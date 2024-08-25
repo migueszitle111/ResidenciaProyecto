@@ -1,0 +1,42 @@
+.email-container {
+  display: flex;
+  color: white;
+}
+
+.toggleMenu{
+    background-color: #1c1c1c;
+
+}
+
+
+
+/* styles.css o styles/tailwind.css */
+
+@keyframes slideInRight {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+ /*Pseudo-elemento*/
+
+ .inverted-border-radius {
+  position: relative;
+  overflow: hidden;
+}
+
+.inverted-border-radius::before {
+  content: "";
+  position: absolute;
+  background-color: #F7F0D0; /* Color de fondo del borde invertido */
+  bottom: 0%; /* Ajusta la posición vertical del borde invertido */
+  left: 0;
+  height: 50%; /* Ajusta la altura del borde invertido */
+  width: 20px; /* Ajusta el ancho del borde invertido */
+  border-top-left-radius: 20px; /* Ajusta el radio de la esquina inferior derecha */
+}

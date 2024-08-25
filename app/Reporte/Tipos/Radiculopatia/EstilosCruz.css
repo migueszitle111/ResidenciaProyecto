@@ -1,0 +1,894 @@
+.imagen1{
+  z-index: 2;
+  position: absolute;
+  width: 600px;
+  height: 750px;
+  top: 20%;
+  left: 21.25%
+}
+
+.cruz1 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 25%;
+    left: 54.25%;
+}
+
+.cruz2 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25%;
+  left: 53.55%
+}
+
+.cruz3 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25%;
+  left: 52.95%
+}
+
+.cruz4 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25%;
+  left: 52.45%
+}
+
+.cruz5 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 25%;
+    left: 60.5%
+}
+
+.cruz6 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25%;
+  left: 61%
+}
+
+.cruz7 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25%;
+  left: 61.5%
+}
+
+/**/
+
+.cruz8 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25%;
+  left: 62%
+}
+
+.cruz9 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 22.5%;
+    left: 55%
+}
+
+.cruz10 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.5%;
+  left: 54.25%
+}
+
+.cruz11 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.5%;
+  left: 53.5%
+}
+
+.cruz12 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.5%;
+  left: 52.75%
+}
+
+.cruz13 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 22.5%;
+    left: 60%
+}
+
+.cruz14 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.5%;
+  left: 60.75%
+}
+
+.cruz15 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.5%;
+  left: 61.5%
+}
+
+.cruz16 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.5%;
+  left: 62.25%
+}
+
+/**/
+
+.cruz17 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 24.25%;
+    left: 55%
+}
+
+.cruz18 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 24.25%;
+  left: 54.25%
+}
+
+.cruz19 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 24.25%;
+  left: 53.5%
+}
+
+.cruz20 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 24.25%;
+  left: 52.75%
+}
+
+.cruz21 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 24.25%;
+    left: 60%
+}
+
+.cruz22 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 24.25%;
+  left: 60.75%
+}
+
+.cruz23 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 24.25%;
+  left: 61.5%
+}
+
+.cruz24 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+    top: 24.25%;
+  left: 62.25%
+}
+
+/**/
+
+.cruz25 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 26.5%;
+    left: 55%
+}
+
+.cruz26 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 26.5%;
+  left: 54.25%
+}
+
+.cruz27 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 26.5%;
+  left: 53.5%
+}
+
+.cruz28 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 26.5%;
+  left: 52.75%
+}
+
+.cruz29 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 26.5%;
+    left: 60%
+}
+
+.cruz30 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 26.5%;
+  left: 60.75%
+}
+
+.cruz31 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 26.5%;
+  left: 61.5%
+}
+
+.cruz32 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 26.5%;
+  left: 62.25%
+}
+
+/**/
+
+.cruz33 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;   
+    top: 29.5%;
+    left: 55%
+}
+
+.cruz34 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 29.5%;
+  left: 54.25%
+}
+
+.cruz35 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 29.5%;
+  left: 53.5%
+}
+
+.cruz36 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 29.5%;
+  left: 52.75%
+}
+
+.cruz37 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 29.5%;
+    left: 60%
+}
+
+.cruz38 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 29.5%;
+  left: 60.75%
+}
+
+.cruz39 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 29.5%;
+  left: 61.5%
+}
+
+.cruz40 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 29.5%;
+  left: 62.25cqi
+}
+
+/**/
+
+.cruz41 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 32.5%;
+    left: 55%
+}
+
+.cruz42 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 32.5%;
+  left: 54.25%
+}
+
+.cruz43 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 32.5%;
+  left: 53.5%
+}
+
+.cruz44 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 32.5%;
+  left: 52.75%
+}
+
+.cruz45 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 32.5%;
+    left: 60%
+}
+
+.cruz46 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 32.5%;
+  left: 60.75%
+}
+
+.cruz47 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 32.5%;
+  left: 61.5%
+}
+
+.cruz48 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 32.5%;
+  left: 62.25%
+}
+
+/**/
+
+.cruz49 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 66%;
+    left: 55%
+}
+
+.cruz50 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 66%;
+  left: 54.25%
+}
+
+.cruz51 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 66%;
+  left: 53.5%
+}
+
+.cruz52 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 66%;
+  left: 52.75%
+}
+
+.cruz53 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 66%;
+    left: 60%
+}
+
+.cruz54 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 66%;
+  left: 60.75%
+}
+
+.cruz55 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 66%;
+  left: 61.5%
+}
+
+.cruz56 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 66%;
+  left: 62.25%
+}
+
+/**/
+
+.cruz57 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 69.5%;
+    left: 55%
+}
+
+.cruz58 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 69.5%;
+  left: 54.25%
+}
+
+.cruz59 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 69.5%;
+  left: 53.5%
+}
+
+.cruz60 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 69.5%;
+  left: 52.75%
+}
+
+.cruz61 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 69.5%;
+    left: 60%
+}
+
+.cruz62 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 69.5%;
+  left: 60.75%
+}
+
+.cruz63 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 69.5%;
+  left: 61.5%
+}
+
+.cruz64 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 69.5%;
+  left: 62.25%
+}
+
+/**/
+
+.cruz65 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 73%;
+    left: 55%
+}
+
+.cruz66 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 73%;
+  left: 54.25%
+}
+
+.cruz67 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 73%;
+  left: 53.5%
+}
+
+.cruz68 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 73%;
+  left: 52.75%
+}
+
+.cruz69 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 73%;
+    left: 60%
+}
+
+.cruz70 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 73%;
+  left: 60.75%
+}
+
+.cruz71 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 73%;
+  left: 61.5%
+}
+
+.cruz72 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 73%;
+  left: 62.25%
+}
+
+/**/
+
+.cruz73 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 76.5%;
+    left: 55%
+}
+
+.cruz74 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 76.5%;
+  left: 54.25%
+}
+
+.cruz75 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 76.5%;
+  left: 53.5%
+}
+
+.cruz76 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 76.5%;
+  left: 52.75%
+}
+
+.cruz77 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 76.5%;
+    left: 60%
+}
+
+.cruz78 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 76.5%;
+  left: 60.75%
+}
+
+.cruz79 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 76.5%;
+  left: 61.5%
+}
+
+.cruz80 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 76.5%;
+  left: 62.25%
+}
+
+/**/
+
+.cruz81 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 80%;
+    left: 55%
+}
+
+.cruz82 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 80%;
+  left: 54.25%
+}
+
+.cruz83 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 80%;
+  left: 53.5%
+}
+
+.cruz84 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 80%;
+  left: 52.75%
+}
+
+.cruz85 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 80%;
+    left: 60%
+}
+
+.cruz86 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 80%;
+  left: 60.75%
+}
+
+.cruz87 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 80%;
+  left: 61.5%
+}
+
+.cruz88 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 80%;
+  left: 62.25%
+}
+
+/**/
+
+.cruz89 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 87%;
+    left: 55%
+}
+
+.cruz90 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 87%;
+  left: 54.25%
+}
+
+.cruz91 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 87%;
+  left: 53.5%
+}
+
+.cruz92 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 87%;
+  left: 52.75%
+}
+
+.cruz93 {
+    z-Index: 3;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    top: 87%;
+    left: 60%
+}
+
+.cruz94 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 87%;
+  left: 60.75%
+}
+
+.cruz95 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 87%;
+  left: 61.5%
+}
+
+.cruz96 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 87%;
+  left: 62.25%
+}

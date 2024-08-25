@@ -1,0 +1,100 @@
+.ContEducacion {
+  text-align: justify;
+  color: #f3f3f3;
+}
+
+.LogoRegistro {
+  padding-top: 2vw;
+  padding-left: 1vw;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ContTitulo {
+  font-family: "Quando";
+  padding-top: 2vw;
+  padding-left: 5vw;
+}
+
+.TituloTexto1 {
+  font-style: bold;
+  font-family: "Quando";
+  padding-left: 5vw;
+}
+
+.TituloTexto2 {
+  font-family: "Quando";
+  padding-left: 5vw;
+}
+
+.TituloTexto3 {
+  font-family: "Quando";
+}
+
+.nombres__field::placeholder {
+  color: #ccc;
+}
+
+.form__field::placeholder {
+  color: #ccc;
+}
+
+.TituloTexto2 a:link {
+  color: #d06d33;
+}
+
+.TitulorefLogin a:link {
+  color: #d06d33;
+}
+
+.ContBotonRegistro {
+  padding-left: 5vw;
+  padding-bottom: 5vw;
+  display: flex;
+  width: 30vw;
+}
+
+.form__group {
+  flex-direction: column;
+}
+
+.nombres__field {
+  font-family: "Quando";
+  background: gray;
+}
+
+/**dssd*/
+.form__field {
+  font-family: "Quando";
+  background: gray;
+}
+
+.alertb {
+  margin-top: 5vw;
+  background: red;
+  padding: 1.5vw 2vw;
+  max-width: 90vw;
+  border-radius: 1vw;
+  right: 0;
+  margin-left: 5vw;
+  border-left: 0.8vw solid #1c1c1c;
+  color: white;
+}
+
+.alertg {
+  margin-top: 5vw;
+  background: green;
+  padding: 1.5vw 2vw;
+  max-width: 90vw;
+  border-radius: 1vw;
+  right: 0;
+  margin-left: 5vw;
+  border-left: 0.8vw solid #1c1c1c;
+  color: white;
+}
+
+.alertb .msg {
+  padding: 0 2vw;
+}

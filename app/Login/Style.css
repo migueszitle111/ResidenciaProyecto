@@ -1,0 +1,114 @@
+.ContTituloLogin {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+}
+
+.TituloTexto3Login {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+}
+
+.TituloTexto4Login {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+}
+
+.nombres__field::placeholder {
+  color: #ccc;
+}
+
+.form__field::placeholder {
+  color: #ccc;
+}
+
+.TituloTexto2 a:link {
+  color: #d06d33;
+}
+
+.TitulorefLogin a:link {
+  color: #d06d33;
+}
+
+.form__field_login {
+  font-family: "Arial Narrow Bold";
+  width: 65%;
+  height: 68px;
+  border: 0;
+  outline: 0;
+  font-size: 1.3rem;
+  padding: 30px;
+  background: white;
+  color: #000000;
+  transition: border-color 0.2s;
+  border-radius: 10px;
+}
+
+
+.alertb{
+  margin-top: 40px;
+  background: red;
+  padding: 15px 20px;
+  max-width: 380px;
+  border-radius: 10px;
+  right: 0;
+  border-left: 8px solid #1C1C1C;
+  color: white;
+}
+.alertg{
+  margin-top: 40px;
+  background: green;
+  padding: 15px 20px;
+  max-width: 380px;
+  border-radius: 10px;
+  right: 0;
+  border-left: 8px solid #1C1C1C;
+  color: white;
+}
+
+.alertb .msg{
+  padding: 0 20px;
+  font-size: 20px;
+}
+
+.alertg .msg{
+  padding: 0 20px;
+  font-size: 20px;
+}
+
+
+.alert.show{
+  animation: show_slide 1s ease forwards;
+}
+
+@keyframes show_slide{
+  0%{
+    transform: translateX(100%);
+  }
+  40%{
+    transform: translateX(-10%);
+  }
+  80%{
+    transform: translateX(0%);
+  }
+  40%{
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

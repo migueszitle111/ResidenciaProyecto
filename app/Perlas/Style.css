@@ -1,0 +1,108 @@
+/*Contenedor de la pagina eventos*/
+.ContEventos {
+  text-align: justify;
+  color: #f3f3f3;
+}
+
+/*Cuerpo de la carta*/
+.card {
+  border: 1px solid #8f3400;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 300px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #8f8f8f;
+  color: #000000cc;
+  margin: 5px;
+}
+
+/*Efecto en la carta al pasar el mouse*/
+.card:hover {
+  background: linear-gradient(to bottom right, #c44900cc, #8f3400cc);
+  color: #ffffff;
+}
+
+/*Imagen de la carta*/
+.card-image {
+  object-fit: cover;
+}
+
+/*Contenedor del titulo y descrip de la carta*/
+.card-content {
+  padding: 16px;
+}
+
+/*Titulo del carta*/
+.card-title {
+  margin: 2px;
+  font-style: oblique;
+  font-size: 20px;
+}
+
+/*Descripcion de la carta*/
+.card-description {
+  color: #000000;
+  margin-top: 10px;
+}
+
+/*Contenedor de diplomas*/
+.contDiplomas {
+  display: flex;
+}
+
+/*PDF*/
+.box1 {
+  flex: 1;
+}
+
+/*Apartado de descarga*/
+.box2 {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 15px;
+}
+
+/*Titulo de descarga*/
+.DescripDescarga {
+  font-size: larger;
+  font-style: oblique;
+}
+
+/*Instruccion de la decsrga*/
+.InstruDesc {
+  font-size: medium;
+  font-style: oblique;
+  text-align: center;
+
+  margin: 25px;
+}
+
+/*Boton de descarga*/
+.BTNDescarga {
+  font-family: Quando;
+  font-size: medium;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #8f3400;
+  height: auto;
+  border-radius: 5px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+/*Btn al pasarle el mouse*/
+.BTNDescarga:hover {
+  background: linear-gradient(to bottom right, #c44900, #8f3400);
+}
+
+/*Icono de imprimir svg*/
+.imgprint {
+  filter: invert(100%) url(#FFFFFF-filter);
+}

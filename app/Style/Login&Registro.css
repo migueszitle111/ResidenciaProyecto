@@ -1,0 +1,230 @@
+.ContEducacion {
+  text-align: justify;
+  color: #f3f3f3;
+}
+.ContLogin {
+  display: flex;
+}
+.LogoRegistro {
+  padding-top: 60px;
+  padding-left: 110px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.LogoLogin {
+  padding-top: 250px;
+  padding-left: 110px;
+  padding-bottom: 250px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ContTitulo {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+  font-size: 20px;
+  padding-top: 60px;
+  padding-left: 110px;
+  display: flex;
+  justify-content: justify;
+  align-items: left;
+  flex-direction: column;
+}
+
+.ContTituloLogin {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+  font-size: 20px;
+  padding-top: 160px;
+  padding-left: 110px;
+  justify-content: justify;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.TituloTexto1 {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+  font-size: 64px;
+  padding-left: 110px;
+  display: flex;
+  justify-content: justify;
+  align-items: left;
+  flex-direction: column;
+}
+
+.TituloTexto2 {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+  font-size: 20px;
+  padding-left: 110px;
+  display: flex;
+  justify-content: justify;
+  align-items: left;
+  flex-direction: column;
+}
+
+.TituloTexto2Login {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+  font-size: 30px;
+  display: flex;
+  justify-content: justify;
+  align-items: left;
+  padding-left: 180px;
+  flex-direction: column;
+}
+.TituloTexto3Login {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+  font-size: 30px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: justify;
+  align-items: left;
+  flex-direction: column;
+}
+
+.TituloTexto4Login {
+  font-style: bold;
+  font-family: "Arial Narrow Bold";
+  font-size: 30px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: justify;
+  align-items: left;
+  flex-direction: column;
+}
+
+.Containerabajo {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+}
+
+.nombres__field::placeholder {
+  color: #ccc;
+}
+
+.form__field::placeholder {
+  color: #ccc;
+}
+
+.TituloTexto2 a:link {
+  color: #d06d33;
+}
+
+.TitulorefLogin a:link {
+  color: #d06d33;
+}
+
+.TitulorefLogin {
+  padding-top: 30px;
+  padding-left: 70px;
+  display: flex;
+}
+.Formulario_nombres {
+  font-size: 20px;
+  padding-left: 90px;
+  padding-top: 60px;
+  display: flex;
+  width: 1700px;
+}
+
+.Formulario {
+  font-size: 20px;
+  padding-left: 110px;
+  width: 866px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Formulario_Login {
+  padding-top: 50px;
+  font-size: 30px;
+  width: 866px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ContBotonRegistro {
+  font-size: 22px;
+  padding-left: 110px;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  display: flex;
+  width: 300px;
+}
+
+.ContBotonLogin {
+  padding-top: 30px;
+}
+
+.form__group {
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 101%;
+  flex-direction: column;
+}
+
+.form__group_login {
+  padding: 15px 0 0;
+  width: 101%;
+  flex-direction: column;
+  padding-bottom: 10px;
+  padding-top: 30px;
+}
+
+.form__nombres {
+  padding: 20px;
+  margin-top: 10px;
+  width: 25%;
+  flex-direction: row;
+  display: flex;
+}
+.nombres__field {
+  font-family: "Arial Narrow Bold";
+  width: 40%;
+  height: 68px;
+  border: 0;
+  outline: 0;
+  font-size: 1.3rem;
+  flex: 1;
+  flex-direction: row;
+  padding: 20px;
+  background: gray;
+  transition: border-color 0.2s;
+  border-radius: 10px;
+}
+
+.form__field {
+  font-family: "Arial Narrow Bold";
+  width: 100%;
+  height: 68px;
+  border: 0;
+  outline: 0;
+  font-size: 1.3rem;
+  padding: 30px;
+  background: gray;
+  transition: border-color 0.2s;
+  border-radius: 10px;
+}
+.form__field_login {
+  font-family: "Arial Narrow Bold";
+  width: 65%;
+  height: 68px;
+  border: 0;
+  outline: 0;
+  font-size: 1.3rem;
+  padding: 30px;
+  background: white;
+  color: #000000;
+  transition: border-color 0.2s;
+  border-radius: 10px;
+}

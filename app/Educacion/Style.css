@@ -1,0 +1,67 @@
+/*Contenedor de la pagina educacion */
+.ContEducacion {
+  text-align: justify;
+  color: #f3f3f3;
+  z-index: 1;
+  position: relative;
+  display: flex;
+}
+
+/*Contenedor del apartado "Temario" */
+.Titulo {
+  font-family: "Quando";
+  font-size: 35px;
+  text-align: center;
+  padding: 5px;
+  display: flex;
+}
+
+/* cuerpo del Item (Tabla e imagen) */
+.contedu {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  margin: 15px;
+  margin-left: 150px;
+  padding-left: 150px;
+  padding-right: 150px;
+  padding-bottom: 150px;
+}
+/*Imagen del item*/
+.box1 {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  margin: 15px;
+}
+/*Tabla del item*/
+.box2 {
+  font-family: Quando;
+  flex: 1;
+  font-size: 25;
+  font-size: 25px;
+  padding: 15px;
+}
+
+/*Titulo de la tabla*/
+.Edutitle {
+  background-color: #7c3106;
+  text-align: center;
+  font-size: 25px;
+}
+
+/*Cuerpo de la tabla*/
+.Edubody {
+  font-size: 15px;
+  background-color: #8f8f8fcc;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 5px;
+  color: #000000;
+}
+/*Icono de imprimir svg*/
+.imgprint {
+  filter: invert(100%) url(#FFFFFF-filter);
+
+  z-index: -1; /* Este valor asegura que la imagen esté detrás de otros elementos */
+}

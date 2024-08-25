@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Luxora+Grotesk:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quando&display=swap");
+
+@font-face {
+  font-family: 'LuxoraGrotesk';
+  src: url('./Luxora\ Grotesk/LuxoraGrotesk-Light.ttf');
+}
+
+body {
+  background-color: #000000;
+}
+
+/*body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../public/G_2.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  z-index: -1;
+}
+*/
+
+/*body {
+  background-image: url(../public/assets/fondo.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}*/
+
+.Conteiner {
+  font-family: LuxoraGrotesk;
+}
+/*Baner de las paginas ¿Dejar aqui o no?*/
+.BannerTitlepage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1c1c1c;
+  color: rgb(255, 255, 255);
+  font-family: LuxoraGrotesk;
+  font-size: 25px;
+  height: 100%;
+  width: 100%;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 0 15px;
+}
+.BannerTitlepageA {
+  font-size: 50px;
+}
+.BannerTitlepageReporte {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: rgb(255, 255, 255);
+  font-family: "Quando";
+  font-size: 25px;
+  height: 100%;
+  width: 100%;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 0 15px;
+}
+
+/*Submenu*/
+.buttommenu {
+  font-family: LuxoraGrotesk;
+  font-size: 13px;
+  color: #f3f3f3;
+  cursor: pointer;
+}
+.buttommenu:hover {
+  color: #c44900;
+}
+.buttonSmenu {
+  font-family: LuxoraGrotesk;
+  font-size: 15px;
+  background-color: #1c1c1c;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  height: 80px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  border: 1px solid #fff;
+}
+
+.buttonSmenu:hover {
+  background: linear-gradient(to bottom right, #000000, #1c1c1c);
+}
+.grayscale {
+  filter: grayscale(100%);
+}
+
+/* styles.css o styles/tailwind.css */
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.5s ease-out;
+}

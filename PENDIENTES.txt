@@ -1,0 +1,82 @@
+	General
+Utilizar diferentes fonts (Todos estan con 1 ahorita)
+Checar ortografia
+
+	Valores
+Dejar listo para insertar texto e imagenes
+Cutenea -> Cutaneo
+Nervios esta en musculos
+
+	Protocolos
+Dejar listo para insertar texto e imagenes
+
+	Reporte anatomico
+La imagen principal en cada reporte es una imagen, debe de ser 3 imagenes separadas ya que las separadas tienen mejor resolucion
+Simbolos tengan un recuadro que fije imagenes insertadas
+Cada opcion se bloque cada vez que se utilize uno
+Cambio dinamico (Le pica a uno, baja automaticamente a otro)
+Poner opcion de elementos individuales al imprimir
+Imagenes predeterminadas para colocar flechas en lugares especificos (El usuario arrastra imagenes donde el quiera)
+Cuando se quiera imprimir, anadir los datos del medico en esquina superior (Nombre, logo, estos son valores que estan pero no se utilizan)
+Ajustar la impresion
+Boton de regreso no desactiva opciones (Debe desactivar la opcion anterior)
+En algunos, quitar un apartado que dice Menu en la parte de arriba
+
+	Plexopatia
+En el paso ubicacion, cuando se selecciona postganglionar parcial, troncos, al querer seleccionar multiples opcines, deben de separarse con , o - (Intentamos de muchas formas, pero nunca encontramos la solucion, orita solo se separan con , pero nunca que sabe con cual se inicia o cual se termina)
+
+	Dermatomas
+Quitar completamente dermatomas
+
+	Ultimo paso reporte anatomico
+En el utimo paso, se puede imprimir, anadir imagenes, ya sea por archivo o predeterminados que son los simbolos en el acordeon Imagen1
+Hacer draggable las imagenes de simbolos (Son aprox 30)
+Esto aplica en todos los reportes anatomicos en el ultimo paso
+
+	Union Muscular
+Arreglar paso distribucion
+En el paso Distribucion, si se selecciona las 3 opciones, debe salir "generalizada"
+
+	Radiculopatia
+Mejorar la forma en que se despliegan las cruces (Perdon por el cancer que dejamos ahi, no teniamos mucho tiempo para hacer algo organizado)
+Cuando se cambia de paso, las cruces se hacen invisibles (Tiene que ver con que el acordeon se desactiva si se cambia de paso)
+Terminar de posicionar cruces 
+En aguda solo hay cruces
+En subaguda hay cruces y musculos
+En cronica solo hay musculos
+
+	Inicio sesion
+Inicio rapido con Gmail
+Arreglar restablecimiento de contrasena
+
+    Diseño
+Modificar diseno de toda la pagina
+	Inicio de sesion
+		Registro
+		Datos de cuenta
+	✓ Inicio (Quitar lineas blancas y centralizar mejor el logo)
+	Educacion
+	✓ Reporte
+	Evento
+	✓ Valores (Probablemente cambiar paleta de colores)
+	Protocolos (Lo mismo que valores)
+	Videos
+	Podcast
+	Perlas
+	Ultrasonidos (Lo mismo que valores)
+	Monitoreo (Lo mismo que valores)
+	Patrocinio
+
+INFO
+	Para correr la pagina, abran la terminal seleccionando la carpeta y escriben el comando 'npm run dev'
+
+	Gilberto Uyua Altamarina / Electroneurodiagnostico
+	663 428 7537
+
+	Drive con todos los elementos
+	Residencia@medxproapp.com / Resi2023@
+
+	Se utilizo mongodb, pero por ahora la mayoria de los elementos son locales menos algunos banners que si estan la base de datos
+
+	Consultorio
+	David Alfaro Siqueiros 2791-4, Zona Urbana Rio Tijuana, 22010 Tijuana, B.C.

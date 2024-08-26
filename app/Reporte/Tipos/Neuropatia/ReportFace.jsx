@@ -10,6 +10,7 @@ import './Style.css';
 import SimpleMultiStepForm from './MenuBotones';
 import Image from 'next/image';
 import Draggable from 'react-draggable';
+import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 
 const Reporte = () => {
   
@@ -362,9 +363,12 @@ const Reporte = () => {
           value={copyConclusions}
           defaultValue=""
           onChange={handleTextareaChange}
-        /></div><div style={{position: 'absolute',top: '38.9%',left: '68.9%'}} className={`dont-print `}>
-        <ConclusionButton value = 'car' title = '(CARPO),' displayText=' '/>
-      </div>
+        /></div><div style={{position: 'absolute',top: '38.9%',left: '68.9%', borderRadius: 100}} className={`dont-print-Nervius `}>
+        <NerviusButton value = 'car' title = '(CARPO),' displayText=' '/></div>
+
+        <div style={{position: 'absolute',top: '28.9%',left: '68.9%', borderRadius: 100 }} className={`dont-print-Nervius `}>
+        <NerviusButton value = 'car' title = '(CARPO2),' displayText=' '/></div>
+
         </div>
         </div>
       </div>

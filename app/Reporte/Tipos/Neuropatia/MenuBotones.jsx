@@ -189,7 +189,7 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
       <h1 className=' text-xl font-bold text-white'>
         NERVIO
       </h1>
-      
+      // revicion  menu
         <div onClick={ handleNextStep }>
           <ConclusionButton value = 'MEDIANO' title = ' DE NERVIO MEDIANO' displayText='MEDIANO'/>
           <ConclusionButton value = 'ACCESORIO' title = ' DE NERVIO ACCESORIO' displayText='ACCESORIO'/>

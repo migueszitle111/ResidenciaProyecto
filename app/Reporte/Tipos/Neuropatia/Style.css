@@ -242,17 +242,48 @@
   background-color: transparent;
   
 }
+
 .dont-print-Nervius :hover {
   
   display: visible;
   background-color: rgb(4, 4, 190);
+  border-radius: 100px;
 }
 .dont-print-Nervius  {
   
   display: visible;
   background-color:transparent;
+  border-radius: 100px;
 }
 
+
+/* //////////////////////////
+
+
+
+.dont-print-Nervius  {
+  display: none;
+  cursor: pointer;
+  padding: 8px;
+  color: white;
+  transition: background-color 300ms ease-in;
+  display: block;
+  position: absolute;
+  top: 28.9%;
+  left: 68.9%;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.nervius-button:hover {
+  background-color: #8F3400;
+}
+
+
+//////////////////////////   */
 
 .handle {
   width: 10px;

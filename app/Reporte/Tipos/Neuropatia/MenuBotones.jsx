@@ -189,9 +189,10 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
       <h1 className=' text-xl font-bold text-white'>
         NERVIO
       </h1>
-      // revicion  menu
+
+      <Accordion title='NERVIOS SUPERIORES'>
         <div onClick={ handleNextStep }>
-          <ConclusionButton value = 'MEDIANO' title = ' DE NERVIO MEDIANO' displayText='MEDIANO'/>
+          <ConclusionButton value = 'MEDIANO' title = ' DE NERVIO MEDIANO' displayText='MEDIANO' />
           <ConclusionButton value = 'ACCESORIO' title = ' DE NERVIO ACCESORIO' displayText='ACCESORIO'/>
           <ConclusionButton value = 'ANTEBRAQUIAL_CUTANEO' title = ' DE NERVIO ANTEBRAQUIAL CUTÁNEO' displayText='ANTEBRAQUIAL CUTÁNEO'/>
           <ConclusionButton value = 'AXILAR' title = ' DE NERVIO AXILAR' displayText='AXILAR'/>
@@ -199,11 +200,15 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
           <ConclusionButton value = 'RADIAL' title = ' DE NERVIO RADIAL' displayText='RADIAL'/>
           <ConclusionButton value = 'SUPRAESCAPULAR' title = ' DE NERVIO SUPRAESCAPULAR' displayText='SUPRAESCAPULAR'/>
           <ConclusionButton value = 'ULNAR' title = ' DE NERVIO ULNAR' displayText='ULNAR'/>
-          <ConclusionButton value = 'FACIAL' title = ' DE NERVIO FACIAL' displayText='FACIAL'/>
           <ConclusionButton value = 'FRENICO' title = ' DE NERVIO FRÉNICO' displayText='FRÉNICO'/>
           <ConclusionButton value = 'TORACICO_LARGO ' title = ' DE NERVIO TORÁCICO LARGO' displayText='TORÁCICO LARGO'/>
           <ConclusionButton value = 'TORACODORSAL' title = ' DE NERVIO TORACODORSAL' displayText='TORACODORSAL'/>
-          <ConclusionButton value = 'CIATICO' title = ' DE NERVIO CIATICO' displayText='CIATICO'/>
+        </div>
+      </Accordion>
+
+      <Accordion title='NERVIOS INFERIORES'>
+      <div onClick={ handleNextStep }>
+        <ConclusionButton value = 'CIATICO' title = ' DE NERVIO CIATICO' displayText='CIATICO'/>
           <ConclusionButton value = 'FEMORAL' title = ' DE NERVIO FEMORAL' displayText='FEMORAL'/>
           <ConclusionButton value = 'FEMOROCUTÁNEO_LATERAL' title = ' DE NERVIO FEMOROCUTÁNEO LATERAL' displayText='FEMOROCUTÁNEO LATERAL'/>
           <ConclusionButton value = 'ILIOINGUINAL' title = ' DE NERVIO ILIOINGUINAL' displayText='ILIOINGUINAL'/>
@@ -211,10 +216,16 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
           <ConclusionButton value = 'NERVIO_PERONEO' title = ' DE NERVIO NERVIO PERONEO' displayText='NERVIO PERONEO'/>
           <ConclusionButton value = 'TIBIAL' title = ' DE NERVIO TIBIAL' displayText='TIBIAL'/>
           <ConclusionButton value = 'PUDENDO' title = ' DE NERVIO PUDENDO' displayText='PUDENDO'/>
+      </div>
+      </Accordion>
+      
+        <div onClick={ handleNextStep }>
+          <ConclusionButton value = 'FACIAL' title = ' DE NERVIO FACIAL' displayText='FACIAL'/>
         </div>
     </div>
   );
 };
+
 
 const StepB1 = ({ handleNextStep, handlePrevStep }) => {
   return (
@@ -266,7 +277,7 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
         <ConclusionButton value='segmentaria' title=' SEGMENTARIA,' displayText={'SEGMENTARIA'}/>
         <ConclusionButton value='generalizada' title=' GENERALIZADA,' displayText={'GENERALIZADA'}/>
       </div>
-      
+       
     </div>
   );
 };

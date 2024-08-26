@@ -360,21 +360,32 @@ const Reporte = () => {
           ]}
         />
         <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
-          value={copyConclusions}
-          defaultValue=""
-          onChange={handleTextareaChange}
-        /></div><div style={{position: 'absolute',top: '38.9%',left: '68.9%', borderRadius: 100}} className={`dont-print-Nervius `}>
-        <NerviusButton value = 'car' title = '(CARPO),' displayText=' '/></div>
+                value={copyConclusions} defaultValue="" onChange={handleTextareaChange} />
 
-        <div style={{position: 'absolute',top: '28.9%',left: '68.9%', borderRadius: 100 }} className={`dont-print-Nervius `}>
-        <NerviusButton value = 'car' title = '(CARPO2),' displayText=' '/></div>
+              </div><div
+                style={{
+                  position: 'absolute',
+                  top: '18.9%',
+                  left: '68.9%', borderRadius: 100,
+                }} className={`dont-print-Nervius`}>
+                <NerviusButton value='car' title='(CARPO),' displayText=' ' /></div>
+                <div
+                style={{
+                  position: 'absolute',
+                  top: '18.9%',
+                  left: '58.9%', borderRadius: 100,
+                }} className={`dont-print-Nervius`}>
+                <NerviusButton value='car' title='(CARPO),' displayText=' ' />
+                </div>
 
+              
+            </div>*
+          </div>
         </div>
-        </div>
       </div>
-      </div>
-      </div>
+    </div>
   )
 }
 
-export default Reporte
+
+export default Reporte 

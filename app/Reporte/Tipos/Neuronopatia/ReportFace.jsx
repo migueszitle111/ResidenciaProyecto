@@ -14,6 +14,57 @@ const Reporte = () => {
   const { name, lastname, cedula, especialidad } = session?.user || {};  const { conclusions } = useContext(ReportContext)
 
   const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
+
+  // Función para formatear las conclusiones: tiene como objetivo insertar comas y conjunciones en las conclusiones
+  function formatConclusions(copyConclusions) {
+    const keywords = ["BULBAR", "CERVICAL", "TORÁCICA", "LUMBAR"];
+    let words = copyConclusions.split(' ');
+    let keywordPositions = [];
+
+    // Identificar las posiciones de las palabras clave
+    for (let i = 0; i < words.length; i++) {
+        if (keywords.includes(words[i])) {
+            keywordPositions.push(i);
+        }
+    }
+
+    // Si no se encontraron palabras clave, devolver la cadena original
+    if (keywordPositions.length === 0) {
+        return copyConclusions;
+    }
+
+    // Si solo hay una palabra clave, devolver la cadena original
+    if (keywordPositions.length === 1) {
+        return copyConclusions;
+    }
+
+    // Formatear las palabras clave con comas, excepto antes de la conjunción
+    for (let i = 0; i < keywordPositions.length - 2; i++) {
+        words[keywordPositions[i]] += ',';
+    }
+
+    // Verificar si la última palabra clave empieza con "I"
+    let lastKeywordIndex = keywordPositions[keywordPositions.length - 1];
+    let secondLastKeywordIndex = keywordPositions[keywordPositions.length - 2];
+    let conjunction = 'Y';
+
+    if (words[lastKeywordIndex][0].toUpperCase() === 'I') {
+        conjunction = 'O';
+    }
+
+    // Insertar la conjunción antes de la última palabra clave
+    words.splice(lastKeywordIndex, 0, conjunction);
+
+    return words.join(' ');
+}
+
+// Ejemplo de uso
+const formattedConclusions = formatConclusions(copyConclusions);
+//console.log(formattedConclusions);
+
+
+
+  //console.log(copyConclusions)
   const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
   const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
   // Estados para el historial de imagenes
@@ -22,8 +73,10 @@ const Reporte = () => {
 
     // Actualizar las conclusiones
     useEffect(() => {
-      setCopyConclusions(conclusions.map(cl => cl.title).join(''))
-    }, [conclusions])
+      const newConclusions = conclusions.map(cl => cl.title).join(' ');
+      const formattedConclusions = formatConclusions(newConclusions);
+      setCopyConclusions(formattedConclusions);
+  }, [conclusions]);
 
     // Para mantener constante la conclusione
     const handleTextareaChange = (event) => {
@@ -119,7 +172,7 @@ const Reporte = () => {
           }}
           rules={[
             {
-              expectedValue: 'bulbar', 
+              expectedValue: 'bulbar',
               image: {
                 src: 'NeuronoImg/NE_Bulbar.png',
                 alt: 'Modelo',
@@ -174,5 +227,7 @@ const Reporte = () => {
     </div>
   )
 }
+
+
 
 export default Reporte

@@ -1,14 +1,11 @@
-import { useState, useEffect, useContext } from 'react'
-import React, { useCallback } from 'react';
+import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
-import { Accordion, AccordionContainer } from '../../../components/ReportTemplate/Accordion'   
-import { ReportContext } from '@/src/context'
-import { ConclusionButton, ConclusionBox } from '../../../components/ReportTemplate/Conclusions'
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas'
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
-import './Style.css';
+import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import './EstilosCruz.css';
 import SimpleMultiStepForm from './MenuBotones';
+import './Style.css';
 
 const Reporte = () => {
   
@@ -124,7 +121,7 @@ const Reporte = () => {
         <tr>
           <td>
           
-
+          
         <ConclusionCanvas 
         
           img={{

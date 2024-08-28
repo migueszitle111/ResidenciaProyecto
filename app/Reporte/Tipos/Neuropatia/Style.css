@@ -122,8 +122,8 @@
   padding: 10px;
   border: 2px solid #ccc;
   border-radius: 8px;
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   font-size: 14px;
 }
 
@@ -154,12 +154,12 @@
   align-items: left;
   border-radius: 4px;
   overflow: hidden;
-  width: 100%;  
+  width: 100%;
   margin: 10px;
   height: 20vh;
   
 
-  z-index: 1; 
+  z-index: 1;
 }
 
 .info-container textarea {
@@ -311,7 +311,7 @@
   height: 2px;
   -webkit-appearance: none;
   appearance: none;
-  background-color: #c44900; 
+  background-color: #c44900;
 }
 
 .baseStyle1 {
@@ -421,8 +421,8 @@
     width: 100%;
     height: 100%;
     font-size: 10px;
-    background-color: transparent; 
-    resize: none; 
+    background-color: transparent;
+    resize: none;
     top: 4vh;
   }
 
@@ -437,7 +437,7 @@
   
   .rnd-image {
     left: -725px !important;
-    top: -205px !important; 
+    top: -205px !important;
   }
 
 }

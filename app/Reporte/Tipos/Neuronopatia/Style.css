@@ -169,12 +169,12 @@
   align-items: left;
   border-radius: 4px;
   overflow: hidden;
-  width: 100%;  
+  width: 100%;
   margin: 10px;
   height: 20vh;
   
 
-  z-index: 1; 
+  z-index: 1;
 }
 
 .info-container textarea {

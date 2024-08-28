@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { Accordion } from '@/app/components/ReportTemplate/Accordion';
+import { useState } from 'react';
+import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';
 
 // Metodos de movimiento entre menus

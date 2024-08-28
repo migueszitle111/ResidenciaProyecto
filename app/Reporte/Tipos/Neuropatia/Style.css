@@ -240,7 +240,19 @@
 .dont-print1 {
   display: visible;
   background-color: transparent;
+  
 }
+.dont-print-Nervius :hover {
+  
+  display: visible;
+  background-color: rgb(4, 4, 190);
+}
+.dont-print-Nervius  {
+  
+  display: visible;
+  background-color:transparent;
+}
+
 
 .handle {
   width: 10px;

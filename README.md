@@ -33,7 +33,4 @@ Finalmente instala el proyecto por medio del comando `npm`, asegurate de tener l
 ```plaintext
 npm install
 ```
-=======
-miguel esta prieto 
-El sergio tambien esta prietisimo alv
->>>>>>> 4ae7cc058ca2e8b05e15e4e87310a1c71ef3527a
+

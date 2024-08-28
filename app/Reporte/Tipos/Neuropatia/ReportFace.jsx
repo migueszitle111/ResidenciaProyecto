@@ -5,7 +5,13 @@ import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de l
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
+<<<<<<< HEAD
 import './Style.css';
+=======
+import Image from 'next/image';
+import Draggable from 'react-draggable';
+import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
+>>>>>>> da6a150dbfa68f044dff30217aab6905b0e8a41a
 
 const Reporte = () => {
   
@@ -358,9 +364,12 @@ const Reporte = () => {
           value={copyConclusions}
           defaultValue=""
           onChange={handleTextareaChange}
-        /></div><div style={{position: 'absolute',top: '38.9%',left: '68.9%'}} className={`dont-print `}>
-        <ConclusionButton value = 'car' title = '(CARPO),' displayText=' '/>
-      </div>
+        /></div><div style={{position: 'absolute',top: '38.9%',left: '68.9%', borderRadius: 100}} className={`dont-print-Nervius `}>
+        <NerviusButton value = 'car' title = '(CARPO),' displayText=' '/></div>
+
+        <div style={{position: 'absolute',top: '28.9%',left: '68.9%', borderRadius: 100 }} className={`dont-print-Nervius `}>
+        <NerviusButton value = 'car' title = '(CARPO2),' displayText=' '/></div>
+
         </div>
         </div>
       </div>

@@ -256,7 +256,7 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={ handleNextStep }>
-        <ConclusionButton value='4' title=' CON DENERVACIÓN DIFUSA SEVERA (++++) (' displayText='DIFUSA SEVERA (++++)'/>
+        <ConclusionButton value='4' title=' CON DENERVACIÓN DIFUSA SEVERA (++++) ( ' displayText='DIFUSA SEVERA (++++)'/>
         <ConclusionButton value='5' title=' CON DENERVACIÓN ABUNDANTE PROGRESIVA (+++) (' displayText='ABUNDANTE PROGRESIVA (+++)'/>
         <ConclusionButton value='6' title=' CON DENERVACIÓN ACTIVA MODERADA (++) (' displayText='ACTIVA MODERADA (++)'/>
         <ConclusionButton value='7' title=' CON DENERVACIÓN LEVE (+/+) (' displayText='LEVE (+/+)'/>

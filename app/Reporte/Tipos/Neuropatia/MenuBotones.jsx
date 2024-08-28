@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Draggable from 'react-draggable';
+import { Accordion } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
-import { Accordion } from '../../../components/ReportTemplate/Accordion'  
 import { useImageState } from '../../MetodosBotones';
-import Draggable from 'react-draggable'; 
 
 // Numero de pasos 
 const stepsArray = ['A', 'B', 'B1', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Draggable from 'react-draggable';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';
-import Draggable from 'react-draggable';
 
 // Numero de pasos 
 const stepsArray = ['A', 'B', 'C', 'D', 'E', 'I'];
@@ -162,8 +162,8 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={ handleNextStep }>
-        <ConclusionButton value='tipo_presinaptico' title=' TIPO PRESINÁPTICO' displayText={'PRESINÁPTICO'}/>                
-        <ConclusionButton value='tipo_postsinaptico' title=' TIPO POSTSINÁPTICO' displayText={'POSTSINÁPTICO'}/>
+        <ConclusionButton value='tipo_presinaptico' title=' TIPO PRESINÁPTICO (' displayText={'PRESINÁPTICO'}/>                
+        <ConclusionButton value='tipo_postsinaptico' title=' TIPO POSTSINÁPTICO (' displayText={'POSTSINÁPTICO'}/>
       </div>
       
       
@@ -186,9 +186,9 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
         DISTRIBUCION
       </h1>
 
-      <ConclusionButton value='bulbar' title=' BULBAR<br>' displayText={'BULBAR'}   dangerouslySetInnerHTML={{ __html: ' BULBAR,<br>' }}/>
-      <ConclusionButton value='proximal' title=' PROXIMAL' displayText={'PROXIMAL'}/>
-      <ConclusionButton value='distal' title=' DISTAL' displayText={'DISTAL'}/>
+      <ConclusionButton value='bulbar' title='BULBAR<br>' displayText={'BULBAR'}   dangerouslySetInnerHTML={{ __html: ' BULBAR,<br>' }}/>
+      <ConclusionButton value='proximal' title='PROXIMAL' displayText={'PROXIMAL'}/>
+      <ConclusionButton value='distal' title='DISTAL' displayText={'DISTAL'}/>
     </div>
   );
 };
@@ -209,8 +209,8 @@ const StepD = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={ handleNextStep }>
-      <ConclusionButton value='activa_abundante_difusa' title=' (RIESGO ALTO DE COMPROMISO RESPIRATORIO)' displayText={'(RIESGO ALTO DE COMPROMISO RESPIRATORIO)'}/>
-      <ConclusionButton value='activa_moderada_progresiva ' title=' (RIESGO BAJO DE COMPROMISO RESPIRATORIO)' displayText={'(RIESGO BAJO DE COMPROMISO RESPIRATORIO)'}/>
+      <ConclusionButton value='activa_abundante_difusa' title=') (RIESGO ALTO DE COMPROMISO RESPIRATORIO)' displayText={'(RIESGO ALTO DE COMPROMISO RESPIRATORIO)'}/>
+      <ConclusionButton value='activa_moderada_progresiva ' title=') (RIESGO BAJO DE COMPROMISO RESPIRATORIO)' displayText={'(RIESGO BAJO DE COMPROMISO RESPIRATORIO)'}/>
       </div>
 
       

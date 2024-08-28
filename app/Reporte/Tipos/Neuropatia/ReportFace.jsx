@@ -1,16 +1,17 @@
-import { useState, useEffect, useContext, useRef } from 'react'
-import React, { useCallback } from 'react';
+import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
-import { Accordion, AccordionContainer } from '../../../components/ReportTemplate/Accordion'   
-import { ReportContext } from '@/src/context'
-import { ConclusionButton, ConclusionBox } from '../../../components/ReportTemplate/Conclusions'
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas'
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
-import './Style.css';
+import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
+import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
+<<<<<<< HEAD
+import './Style.css';
+=======
 import Image from 'next/image';
 import Draggable from 'react-draggable';
 import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
+>>>>>>> da6a150dbfa68f044dff30217aab6905b0e8a41a
 
 const Reporte = () => {
   
@@ -218,7 +219,7 @@ const Reporte = () => {
           
           rules={[
             {
-              expectedValue: 'MEDIANO', 
+              expectedValue: 'MEDIANO',
               image: {
                 src: 'NeuropatiaImg/NO_1_Mediano.png',
                 alt: 'Modelo',

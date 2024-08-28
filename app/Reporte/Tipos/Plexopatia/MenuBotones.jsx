@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
-import { Accordion, darvalor } from '../../../components/ReportTemplate/Accordion';
-import {copyConclusions, handleTextareaChange} from './ReportFace';   
-import { useImageState } from '../../MetodosBotones';
+import { useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
+import { Accordion, darvalor } from '../../../components/ReportTemplate/Accordion';
+import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
+import { useImageState } from '../../MetodosBotones';
 import ReportFace from './ReportFace';
 
 // Numero de pasos 
@@ -1379,7 +1378,7 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
     <div>
       <div className='button-bar'>
         <button onClick={handlePrevStep} className={`print-button`}>
-         <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+        <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={handlePrint} className={`print-button`}>

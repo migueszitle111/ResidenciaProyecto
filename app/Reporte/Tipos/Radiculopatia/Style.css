@@ -13,6 +13,11 @@
   position: relative;
 } 
 
+.dont-print-Nervius{
+  background-color: cyan;
+  visibility: visible; 
+}
+
 .cornerimage {
   border: 0;
   position: absolute;

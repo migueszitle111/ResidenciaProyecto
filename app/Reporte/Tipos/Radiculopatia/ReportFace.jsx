@@ -4,8 +4,10 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import './EstilosCruz.css';
-import SimpleMultiStepForm from './MenuBotones';
+import SimpleMultiStepForm, { checkedState, seleccionA1 } from './MenuBotones';
 import './Style.css';
+
+
 
 const Reporte = () => {
   
@@ -447,7 +449,8 @@ const Reporte = () => {
         value={copyConclusions}
         onChange={handleTextareaChange}
       />
-    </div>
+        </div>
+        <div>{seleccionA1(checkedState)}</div>
         </div>
         </div>
         </div>

@@ -1,21 +1,54 @@
+import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
-import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
-import Image from 'next/image';
-import Draggable from 'react-draggable';
-import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 const Reporte = () => {
   
   // Carga datos de usuario
   const { data: session, status } = useSession();
   const { name, lastname, cedula, especialidad } = session?.user || {};  const { conclusions } = useContext(ReportContext)
 
-  const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
+  const [copyConclusions, setCopyConclusions] = useState('') // Estado para la caja de conclusiones
+  
+  
+  function checkDivs(copyConclusions) {
+    if (copyConclusions.includes(' DE NERVIO MEDIANO')) {
+      return (
+        <>
+          <div
+            style={{
+              position: 'absolute',
+              top: '18.9%',
+              left: '68.9%',
+              borderRadius: 100,
+            }}
+            className={`dont-print-Nervius`}
+          >
+            <NerviusButton value='car' title='(CARPO),' displayText=' ' />
+          </div>
+          <div
+            style={{
+              position: 'absolute',
+              top: '18.9%',
+              left: '58.9%',
+              borderRadius: 100,
+            }}
+            className={`dont-print-Nervius`}
+          >
+            <NerviusButton value='car' title='(CARPO),' displayText=' ' />
+          </div>
+        </>
+      );
+    } else {
+      return null;
+    }
+  }
+  
+  
   const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
   const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
   // Estados para el historial de imagenes
@@ -359,24 +392,9 @@ const Reporte = () => {
         <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
                 value={copyConclusions} defaultValue="" onChange={handleTextareaChange} />
 
-              </div><div
-                style={{
-                  position: 'absolute',
-                  top: '18.9%',
-                  left: '68.9%', borderRadius: 100,
-                }} className={`dont-print-Nervius`}>
-                <NerviusButton value='car' title='(CARPO),' displayText=' ' /></div>
-                <div
-                style={{
-                  position: 'absolute',
-                  top: '18.9%',
-                  left: '58.9%', borderRadius: 100,
-                }} className={`dont-print-Nervius`}>
-                <NerviusButton value='car' title='(CARPO),' displayText=' ' />
-                </div>
-
-              
-            </div>*
+              </div>
+              <div>{checkDivs(copyConclusions)}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -385,4 +403,4 @@ const Reporte = () => {
 }
 
 
-export default Reporte 
+export default Reporte

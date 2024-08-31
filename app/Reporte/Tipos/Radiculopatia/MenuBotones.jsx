@@ -1,4 +1,5 @@
 import { Accordion } from '@/app/components/ReportTemplate/Accordion';
+import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 import { useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';
@@ -9,7 +10,7 @@ const SimpleMultiStepForm = () => {
   const [step, setStep] = useState('A');
 
   // Visibilidad de imagenes
-  const [checkedState, setCheckedState] = useState ({})
+  const [checkedState, setCheckedState] = useState ({A1: false})
   const [checkedState1, setCheckedState1] = useState ({})
 
   // Funcion para mostrar imagenes
@@ -20,6 +21,8 @@ const SimpleMultiStepForm = () => {
       [id]: checked
     }));
   };
+
+  
 
   const handleCheckboxChange1 = (event) => {
     const { id, checked } = event.target;
@@ -254,6 +257,7 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2}) => {
 };
 
 const StepB = ({ handleNextStep, handlePrevStep, checkedState, checkedState1, handleCheckboxChange, handleCheckboxChange1}) => {
+  const isA1Checked = checkedState.A1;
   return (
     <div>
       <div className='button-bar'>
@@ -277,12 +281,12 @@ const StepB = ({ handleNextStep, handlePrevStep, checkedState, checkedState1, ha
               </td>
                 <td>
                   <input type='radio' name="radio1" value='1' id='A1' checked={checkedState.A1} onChange={handleCheckboxChange}></input>
-                  {checkedState.A1 && ( <img src='/assets/Simbolos/S_Cruz 1.png' className="cruz1" /> )}
+                  {isA1Checked && ( <img src='/assets/Simbolos/S_Cruz 1.png' className="cruz1" /> ) + console.log('Estado A1: '+isA1Checked)}
                 </td>
-                <td>           
+                <td>
                   <input type='radio' name="radio1" value='2' id='A2' checked={checkedState.A2} onChange={handleCheckboxChange}></input>
                   {checkedState.A2 && ( <img src='/assets/Simbolos/S_Cruz 2.png' className="cruz2"/> )}
-                </td> 
+                </td>
                 <td>
                   <input type='radio' name="radio1" value='3'  id='A3' checked={checkedState.A3} onChange={handleCheckboxChange}></input>
                   {checkedState.A3 && ( <img src='/assets/Simbolos/S_Cruz 3.png' className="cruz3"/> )}
@@ -1534,3 +1538,44 @@ const StepF1 = ({ handlePrevStep1, handleNextStep1 }) => {
 };
 
 export default SimpleMultiStepForm;
+
+
+export const seleccionA1 = (checkedState) => {
+  console.log('checkedState:', checkedState);
+
+  // Guarda el valor de checkedState.A1 en una variable
+  const isA1Checked = checkedState?.A1;
+  console.log('isA1Checked:', isA1Checked);
+
+  // Verifica si A1 está seleccionado utilizando la variable isA1Checked
+  if (isA1Checked) {
+    return (
+      <>
+        <div
+          style={{
+            position: 'absolute',
+            top: '18.9%',
+            left: '68.9%',
+            borderRadius: 100,
+          }}
+          className='dont-print-Nervius'
+        >
+          <NerviusButton value='car' title='(CARPO),' displayText=' ' />
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            top: '18.9%',
+            left: '58.9%',
+            borderRadius: 100,
+          }}
+          className='dont-print-Nervius'
+        >
+          <NerviusButton value='car' title='(CARPO),' displayText=' ' />
+        </div>
+      </>
+    );
+  }
+
+  return null; // Si no está seleccionado, no se muestra nada
+};

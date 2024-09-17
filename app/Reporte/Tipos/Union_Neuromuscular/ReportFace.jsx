@@ -22,7 +22,7 @@ const Reporte = () => {
 
 
   function formatConclusions(copyConclusions) {
-    const keywords = ["BULBAR<br>", "PROXIMAL", "DISTAL"];
+    const keywords = ["BULBAR", "PROXIMAL", "DISTAL"];
     let words = copyConclusions.split(' ');
     let keywordPositions = [];
 

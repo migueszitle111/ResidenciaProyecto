@@ -14,7 +14,8 @@ export const AccordionValuesContext = createContext({
 
 // Crea un componente que provee el contexto a sus hijos
 export function AccordionContainer ({ children }) {
-  const [activeValue, setActiveValue] = (null) // Estado que se va a compartir
+  const [activeValue, setActiveValue] = useState(null); // Inicializa el estado correctamente
+
   const value = { activeValue, setActiveValue } // Crea un objeto con el valor y la función para actualizarlo
   // Renderiza los hijos
   return (
@@ -26,17 +27,18 @@ export function AccordionContainer ({ children }) {
 
 // Crea un componente que recibe un valor y un título
 // Si el valor es igual al valor activo, muestra el contenido
-export function Accordion ({ children, value, title, displayText}) {
+export function Accordion ({ children, value, title, displayText, onToggle }) {
   const { updateConclusions } = useContext(ReportContext);
 
   const { setActiveValue } = useContext(AccordionValuesContext) // Obtiene la función para actualizar el valor activo
   const [active, setActive] = useState(false) // Estado para saber si el acordeón está activo
-  // Función para actualizar el valor activo
-  // Si el valor es igual al valor activo, lo quita
+
   function handleClick () {
     //updateConclusions({ title });
-
-    setActive(!active)
+    setActive(prev => !prev);
+    setActiveValue(prev => prev === value ? null : value);
+    if (onToggle) onToggle(); // Asegúrate de que onToggle esté definido
+    
   }
 
   // Renderiza el título y el contenido

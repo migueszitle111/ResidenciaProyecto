@@ -1,4 +1,3 @@
-import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -16,30 +15,42 @@ const Reporte = () => {
   
   
   function checkDivs(copyConclusions) {
-    if (copyConclusions.includes(' DE NERVIO MEDIANO')) {
+    if (copyConclusions.includes(' FOCALIZADA')) {
       return (
         <>
           <div
             style={{
               position: 'absolute',
-              top: '18.9%',
-              left: '68.9%',
+              top: '21.5%',
+              left: '37.9%',
               borderRadius: 100,
             }}
             className={`dont-print-Nervius`}
           >
-            <NerviusButton value='car' title='(CARPO),' displayText=' ' />
+            <NerviusButton value='car' title='(TERCIO PROXIMAL DE BRAZO ),' displayText=' ' />
+          </div>
+          <div
+            style={{
+              display: visible = false,
+              position: 'absolute',
+              top: '18.9%',
+              left: '39.5%',
+              borderRadius: 100,
+            }}
+            className={`dont-print-Nervius`}
+          >
+            <NerviusButton value='car' title='(AXILAR),' displayText=' ' />
           </div>
           <div
             style={{
               position: 'absolute',
-              top: '18.9%',
-              left: '58.9%',
+              top: '24.5%',
+              left: '34.8%',
               borderRadius: 100,
             }}
             className={`dont-print-Nervius`}
           >
-            <NerviusButton value='car' title='(CARPO),' displayText=' ' />
+            <NerviusButton value='car' title='(TERCIO MEDIAL DE BRAZO),' displayText=' ' />
           </div>
         </>
       );
@@ -47,8 +58,6 @@ const Reporte = () => {
       return null;
     }
   }
-  
-  
   const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
   const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
   // Estados para el historial de imagenes
@@ -200,9 +209,6 @@ const Reporte = () => {
           <ConclusionBox />
             */}
           </div>
-
-
-
 {/* Menu de opciones */}
 
           <div className={`mx-4 dont-print ${isPageVisible ? '' : 'hidden'}`}>
@@ -234,10 +240,7 @@ const Reporte = () => {
 
         {/* Despliego de las imagenes dentro del array */}
         <div className = 'conclusion-container'>
-
-        <ConclusionCanvas 
-
-          
+        <ConclusionCanvas           
           img={{
             src: '/assets/NeuronoImg/BP_Neuronopatia.png',
             alt: 'Modelo',
@@ -395,6 +398,7 @@ const Reporte = () => {
               </div>
               <div>{checkDivs(copyConclusions)}</div>
             </div>
+          
           </div>
         </div>
       </div>

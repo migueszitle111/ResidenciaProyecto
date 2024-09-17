@@ -245,7 +245,7 @@
 
 .dont-print-Nervius :hover {
   
-  display: visible;
+  display: visible = false;
   background-color: rgb(4, 4, 190);
   border-radius: 100px;
 }

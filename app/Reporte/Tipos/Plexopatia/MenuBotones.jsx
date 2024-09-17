@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
 import { Accordion, darvalor } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
+import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
 import ReportFace from './ReportFace';
+
 
 // Numero de pasos 
 const stepsArray = ['A1','B1','B2','B3','C1','C2','C3','D1','D2','D3','E1','E2','E3','F1','F2','F3','G1','G2','G3','H2','H3', 'D2A', 'D2A', 'D3A', 'I1', 'I2', 'I3'];
@@ -88,13 +90,13 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       
         <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'}>
           <div onClick={handleNextStep5}>
-            <ConclusionButton value='tron1000d' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCOS (' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='tron1000d' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='divid' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep6}>
-            <ConclusionButton value='tron10000d' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDONES (' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+            <ConclusionButton value='tron10000d' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
 
@@ -123,13 +125,13 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       
         <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'}>
           <div onClick={handleNextStep5}>
-            <ConclusionButton value='tron1000i' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCOS (' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='tron1000i' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='divii' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep6}>
-            <ConclusionButton value='tron10000i' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDONES (' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+            <ConclusionButton value='tron10000i' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
 
@@ -158,13 +160,13 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       
         <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'}>
           <div onClick={handleNextStep5}>
-            <ConclusionButton value='tron1000' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCOS (' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='tron1000' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='divi' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep6}>
-            <ConclusionButton value='tron10000' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDONES (' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+            <ConclusionButton value='tron10000' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
 
@@ -179,23 +181,23 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
   const ubicaciond2a = () => {
     if (myVariable1.includes("a")) {
       return (<div>
-              <ConclusionButton value='supd' title=' SUPERIOR,' displayText={'SUPERIOR'}/>
-              <ConclusionButton value='mediod' title=' MEDIO,' displayText={'MEDIO'}/>
+              <ConclusionButton value='supd' title=' SUPERIOR' displayText={'SUPERIOR'}/>
+              <ConclusionButton value='mediod' title=' MEDIO' displayText={'MEDIO'}/>
               <ConclusionButton value='infd' title=' INFERIOR' displayText={'INFERIOR'}/>
             </div>
       );
     }
     else if (myVariable1.includes("b")) {
       return (<div>
-              <ConclusionButton value='supi' title=' SUPERIOR,' displayText={'SUPERIOR'}/>
-              <ConclusionButton value='medioi' title=' MEDIO,' displayText={'MEDIO'}/>
+              <ConclusionButton value='supi' title=' SUPERIOR' displayText={'SUPERIOR'}/>
+              <ConclusionButton value='medioi' title=' MEDIO' displayText={'MEDIO'}/>
               <ConclusionButton value='infi' title=' INFERIOR' displayText={'INFERIOR'}/></div>
       );
     }
     else if (myVariable1.includes("c")) {
       return (<div>
-              <ConclusionButton value='sup' title=' SUPERIOR,' displayText={'SUPERIOR'}/>
-              <ConclusionButton value='medio' title=' MEDIO,' displayText={'MEDIO'}/>
+              <ConclusionButton value='sup' title=' SUPERIOR' displayText={'SUPERIOR'}/>
+              <ConclusionButton value='medio' title=' MEDIO' displayText={'MEDIO'}/>
               <ConclusionButton value='inf' title=' INFERIOR' displayText={'INFERIOR'}/></div>
       );
     }
@@ -205,22 +207,22 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
   const ubicaciond2b = () => {
     if (myVariable1.includes("a")) {
       return (<div>
-        <ConclusionButton value='laterald' title=' LATERAL,' displayText={'LATERAL'}/>
-        <ConclusionButton value='posteriord' title=' POSTERIOR,' displayText={'POSTERIOR'}/>
+        <ConclusionButton value='laterald' title=' LATERAL' displayText={'LATERAL'}/>
+        <ConclusionButton value='posteriord' title=' POSTERIOR' displayText={'POSTERIOR'}/>
         <ConclusionButton value='mediald' title=' MEDIAL'displayText={'MEDIAL'} /></div>
       );
     }
     else if (myVariable1.includes("b")) {
       return (<div>
-        <ConclusionButton value='laterali' title=' LATERAL,' displayText={'LATERAL'}/>
-        <ConclusionButton value='posteriori' title=' POSTERIOR,' displayText={'POSTERIOR'}/>
+        <ConclusionButton value='laterali' title=' LATERAL' displayText={'LATERAL'}/>
+        <ConclusionButton value='posteriori' title=' POSTERIOR' displayText={'POSTERIOR'}/>
         <ConclusionButton value='mediali' title=' MEDIAL'displayText={'MEDIAL'} /></div>
       );
     }
     else if (myVariable1.includes("c")) {
       return (<div>
-        <ConclusionButton value='lateral' title=' LATERAL,' displayText={'LATERAL'}/>
-        <ConclusionButton value='posterior' title=' POSTERIOR,' displayText={'POSTERIOR'}/>
+        <ConclusionButton value='lateral' title=' LATERAL' displayText={'LATERAL'}/>
+        <ConclusionButton value='posterior' title=' POSTERIOR' displayText={'POSTERIOR'}/>
         <ConclusionButton value='medial' title=' MEDIAL'displayText={'MEDIAL'} /></div>
       );
     }
@@ -1373,7 +1375,90 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
   );
 };
 
-const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) => {
+const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) => {
+
+  
+    // Función para manejar la carga de la imagen
+    const [imageSrc, setImageSrc] = useState(null);
+
+    // Función para manejar la carga de la imagen
+    const handleImageUpload = (event) => {
+      const file = event.target.files[0]; // Obtiene el primer archivo seleccionado
+      if (file) {
+        const reader = new FileReader(); // Crea un lector de archivos
+        reader.onloadend = () => {
+          setImageSrc(reader.result); // Almacena la imagen en formato base64
+        };
+        reader.readAsDataURL(file); // Lee el archivo como una URL de datos
+      }
+    };
+  
+    // Función para simular el clic en el input file
+    const triggerFileInput = () => {
+      document.getElementById('imageInput').click();
+    };
+
+  // Función para manejar la carga de la imagen
+  const DropArea2 = () => {
+    const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
+  
+    // Maneja la lógica de soltar las imágenes
+    const handleDrop = (e) => {
+      e.preventDefault();
+      const files = e.dataTransfer.files; // Obtiene los archivos arrastrados
+      if (files && files.length > 0) {
+        const fileArray = Array.from(files);
+        const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
+  
+        // Leer y mostrar la imagen, reemplazando la anterior
+        if (imageFiles.length > 0) {
+          const file = imageFiles[0]; // Solo tomamos la primera imagen
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            setImageSrc(event.target.result); // Reemplaza la imagen anterior
+          };
+          reader.readAsDataURL(file); // Lee el archivo como URL de datos
+        }
+      }
+    };
+  
+    const handleDragOver = (e) => {
+      e.preventDefault(); // Necesario para permitir el "drop"
+    };
+  
+    return (
+      <div
+        className="dropArea2"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        style={{
+          //border: '2px dashed #ccc',
+          position: 'relative', // Necesario para contener la imagen
+        }}
+      >
+        {!imageSrc ? (
+          <p></p>
+        ) : (
+          <img
+            src={imageSrc}
+            alt="Cargada"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover', // Ajusta la imagen dentro del contenedor
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              pointerEvents: 'none', // Desactiva la posibilidad de arrastrar la imagen
+            }}
+          />
+        )}
+      </div>
+    );
+  };
+  
+
+
   return (
     <div>
       <div className='button-bar'>
@@ -1396,21 +1481,72 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
       </div>
 
-      <Draggable>
-        <div className='imagen'>
-          <img src="/assets/Simbolos/S_Circulo 1.png" width="175" height="175" alt="Circulo 1"/>
+      <div className="containerImg">
+      {/* <Draggable>
+          <div className='imagen'>
+            <img src="/assets/Simbolos/S_Circulo 1.png" width="175" height="175" alt="Circulo 1"/>
+          </div>
+        </Draggable>
+        <Draggable>
+          <div className='imagen'>
+            <img src="/assets/Simbolos/S_Circulo 2.png" width="175" height="175" alt="Circulo 2"/>
+          </div>
+        </Draggable>
+        <Draggable>
+          <div className='imagen'>
+            <img src="/assets/Simbolos/S_Circulo 3.png" width="175" height="175" alt="Circulo 3"/>
+          </div>
+        </Draggable> */}
+
+
         </div>
-      </Draggable>
-      <Draggable>
-        <div className='imagen'>
-          <img src="/assets/Simbolos/S_Circulo 2.png" width="175" height="175" alt="Circulo 2"/>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div className='imagen'>
-          <img src="/assets/Simbolos/S_Circulo 3.png" width="175" height="175" alt="Circulo 3"/>
-        </div>
-      </Draggable>
+
+          <div className='DivPanel'>
+
+            <DraggableDiv>
+              <div className="cuadro">
+                <img src="/assets/Simbolos/S_Linea 2.png" width="175" height="175" className='lineaImg'/>
+                <div className="cuadro2">
+                <DropArea2 />
+                </div>
+              </div>
+            </DraggableDiv>
+
+            <DraggableDiv>
+              <div className="cuadro">
+                <img src="/assets/Simbolos/S_Linea 1.png" width="175" height="175" className='lineaImg'/>
+                {/* <div className='lineaImg'><img src="/assets/Simbolos/S_Linea 1.png" width="175" height="75" /></div> */}
+                <div className="cuadro2">
+                <DropArea2 />
+                </div>
+                {/* <div className='lineaDv'></div> */}
+              </div>
+            </DraggableDiv>
+
+            <DraggableDiv>
+              <div className="cuadro">
+                <img src="/assets/Simbolos/S_Linea 3.png" width="175" height="175" className='lineaImg'/>
+                <div className="cuadro2">
+                <DropArea2 />
+                </div>
+              </div>
+            </DraggableDiv>
+
+
+            <div>
+                <button onClick={triggerFileInput} className='btnInsert'>Cargar imagen</button>
+                  <input
+                    id="imageInput"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    style={{ display: 'none' }} // Oculta el input file
+                  />
+                  
+                  {imageSrc && <img src={imageSrc} alt="Imagen cargada" style={{ marginTop: '20px', maxWidth: '100%', height: 'auto' }} />}
+            </div>
+
+          </div>
 
     </div>
   );
@@ -1421,7 +1557,7 @@ const StepI1 = ({ handlePrevStep1, handleUndo, handleImageChange, handlePrint })
     <div>
       <div className='button-bar'>
         <button onClick={handlePrevStep1} className={`print-button`}>
-         <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+        <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={handlePrint} className={`print-button`}>
@@ -1439,21 +1575,42 @@ const StepI1 = ({ handlePrevStep1, handleUndo, handleImageChange, handlePrint })
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
       </div>
 
-      <Draggable>
-        <div className='imagen'>
-          <img src="/assets/Simbolos/S_Circulo 1.png" width="175" height="175" alt="Circulo 1"/>
+      <div className="containerImg">
+        <Draggable>
+          <div className='imagen'>
+            <img src="/assets/Simbolos/S_Circulo 1.png" width="175" height="175" alt="Circulo 1"/>
+          </div>
+        </Draggable>
+        <Draggable>
+          <div className='imagen'>
+            <img src="/assets/Simbolos/S_Circulo 2.png" width="175" height="175" alt="Circulo 2"/>
+          </div>
+        </Draggable>
+        <Draggable>
+          <div className='imagen'>
+            <img src="/assets/Simbolos/S_Circulo 3.png" width="175" height="175" alt="Circulo 3"/>
+          </div>
+        </Draggable>
         </div>
-      </Draggable>
-      <Draggable>
-        <div className='imagen'>
-          <img src="/assets/Simbolos/S_Circulo 2.png" width="175" height="175" alt="Circulo 2"/>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div className='imagen'>
-          <img src="/assets/Simbolos/S_Circulo 3.png" width="175" height="175" alt="Circulo 3"/>
-        </div>
-      </Draggable>
+
+        <DraggableDiv>
+            <div className="cuadro">
+            <p>Hola1</p>
+            <div className='cuadro2'><p2>insertar</p2></div>
+            </div>
+          </DraggableDiv>
+          <DraggableDiv>
+            <div className="cuadro">
+              <p>Hola2</p>
+              <div className='cuadro2'><p2>insertar</p2></div>
+            </div>
+          </DraggableDiv>
+          <DraggableDiv>
+            <div className="cuadro">
+              <p>Hola3</p>
+              <div className='cuadro2'><p2>insertar</p2></div>
+            </div>
+          </DraggableDiv>
 
     </div>
   );
@@ -1464,7 +1621,7 @@ const StepI2 = ({ handlePrevStep2, handleUndo, handleImageChange, handlePrint })
     <div>
       <div className='button-bar'>
         <button onClick={handlePrevStep2} className={`print-button`}>
-         <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={handlePrint} className={`print-button`}>
@@ -1482,21 +1639,43 @@ const StepI2 = ({ handlePrevStep2, handleUndo, handleImageChange, handlePrint })
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
       </div>
 
-      <Draggable>
-        <div className='imagen'>
-          <img src="/assets/Simbolos/S_Circulo 1.png" width="175" height="175" alt="Circulo 1"/>
+      <div className="containerImg">
+        <Draggable>
+          <div className='imagen'>
+            <img src="/assets/Simbolos/S_Circulo 1.png" width="175" height="175" alt="Circulo 1"/>
+          </div>
+        </Draggable>
+        <Draggable>
+          <div className='imagen'>
+            <img src="/assets/Simbolos/S_Circulo 2.png" width="175" height="175" alt="Circulo 2"/>
+          </div>
+        </Draggable>
+        <Draggable>
+          <div className='imagen'>
+            <img src="/assets/Simbolos/S_Circulo 3.png" width="175" height="175" alt="Circulo 3"/>
+          </div>
+        </Draggable>
         </div>
-      </Draggable>
-      <Draggable>
-        <div className='imagen'>
-          <img src="/assets/Simbolos/S_Circulo 2.png" width="175" height="175" alt="Circulo 2"/>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div className='imagen'>
-          <img src="/assets/Simbolos/S_Circulo 3.png" width="175" height="175" alt="Circulo 3"/>
-        </div>
-      </Draggable>
+
+
+        <DraggableDiv>
+            <div className="cuadro">
+              <p>Hola1</p>
+              <div className='cuadro2'><p2>insertar</p2></div>
+            </div>
+          </DraggableDiv>
+          <DraggableDiv>
+            <div className="cuadro">
+              <p>Hola2</p>
+              <div className='cuadro2'><p2>insertar</p2></div>
+            </div>
+          </DraggableDiv>
+          <DraggableDiv>
+            <div className="cuadro">
+              <p>Hola3</p>
+              <div className='cuadro2'><p2>insertar</p2></div>
+            </div>
+          </DraggableDiv>
 
     </div>
   );

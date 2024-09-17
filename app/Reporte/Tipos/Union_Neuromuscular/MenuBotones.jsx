@@ -163,7 +163,7 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
 
       <div onClick={ handleNextStep }>
         <ConclusionButton value='tipo_presinaptico' title=' TIPO PRESINÁPTICO ' displayText={'PRESINÁPTICO'}/>                
-        <ConclusionButton value='tipo_postsinaptico' title=' TIPO POSTSINÁPTICO ' displayText={'POSTSINÁPTICO'}/>
+        <ConclusionButton value='tipo_postsinaptico' title=' TIPO POSTSINÁPTICO' displayText={'POSTSINÁPTICO'}/>
       </div>
       
       
@@ -187,6 +187,7 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <ConclusionButton value='bulbar' title='BULBAR' displayText={'BULBAR'}   dangerouslySetInnerHTML={{ __html: ' BULBAR' }}/>
+     
       <ConclusionButton value='proximal' title='PROXIMAL' displayText={'PROXIMAL'}/>
       <ConclusionButton value='distal' title='DISTAL' displayText={'DISTAL'}/>
     </div>

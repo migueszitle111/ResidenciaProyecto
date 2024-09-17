@@ -1,13 +1,75 @@
-import { useState, useEffect, useContext } from 'react'
-import React, { useCallback } from 'react';
+import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
-import { Accordion, AccordionContainer } from '../../../components/ReportTemplate/Accordion'   
-import { ReportContext } from '@/src/context'
-import { ConclusionButton, ConclusionBox } from '../../../components/ReportTemplate/Conclusions'
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas'
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
-import './Style.css';
+import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
+import './Style.css';
+
+
+const DropArea = () => {
+  const [droppedItems, setDroppedItems] = useState([]);
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData('text/html');
+    if (data) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, 'text/html');
+      const element = doc.body.firstChild;
+      if (element) {
+        setDroppedItems([
+          ...droppedItems,
+          { id: Date.now(), content: element.outerHTML, x: 0, y: 0 }
+        ]);
+      }
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const updatePosition = (id, x, y) => {
+    setDroppedItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, x, y } : item
+      )
+    );
+  };
+
+  return (
+    <div
+      className="dropArea"
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      style={{
+        border: '2px dashed #ccc',
+        position: 'relative'
+      }}
+    >
+      {droppedItems.length === 0 ? (
+        <p></p>
+      ) : (
+        droppedItems.map((item) => (
+          <Rnd
+            key={item.id}
+            default={{
+              x: item.x,
+              y: item.y,
+              width: 200,
+              height: 200
+            }}
+            onDragStop={(e, d) => updatePosition(item.id, d.x, d.y)}
+            style={{ position: 'absolute' }}
+          >
+            <div dangerouslySetInnerHTML={{ __html: item.content }} />
+          </Rnd>
+        ))
+      )}
+    </div>
+  );
+};
 
 const Reporte = () => {
   
@@ -26,6 +88,97 @@ const Reporte = () => {
     useEffect(() => {
       setCopyConclusions(conclusions.map(cl => cl.title).join(''))
     }, [conclusions])
+
+    // Funcion para el arrastre de imagenes
+    
+
+
+
+    //funcion que agreaga comas y conjunciones a las conclusiones
+    function formatConclusions(copyConclusions) {
+      const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
+      const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
+      const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL"];
+      let words = copyConclusions.split(' ');
+      let keywordPositions = [];
+  
+      // Identificar las posiciones de las palabras clave
+      for (let i = 0; i < words.length; i++) {
+          if (keywords.includes(words[i])) {
+              keywordPositions.push(i);
+          }
+      }
+  
+      // Verificar la palabra clave específica en keywords2
+      for (let i = 0; i < words.length; i++) {
+          if (keywords2.includes(words.slice(i, i + 6).join(' '))) {
+              let countAfterKeyword = 0;
+              for (let j = i + 6; j < words.length; j++) {
+                  if (keywords.includes(words[j])) {
+                      countAfterKeyword++;
+                  }
+              }
+  
+              if (countAfterKeyword > 1) {
+                  words[i + 5] += 'S'; // Agregar 'S' al final de 'TROCO' si hay más de dos palabras
+              }
+  
+              break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
+          }
+      }
+  
+      // Verificar la palabra clave específica en keywords3
+      for (let i = 0; i < words.length; i++) {
+          if (keywords3.includes(words.slice(i, i + 6).join(' '))) {
+              let countAfterKeyword = 0;
+              for (let j = i + 6; j < words.length; j++) {
+                  if (keywords.includes(words[j])) {
+                      countAfterKeyword++;
+                  }
+              }
+  
+              if (countAfterKeyword > 1) {
+                  words[i + 5] += 'ES'; // Agregar 'ES' al final de 'CORDON' si hay más de dos palabras
+              }
+  
+              break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
+          }
+      }
+  
+      // Si no se encontraron palabras clave, devolver la cadena original
+      if (keywordPositions.length === 0) {
+          return copyConclusions;
+      }
+  
+      // Si solo hay una palabra clave, devolver la cadena original
+      if (keywordPositions.length === 1) {
+          return copyConclusions;
+      }
+  
+      // Formatear las palabras clave con comas, excepto antes de la conjunción
+      for (let i = 0; i < keywordPositions.length - 2; i++) {
+          words[keywordPositions[i]] += ',';
+      }
+  
+      // Verificar si la última palabra clave empieza con "I"
+      let lastKeywordIndex = keywordPositions[keywordPositions.length - 1];
+      let secondLastKeywordIndex = keywordPositions[keywordPositions.length - 2];
+      let conjunction = 'Y';
+  
+      if (words[lastKeywordIndex][0].toUpperCase() === 'I') {
+          conjunction = 'O';
+      }
+  
+      // Insertar la conjunción antes de la última palabra clave
+      words.splice(lastKeywordIndex, 0, conjunction);
+  
+      return words.join(' ');
+  }
+  
+
+  const formattedConclusions = formatConclusions(copyConclusions);
+
+
 
     // Para mantener constante la conclusione
     const handleTextareaChange = (event) => {
@@ -70,6 +223,12 @@ const Reporte = () => {
       });
     }, []);
 
+    useEffect(() => {
+      const newConclusions = conclusions.map(cl => cl.title).join(' ');
+      const formattedConclusions = formatConclusions(newConclusions);
+      setCopyConclusions(formattedConclusions);
+  }, [conclusions]);
+
 
   // Codigo para imprimir en click
   useEffect(() => {
@@ -85,6 +244,9 @@ const Reporte = () => {
     };
   }, []); 
 
+/*#################backgroundColor: 'white',#######################################################*/
+
+/*########################################################################*/
 
   return (
     <div >
@@ -869,7 +1031,9 @@ const Reporte = () => {
         onChange={handleTextareaChange}
       /></div>
         </div>
+        
         </div>
+        <div><DropArea /> </div>
         </div>
       </div>
     </div>

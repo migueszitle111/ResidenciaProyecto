@@ -15,7 +15,7 @@
 
 .dont-print-Nervius{
   background-color: cyan;
-  visibility: visible; 
+  visibility: visible;
 }
 
 .cornerimage {
@@ -23,7 +23,7 @@
   position: absolute;
   top: 0;
   right: 0;
- } 
+  }
 
 .head h1{
   font-size: 25px;

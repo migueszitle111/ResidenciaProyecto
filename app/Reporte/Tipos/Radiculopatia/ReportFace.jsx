@@ -4,8 +4,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd';
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import './EstilosCruz.css';
-import { CheckboxContext } from './MenuBotones'; 
-import SimpleMultiStepForm from './MenuBotones';
+import SimpleMultiStepForm, { CheckboxContext } from './MenuBotones';
 import './Style.css';
 
 const Reporte = () => {
@@ -65,6 +64,62 @@ const Reporte = () => {
       A76: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz76' },
 
 
+      //Torácica
+      A89: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz89' },
+      A90: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz90' },
+      A91: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz91' },
+      A92: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz92' },
+
+      A97: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz97' },
+      A98: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz98' },
+      A99: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz99' },
+      A100: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz100' },
+
+      A105: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz105' },
+      A106: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz106' },
+      A107: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz107' },
+      A108: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz108' },
+
+      A113: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz113' },
+      A114: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz114' },
+      A115: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz115' },
+      A116: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz116' },
+      
+      A121: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz121' },
+      A122: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz122' },
+      A123: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz123' },
+      A124: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz124' },
+
+      A129: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz129' },
+      A130: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz130' },
+      A131: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz131' },
+      A132: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz132' },
+
+      A137: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz137' },
+      A138: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz138' },
+      A139: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz139' },
+      A140: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz140' },
+
+      A145: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz145' },
+      A146: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz146' },
+      A147: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz147' },
+      A148: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz148' },
+
+      A153: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz153' },
+      A154: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz154' },
+      A155: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz155' },
+      A156: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz156' },
+
+      A161: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz161' },
+      A162: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz162' },
+      A163: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz163' },
+      A164: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz164' },
+
+      A169: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz169' },
+      A170: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz170' },
+      A171: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz171' },
+      A172: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz172' },
+
     },
     right: {
       A5: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz5' },
@@ -116,6 +171,64 @@ const Reporte = () => {
       A78: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz78' },
       A79: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz79' },
       A80: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz80' },
+
+
+
+
+      A93: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz93' },
+      A94: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz94' },
+      A95: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz95' },
+      A96: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz96' },
+
+      A101: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz101' },
+      A102: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz102' },
+      A103: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz103' },
+      A104: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz104' },
+
+      A109: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz109' },
+      A110: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz110' },
+      A111: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz111' },
+      A112: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz112' },
+
+      A117: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz117' },
+      A118: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz118' },
+      A119: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz119' },
+      A120: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz120' },
+
+      A125: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz125' },
+      A126: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz126' },
+      A127: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz127' },
+      A128: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz128' },
+
+      A133: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz133' },
+      A134: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz134' },
+      A135: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz135' },
+      A136: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz136' },
+
+      A141: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz141' },
+      A142: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz142' },
+      A143: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz143' },
+      A144: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz144' },
+
+      A149: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz149' },
+      A150: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz150' },
+      A151: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz151' },
+      A152: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz152' },
+
+      A157: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz157' },
+      A158: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz158' },
+      A159: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz159' },
+      A160: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz160' },
+
+      A165: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz165' },
+      A166: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz166' },
+      A167: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz167' },
+      A168: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz168' },
+
+      A173: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz173' },
+      A174: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz174' },
+      A175: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz175' },
+      A176: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz176' },
 
     }
   };

@@ -704,7 +704,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
       </Accordion>
 
       <Accordion title='TORÁCICA'>
-        <Accordion title='T2' onToggle={handleAccordionToggle}>
+       {/* <Accordion title='T2' onToggle={handleAccordionToggle}>
             <table cellpadding='1'>
               <tr>
                 <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
@@ -1149,7 +1149,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                 </td>
               </tr>
             </table>
-          </Accordion>
+          </Accordion>*/}
       </Accordion>
 
       <Accordion title='POLISEGMENTARIA'>
@@ -1951,13 +1951,44 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='C5'onToggle={handleAccordionToggle}>
         <table>
             <td>
-            <ConclusionButton value='c5_i' title='L' displayText=''/>
-            </td>
-                  <input type='radio' name="radio3" value='9' id='A9' checked={checkedStateLeft.A9} onChange={handleCheckboxChangeLeft}></input>
-                  {checkedStateLeft.A9 && ( <img src='/assets/Simbolos/S_Cruz 1.png' className="cruz1"/> )}
-            {checkedStateLeft.A9 && ( <img src='/assets/RadiculopatiaImg/C5 izquierdo anterior.png' className="imagen1"/> )}
-            <td>
-            <ConclusionButton value='c5_d' title='R' displayText=''/>
+            {/*<ConclusionButton value='c5_i' title='L' displayText=''/>*/}
+          <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+             <td>
+                <input type='radio' name="radio1" title='L' value='c5_i' displayText='' id='A9' checked={checkedStateLeft.A9} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A9 }
+              </td>
+              <td>
+                <input type='radio' name="radio1" title='L' value='c5_i' id='A10' checked={checkedStateLeft.A10} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A10}
+              </td>
+              <td>
+                <input type='radio' name="radio1" title='L' value='c5_i' id='A11' checked={checkedStateLeft.A11} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A11}
+              </td>
+              <td>
+                <input type='radio' name="radio1" title='L' value='c5_i' id='A12' checked={checkedStateLeft.A12} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A12 }
+              </td>
+              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <td>
+                <input type='radio' name="radio2" value='1' id='A13' checked={checkedStateRight.A13} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A13 }
+              </td>
+              <td>
+                <input type='radio' name="radio2" value='2' id='A14' checked={checkedStateRight.A14} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A14}
+              </td>
+              <td>
+                <input type='radio' name="radio2" value='3' id='A15' checked={checkedStateRight.A15} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A15}
+              </td>
+              <td>
+                <input type='radio' name="radio2" value='4' id='A16' checked={checkedStateRight.A16} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A16}
+              </td>
+
+           
+          {/*  <ConclusionButton value='c5_d' title='R' displayText=''/>*/}
             </td>
           </table>
         </Accordion>

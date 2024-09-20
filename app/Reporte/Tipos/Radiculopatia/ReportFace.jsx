@@ -17,7 +17,6 @@ const Reporte = () => {
       A2: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz2' },
       A3: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz3' },
       A4: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz4' },
-
       A9: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz9' },
       A10: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz10' },
       A11: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz11' },
@@ -342,8 +341,149 @@ const Reporte = () => {
                         height: isPageVisible ? '600' : '800'
                       }}
                       rules={[
-                        // Agrega tus reglas aquí
+                        {
+                          expectedValue: 'c5_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/C5 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c5_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/C5 derecho anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c6_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/C6 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c6_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/C6 derecho anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c7_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/C7 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c7_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/C7 derecho anterior.png',
+                            alt: 'Modelo' 
+                          }
+                        },
+                        {
+                          expectedValue: 'c8_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/C8 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c8_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/C8 derecho anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 't1_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/T1 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 't1_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/T1 derecho anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l2_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/L1-L2 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l2_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/L1-L2 derecho anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l3_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/L1-L2 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l3_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/L1-L2 derecho anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l4_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/L3-L4 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l4_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/L3-L4 derecho anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l5_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/L5 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l5_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/L5 derecho anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 's1_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/S1 izquierdo anterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 's1_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/S1 derechoanterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
                       ]}
+                  
+            
                     />
                   </td>
                   <td>
@@ -356,9 +496,155 @@ const Reporte = () => {
                         height: isPageVisible ? '600' : '800'
                       }}
                       rules={[
-                        // Agrega tus reglas aquí
+                        {
+                          expectedValue: 'c5_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C5-C6 derecho posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c5_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C5-C6 izquierdo posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c5_b', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/RA_P_C5,C6.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c6_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C5-C6 derecho posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c6_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C5-C6 izquierdo posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c6_b', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/RA_P_C5-C6-C7.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c7_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C7 derecho posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c7_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C7 izquierdo posterior.png',
+                            alt: 'Modelo' 
+                          }
+                        },
+                        {
+                          expectedValue: 'c7_b', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/RA_P_C7.png',
+                            alt: 'Modelo' 
+                          }
+                        },
+                        {
+                          expectedValue: 'c8_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C8 derecho posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c8_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C8 izquierdo posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c8_b', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/RA_P_C8-T1.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 't1_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C8 derecho posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 't1_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C8 izquierdo posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 't1_b', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/RA_P_C8-T1.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l5_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/L5 derecho posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l5_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/L5 izquierdo posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'l5_b', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/RA_P_L5.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 's1_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/L5 S1 S2 derecho posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 's1_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/L5 S1 S2 izquierdo posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 's1_b', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/RA_P_L5-S1-S2.png',
+                            alt: 'Modelo',
+                          }
+                        },
                       ]}
-                    />
+                    />        
                   </td>
                 </tr>
               </table>

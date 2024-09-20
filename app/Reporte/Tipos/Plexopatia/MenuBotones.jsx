@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Draggable from 'react-draggable';
 import { Accordion, darvalor } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
@@ -1375,28 +1374,8 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
   );
 };
 
-const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) => {
-
   
-    // Función para manejar la carga de la imagen
-    const [imageSrc, setImageSrc] = useState(null);
-
-    // Función para manejar la carga de la imagen
-    const handleImageUpload = (event) => {
-      const file = event.target.files[0]; // Obtiene el primer archivo seleccionado
-      if (file) {
-        const reader = new FileReader(); // Crea un lector de archivos
-        reader.onloadend = () => {
-          setImageSrc(reader.result); // Almacena la imagen en formato base64
-        };
-        reader.readAsDataURL(file); // Lee el archivo como una URL de datos
-      }
-    };
-  
-    // Función para simular el clic en el input file
-    const triggerFileInput = () => {
-      document.getElementById('imageInput').click();
-    };
+  // Función para manejar la carga de la imagen
 
   // Función para manejar la carga de la imagen
   const DropArea2 = () => {
@@ -1457,6 +1436,29 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) =>
     );
   };
   
+
+
+const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) => {
+
+
+    const [imageSrc, setImageSrc] = useState(null);
+
+    // Función para manejar la carga de la imagen
+    const handleImageUpload = (event) => {
+      const file = event.target.files[0]; // Obtiene el primer archivo seleccionado
+      if (file) {
+        const reader = new FileReader(); // Crea un lector de archivos
+        reader.onloadend = () => {
+          setImageSrc(reader.result); // Almacena la imagen en formato base64
+        };
+        reader.readAsDataURL(file); // Lee el archivo como una URL de datos
+      }
+    };
+  
+    // Función para simular el clic en el input file
+    const triggerFileInput = () => {
+      document.getElementById('imageInput').click();
+    };
 
 
   return (
@@ -1553,6 +1555,25 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) =>
 };
 
 const StepI1 = ({ handlePrevStep1, handleUndo, handleImageChange, handlePrint }) => {
+      const [imageSrc, setImageSrc] = useState(null);
+
+      // Función para manejar la carga de la imagen
+      const handleImageUpload = (event) => {
+        const file = event.target.files[0]; // Obtiene el primer archivo seleccionado
+        if (file) {
+          const reader = new FileReader(); // Crea un lector de archivos
+          reader.onloadend = () => {
+            setImageSrc(reader.result); // Almacena la imagen en formato base64
+          };
+          reader.readAsDataURL(file); // Lee el archivo como una URL de datos
+        }
+      };
+
+      // Función para simular el clic en el input file
+      const triggerFileInput = () => {
+        document.getElementById('imageInput').click();
+      };
+
   return (
     <div>
       <div className='button-bar'>
@@ -1575,48 +1596,76 @@ const StepI1 = ({ handlePrevStep1, handleUndo, handleImageChange, handlePrint })
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
       </div>
 
-      <div className="containerImg">
-        <Draggable>
-          <div className='imagen'>
-            <img src="/assets/Simbolos/S_Circulo 1.png" width="175" height="175" alt="Circulo 1"/>
-          </div>
-        </Draggable>
-        <Draggable>
-          <div className='imagen'>
-            <img src="/assets/Simbolos/S_Circulo 2.png" width="175" height="175" alt="Circulo 2"/>
-          </div>
-        </Draggable>
-        <Draggable>
-          <div className='imagen'>
-            <img src="/assets/Simbolos/S_Circulo 3.png" width="175" height="175" alt="Circulo 3"/>
-          </div>
-        </Draggable>
-        </div>
+      <div className='DivPanel'>
 
         <DraggableDiv>
-            <div className="cuadro">
-            <p>Hola1</p>
-            <div className='cuadro2'><p2>insertar</p2></div>
+          <div className="cuadro">
+            <img src="/assets/Simbolos/S_Linea 2.png" width="175" height="175" className='lineaImg'/>
+            <div className="cuadro2">
+            <DropArea2 />
             </div>
-          </DraggableDiv>
-          <DraggableDiv>
-            <div className="cuadro">
-              <p>Hola2</p>
-              <div className='cuadro2'><p2>insertar</p2></div>
-            </div>
-          </DraggableDiv>
-          <DraggableDiv>
-            <div className="cuadro">
-              <p>Hola3</p>
-              <div className='cuadro2'><p2>insertar</p2></div>
-            </div>
-          </DraggableDiv>
+          </div>
+        </DraggableDiv>
 
+        <DraggableDiv>
+          <div className="cuadro">
+            <img src="/assets/Simbolos/S_Linea 1.png" width="175" height="175" className='lineaImg'/>
+            {/* <div className='lineaImg'><img src="/assets/Simbolos/S_Linea 1.png" width="175" height="75" /></div> */}
+            <div className="cuadro2">
+            <DropArea2 />
+            </div>
+            {/* <div className='lineaDv'></div> */}
+          </div>
+        </DraggableDiv>
+
+        <DraggableDiv>
+          <div className="cuadro">
+            <img src="/assets/Simbolos/S_Linea 3.png" width="175" height="175" className='lineaImg'/>
+            <div className="cuadro2">
+            <DropArea2 />
+            </div>
+          </div>
+        </DraggableDiv>
+
+
+        <div>
+            <button onClick={triggerFileInput} className='btnInsert'>Cargar imagen</button>
+              <input
+                id="imageInput"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                style={{ display: 'none' }} // Oculta el input file
+              />
+              
+              {imageSrc && <img src={imageSrc} alt="Imagen cargada" style={{ marginTop: '20px', maxWidth: '100%', height: 'auto' }} />}
+        </div>
+
+        </div>
     </div>
   );
 };
 
 const StepI2 = ({ handlePrevStep2, handleUndo, handleImageChange, handlePrint }) => {
+      const [imageSrc, setImageSrc] = useState(null);
+
+      // Función para manejar la carga de la imagen
+      const handleImageUpload = (event) => {
+        const file = event.target.files[0]; // Obtiene el primer archivo seleccionado
+        if (file) {
+          const reader = new FileReader(); // Crea un lector de archivos
+          reader.onloadend = () => {
+            setImageSrc(reader.result); // Almacena la imagen en formato base64
+          };
+          reader.readAsDataURL(file); // Lee el archivo como una URL de datos
+        }
+      };
+
+      // Función para simular el clic en el input file
+      const triggerFileInput = () => {
+        document.getElementById('imageInput').click();
+      };
+
   return (
     <div>
       <div className='button-bar'>
@@ -1639,43 +1688,52 @@ const StepI2 = ({ handlePrevStep2, handleUndo, handleImageChange, handlePrint })
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
       </div>
 
-      <div className="containerImg">
-        <Draggable>
-          <div className='imagen'>
-            <img src="/assets/Simbolos/S_Circulo 1.png" width="175" height="175" alt="Circulo 1"/>
+      <div className='DivPanel'>
+
+      <DraggableDiv>
+        <div className="cuadro">
+          <img src="/assets/Simbolos/S_Linea 2.png" width="175" height="175" className='lineaImg'/>
+          <div className="cuadro2">
+          <DropArea2 />
           </div>
-        </Draggable>
-        <Draggable>
-          <div className='imagen'>
-            <img src="/assets/Simbolos/S_Circulo 2.png" width="175" height="175" alt="Circulo 2"/>
-          </div>
-        </Draggable>
-        <Draggable>
-          <div className='imagen'>
-            <img src="/assets/Simbolos/S_Circulo 3.png" width="175" height="175" alt="Circulo 3"/>
-          </div>
-        </Draggable>
         </div>
+      </DraggableDiv>
+
+      <DraggableDiv>
+        <div className="cuadro">
+          <img src="/assets/Simbolos/S_Linea 1.png" width="175" height="175" className='lineaImg'/>
+          {/* <div className='lineaImg'><img src="/assets/Simbolos/S_Linea 1.png" width="175" height="75" /></div> */}
+          <div className="cuadro2">
+          <DropArea2 />
+          </div>
+          {/* <div className='lineaDv'></div> */}
+        </div>
+      </DraggableDiv>
+
+      <DraggableDiv>
+        <div className="cuadro">
+          <img src="/assets/Simbolos/S_Linea 3.png" width="175" height="175" className='lineaImg'/>
+          <div className="cuadro2">
+          <DropArea2 />
+          </div>
+        </div>
+      </DraggableDiv>
 
 
-        <DraggableDiv>
-            <div className="cuadro">
-              <p>Hola1</p>
-              <div className='cuadro2'><p2>insertar</p2></div>
-            </div>
-          </DraggableDiv>
-          <DraggableDiv>
-            <div className="cuadro">
-              <p>Hola2</p>
-              <div className='cuadro2'><p2>insertar</p2></div>
-            </div>
-          </DraggableDiv>
-          <DraggableDiv>
-            <div className="cuadro">
-              <p>Hola3</p>
-              <div className='cuadro2'><p2>insertar</p2></div>
-            </div>
-          </DraggableDiv>
+      <div>
+          <button onClick={triggerFileInput} className='btnInsert'>Cargar imagen</button>
+            <input
+              id="imageInput"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              style={{ display: 'none' }} // Oculta el input file
+            />
+            
+            {imageSrc && <img src={imageSrc} alt="Imagen cargada" style={{ marginTop: '20px', maxWidth: '100%', height: 'auto' }} />}
+      </div>
+
+      </div>
 
     </div>
   );

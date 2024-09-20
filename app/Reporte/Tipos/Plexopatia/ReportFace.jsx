@@ -44,7 +44,7 @@ const DropArea = () => {
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       style={{
-        border: '2px dashed #ccc',
+        //border: '2px dashed #ccc',
         position: 'relative'
       }}
     >
@@ -166,7 +166,7 @@ const Reporte = () => {
       let conjunction = 'Y';
   
       if (words[lastKeywordIndex][0].toUpperCase() === 'I') {
-          conjunction = 'O';
+          conjunction = 'E';
       }
   
       // Insertar la conjunción antes de la última palabra clave
@@ -224,7 +224,7 @@ const Reporte = () => {
     }, []);
 
     useEffect(() => {
-      const newConclusions = conclusions.map(cl => cl.title).join(' ');
+      const newConclusions = conclusions.map(cl => cl.title).join('');
       const formattedConclusions = formatConclusions(newConclusions);
       setCopyConclusions(formattedConclusions);
   }, [conclusions]);

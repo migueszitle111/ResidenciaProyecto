@@ -256,11 +256,11 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={ handleNextStep }>
-        <ConclusionButton value='4' title=' CON DENERVACIÓN DIFUSA SEVERA (++++) ( ' displayText='DIFUSA SEVERA (++++)'/>
-        <ConclusionButton value='5' title=' CON DENERVACIÓN ABUNDANTE PROGRESIVA (+++) (' displayText='ABUNDANTE PROGRESIVA (+++)'/>
-        <ConclusionButton value='6' title=' CON DENERVACIÓN ACTIVA MODERADA (++) (' displayText='ACTIVA MODERADA (++)'/>
-        <ConclusionButton value='7' title=' CON DENERVACIÓN LEVE (+/+) (' displayText='LEVE (+/+)'/>
-        <ConclusionButton value='8' title=' SIN DENERVACIÓN ACTIVA (' displayText='INACTIVA'/>
+        <ConclusionButton value='4' title=' CON DENERVACIÓN DIFUSA SEVERA (++++)  ' displayText='DIFUSA SEVERA (++++)'/>
+        <ConclusionButton value='5' title=' CON DENERVACIÓN ABUNDANTE PROGRESIVA (+++) ' displayText='ABUNDANTE PROGRESIVA (+++)'/>
+        <ConclusionButton value='6' title=' CON DENERVACIÓN ACTIVA MODERADA (++) ' displayText='ACTIVA MODERADA (++)'/>
+        <ConclusionButton value='7' title=' CON DENERVACIÓN LEVE (+/+) ' displayText='LEVE (+/+)'/>
+        <ConclusionButton value='8' title=' SIN DENERVACIÓN ACTIVA ' displayText='INACTIVA'/>
       </div>
     </div>
   );
@@ -333,8 +333,8 @@ const StepE = ({ handlePrevStep, handleNextStep }) => {
       </h1>
 
       <div onClick={handleNextStep}>
-        <ConclusionButton value = '9' title = ') SIMÉTRICA;' displayText = 'SIMÉTRICA'/>
-        <ConclusionButton value = '10' title = ') ASIMÉTRICA;'  displayText = 'ASIMÉTRICA'/>
+        <ConclusionButton value = '9' title = ' SIMÉTRICA;' displayText = 'SIMÉTRICA'/>
+        <ConclusionButton value = '10' title = ' ASIMÉTRICA;'  displayText = 'ASIMÉTRICA'/>
       </div>
     </div>
   );

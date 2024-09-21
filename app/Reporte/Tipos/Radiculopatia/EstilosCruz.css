@@ -7,13 +7,30 @@
   left: 21.25%
 }
 
+input[type="checkbox"] {
+  width: 10px;  /* Ajusta el ancho */
+  height: 10px; /* Ajusta la altura */
+  transform: scale(1.5); /* Escala el checkbox para hacerlo más grande */
+  margin: 2.7px;  /* Añade margen para separar los elementos */
+  vertical-align: middle; /* Alinea el checkbox verticalmente al medio */
+}
+
+.checkbox-container {
+  display: flex; /* Utiliza flex para alinear los elementos */
+  justify-content: space-around; /* Espacio entre los checkboxes */
+  align-items: center; /* Alinea verticalmente en el centro */
+}
+
+
+
 .cruz1 {
     z-Index: 3;
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 23.5%;
-    left: 54.25%;
+    top: 5.5%;
+    left: 47%;
+    transform: translate(-50%, -50%);
 }
 
 .cruz2 {
@@ -21,8 +38,9 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 23.5%;
-  left: 53.55%
+  top: 5.5%;
+  left: 46.25%;
+  transform: translate(-50%, -50%);
 }
 
 .cruz3 {
@@ -30,8 +48,10 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 23.5%;
-  left: 52.95%
+  top: 5.5%;
+  left: 45.5%;
+  transform: translate(-50%, -50%);
+
 }
 
 .cruz4 {
@@ -39,8 +59,10 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 23.5%;
-  left: 52.45%
+  top: 5.5%;
+  left: 44.7%;
+  transform: translate(-50%, -50%);
+
 }
 
 .cruz5 {
@@ -48,8 +70,10 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 25%;
-    left: 60.5%
+    top: 5.5%;
+    left:52.7%;
+    transform: translate(-50%, -50%);
+
 }
 
 .cruz6 {
@@ -57,8 +81,10 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 25%;
-  left: 61%
+  top: 5.5%;
+  left:53.5%;
+  transform: translate(-50%, -50%);
+
 }
 
 .cruz7 {
@@ -66,19 +92,21 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 25%;
-  left: 61.5%
-}
+  top: 5.5%;
+  left:54.2%;
+  transform: translate(-50%, -50%);
 
-/**/
+}
 
 .cruz8 {
   z-Index: 3;
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 25%;
-  left: 62%
+  top: 5.5%;
+  left:55%;
+  transform: translate(-50%, -50%);
+
 }
 
 .cruz9 {
@@ -86,8 +114,8 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 22.5%;
-    left: 55%
+    top: 6.3%;
+    left: 43%;
 }
 
 .cruz10 {
@@ -95,8 +123,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 22.5%;
-  left: 54.25%
+  top: 6.3%;
+  left: 42.3%
 }
 
 .cruz11 {
@@ -104,8 +132,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 22.5%;
-  left: 53.5%
+  top: 6.3%;
+  left: 41.5%
 }
 
 .cruz12 {
@@ -113,8 +141,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 22.5%;
-  left: 52.75%
+  top: 6.3%;
+  left: 40.7%
 }
 
 .cruz13 {
@@ -122,8 +150,8 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 22.5%;
-    left: 60%
+    top: 6.3%;
+    right: 43%;
 }
 
 .cruz14 {
@@ -131,8 +159,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 22.5%;
-  left: 60.75%
+  top: 6.3%;
+  right: 42.3%;
 }
 
 .cruz15 {
@@ -140,8 +168,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 22.5%;
-  left: 61.5%
+  top: 6.3%;
+  right: 41.5%;
 }
 
 .cruz16 {
@@ -149,8 +177,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 22.5%;
-  left: 62.25%
+  top: 6.3%;
+  right: 40.7%;
 }
 
 /**/
@@ -160,8 +188,8 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 24.25%;
-    left: 55%
+    top: 8%;
+    left: 43%
 }
 
 .cruz18 {
@@ -169,8 +197,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 24.25%;
-  left: 54.25%
+  top: 8%;
+  left: 42.2%
 }
 
 .cruz19 {
@@ -178,8 +206,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 24.25%;
-  left: 53.5%
+  top: 8%;
+  left: 41.5%
 }
 
 .cruz20 {
@@ -187,8 +215,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 24.25%;
-  left: 52.75%
+  top: 8%;
+  left: 40.7%
 }
 
 .cruz21 {
@@ -196,8 +224,8 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 24.25%;
-    left: 60%
+    top: 8%;
+    right: 43%
 }
 
 .cruz22 {
@@ -205,8 +233,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 24.25%;
-  left: 60.75%
+  top: 8%;
+  right:42.2%
 }
 
 .cruz23 {
@@ -214,8 +242,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 24.25%;
-  left: 61.5%
+  top: 8%;
+  right: 41.5%
 }
 
 .cruz24 {
@@ -223,8 +251,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-    top: 24.25%;
-  left: 62.25%
+  top: 8%;
+  right:40.7%
 }
 
 /**/
@@ -234,8 +262,8 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 26.5%;
-    left: 55%
+    top: 10.2%;
+    left: 42.8%
 }
 
 .cruz26 {
@@ -243,8 +271,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 26.5%;
-  left: 54.25%
+  top: 10.2%;
+  left: 41.8%
 }
 
 .cruz27 {
@@ -252,8 +280,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 26.5%;
-  left: 53.5%
+  top: 10.2%;
+  left: 41%
 }
 
 .cruz28 {
@@ -261,8 +289,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 26.5%;
-  left: 52.75%
+  top: 10.2%;
+  left: 40.3%
 }
 
 .cruz29 {
@@ -270,8 +298,8 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 26.5%;
-    left: 60%
+    top: 10.2%;
+    right: 42.8%
 }
 
 .cruz30 {
@@ -279,8 +307,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 26.5%;
-  left: 60.75%
+  top: 10.2%;
+  right:41.8%
 }
 
 .cruz31 {
@@ -288,8 +316,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 26.5%;
-  left: 61.5%
+  top: 10.2%;
+  right: 41%
 }
 
 .cruz32 {
@@ -297,8 +325,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 26.5%;
-  left: 62.25%
+  top: 10.2%;
+  right: 40.3%
 }
 
 /**/
@@ -307,9 +335,9 @@
     z-Index: 3;
     position: absolute;
     width: 100px;
-    height: 25px;   
-    top: 29.5%;
-    left: 55%
+    height: 25px;
+    top: 13.2%;
+    left: 42.5%
 }
 
 .cruz34 {
@@ -317,8 +345,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 29.5%;
-  left: 54.25%
+  top: 13.2%;
+  left: 41.8%
 }
 
 .cruz35 {
@@ -326,8 +354,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 29.5%;
-  left: 53.5%
+  top: 13.2%;
+  left: 41%
 }
 
 .cruz36 {
@@ -335,8 +363,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 29.5%;
-  left: 52.75%
+  top: 13.2%;
+  left: 40.2%
 }
 
 .cruz37 {
@@ -344,8 +372,8 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 29.5%;
-    left: 60%
+    top: 13.2%;
+    right: 42.5%
 }
 
 .cruz38 {
@@ -353,8 +381,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 29.5%;
-  left: 60.75%
+  top: 13.2%;
+  right: 41.8%
 }
 
 .cruz39 {
@@ -362,8 +390,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 29.5%;
-  left: 61.5%
+  top: 13.2%;
+  right: 41%
 }
 
 .cruz40 {
@@ -371,8 +399,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 29.5%;
-  left: 62.25cqi
+  top: 13.2%;
+  right:  40.2%
 }
 
 /**/
@@ -382,8 +410,9 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 32.5%;
-    left: 55%
+    top: 16.0%;
+    left: 42.2%
+    
 }
 
 .cruz42 {
@@ -391,8 +420,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 32.5%;
-  left: 54.25%
+  top: 16.0%;
+  left: 41.5%
 }
 
 .cruz43 {
@@ -400,8 +429,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 32.5%;
-  left: 53.5%
+  top: 16.0%;
+  left: 40.6%
 }
 
 .cruz44 {
@@ -409,8 +438,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 32.5%;
-  left: 52.75%
+  top: 16.0%;
+  left: 40%
 }
 
 .cruz45 {
@@ -418,8 +447,8 @@
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 32.5%;
-    left: 60%
+    top: 16.0%;
+    right: 42.2%
 }
 
 .cruz46 {
@@ -427,8 +456,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 32.5%;
-  left: 60.75%
+  top: 16.0%;
+  right: 41.5%
 }
 
 .cruz47 {
@@ -436,8 +465,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 32.5%;
-  left: 61.5%
+  top: 16.0%;
+  right: 40.6%
 }
 
 .cruz48 {
@@ -445,19 +474,19 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 32.5%;
-  left: 62.25%
+  top: 16.0%;
+  right: 40%
 }
 
 /**/
-
+/*Lumbar L2 lado Izquierdo*/
 .cruz49 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 66%;
-    left: 55%
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 53%;
+  left: 41.5%
 }
 
 .cruz50 {
@@ -465,8 +494,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 66%;
-  left: 54.25%
+  top: 53%;
+  left: 40.5%
 }
 
 .cruz51 {
@@ -474,8 +503,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 66%;
-  left: 53.5%
+  top: 53%;
+  left: 39.5%
 }
 
 .cruz52 {
@@ -483,17 +512,18 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 66%;
-  left: 52.75%
+  top: 53%;
+  left: 38.5%
 }
 
+/*Lumbar L2 lado Derecho*/
 .cruz53 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 66%;
-    left: 60%
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 53%;
+  left: 49%
 }
 
 .cruz54 {
@@ -501,8 +531,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 66%;
-  left: 60.75%
+  top: 53%;
+  left: 50%
 }
 
 .cruz55 {
@@ -510,8 +540,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 66%;
-  left: 61.5%
+  top: 53%;
+  left: 51%
 }
 
 .cruz56 {
@@ -519,19 +549,19 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 66%;
-  left: 62.25%
+  top: 53%;
+  left: 52%
 }
 
 /**/
-
+/*Lumbar L3 lado Izquierdo*/
 .cruz57 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 69.5%;
-    left: 55%
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 56.5%;
+  left: 41%
 }
 
 .cruz58 {
@@ -539,8 +569,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 69.5%;
-  left: 54.25%
+  top: 56.5%;
+  left: 40%
 }
 
 .cruz59 {
@@ -548,8 +578,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 69.5%;
-  left: 53.5%
+  top: 56.5%;
+  left: 39%
 }
 
 .cruz60 {
@@ -557,17 +587,18 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 69.5%;
-  left: 52.75%
+  top: 56.5%;
+  left: 38%
 }
 
+/*Lumbar L3 lado Derecho*/
 .cruz61 {
     z-Index: 3;
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 69.5%;
-    left: 60%
+    top: 56.5%;
+    left: 49.5%
 }
 
 .cruz62 {
@@ -575,8 +606,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 69.5%;
-  left: 60.75%
+  top: 56.5%;
+  left: 50.5%
 }
 
 .cruz63 {
@@ -584,8 +615,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 69.5%;
-  left: 61.5%
+  top: 56.5%;
+  left: 51.5%
 }
 
 .cruz64 {
@@ -593,19 +624,19 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 69.5%;
-  left: 62.25%
+  top: 56.5%;
+  left: 52.5%
 }
 
 /**/
-
+/*Lumbar L4 lado Izquierdo*/
 .cruz65 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 73%;
-    left: 55%
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 60%;
+  left: 41%
 }
 
 .cruz66 {
@@ -613,8 +644,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 73%;
-  left: 54.25%
+  top: 60%;
+  left: 40%
 }
 
 .cruz67 {
@@ -622,8 +653,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 73%;
-  left: 53.5%
+  top: 60%;
+  left: 39%
 }
 
 .cruz68 {
@@ -631,17 +662,18 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 73%;
-  left: 52.75%
+  top: 60%;
+  left: 38%
 }
 
+/*Lumbar L4 lado Derecho*/
 .cruz69 {
     z-Index: 3;
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 73%;
-    left: 60%
+    top: 60%;
+    left: 49.5%
 }
 
 .cruz70 {
@@ -649,8 +681,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 73%;
-  left: 60.75%
+  top: 60%;
+  left: 50.5%
 }
 
 .cruz71 {
@@ -658,8 +690,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 73%;
-  left: 61.5%
+  top: 60%;
+  left: 51.5%
 }
 
 .cruz72 {
@@ -667,19 +699,19 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 73%;
-  left: 62.25%
+  top: 60%;
+  left: 52.5%
 }
 
 /**/
-
+/*Lumbar L5 lado Izquierdo*/
 .cruz73 {
     z-Index: 3;
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 76.5%;
-    left: 55%
+    top: 64%;
+    left: 41%
 }
 
 .cruz74 {
@@ -687,8 +719,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 76.5%;
-  left: 54.25%
+  top: 64%;
+  left: 40%
 }
 
 .cruz75 {
@@ -696,8 +728,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 76.5%;
-  left: 53.5%
+  top: 64%;
+  left: 39%
 }
 
 .cruz76 {
@@ -705,17 +737,18 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 76.5%;
-  left: 52.75%
+  top: 64%;
+  left: 38%
 }
 
+/*Lumbar L5 lado Derecho*/
 .cruz77 {
     z-Index: 3;
     position: absolute;
     width: 100px;
     height: 25px;
-    top: 76.5%;
-    left: 60%
+    top: 64%;
+    left: 49.5%
 }
 
 .cruz78 {
@@ -723,8 +756,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 76.5%;
-  left: 60.75%
+  top: 64%;
+  left: 50.5%
 }
 
 .cruz79 {
@@ -732,8 +765,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 76.5%;
-  left: 61.5%
+  top: 64%;
+  left: 51.5%
 }
 
 .cruz80 {
@@ -741,93 +774,24 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 76.5%;
-  left: 62.25%
+  top: 64%;
+  left: 52.5%
 }
 
 /**/
 
-.cruz81 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 80%;
-    left: 55%
-}
+/* Torácica S1 lado Izquierdo */
 
-.cruz82 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 80%;
-  left: 54.25%
-}
 
-.cruz83 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 80%;
-  left: 53.5%
-}
-
-.cruz84 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 80%;
-  left: 52.75%
-}
-
-.cruz85 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 80%;
-    left: 60%
-}
-
-.cruz86 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 80%;
-  left: 60.75%
-}
-
-.cruz87 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 80%;
-  left: 61.5%
-}
-
-.cruz88 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 80%;
-  left: 62.25%
-}
-
-/**/
-
+/*############################### Torácica #################################*/
+/*Torácica T2 lado Izquierdo*/
 .cruz89 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 87%;
-    left: 55%
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 19.0%;
+  left: 41.5%
 }
 
 .cruz90 {
@@ -835,8 +799,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 87%;
-  left: 54.25%
+  top: 19.0%;
+  left: 40.5%
 }
 
 .cruz91 {
@@ -844,8 +808,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 87%;
-  left: 53.5%
+  top: 19.0%;
+  left: 39.5%
 }
 
 .cruz92 {
@@ -853,17 +817,18 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 87%;
-  left: 52.75%
+  top: 19.0%;
+  left: 38.8%
 }
 
+/*Torácica T2 lado Derecho*/
 .cruz93 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 87%;
-    left: 60%
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 19.0%;
+  left: 48.7%
 }
 
 .cruz94 {
@@ -871,8 +836,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 87%;
-  left: 60.75%
+  top: 19.0%;
+  left: 49.7%
 }
 
 .cruz95 {
@@ -880,8 +845,8 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 87%;
-  left: 61.5%
+  top: 19.0%;
+  left: 50.7%
 }
 
 .cruz96 {
@@ -889,6 +854,825 @@
   position: absolute;
   width: 100px;
   height: 25px;
-  top: 87%;
-  left: 62.25%
+  top: 19.0%;
+  left: 51.7%
 }
+
+/*Torácica T3 lado Izquierdo*/
+.cruz97 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.0%;
+  left: 41.5%
+}
+
+.cruz98 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.0%;
+  left: 40.5%
+}
+
+.cruz99 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.0%;
+  left: 39.5%
+}
+
+.cruz100 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.0%;
+  left: 38.8%
+}
+
+/*Torácica T3 lado Derecho*/
+.cruz101 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.0%;
+  left: 48.7%
+}
+
+.cruz102 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.0%;
+  left: 49.7%
+}
+
+.cruz103{
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.0%;
+  left: 50.7%
+}
+
+.cruz104 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 22.0%;
+  left: 51.7%
+}
+
+/*Torácica T4 lado Izquierdo*/
+.cruz105 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25.0%;
+  left: 41.5%
+}
+
+.cruz106 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25.0%;
+  left: 40.5%
+}
+
+.cruz107 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25.0%;
+  left: 39.5%
+}
+
+.cruz108 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25.0%;
+  left: 38.8%
+}
+
+/*Torácica T4 lado Derecho*/
+.cruz109 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25.0%;
+  left: 48.7%
+}
+
+.cruz110 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25.0%;
+  left: 49.7%
+}
+
+.cruz111{
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25.0%;
+  left: 50.7%
+}
+
+.cruz112 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 25.0%;
+  left: 51.7%
+}
+
+/*Torácica T5 lado Izquierdo*/
+.cruz113 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 28.0%;
+  left: 41.5%
+}
+
+.cruz114 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 28.0%;
+  left: 40.5%
+}
+
+.cruz115 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 28.0%;
+  left: 39.5%
+}
+
+.cruz116 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 28.0%;
+  left: 38.8%
+}
+
+/*Torácica T4 lado Derecho*/
+.cruz117 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 28.0%;
+  left: 48.7%
+}
+
+.cruz118 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 28.0%;
+  left: 49.7%
+}
+
+.cruz119{
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 28.0%;
+  left: 50.7%
+}
+
+.cruz120 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 28.0%;
+  left: 51.7%
+}
+
+/* Torácica T5 lado Izquierdo */
+.cruz121 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 31.0%;
+  left: 41.5%;
+}
+
+.cruz122 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 31.0%;
+  left: 40.5%;
+}
+
+.cruz123 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 31.0%;
+  left: 39.5%;
+}
+
+.cruz124 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 31.0%;
+  left: 38.8%;
+}
+
+/* Torácica T5 lado Derecho */
+.cruz125 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 31.0%;
+  left: 48.7%;
+}
+
+.cruz126 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 31.0%; 
+  left: 49.7%;
+}
+
+.cruz127 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 31.0%;
+  left: 50.7%;
+}
+
+.cruz128 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 31.0%;
+  left: 51.7%;
+}
+
+/* Torácica T6 lado Izquierdo */
+.cruz129 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 34.0%;
+  left: 41.5%;
+}
+
+.cruz130 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 34.0%;
+  left: 40.5%;
+}
+
+.cruz131 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 34.0%;
+  left: 39.5%;
+}
+
+.cruz132 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 34.0%;
+  left: 38.8%;
+}
+
+/* Torácica T6 lado Derecho */
+.cruz133 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 34.0%;
+  left: 48.7%;
+}
+
+.cruz134 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 34.0%;
+  left: 49.7%;
+}
+
+.cruz135 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 34.0%;
+  left: 50.7%;
+}
+
+.cruz136 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 34.0%;
+  left: 51.7%;
+}
+
+/* Torácica T7 lado Izquierdo */
+.cruz137 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 37.0%;
+  left: 41.5%;
+}
+
+.cruz138 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 37.0%;
+  left: 40.5%;
+}
+
+.cruz139 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 37.0%;
+  left: 39.5%;
+}
+
+.cruz140 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 37.0%;
+  left: 38.8%;
+}
+
+/* Torácica T7 lado Derecho */
+.cruz141 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 37.0%;
+  left: 48.7%;
+}
+
+.cruz142 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 37.0%;
+  left: 49.7%;
+}
+
+.cruz143 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 37.0%;
+  left: 50.7%;
+}
+
+.cruz144 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 37.0%;
+  left: 51.7%;
+}
+
+/* Torácica T8 lado Izquierdo */
+.cruz145 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 40.0%;
+  left: 41.5%;
+}
+
+.cruz146 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 40.0%;
+  left: 40.5%;
+}
+
+.cruz147 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 40.0%;
+  left: 39.5%;
+}
+
+.cruz148 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 40.0%;
+  left: 38.8%;
+}
+
+/* Torácica T8 lado Derecho */
+.cruz149 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 40.0%;
+  left: 48.7%;
+}
+
+.cruz150 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 40.0%;
+  left: 49.7%;
+}
+
+.cruz151 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 40.0%;
+  left: 50.7%;
+}
+
+.cruz152 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 40.0%;
+  left: 51.7%;
+}
+
+/* Torácica T9 lado Izquierdo */
+.cruz153 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 43.0%;
+  left: 41.5%;
+}
+
+.cruz154 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 43.0%;
+  left: 40.5%;
+}
+
+.cruz155 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 43.0%;
+  left: 39.5%;
+}
+
+.cruz156 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 43.0%;
+  left: 38.8%;
+}
+
+/* Torácica T9 lado Derecho */
+.cruz157 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 43.0%;
+  left: 48.7%;
+}
+
+.cruz158 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 43.0%;
+  left: 49.7%;
+}
+
+.cruz159 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 43.0%;
+  left: 50.7%;
+}
+
+.cruz160 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 43.0%;
+  left: 51.7%;
+}
+
+/* Torácica T10 lado Izquierdo */
+.cruz161 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 46.0%; 
+  left: 41.5%;
+}
+
+.cruz162 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 46.0%;
+  left: 40.5%;
+}
+
+.cruz163 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 46.0%;
+  left: 39.5%;
+}
+
+.cruz164 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 46.0%;
+  left: 38.8%;
+}
+
+/* Torácica T10 lado Derecho */
+.cruz165 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 46.0%;
+  left: 48.7%;
+}
+
+.cruz166 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 46.0%;
+  left: 49.7%;
+}
+
+.cruz167 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 46.0%;
+  left: 50.7%;
+}
+
+.cruz168 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 46.0%;
+  left: 51.7%;
+}
+
+/* Torácica T11 lado Izquierdo */
+.cruz169 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 72.0%;
+  left: 41.5%;
+}
+
+.cruz170 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 72.0%;
+  left: 40.5%;
+}
+
+.cruz171 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 72.0%;
+  left: 39.5%;
+}
+
+.cruz172 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 72.0%;
+  left: 38.8%;
+}
+
+/* Torácica T11 lado Derecho */
+.cruz173 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 72.0%;
+  left: 48.7%;
+}
+
+.cruz174 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 72.0%;
+  left: 49.7%;
+}
+
+.cruz175 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 72.0%;
+  left: 50.7%;
+}
+
+.cruz176 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 72.0%;
+  left: 51.7%;
+}
+
+
+/* Torácica S! lado Izquierdo */
+.cruz81 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 68.0%;
+  left: 40.5%;
+}
+
+.cruz82 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 68.0%;
+  left: 39.5%;
+}
+
+.cruz83 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 68.0%;
+  left: 38.5%;
+}
+
+.cruz84 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 68.0%;
+  left: 37.8%;
+}
+
+
+/* Torácica S1 lado Derecho */
+.cruz85 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 68.0%;
+  left: 49.7%;
+}
+
+.cruz86 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 68.0%;
+  left: 50.7%;
+}
+
+.cruz87 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 68.0%;
+  left: 51.7%;
+}
+
+.cruz88 {
+  z-Index: 3;
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  top: 68.0%;
+  left: 52.7%;
+}
+
+
+

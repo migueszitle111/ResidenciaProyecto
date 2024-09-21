@@ -1,6 +1,7 @@
 import { ReportContext } from '@/src/context';
 import { useContext } from 'react';
 
+
 // Se recibe el titulo y el valor de la conclusión
 export function NerviusButton ({title, value, displayText}) {
   // Utiliza el contexto para obtener las conclusiones y la función para actualizarlas

@@ -1,4 +1,5 @@
 import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
+import {checkDivs} from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
 import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -14,39 +15,7 @@ const Reporte = () => {
 
   const [copyConclusions, setCopyConclusions] = useState('') // Estado para la caja de conclusiones
   
-  
-  function checkDivs(copyConclusions) {
-    if (copyConclusions.includes(' DE NERVIO MEDIANO')) {
-      return (
-        <>
-          <div
-            style={{
-              position: 'absolute',
-              top: '18.9%',
-              left: '68.9%',
-              borderRadius: 100,
-            }}
-            className={`dont-print-Nervius`}
-          >
-            <NerviusButton value='car' title='(CARPO),' displayText=' ' />
-          </div>
-          <div
-            style={{
-              position: 'absolute',
-              top: '18.9%',
-              left: '58.9%',
-              borderRadius: 100,
-            }}
-            className={`dont-print-Nervius`}
-          >
-            <NerviusButton value='car' title='(CARPO),' displayText=' ' />
-          </div>
-        </>
-      );
-    } else {
-      return null;
-    }
-  }
+  //Button llamando export --funcion
   
   
   const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
@@ -320,7 +289,7 @@ const Reporte = () => {
             {
               expectedValue: 'TORACICO_LARGO',
               image: {
-                src: 'NeuropatiaImg/NO_Torácico largo.png',
+                src: 'NeuropatiaImg/NO_Torácicolargo.png',
                 alt: 'Modelo',
               }
             },

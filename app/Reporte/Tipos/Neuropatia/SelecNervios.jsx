@@ -67,8 +67,7 @@ export function checkDivs(copyConclusions) {
             left: '64.3%',
             borderRadius: 100,
           }}
-          className={`dont-print-Nervius`}
-        >
+          className={`dont-print-Nervius`}>
           <NerviusButton value='car' title='(LIGAMENTO STRUTHERS),' displayText=' ' />
         </div>
 

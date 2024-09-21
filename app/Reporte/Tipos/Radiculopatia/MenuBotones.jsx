@@ -58,7 +58,7 @@ export const CheckboxProvider = ({ children }) => {
 
   });
    // Función para manejar los cambios de checkboxes en el lado izquierdo
-   const handleCheckboxChangeLeft = (id) => {
+   const handleCheckboxChangeLeft = (id,value) => {
     setcheckedStateLeft((prevState) => {
       const newState = Object.keys(prevState).reduce((acc, key) => {
         acc[key] = key === id ? !prevState[id] : false;
@@ -68,7 +68,7 @@ export const CheckboxProvider = ({ children }) => {
     });
   };
   // Función para manejar los cambios de checkboxes en el lado derecho
-  const handleCheckboxChangeRight = (id) => {
+  const handleCheckboxChangeRight = (id,value) => {
     setcheckedStateRight((prevState) => {
       const newState = Object.keys(prevState).reduce((acc, key) => {
         acc[key] = key === id ? !prevState[id] : false;
@@ -92,6 +92,8 @@ export const CheckboxProvider = ({ children }) => {
   };
   
 
+  
+
   return (
     <CheckboxContext.Provider
       value={{
@@ -102,6 +104,7 @@ export const CheckboxProvider = ({ children }) => {
         setcheckedStateRight,  
         handleCheckboxChangeRight,
         resetCheckboxes,
+        
       }}
     >
       {children}
@@ -112,6 +115,7 @@ export const CheckboxProvider = ({ children }) => {
 const useStep = () => {
   const [step, setStep] = useState('A'); // Inicialmente en el paso 'A'
   const { resetCheckboxes } = useContext(CheckboxContext);
+  const {handlePrint} = useImageState();
 
   // Siguiente paso
   const handleNextStep = () => {
@@ -136,6 +140,7 @@ const useStep = () => {
     else if (step === 'D1') setStep('E1');
     else if (step === 'E1') setStep('F1');
     else if (step === 'F1') setStep('G1');
+    else if (step === 'G1') setStep('E');
   };
   const handlePrevStep1 = () => {
     if (step === 'G1') setStep('F1');
@@ -150,6 +155,7 @@ const useStep = () => {
     else if (step === 'B2') setStep('C2');
     else if (step === 'C2') setStep('D2');
     else if (step === 'D2') setStep('E2');
+    else if (step === 'E2') setStep('E');
   };
   const handlePrevStep2 = () => {
     if (step === 'E2') setStep('D2');
@@ -166,12 +172,14 @@ const useStep = () => {
     handleNextStep2,
     handlePrevStep1,
     handlePrevStep2,
+    handlePrint
+    
   };
 };
 const SimpleMultiStepForm = () => {
-  const { step, handleNextStep, handlePrevStep,handleNextStep1,handleNextStep2,handlePrevStep1,handlePrevStep2 } = useStep();
-  const { checkedStateLeft, setcheckedStateLeft, checkedStateRight, setcheckedStateRight } = useContext(CheckboxContext);
-  const { selectedImages, handleImageChange, handleUndo, handlePrint } = useImageState();
+  const { step, handleNextStep, handlePrevStep,handleNextStep1,handleNextStep2,handlePrevStep1,handlePrevStep2,handlePrint } = useStep();
+  const { checkedStateLeft, setcheckedStateLeft, checkedStateRight, setcheckedStateRight} = useContext(CheckboxContext);
+
   return (
       <div>
         {/* Renderiza el componente adecuado basado en el estado del paso */}
@@ -181,14 +189,14 @@ const SimpleMultiStepForm = () => {
         {step === 'C' ? (<StepC handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />) : null}
         {step === 'C1' ? (<StepC1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'D' ? (<StepD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />) : null}
-        {step === 'E' ? (<StepE handlePrevStep={handlePrevStep}  />) : null}
+        {step === 'E' ? (<StepE handlePrevStep={handlePrevStep}  handlePrint={handlePrint}/>) : null}
         {step === 'D1' ? (<StepD1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'E1' ? (<StepE1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'F1' ? (<StepF1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'G1' ? (<StepG1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'B2' ? (<StepB2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
         {step === 'C2' ? (<StepC2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
-        {step === 'E2' ? (<StepE2 handlePrevStep2={handlePrevStep2} />) : null}
+        {step === 'E2' ? (<StepE2 handlePrevStep2={handlePrevStep2}  handleNextStep2={handleNextStep2} />) : null}
         {step === 'D2' ? (<StepD2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
       </div>
   );
@@ -681,7 +689,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                 <input type='radio' name="radio1" value='4' id='A84' checked={checkedStateLeft.A84} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A84}
               </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='s1_d' title='R' displayText=''/>
             <td>
                 <input type='radio' name="radio2" value='1' id='A85' checked={checkedStateRight.A85} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A85 }
@@ -700,6 +708,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
               </td>
           </table>
         </Accordion> 
+      
         <ConclusionButton value='lumbrosaca_multinivel' title='LUMBROSACA MULTINIVEL' />
       </Accordion>
 
@@ -1294,7 +1303,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='C4' onToggle={handleAccordionToggle}>
           <table cellpadding='3'>
               <td>
-                <ConclusionButton value='c4_i' title='L' displayText=''/>
+              
+                <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+
               </td>
               <td>
                 <input type='radio' name="radio1" value='1' id='A1' checked={checkedStateLeft.A1} onChange={handleCheckboxChangeLeft} />
@@ -1313,7 +1324,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 {checkedStateLeft.A4 }
               </td>
               <td>
-                <ConclusionButton value='c4_d' title='R' displayText=''/>
+              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+
               </td>
               <td>
                 <input type='radio' name="radio2" value='1' id='A5' checked={checkedStateRight.A5} onChange={handleCheckboxChangeRight} />
@@ -1382,7 +1394,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='C6'onToggle={handleAccordionToggle}>
         <table>
         <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+              
+              <ConclusionButton value='c6_i' title='L' displayText=''/>
+
               <td>
                 <input type='radio' name="radio1" value='1' id='A17' checked={checkedStateLeft.A17} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A17}
@@ -1399,7 +1413,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='radio' name="radio1" value='4' id='A20' checked={checkedStateLeft.A20} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A20 }
               </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='c6_d' title='R' displayText=''/>
+
               <td>
                 <input type='radio' name="radio2" value='1' id='A21' checked={checkedStateRight.A21} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A21 }
@@ -1422,7 +1437,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='C7'onToggle={handleAccordionToggle}>
         <table>
         <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+        <ConclusionButton value='c7_i' title='L' displayText=''/>
+
               <td>
                 <input type='radio' name="radio1" value='1' id='A25' checked={checkedStateLeft.A25} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A25}
@@ -1439,7 +1455,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='radio' name="radio1" value='4' id='A28' checked={checkedStateLeft.A28} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A28 }
               </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='c7_d' title='R' displayText=''/>
+
               <td>
                 <input type='radio' name="radio2" value='1' id='A29' checked={checkedStateRight.A29} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A29 }
@@ -1462,7 +1479,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='C8'onToggle={handleAccordionToggle}>
         <table>
         <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+        <ConclusionButton value='c8_i' title='L' displayText=''/>
+
               <td>
                 <input type='radio' name="radio1" value='1' id='A33' checked={checkedStateLeft.A33} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A33}
@@ -1479,7 +1497,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='radio' name="radio1" value='4' id='A36' checked={checkedStateLeft.A36} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A36 }
               </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='c8_d' title='R' displayText=''/>
+
               <td>
                 <input type='radio' name="radio2" value='1' id='A37' checked={checkedStateRight.A37} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A37 }
@@ -1502,7 +1521,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='T1'onToggle={handleAccordionToggle}>
         <table>
         <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+        <ConclusionButton value='t1_i' title='L' displayText=''/>
+
               <td>
                 <input type='radio' name="radio1" value='1' id='A41' checked={checkedStateLeft.A41} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A41}
@@ -1519,7 +1539,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='radio' name="radio1" value='4' id='A44' checked={checkedStateLeft.A44} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A44 }
               </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='t1_d' title='R' displayText=''/>
+
               <td>
                 <input type='radio' name="radio2" value='1' id='A45' checked={checkedStateRight.A45} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A45 }
@@ -1545,7 +1566,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       <Accordion title='LUMBAR'>
       <Accordion title='L2' onToggle={handleAccordionToggle}>
       <table>
-            <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+      <ConclusionButton value='l2_i' title='L' displayText=''/>
+
             <td>
                 <input type='radio' name="radio1" value='1' id='A49' checked={checkedStateLeft.A49} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A49}
@@ -1562,7 +1584,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='radio' name="radio1" value='4' id='A52' checked={checkedStateLeft.A52} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A52 }
               </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='l2_d' title='R' displayText=''/>
             <td>
                 <input type='radio' name="radio2" value='1' id='A53' checked={checkedStateRight.A53} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A53 }
@@ -1584,7 +1606,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         </Accordion> 
         <Accordion title='L3' onToggle={handleAccordionToggle}> 
         <table>
-        <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+        <ConclusionButton value='l3_i' title='L' displayText=''/>
+
             <td>
                 <input type='radio' name="radio1" value='1' id='A57' checked={checkedStateLeft.A57} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A57}
@@ -1601,7 +1624,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='radio' name="radio1" value='4' id='A60' checked={checkedStateLeft.A60} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A60 }
               </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='l3_d' title='R' displayText=''/>
+
             <td>
                 <input type='radio' name="radio2" value='1' id='A61' checked={checkedStateRight.A61} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A61 }
@@ -1641,7 +1665,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='radio' name="radio1" value='4' id='A68' checked={checkedStateLeft.A68} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A68 }
               </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='l4_d' title='R' displayText=''/>
+
             <td>
                 <input type='radio' name="radio2" value='1' id='A69' checked={checkedStateRight.A69} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A69 }
@@ -1681,7 +1706,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='radio' name="radio1" value='4' id='A76' checked={checkedStateLeft.A76} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A76 }
               </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='l5_d' title='R' displayText=''/>
             <td>
                 <input type='radio' name="radio2" value='1' id='A77' checked={checkedStateRight.A77} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A77 }
@@ -1721,7 +1746,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='radio' name="radio1" value='4' id='A84' checked={checkedStateLeft.A84} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A84}
               </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+              <ConclusionButton value='s1_d' title='R' displayText=''/>
+
             <td>
                 <input type='radio' name="radio2" value='1' id='A85' checked={checkedStateRight.A85} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A85 }
@@ -1737,6 +1763,46 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
               <td>
                 <input type='radio' name="radio2" value='4' id='A88' checked={checkedStateRight.A88} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A88}
+              </td>
+          </table>
+        </Accordion> 
+        <Accordion title='S2' onToggle={handleAccordionToggle}>
+        <table>
+            <td>
+            <ConclusionButton value='s2_i' title='L' displayText=''/>
+            </td>
+            <td>
+                <input type='radio' name="radio1" value='1' id='A89' checked={checkedStateLeft.A89} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A89}
+              </td>
+              <td>
+                <input type='radio' name="radio1" value='2' id='A90' checked={checkedStateLeft.A90} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A90}
+              </td>
+              <td>
+                <input type='radio' name="radio1" value='3' id='A91' checked={checkedStateLeft.A91} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A91}
+              </td>
+              <td>
+                <input type='radio' name="radio1" value='4' id='A92' checked={checkedStateLeft.A92} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A92}
+              </td>
+              <ConclusionButton value='s2_d' title='R' displayText=''/>
+              <td>
+                <input type='radio' name="radio2" value='1' id='A93' checked={checkedStateRight.A93} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A93 }
+              </td>
+              <td>
+                <input type='radio' name="radio2" value='2' id='A94' checked={checkedStateRight.A94} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A94}
+              </td>
+              <td>
+                <input type='radio' name="radio2" value='3' id='A95' checked={checkedStateRight.A95} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A95}
+              </td>
+              <td>
+                <input type='radio' name="radio2" value='4' id='A96' checked={checkedStateRight.A96} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A96}
               </td>
           </table>
         </Accordion> 
@@ -1812,13 +1878,14 @@ const StepE1 = ({ handleNextStep1, handlePrevStep1 }) => {
   );
 };
 
-const StepG1 = ({  handlePrevStep1  }) => {
+const StepG1 = ({  handlePrevStep1,handleNextStep1  }) => {
   return (
-    <div>
+    <>
       <div className='button-bar'>
       <button onClick={handlePrevStep1} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
           </button>
+         
           <button className={`print-button dont-print `}>
           <img src="/I_X.webp"style={{filter: 'invert(0.5)'}} />
           </button>
@@ -1827,14 +1894,15 @@ const StepG1 = ({  handlePrevStep1  }) => {
       <h1 className=' text-xl font-bold text-white'>
         PRONOSTICO
       </h1>
-
+      <div onClick={ handleNextStep1 }>
       <ConclusionButton value='p_completa' title='Y PRONOSTICO DE RECUPERACION COMPLETA' displayText=''/>
       <ConclusionButton value='p_parcial' title='Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL' displayText=''/>
       <ConclusionButton value='p_no_funcional' title='Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL' displayText=''/>
       <ConclusionButton value='nula' title='NULA (EN FASE DE SECUELA DEFINITIVA)' displayText=''/>
-
+      </div>
+      </>
       
-    </div>
+    
   );
 };
 
@@ -1909,7 +1977,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='C4' onToggle={handleAccordionToggle}>
           <table cellpadding='3'>
           <td>
-                <ConclusionButton value='c4_i' title='L' displayText=''/>
+                {/*<ConclusionButton value='c4_i' title='L' displayText=''/>*/}
+                <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+
               </td>
               <td>
                 <input type='radio' name="radio1" value='1' id='A1' checked={checkedStateLeft.A1} onChange={handleCheckboxChangeLeft} />
@@ -1928,7 +1998,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 {checkedStateLeft.A4 }
               </td>
               <td>
-                <ConclusionButton value='c4_d' title='R' displayText=''/>
+                {/*<ConclusionButton value='c4_d' title='R' displayText=''/>*/}
+                <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+
               </td>
               <td>
                 <input type='radio' name="radio2" value='1' id='A5' checked={checkedStateRight.A5} onChange={handleCheckboxChangeRight} />
@@ -1951,11 +2023,15 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='C5'onToggle={handleAccordionToggle}>
         <table>
             <td>
-            {/*<ConclusionButton value='c5_i' title='L' displayText=''/>*/}
-          <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+           {/* <ConclusionButton value='c5_i' title='L' displayText=''/>*/}
+            <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
+
+      
              <td>
                 <input type='radio' name="radio1" title='L' value='c5_i' displayText='' id='A9' checked={checkedStateLeft.A9} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A9 }
+                
+                
               </td>
               <td>
                 <input type='radio' name="radio1" title='L' value='c5_i' id='A10' checked={checkedStateLeft.A10} onChange={handleCheckboxChangeLeft} />
@@ -2161,7 +2237,7 @@ const StepD2 = ({ handlePrevStep2, handleNextStep2 }) => {
 };
 
 
-const StepE2 = ({  handlePrevStep2 }) => {
+const StepE2 = ({  handlePrevStep2, handleNextStep2}) => {
   return (
     <div>
       <div className='button-bar'>
@@ -2178,7 +2254,7 @@ const StepE2 = ({  handlePrevStep2 }) => {
         PRONOSTICO
       </h1>
 
-      <div //onClick={handleNextStep}
+      <div onClick={handleNextStep2}
       >
       <ConclusionButton value='p_completa' title='Y PRONOSTICO DE RECUPERACION COMPLETA' displayText=''/>
       <ConclusionButton value='p_parcial' title='Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL' displayText=''/>

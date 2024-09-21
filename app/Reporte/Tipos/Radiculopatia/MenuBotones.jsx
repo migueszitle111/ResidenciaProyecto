@@ -17,7 +17,9 @@ export const CheckboxProvider = ({ children }) => {
     A57: false, A58: false, A59: false, A60: false,
     A65: false, A66: false, A67: false, A68: false,
     A73: false, A74: false, A75: false, A76: false,
+    A81: false, A82: false, A83: false, A84: false,//S1 L
     //Torácica
+    A85: false, A86: false, A87: false, A88: false,//S1 R
     A89: false, A90: false, A91: false, A92: false,//T2
     A97: false, A98: false, A99: false, A100: false,
     A105: false, A106: false, A107: false, A108: false,
@@ -1772,38 +1774,38 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
             <ConclusionButton value='s2_i' title='L' displayText=''/>
             </td>
             <td>
-                <input type='radio' name="radio1" value='1' id='A89' checked={checkedStateLeft.A89} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A89}
-              </td>
-              <td>
-                <input type='radio' name="radio1" value='2' id='A90' checked={checkedStateLeft.A90} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A90}
-              </td>
-              <td>
-                <input type='radio' name="radio1" value='3' id='A91' checked={checkedStateLeft.A91} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A91}
-              </td>
-              <td>
-                <input type='radio' name="radio1" value='4' id='A92' checked={checkedStateLeft.A92} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A92}
-              </td>
-              <ConclusionButton value='s2_d' title='R' displayText=''/>
-              <td>
-                <input type='radio' name="radio2" value='1' id='A93' checked={checkedStateRight.A93} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A93 }
-              </td>
-              <td>
-                <input type='radio' name="radio2" value='2' id='A94' checked={checkedStateRight.A94} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A94}
-              </td>
-              <td>
-                <input type='radio' name="radio2" value='3' id='A95' checked={checkedStateRight.A95} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A95}
-              </td>
-              <td>
-                <input type='radio' name="radio2" value='4' id='A96' checked={checkedStateRight.A96} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A96}
-              </td>
+                  <input type='radio' name="radio1" value='1' id='A161' checked={checkedStateLeft.A161} onChange={handleCheckboxChangeLeft} />
+                  {checkedStateLeft.A161}
+                </td>
+                <td>
+                  <input type='radio' name="radio1" value='2' id='A162' checked={checkedStateLeft.A162} onChange={handleCheckboxChangeLeft} />
+                  {checkedStateLeft.A162}
+                </td>
+                <td>
+                  <input type='radio' name="radio1" value='3' id='A163' checked={checkedStateLeft.A163} onChange={handleCheckboxChangeLeft} />
+                  {checkedStateLeft.A163}
+                </td>
+                <td>
+                  <input type='radio' name="radio1" value='4' id='A164' checked={checkedStateLeft.A164} onChange={handleCheckboxChangeLeft} />
+                  {checkedStateLeft.A164}
+                </td>
+                <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
+                <td>
+                  <input type='radio' name="radio2" value='1' id='A165' checked={checkedStateRight.A165} onChange={handleCheckboxChangeRight} />
+                  {checkedStateRight.A165}
+                </td>
+                <td>
+                  <input type='radio' name="radio2" value='2' id='A166' checked={checkedStateRight.A166} onChange={handleCheckboxChangeRight} />
+                  {checkedStateRight.A166}
+                </td>
+                <td>
+                  <input type='radio' name="radio2" value='3' id='A167' checked={checkedStateRight.A167} onChange={handleCheckboxChangeRight} />
+                  {checkedStateRight.A167}
+                </td>
+                <td>
+                  <input type='radio' name="radio2" value='4' id='A168' checked={checkedStateRight.A168} onChange={handleCheckboxChangeRight} />
+                  {checkedStateRight.A168}
+                </td>
           </table>
         </Accordion> 
         <ConclusionButton value='lumbrosaca_multinivel' title='LUMBROSACA MULTINIVEL' />              

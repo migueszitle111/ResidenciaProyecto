@@ -1,11 +1,9 @@
 
-import { ReportContext } from '@/src/context';
-import { useContext } from 'react';
 import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 
 export function checkDivs(copyConclusions) {
-  /* IZQUIERDA >   MEDIANO        FOCALIZADA,SEMENTARIA, GENERALIZADA */
-  if (copyConclusions.includes('MEDIANO IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('MEDIANO IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('MEDIANO IZQUIERDA, GENERALIZADA,')) {
+  /* IZQUIERDO >   MEDIANO        FOCALIZADA A NIVEL DE SEMENTARIA, GENERALIZADA */
+  if (copyConclusions.includes('MEDIANO IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('MEDIANO IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('MEDIANO IZQUIERDO, GENERALIZADA,')) {
     return (
       <>
         <div
@@ -144,8 +142,8 @@ export function checkDivs(copyConclusions) {
       </>
     );
   }
-  /* DERECHA >  MEDIANO        FOCALIZADA,SEMENTARIA, GENERALIZADA */
-  if (copyConclusions.includes('MEDIANO DERECHA, FOCALIZADA,') || copyConclusions.includes('MEDIANO DERECHA, SEGMENTARIA,') || copyConclusions.includes('MEDIANO DERECHA, GENERALIZADA,')) {
+  /* DEROCHO >  MEDIANO        FOCALIZADA A NIVEL DE SEMENTARIA, GENERALIZADA */
+  if (copyConclusions.includes('MEDIANO DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('MEDIANO DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('MEDIANO DEROCHO, GENERALIZADA,')) {
     return (
       <>
         <div
@@ -265,7 +263,7 @@ export function checkDivs(copyConclusions) {
           }}
           className={`dont-print-Nervius`}
         >
-          <NerviusButton value='car' title='(CARPO),' displayText=' ' />
+          <NerviusButton value='car' title='CARPO,' displayText=' ' />
         </div>
         <div
           style={{
@@ -279,14 +277,14 @@ export function checkDivs(copyConclusions) {
           }}
           className={`dont-print-Nervius`}
         >
-          <NerviusButton value='car' title='(PALMA),' displayText=' ' />
+          <NerviusButton value='car' title='PALMA,' displayText=' ' />
         </div>
       </>
     );
 
   }
-  /* IZQUIERDA >  ACCESORIO        FOCALIZADA,SEMENTARIA, GENERALIZADA */
-  if (copyConclusions.includes('ACCESORIO IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('ACCESORIO IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('ACCESORIO IZQUIERDA, GENERALIZADA,')) {
+  /* IZQUIERDO >  ACCESORIO        FOCALIZADA A NIVEL DE SEMENTARIA, GENERALIZADA */
+  if (copyConclusions.includes('ACCESORIO IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('ACCESORIO IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('ACCESORIO IZQUIERDO, GENERALIZADA,')) {
     return (
       <>
         <div
@@ -305,8 +303,8 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  /* DERECHA >  ACCESORIO        FOCALIZADA,SEMENTARIA, GENERALIZADA */
-  if (copyConclusions.includes('ACCESORIO DERECHA, FOCALIZADA,') || copyConclusions.includes('ACCESORIO DERECHA, SEGMENTARIA,') || copyConclusions.includes('ACCESORIO DERECHA, GENERALIZADA,')) {
+  /* DEROCHO >  ACCESORIO        FOCALIZADA A NIVEL DE SEMENTARIA, GENERALIZADA */
+  if (copyConclusions.includes('ACCESORIO DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('ACCESORIO DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('ACCESORIO DEROCHO, GENERALIZADA,')) {
     return (
       <>
         <div
@@ -325,7 +323,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, GENERALIZADA,')) {
     return (<>
       <div
         style={{
@@ -402,7 +400,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO DERECHA, FOCALIZADA,') || copyConclusions.includes('MUSCULOCUTÁNEO DERECHA, SEGMENTARIA,') || copyConclusions.includes('MUSCULOCUTÁNEO DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('MUSCULOCUTÁNEO DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('MUSCULOCUTÁNEO DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('MUSCULOCUTÁNEO DEROCHO, GENERALIZADA,')) {
     return (<>
       <div
         style={{
@@ -479,7 +477,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL DERECHA, FOCALIZADA,') || copyConclusions.includes('RADIAL DERECHA, SEGMENTARIA,') || copyConclusions.includes('RADIAL DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('RADIAL DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('RADIAL DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('RADIAL DEROCHO, GENERALIZADA,')) {
     return (<>
 
       <div
@@ -600,7 +598,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('RADIAL IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('RADIAL IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('RADIAL IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('RADIAL IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('RADIAL IZQUIERDO, GENERALIZADA,')) {
     return (<>
 
       <div
@@ -720,7 +718,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('SUPRAESCAPULAR IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('SUPRAESCAPULAR IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, GENERALIZADA,')) {
     return (<>
       <div
         style={{
@@ -764,7 +762,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR DERECHA, FOCALIZADA,') || copyConclusions.includes('SUPRAESCAPULAR DERECHA, SEGMENTARIA,') || copyConclusions.includes('SUPRAESCAPULAR DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('SUPRAESCAPULAR DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('SUPRAESCAPULAR DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('SUPRAESCAPULAR DEROCHO, GENERALIZADA,')) {
     return (<>
       <div
         style={{
@@ -808,7 +806,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ULNAR DERECHA, FOCALIZADA,') || copyConclusions.includes('ULNAR DERECHA, SEGMENTARIA,') || copyConclusions.includes('ULNAR DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('ULNAR DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('ULNAR DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('ULNAR DEROCHO, GENERALIZADA,')) {
     return (<>
       <div
         style={{
@@ -951,7 +949,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ULNAR IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('ULNAR IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('ULNAR IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('ULNAR IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('ULNAR IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('ULNAR IZQUIERDO, GENERALIZADA,')) {
     return (<>
       <div
         style={{
@@ -1094,7 +1092,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('FRÉNICO IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('FRÉNICO IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('FRÉNICO IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('FRÉNICO IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('FRÉNICO IZQUIERDO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1158,7 +1156,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO DERECHA, FOCALIZADA,') || copyConclusions.includes('FRÉNICO DERECHA, SEGMENTARIA,') || copyConclusions.includes('FRÉNICO DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('FRÉNICO DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('FRÉNICO DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('FRÉNICO DEROCHO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1222,7 +1220,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('TORACODORSAL IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('TORACODORSAL IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('TORACODORSAL IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('TORACODORSAL IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('TORACODORSAL IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('TORACODORSAL IZQUIERDO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1267,7 +1265,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('TORACODORSAL DERECHA, FOCALIZADA,') || copyConclusions.includes('TORACODORSAL DERECHA, SEGMENTARIA,') || copyConclusions.includes('TORACODORSAL DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('TORACODORSAL DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('TORACODORSAL DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('TORACODORSAL DEROCHO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1312,7 +1310,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('CIATICO DERECHA, FOCALIZADA,') || copyConclusions.includes('CIATICO DERECHA, SEGMENTARIA,') || copyConclusions.includes('CIATICO DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('CIATICO DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('CIATICO DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('CIATICO DEROCHO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1428,7 +1426,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('CIATICO IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('CIATICO IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('CIATICO IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('CIATICO IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('CIATICO IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('CIATICO IZQUIERDO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1544,7 +1542,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('FEMORAL DERECHA, FOCALIZADA,') || copyConclusions.includes('FEMORAL DERECHA, SEGMENTARIA,') || copyConclusions.includes('FEMORAL DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('FEMORAL DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('FEMORAL DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('FEMORAL DEROCHO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1662,7 +1660,7 @@ export function checkDivs(copyConclusions) {
       
     </>);
   }
-  if (copyConclusions.includes('FEMORAL IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('FEMORAL IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('FEMORAL IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('FEMORAL IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('FEMORAL IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('FEMORAL IZQUIERDO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1780,7 +1778,7 @@ export function checkDivs(copyConclusions) {
       
     </>);
   }
-  if (copyConclusions.includes('OBTURADOR IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('OBTURADOR IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('OBTURADOR IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('OBTURADOR IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('OBTURADOR IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('OBTURADOR IZQUIERDO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1827,7 +1825,7 @@ export function checkDivs(copyConclusions) {
     
     </>);
   }
-  if (copyConclusions.includes('OBTURADOR DERECHA, FOCALIZADA,') || copyConclusions.includes('OBTURADOR DERECHA, SEGMENTARIA,') || copyConclusions.includes('OBTURADOR DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('OBTURADOR DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('OBTURADOR DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('OBTURADOR DEROCHO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1873,7 +1871,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('PERONEO IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('PERONEO IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('PERONEO IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('PERONEO IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('PERONEO IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('PERONEO IZQUIERDO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -1975,7 +1973,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('PERONEO DERECHA, FOCALIZADA,') || copyConclusions.includes('PERONEO DERECHA, SEGMENTARIA,') || copyConclusions.includes('PERONEO DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('PERONEO DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('PERONEO DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('PERONEO DEROCHO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -2077,7 +2075,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('TIBIAL DERECHA, FOCALIZADA,') || copyConclusions.includes('TIBIAL DERECHA, SEGMENTARIA,') || copyConclusions.includes('TIBIAL DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('TIBIAL DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('TIBIAL DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('TIBIAL DEROCHO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -2208,7 +2206,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('TIBIAL IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('TIBIAL IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('TIBIAL IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('TIBIAL IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('TIBIAL IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('TIBIAL IZQUIERDO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -2339,7 +2337,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('PUDENDO IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('PUDENDO IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('PUDENDO IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('PUDENDO IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('PUDENDO IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('PUDENDO IZQUIERDO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -2369,7 +2367,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO DERECHA, FOCALIZADA,') || copyConclusions.includes('PUDENDO DERECHA, SEGMENTARIA,') || copyConclusions.includes('PUDENDO DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('PUDENDO DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('PUDENDO DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('PUDENDO DEROCHO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -2399,7 +2397,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL IZQUIERDA, FOCALIZADA,') || copyConclusions.includes('FACIAL IZQUIERDA, SEGMENTARIA,') || copyConclusions.includes('FACIAL IZQUIERDA, GENERALIZADA,')) {
+  if (copyConclusions.includes('FACIAL IZQUIERDO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('FACIAL IZQUIERDO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('FACIAL IZQUIERDO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -2440,7 +2438,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL DERECHA, FOCALIZADA,') || copyConclusions.includes('FACIAL DERECHA, SEGMENTARIA,') || copyConclusions.includes('FACIAL DERECHA, GENERALIZADA,')) {
+  if (copyConclusions.includes('FACIAL DEROCHO, FOCALIZADA A NIVEL DE ') || copyConclusions.includes('FACIAL DEROCHO, SEGMENTARIA A NIVEL DE ') || copyConclusions.includes('FACIAL DEROCHO, GENERALIZADA,')) {
     return (<>
     <div
         style={{
@@ -2487,4 +2485,4 @@ export function checkDivs(copyConclusions) {
   }
 
 
-}// aqui   FRÉNICO IZQUIERDA, FOCALIZADA,
+}// aqui   FRÉNICO IZQUIERDO, FOCALIZADA A NIVEL DE 

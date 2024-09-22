@@ -243,13 +243,13 @@ const StepB1 = ({ handleNextStep, handlePrevStep }) => {
       </h1>
       
       <div onClick={handleNextStep}>
-        <ConclusionButton value='izquierda' title=' IZQUIERDA,' displayText={'IZQUIERDA'}/>
-        <ConclusionButton value='derecha' title=' DERECHA,' displayText={'DERECHA'}/>
+        <ConclusionButton value='izquierda' title=' IZQUIERDO,' displayText={'IZQUIERDO'}/>
+        <ConclusionButton value='derecha' title=' DERECHO,' displayText={'DERECHO'}/>
       </div>
       <Accordion title='BILATERIAL'>
         <div onClick={ handleNextStep }>
-          <ConclusionButton value='derecha' title=' CON PREDOMINIO DERECHO,' displayText={'PREDOMINIO DERECHO'}/>
-          <ConclusionButton value='izquierda' title=' CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'}/>
+          <ConclusionButton value='derecha' title=' BILATERAL CON PREDOMINIO DERECHO,' displayText={'PREDOMINIO DERECHO'}/>
+          <ConclusionButton value='izquierda' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'}/>
           <ConclusionButton value='bilateral' title=' BILATERAL,' displayText={'SIN PREDOMINIO'}/>
         </div>
       </Accordion>
@@ -273,8 +273,8 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       </h1>
       
       <div onClick={handleNextStep}>
-        <ConclusionButton value='focalizada' title=' FOCALIZADA,' displayText={'FOCALIZADA'}/>
-        <ConclusionButton value='segmentaria' title=' SEGMENTARIA,' displayText={'SEGMENTARIA'}/>
+        <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL DE ' displayText={'FOCALIZADA'}/>
+        <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL DE ' displayText={'SEGMENTARIA'}/>
         <ConclusionButton value='generalizada' title=' GENERALIZADA,' displayText={'GENERALIZADA'}/>
       </div>
        
@@ -298,23 +298,23 @@ const StepD = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={handleNextStep}>
-      <ConclusionButton value = 'TIPO AXONAL COMPLETA' title = 'TIPO AXONAL COMPLETA' />
-      <ConclusionButton value = 'AXONAL CON DESMIELINIZACIÓN SECUNDARIA' title = 'AXONAL CON DESMIELINIZACIÓN SECUNDARIA' />
-      <ConclusionButton value = 'DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' title = 'DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' />
+      <ConclusionButton value = 'AXONAL COMPLETA ' title = ' TIPO AXONAL COMPLETA 'displayText={'AXONAL COMPLETA'} />
+      <ConclusionButton value = ' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA ' title = ' AXONAL CON DESMIELINIZACIÓN SECUNDARIA' />
+      <ConclusionButton value = ' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' title = ' DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' />
       </div>
-      <Accordion title='TIPO AXONAL INCOMPLETA'>
-        <ConclusionButton value = 'CON DENERVACIÓN DIFUSA (++++)' title = 'CON DENERVACIÓN DIFUSA (++++)' />
-        <ConclusionButton value = 'CON DENERVACIÓN ABUNDANTE (+++)' title = 'CON DENERVACIÓN ABUNDANTE (+++)' />
-        <ConclusionButton value = 'CON DENERVACIÓN PROGRESIVA (++)' title = 'CON DENERVACIÓN PROGRESIVA (++)' />
-        <ConclusionButton value = 'CON DENERVACIÓN DISCRETA (+/+)' title = 'CON DENERVACIÓN DISCRETA (+/+)' />
-        <ConclusionButton value = 'SIN DENERVACIÓN ACTIVA' title = 'SIN DENERVACIÓN ACTIVA' />
+      <Accordion title='AXONAL INCOMPLETA'>
+        <ConclusionButton value = 'CON DENERVACIÓN DIFUSA (++++)' title = ' DENERVACIÓN DIFUSA (++++)' />
+        <ConclusionButton value = 'CON DENERVACIÓN ABUNDANTE (+++)' title = ' DENERVACIÓN ABUNDANTE (+++)' />
+        <ConclusionButton value = 'CON DENERVACIÓN PROGRESIVA (++)' title = ' DENERVACIÓN PROGRESIVA (++)' />
+        <ConclusionButton value = 'CON DENERVACIÓN DISCRETA (+/+)' title = ' DENERVACIÓN DISCRETA (+/+)' />
+        <ConclusionButton value = 'SIN DENERVACIÓN ACTIVA' title = ' SIN DENERVACIÓN ACTIVA' />
       </Accordion>
       
-      <Accordion title='TIPO DESMIELINIZANTE '>
+      <Accordion title='DESMIELINIZANTE '>
           <div onClick={ handleNextStep }>
-            <ConclusionButton value = 'POR RETARDO EN LA CONDUCCIÓN ' title = 'POR RETARDO EN LA CONDUCCIÓN ' />
-            <ConclusionButton value = 'POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' title = 'POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' />
-            <ConclusionButton value = 'POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title = 'POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' />
+            <ConclusionButton value = ' TIPO DESMILINIZANTE POR RETARDO EN LA CONDUCCIÓN ' title = ' POR RETARDO EN LA CONDUCCIÓN ' />
+            <ConclusionButton value = ' TIPO DESMILINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' title = ' POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' />
+            <ConclusionButton value = ' TIPO DESMILINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title = ' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' />
           </div>
       </Accordion>
       
@@ -337,9 +337,9 @@ const StepE = ({ handleNextStep, handlePrevStep }) => {
         FIBRAS
       </h1>
       <div onClick={handleNextStep}>
-        <ConclusionButton value = 'DE FIBRAS MOTORAS' title = 'DE FIBRAS MOTORAS' />
-        <ConclusionButton value = 'DE FIBRAS SENSITIVAS' title = 'DE FIBRAS SENSITIVAS' />
-        <ConclusionButton value = 'DE FIBRAS MIXTAS (SENSITIVO-MOTOTA)' title = 'DE FIBRAS MIXTAS (SENSITIVO-MOTOTA)' />
+        <ConclusionButton value = ' DE FIBRAS MOTORAS, ' title = ' DE FIBRAS MOTORAS ' />
+        <ConclusionButton value = ' DE FIBRAS SENSITIVAS, ' title = ' DE FIBRAS SENSITIVAS ' />
+        <ConclusionButton value = ' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA),' title = ' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA) ' />
       </div>
       
     </div>
@@ -362,9 +362,9 @@ const StepF = ({ handlePrevStep, handleNextStep }) => {
       </h1>
 
       <div onClick={handleNextStep}>
-      <ConclusionButton value = 'INTENSIDAD LEVE (NEUROAPRAXIA)' title = 'INTENSIDAD LEVE (NEUROAPRAXIA)' />
-      <ConclusionButton value = 'INTENSIDAD MODERADA (AXONOTMESIS INCOMPLETA)' title = 'INTENSIDAD MODERADA (AXONOTMESIS INCOMPLETA)' />
-      <ConclusionButton value = 'INTENSIDAD SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title = 'INTENSIDAD SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' />
+      <ConclusionButton value = ' INTENSIDAD LEVE (NEUROAPRAXIA)' title = 'INTENSIDAD LEVE (NEUROAPRAXIA)' />
+      <ConclusionButton value = ' INTENSIDAD MODERADA (AXONOTMESIS INCOMPLETA)' title = 'INTENSIDAD MODERADA (AXONOTMESIS INCOMPLETA)' />
+      <ConclusionButton value = ' INTENSIDAD SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title = 'INTENSIDAD SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' />
       </div>
 
       
@@ -388,8 +388,8 @@ const StepG = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={ handleNextStep }>
-        <ConclusionButton value='CON REINERVACIÓN ACTIVA' title='CON REINERVACIÓN ACTIVA' />                
-        <ConclusionButton value='SIN REINERVACIÓN ACTIVA' title='SIN REINERVACIÓN ACTIVA' />
+        <ConclusionButton value=' CON REINERVACIÓN ACTIVA ' title=' CON REINERVACIÓN ACTIVA ' />                
+        <ConclusionButton value='  REINERVACIÓN ACTIVA ' title=' SIN REINERVACIÓN ACTIVA ' />
       </div>
       
       

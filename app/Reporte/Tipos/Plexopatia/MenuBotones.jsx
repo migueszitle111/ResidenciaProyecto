@@ -1374,9 +1374,6 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
   );
 };
 
-  
-  // Función para manejar la carga de la imagen
-
   // Función para manejar la carga de la imagen
   const DropArea2 = () => {
     const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
@@ -1439,6 +1436,16 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
 
 
 const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) => {
+
+  const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
+
+  const toggleDivSize = (index) => {
+    // Cambiar el estado del tamaño del div al hacer clic
+    setExpandedDivs((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index], // Alterna entre true/false para expandir o contraer
+    }));
+  };
 
 
     const [imageSrc, setImageSrc] = useState(null);
@@ -1503,36 +1510,111 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) =>
 
         </div>
 
+        <div className='container-grid'>
+          {[1].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+                  <DraggableDiv key={index}>
+                    <div
+                      className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
+                      onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                    >
+                      <img
+                        src="/assets/Simbolos/S_Linea 2.png"
+                        className='lineaImg' // Aplicar estilo a la imagen
+                      />
+                      <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
+                        <DropArea2 />
+                      </div>
+                    </div>
+                  </DraggableDiv>
+              </div>
+                
+              ))}
+            
+            
+            
+            {[2].map((index) => (
+                <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
+                <DraggableDiv key={index}>
+                  <div
+                    className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
+                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                  >
+                    <img
+                      src="/assets/Simbolos/S_Linea 1.png"
+                      className='lineaImg' // Aplicar estilo a la imagen
+                    />
+                    <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
+                      <DropArea2 />
+                    </div>
+                  </div>
+                </DraggableDiv>
+              </div>
+            ))}
+            
+
+            {[3].map((index) => (
+                <div key={index} className={`DivPanel4 ${expandedDivs[index]? 'DivPanel4-expanded' : ''}`} >
+                <DraggableDiv key={index}>
+                  <div
+                    className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
+                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                  >
+                    <img
+                      src="/assets/Simbolos/S_Linea 3.png"
+                      className='lineaImg' // Aplicar estilo a la imagen
+                    />
+                    <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
+                      <DropArea2 />
+                    </div>
+                  </div>
+                </DraggableDiv>
+              </div>
+            ))}
+
+            
+            {[4].map((index) => (
+                <div key={index} className={`DivPanel4 ${expandedDivs[index]? 'DivPanel4-expanded' : ''}`} >
+                <DraggableDiv key={index}>
+                  <div
+                    className={`cuadroIMG ${expandedDivs[index] ? 'cuadroIMG-expanded' : ''}`} // Aplica clase para expandir
+                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                  >
+                    <img
+                      src="/assets/Simbolos/S_ZigZag.png"
+                      className='lineaImg' // Aplicar estilo a la imagen
+                    />
+                  </div>
+                </DraggableDiv>
+              </div>
+            ))}
+        </div>
+
+
+
           <div className='DivPanel'>
 
-            <DraggableDiv>
-              <div className="cuadro">
-                <img src="/assets/Simbolos/S_Linea 2.png" width="175" height="175" className='lineaImg'/>
-                <div className="cuadro2">
-                <DropArea2 />
-                </div>
-              </div>
-            </DraggableDiv>
 
-            <DraggableDiv>
+
+            {/* <DraggableDiv>
               <div className="cuadro">
                 <img src="/assets/Simbolos/S_Linea 1.png" width="175" height="175" className='lineaImg'/>
-                {/* <div className='lineaImg'><img src="/assets/Simbolos/S_Linea 1.png" width="175" height="75" /></div> */}
+                
                 <div className="cuadro2">
                 <DropArea2 />
                 </div>
-                {/* <div className='lineaDv'></div> */}
+                
               </div>
-            </DraggableDiv>
+            </DraggableDiv> */}
 
-            <DraggableDiv>
+            {/* <DraggableDiv>
               <div className="cuadro">
                 <img src="/assets/Simbolos/S_Linea 3.png" width="175" height="175" className='lineaImg'/>
                 <div className="cuadro2">
                 <DropArea2 />
                 </div>
               </div>
-            </DraggableDiv>
+            </DraggableDiv> */}
 
 
             <div>

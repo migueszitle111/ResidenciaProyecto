@@ -315,40 +315,63 @@
   background-color: transparent;
 }
 
+
 .cuadro {
-  width: 240px;
-  height: 120px;
+  width: 50px;
+  height: 50px;
+  transition: width 0.3s ease, height 0.3s ease;
+  background-color: transparent;
   margin: 10px;
   margin-left: -5px;
   margin-top: 10px;
-  background-color: transparent; /* Color de fondo */
-  display: flex;  /*Solo si necesitas centrar el contenido dentro del div */
-  /*align-items: center;  Solo si necesitas centrar verticalmente */
-  /*justify-content: center;  Solo si necesitas centrar horizontalmente */
-  /*border: solid 1px black;  Borde opcional */
+  display: flex;
+}
+
+/* Cuando el elemento está siendo arrastrado (tamaño original) */
+.cuadro-expanded {
+  width: 240px;
+  height: 120px;
+  
 }
 
 .cuadro2 {
-  width: 98px;
-  height: 92px;
-  background-color: white; /* Color de fondo */
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  transition: width 0.3s ease, height 0.3s ease;
   border: 1px solid black; /* Borde opcional */
   position: absolute;
+  margin-top:  5px;
+  margin-bottom: 15px;
+  margin-left: 40px;
+}
+
+.cuadro2-expanded {
+  width: 98px;
+  height: 92px;
   margin-top:  15px;
   margin-bottom: 15px;
   margin-left: 135px;
 }
 
 .lineaImg{
+  width: 100%; /* Ajusta el ancho para que sea responsivo */
+  height: auto; /* Mantiene la proporción de la imagen */
+  transition: transform 0.3s ease; /* Añade una transición suave para efectos */
   position: static;
   background-color: transparent;
   pointer-events: none;
   /* border: solid 1px black; */
-  margin-top: 10px;
-  margin-bottom: 10px;
   /* height: 95px;
   width: 140px; */
-  
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.lineaImg {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transform: scale(1.1); /* Escala la imagen un poco al expandir */
 }
 
 .dropArea2{
@@ -380,13 +403,73 @@
   object-fit: contain; /* Ajusta la imagen para que se ajuste dentro del área de drop sin distorsionarse */
 }
 
-.DivPanel{
+/* .DivPanel{
   background-color: rgba(255, 255, 255, 0.253);
   width: 240px;
   height: 400px;
   margin-right: 10px;
   margin-left: -5px;
   border-radius: 5%;
+} */
+
+.DivPanel2{
+  background-color: rgba(255, 255, 255, 0.253);
+  width: 90px;
+  flex-grow: 1;
+  flex-basis: 200;
+  margin: 2px;
+}
+
+.DivPanel2-expanded{
+  width: 230px;
+  
+}
+
+.DivPanel3{
+  background-color: rgba(255, 255, 255, 0.253);
+  width: 90px;
+  flex-grow: 1;
+  flex-basis: 200;
+  margin: 2px;
+}
+
+.DivPanel3-expanded{
+  width: 230px;
+  
+}
+
+.DivPanel4{
+  background-color: rgba(255, 255, 255, 0.253);
+  width: 90px;
+  flex-grow: 1;
+  flex-basis: 200;
+  margin: 2px;
+}
+
+.DivPanel4-expanded{
+  width: 230px;
+  
+}
+
+.container-grid{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cuadroIMG {
+  width: 50px;
+  height: 50px;
+  transition: width 0.3s ease, height 0.3s ease;
+  background-color: transparent;
+  position: relative;
+  margin-left: 30px;
+}
+
+/* Cuando el elemento está siendo arrastrado (tamaño original) */
+.cuadroIMG-expanded {
+  width: 100px;
+  height: 60px;
+  
 }
 
 

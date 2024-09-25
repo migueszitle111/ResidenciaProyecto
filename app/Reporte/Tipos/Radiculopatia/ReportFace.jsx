@@ -493,8 +493,7 @@ const Reporte = () => {
                         },
                       ]}
                     />
-            
-          
+
                   </td>
                   <td>
                     <ConclusionCanvas 

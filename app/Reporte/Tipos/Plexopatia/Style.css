@@ -354,6 +354,28 @@
   margin-left: 135px;
 }
 
+
+.cuadro3 {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  transition: width 0.3s ease, height 0.3s ease;
+  border: 1px solid black; /* Borde opcional */
+  position: absolute;
+  margin-top:  5px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+.cuadro3-expanded {
+  width: 98px;
+  height: 92px;
+  margin-top:  15px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+
 .lineaImg{
   width: 100%; /* Ajusta el ancho para que sea responsivo */
   height: auto; /* Mantiene la proporción de la imagen */
@@ -361,9 +383,6 @@
   position: static;
   background-color: transparent;
   pointer-events: none;
-  /* border: solid 1px black; */
-  /* height: 95px;
-  width: 140px; */
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -374,11 +393,51 @@
   transform: scale(1.1); /* Escala la imagen un poco al expandir */
 }
 
+.lineaImg2{
+  width: 100%; /* Ajusta el ancho para que sea responsivo */
+  height: auto; /* Mantiene la proporción de la imagen */
+  transition: transform 0.3s ease; /* Añade una transición suave para efectos */
+  position: static;
+  pointer-events: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
+
+.lineaImg2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transform: scale(1.1); /* Escala la imagen un poco al expandir */
+  margin-left: 35px;
+}
+
+
+.lineaImg3{
+  width: 100%; /* Ajusta el ancho para que sea responsivo */
+  height: auto; /* Mantiene la proporción de la imagen */
+  transition: transform 0.3s ease; /* Añade una transición suave para efectos */
+  position: static;
+  background-color: transparent;
+  pointer-events: none;
+  /* border: solid 1px black; */
+  height: 20px;
+  width: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.lineaImg3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transform: scale(1.1); /* Escala la imagen un poco al expandir */
+  height: 10px;
+  width: 10px;
+}
+
 .dropArea2{
   width: 96px;
   height: 90px;
   background-attachment: transparent;
-  
 }
 
 .lineaDv{
@@ -418,6 +477,7 @@
   flex-grow: 1;
   flex-basis: 200;
   margin: 2px;
+  border-radius: 5px;
 }
 
 .DivPanel2-expanded{
@@ -431,6 +491,7 @@
   flex-grow: 1;
   flex-basis: 200;
   margin: 2px;
+  border-radius: 5px;
 }
 
 .DivPanel3-expanded{
@@ -444,16 +505,20 @@
   flex-grow: 1;
   flex-basis: 200;
   margin: 2px;
+  border-radius: 5px;
 }
 
 .DivPanel4-expanded{
   width: 230px;
-  
+  height: 120px;
 }
 
 .container-grid{
   display: flex;
   flex-wrap: wrap;
+  max-height: 400px; /* Ajusta el valor según lo necesites */
+  overflow-y: auto;  /* Permite desplazamiento vertical */
+  overflow-x: hidden; /* Oculta el desplazamiento horizontal */
 }
 
 .cuadroIMG {

@@ -305,8 +305,8 @@ const Reporte = () => {
   return (
     <div>
       <div className="wrapper">
-        <div className='vertical-orientation dont-print'>
-          <div className='button-bar'>
+        <div className='vertical-orientation dont-print  '>
+          <div className='button-bar '>
             <input 
               id="file-upload" 
               type="file" 

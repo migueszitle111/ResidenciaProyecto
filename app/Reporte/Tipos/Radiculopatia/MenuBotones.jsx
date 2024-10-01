@@ -191,14 +191,9 @@ const SimpleMultiStepForm = () => {
 };
 const StepA = ({ handleNextStep,handleNextStep1, handleNextStep2} ) => (
   <div>
-    <div className='button-bar'>
-      <button className='print-button dont-print'>
-        <img src="" style={{ filter: 'invert(0.5)' }} />
-      </button>
-      <button className='print-button dont-print'>
-        <img src="" style={{ filter: 'invert(0.5)' }} />
-      </button>
-    </div>
+    <br></br>
+    <br></br>
+    <br></br>
     <h1 className='text-xl font-bold text-white'>EVOLUCIÓN</h1>
     <div onClick={ handleNextStep }>
           <ConclusionButton value='radiculopatia_aguda' title='RADICULOPATIA AGUDA' displayText=''/>
@@ -248,7 +243,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
     });
   };
   return (
-    <div>
+    <div className='accordion-content '>
       <div className='button-bar'>
         <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
@@ -258,7 +253,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
         </button>
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL</h1>
-      <Accordion title='CERVICAL'>
+      <Accordion title='CERVICAL' >
         <Accordion title='C4'>
           <table cellpadding='1'>
             <tr>
@@ -1893,8 +1888,6 @@ const StepG1 = ({  handlePrevStep1,handleNextStep1  }) => {
       <ConclusionButton value='nula' title='NULA (EN FASE DE SECUELA DEFINITIVA)' displayText=''/>
       </div>
       </>
-      
-    
   );
 };
 

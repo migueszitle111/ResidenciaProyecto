@@ -94,12 +94,13 @@
 .vertical-container {
   display: flex;
   flex-direction: column;
-  height: 117.2vh;
-  width: 40vh;
-  background-color:#1C1C1C;
+  min-height: 117.2vh; /* Tamaño inicial mínimo en altura */
+  min-width: 40vh;    /* Tamaño inicial mínimo en ancho */
+  height: auto;       /* Permite que la altura se ajuste al contenido */
+  width: auto;        /* Permite que el ancho se ajuste al contenido */
+  background-color: #1C1C1C;
   background-image: url('/assets/04_01_ Vector _ SVG/G_14.svg'); /* Ruta relativa a la carpeta public */
-  background-size: cover;  /*Ajustar tamaño de la imagen al contenedor */
-  /*background-repeat: repeat;*/
+  background-size: cover;  /* Ajustar tamaño de la imagen al contenedor */
   background-position: center; /* Centrar la imagen */
   border-radius: 10px;
 }
@@ -110,13 +111,14 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
+  flex-grow: 1; /* Permite que el contenedor crezca dinámicamente */
 }
 
 .overlay-image {
   position: absolute;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; /* Permitir que la altura sea dinámica */
+  object-fit: contain; /* Asegura que la imagen se ajuste dentro del contenedor sin deformarse */
   justify-content: center;
   align-items: center;
   display: flex;
@@ -228,6 +230,13 @@
   border: 2px solid #c44900; 
 
 }
+
+.adjustable-content {
+  flex-grow: 1; /* Permite que este contenido se ajuste al tamaño disponible */
+  padding: 20px;
+ 
+}
+
 
 .vertical-orinetation {
   display: flex;

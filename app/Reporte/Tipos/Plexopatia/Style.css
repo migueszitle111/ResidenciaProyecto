@@ -344,6 +344,7 @@
   margin-top:  5px;
   margin-bottom: 15px;
   margin-left: 40px;
+  /* border-radius: 100%; */
 }
 
 .cuadro2-expanded {
@@ -516,9 +517,9 @@
 .container-grid{
   display: flex;
   flex-wrap: wrap;
-  max-height: 400px; /* Ajusta el valor según lo necesites */
-  overflow-y: auto;  /* Permite desplazamiento vertical */
-  overflow-x: hidden; /* Oculta el desplazamiento horizontal */
+  /*max-height: 400px;  Ajusta el valor según lo necesites */
+  /*overflow-y: auto;   Permite desplazamiento vertical */
+  /*overflow-x: hidden;  Oculta el desplazamiento horizontal */
 }
 
 .cuadroIMG {

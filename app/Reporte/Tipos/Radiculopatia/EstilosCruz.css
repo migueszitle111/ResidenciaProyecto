@@ -23,766 +23,136 @@ input[type="checkbox"] {
 
 
 
-.cruz1 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 5.5%;
-    left: 47%;
-    transform: translate(-50%, -50%);
-}
-
-.cruz2 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 5.5%;
-  left: 46.25%;
-  transform: translate(-50%, -50%);
-}
-
-.cruz3 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 5.5%;
-  left: 45.5%;
-  transform: translate(-50%, -50%);
-
-}
-
-.cruz4 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 5.5%;
-  left: 44.7%;
-  transform: translate(-50%, -50%);
-
-}
-
-.cruz5 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 5.5%;
-    left:52.7%;
-    transform: translate(-50%, -50%);
-
-}
-
-.cruz6 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 5.5%;
-  left:53.5%;
-  transform: translate(-50%, -50%);
-
-}
-
-.cruz7 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 5.5%;
-  left:54.2%;
-  transform: translate(-50%, -50%);
-
-}
-
-.cruz8 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 5.5%;
-  left:55%;
-  transform: translate(-50%, -50%);
-
-}
-
-.cruz9 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 6.3%;
-    left: 43%;
-}
-
-.cruz10 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 6.3%;
-  left: 42.3%
-}
-
-.cruz11 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 6.3%;
-  left: 41.5%
-}
-
-.cruz12 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 6.3%;
-  left: 40.7%
-}
-
-.cruz13 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 6.3%;
-    right: 43%;
-}
-
-.cruz14 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 6.3%;
-  right: 42.3%;
-}
-
-.cruz15 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 6.3%;
-  right: 41.5%;
-}
-
-.cruz16 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 6.3%;
-  right: 40.7%;
-}
-
-/**/
-
-.cruz17 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 8%;
-    left: 43%
-}
-
-.cruz18 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 8%;
-  left: 42.2%
-}
-
-.cruz19 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 8%;
-  left: 41.5%
-}
-
-.cruz20 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 8%;
-  left: 40.7%
-}
-
-.cruz21 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 8%;
-    right: 43%
-}
-
-.cruz22 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 8%;
-  right:42.2%
-}
-
-.cruz23 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 8%;
-  right: 41.5%
-}
-
-.cruz24 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 8%;
-  right:40.7%
-}
-
-/**/
-
-.cruz25 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 10.2%;
-    left: 42.8%
-}
-
-.cruz26 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 10.2%;
-  left: 41.8%
-}
-
-.cruz27 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 10.2%;
-  left: 41%
-}
-
-.cruz28 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 10.2%;
-  left: 40.3%
-}
-
-.cruz29 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 10.2%;
-    right: 42.8%
-}
-
-.cruz30 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 10.2%;
-  right:41.8%
-}
-
-.cruz31 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 10.2%;
-  right: 41%
-}
-
-.cruz32 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 10.2%;
-  right: 40.3%
-}
-
-/**/
-
-.cruz33 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 13.2%;
-    left: 42.5%
-}
-
-.cruz34 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 13.2%;
-  left: 41.8%
-}
-
-.cruz35 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 13.2%;
-  left: 41%
-}
-
-.cruz36 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 13.2%;
-  left: 40.2%
-}
-
-.cruz37 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 13.2%;
-    right: 42.5%
-}
-
-.cruz38 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 13.2%;
-  right: 41.8%
-}
-
-.cruz39 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 13.2%;
-  right: 41%
-}
-
-.cruz40 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 13.2%;
-  right:  40.2%
-}
-
-/**/
-
-.cruz41 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 16.0%;
-    left: 42.2%
-    
-}
-
-.cruz42 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 16.0%;
-  left: 41.5%
-}
-
-.cruz43 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 16.0%;
-  left: 40.6%
-}
-
-.cruz44 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 16.0%;
-  left: 40%
-}
-
-.cruz45 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 16.0%;
-    right: 42.2%
-}
-
-.cruz46 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 16.0%;
-  right: 41.5%
-}
-
-.cruz47 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 16.0%;
-  right: 40.6%
-}
-
-.cruz48 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 16.0%;
-  right: 40%
-}
-
-/**/
-/*Lumbar L2 lado Izquierdo*/
-.cruz49 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 53%;
-  left: 41.5%
-}
-
-.cruz50 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 53%;
-  left: 40.5%
-}
-
-.cruz51 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 53%;
-  left: 39.5%
-}
-
-.cruz52 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 53%;
-  left: 38.5%
-}
-
-/*Lumbar L2 lado Derecho*/
-.cruz53 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 53%;
-  left: 49%
-}
-
-.cruz54 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 53%;
-  left: 50%
-}
-
-.cruz55 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 53%;
-  left: 51%
-}
-
-.cruz56 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 53%;
-  left: 52%
-}
-
-/**/
-/*Lumbar L3 lado Izquierdo*/
-.cruz57 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 56.5%;
-  left: 41%
-}
-
-.cruz58 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 56.5%;
-  left: 40%
-}
-
-.cruz59 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 56.5%;
-  left: 39%
-}
-
-.cruz60 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 56.5%;
-  left: 38%
-}
-
-/*Lumbar L3 lado Derecho*/
-.cruz61 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 56.5%;
-    left: 49.5%
-}
-
-.cruz62 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 56.5%;
-  left: 50.5%
-}
-
-.cruz63 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 56.5%;
-  left: 51.5%
-}
-
-.cruz64 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 56.5%;
-  left: 52.5%
-}
-
-/**/
-/*Lumbar L4 lado Izquierdo*/
-.cruz65 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 60%;
-  left: 41%
-}
-
-.cruz66 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 60%;
-  left: 40%
-}
-
-.cruz67 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 60%;
-  left: 39%
-}
-
-.cruz68 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 60%;
-  left: 38%
-}
-
-/*Lumbar L4 lado Derecho*/
-.cruz69 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 60%;
-    left: 49.5%
-}
-
-.cruz70 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 60%;
-  left: 50.5%
-}
-
-.cruz71 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 60%;
-  left: 51.5%
-}
-
-.cruz72 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 60%;
-  left: 52.5%
-}
-
-/**/
-/*Lumbar L5 lado Izquierdo*/
-.cruz73 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 64%;
-    left: 41%
-}
-
-.cruz74 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 64%;
-  left: 40%
-}
-
-.cruz75 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 64%;
-  left: 39%
-}
-
-.cruz76 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 64%;
-  left: 38%
-}
-
-/*Lumbar L5 lado Derecho*/
-.cruz77 {
-    z-Index: 3;
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    top: 64%;
-    left: 49.5%
-}
-
-.cruz78 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 64%;
-  left: 50.5%
-}
-
-.cruz79 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 64%;
-  left: 51.5%
-}
-
-.cruz80 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 64%;
-  left: 52.5%
-}
-
-/**/
+/* Cruz 1 a 4 izquierdo */
+.cruz1 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 4.5%; left: 41.3%;   }
+.cruz2 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 4.5%; left: 40.5%; }
+.cruz3 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 4.5%; left: 39.7%; }
+.cruz4 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 4.5%; left: 39%; }
+
+/* Cruz 5 a 8 derecho*/
+.cruz5 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 4.5%; right: 41.3%;   }
+.cruz6 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 4.5%; right: 40.5%; }
+.cruz7 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 4.5%; right: 39.7%; }
+.cruz8 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 4.5%; right: 39%; }
+
+/* Cruz 9 a 12 izquierdo*/
+.cruz9 {  z-index: 3; position: absolute; width: 100px; height: 25px; top: 6.3%; left: 41.3%;   }
+.cruz10 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 6.3%; left: 40.5%; }
+.cruz11 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 6.3%; left: 39.7%; }
+.cruz12 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 6.3%; left: 39%; }
+
+/* Cruz 13 a 16 derecho*/
+.cruz13 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 6.3%; right: 41.3%;   }
+.cruz14 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 6.3%; right: 40.5%; }
+.cruz15 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 6.3%; right: 39.7%; }
+.cruz16 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 6.3%; right: 39%; }
+
+/* Cruz 17 a 20 izquierdo*/
+.cruz17 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 8%; left: 41.3%;   }
+.cruz18 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 8%; left: 40.5%; }
+.cruz19 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 8%; left: 39.7%; }
+.cruz20 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 8%; left: 39%; }
+
+/* Cruz 21 a 24 derecho*/
+.cruz21 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 8%; right: 41.3%;   }
+.cruz22 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 8%; right: 40.5%; }
+.cruz23 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 8%; right: 39.7%; }
+.cruz24 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 8%; right: 39%; }
+
+/* Cruz 25 a 28 izquierdo*/
+.cruz25 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; left: 41.3%;   }
+.cruz26 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; left: 40.5%; }
+.cruz27 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; left: 39.7%; }
+.cruz28 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; left: 39%; }
+
+/* Cruz 29 a 32 derecho*/
+.cruz29 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; right:41.3%;   }
+.cruz30 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; right:40.5%; }
+.cruz31 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; right:39.7%; }
+.cruz32 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; right:39%; }
+
+/* Cruz 33 a 36 izquierdo*/
+.cruz33 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; left: 41.3%;   }
+.cruz34 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; left: 40.5%; }
+.cruz35 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; left: 39.7%; }
+.cruz36 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; left: 39%; }
+
+/* Cruz 37 a 40 derecho*/
+.cruz37 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; right: 41.3%;   }
+.cruz38 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; right: 40.5%; }
+.cruz39 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; right: 39.7%; }
+.cruz40 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; right: 39%; }
+
+/* Cruz 41 a 44 izquierdo*/
+.cruz41 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 16.0%; left: 41.3%;   }
+.cruz42 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 16.0%; left: 40.5%; }
+.cruz43 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 16.0%; left: 39.7%; }
+.cruz44 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 16.0%; left: 39%; }
+
+/* Cruz 45 a 48 derecho*/
+.cruz45 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 16.0%; right: 41.3%;   }
+.cruz46 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 16.0%; right: 40.5%; }
+.cruz47 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 16.0%; right: 39.7%; }
+.cruz48 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 16.0%; right: 39%; }
+
+/* Lumbar L2 lado Izquierdo */
+.cruz49 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 53%; left: 41%;   }
+.cruz50 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 53%; left: 40.2%; }
+.cruz51 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 53%; left: 39.4%; }
+.cruz52 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 53%; left: 38.6%; }
+
+/* Lumbar L2 lado Derecho */
+.cruz53 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 53%; right: 41%;   }
+.cruz54 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 53%; right: 40.2%; }
+.cruz55 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 53%; right: 39.4%; }
+.cruz56 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 53%; right: 38.6%; }
+
+/* Lumbar L3 lado Izquierdo */
+.cruz57 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 56.5%; left: 41%;   }
+.cruz58 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 56.5%; left: 40.2%; }
+.cruz59 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 56.5%; left: 39.4%; }
+.cruz60 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 56.5%; left: 38.6%; }
+
+/* Lumbar L3 lado Derecho */
+.cruz61 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 56.5%; right: 41%;   }
+.cruz62 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 56.5%; right: 40.2%; }
+.cruz63 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 56.5%; right: 39.4%; }
+.cruz64 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 56.5%; right: 38.6%; }
+
+/* Lumbar L4 lado Izquierdo */
+.cruz65 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 60%; left: 41%;   }
+.cruz66 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 60%; left: 40.2%; }
+.cruz67 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 60%; left: 39.4%; }
+.cruz68 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 60%; left: 38.6%; }
+
+/* Lumbar L4 lado Derecho */
+.cruz69 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 60%; right: 41%;   }
+.cruz70 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 60%; right: 40.2%; }
+.cruz71 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 60%; right: 39.4%; }
+.cruz72 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 60%; right: 38.6%; }
+
+/* Lumbar L5 lado Izquierdo */
+.cruz73 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 64%; left: 41%;   }
+.cruz74 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 64%; left: 40.2%; }
+.cruz75 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 64%; left: 39.4%; }
+.cruz76 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 64%; left: 38.6%; }
+
+/* Lumbar L5 lado Derecho */
+.cruz77 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 64%; right: 41%;   }
+.cruz78 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 64%; right: 40.2%; }
+.cruz79 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 64%; right: 39.4%; }
+.cruz80 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 64%; right: 38.6%; }
 
 /* Torácica S1 lado Izquierdo */
-
-
+.cruz81 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 68%; left: 41%;   }
+.cruz82 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 68%; left: 40.2%; }
+.cruz83 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 68%; left: 39.4%; }
+.cruz84 {z-index: 3; position: absolute; width: 100px; height: 25px; top: 68%; left: 38.6%; }
+/* Torácica S1 lado Derecho */
+.cruz85 { z-index: 3; position: absolute; width: 100px; height: 25px;top: 68%; right: 41%;   }
+.cruz86 { z-index: 3; position: absolute; width: 100px; height: 25px;top: 68%; right: 40.2%; }
+.cruz87 { z-index: 3; position: absolute; width: 100px; height: 25px;top: 68%; right: 39.4%; }
+.cruz88 { z-index: 3; position: absolute; width: 100px; height: 25px;top: 68%; right: 38.6%; }
 /*############################### Torácica #################################*/
 /*Torácica T2 lado Izquierdo*/
 .cruz89 {
@@ -1599,80 +969,6 @@ input[type="checkbox"] {
 }
 
 
-/* Torácica S! lado Izquierdo */
-.cruz81 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 68.0%;
-  left: 40.5%;
-}
-
-.cruz82 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 68.0%;
-  left: 39.5%;
-}
-
-.cruz83 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 68.0%;
-  left: 38.5%;
-}
-
-.cruz84 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 68.0%;
-  left: 37.8%;
-}
-
-
-/* Torácica S1 lado Derecho */
-.cruz85 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 68.0%;
-  left: 49.7%;
-}
-
-.cruz86 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 68.0%;
-  left: 50.7%;
-}
-
-.cruz87 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 68.0%;
-  left: 51.7%;
-}
-
-.cruz88 {
-  z-Index: 3;
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 68.0%;
-  left: 52.7%;
-}
 
 
 

@@ -3,6 +3,8 @@
 <<<<<<< HEAD
 Esto es el repositorio de la pagina web de la aplicación MEDXpro, ultima actualización febrero 16 de 2024.
 
+Hola compañeros 
+
 ## Cómo Correr el Proyecto
 
 Sigue estos pasos para ejecutar el proyecto en tu máquina local.

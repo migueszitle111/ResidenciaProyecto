@@ -337,9 +337,9 @@ const StepE = ({ handleNextStep, handlePrevStep }) => {
         FIBRAS
       </h1>
       <div onClick={handleNextStep}>
-        <ConclusionButton value = ' DE FIBRAS MOTORAS, ' title = ' DE FIBRAS MOTORAS ' />
-        <ConclusionButton value = ' DE FIBRAS SENSITIVAS, ' title = ' DE FIBRAS SENSITIVAS ' />
-        <ConclusionButton value = ' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA),' title = ' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA) ' />
+        <ConclusionButton value = ' DE FIBRAS MOTORAS ' title = ' DE FIBRAS MOTORAS, ' displayText={' DE FIBRAS MOTORAS '}/>
+        <ConclusionButton value = ' DE FIBRAS SENSITIVAS ' title = ' DE FIBRAS SENSITIVAS, ' displayText={' DE FIBRAS SENSITIVAS '}/>
+        <ConclusionButton value = ' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA)' title = ' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA), 'displayText={' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA) '} />
       </div>
       
     </div>
@@ -362,9 +362,9 @@ const StepF = ({ handlePrevStep, handleNextStep }) => {
       </h1>
 
       <div onClick={handleNextStep}>
-      <ConclusionButton value = ' INTENSIDAD LEVE (NEUROAPRAXIA)' title = 'INTENSIDAD LEVE (NEUROAPRAXIA)' />
-      <ConclusionButton value = ' INTENSIDAD MODERADA (AXONOTMESIS INCOMPLETA)' title = 'INTENSIDAD MODERADA (AXONOTMESIS INCOMPLETA)' />
-      <ConclusionButton value = ' INTENSIDAD SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title = 'INTENSIDAD SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' />
+      <ConclusionButton value = ' INTENSIDAD LEVE (NEUROAPRAXIA)' title = 'INTENSIDAD LEVE ' displayText={'INTENSIDAD LEVE '}/>
+      <ConclusionButton value = ' INTENSIDAD MODERADA (AXONOTMESIS INCOMPLETA)' title = 'INTENSIDAD MODERADA 'displayText={'INTENSIDAD MODERADA '} />
+      <ConclusionButton value = ' INTENSIDAD SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title = 'INTENSIDAD SEVERA 'displayText={'INTENSIDAD SEVERA '} />
       </div>
 
       

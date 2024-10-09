@@ -92,23 +92,21 @@ const Reporte = () => {
     // Funcion para el arrastre de imagenes
     
 
-
-
     //funcion que agreaga comas y conjunciones a las conclusiones
     function formatConclusions(copyConclusions) {
       const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
       const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
-      const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL"];
+      const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL", "INTENSIDAD LEVE. ", "INTENSIDAD MODERADA. ", "INTENSIDAD SEVERA. "];
       let words = copyConclusions.split(' ');
       let keywordPositions = [];
-  
+    
       // Identificar las posiciones de las palabras clave
       for (let i = 0; i < words.length; i++) {
           if (keywords.includes(words[i])) {
               keywordPositions.push(i);
           }
       }
-  
+    
       // Verificar la palabra clave específica en keywords2
       for (let i = 0; i < words.length; i++) {
           if (keywords2.includes(words.slice(i, i + 6).join(' '))) {
@@ -118,15 +116,15 @@ const Reporte = () => {
                       countAfterKeyword++;
                   }
               }
-  
+    
               if (countAfterKeyword > 1) {
                   words[i + 5] += 'S'; // Agregar 'S' al final de 'TROCO' si hay más de dos palabras
               }
-  
+    
               break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
           }
       }
-  
+    
       // Verificar la palabra clave específica en keywords3
       for (let i = 0; i < words.length; i++) {
           if (keywords3.includes(words.slice(i, i + 6).join(' '))) {
@@ -136,44 +134,27 @@ const Reporte = () => {
                       countAfterKeyword++;
                   }
               }
-  
+    
               if (countAfterKeyword > 1) {
-                  words[i + 5] += 'ES'; // Agregar 'ES' al final de 'CORDON' si hay más de dos palabras
+                  words[i + 5] += 'S'; // Agregar 'S' al final de 'CORDON' si hay más de dos palabras
               }
-  
+    
               break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
           }
       }
-  
-      // Si no se encontraron palabras clave, devolver la cadena original
-      if (keywordPositions.length === 0) {
-          return copyConclusions;
+    
+      // Verificar las palabras clave "INTENSIDAD LEVE.", "INTENSIDAD MODERADA." y "INTENSIDAD SEVERA."
+      for (let i = 0; i < words.length; i++) {
+          if (words[i] === "INTENSIDAD" && (words[i + 1] === "LEVE." || words[i + 1] === "MODERADA." || words[i + 1] === "SEVERA.")) {
+              words[i + 1] += "\n\n"; // Agregar un salto e linea después de 'LEVE.', 'MODERADA.' o 'SEVERA.'
+          }
       }
-  
-      // Si solo hay una palabra clave, devolver la cadena original
-      if (keywordPositions.length === 1) {
-          return copyConclusions;
-      }
-  
-      // Formatear las palabras clave con comas, excepto antes de la conjunción
-      for (let i = 0; i < keywordPositions.length - 2; i++) {
-          words[keywordPositions[i]] += ',';
-      }
-  
-      // Verificar si la última palabra clave empieza con "I"
-      let lastKeywordIndex = keywordPositions[keywordPositions.length - 1];
-      let secondLastKeywordIndex = keywordPositions[keywordPositions.length - 2];
-      let conjunction = 'Y';
-  
-      if (words[lastKeywordIndex][0].toUpperCase() === 'I') {
-          conjunction = 'E';
-      }
-  
-      // Insertar la conjunción antes de la última palabra clave
-      words.splice(lastKeywordIndex, 0, conjunction);
-  
+    
       return words.join(' ');
-  }
+    }
+    
+    
+  
   
 
   const formattedConclusions = formatConclusions(copyConclusions);

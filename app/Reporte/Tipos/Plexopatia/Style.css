@@ -166,7 +166,7 @@
   width: 100%;
   height: 100%;
   font-size: 14px;
-  text-align: justify;
+  /* text-align: justify; */
   background-color: transparent;
   resize: none;
   padding: 5px;
@@ -341,16 +341,15 @@
   transition: width 0.3s ease, height 0.3s ease;
   border: 1px solid black; /* Borde opcional */
   position: absolute;
-  margin-top:  5px;
+  margin-top: 5px;
   margin-bottom: 15px;
   margin-left: 40px;
-  border-radius: 100%; 
 }
 
 .cuadro2-expanded {
   width: 98px;
   height: 92px;
-  margin-top:  15px;
+  margin-top: 15px;
   margin-bottom: 15px;
   margin-left: 135px;
 }
@@ -369,6 +368,68 @@
 }
 
 .cuadro3-expanded {
+  width: 98px;
+  height: 92px;
+  margin-top:  15px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+/*Circulos donde se insertan las imagenes*/
+.circulo {
+  width: 50px;
+  height: 50px;
+  transition: width 0.3s ease, height 0.3s ease;
+  background-color: transparent;
+  margin: 10px;
+  margin-left: -5px;
+  margin-top: 10px;
+  display: flex;
+}
+
+/* Cuando el elemento está siendo arrastrado (tamaño original) */
+.circulo-expanded {
+  width: 240px;
+  height: 120px;
+  
+}
+
+.circulo2 {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  transition: width 0.3s ease, height 0.3s ease;
+  border: 1px solid black; /* Borde opcional */
+  position: absolute;
+  margin-top:  5px;
+  margin-bottom: 15px;
+  margin-left: 40px;
+  border-radius: 100%;
+}
+
+.circulo2-expanded {
+  width: 98px;
+  height: 92px;
+  margin-top:  15px;
+  margin-bottom: 15px;
+  margin-left: 135px;
+}
+
+
+.circulo3 {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  transition: width 0.3s ease, height 0.3s ease;
+  border: 1px solid black; /* Borde opcional */
+  position: absolute;
+  margin-top:  5px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  border-radius: 100%;
+}
+
+.circulo3-expanded {
   width: 98px;
   height: 92px;
   margin-top:  15px;
@@ -413,32 +474,25 @@
 }
 
 
-.lineaImg3{
-  width: 100%; /* Ajusta el ancho para que sea responsivo */
-  height: auto; /* Mantiene la proporción de la imagen */
-  transition: transform 0.3s ease; /* Añade una transición suave para efectos */
-  position: static;
+.lineaImg4{
+  width: 84px;
+  height: 84px;
+}
+
+
+
+
+.dropArea2 {
+  width: 40px; /* Tamaño inicial */
+  height: 40px;
   background-color: transparent;
-  pointer-events: none;
-  /* border: solid 1px black; */
-  height: 20px;
-  width: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  transition: width 0.3s ease, height 0.3s ease; /* Transición suave */
 }
 
-.lineaImg3 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  transform: scale(1.1); /* Escala la imagen un poco al expandir */
-  height: 10px;
-  width: 10px;
-}
-
-.dropArea2{
-  width: 96px;
-  height: 90px;
-  background-attachment: transparent;
+.dropArea2-expanded {
+  width: 98px; /* Mismo tamaño que cuadro2-expanded */
+  height: 92px;
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 .lineaDv{
@@ -472,34 +526,38 @@
   border-radius: 5%;
 } */
 
-.DivPanel2{
+.DivPanel2 {
   background-color: rgba(255, 255, 255, 0.253);
   width: 90px;
   flex-grow: 1;
-  flex-basis: 200;
   margin: 2px;
   border-radius: 5px;
+  transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
+  position: relative;
+  display: inline-block;
 }
 
-.DivPanel2-expanded{
+.DivPanel2-expanded {
   width: 230px;
-  
+  z-index: 10; /* Asegura que el div expandido esté en la parte superior */
+  position: relative;
 }
 
-.DivPanel3{
+.DivPanel3 {
   background-color: rgba(255, 255, 255, 0.253);
   width: 90px;
   flex-grow: 1;
-  flex-basis: 200;
   margin: 2px;
   border-radius: 5px;
+  transition: width 0.3s ease; /* Transición suave al cambiar de tamaño */
+  position: relative; /* Para manejar el stacking de elementos */
+  display: inline-block;
 }
 
-.DivPanel3-expanded{
+.DivPanel3-expanded {
   width: 230px;
-  
+  z-index: 10; /* Asegura que el div expandido esté en la parte superior */
 }
-
 .DivPanel4{
   background-color: rgba(255, 255, 255, 0.253);
   width: 90px;
@@ -511,15 +569,13 @@
 
 .DivPanel4-expanded{
   width: 230px;
-  height: 120px;
+  
 }
 
-.container-grid{
+.container-grid {
   display: flex;
   flex-wrap: wrap;
-  /*max-height: 400px;  Ajusta el valor según lo necesites */
-  /*overflow-y: auto;   Permite desplazamiento vertical */
-  /*overflow-x: hidden;  Oculta el desplazamiento horizontal */
+  justify-content: space-between; /* Asegura espacio entre columnas */
 }
 
 .cuadroIMG {
@@ -533,9 +589,41 @@
 
 /* Cuando el elemento está siendo arrastrado (tamaño original) */
 .cuadroIMG-expanded {
-  width: 100px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
+  margin-left: 90px;
   
+}
+
+/* .circuloRojo{
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  position: absolute;
+  border-radius: 100%;
+  margin-top: 20px;
+  margin-left: 60px;
+}
+
+.circuloRojo-expanded{
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  position: absolute;
+  border-radius: 100%;
+
+} */
+
+
+/*CSS del componete que se utiliza para arastrar imagnes*/
+.draggableDiv {
+  transition: all 0.2s ease;
+}
+
+.draggableDiv.expanded {
+  transform: scale(1.1); /* Expande el tamaño del div mientras el clic está sostenido */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Añade sombra */
+  background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
 }
 
 
@@ -627,7 +715,6 @@
     left: -725px !important;
     top: -205px !important; 
   }
-
 
 
 }

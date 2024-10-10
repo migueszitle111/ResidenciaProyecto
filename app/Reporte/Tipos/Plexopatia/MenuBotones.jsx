@@ -373,6 +373,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     else if (step === 'C1') setStep('B1');
     else if (step === 'B1') setStep('A');
   };
+
   const handleNextStep1 = () => {
     if (step === 'A') setStep('B2');
     else if (step === 'B2') setStep('C2');
@@ -1298,7 +1299,7 @@ const StepG3 = ({ handleNextStep2, handlePrevStep2 }) => {
       </h1>
 
       <div onClick={ handleNextStep2 }>
-        <ConclusionButton value='reinervacion_activa' title='REINERVACIÓN ACTIVA; ' displayText={'ACTIVA'}/>                
+        <ConclusionButton value='reinervacion_activa' title='REINERVACIÓN ACTIVA; ' displayText={'ACTIVA'}/>
         <ConclusionButton value='sin_reinervacion_inactiva' title='REINERVACIÓN INACTIVA; ' displayText={'INACTIVA'}/>
       </div>
       
@@ -1437,8 +1438,13 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
   
 
 
-  const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) => {
+  const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) => {
     const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
+    
+    const [imageSrc, setImageSrc] = useState(null);
+    const [isUploadAllowed, setIsUploadAllowed] = useState(false); // Estado para controlar si la carga está permitida
+
+   
   
     const toggleDivSize = (index) => {
       // Cambiar el estado del tamaño del div al hacer clic
@@ -1448,10 +1454,6 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
       }));
     };
 
-
-    const [imageSrc, setImageSrc] = useState(null);
-    const [isUploadAllowed, setIsUploadAllowed] = useState(false); // Estado para controlar si la carga está permitida
-    
     // Función para habilitar la carga de la imagen (puede estar vinculada a algún evento)
     const allowImageUpload = () => {
       setIsUploadAllowed(true); // Habilita la carga
@@ -1482,9 +1484,8 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
     const resetStep = () => {
       setExpandedDivs({});
       setImageSrc(null);
-    };
-
-
+      setIsUploadAllowed(false);
+  };
 
   return (
     <div>
@@ -1509,21 +1510,6 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
       </div>
 
       <div className="containerImg">
-      {/* <Draggable>
-          <div className='imagen'>
-            <img src="/assets/Simbolos/S_Circulo 1.png" width="175" height="175" alt="Circulo 1"/>
-          </div>
-        </Draggable>
-        <Draggable>
-          <div className='imagen'>
-            <img src="/assets/Simbolos/S_Circulo 2.png" width="175" height="175" alt="Circulo 2"/>
-          </div>
-        </Draggable>
-        <Draggable>
-          <div className='imagen'>
-            <img src="/assets/Simbolos/S_Circulo 3.png" width="175" height="175" alt="Circulo 3"/>
-          </div>
-        </Draggable> */}
 
         </div>
 
@@ -1579,7 +1565,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                       className='lineaImg' // Aplicar estilo a la imagen
                     />
                     <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
-                      <DropArea2 />
+                      <DropArea2 isExpanded={expandedDivs[index]} />
                     </div>
                   </div>
                 </DraggableDiv>
@@ -1598,7 +1584,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                       className='lineaImg2' // Aplicar estilo a la imagen
                     />
                     <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
-                      <DropArea2 />
+                      <DropArea2 isExpanded={expandedDivs[index]} />
                     </div>
                   </div>
                 </DraggableDiv>
@@ -1617,7 +1603,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                       className='lineaImg' // Aplicar estilo a la imagen
                     />
                     <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
-                      <DropArea2 />
+                      <DropArea2 isExpanded={expandedDivs[index]} />
                     </div>
                   </div>
                 </DraggableDiv>
@@ -1637,7 +1623,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                       className='lineaImg2' // Aplicar estilo a la imagen
                     />
                     <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
-                      <DropArea2 />
+                      <DropArea2 isExpanded={expandedDivs[index]} />
                     </div>
                   </div>
                 </DraggableDiv>
@@ -1656,7 +1642,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                         className='lineaImg' // Aplicar estilo a la imagen
                       />
                       <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
-                        <DropArea2 />
+                        <DropArea2 isExpanded={expandedDivs[index]} />
                       </div>
                     </div>
                   </DraggableDiv>
@@ -1676,7 +1662,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                       className='lineaImg2' // Aplicar estilo a la imagen
                     />
                     <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
-                      <DropArea2 />
+                      <DropArea2 isExpanded={expandedDivs[index]} />
                     </div>
                   </div>
                 </DraggableDiv>
@@ -1697,7 +1683,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                       className='lineaImg' // Aplicar estilo a la imagen
                     />
                     <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
-                      <DropArea2 />
+                      <DropArea2 isExpanded={expandedDivs[index]} />
                     </div>
                   </div>
                 </DraggableDiv>
@@ -1716,7 +1702,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                       className='lineaImg2' // Aplicar estilo a la imagen
                     />
                     <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
-                      <DropArea2 />
+                      <DropArea2 isExpanded={expandedDivs[index]} />
                     </div>
                   </div>
                 </DraggableDiv>
@@ -1735,7 +1721,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                       className='lineaImg' // Aplicar estilo a la imagen
                     />
                     <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
-                      <DropArea2 />
+                      <DropArea2 isExpanded={expandedDivs[index]}  />
                     </div>
                   </div>
                 </DraggableDiv>
@@ -1755,7 +1741,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                       className='lineaImg2' // Aplicar estilo a la imagen
                     />
                     <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
-                      <DropArea2 />
+                      <DropArea2 isExpanded={expandedDivs[index]} />
                     </div>
                   </div>
                 </DraggableDiv>

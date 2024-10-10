@@ -96,7 +96,7 @@ const Reporte = () => {
     function formatConclusions(copyConclusions) {
       const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
       const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
-      const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL", "INTENSIDAD LEVE. ", "INTENSIDAD MODERADA. ", "INTENSIDAD SEVERA. "];
+      const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL", "INTENSIDAD LEVE.", "INTENSIDAD MODERADA.", "INTENSIDAD SEVERA.", "REINERVACIÓN"];
       let words = copyConclusions.split(' ');
       let keywordPositions = [];
     
@@ -146,15 +146,29 @@ const Reporte = () => {
       // Verificar las palabras clave "INTENSIDAD LEVE.", "INTENSIDAD MODERADA." y "INTENSIDAD SEVERA."
       for (let i = 0; i < words.length; i++) {
           if (words[i] === "INTENSIDAD" && (words[i + 1] === "LEVE." || words[i + 1] === "MODERADA." || words[i + 1] === "SEVERA.")) {
-              words[i + 1] += "\n\n"; // Agregar un salto e linea después de 'LEVE.', 'MODERADA.' o 'SEVERA.'
+              words[i + 1] = words[i + 1].trim() + "\n\n"; // Eliminar el espacio en blanco y agregar un salto de línea después de 'LEVE.', 'MODERADA.' o 'SEVERA.'
           }
       }
     
-      return words.join(' ');
+      // Verificar la palabra "REINERVACIÓN" y eliminar el espacio en blanco antes de ella
+      for (let i = 0; i < words.length; i++) {
+          if (words[i] === "REINERVACIÓN") {
+              words[i] = words[i].trim(); // Eliminar el espacio en blanco antes de 'REINERVACIÓN'
+          }
+      }
+    
+      // Reconstruir la cadena sin agregar espacios en blanco antes de "REINERVACIÓN"
+      let result = '';
+      for (let i = 0; i < words.length; i++) {
+          if (words[i] === "REINERVACIÓN") {
+              result += words[i]; // Agregar "REINERVACIÓN" sin espacio en blanco
+          } else {
+              result += (i > 0 ? ' ' : '') + words[i]; // Agregar espacio en blanco solo entre otras palabras
+          }
+      }
+    
+      return result;
     }
-    
-    
-  
   
 
   const formattedConclusions = formatConclusions(copyConclusions);

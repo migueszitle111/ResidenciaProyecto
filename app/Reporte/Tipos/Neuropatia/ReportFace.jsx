@@ -1,6 +1,8 @@
 
+import { SegmentariaButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Segmentaria';
 import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 import {checkDivs} from '@/app/Reporte/Tipos/Neuropatia/SelecNervios'
+import {checkDivsSegmentar} from '@/app/Reporte/Tipos/Neuropatia/SelecSegmentariaNerv'
 import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -347,6 +349,13 @@ const Reporte = () => {
                 alt: 'Modelo',
               }
             },
+            {
+              expectedValue: 'MEDIANORojo',
+              image: {
+                src: 'NeuropatiaImg/Nervio Rojo/NO_1_Mediano.png',
+                alt: 'Modelo',
+              }
+            },
           ]}
         />
         <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
@@ -354,6 +363,7 @@ const Reporte = () => {
 
               </div>
               <div>{checkDivs(copyConclusions)}</div>
+              <div>{checkDivsSegmentar(copyConclusions)}</div>
             </div>
           
           </div>

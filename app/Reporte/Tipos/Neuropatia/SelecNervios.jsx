@@ -5,7 +5,7 @@ import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botto
 
 export function checkDivs(copyConclusions) {
 
-  if (copyConclusions.includes('MEDIANO IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('MEDIANO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('MEDIANO IZQUIERDO, GENERALIZADA')) {
+  if (copyConclusions.includes('MEDIANO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.2%', left: '57.2%', borderRadius: '50%' }}
@@ -147,7 +147,7 @@ export function checkDivs(copyConclusions) {
       </>
     );
   }
-  if (copyConclusions.includes('MEDIANO DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('MEDIANO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('MEDIANO DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('MEDIANO DERECHO, FOCALIZADA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.2%', left: '41.4%', borderRadius: '50%' }}
@@ -286,7 +286,7 @@ export function checkDivs(copyConclusions) {
     );
 
   }
-  if (copyConclusions.includes('ACCESORIO IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('ACCESORIO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('ACCESORIO IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('ACCESORIO IZQUIERDO, FOCALIZADA A NIVEL DE') ) {
     return (
       <>
         <div style={{ position: 'absolute', top: '14.5%', left: '51.4%', borderRadius: 100, }}
@@ -297,7 +297,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('ACCESORIO DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('ACCESORIO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('ACCESORIO DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('ACCESORIO DERECHO, FOCALIZADA A NIVEL DE') ) {
     return (
       <>
         <div style={{ position: 'absolute', top: '14.5%', left: '47.4%', borderRadius: 100, }}
@@ -308,7 +308,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '17.1%', left: '55.3%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButton value='car' title='APROXIMAL A SU EMERGENCIA,' displayText=' ' /></div>
@@ -372,7 +372,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('MUSCULOCUTÁNEO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('MUSCULOCUTÁNEO DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('MUSCULOCUTÁNEO DERECHO, FOCALIZADA A NIVEL DE') ) {
     return (<>
       <div style={{ position: 'absolute', top: '17.1%', left: '43.3%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButton value='car' title='APROXIMAL A SU EMERGENCIA,' displayText=' ' /></div>
@@ -436,7 +436,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('RADIAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('RADIAL DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('RADIAL DERECHO, FOCALIZADA A NIVEL DE')  ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '18.3%', left: '38.5%', borderRadius: '50%', }}
@@ -521,7 +521,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('RADIAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('RADIAL IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('RADIAL IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '18.3%', left: '59.9%', borderRadius: '50%', }}
@@ -602,7 +602,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '15.3%', left: '52.7%', borderRadius: 100, }}
@@ -629,7 +629,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('SUPRAESCAPULAR DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('SUPRAESCAPULAR DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('SUPRAESCAPULAR DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '15.3%', left: '45.7%', borderRadius: 100, }}
         className={`dont-print-Nervius`}><NerviusButton value='car' title='INMEDIATO A SU EMERGENCIA, RAMA SUPRAESPINOSO,' displayText=' ' /></div>
@@ -656,7 +656,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ULNAR DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('ULNAR DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('ULNAR DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('ULNAR DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '19.4%', left: '39.9%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='AXILAR,' displayText=' ' /></div>
@@ -749,7 +749,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ULNAR IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('ULNAR IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('ULNAR IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('ULNAR IZQUIERDO, FOCALIZADA A NIVEL DE') ) {
     return (<>
       <div style={{ position: 'absolute', top: '19.4%', left: '58.5%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='AXILAR,' displayText=' ' /></div>
@@ -841,7 +841,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('FRÉNICO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FRÉNICO IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('FRÉNICO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '14.8%', left: '50.6%', }}
@@ -871,7 +871,7 @@ export function checkDivs(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DIAFRAGMA,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('FRÉNICO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FRÉNICO DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('FRÉNICO DERECHO, FOCALIZADA A NIVEL DE') ) {
     return (<>
       <div style={{ position: 'absolute', top: '14.8%', left: '48.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='PLEXO CERVICAL,' displayText=' ' /> </div>
@@ -900,7 +900,7 @@ export function checkDivs(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DIAFRAGMA,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('TORACODORSAL IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('TORACODORSAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TORACODORSAL IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('TORACODORSAL IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '17.9%', left: '54.8%', }}
@@ -922,7 +922,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORACODORSAL DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('TORACODORSAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TORACODORSAL DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('TORACODORSAL DERECHO, FOCALIZADA A NIVEL DE') ) {
     return (<>
       <div style={{ position: 'absolute', top: '17.9%', left: '43.8%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='FOSA SUPRACLAVICULAR,' displayText=' ' /> </div>
@@ -943,7 +943,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('CIATICO DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('CIATICO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('CIATICO DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('CIATICO DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '35.3%', left: '46.8%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='ESCOTADURA MAYOR DE LA PELVIS,' displayText=' ' /> </div>
@@ -1047,7 +1047,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('CIATICO IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('CIATICO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('CIATICO IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('CIATICO IZQUIERDO, FOCALIZADA A NIVEL DE') ) {
     return (<>
       <div style={{ position: 'absolute', top: '35.3%', left: '52.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='ESCOTADURA MAYOR DE LA PELVIS,' displayText=' ' /> </div>
@@ -1149,7 +1149,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FEMORAL DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('FEMORAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FEMORAL DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('FEMORAL DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '33.0%', left: '44.1%', }}
@@ -1280,7 +1280,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FEMORAL IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('FEMORAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FEMORAL IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('FEMORAL IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '33.0%', left: '54.5%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='PROXIMAL A LIGAMENTO INGUINAL,' displayText=' ' /> </div>
@@ -1408,7 +1408,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('OBTURADOR IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('OBTURADOR IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('OBTURADOR IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('OBTURADOR IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '31.6%', left: '55.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='PROXIMAL A CANAL OBTURADOR,' displayText=' ' /> </div>
@@ -1447,7 +1447,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('OBTURADOR DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('OBTURADOR DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('OBTURADOR DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('OBTURADOR DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '31.6%', left: '43.5%', }}
@@ -1487,7 +1487,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PERONEO IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('PERONEO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('PERONEO IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('PERONEO IZQUIERDO, FOCALIZADA A NIVEL DE') ) {
     return (<>
       <div
         style={{
@@ -1589,7 +1589,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('PERONEO DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('PERONEO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('PERONEO DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('PERONEO DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div
         style={{
@@ -1691,7 +1691,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('TIBIAL DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('TIBIAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TIBIAL DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('TIBIAL DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div
         style={{
@@ -1822,7 +1822,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('TIBIAL IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('TIBIAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TIBIAL IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('TIBIAL IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div
         style={{
@@ -1953,7 +1953,7 @@ export function checkDivs(copyConclusions) {
       </div>
     </>);
   }
-  if (copyConclusions.includes('PUDENDO IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('PUDENDO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('PUDENDO IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('PUDENDO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '36.1%', left: '48.4%', }}
@@ -1963,7 +1963,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('PUDENDO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('PUDENDO DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('PUDENDO DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '36.1%', left: '49.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='FORAMEN SACROL,' displayText=' ' /> </div>
@@ -1972,7 +1972,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL IZQUIERDO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('FACIAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FACIAL IZQUIERDO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('FACIAL IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div
         style={{
@@ -2013,7 +2013,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('FACIAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FACIAL DERECHO, GENERALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('FACIAL DERECHO, FOCALIZADA A NIVEL DE') ) {
     return (<>
       <div
         style={{
@@ -2054,6 +2054,12 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
+
+
+
+
+
+
   else {
     
 

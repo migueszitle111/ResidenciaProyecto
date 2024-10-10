@@ -4,8 +4,10 @@ import { Accordion } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';
 
+
+
 // Numero de pasos 
-const stepsArray = ['A', 'B', 'B1', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+const stepsArray = ['A', 'B', 'B1', 'C', 'D', 'E', 'F', 'H', 'I'];
 
 // Metodos de movimiento entre menus
 const SimpleMultiStepForm = ({ showStepNumber }) => {
@@ -24,22 +26,24 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     if (step === 'A') setStep('B');
     else if (step === 'B') setStep('B1');
     else if (step === 'B1') setStep('C')
-    else if (step === 'C') setStep('D');
+    else if (step === 'C') setStep('CD');
+    else if (step === 'CD') setStep('D');
     else if (step === 'D') setStep('E');
     else if (step === 'E') setStep('F');
-    else if (step === 'F') setStep('G');
-    else if (step === 'G') setStep('H');
+    else if (step === 'F') setStep('H');
+    //else if (step === 'G') setStep('H');
     else if (step === 'H') setStep('I');
   };
 
   // Paso anterior, se ponen los pasos de abajo hacia arriba
   const handlePrevStep = () => {
     if (step === 'I') setStep('H');
-    else if (step === 'H') setStep('G');
-    else if (step === 'G') setStep('F');
+    else if (step === 'H') setStep('F');
+    //else if (step === 'G') setStep('F');
     else if (step === 'F') setStep('E');
     else if (step === 'E') setStep('D');
-    else if (step === 'D') setStep('C');
+    else if (step === 'D') setStep('CD');
+    else if (step === 'CD') setStep('C');
     else if (step === 'C') setStep('B1');
     else if (step === 'B1') setStep('B');
     else if (step === 'B') setStep('A');
@@ -96,6 +100,13 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         />
       ) : null}
 
+      {step === 'CD' ? (
+        <StepCD
+          handlePrevStep={handlePrevStep}
+          handleNextStep={handleNextStep}
+        />
+      ) : null}
+
       {step === 'D' ? (
         <StepD
           handlePrevStep={handlePrevStep}
@@ -112,13 +123,6 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
 
       {step === 'F' ? (
         <StepF
-          handlePrevStep={handlePrevStep}
-          handleNextStep={handleNextStep}
-        />
-      ) : null}
-
-      {step === 'G' ? (
-        <StepG
           handlePrevStep={handlePrevStep}
           handleNextStep={handleNextStep}
         />
@@ -144,7 +148,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     </div>
   );
 };
-
+/*     {step === 'G' ? ( <StepG handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} /> ) : null}  */ 
 ///////////////// Menu de cada paso /////////////////
 
 const StepA = ({ handleNextStep }) => {
@@ -275,7 +279,30 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       <div onClick={handleNextStep}>
         <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL DE ' displayText={'FOCALIZADA'}/>
         <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL DE ' displayText={'SEGMENTARIA'}/>
-        <ConclusionButton value='generalizada' title=' GENERALIZADA,' displayText={'GENERALIZADA'}/>
+        <ConclusionButton value='generalizada' title=' GENERALIZADA, ' displayText={'GENERALIZADA'}/>
+      </div>
+       
+    </div>
+  );
+};
+
+const StepCD = ({ handleNextStep, handlePrevStep }) => {
+  return (
+    <div>
+      <div className='button-bar'>
+        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
+        </button>
+      </div>
+      <h1 className=' text-xl font-bold text-white'>
+         SELECCIONA UN NERVIO EN EL CUERPO, PARA CONTINUAR
+      </h1>
+      
+      <div onClick={handleNextStep}>
+        <ConclusionButton value='seguir'  displayText={'LISTO'}/>
       </div>
        
     </div>
@@ -312,9 +339,9 @@ const StepD = ({ handleNextStep, handlePrevStep }) => {
       
       <Accordion title='DESMIELINIZANTE '>
           <div onClick={ handleNextStep }>
-            <ConclusionButton value = ' TIPO DESMILINIZANTE POR RETARDO EN LA CONDUCCIÓN ' title = ' POR RETARDO EN LA CONDUCCIÓN ' />
-            <ConclusionButton value = ' TIPO DESMILINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' title = ' POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' />
-            <ConclusionButton value = ' TIPO DESMILINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title = ' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' />
+            <ConclusionButton value = ' RETARDO EN LA CONDUCCIÓN ' title = ' POR RETARDO EN LA CONDUCCIÓN ' />
+            <ConclusionButton value = ' BLOQUEO PARCIAL EN LA CONDUCCIÓN' title = ' POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' />
+            <ConclusionButton value = ' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title = ' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' />
           </div>
       </Accordion>
       
@@ -337,9 +364,9 @@ const StepE = ({ handleNextStep, handlePrevStep }) => {
         FIBRAS
       </h1>
       <div onClick={handleNextStep}>
-        <ConclusionButton value = ' DE FIBRAS MOTORAS ' title = ' DE FIBRAS MOTORAS, ' displayText={' DE FIBRAS MOTORAS '}/>
-        <ConclusionButton value = ' DE FIBRAS SENSITIVAS ' title = ' DE FIBRAS SENSITIVAS, ' displayText={' DE FIBRAS SENSITIVAS '}/>
-        <ConclusionButton value = ' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA)' title = ' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA), 'displayText={' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA) '} />
+        <ConclusionButton value = ' MOTORAS ' title = ' DE FIBRAS MOTORAS, ' displayText={' DE FIBRAS MOTORAS '}/>
+        <ConclusionButton value = ' SENSITIVAS ' title = ' DE FIBRAS SENSITIVAS, ' displayText={' DE FIBRAS SENSITIVAS '}/>
+        <ConclusionButton value = ' MIXTAS (SENSITIVO-MOTOTA)' title = ' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA), 'displayText={' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA) '} />
       </div>
       
     </div>
@@ -362,9 +389,9 @@ const StepF = ({ handlePrevStep, handleNextStep }) => {
       </h1>
 
       <div onClick={handleNextStep}>
-      <ConclusionButton value = ' INTENSIDAD LEVE (NEUROAPRAXIA)' title = 'INTENSIDAD LEVE ' displayText={'INTENSIDAD LEVE '}/>
-      <ConclusionButton value = ' INTENSIDAD MODERADA (AXONOTMESIS INCOMPLETA)' title = 'INTENSIDAD MODERADA 'displayText={'INTENSIDAD MODERADA '} />
-      <ConclusionButton value = ' INTENSIDAD SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title = 'INTENSIDAD SEVERA 'displayText={'INTENSIDAD SEVERA '} />
+      <ConclusionButton value = ' LEVE (NEUROAPRAXIA)' title = 'INTENSIDAD LEVE ' displayText={'INTENSIDAD LEVE '}/>
+      <ConclusionButton value = ' MODERADA (AXONOTMESIS INCOMPLETA)' title = 'INTENSIDAD MODERADA 'displayText={'INTENSIDAD MODERADA '} />
+      <ConclusionButton value = ' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title = 'INTENSIDAD SEVERA 'displayText={'INTENSIDAD SEVERA '} />
       </div>
 
       
@@ -372,7 +399,7 @@ const StepF = ({ handlePrevStep, handleNextStep }) => {
   );
 };
 
-const StepG = ({ handleNextStep, handlePrevStep }) => {
+/* const StepG = ({ handleNextStep, handlePrevStep }) => {
   return (
     <div>
       <div className='button-bar'>
@@ -395,7 +422,7 @@ const StepG = ({ handleNextStep, handlePrevStep }) => {
       
     </div>
   );
-};
+};  */
 
 const StepH = ({handlePrevStep, handleNextStep }) => {
   return (

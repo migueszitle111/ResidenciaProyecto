@@ -215,6 +215,7 @@ const Reporte = () => {
                 src: 'NeuropatiaImg/NO_1_Mediano.png',
                 alt: 'Modelo',
               }
+              
             },
             {
               expectedValue: 'ACCESORIO',

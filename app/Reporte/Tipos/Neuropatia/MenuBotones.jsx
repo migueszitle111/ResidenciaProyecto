@@ -4,8 +4,17 @@ import { Accordion } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';
 
-
-
+/*
+const handleConclusionClick = (value) => {
+  // Verificar si copyConclusions contiene el texto específico
+  if (copyConclusions.includes('MEDIANO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
+    // Buscar la regla que coincida con el expectedValue
+    const rule = rules.find((rule) => rule.expectedValue === 'MEDIANO');
+    if (rule) {
+      setImage({ src: rule.image.src, alt: rule.image.alt });
+    }
+  }
+};*/
 // Numero de pasos 
 const stepsArray = ['A', 'B', 'B1', 'C', 'D', 'E', 'F', 'H', 'I'];
 
@@ -279,7 +288,8 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       <div onClick={handleNextStep}>
         <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL DE ' displayText={'FOCALIZADA'}/>
         <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL DE ' displayText={'SEGMENTARIA'}/>
-        <ConclusionButton value='generalizada' title=' GENERALIZADA, ' displayText={'GENERALIZADA'}/>
+        <ConclusionButton value='generalizada' title=' GENERALIZADA, ' displayText={'GENERALIZADA'} />
+
       </div>
        
     </div>

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 
-export const DraggableDiv = ({ children }) => {
+export const DraggableDiv = ({ children, isDraggable }) => {
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDragStart = (e) => {
+    if (!isDraggable) return; // Si no se permite arrastrar, no hacer nada
+
     e.dataTransfer.setData('text/html', e.target.outerHTML);
     e.dataTransfer.effectAllowed = 'move';
 
@@ -18,16 +20,17 @@ export const DraggableDiv = ({ children }) => {
   };
 
   const handleDragEnd = () => {
+    if (!isDraggable) return; // Si no se permite arrastrar, no hacer nada
     setIsDragging(false); // Vuelve al estado original al terminar el arrastre
   };
 
   return (
     <div
       className={`draggableDiv ${isDragging ? 'dragging' : ''}`}
-      draggable="true"
+      draggable={isDraggable} // Solo permitir arrastrar si isDraggable es true
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      style={{ cursor: 'move' }}
+      style={{ cursor: isDraggable ? 'move' : 'default' }} // Cambiar el cursor si es arrastrable
     >
       {children}
     </div>

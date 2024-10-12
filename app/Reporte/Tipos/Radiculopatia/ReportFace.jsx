@@ -68,7 +68,6 @@ const Reporte = () => {
       A83: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz83' },
       A84: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz84' },
 
-
       //Torácica
       A89: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz89' },
       A90: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz90' },
@@ -238,7 +237,6 @@ const Reporte = () => {
       A174: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz174' },
       A175: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz175' },
       A176: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz176' },
-
     }
   };
 
@@ -254,16 +252,77 @@ const Reporte = () => {
   const [history, setHistory] = useState([]); 
   const [future, setFuture] = useState([]); 
   
-  // Actualizar las conclusiones
   useEffect(() => {
-    setCopyConclusions(conclusions.map(cl => cl.title).join(''))
-  }, [conclusions]);
-
+    // Construir la cadena de texto basada en las conclusiones
+    const conclusionText = conclusions.map(cl => cl.title).join(' ');
+  
+    // Función para verificar si hay cruces marcadas en un grupo específico
+    const checkGroup = (leftKeys, rightKeys) => {
+      let isLeftMarked = false;
+      let isRightMarked = false;
+  
+      leftKeys.forEach(key => {
+        if (checkedStateLeft[key]) {
+          isLeftMarked = true;
+        }
+      });
+  
+      rightKeys.forEach(key => {
+        if (checkedStateRight[key]) {
+          isRightMarked = true;
+        }
+      });
+  
+      if (isLeftMarked && isRightMarked) {
+        return 'BILATERAL';
+      } else if (isLeftMarked) {
+        return 'IZQUIERDO';
+      } else if (isRightMarked) {
+        return 'DERECHO';
+      } else {
+        return null;
+      }
+    };
+  
+    // Definir los grupos de cruces
+    const groups = [
+      { name: 'C4', left: ['A1', 'A2', 'A3', 'A4'], right: ['A5', 'A6', 'A7', 'A8'] },
+      { name: 'C5', left: ['A9', 'A10', 'A11', 'A12'], right: ['A13', 'A14', 'A15', 'A16'] },
+      { name: 'C6', left: ['A17', 'A18', 'A19', 'A20'], right: ['A21', 'A22', 'A23', 'A24'] },
+      { name: 'C7', left: ['A25', 'A26', 'A27', 'A28'], right: ['A29', 'A30', 'A31', 'A32'] },
+      { name: 'C8', left: ['A33', 'A34', 'A35', 'A36'], right: ['A37', 'A38', 'A39', 'A40'] },
+      { name: 'T1', left: ['A41', 'A42', 'A43', 'A44'], right: ['A45', 'A46', 'A47', 'A48'] },
+      { name: 'L2', left: ['A49', 'A50', 'A51', 'A52'], right: ['A53', 'A54', 'A55', 'A56'] },
+      { name: 'L3', left: ['A57', 'A58', 'A59', 'A60'], right: ['A61', 'A62', 'A63', 'A64'] },
+      { name: 'L4', left: ['A65', 'A66', 'A67', 'A68'], right: ['A69', 'A70', 'A71', 'A72'] },
+      { name: 'L5', left: ['A73', 'A74', 'A75', 'A76'], right: ['A77', 'A78', 'A79', 'A80'] },
+      { name: 'S1', left: ['A81', 'A82', 'A83', 'A84'], right: ['A85', 'A86', 'A87', 'A88'] },
+      { name: 'S2', left: ['A89', 'A90', 'A91', 'A92'], right: ['A93', 'A94', 'A95', 'A96'] },
+    ];
+  
+    // Construir texto adicional basado en los grupos
+    let additionalText = groups
+      .map(group => {
+        const status = checkGroup(group.left, group.right);
+        return status ? `${group.name} ${status}` : null;
+      })
+      .filter(text => text !== null)
+      .join(', ');
+  
+    // Verificar si hay texto adicional y conclusiones
+    const firstTwoWords = conclusionText.split(' ').slice(0, 3).join(' ');
+    const remainingText = conclusionText.split(' ').slice(4).join(' ');
+    const combinedText = additionalText 
+      ? `${firstTwoWords}, ${additionalText}, ${remainingText}`
+      : conclusionText;
+  
+    // Establecer el texto completo en el estado
+    setCopyConclusions(combinedText);
+  }, [conclusions, checkedStateLeft, checkedStateRight]);
   const handleTextareaChange = (event) => {
     setCopyConclusions(event.target.value)
+    
   }
-
-  
 
   // Funciones para el historial de imágenes
   const handleImageChange = useCallback((event) => {
@@ -302,7 +361,7 @@ const Reporte = () => {
     });
   }, []);
 
-  return (
+  return  (
     <div>
       <div className="wrapper">
         <div className='vertical-orientation dont-print  '>
@@ -654,9 +713,6 @@ const Reporte = () => {
                         },
                       ]}
                     />
-              
-            
-                    
                   </td>
                 </tr>
               </table>
@@ -665,6 +721,7 @@ const Reporte = () => {
                   value={copyConclusions}
                   onChange={handleTextareaChange}
                 />
+
               {/* Mostrar imágenes dinámicas según el estado de los checkboxes en 'checkedStateLeft' */}
           {Object.keys(checkedStateLeft).map((key) => (
             checkedStateLeft[key] && (

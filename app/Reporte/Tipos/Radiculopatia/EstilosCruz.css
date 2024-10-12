@@ -71,7 +71,7 @@ input[type="checkbox"] {
 .cruz31 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; right:39.7%; }
 .cruz32 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 10.2%; right:39%; }
 
-/* Cruz 33 a 36 izquierdo*/
+/* Cruz 33 a 36 izquierdo */ 
 .cruz33 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; left: 41.3%;   }
 .cruz34 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; left: 40.5%; }
 .cruz35 { z-index: 3; position: absolute; width: 100px; height: 25px; top: 13.2%; left: 39.7%; }

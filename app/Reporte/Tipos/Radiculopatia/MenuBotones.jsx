@@ -197,19 +197,19 @@ const StepA = ({ handleNextStep,handleNextStep1, handleNextStep2} ) => (
     <br></br>
     <h1 className='text-xl font-bold text-white'>EVOLUCIÓN</h1>
     <div onClick={ handleNextStep }>
-          <ConclusionButton value='radiculopatia_aguda' title='RADICULOPATIA AGUDA' displayText=''/>
+          <ConclusionButton value='radiculopatia_aguda' title='RADICULOPATIA AGUDA ' displayText='RADICULOPATIA AGUDA'/>
         </div>
         <div onClick={ handleNextStep2 }>
-          <ConclusionButton value='radiculopatia_subaguda' title='RADICULOPATIA SUBAGUDA' displayText=''/>
+          <ConclusionButton value='radiculopatia_subaguda' title='RADICULOPATIA SUBAGUDA' displayText='RADICULOPATIA SUBAGUDA'/>
         </div>
         <div onClick={ handleNextStep1 }>
-          <ConclusionButton value='radiculopatia_cronica' title='RADICULOPATIA CRONICA' displayText=''/>
+          <ConclusionButton value='radiculopatia_cronica' title='RADICULOPATIA CRONICA' displayText='ADICULOPATIA CRONICA'/>
         </div>
          <div onClick={ handleNextStep2 }> 
-          <ConclusionButton value='radiculopatia_sensitiva' title='RADICULOPATIA SENSITIVA' displayText=''/>
+          <ConclusionButton value='radiculopatia_sensitiva' title='RADICULOPATIA SENSITIVA' displayText='RADICULOPATIA SENSITIVA'/>
          </div>  
         <div onClick={ handleNextStep }>
-          <ConclusionButton value='radiculopatia_intermitente' title='RADICULOPATIA INTERMITENTE' displayText=''/>
+          <ConclusionButton value='radiculopatia_intermitente' title='RADICULOPATIA INTERMITENTE' displayText='RADICULOPATIA INTERMITENTE'/>
         </div>
   </div>
 );
@@ -260,8 +260,10 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
             <tr>
               <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
               <td>
-                <input type='checkbox' name="radioC4Left" value='1' id='A1' checked={checkedStateLeft.A1} onChange={handleCheckboxChangeLeft}/>
+
+                <input type='checkbox' name="radioC4Left" value='1' id='A1'  checked={checkedStateLeft.A1} onChange={handleCheckboxChangeLeft}/>
                 {checkedStateLeft.A1}
+                
               </td>
               <td>
                 <input type='checkbox' name="radioC4Left" value='2' id='A2' checked={checkedStateLeft.A2} onChange={handleCheckboxChangeLeft} />
@@ -1152,11 +1154,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
         <ConclusionButton value='cervical' title='CERVICAL' displayText=''/>   
         <ConclusionButton value='torasica' title='TORACICA' displayText=''/> 
         <ConclusionButton value='lumbrosaca' title='LUMBOSACRA' displayText=''/>            
-      </Accordion>
-
-
-
-      
+      </Accordion>      
     </div>
   );
 };

@@ -276,9 +276,9 @@ const Reporte = () => {
       if (isLeftMarked && isRightMarked) {
         return 'BILATERAL';
       } else if (isLeftMarked) {
-        return 'IZQUIERDO';
+        return 'IZQUIERDA';
       } else if (isRightMarked) {
-        return 'DERECHO';
+        return 'DERECHA';
       } else {
         return null;
       }
@@ -313,7 +313,7 @@ const Reporte = () => {
     const firstTwoWords = conclusionText.split(' ').slice(0, 3).join(' ');
     const remainingText = conclusionText.split(' ').slice(4).join(' ');
     const combinedText = additionalText 
-      ? `${firstTwoWords}, ${additionalText}, ${remainingText}`
+      ? `${firstTwoWords} ${additionalText}, ${remainingText}`
       : conclusionText;
   
     // Establecer el texto completo en el estado

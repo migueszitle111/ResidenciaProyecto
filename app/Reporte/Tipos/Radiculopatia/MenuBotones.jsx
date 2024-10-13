@@ -182,7 +182,7 @@ const SimpleMultiStepForm = () => {
         {step === 'D1' ? (<StepD1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'E1' ? (<StepE1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'F1' ? (<StepF1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
-        {step === 'G1' ? (<StepG1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
+        {step === 'G1' ? (<StepG1 handlePrevStep1={handlePrevStep} handleNextStep1={handleNextStep} />) : null}
         {step === 'B2' ? (<StepB2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
         {step === 'C2' ? (<StepC2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
         {step === 'E2' ? (<StepE2 handlePrevStep2={handlePrevStep2}  handleNextStep2={handleNextStep2} />) : null}
@@ -1207,6 +1207,7 @@ const StepD = ({  handlePrevStep, handleNextStep }) => {
       <div onClick={handleNextStep}>
       <ConclusionButton value='p_completa' title='Y PRONOSTICO DE RECUPERACION COMPLETA' displayText=''/>
       <ConclusionButton value='p_parcial' title='Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL' displayText=''/>
+      
       <ConclusionButton value='p_no_funcional' title='Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL' displayText=''/>
       <ConclusionButton value='nula' title='NULA (EN FASE DE SECUELA DEFINITIVA)' displayText=''/>
       </div>
@@ -1883,6 +1884,7 @@ const StepG1 = ({  handlePrevStep1,handleNextStep1  }) => {
       <div onClick={ handleNextStep1 }>
       <ConclusionButton value='p_completa' title='Y PRONOSTICO DE RECUPERACION COMPLETA' displayText=''/>
       <ConclusionButton value='p_parcial' title='Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL' displayText=''/>
+      
       <ConclusionButton value='p_no_funcional' title='Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL' displayText=''/>
       <ConclusionButton value='nula' title='NULA (EN FASE DE SECUELA DEFINITIVA)' displayText=''/>
       </div>
@@ -2723,8 +2725,9 @@ const StepE2 = ({  handlePrevStep2, handleNextStep2}) => {
 
       <div onClick={handleNextStep2}
       >
-      <ConclusionButton value='p_completa' title='Y PRONOSTICO DE RECUPERACION COMPLETA' displayText=''/>
+     <ConclusionButton value='p_completa' title='Y PRONOSTICO DE RECUPERACION COMPLETA' displayText=''/>
       <ConclusionButton value='p_parcial' title='Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL' displayText=''/>
+      
       <ConclusionButton value='p_no_funcional' title='Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL' displayText=''/>
       <ConclusionButton value='nula' title='NULA (EN FASE DE SECUELA DEFINITIVA)' displayText=''/>
       </div>

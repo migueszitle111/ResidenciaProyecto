@@ -1,5 +1,5 @@
 import { ReportContext } from '@/src/context';
-import { useContext } from 'react';
+import { useContext} from 'react';
 
 // Se recibe el titulo y el valor de la conclusión
 export function ConclusionButton ({title, value, displayText}) {
@@ -7,7 +7,6 @@ export function ConclusionButton ({title, value, displayText}) {
   const { updateConclusions, conclusions } = useContext(ReportContext)
   // Se crea una clase condicional para cambiar el color del botón
   const classnames = 'cursor-pointer p-2 text-white transition-colors transition-300 ease-in hover:bg-[#8F3400] ' + (conclusions.find(cl => cl.value === value) ? 'bg-[#c44900]' : '')
-
   // Función para actualizar las conclusiones
   function handleClick () {
     updateConclusions({ title, value})

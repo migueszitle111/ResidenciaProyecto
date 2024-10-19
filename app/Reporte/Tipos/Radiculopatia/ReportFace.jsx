@@ -9,7 +9,7 @@ import './Style.css';
 
 const Reporte = () => {
   const { checkedStateLeft, checkedStateRight } = useContext(CheckboxContext);
-
+  
   // Mapa de checkbox y rutas de imágenes
   const imageMap = {
     left: {
@@ -300,30 +300,55 @@ const Reporte = () => {
       { name: 'S2', left: ['A89', 'A90', 'A91', 'A92'], right: ['A93', 'A94', 'A95', 'A96'] },
     ];
   
-    // Construir texto adicional basado en los grupos
-    let additionalText = groups
-      .map(group => {
-        const status = checkGroup(group.left, group.right);
-        return status ? `${group.name} ${status}` : null;
-      })
-      .filter(text => text !== null)
+    // Agrupar los grupos por el estado (IZQUIERDA, DERECHA o BILATERAL)
+    const groupedStatus = groups.reduce((acc, group) => {
+      const status = checkGroup(group.left, group.right);
+      if (status) {
+        if (!acc[status]) {
+          acc[status] = [];
+        }
+        acc[status].push(group.name);
+      }
+      return acc;
+    }, {});
+  
+    // Traducción de los estados al español en plural si hay más de un grupo
+    const translateStatus = (status, count) => {
+      if (count > 1) {
+        switch (status) {
+          case 'BILATERAL':
+            return 'BILATERALES';
+          case 'IZQUIERDA':
+            return 'IZQUIERDAS';
+          case 'DERECHA':
+            return 'DERECHAS';
+          default:
+            return status;
+        }
+      }
+      return status;
+    };
+  
+    // Construir el texto basado en los grupos agrupados
+    const additionalText = Object.entries(groupedStatus)
+      .map(([status, groupNames]) => `${groupNames.join(', ')} ${translateStatus(status, groupNames.length)}`)
       .join(', ');
   
     // Verificar si hay texto adicional y conclusiones
     const firstTwoWords = conclusionText.split(' ').slice(0, 3).join(' ');
     const remainingText = conclusionText.split(' ').slice(4).join(' ');
-    const combinedText = additionalText 
+    const combinedText = additionalText
       ? `${firstTwoWords} ${additionalText}, ${remainingText}`
       : conclusionText;
   
     // Establecer el texto completo en el estado
     setCopyConclusions(combinedText);
   }, [conclusions, checkedStateLeft, checkedStateRight]);
+   
+  
   const handleTextareaChange = (event) => {
     setCopyConclusions(event.target.value)
-    
   }
-
   // Funciones para el historial de imágenes
   const handleImageChange = useCallback((event) => {
     if (event.target.files && event.target.files[0]) {
@@ -409,7 +434,9 @@ const Reporte = () => {
                         width: isPageVisible ? '600' : '800',
                         height: isPageVisible ? '600' : '800'
                       }}
-                      rules={[
+                    
+
+                      rules={[ 
                         {
                           expectedValue: 'c5_i', 
                           image: {
@@ -717,34 +744,36 @@ const Reporte = () => {
                 </tr>
               </table>
               <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
-                <textarea
-                  value={copyConclusions}
-                  onChange={handleTextareaChange}
-                />
+  <textarea
+    value={copyConclusions}
+    onChange={handleTextareaChange}
+  />
 
-              {/* Mostrar imágenes dinámicas según el estado de los checkboxes en 'checkedStateLeft' */}
-          {Object.keys(checkedStateLeft).map((key) => (
-            checkedStateLeft[key] && (
-              <img 
-                key={key}
-                src={imageMap.left[key]?.src} 
-                className={imageMap.left[key]?.className} 
-                alt={`Cruz ${key}`} 
-              />
-            )
-          ))}
+  {/* Mostrar imágenes dinámicas según el estado de los checkboxes en 'checkedStateLeft' */}
+  {Object.keys(checkedStateLeft).map((key) => (
+    checkedStateLeft[key] && (
+      <img 
+        key={key}
+        src={imageMap.left[key]?.src} 
+        className={imageMap.left[key]?.className} 
+        alt={`Cruz ${key}`} 
+      />
+    )
+  ))}
 
-          {/* Mostrar imágenes dinámicas según el estado de los checkboxes en 'checkedStateRight' */}
-          {Object.keys(checkedStateRight).map((key) => (
-            checkedStateRight[key] && (
-              <img 
-                key={key}
-                src={imageMap.right[key]?.src} 
-                className={imageMap.right[key]?.className} 
-                alt={`Cruz ${key}`} 
-              />
-            )
-          ))}
+  {/* Mostrar imágenes dinámicas según el estado de los checkboxes en 'checkedStateRight' */}
+  {Object.keys(checkedStateRight).map((key) => (
+    checkedStateRight[key] && (
+      <img 
+        key={key}
+        src={imageMap.right[key]?.src} 
+        className={imageMap.right[key]?.className} 
+        alt={`Cruz ${key}`} 
+      />
+    )
+  ))}
+
+
               </div>
             </div>
           </div>

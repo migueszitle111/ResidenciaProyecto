@@ -1929,11 +1929,15 @@ const StepE = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
   );
 };
 
-//MenuBotones.jsx
 const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
   const { checkedStateLeft, checkedStateRight, setcheckedStateLeft, setcheckedStateRight, resetCheckboxes} = useContext(CheckboxContext);
   const { updateConclusions } = useContext(ReportContext);
+  const [activeButton, setActiveButton] = useState(null); // Estado para el botón activo
+ 
+
   const [buttonPressed, setButtonPressed] = useState([]);
+
+
 
   const handleCheckboxChangeLeft = (event) => {
     const { id, checked } = event.target;
@@ -1956,60 +1960,50 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
     handleButtonPress(id, checked);
   };
 
-  const handleButtonPress = (checkboxId) => {
+  const handleButtonPress = (checkboxId, isChecked) => {
     const conclusionMapping = {
-      'c5_i': ['A9', 'A10', 'A11', 'A12'],
-      'c5_d': ['A13', 'A14', 'A15', 'A16'],
-      'c6_i': ['A17', 'A18', 'A19', 'A20'],
-      'c6_d': ['A21', 'A22', 'A23', 'A24'],
-      'c7_i': ['A25', 'A26', 'A27', 'A28'],
-      'c7_d': ['A29', 'A30', 'A31', 'A32'],
-      'c8_i': ['A33', 'A34', 'A35', 'A36'],
-      'c8_d': ['A37', 'A38', 'A39', 'A40'],
-      't1_i': ['A41', 'A42', 'A43', 'A44'],
-      't1_d': ['A45', 'A46', 'A47', 'A48'],
-      'l2_i': ['A49', 'A50', 'A51', 'A52'],
-      'l2_d': ['A53', 'A54', 'A55', 'A56'],
-      'l3_i': ['A57', 'A58', 'A59', 'A60'],
-      'l3_d': ['A61', 'A62', 'A63', 'A64'],
-      'l4_i': ['A65', 'A66', 'A67', 'A68'],
-      'l4_d': ['A69', 'A70', 'A71', 'A72'],
-      'l5_i': ['A73', 'A74', 'A75', 'A76'],
-      'l5_d': ['A77', 'A78', 'A79', 'A80'],
-      's1_i': ['A81', 'A82', 'A83', 'A84'],
-      's1_d': ['A85', 'A86', 'A87', 'A88'],
-      's2_i': ['A89', 'A90', 'A91', 'A92'],
-      's2_d': ['A93', 'A94', 'A95', 'A96'],  
-    };
-  
-    // Verifica si el checkbox pertenece a algún grupo
-    const groupKey = Object.keys(conclusionMapping).find(key =>
-      conclusionMapping[key].includes(checkboxId)
-    );
+      A9: 'c5_i', A10: 'c5_i', A11: 'c5_i', A12: 'c5_i',
+      A13: 'c5_d', A14: 'c5_d', A15: 'c5_d', A16: 'c5_d',
+      A17: 'c6_i', A18: 'c6_i', A19: 'c6_i', A20: 'c6_i',
+      A21: 'c6_d', A22: 'c6_d', A23: 'c6_d', A24: 'c6_d',
+      A25: 'c7_i', A26: 'c7_i', A27: 'c7_i', A28: 'c7_i',
+      A29: 'c7_d', A30: 'c7_d', A31: 'c7_d', A32: 'c7_d',
+      A33: 'c8_i', A34: 'c8_i', A35: 'c8_i', A36: 'c8_i',
+      A37: 'c8_d', A38: 'c8_d', A39: 'c8_d', A40: 'c8_d',
+      A41: 't1_i', A42: 't1_i', A43: 't1_i', A44: 't1_i',
+      A45: 't1_d', A46: 't1_d', A47: 't1_d', A48: 't1_d',
+      A49: 'l2_i', A50: 'l2_i', A51: 'l2_i', A52: 'l2_i',
+      A53: 'l2_d', A54: 'l2_d', A55: 'l2_d', A56: 'l2_d',
+      A57: 'l3_i', A58: 'l3_i', A59: 'l3_i', A60: 'l3_i',
+      A61: 'l3_d', A62: 'l3_d', A63: 'l3_d', A64: 'l3_d',
+      A65: 'l4_i', A66: 'l4_i', A67: 'l4_i', A68: 'l4_i',
+      A69: 'l4_d', A70: 'l4_d', A71: 'l4_d', A72: 'l4_d',
+      A73: 'l5_i', A74: 'l5_i', A75: 'l5_i', A76: 'l5_i',
+      A77: 'l5_d', A78: 'l5_d', A79: 'l5_d', A80: 'l5_d',
+      A81: 's1_i', A82: 's1_i', A83: 's1_i', A84: 's1_i',
+      A85: 's1_d', A86: 's1_d', A87: 's1_d', A88: 's1_d',
+      A89: 's2_i', A90: 's2_i', A91: 's2_i', A92: 's2_i',
+      A93: 's2_d', A94: 's2_d', A95: 's2_d', A96: 's2_d',
 
+    };   
+    const groupKey = conclusionMapping[checkboxId];
     if (groupKey) {
-      // Verifica si todos los checkboxes del grupo están seleccionados
-      const allChecked = conclusionMapping[groupKey].every(id =>
-        checkedStateLeft[id] || checkedStateRight[id]
-      );
-
-      // Actualiza el estado de buttonPressed según el resultado de la verificación
-      if (allChecked) {
-        setButtonPressed(prevState => {
+      if (isChecked) {
+        // Añadir el grupo al estado si no está ya presente
+        setButtonPressed((prevState) => {
           if (!prevState.includes(groupKey)) {
             return [...prevState, groupKey];
           }
-          return prevState;
+          return prevState; // Si ya está presente, no hacer nada
         });
         updateConclusions({ value: groupKey });
       } else {
-        setButtonPressed(prevState => prevState.filter(key => key !== groupKey));
+        // Eliminar el grupo del estado si está presente
+        setButtonPressed((prevState) => prevState.filter((key) => key !== groupKey));
         updateConclusions({ value: groupKey, remove: true });
       }
     }
   };
-  
-
   return (
     <div>
       <div className='button-bar'>
@@ -2074,40 +2068,49 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <table>
             <td>
             <td>
-                <ConclusionButton value='c5_i' title='L' displayText='' pressed={buttonPressed.includes('c5_i')}/>
-              </td>
-            </td>
-            {['A9', 'A10', 'A11', 'A12'].map(id => (
-                <td key={id}>
-                  <input
-                    type='checkbox'
-                    id={id}
-                    checked={checkedStateLeft[id]}
-                    onChange={handleCheckboxChangeLeft}
-                  />
-                  {checkedStateLeft[id]}
-                </td>
-              ))}
-            <td>
-            <td>
-                <ConclusionButton value='c5_d' title='R' displayText='' pressed={buttonPressed.includes('c5_d')}/>
+                <ConclusionButton value='c5_i' title='L' displayText=''pressed={buttonPressed === 'c5_i' }/>
               </td>
             </td>
             <td>
-            {['A13', 'A14', 'A15', 'A16'].map(id => (
-                <td key={id}>
-                  <input
-                    type='checkbox'
-                    id={id}
-                    checked={checkedStateRight[id]}
-                    onChange={handleCheckboxChangeRight}
-                  />
-                  {checkedStateRight[id]}
-                </td>
-              ))}
+                <input type='checkbox' name="radio1" value='1' id='A9' checked={checkedStateLeft.A9} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A9}
+              </td>
+              <td>
+                <input type='checkbox' name="radio1" value='2' id='A10' checked={checkedStateLeft.A10} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A10}
+              </td>
+              <td>
+                <input type='checkbox' name="radio1" value='3' id='A11' checked={checkedStateLeft.A11} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A11}
+              </td>
+              <td>
+                <input type='checkbox' name="radio1" value='4' id='A12' checked={checkedStateLeft.A12} onChange={handleCheckboxChangeLeft} />
+                {checkedStateLeft.A12 }
+              </td>
+            <td>
+            <td>
+                <ConclusionButton value='c5_d' title='R' displayText='' pressed={buttonPressed === 'c5_d'}/>
+              </td>
+            </td>
+            <td>
+                <input type='checkbox' name="radio2" value='1' id='A13' checked={checkedStateRight.A13} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A13 }
+              </td>
+              <td>
+                <input type='checkbox' name="radio2" value='2' id='A14' checked={checkedStateRight.A14} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A14}
+              </td>
+              <td>
+                <input type='checkbox' name="radio2" value='3' id='A15' checked={checkedStateRight.A15} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A15}
+              </td>
+              <td>
+                <input type='checkbox' name="radio2" value='4' id='A16' checked={checkedStateRight.A16} onChange={handleCheckboxChangeRight} />
+                {checkedStateRight.A16}
               </td>
           </table>
         </Accordion>
+
 
         <Accordion title='C6'>
         <table>

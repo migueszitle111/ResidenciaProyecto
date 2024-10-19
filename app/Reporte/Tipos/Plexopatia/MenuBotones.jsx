@@ -1502,7 +1502,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
           <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}} alt="Reset Step"/>
         </button>
 
-        <label htmlFor="file-upload" className={`print-button`}>
+        <label onClick={triggerFileInput} className={`print-button`} onChange={handleImageUpload}>
           <img src="/I_Folder.svg" style={{filter: 'invert(1)'}}/>
         </label>
 
@@ -1523,7 +1523,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 2.png"
-                      className="lineaImg" // Aplicar estilo a la imagen
+                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}>
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1543,7 +1543,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 4.png"
-                      className='lineaImg2' // Aplicar estilo a la imagen
+                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1563,7 +1563,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 3.png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`}// Aplicar estilo a la imagen
                     />
                     <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1582,7 +1582,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 2.png"
-                      className='lineaImg2' // Aplicar estilo a la imagen
+                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1601,7 +1601,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 1.png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1621,7 +1621,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 5.png"
-                      className='lineaImg2' // Aplicar estilo a la imagen
+                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1640,7 +1640,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                     >
                       <img
                         src="/assets/Simbolos/S_Linea 2.png"
-                        className='lineaImg' // Aplicar estilo a la imagen
+                        className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
                       />
                       <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
                         <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1660,7 +1660,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 4.png"
-                      className='lineaImg2' // Aplicar estilo a la imagen
+                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1681,7 +1681,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 3.png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1700,7 +1700,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 2.png"
-                      className='lineaImg2' // Aplicar estilo a la imagen
+                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1719,7 +1719,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 1.png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]}  />
@@ -1739,7 +1739,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Linea 5.png"
-                      className='lineaImg2' // Aplicar estilo a la imagen
+                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
                     />
                     <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
                       <DropArea2 isExpanded={expandedDivs[index]} />
@@ -1759,7 +1759,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Cruz 1.png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className='cruzImg' // Aplicar estilo a la imagen
                     />
                   </div>
                 </DraggableDiv>
@@ -1775,7 +1775,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Cruz 2.png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className='cruzImg' // Aplicar estilo a la imagen
                     />
                   </div>
                 </DraggableDiv>
@@ -1791,7 +1791,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Cruz 3.png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className='cruzImg' // Aplicar estilo a la imagen
                     />
                   </div>
                 </DraggableDiv>
@@ -1807,7 +1807,7 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
                   >
                     <img
                       src="/assets/Simbolos/S_Cruz 4.png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className='cruzImg' // Aplicar estilo a la imagen
                     />
                   </div>
                 </DraggableDiv>
@@ -1815,15 +1815,15 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
             ))}
 
             {[17].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+                <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
                 <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
                   <div
-                    className={`cuadroIMG ${expandedDivs[index] ? 'cuadroIMG-expanded' : ''}`} // Aplica clase para expandir
+                    className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
                     onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
                   >
                     <img
                       src="/assets/Simbolos/S_Circulo Rojo XXS (3.5px).png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className='PuntoRojo' // Aplicar estilo a la imagen
                     />
                   </div>
                 </DraggableDiv>
@@ -1831,15 +1831,15 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
             ))}
 
             {[18].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+                <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
                 <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
                   <div
-                    className={`cuadroIMG ${expandedDivs[index] ? 'cuadroIMG-expanded' : ''}`} // Aplica clase para expandir
+                    className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
                     onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
                   >
                     <img
                       src="/assets/Simbolos/S_Circulo Rojo XS (4px).png"
-                      className='lineaImg' // Aplicar estilo a la imagen
+                      className='PuntoRojo' // Aplicar estilo a la imagen
                     />
                   </div>
                 </DraggableDiv>

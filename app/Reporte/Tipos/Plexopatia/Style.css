@@ -1,20 +1,20 @@
 /* Seccion de Datos de perfil y Titulo de reporte*/
-.head{
+.head {
   display: flex;
   width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap : 10vh;
+  gap: 10vh;
   padding-top: 2vh;
 }
 
-.head h1{
+.head h1 {
   font-size: 25px;
 }
 
 /* Titulo del reporte */
-.report-container{
+.report-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +33,7 @@
 .box-container {
   display: flex;
   background-color: #1c1c1c;
-  border: 2px solid ;
+  border: 2px solid;
   border-radius: 8px;
   overflow: hidden;
   width: 50vh;
@@ -59,7 +59,7 @@
   font-size: 12px;
   text-align: left;
   margin-bottom: 5px;
-  color : white;
+  color: white;
 }
 
 /* Botones e Imagen */
@@ -68,7 +68,7 @@
   flex-direction: row;
   height: auto;
   width: auto;
-  align-items:flex-start;
+  align-items: flex-start;
   justify-content: center;
   padding-top: 3vh;
   padding-bottom: 3vh;
@@ -510,14 +510,10 @@
 
 }
 
-
 .lineaImg4{
   width: 84px;
   height: 84px;
 }
-
-
-
 
 .dropArea2 {
   width: 40px; /* Tamaño inicial */
@@ -564,6 +560,9 @@
 } */
 
 .DivPanel2 {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
   background-color: rgba(255, 255, 255, 0.253);
   width: 90px;
   flex-grow: 1;
@@ -571,9 +570,7 @@
   border-radius: 5px;
   transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
   position: relative;
-  display: inline-block;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
+
 }
 
 .DivPanel2-expanded {
@@ -587,6 +584,9 @@
 
 
 .DivPanel3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.253);
   width: 90px;
   flex-grow: 1;
@@ -594,10 +594,7 @@
   border-radius: 5px;
   transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
   position: relative;
-  display: flex;
-  display: inline-block;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
+
 }
 
 .DivPanel3-expanded {
@@ -666,25 +663,6 @@
   
 }
 
-/* .circuloRojo{
-  width: 10px;
-  height: 10px;
-  background-color: red;
-  position: absolute;
-  border-radius: 100%;
-  margin-top: 20px;
-  margin-left: 60px;
-}
-
-.circuloRojo-expanded{
-  width: 15px;
-  height: 15px;
-  background-color: red;
-  position: absolute;
-  border-radius: 100%;
-
-} */
-
 
 /*CSS del componete que se utiliza para arastrar imagnes*/
 .draggableDiv {
@@ -695,6 +673,127 @@
   transform: scale(1.1); /* Expande el tamaño del div mientras el clic está sostenido */
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Añade sombra */
   background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
+}
+
+/*############################## Ajutes para tamaños de pantallas #######################################################*/
+
+@media (max-width: 1024px) {
+  .head {
+    flex-direction: column;
+    gap: 5vh;
+  }
+
+  .report-container {
+    width: 70vh;
+    font-size: 22px;
+  }
+
+  .box-container {
+    width: 40vh;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .vertical-container {
+    width: 35vh;
+    height: 90vh;
+  }
+
+  .cuadro,
+  .circulo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cuadro-expanded,
+  .circulo-expanded {
+    width: 200px;
+    height: 100px;
+  }
+}
+
+/* Ajustes para dispositivos pequeños (móviles) */
+@media (max-width: 768px) {
+  .head {
+    flex-direction: column;
+    padding-top: 1vh;
+    gap: 2vh;
+  }
+
+  .head h1 {
+    font-size: 18px;
+  }
+
+  .report-container {
+    width: 60vh;
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  .box-container {
+    width: 30vh;
+  }
+
+  .box {
+    padding-left: 10px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .data {
+    font-size: 10px;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    gap: 10px;
+    padding: 2vh;
+  }
+
+  .vertical-container {
+    width: 30vh;
+    height: 70vh;
+  }
+
+  .cuadro,
+  .circulo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cuadro-expanded,
+  .circulo-expanded {
+    width: 180px;
+    height: 90px;
+  }
+}
+
+/* Ajustes para pantallas muy grandes */
+@media (min-width: 1200px) {
+  .report-container {
+    width: 100vh;
+    font-size: 30px;
+  }
+
+  .box-container {
+    width: 60vh;
+  }
+
+  .vertical-container {
+    width: 50vh;
+    height: 130vh;
+  }
+
+  .cuadro-expanded,
+  .circulo-expanded {
+    width: 250px;
+    height: 130px;
+  }
 }
 
 

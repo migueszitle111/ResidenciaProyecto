@@ -744,6 +744,7 @@ const StepI1 = ({ handlePrevStep2, handleUndo, handleImageChange, handlePrint })
 };
 
 
+
 // -------------------------------------------------------------------------------------------------------------------------- Generalizada
 
 

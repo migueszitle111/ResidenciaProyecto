@@ -351,12 +351,20 @@ const Reporte = () => {
               }
             },
             {
-              expectedValue: 'MEDIANORojo',
+              expectedValue: 'MED_DERECHA',
               image: {
-                src: 'NeuropatiaImg/Nervio Rojo/NO_1_Mediano.png',
+                src: 'NeuropatiaImg\Nervio Rojo\DERECHA\Mediano.png',
                 alt: 'Modelo',
               }
             },
+            {
+              expectedValue: 'MED_IZQUIERDA',
+              image: {
+                src: 'NeuropatiaImg\Nervio Rojo\IZQUIERDA\Mediano.png',
+                alt: 'Modelo',
+              }
+            },
+            
           ]}
         />
         <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea

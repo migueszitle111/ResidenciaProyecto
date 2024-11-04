@@ -29,20 +29,15 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     else if (step === 'CD') setStep('D');
     else if (step === 'D') setStep('E');
     else if (step === 'E') setStep('F');
-    else if (step === 'F') setStep('G');
+    else if (step === 'F') setStep('G');  
     else if (step === 'G') setStep('H');
     else if (step === 'H') setStep('I');
   };
   const handleNextStep2 = () => {
-    if (step === 'A') setStep('B');
-    else if (step === 'B') setStep('B1');
-    else if (step === 'B1') setStep('C')
-    else if (step === 'C') setStep('CD');
-    else if (step === 'CD') setStep('D');
+    if (step === 'CD') setStep('D');
     else if (step === 'D') setStep('E1');
     else if (step === 'E1') setStep('F1');
     else if (step === 'F1') setStep('H1');
-    //else if (step === 'G') setStep('H');
     else if (step === 'H1') setStep('I1');
   };
 
@@ -63,16 +58,37 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
   const handlePrevStep2 = () => {
     if (step === 'I1') setStep('H1');
     else if (step === 'H1') setStep('F1');
-    //else if (step === 'G') setStep('F');
     else if (step === 'F1') setStep('E1');
     else if (step === 'E1') setStep('D');
     else if (step === 'D') setStep('CD');
-    else if (step === 'CD') setStep('C');
-    else if (step === 'C') setStep('B1');
-    else if (step === 'B1') setStep('B');
-    else if (step === 'B') setStep('A');
   };
+// -------------------------------------------------------------------------------------------------------------- PRUEBNAS
+const handleNextStepN1 = () => {
+  if (step === 'A') setStep('B');
+  else if (step === 'B') setStep('B1');
+  else if (step === 'B1') setStep('C')
+  else if (step === 'C') setStep('CD');
+  else if (step === 'CD') setStep('D');
+  else if (step === 'D') setStep('E');
+  else if (step === 'E') setStep('F');
+  else if (step === 'F') setStep('G');
+  else if (step === 'G') setStep('H');
+  else if (step === 'H') setStep('I');
+};
+const handlePrevStepN1 = () => {
+  if (step === 'I') setStep('H');
+  else if (step === 'H') setStep('G');
+  else if (step === 'G') setStep('F');
+  else if (step === 'F') setStep('E');
+  else if (step === 'E') setStep('D');
+  else if (step === 'D') setStep('CD');
+  else if (step === 'CD') setStep('C');
+  else if (step === 'C') setStep('B1');
+  else if (step === 'B1') setStep('B');
+  else if (step === 'B') setStep('A');
+};
 
+// --------------------------------------------------------------------------------------------------------------
   // Renderizado de los pasos en circulos
   const renderTopStepNumbers = () => {
     if (!showStepNumber || step === 'Final') {
@@ -421,15 +437,16 @@ const StepD = ({ handleNextStep, handlePrevStep, handleNextStep2 }) => {
           <ConclusionButton value='CON DENERVACIÓN ABUNDANTE (+++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++)' displayText={'DENERVACIÓN ABUNDANTE (+++)'} />
           <ConclusionButton value='CON DENERVACIÓN PROGRESIVA (++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++)' displayText={'DENERVACIÓN PROGRESIVA (++)'} />
           <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} />
-        </div>
-        <div onClick={handleNextStep2}>
           <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN ACTIVA' displayText={'SIN DENERVACIÓN ACTIVA'} />
         </div>
+
+
+
 
       </Accordion>
 
       <Accordion title='DESMIELINIZANTE '>
-        <div onClick={handleNextStep}>
+        <div onClick={handleNextStep2}>
           <ConclusionButton value=' RETARDO EN LA CONDUCCIÓN ' title=' TIPO DESMIELIMIZANTE POR RETARDO EN LA CONDUCCIÓN ' displayText={'POR RETARDO EN LA CONDUCCIÓN '} />
           <ConclusionButton value=' BLOQUEO PARCIAL EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' displayText={'POR BLOQUEO PARCIAL EN LA CONDUCCIÓN'} />
           <ConclusionButton value=' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' displayText={'POR BLOQUEO COMPLETO EN LA CONDUCCIÓN'} />
@@ -582,7 +599,7 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
   );
 };
 
-// -------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------      SIN REINERVACION 
 const StepE1 = ({ handleNextStep2, handlePrevStep2 }) => {
   return (
     <div>
@@ -725,6 +742,8 @@ const StepI1 = ({ handlePrevStep2, handleUndo, handleImageChange, handlePrint })
   );
 };
 
+
+// -------------------------------------------------------------------------------------------------------------------------- Generalizada
 
 
 

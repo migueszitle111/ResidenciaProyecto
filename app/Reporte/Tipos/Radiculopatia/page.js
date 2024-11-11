@@ -1,10 +1,9 @@
 'use client'
-import { ReportContextProvider } from '@/src/context';
+import { ReportContextProvider,CheckboxProvider,ButtonProvider } from '@/src/context';
 import FooterComponents from '../../../components/FooterComponents';
 import HeadComponents from '../../../components/HeadComponents';
 import ReportFace from './ReportFace';
 import './Style.css';
-import { CheckboxProvider } from './MenuBotones'; // Cambiado a CheckboxProvider
 
 const Page = () => {
 
@@ -14,11 +13,15 @@ const Page = () => {
         <HeadComponents />
       </div>
       {/* ReportFace enrollado en el contexto */}
-      < CheckboxProvider>
       <ReportContextProvider>
+     <ButtonProvider>
+      < CheckboxProvider>
+     
         <ReportFace />
-      </ReportContextProvider>
+      
       </ CheckboxProvider>
+      </ButtonProvider>
+      </ReportContextProvider>
       <div className='dont-print'>
         <FooterComponents />
       </div>

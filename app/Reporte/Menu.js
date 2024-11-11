@@ -26,6 +26,7 @@ export default function Perfil() {
                   Radiculopatía
                 </button>
               </a>
+            
               <a href="./Reporte/Tipos/Plexopatia">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">
                   Plexopatía

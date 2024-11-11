@@ -6,6 +6,7 @@ import { useContext } from 'react'
 export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rules }) {
   // Utiliza el contexto para obtener las conclusiones
   const { conclusions } = useContext(ReportContext)
+  
   return (
     <div className='image-container relative'>
       <Image
@@ -20,16 +21,34 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
         // Se mapean las reglas para mostrar las imágenes
         // Cada regla tiene un valor esperado y una imagen
         // Si el valor esperado se encuentra en las conclusiones, se muestra la imagen
-        Object.entries(rules).map(([rule, { expectedValue, image: {src, alt} }]) => {
-          return conclusions.find(cl => cl.value === expectedValue) && (
+        Object.entries(rules).map(([rule, { expectedValue, image }]) => {
+          const isImageArray = Array.isArray(image); // Verifica si es un array
+          
+          // Comprueba si la conclusión coincide con la regla
+          if (conclusions.find(cl => cl.value === expectedValue)) {
+            return isImageArray ? (
+              // Renderiza ambas imágenes si es un array
+              image.map((img, index) => (
+                <Image
+                  key={`${rule}-${index}`} // Usa un key único para cada imagen
+                  src={'/assets/'+ img.src}
+                  alt={img.alt}
+                  layout='fill'
+                  className='absolute'
+                />
+              ))
+            ) : (
+              // Renderiza la imagen única si no es un array
               <Image
-                key={rule} 
-                src={'/assets/'+ src}
-                alt={alt}
+                key={rule}
+                src={'/assets/'+ image.src}
+                alt={image.alt}
                 layout='fill'
                 className='absolute'
               />
-          )
+            );
+          }
+          return null; // Retorna null si no se cumple la condición
         })
       }
     </div>

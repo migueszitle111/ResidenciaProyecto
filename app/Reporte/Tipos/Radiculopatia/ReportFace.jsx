@@ -1,14 +1,41 @@
-import { ReportContext } from '@/src/context';
+import { ReportContext, CheckboxContext, useButtonContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd';
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import './EstilosCruz.css';
-import SimpleMultiStepForm, { CheckboxContext } from './MenuBotones';
 import './Style.css';
+import SimpleMultiStepForm from './MenuBotones';
 
 const Reporte = () => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  
+  // Load user data
+  const { data: session, status } = useSession();
+  const { name, lastname, cedula, especialidad } = session?.user || {};  
+  const [isPageVisible, setPageVisibility] = useState(true); // State for page visibility
+  const [selectedImages, setSelectedImages] = useState([]); // State for selected images
+  // States for image history
+  const [history, setHistory] = useState([]); 
+  const [future, setFuture] = useState([]); 
   const { checkedStateLeft, checkedStateRight } = useContext(CheckboxContext);
+  
+  const { conclusions } = useContext(ReportContext);
+  const [copyConclusions, setCopyConclusions] = useState('');  // State for conclusion textbox
+  const { activeButtons } = useButtonContext();
+
+  const defaultImage1 = '/assets/RadiculopatiaImg/Columna/RA_Columna_1_FondoB.png';
+  const defaultImage2 = '/assets/RadiculopatiaImg/Columna/RA_Columna_2_FondoB.png';
+  const newImage1 = '/assets/RadiculopatiaImg/Columna/BASE ANTERIOR.png';
+  const newImage2 = '/assets/RadiculopatiaImg/Columna/BASE POSTERIOR.png';
+
+  // Change image based on active buttons
+  const imageSrc1 = (activeButtons && (activeButtons['c6s_i'] || activeButtons['c6s_d'] || activeButtons['c6s_bi'] || activeButtons['c7s_i'] || activeButtons['c7s_d'] || activeButtons['c7s_bi'] || activeButtons['s1s_i'] || activeButtons['s1s_d'] || activeButtons['s1s_bi'])) ? newImage1 : defaultImage1;
+  const imageSrc2 = (activeButtons && (activeButtons['c6s_i'] || activeButtons['c6s_d'] || activeButtons['c6s_bi'] || activeButtons['c7s_i'] || activeButtons['c7s_d'] || activeButtons['c7s_bi'] || activeButtons['s1s_i'] || activeButtons['s1s_d'] || activeButtons['s1s_bi'])) ? newImage2 : defaultImage2;
   
   // Mapa de checkbox y rutas de imágenes
   const imageMap = {
@@ -68,61 +95,10 @@ const Reporte = () => {
       A83: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz83' },
       A84: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz84' },
 
-      //Torácica
-      A89: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz89' },
-      A90: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz90' },
-      A91: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz91' },
-      A92: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz92' },
-
-      A97: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz97' },
-      A98: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz98' },
-      A99: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz99' },
-      A100: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz100' },
-
-      A105: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz105' },
-      A106: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz106' },
-      A107: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz107' },
-      A108: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz108' },
-
-      A113: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz113' },
-      A114: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz114' },
-      A115: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz115' },
-      A116: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz116' },
-      
-      A121: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz121' },
-      A122: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz122' },
-      A123: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz123' },
-      A124: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz124' },
-
-      A129: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz129' },
-      A130: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz130' },
-      A131: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz131' },
-      A132: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz132' },
-
-      A137: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz137' },
-      A138: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz138' },
-      A139: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz139' },
-      A140: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz140' },
-
-      A145: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz145' },
-      A146: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz146' },
-      A147: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz147' },
-      A148: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz148' },
-
-      A153: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz153' },
-      A154: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz154' },
-      A155: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz155' },
-      A156: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz156' },
-
-      A161: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz161' },
-      A162: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz162' },
-      A163: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz163' },
-      A164: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz164' },
-
-      A169: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz169' },
-      A170: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz170' },
-      A171: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz171' },
-      A172: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz172' },
+      A89: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz169' },
+      A90: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz170' },
+      A91: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz171' },
+      A92: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz172' },
 
     },
     right: {
@@ -182,81 +158,22 @@ const Reporte = () => {
       A87: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz87' },
       A88: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz88' },
 
-
-      A93: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz93' },
-      A94: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz94' },
-      A95: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz95' },
-      A96: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz96' },
-
-      A101: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz101' },
-      A102: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz102' },
-      A103: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz103' },
-      A104: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz104' },
-
-      A109: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz109' },
-      A110: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz110' },
-      A111: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz111' },
-      A112: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz112' },
-
-      A117: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz117' },
-      A118: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz118' },
-      A119: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz119' },
-      A120: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz120' },
-
-      A125: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz125' },
-      A126: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz126' },
-      A127: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz127' },
-      A128: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz128' },
-
-      A133: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz133' },
-      A134: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz134' },
-      A135: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz135' },
-      A136: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz136' },
-
-      A141: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz141' },
-      A142: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz142' },
-      A143: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz143' },
-      A144: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz144' },
-
-      A149: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz149' },
-      A150: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz150' },
-      A151: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz151' },
-      A152: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz152' },
-
-      A157: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz157' },
-      A158: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz158' },
-      A159: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz159' },
-      A160: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz160' },
-
-      A165: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz165' },
-      A166: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz166' },
-      A167: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz167' },
-      A168: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz168' },
-
-      A173: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz173' },
-      A174: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz174' },
-      A175: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz175' },
-      A176: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz176' },
+      A93: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz173' },
+      A94: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz174' },
+      A95: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz175' },
+      A96: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz176' },
     }
   };
 
-  // Carga datos de usuario
-  const { data: session, status } = useSession();
-  const { name, lastname, cedula, especialidad } = session?.user || {};  
-  const { conclusions } = useContext(ReportContext)
-  const [copyConclusions, setCopyConclusions] = useState('');  // Estado para la caja de conclusiones
-  const [isPageVisible, setPageVisibility] = useState(true); // Estado para la visibilidad de la página
-  const [selectedImages, setSelectedImages] = useState([]); // Estado para las imágenes seleccionadas
-  
-  // Estados para el historial de imágenes
-  const [history, setHistory] = useState([]); 
-  const [future, setFuture] = useState([]); 
-  
+
   useEffect(() => {
-    // Construir la cadena de texto basada en las conclusiones
+    if (!hasMounted) return; // Ensure this runs only on the client
+
+    console.log('Conclusions:', conclusions);
+    // Build the text string based on conclusions
     const conclusionText = conclusions.map(cl => cl.title).join(' ');
   
-    // Función para verificar si hay cruces marcadas en un grupo específico
+    // Function to check if crosses are marked in a specific group
     const checkGroup = (leftKeys, rightKeys) => {
       let isLeftMarked = false;
       let isRightMarked = false;
@@ -284,7 +201,7 @@ const Reporte = () => {
       }
     };
   
-    // Definir los grupos de cruces
+    // Define groups of crosses
     const groups = [
       { name: 'C4', left: ['A1', 'A2', 'A3', 'A4'], right: ['A5', 'A6', 'A7', 'A8'] },
       { name: 'C5', left: ['A9', 'A10', 'A11', 'A12'], right: ['A13', 'A14', 'A15', 'A16'] },
@@ -300,7 +217,7 @@ const Reporte = () => {
       { name: 'S2', left: ['A89', 'A90', 'A91', 'A92'], right: ['A93', 'A94', 'A95', 'A96'] },
     ];
   
-    // Agrupar los grupos por el estado (IZQUIERDA, DERECHA o BILATERAL)
+    // Group the groups by status (IZQUIERDA, DERECHA, or BILATERAL)
     const groupedStatus = groups.reduce((acc, group) => {
       const status = checkGroup(group.left, group.right);
       if (status) {
@@ -312,7 +229,7 @@ const Reporte = () => {
       return acc;
     }, {});
   
-    // Traducción de los estados al español en plural si hay más de un grupo
+    // Translate status to Spanish plural if more than one group
     const translateStatus = (status, count) => {
       if (count > 1) {
         switch (status) {
@@ -329,27 +246,27 @@ const Reporte = () => {
       return status;
     };
   
-    // Construir el texto basado en los grupos agrupados
+    // Build the text based on grouped groups
     const additionalText = Object.entries(groupedStatus)
       .map(([status, groupNames]) => `${groupNames.join(', ')} ${translateStatus(status, groupNames.length)}`)
       .join(', ');
   
-    // Verificar si hay texto adicional y conclusiones
+    // Check if there's additional text and conclusions
     const firstTwoWords = conclusionText.split(' ').slice(0, 3).join(' ');
     const remainingText = conclusionText.split(' ').slice(4).join(' ');
     const combinedText = additionalText
       ? `${firstTwoWords} ${additionalText}, ${remainingText}`
       : conclusionText;
   
-    // Establecer el texto completo en el estado
+    // Set the complete text in the state
     setCopyConclusions(combinedText);
-  }, [conclusions, checkedStateLeft, checkedStateRight]);
-   
-  
+  }, [hasMounted, conclusions, checkedStateLeft, checkedStateRight]);
+       
   const handleTextareaChange = (event) => {
     setCopyConclusions(event.target.value)
-  }
-  // Funciones para el historial de imágenes
+  };
+
+  // Functions for image history
   const handleImageChange = useCallback((event) => {
     if (event.target.files && event.target.files[0]) {
       setHistory((prevHistory) => [...prevHistory, selectedImages]);
@@ -386,49 +303,73 @@ const Reporte = () => {
     });
   }, []);
 
-  return  (
+  return (
     <div>
       <div className="wrapper">
-        <div className='vertical-orientation dont-print  '>
-          <div className='button-bar '>
+        <div className='vertical-orientation dont-print'>
+          <div className='button-bar'>
             <input 
               id="file-upload" 
               type="file" 
               accept="image/*" 
               onChange={handleImageChange} 
               className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} 
-              style={{display: 'none'}}
+              style={{ display: 'none' }}
             />
           </div>
           <div className={'vertical-container dont-print'}>
             <div className={`mx-4 dont-print ${isPageVisible ? '' : 'hidden'}`}>
-              <SimpleMultiStepForm showStepNumber={true}/>
+              <SimpleMultiStepForm showStepNumber={true} />
             </div>
           </div>
         </div>
         <div>
-          <div className='con-img'> 
-            {selectedImages.map((image, index) => (
-              <Rnd
-                className="rnd-image"
-                key={index}
-                size={image.size}
-                position={image.position}
-                onDragStop={(e, d) => handleDragStop(index, e, d)}
-                onResizeStop={(e, direction, ref, delta, position) => handleResizeStop(index, e, direction, ref, delta, position)}
-                lockAspectRatio={true}
-                style={{ zIndex: 2 }} 
-              >
-                <img src={image.src} draggable="false" alt="Selected" />
-              </Rnd>
-            ))}
+          <div className='con-img'>
+            {/* Conditionally render selected images */}
+            {hasMounted && selectedImages.map((image, index) => {
+              if (Array.isArray(image)) {
+                return image.map((img, imgIndex) => (
+                  <Rnd
+                    className="rnd-image"
+                    key={`${index}-${imgIndex}`}
+                    size={img.size}
+                    position={img.position}
+                    onDragStop={(e, d) => handleDragStop(index, e, d)}
+                    onResizeStop={(e, direction, ref, delta, position) => handleResizeStop(index, e, direction, ref, delta, position)}
+                    lockAspectRatio={true}
+                    style={{ zIndex: 2 }} 
+                  >
+                    <img src={img.src} draggable="false" alt={img.alt} />
+                  </Rnd>
+                ));
+              } else {
+                return (
+                  <Rnd
+                    className="rnd-image"
+                    key={index}
+                    size={image.size}
+                    position={image.position}
+                    onDragStop={(e, d) => handleDragStop(index, e, d)}
+                    onResizeStop={(e, direction, ref, delta, position) => handleResizeStop(index, e, direction, ref, delta, position)}
+                    lockAspectRatio={true}
+                    style={{ zIndex: 2 }} 
+                  >
+                    <img src={image.src} draggable="false" alt="Selected" />
+                  </Rnd>
+                );
+              }
+            })}
             <div className='conclusion-container'>
-              <table cellPadding="0" cellSpacing="0">
-                <tr>
-                  <td>
-                    <ConclusionCanvas 
+              {/* Conditionally render the table and content */}
+              {hasMounted && (
+                <table cellPadding="0" cellSpacing="0">
+                  <tbody>
+                    <tr>
+                      <td>
+                      <ConclusionCanvas 
+                    //Imagen 1
                       img={{
-                        src: '/assets/RadiculopatiaImg/Columna/RA_Columna_1_FondoB.png',
+                        src: imageSrc1 ,
                         alt: 'Modelo',
                         useMap: '#image-map',
                         width: isPageVisible ? '600' : '800',
@@ -464,6 +405,63 @@ const Reporte = () => {
                             src: 'RadiculopatiaImg/C6 derecho anterior.png',
                             alt: 'Modelo',
                           }
+                        },
+
+                        {
+                          expectedValue: 'c6s_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/C6-C7s anterior izquierdo.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        
+                        {
+                          expectedValue: 'c6s_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/C6-C7s anterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c6s_bi', 
+                          image: [
+                            {
+                              src: 'RadiculopatiaImg/C6-C7s anterior izquierdo.png',
+                              alt: 'Modelo',
+                            },
+                            {
+                              src: 'RadiculopatiaImg/C6-C7s anterior derecho.png',
+                              alt: 'Modelo',
+                            }
+                      ]
+                        },
+                        {
+                          expectedValue: 'c7s_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/C6-C7s anterior izquierdo.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        
+                        {
+                          expectedValue: 'c7s_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/C6-C7s anterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c7s_bi', 
+                          image: [
+                          {
+                            src: 'RadiculopatiaImg/C6-C7s anterior izquierdo.png',
+                            alt: 'Modelo',
+                          },
+                          {
+                            src: 'RadiculopatiaImg/C6-C7s anterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        ],
                         },
                         {
                           expectedValue: 'c7_i', 
@@ -577,14 +575,43 @@ const Reporte = () => {
                             alt: 'Modelo',
                           }
                         },
+                        {
+                          expectedValue: 's1s_i', 
+                          image: {
+                            src: 'RadiculopatiaImg/S1s anterior izquierdo.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 's1s_d', 
+                          image: {
+                            src: 'RadiculopatiaImg/S1s anterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 's1s_bi', 
+                          image:[ {
+                            src: 'RadiculopatiaImg/S1s anterior izquierdo.png',
+                            alt: 'Modelo',
+                           
+                          },{
+                            src: 'RadiculopatiaImg/S1s anterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        
+                        ],
+                        },
+
                       ]}
                     />
 
-                  </td>
-                  <td>
-                    <ConclusionCanvas 
+                      </td>
+                      <td>
+                      <ConclusionCanvas 
+                    //Imagen 2
                       img={{
-                        src: '/assets/RadiculopatiaImg/Columna/RA_Columna_2_FondoB.png',
+                        src: imageSrc2,
                         alt: 'Modelo',
                         useMap: '#image-map',
                         width: isPageVisible ? '600' : '800',
@@ -627,6 +654,20 @@ const Reporte = () => {
                           }
                         },
                         {
+                          expectedValue: 'c6_ds', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C5-C6 derecho posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c6_is', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C5-C6 izquierdo posterior.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
                           expectedValue: 'c6_b', 
                           image: {
                             src: 'RadiculopatiaPosteriorImg/RA_P_C5-C6-C7.png',
@@ -654,6 +695,63 @@ const Reporte = () => {
                             alt: 'Modelo' 
                           }
                         },
+                        {
+                          expectedValue: 'c6s_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C6s posterior izquierdo.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c6s_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C6s posterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c6s_bi', 
+                          image:[ {
+                            src: 'RadiculopatiaPosteriorImg/C6s posterior izquierdo.png',
+                            alt: 'Modelo',
+                          },
+                          {
+                            src: 'RadiculopatiaPosteriorImg/C6s posterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        
+                        
+                        ],
+                        },
+                        {
+                          expectedValue: 'c7s_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C6s posterior izquierdo.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        
+                        {
+                          expectedValue: 'c7s_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/C6s posterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'c7s_bi', 
+                          image:[{
+                            src: 'RadiculopatiaPosteriorImg/C6s posterior izquierdo.png',
+                            alt: 'Modelo',
+                          },
+                          {
+                            src: 'RadiculopatiaPosteriorImg/C6s posterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        
+                        ],
+                        },
+
                         {
                           expectedValue: 'c8_d', 
                           image: {
@@ -738,49 +836,80 @@ const Reporte = () => {
                             alt: 'Modelo',
                           }
                         },
+                        {
+                          expectedValue: 's1s_i', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/s1s posterior izquierdo.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 's1s_d', 
+                          image: {
+                            src: 'RadiculopatiaPosteriorImg/s1s posterior derecho.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 's1s_bi', 
+                          image: [{
+                            src: 'RadiculopatiaPosteriorImg/s1s posterior izquierdo.png',
+                           alt: 'Modelo',
+                          },
+                        {
+                          src: 'RadiculopatiaPosteriorImg/s1s posterior derecho.png',
+                          alt: 'Modelo',
+
+                        }
+                        ],
+                        },
                       ]}
                     />
-                  </td>
-                </tr>
-              </table>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              )}
               <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
-  <textarea
-    value={copyConclusions}
-    onChange={handleTextareaChange}
-  />
-
-  {/* Mostrar imágenes dinámicas según el estado de los checkboxes en 'checkedStateLeft' */}
-  {Object.keys(checkedStateLeft).map((key) => (
-    checkedStateLeft[key] && (
-      <img 
-        key={key}
-        src={imageMap.left[key]?.src} 
-        className={imageMap.left[key]?.className} 
-        alt={`Cruz ${key}`} 
-      />
-    )
-  ))}
-
-  {/* Mostrar imágenes dinámicas según el estado de los checkboxes en 'checkedStateRight' */}
-  {Object.keys(checkedStateRight).map((key) => (
-    checkedStateRight[key] && (
-      <img 
-        key={key}
-        src={imageMap.right[key]?.src} 
-        className={imageMap.right[key]?.className} 
-        alt={`Cruz ${key}`} 
-      />
-    )
-  ))}
-
-
+                {/* Conditionally render content that depends on client-only data */}
+                {hasMounted && (
+                  <>
+                    <textarea
+                      value={copyConclusions}
+                      onChange={handleTextareaChange}
+                    />
+                    {/* Render images based on 'checkedStateLeft' */}
+                    {Object.keys(checkedStateLeft || {}).map((key) => (
+                      checkedStateLeft[key] && (
+                        <img 
+                          key={key}
+                          src={imageMap.left[key]?.src} 
+                          className={imageMap.left[key]?.className} 
+                          alt={`Cruz ${key}`} 
+                        />
+                      )
+                    ))}
+                    {/* Render images based on 'checkedStateRight' */}
+                    {Object.keys(checkedStateRight || {}).map((key) => (
+                      checkedStateRight[key] && (
+                        <img 
+                          key={key}
+                          src={imageMap.right[key]?.src} 
+                          className={imageMap.right[key]?.className} 
+                          alt={`Cruz ${key}`} 
+                        />
+                      )
+                    ))}
+                  </>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Reporte;

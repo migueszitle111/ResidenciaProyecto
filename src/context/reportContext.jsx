@@ -1,27 +1,30 @@
-import { createContext, useState } from 'react';
+import { useDeprecatedAnimatedState } from 'framer-motion';
+import { createContext, useState } from 'react' // Hook necesario para crear el contexto
 
+// Crea un contexto para el reporte con un valor inicial vacío
 export const ReportContext = createContext({
-  conclusions: [],
-  updateConclusions: () => {},
-  setInitialConclusions: () => {},
-});
+  conclusions: [], // Valor inicial
+  updateConclusions: () => {}, // Función para actualizar el valor
+  setInitialConclusions: () => {} // Función para establecer el valor inicial desde otro archivo
+})
 
-export function ReportContextProvider({ children }) {
-  const [conclusions, setConclusions] = useState([]);
+// Crea un componente que provee el contexto a sus hijos
+export function ReportContextProvider ({ children }) {
+  const [conclusions, setConclusions] = useState([{ title: ''}]) // Estado que se va a compartir
 
-  function updateConclusions({ value, title, remove }) {
+  // Función para actualizar el valor del contexto
+  function updateConclusions (conclusion) {
     setConclusions((prevConclusions) => {
-      if (remove) {
-        return prevConclusions.filter(cl => cl.value !== value);
+      // Si el valor ya existe en el arreglo, lo remueve
+      if (prevConclusions.find(cl => cl.value === conclusion.value)) {
+        return prevConclusions.filter(cl => cl.value !== conclusion.value);
       } else {
-        if (!prevConclusions.find(cl => cl.value === value)) {
-          return [...prevConclusions, { value, title }];
-        }
-        return prevConclusions;
+        // Si no existe, lo agrega
+        return [...prevConclusions, conclusion]
       }
-    });
-  }
+    })
 
+  // Función para establecer el valor inicial de conclusions desde fuera del archivo
   function setInitialConclusions(initialValue) {
     setConclusions(initialValue);
   }
@@ -29,12 +32,16 @@ export function ReportContextProvider({ children }) {
   const value = {
     conclusions,
     updateConclusions,
-    setInitialConclusions,
+    setInitialConclusions // Incluimos la función en el contexto
   };
 
+  }
+
+  // Crea un objeto con el valor y la función para actualizarlo
+  const value = { conclusions, updateConclusions }
   return (
     <ReportContext.Provider value={value}>
-      {children}
+      {children} {/* Renderiza los hijos */}
     </ReportContext.Provider>
-  );
+  )
 }

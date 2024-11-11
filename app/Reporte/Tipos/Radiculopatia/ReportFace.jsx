@@ -1,8 +1,8 @@
-import { ReportContext, CheckboxContext, useButtonContext } from '@/src/context';
+import { ReportContextR, CheckboxContext, useButtonContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd';
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
+import { ConclusionCanvasR } from '../../../components/ReportTemplate/Conclusions/CanvasRadiculopatia';
 import './EstilosCruz.css';
 import './Style.css';
 import SimpleMultiStepForm from './MenuBotones';
@@ -24,7 +24,7 @@ const Reporte = () => {
   const [future, setFuture] = useState([]); 
   const { checkedStateLeft, checkedStateRight } = useContext(CheckboxContext);
   
-  const { conclusions } = useContext(ReportContext);
+  const { conclusions } = useContext(ReportContextR);
   const [copyConclusions, setCopyConclusions] = useState('');  // State for conclusion textbox
   const { activeButtons } = useButtonContext();
 
@@ -366,7 +366,7 @@ const Reporte = () => {
                   <tbody>
                     <tr>
                       <td>
-                      <ConclusionCanvas 
+                      <ConclusionCanvasR 
                     //Imagen 1
                       img={{
                         src: imageSrc1 ,
@@ -608,7 +608,7 @@ const Reporte = () => {
 
                       </td>
                       <td>
-                      <ConclusionCanvas 
+                      <ConclusionCanvasR 
                     //Imagen 2
                       img={{
                         src: imageSrc2,

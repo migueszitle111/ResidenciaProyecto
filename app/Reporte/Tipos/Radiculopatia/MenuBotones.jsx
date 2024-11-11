@@ -1,8 +1,8 @@
 import { Accordion } from '@/app/components/ReportTemplate/Accordion';
 import { useContext, useState,useEffect} from 'react';
-import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
+import { ConclusionButtonR } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';
-import { ReportContext,CheckboxContext,useButtonContext } from '@/src/context';
+import { ReportContextR,CheckboxContext,useButtonContext } from '@/src/context';
 
 // Hook personalizado para manejar los pasos
 const useStep = () => {
@@ -102,7 +102,7 @@ const SimpleMultiStepForm = () => {
 };
 const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextStep3 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -126,7 +126,7 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextSte
       <br />
       <h1 className="text-xl font-bold text-white">EVOLUCIÓN</h1>
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="radiculopatia_aguda"
           title="RADICULOPATIA AGUDA"
           displayText="RADICULOPATIA AGUDA"
@@ -135,7 +135,7 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextSte
         />
       </div>
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="radiculopatia_subaguda"
           title="RADICULOPATIA SUBAGUDA"
           displayText="RADICULOPATIA SUBAGUDA"
@@ -144,7 +144,7 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextSte
         />
       </div>
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="radiculopatia_cronica"
           title="RADICULOPATIA CRONICA"
           displayText="RADICULOPATIA CRONICA"
@@ -153,7 +153,7 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextSte
         />
       </div>
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="radiculopatia_sensitiva"
           title="RADICULOPATIA SENSITIVA"
           displayText="RADICULOPATIA SENSITIVA"
@@ -183,7 +183,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
   };
 
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -453,7 +453,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
             </tr>
           </table>
         </Accordion>
-        <ConclusionButton 
+        <ConclusionButtonR 
         value='cervical_multinivel' 
         title='CERVICAL MULTINIVEL'
         displayText="CERVICAL MULTINIVEL"
@@ -541,7 +541,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
         <Accordion title='L4' >
         <table>
             <td>
-            <ConclusionButton value='l4_i' title='L' displayText=''/>
+            <ConclusionButtonR value='l4_i' title='L' displayText=''/>
             </td>
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A65' checked={checkedStateLeft.A65} onChange={handleCheckboxChangeLeft} />
@@ -581,7 +581,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
         <Accordion title='L5'>
         <table>
             <td>
-            <ConclusionButton value='l5_i' title='L' displayText=''/>
+            <ConclusionButtonR value='l5_i' title='L' displayText=''/>
             </td>
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A73' checked={checkedStateLeft.A73} onChange={handleCheckboxChangeLeft} />
@@ -621,7 +621,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
         <Accordion title='S1' >
         <table>
             <td>
-            <ConclusionButton value='s1_i' title='L' displayText=''/>
+            <ConclusionButtonR value='s1_i' title='L' displayText=''/>
             </td>
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A81' checked={checkedStateLeft.A81} onChange={handleCheckboxChangeLeft} />
@@ -639,7 +639,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                 <input type='checkbox' name="radio1" value='4' id='A84' checked={checkedStateLeft.A84} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A84}
               </td>
-              <ConclusionButton value='s1_d' title='R' displayText=''/>
+              <ConclusionButtonR value='s1_d' title='R' displayText=''/>
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A85' checked={checkedStateRight.A85} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A85 }
@@ -658,7 +658,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
               </td>
           </table>
         </Accordion> 
-        <ConclusionButton 
+        <ConclusionButtonR 
         value='lumbrosaca_multinivel' 
         title='LUMBROSACA MULTINIVEL' 
         displayText="LUMBROSACA MULTINIVEL"
@@ -669,21 +669,21 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
       <Accordion title='TORÁCICA'>
       </Accordion>
       <Accordion title='POLISEGMENTARIA'>
-        <ConclusionButton 
+        <ConclusionButtonR 
         value='cervical' 
         title='CERVICAL'
         displayText="CERVICAL"
         pressed={activeButtons["cervical"]}
         onClick={() => handleButtonPress("cervical", "CERVICAL")} 
         />   
-        <ConclusionButton 
+        <ConclusionButtonR 
         value='torasica' 
         title='TORACICA' 
         displayText="TORACICA"
         pressed={activeButtons["torasica"]}
         onClick={() => handleButtonPress("torasica", "TORACICA")} 
         /> 
-        <ConclusionButton 
+        <ConclusionButtonR 
         value='lumbrosaca' 
         title='LUMBOSACRA' 
         displayText="LUMBOSACRA"
@@ -697,7 +697,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
 
 const StepC = ({ handleNextStep, handlePrevStep }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -726,28 +726,28 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       </div>
       <h1 className="text-xl font-bold text-white">INTENSIDAD</h1>
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="intensidad_leve"
           title="INTENSIDAD LEVE (+/+)"
           displayText="INTENSIDAD LEVE (+/+)"
           pressed={activeButtons["intensidad_leve"]}
           onClick={() => handleButtonPress("intensidad_leve", "INTENSIDAD LEVE (+/+)", handleNextStep)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="intensidad_moderada"
           title="INTENSIDAD MODERADA (++)"
           displayText="INTENSIDAD MODERADA (++)"
           pressed={activeButtons["intensidad_moderada"]}
           onClick={() => handleButtonPress("intensidad_moderada", "INTENSIDAD MODERADA (++)", handleNextStep)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="intensidad_severa"
           title="INTENSIDAD SEVERA (+++)"
           displayText="INTENSIDAD SEVERA (+++)"
           pressed={activeButtons["intensidad_severa"]}
           onClick={() => handleButtonPress("intensidad_severa", "INTENSIDAD SEVERA (+++)", handleNextStep)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="intensidad_difusa"
           title="INTENSIDAD DIFUSA (++++)"
           displayText="INTENSIDAD DIFUSA (++++)"
@@ -761,7 +761,7 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
 
 const StepD = ({ handlePrevStep, handleNextStep }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -790,28 +790,28 @@ const StepD = ({ handlePrevStep, handleNextStep }) => {
       </div>
       <h1 className="text-xl font-bold text-white">PRONOSTICO</h1>
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="p_completa"
           title="Y PRONOSTICO DE RECUPERACION COMPLETA"
           displayText=""
           pressed={activeButtons["p_completa"]}
           onClick={() => handleButtonPress("p_completa", "Y PRONOSTICO DE RECUPERACION COMPLETA", handleNextStep)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="p_parcial"
           title="Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL"
           displayText=""
           pressed={activeButtons["p_parcial"]}
           onClick={() => handleButtonPress("p_parcial", "Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL", handleNextStep)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="p_no_funcional"
           title="Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL"
           displayText=""
           pressed={activeButtons["p_no_funcional"]}
           onClick={() => handleButtonPress("p_no_funcional", "Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL", handleNextStep)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="nula"
           title="NULA (EN FASE DE SECUELA DEFINITIVA)"
           displayText=""
@@ -825,7 +825,7 @@ const StepD = ({ handlePrevStep, handleNextStep }) => {
 
 const StepB1 = ({ handleNextStep1, handlePrevStep1 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -854,21 +854,21 @@ const StepB1 = ({ handleNextStep1, handlePrevStep1 }) => {
       </div>
       <h1 className="text-xl font-bold text-white">FASE</h1>
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="activa"
           title="ACTIVA"
           displayText=""
           pressed={activeButtons["activa"]}
           onClick={() => handleButtonPress("activa", "ACTIVA", handleNextStep1)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="inactiva"
           title="INACTIVA"
           displayText=""
           pressed={activeButtons["inactiva"]}
           onClick={() => handleButtonPress("inactiva", "INACTIVA", handleNextStep1)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="antigua"
           title="ANTIGUA"
           displayText=""
@@ -883,7 +883,7 @@ const StepB1 = ({ handleNextStep1, handlePrevStep1 }) => {
 
 const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -914,21 +914,21 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
       <Accordion title='C6'>
         <table>
           <tr>
-            <ConclusionButton
+            <ConclusionButtonR
                value="c6s_i"
                title="C6 IZQUIERDA"
                displayText=""
                pressed={activeButtons["c6s_i"]}
                onClick={() => handleButtonPress("c6s_i", "C6 IZQUIERDA", handleNextStep3)}
             />
-            <ConclusionButton
+            <ConclusionButtonR
                value="c6s_d"
                title="C6 DERECHA"
                displayText=""
                pressed={activeButtons["c6s_d"]}
                onClick={() => handleButtonPress("c6s_d", "C6 DERECHA", handleNextStep3)}
             />
-             <ConclusionButton
+             <ConclusionButtonR
                 value="c6s_bi"
                 title="C6 BILATERAL"
                 displayText=""
@@ -942,21 +942,21 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
       <Accordion title='C7'>
         <table>
           <tr>
-            <ConclusionButton
+            <ConclusionButtonR
               value="c7s_i"
               title="C7 IZQUIERDA"
               displayText=""
               pressed={activeButtons["c7s_i"]}
               onClick={() => handleButtonPress("c7s_i", "C7 IZQUIERDA", handleNextStep3)}
             />
-            <ConclusionButton
+            <ConclusionButtonR
                value="c7s_d"
                title="C7 DERECHA"
                displayText=""
                pressed={activeButtons["c7s_d"]}
                onClick={() => handleButtonPress("c7s_i", "C7 DERECHA", handleNextStep3)}
             />
-              <ConclusionButton
+              <ConclusionButtonR
               value="c7s_bi"
               title="C7 BILATERAL"
               displayText=""
@@ -970,21 +970,21 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
       <Accordion title='S1'>
         <table>
           <tr>
-            <ConclusionButton
+            <ConclusionButtonR
                value="s1s_i"
                title="S1 IZQUIERDA"
                displayText=""
                pressed={activeButtons["s1s_i"]}
                onClick={() => handleButtonPress("s1s_i", "S1 IZQUIERDA", handleNextStep3)}
             />
-            <ConclusionButton
+            <ConclusionButtonR
              value="s1s_d"
              title="S1 DERECHA"
              displayText=""
              pressed={activeButtons["s1s_d"]}
              onClick={() => handleButtonPress("s1s_d", "S1 DERECHA", handleNextStep3)}
             />
-              <ConclusionButton
+              <ConclusionButtonR
                value="s1s_bi"
                title="S1 BILATERAL"
                displayText=""
@@ -1002,7 +1002,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
 
 const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
   const { checkedStateLeft, checkedStateRight, setcheckedStateLeft, setcheckedStateRight } = useContext(CheckboxContext);
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
   const [buttonStates, setButtonStates] = useState({});
   const { activeButtons, toggleButton } = useButtonContext(); // Añadir esta línea
   const conclusionMapping = {
@@ -1098,7 +1098,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
     }
   };
    
-  const handleConclusionButtonClick = (value) => {
+  const handleConclusionButtonRClick = (value) => {
     const isPressed = buttonStates[value];
     const newPressedState = !isPressed;
   
@@ -1118,12 +1118,12 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
     }
   }
 
-  const renderConclusionButton = (value, title) => (
-    <ConclusionButton
+  const renderConclusionButtonR = (value, title) => (
+    <ConclusionButtonR
       value={value}
       title={title}
       pressed={buttonStates[value]}
-      onClick={() => handleConclusionButtonClick(value)}
+      onClick={() => handleConclusionButtonRClick(value)}
     />
   );
  
@@ -1191,7 +1191,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <table>
             <td>
             <td>
-            {renderConclusionButton('c5_i', 'L')}
+            {renderConclusionButtonR('c5_i', 'L')}
               </td>
             </td>
             <td>
@@ -1212,7 +1212,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
               </td>
             <td>
             <td>
-            {renderConclusionButton('c5_d', 'R')}
+            {renderConclusionButtonR('c5_d', 'R')}
               </td>
             </td>
             <td>
@@ -1236,7 +1236,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='C6'>
         <table>
         <tr>
-        {renderConclusionButton('c6_i', 'L')}
+        {renderConclusionButtonR('c6_i', 'L')}
 
               <td>
                 <input type='checkbox' name="radio1" value='1' id='A17' checked={checkedStateLeft.A17} onChange={handleCheckboxChangeLeft} />
@@ -1255,7 +1255,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 {checkedStateLeft.A20 }
               </td>
 
-              {renderConclusionButton('c6_d', 'R')}
+              {renderConclusionButtonR('c6_d', 'R')}
 
               <td>
                 <input type='checkbox' name="radio2" value='1' id='A21' checked={checkedStateRight.A21} onChange={handleCheckboxChangeRight} />
@@ -1279,7 +1279,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='C7'>
         <table>
         <tr>
-        {renderConclusionButton('c7_i', 'L')}
+        {renderConclusionButtonR('c7_i', 'L')}
 
               <td>
                 <input type='checkbox' name="radio1" value='1' id='A25' checked={checkedStateLeft.A25} onChange={handleCheckboxChangeLeft} />
@@ -1297,7 +1297,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='checkbox' name="radio1" value='4' id='A28' checked={checkedStateLeft.A28} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A28 }
               </td>
-              {renderConclusionButton('c7_d', 'R')}
+              {renderConclusionButtonR('c7_d', 'R')}
 
               <td>
                 <input type='checkbox' name="radio2" value='1' id='A29' checked={checkedStateRight.A29} onChange={handleCheckboxChangeRight} />
@@ -1321,7 +1321,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='C8'>
       <table>
         <tr>
-          {renderConclusionButton('c8_i', 'L')}
+          {renderConclusionButtonR('c8_i', 'L')}
 
               <td>
                 <input type='checkbox' name="radio1" value='1' id='A33' checked={checkedStateLeft.A33} onChange={handleCheckboxChangeLeft} />
@@ -1339,7 +1339,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='checkbox' name="radio1" value='4' id='A36' checked={checkedStateLeft.A36} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A36 }
               </td>
-               {renderConclusionButton('c8_d', 'R')}
+               {renderConclusionButtonR('c8_d', 'R')}
 
               <td>
                 <input type='checkbox' name="radio2" value='1' id='A37' checked={checkedStateRight.A37} onChange={handleCheckboxChangeRight} />
@@ -1363,7 +1363,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='T1'>
         <table>
         <tr>
-         {renderConclusionButton('t1_i', 'L')}
+         {renderConclusionButtonR('t1_i', 'L')}
 
               <td>
                 <input type='checkbox' name="radio1" value='1' id='A41' checked={checkedStateLeft.A41} onChange={handleCheckboxChangeLeft} />
@@ -1381,7 +1381,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='checkbox' name="radio1" value='4' id='A44' checked={checkedStateLeft.A44} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A44 }
               </td>
-              {renderConclusionButton('t1_d', 'R')}
+              {renderConclusionButtonR('t1_d', 'R')}
 
               <td>
                 <input type='checkbox' name="radio2" value='1' id='A45' checked={checkedStateRight.A45} onChange={handleCheckboxChangeRight} />
@@ -1402,7 +1402,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
             </tr>
           </table>
         </Accordion>
-        <ConclusionButton
+        <ConclusionButtonR
         value='cervical_multinivel'
         title='CERVICAL MULTINIVEL'
         displayText="CERVICAL MULTINIVEL"
@@ -1415,7 +1415,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       <Accordion title='LUMBAR'>
       <Accordion title='L2' >
       <table>
-      {renderConclusionButton('l2_i', 'L')}
+      {renderConclusionButtonR('l2_i', 'L')}
 
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A49' checked={checkedStateLeft.A49} onChange={handleCheckboxChangeLeft} />
@@ -1433,7 +1433,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='checkbox' name="radio1" value='4' id='A52' checked={checkedStateLeft.A52} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A52 }
               </td>
-                    {renderConclusionButton('l2_d', 'R')}
+                    {renderConclusionButtonR('l2_d', 'R')}
 
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A53' checked={checkedStateRight.A53} onChange={handleCheckboxChangeRight} />
@@ -1456,7 +1456,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         </Accordion> 
         <Accordion title='L3' > 
         <table>
-              {renderConclusionButton('l3_i', 'L')}
+              {renderConclusionButtonR('l3_i', 'L')}
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A57' checked={checkedStateLeft.A57} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A57}
@@ -1473,7 +1473,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='checkbox' name="radio1" value='4' id='A60' checked={checkedStateLeft.A60} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A60 }
               </td>
-                            {renderConclusionButton('l3_d', 'R')}
+                            {renderConclusionButtonR('l3_d', 'R')}
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A61' checked={checkedStateRight.A61} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A61 }
@@ -1495,7 +1495,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='L4' >
         <table>
             <td>
-            {renderConclusionButton('l4_i', 'L')}
+            {renderConclusionButtonR('l4_i', 'L')}
             </td>
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A65' checked={checkedStateLeft.A65} onChange={handleCheckboxChangeLeft} />
@@ -1513,7 +1513,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='checkbox' name="radio1" value='4' id='A68' checked={checkedStateLeft.A68} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A68 }
               </td>
-            {renderConclusionButton('l4_d', 'R')}
+            {renderConclusionButtonR('l4_d', 'R')}
 
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A69' checked={checkedStateRight.A69} onChange={handleCheckboxChangeRight} />
@@ -1536,7 +1536,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='L5' >
         <table>
             <td> 
-            {renderConclusionButton('l5_i', 'L')}
+            {renderConclusionButtonR('l5_i', 'L')}
             </td>
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A73' checked={checkedStateLeft.A73} onChange={handleCheckboxChangeLeft} />
@@ -1554,7 +1554,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='checkbox' name="radio1" value='4' id='A76' checked={checkedStateLeft.A76} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A76 }
               </td>
-                          {renderConclusionButton('l5_d', 'R')}
+                          {renderConclusionButtonR('l5_d', 'R')}
 
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A77' checked={checkedStateRight.A77} onChange={handleCheckboxChangeRight} />
@@ -1577,7 +1577,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='S1'>
         <table>
             <td>
-                        {renderConclusionButton('s1_i', 'L')}
+                        {renderConclusionButtonR('s1_i', 'L')}
 
             </td>
             <td>
@@ -1596,7 +1596,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 <input type='checkbox' name="radio1" value='4' id='A84' checked={checkedStateLeft.A84} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A84}
               </td>
-                                      {renderConclusionButton('s1_d', 'R')}
+                                      {renderConclusionButtonR('s1_d', 'R')}
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A85' checked={checkedStateRight.A85} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A85 }
@@ -1618,7 +1618,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         <Accordion title='S2' >
         <table>
             <td>
-                                    {renderConclusionButton('s2_i', 'L')}
+                                    {renderConclusionButtonR('s2_i', 'L')}
             </td>
             <td>
                   <input type='checkbox' name="radio1" value='1' id='A89' checked={checkedStateLeft.A89} onChange={handleCheckboxChangeLeft} />
@@ -1636,7 +1636,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                   <input type='checkbox' name="radio1" value='4' id='A92' checked={checkedStateLeft.A92} onChange={handleCheckboxChangeLeft} />
                   {checkedStateLeft.A92}
                 </td>
-                  {renderConclusionButton('s2_d', 'R')}
+                  {renderConclusionButtonR('s2_d', 'R')}
 
                 <td>
                   <input type='checkbox' name="radio2" value='1' id='A93' checked={checkedStateRight.A93} onChange={handleCheckboxChangeRight} />
@@ -1656,7 +1656,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 </td>
           </table>
         </Accordion> 
-        <ConclusionButton
+        <ConclusionButtonR
         value='lumbrosaca_multinivel'
         title='LUMBROSACA MULTINIVEL'
         displayText="LUMBROSACA MULTINIVEL"
@@ -1666,25 +1666,25 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       </Accordion>
 
       <Accordion title='TORÁCICA'>
-        <ConclusionButton value='T' title='T' />            
+        <ConclusionButtonR value='T' title='T' />            
       </Accordion>
 
       <Accordion title='POLISEGMENTARIA'>
-      <ConclusionButton
+      <ConclusionButtonR
     value='cervical'
     title='CERVICAL'
     displayText='CERVICAL'
     pressed={activeButtons["cervical"]}
     onClick={() => handleButtonPress1("cervical", "CERVICAL")}
   />
-  <ConclusionButton
+  <ConclusionButtonR
     value='toracica'
     title='TORÁCICA'
     displayText='TORÁCICA'
     pressed={activeButtons["toracica"]}
     onClick={() => handleButtonPress1("toracica", "TORÁCICA")}
   />
-  <ConclusionButton
+  <ConclusionButtonR
     value='lumbrosacra'
     title='LUMBOSACRA'
     displayText='LUMBOSACRA'
@@ -1698,7 +1698,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
 
 const StepD1 = ({ handleNextStep1, handlePrevStep1 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -1729,28 +1729,28 @@ const StepD1 = ({ handleNextStep1, handlePrevStep1 }) => {
       <h1 className="text-xl font-bold text-white">INTENSIDAD</h1>
 
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="intensidad_leve"
           title="INTENSIDAD LEVE (+/+)"
           displayText="INTENSIDAD LEVE (+/+)"
           pressed={activeButtons["intensidad_leve"]}
           onClick={() => handleButtonPress("intensidad_leve", "INTENSIDAD LEVE (+/+)", handleNextStep1)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="intensidad_moderada"
           title="INTENSIDAD MODERADA (++)"
           displayText="INTENSIDAD MODERADA (++)"
           pressed={activeButtons["intensidad_moderada"]}
           onClick={() => handleButtonPress("intensidad_moderada", "INTENSIDAD MODERADA (++)", handleNextStep1)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="intensidad_severa"
           title="INTENSIDAD SEVERA (+++)"
           displayText="INTENSIDAD SEVERA (+++)"
           pressed={activeButtons["intensidad_severa"]}
           onClick={() => handleButtonPress("intensidad_severa", "INTENSIDAD SEVERA (+++)", handleNextStep1)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="intensidad_difusa"
           title="INTENSIDAD DIFUSA (++++)"
           displayText="INTENSIDAD DIFUSA (++++)"
@@ -1764,7 +1764,7 @@ const StepD1 = ({ handleNextStep1, handlePrevStep1 }) => {
 
 const StepE1 = ({ handleNextStep1, handlePrevStep1 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -1795,14 +1795,14 @@ const StepE1 = ({ handleNextStep1, handlePrevStep1 }) => {
       <h1 className="text-xl font-bold text-white">PROGRESION</h1>
 
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="con_progresion"
           title="CON PROGRESIÓN DISTAL A MIOTOMAS"
           displayText="CON PROGRESIÓN DISTAL A MIOTOMAS"
           pressed={activeButtons["con_progresion"]}
           onClick={() => handleButtonPress("con_progresion", "CON PROGRESIÓN DISTAL A MIOTOMAS", handleNextStep1)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="sin_progresion"
           title="SIN PROGRESION DISTAL A MIOTOMAS"
           displayText="SIN PROGRESION DISTAL A MIOTOMAS"
@@ -1816,7 +1816,7 @@ const StepE1 = ({ handleNextStep1, handlePrevStep1 }) => {
 
 const StepG1 = ({ handlePrevStep1, handleNextStep1 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -1846,28 +1846,28 @@ const StepG1 = ({ handlePrevStep1, handleNextStep1 }) => {
 
       <h1 className="text-xl font-bold text-white">PRONOSTICO</h1>
       <div>
-        <ConclusionButton
+        <ConclusionButtonR
           value="p_completa"
           title="Y PRONOSTICO DE RECUPERACION COMPLETA"
           displayText=""
           pressed={activeButtons["p_completa"]}
           onClick={() => handleButtonPress("p_completa", "Y PRONOSTICO DE RECUPERACION COMPLETA", handleNextStep1)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="p_parcial"
           title="Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL"
           displayText=""
           pressed={activeButtons["p_parcial"]}
           onClick={() => handleButtonPress("p_parcial", "Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL", handleNextStep1)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="p_no_funcional"
           title="Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL"
           displayText=""
           pressed={activeButtons["p_no_funcional"]}
           onClick={() => handleButtonPress("p_no_funcional", "Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL", handleNextStep1)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="nula"
           title="NULA (EN FASE DE SECUELA DEFINITIVA)"
           displayText=""
@@ -1882,7 +1882,7 @@ const StepG1 = ({ handlePrevStep1, handleNextStep1 }) => {
 
 const StepE = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) => {
 
-  const { setInitialConclusions } = useContext(ReportContext); // Acceder a setInitialConclusions desde el contexto
+  const { setInitialConclusions } = useContext(ReportContextR); // Acceder a setInitialConclusions desde el contexto
   const resetCopyConclusions = () => {
     setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
   };
@@ -1920,7 +1920,7 @@ const StepE = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
 
 const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
   const { checkedStateLeft, checkedStateRight, setcheckedStateLeft, setcheckedStateRight } = useContext(CheckboxContext);
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
   const { activeButtons, toggleButton } = useButtonContext(); // Añadir esta línea
   const [buttonStates, setButtonStates] = useState({});
   const conclusionMapping = {
@@ -2015,7 +2015,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       updateConclusions({ value, remove: true });
     }
   };
-  const handleConclusionButtonClick = (value) => {
+  const handleConclusionButtonRClick = (value) => {
     const isPressed = buttonStates[value];
     const newPressedState = !isPressed;
   
@@ -2049,12 +2049,12 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
     });
   };
 
-  const renderConclusionButton = (value, title) => (
-    <ConclusionButton
+  const renderConclusionButtonR = (value, title) => (
+    <ConclusionButtonR
       value={value}
       title={title}
       pressed={buttonStates[value]}
-      onClick={() => handleConclusionButtonClick(value)}
+      onClick={() => handleConclusionButtonRClick(value)}
     />
   );
 
@@ -2122,7 +2122,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <table>
             <td>
             <td>
-            {renderConclusionButton('c5_i', 'L')}
+            {renderConclusionButtonR('c5_i', 'L')}
               </td>
             </td>
             <td>
@@ -2143,7 +2143,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
               </td>
             <td>
             <td>
-            {renderConclusionButton('c5_d', 'R')}
+            {renderConclusionButtonR('c5_d', 'R')}
               </td>
             </td>
             <td>
@@ -2167,7 +2167,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='C6'>
         <table>
         <tr>
-        {renderConclusionButton('c6_i', 'L')}
+        {renderConclusionButtonR('c6_i', 'L')}
 
               <td>
                 <input type='checkbox' name="radio1" value='1' id='A17' checked={checkedStateLeft.A17} onChange={handleCheckboxChangeLeft} />
@@ -2186,7 +2186,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 {checkedStateLeft.A20 }
               </td>
 
-              {renderConclusionButton('c6_d', 'R')}
+              {renderConclusionButtonR('c6_d', 'R')}
 
               <td>
                 <input type='checkbox' name="radio2" value='1' id='A21' checked={checkedStateRight.A21} onChange={handleCheckboxChangeRight} />
@@ -2210,7 +2210,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='C7'>
         <table>
         <tr>
-        {renderConclusionButton('c7_i', 'L')}
+        {renderConclusionButtonR('c7_i', 'L')}
 
               <td>
                 <input type='checkbox' name="radio1" value='1' id='A25' checked={checkedStateLeft.A25} onChange={handleCheckboxChangeLeft} />
@@ -2228,7 +2228,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 <input type='checkbox' name="radio1" value='4' id='A28' checked={checkedStateLeft.A28} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A28 }
               </td>
-              {renderConclusionButton('c7_d', 'R')}
+              {renderConclusionButtonR('c7_d', 'R')}
 
               <td>
                 <input type='checkbox' name="radio2" value='1' id='A29' checked={checkedStateRight.A29} onChange={handleCheckboxChangeRight} />
@@ -2252,7 +2252,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='C8'>
       <table>
         <tr>
-          {renderConclusionButton('c8_i', 'L')}
+          {renderConclusionButtonR('c8_i', 'L')}
 
               <td>
                 <input type='checkbox' name="radio1" value='1' id='A33' checked={checkedStateLeft.A33} onChange={handleCheckboxChangeLeft} />
@@ -2270,7 +2270,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 <input type='checkbox' name="radio1" value='4' id='A36' checked={checkedStateLeft.A36} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A36 }
               </td>
-               {renderConclusionButton('c8_d', 'R')}
+               {renderConclusionButtonR('c8_d', 'R')}
 
               <td>
                 <input type='checkbox' name="radio2" value='1' id='A37' checked={checkedStateRight.A37} onChange={handleCheckboxChangeRight} />
@@ -2294,7 +2294,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='T1'>
         <table>
         <tr>
-         {renderConclusionButton('t1_i', 'L')}
+         {renderConclusionButtonR('t1_i', 'L')}
 
               <td>
                 <input type='checkbox' name="radio1" value='1' id='A41' checked={checkedStateLeft.A41} onChange={handleCheckboxChangeLeft} />
@@ -2312,7 +2312,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 <input type='checkbox' name="radio1" value='4' id='A44' checked={checkedStateLeft.A44} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A44 }
               </td>
-              {renderConclusionButton('t1_d', 'R')}
+              {renderConclusionButtonR('t1_d', 'R')}
 
               <td>
                 <input type='checkbox' name="radio2" value='1' id='A45' checked={checkedStateRight.A45} onChange={handleCheckboxChangeRight} />
@@ -2333,7 +2333,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
             </tr>
           </table>
         </Accordion>
-        <ConclusionButton
+        <ConclusionButtonR
         value='cervical_multinivel'
         title='CERVICAL MULTINIVEL'
         displayText="CERVICAL MULTINIVEL"
@@ -2344,7 +2344,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       <Accordion title='LUMBAR'>
       <Accordion title='L2' >
       <table>
-      {renderConclusionButton('l2_i', 'L')}
+      {renderConclusionButtonR('l2_i', 'L')}
 
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A49' checked={checkedStateLeft.A49} onChange={handleCheckboxChangeLeft} />
@@ -2362,7 +2362,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 <input type='checkbox' name="radio1" value='4' id='A52' checked={checkedStateLeft.A52} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A52 }
               </td>
-                    {renderConclusionButton('l2_d', 'R')}
+                    {renderConclusionButtonR('l2_d', 'R')}
 
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A53' checked={checkedStateRight.A53} onChange={handleCheckboxChangeRight} />
@@ -2385,7 +2385,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         </Accordion> 
         <Accordion title='L3' > 
         <table>
-              {renderConclusionButton('l3_i', 'L')}
+              {renderConclusionButtonR('l3_i', 'L')}
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A57' checked={checkedStateLeft.A57} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A57}
@@ -2402,7 +2402,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 <input type='checkbox' name="radio1" value='4' id='A60' checked={checkedStateLeft.A60} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A60 }
               </td>
-                            {renderConclusionButton('l3_d', 'R')}
+                            {renderConclusionButtonR('l3_d', 'R')}
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A61' checked={checkedStateRight.A61} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A61 }
@@ -2424,7 +2424,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='L4' >
         <table>
             <td>
-            {renderConclusionButton('l4_i', 'L')}
+            {renderConclusionButtonR('l4_i', 'L')}
             </td>
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A65' checked={checkedStateLeft.A65} onChange={handleCheckboxChangeLeft} />
@@ -2442,7 +2442,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 <input type='checkbox' name="radio1" value='4' id='A68' checked={checkedStateLeft.A68} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A68 }
               </td>
-            {renderConclusionButton('l4_d', 'R')}
+            {renderConclusionButtonR('l4_d', 'R')}
 
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A69' checked={checkedStateRight.A69} onChange={handleCheckboxChangeRight} />
@@ -2465,7 +2465,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='L5' >
         <table>
             <td> 
-            {renderConclusionButton('l5_i', 'L')}
+            {renderConclusionButtonR('l5_i', 'L')}
             </td>
             <td>
                 <input type='checkbox' name="radio1" value='1' id='A73' checked={checkedStateLeft.A73} onChange={handleCheckboxChangeLeft} />
@@ -2483,7 +2483,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 <input type='checkbox' name="radio1" value='4' id='A76' checked={checkedStateLeft.A76} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A76 }
               </td>
-                          {renderConclusionButton('l5_d', 'R')}
+                          {renderConclusionButtonR('l5_d', 'R')}
 
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A77' checked={checkedStateRight.A77} onChange={handleCheckboxChangeRight} />
@@ -2506,7 +2506,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='S1'>
         <table>
             <td>
-                        {renderConclusionButton('s1_i', 'L')}
+                        {renderConclusionButtonR('s1_i', 'L')}
 
             </td>
             <td>
@@ -2525,7 +2525,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 <input type='checkbox' name="radio1" value='4' id='A84' checked={checkedStateLeft.A84} onChange={handleCheckboxChangeLeft} />
                 {checkedStateLeft.A84}
               </td>
-                                      {renderConclusionButton('s1_d', 'R')}
+                                      {renderConclusionButtonR('s1_d', 'R')}
             <td>
                 <input type='checkbox' name="radio2" value='1' id='A85' checked={checkedStateRight.A85} onChange={handleCheckboxChangeRight} />
                 {checkedStateRight.A85 }
@@ -2547,7 +2547,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         <Accordion title='S2' >
         <table>
             <td>
-                                    {renderConclusionButton('s2_i', 'L')}
+                                    {renderConclusionButtonR('s2_i', 'L')}
             </td>
             <td>
                   <input type='checkbox' name="radio1" value='1' id='A89' checked={checkedStateLeft.A89} onChange={handleCheckboxChangeLeft} />
@@ -2565,7 +2565,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                   <input type='checkbox' name="radio1" value='4' id='A92' checked={checkedStateLeft.A92} onChange={handleCheckboxChangeLeft} />
                   {checkedStateLeft.A92}
                 </td>
-                  {renderConclusionButton('s2_d', 'R')}
+                  {renderConclusionButtonR('s2_d', 'R')}
 
                 <td>
                   <input type='checkbox' name="radio2" value='1' id='A93' checked={checkedStateRight.A93} onChange={handleCheckboxChangeRight} />
@@ -2585,7 +2585,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 </td>
           </table>
         </Accordion> 
-        <ConclusionButton
+        <ConclusionButtonR
         value='lumbrosaca_multinivel'
         title='LUMBROSACA MULTINIVEL'
         displayText="LUMBROSACA MULTINIVEL"
@@ -2596,25 +2596,25 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       </Accordion>
 
       <Accordion title='TORÁCICA'>
-        <ConclusionButton value='T' title='T' />            
+        <ConclusionButtonR value='T' title='T' />            
       </Accordion>
 
       <Accordion title='POLISEGMENTARIA'>
-      <ConclusionButton
+      <ConclusionButtonR
     value='cervical'
     title='CERVICAL'
     displayText='CERVICAL'
     pressed={activeButtons["cervical"]}
     onClick={() => handleButtonPress1("cervical", "CERVICAL")}
   />
-  <ConclusionButton
+  <ConclusionButtonR
     value='toracica'
     title='TORÁCICA'
     displayText='TORÁCICA'
     pressed={activeButtons["toracica"]}
     onClick={() => handleButtonPress1("toracica", "TORÁCICA")}
   />
-  <ConclusionButton
+  <ConclusionButtonR
     value='lumbrosacra'
     title='LUMBOSACRA'
     displayText='LUMBOSACRA'
@@ -2627,7 +2627,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
 };
 const StepC2 = ({ handleNextStep2, handlePrevStep2 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -2661,10 +2661,10 @@ const StepC2 = ({ handleNextStep2, handlePrevStep2 }) => {
       </h1>
 
       <div >
-      <ConclusionButton value='intensidad_leve' title='INTENSIDAD LEVE (+/+)'displayText='INTENSIDAD LEVE (+/+)' pressed={activeButtons["intensidad_leve"]} onClick={() => handleButtonPress("intensidad_leve", "INTENSIDAD LEVE (+/+)", handleNextStep2)}/>
-      <ConclusionButton value='intensidad_moderada' title='INTENSIDAD MODERADA (++)' displayText='INTENSIDAD MODERADA (++)' pressed={activeButtons["intensidad_moderada"]} onClick={() => handleButtonPress("intensidad_moderada", "INTENSIDAD MODERADA (+/+)", handleNextStep2)}/>
-      <ConclusionButton value='intensidad_severa' title='INTENSIDAD SEVERA (+++)' displayText='INTENSIDAD SEVERA (+++)' onClick={() => handleButtonPress("intensidad_severa", "INTENSIDAD SEVERA (+++)", handleNextStep2)}/>
-      <ConclusionButton value='intensidad_difusa' title='INTENSIDAD DIFUSA (++++)' displayText='INTENSIDAD DIFUSA (++++)'onClick={() => handleButtonPress("intensidad_difusa", "INTENSIDAD DIFUSA (++++)", handleNextStep2)}/>
+      <ConclusionButtonR value='intensidad_leve' title='INTENSIDAD LEVE (+/+)'displayText='INTENSIDAD LEVE (+/+)' pressed={activeButtons["intensidad_leve"]} onClick={() => handleButtonPress("intensidad_leve", "INTENSIDAD LEVE (+/+)", handleNextStep2)}/>
+      <ConclusionButtonR value='intensidad_moderada' title='INTENSIDAD MODERADA (++)' displayText='INTENSIDAD MODERADA (++)' pressed={activeButtons["intensidad_moderada"]} onClick={() => handleButtonPress("intensidad_moderada", "INTENSIDAD MODERADA (+/+)", handleNextStep2)}/>
+      <ConclusionButtonR value='intensidad_severa' title='INTENSIDAD SEVERA (+++)' displayText='INTENSIDAD SEVERA (+++)' onClick={() => handleButtonPress("intensidad_severa", "INTENSIDAD SEVERA (+++)", handleNextStep2)}/>
+      <ConclusionButtonR value='intensidad_difusa' title='INTENSIDAD DIFUSA (++++)' displayText='INTENSIDAD DIFUSA (++++)'onClick={() => handleButtonPress("intensidad_difusa", "INTENSIDAD DIFUSA (++++)", handleNextStep2)}/>
 
       </div>
 
@@ -2675,7 +2675,7 @@ const StepC2 = ({ handleNextStep2, handlePrevStep2 }) => {
 
 const StepD2 = ({ handlePrevStep2, handleNextStep2 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -2709,9 +2709,9 @@ const StepD2 = ({ handlePrevStep2, handleNextStep2 }) => {
       </h1>
 
       <div>
-      <ConclusionButton value='r_abundante' title='REINERVACION COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", "REINERVACION COLATERAL COMPENSATORIA ABUNDANTE", handleNextStep2)}/>
-      <ConclusionButton value='r_minima' title='REINERVACION COLATERAL COMPENSATORIA MINIMA' displayText='MINIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "REINERVACION COLATERAL COMPENSATORIA MINIMA", handleNextStep2)}/>
-      <ConclusionButton value='r_ausante' title='REINERVACION COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "REINERVACION COLATERAL COMPENSATORIA AUSENTE", handleNextStep2)}/>
+      <ConclusionButtonR value='r_abundante' title='REINERVACION COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", "REINERVACION COLATERAL COMPENSATORIA ABUNDANTE", handleNextStep2)}/>
+      <ConclusionButtonR value='r_minima' title='REINERVACION COLATERAL COMPENSATORIA MINIMA' displayText='MINIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "REINERVACION COLATERAL COMPENSATORIA MINIMA", handleNextStep2)}/>
+      <ConclusionButtonR value='r_ausante' title='REINERVACION COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "REINERVACION COLATERAL COMPENSATORIA AUSENTE", handleNextStep2)}/>
       </div>
       
     </div>
@@ -2721,7 +2721,7 @@ const StepD2 = ({ handlePrevStep2, handleNextStep2 }) => {
 
 const StepE2 = ({  handlePrevStep2, handleNextStep2}) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -2754,28 +2754,28 @@ const StepE2 = ({  handlePrevStep2, handleNextStep2}) => {
       </h1>
 
       <div>
-     <ConclusionButton
+     <ConclusionButtonR
           value="p_completa"
           title="Y PRONOSTICO DE RECUPERACION COMPLETA"
           displayText=""
           pressed={activeButtons["p_completa"]}
           onClick={() => handleButtonPress("p_completa", "Y PRONOSTICO DE RECUPERACION COMPLETA", handleNextStep2)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="p_parcial"
           title="Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL"
           displayText=""
           pressed={activeButtons["p_parcial"]}
           onClick={() => handleButtonPress("p_parcial", "Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL", handleNextStep2)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="p_no_funcional"
           title="Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL"
           displayText=""
           pressed={activeButtons["p_no_funcional"]}
           onClick={() => handleButtonPress("p_no_funcional", "Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL", handleNextStep2)}
         />
-        <ConclusionButton
+        <ConclusionButtonR
           value="nula"
           title="NULA (EN FASE DE SECUELA DEFINITIVA)"
           displayText=""
@@ -2790,7 +2790,7 @@ const StepE2 = ({  handlePrevStep2, handleNextStep2}) => {
 
 const StepF1 = ({ handlePrevStep1, handleNextStep1 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
-  const { updateConclusions } = useContext(ReportContext);
+  const { updateConclusions } = useContext(ReportContextR);
 
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -2820,9 +2820,9 @@ const StepF1 = ({ handlePrevStep1, handleNextStep1 }) => {
         REINERVACION
       </h1>
       <div>
-      <ConclusionButton value='r_abundante' title='REINERVACION COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", "REINERVACION COLATERAL COMPENSATORIA ABUNDANTE", handleNextStep1)}/>
-      <ConclusionButton value='r_minima' title='REINERVACION COLATERAL COMPENSATORIA MINIMA' displayText='MINIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "REINERVACION COLATERAL COMPENSATORIA MINIMA", handleNextStep1)}/>
-      <ConclusionButton value='r_ausante' title='REINERVACION COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "REINERVACION COLATERAL COMPENSATORIA AUSENTE", handleNextStep1)}/>
+      <ConclusionButtonR value='r_abundante' title='REINERVACION COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", "REINERVACION COLATERAL COMPENSATORIA ABUNDANTE", handleNextStep1)}/>
+      <ConclusionButtonR value='r_minima' title='REINERVACION COLATERAL COMPENSATORIA MINIMA' displayText='MINIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "REINERVACION COLATERAL COMPENSATORIA MINIMA", handleNextStep1)}/>
+      <ConclusionButtonR value='r_ausante' title='REINERVACION COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "REINERVACION COLATERAL COMPENSATORIA AUSENTE", handleNextStep1)}/>
       </div>
       
     </div>

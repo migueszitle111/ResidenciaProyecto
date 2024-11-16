@@ -283,7 +283,7 @@ const Reporte = () => {
             {
               expectedValue: 'TORACICO_LARGO',
               image: {
-                src: 'NeuropatiaImg/NO_Torácicolargo.png',
+                src: 'NeuropatiaImg/NO_Toracico_largo.png',
                 alt: 'Modelo',
               }
             },
@@ -308,13 +308,13 @@ const Reporte = () => {
                 alt: 'Modelo',
               }
             },
-            {
-              expectedValue: 'FEMOROCUTÁNEO_LATERAL',
-              image: {
-                src: 'NeuropatiaImg/NO_Femorocutáneo femoral.png',
-                alt: 'Modelo',
-              }
-            },
+            //{
+            //  expectedValue: 'FEMOROCUTÁNEO_LATERAL',
+            //  image: {
+            //    src: 'NeuropatiaImg/NO_Femorocutáneo femoral.png',
+            //    alt: 'Modelo',
+          //  }
+           // },
             {
               expectedValue: 'ILIOINGUINAL',
               image: {
@@ -353,17 +353,180 @@ const Reporte = () => {
             {
               expectedValue: 'MED_DERECHA',
               image: {
-                src: 'NeuropatiaImg\Nervio Rojo\DERECHA\Mediano.png',
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Mediano.png',
                 alt: 'Modelo',
               }
             },
             {
               expectedValue: 'MED_IZQUIERDA',
               image: {
-                src: 'NeuropatiaImg\Nervio Rojo\IZQUIERDA\Mediano.png',
+                src: 'NeuropatiaImg\NervioRojo\IZQUIERDA\Mediano.png',
                 alt: 'Modelo',
               }
             },
+
+
+// Imagenes de Generalizada Izquierda
+
+            {
+              expectedValue: 'ACCE_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Accesorio.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'ANTEBRLATE_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Antebraquial medial.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'ANTEBRMEDIAL_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Antebraquial medial.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'AXILAR_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Axilar.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'CIATICO_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Ciatico.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'FACIAL_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Facial.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'FEMORAL_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Femoral.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'FEMOROCUTANEO_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Femorocutáneo lateral.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'FRENICO_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Frenico.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'ILIO_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\GF-ILIO.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'MEDIANO_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Mediano.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'MUSCUTANEO_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Musculocutaneo.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'OBTUUADOR_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Obturador.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'PERONEO_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Peroneo.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'PUDENDO_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Pudendo.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'RADIAL_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Radial.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'SUPRAESCAPULAR_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Supraescapular.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'TIBIAL_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Tibial.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'TORACICO_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Toracico largo.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'TORACODORSAL_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Toracodorsal.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'ULNAR_DERECHA',
+              image: {
+                src: 'NeuropatiaImg\NervioRojo\DERECHA\Ulnar.png',
+                alt: 'Modelo',
+              }
+            },
+
+
+
+
+
+
+
+
+
+
+
+
             
           ]}
         />

@@ -5,7 +5,7 @@ import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botto
 
 export function checkDivs(copyConclusions) {
 
-  if (copyConclusions.includes('MEDIANO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('MEDIANO IZQUIERDO, FOCALIZADA A NIVEL DE')||copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.2%', left: '57.2%', borderRadius: '50%' }}
@@ -147,7 +147,7 @@ export function checkDivs(copyConclusions) {
       </>
     );
   }
-  if (copyConclusions.includes('MEDIANO DERECHO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('MEDIANO DERECHO, FOCALIZADA A NIVEL DE')||copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.2%', left: '41.4%', borderRadius: '50%' }}
@@ -286,7 +286,7 @@ export function checkDivs(copyConclusions) {
     );
 
   }
-  if (copyConclusions.includes('ACCESORIO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('ACCESORIO IZQUIERDO, FOCALIZADA A NIVEL DE')||copyConclusions.includes('ACCESORIO BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '14.5%', left: '51.4%', borderRadius: 100, }}
@@ -297,7 +297,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('ACCESORIO DERECHO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('ACCESORIO DERECHO, FOCALIZADA A NIVEL DE')||copyConclusions.includes('ACCESORIO BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '14.5%', left: '47.4%', borderRadius: 100, }}
@@ -308,7 +308,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILAR IZQUIERDO, FOCALIZADA A NIVEL DE')) {// FALTA VERIFICAR
+  if (copyConclusions.includes('AXILAR IZQUIERDO, FOCALIZADA A NIVEL DE')||copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL DE') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '18.9%', left: '58.8%', borderRadius: 100, }}
@@ -328,7 +328,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILAR DERECHO, FOCALIZADA A NIVEL DE')) {// FALTA 
+  if (copyConclusions.includes('AXILAR DERECHO, FOCALIZADA A NIVEL DE')||copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL DE') ) {// FALTA 
     return (
       <>
         <div style={{ position: 'absolute', top: '18.9%', left: '39.8%', borderRadius: 100, }}
@@ -351,7 +351,7 @@ export function checkDivs(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}><NerviusButton value='car' title='AXILAR,' displayText=' ' /></div>
       </>);
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, FOCALIZADA A NIVEL DE')||copyConclusions.includes('MUSCULOCUTÁNEO BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL DE') ){
     return (<>
       <div style={{ position: 'absolute', top: '17.1%', left: '55.3%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButton value='car' title='APROXIMAL A SU EMERGENCIA,' displayText=' ' /></div>
@@ -415,7 +415,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO DERECHO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('MUSCULOCUTÁNEO DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('MUSCULOCUTÁNEO BILATERAL CON PREDOMINIO DERECHO,FOCALIZADA A NIVEL DE') ){
     return (<>
       <div style={{ position: 'absolute', top: '17.1%', left: '43.3%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButton value='car' title='APROXIMAL A SU EMERGENCIA,' displayText=' ' /></div>
@@ -479,7 +479,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL DERECHO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('RADIAL DERECHO, FOCALIZADA A NIVEL DE') || copyConclusions.includes('RADIAL BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '18.3%', left: '38.5%', borderRadius: '50%', }}
@@ -564,7 +564,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL IZQUIERDO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('RADIAL IZQUIERDO, FOCALIZADA A NIVEL DE')  || copyConclusions.includes('RADIAL BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '18.3%', left: '59.9%', borderRadius: '50%', }}
@@ -645,7 +645,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, FOCALIZADA A NIVEL DE')  || copyConclusions.includes('SUPRAESCAPULAR BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '15.3%', left: '52.7%', borderRadius: 100, }}
@@ -672,7 +672,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR DERECHO, FOCALIZADA A NIVEL DE')) {
+  if (copyConclusions.includes('SUPRAESCAPULAR DERECHO, FOCALIZADA A NIVEL DE')|| copyConclusions.includes('SUPRAESCAPULAR BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '15.3%', left: '45.7%', borderRadius: 100, }}
         className={`dont-print-Nervius`}><NerviusButton value='car' title='INMEDIATO A SU EMERGENCIA, RAMA SUPRAESPINOSO,' displayText=' ' /></div>

@@ -1,0 +1,779 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btn1, .btn2, .btn3, .btn4, .btn5, .btn6, .btn7, .btn8, .btn9, .btn10,
+    .btn11, .btn12, .btn13, .btn14, .btn15, .btn16, .btn17, .btn18, .btn19, .btn20,
+    .btn21, .btn22, .btn23, .btn24, .btn25, .btn26, .btn27, .btn28, .btn29, .btn30,
+    .btn31, .btn32, .btn33, .btn34, .btn35, .btn36, .btn37, .btn38, .btn39, .btn40,
+    .btn41, .btn42, .btn43, .btn44, .btn45 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btn1, .btn2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+
+/* Botón 1 */
+.btn1 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(418%, -215%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btn1:hover {
+    background-color: rgb(0, 0, 0);
+    font-size: 30px;
+    height: 3.2vw; /* Tamaño reducido */
+    width: 3.2vw;
+    transform: translate(400%, -220%);
+    color: white;
+    font-family: 'Times New Roman'
+}
+
+/* Botón 2 */
+.btn2 {
+    position: absolute;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-20%, 222%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+}
+.btn2:hover {
+    background-color: rgb(86, 143, 86);
+    font-size: 30px;
+    height: 3.7vw; /* Tamaño reducido */
+    width: 3.7vw;
+    transform: translate(-20%, 190%);
+    color: black;
+    font-family: 'Times New Roman'
+}
+
+/* Botón 3 */
+.btn3 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(430%, -250%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btn3:hover {
+    background-color: rgb(196, 86, 12);
+    font-size: 30px;
+    height: 3.2vw; /* Tamaño reducido */
+    width: 3.2vw;
+    transform: translate(400%, -250%);
+    color: white;
+    font-family: 'Times New Roman'
+}
+
+.btn4 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-510%, 160%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btn4:hover {
+    background-color: rgb(182, 182, 182);
+    font-size: 30px;
+    height: 3.2vw; /* Tamaño reducido */
+    width: 3.2vw;
+    transform: translate(-460%, 140%);
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: bold;
+}
+
+.btnI1 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(818%, -415%);
+    background-color: cadetblue;
+    border: none;
+    border-radius: 20%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnI2 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(930%, -415%);
+    background-color: rgb(70, 69, 69);
+    border: none;
+    border-radius: 20%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+/* ################################# Botones de la segunda imagen #########################*/
+
+.btn5 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(240%, -175%);
+    background-color:transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    font-size: 1.5vw;
+    color: transparent;
+}
+
+.btn6 {
+    position: absolute;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-74%, 245%);
+    background-color:transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+}
+
+.btn7 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-577%, 175%);
+    background-color:transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+}
+
+.btn8 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(480%, -205%);
+    background-color:transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+}
+
+.btn9 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-74%, 138%);
+    background-color:transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+}
+
+/* ################################# Botones de la tercera imagen #########################*/
+
+.btn10 {
+    position: absolute;
+    height: 2vw; /* Tamaño reducido */
+    width: 2vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(685%, -110%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn11 {
+    position: absolute;
+    height: 2.5vw; /* Tamaño reducido */
+    width: 2.5vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(350%, 255%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn12 {
+    position: absolute;
+    height: 2vw; /* Tamaño reducido */
+    width: 2vw;
+    top: 10%;
+    left: 10%;
+    transform: translate(155%, 880%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn13 {
+    position: absolute;
+    height: 2vw; /* Tamaño reducido */
+    width: 2vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(840%, -145%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn14 {
+    position: absolute;
+    height: 2vw; /* Tamaño reducido */
+    width: 2vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(148%, 355%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn15 {
+    position: absolute;
+    height: 2vw; /* Tamaño reducido */
+    width: 2vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(480%, 160%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* ################################# Botones de la cuarta imagen #########################*/
+.btn16 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-710%, 465%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn17 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-490%, 580%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn18 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-805%, 260%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn19 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-760%, 40%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn20 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-500%, -80%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn21 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-296%, -65%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn22 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-20%, -325%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn23 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(75%, -240%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn24 {
+    position: absolute;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(70%, 275%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn25 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(490%, 155%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* ################################# Botones de la Quinta imagen #########################*/
+.btn26 {
+    position: absolute;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(115%, 350%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn27 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-340%, 275%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn28 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-340%, 160%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn29 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-5%, -165%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn30 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(65%, -240%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* ################################# Botones de la Sexta imagen #########################*/
+.btn31 {
+    position: absolute;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-555%, 90%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn32 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-370%, 310%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn33 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-370%, 190%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn34 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(410%, 510%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn35 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(600%, 525%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* ################################# Botones de la Septima imagen #########################*/
+.btn36 {
+    position: absolute;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-65%, 25%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn37 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-324%, 365%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn38 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-324%, 215%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn39 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-440%, 215%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn40 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-440%, 365%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn41 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(120%, 350%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn42 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(120%, 235%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* ################################# Botones de la Octava imagen #########################*/
+.btn43 {
+    position: absolute;
+    height: 2.5vw; /* Tamaño reducido */
+    width: 2.5vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-200%, -30%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn44 {
+    position: absolute;
+    height: 2vw; /* Tamaño reducido */
+    width: 2vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -500%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btn45 {
+    position: absolute;
+    height: 2vw; /* Tamaño reducido */
+    width: 2vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(-10%, -270%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.text-box {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 27vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(31, 30, 30, 0.719);
+    color: white;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+    border: 1px solid #ddd;
+}
+
+

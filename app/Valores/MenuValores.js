@@ -1,108 +1,108 @@
-import React, { useState } from "react";
 import Image from "next/image";
-import EditorFacial from "./Componentes/Neurolografia/Craneales/EditorFacial";
-import EditorTrigemino from "./Componentes/Neurolografia/Craneales/EditorTrigemino";
-import EditorAccesorioEspinal from "./Componentes/Neurolografia/Craneales/EditorAccesorioEspinal";
-import EditorAuricular from "./Componentes/Neurolografia/Cervical/EditorAuricular";
-import EditorFrenico from "./Componentes/Neurolografia/Cervical/EditorFrenico";
+import { useState } from "react";
+import EditorCervicalCrani from "./Componentes/Miografia/Craniobulbar/EditorCervicalCrani";
+import EditorFacialCraniobulbar from "./Componentes/Miografia/Craniobulbar/EditorFacialCraniomulbar";
+import EditorFrenicoCrani from "./Componentes/Miografia/Craniobulbar/EditorFrenicoCrani";
+import EditorLingualCrani from "./Componentes/Miografia/Craniobulbar/EditorLingualCrani";
+import EditorTrigeminoCrani from "./Componentes/Miografia/Craniobulbar/EditorTrigeminoCrani";
+import EditorCiaticoIdferior from "./Componentes/Miografia/Inferior/EditorCiaticoibferior";
+import EditorFemoralInferior from "./Componentes/Miografia/Inferior/EditorFemoralinferior";
+import EditorGluetoinferior from "./Componentes/Miografia/Inferior/EditorGluteoinferior";
+import EditorGluteosuperior from "./Componentes/Miografia/Inferior/EditorGluteosuperior";
+import EditorObturador from "./Componentes/Miografia/Inferior/EditorObturador";
+import EditorPeroneoComunInferior from "./Componentes/Miografia/Inferior/EditorPeroneoComunInferior";
+import EditorPudendo from "./Componentes/Miografia/Inferior/EditorPudendo";
+import EditorTibialInferior from "./Componentes/Miografia/Inferior/EditorTibialInferior";
+import EditorAxilarSuperior from "./Componentes/Miografia/Superior/EditorAxilarSuperior";
+import EditorDorsalSuperior from "./Componentes/Miografia/Superior/EditorDorsalSuperior";
+import EditorMedianoSuperior from "./Componentes/Miografia/Superior/EditorMedianoSuperior";
+import EditorMusculocutaneoSuperior from "./Componentes/Miografia/Superior/EditorMusculocutaneoSuperior";
+import EditorPectoral from "./Componentes/Miografia/Superior/EditorPectoral";
+import EditorRadialSuperior from "./Componentes/Miografia/Superior/EditorRadialSuperior";
+import EditorSupraescapularSuperior from "./Componentes/Miografia/Superior/EditorSupraescapularSuperior";
+import EditorToracicoLargo from "./Componentes/Miografia/Superior/EditorToracicoLargo";
+import EditorUlnarSuperior from "./Componentes/Miografia/Superior/EditorUlnarSuperior";
+import EditorSubescapular from "./Componentes/Miografia/Superior/EditrSubescapular";
+import EditorParaespinalesTronco from "./Componentes/Miografia/Tronco/EditorParaespinalesTronco";
+import EditorAxilar from "./Componentes/Neurolografia/Braquial/EditorAxilar";
 import EditorCervicales from "./Componentes/Neurolografia/Braquial/EditorCervicales";
+import EditorCutaneoBranquial from "./Componentes/Neurolografia/Braquial/EditorCutaneoBranquial";
+import EditorDorsalEsca from "./Componentes/Neurolografia/Braquial/EditorDorsalEsca";
 import EditorDorsalEscapula from "./Componentes/Neurolografia/Braquial/EditorDorsalEscapula";
+import EditorMediano from "./Componentes/Neurolografia/Braquial/EditorMediano";
+import EditorMusculocutaneo from "./Componentes/Neurolografia/Braquial/EditorMusculocutaneo";
+import EditorRadial from "./Componentes/Neurolografia/Braquial/EditorRadial";
 import EditorSupaescapular from "./Componentes/Neurolografia/Braquial/EditorSupaescapular";
 import EditorToracodorsal from "./Componentes/Neurolografia/Braquial/EditorToracodorsal";
-import EditorMusculocutaneo from "./Componentes/Neurolografia/Braquial/EditorMusculocutaneo";
-import EditorAxilar from "./Componentes/Neurolografia/Braquial/EditorAxilar";
-import EditorRadial from "./Componentes/Neurolografia/Braquial/EditorRadial";
-import EditorMediano from "./Componentes/Neurolografia/Braquial/EditorMediano";
 import EditorUlnar from "./Componentes/Neurolografia/Braquial/EditorUlnar";
-import EditorIntercostales from "./Componentes/Neurolografia/Toracico/EditorIntercostales";
-import EditorFemorocutaneo from "./Componentes/Neurolografia/Lumbar/EditorFemorocutaneo";
+import EditorAuricular from "./Componentes/Neurolografia/Cervical/EditorAuricular";
+import EditorFrenico from "./Componentes/Neurolografia/Cervical/EditorFrenico";
+import EditorAccesorioEspinal from "./Componentes/Neurolografia/Craneales/EditorAccesorioEspinal";
+import EditorFacial from "./Componentes/Neurolografia/Craneales/EditorFacial";
+import EditorTrigemino from "./Componentes/Neurolografia/Craneales/EditorTrigemino";
 import EditorFemoral from "./Componentes/Neurolografia/Lumbar/EditorFemoral";
+import EditorFemorocutaneo from "./Componentes/Neurolografia/Lumbar/EditorFemorocutaneo";
 import EditorSafeno from "./Componentes/Neurolografia/Lumbar/EditorSafeno";
-import EditorLumbosacras from "./Componentes/Neurolografia/Lumbosacro/EditorLumbosacras";
 import EditorCiatico from "./Componentes/Neurolografia/Lumbosacro/EditorCiatico";
+import EditorInterdigital from "./Componentes/Neurolografia/Lumbosacro/EditorInterdigital";
+import EditorLumbosacras from "./Componentes/Neurolografia/Lumbosacro/EditorLumbosacras";
 import EditorPeroneo from "./Componentes/Neurolografia/Lumbosacro/EditorPeroneo";
-import EditorTibial from "./Componentes/Neurolografia/Lumbosacro/EditorTibial";
 import EditorPlantar from "./Componentes/Neurolografia/Lumbosacro/EditorPlantar";
 import EditorSural from "./Componentes/Neurolografia/Lumbosacro/EditorSural";
-import EditorInterdigital from "./Componentes/Neurolografia/Lumbosacro/EditorInterdigital";
+import EditorTibial from "./Componentes/Neurolografia/Lumbosacro/EditorTibial";
 import EditorCutaneaPosterior from "./Componentes/Neurolografia/Sacro/EditorCutaneaPosterior";
 import EditorDorsaPene from "./Componentes/Neurolografia/Sacro/EditorDorsaPene";
-import EditorFacialCraniobulbar from "./Componentes/Miografia/Craniobulbar/EditorFacialCraniomulbar";
-import EditorTrigeminoCrani from "./Componentes/Miografia/Craniobulbar/EditorTrigeminoCrani";
-import EditorLingualCrani from "./Componentes/Miografia/Craniobulbar/EditorLingualCrani";
-import EditorCervicalCrani from "./Componentes/Miografia/Craniobulbar/EditorCervicalCrani";
-import EditorFrenicoCrani from "./Componentes/Miografia/Craniobulbar/EditorFrenicoCrani";
-import EditorMedianoSuperior from "./Componentes/Miografia/Superior/EditorMedianoSuperior";
-import EditorUlnarSuperior from "./Componentes/Miografia/Superior/EditorUlnarSuperior";
-import EditorRadialSuperior from "./Componentes/Miografia/Superior/EditorRadialSuperior";
-import EditorAxilarSuperior from "./Componentes/Miografia/Superior/EditorAxilarSuperior";
-import EditorSupraescapularSuperior from "./Componentes/Miografia/Superior/EditorSupraescapularSuperior";
-import EditorMusculocutaneoSuperior from "./Componentes/Miografia/Superior/EditorMusculocutaneoSuperior";
-import EditorDorsalSuperior from "./Componentes/Miografia/Superior/EditorDorsalSuperior";
-import EditorToracicoLargo from "./Componentes/Miografia/Superior/EditorToracicoLargo";
-import EditorSubescapular from "./Componentes/Miografia/Superior/EditrSubescapular";
-import EditorPectoral from "./Componentes/Miografia/Superior/EditorPectoral";
-import EditorCiaticoIdferior from "./Componentes/Miografia/Inferior/EditorCiaticoibferior";
-import EditorTibialInferior from "./Componentes/Miografia/Inferior/EditorTibialInferior";
-import EditorPeroneoComunInferior from "./Componentes/Miografia/Inferior/EditorPeroneoComunInferior";
-import EditorGluteosuperior from "./Componentes/Miografia/Inferior/EditorGluteosuperior";
-import EditorGluetoinferior from "./Componentes/Miografia/Inferior/EditorGluteoinferior";
-import EditorPudendo from "./Componentes/Miografia/Inferior/EditorPudendo";
-import EditorFemoralInferior from "./Componentes/Miografia/Inferior/EditorFemoralinferior";
-import EditorObturador from "./Componentes/Miografia/Inferior/EditorObturador";
-import EditorParaespinalesTronco from "./Componentes/Miografia/Tronco/EditorParaespinalesTronco";
-import EditorMedianoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorMedianoSoma";
-import EditorUlrnaSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorUlrnaSoma";
-import EditorTibialSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorTibialSoma";
-import EditorPeroneoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorPeroneoSoma";
-import EditorTrigeminoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorTrigeminoSoma";
-import EditorPudendoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorPudendoSoma";
-import EditorRadialSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorRadialSoma";
-import EditorMusculocutaneoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorMusculocutaneoSoma";
-import EditorFemorocutaneoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorFemorocutaneoSoma";
-import EditorSafenoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorSafenoSoma";
-import EditorPeroneoSuperficialSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorPeroneoSuperficialSoma";
-import EditorSuralSomatosensores from "./Componentes/PotencialesProvocados/Somatosensores/NervioSuralSomatosensores";
-import EditorPlantarSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorPlantarSoma";
-import EditorCalcaneoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorCalcaneoSoma";
-import EditorDermatomales from "./Componentes/PotencialesProvocados/Somatosensores/EditorDermatomalesSoma";
-import EditorTalloCerebral from "./Componentes/PotencialesProvocados/Auditivos/EditorTalloCerebral";
+import EditorIntercostales from "./Componentes/Neurolografia/Toracico/EditorIntercostales";
 import EditorLatenciaMediana from "./Componentes/PotencialesProvocados/Auditivos/EditorLatenciaMediana";
 import EditorLatenciaLarga from "./Componentes/PotencialesProvocados/Auditivos/EditorLetenciaLarga";
+import EditorTalloCerebral from "./Componentes/PotencialesProvocados/Auditivos/EditorTalloCerebral";
+import EditorPAuditivo from "./Componentes/PotencialesProvocados/CognitivosRelacionados/EditorPAuditivo";
+import EditorPVisual from "./Componentes/PotencialesProvocados/CognitivosRelacionados/EditorPVisual";
+import EditorFacialMotores from "./Componentes/PotencialesProvocados/Motores/EditorFacialMotores";
+import EditorInferioresMotores from "./Componentes/PotencialesProvocados/Motores/EditorInferiorMotores";
+import EditorSuperiorMotores from "./Componentes/PotencialesProvocados/Motores/EditorSuperiorMotores";
+import EditorCalcaneoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorCalcaneoSoma";
+import EditorDermatomales from "./Componentes/PotencialesProvocados/Somatosensores/EditorDermatomalesSoma";
+import EditorFemorocutaneoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorFemorocutaneoSoma";
+import EditorMedianoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorMedianoSoma";
+import EditorMusculocutaneoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorMusculocutaneoSoma";
+import EditorPeroneoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorPeroneoSoma";
+import EditorPeroneoSuperficialSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorPeroneoSuperficialSoma";
+import EditorPlantarSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorPlantarSoma";
+import EditorPudendoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorPudendoSoma";
+import EditorRadialSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorRadialSoma";
+import EditorSafenoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorSafenoSoma";
+import EditorTibialSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorTibialSoma";
+import EditorTrigeminoSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorTrigeminoSoma";
+import EditorUlrnaSoma from "./Componentes/PotencialesProvocados/Somatosensores/EditorUlrnaSoma";
+import EditorSuralSomatosensores from "./Componentes/PotencialesProvocados/Somatosensores/NervioSuralSomatosensores";
 import EditorDamero from "./Componentes/PotencialesProvocados/Visuales/EditorDamero";
 import EditorLeds from "./Componentes/PotencialesProvocados/Visuales/EditorLeds";
-import EditorSuperiorMotores from "./Componentes/PotencialesProvocados/Motores/EditorSuperiorMotores";
-import EditorInferioresMotores from "./Componentes/PotencialesProvocados/Motores/EditorInferiorMotores";
-import EditorFacialMotores from "./Componentes/PotencialesProvocados/Motores/EditorFacialMotores";
-import EditorPVisual from "./Componentes/PotencialesProvocados/CognitivosRelacionados/EditorPVisual";
-import EditorPAuditivo from "./Componentes/PotencialesProvocados/CognitivosRelacionados/EditorPAuditivo";
-import EditorFacialEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorFacialEstimulacion";
-import EditorDistalEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorDistalEstimulacion";
-import EditorProximalEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorProximalEstimulacion";
-import EditorProvocativosEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorProvocativosEstimulacion";
-import EditorAltasEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorAltasEstimulacion";
-import EditorEjercicioEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorEjercicioEstimulacion";
-import EditorFibraUnica from "./Componentes/PruebasEspeciales/FibraUnica/EditorFibraUnica";
-import EditorDensidadFibras from "./Componentes/PruebasEspeciales/FibraUnica/EditorDensidadFibras";
-import EditorMacroEstimulacion from "./Componentes/PruebasEspeciales/FibraUnica/EditorMacroEstimulacion";
-import EditorSinapticaPrueba from "./Componentes/PruebasEspeciales/Autonomicos/EditorSinapticaPrueba";
-import EditorPupilasPruebas from "./Componentes/PruebasEspeciales/Autonomicos/EditorPupilarPruebas";
-import EditorVariabilidadPruebas from "./Componentes/PruebasEspeciales/Autonomicos/EditorVariabilidadPruebas";
 import EditorPeriodoPrueba from "./Componentes/PruebasEspeciales/Autonomicos/EditorPeriodoPrueba";
-import EditorReflejoTardias from "./Componentes/PruebasEspeciales/RespuestasTardias/EditorReflejoTardias";
-import EditorOndaF from "./Componentes/PruebasEspeciales/RespuestasTardias/EditorOndaF";
-import EditorReflejoH from "./Componentes/PruebasEspeciales/RespuestasTardias/EditorReflejoH";
-import EditorBulbocavernoso from "./Componentes/PruebasEspeciales/RespuestasTardias/EditorBulbocavernoso";
+import EditorPupilasPruebas from "./Componentes/PruebasEspeciales/Autonomicos/EditorPupilarPruebas";
+import EditorSinapticaPrueba from "./Componentes/PruebasEspeciales/Autonomicos/EditorSinapticaPrueba";
+import EditorVariabilidadPruebas from "./Componentes/PruebasEspeciales/Autonomicos/EditorVariabilidadPruebas";
+import EditorGluteoEsotericas from "./Componentes/PruebasEspeciales/Esotericas/EditorGluteoEsotericas";
+import EditorIntercostalesEsotericas from "./Componentes/PruebasEspeciales/Esotericas/EditorIntercostalesEsotericas";
+import EditorLaringeoEsotericas from "./Componentes/PruebasEspeciales/Esotericas/EditorLaringeoEsotericas";
 import EditorMasateroEsotericas from "./Componentes/PruebasEspeciales/Esotericas/EditorMaseteroEsotericas";
 import EditorPalmoEsotericas from "./Componentes/PruebasEspeciales/Esotericas/EditorPalmoEsotericas";
-import EditorLaringeoEsotericas from "./Componentes/PruebasEspeciales/Esotericas/EditorLaringeoEsotericas";
-import EditorRaicesNerviosasEso from "./Componentes/PruebasEspeciales/Esotericas/EditorRaicesNerviosasEso";
-import EditorIntercostalesEsotericas from "./Componentes/PruebasEspeciales/Esotericas/EditorIntercostalesEsotericas";
-import EditorGluteoEsotericas from "./Componentes/PruebasEspeciales/Esotericas/EditorGluteoEsotericas";
 import EditorPudendoEsotericas from "./Componentes/PruebasEspeciales/Esotericas/EditorPudendoEsotericas";
+import EditorRaicesNerviosasEso from "./Componentes/PruebasEspeciales/Esotericas/EditorRaicesNerviosasEso";
+import EditorAltasEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorAltasEstimulacion";
+import EditorDistalEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorDistalEstimulacion";
+import EditorEjercicioEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorEjercicioEstimulacion";
+import EditorFacialEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorFacialEstimulacion";
+import EditorProvocativosEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorProvocativosEstimulacion";
+import EditorProximalEstimulacion from "./Componentes/PruebasEspeciales/EstilumacionRepetitiva/EditorProximalEstimulacion";
+import EditorDensidadFibras from "./Componentes/PruebasEspeciales/FibraUnica/EditorDensidadFibras";
+import EditorFibraUnica from "./Componentes/PruebasEspeciales/FibraUnica/EditorFibraUnica";
+import EditorMacroEstimulacion from "./Componentes/PruebasEspeciales/FibraUnica/EditorMacroEstimulacion";
 import EditorTremorMovimiento from "./Componentes/PruebasEspeciales/Movimiento/EditorTremorMovimiento";
-import EditorDorsalEsca from "./Componentes/Neurolografia/Braquial/EditorDorsalEsca";
-import EditorCutaneoBranquial from "./Componentes/Neurolografia/Braquial/EditorCutaneoBranquial";
+import EditorBulbocavernoso from "./Componentes/PruebasEspeciales/RespuestasTardias/EditorBulbocavernoso";
+import EditorOndaF from "./Componentes/PruebasEspeciales/RespuestasTardias/EditorOndaF";
+import EditorReflejoH from "./Componentes/PruebasEspeciales/RespuestasTardias/EditorReflejoH";
+import EditorReflejoTardias from "./Componentes/PruebasEspeciales/RespuestasTardias/EditorReflejoTardias";
 
 const MenuValores = () => {
   // Estado para almacenar la opción seleccionada en el menú
@@ -374,7 +374,7 @@ const MenuValores = () => {
     </div>
     <div className="flex">
       {/*Contenido del div izquierdo */}
-      <div className="w-1/3 max-h-full">
+      <div className="w-1/4 max-h-full">
 
         {/*Botones fijos */}
 {/*      <div className="flex item-center justify-center">
@@ -499,7 +499,7 @@ const MenuValores = () => {
 
             {/*Miograia */}
             {ShowMiografiaMap && ( // Verifica si ShowMiografiaMap es verdadero
-              <div className="bg-[#404040] mt-1 p-2 rounded-bl-lg rounded-tr-lg text-white text-justify flex flex-col">
+              <div className="bg-[#2c2c2c] mt-1 p-2 rounded-bl-lg rounded-tr-lg text-white text-justify flex flex-col">
                 <h2 className="text-lg mb-4 truncate lg:truncate xl:truncate">
                   Miografía {/* Título del menú */}
                 </h2>
@@ -520,7 +520,7 @@ const MenuValores = () => {
                           toggleSubMenuVisibility(menuOption.Menu); // Muestra u oculta el submenú
                         }}
                       >
-                        ➤ {menuOption.Menu}
+                        ▷ {menuOption.Menu}
                         {/* Muestra el nombre de la opción de menú */}
                       </button>
 
@@ -571,7 +571,7 @@ const MenuValores = () => {
                         toggleSubMenuVisibility(menuOption.Menu);
                       }}
                     >
-                      ➤ {menuOption.Menu}
+                      ➢ {menuOption.Menu}
                     </button>
 
                     {subMenuVisibility[menuOption.Menu] && (
@@ -616,7 +616,7 @@ const MenuValores = () => {
                         toggleSubMenuVisibility(menuOption.Menu);
                       }}
                     >
-                      ➤ {menuOption.Menu}
+                      ➢ {menuOption.Menu}
                     </button>
 
                     {subMenuVisibility[menuOption.Menu] && (
@@ -646,7 +646,7 @@ const MenuValores = () => {
         </div>
       </div>
       {/* Contenido del div derecho */}
-      <div className= "w-2/3 max-h-full">
+      <div className= "w-3/4 max-h-full">
           {/* Página disponible */}
           {!selectedOption && (
             <div className="flex min-h-screen flex-col items-center p-10">

@@ -1,25 +1,23 @@
 "use client";
-import React from "react";
+import Footer from "../components/Footer";
 import Overhead from "../components/Overhead";
 import OverheadMenu from "../components/OverheadMenu";
 import SubMenu from "../components/Submenu";
-import MenuValores from "./MenuValores";
-import Footer from "../components/Footer";
+import SubMenuE from "./SubMenuE";
 
-export default function Valores() {
+export default function Reporte() {
   return (
-    <div className="Conteiner bg-[#000000cc]">
+    <div div className="Conteiner">
       <Overhead />
-        <OverheadMenu />
-          <hr className="bg-grey h-0.5" />
-          
+      <OverheadMenu />
+      <hr className="bg-white h-0.5" />
+      <div className="bg-[#000000CC]">
         <SubMenu />
-        <hr className="bg-grey h-0.5" />
-
-      <div className="Conteiner">
-        {/*Menú Valores */}
-        <div className="p-5">
-          <MenuValores />
+        <div className="items-center px-5 lg:px-10">
+          <div className="BannerTitlepage">
+            
+          </div>
+          <SubMenuE />
         </div>
       </div>
       <hr className="bg-white h-0.5" />

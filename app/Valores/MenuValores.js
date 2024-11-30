@@ -438,6 +438,28 @@ const MenuValores = () => {
               >
                 Pruebas Especiales
               </button>
+
+              {/* btn Pruebas Especiales */}
+              <button
+                className={`flex-1 bg-${
+                  ShowPruebasEspecialesMap ? "[#8F3400]" : "[#1c1c1c]"
+                } text-white p-2 rounded-tr-lg rounded-bl-lg mr-2 mb-2`}
+                onClick={ShowPruebasEspeciales}
+              >
+                Valores
+              </button>
+
+
+              {/* btn Pruebas Especiales */}
+              <button
+                className={`flex-1 bg-${
+                  ShowPruebasEspecialesMap ? "[#8F3400]" : "[#1c1c1c]"
+                } text-white p-2 rounded-tr-lg rounded-bl-lg mr-2 mb-2`}
+                onClick={ShowPruebasEspeciales}
+              >
+                Protocolo
+              </button>
+
             </div>
 
             {/*Divs Ocultos/mostrados */}

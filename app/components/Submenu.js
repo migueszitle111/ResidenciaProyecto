@@ -1,22 +1,21 @@
-import React from "react";
 import Image from "next/image";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 import "../globals.css";
 
 const Submenu = () => {
   const allpages = [
     {
-      name: "Valores",
-      imagen: "/assets/SubmenuSvg/Valores.svg",
-      path: "/Valores",
+      name: "Reporte",
+      imagen: "/assets/SubmenuSvg/mEDX_128_SNP.svg",
+      path: "/Reporte",
     },
     {
-      name: "Protocolos",
+      name: "Técnicas",
       imagen: "/assets/SubmenuSvg/Protocolos.svg",
-      path: "/Protocolos",
+      path: "/Tecnicas",
     },
     {
       name: "Videos",

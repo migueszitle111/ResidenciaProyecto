@@ -1,0 +1,352 @@
+/* Seccion de Datos de perfil y Titulo de reporte*/
+.head{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap : 10vh;
+  padding-top: 2vh;
+}
+
+.head h1{
+  font-size: 25px;
+}
+
+/* Titulo del reporte */
+.report-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1c1c1c;
+  color: rgb(255, 255, 255);
+  font-family: "Quando";
+  font-size: 25px;
+  height: 100%;
+  width: 90vh;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 0 15px;
+}
+
+/* Informacion acerca del usuario */
+.box-container {
+  display: flex;
+  background-color: #1c1c1c;
+  border: 2px solid ;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 50vh;
+}
+
+.box {
+  padding: 5px;
+  padding-left: 15px;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.data {
+  font-size: 12px;
+  text-align: left;
+  margin-bottom: 5px;
+  color : white;
+}
+
+/* Botones e Imagen */
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: auto;
+  align-items:flex-start;
+  justify-content: center;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  gap: 20px;
+}
+
+.vertical-container {
+  display: flex;
+  flex-direction: column;
+  height: 117.2vh;
+  width: 40vh;
+  background-color:#1C1C1C;
+  background-image: url('/assets/04_01_ Vector _ SVG/G_14.svg'); /* Ruta relativa a la carpeta public */
+  background-size: cover;  /*Ajustar tamaño de la imagen al contenedor */
+  /*background-repeat: repeat;*/
+  background-position: center; /* Centrar la imagen */
+  border-radius: 10px;
+}
+
+.image-container {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.info-box{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 20vh;
+  background-color: #1C1C1C;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.selected-words-box {
+  background-color: #eee;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  width: 100%; 
+  height: 100%; 
+  font-size: 14px;
+}
+
+.selected-words-box h2 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.selected-words-box ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.selected-words-box li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.con-img{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.info-container {
+  display: flex;
+  background-color: white;
+  align-items: left;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;  
+  margin: 10px;
+  height: 20vh;
+  
+
+  z-index: 1; 
+}
+
+.info-container textarea {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  text-align: justify;
+  background-color: transparent; 
+  resize: none; 
+  padding: 5px;
+}
+
+.print-button {
+  background-color: #1C1C1C;
+  padding: 8px;
+  color: white;
+  font-size: 18px;
+  text-align: left;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+}
+
+.print-button:hover {
+  background-color: #c44900;
+  color: white;
+}
+
+.print-button.active {
+  background-color: #c44900;
+  color: white;
+}
+
+.button-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 1vh;
+}
+
+.button-bar button, .button-bar input[type="file"], .button-bar label {
+  border-radius: 50%;
+  width: 55px; 
+  height: 55px; 
+  text-align: center;
+  margin : 10px;
+  border: 2px solid #c44900; 
+
+}
+
+.vertical-orinetation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;  
+}
+
+.conclusion-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #1C1C1C;
+  margin: 10px;
+}
+
+.dont-print {
+  display: visible;
+}
+
+.handle {
+  width: 10px;
+  height: 10px;
+  background: #f0f0f0;
+  border: 1px solid #999;
+  position: absolute;
+}
+
+.handle-n {
+  cursor: n-resize;
+  top: -5px;
+  left: 50%;
+  margin-left: -5px;
+}
+
+.handle-e {
+  cursor: e-resize;
+  top: 50%;
+  right: -5px;
+  margin-top: -5px;
+}
+
+.handle-s {
+  cursor: s-resize;
+  bottom: -5px;
+  left: 50%;
+  margin-left: -5px;
+}
+
+.handle-w {
+  cursor: w-resize;
+  top: 50%;
+  left: -5px;
+  margin-top: -5px;
+}
+
+.handle-ne {
+  cursor: ne-resize;
+  top: -5px;
+  right: -5px;
+}
+
+.handle-se {
+  cursor: se-resize;
+  bottom: -5px;
+  right: -5px;
+}
+
+.handle-sw {
+  cursor: sw-resize;
+  bottom: -5px;
+  left: -5px;
+}
+
+.handle-nw {
+  cursor: nw-resize;
+  top: -5px;
+  left: -5px;
+}
+
+/* Detalles referentes a la impresion */
+@media print {
+  .print {
+    display: none;
+  }
+  .dont-print {
+    display: none;
+  }
+  .image-container {
+    position: relative;
+    width: 530px;
+    height: 100%;
+  }
+  .handle {
+    position: relative;
+  }
+
+  .box-container {
+    position: absolute;
+    top: 0;
+    width: 40vh;
+    background: transparent;
+    background-color: white;
+    border: 2px solid white;
+    z-index: 1;
+  }
+
+  .info-container textarea {
+    position: bottom;
+    width: 100%;
+    height: 100%;
+    font-size: 10px;
+    background-color: transparent; 
+    resize: none; 
+    top: 4vh;
+  }
+
+.head{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap : 10vh;
+  }
+  
+  .rnd-image {
+    left: -725px !important;
+    top: -205px !important; 
+  }
+
+}

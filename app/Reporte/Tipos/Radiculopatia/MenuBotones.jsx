@@ -57,11 +57,12 @@ const useStep = () => {
   };
   const handleNextStep3 = () => {
     if (step === 'A') setStep('S1');
-    if (step === 'S1') setStep('C2');
+    if (step === 'S1') setStep('E3');
   };
   const handlePrevStep3 = () => {
 
     if (step === 'S1') setStep('A');
+    if (step === 'E3') setStep('S1');
   };
   return {
     step,
@@ -88,13 +89,14 @@ const SimpleMultiStepForm = () => {
         {step === 'C1' ? (<StepC1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'D' ? (<StepD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />) : null}
         {step === 'E' ? (<StepE handlePrevStep={handlePrevStep}  handlePrint={handlePrint}/>) : null}
+        {step === 'E3' ? (<StepE3 handlePrevStep3={handlePrevStep3} handleNextStep3={handleNextStep3}  handlePrint={handlePrint} />) : null}
         {step === 'D1' ? (<StepD1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'E1' ? (<StepE1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'F1' ? (<StepF1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'G1' ? (<StepG1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
         {step === 'B2' ? (<StepB2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
         {step === 'C2' ? (<StepC2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
-        {step === 'E2' ? (<StepE2 handlePrevStep2={handlePrevStep2}  handleNextStep2={handleNextStep2} />) : null}
+        {step === 'E2' ? (<StepE2 handlePrevStep2={handlePrevStep2}  handleNextStep2={handleNextStep2}  handlePrint={handlePrint} />) : null}
         {step === 'D2' ? (<StepD2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
         {step === 'S1' ? (<StepS1 handlePrevStep3={handlePrevStep3} handleNextStep3={handleNextStep3} />) : null}
       </div>
@@ -118,7 +120,6 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextSte
       nextStepFunction();
     }
   };
-
   return (
     <div>
       <br />
@@ -1142,7 +1143,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
         NIVEL
       </h1>
       <Accordion title='CERVICAL'>
-        <Accordion title='C4a' >
+        <Accordion title='C4' >
           <table cellpadding='3'>
               <td>
               
@@ -1917,6 +1918,46 @@ const StepE = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
     </div>
   );
 };
+
+const StepE3 = ({ handlePrevStep3, handleUndo, handleImageChange, handlePrint }) => {
+
+  const { setInitialConclusions } = useContext(ReportContextR); // Acceder a setInitialConclusions desde el contexto
+  const resetCopyConclusions = () => {
+    setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
+  };
+
+  return (
+    <div className='button-bar'>
+      <button 
+        onClick={() => { 
+          handlePrevStep3(); // Llamar a la función para el paso anterior
+          resetCopyConclusions(); // Resetea las conclusiones
+        }} 
+        id='prev' 
+        className={`print-button dont-print `}
+      >
+
+        <img src="/I_Out.svg" alt="Regresar" style={{filter: 'invert(1)'}} />
+      </button>
+
+      <button onClick={handlePrint} className={`print-button dont-print`}>
+        <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+      </button>
+
+      <button onClick={handleUndo} className={`print-button dont-print`}>
+        <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+      </button>
+
+      <label htmlFor="file-upload" className={`print-button`}>
+        <img src="/I_Folder.svg" alt="Subir" style={{filter: 'invert(1)'}} />
+      </label>
+
+      <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print`} style={{display: 'none'}} />
+    </div>
+  );
+};
+
+
 
 const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
   const { checkedStateLeft, checkedStateRight, setcheckedStateLeft, setcheckedStateRight } = useContext(CheckboxContext);

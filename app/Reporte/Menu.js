@@ -84,31 +84,32 @@ export default function Perfil() {
 
             {/* Boton con ruta */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-              <a href="./Visual">
+              <a href="./Reporte/Tipos/Visual">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">
                   Visual
                 </button>
               </a>
-              <a href="./Auditiva">
+              <a href="./Reporte/Tipos/Auditiva">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">
                   Auditiva
                 </button>
               </a>
-              <a href="./Somatosensorial">
+              <a href="./Reporte/Tipos/Somatosensorial">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">
                   Somatosensorial
                 </button>
               </a>
-              <a href="./Motores">
+              <a href="./Reporte/Tipos/Motores">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">
-                  Motores
+                  Motora Corticoespinal
                 </button>
               </a>
-              <a href="./Trigemino-Facial">
+              <a href="./Reporte/Tipos/TrigeminoFacial">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">
                   Trigémino-Facial
                 </button>
               </a>
+             
             </div>
           </div>
           <div className="w-full md:w-1/2 flex items-center justify-center relative">

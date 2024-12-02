@@ -431,7 +431,6 @@
 /* Detalles referentes a la impresion */
 @media print {
 
-
   .print {
     display: none;
   }
@@ -442,7 +441,7 @@
 
   .image-container {
     position: relative;
-    width: 750px;
+    width: 600px;
     height: 100%;
   }
 
@@ -461,13 +460,22 @@
   }
 
   .info-container textarea {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    font-size: 10px;
-    background-color: transparent;
+    position: bottom;
+    width: 92%;
+    height: 60%;
+    font-size: 14px;
+    text-align: justify; 
+    background-color: lightgreen;
     resize: none;
     top: 4vh;
+    margin-left: 15px;
+   
+    /*/* Para asegurar que el padding esté controlado */
+    padding: 10px;
+    /* Controla la altura de la línea del texto */
+    line-height: 1.5;  
+    /* Controla los bordes */   
+    box-sizing: border-box; /* Incluye el padding y borde en el tamaño total */
   }
 
 .head{

@@ -5,151 +5,241 @@ import { SegmentariaButton } from '@/app/components/ReportTemplate/Conclusions/B
 
 export function checkDivsSegmentar(copyConclusions) {
 
-  if (copyConclusions.includes('MEDIANO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {/* FALTA PERO YA ME CANSE */
+  if (copyConclusions.includes('MEDIANO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (
       <>
-        <div style={{ position: 'absolute', top: '18.2%', left: '57.2%', transform: 'rotate(60deg)', borderRadius: '50%' }}
+        <div style={{ position: 'absolute', top: '17.8%', left: '57.4%', transform: 'rotate(60deg)', borderRadius: '50%' }}
           className={`.dont-print-Nervius`}> <SegmentariaButton value='car' title='AXILAR,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '19.2%', left: '57.2%', transform: 'rotate(60deg)', borderRadius: '50%' }}
+        <div style={{ position: 'absolute', top: '18.2%', left: '57.7%', transform: 'rotate(60deg)', borderRadius: '50%' }}
           className={`.dont-print-Nervius`}> <SegmentariaButton value='car' title='AXILAR,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '18.9%', left: '58.1%', transform: 'rotate(60deg)' }}
+
+        <div style={{ position: 'absolute', top: '18.5%', left: '58.4%', transform: 'rotate(60deg)', borderRadius: '50%' }}
           className={`.dont-print-Nervius`}> <SegmentariaButton value='car' title='AXILAR,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '19.5%', left: '58.9%', transform: 'rotate(60deg)' }}
+
+        <div style={{ position: 'absolute', top: '19.2%', left: '59.4%', transform: 'rotate(60deg)', borderRadius: '50%' }}
+          className={`.dont-print-Nervius`}> <SegmentariaButton value='car' title='AXILAR,' displayText=' ' /> </div>
+        <div style={{ position: 'absolute', top: '18.9%', left: '59.1%', transform: 'rotate(60deg)' }}
+          className={`.dont-print-Nervius`}> <SegmentariaButton value='car' title='AXILAR,' displayText=' ' /> </div>
+
+        <div style={{ position: 'absolute', top: '19.5%', left: '59.9%', transform: 'rotate(60deg)' }}
           className={`.dont-print-Nervius`}> <SegmentariaButton value='car' title='AXILAR,' displayText=' ' />  </div>
-        <div style={{ position: 'absolute', top: '20.2%', left: '59.6%', transform: 'rotate(60deg)' }}
+        <div style={{ position: 'absolute', top: '19.8%', left: '60.3%', transform: 'rotate(60deg)' }}
           className={`.dont-print-Nervius`}> <SegmentariaButton value='car' title='AXILAR,' displayText=' ' />  </div>
 
-        <div style={{ position: 'absolute', top: '21.1%', left: '60.25%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '20.2%', left: '60.6%', transform: 'rotate(60deg)' }}
+          className={`.dont-print-Nervius`}> <SegmentariaButton value='car' title='AXILAR,' displayText=' ' />  </div>
+        <div style={{ position: 'absolute', top: '20.6%', left: '61.0%', transform: 'rotate(60deg)' }}
+          className={`.dont-print-Nervius`}> <SegmentariaButton value='car' title='AXILAR,' displayText=' ' />  </div>
+
+        <div style={{ position: 'absolute', top: '21.1%', left: '61.25%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '21.9%', left: '61.2%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '21.5%', left: '61.85%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
 
-        <div style={{ position: 'absolute', top: '22.6%', left: '61.9%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '21.9%', left: '62.2%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '22.2%', left: '62.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '22.6%', left: '62.9%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '23.4%', left: '62.5%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '23.0%', left: '63.2%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '24.2%', left: '63.1%', transform: 'rotate(60deg)', }}
+
+        <div style={{ position: 'absolute', top: '23.4%', left: '63.5%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '23.8%', left: '63.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '24.2%', left: '63.7%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`}  ><SegmentariaButton value='car' title='TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '25%', left: '63.4%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '24.6%', left: '63.8%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`}  ><SegmentariaButton value='car' title='TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
 
-        <div style={{ position: 'absolute', top: '25.8%', left: '63.8%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '25%', left: '64.0%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}  ><SegmentariaButton value='car' title='TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '25.4%', left: '64.0%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}  ><SegmentariaButton value='car' title='TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '25.8%', left: '64.3%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`}  ><SegmentariaButton value='car' title='TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '26.5%', left: '64.2%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '26.1%', left: '64.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}  ><SegmentariaButton value='car' title='TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '26.5%', left: '64.8%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '26.9%', left: '64.8%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
 
 
-        <div style={{ position: 'absolute', top: '27.2%', left: '64.5%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '27.2%', left: '65.0%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`}><SegmentariaButton value='car' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '27.9%', left: '64.8%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '27.6%', left: '65.0%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`}><SegmentariaButton value='car' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 
-        <div style={{ position: 'absolute', top: '28.6%', left: '65.2%', transform: 'rotate(60deg)' }}
+        <div style={{ position: 'absolute', top: '27.9%', left: '65.3%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '28.2%', left: '65.5%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '28.6%', left: '65.7%', transform: 'rotate(60deg)' }}
           className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '29.4%', left: '65.5%', transform: 'rotate(60deg)' }}
+        <div style={{ position: 'absolute', top: '29.0%', left: '65.8%', transform: 'rotate(60deg)' }}
           className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '30.2%', left: '65.8%', transform: 'rotate(60deg)' }}
+
+        <div style={{ position: 'absolute', top: '29.4%', left: '66.0%', transform: 'rotate(60deg)' }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '29.8%', left: '66.2%', transform: 'rotate(60deg)' }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '30.2%', left: '66.3%', transform: 'rotate(60deg)' }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '30.6%', left: '66.3%', transform: 'rotate(60deg)' }}
           className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
 
 
-        <div style={{ position: 'absolute', top: '30.9%', left: '66.2%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '30.9%', left: '66.5%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`}  ><SegmentariaButton value='car' title='TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '31.7%', left: '66.6%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '31.3%', left: '66.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}  ><SegmentariaButton value='car' title='TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '31.7%', left: '66.8%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '32.4%', left: '66.7%', transform: 'rotate(60deg)', bosrderRadius: '50%', }}
+        <div style={{ position: 'absolute', top: '32.1%', left: '67.1%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '32.5%', left: '67.2%', transform: 'rotate(60deg)', bosrderRadius: '50%', }}
           className={`dont-print-Nervius`}  ><SegmentariaButton value='car' title='TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
 
-
-        <div style={{ position: 'absolute', top: '33.1%', left: '67.1%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '33.0%', left: '67.4%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '33.8%', left: '67.3%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '33.1%', left: '67.1%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '34.5%', left: '67.5%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '35.3%', left: '67.9%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '33.4%', left: '67.4%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
 
+        <div style={{ position: 'absolute', top: '33.8%', left: '67.7%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
 
-        <div style={{ position: 'absolute', top: '36.0%', left: '68.2%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '34.1%', left: '68.0%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '34.5%', left: '68.0%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '34.9%', left: '68.2%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '35.5%', left: '68.4%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '35.9%', left: '68.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '36.3%', left: '68.9%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`}><SegmentariaButton value='car' title='TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '36.6%', left: '69.2%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '36.8%', left: '68.6%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '37.0%', left: '69.4%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '37.6%', left: '69.2%', transform: 'rotate(60deg)', }}
+
+        <div style={{ position: 'absolute', top: '37.2%', left: '69.8%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '37.6%', left: '69.8%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+
+
+
+
         <div style={{ position: 'absolute', top: '38.3%', left: '69.3%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '37.8%', left: '70.55%', transform: 'rotate(60deg)', }}
+        <div style={{ position: 'absolute', top: '37.6%', left: '71.3%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
-        <div style={{ position: 'absolute', top: '38.5%', left: '71.1%', transform: 'rotate(60deg)', }}
+
+        <div style={{ position: 'absolute', top: '38.0%', left: '71.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '38.7%', left: '69.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '38.5%', left: '71.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '39.2%', left: '69.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '38.8%', left: '72.3%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '39.7%', left: '69.9%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '39.2%', left: '72.5%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '40.1%', left: '70.1%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
 
 
-        <div style={{ position: 'absolute', top: '39.2%', left: '71.9%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '39.8%', left: '72.9%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '40.4%', left: '73.9%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '40.9%', left: '74.9%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '38.9%', left: '70.1%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '39.5%', left: '70.9%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '40.3%', left: '71.5%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '41.1%', left: '71.8%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '41.9%', left: '72.1%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '42.6%', left: '72.5%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '43.4%', left: '73.1%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '44.2%', left: '73.5%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
+        <div style={{ position: 'absolute', top: '39.5%', left: '73.3%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '40.2%', left: '71.3%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
 
 
-        <div style={{ position: 'absolute', top: '41.1%', left: '70.8%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '41.9%', left: '70.9%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '42.6%', left: '71.1%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '43.4%', left: '71.3%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '44.2%', left: '71.5%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '45.0%', left: '71.8%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
+        <div style={{ position: 'absolute', top: '39.7%', left: '74.1%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '40.2%', left: '71.3%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
 
 
-        <div style={{ position: 'absolute', top: '39.3%', left: '69.3%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '40.1%', left: '69.6%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '41.1%', left: '69.6%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '41.9%', left: '69.7%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '42.6%', left: '69.7%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
+        <div style={{ position: 'absolute', top: '40.1%', left: '74.5%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '40.6%', left: '71.7%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
 
 
-        <div style={{ position: 'absolute', top: '43.4%', left: '69.7%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '44.2%', left: '69.6%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '45.0%', left: '69.8%', transform: 'rotate(60deg)', }}
-          className={`dont-print-Nervius`}> <SegmentariaButton value='car' title='PALMA,' displayText=' ' /> </div>
+        <div style={{ position: 'absolute', top: '40.4%', left: '75.0%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '41.0%', left: '72.1%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '41.0%', left: '70.1%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
 
+        <div style={{ position: 'absolute', top: '41.4%', left: '72.5%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '41.5%', left: '70.2%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '41.8%', left: '72.9%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '42.2%', left: '69.8%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '42.0%', left: '70.8%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '42.2%', left: '73.3%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '42.7%', left: '69.9%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '42.4%', left: '70.9%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '42.6%', left: '73.4%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '43.2%', left: '70.0%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '42.9%', left: '71.2%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '43.0%', left: '73.6%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '43.4%', left: '71.5%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+
+        <div style={{ position: 'absolute', top: '43.4%', left: '73.8%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+        <div style={{ position: 'absolute', top: '43.8%', left: '71.8%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
+          <div style={{ position: 'absolute', top: '44.2%', left: '72.1%', transform: 'rotate(60deg)', }}
+          className={`dont-print-Nervius`} > <SegmentariaButton value='car' title='CARPO,' displayText=' ' /></div>
 
       </>
     );
   }
-  if (copyConclusions.includes('MEDIANO DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('MEDIANO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.2%', left: '41.4%', transform: 'rotate(100deg)' }}
@@ -430,7 +520,7 @@ export function checkDivsSegmentar(copyConclusions) {
     );
 
   }
-  if (copyConclusions.includes('ACCESORIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('ACCESORIO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('ACCESORIO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '13.5%', left: '50.6%', transform: 'rotate(50deg)', }}
@@ -448,7 +538,7 @@ export function checkDivsSegmentar(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('ACCESORIO DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('ACCESORIO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('ACCESORIO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '14.3%', left: '48.0%', transform: 'rotate(110deg)', }}
@@ -464,7 +554,7 @@ export function checkDivsSegmentar(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILAR IZQUIERDO, SEGMENTARIA A NIVEL DE')) {// FALTA VERIFICAR
+  if (copyConclusions.includes('AXILAR IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.5%', left: '58.8%', transform: 'rotate(180deg)', }}
@@ -500,7 +590,7 @@ export function checkDivsSegmentar(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILAR DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('AXILAR DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.7%', left: '39.8%', transform: 'rotate(180deg)', }}
@@ -541,7 +631,7 @@ export function checkDivsSegmentar(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car' title='AXILAR,' displayText=' ' /></div>
       </>);
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('MUSCULOCUTÁNEO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '16.7%', left: '56.0%', transform: 'rotate(50deg)', }}
         className={`.dont-print-Nervius`}><SegmentariaButton value='car' title='APROXIMAL A SU EMERGENCIA,' displayText=' ' /></div>
@@ -669,7 +759,7 @@ export function checkDivsSegmentar(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('MUSCULOCUTÁNEO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('MUSCULOCUTÁNEO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '16.7%', left: '43.6%', transform: 'rotate(110deg)', }}
@@ -802,7 +892,7 @@ export function checkDivsSegmentar(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('RADIAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('RADIAL BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
 
@@ -979,7 +1069,7 @@ export function checkDivsSegmentar(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('RADIAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('RADIAL BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '17.9%', left: '60.5%', transform: 'rotate(60deg)', }}
@@ -1158,7 +1248,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('SUPRAESCAPULAR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '15.0%', left: '53.3%', transform: 'rotate(60deg)', }}
@@ -1209,7 +1299,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('SUPRAESCAPULAR DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('SUPRAESCAPULAR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '15.0%', left: '45.9%', transform: 'rotate(120deg)', }}
@@ -1262,7 +1352,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ULNAR DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('ULNAR DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('ULNAR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '19.1%', left: '40.1%', transform: 'rotate(120deg)', }}
@@ -1468,7 +1558,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ULNAR IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('ULNAR IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('ULNAR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '19.0%', left: '58.7%', transform: 'rotate(60deg)', }}
@@ -1671,7 +1761,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('FRÉNICO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FRÉNICO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '14.2%', left: '51.4%', transform: 'rotate(80deg)', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='PLEXO CERVICAL,' displayText=' ' /> </div>
@@ -1738,7 +1828,7 @@ export function checkDivsSegmentar(copyConclusions) {
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='DIAFRAGMA,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('FRÉNICO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FRÉNICO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '14.4%', left: '48.0%', transform: 'rotate(60deg)', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='PLEXO CERVICAL,' displayText=' ' /> </div>
@@ -1798,7 +1888,7 @@ export function checkDivsSegmentar(copyConclusions) {
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='DIAFRAGMA,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('TORACODORSAL IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('TORACODORSAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TORACODORSAL BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '17.9%', left: '55.3%', transform: 'rotate(80deg)', }}
@@ -1837,7 +1927,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORACODORSAL DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('TORACODORSAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TORACODORSAL BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '17.9%', left: '43.8%', transform: 'rotate(80deg)', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='FOSA SUPRACLAVICULAR,' displayText=' ' /> </div>
@@ -1873,7 +1963,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORÁCICO LARGO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('TORÁCICO LARGO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TORÁCICO LARGO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '17.9%', left: '55.8%', transform: 'rotate(80deg)', }}
@@ -1932,7 +2022,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORÁCICO LARGO DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('TORÁCICO LARGO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TORÁCICO LARGO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '17.9%', left: '43.3%', transform: 'rotate(80deg)', }}
         className={`.dont-print-Nerviusgrande`} > <SegmentariaButton value='car' title='FOSA SUPRACLAVICULAR,' displayText=' ' /> </div>
@@ -1991,7 +2081,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('CIATICO DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('CIATICO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('CIATICO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '32.6%', left: '48.8%', transform: 'rotate(180deg)', }}
@@ -2393,7 +2483,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('CIATICO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {/* SEGUIR AQUI */
+  if (copyConclusions.includes('CIATICO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('CIATICO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {/* SEGUIR AQUI */
     return (<>
       <div style={{ position: 'absolute', top: '32.6%', left: '50.4%', transform: 'rotate(180deg)', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='ESCOTADURA MAYOR DE LA PELVIS,' displayText=' ' /> </div>
@@ -2545,7 +2635,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
 
 
-        
+
 
       <div style={{ position: 'absolute', top: '50.7%', left: '42.0%', transform: 'rotate(240deg)', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='MUSLO TERCIO DISTAL,' displayText=' ' /> </div>
@@ -2799,7 +2889,7 @@ export function checkDivsSegmentar(copyConclusions) {
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='HUECO POPLIEO,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('FEMORAL DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('FEMORAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FEMORAL BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '30.0%', left: '49.1%', transform: 'rotate(180deg)', }}
@@ -3098,7 +3188,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FEMORAL IZQUIERDO, SEGMENTARIA A NIVEL DE')) {/* SEGUIR AQUI */
+  if (copyConclusions.includes('FEMORAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FEMORAL BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {/* SEGUIR AQUI */
     return (<>
       <div style={{ position: 'absolute', top: '33.0%', left: '54.5%', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='PROXIMAL A LIGAMENTO INGUINAL,' displayText=' ' /> </div>
@@ -3226,7 +3316,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('OBTURADOR IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('OBTURADOR IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '29.8%', left: '50.5%', transform: 'rotate(180deg)', }}
@@ -3330,7 +3420,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('OBTURADOR DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('OBTURADOR DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '29.8%', left: '48.8%', transform: 'rotate(180deg)', }}
@@ -3431,7 +3521,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PERONEO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('PERONEO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('PERONEO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '49.4%', left: '56.5%', transform: 'rotate(260deg)' }}
@@ -3567,7 +3657,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PERONEO DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('PERONEO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('PERONEO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '49.4%', left: '42.9%', transform: 'rotate(95deg)' }}
@@ -3706,7 +3796,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TIBIAL DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('TIBIAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TIBIAL BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '49.4%', left: '42.9%', transform: 'rotate(95deg)' }}
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='BIFURCACION EN HUECO POPLITEO,' displayText=' ' /> </div>
@@ -3871,7 +3961,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TIBIAL IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('TIBIAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('TIBIAL BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '49.4%', left: '56.5%', transform: 'rotate(260deg)' }}
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='BIFURCACION EN HUECO POPLITEO,' displayText=' ' /> </div>
@@ -4033,7 +4123,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('PUDENDO IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '35.8%', left: '49.0%', transform: 'rotate(170deg)' }}
@@ -4043,7 +4133,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO DERECHO, SEGMENTARIA A NIVEL DE')) {
+  if (copyConclusions.includes('PUDENDO DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {
     return (<>
       <div style={{ position: 'absolute', top: '35.9%', left: '50.2%', transform: 'rotate(200deg)' }}
         className={`.dont-print-Nervius`} > <SegmentariaButton value='car' title='FORAMEN SACROL,' displayText=' ' /> </div>
@@ -4052,7 +4142,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL IZQUIERDO, SEGMENTARIA A NIVEL DE')) {/* SEGUIR AQUI */
+  if (copyConclusions.includes('FACIAL IZQUIERDO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL DE')) {/* SEGUIR AQUI */
     return (<>
       <div
         style={{
@@ -4093,7 +4183,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL DERECHO, SEGMENTARIA A NIVEL DE')) {/* SEGUIR AQUI */
+  if (copyConclusions.includes('FACIAL DERECHO, SEGMENTARIA A NIVEL DE') || copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL DE')) {/* SEGUIR AQUI */
     return (<>
       <div
         style={{

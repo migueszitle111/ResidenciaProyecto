@@ -178,12 +178,7 @@ const Reporte = () => {
       return formattedConclusions;
   }
   
-  
-  
-  
   const formattedConclusions = formatConclusions(copyConclusions);
-
-
 
     // Para mantener constante la conclusione
     const handleTextareaChange = (event) => {
@@ -249,9 +244,6 @@ const Reporte = () => {
     };
   }, []); 
 
-/*#################backgroundColor: 'white',#######################################################*/
-
-/*########################################################################*/
 
   return (
     <div >
@@ -1036,7 +1028,6 @@ const Reporte = () => {
         onChange={handleTextareaChange}
       /></div>
         </div>
-        
         </div>
         <div><DropArea /> </div>
         </div>

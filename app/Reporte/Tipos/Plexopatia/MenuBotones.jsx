@@ -1443,9 +1443,6 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
     
     const [imageSrc, setImageSrc] = useState(null);
     const [isUploadAllowed, setIsUploadAllowed] = useState(false); // Estado para controlar si la carga está permitida
-
-   
-  
     const toggleDivSize = (index) => {
       // Cambiar el estado del tamaño del div al hacer clic
       setExpandedDivs((prevState) => ({

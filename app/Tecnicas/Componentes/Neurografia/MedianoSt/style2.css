@@ -171,7 +171,7 @@
     font-size: 30px;
     height: 3.2vw; /* Tamaño reducido */
     width: 3.2vw;
-    transform: translate(-460%, 140%);
+    transform: translate(-490%, 145%);
     color: black;
     font-family: 'Times New Roman', Times, serif;
     font-style: bold;
@@ -187,8 +187,8 @@
     width: 3.5vw;
     top: 30%;
     left: 45%;
-    transform: translate(700%, -365%);
-    background-color: rgb(56, 10, 117);
+    transform: translate(820%, -365%);
+    background-color: rgb(107, 107, 107);
     border: none;
     border-radius: 20%;
     z-index: 1;
@@ -207,7 +207,7 @@
     width: 3.5vw;
     top: 30%;
     left: 45%;
-    transform: translate(820%, -365%);
+    transform: translate(700%, -365%);
     background-color: rgb(107, 107, 107);
     border: none;
     border-radius: 20%;
@@ -774,7 +774,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(31, 30, 30, 0.719);
+    background-color: rgba(48, 48, 48, 0.541);
     color: white;
     border-radius: 10px;
     padding: 2%;

@@ -6,6 +6,71 @@ import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
 
+
+const DropArea = () => {
+  const [droppedItems, setDroppedItems] = useState([]);
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData('text/html');
+    if (data) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, 'text/html');
+      const element = doc.body.firstChild;
+      if (element) {
+        setDroppedItems([
+          ...droppedItems,
+          { id: Date.now(), content: element.outerHTML, x: 0, y: 0 }
+        ]);
+      }
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const updatePosition = (id, x, y) => {
+    setDroppedItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, x, y } : item
+      )
+    );
+  };
+
+  return (
+    <div
+      className="dropArea"
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      style={{
+        //border: '2px dashed #ccc',
+        position: 'relative'
+      }}
+    >
+      {droppedItems.length === 0 ? (
+        <p></p>
+      ) : (
+        droppedItems.map((item) => (
+          <Rnd
+            key={item.id}
+            default={{
+              x: item.x,
+              y: item.y,
+              width: 200,
+              height: 200
+            }}
+            onDragStop={(e, d) => updatePosition(item.id, d.x, d.y)}
+            style={{ position: 'absolute' }}
+          >
+            <div dangerouslySetInnerHTML={{ __html: item.content }} />
+          </Rnd>
+        ))
+      )}
+    </div>
+  );
+};
+
 const Reporte = () => {
   
   // Carga datos de usuario
@@ -307,6 +372,7 @@ console.log(formattedConclusions);
       </div>
         </div>
         </div>
+        <div><DropArea /> </div>
         </div>
       </div>
     </div>

@@ -1,14 +1,74 @@
-import { useState, useEffect, useContext } from 'react'
-import React, { useCallback } from 'react';
+import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
-import { Accordion, AccordionContainer } from '../../../components/ReportTemplate/Accordion'   
-import { ReportContext } from '@/src/context'
-import { ConclusionButton, ConclusionBox } from '../../../components/ReportTemplate/Conclusions'
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas'
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
-import './Style.css';
+import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
-import Draggable from 'react-draggable';
+import './Style.css';
+
+const DropArea = () => {
+  const [droppedItems, setDroppedItems] = useState([]);
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData('text/html');
+    if (data) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, 'text/html');
+      const element = doc.body.firstChild;
+      if (element) {
+        setDroppedItems([
+          ...droppedItems,
+          { id: Date.now(), content: element.outerHTML, x: 0, y: 0 }
+        ]);
+      }
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const updatePosition = (id, x, y) => {
+    setDroppedItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, x, y } : item
+      )
+    );
+  };
+
+  return (
+    <div
+      className="dropArea"
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      style={{
+        //border: '2px dashed #ccc',
+        position: 'relative'
+      }}
+    >
+      {droppedItems.length === 0 ? (
+        <p></p>
+      ) : (
+        droppedItems.map((item) => (
+          <Rnd
+            key={item.id}
+            default={{
+              x: item.x,
+              y: item.y,
+              width: 200,
+              height: 200
+            }}
+            onDragStop={(e, d) => updatePosition(item.id, d.x, d.y)}
+            style={{ position: 'absolute' }}
+          >
+            <div dangerouslySetInnerHTML={{ __html: item.content }} />
+          </Rnd>
+        ))
+      )}
+    </div>
+  );
+};
 
 const Reporte = () => {
   
@@ -287,6 +347,7 @@ const Reporte = () => {
       </div>
         </div>
         </div>
+        <div><DropArea /> </div>
         </div>
       </div>
     </div>

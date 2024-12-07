@@ -65,6 +65,24 @@
   width: 100%;
 }
 
+/* Estilo para las filas de checkbox */
+.checkbox-row {
+  display: flex;
+  gap: 40px; /* Espaciado horizontal entre columnas */
+  align-items: center;
+}
+/* Ajustar los checkboxes y las etiquetas */
+.checkbox-row input[type="checkbox"] {
+  width: 12px; /* Tamaño del checkbox */
+  height: 12px;
+  margin: 5px; /* Espaciado entre checkbox */
+  cursor: pointer; /* Cambia el cursor al pasar */
+  margin-left: 27px; 
+}
+input[type="checkbox"] {
+  cursor: pointer; /* Cambia el cursor al pasar */
+  margin-left: 6px; 
+}
 .title {
   font-size: 15px;
   font-weight: bold;

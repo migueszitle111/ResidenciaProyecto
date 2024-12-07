@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { Accordion, AccordionContainer } from '../../../components/ReportTemplate/Accordion'   
 import { ReportContext } from '@/src/context'
 import { ConclusionButton, ConclusionBox } from '../../../components/ReportTemplate/Conclusions'
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas'
+import { ConclusionCanvasV } from '../../../components/ReportTemplate/Conclusions/CanvasViasVisual'
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import './Style.css';
 import SimpleMultiStepForm from './MenuBotones';
@@ -156,7 +156,7 @@ const Reporte = () => {
 
         {/* Despliego de las imagenes dentro del array */}
         <div className='conclusion-container'>
-        <ConclusionCanvas 
+        <ConclusionCanvasV 
         
           img={{
             src: '/assets/MioImg/MO_BASE_BLANCO_MOTORES.png',
@@ -170,16 +170,70 @@ const Reporte = () => {
             {
               expectedValue: 'izquierdocervical', 
               image: {
-                src: 'CorticoespinalImg/BP_Motores_page-MR.jpg',
+                src: 'CorticoespinalImg/Vias/MO_1-D.png',
                 alt: 'Modelo',
               }
             },
             {
-              expectedValue: 'izquierdolumbasacro', 
+              expectedValue: 'derechocervical', 
               image: {
-                src: 'CorticoespinalImg/BP_Motores_page-FR.jpg',
+                src: 'CorticoespinalImg/Vias/MO_1.png',
                 alt: 'Modelo',
               }
+            },
+            {
+              expectedValue: 'bilateralcervical', 
+              image: [
+                {
+                  src: 'CorticoespinalImg/Vias/MO_1-D.png',
+                  alt: 'Modelo',
+                },
+                {
+                  src: 'CorticoespinalImg/Vias/MO_1.png',
+                  alt: 'Modelo',
+                }]
+            },
+            
+            
+            {
+              expectedValue: 'izquierdolumbasacro', 
+              image: {
+                src: 'CorticoespinalImg/Vias/MO_2-D.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'derecholumbasacro', 
+              image: {
+                src: 'CorticoespinalImg/Vias/MO_2.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'bilaterallumbasacro', 
+              image: [
+                {
+                  src: 'CorticoespinalImg/Vias/MO_2-D.png',
+                  alt: 'Modelo',
+                },
+                {
+                  src: 'CorticoespinalImg/Vias/MO_2.png',
+                  alt: 'Modelo',
+                }]
+            },
+           
+
+            {
+              expectedValue: 'indenme', 
+              image: [
+                {
+                  src: 'CorticoespinalImg/BP_Motores_page-FR.jpg',
+                  alt: 'Modelo',
+                },
+                {
+                  src: 'CorticoespinalImg/Vias/MO_2-D.png',
+                  alt: 'Modelo',
+                }]
             },
            
           ]}

@@ -1,23 +1,25 @@
 'use client'
-import React from 'react';
-import './Style.css';
-import { ReportContextProvider } from '@/src/context';
+import { ReportContextProviderR,CheckboxProvider,ButtonContextProvider  } from '@/src/context';
 import FooterComponents from '../../../components/FooterComponents';
 import HeadComponents from '../../../components/HeadComponents';
 import ReportFace from './ReportFace';
-import MenuReportes from '../../../components/ReportTemplate/MenuReportes';
+import './Style.css';
 
 const Page = () => {
+
   return (
     <>
       <div className='dont-print'>
         <HeadComponents />
       </div>
-      
       {/* ReportFace enrollado en el contexto */}
-      <ReportContextProvider>
+      <ReportContextProviderR>
+     <ButtonContextProvider >
+      < CheckboxProvider>
         <ReportFace />
-      </ReportContextProvider>
+      </ CheckboxProvider>
+      </ButtonContextProvider>
+      </ReportContextProviderR>
       <div className='dont-print'>
         <FooterComponents />
       </div>

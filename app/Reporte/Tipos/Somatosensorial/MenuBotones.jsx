@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { Accordion } from '../../../components/ReportTemplate/Accordion';
 import { useImageState } from '../../MetodosBotones';
+import { ReportContextR,CheckboxContext,useButtonContext } from '@/src/context';
+
 import Draggable from 'react-draggable';
 import './Style.css';
 
@@ -13,7 +15,6 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
 
   // Se da el valor en donde se inicie el primer paso
   const [step, setStep] = useState('A');
-
   // Metodos del ultimo paso
   const {
     selectedImages,
@@ -48,7 +49,6 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'C1' && <StepC1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'C2' && <StepC2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'D' && <StepD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
-      {step === 'D1' && <StepD1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'E' && <StepE handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'F' && <StepF handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'G' && <StepG handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}  handlePrint={handlePrint}/>}
@@ -67,7 +67,7 @@ const StepA = ({ handleNextStep ,setStep}) => (
     <h1 className="text-xl font-bold text-white">VÍA SOMATOSENSORIAL</h1>
     <div onClick={handleNextStep}> 
     </div>
-    <div onClick={() => setStep('D1')}>
+    <div onClick={() => setStep('G')}>
       <ConclusionButton value="indenme" title="VÍA SOMATOSENSORIAL INDEMNE CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
     <div onClick={() => setStep('B')}>
       <ConclusionButton value="alterada" title="VÍA SOMATOSENSORIAL ALTERADA CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
@@ -174,26 +174,9 @@ const StepD = ({ handlePrevStep, handleNextStep, setStep }) => (
 );
 
 
-const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => (
-  <div>
-    <div className='button-bar'>
-      <button onClick={handlePrevStep} className="print-button dont-print">
-        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-      </button>
-      <button onClick={handleNextStep} className="print-button dont-print">
-        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
-      </button>
-    </div>
-    <h1 className="text-xl font-bold text-white">LADO:</h1>
-    <div onClick={() => setStep('G')}>
-      <ConclusionButton value="izquierdo" title="PARA LADO IZQUIERDO." displayText="IZQUIERDO" />
-      <ConclusionButton value="derecho" title="PARA LADO DERECHO." displayText="DERECHO" />
-      <ConclusionButton value="bilateral" title="BILATERAL. " displayText="BILATERAL" />
-    </div>
-  </div>
-);
-
-const StepE = ({ handleNextStep, handlePrevStep, setStep }) => (
+const StepE = ({ handleNextStep, handlePrevStep, setStep }) =>{
+  const { activeButtons, toggleButton } = useButtonContext(); // Añadir esta línea
+return(
   <div>
     <div className='button-bar'>
       <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
@@ -206,6 +189,39 @@ const StepE = ({ handleNextStep, handlePrevStep, setStep }) => (
     <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
     <Accordion  title='SUPERIORES'>
       <Accordion  title='NERVIO MEDIANO'>
+        <Accordion title='C4'>
+        <table>
+          <tr className="checkbox-row">
+            <td>
+              <input
+                type="checkbox"
+                id="c4_i"
+                checked={activeButtons["c4_i"] || false}
+                onChange={(e) => handleCheckboxChange(e, "c4_i", ",C4 IZQUIERDA")}
+              />
+              <label htmlFor="c4_i"> L </label>
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="c4_d"
+                checked={activeButtons["c4_d"] || false}
+                onChange={(e) => handleCheckboxChange(e, "c4_d", ",C4 DERECHA")}
+              />
+              <label htmlFor="c4_d"> R </label>
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="c4_bi"
+                checked={activeButtons["c4_bi"] || false}
+                onChange={(e) => handleCheckboxChange(e, "C4_bi", ",C4 BILATERAL")}
+              />
+              <label htmlFor="c4_bi"> B </label>
+            </td>
+          </tr>
+        </table>
+      </Accordion>
       </Accordion>
       <Accordion  title='NERVIO  ULNAR'>  
       </Accordion>
@@ -230,11 +246,13 @@ const StepE = ({ handleNextStep, handlePrevStep, setStep }) => (
        <Accordion  title='NERVIO  PUDENDO'>
       </Accordion>
     </Accordion>
-    <div onClick={() => setStep('F')}>
+    <div onClick={() => setStep('G')}>
     <ConclusionButton value="trigemino" title="A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />
     </div>
   </div>
+  
 );
+}
 
 
 const StepF = ({ handleNextStep, handlePrevStep, setStep }) => (

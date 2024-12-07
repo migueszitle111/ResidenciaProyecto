@@ -5,6 +5,8 @@ import { Accordion, AccordionContainer } from '../../../components/ReportTemplat
 import { ReportContext } from '@/src/context'
 import { ConclusionButton, ConclusionBox } from '../../../components/ReportTemplate/Conclusions'
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas'
+import { ConclusionCanvasV } from '../../../components/ReportTemplate/Conclusions/CanvasViasVisual'
+
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import './Style.css';
 import SimpleMultiStepForm from './MenuBotones';
@@ -156,7 +158,7 @@ const Reporte = () => {
 
         {/* Despliego de las imagenes dentro del array */}
         <div className='conclusion-container'>
-        <ConclusionCanvas 
+        <ConclusionCanvasV
         
           img={{
             src: '/assets/MioImg/Base_Cerebro.png',
@@ -190,35 +192,61 @@ const Reporte = () => {
             },
 
             {
-              expectedValue: 'aferente_ipsilateral', 
+              expectedValue: 'izquierdoaferente_ipsilateral', 
               image: {
-                src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial Rojo_L.jpg',
+                src: 'TrigeminoFacialImg/Afectadas/FA_4.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'derechoaferente_ipsilateral', 
+              image: {
+                src: 'TrigeminoFacialImg/Afectadas/FA_5.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'bilateralaferente_ipsilateral', 
+              image: {
+                src: 'TrigeminoFacialImg/Afectadas/FA_3.png',
                 alt: 'Modelo',
               }
             },
             {
               expectedValue: 'integracion_pontina', 
               image: {
-                src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial Rojo_E.jpg',
+                src: 'TrigeminoFacialImg/Afectadas/FA_2.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'eferente', 
+              image: {
+                src: 'TrigeminoFacialImg/Afectadas/FA_3.png',
                 alt: 'Modelo',
               }
             },
             {
               expectedValue: 'nucleo_y_formacion_reticular', 
               image: {
-                src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial Rojo_E.jpg',
+                src: 'TrigeminoFacialImg/Afectadas/FA_2.png',
                 alt: 'Modelo',
               }
             },
             {
-              expectedValue: 'referente', 
-              image: {
-                src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial Rojo_BI.jpg',
-                alt: 'Modelo',
-              }
-            },
-
-
+              expectedValue: 'indemne', 
+              image: [
+                {
+                  src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial_page-0002.jpg',
+                  alt: 'Modelo',
+                },
+                {
+                  src: 'TrigeminoFacialImg/Idemne/FA_5.png',
+                  alt: 'Modelo',
+                }
+                
+              ]
+              },
             //
            
           

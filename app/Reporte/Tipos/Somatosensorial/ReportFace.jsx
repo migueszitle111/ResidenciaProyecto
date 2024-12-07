@@ -168,62 +168,34 @@ const Reporte = () => {
           
           rules={[
             {
-              expectedValue: 'distribucion_proximal', 
+              expectedValue: 'trigemino', 
               image: {
-                src: 'MioImg/MI_Proximal.png',
+                src: 'SomatosensorialImg/TR_2.png',
                 alt: 'Modelo',
               }
             },
             {
-              expectedValue: 'distribucion_distal',
+              expectedValue: 'c4_i', 
               image: {
-                src: 'MioImg/MI_Distal.png',
+                src: 'SomatosensorialImg/TR_2.png',
                 alt: 'Modelo',
               }
             },
             {
-              expectedValue: 'distribucion_generalizada',
+              expectedValue: 'c4_d', 
               image: {
-                src: 'MioImg/MI_Facial.png',
-                // AGREGAR 2 IMAGENES MAS AQUI
+                src: 'SomatosensorialImg/TR_2.png',
                 alt: 'Modelo',
               }
             },
             {
-              expectedValue: 'anillo_oseo',
+              expectedValue: 'c4_bi', 
               image: {
-                src: 'MioImg/MI_Distrofia de Anillo Oseo.png',
+                src: 'SomatosensorialImg/TR_2.png',
                 alt: 'Modelo',
               }
             },
-            {
-              expectedValue: 'duchenne_becker',
-              image: {
-                src: 'MioImg/MI_Distrofia de Duchenne e Becker.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'emery_dreifuss',
-              image: {
-                src: 'MioImg/MI_Distrofia de Emery-Dreifuss.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'facioescapulohumeral',
-              image: {
-                src: 'MioImg/MI_Distrofia Facioescapulohumeral.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'oculofaringea',
-              image: {
-                src: 'MioImg/MI_Distrofia Oculofaringea.png',
-                alt: 'Modelo',
-              }
-            },
+            
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
         value={copyConclusions}

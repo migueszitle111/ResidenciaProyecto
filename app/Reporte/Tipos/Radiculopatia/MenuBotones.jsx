@@ -212,7 +212,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL</h1>
       <Accordion title='CERVICAL' >
-        <Accordion title='C4'>
+        <Accordion title='C4 '>
           <table cellpadding='1'>
             <tr>
               <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
@@ -886,120 +886,100 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
   const { updateConclusions } = useContext(ReportContextR);
 
-  const handleButtonPress = (value, title, nextStepFunction) => {
+  const handleCheckboxChange = (event, value, title) => {
+    const isChecked = event.target.checked;
     toggleButton(value);
-    const isPressed = !activeButtons[value];
 
-    if (isPressed) {
+    if (isChecked) {
       updateConclusions({ value, title });
     } else {
       updateConclusions({ value, remove: true });
     }
-
-    if (nextStepFunction) {
-      nextStepFunction();
-    }
   };
+
   return (
     <div>
       <div className='button-bar'>
         <button onClick={handlePrevStep3} id='prev' className='print-button dont-print'>
-          <img src="/I_Out.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+          <img src="/I_Out.svg" alt="Previous" style={{ filter: 'invert(1)' }} />
         </button>
         <button onClick={handleNextStep3} id='next' className='print-button dont-print'>
-          <img src="/I_In.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+          <img src="/I_In.svg" alt="Next" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL</h1>  
 
-      <Accordion title='C6'>
+      <Accordion title='C6 Y C7'>
         <table>
-          <tr>
-            <ConclusionButtonR
-               value="c6s_i"
-               title="C6 IZQUIERDA"
-               displayText=""
-               pressed={activeButtons["c6s_i"]}
-               onClick={() => handleButtonPress("c6s_i", "C6 IZQUIERDA", handleNextStep3)}
-            />
-            <ConclusionButtonR
-               value="c6s_d"
-               title="C6 DERECHA"
-               displayText=""
-               pressed={activeButtons["c6s_d"]}
-               onClick={() => handleButtonPress("c6s_d", "C6 DERECHA", handleNextStep3)}
-            />
-             <ConclusionButtonR
-                value="c6s_bi"
-                title="C6 BILATERAL"
-                displayText=""
-                pressed={activeButtons["c6s_bi"]}
-                onClick={() => handleButtonPress("c6s_bi", "C6 BILATERAL", handleNextStep3)}
-            />
-          </tr>
-        </table>
-      </Accordion>
-
-      <Accordion title='C7'>
-        <table>
-          <tr>
-            <ConclusionButtonR
-              value="c7s_i"
-              title="C7 IZQUIERDA"
-              displayText=""
-              pressed={activeButtons["c7s_i"]}
-              onClick={() => handleButtonPress("c7s_i", "C7 IZQUIERDA", handleNextStep3)}
-            />
-            <ConclusionButtonR
-               value="c7s_d"
-               title="C7 DERECHA"
-               displayText=""
-               pressed={activeButtons["c7s_d"]}
-               onClick={() => handleButtonPress("c7s_i", "C7 DERECHA", handleNextStep3)}
-            />
-              <ConclusionButtonR
-              value="c7s_bi"
-              title="C7 BILATERAL"
-              displayText=""
-              pressed={activeButtons["c7s_bi"]}
-              onClick={() => handleButtonPress("c7s_bi", "C7 BILATERAL", handleNextStep3)}
-            />
+          <tr className="checkbox-row">
+            <td>
+              <input
+                type="checkbox"
+                id="c6s_i"
+                checked={activeButtons["c6s_i"] || false}
+                onChange={(e) => handleCheckboxChange(e, "c6s_i", ",C6 ,C7 IZQUIERDAS")}
+              />
+              <label htmlFor="c6s_i"> L </label>
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="c6s_d"
+                checked={activeButtons["c6s_d"] || false}
+                onChange={(e) => handleCheckboxChange(e, "c6s_d", ",C6 ,C7 DERECHAS")}
+              />
+              <label htmlFor="c6s_d"> R </label>
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="c6s_bi"
+                checked={activeButtons["c6s_bi"] || false}
+                onChange={(e) => handleCheckboxChange(e, "c6s_bi", ",C6 ,C7 BILATERALES")}
+              />
+              <label htmlFor="c6s_bi"> B </label>
+            </td>
           </tr>
         </table>
       </Accordion>
 
       <Accordion title='S1'>
         <table>
-          <tr>
-            <ConclusionButtonR
-               value="s1s_i"
-               title="S1 IZQUIERDA"
-               displayText=""
-               pressed={activeButtons["s1s_i"]}
-               onClick={() => handleButtonPress("s1s_i", "S1 IZQUIERDA", handleNextStep3)}
-            />
-            <ConclusionButtonR
-             value="s1s_d"
-             title="S1 DERECHA"
-             displayText=""
-             pressed={activeButtons["s1s_d"]}
-             onClick={() => handleButtonPress("s1s_d", "S1 DERECHA", handleNextStep3)}
-            />
-              <ConclusionButtonR
-               value="s1s_bi"
-               title="S1 BILATERAL"
-               displayText=""
-               pressed={activeButtons["s1s_bi"]}
-               onClick={() => handleButtonPress("s1s_bi", "S1 BILATERAL", handleNextStep3)}
-            />
+          <tr className="checkbox-row">
+            <td>
+              <input
+                type="checkbox"
+                id="s1s_i"
+                checked={activeButtons["s1s_i"] || false}
+                onChange={(e) => handleCheckboxChange(e, "s1s_i", ", S1 IZQUIERDA, ")}
+              />
+              <label htmlFor="s1s_i"> L </label>
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="s1s_d"
+                checked={activeButtons["s1s_d"] || false}
+                onChange={(e) => handleCheckboxChange(e, "s1s_d", ", S1 DERECHA, ")}
+              />
+              <label htmlFor="s1s_d"> R </label>
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="s1s_bi"
+                checked={activeButtons["s1s_bi"] || false}
+                onChange={(e) => handleCheckboxChange(e, "s1s_bi", ", S1 BILATERAL")}
+              />
+              <label htmlFor="s1s_bi"> B </label>
+            </td>
           </tr>
         </table>
       </Accordion>
-      <div>
-      </div>
     </div>
   );
 };
+
 
 const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
   const { checkedStateLeft, checkedStateRight, setcheckedStateLeft, setcheckedStateRight } = useContext(CheckboxContext);

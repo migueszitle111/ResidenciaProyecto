@@ -182,11 +182,28 @@ const Reporte = () => {
             ],
             },
             {
-              expectedValue: 'izquierdo', 
-              image: {
-                src: 'VisualImg/BP_Visual_page-GreyLBI.jpg',
+              expectedValue: 'alterada', 
+              image: [
+              {
+                src: 'VisualImg/VN_VisualGreyLBI.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'VisualImg/VN_VisualGreyRBI.png',
                 alt: 'Modelo',
               }
+            ],
+            },
+            
+
+            {
+              expectedValue: 'izquierdo', 
+              image: 
+                {
+                  src: 'VisualImg/Afectadas/VI_5.png',
+                  alt: 'Modelo',
+                },
+              
             },
             {
               expectedValue: 'derecho', 

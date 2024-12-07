@@ -25,7 +25,7 @@ const Reporte = () => {
   const { checkedStateLeft, checkedStateRight } = useContext(CheckboxContext);
   
   const { conclusions } = useContext(ReportContextR);
-  const [copyConclusions, setCopyConclusions] = useState('');  // State for conclusion textbox
+  const [copyConclusions, setCopyConclusions] = useState('n ');  // State for conclusion textbox
   const { activeButtons } = useButtonContext();
 
   const defaultImage1 = '/assets/RadiculopatiaImg/Columna/RA_Columna_1_FondoB.png';
@@ -251,6 +251,7 @@ const Reporte = () => {
       .map(([status, groupNames]) => `${groupNames.join(', ')} ${translateStatus(status, groupNames.length)}`)
       .join(', ');
   
+   
     // Check if there's additional text and conclusions
     const firstTwoWords = conclusionText.split(' ').slice(0, 3).join(' ');
     const remainingText = conclusionText.split(' ').slice(4).join(' ');
@@ -261,7 +262,7 @@ const Reporte = () => {
     // Set the complete text in the state
     setCopyConclusions(combinedText);
   }, [hasMounted, conclusions, checkedStateLeft, checkedStateRight]);
-       
+
   const handleTextareaChange = (event) => {
     setCopyConclusions(event.target.value)
   };

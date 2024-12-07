@@ -10,6 +10,7 @@ const useStep = () => {
   const { resetCheckboxes } = useContext(CheckboxContext);
   const {handlePrint} = useImageState();
 
+
   // Siguiente paso
   const handleNextStep = () => {
     if (step === 'A') setStep('B');
@@ -159,7 +160,7 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextSte
           title="RADICULOPATIA SENSITIVA"
           displayText="RADICULOPATIA SENSITIVA"
           pressed={activeButtons["radiculopatia_sensitiva"]}
-          onClick={() => handleButtonPress("radiculopatia_sensitiva", "RADICULOPATIA SENSITIVA", handleNextStep3)}
+          onClick={() => handleButtonPress("radiculopatia_sensitiva", "BLOQUEO AFERENTE", handleNextStep3)}
         />
       </div>
     </div>
@@ -793,31 +794,31 @@ const StepD = ({ handlePrevStep, handleNextStep }) => {
       <div>
         <ConclusionButtonR
           value="p_completa"
-          title="Y PRONOSTICO DE RECUPERACION COMPLETA"
-          displayText=""
+          title="COMPLETA"
+          displayText="COMPLETA"
           pressed={activeButtons["p_completa"]}
-          onClick={() => handleButtonPress("p_completa", "Y PRONOSTICO DE RECUPERACION COMPLETA", handleNextStep)}
+          onClick={() => handleButtonPress("p_completa", "Y PRONOSTICO DE RECUPERACION COMPLETA.", handleNextStep)}
         />
         <ConclusionButtonR
           value="p_parcial"
-          title="Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL"
-          displayText=""
+          title="PARCIAL FUNCIONAL"
+          displayText="PARCIAL FUNCIONAL"
           pressed={activeButtons["p_parcial"]}
-          onClick={() => handleButtonPress("p_parcial", "Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL", handleNextStep)}
+          onClick={() => handleButtonPress("p_parcial", "Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL.", handleNextStep)}
         />
         <ConclusionButtonR
           value="p_no_funcional"
-          title="Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL"
-          displayText=""
+          title="POBRE NO FUNCIONAL"
+          displayText="POBRE NO FUNCIONAL"
           pressed={activeButtons["p_no_funcional"]}
-          onClick={() => handleButtonPress("p_no_funcional", "Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL", handleNextStep)}
+          onClick={() => handleButtonPress("p_no_funcional", "Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL.", handleNextStep)}
         />
         <ConclusionButtonR
           value="nula"
           title="NULA (EN FASE DE SECUELA DEFINITIVA)"
-          displayText=""
+          displayText="NULA (EN FASE DE SECUELA DEFINITIVA)"
           pressed={activeButtons["nula"]}
-          onClick={() => handleButtonPress("nula", "NULA (EN FASE DE SECUELA DEFINITIVA)", handleNextStep)}
+          onClick={() => handleButtonPress("nula", "Y PRONOSTICO DE RECUPERACION NULO (EN FASE DE SECUELA DEFINITIVA)", handleNextStep)}
         />
       </div>
     </div>
@@ -917,7 +918,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                 type="checkbox"
                 id="c6s_i"
                 checked={activeButtons["c6s_i"] || false}
-                onChange={(e) => handleCheckboxChange(e, "c6s_i", ",C6 ,C7 IZQUIERDAS")}
+                onChange={(e) => handleCheckboxChange(e, "c6s_i", "C6-C8 IZQUIERDO.")}
               />
               <label htmlFor="c6s_i"> L </label>
             </td>
@@ -926,7 +927,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                 type="checkbox"
                 id="c6s_d"
                 checked={activeButtons["c6s_d"] || false}
-                onChange={(e) => handleCheckboxChange(e, "c6s_d", ",C6 ,C7 DERECHAS")}
+                onChange={(e) => handleCheckboxChange(e, "c6s_d", "C6-C8 DERECHO.")}
               />
               <label htmlFor="c6s_d"> R </label>
             </td>
@@ -935,9 +936,9 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                 type="checkbox"
                 id="c6s_bi"
                 checked={activeButtons["c6s_bi"] || false}
-                onChange={(e) => handleCheckboxChange(e, "c6s_bi", ",C6 ,C7 BILATERALES")}
+                onChange={(e) => handleCheckboxChange(e, "c6s_bi", "C6-C8 BILATERAL.")}
               />
-              <label htmlFor="c6s_bi"> B </label>
+              <label htmlFor="c6s_bi"> L&R </label>
             </td>
           </tr>
         </table>
@@ -951,7 +952,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                 type="checkbox"
                 id="s1s_i"
                 checked={activeButtons["s1s_i"] || false}
-                onChange={(e) => handleCheckboxChange(e, "s1s_i", ", S1 IZQUIERDA, ")}
+                onChange={(e) => handleCheckboxChange(e, "s1s_i", " S1 IZQUIERDA.")}
               />
               <label htmlFor="s1s_i"> L </label>
             </td>
@@ -960,7 +961,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                 type="checkbox"
                 id="s1s_d"
                 checked={activeButtons["s1s_d"] || false}
-                onChange={(e) => handleCheckboxChange(e, "s1s_d", ", S1 DERECHA, ")}
+                onChange={(e) => handleCheckboxChange(e, "s1s_d", "S1 DERECHA.")}
               />
               <label htmlFor="s1s_d"> R </label>
             </td>
@@ -969,9 +970,9 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                 type="checkbox"
                 id="s1s_bi"
                 checked={activeButtons["s1s_bi"] || false}
-                onChange={(e) => handleCheckboxChange(e, "s1s_bi", ", S1 BILATERAL")}
+                onChange={(e) => handleCheckboxChange(e, "s1s_bi", "S1 BILATERAL.")}
               />
-              <label htmlFor="s1s_bi"> B </label>
+              <label htmlFor="s1s_bi"> L&R </label>
             </td>
           </tr>
         </table>
@@ -1829,31 +1830,31 @@ const StepG1 = ({ handlePrevStep1, handleNextStep1 }) => {
       <div>
         <ConclusionButtonR
           value="p_completa"
-          title="Y PRONOSTICO DE RECUPERACION COMPLETA"
-          displayText=""
+          title="COMPLETA"
+          displayText="COMPLETA"
           pressed={activeButtons["p_completa"]}
-          onClick={() => handleButtonPress("p_completa", "Y PRONOSTICO DE RECUPERACION COMPLETA", handleNextStep1)}
+          onClick={() => handleButtonPress("p_completa", "Y PRONOSTICO DE RECUPERACION COMPLETA.", handleNextStep1)}
         />
         <ConclusionButtonR
           value="p_parcial"
-          title="Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL"
-          displayText=""
+          title="PARCIAL FUNCIONAL"
+          displayText="PARCIAL FUNCIONAL"
           pressed={activeButtons["p_parcial"]}
-          onClick={() => handleButtonPress("p_parcial", "Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL", handleNextStep1)}
+          onClick={() => handleButtonPress("p_parcial", "Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL.", handleNextStep1)}
         />
         <ConclusionButtonR
           value="p_no_funcional"
-          title="Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL"
-          displayText=""
+          title="POBRE NO FUNCIONAL"
+          displayText="POBRE NO FUNCIONAL"
           pressed={activeButtons["p_no_funcional"]}
-          onClick={() => handleButtonPress("p_no_funcional", "Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL", handleNextStep1)}
+          onClick={() => handleButtonPress("p_no_funcional", "Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL.", handleNextStep1)}
         />
         <ConclusionButtonR
           value="nula"
           title="NULA (EN FASE DE SECUELA DEFINITIVA)"
-          displayText=""
+          displayText="NULA (EN FASE DE SECUELA DEFINITIVA)"
           pressed={activeButtons["nula"]}
-          onClick={() => handleButtonPress("nula", "NULA (EN FASE DE SECUELA DEFINITIVA)", handleNextStep1)}
+          onClick={() => handleButtonPress("nula", "Y PRONOSTICO DE RECUPERACION NULO (EN FASE DE SECUELA DEFINITIVA)", handleNextStep1)}
         />
       </div>
     </>
@@ -2777,31 +2778,31 @@ const StepE2 = ({  handlePrevStep2, handleNextStep2}) => {
       <div>
      <ConclusionButtonR
           value="p_completa"
-          title="Y PRONOSTICO DE RECUPERACION COMPLETA"
-          displayText=""
+          title="COMPLETA"
+          displayText="COMPLETA"
           pressed={activeButtons["p_completa"]}
-          onClick={() => handleButtonPress("p_completa", "Y PRONOSTICO DE RECUPERACION COMPLETA", handleNextStep2)}
+          onClick={() => handleButtonPress("p_completa", "Y PRONOSTICO DE RECUPERACION COMPLETA.", handleNextStep2)}
         />
         <ConclusionButtonR
           value="p_parcial"
-          title="Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL"
-          displayText=""
+          title="PARCIAL FUNCIONAL"
+          displayText="PARCIAL FUNCIONAL"
           pressed={activeButtons["p_parcial"]}
-          onClick={() => handleButtonPress("p_parcial", "Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL", handleNextStep2)}
+          onClick={() => handleButtonPress("p_parcial", "Y PRONOSTICO DE RECUPERACION PARCIAL FUNCIONAL.", handleNextStep2)}
         />
         <ConclusionButtonR
           value="p_no_funcional"
-          title="Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL"
-          displayText=""
+          title="POBRE NO FUNCIONAL"
+          displayText="POBRE NO FUNCIONAL"
           pressed={activeButtons["p_no_funcional"]}
-          onClick={() => handleButtonPress("p_no_funcional", "Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL", handleNextStep2)}
+          onClick={() => handleButtonPress("p_no_funcional", "Y PRONOSTICO DE RECUPERACION POBRE NO FUNCIONAL.", handleNextStep2)}
         />
         <ConclusionButtonR
           value="nula"
           title="NULA (EN FASE DE SECUELA DEFINITIVA)"
-          displayText=""
+          displayText="NULA (EN FASE DE SECUELA DEFINITIVA)"
           pressed={activeButtons["nula"]}
-          onClick={() => handleButtonPress("nula", "NULA (EN FASE DE SECUELA DEFINITIVA)", handleNextStep2)}
+          onClick={() => handleButtonPress("nula", "Y PRONOSTICO DE RECUPERACION NULO (EN FASE DE SECUELA DEFINITIVA)", handleNextStep2)}
         />
       </div>
       
@@ -2830,7 +2831,7 @@ const StepF1 = ({ handlePrevStep1, handleNextStep1 }) => {
   return (
     <div>
       <div className='button-bar'>
-      <button onClick={handlePrevStep1} id='prev' className={`print-button dont-print `}>
+      <button  id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
           </button>
           <button id='prev' className={`print-button dont-print `}>

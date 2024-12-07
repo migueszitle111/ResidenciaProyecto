@@ -71,9 +71,9 @@ const StepA = ({ handleNextStep ,setStep}) => (
     <div onClick={handleNextStep}> 
     </div>
     <div onClick={() => setStep('H')}>
-      <ConclusionButton value="indenme" title="VÍA VISUAL INDEMNE CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
+      <ConclusionButton value="indenme" title="VÍA VISUAL CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
     <div onClick={() => setStep('B')}>
-      <ConclusionButton value="alterada" title="VÍA VISUAL ALTERADA CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
+      <ConclusionButton value="alterada" title="VÍA VISUAL CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
     </div>
   </div>
 );

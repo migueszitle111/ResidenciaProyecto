@@ -527,7 +527,7 @@ const Reporte = () => {
                       alt: 'Modelo',
                     }
                   },
-                
+
                   {
                     expectedValue: 'ACCESORIO_IZQgeneralizada',
                     image: {
@@ -675,9 +675,158 @@ const Reporte = () => {
                       alt: 'Modelo',
                     }
                   },
-                
-              
 
+                  // Imagenes de Generalizada NERVIO COMPLETO
+
+                  {
+                    expectedValue: 'MEDIANO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_12_Mediano.png',
+                      alt: 'Modelo',
+                    }
+                  },
+
+                  {
+                    expectedValue: 'ACCESORIO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Accesorio.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'ANTEBRLATE_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Antebraquial medial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'ANTEBRMEDIAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Antebraquial medial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'AXILAR_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Axilar.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'CIATICO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Ciatico.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'FACIAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Facial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'FEMORAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Femoral.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'FEMOROCUTANEO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Femorocutáneo lateral.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'FRENICO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Frenico.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'ILIO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_GF-ILIO.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  
+                  {
+                    expectedValue: 'MUSCULOCUTANEO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Musculocutaneo.png',
+                      alt: 'Modelo2',
+                    }
+                  },
+                  {
+                    expectedValue: 'OBTUUADOR_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Obturador.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PERONEO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Peroneo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PUDENDO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Pudendo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'RADIAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Radial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'SUPRAESCAPULAR_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Supraescapular.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'TIBIAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Tibial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'TORACICO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Toracico largo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'TORACODORSAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Toracodorsal.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'ULNAR_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Ulnar.png',
+                      alt: 'Modelo',
+                    }
+                  },
 
 
 

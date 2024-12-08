@@ -1021,6 +1021,27 @@ const Reporte = () => {
                 alt: 'Modelo',
               }
             },
+            {
+              expectedValue: 'izquierda_C',
+              image: {
+                src: 'PlexoImg/Plexo cervical izquierdo.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'derecha_C',
+              image: {
+                src: 'PlexoImg/Plexo cervical derecho.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'bilateral_C',
+              image: {
+                src: 'PlexoImg/Plexo lumbar derecho.png',
+                alt: 'Modelo',
+              }
+            },
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
         value={copyConclusions}

@@ -136,7 +136,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
 
     // Actualizar las conclusiones
     useEffect(() => {
-      const newConclusions = conclusions.map(cl => cl.title).join(' ');
+      const newConclusions = conclusions.map(cl => cl.title).join('');
       const formattedConclusions = formatConclusions(newConclusions);
       setCopyConclusions(formattedConclusions);
   }, [conclusions]);

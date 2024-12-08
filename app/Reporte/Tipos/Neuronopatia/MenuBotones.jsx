@@ -563,8 +563,8 @@ const StepH = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
           <img src="/I_Print.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={handleUndo} className={`print-button`}>
-          <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <label htmlFor="file-upload" className={`print-button`}>

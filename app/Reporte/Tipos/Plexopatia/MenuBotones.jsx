@@ -761,9 +761,9 @@ const StepB1 = ({ handleNextStep, handlePrevStep }) => {
       </h1>
       
       <div onClick={ handleNextStep }>
-      <ConclusionButton value='izquierda' title=' IZQUIERDA,' displayText={'IZQUIERDA'}/>
-      <ConclusionButton value='derecha' title=' DERECHA' displayText={'DERECHA'}   dangerouslySetInnerHTML={{ __html: 'DERECHA,<br>' }} />
-      <ConclusionButton value='bilateral' title=' BILATERAL,' displayText={'BILATERAL'}/>
+      <ConclusionButton value='izquierda_C' title=' IZQUIERDA,' displayText={'IZQUIERDA'}/>
+      <ConclusionButton value='derecha_C' title=' DERECHA' displayText={'DERECHA'}   dangerouslySetInnerHTML={{ __html: 'DERECHA,<br>' }} />
+      <ConclusionButton value='bilateral_C' title=' BILATERAL,' displayText={'BILATERAL'}/>
       </div>
 
       
@@ -1495,14 +1495,14 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
           <img src="/I_Print.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={triggerFileInput} className={`print-button`} onChange={handleImageUpload} title="Subir imagen">
-          <img src="/I_Document.svg" style={{filter: 'invert(1)'}}/>
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <input id="imageInput" type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }}/>
 
         <label htmlFor="file-upload" className={`print-button`} title="Guardar archivo">
-          <img src="/I_Folder.svg" style={{filter: 'invert(1)'}}/>
+          <img src="/I_Document.svg" style={{filter: 'invert(1)'}}/>
         </label>
 
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>

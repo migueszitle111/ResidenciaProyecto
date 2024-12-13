@@ -1,4 +1,3 @@
-import { Accordion } from '@/app/components/ReportTemplate/Accordion';
 import { useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
@@ -433,8 +432,8 @@ const StepF = ({ handleNextStep, handlePrevStep, handleNextStep2 }) => {
         <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
-        <button id='prev' className={`print-button dont-print `}>
-        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
+        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
@@ -445,12 +444,20 @@ const StepF = ({ handleNextStep, handlePrevStep, handleNextStep2 }) => {
         <ConclusionButton value='motora' title=' DE FIBRAS MOTORAS' displayText={'MOTORA'}/>
         <ConclusionButton value='sensitiva' title=' DE FIBRAS SENSITIVAS' displayText={'SENSITIVA'}/>
       </div>
-        <Accordion title='MIXTA'>
+
+      <ConclusionButton value='mixta' title=' MIXTA' displayText={'MIXTA'} />
+      <div onClick={handleNextStep}>
+            <ConclusionButton value = 'predominio_sentitivo' title = ' DE FIBRAS MIXTAS PREDOMINIO SENSITIVO,' displayText={'• PREDOMINIO SENSITIVO'}/>
+            <ConclusionButton value = 'predominio_motor' title = ' DE FIBRAS MIXTAS PREDOMINIO MOTOR,'displayText={'• PREDOMINIO MOTOR'} />
+      </div>
+
+
+        {/* <Accordion title='MIXTA' >
           <div onClick={handleNextStep}>
             <ConclusionButton value = 'predominio_sentitivo' title = ' DE FIBRAS MIXTAS PREDOMINIO SENSITIVO,' displayText={'PREDOMINIO SENSITIVO'}/>
             <ConclusionButton value = 'predominio_motor' title = ' DE FIBRAS MIXTAS PREDOMINIO MOTOR,'displayText={'PREDOMINIO MOTOR'} />
           </div>
-        </Accordion>
+        </Accordion> */}
     </div>
   );
 };

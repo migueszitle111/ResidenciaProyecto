@@ -48,6 +48,8 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
 
       {step === 'CL' && <StepCL handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} />}
 
+      {step === 'CG' && <StepCG handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} />}
+
       {step === 'CD' && <StepCD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
 
       {step === 'D' && <StepD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
@@ -185,17 +187,45 @@ const StepB1 = ({ handleNextStep, handlePrevStep, setStep }) => (
       <ConclusionButton value='DERECHO' title=' DERECHO,' displayText='DERECHO' /></div>
 
     <Accordion title='BILATERIAL'>
-      <div onClick={() => setStep('CL')}>
-        <ConclusionButton value='BDERECHO' title=' BILATERAL CON PREDOMINIO DERECHO,' displayText={'PREDOMINIO DERECHO'} /></div>
-      <div onClick={() => setStep('C')}>
-        <ConclusionButton value='BIZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} /></div>
-      <div onClick={() => setStep('C')}>
-        <ConclusionButton value='BILATERAL' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} /></div>
+      <div onClick={() => setStep('CG')}>
+        <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO DERECHO,' displayText={'PREDOMINIO DERECHO'} /></div>
+      <div onClick={() => setStep('CG')}>
+        <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} /></div>
+      <div onClick={() => setStep('CG')}>
+        <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} /></div>
 
     </Accordion>
   </div>
 
 );
+const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => ( 
+
+  <div>
+    <div className='button-bar'>
+      <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_Out.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className=' text-xl font-bold text-white'>
+      UBICACION
+    </h1>
+
+    <div onClick={() => setStep('CD')}>
+      <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL DE ' displayText={'FOCALIZADA'} /></div>
+    <div onClick={() => setStep('CD')}>
+      <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL DE ' displayText={'SEGMENTARIA'} /></div>
+
+
+    <div onClick={() => setStep('D')}>
+      <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
+
+  </div>
+
+);
+
 
 const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => ( 
 
@@ -252,6 +282,8 @@ const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
   </div>
 
 );
+
+
 
 
 const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => (

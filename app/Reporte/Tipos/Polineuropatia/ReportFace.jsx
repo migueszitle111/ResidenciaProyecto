@@ -332,7 +332,21 @@ const Reporte = () => {
               }
             },
             {
-              expectedValue: 'mixtas',
+              expectedValue: 'mixta',
+              image: {
+                src: 'PolineuropatiaIMG/PO_Sensitivo-Motor.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'predominio_sentitivo',
+              image: {
+                src: 'PolineuropatiaIMG/PO_Sensitivo-Motor.png',
+                alt: 'Modelo',
+              }
+            },
+            {
+              expectedValue: 'predominio_motor',
               image: {
                 src: 'PolineuropatiaIMG/PO_Sensitivo-Motor.png',
                 alt: 'Modelo',

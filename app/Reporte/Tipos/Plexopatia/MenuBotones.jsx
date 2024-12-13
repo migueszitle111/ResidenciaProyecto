@@ -83,9 +83,21 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
           <ConclusionButton value='t1fd' title=' T1' displayText={'T1'}/>
         </Accordion>
 
-        <div onClick={ handleNextStep1 }>
+        {/* <div onClick={ handleNextStep1 }>
           <ConclusionButton value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
-        </div>
+        </div> */}
+
+        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
+          <div onClick={handleNextStep1}>
+            <ConclusionButton value='troncosD' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+          </div>
+          <div onClick={ handleNextStep1 }>
+            <ConclusionButton value='divid' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
+          </div>
+          <div onClick={handleNextStep1}>
+            <ConclusionButton value='tron10000d' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+          </div>
+        </Accordion>
       
         <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'}>
           <div onClick={handleNextStep5}>
@@ -118,9 +130,21 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
           <ConclusionButton value='t1fi' title=' T1' displayText={'T1'}/>
         </Accordion>
 
-        <div onClick={ handleNextStep1 }>
+        {/* <div onClick={ handleNextStep1 }>
           <ConclusionButton value='post_totali' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
-        </div>
+        </div> */}
+
+        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
+          <div onClick={handleNextStep1}>
+            <ConclusionButton value='troncosI' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+          </div>
+          <div onClick={ handleNextStep1 }>
+            <ConclusionButton value='divii' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
+          </div>
+          <div onClick={handleNextStep1}>
+            <ConclusionButton value='tron10000i' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+          </div>
+        </Accordion>
       
         <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'}>
           <div onClick={handleNextStep5}>
@@ -152,10 +176,22 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
           <ConclusionButton value='c8f' title=' C8' displayText={'C8'}/>
           <ConclusionButton value='t1f' title=' T1' displayText={'T1'}/>
         </Accordion>
-
+{/* 
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='post_total' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
-        </div>
+        </div> */}
+
+        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
+          <div onClick={handleNextStep1}>
+            <ConclusionButton value='troncosB' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+          </div>
+          <div onClick={ handleNextStep1 }>
+            <ConclusionButton value='divi' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
+          </div>
+          <div onClick={handleNextStep1}>
+            <ConclusionButton value='tron10000' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+          </div>
+        </Accordion>
       
         <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'}>
           <div onClick={handleNextStep5}>
@@ -1375,66 +1411,84 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
   );
 };
 
-  // Función para manejar la carga de la imagen
-  const DropArea2 = ({ isExpanded }) => {
-    const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
-  
-    const handleDrop = (e) => {
-      e.preventDefault();
-      const files = e.dataTransfer.files;
-      if (files && files.length > 0) {
-        const fileArray = Array.from(files);
-        const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
-  
-        if (imageFiles.length > 0) {
-          const file = imageFiles[0]; // Solo tomamos la primera imagen
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            setImageSrc(event.target.result); // Reemplaza la imagen anterior
-          };
-          reader.readAsDataURL(file); // Lee el archivo como URL de datos
-        }
-      }
-    };
-  
-    const handleDragOver = (e) => {
-      e.preventDefault(); // Necesario para permitir el "drop"
-    };
-  
-    return (
-      <div
-        className={`dropArea2 ${isExpanded ? 'dropArea2-expanded' : ''}`}
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        style={{
-          width: isExpanded ? '98px' : '40px', // Ajusta el tamaño basado en el estado de expansión
-          height: isExpanded ? '92px' : '40px',
-          position: 'relative',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          transition: 'width 0.3s ease, height 0.3s ease', // Transiciones suaves
-          overflow: 'hidden', // Evita que el contenido se desborde
-        }}
-      >
-        {!imageSrc ? (
-          <p></p>
-        ) : (
-          <img
-            src={imageSrc}
-            alt="Cargada"
-            style={{
-              maxWidth: '100%',
-              maxHeight: '100%',
-              objectFit: 'cover', // Ajusta la imagen dentro del contenedor
-              pointerEvents: 'none', // Evita interacciones con la imagen
-              userSelect: 'none', // Evita que la imagen sea seleccionable
-            }}
-          />
-        )}
-      </div>
-    );
+const DropArea2 = ({ isExpanded }) => {
+  const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    handleFileSelect(e.dataTransfer.files);
   };
+
+  const handleFileSelect = (files) => {
+    if (files && files.length > 0) {
+      const fileArray = Array.from(files);
+      const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
+
+      if (imageFiles.length > 0) {
+        const file = imageFiles[0]; // Solo tomamos la primera imagen
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          setImageSrc(event.target.result); // Reemplaza la imagen anterior
+        };
+        reader.readAsDataURL(file); // Lee el archivo como URL de datos
+      }
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault(); // Necesario para permitir el "drop"
+  };
+
+  const handleInputChange = (e) => {
+    handleFileSelect(e.target.files);
+  };
+
+  return (
+    <div
+      className={`dropArea2 ${isExpanded ? 'dropArea2-expanded' : ''}`}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      style={{
+        width: isExpanded ? '96px' : '40px', // Ajusta el tamaño basado en el estado de expansión
+        height: isExpanded ? '90px' : '40px',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        transition: 'width 0.3s ease, height 0.3s ease', // Transiciones suaves
+        overflow: 'hidden', // Evita que el contenido se desborde
+      }}
+    >
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleInputChange}
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          opacity: 0,
+          cursor: 'pointer',
+        }}
+      />
+      {!imageSrc ? (
+        <p></p>
+      ) : (
+        <img
+          src={imageSrc}
+          alt="Cargada"
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            objectFit: 'cover', // Ajusta la imagen dentro del contenedor
+            pointerEvents: 'none', // Evita interacciones con la imagen
+            userSelect: 'none', // Evita que la imagen sea seleccionable
+          }}
+        />
+      )}
+    </div>
+  );
+};
   
 
 
@@ -1844,22 +1898,6 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
 
         </div>
 
-          {/* <div className='DivPanel'>
-
-            <div>
-                <button onClick={triggerFileInput} className='btnInsert'>Cargar imagen</button>
-                  <input
-                    id="imageInput"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    style={{ display: 'none' }} // Oculta el input file
-                  />
-                  
-                  {imageSrc && <img src={imageSrc} alt="Imagen cargada" style={{ marginTop: '20px', maxWidth: '100%', height: 'auto' }} />}
-            </div>
-
-          </div> */}
     </div>
   );
 };
@@ -1906,12 +1944,12 @@ const StepI1 = ({ handlePrevStep1, handleUndo, handleImageChange, handlePrint })
           <img src="/I_Print.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={handleUndo} className={`print-button`}>
-          <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <label htmlFor="file-upload" className={`print-button`}>
-          <img src="/I_Folder.svg" style={{filter: 'invert(1)'}}/>
+        <label htmlFor="file-upload" className={`print-button`} title="Guardar archivo">
+          <img src="/I_Document.svg" style={{filter: 'invert(1)'}}/>
         </label>
 
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
@@ -2250,24 +2288,6 @@ const StepI1 = ({ handlePrevStep1, handleUndo, handleImageChange, handlePrint })
             ))}
 
         </div>
-
-          {/* <div className='DivPanel'>
-
-            <div>
-                <button onClick={triggerFileInput} className='btnInsert'>Cargar imagen</button>
-                  <input
-                    id="imageInput"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    style={{ display: 'none' }} // Oculta el input file
-                  />
-                  
-                  {imageSrc && <img src={imageSrc} alt="Imagen cargada" style={{ marginTop: '20px', maxWidth: '100%', height: 'auto' }} />}
-            </div>
-
-          </div> */}
-
     </div>
   );
 };
@@ -2314,12 +2334,12 @@ const StepI2 = ({ handlePrevStep2, handleUndo, handleImageChange, handlePrint })
           <img src="/I_Print.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={handleUndo} className={`print-button`}>
-          <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <label htmlFor="file-upload" className={`print-button`}>
-          <img src="/I_Folder.svg" style={{filter: 'invert(1)'}}/>
+        <label htmlFor="file-upload" className={`print-button`} title="Guardar archivo">
+          <img src="/I_Document.svg" style={{filter: 'invert(1)'}}/>
         </label>
 
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
@@ -2659,23 +2679,6 @@ const StepI2 = ({ handlePrevStep2, handleUndo, handleImageChange, handlePrint })
             ))}
 
         </div>
-
-          {/* <div className='DivPanel'>
-
-            <div>
-                <button onClick={triggerFileInput} className='btnInsert'>Cargar imagen</button>
-                  <input
-                    id="imageInput"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    style={{ display: 'none' }} // Oculta el input file
-                  />
-                  
-                  {imageSrc && <img src={imageSrc} alt="Imagen cargada" style={{ marginTop: '20px', maxWidth: '100%', height: 'auto' }} />}
-            </div>
-
-          </div> */}
 
     </div>
   );

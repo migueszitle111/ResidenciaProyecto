@@ -2,7 +2,7 @@ import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
+import { ConclusionCanvasV } from '../../../components/ReportTemplate/Conclusions/CanvasViasVisual';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
 
@@ -317,7 +317,7 @@ const Reporte = () => {
 
         {/* Despliego de las imagenes dentro del array */}
         <div className='conclusion-container'>
-        <ConclusionCanvas 
+        <ConclusionCanvasV 
         
           img={{
             src: '/assets/PlexoImg/BP_Plexopatia.png',
@@ -1038,10 +1038,77 @@ const Reporte = () => {
             {
               expectedValue: 'bilateral_C',
               image: {
-                src: 'PlexoImg/Plexo lumbar derecho.png',
+                src: 'PlexoImg/PLEXO CERVICAL BILATERAL.png',
                 alt: 'Modelo',
               }
             },
+
+            {
+              expectedValue: 'troncosD',
+              image: [
+              {
+                src: 'PlexoImg/Tronco superior derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco medio derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco inferior derecho.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
+            {
+              expectedValue: 'troncosI',
+              image: [
+              {
+                src: 'PlexoImg/Tronco superior izquierdo.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco medio izquierdo.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco inferior izquierdo.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
+            {
+              expectedValue: 'troncosB',
+              image: [
+              {
+                src: 'PlexoImg/Tronco superior derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco medio derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco inferior derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco superior izquierdo.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco medio izquierdo.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco inferior izquierdo.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
         value={copyConclusions}

@@ -197,116 +197,177 @@ const Reporte = () => {
             
 
             {
-              expectedValue: 'izquierdo', 
-              image: 
-                {
-                  src: 'VisualImg/Afectadas/VI_5.png',
-                  alt: 'Modelo',
-                },
+              expectedValue: 'izquierdoled_flash', 
+
+                image: [
+                  {
+                    src: 'VisualImg/VN_VisualRedRBI.png',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
+                    alt: 'Modelo',
+                  }
+                
+                ],
               
             },
             {
-              expectedValue: 'derecho', 
-              image: {
-                src: 'VisualImg/BP_Visual_page-GreyRBI.jpg',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'bilateral', 
-              image: [
-              {
-                src: 'VisualImg/VN_VisualGreyLBI.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'VisualImg/VN_VisualGreyRBI.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-            {
-              expectedValue: 'damero_total', 
-              image: [
-              {
-                src: 'VisualImg/VN_VisualGreyLBI.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'VisualImg/VN_VisualGreyRBI.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            {
-              expectedValue: 'nervio_optico', 
-              image: [
-              {
-                src: 'VisualImg/Afectadas/VI_7.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'VisualImg/Afectadas/VI_8.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            {
-              expectedValue: 'quiasma_optico', 
-              image: [
-              {
-                src: 'VisualImg/Afectadas/VI_2.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'VisualImg/Afectadas/VI_6.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            {
-              expectedValue: 'tracto_optico', 
-              image: [
-              {
-                src: 'VisualImg/Afectadas/VI_3.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'VisualImg/Afectadas/VI_1.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            {
-              expectedValue: 'nucleo_geniculado', 
-              image: [
-              {
-                src: 'VisualImg/Afectadas/VI_3.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'VisualImg/Afectadas/VI_1.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            {
-              expectedValue: 'led_flash', 
+              expectedValue: 'derecholed_flash', 
               image: [
                 {
                   src: 'VisualImg/VN_VisualRedLBI.png',
                   alt: 'Modelo',
                 },
                 {
-                  src: 'VisualImg/VN_VisualRedRBI.png',
+                  src: 'VisualImg/Via Afectada/LED DERECHO.png',
                   alt: 'Modelo',
-                }]
+                }
+              
+              ],
             },
+            {
+              expectedValue: 'bilateralled_flash', 
+              image: [
+                {
+                  src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
+                  alt: 'Modelo',
+                },
+                {
+                  src: 'VisualImg/Via Afectada/LED DERECHO.png',
+                  alt: 'Modelo',
+                }
+            ],
+            },
+           
+            {
+              expectedValue: 'izquierdonervio_optico', 
+              image: 
+                {
+                  src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'derechonervio_optico', 
+              image: 
+              {
+                src: 'VisualImg/Via Afectada/LED DERECHO.png',
+                alt: 'Modelo',
+              }
+              
+            },
+            {
+              expectedValue: 'bilateralnervio_optico', 
+              image: [
+              {
+                src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'VisualImg/Via Afectada/LED DERECHO.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
+            {
+              expectedValue: 'izquierdoquiasma_optico', 
+              image: 
+                {
+                  src: 'VisualImg/Via Afectada/QUIASMA OPTICO IZQUIERDO.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'derechoquiasma_optico', 
+              image: 
+                {
+                  src: 'VisualImg/Via Afectada/QUIASMA OPTICO DERECHO.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'bilateralquiasma_optico', 
+              image: [
+              {
+                src: 'VisualImg/Via Afectada/QUIASMA OPTICO IZQUIERDO.png',
+                  alt: 'Modelo',
+              },
+              {
+                src: 'VisualImg/Via Afectada/QUIASMA OPTICO DERECHO.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
+            {
+              expectedValue: 'izquierdotracto_optico', 
+              image: 
+                {
+                  src: 'VisualImg/Via Afectada/TRACTO OPTICO IZQUIERDO.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'derechotracto_optico', 
+              image: 
+                {
+                  src: 'VisualImg/Via Afectada/TRACTO OPTICO DERECHO.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'bilateraltracto_optico', 
+              image: [
+              {
+                src: 'VisualImg/Via Afectada/TRACTO OPTICO IZQUIERDO.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'VisualImg/Via Afectada/TRACTO OPTICO DERECHO.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+            
+            {
+              expectedValue: 'izquierdonucleo_geniculado', 
+              image: 
+                {
+                  src: 'VisualImg/Via Afectada/NUCLEO GENICULADO IZQUIERDO.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'derechonucleo_geniculado', 
+              image: 
+                {
+                  src: 'VisualImg/Via Afectada/NUCLEO GENICULADO DERECHO.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'bilateralnucleo_geniculado', 
+              image: [
+              {
+                src: 'VisualImg/Via Afectada/NUCLEO GENICULADO IZQUIERDO.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'VisualImg/Via Afectada/NUCLEO GENICULADO DERECHO.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+           
 
 
 

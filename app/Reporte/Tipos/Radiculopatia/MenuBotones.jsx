@@ -8,25 +8,28 @@ import { ReportContextR,CheckboxContext,useButtonContext } from '@/src/context';
 const useStep = () => {
   const [step, setStep] = useState('A'); // Inicialmente en el paso 'A'
   const { resetCheckboxes } = useContext(CheckboxContext);
-  const {handlePrint} = useImageState();
+  const { handlePrint } = useImageState();
 
-
-  // Siguiente paso
+  // Flujo principal (ejemplo Radiculopatía Aguda)
   const handleNextStep = () => {
     if (step === 'A') setStep('B');
     else if (step === 'B') setStep('C');
     else if (step === 'C') setStep('D');
     else if (step === 'D') setStep('E');
   };
-  // Paso anterior
+  
   const handlePrevStep = () => {
-    resetCheckboxes();
     if (step === 'E') setStep('D');
     else if (step === 'D') setStep('C');
     else if (step === 'C') setStep('B');
-    else if (step === 'B') setStep('A');
+    else if (step === 'B') {
+      setStep('A');
+      // Al volver a A, puedes resetear si así lo requieres
+      resetCheckboxes();
+    }
   };
-  // Metodos de movimiento entre menus custom
+  
+  // Flujo para Radiculopatía Crónica
   const handleNextStep1 = () => {
     if (step === 'A') setStep('B1');
     else if (step === 'B1') setStep('C1');
@@ -36,14 +39,20 @@ const useStep = () => {
     else if (step === 'F1') setStep('G1');
     else if (step === 'G1') setStep('E');
   };
+  
   const handlePrevStep1 = () => {
     if (step === 'G1') setStep('F1');
     else if (step === 'F1') setStep('E1');
     else if (step === 'E1') setStep('D1');
     else if (step === 'D1') setStep('C1');
     else if (step === 'C1') setStep('B1');
-    else if (step === 'B1') setStep('A');
+    else if (step === 'B1') {
+      setStep('A');
+      resetCheckboxes();
+    }
   };
+  
+  // Flujo para Radiculopatía Subaguda
   const handleNextStep2 = () => {
     if (step === 'A') setStep('B2');
     else if (step === 'B2') setStep('C2');
@@ -51,58 +60,97 @@ const useStep = () => {
     else if (step === 'D2') setStep('E2');
     else if (step === 'E2') setStep('E');
   };
+  
   const handlePrevStep2 = () => {
     if (step === 'E2') setStep('D2');
-    if (step === 'C2') setStep('B2');
-    if (step === 'B2') setStep('A');
+    else if (step === 'D2') setStep('C2');
+    else if (step === 'C2') setStep('B2');
+    else if (step === 'B2') {
+      setStep('A');
+      resetCheckboxes();
+    }
   };
+
+  // Flujo para Radiculopatía Sensitiva
   const handleNextStep3 = () => {
     if (step === 'A') setStep('S1');
-    if (step === 'S1') setStep('E3');
+    else if (step === 'S1') setStep('E3');
   };
+  
   const handlePrevStep3 = () => {
-
-    if (step === 'S1') setStep('A');
     if (step === 'E3') setStep('S1');
+    else if (step === 'S1') {
+      setStep('A');
+      resetCheckboxes();
+    }
   };
+
   return {
     step,
     handleNextStep,
     handlePrevStep,
     handleNextStep1,
-    handleNextStep2,
     handlePrevStep1,
+    handleNextStep2,
     handlePrevStep2,
     handleNextStep3,
     handlePrevStep3,
     handlePrint
   };
 };
+
 const SimpleMultiStepForm = () => {
-  const { step, handleNextStep, handlePrevStep,handleNextStep1,handleNextStep2,handlePrevStep1,handlePrevStep2,handleNextStep3,handlePrevStep3,handlePrint } = useStep();
+  const {
+    step,
+    handleNextStep,
+    handlePrevStep,
+    handleNextStep1,
+    handlePrevStep1,
+    handleNextStep2,
+    handlePrevStep2,
+    handleNextStep3,
+    handlePrevStep3,
+    handlePrint
+  } = useStep();
+
   return (
-      <div>
-        {/* Renderiza el componente adecuado basado en el estado del paso */}
-        {step === 'A' ? (<StepA handleNextStep={handleNextStep} handleNextStep1={handleNextStep1} handleNextStep2={handleNextStep2} handleNextStep3={handleNextStep3} />) : null}
-        {step === 'B' ? (<StepB handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />) : null}
-        {step === 'B1' ? (<StepB1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
-        {step === 'C' ? (<StepC handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />) : null}
-        {step === 'C1' ? (<StepC1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
-        {step === 'D' ? (<StepD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />) : null}
-        {step === 'E' ? (<StepE handlePrevStep={handlePrevStep}  handlePrint={handlePrint}/>) : null}
-        {step === 'E3' ? (<StepE3 handlePrevStep3={handlePrevStep3} handleNextStep3={handleNextStep3}  handlePrint={handlePrint} />) : null}
-        {step === 'D1' ? (<StepD1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
-        {step === 'E1' ? (<StepE1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
-        {step === 'F1' ? (<StepF1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
-        {step === 'G1' ? (<StepG1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />) : null}
-        {step === 'B2' ? (<StepB2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
-        {step === 'C2' ? (<StepC2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
-        {step === 'E2' ? (<StepE2 handlePrevStep2={handlePrevStep2}  handleNextStep2={handleNextStep2}  handlePrint={handlePrint} />) : null}
-        {step === 'D2' ? (<StepD2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />) : null}
-        {step === 'S1' ? (<StepS1 handlePrevStep3={handlePrevStep3} handleNextStep3={handleNextStep3} />) : null}
-      </div>
+    <div>
+      {step === 'A' && (
+        <StepA
+          handleNextStep={handleNextStep}    // Aguda
+          handleNextStep1={handleNextStep1}  // Crónica
+          handleNextStep2={handleNextStep2}  // Subaguda
+          handleNextStep3={handleNextStep3}  // Sensitiva
+        />
+      )}
+      
+      {/* Flujo principal (aguda) */}
+      {step === 'B' && <StepB handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
+      {step === 'C' && <StepC handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
+      {step === 'D' && <StepD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
+      {step === 'E' && <StepE handlePrevStep={handlePrevStep} handlePrint={handlePrint} />}
+
+      {/* Flujo crónico */}
+      {step === 'B1' && <StepB1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
+      {step === 'C1' && <StepC1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
+      {step === 'D1' && <StepD1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
+      {step === 'E1' && <StepE1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
+      {step === 'F1' && <StepF1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
+      {step === 'G1' && <StepG1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
+
+      {/* Flujo subagudo */}
+      {step === 'B2' && <StepB2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />}
+      {step === 'C2' && <StepC2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />}
+      {step === 'D2' && <StepD2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />}
+      {step === 'E2' && <StepE2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} handlePrint={handlePrint} />}
+
+      {/* Flujo sensitiva */}
+      {step === 'S1' && <StepS1 handlePrevStep3={handlePrevStep3} handleNextStep3={handleNextStep3} />}
+      {step === 'E3' && <StepE3 handlePrevStep3={handlePrevStep3} handleNextStep3={handleNextStep3} handlePrint={handlePrint} />}
+    </div>
   );
 };
+
 const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextStep3 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
   const { updateConclusions } = useContext(ReportContextR);
@@ -1887,7 +1935,7 @@ const StepE = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
         <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
       </button>
 
-      <button onClick={handleUndo} className={`print-button dont-print`}>
+      <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
         <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
       </button>
 
@@ -1925,7 +1973,7 @@ const StepE3 = ({ handlePrevStep3, handleUndo, handleImageChange, handlePrint })
         <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
       </button>
 
-      <button onClick={handleUndo} className={`print-button dont-print`}>
+      <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
         <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
       </button>
 

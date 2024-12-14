@@ -167,13 +167,10 @@ const Reporte = () => {
 
 
   useEffect(() => {
-    if (!hasMounted) return; // Ensure this runs only on the client
-
-    console.log('Conclusions:', conclusions);
-    // Build the text string based on conclusions
+    if (!hasMounted) return;
+  
     const conclusionText = conclusions.map(cl => cl.title).join(' ');
   
-    // Function to check if crosses are marked in a specific group
     const checkGroup = (leftKeys, rightKeys) => {
       let isLeftMarked = false;
       let isRightMarked = false;
@@ -201,7 +198,6 @@ const Reporte = () => {
       }
     };
   
-    // Define groups of crosses
     const groups = [
       { name: 'C4', left: ['A1', 'A2', 'A3', 'A4'], right: ['A5', 'A6', 'A7', 'A8'] },
       { name: 'C5', left: ['A9', 'A10', 'A11', 'A12'], right: ['A13', 'A14', 'A15', 'A16'] },
@@ -217,7 +213,6 @@ const Reporte = () => {
       { name: 'S2', left: ['A89', 'A90', 'A91', 'A92'], right: ['A93', 'A94', 'A95', 'A96'] },
     ];
   
-    // Group the groups by status (IZQUIERDA, DERECHA, or BILATERAL)
     const groupedStatus = groups.reduce((acc, group) => {
       const status = checkGroup(group.left, group.right);
       if (status) {
@@ -229,7 +224,6 @@ const Reporte = () => {
       return acc;
     }, {});
   
-    // Translate status to Spanish plural if more than one group
     const translateStatus = (status, count) => {
       if (count > 1) {
         switch (status) {
@@ -246,22 +240,50 @@ const Reporte = () => {
       return status;
     };
   
-    // Build the text based on grouped groups
     const additionalText = Object.entries(groupedStatus)
       .map(([status, groupNames]) => `${groupNames.join(', ')} ${translateStatus(status, groupNames.length)}`)
       .join(', ');
   
-   
-    // Check if there's additional text and conclusions
-    const firstTwoWords = conclusionText.split(' ').slice(0, 3).join(' ');
-    const remainingText = conclusionText.split(' ').slice(4).join(' ');
-    const combinedText = additionalText
-      ? `${firstTwoWords} ${additionalText}, ${remainingText}`
-      : conclusionText;
+    const words = conclusionText.split(' ');
+    let combinedText;
   
-    // Set the complete text in the state
+    if (words.length >= 2 && words[0].toUpperCase() === "RADICULOPATIA") {
+      const firstTwoWords = words.slice(0, 2).join(' ');
+      const remainingText = words.slice(2).join(' ');
+      combinedText = additionalText
+        ? `${firstTwoWords} ${additionalText}, ${remainingText}`
+        : conclusionText;
+    } else {
+      combinedText = conclusionText;
+    }
+  
+    // Ajuste específico para radiculopatía crónica + cualquier fase (ACTIVA, INACTIVA, ANTIGUA)
+    const isCronica = words[1]?.toUpperCase() === "CRONICA";
+    const phases = ["activa", "inactiva", "antigua"];
+    const selectedPhase = conclusions.find(c => phases.includes(c.value)); 
+    // selectedPhase será el objeto {value: "activa", title:"ACTIVA"} por ejemplo, si existe.
+    
+    if (isCronica && selectedPhase) {
+      const phaseWord = selectedPhase.title; // Por ejemplo "ACTIVA", "INACTIVA" o "ANTIGUA"
+      const ctWords = combinedText.split(' ');
+      const cronicaIndex = ctWords.findIndex(w => w.toUpperCase() === "CRONICA");
+      const phaseIndex = ctWords.findIndex(w => w.toUpperCase() === phaseWord.toUpperCase());
+  
+      if (cronicaIndex !== -1 && phaseIndex !== -1 && phaseIndex > cronicaIndex) {
+        // Remover la fase de su posición actual
+        const [extractedPhase] = ctWords.splice(phaseIndex, 1);
+        // Insertar la fase justo después de "CRONICA" con una coma
+        ctWords.splice(cronicaIndex + 1, 0, ",", extractedPhase);
+  
+        combinedText = ctWords.join(' ');
+      }
+    }
+  
     setCopyConclusions(combinedText);
+  
   }, [hasMounted, conclusions, checkedStateLeft, checkedStateRight]);
+  
+
 
   const handleTextareaChange = (event) => {
     setCopyConclusions(event.target.value)

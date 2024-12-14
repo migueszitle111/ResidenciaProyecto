@@ -52,8 +52,8 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'D2' && <StepD2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'E' && <StepE handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>}
       {step === 'F' && <StepF handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} />}
-      {step === 'G1' && <StepG1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
-      {step === 'G2' && <StepG2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
+      {step === 'G1' && <StepG1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
+      {step === 'G2' && <StepG2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
       {step === 'H' && <StepH handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}  handlePrint={handlePrint}/>}
 
     </div>
@@ -232,7 +232,10 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
     </div>
     <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
     <div onClick={() => setStep('H')}>
-    <ConclusionButton value='led_flash' title=' LED FLASH AL ESTIMULO LUMINOSO DE LAS FIBRAS RETINOTALAMOCORTICALES ' displayText='LED FLASH' />
+    <ConclusionButton
+            value={`${selectedSide}led_flash`}
+            title=' LED FLASH AL ESTIMULO LUMINOSO DE LAS FIBRAS RETINOTALAMOCORTICALES ' displayText='LED FLASH'
+          />
     </div>
     <div onClick={() => setStep('G1')}>
       <ConclusionButton value='damero_total' title=' DAMERO TOTAL AL ESTÍMULAR ÁREA PREQUIASMÁTICA ' displayText='DAMERO TOTAL' />
@@ -243,7 +246,7 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
   </div>
 );
 
-const StepG1 = ({ handleNextStep, handlePrevStep, setStep }) => (
+const StepG1 = ({ handleNextStep, handlePrevStep, setStep,selectedSide}) => (
   <div>
     <div className='button-bar'>
       <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
@@ -255,14 +258,22 @@ const StepG1 = ({ handleNextStep, handlePrevStep, setStep }) => (
     </div>
     <h1 className='text-xl font-bold text-white'>NIVEL PREQUIASMATICA: </h1>
     <div onClick={() => setStep('H')}>
-    <ConclusionButton value='nervio_optico' title=' TOPOGRÁFICAMENTE A NIVEL DE NERVIO ÓPTICO.' displayText='NERVIO ÓPTICO'/> 
-    <ConclusionButton value='quiasma_optico' title=' TOPOGRÁFICAMENTE A NIVEL DE QUIASMA ÓPTICO.' displayText='QUIASMA ÓPTICO'/> 
+      <ConclusionButton
+            value={`${selectedSide}nervio_optico`}
+            title=' TOPOGRÁFICAMENTE A NIVEL DE NERVIO ÓPTICO.' displayText='NERVIO ÓPTICO'
+            
+          />
+      <ConclusionButton
+            value={`${selectedSide}quiasma_optico`}
+            title=' TOPOGRÁFICAMENTE A NIVEL DE QUIASMA ÓPTICO.' displayText='QUIASMA ÓPTICO'
+            
+         />
     </div>
   </div>
 );
 
 
-const StepG2 = ({ handleNextStep, handlePrevStep, setStep }) => (
+const StepG2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide}) => (
   <div>
   <div className='button-bar'>
     <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
@@ -274,8 +285,15 @@ const StepG2 = ({ handleNextStep, handlePrevStep, setStep }) => (
   </div>
   <h1 className='text-xl font-bold text-white'>NIVEL RETROQUIASMATICA: </h1>
   <div onClick={() => setStep('H')}>
-  <ConclusionButton value='tracto_optico' title=' TOPOGRÁFICAMENTE A NIVEL DE DE TRACTO ÓPTICO.' displayText='TRACTO ÓPTICO'/> 
-  <ConclusionButton value='nucleo_geniculado' title=' TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO GENICULADO.' displayText='NÚCLEO GENICULADO'/> 
+  <ConclusionButton
+            value={`${selectedSide}tracto_optico`}
+            title=' TOPOGRÁFICAMENTE A NIVEL DE DE TRACTO ÓPTICO.' displayText='TRACTO ÓPTICO'
+            
+         />
+  <ConclusionButton
+          value={`${selectedSide}nucleo_geniculado`}
+          title=' TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO GENICULADO.' displayText='NÚCLEO GENICULADO' 
+         />
   </div>
 </div>
 );

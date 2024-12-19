@@ -9,7 +9,7 @@ const Submenu = () => {
   const allpages = [
     {
       name: "Reporte",
-      imagen: "/assets/SubmenuSvg/mEDX_128_SNP.svg",
+      imagen: "/assets/SubmenuSvg/I_Reporte_Blanco.png",
       path: "/Reporte",
     },
     {

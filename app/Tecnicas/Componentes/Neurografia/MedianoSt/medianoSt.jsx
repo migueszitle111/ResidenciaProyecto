@@ -92,7 +92,7 @@ const MedianoSt = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btn1" onClick={() => handleButtonClick('Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', {  top: '65%', left: '24%' })}>A</button>}
+                {currentImageIndex === 0 && <button className="btn1" onClick={() => handleButtonClick('Dedo índice. Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', {  top: '65%', left: '24%' })}>A</button>}
                 {currentImageIndex === 0 && <button className="btn2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '65%', left: '24%'})}>T</button>}
                 {currentImageIndex === 0 && <button className="btn3" onClick={() => handleButtonClick('3-4 cm del electrodo de registo, discretamente distal a articulación interfalángica distal.', { top: '65%', left: '24%'})}>R</button>}
                 {currentImageIndex === 0 && <button className="btn4" onClick={() => handleButtonClick('Muñeca: 14 cm distal al electrodo de registro, entre los tendones palmar mayor y palmar menor.', { top: '65%', left: '24%'})}>E</button>}

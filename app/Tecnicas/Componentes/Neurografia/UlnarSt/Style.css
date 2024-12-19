@@ -1,0 +1,145 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btnUSt1, .btnUSt2, .btnUSt3, .btnUSt4, .btnUSt5, .btnUSt6, .btnUSt7, .btnUSt8, .btnUSt9, .btnUSt10,
+    .btnUSt11, .btnUSt12, .btnUSt13, .btnUSt14, .btnUSt15, .btnUSt16, .btnUSt17, .btnUSt18, .btnUSt19, .btnUSt20,
+    .btnUSt21, .btnUSt22, .btnUSt23, .btnUSt24, .btnUSt25, .btnUSt26, .btnUSt27, .btnUSt28, .btnUSt29, .btnUSt30,
+    .btnUSt31, .btnUSt32, .btnUSt33, .btnUSt34, .btnUSt35, .btnUSt36, .btnUSt37, .btnUSt38, .btnUSt39, .btnUSt40,
+    .btnUSt41, .btnUSt42, .btnUSt43, .btnUSt44, .btnUSt45 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btnUSt1, .btnUSt2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+
+/* Botón 1 */
+.btnUSt1 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(418%, -215%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnUSt1:hover {
+    background-color: black;
+    font-size: 30px;
+    height: 3.2vw; /* Tamaño reducido */
+    width: 3.2vw;
+    transform: translate(400%, -220%);
+}
+
+/* Botón 2 */
+.btnUSt2 {
+    position: absolute;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-20%, 222%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+}
+.btnUSt2:hover {
+    background-color: rgb(86, 143, 86);
+    font-size: 30px;
+    height: 3.7vw; /* Tamaño reducido */
+    width: 3.7vw;
+    transform: translate(-20%, 190%);
+    color: black;
+}
+
+
+
+.text-box {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 35vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(233, 14, 69, 0.842);
+    color: #242424;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+}
+
+

@@ -338,7 +338,10 @@ const Reporte = () => {
                 alt: 'Modelo',
               }
             },
+<<<<<<< HEAD
 
+=======
+>>>>>>> 127ab92c99f17af215cf3ba8f097379edb4bbdbd
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
         <textarea

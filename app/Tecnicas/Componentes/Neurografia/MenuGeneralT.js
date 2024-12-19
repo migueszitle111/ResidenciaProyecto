@@ -1,7 +1,40 @@
 import Image from "next/image";
 import { useState } from "react";
+import AuricularM from "./Auricular/AuricularM";
+import Axilar from "./Axilar/Axilar";
+import Ciatico from "./Ciatico/Ciatico";
+import { default as CutaneoFemoral } from "./CutaneoFemoral/CutaneoFemoral";
+import CutaneoL from "./CutaneoL/CutaneoL";
+import CutaneoM from "./CutaneoM/CutaneoM";
+import CutaneoP from "./CutaneoP/CutaneoP";
+import DorsalDelPene from "./DorsalDelPene/DorsalDelPene";
+import EscapularDorsal from "./EscapularDorsal/EscapularDorsal";
+import Espinal from "./Espinal/Espinal";
+import Facial from "./Facial/Facial";
+import Femoral from "./Femoral/Femoral";
+import FemoralcutaneoLt from "./FemorocutaneoLt/FemoralcutaneoLt";
+import Frenico from "./Frenico/Frenico";
 import MedianoMt from "./MedianoMt/medianoMt";
 import MedianoSt from "./MedianoSt/medianoSt";
+import Musculocutaneo from "./Musculocutaneo/Musculocutaneo";
+import OccipitalM from "./Occipital/OccipitalM";
+import Peroneo from "./Peroneo/Peroneo";
+import PeroneoProfundo from "./PeroneoProfundo/PeroneoProfundo";
+import PeroneoSuperficial from "./PeroneoSuperficial/PeroneoSuperficial";
+import Plantar from "./Plantar/Plantar";
+import Pudendo from "./Pudendo/Pudendo";
+import RadialMt from "./RadialMt/RadialMt";
+import RadialSt from "./RadialSt/RadialSt";
+import Safeno from "./Safeno/Safeno";
+import Supraclavicular from "./Supraclavicular/Supraclavicular";
+import Supraescapular from "./Supraescapular/Supraescapular";
+import Sural from "./Sural/Sural";
+import Tibial from "./Tibial/Tibial";
+import ToracicoLargo from "./ToracicoLargo/ToracicoLargo";
+import Toracodorsal from "./Toracodorsal/Toracodorsal";
+import Trigemino from "./Trigemino/Trigemino";
+import UlnarMt from "./UlnarMt/UlnarMt";
+import UlnarSt from "./UlnarSt/UlnarSt";
 
 
 const MenuGeneralT = () => {
@@ -155,11 +188,43 @@ const MenuGeneralT = () => {
             <div className="flex min-h-screen flex-col items-center rounded p-2 m-4">
               {selectedOption === "Mediano (motor)" && <MedianoMt />}
               {selectedOption === "Mediano (sensitivo)" && <MedianoSt />}
-              {/* {selectedOption === "Trigémino" && <EditorTrigemino />}
-              {selectedOption === "Accesorio Espinal" && (
-                <EditorAccesorioEspinal />
-              )} */}
-              {/* Agrega aquí más componentes según sea necesario */}
+              {selectedOption === "Ulnar (motor)" && <UlnarMt />}
+              {selectedOption === "Ulnar (sensitivo)" && <UlnarSt />}
+              {selectedOption === "Radial (motor)" && <RadialMt />}
+              {selectedOption === "Radial (sensitivo)" && <RadialSt />}
+              {selectedOption === "Antebraquial cutáneo lateral" && <CutaneoL />}
+              {selectedOption === "Antebraquial cutáneo medial" && <CutaneoM />}
+              {selectedOption === "Antebraquial cutáneo posterior" && <CutaneoP />}
+              {selectedOption === "Axilar" && <Axilar />}
+              {selectedOption === "Musculocutáneo" && <Musculocutaneo />}
+              {selectedOption === "Supraescapular" && <Supraescapular />}
+              {selectedOption === "Escapular dorsal" && <EscapularDorsal />}
+              {selectedOption === "Torácico largo" && <ToracicoLargo />}
+              {selectedOption === "Toracodorsal" && <Toracodorsal />}
+
+              {selectedOption === "Frénico" && <Frenico />}
+              {selectedOption === "Espinal accesorio" && <Espinal />}
+              {selectedOption === "Supraclavicular" && <Supraclavicular />}
+              {selectedOption === "Auricular mayor" && <AuricularM />}
+              {selectedOption === "Occipital mayor" && <OccipitalM />}
+              {selectedOption === "Facial" && <Facial />}
+              {selectedOption === "Trigémino" && <Trigemino />}
+
+              {selectedOption === "Peroneo" && <Peroneo />}
+              {selectedOption === "Peroneo superficial" && <PeroneoSuperficial />}
+              {selectedOption === "Peroneo profundo" && <PeroneoProfundo />}
+              {selectedOption === "Tibial" && <Tibial />}
+              {selectedOption === "Sural" && <Sural />}
+              {selectedOption === "Plantar" && <Plantar />}
+              {selectedOption === "Femoral" && <Femoral />}
+              {selectedOption === "Safeno" && <Safeno />}
+              {selectedOption === "Femorocutáneo lateral" && <FemoralcutaneoLt />}
+              {selectedOption === "Cutáneo femoral" && <CutaneoFemoral />} 
+              
+              {selectedOption === "Ciático" && <Ciatico />}
+              {selectedOption === "Pudendo" && <Pudendo />}
+              {selectedOption === "Dorsal del pene" && <DorsalDelPene />}
+              
             </div>
           )}
         </div>

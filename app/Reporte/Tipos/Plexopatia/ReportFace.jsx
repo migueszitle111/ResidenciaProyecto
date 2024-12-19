@@ -618,7 +618,7 @@ const Reporte = () => {
             {
               expectedValue: 'posteriord',
               image: {
-                src: 'PlexoImg/PCordon posterior derecho.png',
+                src: 'PlexoImg/Cordon posterior derecho.png',
                 alt: 'Modelo',
               }
             },
@@ -1108,6 +1108,75 @@ const Reporte = () => {
               }
             ],
             },
+
+
+            {
+              expectedValue: 'CordonI',
+              image: [
+              {
+                src: 'PlexoImg/Cordon lateral izquierdo.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Cordon posterior izquierdo.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Cordon medial izquierdo.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+            
+            {
+              expectedValue: 'CordonD',
+              image: [
+              {
+                src: 'PlexoImg/Cordon lateral derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Cordon posterior derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Cordon medial derecho.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
+            {
+              expectedValue: 'CordonB',
+              image: [
+              {
+                src: 'PlexoImg/Cordon lateral derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Cordon posterior derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Cordon medial derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Cordon lateral izquierdo.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Cordon posterior izquierdo.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Cordon medial izquierdo.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
+
 
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea

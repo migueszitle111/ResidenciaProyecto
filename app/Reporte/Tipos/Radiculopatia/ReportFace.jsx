@@ -273,7 +273,7 @@ const Reporte = () => {
         // Remover la fase de su posición actual
         const [extractedPhase] = ctWords.splice(phaseIndex, 1);
         // Insertar la fase justo después de "CRONICA" con una coma
-        ctWords.splice(cronicaIndex + 1, 0, ",", extractedPhase);
+        ctWords.splice(cronicaIndex + 1, 0, "", extractedPhase);
   
         combinedText = ctWords.join(' ');
       }

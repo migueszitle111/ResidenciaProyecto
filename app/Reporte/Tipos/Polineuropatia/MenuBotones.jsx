@@ -441,11 +441,11 @@ const StepF = ({ handleNextStep, handlePrevStep, handleNextStep2 }) => {
       </h1>
 
       <div onClick={handleNextStep}>
-        <ConclusionButton value='motora' title=' DE FIBRAS MOTORAS' displayText={'MOTORA'}/>
+        <ConclusionButton value='motora' title=' DE FIBRAS MOTORAS,' displayText={'MOTORA'}/>
         <ConclusionButton value='sensitiva' title=' DE FIBRAS SENSITIVAS' displayText={'SENSITIVA'}/>
       </div>
 
-      <ConclusionButton value='mixta' title=' MIXTA' displayText={'MIXTA'} />
+      <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS,' displayText={'MIXTA'} />
       <div onClick={handleNextStep}>
             <ConclusionButton value = 'predominio_sentitivo' title = ' DE FIBRAS MIXTAS PREDOMINIO SENSITIVO,' displayText={'• PREDOMINIO SENSITIVO'}/>
             <ConclusionButton value = 'predominio_motor' title = ' DE FIBRAS MIXTAS PREDOMINIO MOTOR,'displayText={'• PREDOMINIO MOTOR'} />
@@ -532,10 +532,10 @@ const StepI1 = ({ handlePrevStep,handleNextStep }) => {
         EXTENSION
       </h1>
       <div onClick={handleNextStep}>
-      <ConclusionButton value = 'proximal' title = ' PROXIMAL,' displayText={'PROXIMAL'}/>
-      <ConclusionButton value = 'distal' title = ' DISTAL,' displayText={'DISTAL'} />
-      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA,' displayText={'SEGMENTARIA'}/>
-      <ConclusionButton value = 'proximal' title = ' GENERALIZADA,' displayText={'GENERALIZADA'}/>
+      <ConclusionButton value = 'proximal' title = ' PROXIMAL' displayText={'PROXIMAL'}/>
+      <ConclusionButton value = 'distal' title = ' DISTAL' displayText={'DISTAL'} />
+      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA' displayText={'SEGMENTARIA'}/>
+      <ConclusionButton value = 'proximal' title = ' GENERALIZADA' displayText={'GENERALIZADA'}/>
       </div>
       
     </div>
@@ -557,10 +557,10 @@ const StepI2 = ({ handlePrevStep1,handleNextStep1 }) => {
         EXTENSION
       </h1>
       <div onClick={handleNextStep1}>
-      <ConclusionButton value = 'proximal' title = ' PROXIMAL,' displayText={'PROXIMAL'}/>
-      <ConclusionButton value = 'distal' title = ' DISTAL,' displayText={'DISTAL'} />
-      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA,' displayText={'SEGMENTARIA'}/>
-      <ConclusionButton value = 'proximal' title = ' GENERALIZADA,' displayText={'GENERALIZADA'}/>
+      <ConclusionButton value = 'proximal' title = ' PROXIMAL' displayText={'PROXIMAL'}/>
+      <ConclusionButton value = 'distal' title = ' DISTAL' displayText={'DISTAL'} />
+      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA' displayText={'SEGMENTARIA'}/>
+      <ConclusionButton value = 'proximal' title = ' GENERALIZADA' displayText={'GENERALIZADA'}/>
       </div>
 
       
@@ -607,9 +607,9 @@ const StepK = ({ handlePrevStep, handleNextStep }) => {
         PRONÓSTICO
       </h1>
       <div onClick={handleNextStep}>
-      <ConclusionButton value = 'pronostico_recuperacion_completa' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETA' displayText={'COMPLETA'}/>
-      <ConclusionButton value = 'pronostico_recuperacion_funcional' title = ' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL' displayText={'PARCIAL FUNCIONAL'}/>
-      <ConclusionButton value = 'pronostico_recuperacion_no_funcional' title = ' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL' displayText={'POBRE NO FUNCIONAL'}/>
+      <ConclusionButton value = 'pronostico_recuperacion_completa' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'COMPLETA'}/>
+      <ConclusionButton value = 'pronostico_recuperacion_funcional' title = ' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'PARCIAL FUNCIONAL'}/>
+      <ConclusionButton value = 'pronostico_recuperacion_no_funcional' title = ' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'POBRE NO FUNCIONAL'}/>
       <ConclusionButton value = 'pronostico_recuperacion_nulo' title = ' PRONÓSTICO DE RECUPERACIÓN NULO' displayText={'NULO'}/></div>
 
       

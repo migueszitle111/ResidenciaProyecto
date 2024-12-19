@@ -1,0 +1,144 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btnCf1, .btnCf2, .btnCf3, .btnCf4, .btnCf5, .btnCf6, .btnCf7, .btnCf8, .btnCf9, .btnCf10,
+    .btnCf11, .btnCf12, .btnCf13, .btnCf14, .btnCf15, .btnCf16, .btnCf17, .btnCf18, .btnCf19, .btnCf20,
+    .btnCf21, .btnCf22, .btnCf23, .btnCf24, .btnCf25, .btnCf26, .btnCf27, .btnCf28, .btnCf29, .btnCf30,
+    .btnCf31, .btnCf32, .btnCf33, .btnCf34, .btnCf35, .btnCf36, .btnCf37, .btnCf38, .btnCf39, .btnCf40,
+    .btnCf41, .btnCf42, .btnCf43, .btnCf44, .btnCf45 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btnCf1, .btnCf2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+
+/* Botón 1 
+.btnCf1 {
+    position: absolute;
+    height: 3vw; 
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(418%, -215%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnCf1:hover {
+    background-color: black;
+    font-size: 30px;
+    height: 3.2vw; 
+    width: 3.2vw;
+    transform: translate(400%, -220%);
+}
+
+.btnCf2 {
+    position: absolute;
+    height: 3.5vw; 
+    width: 3.5vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-20%, 222%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+}
+.btnCf2:hover {
+    background-color: rgb(86, 143, 86);
+    font-size: 30px;
+    height: 3.7vw; 
+    width: 3.7vw;
+    transform: translate(-20%, 190%);
+    color: black;
+}
+
+*/
+
+.text-box {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 35vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(233, 14, 69, 0.842);
+    color: #242424;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+}
+
+

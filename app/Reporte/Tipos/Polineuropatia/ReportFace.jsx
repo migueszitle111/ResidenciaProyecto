@@ -338,20 +338,6 @@ const Reporte = () => {
                 alt: 'Modelo',
               }
             },
-            {
-              expectedValue: 'predominio_sentitivo',
-              image: {
-                src: 'PolineuropatiaIMG/PO_Sensitivo-Motor.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'predominio_motor',
-              image: {
-                src: 'PolineuropatiaIMG/PO_Sensitivo-Motor.png',
-                alt: 'Modelo',
-              }
-            },
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
         <textarea

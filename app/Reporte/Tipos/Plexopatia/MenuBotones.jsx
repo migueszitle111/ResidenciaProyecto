@@ -95,7 +95,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
             <ConclusionButton value='divid' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='tron10000d' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+            <ConclusionButton value='CordonD' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
       
@@ -139,10 +139,10 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
             <ConclusionButton value='troncosI' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
-            <ConclusionButton value='divii' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
+            <ConclusionButton value='diviI' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='tron10000i' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+            <ConclusionButton value='CordonI' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
       
@@ -189,7 +189,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
             <ConclusionButton value='divi' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='tron10000' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+            <ConclusionButton value='CordonB' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
       

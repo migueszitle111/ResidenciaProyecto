@@ -198,7 +198,7 @@ const StepB1 = ({ handleNextStep, handlePrevStep, setStep }) => (
   </div>
 
 );
-const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => ( 
+const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
 
   <div>
     <div className='button-bar'>
@@ -214,9 +214,9 @@ const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
     </h1>
 
     <div onClick={() => setStep('CD')}>
-      <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL DE ' displayText={'FOCALIZADA'} /></div>
+      <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
     <div onClick={() => setStep('CD')}>
-      <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL DE ' displayText={'SEGMENTARIA'} /></div>
+      <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
 
 
     <div onClick={() => setStep('D')}>
@@ -227,7 +227,7 @@ const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
 );
 
 
-const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => ( 
+const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
 
   <div>
     <div className='button-bar'>
@@ -243,9 +243,9 @@ const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
     </h1>
 
     <div onClick={() => setStep('CD')}>
-      <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL DE ' displayText={'FOCALIZADA'} /></div>
+      <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
     <div onClick={() => setStep('CD')}>
-      <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL DE ' displayText={'SEGMENTARIA'} /></div>
+      <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
 
 
     <div onClick={() => setStep('D')}>
@@ -255,7 +255,7 @@ const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
 
 );
 
-const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => ( 
+const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
 
   <div>
     <div className='button-bar'>
@@ -271,9 +271,9 @@ const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
     </h1>
 
     <div onClick={() => setStep('CD')}>
-      <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL DE ' displayText={'FOCALIZADA'} /></div>
+      <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
     <div onClick={() => setStep('CD')}>
-      <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL DE ' displayText={'SEGMENTARIA'} /></div>
+      <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
 
 
     <div onClick={() => setStep('D')}>

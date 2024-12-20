@@ -27,6 +27,12 @@ A continuación, asegúrate de tener un archivo `.env` en la raíz del directori
 MONGODB_URI=mongodb+srv://adminmed:JoJWYBbbUWYUFowp@medxpro.1xxmjpy.mongodb.net/authapp
 NEXTAUTH_SECRET=asdfaskfjdsafkadssadkf
 NEXTAUTH_URL=http://localhost:3000
+
+### 2.1 nuevo
+
+MONGODB_URI=mongodb+srv://adminmed:residencia2025_3@medxpro.1xxmjpy.mongodb.net/authapp
+NEXTAUTH_SECRET=asdfaskfjdsafkadssadkf
+NEXTAUTH_URL=http://localhost:3000
 ```
 ### 3. Realiza la instalación
 

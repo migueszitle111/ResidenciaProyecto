@@ -43,11 +43,11 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnUMt1, .btnUMt2, .btnUMt3, .btnUMt4, .btnUMt5, .btnUMt6, .btnUMt7, .btnUMt8, .btnUMt9, .btnUMt10,
-    .btnUMt11, .btnUMt12, .btnUMt13, .btnUMt14, .btnUMt15, .btnUMt16, .btnUMt17, .btnUMt18, .btnUMt19, .btnUMt20,
-    .btnUMt21, .btnUMt22, .btnUMt23, .btnUMt24, .btnUMt25, .btnUMt26, .btnUMt27, .btnUMt28, .btnUMt29, .btnUMt30,
-    .btnUMt31, .btnUMt32, .btnUMt33, .btnUMt34, .btnUMt35, .btnUMt36, .btnUMt37, .btnUMt38, .btnUMt39, .btnUMt40,
-    .btnUMt41, .btnUMt42, .btnUMt43, .btnUMt44, .btnUMt45 {
+    .btnUSt1, .btnUSt2, .btnUSt3, .btnUSt4, .btnUSt5, .btnUSt6, .btnUSt7, .btnUSt8, .btnUSt9, .btnUSt10,
+    .btnUSt11, .btnUSt12, .btnUSt13, .btnUSt14, .btnUSt15, .btnUSt16, .btnUSt17, .btnUSt18, .btnUSt19, .btnUSt20,
+    .btnUSt21, .btnUSt22, .btnUSt23, .btnUSt24, .btnUSt25, .btnUSt26, .btnUSt27, .btnUSt28, .btnUSt29, .btnUSt30,
+    .btnUSt31, .btnUSt32, .btnUSt33, .btnUSt34, .btnUSt35, .btnUSt36, .btnUSt37, .btnUSt38, .btnUSt39, .btnUSt40,
+    .btnUSt41, .btnUSt42, .btnUSt43, .btnUSt44, .btnUSt45 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -60,7 +60,7 @@
         max-width: 60vw;
     }
 
-    .btnUMt1, .btnUMt2 {
+    .btnUSt1, .btnUSt2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -73,14 +73,14 @@
 
 
 /* Botón 1 */
-.btnUMt1 {
+.btnUSt1 {
     position: absolute;
     height: 3vw; /* Tamaño reducido */
     width: 3vw;
     top: 30%;
     left: 45%;
     transform: translate(418%, -215%);
-    background-color: transparent;
+    background-color: skyblue;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,7 +88,7 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnUMt1:hover {
+.btnUSt1:hover {
     background-color: black;
     font-size: 30px;
     height: 3.2vw; /* Tamaño reducido */
@@ -97,7 +97,7 @@
 }
 
 /* Botón 2 */
-.btnUMt2 {
+.btnUSt2 {
     position: absolute;
     height: 3.5vw; /* Tamaño reducido */
     width: 3.5vw;
@@ -113,7 +113,7 @@
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
 }
-.btnUMt2:hover {
+.btnUSt2:hover {
     background-color: rgb(86, 143, 86);
     font-size: 30px;
     height: 3.7vw; /* Tamaño reducido */
@@ -124,7 +124,7 @@
 
 
 
-.text-box {
+.text-boxUSt {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 35vw;
@@ -132,7 +132,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(233, 14, 69, 0.842);
+    background-color: rgba(243, 18, 213, 0.842);
     color: #242424;
     border-radius: 10px;
     padding: 2%;

@@ -38,18 +38,15 @@ import UlnarSt from "./UlnarSt/UlnarSt";
 
 
 const MenuGeneralT = () => {
-  // Estado para almacenar la opción seleccionada en el menú
   const [selectedOption, setSelectedOption] = useState(null);
-
-  // Estado para controlar la visibilidad de los submenús
   const [subMenuVisibility, setSubMenuVisibility] = useState({});
 
-  // Matriz de opciones de neurografía y submenús
   const Neurolografia = [
     {
       Menu: "Miembros superiores",
-      Submenu: ["Mediano (motor)", 
-        "Mediano (sensitivo)", 
+      Submenu: [
+        "Mediano (motor)",
+        "Mediano (sensitivo)",
         "Ulnar (motor)",
         "Ulnar (sensitivo)",
         "Radial (motor)",
@@ -63,18 +60,19 @@ const MenuGeneralT = () => {
         "Escapular dorsal",
         "Torácico largo",
         "Toracodorsal",
-        ],
+      ],
     },
     {
       Menu: "Cervicales/Craneales",
-      Submenu: ["Frénico", 
+      Submenu: [
+        "Frénico",
         "Espinal accesorio",
         "Supraclavicular",
         "Auricular mayor",
         "Occipital mayor",
         "Facial",
         "Trigémino",
-        ],
+      ],
     },
     {
       Menu: "Miembros inferiores",
@@ -93,17 +91,14 @@ const MenuGeneralT = () => {
     },
     {
       Menu: "Sacros",
-      Submenu: ["Ciático", "Pudendo", "Dorsal del pene",],
+      Submenu: ["Ciático", "Pudendo", "Dorsal del pene"],
     },
-   
   ];
 
-  // Función para manejar el clic en una opción del menú
   const handleClick = (option) => {
     setSelectedOption(option);
   };
 
-  // Función para alternar la visibilidad de los submenús
   const toggleSubMenuVisibility = (menuOption) => {
     setSubMenuVisibility((prevVisibility) => ({
       ...prevVisibility,
@@ -117,11 +112,9 @@ const MenuGeneralT = () => {
         <div>Neurografía</div>
       </div>
       <div className="flex">
-        {/* Contenido del div izquierdo */}
         <div className="w-1/4 max-h-full">
           <div className="p-1">
             <div className="p-1">
-              {/* Menú de Neurografía siempre visible */}
               <div className="bg-[#3f3c3c] mt-1 p-2 rounded-bl-lg rounded-2xl text-white text-justify flex flex-col truncate lg:truncate xl:truncate">
                 <h2 className="text-lg mb-4 truncate lg:truncate xl:truncate">
                   Neurografía
@@ -146,11 +139,11 @@ const MenuGeneralT = () => {
                         {menuOption.Submenu.map((submenuOption, submenuIndex) => (
                           <button
                             key={submenuIndex}
-                            className={`w-full flex flex-col text-sm lg:w-auto text-left lg:text-justify hover:text-orange-600 active:bg-[#404040] text-white py-2 px-4 lg:py-3 lg:px-6 rounded truncate lg:truncate xl:truncate ${
+                            className={`w-full flex flex-col text-sm lg:w-auto text-left lg:text-justify py-2 px-4 lg:py-3 lg:px-6 rounded truncate lg:truncate xl:truncate ${
                               selectedOption === submenuOption
-                                ? "bg-opacity-50"
-                                : ""
-                            }`}
+                                ? "text-orange-600"
+                                : "text-white"
+                            } hover:text-orange-600`}
                             onClick={() => handleClick(submenuOption)}
                           >
                             {submenuOption}
@@ -165,7 +158,6 @@ const MenuGeneralT = () => {
           </div>
         </div>
 
-        {/* Contenido del div derecho */}
         <div className="w-3/4 max-h-full">
           {!selectedOption && (
             <div className="flex min-h-screen flex-col items-center p-10">

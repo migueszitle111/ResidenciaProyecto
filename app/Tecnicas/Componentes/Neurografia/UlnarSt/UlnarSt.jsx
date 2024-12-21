@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
-import "./style.css"
+import "./style-UlnarSt.css"
 
 
 const UlnarSt = () => {
@@ -57,7 +57,7 @@ const UlnarSt = () => {
                 {currentImageIndex === 0 && <button className="btnUSt2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}>T</button>}
             </div>
             {textBoxVisible && (
-                <div className="text-box" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxUSt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}

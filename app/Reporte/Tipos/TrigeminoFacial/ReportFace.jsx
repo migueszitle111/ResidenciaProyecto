@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import { Accordion, AccordionContainer } from '../../../components/ReportTemplate/Accordion'   
 import { ReportContext } from '@/src/context'
 import { ConclusionButton, ConclusionBox } from '../../../components/ReportTemplate/Conclusions'
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas'
 import { ConclusionCanvasV } from '../../../components/ReportTemplate/Conclusions/CanvasViasVisual'
 
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
@@ -169,72 +168,9 @@ const Reporte = () => {
           }}
           
           rules={[
+            
             {
-              expectedValue: 'izquierdo', 
-              image: {
-                src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial_L.jpg',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'derecho', 
-              image: {
-                src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial_R.jpg',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'bilateral', 
-              image: {
-                src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial_BI.jpg',
-                alt: 'Modelo',
-              }
-            },
-
-            {
-              expectedValue: 'izquierdoaferente_ipsilateral', 
-              image: {
-                src: 'TrigeminoFacialImg/Afectadas/FA_4.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'derechoaferente_ipsilateral', 
-              image: {
-                src: 'TrigeminoFacialImg/Afectadas/FA_5.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'bilateralaferente_ipsilateral', 
-              image: {
-                src: 'TrigeminoFacialImg/Afectadas/FA_3.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'integracion_pontina', 
-              image: {
-                src: 'TrigeminoFacialImg/Afectadas/FA_2.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'eferente', 
-              image: {
-                src: 'TrigeminoFacialImg/Afectadas/FA_3.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'nucleo_y_formacion_reticular', 
-              image: {
-                src: 'TrigeminoFacialImg/Afectadas/FA_2.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'indemne', 
+              expectedValue: 'indenme', 
               image: [
                 {
                   src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial_page-0002.jpg',
@@ -247,8 +183,82 @@ const Reporte = () => {
                 
               ]
               },
-            //
-           
+
+              {
+                expectedValue: 'alterada', 
+                image: [
+                  {
+                    src: 'TrigeminoFacialImg/BP_Via Trigemino-Facial_page-0002.jpg',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'TrigeminoFacialImg/Idemne/FA_5.png',
+                    alt: 'Modelo',
+                  }
+                  
+                ]
+                },
+
+                {
+                  expectedValue: 'izquierdoaferente_ipsilateral', 
+                  image: 
+                    {
+                      src: 'TrigeminoFacialImg/Vía Afectada/AFERENTE I.png',
+                      
+                      alt: 'Modelo',
+                    },
+                },
+                {
+                  expectedValue: 'derechoaferente_ipsilateral', 
+                  image: 
+                    {
+                      src: 'TrigeminoFacialImg/Vía Afectada/AFERENTE D.png',
+                      alt: 'Modelo',
+                    },
+                },
+
+                {
+                  expectedValue: 'bilateralaferente_ipsilateral', 
+                  image: [
+                    {
+                      src: 'TrigeminoFacialImg/Vía Afectada/AFERENTE I.png',
+                      alt: 'Modelo',
+                    },
+                    {
+                      src: 'TrigeminoFacialImg/Vía Afectada/AFERENTE D.png',
+                      alt: 'Modelo',
+                    }
+                    
+                  ]
+                  },
+
+                  {
+                    expectedValue: 'integracion_pontina', 
+                    image: 
+                      {
+                        src: 'TrigeminoFacialImg/Vía Afectada/INTEGRACION.png',
+                        alt: 'Modelo',
+                      },
+                  },
+
+                  {
+                    expectedValue: 'nucleo_y_formacion_reticular', 
+                    image: 
+                      {
+                        src: 'TrigeminoFacialImg/Vía Afectada/INTEGRACION.png',
+                        alt: 'Modelo',
+                      },
+                  },
+
+                  {
+                    expectedValue: 'eferente', 
+                    image: 
+                      {
+                        src: 'TrigeminoFacialImg/Vía Afectada/EFERENCIA.png',
+                        alt: 'Modelo',
+                      },
+                  },
+
           
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea

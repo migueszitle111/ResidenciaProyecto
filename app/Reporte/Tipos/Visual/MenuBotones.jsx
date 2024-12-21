@@ -101,7 +101,7 @@ const StepB = ({ handlePrevStep, handleNextStep, setStep }) => (
       <ConclusionButton value="bloqueo_en_la_conduccion" title="POR BLOQUEO EN LA CONDUCCIÓN " displayText="BLOQUEO EN LA CONDUCCIÓN" />
     </div>
     <div onClick={() => setStep('C2')}>
-      <ConclusionButton value="deficit_neuronal" title="POR DEFICIT NEURONAL " displayText="AXONAL" />
+      <ConclusionButton value="deficit_neuronal" title="AXONAL " displayText="POR DEFICIT NEURONAL" />
     </div>
     <div onClick={() => setStep('E')}>
       <ConclusionButton value="sin_respuesta" title="POR AUSENCIA DE RESPUESTA EVOCABLE " displayText="SIN RESPUETA" />
@@ -175,6 +175,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => (
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
     </div>
+    
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="RETARDO SECUNDARIO EN LA CONDUCCIÓN" />
   </div>

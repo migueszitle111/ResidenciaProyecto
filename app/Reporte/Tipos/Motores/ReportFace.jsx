@@ -168,78 +168,100 @@ const Reporte = () => {
           
           rules={[
             {
-              expectedValue: 'izquierdocervical', 
-              image: {
-                src: 'CorticoespinalImg/Vias/MO_1-D.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'derechocervical', 
-              image: {
-                src: 'CorticoespinalImg/Vias/MO_1.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'bilateralcervical', 
+              expectedValue: 'alterada', 
               image: [
                 {
-                  src: 'CorticoespinalImg/Vias/MO_1-D.png',
+                  src: 'CorticoespinalImg/INFERIOR D.png',
                   alt: 'Modelo',
                 },
                 {
-                  src: 'CorticoespinalImg/Vias/MO_1.png',
+                  src: 'CorticoespinalImg/INFERIOR I.png',
                   alt: 'Modelo',
                 }]
             },
-            
-            
-            {
-              expectedValue: 'izquierdolumbasacro', 
-              image: {
-                src: 'CorticoespinalImg/Vias/MO_2-D.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'derecholumbasacro', 
-              image: {
-                src: 'CorticoespinalImg/Vias/MO_2.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'bilaterallumbasacro', 
-              image: [
-                {
-                  src: 'CorticoespinalImg/Vias/MO_2-D.png',
-                  alt: 'Modelo',
-                },
-                {
-                  src: 'CorticoespinalImg/Vias/MO_2.png',
-                  alt: 'Modelo',
-                }]
-            },
+           
            
 
             {
               expectedValue: 'indenme', 
-              image: [
+             
+                image: [
+                  {
+                    src: 'CorticoespinalImg/INFERIOR D.png',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'CorticoespinalImg/INFERIOR I.png',
+                    alt: 'Modelo',
+                  }]
+            },
+
+            {
+              expectedValue: 'bilateralcervical', 
+             
+                image: [
+                  {
+                    src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
+                    alt: 'Modelo',
+                  }]
+            },
+
+            {
+              expectedValue: 'izquierdocervical', 
+              image: 
                 {
-                  src: 'CorticoespinalImg/BP_Motores_page-FR.jpg',
+                  src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
                   alt: 'Modelo',
                 },
-                {
-                  src: 'CorticoespinalImg/Vias/MO_2-D.png',
-                  alt: 'Modelo',
-                }]
             },
-           
+            {
+              expectedValue: 'derechocervical', 
+              image: 
+                {
+                  src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'bilaterallumbasacro', 
+             
+                image: [
+                  {
+                    src: 'CorticoespinalImg/ViasAfectadas/INFERIOR D.png',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'CorticoespinalImg/ViasAfectadas/INFERIOR I.png',
+                    alt: 'Modelo',
+                  }]
+            },
+
+            {
+              expectedValue: 'izquierdolumbasacro', 
+              image: 
+                {
+                  src: 'CorticoespinalImg/ViasAfectadas/INFERIOR D.png',
+                  alt: 'Modelo',
+                },
+            },
+            {
+              expectedValue: 'derecholumbasacro', 
+              image: 
+                {
+                  src: 'CorticoespinalImg/ViasAfectadas/INFERIOR I.png',
+                  alt: 'Modelo',
+                },
+            },
+
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
         value={copyConclusions}
-        defaultValue="NEURONOPATIA"
+        defaultValue=""
         onChange={handleTextareaChange}
       /></div>
         </div>

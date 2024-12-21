@@ -218,6 +218,14 @@ const Reporte = () => {
 
                   },
                   {
+                    expectedValue: 'INTEROSEO_ANTERIOR',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Interoseo Anterior.png',
+                      alt: 'Modelo',
+                    }
+
+                  },
+                  {
                     expectedValue: 'ACCESORIO',
                     image: {
                       src: 'NeuropatiaImg/NO_Accesorio.png',
@@ -246,6 +254,20 @@ const Reporte = () => {
                     }
                   },
                   {
+                    expectedValue: 'RADIAL_SUPERFICIAL',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Radial Superficial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'INTEROSEO_POSTERIOR',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Interoseo Posterior.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'RADIAL',
                     image: {
                       src: 'NeuropatiaImg/NO_Radial.png',
@@ -263,6 +285,13 @@ const Reporte = () => {
                     expectedValue: 'ULNAR',
                     image: {
                       src: 'NeuropatiaImg/NO_Ulnar.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'DORSAL_CUTANEO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Dorsal Cutaneo.png',
                       alt: 'Modelo',
                     }
                   },
@@ -302,9 +331,30 @@ const Reporte = () => {
                     }
                   },
                   {
+                    expectedValue: 'GLUTEO_MEDIO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Gluteo Medio.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'GLUTEO_INFERIOR',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Gluteo Sup.Inf FC.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'FEMORAL',
                     image: {
                       src: 'NeuropatiaImg/NO_Femoral.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'SAFENO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Safeno.png',
                       alt: 'Modelo',
                     }
                   },
@@ -337,9 +387,44 @@ const Reporte = () => {
                     }
                   },
                   {
+                    expectedValue: 'PERONEO_SUPERFICIAL',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Peroneo Superficial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PERONEO_PROFUNDO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Peroneo Profundo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'TIBIAL',
                     image: {
                       src: 'NeuropatiaImg/NO_Tibial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'SURAL',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Sural.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PLANTAR_MEDIAL',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Plantar Medial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PLANTAR_LATERAL',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Plantar Lateral.png',
                       alt: 'Modelo',
                     }
                   },
@@ -756,7 +841,7 @@ const Reporte = () => {
                       alt: 'Modelo',
                     }
                   },
-                  
+
                   {
                     expectedValue: 'MUSCULOCUTANEO_COMPgeneralizada',
                     image: {

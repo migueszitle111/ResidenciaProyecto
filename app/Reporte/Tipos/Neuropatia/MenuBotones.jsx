@@ -152,7 +152,7 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
       <div onClick={() => { setSelectedSide('GLUTEO INFERIOR'); setStep('B1'); }}>
         <ConclusionButton value='GLUTEO_INFERIOR' title=' DE NERVIO GLUTEO INFERIOR' displayText='GLUTEO INFERIOR' /></div>
       <div onClick={() => { setSelectedSide('GLUTEO MEDIO'); setStep('B1'); }}>
-        <ConclusionButton value='GLUTEO_MEDIO' title=' DE NERVIO GLUTEO MEDIO' displayText='GLUTEO MEDIO' /></div>
+        <ConclusionButton value='GLUTEO_MEDIO' title=' DE NERVIO GLUTEO SUPERIOR' displayText='GLUTEO SUPERIOR' /></div>
       <div onClick={() => { setSelectedSide('FEMORAL'); setStep('B1'); }}>
         <ConclusionButton value='FEMORAL' title=' DE NERVIO FEMORAL' displayText='FEMORAL' /></div>
       <div onClick={() => { setSelectedSide('SAFENO'); setStep('B1'); }}>

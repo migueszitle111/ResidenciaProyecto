@@ -93,7 +93,7 @@ export function checkDivs(copyConclusions) {
         <div style={{ position: 'absolute', top: '34.5%', left: '67.5%', borderRadius: '50%', }}
           className={`dont-print-Nervius`}><NerviusButton value='car' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '35.3%', left: '67.9%', borderRadius: '50%', }}
-          className={`dont-print-Nervius`}><NerviusButton value='car' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+          className={`dont-print-Nervius`}><NerviusButton value='car' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
 
 
         <div style={{ position: 'absolute', top: '36.0%', left: '68.2%', }}
@@ -162,8 +162,7 @@ export function checkDivs(copyConclusions) {
           className={`dont-print-Nervius`}> <NerviusButton value='car' title='DE DEDOS II-III,' displayText=' ' /> </div>
 
         <div style={{
-          position: 'absolute', top: '43.4%', left: '69.7%',
-        }}
+          position: 'absolute', top: '43.4%', left: '69.7%', }}
           className={`dont-print-Nervius`}> <NerviusButton value='car' title='DE DEDOS II-III,' displayText=' ' /> </div>
         <div style={{ position: 'absolute', top: '44.2%', left: '69.6%', }}
           className={`dont-print-Nervius`}> <NerviusButton value='car' title='DE DEDOS II-III,' displayText=' ' /> </div>
@@ -1061,7 +1060,7 @@ export function checkDivs(copyConclusions) {
         className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '25.1%', left: '36.3%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '25.9%', left: '35.9%', borderRadius: '50%', }}
         className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '26.7%', left: '35.5%', borderRadius: '50%', }}
@@ -1080,7 +1079,7 @@ export function checkDivs(copyConclusions) {
         className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
 
       <div style={{ position: 'absolute', top: '31.5%', left: '34.0%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '32.3%', left: '33.9%', borderRadius: '50%', }}
         className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '33.1%', left: '33.6%', borderRadius: '50%', }}
@@ -1093,7 +1092,7 @@ export function checkDivs(copyConclusions) {
       <div style={{ position: 'absolute', top: '35.5%', left: '32.5%', borderRadius: '50%', }}
         className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '36.2%', left: '32.2%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '37.1%', left: '31.7%', borderRadius: '50%', }}
         className={`dont-print-Nervius`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
@@ -1675,7 +1674,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLUTEO SUPERIOR IZQUIERDO, FOCALIZADA A NIVEL') || copyConclusions.includes('GLUTEO MEDIO BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL')) {// FALTA VERIFICAR
+  if (copyConclusions.includes('GLUTEO SUPERIOR IZQUIERDO, FOCALIZADA A NIVEL') || copyConclusions.includes('GLUTEO SUPERIOR BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.0%', left: '53.9%', borderRadius: 100, }}
@@ -1696,7 +1695,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLUTEO MEDIO DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('GLUTEO MEDIO BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {// FALTA VERIFICAR
+  if (copyConclusions.includes('GLUTEO SUPERIOR DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('GLUTEO SUPERIOR BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.0%', left: '45.7%', borderRadius: 100, }}
@@ -2468,81 +2467,83 @@ export function checkDivs(copyConclusions) {
   if (copyConclusions.includes('TIBIAL DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('TIBIAL BILATERAL CON PREDOMINIODERECHO, FOCALIZADA A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '50.1%', left: '42.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '50.9%', left: '43.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '51.7%', left: '43.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '52.5%', left: '43.1%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.3%', left: '43.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '54.1%', left: '42.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '54.9%', left: '42.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '55.7%', left: '42.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '56.5%', left: '42.3%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '57.3%', left: '42.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.1%', left: '41.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.9%', left: '41.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.7%', left: '41.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '60.5%', left: '41.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.3%', left: '41.3%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.1%', left: '41.3%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.9%', left: '41.3%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '63.7%', left: '41.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.7%', left: '41.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '64.5%', left: '40.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '64.5%', left: '41.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
+
+
 
       <div style={{ position: 'absolute', top: '65.3%', left: '40.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.3%', left: '42.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '66.1%', left: '40.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.1%', left: '42.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '66.9%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.9%', left: '42.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '67.7%', left: '40.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '67.7%', left: '42.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '68.5%', left: '39.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '68.5%', left: '43.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '69.3%', left: '39.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.3%', left: '43.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '70.1%', left: '39.2%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TOBILLO,' displayText=' ' /> </div>
@@ -2555,92 +2556,92 @@ export function checkDivs(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TOBILLO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '71.7%', left: '37.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='TUNEL DEL TARSO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TARSO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '71.6%', left: '42.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='TUNEL DEL TARSO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TARSO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '71.9%', left: '36.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='TUNEL DEL TARSO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TARSO,' displayText=' ' /> </div>
     </>);
   }
   if (copyConclusions.includes('TIBIAL IZQUIERDO, FOCALIZADA A NIVEL') || copyConclusions.includes('TIBIAL BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '50.1%', left: '55.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '50.9%', left: '55.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '51.7%', left: '55.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '52.5%', left: '55.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.3%', left: '55.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '54.1%', left: '55.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '54.9%', left: '55.8%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '55.7%', left: '56.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '56.5%', left: '56.3%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '57.3%', left: '56.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.1%', left: '56.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.9%', left: '57.1%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.7%', left: '57.1%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '60.5%', left: '57.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.3%', left: '57.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.1%', left: '57.3%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.9%', left: '57.3%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '63.7%', left: '57.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.7%', left: '57.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '64.5%', left: '56.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '64.5%', left: '57.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '65.3%', left: '56.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.3%', left: '57.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '66.1%', left: '56.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.1%', left: '57.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '66.9%', left: '56.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.9%', left: '58.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '67.7%', left: '56.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '67.7%', left: '58.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '68.5%', left: '55.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '68.5%', left: '58.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '69.3%', left: '55.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.3%', left: '59.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '70.1%', left: '55.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TOBILLO,' displayText=' ' /> </div>
@@ -2653,12 +2654,12 @@ export function checkDivs(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TOBILLO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '71.7%', left: '55.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='TUNEL DEL TARSO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TARSO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '71.4%', left: '60.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='TUNEL DEL TARSO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TARSO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '71.9%', left: '61.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='TUNEL DEL TARSO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TARSO,' displayText=' ' /> </div>
 
 
     </>);
@@ -2667,18 +2668,18 @@ export function checkDivs(copyConclusions) {
     return (<>
 
       <div style={{ position: 'absolute', top: '36.1%', left: '48.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='FORAMEN SACROL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '36.7%', left: '47.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='LIG. SACROESPINOSO/CANAL PUDENDO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
 
     </>);
   }
   if (copyConclusions.includes('PUDENDO DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '36.1%', left: '49.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='FORAMEN SACROL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '36.7%', left: '50.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='LIG. SACROESPINOSO/CANAL PUDENDO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
 
     </>);
   }
@@ -2730,47 +2731,47 @@ export function checkDivs(copyConclusions) {
   if (copyConclusions.includes('FACIAL DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '5.2%', left: '46.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.9%', left: '45.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.8%', left: '47.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.8%', left: '47.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '6.6%', left: '44.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
 
 
 
       <div style={{ position: 'absolute', top: '8.5%', left: '48.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA 1,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.5%', left: '47.1%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA 1,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.3%', left: '45.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA 1,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.6%', left: '44.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='CENTRAL RAMA 1,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '9.2%', left: '44.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='MALAR,' displayText=' ' /></div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='CENTRAL RAMA 1,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.0%', left: '44.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='MALAR,' displayText=' ' /></div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='CENTRAL RAMA 2,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.6%', left: '45.2%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='MALAR,' displayText=' ' /></div>
 
       <div style={{ position: 'absolute', top: '9.5%', left: '45.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='MALAR,' displayText=' ' /></div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA 2,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.0%', left: '46.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='MALAR,' displayText=' ' /></div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA 2,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.1%', left: '47.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='MALAR,' displayText=' ' /></div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA 2,' displayText=' ' /></div>
 
 
       <div style={{ position: 'absolute', top: '11.2%', left: '45.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='MADICULAR,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA 3,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.5%', left: '46.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='MADICULAR,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA 3,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.7%', left: '48.3%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='MADICULAR,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA 3,' displayText=' ' /> </div>
 
     </>);
   }

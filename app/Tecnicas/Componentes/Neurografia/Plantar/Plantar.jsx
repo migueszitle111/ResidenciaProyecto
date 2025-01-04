@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
-import "./style.css"
+import "../Plantar/Plantar.css"
 
 
 const Plantar = () => {
@@ -56,11 +56,27 @@ const Plantar = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnPt1" onClick={() => handleButtonClick('Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', {  top: '12%', left: '32%' })}>A</button>}
-                {currentImageIndex === 0 && <button className="btnPt2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}>T</button>}
+            {currentImageIndex === 0 && <button className="btnPt1" onClick={() => handleButtonClick('1', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPt2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPt3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPt4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPt5" onClick={() => handleButtonClick('5', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPt6" onClick={() => handleButtonClick('6', { top: '12%', left: '32%' })}></button>}
+            
+            {currentImageIndex === 1 && <button className="btnPt7" onClick={() => handleButtonClick('7', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPt8" onClick={() => handleButtonClick('8', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPt9" onClick={() => handleButtonClick('9', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPt10" onClick={() => handleButtonClick('10', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPt11" onClick={() => handleButtonClick('11', { top: '12%', left: '32%' })}></button>}
+            
+            {currentImageIndex === 2 && <button className="btnPt12" onClick={() => handleButtonClick('12', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPt13" onClick={() => handleButtonClick('13', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPt14" onClick={() => handleButtonClick('14', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPt15" onClick={() => handleButtonClick('15', { top: '12%', left: '32%' })}></button>}
+            
             </div>
             {textBoxVisible && (
-                <div className="text-box" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxPt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}

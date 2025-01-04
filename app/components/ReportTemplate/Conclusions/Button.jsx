@@ -1,5 +1,5 @@
 import { ReportContext } from '@/src/context';
-import React, { useState, useContext } from 'react';
+import { useContext } from 'react';
 
 // Se recibe el titulo y el valor de la conclusión
 export function ConclusionButton ({title, value, displayText}) {
@@ -17,6 +17,6 @@ export function ConclusionButton ({title, value, displayText}) {
   return (
       <div className={classnames} onClick={handleClick} >
         {displayText || title}
-      </div>   
+      </div>
   )
 }

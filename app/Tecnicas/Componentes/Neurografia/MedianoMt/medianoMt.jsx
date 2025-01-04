@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-import "./style.css";
+import "../MedianoMt/medianoMt.css";
 
 
 

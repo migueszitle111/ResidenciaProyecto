@@ -43,11 +43,11 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnCP1, .btnCP2, .btnCP3, .btnCP4, .btnCP5, .btnCP6, .btnCP7, .btnCP8, .btnCP9, .btnCP10,
-    .btnCP11, .btnCP12, .btnCP13, .btnCP14, .btnCP15, .btnCP16, .btnCP17, .btnCP18, .btnCP19, .btnCP20,
-    .btnCP21, .btnCP22, .btnCP23, .btnCP24, .btnCP25, .btnCP26, .btnCP27, .btnCP28, .btnCP29, .btnCP30,
-    .btnCP31, .btnCP32, .btnCP33, .btnCP34, .btnCP35, .btnCP36, .btnCP37, .btnCP38, .btnCP39, .btnCP40,
-    .btnCP41, .btnCP42, .btnCP43, .btnCP44, .btnCP45 {
+    .btnAu1, .btnAu2, .btnAu3, .btnAu4, .btnAu5, .btnAu6, .btnAu7, .btnAu8, .btnAu9, .btnAu10,
+    .btnAu11, .btnAu12, .btnAu13, .btnAu14, .btnAu15, .btnAu16, .btnAu17, .btnAu18, .btnAu19, .btnAu20,
+    .btnAu21, .btnAu22, .btnAu23, .btnAu24, .btnAu25, .btnAu26, .btnAu27, .btnAu28, .btnAu29, .btnAu30,
+    .btnAu31, .btnAu32, .btnAu33, .btnAu34, .btnAu35, .btnAu36, .btnAu37, .btnAu38, .btnAu39, .btnAu40,
+    .btnAu41, .btnAu42, .btnAu43, .btnAu44, .btnAu45 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -60,7 +60,7 @@
         max-width: 60vw;
     }
 
-    .btnCP1, .btnCP2 {
+    .btnAu1, .btnAu2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -72,15 +72,14 @@
 }
 
 
-/* Botón 1 
-.btnCP1 {
+.btnAu1 {
     position: absolute;
-    height: 3vw; 
-    width: 3vw;
+    height: 2vw;
+    width: 2vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
-    background-color: transparent;
+    transform: translate(-110%, 510%);
+    background-color: firebrick;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,42 +87,53 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnCP1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; 
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
-
-.btnCP2 {
+.btnAu2 {
     position: absolute;
-    height: 3.5vw; 
-    width: 3.5vw;
+    height: 2vw;
+    width: 2vw;
     top: 30%;
-    left: 55%;
-    transform: translate(-20%, 222%);
-    background-color: transparent;
+    left: 45%;
+    transform: translate(-185%, 260%);
+    background-color: firebrick;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    color: transparent;
-    font-size: 1.9vw;
-    font-family: 'Times New Roman';
+    color: white;
+    font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnCP2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; 
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
+.btnAu3 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-170%, 130%);
+    background-color: firebrick;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnAu4 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(345%, 615%);
+    background-color: firebrick;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
 }
 
-*/
-
-.text-box {
+.text-boxAu {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 35vw;

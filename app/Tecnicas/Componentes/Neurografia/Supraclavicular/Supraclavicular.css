@@ -43,11 +43,11 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnTl1, .btnTl2, .btnTl3, .btnTl4, .btnTl5, .btnTl6, .btnTl7, .btnTl8, .btnTl9, .btnTl10,
-    .btnTl11, .btnTl12, .btnTl13, .btnTl14, .btnTl15, .btnTl16, .btnTl17, .btnTl18, .btnTl19, .btnTl20,
-    .btnTl21, .btnTl22, .btnTl23, .btnTl24, .btnTl25, .btnTl26, .btnTl27, .btnTl28, .btnTl29, .btnTl30,
-    .btnTl31, .btnTl32, .btnTl33, .btnTl34, .btnTl35, .btnTl36, .btnTl37, .btnTl38, .btnTl39, .btnTl40,
-    .btnTl41, .btnTl42, .btnTl43, .btnTl44, .btnTl45 {
+    .btnSpC1, .btnSpC2, .btnSpC3, .btnSpC4, .btnSpC5, .btnSpC6, .btnSpC7, .btnSpC8, .btnSpC9, .btnSpC10,
+    .btnSpC11, .btnSpC12, .btnSpC13, .btnSpC14, .btnSpC15, .btnSpC16, .btnSpC17, .btnSpC18, .btnSpC19, .btnSpC20,
+    .btnSpC21, .btnSpC22, .btnSpC23, .btnSpC24, .btnSpC25, .btnSpC26, .btnSpC27, .btnSpC28, .btnSpC29, .btnSpC30,
+    .btnSpC31, .btnSpC32, .btnSpC33, .btnSpC34, .btnSpC35, .btnSpC36, .btnSpC37, .btnSpC38, .btnSpC39, .btnSpC40,
+    .btnSpC41, .btnSpC42, .btnSpC43, .btnSpC44, .btnSpC45 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -60,7 +60,7 @@
         max-width: 60vw;
     }
 
-    .btnTl1, .btnTl2 {
+    .btnSpC1, .btnSpC2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -72,15 +72,15 @@
 }
 
 
-/* Botón 1 
-.btnTl1 {
+
+.btnSpC1 {
     position: absolute;
-    height: 3vw; 
-    width: 3vw;
+    height: 2.3vw; 
+    width: 2.3vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
-    background-color: transparent;
+    transform: translate(-430%, 400%);
+    background-color: chocolate;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,22 +88,46 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnTl1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; 
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
-
-.btnTl2 {
+.btnSpC2 {
     position: absolute;
-    height: 3.5vw; 
-    width: 3.5vw;
+    height: 1.4vw; 
+    width: 7.8vw;
     top: 30%;
     left: 55%;
-    transform: translate(-20%, 222%);
-    background-color: transparent;
+    transform: translate(-170%, 880%) rotate(15deg);
+    background-color: chocolate;
+    border: none;
+    border-radius: 15%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+}
+.btnSpC3 {
+    position: absolute;
+    height: 1.4vw; 
+    width: 7.8vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-160%, 760%) rotate(15deg);
+    background-color: black;
+    border: none;
+    border-radius: 15%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+}
+.btnSpC4 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-220%, 270%);
+    background-color: chocolate;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -112,16 +136,9 @@
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
 }
-.btnTl2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; 
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
-}
 
-*/
+
+
 
 .text-box {
     position: absolute;

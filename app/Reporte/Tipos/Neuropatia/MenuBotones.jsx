@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
+
 import { Accordion } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';

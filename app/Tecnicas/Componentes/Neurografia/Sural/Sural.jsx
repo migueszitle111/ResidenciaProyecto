@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
-import "./style.css"
+import "../Sural/Sural.css"
 
 
 const Sural = () => {
@@ -52,11 +52,21 @@ const Sural = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnSr1" onClick={() => handleButtonClick('Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', {  top: '12%', left: '32%' })}>A</button>}
-                {currentImageIndex === 0 && <button className="btnSr2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}>T</button>}
+            {currentImageIndex === 0 && <button className="btnSr1" onClick={() => handleButtonClick('1', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnSr2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnSr3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnSr4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnSr5" onClick={() => handleButtonClick('5', { top: '12%', left: '32%' })}></button>}      
+            {currentImageIndex === 0 && <button className="btnSr6" onClick={() => handleButtonClick('6', { top: '12%', left: '32%' })}></button>}
+            
+            {currentImageIndex === 1 && <button className="btnSr7" onClick={() => handleButtonClick('7', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnSr8" onClick={() => handleButtonClick('8', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnSr9" onClick={() => handleButtonClick('9', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnSr10" onClick={() => handleButtonClick('10', { top: '12%', left: '32%' })}></button>}
+
             </div>
             {textBoxVisible && (
-                <div className="text-box" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxSr" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}

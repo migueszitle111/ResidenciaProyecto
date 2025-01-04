@@ -43,11 +43,11 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnPt1, .btnPt2, .btnPt3, .btnPt4, .btnPt5, .btnPt6, .btnPt7, .btnPt8, .btnPt9, .btnPt10,
-    .btnPt11, .btnPt12, .btnPt13, .btnPt14, .btnPt15, .btnPt16, .btnPt17, .btnPt18, .btnPt19, .btnPt20,
-    .btnPt21, .btnPt22, .btnPt23, .btnPt24, .btnPt25, .btnPt26, .btnPt27, .btnPt28, .btnPt29, .btnPt30,
-    .btnPt31, .btnPt32, .btnPt33, .btnPt34, .btnPt35, .btnPt36, .btnPt37, .btnPt38, .btnPt39, .btnPt40,
-    .btnPt41, .btnPt42, .btnPt43, .btnPt44, .btnPt45 {
+    .btnPs1, .btnPs2, .btnPs3, .btnPs4, .btnPs5, .btnPs6, .btnPs7, .btnPs8, .btnPs9, .btnPs10,
+    .btnPs11, .btnPs12, .btnPs13, .btnPs14, .btnPs15, .btnPs16, .btnPs17, .btnPs18, .btnPs19, .btnPs20,
+    .btnPs21, .btnPs22, .btnPs23, .btnPs24, .btnPs25, .btnPs26, .btnPs27, .btnPs28, .btnPs29, .btnPs30,
+    .btnPs31, .btnPs32, .btnPs33, .btnPs34, .btnPs35, .btnPs36, .btnPs37, .btnPs38, .btnPs39, .btnPs40,
+    .btnPs41, .btnPs42, .btnPs43, .btnPs44, .btnPs45 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -60,7 +60,7 @@
         max-width: 60vw;
     }
 
-    .btnPt1, .btnPt2 {
+    .btnPs1, .btnPs2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -72,15 +72,14 @@
 }
 
 
-/* Botón 1 
-.btnPt1 {
+.btnPs1 {
     position: absolute;
-    height: 3vw; 
-    width: 3vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
-    background-color: transparent;
+    transform: translate(-125%, 535%);
+    background-color: slategray;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,42 +87,84 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnPt1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; 
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
-
-.btnPt2 {
+.btnPs2 {
     position: absolute;
-    height: 3.5vw; 
-    width: 3.5vw;
+    height: 2.1vw;
+    width: 2.1vw;
     top: 30%;
-    left: 55%;
-    transform: translate(-20%, 222%);
-    background-color: transparent;
+    left: 45%;
+    transform: translate(360%, 730%);
+    background-color: slategray;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    color: transparent;
-    font-size: 1.9vw;
-    font-family: 'Times New Roman';
+    color: white;
+    font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnPt2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; 
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
+.btnPs3 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-125%, 365%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs4 {
+    position: absolute;
+    height: 2.1vw;
+    width: 2.1vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(240%, 280%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs5 {
+    position: absolute;
+    height: 2.1vw;
+    width: 2.1vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(280%, 185%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs6 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(455%, -365%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
 }
 
-*/
 
-.text-box {
+.text-boxPs {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 35vw;
@@ -131,8 +172,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(233, 14, 69, 0.842);
-    color: #242424;
+    background-color: rgba(121, 118, 119, 0.842);
+    color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);

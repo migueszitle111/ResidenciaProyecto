@@ -1,0 +1,247 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btnFn1, .btnFn2, .btnFn3, .btnFn4, .btnFn5, .btnFn6, .btnFn7, .btnFn8, .btnFn9, .btnFn10,
+    .btnFn11, .btnFn12, .btnFn13, .btnFn14, .btnFn15, .btnFn16, .btnFn17, .btnFn18, .btnFn19, .btnFn20,
+    .btnFn21, .btnFn22, .btnFn23, .btnFn24, .btnFn25, .btnFn26, .btnFn27, .btnFn28, .btnFn29, .btnFn30,
+    .btnFn31, .btnFn32, .btnFn33, .btnFn34, .btnFn35, .btnFn36, .btnFn37, .btnFn38, .btnFn39, .btnFn40,
+    .btnFn41, .btnFn42, .btnFn43, .btnFn44, .btnFn45 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btnFn1, .btnFn2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+
+.btnFn1 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-230%, 580%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFn2 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-300%, -10%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFn3 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-40%, -380%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFn4 {
+    position: absolute;
+    height: 2.3vw;
+    width: 2.3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(0%, -220%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFn5 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(130%, 435%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFn6 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(495%, 565%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+.btnFn7 {
+    position: absolute;
+    height: 2.3vw;
+    width: 2.3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-220%, 685%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFn8 {
+    position: absolute;
+    height: 2.3vw;
+    width: 2.3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-220%, 575%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFn9 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(60%, -300%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFn10 {
+    position: absolute;
+    height: 2.7vw;
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(320%, 355%);
+    background-color: teal;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.text-boxFn {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 35vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(131, 226, 139, 0.842);
+    color: #242424;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+}
+
+

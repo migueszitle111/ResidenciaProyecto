@@ -56,6 +56,8 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'F2' && <StepF2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}  />}
       {step === 'G' && <StepG handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
       {step === 'G2' && <StepG2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
+      {step === 'G3' && <StepG3 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
+
       {step === 'H' && <StepH handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}  handlePrint={handlePrint}/>}
 
     </div>
@@ -73,9 +75,10 @@ const StepA = ({ handleNextStep ,setStep}) => (
     <div onClick={handleNextStep}> 
     </div>
     <div onClick={() => setStep('E2')}>
-      <ConclusionButton value="indenme" title="VÍA SOMATOSENSORIAL INDEMNE CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
+      <ConclusionButton value="indenme" title="VÍA SOMATOSENSORIAL CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />   
+       </div>
     <div onClick={() => setStep('B')}>
-      <ConclusionButton value="alterada" title="VÍA SOMATOSENSORIAL ALTERADA CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
+      <ConclusionButton value="alterada" title="VÍA SOMATOSENSORIAL CON DEFECTO FUNCIONAL" displayText="ALTERADA " />
     </div>
   </div>
 );
@@ -93,16 +96,16 @@ const StepB = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
     <h1 className="text-xl font-bold text-white">FISIOPATOLOGÍA</h1>
     <div onClick={() => setStep('C1')}>
-      <ConclusionButton value="retardo_en_la_conduccion" title="POR RETARDO EN LA CONDUCCIÓN " displayText="RETARDO EN LA CONDUCCIÓN" />
+      <ConclusionButton value="retardo_en_la_conduccion" title="POR RETARDO EN LA CONDUCCIÓN" displayText=" RETARDO EN LA CONDUCCIÓN " />
     </div>
     <div onClick={() => setStep('E')}>
-      <ConclusionButton value="bloqueo_en_la_conduccion" title="POR BLOQUEO EN LA CONDUCCIÓN " displayText="BLOQUEO EN LA CONDUCCIÓN" />
+      <ConclusionButton value="bloqueo_en_la_conduccion" title=" POR BLOQUEO EN LA CONDUCCIÓN" displayText=" BLOQUEO EN LA CONDUCCIÓN " />
     </div>
     <div onClick={() => setStep('C2')}>
-      <ConclusionButton value="deficit_neuronal" title="AXONAL " displayText="POR DEFICIT NEURONAL" />
+      <ConclusionButton value="deficit_neuronal" title=" AXONAL" displayText=" POR DEFICIT NEURONAL" />
     </div>
     <div onClick={() => setStep('E')}>
-      <ConclusionButton value="sin_respuesta" title="POR AUSENCIA DE RESPUESTA EVOCABLE " displayText="SIN RESPUETA" />
+      <ConclusionButton value="sin_respuesta" title=" POR AUSENCIA DE RESPUESTA EVOCABLE" displayText=" SIN RESPUETA" />
     </div>
   </div>
 );
@@ -119,9 +122,9 @@ const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('D1')}>
-      <ConclusionButton value="leve" title="LEVE " displayText="LEVE " />
-      <ConclusionButton value="moderado" title="MODERADO " displayText=" MODERADO " />
-      <ConclusionButton value="severo" title="SEVERO " displayText="SEVERO " />
+      <ConclusionButton value="leve" title=" LEVE " displayText="LEVE " />
+      <ConclusionButton value="moderado" title=" MODERADO " displayText=" MODERADO " />
+      <ConclusionButton value="severo" title=" SEVERO " displayText="SEVERO " />
 
     </div>
   </div>
@@ -139,9 +142,9 @@ const StepC2 = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('D2')}>
-      <ConclusionButton value="leve" title="LEVE " displayText="LEVE" />
-      <ConclusionButton value="moderado" title="MODERADO " displayText="MODERADO" />
-      <ConclusionButton value="severo" title="SEVERO " displayText=" SEVERO" />
+      <ConclusionButton value="leve" title=" LEVE " displayText="LEVE" />
+      <ConclusionButton value="moderado" title=" MODERADO " displayText="MODERADO" />
+      <ConclusionButton value="severo" title=" SEVERO " displayText=" SEVERO" />
 
     </div>
   </div>
@@ -158,7 +161,7 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => (
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
-      <ConclusionButton value="perdida_axonal_secundaria" title=" Y PERDIDA AXONAL SECUNDARIA " displayText="PERDIDA AXONAL SECUNDARIA" />
+      <ConclusionButton value="perdida_axonal_secundaria" title=", Y PERDIDA AXONAL SECUNDARIA " displayText="PERDIDA AXONAL SECUNDARIA" />
   </div>
 );
 
@@ -174,7 +177,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => (
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
-      <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="RETARDO SECUNDARIO EN LA CONDUCCIÓN" />
+      <ConclusionButton value="retardo_secundario_en_la_conduccion" title=", Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="RETARDO SECUNDARIO EN LA CONDUCCIÓN" />
   </div>
 );
 
@@ -195,7 +198,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
         }}>
       <ConclusionButton
         value="izquierdo"
-        title="PARA LADO IZQUIERDO "
+        title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
       />
@@ -206,7 +209,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
         }}>
       <ConclusionButton
         value="derecho"
-        title="PARA LADO DERECHO "
+        title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
       />
@@ -217,7 +220,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
         }}>
       <ConclusionButton
         value="bilateral"
-        title="BILATERAL,"
+        title=" BILATERAL,"
         displayText="BILATERAL "
         
       />
@@ -242,7 +245,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
         }}>
       <ConclusionButton
         value="izquierdo"
-        title="PARA LADO IZQUIERDO "
+        title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
       />
@@ -252,7 +255,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
         }}>
       <ConclusionButton
         value="derecho"
-        title="PARA LADO DERECHO "
+        title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
       />
@@ -262,7 +265,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
         }}>
       <ConclusionButton
         value="bilateral"
-        title="BILATERAL,"
+        title=" BILATERAL"
         displayText="BILATERAL "
         
       />
@@ -278,44 +281,44 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
       <button onClick={() => setStep('E')} id='prev' className={`print-button dont-print `}>
         <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
       </button>
-      <button onClick={() => setStep('G')} id='next' className={`print-button dont-print `}>
+      <button onClick={() => setStep('H')} id='next' className={`print-button dont-print `}>
         <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
     <Accordion  title='SUPERIORES'>
       <div onClick={() => setStep('G')} >
-      <ConclusionButton value="mediano" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO MEDIANO' displayText="NERVIO MEDIANO"></ConclusionButton>
-      <ConclusionButton value="ulnar" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ULNAR' displayText="NERVIO ULNAR"></ConclusionButton>
-      <ConclusionButton value="radial" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO RADIAL' displayText="NERVIO RADIAL"></ConclusionButton>
-      <ConclusionButton value="radial_superficial" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO RADIAL SUPERFICIAL' displayText="NERVIO RADIAL SUPERFICIAL"></ConclusionButton>
-      <ConclusionButton value="antebraqueal_cutaneo_lateral" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ANTEBRAQUEAL CUTANEO lATERAL' displayText="NERVIO ANTEBRAQUEAL CUTANEO lATERAL"></ConclusionButton>
+      <ConclusionButton value="mediano" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO MEDIANO' displayText="NERVIO MEDIANO"></ConclusionButton>
+      <ConclusionButton value="ulnar" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ULNAR' displayText="NERVIO ULNAR"></ConclusionButton>
+      <ConclusionButton value="radial_superficial" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO RADIAL SUPERFICIAL' displayText="NERVIO RADIAL SUPERFICIAL"></ConclusionButton>
+      <ConclusionButton value="antebraqueal_cutaneo_lateral" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ANTEBRAQUEAL CUTANEO lATERAL' displayText="NERVIO ANTEBRAQUEAL CUTANEO lATERAL"></ConclusionButton>
       </div>
    </Accordion>
      <Accordion  title='INFERIORES'>
-      <div onClick={() => setStep('G')} >
-     <ConclusionButton value="tibial" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO TIBIAL' displayText="NERVIO TIBIAL"></ConclusionButton>
-     <ConclusionButton value="peroneo_superficial" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PERONEO SUPERFICIAL' displayText="NERVIO PERONEO SUPERFICIAL"></ConclusionButton>
-     <ConclusionButton value="sural" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO SURAL' displayText="NERVIO SURAL"></ConclusionButton>
-     <ConclusionButton value="safeno" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO SAFENO' displayText="NERVIO SAFENO"></ConclusionButton>
-     <ConclusionButton value="femorocutaneo_lateral" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO FEMOROCUTANEO LATERAL' displayText="NERVIO FEMOROCUTANEO LATERAL"></ConclusionButton>
-     <ConclusionButton value="pudendo" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PUDENDO' displayText="NERVIO PUDENDO"></ConclusionButton>
+      <div onClick={() => setStep('G3')} >
+     <ConclusionButton value="tibial" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO TIBIAL' displayText="NERVIO TIBIAL"></ConclusionButton>
+     <ConclusionButton value="peroneo_superficial" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PERONEO' displayText="NERVIO PERONEO"></ConclusionButton>
+     <ConclusionButton value="peroneo_superficial" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PERONEO SUPERFICIAL' displayText="NERVIO PERONEO SUPERFICIAL"></ConclusionButton>
+     <ConclusionButton value="sural" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO SURAL' displayText="NERVIO SURAL"></ConclusionButton>
+     <ConclusionButton value="safeno" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO SAFENO' displayText="NERVIO SAFENO"></ConclusionButton>
+     <ConclusionButton value="femorocutaneo_lateral" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO FEMOROCUTANEO LATERAL' displayText="NERVIO FEMOROCUTANEO LATERAL"></ConclusionButton>
+     <ConclusionButton value="pudendo" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PUDENDO' displayText="NERVIO PUDENDO"></ConclusionButton>
     </div>
     </Accordion>
     <Accordion  title='DERMATOMAS'>
-     <Accordion title='SUPERIORES'>
+     <Accordion title='CERVICAL'>
        <div style={{ display: 'flex', gap: '8px' }}>
          <ConclusionButton value="c4" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
          <ConclusionButton value="c5" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
          <ConclusionButton value="c6" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
          <ConclusionButton value="c7" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
          <ConclusionButton value="c8" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value="t1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
       </div>
       </Accordion>
 
-      <Accordion  title='INFERIOR TORACICO'>
+      <Accordion  title='TORACICO'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
         <ConclusionButton value="t2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
         <ConclusionButton value="t3" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
         <ConclusionButton value="t4" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
@@ -331,25 +334,21 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
         <ConclusionButton value="t12" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
         </div>
       </Accordion>
-      <Accordion  title='INFERIOR'>
+      <Accordion  title='LUMBOSACRO'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value="l1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
         <ConclusionButton value="l2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
         <ConclusionButton value="l3" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
         <ConclusionButton value="l4" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value="l5" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/>       
-        </div>
-      </Accordion>
-      <Accordion  title='INFERIOR'>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="l5" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
         <ConclusionButton value="s1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value="s2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />
-         
+        <ConclusionButton value="s2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
         </div>
       </Accordion>
+     
     </Accordion>
     <div onClick={() => setStep('H')} >
-    <ConclusionButton value={`${selectedSide}trigemino`} title="A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />
+    <ConclusionButton value={`${selectedSide}trigemino`} title=", A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />
     </div>
 </div>
 );
@@ -367,20 +366,20 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
     <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
     <Accordion  title='SUPERIORES'>
      
-      <ConclusionButton value="mediano" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO MEDIANO' displayText="NERVIO MEDIANO"></ConclusionButton>
-      <ConclusionButton value="ulnar" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ULNAR' displayText="NERVIO ULNAR"></ConclusionButton>
-      <ConclusionButton value="radial" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO RADIAL' displayText="NERVIO RADIAL"></ConclusionButton>
-      <ConclusionButton value="radial_superficial" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO RADIAL SUPERFICIAL' displayText="NERVIO RADIAL SUPERFICIAL"></ConclusionButton>
-      <ConclusionButton value="antebraqueal_cutaneo_lateral" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ANTEBRAQUEAL CUTANEO lATERAL' displayText="NERVIO ANTEBRAQUEAL CUTANEO lATERAL"></ConclusionButton>
+      <ConclusionButton value="mediano" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO MEDIANO' displayText="NERVIO MEDIANO"></ConclusionButton>
+      <ConclusionButton value="ulnar" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ULNAR' displayText="NERVIO ULNAR"></ConclusionButton>
+      <ConclusionButton value="radial_superficial" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO RADIAL SUPERFICIAL' displayText="NERVIO RADIAL SUPERFICIAL"></ConclusionButton>
+      <ConclusionButton value="antebraqueal_cutaneo_lateral" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ANTEBRAQUEAL CUTANEO lATERAL' displayText="NERVIO ANTEBRAQUEAL CUTANEO lATERAL"></ConclusionButton>
     
    </Accordion>
      <Accordion  title='INFERIORES'>
-     <ConclusionButton value="tibial" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO TIBIAL' displayText="NERVIO TIBIAL"></ConclusionButton>
-     <ConclusionButton value="peroneo_superficial" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PERONEO SUPERFICIAL' displayText="NERVIO PERONEO SUPERFICIAL"></ConclusionButton>
-     <ConclusionButton value="sural" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO SURAL' displayText="NERVIO SURAL"></ConclusionButton>
-     <ConclusionButton value="safeno" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO SAFENO' displayText="NERVIO SAFENO"></ConclusionButton>
-     <ConclusionButton value="femorocutaneo_lateral" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO FEMOROCUTANEO LATERAL' displayText="NERVIO FEMOROCUTANEO LATERAL"></ConclusionButton>
-     <ConclusionButton value="pudendo" title='A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PUDENDO' displayText="NERVIO PUDENDO"></ConclusionButton>
+     <ConclusionButton value="tibial" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO TIBIAL' displayText="NERVIO TIBIAL"></ConclusionButton>
+     <ConclusionButton value="peroneo_superficial" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PERONEO' displayText="NERVIO PERONEO "></ConclusionButton>
+     <ConclusionButton value="peroneo_superficial" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PERONEO SUPERFICIAL' displayText="NERVIO PERONEO SUPERFICIAL"></ConclusionButton>
+     <ConclusionButton value="sural" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO SURAL' displayText="NERVIO SURAL"></ConclusionButton>
+     <ConclusionButton value="safeno" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO SAFENO' displayText="NERVIO SAFENO"></ConclusionButton>
+     <ConclusionButton value="femorocutaneo_lateral" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO FEMOROCUTANEO LATERAL' displayText="NERVIO FEMOROCUTANEO LATERAL"></ConclusionButton>
+     <ConclusionButton value="pudendo" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PUDENDO' displayText="NERVIO PUDENDO"></ConclusionButton>
     </Accordion>
     <Accordion  title='DERMATOMAS'>
      <Accordion title='SUPERIORES'>
@@ -428,13 +427,35 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
         </div>
     </Accordion>
     </Accordion>
-    <ConclusionButton value="trigemino" title="A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />
+    <ConclusionButton value="trigemino" title=", A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />
 
   
 </div>
 
 );
 
+
+const StepG3 = ({ setStep, selectedImages, handleUndo, handleImageChange, selectedSide }) => (
+  <div>
+    <div className='button-bar'>
+    <button onClick={() => setStep('F')} id='prev' className={`print-button dont-print `}>
+        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
+      </button>
+      <button onClick={() => setStep('H')} id='next' className={`print-button dont-print `}>
+        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+      </button>
+    </div>
+    <h1 className='text-xl font-bold text-white'>NIVEL INFERIOR: </h1>
+    
+      <ConclusionButton value={`${selectedSide}corticali`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
+      <ConclusionButton value={`${selectedSide}subcorticali`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
+      <ConclusionButton value={`${selectedSide}cervicali`} title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N26: Tracto gracilis-sustancia gris medular)." displayText="CERVICAL" />
+      <ConclusionButton value={`${selectedSide}toracicoi`} title=", TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
+      <ConclusionButton value={`${selectedSide}lumbosacroi`} title=", TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
+      <ConclusionButton value={`${selectedSide}perifericoi`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
+       
+  </div>
+);
 
 const StepG = ({ setStep, selectedImages, handleUndo, handleImageChange, selectedSide }) => (
   <div>
@@ -446,30 +467,23 @@ const StepG = ({ setStep, selectedImages, handleUndo, handleImageChange, selecte
         <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
       </button>
     </div>
-    <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
+    <h1 className='text-xl font-bold text-white'>NIVEL SUPERIOR: </h1>
    
-    <Accordion  title='SUPERIORES'>
-     
-      <ConclusionButton value={`${selectedSide}corticals`} title="TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value={`${selectedSide}subcorticals`} title="TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medialNúcleo tectal). " displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}cervicals`} title="TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsalesTracto cuneatus). " displayText="CERVICAL" />
-      <ConclusionButton value={`${selectedSide}perifericos`} title="TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas (IA-II)- Plexo braquial). " displayText="PERIFERICO" />
-      
-    </Accordion>
-    <Accordion  title='INFERIORES'>
-     
-      <ConclusionButton value={`${selectedSide}corticali`} title="TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value={`${selectedSide}subcorticali`} title="TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}cervicali`} title="TOPOGRÁFICAMENTE A NIVEL CERVICAL (N26: Tracto gracilis-sustancia gris medular)." displayText="CERVICAL" />
-      <ConclusionButton value={`${selectedSide}toracicoi`} title="TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
-      <ConclusionButton value={`${selectedSide}lumbosacroi`} title="TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
-      <ConclusionButton value={`${selectedSide}perifericoi`} title="TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
-      
-    </Accordion>
-
     
+     
+      <ConclusionButton value={`${selectedSide}corticals`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
+      <ConclusionButton value={`${selectedSide}subcorticals`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medialNúcleo tectal). " displayText="SUBCORTICAL" />
+      <ConclusionButton value={`${selectedSide}cervicals`} title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsalesTracto cuneatus). " displayText="CERVICAL" />
+      <ConclusionButton value={`${selectedSide}perifericos`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas (IA-II)- Plexo braquial). " displayText="PERIFERICO" />
+          
   </div>
 );
+
+
+
+
+
+
 
 const StepG2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => (
   <div>
@@ -484,20 +498,20 @@ const StepG2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
     <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
     <Accordion  title='SUPERIORES'>
       <div onClick={() => setStep('H')}>
-      <ConclusionButton value="cortical" title="TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value="subcortical" title="TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medialNúcleo tectal). " displayText="SUBCORTICAL" />
-      <ConclusionButton value="cervical" title="TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsalesTracto cuneatus). " displayText="CERVICAL" />
-      <ConclusionButton value="periferico" title="TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas (IA-II)- Plexo braquial). " displayText="PERIFERICO" />
+      <ConclusionButton value="cortical" title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
+      <ConclusionButton value="subcortical" title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medialNúcleo tectal). " displayText="SUBCORTICAL" />
+      <ConclusionButton value="cervical" title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsalesTracto cuneatus). " displayText="CERVICAL" />
+      <ConclusionButton value="periferico" title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas (IA-II)- Plexo braquial). " displayText="PERIFERICO" />
       </div>
     </Accordion>
     <Accordion  title='INFERIORES'>
       <div onClick={() => setStep('H')}>
-      <ConclusionButton value="cortical" title="TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value="subcortical" title="TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
-      <ConclusionButton value="cervical" title="TOPOGRÁFICAMENTE A NIVEL CERVICAL (N26: Tracto gracilis-sustancia gris medular)." displayText="CERVICAL" />
-      <ConclusionButton value="toracico" title="TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
-      <ConclusionButton value="lumbosacro" title="TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
-      <ConclusionButton value="periferico" title="TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
+      <ConclusionButton value="cortical" title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
+      <ConclusionButton value="subcortical" title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
+      <ConclusionButton value="cervical" title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N26: Tracto gracilis-sustancia gris medular)." displayText="CERVICAL" />
+      <ConclusionButton value="toracico" title=", TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
+      <ConclusionButton value="lumbosacro" title=", TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
+      <ConclusionButton value="periferico" title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
       </div>
     </Accordion>
 

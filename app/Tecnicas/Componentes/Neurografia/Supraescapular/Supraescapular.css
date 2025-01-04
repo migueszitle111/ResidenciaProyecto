@@ -72,15 +72,14 @@
 }
 
 
-/* Botón 1 
 .btnSp1 {
     position: absolute;
-    height: 3vw; 
-    width: 3vw;
+    height: 2vw;
+    width: 2vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
-    background-color: transparent;
+    transform: translate(-290%, -60%);
+    background-color: firebrick;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,40 +87,113 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnSp1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; 
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
-
 .btnSp2 {
     position: absolute;
-    height: 3.5vw; 
-    width: 3.5vw;
+    height: 2vw;
+    width: 2vw;
     top: 30%;
-    left: 55%;
-    transform: translate(-20%, 222%);
-    background-color: transparent;
+    left: 45%;
+    transform: translate(-130%, -85%);
+    background-color: firebrick;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    color: transparent;
-    font-size: 1.9vw;
-    font-family: 'Times New Roman';
+    color: white;
+    font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnSp2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; 
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
+.btnSp3 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(190%, 5%);
+    background-color: firebrick;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSp4 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(290%, -510%);
+    background-color: firebrick;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
 }
 
-*/
+.btnSp5 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-85%, 690%);
+    background-color: firebrick;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSp6 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(100%, 355%);
+    background-color: firebrick;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSp7 {
+    position: absolute;
+    height: 2.3vw;
+    width: 2.3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(380%, -60%);
+    background-color: firebrick;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSp8 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-25%, -540%);
+    background-color: firebrick;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
 
 .text-box {
     position: absolute;

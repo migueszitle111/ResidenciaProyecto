@@ -160,7 +160,7 @@ const Reporte = () => {
         <ConclusionCanvasV 
         
           img={{
-            src: '/assets/MioImg/MO_BASE_BLANCO_MOTORES.png',
+            src: '/assets/AuditivaIMG/AU_BASE_BLANCO.png',
             alt: 'Modelo',
             useMap: '#image-map',
             width: isPageVisible ? '600' : '800',
@@ -168,13 +168,36 @@ const Reporte = () => {
           }}
           
           rules={[
+          
+
             {
-              expectedValue: 'indenme', 
-              image: {
+              expectedValue: 'derecho',  
+                image: 
+                  {
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_3-D.png',
+                    alt: 'Modelo',
+                  },
+            },
+
+            {
+              expectedValue: 'izquierdo',  
+                image: 
+                  {
+                    src: 'AuditivaImg/Vía Afectada/AU_3.png',
+                    alt: 'Modelo',
+                  },
+            },
+
+            {
+              expectedValue: 'bilateral', 
+              image: 
+              {
                 src: 'AuditivaIMG/imagen_combinadaAuditiva.png',
                 alt: 'Modelo',
-              }
+              },
+            
             },
+
             {
               expectedValue: 'alterada', 
               image: {

@@ -83,68 +83,174 @@ const DropArea = () => {
     const [history, setHistory] = useState([]); 
     const [Future,setFuture] = useState([]); 
 
-        // Actualizar las conclusiones
-        useEffect(() => {
+    // Actualizar las conclusiones
+    useEffect(() => {
         setCopyConclusions(conclusions.map(cl => cl.title).join(''))
-        }, [conclusions])
+    }, [conclusions])
 
-        // Para mantener constante la conclusione
-        const handleTextareaChange = (event) => {
-        setCopyConclusions(event.target.value)
+    // Funcion para el arrastre de imagenes
+    
+
+    //funcion que agreaga comas y conjunciones a las conclusiones
+    function formatConclusions(copyConclusions) {
+        const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
+        const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
+        const keywords4 = ["ASIMÉTRICA PROXIMAL.", "ASIMÉTRICA DISTAL.", "ASIMÉTRICA SEGMENTARIA.", "ASIMÉTRICA GENERALIZADA.", "SIMÉTRICA PROXIMAL.", "SIMÉTRICA DISTAL", "SIMÉTRICA SEGMENTARIA.", "SIMÉTRICA GENERALIZADA.", "MULTIFOCAL PROXIMAL.", "MULTIFOCAL DISTAL", "MULTIFOCAL SEGMENTARIA.", "MULTIFOCAL GENERALIZADA."];
+        const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL"];
+        const specificKeywords = ["C5", "C6", "C7", "C8", "T1"]; // Nueva condición específica
+        let words = copyConclusions.split(' ');
+    
+        // Verificar la palabra clave específica en keywords2 (TROCO)
+        for (let i = 0; i < words.length; i++) {
+            if (keywords2.includes(words.slice(i, i + 6).join(' '))) {
+                let countAfterKeyword = 0;
+                for (let j = i + 6; j < words.length; j++) {
+                    if (keywords.includes(words[j])) {
+                        countAfterKeyword++;
+                    }
+                }
+    
+                if (countAfterKeyword > 1) {
+                    words[i + 5] += 'S'; // Agregar 'S' al final de 'TROCO' si hay más de dos palabras
+                }
+    
+                break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
+            }
         }
+    
+        // Verificar la palabra clave específica en keywords3 (CORDON)
+        for (let i = 0; i < words.length; i++) {
+            if (keywords3.includes(words.slice(i, i + 6).join(' '))) {
+                let countAfterKeyword = 0;
+                for (let j = i + 6; j < words.length; j++) {
+                    if (keywords.includes(words[j])) {
+                        countAfterKeyword++;
+                    }
+                }
+    
+                if (countAfterKeyword > 1) {
+                    words[i + 5] += 'ES'; // Agregar 'ES' al final de 'CORDON' si hay más de dos palabras
+                }
+    
+                break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
+            }
+        }
+    
+        // Verificar las palabras clave específicas en keywords4 (INTENSIDAD) y agregar doble salto de línea
+        for (let i = 0; i < words.length; i++) {
+            if (keywords4.includes(words.slice(i, i + 2).join(' '))) { // Comparar con las palabras clave de 2 palabras
+                words[i + 1] += '\n\n'; // Agregar doble salto de línea después de la palabra clave
+            }
+        }
+    
+        // Nueva condición para "PREGANGLIONAR PARCIAL"
+        let firstKeywordIndex = words.findIndex(word => specificKeywords.includes(word));
+        if (firstKeywordIndex !== -1) {
+            words.splice(firstKeywordIndex, 0, "PREGANGLIONAR PARCIAL A NIVEL DE");
+        }
+    
+        // Verificar y formatear las palabras clave generales (C5, C6, T1, etc.)
+        let keywordPositions = [];
+        for (let i = 0; i < words.length; i++) {
+            if (keywords.includes(words[i])) {
+                keywordPositions.push(i);
+            }
+        }
+    
+        if (keywordPositions.length > 1) {
+            // Formatear las palabras clave con comas, excepto antes de la conjunción
+            for (let i = 0; i < keywordPositions.length - 2; i++) {
+                words[keywordPositions[i]] += ',';
+            }
+    
+            // Verificar si la última palabra clave empieza con "I"
+            let lastKeywordIndex = keywordPositions[keywordPositions.length - 1];
+            let conjunction = 'Y';
+    
+            if (words[lastKeywordIndex][0].toUpperCase() === 'I') {
+                conjunction = 'E';
+            }
+    
+            // Insertar la conjunción antes de la última palabra clave
+            words.splice(lastKeywordIndex, 0, conjunction);
+        }
+    
+        // Unir las palabras con espacios
+        let formattedConclusions = words.join(' ');
+    
+        // Eliminar espacio en blanco antes de la palabra 'REINERVACIÓN'
+        formattedConclusions = formattedConclusions.replace(/\sREINERVACIÓN/g, 'REINERVACIÓN');
+    
+        return formattedConclusions;
+    }
+    
+    
+    const formattedConclusions = formatConclusions(copyConclusions);
 
-        // Funciones para el historial de imagenes, en caso de usar Undo te regresa a la imagen anterior
-        const handleImageChange = useCallback((event) => {
+    // Para mantener constante la conclusione
+    const handleTextareaChange = (event) => {
+        setCopyConclusions(event.target.value)
+    }
+
+    // Funciones para el historial de imagenes, en caso de usar Undo te regresa a la imagen anterior
+    const handleImageChange = useCallback((event) => {
         if (event.target.files && event.target.files[0]) {
-            setHistory((prevHistory) => [...prevHistory, selectedImages]);
-            setSelectedImages((prevImages) => [...prevImages, { 
+        setHistory((prevHistory) => [...prevHistory, selectedImages]);
+        setSelectedImages((prevImages) => [...prevImages, { 
             src: URL.createObjectURL(event.target.files[0]), 
             position: { x: Math.random() * 200, y: Math.random() * 200 }, 
             size: { width: 200, height: 200 } 
-            }]);
-            setFuture([]);
+        }]);
+        setFuture([]);
         }
-        }, [selectedImages]);
-        
-        const handleUndo = useCallback(() => {
+    }, [selectedImages]);
+    
+    const handleUndo = useCallback(() => {
         if (history.length > 0) {
-            setFuture((prevFuture) => [selectedImages, ...prevFuture]);
-            setSelectedImages(history[history.length - 1]);
-            setHistory((prevHistory) => prevHistory.slice(0, prevHistory.length - 1));
+        setFuture((prevFuture) => [selectedImages, ...prevFuture]);
+        setSelectedImages(history[history.length - 1]);
+        setHistory((prevHistory) => prevHistory.slice(0, prevHistory.length - 1));
         }
-        }, [history, selectedImages]);
-        
-        // Funciones para el arrastre y redimension de las imagenes
-        const handleDragStop = useCallback((index, e, d) => {
+    }, [history, selectedImages]);
+    
+    // Funciones para el arrastre y redimension de las imagenes
+    const handleDragStop = useCallback((index, e, d) => {
         setSelectedImages((prevImages) => {
-            const newImages = [...prevImages];
-            newImages[index].position = { x: d.x, y: d.y };
-            return newImages;
+        const newImages = [...prevImages];
+        newImages[index].position = { x: d.x, y: d.y };
+        return newImages;
         });
-        }, []);
-        
-        const handleResizeStop = useCallback((index, e, direction, ref, delta, position) => {
+    }, []);
+    
+    const handleResizeStop = useCallback((index, e, direction, ref, delta, position) => {
         setSelectedImages((prevImages) => {
-            const newImages = [...prevImages];
-            newImages[index].size = { width: ref.style.width, height: ref.style.height };
-            return newImages;
+        const newImages = [...prevImages];
+        newImages[index].size = { width: ref.style.width, height: ref.style.height };
+        return newImages;
         });
-        }, []);
+    }, []);
+
+    useEffect(() => {
+        const newConclusions = conclusions.map(cl => cl.title).join('');
+        const formattedConclusions = formatConclusions(newConclusions);
+        setCopyConclusions(formattedConclusions);
+    }, [conclusions]);
 
 
     // Codigo para imprimir en click
     useEffect(() => {
-        const printButton = document.getElementById('print');
-        const handlePrint = () => {
+    const printButton = document.getElementById('print');
+    const handlePrint = () => {
         window.print();
-        };
+    };
 
-        printButton.addEventListener('click', handlePrint);
+    printButton.addEventListener('click', handlePrint);
 
-        return () => {
+    return () => {
         printButton.removeEventListener('click', handlePrint);
-        };
+    };
     }, []); 
+
 
 
     return (

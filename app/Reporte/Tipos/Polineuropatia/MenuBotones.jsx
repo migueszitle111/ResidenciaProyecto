@@ -532,10 +532,10 @@ const StepI1 = ({ handlePrevStep,handleNextStep }) => {
         EXTENSION
       </h1>
       <div onClick={handleNextStep}>
-      <ConclusionButton value = 'proximal' title = ' PROXIMAL' displayText={'PROXIMAL'}/>
-      <ConclusionButton value = 'distal' title = ' DISTAL' displayText={'DISTAL'} />
-      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA' displayText={'SEGMENTARIA'}/>
-      <ConclusionButton value = 'proximal' title = ' GENERALIZADA' displayText={'GENERALIZADA'}/>
+      <ConclusionButton value = 'proximal' title = ' PROXIMAL.' displayText={'PROXIMAL'}/>
+      <ConclusionButton value = 'distal' title = ' DISTAL.' displayText={'DISTAL'} />
+      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA.' displayText={'SEGMENTARIA'}/>
+      <ConclusionButton value = 'proximal' title = ' GENERALIZADA.' displayText={'GENERALIZADA'}/>
       </div>
       
     </div>
@@ -557,10 +557,10 @@ const StepI2 = ({ handlePrevStep1,handleNextStep1 }) => {
         EXTENSION
       </h1>
       <div onClick={handleNextStep1}>
-      <ConclusionButton value = 'proximal' title = ' PROXIMAL' displayText={'PROXIMAL'}/>
-      <ConclusionButton value = 'distal' title = ' DISTAL' displayText={'DISTAL'} />
-      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA' displayText={'SEGMENTARIA'}/>
-      <ConclusionButton value = 'proximal' title = ' GENERALIZADA' displayText={'GENERALIZADA'}/>
+      <ConclusionButton value = 'proximal' title = ' PROXIMAL.' displayText={'PROXIMAL'}/>
+      <ConclusionButton value = 'distal' title = ' DISTAL.' displayText={'DISTAL'} />
+      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA.' displayText={'SEGMENTARIA'}/>
+      <ConclusionButton value = 'proximal' title = ' GENERALIZADA.' displayText={'GENERALIZADA'}/>
       </div>
 
       
@@ -583,8 +583,8 @@ const StepJ = ({ handlePrevStep,handleNextStep }) => {
         REINERVACIÓN
       </h1>
       <div onClick={handleNextStep}>
-      <ConclusionButton value = 'con_presencia_reinervacion' title = ' CON PRESENCIA DE REINERVACIÓN;' displayText={'ACTIVA'}/>
-      <ConclusionButton value = 'sin_presencia_reinervacion' title = ' SIN PRESENCIA DE REINERVACIÓN;' displayText={'INACTIVA'}/>
+      <ConclusionButton value = 'con_presencia_reinervacion' title = ' REINERVACIÓN ACTIVA;' displayText={'ACTIVA'}/>
+      <ConclusionButton value = 'sin_presencia_reinervacion' title = ' REINERVACIÓN INACTIVA;' displayText={'INACTIVA'}/>
       </div>
 
       

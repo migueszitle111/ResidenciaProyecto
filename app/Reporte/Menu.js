@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 
 export default function Perfil() {
@@ -52,11 +51,11 @@ export default function Perfil() {
                   Miopatía
                 </button>
               </a>
-              <a href="./Reporte/Tipos/Dermatomas">
+              {/* <a href="./Reporte/Tipos/Dermatomas">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">
                   Dermatomas
                 </button>
-              </a>
+              </a> */}
             </div>
           </div>
           <div className="w-full md:w-1/2 flex items-center justify-center relative">

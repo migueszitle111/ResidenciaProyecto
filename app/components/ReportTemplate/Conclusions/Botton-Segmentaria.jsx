@@ -30,3 +30,5 @@ export function SegmentariaButton({ title, value, displayText }) {
     </div>
   );
 }
+
+

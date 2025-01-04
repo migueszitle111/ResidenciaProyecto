@@ -1,8 +1,7 @@
 import { useState } from "react"
 import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
-import "./style.css"
-
+import "../RadialSt/RadialSt.css"
 
 const RadialSt = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -53,11 +52,19 @@ const RadialSt = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnRSt1" onClick={() => handleButtonClick('Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', {  top: '12%', left: '32%' })}>A</button>}
-                {currentImageIndex === 0 && <button className="btnRSt2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}>T</button>}
+                {currentImageIndex === 0 && <button className="btnRSt1" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnRSt2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnRSt3" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnRSt4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                
+                {currentImageIndex === 1 && <button className="btnRSt5" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnRSt6" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnRSt7" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnRSt8" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                
             </div>
             {textBoxVisible && (
-                <div className="text-box" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxRst" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}

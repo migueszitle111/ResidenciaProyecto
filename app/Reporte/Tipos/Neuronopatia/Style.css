@@ -682,6 +682,132 @@
   background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
 }
 
+
+/*############################## Ajutes para tamaños de pantallas #######################################################*/
+
+@media (max-width: 1024px) {
+  .head {
+    flex-direction: column;
+    gap: 5vh;
+  }
+
+  .report-container {
+    width: 70vh;
+    font-size: 22px;
+  }
+
+  .box-container {
+    width: 40vh;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .vertical-container {
+    width: 35vh;
+    height: 90vh;
+  }
+
+  .cuadro,
+  .circulo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cuadro-expanded,
+  .circulo-expanded {
+    width: 200px;
+    height: 100px;
+  }
+}
+
+/* Ajustes para dispositivos pequeños (móviles) */
+@media (max-width: 768px) {
+  .head {
+    flex-direction: column;
+    padding-top: 1vh;
+    gap: 2vh;
+  }
+
+  .head h1 {
+    font-size: 18px;
+  }
+
+  .report-container {
+    width: 60vh;
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  .box-container {
+    width: 30vh;
+  }
+
+  .box {
+    padding-left: 10px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .data {
+    font-size: 10px;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    gap: 10px;
+    padding: 2vh;
+  }
+
+  .vertical-container {
+    width: 30vh;
+    height: 70vh;
+  }
+
+  .cuadro,
+  .circulo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cuadro-expanded,
+  .circulo-expanded {
+    width: 180px;
+    height: 90px;
+  }
+}
+
+/* Ajustes para pantallas muy grandes */
+@media (min-width: 1200px) {
+  .report-container {
+    width: 100vh;
+    font-size: 30px;
+  }
+
+  .box-container {
+    width: 60vh;
+  }
+
+  .vertical-container {
+    width: 50vh;
+    height: 130vh;
+  }
+
+  .cuadro-expanded,
+  .circulo-expanded {
+    width: 250px;
+    height: 130px;
+  }
+}
+
+
+/*#####################################################################################*/
+
+
 /* Detalles referentes a la impresion */
 @media print {
 

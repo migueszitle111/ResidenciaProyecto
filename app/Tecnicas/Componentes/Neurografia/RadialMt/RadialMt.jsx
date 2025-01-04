@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
-import "./style.css"
+import "../RadialMt/RadialMt.css"
 
 
 const RadialMt = () => {
@@ -69,11 +69,48 @@ const RadialMt = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnRMt1" onClick={() => handleButtonClick('Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', {  top: '12%', left: '32%' })}>A</button>}
-                {currentImageIndex === 0 && <button className="btnRMt2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}>T</button>}
+                {currentImageIndex === 0 && <button className="btnRMt1" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnRMt2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnRMt3" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnRMt4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnRMt5" onClick={() => handleButtonClick('5', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnRMt6" onClick={() => handleButtonClick('6', { top: '12%', left: '32%'})}></button>}
+            
+                {currentImageIndex === 1 && <button className="btnRMt7" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnRMt8" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnRMt9" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnRMt10" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnRMt11" onClick={() => handleButtonClick('5', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnRMt12" onClick={() => handleButtonClick('6', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnRMt13" onClick={() => handleButtonClick('7', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnRMt14" onClick={() => handleButtonClick('8', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnRMt15" onClick={() => handleButtonClick('9', {  top: '12%', left: '32%' })}></button>}
+            
+                {currentImageIndex === 2 && <button className="btnRMt16" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 2 && <button className="btnRMt17" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 2 && <button className="btnRMt18" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 2 && <button className="btnRMt19" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                
+                {currentImageIndex === 3 && <button className="btnRMt20" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 3 && <button className="btnRMt21" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 3 && <button className="btnRMt22" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 3 && <button className="btnRMt23" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                
+                {currentImageIndex === 4 && <button className="btnRMt24" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 4 && <button className="btnRMt25" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 4 && <button className="btnRMt26" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 4 && <button className="btnRMt27" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                
+                {currentImageIndex === 5 && <button className="btnRMt28" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 5 && <button className="btnRMt29" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 5 && <button className="btnRMt30" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 5 && <button className="btnRMt31" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 5 && <button className="btnRMt32" onClick={() => handleButtonClick('5', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 5 && <button className="btnRMt33" onClick={() => handleButtonClick('6', { top: '12%', left: '32%'})}></button>}
+            
             </div>
             {textBoxVisible && (
-                <div className="text-box" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxRMt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}

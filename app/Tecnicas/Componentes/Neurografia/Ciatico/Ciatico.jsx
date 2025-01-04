@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
-import "./style.css"
+import "../Ciatico/Ciatico.css"
 
 
 const Ciatico = () => {
@@ -52,11 +52,20 @@ const Ciatico = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnSc1" onClick={() => handleButtonClick('Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', {  top: '12%', left: '32%' })}>A</button>}
-                {currentImageIndex === 0 && <button className="btnSc2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}>T</button>}
+            {currentImageIndex === 0 && <button className="btnCt1" onClick={() => handleButtonClick('1', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCt2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCt3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCt4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCt5" onClick={() => handleButtonClick('5', { top: '12%', left: '32%' })}></button>}
+            
+            {currentImageIndex === 1 && <button className="btnCt6" onClick={() => handleButtonClick('6', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCt7" onClick={() => handleButtonClick('7', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCt8" onClick={() => handleButtonClick('8', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCt9" onClick={() => handleButtonClick('9', { top: '12%', left: '32%' })}></button>}
+            
             </div>
             {textBoxVisible && (
-                <div className="text-box" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxCt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}

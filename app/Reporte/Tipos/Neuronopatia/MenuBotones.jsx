@@ -30,6 +30,15 @@ const SimpleMultiStepForm = () => {
     else if (step === 'G') setStep('H');
   };
 
+  const handleNextStep2 = () => {
+    if (step === 'A') setStep('B');
+    else if (step === 'B') setStep('D');
+    else if (step === 'D') setStep('E');
+    else if (step === 'E') setStep('F');
+    else if (step === 'F') setStep('G');
+    else if (step === 'G') setStep('H');
+  };
+
   // Paso anterior, se ponen los pasos de abajo hacia arriba
   const handlePrevStep = () => {
     if (step === 'H') setStep('G');
@@ -73,6 +82,7 @@ const SimpleMultiStepForm = () => {
         <StepB
           handlePrevStep={handlePrevStep}
           handleNextStep={handleNextStep}
+          handleNextStep2={handleNextStep2}
         />
       ) : null}
 
@@ -192,9 +202,7 @@ const StepA = ({ handleNextStep, handleNextStep1 }) => {
   );
 };
 
-const StepB = ({ handleNextStep, handlePrevStep }) => {
-    const { removeConclusion } = useContext(ReportContext)
-  
+const StepB = ({ handleNextStep, handlePrevStep,handleNextStep2 }) => {
   return (
     <div>
       <div className='button-bar'>
@@ -209,8 +217,12 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
           }} className={`print-button`}>
           <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button className={`print-button`}>
-          <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
+        <button onClick={handleNextStep} className={`print-button`}>
+          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+        <button onClick={handleNextStep2} className={`print-button`}>
+          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
         </button>
       </div>
 
@@ -326,10 +338,10 @@ const StepD = ({ handleNextStep, handlePrevStep }) => {
       <h1 className=' text-xl font-bold text-white'>
         DISTRIBUCIÓN
       </h1>
-      <ConclusionButton value='bulbar' title='BULBAR ' displayText='BULBAR'/>
-      <ConclusionButton value='cervical_miembros_superiores' title='CERVICAL ' displayText='CERVICAL/MIEMBROS SUPERIORES'/>
-      <ConclusionButton value='toracico' title='TORÁCICA ' displayText='TORÁCICA'/>
-      <ConclusionButton value='lumbar_miembros_inferiores' title='LUMBAR ' displayText='LUMBAR/MIEMBROS INFERIORES'/>
+      <ConclusionButton value='bulbar' title=' BULBAR ' displayText='BULBAR'/>
+      <ConclusionButton value='cervical_miembros_superiores' title=' CERVICAL ' displayText='CERVICAL/MIEMBROS SUPERIORES'/>
+      <ConclusionButton value='toracico' title='TORÁCICA ' displayText=' TORÁCICA'/>
+      <ConclusionButton value='lumbar_miembros_inferiores' title=' LUMBAR ' displayText='LUMBAR/MIEMBROS INFERIORES'/>
     </div>
   );
 };

@@ -96,8 +96,9 @@ const Reporte = () => {
     function formatConclusions(copyConclusions) {
       const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
       const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
-      const keywords4 = ["INTENSIDAD LEVE.", "INTENSIDAD MODERADA.", "INTENSIDAD SEVERA."]; // Nuevas palabras clave
+      const keywords4 = ["INTENSIDAD LEVE.", "INTENSIDAD MODERADA.", "INTENSIDAD SEVERA."];
       const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL"];
+      const specificKeywords = ["C5", "C6", "C7", "C8", "T1"]; // Nueva condición específica
       let words = copyConclusions.split(' ');
   
       // Verificar la palabra clave específica en keywords2 (TROCO)
@@ -143,6 +144,12 @@ const Reporte = () => {
           }
       }
   
+      // Nueva condición para "PREGANGLIONAR PARCIAL"
+      let firstKeywordIndex = words.findIndex(word => specificKeywords.includes(word));
+      if (firstKeywordIndex !== -1) {
+          words.splice(firstKeywordIndex, 0, "PREGANGLIONAR PARCIAL A NIVEL DE");
+      }
+  
       // Verificar y formatear las palabras clave generales (C5, C6, T1, etc.)
       let keywordPositions = [];
       for (let i = 0; i < words.length; i++) {
@@ -177,6 +184,7 @@ const Reporte = () => {
   
       return formattedConclusions;
   }
+  
   
   const formattedConclusions = formatConclusions(copyConclusions);
 

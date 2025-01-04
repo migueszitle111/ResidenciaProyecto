@@ -1,0 +1,247 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btnSr1, .btnSr2, .btnSr3, .btnSr4, .btnSr5, .btnSr6, .btnSr7, .btnSr8, .btnSr9, .btnSr10,
+    .btnSr11, .btnSr12, .btnSr13, .btnSr14, .btnSr15, .btnSr16, .btnSr17, .btnSr18, .btnSr19, .btnSr20,
+    .btnSr21, .btnSr22, .btnSr23, .btnSr24, .btnSr25, .btnSr26, .btnSr27, .btnSr28, .btnSr29, .btnSr30,
+    .btnSr31, .btnSr32, .btnSr33, .btnSr34, .btnSr35, .btnSr36, .btnSr37, .btnSr38, .btnSr39, .btnSr40,
+    .btnSr41, .btnSr42, .btnSr43, .btnSr44, .btnSr45 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btnSr1, .btnSr2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+
+.btnSr1 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-235%, -30%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSr2 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-230%, 40%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSr3 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-220%, 110%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSr4 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(525%, 40%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSr5 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(625%, 25%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSr6 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(654%, 110%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+.btnSr7 {
+    position: absolute;
+    height: 3.4vw;
+    width: 3.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(190%, 5%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSr8 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(165%, 440%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSr9 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(560%, 70%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnSr10 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(655%, -55%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.text-boxSr {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 35vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(126, 126, 126, 0.842);
+    color: white;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+}
+
+

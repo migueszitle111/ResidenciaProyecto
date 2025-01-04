@@ -1,0 +1,262 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btnFm1, .btnFm2, .btnFm3, .btnFm4, .btnFm5, .btnFm6, .btnFm7, .btnFm8, .btnFm9, .btnFm10,
+    .btnFm11, .btnFm12, .btnFm13, .btnFm14, .btnFm15, .btnFm16, .btnFm17, .btnFm18, .btnFm19, .btnFm20,
+    .btnFm21, .btnFm22, .btnFm23, .btnFm24, .btnFm25, .btnFm26, .btnFm27, .btnFm28, .btnFm29, .btnFm30,
+    .btnFm31, .btnFm32, .btnFm33, .btnFm34, .btnFm35, .btnFm36, .btnFm37, .btnFm38, .btnFm39, .btnFm40,
+    .btnFm41, .btnFm42, .btnFm43, .btnFm44, .btnFm45 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btnFm1, .btnFm2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+
+.btnFm1 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(30%, 545%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFm2 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(150%, 545%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFm3 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-65%, 385%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFm4 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(240%, 385%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+.btnFm5 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-1160%, -195%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFm6 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-970%, -180%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFm7 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-490%, -350%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFm8 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(395%, -50%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFm9 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(685%, -20%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFm10 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(370%, 220%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnFm11 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(670%, 245%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.text-boxFm {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 35vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(233, 14, 69, 0.842);
+    color: #242424;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+}
+
+

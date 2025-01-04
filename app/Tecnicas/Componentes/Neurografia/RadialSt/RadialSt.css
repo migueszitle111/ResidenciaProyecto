@@ -72,15 +72,15 @@
 }
 
 
-/* Botón 1 
+
 .btnRSt1 {
     position: absolute;
-    height: 3vw; 
-    width: 3vw;
+    height: 2.5vw; 
+    width: 2.5vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
-    background-color: transparent;
+    transform: translate(-450%, 75%);
+    background-color: blue;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,42 +88,115 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnRSt1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; 
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
-
 .btnRSt2 {
     position: absolute;
-    height: 3.5vw; 
-    width: 3.5vw;
+    height: 3vw; 
+    width: 3vw;
     top: 30%;
-    left: 55%;
-    transform: translate(-20%, 222%);
-    background-color: transparent;
+    left: 45%;
+    transform: translate(-125%, -15%);
+    background-color: yellowgreen;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    color: transparent;
-    font-size: 1.9vw;
-    font-family: 'Times New Roman';
+    color: white;
+    font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnRSt2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; 
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
+.btnRSt3 {
+    position: absolute;
+    height: 2.5vw; 
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(55%, 205%);
+    background-color: yellowgreen;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnRSt4 {
+    position: absolute;
+    height: 2.7vw; 
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(360%, 235%);
+    background-color: yellowgreen;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
 }
 
-*/
 
-.text-box {
+.btnRSt5 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-100%, 440%);
+    background-color: hotpink;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnRSt6 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(20%, 390%);
+    background-color: hotpink;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnRSt7 {
+    position: absolute;
+    height: 3.4vw;
+    width: 3.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(55%, -145%);
+    background-color: hotpink;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnRSt8 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(585%, -180%);
+    background-color: hotpink;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.text-boxRst {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 35vw;
@@ -131,7 +204,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(233, 14, 69, 0.842);
+    background-color: rgba(145, 14, 233, 0.842);
     color: #242424;
     border-radius: 10px;
     padding: 2%;

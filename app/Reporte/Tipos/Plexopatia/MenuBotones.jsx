@@ -89,13 +89,13 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
 
         <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='troncosD' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='troncosD' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='divid' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='CordonD' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+            <ConclusionButton value='CordonD' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDONES' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
       
@@ -119,7 +119,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     else if (myVariable1.includes("b")) {
       return (<div>
         <div onClick={ handleNextStep1 }>
-          <ConclusionButton value='pre_total' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
+          <ConclusionButton value='pre_totald' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
 
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'}>
@@ -136,13 +136,13 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
 
         <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='troncosI' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='troncosI' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='diviI' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='CordonI' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+            <ConclusionButton value='CordonI' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDONES' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
       
@@ -166,7 +166,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     else if (myVariable1.includes("c")) {
       return (<div>
         <div onClick={ handleNextStep1 }>
-          <ConclusionButton value='pre_total' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
+          <ConclusionButton value='pre_totali' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
 
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'}>
@@ -183,13 +183,13 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
 
         <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='troncosB' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='troncosB' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='divi' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='CordonB' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
+            <ConclusionButton value='CordonB' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDONES' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
       
@@ -1051,36 +1051,36 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
       </h1>
         <Accordion title='AXONAL COMPLETA'>
           <div onClick={handleNextStep}>
-          <ConclusionButton value='con_denervación_difusa' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
-          <ConclusionButton value='con_denervación_abundante' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
-          <ConclusionButton value='con_denervación_progresiva' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
-          <ConclusionButton value='con_denervación discreta' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
-          <ConclusionButton value='sin_denervación' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'AUSENTE'}/>
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'AUSENTE'}/>
           </div>
         </Accordion>
 
         <Accordion title='AXONAL INCOMPLETA'>
           <div onClick={handleNextStep}>
-          <ConclusionButton value='con_denervación_difusa' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
-          <ConclusionButton value='con_denervación_abundante' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
-          <ConclusionButton value='con_denervación_progresiva' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
-          <ConclusionButton value='con_denervación discreta' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
-          <ConclusionButton value='sin_denervación' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
         <Accordion title='DESMIELINIZANTE'>
           <div onClick={handleNextStep4}>
-          <ConclusionButton value='por_retardo_en_la_conduccion' title=' TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
-          <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=' TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
-          <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=' TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_retardo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
           </div>
         </Accordion>
 
         <Accordion title='MIXTA'>
           <div onClick={handleNextStep}>
-          <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=' TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
-          <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=' TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
+          <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
+          <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
           </div>
         </Accordion>
     </div>
@@ -1104,36 +1104,36 @@ const StepE2 = ({ handleNextStep1, handlePrevStep1, handleNextStep4 }) => {
       </h1>
       <Accordion title='AXONAL COMPLETA'>
           <div onClick={handleNextStep1}>
-          <ConclusionButton value='con_denervación_difusa' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
-          <ConclusionButton value='con_denervación_abundante' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
-          <ConclusionButton value='con_denervación_progresiva' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
-          <ConclusionButton value='con_denervación discreta' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
-          <ConclusionButton value='sin_denervación' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
         <Accordion title='AXONAL INCOMPLETA'>
           <div onClick={handleNextStep1}>
-          <ConclusionButton value='con_denervación_difusa' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
-          <ConclusionButton value='con_denervación_abundante' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
-          <ConclusionButton value='con_denervación_progresiva' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
-          <ConclusionButton value='con_denervación discreta' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
-          <ConclusionButton value='sin_denervación' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
         <Accordion title='DESMIELINIZANTE'>
           <div onClick={handleNextStep4}>
-          <ConclusionButton value='por_retardo_en_la_conduccion' title=' TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
-          <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=' TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
-          <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=' TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_retardo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
           </div>
         </Accordion>
 
         <Accordion title='MIXTA'>
           <div onClick={handleNextStep1}>
-          <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=' TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
-          <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=' TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
+          <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
+          <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
           </div>
         </Accordion>
     </div>
@@ -1157,36 +1157,36 @@ const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
       </h1>
       <Accordion title='AXONAL COMPLETA'>
           <div onClick={handleNextStep2}>
-          <ConclusionButton value='con_denervación_difusa' title=', TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
-          <ConclusionButton value='con_denervación_abundante' title=', TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
-          <ConclusionButton value='con_denervación_progresiva' title=', TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
-          <ConclusionButton value='con_denervación discreta' title=', TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
-          <ConclusionButton value='sin_denervación' title=', TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
+          <ConclusionButton value='con_denervación_difusa' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=', DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
         <Accordion title='AXONAL INCOMPLETA'>
           <div onClick={handleNextStep2}>
-          <ConclusionButton value='con_denervación_difusa' title=', TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
-          <ConclusionButton value='con_denervación_abundante' title=', TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
-          <ConclusionButton value='con_denervación_progresiva' title=', TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
-          <ConclusionButton value='con_denervación discreta' title=', TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
-          <ConclusionButton value='sin_denervación' title=', TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
+          <ConclusionButton value='con_denervación_difusa' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=', DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
         <Accordion title='DESMIELINIZANTE'>
           <div onClick={handleNextStep4}>
-          <ConclusionButton value='por_retardo_en_la_conduccion' title=', TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
-          <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=', TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
-          <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=', TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_retardo_en_la_conduccion' title=', DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=', DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=', DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
           </div>
         </Accordion>
 
         <Accordion title='MIXTA'>
           <div onClick={handleNextStep2}>
-          <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=', TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
-          <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=', TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
+          <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=', DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
+          <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=', DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
           </div>
         </Accordion>
     </div>

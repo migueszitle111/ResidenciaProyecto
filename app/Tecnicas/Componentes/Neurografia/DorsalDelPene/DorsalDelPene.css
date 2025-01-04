@@ -43,11 +43,11 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnRMt1, .btnRMt2, .btnRMt3, .btnRMt4, .btnRMt5, .btnRMt6, .btnRMt7, .btnRMt8, .btnRMt9, .btnRMt10,
-    .btnRMt11, .btnRMt12, .btnRMt13, .btnRMt14, .btnRMt15, .btnRMt16, .btnRMt17, .btnRMt18, .btnRMt19, .btnRMt20,
-    .btnRMt21, .btnRMt22, .btnRMt23, .btnRMt24, .btnRMt25, .btnRMt26, .btnRMt27, .btnRMt28, .btnRMt29, .btnRMt30,
-    .btnRMt31, .btnRMt32, .btnRMt33, .btnRMt34, .btnRMt35, .btnRMt36, .btnRMt37, .btnRMt38, .btnRMt39, .btnRMt40,
-    .btnRMt41, .btnRMt42, .btnRMt43, .btnRMt44, .btnRMt45 {
+    .btnDs1, .btnDs2, .btnDs3, .btnDs4, .btnDs5, .btnDs6, .btnDs7, .btnDs8, .btnDs9, .btnDs10,
+    .btnDs11, .btnDs12, .btnDs13, .btnDs14, .btnDs15, .btnDs16, .btnDs17, .btnDs18, .btnDs19, .btnDs20,
+    .btnDs21, .btnDs22, .btnDs23, .btnDs24, .btnDs25, .btnDs26, .btnDs27, .btnDs28, .btnDs29, .btnDs30,
+    .btnDs31, .btnDs32, .btnDs33, .btnDs34, .btnDs35, .btnDs36, .btnDs37, .btnDs38, .btnDs39, .btnDs40,
+    .btnDs41, .btnDs42, .btnDs43, .btnDs44, .btnDs45 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -60,7 +60,7 @@
         max-width: 60vw;
     }
 
-    .btnRMt1, .btnRMt2 {
+    .btnDs1, .btnDs2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -72,15 +72,14 @@
 }
 
 
-/* Botón 1 
-.btnRMt1 {
+.btnDs1 {
     position: absolute;
-    height: 3vw; 
+    height: 3vw;
     width: 3vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
-    background-color: transparent;
+    transform: translate(-450%, -350%);
+    background-color: slategray;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,42 +87,68 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnRMt1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; 
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
-
-.btnRMt2 {
+.btnDs2 {
     position: absolute;
-    height: 3.5vw; 
-    width: 3.5vw;
+    height: 2.5vw;
+    width: 2.5vw;
     top: 30%;
-    left: 55%;
-    transform: translate(-20%, 222%);
-    background-color: transparent;
+    left: 45%;
+    transform: translate(150%, -500%);
+    background-color: slategray;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    color: transparent;
-    font-size: 1.9vw;
-    font-family: 'Times New Roman';
+    color: white;
+    font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnRMt2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; 
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
+.btnDs3 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(250%, -420%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnDs4 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(595%, 20%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnDs5 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(740%, 200%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
 }
 
-*/
-
-.text-box {
+.text-boxDs {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 35vw;

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
-import "./style.css"
+import "../Pudendo/Pudendo.css"
 
 
 const Pudendo = () => {
@@ -48,11 +48,13 @@ const Pudendo = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnPd1" onClick={() => handleButtonClick('Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', {  top: '12%', left: '32%' })}>A</button>}
-                {currentImageIndex === 0 && <button className="btnPd2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}>T</button>}
+            {currentImageIndex === 0 && <button className="btnPd1" onClick={() => handleButtonClick('1', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPd2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPd3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
+            
             </div>
             {textBoxVisible && (
-                <div className="text-box" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxPd" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}

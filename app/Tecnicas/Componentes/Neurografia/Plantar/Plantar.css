@@ -1,0 +1,325 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btnPt1, .btnPt2, .btnPt3, .btnPt4, .btnPt5, .btnPt6, .btnPt7, .btnPt8, .btnPt9, .btnPt10,
+    .btnPt11, .btnPt12, .btnPt13, .btnPt14, .btnPt15, .btnPt16, .btnPt17, .btnPt18, .btnPt19, .btnPt20,
+    .btnPt21, .btnPt22, .btnPt23, .btnPt24, .btnPt25, .btnPt26, .btnPt27, .btnPt28, .btnPt29, .btnPt30,
+    .btnPt31, .btnPt32, .btnPt33, .btnPt34, .btnPt35, .btnPt36, .btnPt37, .btnPt38, .btnPt39, .btnPt40,
+    .btnPt41, .btnPt42, .btnPt43, .btnPt44, .btnPt45 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btnPt1, .btnPt2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+
+.btnPt1 {
+    position: absolute;
+    height: 2.1vw;
+    width: 2.1vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-510%, 605%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt2 {
+    position: absolute;
+    height: 2.1vw;
+    width: 2.1vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-435%, 535%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt3 {
+    position: absolute;
+    height: 3.2vw;
+    width: 3.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(140%, -125%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt4 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(410%, -220%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt5 {
+    position: absolute;
+    height: 2.1vw;
+    width: 2.1vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(130%, 800%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt6 {
+    position: absolute;
+    height: 2.1vw;
+    width: 2.1vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(200%, 730%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+.btnPt7 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-490%, 95%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt8 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-380%, 95%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt9 {
+    position: absolute;
+    height: 4.2vw;
+    width: 4.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-220%, 240%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt10 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(460%, 10%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt11 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(500%, 200%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+.btnPt12 {
+    position: absolute;
+    height: 4.2vw;
+    width: 4.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-20%, 115%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt13 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(425%, 385%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt14 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(510%, 435%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPt15 {
+    position: absolute;
+    height: 3vw;
+    width: 3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(615%, 0%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.text-boxPt {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 35vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(233, 14, 69, 0.842);
+    color: #242424;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+}
+
+

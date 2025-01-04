@@ -43,11 +43,11 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnUSt1, .btnUSt2, .btnUSt3, .btnUSt4, .btnUSt5, .btnUSt6, .btnUSt7, .btnUSt8, .btnUSt9, .btnUSt10,
-    .btnUSt11, .btnUSt12, .btnUSt13, .btnUSt14, .btnUSt15, .btnUSt16, .btnUSt17, .btnUSt18, .btnUSt19, .btnUSt20,
-    .btnUSt21, .btnUSt22, .btnUSt23, .btnUSt24, .btnUSt25, .btnUSt26, .btnUSt27, .btnUSt28, .btnUSt29, .btnUSt30,
-    .btnUSt31, .btnUSt32, .btnUSt33, .btnUSt34, .btnUSt35, .btnUSt36, .btnUSt37, .btnUSt38, .btnUSt39, .btnUSt40,
-    .btnUSt41, .btnUSt42, .btnUSt43, .btnUSt44, .btnUSt45 {
+    .btnTg1, .btnTg2, .btnTg3, .btnTg4, .btnTg5, .btnTg6, .btnTg7, .btnTg8, .btnTg9, .btnTg10,
+    .btnTg11, .btnTg12, .btnTg13, .btnTg14, .btnTg15, .btnTg16, .btnTg17, .btnTg18, .btnTg19, .btnTg20,
+    .btnTg21, .btnTg22, .btnTg23, .btnTg24, .btnTg25, .btnTg26, .btnTg27, .btnTg28, .btnTg29, .btnTg30,
+    .btnTg31, .btnTg32, .btnTg33, .btnTg34, .btnTg35, .btnTg36, .btnTg37, .btnTg38, .btnTg39, .btnTg40,
+    .btnTg41, .btnTg42, .btnTg43, .btnTg44, .btnTg45 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -60,7 +60,7 @@
         max-width: 60vw;
     }
 
-    .btnUSt1, .btnUSt2 {
+    .btnTg1, .btnTg2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -72,15 +72,14 @@
 }
 
 
-/* Botón 1 */
-.btnUSt1 {
+.btnTg1 {
     position: absolute;
-    height: 3vw; /* Tamaño reducido */
-    width: 3vw;
+    height: 2vw;
+    width: 2vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
-    background-color: skyblue;
+    transform: translate(195%, -435%);
+    background-color: slategray;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,43 +87,53 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnUSt1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; /* Tamaño reducido */
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
-
-/* Botón 2 */
-.btnUSt2 {
+.btnTg2 {
     position: absolute;
-    height: 3.5vw; /* Tamaño reducido */
-    width: 3.5vw;
+    height: 2vw;
+    width: 2vw;
     top: 30%;
-    left: 55%;
-    transform: translate(-20%, 222%);
-    background-color: transparent;
+    left: 45%;
+    transform: translate(340%, -250%);
+    background-color: slategray;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    color: transparent;
-    font-size: 1.9vw;
-    font-family: 'Times New Roman';
+    color: white;
+    font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnUSt2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; /* Tamaño reducido */
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
+.btnTg3 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(480%, -225%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnTg4 {
+    position: absolute;
+    height: 2.7vw;
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(350%, -335%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
 }
 
-
-
-.text-boxUSt {
+.text-boxTg {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 35vw;
@@ -132,7 +141,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(243, 18, 213, 0.842);
+    background-color: rgba(95, 95, 95, 0.842);
     color: #242424;
     border-radius: 10px;
     padding: 2%;

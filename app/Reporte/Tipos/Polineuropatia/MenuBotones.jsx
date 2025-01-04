@@ -445,11 +445,7 @@ const StepF = ({ handleNextStep, handlePrevStep, handleNextStep2 }) => {
         <ConclusionButton value='sensitiva' title=' DE FIBRAS SENSITIVAS' displayText={'SENSITIVA'}/>
       </div>
 
-<<<<<<< HEAD
-      <ConclusionButton value='mixta' title=' FIBRAS' displayText={'MIXTA'} />
-=======
       <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS,' displayText={'MIXTA'} />
->>>>>>> 127ab92c99f17af215cf3ba8f097379edb4bbdbd
       <div onClick={handleNextStep}>
             <ConclusionButton value = 'predominio_sentitivo' title = ' DE FIBRAS MIXTAS PREDOMINIO SENSITIVO,' displayText={'• PREDOMINIO SENSITIVO'}/>
             <ConclusionButton value = 'predominio_motor' title = ' DE FIBRAS MIXTAS PREDOMINIO MOTOR,'displayText={'• PREDOMINIO MOTOR'} />

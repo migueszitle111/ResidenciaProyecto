@@ -43,11 +43,11 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnPd1, .btnPd2, .btnPd3, .btnPd4, .btnPd5, .btnPd6, .btnPd7, .btnPd8, .btnPd9, .btnPd10,
-    .btnPd11, .btnPd12, .btnPd13, .btnPd14, .btnPd15, .btnPd16, .btnPd17, .btnPd18, .btnPd19, .btnPd20,
-    .btnPd21, .btnPd22, .btnPd23, .btnPd24, .btnPd25, .btnPd26, .btnPd27, .btnPd28, .btnPd29, .btnPd30,
-    .btnPd31, .btnPd32, .btnPd33, .btnPd34, .btnPd35, .btnPd36, .btnPd37, .btnPd38, .btnPd39, .btnPd40,
-    .btnPd41, .btnPd42, .btnPd43, .btnPd44, .btnPd45 {
+    .btnOc1, .btnOc2, .btnOc3, .btnOc4, .btnOc5, .btnOc6, .btnOc7, .btnOc8, .btnOc9, .btnOc10,
+    .btnOc11, .btnOc12, .btnOc13, .btnOc14, .btnOc15, .btnOc16, .btnOc17, .btnOc18, .btnOc19, .btnOc20,
+    .btnOc21, .btnOc22, .btnOc23, .btnOc24, .btnOc25, .btnOc26, .btnOc27, .btnOc28, .btnOc29, .btnOc30,
+    .btnOc31, .btnOc32, .btnOc33, .btnOc34, .btnOc35, .btnOc36, .btnOc37, .btnOc38, .btnOc39, .btnOc40,
+    .btnOc41, .btnOc42, .btnOc43, .btnOc44, .btnOc45 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -60,7 +60,7 @@
         max-width: 60vw;
     }
 
-    .btnPd1, .btnPd2 {
+    .btnOc1, .btnOc2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -72,15 +72,14 @@
 }
 
 
-/* Botón 1 
-.btnPd1 {
+.btnOc1 {
     position: absolute;
-    height: 3vw; 
-    width: 3vw;
+    height: 2vw;
+    width: 2vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
-    background-color: transparent;
+    transform: translate(195%, 15%);
+    background-color: slategray;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,42 +87,53 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnPd1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; 
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
-
-.btnPd2 {
+.btnOc2 {
     position: absolute;
-    height: 3.5vw; 
-    width: 3.5vw;
+    height: 2vw;
+    width: 2vw;
     top: 30%;
-    left: 55%;
-    transform: translate(-20%, 222%);
-    background-color: transparent;
+    left: 45%;
+    transform: translate(205%, 130%);
+    background-color: slategray;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    color: transparent;
-    font-size: 1.9vw;
-    font-family: 'Times New Roman';
+    color: white;
+    font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnPd2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; 
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
+.btnOc3 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(180%, 380%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnOc4 {
+    position: absolute;
+    height: 2.7vw;
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(70%, 610%);
+    background-color: slategray;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
 }
 
-*/
-
-.text-box {
+.text-boxOc {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 35vw;
@@ -131,7 +141,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(233, 14, 69, 0.842);
+    background-color: rgba(90, 90, 90, 0.842);
     color: #242424;
     border-radius: 10px;
     padding: 2%;

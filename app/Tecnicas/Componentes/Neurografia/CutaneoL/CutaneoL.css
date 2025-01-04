@@ -43,11 +43,11 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnCM1, .btnCM2, .btnCM3, .btnCM4, .btnCM5, .btnCM6, .btnCM7, .btnCM8, .btnCM9, .btnCM10,
-    .btnCM11, .btnCM12, .btnCM13, .btnCM14, .btnCM15, .btnCM16, .btnCM17, .btnCM18, .btnCM19, .btnCM20,
-    .btnCM21, .btnCM22, .btnCM23, .btnCM24, .btnCM25, .btnCM26, .btnCM27, .btnCM28, .btnCM29, .btnCM30,
-    .btnCM31, .btnCM32, .btnCM33, .btnCM34, .btnCM35, .btnCM36, .btnCM37, .btnCM38, .btnCM39, .btnCM40,
-    .btnCM41, .btnCM42, .btnCM43, .btnCM44, .btnCM45 {
+    .btnCl1, .btnCl2, .btnCl3, .btnCl4, .btnCl5, .btnCl6, .btnCl7, .btnCl8, .btnCl9, .btnCl10,
+    .btnCl11, .btnCl12, .btnCl13, .btnCl14, .btnCl15, .btnCl16, .btnCl17, .btnCl18, .btnCl19, .btnCl20,
+    .btnCl21, .btnCl22, .btnCl23, .btnCl24, .btnCl25, .btnCl26, .btnCl27, .btnCl28, .btnCl29, .btnCl30,
+    .btnCl31, .btnCl32, .btnCl33, .btnCl34, .btnCl35, .btnCl36, .btnCl37, .btnCl38, .btnCl39, .btnCl40,
+    .btnCl41, .btnCl42, .btnCl43, .btnCl44, .btnCl45 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -60,7 +60,7 @@
         max-width: 60vw;
     }
 
-    .btnCM1, .btnCM2 {
+    .btnCl1, .btnCl2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -72,15 +72,15 @@
 }
 
 
-/* Botón 1 
-.btnCM1 {
+
+.btnCl1 {
     position: absolute;
-    height: 3vw; 
-    width: 3vw;
+    height: 2.5vw;
+    width: 2.5vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
-    background-color: transparent;
+    transform: translate(-830%, 60%);
+    background-color: saddlebrown;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -88,42 +88,55 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnCM1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; 
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
 
-.btnCM2 {
+.btnCl2 {
     position: absolute;
-    height: 3.5vw; 
-    width: 3.5vw;
+    height: 2.8vw;
+    width: 2.8vw;
     top: 30%;
-    left: 55%;
-    transform: translate(-20%, 222%);
-    background-color: transparent;
+    left: 45%;
+    transform: translate(-435%, 225%);
+    background-color: saddlebrown;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    color: transparent;
-    font-size: 1.9vw;
-    font-family: 'Times New Roman';
+    color: white;
+    font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnCM2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; 
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
+
+.btnCl3 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-270%, 100%);
+    background-color: saddlebrown;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
 }
 
-*/
-
-.text-box {
+.btnCl4 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-165%, 100%);
+    background-color: rgb(224, 228, 31);
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.text-boxCtl {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 35vw;
@@ -131,7 +144,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(233, 14, 69, 0.842);
+    background-color: rgba(78, 143, 155, 0.842);
     color: #242424;
     border-radius: 10px;
     padding: 2%;

@@ -4,7 +4,8 @@ import { useSession } from "next-auth/react";
 import { Accordion, AccordionContainer } from '../../../components/ReportTemplate/Accordion'   
 import { ReportContext } from '@/src/context'
 import { ConclusionButton, ConclusionBox } from '../../../components/ReportTemplate/Conclusions'
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas'
+import { ConclusionCanvasV } from '../../../components/ReportTemplate/Conclusions/CanvasViasVisual'
+
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import './Style.css';
 import SimpleMultiStepForm from './MenuBotones';
@@ -156,7 +157,7 @@ const Reporte = () => {
 
         {/* Despliego de las imagenes dentro del array */}
         <div className='conclusion-container'>
-        <ConclusionCanvas 
+        <ConclusionCanvasV 
         
           img={{
             src: '/assets/MioImg/MO_BASE_BLANCO_MOTORES.png',
@@ -168,66 +169,191 @@ const Reporte = () => {
           
           rules={[
             {
-              expectedValue: 'distribucion_proximal', 
+              expectedValue: 'indenme', 
               image: {
-                src: 'MioImg/MI_Proximal.png',
+                src: 'AuditivaIMG/imagen_combinadaAuditiva.png',
                 alt: 'Modelo',
               }
             },
             {
-              expectedValue: 'distribucion_distal',
+              expectedValue: 'alterada', 
               image: {
-                src: 'MioImg/MI_Distal.png',
+                src: 'AuditivaIMG/imagen_combinadaAuditiva.png',
                 alt: 'Modelo',
               }
             },
+            // Vía coliculo_inferior
+
             {
-              expectedValue: 'distribucion_generalizada',
-              image: {
-                src: 'MioImg/MI_Facial.png',
-                // AGREGAR 2 IMAGENES MAS AQUI
-                alt: 'Modelo',
-              }
+              expectedValue: 'derechocoliculo_inferior',  
+                image: 
+                  {
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_5-D.png',
+                    alt: 'Modelo',
+                  },
             },
+
             {
-              expectedValue: 'anillo_oseo',
-              image: {
-                src: 'MioImg/MI_Distrofia de Anillo Oseo.png',
-                alt: 'Modelo',
-              }
+              expectedValue: 'izquierdocoliculo_inferior',  
+                image: 
+                  {
+                    src: 'AuditivaImg/Vía Afectada/AU_5.png',
+                    alt: 'Modelo',
+                  },
             },
+
             {
-              expectedValue: 'duchenne_becker',
-              image: {
-                src: 'MioImg/MI_Distrofia de Duchenne e Becker.png',
+              expectedValue: 'bilateralcoliculo_inferior', 
+              image: [
+              {
+                src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_5-D.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'AuditivaImg/Vía Afectada/AU_5.png',
                 alt: 'Modelo',
               }
+            ],
             },
+            //lemnisco_lateral
             {
-              expectedValue: 'emery_dreifuss',
-              image: {
-                src: 'MioImg/MI_Distrofia de Emery-Dreifuss.png',
-                alt: 'Modelo',
-              }
+              expectedValue: 'derecholemnisco_lateral',  
+                image: 
+                  {
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_4-D.png',
+                    alt: 'Modelo',
+                  },
             },
+
             {
-              expectedValue: 'facioescapulohumeral',
-              image: {
-                src: 'MioImg/MI_Distrofia Facioescapulohumeral.png',
-                alt: 'Modelo',
-              }
+              expectedValue: 'izquierdolemnisco_lateral',  
+                image: 
+                  {
+                    src: 'AuditivaImg/Vía Afectada/AU_4.png',
+                    alt: 'Modelo',
+                  },
             },
+
             {
-              expectedValue: 'oculofaringea',
-              image: {
-                src: 'MioImg/MI_Distrofia Oculofaringea.png',
+              expectedValue: 'bilaterallemnisco_lateral', 
+              image: [
+              {
+                src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_4-D.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'AuditivaImg/Vía Afectada/AU_4.png',
                 alt: 'Modelo',
               }
+            ],
             },
+            //completo_olivar_trapezoide
+            {
+              expectedValue: 'derechocompleto_olivar_trapezoide',  
+                image: 
+                  {
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_3-D.png',
+                    alt: 'Modelo',
+                  },
+            },
+
+            {
+              expectedValue: 'izquierdocompleto_olivar_trapezoide',  
+                image: 
+                  {
+                    src: 'AuditivaImg/Vía Afectada/AU_3.png',
+                    alt: 'Modelo',
+                  },
+            },
+
+            {
+              expectedValue: 'bilateralcompleto_olivar_trapezoide', 
+              image: [
+              {
+                src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_3-D.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'AuditivaImg/Vía Afectada/AU_3.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
+            //nucleo_coclear
+            {
+              expectedValue: 'derechonucleo_coclear',  
+                image: 
+                  {
+                    src: 'AuditivaImg/Vía Afectada/AU_2.png',
+                    alt: 'Modelo',
+                  },
+            },
+
+            {
+              expectedValue: 'izquierdonucleo_coclear',  
+                image: 
+                  {
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_2-D.png',
+                  
+                    alt: 'Modelo',
+                  },
+            },
+
+            {
+              expectedValue: 'bilateralnucleo_coclear', 
+              image: [
+              {
+                src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_2-D.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'AuditivaImg/Vía Afectada/AU_2.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
+            //nervio_auditivo
+
+            {
+              expectedValue: 'derechonervio_auditivo',  
+                image: 
+                  {
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_1-D.png',
+                    alt: 'Modelo',
+                  },
+            },
+
+            {
+              expectedValue: 'izquierdonervio_auditivo',  
+                image: 
+                  {
+                    src: 'AuditivaImg/Vía Afectada/AU_1.png',
+                    alt: 'Modelo',
+                  },
+            },
+
+            {
+              expectedValue: 'bilateralnervio_auditivo', 
+              image: [
+              {
+                src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_1-D.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'AuditivaImg/Vía Afectada/AU_1.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+          
+
+           
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
         value={copyConclusions}
-        defaultValue="NEURONOPATIA"
+        defaultValue=""
         onChange={handleTextareaChange}
       /></div>
         </div>

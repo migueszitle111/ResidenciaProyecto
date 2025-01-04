@@ -1,47 +1,50 @@
-import { useDeprecatedAnimatedState } from 'framer-motion';
-import { createContext, useState } from 'react' // Hook necesario para crear el contexto
+import { createContext, useState } from 'react'
 
-// Crea un contexto para el reporte con un valor inicial vacío
+// Valor inicial del contexto
 export const ReportContext = createContext({
-  conclusions: [], // Valor inicial
-  updateConclusions: () => {}, // Función para actualizar el valor
-  setInitialConclusions: () => {} // Función para establecer el valor inicial desde otro archivo
+  conclusions: [],
+  updateConclusions: () => {},
+  setInitialConclusions: () => {},
+  removeConclusion: () => {}
 })
 
-// Crea un componente que provee el contexto a sus hijos
-export function ReportContextProvider ({ children }) {
-  const [conclusions, setConclusions] = useState([{ title: ''}]) // Estado que se va a compartir
+export function ReportContextProvider({ children }) {
+  const [conclusions, setConclusions] = useState([{ title: '' }])
 
-  // Función para actualizar el valor del contexto
-  function updateConclusions (conclusion) {
+  // 1) Función para agregar/quitar conclusiones a modo "toggle"
+  function updateConclusions(conclusion) {
     setConclusions((prevConclusions) => {
-      // Si el valor ya existe en el arreglo, lo remueve
-      if (prevConclusions.find(cl => cl.value === conclusion.value)) {
-        return prevConclusions.filter(cl => cl.value !== conclusion.value);
+      // Si 'value' ya existe, lo removemos
+      if (prevConclusions.find((cl) => cl.value === conclusion.value)) {
+        return prevConclusions.filter((cl) => cl.value !== conclusion.value)
       } else {
-        // Si no existe, lo agrega
+        // Si no existe, lo agregamos
         return [...prevConclusions, conclusion]
       }
     })
+  } // <-- Cierra correctamente la llave AQUÍ
 
-  // Función para establecer el valor inicial de conclusions desde fuera del archivo
+  // 2) (Opcional) Función para setear conclusiones desde fuera
   function setInitialConclusions(initialValue) {
-    setConclusions(initialValue);
+    setConclusions(initialValue)
   }
 
+  // 3) (Opcional) Función para eliminar un 'value' sin toggle
+  function removeConclusion(value) {
+    setConclusions((prev) => prev.filter((cl) => cl.value !== value))
+  }
+
+  // 4) Creamos el objeto con todo lo que exponemos
   const value = {
     conclusions,
     updateConclusions,
-    setInitialConclusions // Incluimos la función en el contexto
-  };
-
+    setInitialConclusions,
+    removeConclusion // <- solo si lo vas a usar
   }
 
-  // Crea un objeto con el valor y la función para actualizarlo
-  const value = { conclusions, updateConclusions }
   return (
     <ReportContext.Provider value={value}>
-      {children} {/* Renderiza los hijos */}
+      {children}
     </ReportContext.Provider>
   )
 }

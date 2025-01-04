@@ -75,9 +75,9 @@ const StepA = ({ handleNextStep ,setStep}) => (
     <div onClick={handleNextStep}> 
     </div>
     <div onClick={() => setStep('E2')}>
-      <ConclusionButton value="indenme" title="VÍA AUDITIVA INDEMNE CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
+      <ConclusionButton value="indenme" title="VÍA AUDITIVA CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
     <div onClick={() => setStep('B')}>
-      <ConclusionButton value="alterada" title="VÍA AUDITIVA ALTERADA CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
+      <ConclusionButton value="alterada" title="VÍA AUDITIVA CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
     </div>
   </div>
 );
@@ -240,31 +240,31 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
-          setStep('F2');
+          setStep('J');
         }}>
       <ConclusionButton
         value="izquierdo"
-        title="PARA LADO IZQUIERDO "
+        title="PARA LADO IZQUIERDO, A TRAVES DEL TALLO CEREBERAL."
         displayText="IZQUIERDO"
        
       />
     </div>
     <div  onClick={() => {
-          setStep('F2');
+          setStep('J');
         }}>
       <ConclusionButton
         value="derecho"
-        title="PARA LADO DERECHO "
+        title="PARA LADO DERECHO, A TRAVES DEL TALLO CEREBERAL. "
         displayText="DERECHO"
        
       />
     </div>
     <div onClick={() => {
-          setStep('F2');
+          setStep('J');
         }}>
       <ConclusionButton
         value="bilateral"
-        title="BILATERAL,"
+        title="BILATERAL, A TRAVES DEL TALLO CEREBERAL."
         displayText="BILATERAL "
         
       />
@@ -289,7 +289,7 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
     <div onClick={() => setStep('G')}>
       <ConclusionButton value='rostral' title=' A TRAVÉS DE REGION ROSTRAL (III-V) DEL TALLO CEREBRAL ' displayText='ROSTRAL' />
       <ConclusionButton value='caudal' title=' A TRAVÉS DE REGION CAUDAL (I-III) DEL TALLO CEREBERAL' displayText='CAUDAL' />
-      <ConclusionButton value='tallo_cerebral' title=' A TRAVES DE TODO EL TRAYECTO DEL TALLO CEREBERAL (I-V)' displayText='TALLO CEREBRAL' />
+      <ConclusionButton value='tallo_cerebral' title=' A TRAVES DEL TALLO CEREBERAL (I-V)' displayText='TALLO CEREBRAL' />
     </div>
 
 </div>
@@ -331,11 +331,12 @@ const StepG = ({ setStep, selectedImages, handleUndo, handleImageChange, selecte
     </div>
     <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
     
-    <ConclusionButton value={`${selectedSide}coliculo_inferior`} title=' TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.' displayText='COLÍCULO INFERIOR (V)'/> 
-    <ConclusionButton value={`${selectedSide}lemnisco_lateral`} title=' TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.' displayText='LEMNISCO LATERAL (IV)'/> 
-    <ConclusionButton value={`${selectedSide}completo_olivar_trapezoide`} title=' TOPOGRÁFICAMENTE A NIVEL DE COMPLETO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE..' displayText='COMPLETO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)'/> 
-    <ConclusionButton value={`${selectedSide}nucleo_coclear`} title=' TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR' displayText='NUCLEO COCLEAR (II)'/> 
+    
     <ConclusionButton value={`${selectedSide}nervio_auditivo`} title=' TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO' displayText='NERVIO AUDITIVO (I)'/> 
+    <ConclusionButton value={`${selectedSide}nucleo_coclear`} title=' TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR' displayText='NUCLEO COCLEAR (II)'/> 
+    <ConclusionButton value={`${selectedSide}completo_olivar_trapezoide`} title=' TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE..' displayText='COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)'/> 
+    <ConclusionButton value={`${selectedSide}lemnisco_lateral`} title=' TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.' displayText='LEMNISCO LATERAL (IV)'/> 
+    <ConclusionButton value={`${selectedSide}coliculo_inferior`} title=' TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.' displayText='COLÍCULO INFERIOR (V)'/> 
 
   </div>
 );
@@ -352,11 +353,11 @@ const StepG2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
     </div>
     <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
     <div onClick={() => setStep('J')}>
-    <ConclusionButton value='coliculo_inferior' title=' TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.' displayText='COLÍCULO INFERIOR (V)'/> 
-    <ConclusionButton value='lemnisco_lateral' title=' TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.' displayText='LEMNISCO LATERAL (IV)'/> 
-    <ConclusionButton value='completo_olivar_trapezoide' title=' TOPOGRÁFICAMENTE A NIVEL DE COMPLETO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE..' displayText='COMPLETO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)'/> 
-    <ConclusionButton value='nucleo_coclear' title=' TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR' displayText='NUCLEO COCLEAR (II)'/> 
-    <ConclusionButton value='nervio_auditivo' title=' TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO' displayText='NERVIO AUDITIVO (I)'/> 
+    <ConclusionButton value={'nervio_auditivo'} title=' TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO' displayText='NERVIO AUDITIVO (I)'/> 
+    <ConclusionButton value={'nucleo_coclear'} title=' TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR' displayText='NUCLEO COCLEAR (II)'/> 
+    <ConclusionButton value={'completo_olivar_trapezoide'} title=' TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE..' displayText='COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)'/> 
+    <ConclusionButton value={'lemnisco_lateral'} title=' TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.' displayText='LEMNISCO LATERAL (IV)'/> 
+    <ConclusionButton value={'coliculo_inferior'} title=' TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.' displayText='COLÍCULO INFERIOR (V)'/> 
     </div>
   </div>
 );

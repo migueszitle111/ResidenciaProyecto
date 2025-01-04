@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState,useContext} from 'react';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
+import { ReportContext } from '@/src/context'
 
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';
@@ -148,10 +149,19 @@ const StepA = ({ handleNextStep }) => {
 };
 
 const StepB = ({ handleNextStep, handlePrevStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+      <button  onClick={() => {
+            // 1) Quitamos las conclusiones que StepA pudo haber agregado
+            removeConclusion('tipo_presinaptico')
+            removeConclusion('tipo_postsinaptico')
+            removeConclusion('adquirido')
+            removeConclusion('hereditario')
+            // 2) Regresamos a StepA
+            handlePrevStep()
+          }} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
         <button id='prev' className={`print-button dont-print `}>

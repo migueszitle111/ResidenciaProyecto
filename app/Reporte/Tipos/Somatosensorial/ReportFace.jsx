@@ -67,13 +67,13 @@ const Reporte = () => {
     });
   
     // 1) Unimos "rest" en un solo string
-    const textRest = rest.join('');
+    const textRest = rest.join(' ');
   
     // 2) Si hay dermatomas, construimos la frase única
     let textDermatomes = '';
     if (dermatomes.length > 0) {
       textDermatomes = 'A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS ' 
-        + dermatomes.join(', ');
+        + dermatomes.join('-') + '.';
     }
   
     // 3) Unimos topografía (puede haber una o varias)

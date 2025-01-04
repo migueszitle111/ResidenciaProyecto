@@ -1,5 +1,3 @@
-
-
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 
@@ -12,18 +10,11 @@ export function NerviusButton({ title, value, displayText }) {
 
   // Clase condicional para que el botón seleccionado sea visible y los demás transparentes
   const classnames = 'cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in ' + 
-    (selectedButton === value ? 'bg-[#c44900]' : 'bg-transparent') + ' rounded-[50px]';
+  (conclusions.find(cl => cl.value === value) ? 'bg-[#c44900]' : 'bg-transparent') + ' rounded-[50px]';
 
-  // Función para actualizar las conclusiones y mostrar o esconder el botón seleccionado
-  function handleClick() {
-    if (selectedButton === value) {
-      // Si ya está seleccionado, deseleccionarlo (hacerlo invisible)
-      setSelectedButton(null);
-    } else {
-      // Si no está seleccionado, seleccionarlo (hacerlo visible)
-      setSelectedButton(value);
-    }
-    updateConclusions({ title, value });
+ // Función para actualizar las conclusiones
+ function handleClick() {
+  updateConclusions({ title, value });
   }
 
   return (

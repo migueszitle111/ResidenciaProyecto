@@ -351,11 +351,19 @@ const StepD = ({ handlePrevStep, handleNextStep, setStep }) => (
 
     <div onClick={() => setStep('E')}>
       <ConclusionButton value='AXONAL COMPLETA ' title=' TIPO AXONAL COMPLETA ' displayText={'AXONAL COMPLETA'} /></div>
-    <div onClick={() => setStep('E')}>
-      <ConclusionButton value=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA ' title=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'AXONAL CON DESMIELINIZACIÓN SECUNDARIA'} /></div>
-    <div onClick={() => setStep('E')}>
-      <ConclusionButton value=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' title=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' displayText={'DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA '} /></div>
+    
 
+      
+
+    <Accordion title='DESMIELINIZANTE '>
+      <div onClick={() => setStep('E')}>
+        <ConclusionButton value=' RETARDO EN LA CONDUCCIÓN ' title=' TIPO DESMIELIMIZANTE POR RETARDO EN LA CONDUCCIÓN ' displayText={'POR RETARDO EN LA CONDUCCIÓN '} /></div>
+      <div onClick={() => setStep('E')}>
+        <ConclusionButton value=' BLOQUEO PARCIAL EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' displayText={'POR BLOQUEO PARCIAL EN LA CONDUCCIÓN'} /></div>
+      <div onClick={() => setStep('E')}>
+        <ConclusionButton value=' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' displayText={'POR BLOQUEO COMPLETO EN LA CONDUCCIÓN'} /></div>
+
+    </Accordion>
     <Accordion title='AXONAL INCOMPLETA'>
       <div onClick={() => setStep('E')}>
         <ConclusionButton value='CON DENERVACIÓN DIFUSA (++++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++)' displayText={' DENERVACIÓN DIFUSA (++++) '} /></div>
@@ -369,18 +377,13 @@ const StepD = ({ handlePrevStep, handleNextStep, setStep }) => (
         <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN ACTIVA' displayText={'SIN DENERVACIÓN ACTIVA'} /></div>
 
 
-    </Accordion>
+     </Accordion>
 
-    <Accordion title='DESMIELINIZANTE '>
+    
+    <div onClick={() => setStep('E')}>
+      <ConclusionButton value=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' title=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' displayText={'DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA '} /></div>
       <div onClick={() => setStep('E')}>
-        <ConclusionButton value=' RETARDO EN LA CONDUCCIÓN ' title=' TIPO DESMIELIMIZANTE POR RETARDO EN LA CONDUCCIÓN ' displayText={'POR RETARDO EN LA CONDUCCIÓN '} /></div>
-      <div onClick={() => setStep('E')}>
-        <ConclusionButton value=' BLOQUEO PARCIAL EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' displayText={'POR BLOQUEO PARCIAL EN LA CONDUCCIÓN'} /></div>
-      <div onClick={() => setStep('E')}>
-        <ConclusionButton value=' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' displayText={'POR BLOQUEO COMPLETO EN LA CONDUCCIÓN'} /></div>
-
-    </Accordion>
-
+      <ConclusionButton value=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA ' title=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'  AXONAL CON DESMIELINIZACIÓN SECUNDARIA'} /></div>
   </div>
 
 );

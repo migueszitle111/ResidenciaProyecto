@@ -2664,7 +2664,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO IZQUIERDO, FOCALIZADA A NIVEL') || copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('PUDENDO DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '36.1%', left: '48.4%', }}
@@ -2674,7 +2674,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('PUDENDO IZQUIERDO, FOCALIZADA A NIVEL') || copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '36.1%', left: '49.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>

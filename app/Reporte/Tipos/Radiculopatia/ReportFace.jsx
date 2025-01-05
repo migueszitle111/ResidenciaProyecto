@@ -1,11 +1,11 @@
-import { ReportContextR, CheckboxContext, useButtonContext } from '@/src/context';
+import { CheckboxContext, ReportContextR, useButtonContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd';
 import { ConclusionCanvasR } from '../../../components/ReportTemplate/Conclusions/CanvasRadiculopatia';
 import './EstilosCruz.css';
-import './Style.css';
 import SimpleMultiStepForm from './MenuBotones';
+import './Style.css';
 
 const Reporte = () => {
   const [hasMounted, setHasMounted] = useState(false);

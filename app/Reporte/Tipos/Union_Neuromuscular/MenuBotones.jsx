@@ -1,6 +1,6 @@
-import { useState,useContext} from 'react';
+import { ReportContext } from '@/src/context';
+import { useContext, useState } from 'react';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
-import { ReportContext } from '@/src/context'
 
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';
@@ -289,7 +289,10 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
   
     const handleDrop = (e) => {
       e.preventDefault();
-      const files = e.dataTransfer.files;
+      handleFileSelect(e.dataTransfer.files);
+    };
+  
+    const handleFileSelect = (files) => {
       if (files && files.length > 0) {
         const fileArray = Array.from(files);
         const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
@@ -309,14 +312,18 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
       e.preventDefault(); // Necesario para permitir el "drop"
     };
   
+    const handleInputChange = (e) => {
+      handleFileSelect(e.target.files);
+    };
+  
     return (
       <div
         className={`dropArea2 ${isExpanded ? 'dropArea2-expanded' : ''}`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         style={{
-          width: isExpanded ? '98px' : '40px', // Ajusta el tamaño basado en el estado de expansión
-          height: isExpanded ? '92px' : '40px',
+          width: isExpanded ? '96px' : '40px', // Ajusta el tamaño basado en el estado de expansión
+          height: isExpanded ? '90px' : '40px',
           position: 'relative',
           display: 'flex',
           justifyContent: 'center',
@@ -325,6 +332,18 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
           overflow: 'hidden', // Evita que el contenido se desborde
         }}
       >
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleInputChange}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            opacity: 0,
+            cursor: 'pointer',
+          }}
+        />
         {!imageSrc ? (
           <p></p>
         ) : (
@@ -343,7 +362,7 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
       </div>
     );
   };
-  
+    
 
 
 const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) => {
@@ -405,8 +424,8 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
           <img src="/I_Print.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={handleUndo} className={`print-button`}>
-          <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <label htmlFor="file-upload" className={`print-button`}>

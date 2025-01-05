@@ -1,5 +1,5 @@
-import { useState,useContext} from 'react';
-import { ReportContext } from '@/src/context'
+import { ReportContext } from '@/src/context';
+import { useContext, useState } from 'react';
 
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
@@ -551,13 +551,17 @@ const StepG = ({ handlePrevStep, handleNextStep }) => {
 };
 
 
+
   // Función para manejar la carga de la imagen
   const DropArea2 = ({ isExpanded }) => {
     const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
   
     const handleDrop = (e) => {
       e.preventDefault();
-      const files = e.dataTransfer.files;
+      handleFileSelect(e.dataTransfer.files);
+    };
+  
+    const handleFileSelect = (files) => {
       if (files && files.length > 0) {
         const fileArray = Array.from(files);
         const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
@@ -577,14 +581,18 @@ const StepG = ({ handlePrevStep, handleNextStep }) => {
       e.preventDefault(); // Necesario para permitir el "drop"
     };
   
+    const handleInputChange = (e) => {
+      handleFileSelect(e.target.files);
+    };
+  
     return (
       <div
         className={`dropArea2 ${isExpanded ? 'dropArea2-expanded' : ''}`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         style={{
-          width: isExpanded ? '98px' : '40px', // Ajusta el tamaño basado en el estado de expansión
-          height: isExpanded ? '92px' : '40px',
+          width: isExpanded ? '96px' : '40px', // Ajusta el tamaño basado en el estado de expansión
+          height: isExpanded ? '90px' : '40px',
           position: 'relative',
           display: 'flex',
           justifyContent: 'center',
@@ -593,6 +601,18 @@ const StepG = ({ handlePrevStep, handleNextStep }) => {
           overflow: 'hidden', // Evita que el contenido se desborde
         }}
       >
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleInputChange}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            opacity: 0,
+            cursor: 'pointer',
+          }}
+        />
         {!imageSrc ? (
           <p></p>
         ) : (

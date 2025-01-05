@@ -1,8 +1,8 @@
 import { Accordion } from '@/app/components/ReportTemplate/Accordion';
-import { useContext, useState,useEffect} from 'react';
+import { CheckboxContext, ReportContextR, useButtonContext } from '@/src/context';
+import { useContext, useState } from 'react';
 import { ConclusionButtonR } from '../../../components/ReportTemplate/Conclusions';
 import { useImageState } from '../../MetodosBotones';
-import { ReportContextR,CheckboxContext,useButtonContext } from '@/src/context';
 
 // Hook personalizado para manejar los pasos
 const useStep = () => {

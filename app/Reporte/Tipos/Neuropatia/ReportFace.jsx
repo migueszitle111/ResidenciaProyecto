@@ -48,7 +48,7 @@ const DropArea = () => {
       onDragOver={handleDragOver}
       style={{
         //border: '2px dashed #ccc',
-        position: 'relative'
+        //position: 'relative'
       }}
     >
       {droppedItems.length === 0 ? (
@@ -985,12 +985,13 @@ const Reporte = () => {
                 value={copyConclusions} defaultValue="" onChange={handleTextareaChange} />
 
               </div>
+              <div><DropArea /> </div>
               <div>{checkDivs(copyConclusions)}</div>
               <div>{checkDivsSegmentar(copyConclusions)}</div>
             </div>
 
           </div>
-          <div><DropArea /> </div>
+          
         </div>
       </div>
     </div>

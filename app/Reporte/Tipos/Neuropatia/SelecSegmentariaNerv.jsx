@@ -658,7 +658,7 @@ export function checkDivsSegmentar(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILA IZQUIERDO, SEGMENTARIA A NIVEL') || copyConclusions.includes('AXILA BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {
+  if (copyConclusions.includes('AXILAR IZQUIERDO, SEGMENTARIA A NIVEL') || copyConclusions.includes('AXILA BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.5%', left: '58.8%', transform: 'rotate(180deg)', }}
@@ -694,7 +694,7 @@ export function checkDivsSegmentar(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILA DERECHO, SEGMENTARIA A NIVEL') || copyConclusions.includes('AXILA BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
+  if (copyConclusions.includes('AXILAR DERECHO, SEGMENTARIA A NIVEL') || copyConclusions.includes('AXILA BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.5%', left: '39.8%', transform: 'rotate(180deg)', }}

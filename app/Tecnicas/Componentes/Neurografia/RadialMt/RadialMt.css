@@ -72,6 +72,43 @@
 }
 
 
+.btnIMs1 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(820%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(226, 226, 226);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnIMs2 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/I_Tabla_Gris.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(700%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
 
 .btnRMt1 {
     position: absolute;
@@ -80,7 +117,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-730%, 115%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -95,7 +132,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-290%, 15%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -110,7 +147,7 @@
     top: 30%;
     left: 45%;
     transform: translate(270%, 395%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -125,7 +162,7 @@
     top: 30%;
     left: 45%;
     transform: translate(500%, 345%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -140,7 +177,7 @@
     top: 30%;
     left: 45%;
     transform: translate(700%, 320%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -155,7 +192,7 @@
     top: 30%;
     left: 45%;
     transform: translate(815%, 140%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -173,7 +210,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-1140%, 360%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -188,7 +225,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-780%, -110%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -203,7 +240,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-570%, -210%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -218,7 +255,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-395%, -350%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -233,7 +270,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-200%, -320%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -248,7 +285,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-255%, 100%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -263,7 +300,7 @@
     top: 30%;
     left: 45%;
     transform: translate(290%, 10%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -278,7 +315,7 @@
     top: 30%;
     left: 45%;
     transform: translate(470%, -180%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -293,7 +330,7 @@
     top: 30%;
     left: 45%;
     transform: translate(700%, -160%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -312,7 +349,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-10%, -80%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -328,7 +365,7 @@
     top: 30%;
     left: 45%;
     transform: translate(160%, 400%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -343,7 +380,7 @@
     top: 30%;
     left: 45%;
     transform: translate(405%, 0%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -358,7 +395,7 @@
     top: 30%;
     left: 45%;
     transform: translate(950%, 115%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -376,7 +413,7 @@
     top: 30%;
     left: 45%;
     transform: translate(190%, -100%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -391,7 +428,7 @@
     top: 30%;
     left: 45%;
     transform: translate(395%, -70%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -407,7 +444,7 @@
     top: 30%;
     left: 45%;
     transform: translate(510%, 160%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -422,7 +459,7 @@
     top: 30%;
     left: 45%;
     transform: translate(1100%, 40%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -441,7 +478,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-250%, 320%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -457,7 +494,7 @@
     top: 30%;
     left: 45%;
     transform: translate(360%, 360%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -473,7 +510,7 @@
     top: 30%;
     left: 45%;
     transform: translate(925%, 15%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -489,7 +526,7 @@
     top: 30%;
     left: 45%;
     transform: translate(890%, 140%);
-    background-color: slategrey;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -503,12 +540,12 @@
 
 .btnRMt28 {
     position: absolute;
-    height: 2vw;
-    width: 2vw;
+    height: 3vw;
+    width: 3vw;
     top: 30%;
     left: 45%;
-    transform: translate(-250%, 680%);
-    background-color: slategrey;
+    transform: translate(-708%, 329%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -519,12 +556,12 @@
 
 .btnRMt29 {
     position: absolute;
-    height: 2vw;
-    width: 2vw;
+    height: 3.2vw;
+    width: 3.2vw;
     top: 30%;
     left: 45%;
-    transform: translate(-300%, 370%);
-    background-color: slategrey;
+    transform: translate(230%, -140%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -535,12 +572,12 @@
 
 .btnRMt30 {
     position: absolute;
-    height: 2.2vw; 
-    width: 2.2vw;
+    height: 3.2vw;
+    width: 3.2vw;
     top: 30%;
     left: 45%;
-    transform: translate(-130%, -570%);
-    background-color: slategrey;
+    transform: translate(390%, 480%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -551,12 +588,12 @@
 
 .btnRMt31 {
     position: absolute;
-    height: 2vw; 
-    width: 2vw;
+    height: 3.5vw;
+    width: 3.5vw;
     top: 30%;
     left: 45%;
-    transform: translate(285%, 220%);
-    background-color: slategrey;
+    transform: translate(445%, -195%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -567,12 +604,12 @@
 
 .btnRMt32 {
     position: absolute;
-    height: 2.2vw; 
-    width: 2.2vw;
+    height: 3.2vw;
+    width: 3.2vw;
     top: 30%;
     left: 45%;
-    transform: translate(300%, 420%);
-    background-color: slategrey;
+    transform: translate(755%, -265%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -583,12 +620,12 @@
 
 .btnRMt33 {
     position: absolute;
-    height: 2vw; 
-    width: 2vw;
+    height: 3.2vw;
+    width: 3.2vw;
     top: 30%;
     left: 45%;
-    transform: translate(390%, 715%);
-    background-color: slategrey;
+    transform: translate(710%, 420%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -602,19 +639,25 @@
 .text-boxRMt {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 35vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(164, 240, 250, 0.842);
-    color: #242424;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
+}
+
+.zoomable-imageRm:hover {
+    transform: scale(2.5); /* Ajusta el valor de escala según sea necesario */
+    transform-origin: top left; /* Expande hacia la derecha y hacia abajo */
 }
 
 

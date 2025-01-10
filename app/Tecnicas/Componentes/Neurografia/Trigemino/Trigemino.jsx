@@ -48,10 +48,10 @@ const Trigemino = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnTg1" onClick={() => handleButtonClick('1', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTg2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTg3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTg4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTg1" onClick={() => handleButtonClick('Región frontal. El cátodo del estimulador se coloca en la esquina lateral superior de la frente.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTg2" onClick={() => handleButtonClick('El electrodo activo de superficie se coloca en el foramen supraorbitario', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTg3" onClick={() => handleButtonClick('Medial al elétrodo activo, 2-3 cm de distancia.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTg4" onClick={() => handleButtonClick('Región frontal contralateral.', { top: '12%', left: '32%' })}></button>}
             
             </div>
             {textBoxVisible && (

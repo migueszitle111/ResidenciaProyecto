@@ -48,10 +48,10 @@ const AuricularM = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnAu1" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAu2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnAu3" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAu4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnAu1" onClick={() => handleButtonClick('Cuello punto medio: De forma antidrómica en el borde lateral del músculo esternocleidomastoideo, aproximadamente en su tercio medio o 8cm de distancia en dirección caudal a electrodo de registro.', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAu2" onClick={() => handleButtonClick('Con electrodos de superficie sobre la parte posterior del lóbulo de la oreja.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnAu3" onClick={() => handleButtonClick('2 cm en dirección cefálica a electrodo activo.', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAu4" onClick={() => handleButtonClick('Proceso espinoso C7.', { top: '12%', left: '32%'})}></button>}
             
             </div>
             {textBoxVisible && (

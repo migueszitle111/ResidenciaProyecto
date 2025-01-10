@@ -69,10 +69,10 @@ const Plantar = () => {
             {currentImageIndex === 1 && <button className="btnPt10" onClick={() => handleButtonClick('10', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPt11" onClick={() => handleButtonClick('11', { top: '12%', left: '32%' })}></button>}
             
-            {currentImageIndex === 2 && <button className="btnPt12" onClick={() => handleButtonClick('12', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnPt13" onClick={() => handleButtonClick('13', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnPt14" onClick={() => handleButtonClick('14', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnPt15" onClick={() => handleButtonClick('15', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPt12" onClick={() => handleButtonClick('Dorso del pie. ', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPt13" onClick={() => handleButtonClick('Se coloca a un tercio de la distancia desde el vértice del talón hasta el punto medio entre el escafoides y punta del maléolo medial.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPt14" onClick={() => handleButtonClick('Sobre el vértice del talon.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPt15" onClick={() => handleButtonClick('1. Tobillo: De forma antidrómica y con intensidad submáxima a 10 cm en dirección proximal del electrodo activo.', { top: '12%', left: '32%' })}></button>}
             
             </div>
             {textBoxVisible && (

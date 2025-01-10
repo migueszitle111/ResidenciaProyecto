@@ -79,7 +79,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-235%, -30%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -94,7 +94,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-230%, 40%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -109,7 +109,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-220%, 110%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -124,7 +124,7 @@
     top: 30%;
     left: 45%;
     transform: translate(525%, 40%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -139,7 +139,7 @@
     top: 30%;
     left: 45%;
     transform: translate(625%, 25%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -154,7 +154,7 @@
     top: 30%;
     left: 45%;
     transform: translate(654%, 110%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -172,7 +172,7 @@
     top: 30%;
     left: 45%;
     transform: translate(190%, 5%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -187,7 +187,7 @@
     top: 30%;
     left: 45%;
     transform: translate(165%, 440%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -202,7 +202,7 @@
     top: 30%;
     left: 45%;
     transform: translate(560%, 70%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -217,7 +217,7 @@
     top: 30%;
     left: 45%;
     transform: translate(655%, -55%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -229,19 +229,20 @@
 .text-boxSr {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 35vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(126, 126, 126, 0.842);
+    background-color: rgba(66, 66, 66, 0.842);
     color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
 
 

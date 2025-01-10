@@ -71,6 +71,44 @@
     }
 }
 
+.btnIMs1 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(820%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(226, 226, 226);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnIMs2 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/I_Tabla_Gris.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(700%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
 
 .btnAx1 {
     position: absolute;
@@ -79,7 +117,7 @@
     top: 30%;
     left: 45%;
     transform: translate(120%, -585%);
-    background-color: firebrick;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -94,7 +132,7 @@
     top: 30%;
     left: 45%;
     transform: translate(120%, -410%);
-    background-color: firebrick;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -109,7 +147,7 @@
     top: 30%;
     left: 45%;
     transform: translate(445%, 0%);
-    background-color: firebrick;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -124,7 +162,7 @@
     top: 30%;
     left: 45%;
     transform: translate(430%, 310%);
-    background-color: firebrick;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -136,19 +174,26 @@
 .text-boxAx {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 35vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(55, 92, 146, 0.842);
-    color: #242424;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
+
+.zoomable-imageAx:hover {
+    transform: scale(3.0); /* Ajusta el valor de escala según sea necesario */
+    transform-origin: top left; /* Expande hacia la derecha y hacia abajo */
+}
+
 
 

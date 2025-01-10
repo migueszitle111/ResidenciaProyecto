@@ -74,12 +74,12 @@
 
 .btnTb1 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(30%, 545%);
-    background-color: slategray;
+    transform: translate(-875%, -55%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -89,12 +89,12 @@
 }
 .btnTb2 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(150%, 545%);
-    background-color: slategray;
+    transform: translate(500%, 490%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -104,12 +104,12 @@
 }
 .btnTb3 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.8vw;
+    width: 2.8vw;
     top: 30%;
     left: 45%;
-    transform: translate(-65%, 385%);
-    background-color: slategray;
+    transform: translate(705%, 180%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -119,12 +119,12 @@
 }
 .btnTb4 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(240%, 385%);
-    background-color: slategray;
+    transform: translate(890%, 460%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -134,12 +134,12 @@
 }
 .btnTb5 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(45%, 130%);
-    background-color: slategray;
+    transform: translate(1095%, 105%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -151,12 +151,12 @@
 
 .btnTb6 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(145%, 130%);
-    background-color: slategray;
+    transform: translate(-1010%, 65%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -170,8 +170,8 @@
     width: 2.2vw;
     top: 30%;
     left: 45%;
-    transform: translate(-180%, 60%);
-    background-color: slategray;
+    transform: translate(500%, 60%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -185,8 +185,8 @@
     width: 2.2vw;
     top: 30%;
     left: 45%;
-    transform: translate(365%, 60%);
-    background-color: slategray;
+    transform: translate(720%, 595%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -196,12 +196,12 @@
 }
 .btnTb9 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.8vw;
+    width: 2.8vw;
     top: 30%;
     left: 45%;
-    transform: translate(-90%, -210%);
-    background-color: slategray;
+    transform: translate(620%, 215%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -215,8 +215,8 @@
     width: 2.2vw;
     top: 30%;
     left: 45%;
-    transform: translate(270%, -215%);
-    background-color: slategray;
+    transform: translate(1065%, 385%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -233,7 +233,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-200%, -265%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -248,7 +248,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-60%, 80%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -263,7 +263,7 @@
     top: 30%;
     left: 45%;
     transform: translate(100%, 185%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -278,7 +278,7 @@
     top: 30%;
     left: 45%;
     transform: translate(360%, 60%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -293,7 +293,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-55%, 390%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -308,7 +308,7 @@
     top: 30%;
     left: 45%;
     transform: translate(295%, 345%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -324,7 +324,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-985%, 55%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -339,7 +339,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-340%, 210%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -354,7 +354,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-410%, -170%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -369,7 +369,7 @@
     top: 30%;
     left: 45%;
     transform: translate(370%, 10%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -384,7 +384,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-110%, -120%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -399,7 +399,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-70%, 120%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -414,7 +414,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-30%, -10%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -429,7 +429,7 @@
     top: 30%;
     left: 45%;
     transform: translate(180%, -170%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -443,19 +443,20 @@
 .text-boxTb {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 35vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(82, 82, 82, 0.842);
-    color: #242424;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
 
 

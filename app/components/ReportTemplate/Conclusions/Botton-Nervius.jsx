@@ -9,11 +9,11 @@ export function NerviusButton({ title, value, displayText }) {
   const isSelected = conclusions.find(cl => cl.value === value);
 
   // Clase condicional para que el botón seleccionado sea visible y los demás transparentes
-  const classnames = 'cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in ' + 
-  (conclusions.find(cl => cl.value === value) ? 'bg-[#c44900]' : 'bg-transparent') + ' rounded-[50px]';
+  const classnames = 'cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in ' +
+  (conclusions.find(cl => cl.value === value) ? 'bg-[#c44900]' : 'bg-transparent') + ' rounded-[50px] z-50 relative';
 
  // Función para actualizar las conclusiones
- function handleClick() {
+  function handleClick() {
   updateConclusions({ title, value });
   }
 

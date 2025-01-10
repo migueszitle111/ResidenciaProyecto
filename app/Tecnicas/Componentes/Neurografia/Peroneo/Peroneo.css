@@ -1,0 +1,525 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btnPr1, .btnPr2, .btnPr3, .btnPr4, .btnPr5, .btnPr6, .btnPr7, .btnPr8, .btnPr9, .btnPr10,
+    .btnPr11, .btnPr12, .btnPr13, .btnPr14, .btnPr15, .btnPr16, .btnPr17, .btnPr18, .btnPr19, .btnPr20,
+    .btnPr21, .btnPr22, .btnPr23, .btnPr24, .btnPr25, .btnPr26, .btnPr27, .btnPr28, .btnPr29, .btnPr30,
+    .btnPr31, .btnPr32, .btnPr33, .btnPr34, .btnPr35, .btnPr36, .btnPr37, .btnPr38, .btnPr39, .btnPr40,
+    .btnPr41, .btnPr42, .btnPr43, .btnPr44, .btnPr45 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btnPr1, .btnPr2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+
+.btnPr1 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-885%, 430%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr2 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-680%, 540%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr3 {
+    position: absolute;
+    height: 2.2vw;
+    width: 2.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-510%, 475%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr4 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-520%, 685%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr5 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(705%, 50%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr6 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(930%, 90%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+.btnPr7 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-920%, 190%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr8 {
+    position: absolute;
+    height: 2.5vw;
+    width: 2.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-855%, -240%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr9 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-670%, 180%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr10 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-255%, 70%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr11 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-35%, 155%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+.btnPr12 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-1015%, 370%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr13 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-640%, 300%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr14 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-310%, 240%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr15 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-115%, 260%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr16 {
+    position: absolute;
+    height: 2.8vw;
+    width: 2.8vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-170%, 55%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+.btnPr17 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-1010%, 250%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr18 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-640%, 210%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr19 {
+    position: absolute;
+    height: 2.8vw;
+    width: 2.8vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-160%, 10%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr20 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(175%, 205%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr21 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(385%, 210%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+.btnPr22 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-1140%, -360%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr23 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-890%, 110%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr24 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-795%, 265%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr25 {
+    position: absolute;
+    height: 2.8vw;
+    width: 2.8vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(355%, -235%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr26 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(990%, 635%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr27 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(1150%, 560%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPr28 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(1310%, 540%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.text-boxPr {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 27vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
+}
+
+

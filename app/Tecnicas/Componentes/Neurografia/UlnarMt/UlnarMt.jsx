@@ -12,7 +12,7 @@ const UlnarMt = () => {
     const [imageBoxVisible, setImageBoxVisible] = useState(false);
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxUlM');
+    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
 
     const images = [
         {
@@ -52,7 +52,7 @@ const UlnarMt = () => {
         setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
     };
 
-    const handleButtonClickUlM = (content, position, customClass = 'text-boxUlM') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -73,7 +73,6 @@ const UlnarMt = () => {
         }
     };
 
-
     return (
         
         <div  className=" py-20 gallery-container">
@@ -89,48 +88,57 @@ const UlnarMt = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnUMt1" onClick={() => handleButtonClickUlM('1', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnUMt2" onClick={() => handleButtonClickUlM('2', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnUMt3" onClick={() => handleButtonClickUlM('3', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnUMt4" onClick={() => handleButtonClickUlM('4', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnUMt5" onClick={() => handleButtonClickUlM('5', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnUMt1" onClick={() => handleButtonClick('1.	Muñeca: 8 cm en dirección proximal a electrodo activo, medial a tendón cubital anterior. \n2. Codo: 2-3 cm distal al epicóndilo medial en línea media dibujada con relación al olecranon. \n3. Arriba de codo. 10 cm distal a punto de estimulación de codo en flexión de 90 grados, a nivel de humero medial entre tendones de Bíceps-Tríceps.', {  top: '25%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnUMt2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnUMt3" onClick={() => handleButtonClick('1.	Muñeca: 8 cm en dirección proximal a electrodo activo, medial a tendón cubital anterior. \n2. Codo: 2-3 cm distal al epicóndilo medial en línea media dibujada con relación al olecranon. \n3. Arriba de codo. 10 cm distal a punto de estimulación de codo en flexión de 90 grados, a nivel de humero medial entre tendones de Bíceps-Tríceps.', {  top: '25%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnUMt4" onClick={() => handleButtonClick('Músculo abductor del dedo meñique o quinto dedo (ADM) (eminencia hipotenar medial).', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnUMt5" onClick={() => handleButtonClick('Articulación metacarpofalángica del quinto dedo', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnar-G-01.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnar-T-01.png",{ top: '2%', left: '2%' })}></button>}
             
-                {currentImageIndex === 1 && <button className="btnUMt6" onClick={() => handleButtonClickUlM('1', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnUMt7" onClick={() => handleButtonClickUlM('2', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 1 && <button className="btnUMt8" onClick={() => handleButtonClickUlM('3', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnUMt9" onClick={() => handleButtonClickUlM('4', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 1 && <button className="btnUMt10" onClick={() => handleButtonClickUlM('5', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnUMt11" onClick={() => handleButtonClickUlM('6', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 1 && <button className="btnUMt12" onClick={() => handleButtonClickUlM('7', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnUMt13" onClick={() => handleButtonClickUlM('8', { top: '12%', left: '32%'})}></button>}
-                
-                {currentImageIndex === 2 && <button className="btnUMt14" onClick={() => handleButtonClickUlM('1', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 2 && <button className="btnUMt15" onClick={() => handleButtonClickUlM('2', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 2 && <button className="btnUMt16" onClick={() => handleButtonClickUlM('3', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 2 && <button className="btnUMt17" onClick={() => handleButtonClickUlM('4', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 2 && <button className="btnUMt18" onClick={() => handleButtonClickUlM('5', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 2 && <button className="btnUMt19" onClick={() => handleButtonClickUlM('6', { top: '12%', left: '32%'})}></button>}
-            
-                {currentImageIndex === 3 && <button className="btnUMt20" onClick={() => handleButtonClickUlM('1', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 3 && <button className="btnUMt21" onClick={() => handleButtonClickUlM('2', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 3 && <button className="btnUMt22" onClick={() => handleButtonClickUlM('3', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 3 && <button className="btnUMt23" onClick={() => handleButtonClickUlM('4', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 3 && <button className="btnUMt24" onClick={() => handleButtonClickUlM('5', { top: '12%', left: '32%'})}></button>}
-            
-                {currentImageIndex === 4 && <button className="btnUMt25" onClick={() => handleButtonClickUlM('1', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 4 && <button className="btnUMt26" onClick={() => handleButtonClickUlM('2', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 4 && <button className="btnUMt27" onClick={() => handleButtonClickUlM('3', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 4 && <button className="btnUMt28" onClick={() => handleButtonClickUlM('4', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 4 && <button className="btnUMt29" onClick={() => handleButtonClickUlM('5', { top: '12%', left: '32%'})}></button>}
-            
-                {currentImageIndex === 5 && <button className="btnUMt30" onClick={() => handleButtonClickUlM('1', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 5 && <button className="btnUMt31" onClick={() => handleButtonClickUlM('2', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 5 && <button className="btnUMt32" onClick={() => handleButtonClickUlM('3', { top: '12%', left: '32%'})}></button>}
-                
-                {currentImageIndex === 6 && <button className="btnUMt33" onClick={() => handleButtonClickUlM('1', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 6 && <button className="btnUMt34" onClick={() => handleButtonClickUlM('2', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 6 && <button className="btnUMt35" onClick={() => handleButtonClickUlM('3', { top: '12%', left: '32%'})}></button>}
-                
+
+                {currentImageIndex === 1 && <button className="btnUMt6" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnUMt7" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnUMt8" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnUMt9" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnUMt10" onClick={() => handleButtonClick('5', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnUMt11" onClick={() => handleButtonClick('6', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnUMt12" onClick={() => handleButtonClick('7', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnUMt13" onClick={() => handleButtonClick('8', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnar-G-02.png",{ top: '2%', left: '2%' })}></button>}
+
+                {currentImageIndex === 2 && <button className="btnUMt14" onClick={() => handleButtonClick('Articulación metacarpofalángica del pulgar.', {  top: '10%', left: '32%' })}></button>}
+                {currentImageIndex === 2 && <button className="btnUMt15" onClick={() => handleButtonClick('Músculo Primer interóseo dorsal. En aducción de dedos de la mano, palpar vientre muscular entre primer y segundo metacarpianos, o espacio dorsal línea media de membrana cutánea entre dedos pulgar e índice.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 2 && <button className="btnUMt16" onClick={() => handleButtonClick('Dorso de la mano.', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 2 && <button className="btnUMt17" onClick={() => handleButtonClick('1. Muñeca: 8-12 cm proximal de electrodo activo (ideal con calibrador obstétrico) o idéntico a técnica convencional ya realizada previamente; medial a tendón cubital anterior. \n2. Codo: 2-3 cm distal al epicóndilo medial en línea media dibujada con relación al olecranon. \n3. Arriba de codo. 10 cm distal a punto de estimulación de codo en flexión de 90 grados, a nivel de humero medial entre tendones de Bíceps-Tríceps.', { top: '45%', left: '70%'})}></button>}
+                {currentImageIndex === 2 && <button className="btnUMt18" onClick={() => handleButtonClick('1. Muñeca: 8-12 cm proximal de electrodo activo (ideal con calibrador obstétrico) o idéntico a técnica convencional ya realizada previamente; medial a tendón cubital anterior. \n2. Codo: 2-3 cm distal al epicóndilo medial en línea media dibujada con relación al olecranon. \n3. Arriba de codo. 10 cm distal a punto de estimulación de codo en flexión de 90 grados, a nivel de humero medial entre tendones de Bíceps-Tríceps.', { top: '45%', left: '70%'})}></button>}
+                {currentImageIndex === 2 && <button className="btnUMt19" onClick={() => handleButtonClick('1. Muñeca: 8-12 cm proximal de electrodo activo (ideal con calibrador obstétrico) o idéntico a técnica convencional ya realizada previamente; medial a tendón cubital anterior. \n2. Codo: 2-3 cm distal al epicóndilo medial en línea media dibujada con relación al olecranon. \n3. Arriba de codo. 10 cm distal a punto de estimulación de codo en flexión de 90 grados, a nivel de humero medial entre tendones de Bíceps-Tríceps.', { top: '45%', left: '70%'})}></button>}
+                {currentImageIndex === 2 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnar-G-03.png",{ top: '2%', left: '2%' })}></button>}
+
+                {currentImageIndex === 3 && <button className="btnUMt20" onClick={() => handleButtonClick('Muñeca: 8 en dirección proximal a electrodo activo; para nervio Mediano entre tendones flexores del carpo y para nervio Cubital medial al tendón cubital anterior (puntos de estimulación convencionales).', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 3 && <button className="btnUMt21" onClick={() => handleButtonClick('Muñeca: 8 en dirección proximal a electrodo activo; para nervio Mediano entre tendones flexores del carpo y para nervio Cubital medial al tendón cubital anterior (puntos de estimulación convencionales).', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 3 && <button className="btnUMt22" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 3 && <button className="btnUMt23" onClick={() => handleButtonClick('Palma, ligeramente lateral al punto medio del tercer metacarpiano.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 3 && <button className="btnUMt24" onClick={() => handleButtonClick('Articulación metacarpofalángica del dedo índice. ', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 3 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnar-G-04.png",{ top: '2%', left: '2%' })}></button>}
+
+                {currentImageIndex === 4 && <button className="btnUMt25" onClick={() => handleButtonClick('1. Codo: 2-3 cm distal al epicóndilo medial en línea media dibujada con relación al olecranon. \n2. Arriba de codo. 10 cm distal a punto de estimulación de codo en flexión de 90 grados, a nivel de humero medial entre tendones de Bíceps-Tríceps.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 4 && <button className="btnUMt26" onClick={() => handleButtonClick('1. Codo: 2-3 cm distal al epicóndilo medial en línea media dibujada con relación al olecranon. \n2. Arriba de codo. 10 cm distal a punto de estimulación de codo en flexión de 90 grados, a nivel de humero medial entre tendones de Bíceps-Tríceps.', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 4 && <button className="btnUMt27" onClick={() => handleButtonClick('Musculo Cubital anterior o Flexor cubital del carpo. Punto motor a cuatro dedos de distancia, distal de epicóndilo medial sobre borde cubital entre línea imaginaria de tercio medio y proximal de antebrazo.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 4 && <button className="btnUMt28" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 4 && <button className="btnUMt29" onClick={() => handleButtonClick('En dirección a carpo sobre borde cubital, recorrido distal del tendón del Cubital anterior', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 4 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnar-G-05.png",{ top: '2%', left: '2%' })}></button>}
+
+                {currentImageIndex === 5 && <button className="btnUMt30" onClick={() => handleButtonClick('1', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 5 && <button className="btnUMt31" onClick={() => handleButtonClick('2', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 5 && <button className="btnUMt32" onClick={() => handleButtonClick('3', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 5 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnar-G-06.png",{ top: '2%', left: '2%' })}></button>}
+
+                {currentImageIndex === 6 && <button className="btnUMt33" onClick={() => handleButtonClick('1', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 6 && <button className="btnUMt34" onClick={() => handleButtonClick('2', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 6 && <button className="btnUMt35" onClick={() => handleButtonClick('3', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 6 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnar-G-07.png",{ top: '2%', left: '2%' })}></button>}
+
             </div>
             {textBoxVisible && (
                 <div
@@ -141,24 +149,24 @@ const UlnarMt = () => {
                 </div>
             )}
             {imageBoxVisible && (
-                <div
-                    className="image-boxUlM"
+            <div
+                className="image-boxM"
+                style={{
+                    top: imageBoxPosition.top,
+                    left: imageBoxPosition.left,
+                    position: 'absolute',
+                }}
+            >
+                <img
+                    src={imageBoxContent}
+                    alt="Cuadro dinámico"
                     style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
                         position: 'absolute',
+                        maxWidth: '25vw',
+                        maxHeight: '20vh',
+                        transition: 'transform 0.3s ease',
                     }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '25vw',
-                            maxHeight: '25vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-imageUlM"
+                    className="zoomable-imageUlMt"
                     />
                 </div>
             )}

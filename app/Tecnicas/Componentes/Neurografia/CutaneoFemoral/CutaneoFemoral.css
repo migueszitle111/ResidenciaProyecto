@@ -72,14 +72,13 @@
 }
 
 
-/* Botón 1 
 .btnCf1 {
     position: absolute;
-    height: 3vw; 
-    width: 3vw;
+    height: 2.8vw;
+    width: 2.8vw;
     top: 30%;
     left: 45%;
-    transform: translate(418%, -215%);
+    transform: translate(-803%, 138%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -88,57 +87,131 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnCf1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 3.2vw; 
-    width: 3.2vw;
-    transform: translate(400%, -220%);
-}
-
 .btnCf2 {
     position: absolute;
-    height: 3.5vw; 
-    width: 3.5vw;
+    height: 3.2vw;
+    width: 3.2vw;
     top: 30%;
-    left: 55%;
-    transform: translate(-20%, 222%);
+    left: 45%;
+    transform: translate(-495%, 285%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    color: transparent;
-    font-size: 1.9vw;
-    font-family: 'Times New Roman';
+    color: white;
+    font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnCf2:hover {
-    background-color: rgb(86, 143, 86);
-    font-size: 30px;
-    height: 3.7vw; 
-    width: 3.7vw;
-    transform: translate(-20%, 190%);
-    color: black;
+.btnCf3 {
+    position: absolute;
+    height: 2.8vw;
+    width: 2.8vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-255%, -10%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnCf4 {
+    position: absolute;
+    height: 2.8vw;
+    width: 2.8vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-105%, 0%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
 }
 
-*/
 
-.text-box {
+
+.btnCf5 {
+    position: absolute;
+    height: 3.2vw;
+    width: 3.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-138%, 65%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnCf6 {
+    position: absolute;
+    height: 2.8vw;
+    width: 2.8vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-88%, 285%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnCf7 {
+    position: absolute;
+    height: 2.8vw;
+    width: 2.8vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(480%, 395%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnCf8 {
+    position: absolute;
+    height: 2.8vw;
+    width: 2.8vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(610%, 440%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.text-boxCf {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 35vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(233, 14, 69, 0.842);
-    color: #242424;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
-
 

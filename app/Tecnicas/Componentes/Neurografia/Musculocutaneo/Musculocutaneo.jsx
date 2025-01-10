@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
-import "./style.css"
+import "../Musculocutaneo/Musculocutaneo.css"
 
 
 const Musculocutaneo = () => {
@@ -9,6 +9,10 @@ const Musculocutaneo = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [imageBoxVisible, setImageBoxVisible] = useState(false);
+    const [imageBoxContent, setImageBoxContent] = useState('');
+    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
 
     const images = [
         {
@@ -22,15 +26,27 @@ const Musculocutaneo = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
+        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
     };
 
-    const handleButtonClick = (content, position) => {
+    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
+            setTextBoxClass(customClass);
             setTextBoxVisible(true);
+        }
+    };
+
+    const handleImageBoxClick = (image, position) => {
+        if (imageBoxVisible && imageBoxContent === image) {
+            setImageBoxVisible(false);
+        } else {
+            setImageBoxContent(image);
+            setImageBoxPosition(position);
+            setImageBoxVisible(true);
         }
     };
 
@@ -50,12 +66,39 @@ const Musculocutaneo = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnMc1" onClick={() => handleButtonClick('Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', {  top: '12%', left: '32%' })}>A</button>}
-                {currentImageIndex === 0 && <button className="btnMc2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}>T</button>}
+            {currentImageIndex === 0 && <button className="btnMc1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnMc2" onClick={() => handleButtonClick('Articulación acromoclavicular.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnMc3" onClick={() => handleButtonClick('Codo en flexión, electrodo colocado sobre el vientre muscular más prominente del Bíceps braquial o punto medio ventral del brazo.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnMc4" onClick={() => handleButtonClick('Tendón del bíceps braquiai en el codo.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/musculocutaneo-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/musculocutaneo-T-01.png",{ top: '5%', left: '2%' })}></button>}
+                
             </div>
             {textBoxVisible && (
-                <div className="text-box" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxMc" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
+                </div>
+            )}
+            {imageBoxVisible && (
+            <div
+                className="image-boxM"
+                style={{
+                    top: imageBoxPosition.top,
+                    left: imageBoxPosition.left,
+                    position: 'absolute',
+                }}
+            >
+                <img
+                    src={imageBoxContent}
+                    alt="Cuadro dinámico"
+                    style={{
+                        position: 'absolute',
+                        maxWidth: '25vw',
+                        maxHeight: '20vh',
+                        transition: 'transform 0.3s ease',
+                    }}
+                    className="zoomable-imageMc"
+                    />
                 </div>
             )}
         </div>

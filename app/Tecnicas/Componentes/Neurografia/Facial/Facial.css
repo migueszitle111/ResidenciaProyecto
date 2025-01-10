@@ -79,7 +79,7 @@
     top: 30%;
     left: 45%;
     transform: translate(30%, 545%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -94,7 +94,7 @@
     top: 30%;
     left: 45%;
     transform: translate(150%, 545%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -109,7 +109,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-65%, 385%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -124,7 +124,7 @@
     top: 30%;
     left: 45%;
     transform: translate(240%, 385%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -139,7 +139,7 @@
     top: 30%;
     left: 45%;
     transform: translate(45%, 130%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -154,7 +154,7 @@
     top: 30%;
     left: 45%;
     transform: translate(145%, 130%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -169,7 +169,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-180%, 60%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -184,7 +184,7 @@
     top: 30%;
     left: 45%;
     transform: translate(365%, 60%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -199,7 +199,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-90%, -210%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -214,7 +214,7 @@
     top: 30%;
     left: 45%;
     transform: translate(270%, -215%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -229,7 +229,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-160%, 210%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -244,7 +244,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-460%, 230%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -262,7 +262,7 @@
     top: 30%;
     left: 45%;
     transform: translate(85%, 340%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -277,7 +277,7 @@
     top: 30%;
     left: 45%;
     transform: translate(430%, 13%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -292,7 +292,7 @@
     top: 30%;
     left: 45%;
     transform: translate(530%, -245%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -307,7 +307,7 @@
     top: 30%;
     left: 45%;
     transform: translate(680%, -20%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -322,7 +322,7 @@
     top: 30%;
     left: 45%;
     transform: translate(740%, 20%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -337,7 +337,7 @@
     top: 30%;
     left: 45%;
     transform: translate(730%, 120%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -352,7 +352,7 @@
     top: 30%;
     left: 45%;
     transform: translate(590%, 400%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -367,7 +367,7 @@
     top: 30%;
     left: 45%;
     transform: translate(635%, 430%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -385,7 +385,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-190%, -190%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -400,7 +400,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-170%, 90%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -415,7 +415,7 @@
     top: 30%;
     left: 45%;
     transform: translate(130%, 120%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -430,7 +430,7 @@
     top: 30%;
     left: 45%;
     transform: translate(300%, 300%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -445,7 +445,7 @@
     top: 30%;
     left: 45%;
     transform: translate(350%, 415%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -460,7 +460,7 @@
     top: 30%;
     left: 45%;
     transform: translate(430%, 440%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -478,7 +478,7 @@
     top: 30%;
     left: 45%;
     transform: translate(470%, -230%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -493,7 +493,7 @@
     top: 30%;
     left: 45%;
     transform: translate(710%, 20%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -508,7 +508,7 @@
     top: 30%;
     left: 45%;
     transform: translate(700%, 115%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -523,7 +523,7 @@
     top: 30%;
     left: 45%;
     transform: translate(190%, 335%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -538,7 +538,7 @@
     top: 30%;
     left: 45%;
     transform: translate(55%, 345%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -553,7 +553,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-40%, 350%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -571,7 +571,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-240%, -185%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -586,7 +586,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-305%, 570%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -601,7 +601,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-120%, 450%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -616,7 +616,7 @@
     top: 30%;
     left: 45%;
     transform: translate(135%, 420%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -632,7 +632,7 @@
     top: 30%;
     left: 45%;
     transform: translate(240%, 385%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -648,7 +648,7 @@
     top: 30%;
     left: 45%;
     transform: translate(325%, 395%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -660,19 +660,20 @@
 .text-boxFc {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 35vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(39, 39, 39, 0.842);
+    background-color: rgba(66, 66, 66, 0.842);
     color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
 
 

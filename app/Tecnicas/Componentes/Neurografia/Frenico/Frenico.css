@@ -79,7 +79,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-230%, 580%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -94,7 +94,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-300%, -10%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -109,7 +109,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-40%, -380%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -124,7 +124,7 @@
     top: 30%;
     left: 45%;
     transform: translate(0%, -220%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -139,7 +139,7 @@
     top: 30%;
     left: 45%;
     transform: translate(130%, 435%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -154,7 +154,7 @@
     top: 30%;
     left: 45%;
     transform: translate(495%, 565%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -172,7 +172,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-220%, 685%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -187,7 +187,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-220%, 575%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -202,7 +202,7 @@
     top: 30%;
     left: 45%;
     transform: translate(60%, -300%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -217,7 +217,7 @@
     top: 30%;
     left: 45%;
     transform: translate(320%, 355%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -229,19 +229,20 @@
 .text-boxFn {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 35vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(131, 226, 139, 0.842);
-    color: #242424;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
 
 

@@ -1,6 +1,4 @@
 
-import { ReportContext } from '@/src/context';
-import { useContext } from 'react';
 import { SegmentariaButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Segmentaria';
 
 export function checkDivsSegmentar(copyConclusions) {
@@ -44,7 +42,7 @@ export function checkDivsSegmentar(copyConclusions) {
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '22.2%', left: '62.6%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /></div>
-        TERCIO
+        {/* TERCIO */}
         <div style={{ position: 'absolute', top: '22.6%', left: '62.9%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '23.0%', left: '63.2%', transform: 'rotate(60deg)', }}

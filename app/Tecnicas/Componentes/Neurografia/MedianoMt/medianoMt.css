@@ -72,6 +72,47 @@
 }
 
 /* ################################# Botones de la primera imagen #########################*/
+
+.btnIMs1 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(820%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(226, 226, 226);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnIMs2 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/I_Tabla_Gris.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(700%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
 /* Botón 1 */
 .btnM1 {
     position: absolute;
@@ -88,14 +129,6 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnM1:hover {
-    background-color: black;
-    font-size: 30px;
-    height: 2.3vw; /* Tamaño reducido */
-    width: 2.3vw;
-    transform: translate(710%, 120%);
-}
-
 /* Botón 2 */
 .btnM2 {
     position: absolute;
@@ -112,14 +145,6 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnM2:hover {
-    background-color: rgb(196, 86, 12);
-    font-size: 30px;
-    height: 2.2vw; /* Tamaño reducido */
-    width: 2.2vw;
-    transform: translate(625%, -385%);
-}
-
 /* Botón 3 */
 .btnM3 {
     position: absolute;
@@ -135,13 +160,6 @@
     color: white;
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
-}
-.btnM3:hover {
-    background-color: transparent;
-    font-size: 30px;
-    height: 2.3vw; /* Tamaño reducido */
-    width: 2.3vw;
-    transform: translate(97%, -220%);
 }
 
 .btnM4 {
@@ -159,17 +177,6 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-.btnM4:hover {
-    background-color: rgb(182, 182, 182);
-    font-size: 30px;
-    height: 2.3vw; /* Tamaño reducido */
-    width: 2.3vw;
-    transform: translate(-160%, 110%);
-    color: black;
-    font-family: 'Times New Roman', Times, serif;
-    font-style: bold;
-}
-
 .btnM5 {
     position: absolute;
     height: 2.7vw; /* Tamaño reducido */
@@ -206,7 +213,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-930%, -280%);
-    background-color:cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -219,7 +226,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-795%, -155%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -232,7 +239,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-550%, 160%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -245,7 +252,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-100%, 150%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -258,7 +265,7 @@
     top: 30%;
     left: 55%;
     transform: translate(110%, 385%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -271,7 +278,7 @@
     top: 30%;
     left: 55%;
     transform: translate(610%, 400%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -284,7 +291,7 @@
     top: 30%;
     left: 55%;
     transform: translate(998%, 500%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -299,7 +306,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-1050%, 250%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -312,7 +319,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-465%, 250%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -325,7 +332,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-230%, -100%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -338,7 +345,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-105%, -95%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -355,7 +362,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-550%, -100%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -368,7 +375,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-350%, -175%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -381,7 +388,7 @@
     top: 30%;
     left: 55%;
     transform: translate(100%, -45%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -394,7 +401,7 @@
     top: 30%;
     left: 55%;
     transform: translate(820%, 240%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -407,7 +414,7 @@
     top: 30%;
     left: 55%;
     transform: translate(-350%, -25%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -420,7 +427,7 @@
     top: 30%;
     left: 55%;
     transform: translate(90%, 40%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -433,7 +440,7 @@
     top: 30%;
     left: 55%;
     transform: translate(500%, 450%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -446,7 +453,7 @@
     top: 30%;
     left: 55%;
     transform: translate(930%, 190%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -462,7 +469,7 @@
     top: 30%;
     left: 55%;
     transform: translate(930%, 185%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -475,7 +482,7 @@
     top: 30%;
     left: 55%;
     transform: translate(80%, -120%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -488,7 +495,7 @@
     top: 30%;
     left: 55%;
     transform: translate(155%, 250%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -501,7 +508,7 @@
     top: 30%;
     left: 55%;
     transform: translate(625%, 420%);
-    background-color: cadetblue;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -542,14 +549,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.842);
-    color: #242424;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
     font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
 
+.zoomable-imageMt:hover {
+    transform: scale(3.0); /* Ajusta el valor de escala según sea necesario */
+    transform-origin: top left; /* Expande hacia la derecha y hacia abajo */
+    position: center;
+}
 

@@ -48,11 +48,11 @@ const DorsalDelPene = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnDs1" onClick={() => handleButtonClick('1', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnDs2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnDs3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnDs4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnDs5" onClick={() => handleButtonClick('5', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnDs1" onClick={() => handleButtonClick('T.	Sínfisis del pubis.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnDs2" onClick={() => handleButtonClick('R.	Colocar en la base del pene antes de la colocación  del electrodo activo. ', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnDs3" onClick={() => handleButtonClick('1-2 cm distal del electrodo de referencia (estará situado previamente en la base del pene).', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnDs4" onClick={() => handleButtonClick('1-2 cm distal del electrodo de referencia (estará situado previamente en la base del pene).', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnDs5" onClick={() => handleButtonClick('R.	Colocar en la base del pene antes de la colocación  del electrodo activo. ', { top: '12%', left: '32%' })}></button>}
             
             </div>
             {textBoxVisible && (

@@ -77,32 +77,32 @@ const Facial = () => {
             {currentImageIndex === 0 && <button className="btnFc11" onClick={() => handleButtonClick('11', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnFc12" onClick={() => handleButtonClick('12', { top: '12%', left: '32%' })}></button>}
             
-            {currentImageIndex === 1 && <button className="btnFc13" onClick={() => handleButtonClick('13', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFc14" onClick={() => handleButtonClick('14', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFc15" onClick={() => handleButtonClick('15', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFc16" onClick={() => handleButtonClick('16', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFc17" onClick={() => handleButtonClick('17', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFc18" onClick={() => handleButtonClick('18', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFc19" onClick={() => handleButtonClick('19', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFc20" onClick={() => handleButtonClick('20', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFc13" onClick={() => handleButtonClick('1. Preauricular \n2. Postauricular \n3. Rama. 2 a 5 cm en dirección antero medial y orientado hacia el musculo correspondiente (con el estimulador bipolar, una colocación cómoda para el explorador es colocar el ánodo en el área preauricular-trago anterior y el cátodo en dirección medial hacia el musculo de registro).', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFc14" onClick={() => handleButtonClick('Orbicularis oculi. Con electrodo de superficie colocado, lateral al borde externo de la órbita.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFc15" onClick={() => handleButtonClick('Región frontal.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFc16" onClick={() => handleButtonClick('Sobre dorso del tabique nasal 2 cm en dirección lateral, ipsilateral al lado estimulado.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFc17" onClick={() => handleButtonClick('Sobre el dorso del tabique nasal 1 cm en dirección lateral, ipsilateral al lado estimulado.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFc18" onClick={() => handleButtonClick('Nasalis. Con electrodo de superficie colocado, lateral al centro de la nariz.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFc19" onClick={() => handleButtonClick('Orbicularis oris. Con electrodo de superficie colocado, lateral al borde externo de la comisura labial.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFc20" onClick={() => handleButtonClick('Inferior a la mitad del labio menor.', { top: '12%', left: '32%' })}></button>}
             
-            {currentImageIndex === 2 && <button className="btnFc21" onClick={() => handleButtonClick('21', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnFc22" onClick={() => handleButtonClick('22', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnFc23" onClick={() => handleButtonClick('23', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnFc24" onClick={() => handleButtonClick('24', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnFc21" onClick={() => handleButtonClick('Región frontal.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnFc22" onClick={() => handleButtonClick('Sobre dorso del tabique nasal 2 cm en dirección lateral, ipsilateral al lado estimulado.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnFc23" onClick={() => handleButtonClick('Orbicularis oculi. Con electrodo de superficie colocado, lateral al borde externo de la órbita.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnFc24" onClick={() => handleButtonClick('1. Preauricular \n2. Postauricular \n3. Rama. 2 a 5 cm en dirección antero medial y orientado hacia el musculo correspondiente (con el estimulador bipolar, una colocación cómoda para el explorador es colocar el ánodo en el área preauricular-trago anterior y el cátodo en dirección medial hacia el musculo de registro).', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 2 && <button className="btnFc25" onClick={() => handleButtonClick('25', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 2 && <button className="btnFc26" onClick={() => handleButtonClick('26', { top: '12%', left: '32%' })}></button>}
             
-            {currentImageIndex === 3 && <button className="btnFc27" onClick={() => handleButtonClick('27', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 3 && <button className="btnFc28" onClick={() => handleButtonClick('28', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 3 && <button className="btnFc29" onClick={() => handleButtonClick('29', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 3 && <button className="btnFc27" onClick={() => handleButtonClick('Región frontal.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 3 && <button className="btnFc28" onClick={() => handleButtonClick('Sobre el dorso del tabique nasal 1 cm en dirección lateral, ipsilateral al lado estimulado.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 3 && <button className="btnFc29" onClick={() => handleButtonClick('Nasalis. Con electrodo de superficie colocado, lateral al centro de la nariz.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 3 && <button className="btnFc30" onClick={() => handleButtonClick('30', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 3 && <button className="btnFc31" onClick={() => handleButtonClick('31', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 3 && <button className="btnFc32" onClick={() => handleButtonClick('32', { top: '12%', left: '32%' })}></button>}
             
-            {currentImageIndex === 4 && <button className="btnFc33" onClick={() => handleButtonClick('33', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 4 && <button className="btnFc34" onClick={() => handleButtonClick('34', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 4 && <button className="btnFc35" onClick={() => handleButtonClick('35', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnFc33" onClick={() => handleButtonClick('Región frontal', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnFc34" onClick={() => handleButtonClick('Inferior a la mitad del labio menor.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnFc35" onClick={() => handleButtonClick('Orbicularis oris. Con electrodo de superficie colocado, lateral al borde externo de la comisura labial.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 4 && <button className="btnFc36" onClick={() => handleButtonClick('36', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 4 && <button className="btnFc37" onClick={() => handleButtonClick('37', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 4 && <button className="btnFc38" onClick={() => handleButtonClick('38', { top: '12%', left: '32%' })}></button>}

@@ -52,10 +52,10 @@ const Femoral = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnFm1" onClick={() => handleButtonClick('1', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnFm2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnFm3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnFm4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFm1" onClick={() => handleButtonClick('Inguinal: Se aplica justo debajo del ligamento inguinal y lateral a la arteria femoral.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFm2" onClick={() => handleButtonClick('Zona media lateral entre estimulo y registro.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFm3" onClick={() => handleButtonClick('Músculo Recto Femoral, colocar el electrodo de superficie sobre la cara anterior del muslo, a la media distancia entre el ligamento inguinal y la patela. Se pueden utilizar distancias establecidas desde el ligamento inguinal en dirección distal de 14 y 30 cm.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFm4" onClick={() => handleButtonClick('En el tendón del recto femoral, cerca del borde superior de la rótula.', { top: '12%', left: '32%' })}></button>}
             
             {currentImageIndex === 1 && <button className="btnFm5" onClick={() => handleButtonClick('5', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnFm6" onClick={() => handleButtonClick('6', { top: '12%', left: '32%' })}></button>}

@@ -79,7 +79,7 @@
     top: 30%;
     left: 45%;
     transform: translate(145%, 115%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -94,7 +94,7 @@
     top: 30%;
     left: 45%;
     transform: translate(560%, 100%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -109,7 +109,7 @@
     top: 30%;
     left: 45%;
     transform: translate(570%, 210%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -124,7 +124,7 @@
     top: 30%;
     left: 45%;
     transform: translate(490%, 360%);
-    background-color: teal;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -132,14 +132,17 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
+
+
+
 .btnEp5 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(130%, 435%);
-    background-color: teal;
+    transform: translate(-895%, -155%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -149,12 +152,12 @@
 }
 .btnEp6 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(495%, 565%);
-    background-color: teal;
+    transform: translate(-610%, 110%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -162,17 +165,14 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
-
-
-
 .btnEp7 {
     position: absolute;
-    height: 2.3vw;
-    width: 2.3vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(-220%, 685%);
-    background-color: teal;
+    transform: translate(-630%, -90%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -182,12 +182,12 @@
 }
 .btnEp8 {
     position: absolute;
-    height: 2.3vw;
-    width: 2.3vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(-220%, 575%);
-    background-color: teal;
+    transform: translate(-360%, -220%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -197,12 +197,12 @@
 }
 .btnEp9 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.8vw;
+    width: 2.8vw;
     top: 30%;
     left: 45%;
-    transform: translate(60%, -300%);
-    background-color: teal;
+    transform: translate(-275%, 475%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -212,12 +212,12 @@
 }
 .btnEp10 {
     position: absolute;
-    height: 2.7vw;
-    width: 2.7vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(320%, 355%);
-    background-color: teal;
+    transform: translate(-220%, -230%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -227,26 +227,27 @@
 }
 .btnEp11 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(60%, -300%);
-    background-color: teal;
+    transform: translate(225%, -255%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
     color: white;
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
-}.btnEp12 {
+}
+.btnEp12 {
     position: absolute;
-    height: 2.2vw;
-    width: 2.2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(60%, -300%);
-    background-color: teal;
+    transform: translate(375%, -275%);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -258,19 +259,20 @@
 .text-boxEp {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 35vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(233, 14, 69, 0.842);
-    color: #242424;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
 
 

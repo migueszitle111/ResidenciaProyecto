@@ -48,15 +48,15 @@ const Supraclavicular = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnSpC1" onClick={() => handleButtonClick('1', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnSpC2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnSpC3" onClick={() => handleButtonClick('3', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnSpC4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC1" onClick={() => handleButtonClick('Acromio.', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC2" onClick={() => handleButtonClick('3 cm en dirección caudal mismo tipo de electrodo de forma horizontal.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC3" onClick={() => handleButtonClick('Electrodos adheribles de tira colocados sobre la superficie exterior de la diáfisis clavicular.', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC4" onClick={() => handleButtonClick('Cuello punto medio: El cátodo se coloca en el borde posterior del músculo esternocleidomastoideo a nivel del margen inferior del cartílago tiroides.', { top: '12%', left: '32%'})}></button>}
             
             
             </div>
             {textBoxVisible && (
-                <div className="text-box" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxSpC" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}

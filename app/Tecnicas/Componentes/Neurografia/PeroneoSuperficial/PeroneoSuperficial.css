@@ -79,7 +79,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-125%, 535%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -94,7 +94,7 @@
     top: 30%;
     left: 45%;
     transform: translate(360%, 730%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -109,7 +109,7 @@
     top: 30%;
     left: 45%;
     transform: translate(-125%, 365%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -124,7 +124,7 @@
     top: 30%;
     left: 45%;
     transform: translate(240%, 280%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -139,7 +139,7 @@
     top: 30%;
     left: 45%;
     transform: translate(280%, 185%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -154,7 +154,7 @@
     top: 30%;
     left: 45%;
     transform: translate(455%, -365%);
-    background-color: slategray;
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
@@ -167,19 +167,20 @@
 .text-boxPs {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 35vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(121, 118, 119, 0.842);
+    background-color: rgba(66, 66, 66, 0.842);
     color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
 
 

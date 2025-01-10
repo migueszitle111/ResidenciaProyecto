@@ -52,10 +52,10 @@ const PeroneoProfundo = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnPp1" onClick={() => handleButtonClick('1', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPp2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPp3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPp4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp1" onClick={() => handleButtonClick('3 cm distal sobre dorso del segundo ortejo ', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp2" onClick={() => handleButtonClick('Horizontal al espacio interdigital, entre las cabezas del primer y segundo metatarsiano.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp3" onClick={() => handleButtonClick('1.	Tobillo: de forma antidrómica a 12 cm proximal del electrodo activo y justo lateral al tendón extensor largo del primer ortejo. En caso de pies de longitud considerable, el estimulo deberá aplicarse 2 cm distal del retináculo extensor.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp4" onClick={() => handleButtonClick('Dorso del pie.', { top: '12%', left: '32%' })}></button>}
             
             {currentImageIndex === 1 && <button className="btnPp5" onClick={() => handleButtonClick('5', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPp6" onClick={() => handleButtonClick('6', { top: '12%', left: '32%' })}></button>}

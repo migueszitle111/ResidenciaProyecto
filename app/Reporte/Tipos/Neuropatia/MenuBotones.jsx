@@ -52,6 +52,10 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
 
       {step === 'CD' && <StepCD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
 
+      {step === 'CDD' && <StepCDD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
+
+      {step === 'CDI' && <StepCDI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
+
       {step === 'D' && <StepD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
 
       {step === 'E' && <StepE handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
@@ -241,9 +245,9 @@ const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
       UBICACION
     </h1>
 
-    <div onClick={() => setStep('CD')}>
+    <div onClick={() => setStep('CDD')}>
       <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
-    <div onClick={() => setStep('CD')}>
+    <div onClick={() => setStep('CDD')}>
       <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
 
 
@@ -327,6 +331,51 @@ const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => (
     </div> <br></br><br></br><br></br><br></br>
     <h1 className=' text-xl font-bold text-white '>
       SELECCIONAR EL NIVEL DE LESION CON EL PUNTERO
+    </h1>
+
+    <div onClick={() => setStep('D')}>
+      <ConclusionButton value='seguir' displayText={'LISTO'} />
+    </div>
+
+  </div>
+
+);
+
+const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => (
+
+  <div>
+    <div className='button-bar'>
+      <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_Out.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div> <br></br><br></br><br></br><br></br>
+    <h1 className=' text-xl font-bold text-white '>
+      SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO
+    </h1>
+
+    <div onClick={() => setStep('CDI')}>
+      <ConclusionButton value='seguir' displayText={'LISTO'} />
+    </div>
+
+  </div>
+
+);
+const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => (
+
+  <div>
+    <div className='button-bar'>
+      <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_Out.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div> <br></br><br></br><br></br><br></br>
+    <h1 className=' text-xl font-bold text-white '>
+    SELECCIONAR EL NIVEL DE LESION DEL LADO IZQUIERDO CON EL PUNTERO
     </h1>
 
     <div onClick={() => setStep('D')}>

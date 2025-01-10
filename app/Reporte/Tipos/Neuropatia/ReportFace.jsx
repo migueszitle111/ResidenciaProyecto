@@ -282,7 +282,7 @@ const Reporte = () => {
 
                   },
                   {
-                    expectedValue: 'INTEROSEO_ANTERIOR',
+                    expectedValue: 'INTEROSEOANTERIOR',
                     image: {
                       src: 'NeuropatiaImg/NO_Interoseo Anterior.png',
                       alt: 'Modelo',
@@ -324,6 +324,7 @@ const Reporte = () => {
                       alt: 'Modelo',
                     }
                   },
+                  
                   {
                     expectedValue: 'INTEROSEO_POSTERIOR',
                     image: {
@@ -519,6 +520,23 @@ const Reporte = () => {
                     }
                   },
 
+                // FALTA EL NERVIO 
+                  {
+                    expectedValue: 'INTEROSEO_ANTERIOR_DERgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/DERECHA/Mediano.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  // FALTA EL NERVIO 
+                  {
+                    expectedValue: 'INTEROSEO_POSTERIOR_DERgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/DERECHA/Mediano.png',
+                      alt: 'Modelo',
+                    }
+                  },
+
                   {
                     expectedValue: 'ACCESORIO_DERgeneralizada',
                     image: {
@@ -631,6 +649,7 @@ const Reporte = () => {
                       alt: 'Modelo',
                     }
                   },
+                  
                   {
                     expectedValue: 'SUPRAESCAPULAR_DERgeneralizada',
                     image: {
@@ -834,6 +853,14 @@ const Reporte = () => {
                       alt: 'Modelo',
                     }
                   },
+                  //C:\Users\Estefanny Cruz.B\Documents\RESIDENCIA\ResidenciaProyecto\public\assets\NeuropatiaImg\NervioRojo\COMPLETO\NO_Interoseo-Anterior(1).png
+                  {
+                    expectedValue: 'INTEROSEOANTERIOR_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Interoseo-Anterior(1).png',
+                      alt: 'Modelo',
+                    }
+                  },
 
                   {
                     expectedValue: 'ACCESORIO_COMPgeneralizada',
@@ -942,6 +969,36 @@ const Reporte = () => {
                     }
                   },
                   {
+                    expectedValue: 'RADIAL_SUPERFICIAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Radial-Superficial(1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'INTEROSEO_POSTERIOR_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Interoseo-Posterior (1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+
+                //FALTA NERVIO
+                  {
+                    expectedValue: 'DORSAL_CUTANEO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Radial-Superficial(1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'SAFENO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Safeno(1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'SUPRAESCAPULAR_COMPgeneralizada',
                     image: {
                       src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Supraescapular.png',
@@ -952,6 +1009,55 @@ const Reporte = () => {
                     expectedValue: 'TIBIAL_COMPgeneralizada',
                     image: {
                       src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Tibial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'SURAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Sural-(1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PLANTAR_MEDIAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Plantar-Medial(1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PLANTAR_LATERAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Plantar-Lateral(1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PERONEO_SUPERFICIAL_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Peroneo-Superficial (1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PERONEO_PROFUNDO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Peroneo-Profundo (1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'GLUTEO_INFERIOR_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Gluteo Sup.Inf (1).png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'GLUTEO_MEDIO_COMPgeneralizada',
+                    image: {
+                      src: 'NeuropatiaImg/NervioRojo/COMPLETO/NO_Gluteo Medio (1).png',
                       alt: 'Modelo',
                     }
                   },

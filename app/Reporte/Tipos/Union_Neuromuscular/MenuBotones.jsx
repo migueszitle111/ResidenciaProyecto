@@ -129,8 +129,8 @@ const StepA = ({ handleNextStep }) => {
           <img src="" style={{filter: 'invert(0.5)'}}/>
         </button>
 
-        <button className={`print-button`}>
-          <img src="" style={{filter: 'invert(0.5)'}}/>
+        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
@@ -164,6 +164,11 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
           }} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -183,12 +188,23 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
 };
 
 const StepC = ({ handleNextStep, handlePrevStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+      <button  onClick={() => {
+            removeConclusion('bulbar')
+            removeConclusion('proximal')
+            removeConclusion('distal')
+            handlePrevStep()
+          }} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -198,7 +214,6 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <ConclusionButton value='bulbar' title='BULBAR' displayText={'BULBAR'}   dangerouslySetInnerHTML={{ __html: ' BULBAR' }}/>
-     
       <ConclusionButton value='proximal' title='PROXIMAL' displayText={'PROXIMAL'}/>
       <ConclusionButton value='distal' title='DISTAL' displayText={'DISTAL'}/>
     </div>
@@ -206,14 +221,24 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
 };
 
 const StepD = ({ handleNextStep, handlePrevStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+      <button  onClick={() => {
+            removeConclusion('activa_abundante_difusa')
+            removeConclusion('activa_moderada_progresiva')
+            handlePrevStep()
+          }} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
-        <button id='prev' onClick={handleNextStep} className={`print-button dont-print `}>
-        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
@@ -231,12 +256,23 @@ const StepD = ({ handleNextStep, handlePrevStep }) => {
 };
 
 const StepE = ({ handleNextStep, handlePrevStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+      <button  onClick={() => {
+            removeConclusion('intensidad_leve')
+            removeConclusion('intensidad_moderada')
+            removeConclusion('intensidad_severa')
+            handlePrevStep()
+          }} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -258,12 +294,23 @@ const StepE = ({ handleNextStep, handlePrevStep }) => {
 };
 
 const StepF = ({ handleNextStep, handlePrevStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+      <button  onClick={() => {
+            removeConclusion('recuperacion_completa')
+            removeConclusion('recuperacion_parcial')
+            removeConclusion('recuperacion_nula')
+            handlePrevStep()
+          }} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>

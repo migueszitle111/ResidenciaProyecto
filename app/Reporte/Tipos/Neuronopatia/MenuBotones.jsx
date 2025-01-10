@@ -1,6 +1,5 @@
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
-
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
@@ -203,6 +202,8 @@ const StepA = ({ handleNextStep, handleNextStep1 }) => {
 };
 
 const StepB = ({ handleNextStep, handlePrevStep,handleNextStep2 }) => {
+  const { removeConclusion } = useContext(ReportContext)
+
   return (
     <div>
       <div className='button-bar'>

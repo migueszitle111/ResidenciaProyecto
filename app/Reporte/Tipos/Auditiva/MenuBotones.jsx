@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState,useContext} from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
+import { ReportContext } from '@/src/context'
 import './Style.css';
 
 // Numero de pasos
@@ -58,6 +59,8 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'H' && <StepH handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
       {step === 'I' && <StepI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
       {step === 'J' && <StepJ handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}  handlePrint={handlePrint}/>}
+      {step === 'J2' && <StepJ2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}  handlePrint={handlePrint}/>}
+
 
     </div>
   );
@@ -114,7 +117,7 @@ const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => (
       <button onClick={() => setStep('B')} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={handleNextStep} className="print-button dont-print">
+      <button onClick={() => setStep('D1')} className="print-button dont-print">
         <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>
@@ -134,7 +137,7 @@ const StepC2 = ({ handlePrevStep, handleNextStep, setStep }) => (
       <button onClick={() => setStep('B')} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={handleNextStep} className="print-button dont-print">
+      <button onClick={() => setStep('D2')} className="print-button dont-print">
         <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>
@@ -170,7 +173,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => (
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       
-      <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+      <button onClick={() => setStep('E')} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
     </div>
@@ -185,7 +188,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
       <button onClick={() => setStep('B')} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={handleNextStep} className="print-button dont-print">
+      <button onClick={()=>setStep('F')} className="print-button dont-print">
         <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>
@@ -230,16 +233,16 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
 const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('B')} className="print-button dont-print">
+      <button onClick={() => setStep('A')} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={handleNextStep} className="print-button dont-print">
+      <button onClick={() => setStep('J2')} className="print-button dont-print">
         <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
-          setStep('J');
+          setStep('J2');
         }}>
       <ConclusionButton
         value="izquierdo"
@@ -249,7 +252,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
       />
     </div>
     <div  onClick={() => {
-          setStep('J');
+          setStep('J2');
         }}>
       <ConclusionButton
         value="derecho"
@@ -259,7 +262,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
       />
     </div>
     <div onClick={() => {
-          setStep('J');
+          setStep('J2');
         }}>
       <ConclusionButton
         value="bilateral"
@@ -294,72 +297,123 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
 </div>
 );
 
-const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
-  <div>
-    <div className='button-bar'>
-      <button onClick={() => setStep('E2')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('J')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
-    </div>
-    <h1 className='text-xl font-bold text-white'>REGION: </h1>
-  
-    <div onClick={() => setStep('J')}>
-      <ConclusionButton value='rostral' title=' A TRAVÉS DE REGION ROSTRAL (III-V) DEL TALLO CEREBRAL ' displayText='ROSTRAL' />
-      <ConclusionButton value='caudal' title=' A TRAVÉS DE REGION CAUDAL (I-III) DEL TALLO CEREBERAL' displayText='CAUDAL' />
-      <ConclusionButton value='tallo_cerebral' title=' A TRAVES DE TODO EL TRAYECTO DEL TALLO CEREBERAL (I-V)' displayText='TALLO CEREBRAL' />
-    </div>
+// ...
+const StepG = ({
+  setStep,
+  selectedSide,
+  // otras props que necesites
+}) => {
+  const { updateConclusions } = useContext(ReportContext)
 
-  
-</div>
+  // Array de los 5 niveles, EN ORDEN.
+  // Nota que "value" incluye "selectedSide".
+  const levels = [
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO',
+      value: `${selectedSide}nervio_auditivo`,
+      displayText: 'NERVIO AUDITIVO (I)'
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR',
+      value: `${selectedSide}nucleo_coclear`,
+      displayText: 'NUCLEO COCLEAR (II)'
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE..',
+      value: `${selectedSide}completo_olivar_trapezoide`,
+      displayText: 'COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)'
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.',
+      value: `${selectedSide}lemnisco_lateral`,
+      displayText: 'LEMNISCO LATERAL (IV)'
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.',
+      value: `${selectedSide}coliculo_inferior`,
+      displayText: 'COLÍCULO INFERIOR (V)'
+    },
+  ]
 
-);
+  // Cuando clican cualquiera de los 5, seleccionamos
+  // a partir de ÉL hasta el final (incluyéndolo).
+ const handleConclusionClick = (title, value) => {
+  const index = levels.findIndex(item => item.value === value);
+  if (index === -1) {
+    updateConclusions({ title, value });
+    return;
+  }
+
+  // Limpia los niveles previos (si tu contexto lo permite),
+  // o de lo contrario sobrescribe la conclusión anterior.
+  // Luego agregas desde 'index' hasta el final:
+  for (let i = index; i < levels.length; i++) {
+    updateConclusions({
+      title: i === index ? levels[i].title : '', // Solo el clicado conserva su título
+      value: levels[i].value,
+    });
+  }
+};
 
 
-const StepG = ({ setStep, selectedImages, handleUndo, handleImageChange, selectedSide }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('F')} id='prev' className={`print-button dont-print `}>
+  return (
+    <div>
+      <div className='button-bar'>
+      <button onClick={() => setStep('F')} id='prev' className={`print-button dont-print `}>
         <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
       </button>
       <button onClick={() => setStep('H')} id='next' className={`print-button dont-print `}>
         <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
       </button>
-    </div>
-    <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
-    
-    
-    <ConclusionButton value={`${selectedSide}nervio_auditivo`} title=' TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO' displayText='NERVIO AUDITIVO (I)'/> 
-    <ConclusionButton value={`${selectedSide}nucleo_coclear`} title=' TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR' displayText='NUCLEO COCLEAR (II)'/> 
-    <ConclusionButton value={`${selectedSide}completo_olivar_trapezoide`} title=' TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE..' displayText='COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)'/> 
-    <ConclusionButton value={`${selectedSide}lemnisco_lateral`} title=' TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.' displayText='LEMNISCO LATERAL (IV)'/> 
-    <ConclusionButton value={`${selectedSide}coliculo_inferior`} title=' TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.' displayText='COLÍCULO INFERIOR (V)'/> 
+       
+      </div>
 
-  </div>
-);
+      <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
+      
+      {/* Botón 1 (especial) */}
+      <ConclusionButton
+        value={`${selectedSide}nervio_auditivo`}
+        title="TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO."
+        displayText="NERVIO AUDITIVO (I)"
+        onClick={handleConclusionClick}   // <--- Pasamos la función
+      />
 
-const StepG2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('F2')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('J')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
+      {/* Botón 2 (normal) */}
+      <ConclusionButton
+        value={`${selectedSide}nucleo_coclear`}
+        title="TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR."
+        displayText="NUCLEO COCLEAR (II)"
+        onClick={handleConclusionClick}   // <--- misma función
+      />
+
+      {/* Botón 3 (normal) */}
+      <ConclusionButton
+        value={`${selectedSide}completo_olivar_trapezoide`}
+        title="TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE."
+        displayText="COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)"
+        onClick={handleConclusionClick}
+      />
+
+      {/* Botón 4 (normal) */}
+      <ConclusionButton
+        value={`${selectedSide}lemnisco_lateral`}
+        title="TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL."
+        displayText="LEMNISCO LATERAL (IV)"
+        onClick={handleConclusionClick}
+      />
+
+      {/* Botón 5 (normal) */}
+      <ConclusionButton
+        value={`${selectedSide}coliculo_inferior`}
+        title="TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR."
+        displayText="COLÍCULO INFERIOR (V)"
+        onClick={handleConclusionClick}
+      />
     </div>
-    <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
-    <div onClick={() => setStep('J')}>
-    <ConclusionButton value={'nervio_auditivo'} title=' TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO' displayText='NERVIO AUDITIVO (I)'/> 
-    <ConclusionButton value={'nucleo_coclear'} title=' TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR' displayText='NUCLEO COCLEAR (II)'/> 
-    <ConclusionButton value={'completo_olivar_trapezoide'} title=' TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE..' displayText='COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)'/> 
-    <ConclusionButton value={'lemnisco_lateral'} title=' TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.' displayText='LEMNISCO LATERAL (IV)'/> 
-    <ConclusionButton value={'coliculo_inferior'} title=' TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.' displayText='COLÍCULO INFERIOR (V)'/> 
-    </div>
-  </div>
-);
+  )
+}
+
+
 
 
 const StepH = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => (
@@ -883,6 +937,408 @@ const StepJ = ({ setStep, selectedImages, handleUndo, handleImageChange, handleP
 
     </div>
   );
+};
+
+const StepJ2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+  const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
+  
+  const [imageSrc, setImageSrc] = useState(null);
+  const [isUploadAllowed, setIsUploadAllowed] = useState(false); // Estado para controlar si la carga está permitida
+  const toggleDivSize = (index) => {
+    // Cambiar el estado del tamaño del div al hacer clic
+    setExpandedDivs((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index], // Alterna entre true/false para expandir o contraer
+    }));
+  };
+
+  // Función para habilitar la carga de la imagen (puede estar vinculada a algún evento)
+  const allowImageUpload = () => {
+    setIsUploadAllowed(true); // Habilita la carga
+  };
+  
+  // Función para manejar la carga de la imagen
+  const handleImageUpload = (event) => {
+    if (!isUploadAllowed) {
+      alert("Arrastre la imagen dentro una figura .");
+      return; // Si la carga no está permitida, evita que la imagen se cargue
+    }
+  
+    const file = event.target.files[0]; // Obtiene el primer archivo seleccionado
+    if (file) {
+      const reader = new FileReader(); // Crea un lector de archivos
+      reader.onloadend = () => {
+        setImageSrc(reader.result); // Almacena la imagen en formato base64
+      };
+      reader.readAsDataURL(file); // Lee el archivo como una URL de datos
+    }
+  };
+
+  // Función para simular el clic en el input file
+  const triggerFileInput = () => {
+    document.getElementById('imageInput').click();
+  };
+
+  const resetStep = () => {
+    setExpandedDivs({});
+    setImageSrc(null);
+    setIsUploadAllowed(false);
+};
+
+return (
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => setStep('E2')} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+
+      <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
+        <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+      </button>
+    
+      <button onClick={handlePrint} className={`print-button dont-print`}>
+        <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+      </button>
+    </div>
+
+
+      <div className='container-grid'>
+          {[1].map((index) => (
+            <div key={index} className={`DivPanel2 ${expandedDivs[index] ? 'DivPanel2-expanded' : ''}`}>
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 2.png"
+                    className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}>
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+
+          {[2].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 4.png"
+                    className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+          
+
+          {[3].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 3.png"
+                    className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`}// Aplicar estilo a la imagen
+                  />
+                  <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          {[4].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 2.png"
+                    className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          {[5].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 1.png"
+                    className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+          
+
+          {[6].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 5.png"
+                    className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          {[7].map((index) => (
+            <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                  <div
+                    className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
+                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                  >
+                    <img
+                      src="/assets/Simbolos/S_Linea 2.png"
+                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
+                    />
+                    <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
+                      <DropArea2 isExpanded={expandedDivs[index]} />
+                    </div>
+                  </div>
+                </DraggableDiv>
+            </div>
+            ))}
+          
+          
+          {[8].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 4.png"
+                    className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          
+
+          {[9].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 3.png"
+                    className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          {[10].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 2.png"
+                    className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          {[11].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 1.png"
+                    className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]}  />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+          
+
+          {[12].map((index) => (
+              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Linea 5.png"
+                    className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
+                  />
+                  <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
+                    <DropArea2 isExpanded={expandedDivs[index]} />
+                  </div>
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+
+          {[13].map((index) => (
+              <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Cruz 1.png"
+                    className='cruzImg' // Aplicar estilo a la imagen
+                  />
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+    
+          {[14].map((index) => (
+              <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Cruz 2.png"
+                    className='cruzImg' // Aplicar estilo a la imagen
+                  />
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          {[15].map((index) => (
+              <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Cruz 3.png"
+                    className='cruzImg' // Aplicar estilo a la imagen
+                  />
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          {[16].map((index) => (
+              <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Cruz 4.png"
+                    className='cruzImg' // Aplicar estilo a la imagen
+                  />
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          {[17].map((index) => (
+              <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Circulo Rojo XXS (3.5px).png"
+                    className='PuntoRojo' // Aplicar estilo a la imagen
+                  />
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+          {[18].map((index) => (
+              <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
+              <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
+                <div
+                  className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
+                  onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
+                >
+                  <img
+                    src="/assets/Simbolos/S_Circulo Rojo XS (4px).png"
+                    className='PuntoRojo' // Aplicar estilo a la imagen
+                  />
+                </div>
+              </DraggableDiv>
+            </div>
+          ))}
+
+      </div>
+
+  </div>
+);
 };
 
 

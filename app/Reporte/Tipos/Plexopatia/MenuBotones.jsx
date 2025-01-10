@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect,useContext, useState } from 'react';
+import { ReportContext } from '@/src/context';
 import { Accordion, darvalor } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
@@ -748,6 +749,7 @@ const cambiotexto = () =>{
 ///////////////// Menu de cada paso /////////////////
 
 const StepA = ({ handleNextStep,handleNextStep1,handleNextStep2 }) => {
+  
   return (
     <div>
       <div className='button-bar'>
@@ -782,10 +784,17 @@ const StepA = ({ handleNextStep,handleNextStep1,handleNextStep2 }) => {
 };
 
 const StepB1 = ({ handleNextStep, handlePrevStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+        <button onClick={() => {
+           removeConclusion('izquierda_C')
+            removeConclusion('derecha_C')
+            removeConclusion('bilateral_C')
+          
+          handlePrevStep}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
         <button id='prev' className={`print-button dont-print `}>
@@ -808,10 +817,17 @@ const StepB1 = ({ handleNextStep, handlePrevStep }) => {
 };
 
 const StepB2 = ({ handleNextStep1, handlePrevStep1, ladoizquierda, ladoderecho, ladobilateral}) => {
+  const { removeConclusion } = useContext(ReportContext)
+
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep1} id='prev' className={`print-button dont-print `}>
+        <button onClick={() => {
+          removeConclusion('izquierda')
+          removeConclusion('derecha')
+          removeConclusion('bilateral')
+          
+          handlePrevStep1}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
         <button id='prev' className={`print-button dont-print `}>
@@ -836,10 +852,15 @@ const StepB2 = ({ handleNextStep1, handlePrevStep1, ladoizquierda, ladoderecho, 
 };
 
 const StepB3 = ({ handleNextStep2, handlePrevStep2, ladoizquierda1, ladoderecho1, ladobilateral1 }) => {
+  
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep2} id='prev' className={`print-button dont-print `}>
+        <button onClick={() => {
+          removeConclusion('izquierda')
+          removeConclusion('derecha')
+          removeConclusion('bilateral')
+          handlePrevStep2}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
         <button id='prev' className={`print-button dont-print `}>
@@ -864,10 +885,15 @@ const StepB3 = ({ handleNextStep2, handlePrevStep2, ladoizquierda1, ladoderecho1
 };
 
 const StepC1 = ({ handleNextStep, handlePrevStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+        <button onClick={() => {
+          removeConclusion('aguda');
+          removeConclusion('subaguda');
+          removeConclusion('cronica');
+          handlePrevStep}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
         <button id='prev' className={`print-button dont-print `}>
@@ -888,10 +914,15 @@ const StepC1 = ({ handleNextStep, handlePrevStep }) => {
 };
 
 const StepC2 = ({ handleNextStep1, handlePrevStep1 }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep1} id='prev' className={`print-button dont-print `}>
+        <button onClick={() => {
+          removeConclusion('aguda');
+          removeConclusion('subaguda');
+          removeConclusion('cronica');
+          handlePrevStep1}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
         <button id='prev' className={`print-button dont-print `}>

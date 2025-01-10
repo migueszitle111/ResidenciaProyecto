@@ -9,12 +9,28 @@ export function NerviusButton({ title, value, displayText }) {
   const isSelected = conclusions.find(cl => cl.value === value);
 
   // Clase condicional para que el botón seleccionado sea visible y los demás transparentes
+<<<<<<< HEAD
   const classnames = 'cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in ' +
   (conclusions.find(cl => cl.value === value) ? 'bg-[#c44900]' : 'bg-transparent') + ' rounded-[50px] z-50 relative';
 
  // Función para actualizar las conclusiones
   function handleClick() {
   updateConclusions({ title, value });
+=======
+  const classnames = 'cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in ' + 
+    (selectedButton === value ? 'bg-[#c44900]' : 'bg-transparent') + ' rounded-[50px] z-50 relative';
+
+  // Función para actualizar las conclusiones y mostrar o esconder el botón seleccionado
+  function handleClick() {
+    if (selectedButton === value) {
+      // Si ya está seleccionado, deseleccionarlo (hacerlo invisible)
+      setSelectedButton(null);
+    } else {
+      // Si no está seleccionado, seleccionarlo (hacerlo visible)
+      setSelectedButton(value);
+    }
+    updateConclusions({ title, value });
+>>>>>>> f1c92946241d5167275d0e43f1a4c03934da14e3
   }
 
   return (
@@ -23,3 +39,10 @@ export function NerviusButton({ title, value, displayText }) {
     </div>
   );
 }
+
+
+
+
+
+
+

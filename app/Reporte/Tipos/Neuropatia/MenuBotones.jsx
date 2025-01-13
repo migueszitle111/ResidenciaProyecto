@@ -5,6 +5,15 @@ import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage'
 import { useImageState } from '../../MetodosBotones';
 import './Style.css';
 
+import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL';
+
+function Reporte({ copyConclusions }) {
+  return (
+    <div>
+      {checkDivsBILATERAL(copyConclusions)}
+    </div>
+  );
+}
 // Numero de pasos 
 //const stepsArray = ['A', 'B', 'B1', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 

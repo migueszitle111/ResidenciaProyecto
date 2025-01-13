@@ -1,7 +1,7 @@
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 
-export function NerviusButton({ title, value, displayText }) {
+export function NerviusButtonBILATERAL({ title, value, displayText }) {
   const { updateConclusions, conclusions } = useContext(ReportContext);
   const [selectedButton, setSelectedButton] = useState(null);
 
@@ -18,7 +18,7 @@ export function NerviusButton({ title, value, displayText }) {
       // Si ya está seleccionado, deseleccionarlo (hacerlo invisible)
       setSelectedButton(null);
     } else {
-      // Si no está seleccionado, seleccionarlo (hacerlo visible)
+      // Si no está seleccionado, seleccionarlo (hacerlo visible) 
       setSelectedButton(value);
     }
     updateConclusions({ title, value });

@@ -1,6 +1,4 @@
 
-import { ReportContext } from '@/src/context';
-import { useContext } from 'react';
 import { SegmentariaButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Segmentaria';
 
 export function checkDivsSegmentar(copyConclusions) {

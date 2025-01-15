@@ -203,7 +203,6 @@ const StepA = ({ handleNextStep, handleNextStep1 }) => {
 
 const StepB = ({ handleNextStep, handlePrevStep,handleNextStep2 }) => {
   const { removeConclusion } = useContext(ReportContext)
-
   return (
     <div>
       <div className='button-bar'>

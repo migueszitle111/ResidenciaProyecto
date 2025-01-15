@@ -84,10 +84,17 @@ const StepA = ({ handleNextStep ,setStep}) => (
   </div>
 );
 
-const StepB = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepB = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('A')} className="print-button dont-print">
+      <button onClick={() => {
+        removeConclusion('retardo_en_la_conduccion')
+        removeConclusion('bloqueo_en_la_conduccion')
+        removeConclusion('deficit_neuronal')
+        removeConclusion('sin_respuesta')
+        setStep('A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
 
@@ -110,11 +117,18 @@ const StepB = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
   </div>
 );
+};
 
-const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('B')} className="print-button dont-print">
+      <button onClick={() => {
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        setStep('B')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button onClick={() => setStep('D1')} className="print-button dont-print">
@@ -130,11 +144,18 @@ const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
   </div>
 );
+};
 
-const StepC2 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepC2 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('B')} className="print-button dont-print">
+      <button onClick={() =>{ 
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        setStep('B')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button onClick={() => setStep('D2')} className="print-button dont-print">
@@ -150,11 +171,16 @@ const StepC2 = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
   </div>
 );
+};
 
-const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('C1')} className="print-button dont-print">
+      <button onClick={() =>{ 
+        removeConclusion('perdida_axonal_secundaria')
+        setStep('C1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button onClick={() => setStep('E')} id='prev' className={`print-button dont-print `}>
@@ -165,8 +191,10 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => (
       <ConclusionButton value="perdida_axonal_secundaria" title=" Y PERDIDA AXONAL SECUNDARIA " displayText="PERDIDA AXONAL SECUNDARIA" />
   </div>
 );
+};
 
-const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  return (
   <div>
     <div className='button-bar'>
       <button onClick={() => setStep('C2')} className="print-button dont-print">
@@ -181,6 +209,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => (
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="RETARDO SECUNDARIO EN LA CONDUCCIÓN" />
   </div>
 );
+};
 
 const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
   <div>

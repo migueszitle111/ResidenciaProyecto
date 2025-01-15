@@ -1,51 +1,96 @@
-import { ReportContext } from '@/src/context';
 import { createContext, useContext, useState } from 'react';
 
-var value=1;
-export function darvalor({value}){
-value += 1
-}
-
-// Crea un contexto para el reporte con un valor inicial vacío
+// Contexto para acordeones externos (solo uno abierto)
 export const AccordionValuesContext = createContext({
-  activeValue: value,
-  setActiveValue: () => {}
-})
+  activeValue: null,
+  setActiveValue: () => {},
+});
 
-// Crea un componente que provee el contexto a sus hijos
-export function AccordionContainer ({ children }) {
-  const [activeValue, setActiveValue] = useState(null); // Inicializa el estado correctamente
+// Contexto para acordeones internos (varios abiertos)
+export const InternalAccordionContext = createContext({
+  activeInternalValues: {},
+  toggleInternalValue: () => {},
+});
 
-  const value = { activeValue, setActiveValue } // Crea un objeto con el valor y la función para actualizarlo
-  // Renderiza los hijos
+// Proveedor para acordeones externos
+export function AccordionContainer({ children }) {
+  const [activeValue, setActiveValue] = useState(null);
+
   return (
-    <AccordionValuesContext.Provider value={value}>
+    <AccordionValuesContext.Provider value={{ activeValue, setActiveValue }}>
       {children}
     </AccordionValuesContext.Provider>
-  )
+  );
 }
 
-// Crea un componente que recibe un valor y un título
-// Si el valor es igual al valor activo, muestra el contenido
-export function Accordion ({ children, value, title, displayText, onToggle }) {
-  const { updateConclusions } = useContext(ReportContext);
+// Proveedor para acordeones internos
+export function InternalAccordionContainer({ children }) {
+  // En este caso guardamos un objeto cuyas keys son los 'value' de cada acordeón
+  // y su valor es true/false si está abierto o no
+  const [activeInternalValues, setActiveInternalValues] = useState({});
 
-  const { setActiveValue } = useContext(AccordionValuesContext) // Obtiene la función para actualizar el valor activo
-  const [active, setActive] = useState(false) // Estado para saber si el acordeón está activo
-
-  function handleClick () {
-    //updateConclusions({ title });
-    setActive(prev => !prev);
-    setActiveValue(prev => prev === value ? null : value);
-    if (onToggle) onToggle(); // Asegúrate de que onToggle esté definido
-    
+  function toggleInternalValue(value) {
+    setActiveInternalValues(prev => {
+      // Si ya está abierto, lo cerramos
+      if (prev[value]) {
+        const newState = { ...prev };
+        delete newState[value];
+        return newState;
+      } 
+      // Si está cerrado, lo abrimos (sin cerrar otros)
+      return {
+        ...prev,
+        [value]: true,
+      };
+    });
   }
 
-  // Renderiza el título y el contenido
   return (
-    <div className='p-2'>
-      <h2 className={'text-white cursor-pointer p-2 rounded-md transition-colors transition-300 ease-in hover:bg-[#8F3400]' + (active ? ' active bg-[#c44900]' : '')} onClick={handleClick}>{title}</h2>
-      {active && <div className='text-white p-2'>{children}</div>}
-    </div>  
-  )
+    <InternalAccordionContext.Provider
+      value={{ activeInternalValues, toggleInternalValue }}
+    >
+      {children}
+    </InternalAccordionContext.Provider>
+  );
+}
+
+// Componente Accordion
+// type = "external" => maneja la lógica de un solo abierto
+// type = "internal" => maneja la lógica de múltiples abiertos
+export function Accordion({ children, value, title, type = 'external' }) {
+  const { activeValue, setActiveValue } = useContext(AccordionValuesContext);
+  const { activeInternalValues, toggleInternalValue } = useContext(InternalAccordionContext);
+
+  const isExternal = type === 'external';
+
+  // Determina si está activo según si es externo o interno
+  const isActive = isExternal
+    ? activeValue === value
+    : !!activeInternalValues[value]; // true/false
+
+  function handleClick() {
+    if (isExternal) {
+      // Cierra el que esté abierto y abre este (lógica de "solo uno abierto")
+      setActiveValue(isActive ? null : value);
+    } else {
+      // Interno => se permite abrir/cerrar varios
+      toggleInternalValue(value);
+    }
+  }
+
+  return (
+    <div className="p-2">
+      <h2
+        className={`text-white cursor-pointer p-2 rounded-md 
+                    hover:bg-[#8F3400] transition-colors transition-300 ease-in 
+                    ${isActive ? 'bg-[#c44900]' : ''}`}
+        onClick={handleClick}
+      >
+        {title}
+      </h2>
+
+      {/* Si está activo, muestra el contenido */}
+      {isActive && <div className="text-white p-2">{children}</div>}
+    </div>
+  );
 }

@@ -57,13 +57,11 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'G' && <StepG handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
       {step === 'G2' && <StepG2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'G3' && <StepG3 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
-
       {step === 'H' && <StepH handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}  handlePrint={handlePrint}/>}
-
     </div>
   );
 };
-///////////////// Menu de cada paso /////////////////
+///////////////// Menu de cada paso /////////////////t
 const StepA = ({ handleNextStep ,setStep}) => (
   <div>
     <div className='button-bar'>
@@ -273,8 +271,6 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
   </div>
 );
 
-
-
 const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
   <div>
     <div className='button-bar'>
@@ -423,15 +419,11 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value="s1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
         <ConclusionButton value="s2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />
-         
         </div>
     </Accordion>
     </Accordion>
-    <ConclusionButton value="trigemino" title=", A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />
-
-  
+    <ConclusionButton value="trigemino" title=", A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />  
 </div>
-
 );
 
 
@@ -469,8 +461,6 @@ const StepG = ({ setStep, selectedImages, handleUndo, handleImageChange, selecte
     </div>
     <h1 className='text-xl font-bold text-white'>NIVEL SUPERIOR: </h1>
    
-    
-     
       <ConclusionButton value={`${selectedSide}corticals`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
       <ConclusionButton value={`${selectedSide}subcorticals`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medialNúcleo tectal). " displayText="SUBCORTICAL" />
       <ConclusionButton value={`${selectedSide}cervicals`} title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsalesTracto cuneatus). " displayText="CERVICAL" />
@@ -478,12 +468,6 @@ const StepG = ({ setStep, selectedImages, handleUndo, handleImageChange, selecte
           
   </div>
 );
-
-
-
-
-
-
 
 const StepG2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => (
   <div>

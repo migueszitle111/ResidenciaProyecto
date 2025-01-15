@@ -1,4 +1,4 @@
-import { Accordion } from '@/app/components/ReportTemplate/Accordion';
+import { Accordion ,AccordionContainer,InternalAccordionContainer} from '@/app/components/ReportTemplate/Accordion';
 import { CheckboxContext, ReportContextR, useButtonContext } from '@/src/context';
 import { useContext, useState } from 'react';
 import { ConclusionButtonR } from '../../../components/ReportTemplate/Conclusions';
@@ -8,6 +8,12 @@ import { useImageState } from '../../MetodosBotones';
 const useStep = () => {
   const [step, setStep] = useState('A'); // Inicialmente en el paso 'A'
   const { resetCheckboxes } = useContext(CheckboxContext);
+  const { resetAllButtons } = useButtonContext(); // <-- Importante
+  const { setInitialConclusions } = useContext(ReportContextR); // Acceder a setInitialConclusions desde el contexto
+
+  const resetCopyConclusions = () => {
+    setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
+  };
   const { handlePrint } = useImageState();
 
   // Flujo principal (ejemplo Radiculopatía Aguda)
@@ -19,14 +25,11 @@ const useStep = () => {
   };
   
   const handlePrevStep = () => {
-    if (step === 'E') setStep('D');
-    else if (step === 'D') setStep('C');
-    else if (step === 'C') setStep('B');
-    else if (step === 'B') {
-      setStep('A');
-      // Al volver a A, puedes resetear si así lo requieres
-      resetCheckboxes();
-    }
+    if (step === 'E') {setStep('D'); resetCheckboxes(); resetAllButtons(); resetCopyConclusions();}
+    else if (step === 'D') {setStep('C');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'C') {setStep('B'); resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'B') {setStep('A'); resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
   };
   
   // Flujo para Radiculopatía Crónica
@@ -42,14 +45,13 @@ const useStep = () => {
   
   const handlePrevStep1 = () => {
     if (step === 'G1') setStep('F1');
-    else if (step === 'F1') setStep('E1');
-    else if (step === 'E1') setStep('D1');
-    else if (step === 'D1') setStep('C1');
-    else if (step === 'C1') setStep('B1');
-    else if (step === 'B1') {
-      setStep('A');
-      resetCheckboxes();
-    }
+    else if (step === 'F1') {setStep('E1');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'E1') {setStep('D1');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'D1') {setStep('C1');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'C1') {setStep('B1');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'B1') {setStep('A');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+
   };
   
   // Flujo para Radiculopatía Subaguda
@@ -62,13 +64,12 @@ const useStep = () => {
   };
   
   const handlePrevStep2 = () => {
-    if (step === 'E2') setStep('D2');
-    else if (step === 'D2') setStep('C2');
-    else if (step === 'C2') setStep('B2');
-    else if (step === 'B2') {
-      setStep('A');
-      resetCheckboxes();
-    }
+    if (step === 'E2') {setStep('D2');resetCheckboxes();}
+    else if (step === 'D2') {setStep('C2');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'C2') {setStep('B2');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'B2') {setStep('A');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+
   };
 
   // Flujo para Radiculopatía Sensitiva
@@ -78,11 +79,10 @@ const useStep = () => {
   };
   
   const handlePrevStep3 = () => {
-    if (step === 'E3') setStep('S1');
-    else if (step === 'S1') {
-      setStep('A');
-      resetCheckboxes();
-    }
+    if (step === 'E3') {setStep('S1');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'S1') {setStep('A');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+
   };
 
   return {
@@ -214,30 +214,40 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextSte
     </div>
   );
 };
-const StepB = ({ handleNextStep, handlePrevStep}) => {
-  const { checkedStateLeft, checkedStateRight, setcheckedStateLeft, setcheckedStateRight, resetCheckboxes} = useContext(CheckboxContext);  
-  const handleCheckboxChangeLeft = (event) => {
-    const { id, checked } = event.target;
-    setcheckedStateLeft(prevState => ({
-      ...prevState,  // Mantener el estado actual
-      [id]: checked  // Solo actualizar el checkbox que cambió
-    }));
-  };
-  
-  const handleCheckboxChangeRight = (event) => {
-    const { id, checked } = event.target;
-    setcheckedStateRight(prevState => ({
-      ...prevState,  // Mantener el estado actual
-      [id]: checked  // Solo actualizar el checkbox que cambió
-    }));
-  };
+
+const StepB = ({ handleNextStep, handlePrevStep }) => {
+  const {
+    checkedStateLeft,
+    checkedStateRight,
+    setcheckedStateLeft,
+    setcheckedStateRight,
+  } = useContext(CheckboxContext);
 
   const { activeButtons, toggleButton } = useButtonContext();
   const { updateConclusions } = useContext(ReportContextR);
 
+  // Manejo de checkboxes “lado izquierdo”
+  const handleCheckboxChangeLeft = (event) => {
+    const { id, checked } = event.target;
+    setcheckedStateLeft((prevState) => ({
+      ...prevState,
+      [id]: checked,
+    }));
+  };
+
+  // Manejo de checkboxes “lado derecho”
+  const handleCheckboxChangeRight = (event) => {
+    const { id, checked } = event.target;
+    setcheckedStateRight((prevState) => ({
+      ...prevState,
+      [id]: checked,
+    }));
+  };
+
+  // Manejo de botones de conclusión
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
-    const isPressed = !activeButtons[value]; // Since we just toggled it
+    const isPressed = !activeButtons[value];
 
     if (isPressed) {
       updateConclusions({ value, title });
@@ -249,501 +259,1221 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
       nextStepFunction();
     }
   };
+
   return (
-    <div className='accordion-content '>
-      <div className='button-bar'>
-        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+    <div className="accordion-content">
+      {/* Barra de navegación de StepB */}
+      <div className="button-bar">
+        <button onClick={handlePrevStep} id="prev" className="print-button dont-print">
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
-        <button onClick={handleNextStep} id='next' className={`print-button dont-print `}>
-          <img src="/I_In.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+        <button onClick={handleNextStep} id="next" className="print-button dont-print">
+          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
-      <h1 className='text-xl font-bold text-white'>NIVEL</h1>
-      <Accordion title='CERVICAL' >
-        <Accordion title='C4 '>
-          <table cellpadding='1'>
-            <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
-              <td>
 
-                <input type='checkbox' name="radioC4Left" value='1' id='A1'  checked={checkedStateLeft.A1} onChange={handleCheckboxChangeLeft}/>
-                {checkedStateLeft.A1}
-                
-              </td>
-              <td>
-                <input type='checkbox' name="radioC4Left" value='2' id='A2' checked={checkedStateLeft.A2} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A2}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC4Left" value='3' id='A3' checked={checkedStateLeft.A3} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A3}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC4Left" value='4' id='A4' checked={checkedStateLeft.A4} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A4 }
-              </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioC4Right" value='1' id='A5' checked={checkedStateRight.A5} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A5 }
-              </td>
-              <td>
-                <input type='checkbox' name="radioC4Right" value='2' id='A6' checked={checkedStateRight.A6} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A6}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC4Right" value='3' id='A7' checked={checkedStateRight.A7} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A7}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC4Right" value='4' id='A8' checked={checkedStateRight.A8} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A8}
-              </td>
-            </tr>
-          </table>
+      <h1 className="text-xl font-bold text-white">NIVEL</h1>
+
+      {/** 
+       * 1) Acordeones Externos: 
+       *    <AccordionContainer> maneja que solo uno se abra
+       */}
+      <AccordionContainer>
+        {/* Acordeón externo: CERVICAL */}
+        <Accordion title="CERVICAL" value= "CERVICAL" type="external">
+          {/** 
+           * 2) Acordeones Internos: 
+           *    <InternalAccordionContainer> permite abrir varios simultáneamente
+           */}
+          <InternalAccordionContainer>
+            {/* C4 (interno) */}
+            <Accordion title="C4" type="internal">
+              <table cellPadding="1">
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC4Left"
+                        value="1"
+                        id="A1"
+                        checked={checkedStateLeft.A1}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A1}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC4Left"
+                        value="2"
+                        id="A2"
+                        checked={checkedStateLeft.A2}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A2}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC4Left"
+                        value="3"
+                        id="A3"
+                        checked={checkedStateLeft.A3}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A3}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC4Left"
+                        value="4"
+                        id="A4"
+                        checked={checkedStateLeft.A4}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A4}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC4Right"
+                        value="1"
+                        id="A5"
+                        checked={checkedStateRight.A5}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A5}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC4Right"
+                        value="2"
+                        id="A6"
+                        checked={checkedStateRight.A6}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A6}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC4Right"
+                        value="3"
+                        id="A7"
+                        checked={checkedStateRight.A7}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A7}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC4Right"
+                        value="4"
+                        id="A8"
+                        checked={checkedStateRight.A8}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A8}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
+
+          <InternalAccordionContainer>
+            {/* C5 (interno) */}
+            <Accordion title="C5" type="internal">
+              <table cellPadding="1">
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC5Left"
+                        value="1"
+                        id="A9"
+                        checked={checkedStateLeft.A9}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A9}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC5Left"
+                        value="2"
+                        id="A10"
+                        checked={checkedStateLeft.A10}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A10}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC5Left"
+                        value="3"
+                        id="A11"
+                        checked={checkedStateLeft.A11}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A11}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC5Left"
+                        value="4"
+                        id="A12"
+                        checked={checkedStateLeft.A12}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A12}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC5Right"
+                        value="1"
+                        id="A13"
+                        checked={checkedStateRight.A13}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A13}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC5Right"
+                        value="2"
+                        id="A14"
+                        checked={checkedStateRight.A14}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A14}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC5Right"
+                        value="3"
+                        id="A15"
+                        checked={checkedStateRight.A15}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A15}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC5Right"
+                        value="4"
+                        id="A16"
+                        checked={checkedStateRight.A16}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A16}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
+
+          <InternalAccordionContainer>
+            {/* C6 (interno) */}
+            <Accordion title="C6" type="internal">
+              <table cellPadding="1">
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC6Left"
+                        value="1"
+                        id="A17"
+                        checked={checkedStateLeft.A17}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A17}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC6Left"
+                        value="2"
+                        id="A18"
+                        checked={checkedStateLeft.A18}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A18}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC6Left"
+                        value="3"
+                        id="A19"
+                        checked={checkedStateLeft.A19}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A19}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC6Left"
+                        value="4"
+                        id="A20"
+                        checked={checkedStateLeft.A20}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A20}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC6Right"
+                        value="1"
+                        id="A21"
+                        checked={checkedStateRight.A21}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A21}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC6Right"
+                        value="2"
+                        id="A22"
+                        checked={checkedStateRight.A22}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A22}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC6Right"
+                        value="3"
+                        id="A23"
+                        checked={checkedStateRight.A23}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A23}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC6Right"
+                        value="4"
+                        id="A24"
+                        checked={checkedStateRight.A24}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A24}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
+
+          <InternalAccordionContainer>
+            {/* C7 (interno) */}
+            <Accordion title="C7" type="internal">
+              <table cellPadding="1">
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC7Left"
+                        value="1"
+                        id="A25"
+                        checked={checkedStateLeft.A25}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A25}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC7Left"
+                        value="2"
+                        id="A26"
+                        checked={checkedStateLeft.A26}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A26}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC7Left"
+                        value="3"
+                        id="A27"
+                        checked={checkedStateLeft.A27}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A27}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC7Left"
+                        value="4"
+                        id="A28"
+                        checked={checkedStateLeft.A28}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A28}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC7Right"
+                        value="1"
+                        id="A29"
+                        checked={checkedStateRight.A29}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A29}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC7Right"
+                        value="2"
+                        id="A30"
+                        checked={checkedStateRight.A30}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A30}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC7Right"
+                        value="3"
+                        id="A31"
+                        checked={checkedStateRight.A31}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A31}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC7Right"
+                        value="4"
+                        id="A32"
+                        checked={checkedStateRight.A32}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A32}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
+
+          <InternalAccordionContainer>
+            {/* C8 (interno) */}
+            <Accordion title="C8" type="internal">
+              <table cellPadding="1">
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC8Left"
+                        value="1"
+                        id="A33"
+                        checked={checkedStateLeft.A33}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A33}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC8Left"
+                        value="2"
+                        id="A34"
+                        checked={checkedStateLeft.A34}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A34}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC8Left"
+                        value="3"
+                        id="A35"
+                        checked={checkedStateLeft.A35}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A35}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC8Left"
+                        value="4"
+                        id="A36"
+                        checked={checkedStateLeft.A36}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A36}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC8Right"
+                        value="1"
+                        id="A37"
+                        checked={checkedStateRight.A37}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A37}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC8Right"
+                        value="2"
+                        id="A38"
+                        checked={checkedStateRight.A38}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A38}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC8Right"
+                        value="3"
+                        id="A39"
+                        checked={checkedStateRight.A39}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A39}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioC8Right"
+                        value="4"
+                        id="A40"
+                        checked={checkedStateRight.A40}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A40}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
+
+          <InternalAccordionContainer>
+            {/* T1 (interno) */}
+            <Accordion title="T1" type="internal">
+              <table cellPadding="1">
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioT1Left"
+                        value="1"
+                        id="A41"
+                        checked={checkedStateLeft.A41}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A41}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioT1Left"
+                        value="2"
+                        id="A42"
+                        checked={checkedStateLeft.A42}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A42}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioT1Left"
+                        value="3"
+                        id="A43"
+                        checked={checkedStateLeft.A43}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A43}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioT1Left"
+                        value="4"
+                        id="A44"
+                        checked={checkedStateLeft.A44}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A44}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioT1Right"
+                        value="1"
+                        id="A45"
+                        checked={checkedStateRight.A45}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A45}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioT1Right"
+                        value="2"
+                        id="A46"
+                        checked={checkedStateRight.A46}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A46}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioT1Right"
+                        value="3"
+                        id="A47"
+                        checked={checkedStateRight.A47}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A47}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radioT1Right"
+                        value="4"
+                        id="A48"
+                        checked={checkedStateRight.A48}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A48}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
+
+          {/* Botón de conclusión para "CERVICAL MULTINIVEL" */}
+          <ConclusionButtonR
+            value="cervical_multinivel"
+            title="CERVICAL MULTINIVEL"
+            displayText="CERVICAL MULTINIVEL"
+            pressed={activeButtons['cervical_multinivel']}
+            onClick={() =>
+              handleButtonPress('cervical_multinivel', 'CERVICAL MULTINIVEL')
+            }
+          />
         </Accordion>
-        <Accordion title='C5' >
-          <table cellpadding='1'>
-            <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioC5Left" value='1' id='A9' checked={checkedStateLeft.A9} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A9}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC5Left" value='2' id='A10' checked={checkedStateLeft.A10}onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A10}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC5Left" value='3' id='A11' checked={checkedStateLeft.A11}onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A11}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC5Left" value='4' id='A12' checked={checkedStateLeft.A12}onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A12 }
-              </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioC5Right" value='1' id='A13' checked={checkedStateRight.A13} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A13 }
-              </td>
-              <td>
-                <input type='checkbox' name="radioC5Right" value='2' id='A14' checked={checkedStateRight.A14} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A14}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC45Right" value='3' id='A15' checked={checkedStateRight.A15}onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A15}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC5Right" value='4' id='A16' checked={checkedStateRight.A16} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A16}
-              </td>
-            </tr>
-          </table>
+
+        {/* Acordeón externo: LUMBAR */}
+        <Accordion title="LUMBAR" value="LUMBAR" type="external">
+          <InternalAccordionContainer>
+            {/* L2 (interno) */}
+            <Accordion title="L2" type="internal">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="1"
+                        id="A49"
+                        checked={checkedStateLeft.A49}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A49}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="2"
+                        id="A50"
+                        checked={checkedStateLeft.A50}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A50}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="3"
+                        id="A51"
+                        checked={checkedStateLeft.A51}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A51}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="4"
+                        id="A52"
+                        checked={checkedStateLeft.A52}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A52}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="1"
+                        id="A53"
+                        checked={checkedStateRight.A53}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A53}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="2"
+                        id="A54"
+                        checked={checkedStateRight.A54}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A54}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="3"
+                        id="A55"
+                        checked={checkedStateRight.A55}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A55}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="4"
+                        id="A56"
+                        checked={checkedStateRight.A56}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A56}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
+          <InternalAccordionContainer>
+          {/* L3 (interno) */}
+          <Accordion title="L3" type="internal">
+            <table>
+              <tbody>
+                <tr>
+                  <td>&nbsp;L&nbsp;</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="1"
+                      id="A57"
+                      checked={checkedStateLeft.A57}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A57}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="2"
+                      id="A58"
+                      checked={checkedStateLeft.A58}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A58}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="3"
+                      id="A59"
+                      checked={checkedStateLeft.A59}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A59}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="4"
+                      id="A60"
+                      checked={checkedStateLeft.A60}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A60}
+                  </td>
+                  <td>&nbsp;R&nbsp;</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="1"
+                      id="A61"
+                      checked={checkedStateRight.A61}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A61}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="2"
+                      id="A62"
+                      checked={checkedStateRight.A62}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A62}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="3"
+                      id="A63"
+                      checked={checkedStateRight.A63}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A63}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="4"
+                      id="A64"
+                      checked={checkedStateRight.A64}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A64}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Accordion>
+          </InternalAccordionContainer>
+          <InternalAccordionContainer>
+          {/* L4 (interno) */}
+          <Accordion title="L4" type="internal">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <ConclusionButtonR value="l4_i" title="L" displayText="" />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="1"
+                      id="A65"
+                      checked={checkedStateLeft.A65}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A65}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="2"
+                      id="A66"
+                      checked={checkedStateLeft.A66}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A66}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="3"
+                      id="A67"
+                      checked={checkedStateLeft.A67}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A67}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="4"
+                      id="A68"
+                      checked={checkedStateLeft.A68}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A68}
+                  </td>
+                  <td>&nbsp;R&nbsp;</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="1"
+                      id="A69"
+                      checked={checkedStateRight.A69}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A69}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="2"
+                      id="A70"
+                      checked={checkedStateRight.A70}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A70}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="3"
+                      id="A71"
+                      checked={checkedStateRight.A71}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A71}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="4"
+                      id="A72"
+                      checked={checkedStateRight.A72}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A72}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Accordion>
+          </InternalAccordionContainer>
+          <InternalAccordionContainer>
+
+          {/* L5 (interno) */}
+          <Accordion title="L5" type="internal">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <ConclusionButtonR value="l5_i" title="L" displayText="" />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="1"
+                      id="A73"
+                      checked={checkedStateLeft.A73}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A73}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="2"
+                      id="A74"
+                      checked={checkedStateLeft.A74}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A74}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="3"
+                      id="A75"
+                      checked={checkedStateLeft.A75}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A75}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="4"
+                      id="A76"
+                      checked={checkedStateLeft.A76}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A76}
+                  </td>
+                  <td>&nbsp;R&nbsp;</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="1"
+                      id="A77"
+                      checked={checkedStateRight.A77}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A77}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="2"
+                      id="A78"
+                      checked={checkedStateRight.A78}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A78}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="3"
+                      id="A79"
+                      checked={checkedStateRight.A79}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A79}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="4"
+                      id="A80"
+                      checked={checkedStateRight.A80}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A80}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Accordion>
+          </InternalAccordionContainer>
+          <InternalAccordionContainer>
+
+          {/* S1 (interno) */}
+          <Accordion title="S1" type="internal">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <ConclusionButtonR value="s1_i" title="L" displayText="" />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="1"
+                      id="A81"
+                      checked={checkedStateLeft.A81}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A81}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="2"
+                      id="A82"
+                      checked={checkedStateLeft.A82}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A82}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="3"
+                      id="A83"
+                      checked={checkedStateLeft.A83}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A83}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="4"
+                      id="A84"
+                      checked={checkedStateLeft.A84}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A84}
+                  </td>
+                  <td>
+                    <ConclusionButtonR value="s1_d" title="R" displayText="" />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="1"
+                      id="A85"
+                      checked={checkedStateRight.A85}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A85}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="2"
+                      id="A86"
+                      checked={checkedStateRight.A86}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A86}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="3"
+                      id="A87"
+                      checked={checkedStateRight.A87}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A87}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="4"
+                      id="A88"
+                      checked={checkedStateRight.A88}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A88}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Accordion>
+          </InternalAccordionContainer>
+
+          {/* Botón de conclusión para "LUMBROSACA MULTINIVEL" */}
+          <ConclusionButtonR
+            value="lumbrosaca_multinivel"
+            title="LUMBROSACA MULTINIVEL"
+            displayText="LUMBROSACA MULTINIVEL"
+            pressed={activeButtons['lumbrosaca_multinivel']}
+            onClick={() =>
+              handleButtonPress('lumbrosaca_multinivel', 'LUMBROSACA MULTINIVEL')
+            }
+          />
         </Accordion>
-        <Accordion title='C6' >
-          <table cellpadding='1'>
-            <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioC6Left" value='1' id='A17' checked={checkedStateLeft.A17} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A17}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC6Left" value='2' id='A18' checked={checkedStateLeft.A18} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A18}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC6Left" value='3' id='A19' checked={checkedStateLeft.A19} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A19}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC6Left" value='4' id='A20' checked={checkedStateLeft.A20} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A20 }
-              </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioC6Right" value='1' id='A21' checked={checkedStateRight.A21} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A21 }
-              </td>
-              <td>
-                <input type='checkbox' name="radioC6Right" value='2' id='A22' checked={checkedStateRight.A22} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A22}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC6Right" value='3' id='A23' checked={checkedStateRight.A23} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A23}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC6Right" value='4' id='A24' checked={checkedStateRight.A24} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A24}
-              </td>
-            </tr>
-          </table>
+
+        {/* TORÁCICA (aquí lo pones como un acordeón "interno" o "external" según necesites) */}
+        <Accordion title="TORÁCICA" value="TORÁCICA" type="external">
+        <ConclusionButtonR value='T' title='T' />            
         </Accordion>
-        <Accordion title='C7' >
-          <table cellpadding='1'>
-            <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioC7Left" value='1' id='A25' checked={checkedStateLeft.A25} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A25}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC7Left" value='2' id='A26' checked={checkedStateLeft.A26} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A26}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC7Left" value='3' id='A27' checked={checkedStateLeft.A27} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A27}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC7Left" value='4' id='A28' checked={checkedStateLeft.A28} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A28 }
-              </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioC7Right" value='1' id='A29' checked={checkedStateRight.A29} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A29 }
-              </td>
-              <td>
-                <input type='checkbox' name="radioC7Right" value='2' id='A30' checked={checkedStateRight.A30} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A30}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC7Right" value='3' id='A31' checked={checkedStateRight.A31} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A31}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC7Right" value='4' id='A32' checked={checkedStateRight.A32} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A32}
-              </td>
-            </tr>
-          </table>
+
+        {/* POLISEGMENTARIA (acordeón externo o interno, según tu lógica) */}
+        <Accordion title="POLISEGMENTARIA" value="POLISEGMENTARIA" type="external">
+          <ConclusionButtonR
+            value="cervical"
+            title="CERVICAL"
+            displayText="CERVICAL"
+            pressed={activeButtons['cervical']}
+            onClick={() => handleButtonPress('cervical', 'CERVICAL')}
+          />
+          <ConclusionButtonR
+            value="torasica"
+            title="TORACICA"
+            displayText="TORACICA"
+            pressed={activeButtons['torasica']}
+            onClick={() => handleButtonPress('torasica', 'TORACICA')}
+          />
+          <ConclusionButtonR
+            value="lumbrosaca"
+            title="LUMBOSACRA"
+            displayText="LUMBOSACRA"
+            pressed={activeButtons['lumbrosaca']}
+            onClick={() => handleButtonPress('lumbrosaca', 'LUMBOSACRA')}
+          />
         </Accordion>
-        <Accordion title='C8'>
-          <table cellpadding='1'>
-            <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioC8Left" value='1' id='A33' checked={checkedStateLeft.A33} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A33}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC8Left" value='2' id='A34' checked={checkedStateLeft.A34} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A34}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC8Left" value='3' id='A35' checked={checkedStateLeft.A35} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A35}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC8Left" value='4' id='A36' checked={checkedStateLeft.A36} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A36 }
-              </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioC8Right" value='1' id='A37' checked={checkedStateRight.A37} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A37 }
-              </td>
-              <td>
-                <input type='checkbox' name="radioC8Right" value='2' id='A38' checked={checkedStateRight.A38} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A38}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC8Right" value='3' id='A39' checked={checkedStateRight.A39} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A39}
-              </td>
-              <td>
-                <input type='checkbox' name="radioC8Right" value='4' id='A40' checked={checkedStateRight.A40} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A40}
-              </td>
-            </tr>
-          </table>
-        </Accordion>
-        <Accordion title='T1' >
-          <table cellpadding='1'>
-            <tr>
-              <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioT1Left" value='1' id='A41' checked={checkedStateLeft.A41} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A41}
-              </td>
-              <td>
-                <input type='checkbox' name="radioT1Left" value='2' id='A42' checked={checkedStateLeft.A42} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A42}
-              </td>
-              <td>
-                <input type='checkbox' name="radioT1Left" value='3' id='A43' checked={checkedStateLeft.A43} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A43}
-              </td>
-              <td>
-                <input type='checkbox' name="radioT1Left" value='4' id='A44' checked={checkedStateLeft.A44} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A44 }
-              </td>
-              <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-              <td>
-                <input type='checkbox' name="radioT1Right" value='1' id='A45' checked={checkedStateRight.A45} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A45 }
-              </td>
-              <td>
-                <input type='checkbox' name="radioT1Right" value='2' id='A46' checked={checkedStateRight.A46} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A46}
-              </td>
-              <td>
-                <input type='checkbox' name="radioT1Right" value='3' id='A47' checked={checkedStateRight.A47} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A47}
-              </td>
-              <td>
-                <input type='checkbox' name="radioT1Right" value='4' id='A48' checked={checkedStateRight.A48} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A48}
-              </td>
-            </tr>
-          </table>
-        </Accordion>
-        <ConclusionButtonR 
-        value='cervical_multinivel' 
-        title='CERVICAL MULTINIVEL'
-        displayText="CERVICAL MULTINIVEL"
-        pressed={activeButtons["cervical_multinivel"]}
-        onClick={() => handleButtonPress("cervical_multinivel", "CERVICAL MULTINIVEL")}
-        /> 
-      </Accordion>
-      <Accordion title='LUMBAR'>
-      <Accordion title='L2' >
-      <table>
-            <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
-            <td>
-                <input type='checkbox' name="radio1" value='1' id='A49' checked={checkedStateLeft.A49} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A49}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='2' id='A50' checked={checkedStateLeft.A50} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A50}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='3' id='A51' checked={checkedStateLeft.A51} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A51}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='4' id='A52' checked={checkedStateLeft.A52} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A52 }
-              </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-            <td>
-                <input type='checkbox' name="radio2" value='1' id='A53' checked={checkedStateRight.A53} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A53 }
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='2' id='A54' checked={checkedStateRight.A54} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A54}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='3' id='A55' checked={checkedStateRight.A55} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A55}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='4' id='A56' checked={checkedStateRight.A56} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A56}
-              </td>
-          </table>
-        </Accordion> 
-        <Accordion title='L3' > 
-        <table>
-        <td>&nbsp;&nbsp;L&nbsp;&nbsp;</td>
-            <td>
-                <input type='checkbox' name="radio1" value='1' id='A57' checked={checkedStateLeft.A57} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A57}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='2' id='A58' checked={checkedStateLeft.A58} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A58}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='3' id='A59' checked={checkedStateLeft.A59} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A59}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='4' id='A60' checked={checkedStateLeft.A60} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A60 }
-              </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-            <td>
-                <input type='checkbox' name="radio2" value='1' id='A61' checked={checkedStateRight.A61} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A61 }
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='2' id='A62' checked={checkedStateRight.A62} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A62}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='3' id='A63' checked={checkedStateRight.A63} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A63}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='4' id='A64' checked={checkedStateRight.A64} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A64}
-              </td>
-          </table>
-        </Accordion> 
-        <Accordion title='L4' >
-        <table>
-            <td>
-            <ConclusionButtonR value='l4_i' title='L' displayText=''/>
-            </td>
-            <td>
-                <input type='checkbox' name="radio1" value='1' id='A65' checked={checkedStateLeft.A65} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A65}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='2' id='A66' checked={checkedStateLeft.A66} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A66}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='3' id='A67' checked={checkedStateLeft.A67} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A67}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='4' id='A68' checked={checkedStateLeft.A68} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A68 }
-              </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-            <td>
-                <input type='checkbox' name="radio2" value='1' id='A69' checked={checkedStateRight.A69} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A69 }
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='2' id='A70' checked={checkedStateRight.A70} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A70}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='3' id='A71' checked={checkedStateRight.A71} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A71}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='4' id='A72' checked={checkedStateRight.A72} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A72}
-              </td>
-          </table>
-        </Accordion> 
-        <Accordion title='L5'>
-        <table>
-            <td>
-            <ConclusionButtonR value='l5_i' title='L' displayText=''/>
-            </td>
-            <td>
-                <input type='checkbox' name="radio1" value='1' id='A73' checked={checkedStateLeft.A73} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A73}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='2' id='A74' checked={checkedStateLeft.A74} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A74}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='3' id='A75' checked={checkedStateLeft.A75} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A75}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='4' id='A76' checked={checkedStateLeft.A76} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A76 }
-              </td>
-            <td>&nbsp;&nbsp;R&nbsp;&nbsp;</td>
-            <td>
-                <input type='checkbox' name="radio2" value='1' id='A77' checked={checkedStateRight.A77} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A77 }
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='2' id='A78' checked={checkedStateRight.A78} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A78}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='3' id='A79' checked={checkedStateRight.A79} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A79}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='4' id='A80' checked={checkedStateRight.A80} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A80}
-              </td>
-          </table>
-        </Accordion> 
-        <Accordion title='S1' >
-        <table>
-            <td>
-            <ConclusionButtonR value='s1_i' title='L' displayText=''/>
-            </td>
-            <td>
-                <input type='checkbox' name="radio1" value='1' id='A81' checked={checkedStateLeft.A81} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A81}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='2' id='A82' checked={checkedStateLeft.A82} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A82}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='3' id='A83' checked={checkedStateLeft.A83} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A83}
-              </td>
-              <td>
-                <input type='checkbox' name="radio1" value='4' id='A84' checked={checkedStateLeft.A84} onChange={handleCheckboxChangeLeft} />
-                {checkedStateLeft.A84}
-              </td>
-              <ConclusionButtonR value='s1_d' title='R' displayText=''/>
-            <td>
-                <input type='checkbox' name="radio2" value='1' id='A85' checked={checkedStateRight.A85} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A85 }
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='2' id='A86' checked={checkedStateRight.A86} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A86}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='3' id='A87' checked={checkedStateRight.A87} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A87}
-              </td>
-              <td>
-                <input type='checkbox' name="radio2" value='4' id='A88' checked={checkedStateRight.A88} onChange={handleCheckboxChangeRight} />
-                {checkedStateRight.A88}
-              </td>
-          </table>
-        </Accordion> 
-        <ConclusionButtonR 
-        value='lumbrosaca_multinivel' 
-        title='LUMBROSACA MULTINIVEL' 
-        displayText="LUMBROSACA MULTINIVEL"
-        pressed={activeButtons["lumbrosaca_multinivel"]}
-        onClick={() => handleButtonPress("lumbrosaca_multinivel", "LUMBROSACA MULTINIVEL")}
-        />
-      </Accordion>
-      <Accordion title='TORÁCICA'>
-      </Accordion>
-      <Accordion title='POLISEGMENTARIA'>
-        <ConclusionButtonR 
-        value='cervical' 
-        title='CERVICAL'
-        displayText="CERVICAL"
-        pressed={activeButtons["cervical"]}
-        onClick={() => handleButtonPress("cervical", "CERVICAL")} 
-        />   
-        <ConclusionButtonR 
-        value='torasica' 
-        title='TORACICA' 
-        displayText="TORACICA"
-        pressed={activeButtons["torasica"]}
-        onClick={() => handleButtonPress("torasica", "TORACICA")} 
-        /> 
-        <ConclusionButtonR 
-        value='lumbrosaca' 
-        title='LUMBOSACRA' 
-        displayText="LUMBOSACRA"
-        pressed={activeButtons["lumbrosaca"]}
-        onClick={() => handleButtonPress("lumbrosaca", "LUMBOSACRA")} 
-        />            
-      </Accordion>      
+      </AccordionContainer>
     </div>
   );
 };
+
+
 
 const StepC = ({ handleNextStep, handlePrevStep }) => {
   const { activeButtons, toggleButton } = useButtonContext();
@@ -934,7 +1664,6 @@ const StepB1 = ({ handleNextStep1, handlePrevStep1 }) => {
 const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
   const { updateConclusions } = useContext(ReportContextR);
-
   const handleCheckboxChange = (event, value, title) => {
     const isChecked = event.target.checked;
     toggleButton(value);
@@ -957,8 +1686,8 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
         </button>
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL</h1>  
-
-      <Accordion title='C6-C7'>
+      <AccordionContainer>
+      <Accordion title='C6-C7'  value='C6-C7' type='external'>
         <table>
           <tr className="checkbox-row">
             <td>
@@ -992,7 +1721,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
         </table>
       </Accordion>
 
-      <Accordion title='S1'>
+      <Accordion title='S1' value='S1' type='external'>
         <table>
           <tr className="checkbox-row">
             <td>
@@ -1025,6 +1754,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
           </tr>
         </table>
       </Accordion>
+      </AccordionContainer>
     </div>
   );
 };
@@ -1034,7 +1764,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
   const { checkedStateLeft, checkedStateRight, setcheckedStateLeft, setcheckedStateRight } = useContext(CheckboxContext);
   const { updateConclusions } = useContext(ReportContextR);
   const [buttonStates, setButtonStates] = useState({});
-  const { activeButtons, toggleButton } = useButtonContext(); // Añadir esta línea
+  const { activeButtons, toggleButton } = useButtonContext(); //
   const conclusionMapping = {
     A9: 'c5_i', A10: 'c5_i', A11: 'c5_i', A12: 'c5_i',
       A13: 'c5_d', A14: 'c5_d', A15: 'c5_d', A16: 'c5_d',
@@ -1171,8 +1901,10 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       <h1 className=' text-xl font-bold text-white'>
         NIVEL
       </h1>
-      <Accordion title='CERVICAL'>
-        <Accordion title='C4' >
+    <AccordionContainer>
+      <Accordion title='CERVICAL' value='CERVICAL' type='external'>
+      <InternalAccordionContainer>
+        <Accordion title='C4' type='internal'>
           <table cellpadding='3'>
               <td>
               
@@ -1217,7 +1949,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
               </td>
           </table>
         </Accordion>
-        <Accordion title='C5'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='C5' type='internal'>
         <table>
             <td>
             <td>
@@ -1263,7 +1997,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
               </td>
           </table>
         </Accordion>
-        <Accordion title='C6'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='C6' type='internal'>
         <table>
         <tr>
         {renderConclusionButtonR('c6_i', 'L')}
@@ -1306,7 +2042,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
             </tr>
           </table>
         </Accordion>
-        <Accordion title='C7'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='C7' type='internal'>
         <table>
         <tr>
         {renderConclusionButtonR('c7_i', 'L')}
@@ -1348,7 +2086,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
             </tr>
           </table>
         </Accordion>
-        <Accordion title='C8'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='C8' type='internal'>
       <table>
         <tr>
           {renderConclusionButtonR('c8_i', 'L')}
@@ -1390,7 +2130,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
             </tr>
           </table>
         </Accordion>
-        <Accordion title='T1'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='T1' type='internal'>
         <table>
         <tr>
          {renderConclusionButtonR('t1_i', 'L')}
@@ -1432,6 +2174,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
             </tr>
           </table>
         </Accordion>
+        </InternalAccordionContainer>
         <ConclusionButtonR
         value='cervical_multinivel'
         title='CERVICAL MULTINIVEL'
@@ -1441,9 +2184,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       />                        
       </Accordion>
 
-     
-      <Accordion title='LUMBAR'>
-      <Accordion title='L2' >
+      <Accordion title='LUMBAR' value='LUMBAR' type='external'>
+      <InternalAccordionContainer>
+      <Accordion title='L2' type='internal' >
       <table>
       {renderConclusionButtonR('l2_i', 'L')}
 
@@ -1484,7 +2227,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
           
           </table>
         </Accordion> 
-        <Accordion title='L3' > 
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='L3' type='internal' > 
         <table>
               {renderConclusionButtonR('l3_i', 'L')}
             <td>
@@ -1522,7 +2267,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
               </td>
           </table>
         </Accordion> 
-        <Accordion title='L4' >
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='L4' type='internal' >
         <table>
             <td>
             {renderConclusionButtonR('l4_i', 'L')}
@@ -1563,7 +2310,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
               </td>
           </table>
         </Accordion> 
-        <Accordion title='L5' >
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='L5' type='internal' >
         <table>
             <td> 
             {renderConclusionButtonR('l5_i', 'L')}
@@ -1604,7 +2353,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
               </td>
           </table>
         </Accordion> 
-        <Accordion title='S1'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='S1' type='internal' >
         <table>
             <td>
                         {renderConclusionButtonR('s1_i', 'L')}
@@ -1645,7 +2396,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
               </td>
           </table>
         </Accordion> 
-        <Accordion title='S2' >
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='S2' type='internal' >
         <table>
             <td>
                                     {renderConclusionButtonR('s2_i', 'L')}
@@ -1686,6 +2439,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                 </td>
           </table>
         </Accordion> 
+        
+        </InternalAccordionContainer>
         <ConclusionButtonR
         value='lumbrosaca_multinivel'
         title='LUMBROSACA MULTINIVEL'
@@ -1695,11 +2450,11 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       />
       </Accordion>
 
-      <Accordion title='TORÁCICA'>
+      <Accordion title='TORÁCICA' value='TORÁCICA' type='external'>
         <ConclusionButtonR value='T' title='T' />            
       </Accordion>
 
-      <Accordion title='POLISEGMENTARIA'>
+      <Accordion title='POLISEGMENTARIA' value='POLISEGMENTARIA' type='external'>
       <ConclusionButtonR
     value='cervical'
     title='CERVICAL'
@@ -1721,8 +2476,10 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
     pressed={activeButtons["lumbrosacra"]}
     onClick={() => handleButtonPress1("lumbrosacra", "LUMBOSACRA")}
   />                      
-      </Accordion>     
+      </Accordion> 
+      </AccordionContainer>    
     </div>
+    
   );
 };
 
@@ -1911,18 +2668,12 @@ const StepG1 = ({ handlePrevStep1, handleNextStep1 }) => {
 
 
 const StepE = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) => {
-
-  const { setInitialConclusions } = useContext(ReportContextR); // Acceder a setInitialConclusions desde el contexto
-  const resetCopyConclusions = () => {
-    setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
-  };
-
   return (
     <div className='button-bar'>
       <button 
         onClick={() => { 
           handlePrevStep(); // Llamar a la función para el paso anterior
-          resetCopyConclusions(); // Resetea las conclusiones
+         
         }} 
         id='prev' 
         className={`print-button dont-print `}
@@ -1949,18 +2700,11 @@ const StepE = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
 };
 
 const StepE3 = ({ handlePrevStep3, handleUndo, handleImageChange, handlePrint }) => {
-
-  const { setInitialConclusions } = useContext(ReportContextR); // Acceder a setInitialConclusions desde el contexto
-  const resetCopyConclusions = () => {
-    setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
-  };
-
   return (
     <div className='button-bar'>
       <button 
         onClick={() => { 
           handlePrevStep3(); // Llamar a la función para el paso anterior
-          resetCopyConclusions(); // Resetea las conclusiones
         }} 
         id='prev' 
         className={`print-button dont-print `}
@@ -2142,8 +2886,10 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       <h1 className=' text-xl font-bold text-white'>
         NIVEL
       </h1>
-      <Accordion title='CERVICAL'>
-        <Accordion title='C4' >
+      <AccordionContainer>
+      <Accordion title='CERVICAL' value="CERVICAL" type= 'external' >
+        <InternalAccordionContainer>
+        <Accordion title='C4' type='internal' >
           <table cellpadding='3'>
               <td>
               
@@ -2188,7 +2934,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
               </td>
           </table>
         </Accordion>
-        <Accordion title='C5'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='C5' type='internal' >
         <table>
             <td>
             <td>
@@ -2234,7 +2982,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
               </td>
           </table>
         </Accordion>
-        <Accordion title='C6'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='C6' type='internal' >
         <table>
         <tr>
         {renderConclusionButtonR('c6_i', 'L')}
@@ -2277,7 +3027,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
             </tr>
           </table>
         </Accordion>
-        <Accordion title='C7'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='C7' type='internal'>
         <table>
         <tr>
         {renderConclusionButtonR('c7_i', 'L')}
@@ -2319,7 +3071,10 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
             </tr>
           </table>
         </Accordion>
-        <Accordion title='C8'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+
+        <Accordion title='C8' type='internal'>
       <table>
         <tr>
           {renderConclusionButtonR('c8_i', 'L')}
@@ -2361,7 +3116,10 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
             </tr>
           </table>
         </Accordion>
-        <Accordion title='T1'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+
+        <Accordion title='T1' type='internal'>
         <table>
         <tr>
          {renderConclusionButtonR('t1_i', 'L')}
@@ -2403,6 +3161,8 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
             </tr>
           </table>
         </Accordion>
+        </InternalAccordionContainer>
+
         <ConclusionButtonR
         value='cervical_multinivel'
         title='CERVICAL MULTINIVEL'
@@ -2411,8 +3171,10 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
         onClick={() => handleButtonPress1("cervical_multinivel", "CERVICAL MULTINIVEL")}
       />             
       </Accordion>
-      <Accordion title='LUMBAR'>
-      <Accordion title='L2' >
+      <Accordion title='LUMBAR' value='LUMBAR' type='external'>
+      <InternalAccordionContainer>
+
+      <Accordion title='L2' type='internal' >
       <table>
       {renderConclusionButtonR('l2_i', 'L')}
 
@@ -2453,7 +3215,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
           
           </table>
         </Accordion> 
-        <Accordion title='L3' > 
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='L3' type='internal' > 
         <table>
               {renderConclusionButtonR('l3_i', 'L')}
             <td>
@@ -2491,7 +3255,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
               </td>
           </table>
         </Accordion> 
-        <Accordion title='L4' >
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='L4' type='internal'>
         <table>
             <td>
             {renderConclusionButtonR('l4_i', 'L')}
@@ -2532,7 +3298,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
               </td>
           </table>
         </Accordion> 
-        <Accordion title='L5' >
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='L5' type='internal'>
         <table>
             <td> 
             {renderConclusionButtonR('l5_i', 'L')}
@@ -2573,7 +3341,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
               </td>
           </table>
         </Accordion> 
-        <Accordion title='S1'>
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='S1' type='internal' >
         <table>
             <td>
                         {renderConclusionButtonR('s1_i', 'L')}
@@ -2614,7 +3384,9 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
               </td>
           </table>
         </Accordion> 
-        <Accordion title='S2' >
+        </InternalAccordionContainer>
+        <InternalAccordionContainer>
+        <Accordion title='S2' type='internal'>
         <table>
             <td>
                                     {renderConclusionButtonR('s2_i', 'L')}
@@ -2655,6 +3427,8 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 </td>
           </table>
         </Accordion> 
+        </InternalAccordionContainer>
+
         <ConclusionButtonR
         value='lumbrosaca_multinivel'
         title='LUMBROSACA MULTINIVEL'
@@ -2665,11 +3439,11 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                 
       </Accordion>
 
-      <Accordion title='TORÁCICA'>
+      <Accordion title='TORÁCICA' value='TORÁCICA' type='external'>
         <ConclusionButtonR value='T' title='T' />            
       </Accordion>
 
-      <Accordion title='POLISEGMENTARIA'>
+      <Accordion title='POLISEGMENTARIA' value='POLISEGMENTARIA' type='external'>
       <ConclusionButtonR
     value='cervical'
     title='CERVICAL'
@@ -2691,7 +3465,8 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
     pressed={activeButtons["lumbrosacra"]}
     onClick={() => handleButtonPress1("lumbrosacra", "LUMBOSACRA")}
   />           
-      </Accordion>     
+      </Accordion>    
+      </AccordionContainer> 
     </div>
   );
 };

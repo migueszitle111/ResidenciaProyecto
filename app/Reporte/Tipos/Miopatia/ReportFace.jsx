@@ -2,7 +2,7 @@ import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
-import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
+import { ConclusionCanvasV } from '../../../components/ReportTemplate/Conclusions/CanvasViasVisual';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
 
@@ -150,6 +150,8 @@ const Reporte = () => {
 
   return (
     <div >
+      {/* Clase que encapzula la información y el titulo de la pagina */}
+        
       {/* Wrapper que encapsula la image, conclusión y lista de botones */}
       <div className="wrapper">
         {/* Componente de la caja de conclusión junto con la caja de notas */}
@@ -177,8 +179,7 @@ const Reporte = () => {
           <label htmlFor="file-upload" className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
           <img src="/I_Folder.svg" alt="Subir" style={{filter: 'invert(1)'}} />
           </label>
-          <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} style={{display: 'none'}}/>          
-          </div>
+            <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} style={{display: 'none'}}/>          </div>
 
           <div className={'vertical-container dont-print'}>
           <div className={`dont-print ${isPageVisible ? 'visible' : 'hidden'}`}>
@@ -199,6 +200,7 @@ const Reporte = () => {
         {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
         <div>
           <div className='con-img'> 
+        
         {/* Codigo para desplegar las imagenes dentro de un array */}
         {selectedImages.map((image, index) => (
           <Rnd
@@ -218,78 +220,96 @@ const Reporte = () => {
 
         {/* Despliego de las imagenes dentro del array */}
         <div className='conclusion-container'>
-        <ConclusionCanvas 
+        <ConclusionCanvasV 
         
-          img={{
-            src: '/assets/MioImg/MI_Base Gris_Fondo Blanco.png',
-            alt: 'Modelo',
-            useMap: '#image-map',
-            width: isPageVisible ? '600' : '800',
-            height: isPageVisible ? '600' : '800'
-          }}
+        img={{
+          src: '/assets/MioImg/MI_Base Gris_Fondo Blanco.png',
+          alt: 'Modelo',
+          useMap: '#image-map',
+          width: isPageVisible ? '600' : '800',
+          height: isPageVisible ? '600' : '800'
+        }}
+        
+        rules={[
+          {
+            expectedValue: 'distribucion_proximal', 
+            image: {
+              src: 'MioImg/MI_Proximal.png',
+              alt: 'Modelo',
+            }
+          },
+          {
+            expectedValue: 'distribucion_distal',
+            image: {
+              src: 'MioImg/MI_Distal.png',
+              alt: 'Modelo',
+            }
+          },
+          {
+            expectedValue: 'distribucion_generalizada',
+            image: {
+              src: 'MioImg/MI_Facial.png',
+              // AGREGAR 2 IMAGENES MAS AQUI
+              alt: 'Modelo',
+            }
+          },
+          {
+            expectedValue: 'anillo_oseo',
+            image: {
+              src: 'MioImg/MI_Distrofia de Anillo Oseo.png',
+              alt: 'Modelo',
+            }
+          },
+          {
+            expectedValue: 'duchenne_becker',
+            image: {
+              src: 'MioImg/MI_Distrofia de Duchenne e Becker.png',
+              alt: 'Modelo',
+            }
+          },
+          {
+            expectedValue: 'emery_dreifuss',
+            image: {
+              src: 'MioImg/MI_Distrofia de Emery-Dreifuss.png',
+              alt: 'Modelo',
+            }
+          },
+          {
+            expectedValue: 'facioescapulohumeral',
+            image: {
+              src: 'MioImg/MI_Distrofia Facioescapulohumeral.png',
+              alt: 'Modelo',
+            }
+          },
+          {
+            expectedValue: 'oculofaringea',
+            image: {
+              src: 'MioImg/MI_Distrofia Oculofaringea.png',
+              alt: 'Modelo',
+            }
+          },
+
+          {
+            expectedValue: 'generalizada1',
+            image:[{
+              src: 'MioImg/MI_Facial.png',
+              alt: 'Modelo',
+            },
+            {
+              src: 'MioImg/MI_Distal.png',
+              alt: 'Modelo',
+            },
+            {
+              src: 'MioImg/MI_Proximal.png',
+              alt: 'Modelo',
+            }
           
-          rules={[
-            {
-              expectedValue: 'distribucion_proximal', 
-              image: {
-                src: 'MioImg/MI_Proximal.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'distribucion_distal',
-              image: {
-                src: 'MioImg/MI_Distal.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'distribucion_generalizada',
-              image: {
-                src: 'MioImg/MI_Facial.png',
-                // AGREGAR 2 IMAGENES MAS AQUI
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'anillo_oseo',
-              image: {
-                src: 'MioImg/MI_Distrofia de Anillo Oseo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'duchenne_becker',
-              image: {
-                src: 'MioImg/MI_Distrofia de Duchenne e Becker.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'emery_dreifuss',
-              image: {
-                src: 'MioImg/MI_Distrofia de Emery-Dreifuss.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'facioescapulohumeral',
-              image: {
-                src: 'MioImg/MI_Distrofia Facioescapulohumeral.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'oculofaringea',
-              image: {
-                src: 'MioImg/MI_Distrofia Oculofaringea.png',
-                alt: 'Modelo',
-              }
-            },
-          ]}
+          ],
+          },
+        ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
         value={copyConclusions}
-        defaultValue="NEURONOPATIA"
+        defaultValue="PLEXOPATIA  "
         onChange={handleTextareaChange}
       /></div>
         </div>
@@ -300,5 +320,6 @@ const Reporte = () => {
     </div>
   )
 }
+
 
 export default Reporte

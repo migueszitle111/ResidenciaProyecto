@@ -1,5 +1,5 @@
-import { useEffect,useContext, useState } from 'react';
 import { ReportContext } from '@/src/context';
+import { useContext, useEffect, useState } from 'react';
 import { Accordion, darvalor } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
@@ -790,13 +790,21 @@ const StepB1 = ({ handleNextStep, handlePrevStep }) => {
     <div>
       <div className='button-bar'>
         <button onClick={() => {
-           removeConclusion('izquierda_C')
+            removeConclusion('izquierda_C')
             removeConclusion('derecha_C')
             removeConclusion('bilateral_C')
+            removeConclusion('plexopatia_cervical')
+            removeConclusion('plexopatia_cervical')
+            removeConclusion('plexopatia_cervical')
           
           handlePrevStep}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -830,6 +838,11 @@ const StepB2 = ({ handleNextStep1, handlePrevStep1, ladoizquierda, ladoderecho, 
           handlePrevStep1}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -863,6 +876,11 @@ const StepB3 = ({ handleNextStep2, handlePrevStep2, ladoizquierda1, ladoderecho1
           handlePrevStep2}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -896,6 +914,11 @@ const StepC1 = ({ handleNextStep, handlePrevStep }) => {
           handlePrevStep}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -925,6 +948,12 @@ const StepC2 = ({ handleNextStep1, handlePrevStep1 }) => {
           handlePrevStep1}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+
         <button id='prev' className={`print-button dont-print `}>
           <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -950,6 +979,11 @@ const StepC3 = ({ handleNextStep2, handlePrevStep2 }) => {
         <button onClick={handlePrevStep2} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -976,6 +1010,11 @@ const StepD2 = ({ handleNextStep1, handlePrevStep1, handleNextStep5, handleNextS
         <button onClick={handlePrevStep1} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' onClick={handleNextStep1} className={`print-button dont-print `}>
         <img src="/I_In.svg" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -995,6 +1034,11 @@ const StepD2A = ({handleNextStep5, assignFirstValue, assignSecondValue, assignTh
         <button  onClick={handlePrevStep5} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' onClick={handleNextStep5} className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -1014,6 +1058,11 @@ const StepD2B = ({ handleNextStep6, handlePrevStep6, ubicaciond2b }) => {
         <button  onClick={handlePrevStep6} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' onClick={handleNextStep6} className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -1033,6 +1082,11 @@ const StepD3 = ({ handleNextStep2, handlePrevStep2, handleNextStep7, ubicaciond3
         <button onClick={handlePrevStep2} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1053,6 +1107,11 @@ const StepD3A = ({ handleNextStep7, handlePrevStep7, ubicaciond3a }) => {
         <button  onClick={handlePrevStep7} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' onClick={handleNextStep7} className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -1072,6 +1131,11 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
         <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1125,6 +1189,11 @@ const StepE2 = ({ handleNextStep1, handlePrevStep1, handleNextStep4 }) => {
         <button onClick={handlePrevStep1} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep1} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1178,6 +1247,11 @@ const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
         <button onClick={handlePrevStep2} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1231,6 +1305,11 @@ const StepE1 = ({ handlePrevStep, handleNextStep }) => {
         <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1240,9 +1319,9 @@ const StepE1 = ({ handlePrevStep, handleNextStep }) => {
       </h1>
       
       <div onClick={ handleNextStep }>
-        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE. ' displayText={'LEVE (NEUROAPRAXIA)'}/>
-        <ConclusionButton value='intensidad_leverada' title=' INTENSIDAD MODERADA. ' displayText={'MODERADA (AXONOTMESIS INCOMPLETA)'}/>
-        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA. ' displayText={'SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)'}/>
+        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE. ' displayText={'LEVE '}/>
+        <ConclusionButton value='intensidad_leverada' title=' INTENSIDAD MODERADA. ' displayText={'MODERADA '}/>
+        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA. ' displayText={'SEVERA '}/>
       </div>
     </div>
   );
@@ -1255,6 +1334,11 @@ const StepF2 = ({ handlePrevStep1, handleNextStep1 }) => {
         <button onClick={handlePrevStep1} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep1} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1264,9 +1348,9 @@ const StepF2 = ({ handlePrevStep1, handleNextStep1 }) => {
       </h1>
       
       <div onClick={ handleNextStep1 }>
-        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE. ' displayText={'LEVE (NEUROAPRAXIA)'}/>
-        <ConclusionButton value='intensidad_leverada' title=' INTENSIDAD MODERADA. ' displayText={'MODERADA (AXONOTMESIS INCOMPLETA)'}/>
-        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA. ' displayText={'SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)'}/>
+        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE. ' displayText={'LEVE '}/>
+        <ConclusionButton value='intensidad_leverada' title=' INTENSIDAD MODERADA. ' displayText={'MODERADA '}/>
+        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA. ' displayText={'SEVERA '}/>
       </div>
 
       
@@ -1281,6 +1365,11 @@ const StepF3 = ({ handlePrevStep2, handleNextStep2 }) => {
         <button onClick={handlePrevStep2} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1290,9 +1379,9 @@ const StepF3 = ({ handlePrevStep2, handleNextStep2 }) => {
       </h1>
       
       <div onClick={ handleNextStep2 }>
-        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE. ' displayText={'LEVE (NEUROAPRAXIA)'}/>
-        <ConclusionButton value='intensidad_leverada' title=' INTENSIDAD MODERADA. ' displayText={'MODERADA (AXONOTMESIS INCOMPLETA)'}/>
-        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA. ' displayText={'SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)'}/>
+        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE. ' displayText={'LEVE '}/>
+        <ConclusionButton value='intensidad_leverada' title=' INTENSIDAD MODERADA. ' displayText={'MODERADA '}/>
+        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA. ' displayText={'SEVERA '}/>
       </div>
 
       
@@ -1307,6 +1396,11 @@ const StepF1 = ({ handleNextStep, handlePrevStep }) => {
         <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1332,6 +1426,11 @@ const StepG2 = ({ handleNextStep1, handlePrevStep1 }) => {
         <button onClick={handlePrevStep1} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep1} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1357,6 +1456,11 @@ const StepG3 = ({ handleNextStep2, handlePrevStep2 }) => {
         <button onClick={handlePrevStep2} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1382,6 +1486,11 @@ const StepG1 = ({handlePrevStep, handleNextStep }) => {
         <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1404,6 +1513,11 @@ const StepH2 = ({handlePrevStep1, handleNextStep1 }) => {
         <button onClick={handlePrevStep1} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
@@ -1426,6 +1540,11 @@ const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
         <button onClick={handlePrevStep2} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
         <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>

@@ -95,6 +95,138 @@ const MenuGeneralT = () => {
     },
   ];
 
+  //Matriz de opciones de Miografia  y submenús
+  const Miografia = [
+    {
+      Menu: "Craniobulbar",
+      Submenu: [
+        "Facial Cranio Bulbar",
+        "Trigémino",
+        "Lingual",
+        "Cervical",
+        "Frénico",
+      ],
+    },
+    {
+      Menu: "Superior",
+      Submenu: [
+        "Mediano",
+        "Ulnar",
+        "Radial",
+        "Axilar",
+        "Musculocutáneo",
+        "Supraescapular Superior",
+        "Dorsal Escapular",
+        "Torácico Largo",
+        "Subescapular y Toracodorsal",
+        "Pectoral",
+      ],
+    },
+    {
+      Menu: "Inferior",
+      Submenu: [
+        "Ciático",
+        "Tibial",
+        "Peroneo Común",
+        "Glúteo Superior",
+        "Glúteo Inferior",
+        "Pudendo",
+        "Femoral",
+        "Obturador",
+      ],
+    },
+    { Menu: "Tronco", Submenu: ["Paraespinales"] },
+  ];
+
+  //Matriz de opciones de Potenciales Provocados  y submenús
+
+  const PotencialesProvocados = [
+    {
+      Menu: "Somatosensoriales",
+      Submenu: [
+        "Nervios Medianos",
+        "Nervios Ulnar",
+        "Tibial",
+        "Peroneo",
+        "Nervios Trigéminos",
+        "Pudendo",
+        "Radial Superficial",
+        "Nervios Musculocutáneo",
+        "Femorocutáneo o lateral",
+        "Safeno",
+        "Peroneo superficial",
+        "Sural",
+        "Plantar",
+        "Calcáneo",
+        "Segmentarios Dermatomales",
+      ],
+    },
+    {
+      Menu: "Auditivos",
+      Submenu: [
+        "Latencia Corta Tallo Cerebral",
+        "Latencia Mediana",
+        "Latencia Larga",
+      ],
+    },
+    { Menu: "Visuales", Submenu: ["Damero", "Leds"] },
+    { Menu: "Motores", Submenu: ["Superiores", "Inferiores", "Faciales"] },
+    {
+      Menu: "Cognitivos Relacionados a Eventos",
+      Submenu: ["P300 Visual", "P300 Auditivo"],
+    },
+  ];
+  //Matriz de opciones de Pruebas especiales  y submenús
+
+  const PruebasEspeciales = [
+    {
+      Menu: "Estimulación Repetitiva",
+      Submenu: [
+        "Facial",
+        "Distal",
+        "Proximal",
+        "Tests Provocativos",
+        "Altas Frecuencias",
+        "Test de Ejercicio",
+      ],
+    },
+    {
+      Menu: "Fibra Única",
+      Submenu: ["Fibra Única", "Densidad de Fibra", "Macro y Escaneo"],
+    },
+    {
+      Menu: "Autonómicos",
+      Submenu: [
+        "Respuesta sináptica de la Piel",
+        "Reflejo pupilar",
+        "Variabilidad R-R",
+        "Periodo Silente",
+      ],
+    },
+    {
+      Menu: "Respuestas Tardías",
+      Submenu: [
+        "Reflejo del parpadeo",
+        "Onda F",
+        "Reflejo H",
+        "Reflejo bulbocavernoso",
+      ],
+    },
+    {
+      Menu: "Esotéricas",
+      Submenu: [
+        "Reflejo Masetero",
+        "Reflejo Palmo Mentoniano",
+        "Laríngeo Recurrente",
+        "Raíces Nerviosas",
+        "Nervios Intercostales",
+        "Glúteo Superior",
+        "Reflejos Pudendos Sexuales",
+      ],
+    },
+    { Menu: "Movimiento", Submenu: ["Tremor"] },
+  ];
+
   const handleClick = (option) => {
     setSelectedOption(option);
   };

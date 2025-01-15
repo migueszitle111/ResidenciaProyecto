@@ -42,7 +42,7 @@ export function checkDivsSegmentar(copyConclusions) {
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '22.2%', left: '62.6%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
-        TERCIO
+        
         <div style={{ position: 'absolute', top: '22.6%', left: '62.9%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} ><SegmentariaButton value='car' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '23.0%', left: '63.2%', transform: 'rotate(60deg)', }}

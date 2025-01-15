@@ -2747,7 +2747,6 @@ const DropArea2 = ({ isExpanded }) => {
     </div>
   );
 };
- 
 
 const StepE = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) => {
 
@@ -2756,19 +2755,59 @@ const StepE = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
     setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
   };
 
-  return (
-    <div className='button-bar'>
-      <button 
-        onClick={() => { 
-          handlePrevStep(); // Llamar a la función para el paso anterior
-          resetCopyConclusions(); // Resetea las conclusiones
-        }} 
-        id='prev' 
-        className={`print-button dont-print `}
-      >
 
-        <img src="/I_Out.svg" alt="Regresar" style={{filter: 'invert(1)'}} />
-      </button>
+  const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
+    
+    const [imageSrc, setImageSrc] = useState(null);
+    const [isUploadAllowed, setIsUploadAllowed] = useState(false); // Estado para controlar si la carga está permitida
+    const toggleDivSize = (index) => {
+      // Cambiar el estado del tamaño del div al hacer clic
+      setExpandedDivs((prevState) => ({
+        ...prevState,
+        [index]: !prevState[index], // Alterna entre true/false para expandir o contraer
+      }));
+    };
+
+    // Función para habilitar la carga de la imagen (puede estar vinculada a algún evento)
+    const allowImageUpload = () => {
+      setIsUploadAllowed(true); // Habilita la carga
+    };
+    
+    // Función para manejar la carga de la imagen
+    const handleImageUpload = (event) => {
+      if (!isUploadAllowed) {
+        alert("Arrastre la imagen dentro una figura .");
+        return; // Si la carga no está permitida, evita que la imagen se cargue
+      }
+    
+      const file = event.target.files[0]; // Obtiene el primer archivo seleccionado
+      if (file) {
+        const reader = new FileReader(); // Crea un lector de archivos
+        reader.onloadend = () => {
+          setImageSrc(reader.result); // Almacena la imagen en formato base64
+        };
+        reader.readAsDataURL(file); // Lee el archivo como una URL de datos
+      }
+    };
+  
+    // Función para simular el clic en el input file
+    const triggerFileInput = () => {
+      document.getElementById('imageInput').click();
+    };
+
+    const resetStep = () => {
+      setExpandedDivs({});
+      setImageSrc(null);
+      setIsUploadAllowed(false);
+  };
+
+
+  return (
+    <div>
+      <div className='button-bar'>
+        <button onClick={handlePrevStep} className={`print-button`} title="Anterior"> 
+        <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+        </button>
 
         <button onClick={handlePrint} className={`print-button`} title="Imprimir">
           <img src="/I_Print.svg" style={{filter: 'invert(1)'}}/>
@@ -3132,19 +3171,57 @@ const StepE3 = ({ handlePrevStep3, handleUndo, handleImageChange, handlePrint })
     setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
   };
 
-  return (
-    <div className='button-bar'>
-      <button 
-        onClick={() => { 
-          handlePrevStep3(); // Llamar a la función para el paso anterior
-          resetCopyConclusions(); // Resetea las conclusiones
-        }} 
-        id='prev' 
-        className={`print-button dont-print `}
-      >
+  const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
+    
+    const [imageSrc, setImageSrc] = useState(null);
+    const [isUploadAllowed, setIsUploadAllowed] = useState(false); // Estado para controlar si la carga está permitida
+    const toggleDivSize = (index) => {
+      // Cambiar el estado del tamaño del div al hacer clic
+      setExpandedDivs((prevState) => ({
+        ...prevState,
+        [index]: !prevState[index], // Alterna entre true/false para expandir o contraer
+      }));
+    };
 
-        <img src="/I_Out.svg" alt="Regresar" style={{filter: 'invert(1)'}} />
-      </button>
+    // Función para habilitar la carga de la imagen (puede estar vinculada a algún evento)
+    const allowImageUpload = () => {
+      setIsUploadAllowed(true); // Habilita la carga
+    };
+    
+    // Función para manejar la carga de la imagen
+    const handleImageUpload = (event) => {
+      if (!isUploadAllowed) {
+        alert("Arrastre la imagen dentro una figura .");
+        return; // Si la carga no está permitida, evita que la imagen se cargue
+      }
+    
+      const file = event.target.files[0]; // Obtiene el primer archivo seleccionado
+      if (file) {
+        const reader = new FileReader(); // Crea un lector de archivos
+        reader.onloadend = () => {
+          setImageSrc(reader.result); // Almacena la imagen en formato base64
+        };
+        reader.readAsDataURL(file); // Lee el archivo como una URL de datos
+      }
+    };
+  
+    // Función para simular el clic en el input file
+    const triggerFileInput = () => {
+      document.getElementById('imageInput').click();
+    };
+
+    const resetStep = () => {
+      setExpandedDivs({});
+      setImageSrc(null);
+      setIsUploadAllowed(false);
+  };
+
+  return (
+    <div>
+      <div className='button-bar'>
+        <button onClick={handlePrevStep} className={`print-button`} title="Anterior"> 
+        <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+        </button>
 
         <button onClick={handlePrint} className={`print-button`} title="Imprimir">
           <img src="/I_Print.svg" style={{filter: 'invert(1)'}}/>
@@ -3499,9 +3576,7 @@ const StepE3 = ({ handlePrevStep3, handleUndo, handleImageChange, handlePrint })
         </div>
     </div> 
   );
-};
-
-
+}
 
 const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
   const { checkedStateLeft, checkedStateRight, setcheckedStateLeft, setcheckedStateRight } = useContext(CheckboxContext);

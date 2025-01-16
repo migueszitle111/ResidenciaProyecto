@@ -1,6 +1,6 @@
 import { ReportContext } from '@/src/context';
 import { useContext, useEffect, useState } from 'react';
-import { Accordion, darvalor } from '../../../components/ReportTemplate/Accordion';
+import { Accordion, darvalor,AccordionContainer,InternalAccordionContainer} from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
@@ -75,20 +75,20 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='pre_total' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
-
-        <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'}>
+        <InternalAccordionContainer>
+        <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'} type='internal'>
           <ConclusionButton value='c5sd' title=' C5' displayText={'C5'}/>
           <ConclusionButton value='c6sd' title=' C6' displayText={'C6'}/>
           <ConclusionButton value='c7md' title=' C7' displayText={'C7'}/>
           <ConclusionButton value='c8fd' title=' C8' displayText={'C8'}/>
           <ConclusionButton value='t1fd' title=' T1' displayText={'T1'}/>
         </Accordion>
-
+        </InternalAccordionContainer>
         {/* <div onClick={ handleNextStep1 }>
           <ConclusionButton value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
         </div> */}
-
-        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
+        <AccordionContainer>
+        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}  type='external'>
           <div onClick={handleNextStep1}>
             <ConclusionButton value='troncosD' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
@@ -99,8 +99,9 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
             <ConclusionButton value='CordonD' title=' POSTGANGLIONAR TOTAL A NIVEL DE CORDONES' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
-      
-        <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'}>
+      </AccordionContainer>
+      <AccordionContainer>
+        <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'} type='external'>
           <div onClick={handleNextStep5}>
             <ConclusionButton value='tron1000d' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
@@ -111,7 +112,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
             <ConclusionButton value='tron10000d' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
-
+        </AccordionContainer>
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='salidad' title=' A NIVEL DE SALIDA TORÁCICA' displayText={'SALIDA TORÁCICA'}/>
         </div></div>
@@ -122,7 +123,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='pre_totald' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
-
+<AccordionContainer>
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'}>
           <ConclusionButton value='c5si' title=' C5' displayText={'C5'}/>
           <ConclusionButton value='c6si' title=' C6' displayText={'C6'}/>
@@ -158,7 +159,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
             <ConclusionButton value='tron10000i' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
-
+</AccordionContainer>
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='salidai' title=' A NIVEL DE SALIDA TORÁCICA' displayText={'SALIDA TORÁCICA'}/>
         </div></div>
@@ -169,7 +170,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='pre_totali' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
-
+<AccordionContainer>
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'}>
           <ConclusionButton value='c5s' title=' C5' displayText={'C5'}/>
           <ConclusionButton value='c6s' title=' C6' displayText={'C6'}/>
@@ -205,7 +206,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
             <ConclusionButton value='tron10000' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
-
+        </AccordionContainer>
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='salida' title=' A NIVEL DE SALIDA TORÁCICA' displayText={'SALIDA TORÁCICA'}/>
         </div></div>
@@ -279,8 +280,8 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         <div onClick={ handleNextStep2 }>
           <ConclusionButton value='postganglionar_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
         </div>
-
-        <Accordion title='POSTGANGLIONAR PACIAL'>
+        <AccordionContainer>
+        <Accordion title='POSTGANGLIONAR PACIAL' value='POSTGANGLIONAR PACIAL' type='external'> 
             <div onClick={ handleNextStep2 }>
               <ConclusionButton value='ilihipogastrico_e_ilinguinald' title=' POSTGANGLIONAR PACIAL A NIVEL DE ILIHIPOGASTRICO E ILIINGUINAL' displayText={'ILIHIPOGASTRICO E ILIINGUINAL'}/>
               <ConclusionButton value='genitocrural_y_femorocutáneo_laterald' title=' POSTGANGLIONAR PACIAL A NIVEL DE GENITOCRURAL Y FEMOROCUTANEO LATERAL' displayText={'GENITOCRURAL Y FEMOROCUTANEO LATERAL'}/>
@@ -289,7 +290,9 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
               <ConclusionButton value='plexo_sacrod' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'PLEXO SACRO'}/>
               <ConclusionButton value='plexo_pudendod' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO PUDENDO' displayText={'PLEXO PUDENDO'}/>
             </div>
-        </Accordion></div>
+        </Accordion>
+        </AccordionContainer>
+        </div>
       );
     }
     else if (myVariable2.includes("b")) {
@@ -305,8 +308,8 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         <div onClick={ handleNextStep2 }>
           <ConclusionButton value='postganglionar_totali' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
         </div>
-
-        <Accordion title='POSTGANGLIONAR PACIAL'>
+        <AccordionContainer>
+        <Accordion title='POSTGANGLIONAR PACIAL' value='POSTGANGLIONAR PACIAL' type='external'>
             <div onClick={ handleNextStep2 }>
               <ConclusionButton value='ilihipogastrico_e_ilinguinali' title=' POSTGANGLIONAR PACIAL A NIVEL DE ILIHIPOGASTRICO E ILIINGUINAL' displayText={'ILIHIPOGASTRICO E ILIINGUINAL'}/>
               <ConclusionButton value='genitocrural_y_femorocutáneo_laterali' title=' POSTGANGLIONAR PACIAL A NIVEL DE GENITOCRURAL Y FEMOROCUTANEO LATERAL' displayText={'GENITOCRURAL Y FEMOROCUTANEO LATERAL'}/>
@@ -315,7 +318,9 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
               <ConclusionButton value='plexo_sacroi' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)'}/>
               <ConclusionButton value='plexo_pudendoi' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO PUDENDO' displayText={'PLEXO PUDENDO'}/>
             </div>
-        </Accordion></div>
+        </Accordion>
+        </AccordionContainer>
+        </div>
       );
     }
     else if (myVariable2.includes("c")) {
@@ -331,7 +336,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         <div onClick={ handleNextStep2 }>
           <ConclusionButton value='postganglionar_total' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
         </div>
-
+        <AccordionContainer>
         <Accordion title='POSTGANGLIONAR PACIAL'>
             <div onClick={ handleNextStep2 }>
               <ConclusionButton value='ilihipogastrico_e_ilinguinal' title=' POSTGANGLIONAR PACIAL A NIVEL DE ILIHIPOGASTRICO E ILIINGUINAL' displayText={'ILIHIPOGASTRICO E ILIINGUINAL'}/>
@@ -341,7 +346,9 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
               <ConclusionButton value='plexo_sacro' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)'}/>
               <ConclusionButton value='plexo_pudendo' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO PUDENDO' displayText={'PLEXO PUDENDO'}/>
             </div>
-        </Accordion></div>
+        </Accordion>
+        </AccordionContainer>
+        </div>
       );
     }
     return null;
@@ -1144,7 +1151,8 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
       <h1 className=' text-xl font-bold text-white'>
         TIPO
       </h1>
-        <Accordion title='AXONAL COMPLETA'>
+      <AccordionContainer>
+        <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type="external">
           <div onClick={handleNextStep}>
           <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
           <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
@@ -1154,7 +1162,7 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
           </div>
         </Accordion>
 
-        <Accordion title='AXONAL INCOMPLETA'>
+        <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type="external">
           <div onClick={handleNextStep}>
           <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
           <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
@@ -1164,7 +1172,7 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
           </div>
         </Accordion>
 
-        <Accordion title='DESMIELINIZANTE'>
+        <Accordion title='DESMIELINIZANTE' value='DESMIELINIZANTE' type="external">
           <div onClick={handleNextStep4}>
           <ConclusionButton value='por_retardo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
           <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
@@ -1172,12 +1180,13 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
           </div>
         </Accordion>
 
-        <Accordion title='MIXTA'>
+        <Accordion title='MIXTA' value='MIXTA' type="external">
           <div onClick={handleNextStep}>
           <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
           <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
           </div>
         </Accordion>
+      </AccordionContainer>
     </div>
   );
 };
@@ -1202,7 +1211,8 @@ const StepE2 = ({ handleNextStep1, handlePrevStep1, handleNextStep4 }) => {
       <h1 className=' text-xl font-bold text-white'>
         TIPO
       </h1>
-      <Accordion title='AXONAL COMPLETA'>
+      <AccordionContainer>
+      <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type="external">
           <div onClick={handleNextStep1}>
           <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
           <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
@@ -1212,7 +1222,7 @@ const StepE2 = ({ handleNextStep1, handlePrevStep1, handleNextStep4 }) => {
           </div>
         </Accordion>
 
-        <Accordion title='AXONAL INCOMPLETA'>
+        <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type="external">
           <div onClick={handleNextStep1}>
           <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
           <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
@@ -1222,7 +1232,7 @@ const StepE2 = ({ handleNextStep1, handlePrevStep1, handleNextStep4 }) => {
           </div>
         </Accordion>
 
-        <Accordion title='DESMIELINIZANTE'>
+        <Accordion title='DESMIELINIZANTE' value='DESMIELINIZANTE' type="external">
           <div onClick={handleNextStep4}>
           <ConclusionButton value='por_retardo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
           <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
@@ -1230,12 +1240,13 @@ const StepE2 = ({ handleNextStep1, handlePrevStep1, handleNextStep4 }) => {
           </div>
         </Accordion>
 
-        <Accordion title='MIXTA'>
-          <div onClick={handleNextStep1}>
+        <Accordion title='MIXTA'value='MIXTA' type="external">
+          <div onClick={handleNextStep1} >
           <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
           <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
           </div>
         </Accordion>
+        </AccordionContainer>
     </div>
   );
 };
@@ -1260,7 +1271,8 @@ const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
       <h1 className=' text-xl font-bold text-white'>
         TIPO
       </h1>
-      <Accordion title='AXONAL COMPLETA'>
+      <AccordionContainer>
+      <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type="external">
           <div onClick={handleNextStep2}>
           <ConclusionButton value='con_denervación_difusa' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
           <ConclusionButton value='con_denervación_abundante' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
@@ -1270,7 +1282,7 @@ const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
           </div>
         </Accordion>
 
-        <Accordion title='AXONAL INCOMPLETA'>
+        <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type="external">
           <div onClick={handleNextStep2}>
           <ConclusionButton value='con_denervación_difusa' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
           <ConclusionButton value='con_denervación_abundante' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
@@ -1280,7 +1292,7 @@ const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
           </div>
         </Accordion>
 
-        <Accordion title='DESMIELINIZANTE'>
+        <Accordion title='DESMIELINIZANTE' value='DESMIELINIZANTE' type="external">
           <div onClick={handleNextStep4}>
           <ConclusionButton value='por_retardo_en_la_conduccion' title=', DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
           <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=', DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
@@ -1288,12 +1300,13 @@ const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
           </div>
         </Accordion>
 
-        <Accordion title='MIXTA'>
+        <Accordion title='MIXTA' value='MIXTA' type="external">
           <div onClick={handleNextStep2}>
           <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=', DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
           <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=', DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
           </div>
         </Accordion>
+        </AccordionContainer>
     </div>
   );
 };

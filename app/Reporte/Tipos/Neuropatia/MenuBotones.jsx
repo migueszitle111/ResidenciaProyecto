@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Accordion } from '../../../components/ReportTemplate/Accordion';
+import { Accordion,AccordionContainer,InternalAccordionContainer} from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
@@ -89,7 +89,6 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
 ///////////////// Menu de cada paso /////////////////
 
 const StepA = ({ handleNextStep, setStep }) => (
-
   <div>
     <div className='button-bar'>
       <button onClick={handleNextStep} className="print-button">
@@ -108,7 +107,6 @@ const StepA = ({ handleNextStep, setStep }) => (
     <div onClick={() => setStep('B')}>
       <ConclusionButton value='evolucion_cronica' title='MONO NEUROPATÍA CRÓNICA ' displayText="MONO NEUROPATÍA CRÓNICA" />
     </div>
-
     <div className='my-2 flex justify-end items-center'>
     </div>
   </div>
@@ -116,7 +114,6 @@ const StepA = ({ handleNextStep, setStep }) => (
 );
 
 const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => (
-
   <div>
     <div className='button-bar'>
       <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
@@ -129,8 +126,8 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
     <h1 className=' text-xl font-bold text-white'>
       NERVIO
     </h1>
-
-    <Accordion title='NERVIOS SUPERIORES'>
+<AccordionContainer>
+    <Accordion title='NERVIOS SUPERIORES' value='NERVIOS SUPERIORES' type='external'>
       <div onClick={() => { setSelectedSide('MEDIANO'); setStep('B1'); }}>
         <ConclusionButton value='MEDIANO' title=' DE NERVIO MEDIANO' displayText='MEDIANO' /></div>
       <div onClick={() => { setSelectedSide('INTEROSEOANTERIOR'); setStep('B1'); }}>
@@ -155,15 +152,12 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
         <ConclusionButton value='DORSAL_CUTANEO' title=' DE NERVIO DORSAL CUTANEO' displayText='DORSAL CUTANEO' /></div>
       <div onClick={() => { setSelectedSide('FRENICO'); setStep('B1'); }}>
         <ConclusionButton value='FRENICO' title=' DE NERVIO FRÉNICO' displayText='FRÉNICO' /></div>
-
       <div onClick={() => { setSelectedSide('TORACODORSAL'); setStep('B1'); }}>
         <ConclusionButton value='TORACODORSAL' title=' DE NERVIO TORACODORSAL' displayText='TORACODORSAL' /></div>
       <div onClick={() => { setSelectedSide('TORACICO_LARGO'); setStep('B1'); }}>
         <ConclusionButton value='TORACICO_LARGO' title=' DE NERVIO TORÁCICO LARGO' displayText='TORÁCICO LARGO' /></div>
-
     </Accordion>
-
-    <Accordion title='NERVIOS INFERIORES'>
+    <Accordion title='NERVIOS INFERIORES' value='NERVIOS INFERIORES' type='external'>
       <div onClick={() => { setSelectedSide('CIATICO'); setStep('B1'); }}>
         <ConclusionButton value='CIATICO' title=' DE NERVIO CIATICO' displayText='CIATICO' /></div>
       <div onClick={() => { setSelectedSide('GLUTEO_INFERIOR'); setStep('B1'); }}>
@@ -193,13 +187,10 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
       <div onClick={() => { setSelectedSide('PUDENDO'); setStep('B1'); }}>
         <ConclusionButton value='PUDENDO' title=' DE NERVIO PUDENDO' displayText='PUDENDO' /></div>
     </Accordion>
-
-
+    </AccordionContainer>
     <div onClick={() => { setSelectedSide('FACIAL'); setStep('B1'); }}>
       <ConclusionButton value='FACIAL' title=' DE NERVIO FACIAL' displayText='FACIAL' /></div>
-
   </div>
-
 );
 
 //<ConclusionButton value='ANTEBRAQUIAL_CUTANEO' title=' DE NERVIO ANTEBRAQUIAL CUTÁNEO' displayText='ANTEBRAQUIAL CUTÁNEO' />
@@ -208,7 +199,6 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
 //<ConclusionButton value='ILIOINGUINAL' title=' DE NERVIO ILIOINGUINAL' displayText='ILIOINGUINAL' />
 
 const StepB1 = ({ handleNextStep, handlePrevStep, setStep }) => (
-
   <div>
     <div className='button-bar'>
       <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
@@ -221,26 +211,23 @@ const StepB1 = ({ handleNextStep, handlePrevStep, setStep }) => (
     <h1 className=' text-xl font-bold text-white'>
       LADO
     </h1>
-
     <div onClick={() => setStep('C')}>
       <ConclusionButton value='IZQUIERDO' title=' IZQUIERDO,' displayText='IZQUIERDO' /></div>
     <div onClick={() => setStep('CL')}>
       <ConclusionButton value='DERECHO' title=' DERECHO,' displayText='DERECHO' /></div>
-
-    <Accordion title='BILATERIAL'>
+    <AccordionContainer>
+    <Accordion title='BILATERIAL' value={'BILATERAL'} type='internal'>
       <div onClick={() => setStep('CG')}>
         <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO DERECHO,' displayText={'PREDOMINIO DERECHO'} /></div>
       <div onClick={() => setStep('CG')}>
         <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} /></div>
       <div onClick={() => setStep('CG')}>
         <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} /></div>
-
     </Accordion>
+    </AccordionContainer>
   </div>
-
 );
 const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
-
   <div>
     <div className='button-bar'>
       <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
@@ -253,23 +240,17 @@ const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
     <h1 className=' text-xl font-bold text-white'>
       UBICACION
     </h1>
-
     <div onClick={() => setStep('CDD')}>
       <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
     <div onClick={() => setStep('CDD')}>
       <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
-
-
     <div onClick={() => setStep('D')}>
       <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
-
   </div>
-
 );
 
 
 const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
-
   <div>
     <div className='button-bar'>
       <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
@@ -282,18 +263,13 @@ const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
     <h1 className=' text-xl font-bold text-white'>
       UBICACION
     </h1>
-
     <div onClick={() => setStep('CD')}>
       <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
     <div onClick={() => setStep('CD')}>
       <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
-
-
     <div onClick={() => setStep('D')}>
       <ConclusionButton value={`${selectedSide}_IZQgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
-
   </div>
-
 );
 
 const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
@@ -315,17 +291,12 @@ const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
       <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
     <div onClick={() => setStep('CD')}>
       <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
-
-
     <div onClick={() => setStep('D')}>
       <ConclusionButton value={`${selectedSide}_DERgeneralizada`} title=' GENERALIZADA, ' displayText='GENERALIZADA' /></div>
 
   </div>
 
 );
-
-
-
 
 const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => (
 
@@ -341,11 +312,9 @@ const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => (
     <h1 className=' text-xl font-bold text-white '>
       SELECCIONAR EL NIVEL DE LESION CON EL PUNTERO
     </h1>
-
     <div onClick={() => setStep('D')}>
       <ConclusionButton value='seguir' displayText={'LISTO'} />
     </div>
-
   </div>
 
 );
@@ -364,14 +333,12 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => (
     <h1 className=' text-xl font-bold text-white '>
       SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO
     </h1>
-
     <div onClick={() => setStep('CDI')}>
       <ConclusionButton value='seguir' displayText={'LISTO'} />
     </div>
-
   </div>
-
 );
+
 const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => (
 
   <div>
@@ -386,11 +353,9 @@ const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => (
     <h1 className=' text-xl font-bold text-white '>
     SELECCIONAR EL NIVEL DE LESION DEL LADO IZQUIERDO CON EL PUNTERO
     </h1>
-
     <div onClick={() => setStep('D')}>
       <ConclusionButton value='seguir' displayText={'LISTO'} />
     </div>
-
   </div>
 
 );
@@ -433,8 +398,8 @@ const StepD = ({ handlePrevStep, handleNextStep, setStep }) => (
     <h1 className=' text-xl font-bold text-white'>
       TIPO
     </h1>
-
-    <Accordion title='AXONAL COMPLETA'>
+<AccordionContainer>
+    <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type='external'>
       <div onClick={() => setStep('E')}>
         <ConclusionButton value='CON DENERVACIÓN DIFUSA (++++)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++)' displayText={' DENERVACIÓN DIFUSA (++++) '} /></div>
       <div onClick={() => setStep('E')}>
@@ -446,8 +411,9 @@ const StepD = ({ handlePrevStep, handleNextStep, setStep }) => (
       <div onClick={() => setStep('F')}>
         <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN ACTIVA' displayText={'SIN DENERVACIÓN ACTIVA'} /></div>
     </Accordion>
-
-    <Accordion title='AXONAL INCOMPLETA'>
+    </AccordionContainer>
+    <AccordionContainer>
+    <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type='external'>
       <div onClick={() => setStep('E')}>
         <ConclusionButton value='CON DENERVACIÓN DIFUSA (++++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++)' displayText={' DENERVACIÓN DIFUSA (++++) '} /></div>
       <div onClick={() => setStep('E')}>
@@ -459,27 +425,26 @@ const StepD = ({ handlePrevStep, handleNextStep, setStep }) => (
       <div onClick={() => setStep('F')}>
         <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN ACTIVA' displayText={'SIN DENERVACIÓN ACTIVA'} /></div>
     </Accordion>
-
-
-
-    <Accordion title='DESMIELINIZANTE '>
+    </AccordionContainer>
+    <AccordionContainer>
+    <Accordion title='DESMIELINIZANTE ' value='DESMIELINIZANTE' type='external'>
       <div onClick={() => setStep('E1')}>
         <ConclusionButton value=' RETARDO EN LA CONDUCCIÓN ' title=' TIPO DESMIELIMIZANTE POR RETARDO EN LA CONDUCCIÓN ' displayText={'POR RETARDO EN LA CONDUCCIÓN '} /></div>
       <div onClick={() => setStep('E1')}>
         <ConclusionButton value=' BLOQUEO PARCIAL EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' displayText={'POR BLOQUEO PARCIAL EN LA CONDUCCIÓN'} /></div>
       <div onClick={() => setStep('E1')}>
         <ConclusionButton value=' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' displayText={'POR BLOQUEO COMPLETO EN LA CONDUCCIÓN'} /></div>
-
     </Accordion>
+    </AccordionContainer>
 
-
-    <Accordion title='MIXTA'>
+    <AccordionContainer>
+    <Accordion title='MIXTA' value='MIXTA' type='external'>
       <div onClick={() => setStep('E')}>
         <ConclusionButton value=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' title=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' displayText={'DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA '} /></div>
       <div onClick={() => setStep('E')}>
         <ConclusionButton value=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA ' title=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'  AXONAL CON DESMIELINIZACIÓN SECUNDARIA'} /></div>
     </Accordion>
-    
+    </AccordionContainer>
   </div>
 
 );
@@ -588,18 +553,14 @@ const StepG = ({ handleNextStep, handlePrevStep, setStep }) => (
     <h1 className=' text-xl font-bold text-white'>
       REINERVACIÓN
     </h1>
-
     <div onClick={() => setStep('H')}>
       <ConclusionButton value=' CON REINERVACIÓN ACTIVA ' title=' CON REINERVACIÓN ACTIVA ' /></div>
     <div onClick={() => setStep('H')}>
       <ConclusionButton value='  REINERVACIÓN ACTIVA ' title=' SIN REINERVACIÓN ACTIVA ' /></div>
-
   </div>
-
 );
 
 const StepH = ({ handlePrevStep, handleNextStep, setStep }) => (
-
   <div>
     <div className='button-bar'>
       <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
@@ -612,7 +573,6 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => (
     <h1 className=' text-xl font-bold text-white'>
       PRONOSTICO
     </h1>
-
     <div onClick={() => setStep('I')}>
       <ConclusionButton value='completo' title='Y PRONÓSTICO DE RECUPERACIÓN COMPLETA' displayText={'RECUPERACIÓN COMPLETA'} /></div>
     <div onClick={() => setStep('I')}>
@@ -621,7 +581,6 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => (
       <ConclusionButton value='pobre' title='Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
     <div onClick={() => setStep('I')}>
       <ConclusionButton value='nulo' title='Y PRONÓSTICO DE RECUPERACIÓN NULA' displayText={'RECUPERACION NULA'} /></div></div>
-
 
 );
 

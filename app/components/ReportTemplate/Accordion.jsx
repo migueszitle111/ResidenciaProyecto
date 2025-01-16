@@ -12,6 +12,14 @@ export const InternalAccordionContext = createContext({
   toggleInternalValue: () => {},
 });
 
+// Variable y función adicional
+var value = 1;
+
+export function darvalor() {
+  value += 1;
+  return value;
+}
+
 // Proveedor para acordeones externos
 export function AccordionContainer({ children }) {
   const [activeValue, setActiveValue] = useState(null);
@@ -25,19 +33,15 @@ export function AccordionContainer({ children }) {
 
 // Proveedor para acordeones internos
 export function InternalAccordionContainer({ children }) {
-  // En este caso guardamos un objeto cuyas keys son los 'value' de cada acordeón
-  // y su valor es true/false si está abierto o no
   const [activeInternalValues, setActiveInternalValues] = useState({});
 
   function toggleInternalValue(value) {
-    setActiveInternalValues(prev => {
-      // Si ya está abierto, lo cerramos
+    setActiveInternalValues((prev) => {
       if (prev[value]) {
         const newState = { ...prev };
         delete newState[value];
         return newState;
-      } 
-      // Si está cerrado, lo abrimos (sin cerrar otros)
+      }
       return {
         ...prev,
         [value]: true,
@@ -55,8 +59,6 @@ export function InternalAccordionContainer({ children }) {
 }
 
 // Componente Accordion
-// type = "external" => maneja la lógica de un solo abierto
-// type = "internal" => maneja la lógica de múltiples abiertos
 export function Accordion({ children, value, title, type = 'external' }) {
   const { activeValue, setActiveValue } = useContext(AccordionValuesContext);
   const { activeInternalValues, toggleInternalValue } = useContext(InternalAccordionContext);
@@ -70,12 +72,12 @@ export function Accordion({ children, value, title, type = 'external' }) {
 
   function handleClick() {
     if (isExternal) {
-      // Cierra el que esté abierto y abre este (lógica de "solo uno abierto")
       setActiveValue(isActive ? null : value);
     } else {
-      // Interno => se permite abrir/cerrar varios
       toggleInternalValue(value);
     }
+    // Ejemplo de uso de darvalor (opcional)
+    console.log('Nuevo valor:', darvalor());
   }
 
   return (
@@ -89,7 +91,6 @@ export function Accordion({ children, value, title, type = 'external' }) {
         {title}
       </h2>
 
-      {/* Si está activo, muestra el contenido */}
       {isActive && <div className="text-white p-2">{children}</div>}
     </div>
   );

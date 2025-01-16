@@ -6,6 +6,128 @@ import { ConclusionButtonR } from '../../../components/ReportTemplate/Conclusion
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
 
+export const groupMapping = {
+  // C4
+  A1: 'c4_left',
+  A2: 'c4_left',
+  A3: 'c4_left',
+  A4: 'c4_left',
+  A5: 'c4_right',
+  A6: 'c4_right',
+  A7: 'c4_right',
+  A8: 'c4_right',
+
+  // C5
+  A9:  'c5_left',
+  A10: 'c5_left',
+  A11: 'c5_left',
+  A12: 'c5_left',
+  A13: 'c5_right',
+  A14: 'c5_right',
+  A15: 'c5_right',
+  A16: 'c5_right',
+
+  // C6
+  A17: 'c6_left',
+  A18: 'c6_left',
+  A19: 'c6_left',
+  A20: 'c6_left',
+  A21: 'c6_right',
+  A22: 'c6_right',
+  A23: 'c6_right',
+  A24: 'c6_right',
+
+  // C7
+  A25: 'c7_left',
+  A26: 'c7_left',
+  A27: 'c7_left',
+  A28: 'c7_left',
+  A29: 'c7_right',
+  A30: 'c7_right',
+  A31: 'c7_right',
+  A32: 'c7_right',
+
+  // C8
+  A33: 'c8_left',
+  A34: 'c8_left',
+  A35: 'c8_left',
+  A36: 'c8_left',
+  A37: 'c8_right',
+  A38: 'c8_right',
+  A39: 'c8_right',
+  A40: 'c8_right',
+
+  // T1
+  A41: 't1_left',
+  A42: 't1_left',
+  A43: 't1_left',
+  A44: 't1_left',
+  A45: 't1_right',
+  A46: 't1_right',
+  A47: 't1_right',
+  A48: 't1_right',
+
+  // L2
+  A49: 'l2_left',
+  A50: 'l2_left',
+  A51: 'l2_left',
+  A52: 'l2_left',
+  A53: 'l2_right',
+  A54: 'l2_right',
+  A55: 'l2_right',
+  A56: 'l2_right',
+
+  // L3
+  A57: 'l3_left',
+  A58: 'l3_left',
+  A59: 'l3_left',
+  A60: 'l3_left',
+  A61: 'l3_right',
+  A62: 'l3_right',
+  A63: 'l3_right',
+  A64: 'l3_right',
+
+  // L4
+  A65: 'l4_left',
+  A66: 'l4_left',
+  A67: 'l4_left',
+  A68: 'l4_left',
+  A69: 'l4_right',
+  A70: 'l4_right',
+  A71: 'l4_right',
+  A72: 'l4_right',
+
+  // L5
+  A73: 'l5_left',
+  A74: 'l5_left',
+  A75: 'l5_left',
+  A76: 'l5_left',
+  A77: 'l5_right',
+  A78: 'l5_right',
+  A79: 'l5_right',
+  A80: 'l5_right',
+
+  // S1
+  A81: 's1_left',
+  A82: 's1_left',
+  A83: 's1_left',
+  A84: 's1_left',
+  A85: 's1_right',
+  A86: 's1_right',
+  A87: 's1_right',
+  A88: 's1_right',
+
+  // S2
+  A89: 's2_left',
+  A90: 's2_left',
+  A91: 's2_left',
+  A92: 's2_left',
+  A93: 's2_right',
+  A94: 's2_right',
+  A95: 's2_right',
+  A96: 's2_right',
+};
+
 // Hook personalizado para manejar los pasos
 const useStep = () => {
   const [step, setStep] = useState('A'); // Inicialmente en el paso 'A'
@@ -17,6 +139,9 @@ const useStep = () => {
     setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
   };
   const { handlePrint } = useImageState();
+
+  
+
 
   // Flujo principal (ejemplo Radiculopatía Aguda)
   const handleNextStep = () => {
@@ -86,6 +211,8 @@ const useStep = () => {
     else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
 
   };
+  
+  
 
   return {
     step,
@@ -151,6 +278,9 @@ const SimpleMultiStepForm = () => {
       {step === 'E3' && <StepE3 handlePrevStep3={handlePrevStep3} handleNextStep3={handleNextStep3} handlePrint={handlePrint} />}
     </div>
   );
+
+
+
 };
 
 const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextStep3 }) => {
@@ -217,7 +347,7 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextSte
   );
 };
 
-const StepB = ({ handleNextStep, handlePrevStep }) => {
+const StepB = ({ handleNextStep, handlePrevStep}) => {
   const {
     checkedStateLeft,
     checkedStateRight,
@@ -229,22 +359,50 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
   const { updateConclusions } = useContext(ReportContextR);
 
   // Manejo de checkboxes “lado izquierdo”
-  const handleCheckboxChangeLeft = (event) => {
+  function handleCheckboxChangeLeft(event) {
     const { id, checked } = event.target;
-    setcheckedStateLeft((prevState) => ({
-      ...prevState,
-      [id]: checked,
-    }));
-  };
-
+    setcheckedStateLeft((prevState) => {
+      // 1) Clonamos el estado previo
+      const newState = { ...prevState };
+  
+      // 2) Averiguamos a qué “grupo” pertenece el checkbox que se está clicando
+      const group = groupMapping[id]; 
+      if (group) {
+        // 3) Buscar TODOS los IDs que tengan el mismo group, y ponerlos en false
+        for (const [key, val] of Object.entries(groupMapping)) {
+          if (val === group) {
+            newState[key] = false; // Desactiva todos los checkboxes en ese grupo
+          }
+        }
+      }
+  
+      // 4) Activa solo el ID actual
+      newState[id] = checked;
+      return newState;
+    });
+  }
+  
   // Manejo de checkboxes “lado derecho”
-  const handleCheckboxChangeRight = (event) => {
+  function handleCheckboxChangeRight(event) {
     const { id, checked } = event.target;
-    setcheckedStateRight((prevState) => ({
-      ...prevState,
-      [id]: checked,
-    }));
-  };
+    setcheckedStateRight((prevState) => {
+      const newState = { ...prevState };
+  
+      const group = groupMapping[id];
+      if (group) {
+        for (const [key, val] of Object.entries(groupMapping)) {
+          if (val === group) {
+            newState[key] = false; 
+          }
+        }
+      }
+  
+      newState[id] = checked;
+      return newState;
+    });
+  }
+  
+  
 
   // Manejo de botones de conclusión
   const handleButtonPress = (value, title, nextStepFunction) => {

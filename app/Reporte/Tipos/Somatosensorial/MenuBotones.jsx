@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Accordion } from '../../../components/ReportTemplate/Accordion';
+import { Accordion,AccordionContainer,InternalAccordionContainer} from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
 import './Style.css';
+import { Inter } from 'next/font/google';
 
 // Numero de pasos
 const stepsArray = ['A', 'B', 'C1','C2','D1','D2', 'E','E2', 'F','F2','G','H'];
@@ -282,7 +283,8 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
-    <Accordion  title='SUPERIORES'>
+    <AccordionContainer>
+    <Accordion  title='SUPERIORES' value='superiores' type='external'>
       <div onClick={() => setStep('G')} >
       <ConclusionButton value="mediano" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO MEDIANO' displayText="NERVIO MEDIANO"></ConclusionButton>
       <ConclusionButton value="ulnar" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ULNAR' displayText="NERVIO ULNAR"></ConclusionButton>
@@ -290,7 +292,9 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
       <ConclusionButton value="antebraqueal_cutaneo_lateral" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ANTEBRAQUEAL CUTANEO lATERAL' displayText="NERVIO ANTEBRAQUEAL CUTANEO lATERAL"></ConclusionButton>
       </div>
    </Accordion>
-     <Accordion  title='INFERIORES'>
+   </AccordionContainer>
+   <AccordionContainer>
+     <Accordion  title='INFERIORES' value="inferiores" type='external'>
       <div onClick={() => setStep('G3')} >
      <ConclusionButton value="tibial" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO TIBIAL' displayText="NERVIO TIBIAL"></ConclusionButton>
      <ConclusionButton value="peroneo_superficial" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PERONEO' displayText="NERVIO PERONEO"></ConclusionButton>
@@ -301,8 +305,10 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
      <ConclusionButton value="pudendo" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PUDENDO' displayText="NERVIO PUDENDO"></ConclusionButton>
     </div>
     </Accordion>
-    <Accordion  title='DERMATOMAS'>
-     <Accordion title='CERVICAL'>
+    <InternalAccordionContainer> 
+    <Accordion  title='DERMATOMAS' type='internal'>
+     <InternalAccordionContainer> 
+     <Accordion title='CERVICAL' type='internal'> 
        <div style={{ display: 'flex', gap: '8px' }}>
          <ConclusionButton value="c4" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
          <ConclusionButton value="c5" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
@@ -312,8 +318,9 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
          <ConclusionButton value="t1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
       </div>
       </Accordion>
-
-      <Accordion  title='TORACICO'>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value="t2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
         <ConclusionButton value="t3" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
@@ -330,7 +337,9 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
         <ConclusionButton value="t12" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
         </div>
       </Accordion>
-      <Accordion  title='LUMBOSACRO'>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='LUMBOSACRO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value="l1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
         <ConclusionButton value="l2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
@@ -341,8 +350,10 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
         <ConclusionButton value="s2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
         </div>
       </Accordion>
-     
+      </InternalAccordionContainer> 
     </Accordion>
+    </InternalAccordionContainer> 
+    </AccordionContainer>
     <div onClick={() => setStep('H')} >
     <ConclusionButton value={`${selectedSide}trigemino`} title=", A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />
     </div>
@@ -360,15 +371,16 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
-    <Accordion  title='SUPERIORES'>
-     
+    <AccordionContainer>
+    <Accordion  title='SUPERIORES' value='superiores' type='external'>
       <ConclusionButton value="mediano" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO MEDIANO' displayText="NERVIO MEDIANO"></ConclusionButton>
       <ConclusionButton value="ulnar" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ULNAR' displayText="NERVIO ULNAR"></ConclusionButton>
       <ConclusionButton value="radial_superficial" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO RADIAL SUPERFICIAL' displayText="NERVIO RADIAL SUPERFICIAL"></ConclusionButton>
       <ConclusionButton value="antebraqueal_cutaneo_lateral" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO ANTEBRAQUEAL CUTANEO lATERAL' displayText="NERVIO ANTEBRAQUEAL CUTANEO lATERAL"></ConclusionButton>
-    
    </Accordion>
-     <Accordion  title='INFERIORES'>
+   </AccordionContainer>
+   <AccordionContainer>
+     <Accordion  title='INFERIORES' value="inferiores" type='external'>
      <ConclusionButton value="tibial" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO TIBIAL' displayText="NERVIO TIBIAL"></ConclusionButton>
      <ConclusionButton value="peroneo_superficial" title=', A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PERONEO' displayText="NERVIO PERONEO "></ConclusionButton>
      <ConclusionButton value="peroneo_superficial" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PERONEO SUPERFICIAL' displayText="NERVIO PERONEO SUPERFICIAL"></ConclusionButton>
@@ -377,8 +389,10 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
      <ConclusionButton value="femorocutaneo_lateral" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO FEMOROCUTANEO LATERAL' displayText="NERVIO FEMOROCUTANEO LATERAL"></ConclusionButton>
      <ConclusionButton value="pudendo" title=' A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTIMULO DE NERVIO PUDENDO' displayText="NERVIO PUDENDO"></ConclusionButton>
     </Accordion>
-    <Accordion  title='DERMATOMAS'>
-     <Accordion title='SUPERIORES'>
+    <InternalAccordionContainer>
+    <Accordion  title='DERMATOMAS' type='internal'>
+      <InternalAccordionContainer>
+     <Accordion title='SUPERIORES' type='internal'>
        <div style={{ display: 'flex', gap: '8px' }}>
          <ConclusionButton value="c4" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
          <ConclusionButton value="c5" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
@@ -387,8 +401,9 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
          <ConclusionButton value="c8" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
       </div>
       </Accordion>
-
-      <Accordion  title='INFERIOR TORACICO'>
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
+      <Accordion  title='INFERIOR TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value="t1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"  /> 
         <ConclusionButton value="t2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"  />
@@ -406,7 +421,9 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
         <ConclusionButton value="t12" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"/>   
         </div>
       </Accordion>
-      <Accordion  title='INFERIOR'>
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
+      <Accordion  title='INFERIOR' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value="l1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
         <ConclusionButton value="l2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
@@ -415,13 +432,18 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
         <ConclusionButton value="l5" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/>       
         </div>
       </Accordion>
-      <Accordion  title='INFERIOR'>
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
+      <Accordion  title='INFERIOR' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value="s1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
         <ConclusionButton value="s2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />
         </div>
     </Accordion>
+    </InternalAccordionContainer>
     </Accordion>
+    </InternalAccordionContainer>
+    </AccordionContainer>
     <ConclusionButton value="trigemino" title=", A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />  
 </div>
 );
@@ -480,7 +502,8 @@ const StepG2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
-    <Accordion  title='SUPERIORES'>
+    <AccordionContainer>
+    <Accordion  title='SUPERIORES' value={'superiores'} type='external'>
       <div onClick={() => setStep('H')}>
       <ConclusionButton value="cortical" title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
       <ConclusionButton value="subcortical" title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medialNúcleo tectal). " displayText="SUBCORTICAL" />
@@ -488,7 +511,9 @@ const StepG2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
       <ConclusionButton value="periferico" title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas (IA-II)- Plexo braquial). " displayText="PERIFERICO" />
       </div>
     </Accordion>
-    <Accordion  title='INFERIORES'>
+    </AccordionContainer>
+    <AccordionContainer>
+    <Accordion  title='INFERIORES' value={'inferiores'} type='external'>
       <div onClick={() => setStep('H')}>
       <ConclusionButton value="cortical" title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
       <ConclusionButton value="subcortical" title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
@@ -498,6 +523,7 @@ const StepG2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
       <ConclusionButton value="periferico" title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
       </div>
     </Accordion>
+    </AccordionContainer>
 
     
   </div>

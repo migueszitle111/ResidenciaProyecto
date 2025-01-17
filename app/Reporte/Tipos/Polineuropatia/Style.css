@@ -305,15 +305,15 @@
 }
 
 .dropArea {
-  /*position: absolute; /* Cambiado a absolute para posicionamiento */
-  bottom: 950px;
-  left: 20px;
-  width: 600px;
-  height: 780px;
-  /*position: relative;*/
+  top: 10px;
+  left: 10px;
+  width: 97%;
+  height: 82%;
+  position: absolute;
   overflow: hidden;
   background-color: transparent;
 }
+
 
 
 .cuadro {
@@ -751,6 +751,26 @@
 /* Detalles referentes a la impresion */
 @media print {
 
+  .cuadro-expanded {
+    width: 240px;
+    height: 120px;
+    margin-left: -10px;
+  }
+  .circulo-expanded {
+    width: 240px;
+    height: 120px;
+    
+  }
+
+  .dropArea {
+    top: 94px;
+    left: 10px;
+    width: 97%;
+    height: 82%;
+    position: absolute;
+    overflow: hidden;
+    background-color: transparent;
+  }
 
   .print {
     display: none;
@@ -761,9 +781,11 @@
   }
 
   .image-container {
+    margin-top: 80px;
     position: relative;
-    width: 750px;
+    width: 100%;
     height: 100%;
+    /* border: cadetblue 2px solid; */
   }
 
   .handle {
@@ -783,11 +805,12 @@
   .info-container textarea {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 50%;
     font-size: 10px;
-    background-color: transparent; 
-    resize: none; 
+    background-color: transparent;
+    resize: none;
     top: 4vh;
+    
   }
 
 .head{

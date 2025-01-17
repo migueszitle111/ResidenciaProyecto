@@ -40,6 +40,7 @@ import UlnarSt from "./UlnarSt/UlnarSt";
 const MenuGeneralT = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [subMenuVisibility, setSubMenuVisibility] = useState({});
+  const [visibleSubMenu, setVisibleSubMenu] = useState(null);
 
   const Neurolografia = [
     {
@@ -232,10 +233,9 @@ const MenuGeneralT = () => {
   };
 
   const toggleSubMenuVisibility = (menuOption) => {
-    setSubMenuVisibility((prevVisibility) => ({
-      ...prevVisibility,
-      [menuOption]: !prevVisibility[menuOption],
-    }));
+    setVisibleSubMenu((prevMenu) =>
+      prevMenu === menuOption ? null : menuOption
+    );
   };
 
   return (
@@ -255,18 +255,13 @@ const MenuGeneralT = () => {
                   <div key={menuIndex} className="ml-4">
                     <button
                       className={`w-full flex flex-col lg:w-auto text-left lg:text-justify hover:text-orange-600 active:bg-[#404040] text-white py-2 lg:py-3 rounded truncate lg:truncate xl:truncate ${
-                        selectedOption === menuOption.Menu
-                          ? "bg-opacity-50"
-                          : ""
+                        visibleSubMenu === menuOption.Menu ? "bg-opacity-50" : ""
                       }`}
-                      onClick={() => {
-                        handleClick(menuOption.Menu);
-                        toggleSubMenuVisibility(menuOption.Menu);
-                      }}
+                      onClick={() => toggleSubMenuVisibility(menuOption.Menu)}
                     >
                       › {menuOption.Menu}
                     </button>
-                    {subMenuVisibility[menuOption.Menu] && (
+                    {visibleSubMenu === menuOption.Menu && (
                       <div>
                         {menuOption.Submenu.map((submenuOption, submenuIndex) => (
                           <button

@@ -45,7 +45,7 @@ const DropArea = () => {
       onDragOver={handleDragOver}
       style={{
         //border: '2px dashed #ccc',
-        position: 'relative'
+        //position: 'relative'
       }}
     >
       {droppedItems.length === 0 ? (
@@ -70,6 +70,7 @@ const DropArea = () => {
     </div>
   );
 };
+
 
 const Reporte = () => {
   
@@ -312,9 +313,10 @@ const Reporte = () => {
         defaultValue="PLEXOPATIA  "
         onChange={handleTextareaChange}
       /></div>
+      <div><DropArea /> </div>
         </div>
         </div>
-        <div><DropArea /> </div>
+        
         </div>
       </div>
     </div>

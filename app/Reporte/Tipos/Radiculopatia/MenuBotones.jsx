@@ -16,7 +16,6 @@ export const groupMapping = {
   A6: 'c4_right',
   A7: 'c4_right',
   A8: 'c4_right',
-
   // C5
   A9:  'c5_left',
   A10: 'c5_left',
@@ -26,7 +25,6 @@ export const groupMapping = {
   A14: 'c5_right',
   A15: 'c5_right',
   A16: 'c5_right',
-
   // C6
   A17: 'c6_left',
   A18: 'c6_left',
@@ -36,7 +34,6 @@ export const groupMapping = {
   A22: 'c6_right',
   A23: 'c6_right',
   A24: 'c6_right',
-
   // C7
   A25: 'c7_left',
   A26: 'c7_left',
@@ -46,7 +43,6 @@ export const groupMapping = {
   A30: 'c7_right',
   A31: 'c7_right',
   A32: 'c7_right',
-
   // C8
   A33: 'c8_left',
   A34: 'c8_left',
@@ -56,7 +52,6 @@ export const groupMapping = {
   A38: 'c8_right',
   A39: 'c8_right',
   A40: 'c8_right',
-
   // T1
   A41: 't1_left',
   A42: 't1_left',
@@ -66,7 +61,6 @@ export const groupMapping = {
   A46: 't1_right',
   A47: 't1_right',
   A48: 't1_right',
-
   // L2
   A49: 'l2_left',
   A50: 'l2_left',
@@ -76,7 +70,6 @@ export const groupMapping = {
   A54: 'l2_right',
   A55: 'l2_right',
   A56: 'l2_right',
-
   // L3
   A57: 'l3_left',
   A58: 'l3_left',
@@ -86,7 +79,6 @@ export const groupMapping = {
   A62: 'l3_right',
   A63: 'l3_right',
   A64: 'l3_right',
-
   // L4
   A65: 'l4_left',
   A66: 'l4_left',
@@ -96,7 +88,6 @@ export const groupMapping = {
   A70: 'l4_right',
   A71: 'l4_right',
   A72: 'l4_right',
-
   // L5
   A73: 'l5_left',
   A74: 'l5_left',
@@ -106,7 +97,6 @@ export const groupMapping = {
   A78: 'l5_right',
   A79: 'l5_right',
   A80: 'l5_right',
-
   // S1
   A81: 's1_left',
   A82: 's1_left',
@@ -116,7 +106,6 @@ export const groupMapping = {
   A86: 's1_right',
   A87: 's1_right',
   A88: 's1_right',
-
   // S2
   A89: 's2_left',
   A90: 's2_left',
@@ -127,22 +116,16 @@ export const groupMapping = {
   A95: 's2_right',
   A96: 's2_right',
 };
-
 // Hook personalizado para manejar los pasos
 const useStep = () => {
   const [step, setStep] = useState('A'); // Inicialmente en el paso 'A'
   const { resetCheckboxes } = useContext(CheckboxContext);
   const { resetAllButtons } = useButtonContext(); // <-- Importante
   const { setInitialConclusions } = useContext(ReportContextR); // Acceder a setInitialConclusions desde el contexto
-
   const resetCopyConclusions = () => {
     setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
   };
   const { handlePrint } = useImageState();
-
-  
-
-
   // Flujo principal (ejemplo Radiculopatía Aguda)
   const handleNextStep = () => {
     if (step === 'A') setStep('B');
@@ -150,7 +133,6 @@ const useStep = () => {
     else if (step === 'C') setStep('D');
     else if (step === 'D') setStep('E');
   };
-  
   const handlePrevStep = () => {
     if (step === 'E') {setStep('D'); resetCheckboxes(); resetAllButtons(); resetCopyConclusions();}
     else if (step === 'D') {setStep('C');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
@@ -158,7 +140,6 @@ const useStep = () => {
     else if (step === 'B') {setStep('A'); resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
   };
-  
   // Flujo para Radiculopatía Crónica
   const handleNextStep1 = () => {
     if (step === 'A') setStep('B1');
@@ -169,7 +150,6 @@ const useStep = () => {
     else if (step === 'F1') setStep('G1');
     else if (step === 'G1') setStep('E');
   };
-  
   const handlePrevStep1 = () => {
     if (step === 'G1') setStep('F1');
     else if (step === 'F1') {setStep('E1');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
@@ -178,9 +158,7 @@ const useStep = () => {
     else if (step === 'C1') {setStep('B1');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'B1') {setStep('A');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
-
   };
-  
   // Flujo para Radiculopatía Subaguda
   const handleNextStep2 = () => {
     if (step === 'A') setStep('B2');
@@ -189,31 +167,23 @@ const useStep = () => {
     else if (step === 'D2') setStep('E2');
     else if (step === 'E2') setStep('E');
   };
-  
   const handlePrevStep2 = () => {
     if (step === 'E2') {setStep('D2');resetCheckboxes();}
     else if (step === 'D2') {setStep('C2');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'C2') {setStep('B2');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'B2') {setStep('A');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
-
   };
-
   // Flujo para Radiculopatía Sensitiva
   const handleNextStep3 = () => {
     if (step === 'A') setStep('S1');
     else if (step === 'S1') setStep('E3');
   };
-  
   const handlePrevStep3 = () => {
     if (step === 'E3') {setStep('S1');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'S1') {setStep('A');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
-
   };
-  
-  
-
   return {
     step,
     handleNextStep,
@@ -227,7 +197,6 @@ const useStep = () => {
     handlePrint
   };
 };
-
 const SimpleMultiStepForm = () => {
   const {
     step,
@@ -241,7 +210,6 @@ const SimpleMultiStepForm = () => {
     handlePrevStep3,
     handlePrint
   } = useStep();
-
   return (
     <div>
       {step === 'A' && (
@@ -252,13 +220,11 @@ const SimpleMultiStepForm = () => {
           handleNextStep3={handleNextStep3}  // Sensitiva
         />
       )}
-      
       {/* Flujo principal (aguda) */}
       {step === 'B' && <StepB handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
       {step === 'C' && <StepC handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
       {step === 'D' && <StepD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
       {step === 'E' && <StepE handlePrevStep={handlePrevStep} handlePrint={handlePrint} />}
-
       {/* Flujo crónico */}
       {step === 'B1' && <StepB1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
       {step === 'C1' && <StepC1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
@@ -266,21 +232,16 @@ const SimpleMultiStepForm = () => {
       {step === 'E1' && <StepE1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
       {step === 'F1' && <StepF1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
       {step === 'G1' && <StepG1 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />}
-
       {/* Flujo subagudo */}
       {step === 'B2' && <StepB2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />}
       {step === 'C2' && <StepC2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />}
       {step === 'D2' && <StepD2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />}
       {step === 'E2' && <StepE2 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} handlePrint={handlePrint} />}
-
       {/* Flujo sensitiva */}
       {step === 'S1' && <StepS1 handlePrevStep3={handlePrevStep3} handleNextStep3={handleNextStep3} />}
       {step === 'E3' && <StepE3 handlePrevStep3={handlePrevStep3} handleNextStep3={handleNextStep3} handlePrint={handlePrint} />}
     </div>
   );
-
-
-
 };
 
 const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2, handleNextStep3 }) => {
@@ -364,7 +325,6 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
     setcheckedStateLeft((prevState) => {
       // 1) Clonamos el estado previo
       const newState = { ...prevState };
-  
       // 2) Averiguamos a qué “grupo” pertenece el checkbox que se está clicando
       const group = groupMapping[id]; 
       if (group) {
@@ -375,19 +335,16 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
           }
         }
       }
-  
       // 4) Activa solo el ID actual
       newState[id] = checked;
       return newState;
     });
   }
-  
   // Manejo de checkboxes “lado derecho”
   function handleCheckboxChangeRight(event) {
     const { id, checked } = event.target;
     setcheckedStateRight((prevState) => {
       const newState = { ...prevState };
-  
       const group = groupMapping[id];
       if (group) {
         for (const [key, val] of Object.entries(groupMapping)) {
@@ -396,30 +353,23 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
           }
         }
       }
-  
       newState[id] = checked;
       return newState;
     });
   }
-  
-  
-
   // Manejo de botones de conclusión
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
     const isPressed = !activeButtons[value];
-
     if (isPressed) {
       updateConclusions({ value, title });
     } else {
       updateConclusions({ value, remove: true });
     }
-
     if (nextStepFunction) {
       nextStepFunction();
     }
   };
-
   return (
     <div className="accordion-content">
       {/* Barra de navegación de StepB */}
@@ -431,9 +381,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
           <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
-
       <h1 className="text-xl font-bold text-white">NIVEL</h1>
-
       {/** 
        * 1) Acordeones Externos: 
        *    <AccordionContainer> maneja que solo uno se abra
@@ -546,7 +494,6 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
               </table>
             </Accordion>
           </InternalAccordionContainer>
-
           <InternalAccordionContainer>
             {/* C5 (interno) */}
             <Accordion title="C5" type="internal">
@@ -648,7 +595,6 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
               </table>
             </Accordion>
           </InternalAccordionContainer>
-
           <InternalAccordionContainer>
             {/* C6 (interno) */}
             <Accordion title="C6" type="internal">
@@ -750,7 +696,6 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
               </table>
             </Accordion>
           </InternalAccordionContainer>
-
           <InternalAccordionContainer>
             {/* C7 (interno) */}
             <Accordion title="C7" type="internal">
@@ -852,7 +797,6 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
               </table>
             </Accordion>
           </InternalAccordionContainer>
-
           <InternalAccordionContainer>
             {/* C8 (interno) */}
             <Accordion title="C8" type="internal">
@@ -954,7 +898,6 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
               </table>
             </Accordion>
           </InternalAccordionContainer>
-
           <InternalAccordionContainer>
             {/* T1 (interno) */}
             <Accordion title="T1" type="internal">
@@ -1056,7 +999,6 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
               </table>
             </Accordion>
           </InternalAccordionContainer>
-
           {/* Botón de conclusión para "CERVICAL MULTINIVEL" */}
           <ConclusionButtonR
             value="cervical_multinivel"
@@ -1068,7 +1010,6 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
             }
           />
         </Accordion>
-
         {/* Acordeón externo: LUMBAR */}
         <Accordion title="LUMBAR" value="LUMBAR" type="external">
           <InternalAccordionContainer>
@@ -1824,13 +1765,35 @@ const StepB1 = ({ handleNextStep1, handlePrevStep1 }) => {
 const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
   const { activeButtons, toggleButton } = useButtonContext();
   const { updateConclusions } = useContext(ReportContextR);
-  const handleCheckboxChange = (event, value, title) => {
+
+  // Grupos de checkboxes
+  const groupC6C7 = ["c6s_i", "c6s_d", "c6s_bi"];
+  const groupS1   = ["s1s_i", "s1s_d", "s1s_bi"];
+
+  // Función para desmarcar otros checkboxes en el mismo grupo
+  const uncheckOthers = (clickedValue, groupArray) => {
+    groupArray.forEach(itemValue => {
+      if (itemValue !== clickedValue && activeButtons[itemValue]) {
+        // Si alguno está marcado, lo desmarcamos
+        toggleButton(itemValue);
+        updateConclusions({ value: itemValue, remove: true });
+      }
+    });
+  };
+
+  const handleCheckboxChange = (event, value, title, groupArray) => {
     const isChecked = event.target.checked;
-    toggleButton(value);
 
     if (isChecked) {
+      // 1) Desmarcar otros checkboxes de este grupo
+      uncheckOthers(value, groupArray);
+
+      // 2) Marcar (toggle ON) el checkbox actual
+      toggleButton(value);
       updateConclusions({ value, title });
     } else {
+      // Si el usuario desmarca el checkbox actual
+      toggleButton(value);
       updateConclusions({ value, remove: true });
     }
   };
@@ -1845,79 +1808,85 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
           <img src="/I_In.svg" alt="Next" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
-      <h1 className='text-xl font-bold text-white'>NIVEL</h1>  
-      <AccordionContainer>
-      <Accordion title='C6-C7'  value='C6-C7' type='external'>
-        <table>
-          <tr className="checkbox-row">
-            <td>
-              <input
-                type="checkbox"
-                id="c6s_i"
-                checked={activeButtons["c6s_i"] || false}
-                onChange={(e) => handleCheckboxChange(e, "c6s_i", "C6-C8 IZQUIERDO.")}
-              />
-              <label htmlFor="c6s_i"> L </label>
-            </td>
-            <td>
-              <input
-                type="checkbox"
-                id="c6s_d"
-                checked={activeButtons["c6s_d"] || false}
-                onChange={(e) => handleCheckboxChange(e, "c6s_d", "C6-C8 DERECHO.")}
-              />
-              <label htmlFor="c6s_d"> R </label>
-            </td>
-            <td>
-              <input
-                type="checkbox"
-                id="c6s_bi"
-                checked={activeButtons["c6s_bi"] || false}
-                onChange={(e) => handleCheckboxChange(e, "c6s_bi", "C6-C8 BILATERAL.")}
-              />
-              <label htmlFor="c6s_bi"> L & R </label>
-            </td>
-          </tr>
-        </table>
-      </Accordion>
+      <h1 className='text-xl font-bold text-white'>NIVEL</h1>
 
-      <Accordion title='S1' value='S1' type='external'>
-        <table>
-          <tr className="checkbox-row">
-            <td>
-              <input
-                type="checkbox"
-                id="s1s_i"
-                checked={activeButtons["s1s_i"] || false}
-                onChange={(e) => handleCheckboxChange(e, "s1s_i", " S1 IZQUIERDA.")}
-              />
-              <label htmlFor="s1s_i"> L </label>
-            </td>
-            <td>
-              <input
-                type="checkbox"
-                id="s1s_d"
-                checked={activeButtons["s1s_d"] || false}
-                onChange={(e) => handleCheckboxChange(e, "s1s_d", "S1 DERECHA.")}
-              />
-              <label htmlFor="s1s_d"> R </label>
-            </td>
-            <td>
-              <input
-                type="checkbox"
-                id="s1s_bi"
-                checked={activeButtons["s1s_bi"] || false}
-                onChange={(e) => handleCheckboxChange(e, "s1s_bi", "S1 BILATERAL.")}
-              />
-              <label htmlFor="s1s_bi"> L & R </label>
-            </td>
-          </tr>
-        </table>
-      </Accordion>
+      <AccordionContainer>
+        
+        {/* Grupo C6-C7 */}
+        <Accordion title='C6-C7'  value='C6-C7' type='external'>
+          <table>
+            <tr className="checkbox-row">
+              <td>
+                <input
+                  type="checkbox"
+                  id="c6s_i"
+                  checked={!!activeButtons["c6s_i"]}
+                  onChange={(e) => handleCheckboxChange(e, "c6s_i", "C6-C8 IZQUIERDO", groupC6C7)}
+                />
+                <label htmlFor="c6s_i"> L </label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="c6s_d"
+                  checked={!!activeButtons["c6s_d"]}
+                  onChange={(e) => handleCheckboxChange(e, "c6s_d", "C6-C8 DERECHO", groupC6C7)}
+                />
+                <label htmlFor="c6s_d"> R </label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="c6s_bi"
+                  checked={!!activeButtons["c6s_bi"]}
+                  onChange={(e) => handleCheckboxChange(e, "c6s_bi", "C6-C8 BILATERAL", groupC6C7)}
+                />
+                <label htmlFor="c6s_bi"> L & R </label>
+              </td>
+            </tr>
+          </table>
+        </Accordion>
+
+        {/* Grupo S1 */}
+        <Accordion title='S1' value='S1' type='external'>
+          <table>
+            <tr className="checkbox-row">
+              <td>
+                <input
+                  type="checkbox"
+                  id="s1s_i"
+                  checked={!!activeButtons["s1s_i"]}
+                  onChange={(e) => handleCheckboxChange(e, "s1s_i", "S1 IZQUIERDO", groupS1)}
+                />
+                <label htmlFor="s1s_i"> L </label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="s1s_d"
+                  checked={!!activeButtons["s1s_d"]}
+                  onChange={(e) => handleCheckboxChange(e, "s1s_d", "S1 DERECHO", groupS1)}
+                />
+                <label htmlFor="s1s_d"> R </label>
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  id="s1s_bi"
+                  checked={!!activeButtons["s1s_bi"]}
+                  onChange={(e) => handleCheckboxChange(e, "s1s_bi", "S1 BILATERAL", groupS1)}
+                />
+                <label htmlFor="s1s_bi"> L & R </label>
+              </td>
+            </tr>
+          </table>
+        </Accordion>
+
       </AccordionContainer>
     </div>
   );
 };
+
 
 
 const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
@@ -1926,7 +1895,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
   const [buttonStates, setButtonStates] = useState({});
   const { activeButtons, toggleButton } = useButtonContext(); //
   const conclusionMapping = {
-    A9: 'c5_i', A10: 'c5_i', A11: 'c5_i', A12: 'c5_i',
+       A1: 'c4_i',  A2: 'c4_i',  A3: 'c4_i',  A4: 'c4_i',
+       A5: 'c4_d',  A6: 'c4_d',  A7: 'c4_d',  A8: 'c4_d',
+       A9: 'c5_i', A10: 'c5_i', A11: 'c5_i', A12: 'c5_i',
       A13: 'c5_d', A14: 'c5_d', A15: 'c5_d', A16: 'c5_d',
       A17: 'c6_i', A18: 'c6_i', A19: 'c6_i', A20: 'c6_i',
       A21: 'c6_d', A22: 'c6_d', A23: 'c6_d', A24: 'c6_d',
@@ -1951,21 +1922,37 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
   };
 
   const handleCheckboxChange = (event, side) => {
-    const { id, checked } = event.target;
+    const { id } = event.target; // ID del checkbox clicado
     const setCheckedState = side === 'left' ? setcheckedStateLeft : setcheckedStateRight;
     const checkedState = side === 'left' ? checkedStateLeft : checkedStateRight;
-
+  
+    const groupKey = conclusionMapping[id]; // grupo al que pertenece el checkbox
+  
     setCheckedState(prevState => {
-      const newState = {
-        ...prevState,
-        [id]: checked,
-      };
-
-      // Now call handleButtonPress with the updated state
-      handleButtonPress(id, checked, side, newState);
-      return newState;
+      const updatedState = { ...prevState };
+      const wasChecked = prevState[id]; // saber si YA estaba marcado
+  
+      if (wasChecked) {
+        // Caso 1: ya estaba marcado => lo desmarcamos
+        updatedState[id] = false;
+        handleButtonPress(id, false, side, updatedState);
+      } else {
+        // Caso 2: estaba desmarcado => lo marcamos y desmarcamos los demás en ese grupo
+        Object.keys(conclusionMapping).forEach(key => {
+          if (conclusionMapping[key] === groupKey) {
+            updatedState[key] = false; // Desmarcar todos los del mismo grupo
+          }
+        });
+        // Marcar el checkbox que el usuario seleccionó
+        updatedState[id] = true;
+        handleButtonPress(id, true, side, updatedState);
+      }
+  
+      return updatedState;
     });
   };
+  
+  
 
   const handleCheckboxChangeLeft = (event) => {
     handleCheckboxChange(event, 'left');
@@ -3742,7 +3729,8 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
   const { activeButtons, toggleButton } = useButtonContext(); // Añadir esta línea
   const [buttonStates, setButtonStates] = useState({});
   const conclusionMapping = {
-    A9: 'c5_i', A10: 'c5_i', A11: 'c5_i', A12: 'c5_i',
+       A1: 'c1_i',  A2: 'c1_i',  A3: 'c1_i',  A4: 'c1_i',
+       A9: 'c5_i', A10: 'c5_i', A11: 'c5_i', A12: 'c5_i',
       A13: 'c5_d', A14: 'c5_d', A15: 'c5_d', A16: 'c5_d',
       A17: 'c6_i', A18: 'c6_i', A19: 'c6_i', A20: 'c6_i',
       A21: 'c6_d', A22: 'c6_d', A23: 'c6_d', A24: 'c6_d',
@@ -3767,21 +3755,36 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
   };
 
   const handleCheckboxChange = (event, side) => {
-    const { id, checked } = event.target;
+    const { id } = event.target; // ID del checkbox clicado
     const setCheckedState = side === 'left' ? setcheckedStateLeft : setcheckedStateRight;
     const checkedState = side === 'left' ? checkedStateLeft : checkedStateRight;
-
+  
+    const groupKey = conclusionMapping[id]; // grupo al que pertenece el checkbox
+  
     setCheckedState(prevState => {
-      const newState = {
-        ...prevState,
-        [id]: checked,
-      };
-
-      // Now call handleButtonPress with the updated state
-      handleButtonPress(id, checked, side, newState);
-      return newState;
+      const updatedState = { ...prevState };
+      const wasChecked = prevState[id]; // saber si YA estaba marcado
+  
+      if (wasChecked) {
+        // Caso 1: ya estaba marcado => lo desmarcamos
+        updatedState[id] = false;
+        handleButtonPress(id, false, side, updatedState);
+      } else {
+        // Caso 2: estaba desmarcado => lo marcamos y desmarcamos los demás en ese grupo
+        Object.keys(conclusionMapping).forEach(key => {
+          if (conclusionMapping[key] === groupKey) {
+            updatedState[key] = false; // Desmarcar todos los del mismo grupo
+          }
+        });
+        // Marcar el checkbox que el usuario seleccionó
+        updatedState[id] = true;
+        handleButtonPress(id, true, side, updatedState);
+      }
+  
+      return updatedState;
     });
   };
+  
 
   const handleCheckboxChangeLeft = (event) => {
     handleCheckboxChange(event, 'left');

@@ -1,7 +1,6 @@
-import React from "react";
+import { useSession } from "next-auth/react";
 import Overhead from "./Overhead";
 import OverheadMenu from "./OverheadMenu";
-import { useSession } from "next-auth/react";
 
 const HeadComponents = () => {
   const { data: session } = useSession();

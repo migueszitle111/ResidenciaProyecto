@@ -802,16 +802,32 @@
 /* Detalles referentes a la impresion */
 @media print {
 
-
-  .dropArea2 {
-    background-image: inherit !important;
+  .conclusion-container {
+    height: 985px !important;
+    overflow: visible !important;
+    
   }
+
+  .cuadro-expanded {
+    width: 240px;
+    height: 120px;
+    margin-left: -10px;
+  }
+  .circulo-expanded {
+    width: 240px;
+    height: 120px;
+    
+  }
+
   .dropArea {
-    bottom: 1072px;
-    left: 20px;
-    width: 600px;
-    height: 805px;
-    margin-left: 90px;
+    top: 0px;
+    left: 8px;
+    width: 100%;
+    height: 985px;
+    position: absolute;
+    overflow: hidden;
+    /* border: yellow 2px solid; */
+    
   }
 
   .print {
@@ -823,10 +839,11 @@
   }
 
   .image-container {
+    margin-top: -20px;
     position: relative;
-    width: 750px;
+    width: 100%;
     height: 100%;
-    margin-left: 90px;
+    /* border: rgb(0, 60, 255) 2px solid; */
   }
 
   .handle {
@@ -837,39 +854,21 @@
     position: absolute;
     top: 0;
     width: 40vh;
-    background: coral;
-    background-color: white;
-    border: 2px solid white;
+    background: transparent;
+    background-color: transparent;
     z-index: 1;
   }
 
   .info-container textarea {
-    position: button;
-    width: 760px;
-    height: 100%;
-    font-size: 14px;;
-    background-color: lightgreen; 
-    resize: none; 
+    position: bottom;
+    width: 100%;
+    height: 80%;
+    margin-top: 20px;
+    font-size: 14px;
+    /* border: yellowgreen 2px solid; */
+    resize: none;
     top: 4vh;
-    border: solid 1px black;
-    margin-left: 40px;
     
-
-
-    /* Para ajustar el texto */
-    word-wrap: break-word;  /* Rompe las palabras largas */
-    word-break: break-all;   /* Rompe las palabras si es necesario */
-    overflow-wrap: break-word; /* Ajuste de palabras al borde del contenedor */
-
-    /* Para asegurar que el padding esté controlado */
-    padding: 10px;
-
-    /* Controla la altura de la línea del texto */
-    line-height: 1.5;
-
-    /* Controla los bordes */
-    border: 1px solid #ccc;
-    box-sizing: border-box; /* Incluye el padding y borde en el tamaño total */
   }
 
   .head{
@@ -879,12 +878,13 @@
     align-items: center;
     justify-content: flex-start;
     gap : 10vh;
+
   }
   
   .rnd-image {
     left: -725px !important;
-    top: -205px !important; 
-  }
+    top: -105px !important;
 
+  }
 
 }

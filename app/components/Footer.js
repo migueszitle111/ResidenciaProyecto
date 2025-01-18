@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 const Footer = () => {
@@ -81,7 +80,7 @@ const Footer = () => {
           href="#"
           className="text-gray-700 hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"
         >
-          2024 mEDXpro.
+          2025 mEDXpro.
         </a>
         <a
           href="#"

@@ -137,7 +137,7 @@ console.log(formattedConclusions);
 
     // Actualizar las conclusiones
     useEffect(() => {
-      const newConclusions = conclusions.map(cl => cl.title).join(' ');
+      const newConclusions = conclusions.map(cl => cl.title).join('');
       const formattedConclusions = formatConclusions(newConclusions);
       setCopyConclusions(formattedConclusions);
   }, [conclusions]);
@@ -351,7 +351,7 @@ console.log(formattedConclusions);
               }
             },
             {
-              expectedValue: 'y_distal',
+              expectedValue: 'distal',
               image: {
                 src: 'UnionMuscularIMG/UN_Distal.png',
                 alt: 'Modelo',

@@ -62,6 +62,17 @@ export const groupMapping = {
   A46: 't1_right',
   A47: 't1_right',
   A48: 't1_right',
+ //L1
+  A97: 'l1_left',
+  A98: 'l1_left',
+  A99: 'l1_left',
+  A100: 'l1_left',
+  A101: 'l1_right',
+  A102: 'l1_right',
+  A103: 'l1_right',
+  A104: 'l1_right',
+
+
   // L2
   A49: 'l2_left',
   A50: 'l2_left',
@@ -1014,6 +1025,107 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
         </Accordion>
         {/* Acordeón externo: LUMBAR */}
         <Accordion title="LUMBAR" value="LUMBAR" type="external">
+        <InternalAccordionContainer>
+            {/* L1 (interno) */}
+            <Accordion title="L1" type="internal">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="1"
+                        id="A97"
+                        checked={checkedStateLeft.A97}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A49}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="2"
+                        id="A98"
+                        checked={checkedStateLeft.A98}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A50}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="3"
+                        id="A99"
+                        checked={checkedStateLeft.A99}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A51}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="4"
+                        id="A100"
+                        checked={checkedStateLeft.A100}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A52}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="1"
+                        id="A101"
+                        checked={checkedStateRight.A101}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A53}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="2"
+                        id="A102"
+                        checked={checkedStateRight.A102}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A54}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="3"
+                        id="A103"
+                        checked={checkedStateRight.A103}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A55}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="4"
+                        id="A104"
+                        checked={checkedStateRight.A104}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A56}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
           <InternalAccordionContainer>
             {/* L2 (interno) */}
             <Accordion title="L2" type="internal">
@@ -1529,6 +1641,112 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
             </table>
           </Accordion>
           </InternalAccordionContainer>
+          <InternalAccordionContainer>
+
+          {/* S2 (interno) */}
+          <Accordion title="S2" type="internal">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <ConclusionButtonR value="s2_i" title="L" displayText="" />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="1"
+                      id="A89"
+                      checked={checkedStateLeft.A89}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A89}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="2"
+                      id="A90"
+                      checked={checkedStateLeft.A90}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A90}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="3"
+                      id="A91"
+                      checked={checkedStateLeft.A91}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A91}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio1"
+                      value="4"
+                      id="A92"
+                      checked={checkedStateLeft.A92}
+                      onChange={handleCheckboxChangeLeft}
+                    />
+                    {checkedStateLeft.A92}
+                  </td>
+                  <td>
+                    <ConclusionButtonR value="s2_d" title="R" displayText="" />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="1"
+                      id="A93"
+                      checked={checkedStateRight.A93}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A93}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="2"
+                      id="A94"
+                      checked={checkedStateRight.A94}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A94}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="3"
+                      id="A95"
+                      checked={checkedStateRight.A95}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A95}
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="radio2"
+                      value="4"
+                      id="A96"
+                      checked={checkedStateRight.A96}
+                      onChange={handleCheckboxChangeRight}
+                    />
+                    {checkedStateRight.A96}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Accordion>
+          </InternalAccordionContainer>
 
           {/* Botón de conclusión para "LUMBROSACA MULTINIVEL" */}
           <ConclusionButtonR
@@ -1913,6 +2131,10 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       A37: 'c8_d', A38: 'c8_d', A39: 'c8_d', A40: 'c8_d',
       A41: 't1_i', A42: 't1_i', A43: 't1_i', A44: 't1_i',
       A45: 't1_d', A46: 't1_d', A47: 't1_d', A48: 't1_d',
+
+      A97: 'l1_i', A98: 'l1_i', A99: 'l1_i', A100: 'l1_i',
+      A101: 'l1_d', A102: 'l1_d', A103: 'l1_d', A104: 'l1_d',
+
       A49: 'l2_i', A50: 'l2_i', A51: 'l2_i', A52: 'l2_i',
       A53: 'l2_d', A54: 'l2_d', A55: 'l2_d', A56: 'l2_d',
       A57: 'l3_i', A58: 'l3_i', A59: 'l3_i', A60: 'l3_i',
@@ -1925,6 +2147,8 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       A85: 's1_d', A86: 's1_d', A87: 's1_d', A88: 's1_d',
       A89: 's2_i', A90: 's2_i', A91: 's2_i', A92: 's2_i',
       A93: 's2_d', A94: 's2_d', A95: 's2_d', A96: 's2_d',
+      A97: 'l1_i', A98: 'l1_i', A99: 'l1_i', A100: 'l1_i',
+      A101: 'l1_d', A102: 'l1_d', A103: 'l1_d', A104: 'l1_d',
   };
 
   const handleCheckboxChange = (event, side) => {
@@ -2338,6 +2562,107 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       </Accordion>
 
       <Accordion title='LUMBAR' value='LUMBAR' type='external'>
+        <InternalAccordionContainer>
+            {/* L1 (interno) */}
+            <Accordion title="L1" type="internal">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="1"
+                        id="A97"
+                        checked={checkedStateLeft.A97}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A49}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="2"
+                        id="A98"
+                        checked={checkedStateLeft.A98}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A50}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="3"
+                        id="A99"
+                        checked={checkedStateLeft.A99}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A51}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="4"
+                        id="A100"
+                        checked={checkedStateLeft.A100}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A52}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="1"
+                        id="A101"
+                        checked={checkedStateRight.A101}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A53}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="2"
+                        id="A102"
+                        checked={checkedStateRight.A102}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A54}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="3"
+                        id="A103"
+                        checked={checkedStateRight.A103}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A55}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="4"
+                        id="A104"
+                        checked={checkedStateRight.A104}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A56}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
       <InternalAccordionContainer>
       <Accordion title='L2' type='internal' >
       <table>
@@ -3751,6 +4076,10 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       A37: 'c8_d', A38: 'c8_d', A39: 'c8_d', A40: 'c8_d',
       A41: 't1_i', A42: 't1_i', A43: 't1_i', A44: 't1_i',
       A45: 't1_d', A46: 't1_d', A47: 't1_d', A48: 't1_d',
+
+      A97: 'l1_i', A98: 'l1_i', A99: 'l1_i', A100: 'l1_i',
+      A101: 'l1_d', A102: 'l1_d', A103: 'l1_d', A104: 'l1_d',
+
       A49: 'l2_i', A50: 'l2_i', A51: 'l2_i', A52: 'l2_i',
       A53: 'l2_d', A54: 'l2_d', A55: 'l2_d', A56: 'l2_d',
       A57: 'l3_i', A58: 'l3_i', A59: 'l3_i', A60: 'l3_i',
@@ -4190,6 +4519,107 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       />             
       </Accordion>
       <Accordion title='LUMBAR' value='LUMBAR' type='external'>
+      <InternalAccordionContainer>
+            {/* L1 (interno) */}
+            <Accordion title="L1" type="internal">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>&nbsp;L&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="1"
+                        id="A97"
+                        checked={checkedStateLeft.A97}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A49}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="2"
+                        id="A98"
+                        checked={checkedStateLeft.A98}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A50}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="3"
+                        id="A99"
+                        checked={checkedStateLeft.A99}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A51}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio1"
+                        value="4"
+                        id="A100"
+                        checked={checkedStateLeft.A100}
+                        onChange={handleCheckboxChangeLeft}
+                      />
+                      {checkedStateLeft.A52}
+                    </td>
+                    <td>&nbsp;R&nbsp;</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="1"
+                        id="A101"
+                        checked={checkedStateRight.A101}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A53}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="2"
+                        id="A102"
+                        checked={checkedStateRight.A102}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A54}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="3"
+                        id="A103"
+                        checked={checkedStateRight.A103}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A55}
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name="radio2"
+                        value="4"
+                        id="A104"
+                        checked={checkedStateRight.A104}
+                        onChange={handleCheckboxChangeRight}
+                      />
+                      {checkedStateRight.A56}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Accordion>
+          </InternalAccordionContainer>
       <InternalAccordionContainer>
 
       <Accordion title='L2' type='internal' >

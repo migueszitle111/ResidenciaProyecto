@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
 import { ReportContext } from '@/src/context';
+import { useContext, useState } from 'react';
 import { Accordion } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
@@ -152,7 +152,7 @@ const StepA = ({ handleNextStep }) => {
           </h1>
 
           <div onClick={ handleNextStep }>
-            <ConclusionButton value='evolucion_aguda' title='MIOPATIA AGUDA' displayText={'AGUDAA'}/>
+            <ConclusionButton value='evolucion_aguda' title='MIOPATIA AGUDA' displayText={'AGUDA'}/>
             <ConclusionButton value='evolucion_subaguda' title='MIOPATIA SUBAGUDA' displayText={'SUBAGUDA'}/>
             <ConclusionButton value='evolucion_cronica' title='MIOPATIA CRÓNICA' displayText={'CRÓNICA'}/>
             <ConclusionButton value='evolucion_antigua' title='MIOPATIA ANTIGUA' displayText={'ANTIGUA'}/>

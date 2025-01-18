@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Accordion,AccordionContainer,InternalAccordionContainer} from '../../../components/ReportTemplate/Accordion';
+import { Accordion, AccordionContainer, InternalAccordionContainer } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
@@ -216,6 +216,7 @@ const StepB1 = ({ handleNextStep, handlePrevStep, setStep }) => (
     <div onClick={() => setStep('CL')}>
       <ConclusionButton value='DERECHO' title=' DERECHO,' displayText='DERECHO' /></div>
     <AccordionContainer>
+    <InternalAccordionContainer>
     <Accordion title='BILATERIAL' value={'BILATERAL'} type='internal'>
       <div onClick={() => setStep('CG')}>
         <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO DERECHO,' displayText={'PREDOMINIO DERECHO'} /></div>
@@ -224,6 +225,7 @@ const StepB1 = ({ handleNextStep, handlePrevStep, setStep }) => (
       <div onClick={() => setStep('CG')}>
         <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} /></div>
     </Accordion>
+    </InternalAccordionContainer>
     </AccordionContainer>
   </div>
 );

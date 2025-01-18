@@ -12,16 +12,24 @@ export function ReportContextProviderR({ children }) {
   function updateConclusions({ value, title, remove }) {
     setConclusions((prevConclusions) => {
       if (remove) {
+        // Eliminamos la conclusión
         return prevConclusions.filter(cl => cl.value !== value);
       } else {
-        if (!prevConclusions.find(cl => cl.value === value)) {
+        // Buscamos si ya existe
+        const existingIndex = prevConclusions.findIndex(cl => cl.value === value);
+        if (existingIndex === -1) {
+          // No existe, lo agregamos
           return [...prevConclusions, { value, title }];
+        } else {
+          // Sí existe, entonces actualizamos el title (u otras props si quieres)
+          const updated = [...prevConclusions];
+          updated[existingIndex] = { ...updated[existingIndex], title };
+          return updated;
         }
-        return prevConclusions;
       }
     });
   }
-
+  
   function setInitialConclusions(initialValue) {
     setConclusions(initialValue);
   }

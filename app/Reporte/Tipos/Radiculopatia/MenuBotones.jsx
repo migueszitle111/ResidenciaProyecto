@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import { ConclusionButtonR } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
+import { ConclusionInputR } from '../../../components/ReportTemplate/Conclusions/ConclusionInputR';
 
 export const groupMapping = {
   // C4
@@ -124,6 +125,7 @@ const useStep = () => {
   const { setInitialConclusions } = useContext(ReportContextR); // Acceder a setInitialConclusions desde el contexto
   const resetCopyConclusions = () => {
     setInitialConclusions([{ title: '' }]); // Resetea las conclusiones a una cadena vacía
+    
   };
   const { handlePrint } = useImageState();
   // Flujo principal (ejemplo Radiculopatía Aguda)
@@ -134,10 +136,10 @@ const useStep = () => {
     else if (step === 'D') setStep('E');
   };
   const handlePrevStep = () => {
-    if (step === 'E') {setStep('D'); resetCheckboxes(); resetAllButtons(); resetCopyConclusions();}
+    if (step === 'E') {setStep('D'); resetCheckboxes(); resetAllButtons();resetCopyConclusions();}
     else if (step === 'D') {setStep('C');resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'C') {setStep('B'); resetCheckboxes();resetAllButtons();resetCopyConclusions();}
-    else if (step === 'B') {setStep('A'); resetCheckboxes();resetAllButtons();resetCopyConclusions();}
+    else if (step === 'B') {setStep('A'); resetCheckboxes();resetCheckboxes();resetAllButtons();resetCopyConclusions();}
     else if (step === 'A') {resetCheckboxes();resetAllButtons();resetCopyConclusions();}
   };
   // Flujo para Radiculopatía Crónica
@@ -315,11 +317,10 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
     setcheckedStateLeft,
     setcheckedStateRight,
   } = useContext(CheckboxContext);
-
   const { activeButtons, toggleButton } = useButtonContext();
   const { updateConclusions } = useContext(ReportContextR);
-
   // Manejo de checkboxes “lado izquierdo”
+  
   function handleCheckboxChangeLeft(event) {
     const { id, checked } = event.target;
     setcheckedStateLeft((prevState) => {
@@ -340,6 +341,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
       return newState;
     });
   }
+  
   // Manejo de checkboxes “lado derecho”
   function handleCheckboxChangeRight(event) {
     const { id, checked } = event.target;
@@ -1540,33 +1542,37 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
           />
         </Accordion>
 
-        {/* TORÁCICA (aquí lo pones como un acordeón "interno" o "external" según necesites) */}
+        {/* TORÁCICA  "interno" o "external"  */}
         <Accordion title="TORÁCICA" value="TORÁCICA" type="external">
-        <ConclusionButtonR value='T' title='T' />            
+        <ConclusionInputR
+        valueKey="toracica_input"
+        placeholder="Ingrese texto..."
+        style={{ width: "290px", height: "60px",color: "white",backgroundColor: '#1c1c1c',border: '1px solid white',borderRadius: '5px',padding: '5px',margin: '5px'}}
+      />
         </Accordion>
 
         {/* POLISEGMENTARIA (acordeón externo o interno, según tu lógica) */}
         <Accordion title="POLISEGMENTARIA" value="POLISEGMENTARIA" type="external">
           <ConclusionButtonR
-            value="cervical"
-            title="CERVICAL"
-            displayText="CERVICAL"
-            pressed={activeButtons['cervical']}
-            onClick={() => handleButtonPress('cervical', 'CERVICAL')}
+            value='cervical_multinivel'
+            title='CERVICAL'
+            displayText='CERVICAL'
+            pressed={activeButtons['cervical_multinivel']}
+            onClick={() => handleButtonPress('cervical_multinivel', 'CERVICAL')}
           />
           <ConclusionButtonR
-            value="torasica"
-            title="TORACICA"
-            displayText="TORACICA"
-            pressed={activeButtons['torasica']}
-            onClick={() => handleButtonPress('torasica', 'TORACICA')}
+            value='toracica_multinivel'
+            title='TORACICA'
+            displayText='TORACICA'
+            pressed={activeButtons['toracica_multinivel']}
+            onClick={() => handleButtonPress('toracica_multinivel', 'TORACICA')}
           />
           <ConclusionButtonR
-            value="lumbrosaca"
-            title="LUMBOSACRA"
-            displayText="LUMBOSACRA"
-            pressed={activeButtons['lumbrosaca']}
-            onClick={() => handleButtonPress('lumbrosaca', 'LUMBOSACRA')}
+            value='lumbrosaca_multinivel'
+            title='LUMBOSACRA'
+            displayText='LUMBOSACRA'
+            pressed={activeButtons['lumbrosaca_multinivel']}
+            onClick={() => handleButtonPress('lumbrosaca_multinivel', 'LUMBOSACRA')}
           />
         </Accordion>
       </AccordionContainer>
@@ -2598,31 +2604,36 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       </Accordion>
 
       <Accordion title='TORÁCICA' value='TORÁCICA' type='external'>
-        <ConclusionButtonR value='T' title='T' />            
+      <ConclusionInputR
+        valueKey="toracica_input"
+        placeholder="Ingrese texto..."
+        style={{ width: "290px", height: "60px",color: "white",backgroundColor: '#1c1c1c',border: '1px solid white',borderRadius: '5px',padding: '5px',margin: '5px'}}
+      />          
       </Accordion>
 
       <Accordion title='POLISEGMENTARIA' value='POLISEGMENTARIA' type='external'>
       <ConclusionButtonR
-    value='cervical'
+    value='cervical_multinivel'
     title='CERVICAL'
     displayText='CERVICAL'
-    pressed={activeButtons["cervical"]}
-    onClick={() => handleButtonPress1("cervical", "CERVICAL")}
+    pressed={activeButtons['cervical_multinivel']}
+    onClick={() => handleButtonPress1('cervical_multinivel', "CERVICAL")}
   />
   <ConclusionButtonR
-    value='toracica'
+    value='toracica_multinivel'
     title='TORÁCICA'
     displayText='TORÁCICA'
-    pressed={activeButtons["toracica"]}
-    onClick={() => handleButtonPress1("toracica", "TORÁCICA")}
+    pressed={activeButtons['toracica_multinivel']}
+    onClick={() => handleButtonPress1('toracica_multinivel', "TORÁCICA")}
   />
-  <ConclusionButtonR
-    value='lumbrosacra'
-    title='LUMBOSACRA'
-    displayText='LUMBOSACRA'
-    pressed={activeButtons["lumbrosacra"]}
-    onClick={() => handleButtonPress1("lumbrosacra", "LUMBOSACRA")}
-  />                      
+   <ConclusionButtonR
+            value='lumbrosaca_multinivel'
+            title='LUMBOSACRA'
+            displayText='LUMBOSACRA'
+            pressed={activeButtons['lumbrosaca_multinivel']}
+            onClick={() => handleButtonPress1('lumbrosaca_multinivel', 'LUMBOSACRA')}
+          />
+ 
       </Accordion> 
       </AccordionContainer>    
     </div>
@@ -4447,31 +4458,35 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       </Accordion>
 
       <Accordion title='TORÁCICA' value='TORÁCICA' type='external'>
-        <ConclusionButtonR value='T' title='T' />            
+      <ConclusionInputR
+        valueKey="toracica_input"
+        placeholder="Ingrese texto..."
+        style={{ width: "290px", height: "60px",color: "white",backgroundColor: '#1c1c1c',border: '1px solid white',borderRadius: '5px',padding: '5px',margin: '5px'}}
+      />           
       </Accordion>
 
       <Accordion title='POLISEGMENTARIA' value='POLISEGMENTARIA' type='external'>
       <ConclusionButtonR
-    value='cervical'
+    value='cervical_multinivel'
     title='CERVICAL'
     displayText='CERVICAL'
-    pressed={activeButtons["cervical"]}
-    onClick={() => handleButtonPress1("cervical", "CERVICAL")}
+    pressed={activeButtons['cervical_multinivel']}
+    onClick={() => handleButtonPress1('cervical_multinivel', "CERVICAL")}
   />
   <ConclusionButtonR
-    value='toracica'
+    value='toracica_multinivel'
     title='TORÁCICA'
     displayText='TORÁCICA'
-    pressed={activeButtons["toracica"]}
-    onClick={() => handleButtonPress1("toracica", "TORÁCICA")}
+    pressed={activeButtons['toracica_multinivel']}
+    onClick={() => handleButtonPress1('toracica_multinivel', "TORÁCICA")}
   />
-  <ConclusionButtonR
-    value='lumbrosacra'
-    title='LUMBOSACRA'
-    displayText='LUMBOSACRA'
-    pressed={activeButtons["lumbrosacra"]}
-    onClick={() => handleButtonPress1("lumbrosacra", "LUMBOSACRA")}
-  />           
+ <ConclusionButtonR
+   value='lumbrosaca_multinivel'
+   title='LUMBOSACRA'
+   displayText='LUMBOSACRA'
+   pressed={activeButtons['lumbrosaca_multinivel']}
+   onClick={() => handleButtonPress1('lumbrosaca_multinivel', 'LUMBOSACRA')}
+ />
       </Accordion>    
       </AccordionContainer> 
     </div>

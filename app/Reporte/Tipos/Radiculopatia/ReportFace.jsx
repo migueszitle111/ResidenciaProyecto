@@ -690,7 +690,29 @@ const Reporte = () => {
                             alt: 'Modelo',
                           }
                         
-                        ],
+                        ],                        
+                        },
+                        {
+                          expectedValue: 'cervical_multinivel', 
+                          image: {
+                            src: 'RadiculopatiaImg/Multinivel/Columna_Cervical_I.png',
+                            alt: 'Modelo',
+                          }
+                        },
+
+                        {
+                          expectedValue: 'lumbrosaca_multinivel', 
+                          image: {
+                            src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_I.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'toracica_multinivel', 
+                          image: {
+                            src: 'RadiculopatiaImg/Multinivel/Columna_Toracica_I.png',
+                            alt: 'Modelo',
+                          }
                         },
 
                       ]}
@@ -953,6 +975,29 @@ const Reporte = () => {
                         }
                         ],
                         },
+                        {
+                          expectedValue: 'cervical_multinivel', 
+                          image: {
+                            src: 'RadiculopatiaImg/Multinivel/Columna_Cervical_D.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'lumbrosaca_multinivel', 
+                          image: {
+                            src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_D.png',
+                            alt: 'Modelo',
+                          }
+                        },
+                        {
+                          expectedValue: 'toracica_multinivel', 
+                          image: {
+                            src: 'RadiculopatiaImg/Multinivel/Columna_Toracica_D.png',
+                            alt: 'Modelo',
+                          }
+                        },
+
+
                       ]}
                     />
 

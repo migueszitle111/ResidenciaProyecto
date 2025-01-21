@@ -759,21 +759,25 @@
 /* Detalles referentes a la impresion */
 @media print {
 
+  @page {
+    size: A4;
+    margin: 1cm; /* Ajustar según sea necesario */
+  }
   .conclusion-container {
-    height: 965px !important;
-    overflow: visible !important;
-
+    width: 92%;
+    min-height: 90vh;
+    overflow: visible;
+    border: greenyellow 2px solid;
   }
 
   .cuadro-expanded {
-    width: 240px;
-    height: 120px;
-    margin-left: -10px;
+    width: 17.57vw; /* ~240px en 1366px */
+    height: 15.63vh; /* ~120px en 768px */
+    margin-left: -0.73vw; /* ~10px en 1366px */
   }
   .circulo-expanded {
-    width: 240px;
-    height: 120px;
-    
+    width: 17.57vw; /* ~240px */
+    height: 15.63vh; /* ~120px */
   }
 
   .dropArea {
@@ -784,7 +788,6 @@
     position: absolute;
     overflow: hidden;
     /* border: yellow 2px solid; */
-    
   }
 
   .print {
@@ -825,22 +828,19 @@
     /* border: yellowgreen 2px solid; */
     resize: none;
     top: 4vh;
-    
   }
 
-  .head{
+  .head {
     display: flex;
     width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap : 10vh;
-
+    gap: 10vh;
   }
-  
+
   .rnd-image {
     left: -725px !important;
     top: -105px !important;
-
   }
 }

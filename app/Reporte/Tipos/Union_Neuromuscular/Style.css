@@ -112,7 +112,7 @@
   flex-direction: column;
   width: 100%;
   height: 20vh;
-  background-color: #1C1C1C;
+  background-color: #1c1c1c;
   padding: 10px;
   border-radius: 10px;
 }
@@ -336,7 +336,7 @@
 .cuadro2 {
   width: 40px;
   height: 40px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   transition: width 0.3s ease, height 0.3s ease;
   border: 1px solid black; /* Borde opcional */
   position: absolute;
@@ -674,6 +674,7 @@
   background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
 }
 
+
 /* Ajustes para dispositivos pequeños (móviles) */
 @media (max-width: 768px) {
   .head {
@@ -764,20 +765,32 @@
     margin: 1cm; /* Ajustar según sea necesario */
   }
   .conclusion-container {
-    width: 92%;
-    min-height: 90vh;
+    width: 90%;
+    min-height: 88vh;
     overflow: visible;
-    border: greenyellow 2px solid;
+    /* border: greenyellow 2px solid; */
   }
 
   .cuadro-expanded {
-    width: 17.57vw; /* ~240px en 1366px */
-    height: 15.63vh; /* ~120px en 768px */
-    margin-left: -0.73vw; /* ~10px en 1366px */
+    width: 20vw;    /* 20% del ancho de la pantalla */
+    height: 10vh;   /* 10% de la altura de la pantalla */
+
   }
+
+  .cuadro2-expanded {
+    width: 98px;
+    height: 92px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 135px;
+  }
+
   .circulo-expanded {
-    width: 17.57vw; /* ~240px */
-    height: 15.63vh; /* ~120px */
+    width: 240.57vw; /* ~240px en 1366px */
+    height: 12.63vh; /* ~120px en 768px */
+    position: absolute;
+    left: 5vw;
+    bottom: 10vh;
   }
 
   .dropArea {
@@ -799,7 +812,7 @@
   }
 
   .image-container {
-    margin-top: -20px;
+    margin-left: 10%;
     position: relative;
     width: 100%;
     height: 100%;
@@ -814,8 +827,6 @@
     position: absolute;
     top: 0;
     width: 40vh;
-    background: transparent;
-    background-color: transparent;
     z-index: 1;
   }
 
@@ -837,6 +848,10 @@
     align-items: center;
     justify-content: flex-start;
     gap: 10vh;
+  }
+
+  .header, .footer {
+    display: none;
   }
 
   .rnd-image {

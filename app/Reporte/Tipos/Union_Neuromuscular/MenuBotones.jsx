@@ -1,8 +1,9 @@
 import { ReportContext } from '@/src/context';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { useContext, useState } from 'react';
-import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
-
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
+import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
 
 // Numero de pasos 
@@ -459,12 +460,164 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
       setIsUploadAllowed(false);
   };
 
+
+  const handleSaveAsPDF = () => {
+    const conclusionContainer = document.querySelector('.conclusion-container');
+    const infoContainer = document.querySelector('.info-container');
+    const infoTextareaContainer = document.querySelector('.box-container');
+    const infoTextarea = document.querySelector('.info-container textarea');
+    const cuadroExpanded = document.querySelector('.cuadro-expanded');
+    const cuadro2Expanded = document.querySelector('.cuadro2-expanded');
+    const circuloExpanded = document.querySelector('.circulo-expanded');
+    const dropArea = document.querySelector('.dropArea');
+  
+    // Guarda los estilos originales de todos los elementos relevantes
+    const originalStyles = {
+      conclusion: conclusionContainer?.getAttribute("style"),
+      info: infoContainer?.getAttribute("style"),
+      textareaContainer: infoTextareaContainer?.getAttribute("style"),
+      textarea: infoTextarea?.getAttribute("style"),
+      cuadroExpanded: cuadroExpanded?.getAttribute("style"),
+      cuadro2Expanded: cuadro2Expanded?.getAttribute("style"),
+      circuloExpanded: circuloExpanded?.getAttribute("style"),
+      dropArea: dropArea?.getAttribute("style"),
+    };
+  
+    // Aplica estilos específicos de impresión
+    if (conclusionContainer) {
+      conclusionContainer.style.width = "90%";
+      conclusionContainer.style.minHeight = "88vh";
+      conclusionContainer.style.overflow = "visible";
+      conclusionContainer.style.padding = "10px";
+    }
+  
+    if (infoContainer) {
+      infoContainer.style.display = "flex";
+      infoContainer.style.backgroundColor = "white";
+      infoContainer.style.alignItems = "left";
+      infoContainer.style.borderRadius = "4px";
+      infoContainer.style.overflow = "hidden";
+      infoContainer.style.width = "100%";
+      infoContainer.style.margin = "10px";
+      infoContainer.style.height = "20vh";
+      infoContainer.style.zIndex = "1";
+    }
+  
+    if (infoTextareaContainer) {
+      infoTextareaContainer.style.position = "absolute";
+      infoTextareaContainer.style.top = "0";
+      infoTextareaContainer.style.width = "40vh";
+      infoTextareaContainer.style.zIndex = "1";
+    }
+  
+    if (infoTextarea) {
+      infoTextarea.style.width = "100%";
+      infoTextarea.style.height = "100%";
+      infoTextarea.style.fontSize = "14px";
+      infoTextarea.style.textAlign = "justify";
+      infoTextarea.style.backgroundColor = "transparent";
+      infoTextarea.style.resize = "none";
+      infoTextarea.style.padding = "5px";
+      infoTextarea.style.whiteSpace = "pre-wrap"; // Asegura que el texto se ajuste correctamente
+    }
+  
+    if (cuadroExpanded) {
+      cuadroExpanded.style.width = "20vw";
+      cuadroExpanded.style.height = "10vh";
+    }
+  
+    if (cuadro2Expanded) {
+      cuadro2Expanded.style.width = "98px";
+      cuadro2Expanded.style.height = "92px";
+      cuadro2Expanded.style.marginTop = "15px";
+      cuadro2Expanded.style.marginBottom = "15px";
+      cuadro2Expanded.style.marginLeft = "135px";
+    }
+  
+    if (circuloExpanded) {
+      circuloExpanded.style.width = "240.57vw";
+      circuloExpanded.style.height = "12.63vh";
+      circuloExpanded.style.position = "absolute";
+      circuloExpanded.style.left = "5vw";
+      circuloExpanded.style.bottom = "10vh";
+    }
+  
+    if (dropArea) {
+      dropArea.style.top = "0px";
+      dropArea.style.left = "8px";
+      dropArea.style.width = "100%";
+      dropArea.style.height = "985px";
+      dropArea.style.position = "absolute";
+      dropArea.style.overflow = "hidden";
+    }
+  
+    // Genera el PDF
+    html2canvas(conclusionContainer)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+  
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = pageWidth;
+        const imgHeight = (canvas.height * pageWidth) / canvas.width;
+  
+        // Centra la imagen en la página
+        const x = 0;
+        const y = (pageHeight - imgHeight) / 2;
+  
+        pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+        pdf.save("conclusion.pdf");
+  
+        // Restaura los estilos originales
+        restoreOriginalStyles(originalStyles, {
+          conclusionContainer,
+          infoContainer,
+          infoTextareaContainer,
+          infoTextarea,
+          cuadroExpanded,
+          cuadro2Expanded,
+          circuloExpanded,
+          dropArea,
+        });
+      })
+      .catch((error) => {
+        console.error("Error al generar el PDF:", error);
+  
+        // Restaura los estilos originales en caso de error
+        restoreOriginalStyles(originalStyles, {
+          conclusionContainer,
+          infoContainer,
+          infoTextareaContainer,
+          infoTextarea,
+          cuadroExpanded,
+          cuadro2Expanded,
+          circuloExpanded,
+          dropArea,
+        });
+      });
+  };
+  
+  const restoreOriginalStyles = (originalStyles, elements) => {
+    for (const [key, element] of Object.entries(elements)) {
+      if (element) {
+        if (originalStyles[key]) {
+          element.setAttribute("style", originalStyles[key]);
+        } else {
+          element.removeAttribute("style");
+        }
+      }
+    }
+  };
+  
+  
+  
   
   return (
     <div>
       <div className='button-bar'>
         <button onClick={handlePrevStep} className={`print-button`}>
-         <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+        <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={handlePrint} className={`print-button`}>
@@ -475,9 +628,10 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
         <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <label htmlFor="file-upload" className={`print-button`}>
-          <img src="/I_Folder.svg" style={{filter: 'invert(1)'}}/>
-        </label>
+
+        <button onClick={handleSaveAsPDF} className={`print-button`}>
+        <img src="/I_Save.svg" style={{filter: 'invert(1)'}}/>
+        </button>
 
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
       </div>

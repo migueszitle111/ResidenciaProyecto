@@ -131,9 +131,6 @@ const Reporte = () => {
 
 // Ejemplo de uso
 const formattedConclusions = formatConclusions(copyConclusions);
-console.log(formattedConclusions);
-
-
 
     // Actualizar las conclusiones
     useEffect(() => {
@@ -141,6 +138,7 @@ console.log(formattedConclusions);
       const formattedConclusions = formatConclusions(newConclusions);
       setCopyConclusions(formattedConclusions);
   }, [conclusions]);
+
 
     // Para mantener constante la conclusione
     const handleTextareaChange = (event) => {

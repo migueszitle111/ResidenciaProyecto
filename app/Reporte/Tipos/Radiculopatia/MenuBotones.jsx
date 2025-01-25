@@ -332,26 +332,30 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
   const { updateConclusions } = useContext(ReportContextR);
   // Manejo de checkboxes “lado izquierdo”
   
+
   function handleCheckboxChangeLeft(event) {
     const { id, checked } = event.target;
     setcheckedStateLeft((prevState) => {
-      // 1) Clonamos el estado previo
       const newState = { ...prevState };
-      // 2) Averiguamos a qué “grupo” pertenece el checkbox que se está clicando
-      const group = groupMapping[id]; 
-      if (group) {
-        // 3) Buscar TODOS los IDs que tengan el mismo group, y ponerlos en false
-        for (const [key, val] of Object.entries(groupMapping)) {
-          if (val === group) {
-            newState[key] = false; // Desactiva todos los checkboxes en ese grupo
-          }
+  
+      // 1) Determinar el grupo (si estás usando groupMapping)
+      const group = groupMapping[id];
+      // 2) Desmarcar cualquier checkbox del mismo grupo
+      Object.keys(groupMapping).forEach((k) => {
+        if (groupMapping[k] === group) {
+          newState[k] = false;
         }
-      }
-      // 4) Activa solo el ID actual
+      });
+      // 3) Marcar sólo el que se acaba de seleccionar
       newState[id] = checked;
-      return newState;
+  
+      return newState; 
+      // (No hace falta updateConclusions si tu
+      //  "ReportFace.jsx" arma la frase desde
+      //   checkedStateLeft/Right).
     });
   }
+  
   
   // Manejo de checkboxes “lado derecho”
   function handleCheckboxChangeRight(event) {
@@ -370,6 +374,66 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
       return newState;
     });
   }
+// Arreglo ordenado: CERVICAL (índice 0), TORACICA (1), LUMBROSACRA (2)
+const polisegSteps = [
+  { value: 'cervical_multinivel',   title: 'CERVICAL',    displayText: 'CERVICAL' },
+  { value: 'toracica_multinivel',   title: 'TORACICA',    displayText: 'TORACICA' },
+  { value: 'lumbrosaca_multinivel', title: 'LUMBROSACRA', displayText: 'LUMBROSACRA' },
+];
+
+// Ejemplo de función para “forzar” un estado ON/OFF en la UI
+// en lugar de un "toggle" ciego.
+function setButtonState(value, desiredOn) {
+  const currentlyOn = activeButtons[value];
+  if (desiredOn && !currentlyOn) {
+    toggleButton(value); // lo enciende
+  } else if (!desiredOn && currentlyOn) {
+    toggleButton(value); // lo apaga
+  }
+}
+
+function handlePolisegmentariaClick(clickedValue) {
+  const index = polisegSteps.findIndex(item => item.value === clickedValue);
+  if (index === -1) return;
+
+  const isCurrentlyActive = activeButtons[clickedValue];
+
+  if (!isCurrentlyActive) {
+    // --- CASO 1: Activar un botón que estaba apagado ---
+
+    // (A) Enciende en la UI los niveles del inicio (0) hasta el clicado (index-1),
+    //     sin meterlos a conclusiones
+    for (let i = 0; i < index; i++) {
+      const { value } = polisegSteps[i];
+      // Fuerza ON en la UI
+      setButtonState(value, true);
+      // Asegúrate de sacarlos de conclusiones (no se mostrarán en el reporte)
+      updateConclusions({ value, remove: true });
+    }
+
+    // (B) Enciende el botón clicado en la UI y SÍ lo mete a conclusiones
+    const { value, title } = polisegSteps[index];
+    setButtonState(value, true);
+    updateConclusions({ value, title }); // ESTE es el que se guarda en reporte
+
+    // (C) Apaga (UI) y quita de conclusiones todos los posteriores
+    for (let i = index + 1; i < polisegSteps.length; i++) {
+      const { value } = polisegSteps[i];
+      setButtonState(value, false);
+      updateConclusions({ value, remove: true });
+    }
+
+  } else {
+    // --- CASO 2: El botón ya estaba activo => apaga todo ---
+    for (let i = 0; i < polisegSteps.length; i++) {
+      const { value } = polisegSteps[i];
+      setButtonState(value, false);
+      updateConclusions({ value, remove: true });
+    }
+  }
+}
+
+
   // Manejo de botones de conclusión
   const handleButtonPress = (value, title, nextStepFunction) => {
     toggleButton(value);
@@ -1041,7 +1105,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                         checked={checkedStateLeft.A97}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A49}
+                      {checkedStateLeft.A97}
                     </td>
                     <td>
                       <input
@@ -1052,7 +1116,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                         checked={checkedStateLeft.A98}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A50}
+                      {checkedStateLeft.A98}
                     </td>
                     <td>
                       <input
@@ -1063,7 +1127,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                         checked={checkedStateLeft.A99}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A51}
+                      {checkedStateLeft.A99}
                     </td>
                     <td>
                       <input
@@ -1074,7 +1138,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                         checked={checkedStateLeft.A100}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A52}
+                      {checkedStateLeft.A100}
                     </td>
                     <td>&nbsp;R&nbsp;</td>
                     <td>
@@ -1086,7 +1150,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                         checked={checkedStateRight.A101}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A53}
+                      {checkedStateRight.A101}
                     </td>
                     <td>
                       <input
@@ -1097,7 +1161,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                         checked={checkedStateRight.A102}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A54}
+                      {checkedStateRight.A102}
                     </td>
                     <td>
                       <input
@@ -1108,7 +1172,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                         checked={checkedStateRight.A103}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A55}
+                      {checkedStateRight.A103}
                     </td>
                     <td>
                       <input
@@ -1119,7 +1183,7 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
                         checked={checkedStateRight.A104}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A56}
+                      {checkedStateRight.A104}
                     </td>
                   </tr>
                 </tbody>
@@ -1769,30 +1833,32 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
       />
         </Accordion>
 
-        {/* POLISEGMENTARIA (acordeón externo o interno, según tu lógica) */}
         <Accordion title="POLISEGMENTARIA" value="POLISEGMENTARIA" type="external">
-          <ConclusionButtonR
-            value='cervical_multinivel'
-            title='CERVICAL'
-            displayText='CERVICAL'
-            pressed={activeButtons['cervical_multinivel']}
-            onClick={() => handleButtonPress('cervical_multinivel', 'CERVICAL')}
-          />
-          <ConclusionButtonR
-            value='toracica_multinivel'
-            title='TORACICA'
-            displayText='TORACICA'
-            pressed={activeButtons['toracica_multinivel']}
-            onClick={() => handleButtonPress('toracica_multinivel', 'TORACICA')}
-          />
-          <ConclusionButtonR
-            value='lumbrosaca_multinivel'
-            title='LUMBOSACRA'
-            displayText='LUMBOSACRA'
-            pressed={activeButtons['lumbrosaca_multinivel']}
-            onClick={() => handleButtonPress('lumbrosaca_multinivel', 'LUMBOSACRA')}
-          />
-        </Accordion>
+  <ConclusionButtonR
+    value="cervical_multinivel"
+    title="CERVICAL"
+    displayText="CERVICAL"
+    pressed={activeButtons['cervical_multinivel']}
+    onClick={() => handlePolisegmentariaClick('cervical_multinivel')}
+  />
+  
+  <ConclusionButtonR
+    value="toracica_multinivel"
+    title="TORACICA"
+    displayText="TORACICA"
+    pressed={activeButtons['toracica_multinivel']}
+    onClick={() => handlePolisegmentariaClick('toracica_multinivel')}
+  />
+
+  <ConclusionButtonR
+    value="lumbrosaca_multinivel"
+    title="LUMBROSACRA"
+    displayText="LUMBROSACRA"
+    pressed={activeButtons['lumbrosaca_multinivel']}
+    onClick={() => handlePolisegmentariaClick('lumbrosaca_multinivel')}
+  />
+</Accordion>
+
       </AccordionContainer>
     </div>
   );
@@ -2182,6 +2248,65 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
     });
   };
   
+  // Arreglo ordenado: CERVICAL (índice 0), TORACICA (1), LUMBROSACRA (2)
+const polisegSteps = [
+  { value: 'cervical_multinivel',   title: 'CERVICAL',    displayText: 'CERVICAL' },
+  { value: 'toracica_multinivel',   title: 'TORACICA',    displayText: 'TORACICA' },
+  { value: 'lumbrosaca_multinivel', title: 'LUMBROSACRA', displayText: 'LUMBROSACRA' },
+];
+
+// Ejemplo de función para “forzar” un estado ON/OFF en la UI
+// en lugar de un "toggle" ciego.
+function setButtonState(value, desiredOn) {
+  const currentlyOn = activeButtons[value];
+  if (desiredOn && !currentlyOn) {
+    toggleButton(value); // lo enciende
+  } else if (!desiredOn && currentlyOn) {
+    toggleButton(value); // lo apaga
+  }
+}
+
+function handlePolisegmentariaClick(clickedValue) {
+  const index = polisegSteps.findIndex(item => item.value === clickedValue);
+  if (index === -1) return;
+
+  const isCurrentlyActive = activeButtons[clickedValue];
+
+  if (!isCurrentlyActive) {
+    // --- CASO 1: Activar un botón que estaba apagado ---
+
+    // (A) Enciende en la UI los niveles del inicio (0) hasta el clicado (index-1),
+    //     sin meterlos a conclusiones
+    for (let i = 0; i < index; i++) {
+      const { value } = polisegSteps[i];
+      // Fuerza ON en la UI
+      setButtonState(value, true);
+      // Asegúrate de sacarlos de conclusiones (no se mostrarán en el reporte)
+      updateConclusions({ value, remove: true });
+    }
+
+    // (B) Enciende el botón clicado en la UI y SÍ lo mete a conclusiones
+    const { value, title } = polisegSteps[index];
+    setButtonState(value, true);
+    updateConclusions({ value, title }); // ESTE es el que se guarda en reporte
+
+    // (C) Apaga (UI) y quita de conclusiones todos los posteriores
+    for (let i = index + 1; i < polisegSteps.length; i++) {
+      const { value } = polisegSteps[i];
+      setButtonState(value, false);
+      updateConclusions({ value, remove: true });
+    }
+
+  } else {
+    // --- CASO 2: El botón ya estaba activo => apaga todo ---
+    for (let i = 0; i < polisegSteps.length; i++) {
+      const { value } = polisegSteps[i];
+      setButtonState(value, false);
+      updateConclusions({ value, remove: true });
+    }
+  }
+}
+
   
 
   const handleCheckboxChangeLeft = (event) => {
@@ -2578,7 +2703,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                         checked={checkedStateLeft.A97}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A49}
+                      {checkedStateLeft.A97}
                     </td>
                     <td>
                       <input
@@ -2589,7 +2714,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                         checked={checkedStateLeft.A98}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A50}
+                      {checkedStateLeft.A98}
                     </td>
                     <td>
                       <input
@@ -2600,7 +2725,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                         checked={checkedStateLeft.A99}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A51}
+                      {checkedStateLeft.A99}
                     </td>
                     <td>
                       <input
@@ -2611,7 +2736,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                         checked={checkedStateLeft.A100}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A52}
+                      {checkedStateLeft.A100}
                     </td>
                     <td>&nbsp;R&nbsp;</td>
                     <td>
@@ -2623,7 +2748,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                         checked={checkedStateRight.A101}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A53}
+                      {checkedStateRight.A101}
                     </td>
                     <td>
                       <input
@@ -2634,7 +2759,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                         checked={checkedStateRight.A102}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A54}
+                      {checkedStateRight.A102}
                     </td>
                     <td>
                       <input
@@ -2645,7 +2770,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                         checked={checkedStateRight.A103}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A55}
+                      {checkedStateRight.A103}
                     </td>
                     <td>
                       <input
@@ -2656,7 +2781,7 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
                         checked={checkedStateRight.A104}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A56}
+                      {checkedStateRight.A104}
                     </td>
                   </tr>
                 </tbody>
@@ -2936,30 +3061,31 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
       />          
       </Accordion>
 
-      <Accordion title='POLISEGMENTARIA' value='POLISEGMENTARIA' type='external'>
-      <ConclusionButtonR
-    value='cervical_multinivel'
-    title='CERVICAL'
-    displayText='CERVICAL'
-    pressed={activeButtons['cervical_multinivel']}
-    onClick={() => handleButtonPress1('cervical_multinivel', "CERVICAL")}
-  />
+      <Accordion title="POLISEGMENTARIA" value="POLISEGMENTARIA" type="external">
   <ConclusionButtonR
-    value='toracica_multinivel'
-    title='TORÁCICA'
-    displayText='TORÁCICA'
-    pressed={activeButtons['toracica_multinivel']}
-    onClick={() => handleButtonPress1('toracica_multinivel', "TORÁCICA")}
+    value="cervical_multinivel"
+    title="CERVICAL"
+    displayText="CERVICAL"
+    pressed={activeButtons['cervical_multinivel']}
+    onClick={() => handlePolisegmentariaClick('cervical_multinivel')}
   />
-   <ConclusionButtonR
-            value='lumbrosaca_multinivel'
-            title='LUMBOSACRA'
-            displayText='LUMBOSACRA'
-            pressed={activeButtons['lumbrosaca_multinivel']}
-            onClick={() => handleButtonPress1('lumbrosaca_multinivel', 'LUMBOSACRA')}
-          />
- 
-      </Accordion> 
+  
+  <ConclusionButtonR
+    value="toracica_multinivel"
+    title="TORACICA"
+    displayText="TORACICA"
+    pressed={activeButtons['toracica_multinivel']}
+    onClick={() => handlePolisegmentariaClick('toracica_multinivel')}
+  />
+
+  <ConclusionButtonR
+    value="lumbrosaca_multinivel"
+    title="LUMBROSACRA"
+    displayText="LUMBROSACRA"
+    pressed={activeButtons['lumbrosaca_multinivel']}
+    onClick={() => handlePolisegmentariaClick('lumbrosaca_multinivel')}
+  />
+</Accordion>
       </AccordionContainer>    
     </div>
     
@@ -4076,10 +4202,8 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       A37: 'c8_d', A38: 'c8_d', A39: 'c8_d', A40: 'c8_d',
       A41: 't1_i', A42: 't1_i', A43: 't1_i', A44: 't1_i',
       A45: 't1_d', A46: 't1_d', A47: 't1_d', A48: 't1_d',
-
       A97: 'l1_i', A98: 'l1_i', A99: 'l1_i', A100: 'l1_i',
       A101: 'l1_d', A102: 'l1_d', A103: 'l1_d', A104: 'l1_d',
-
       A49: 'l2_i', A50: 'l2_i', A51: 'l2_i', A52: 'l2_i',
       A53: 'l2_d', A54: 'l2_d', A55: 'l2_d', A56: 'l2_d',
       A57: 'l3_i', A58: 'l3_i', A59: 'l3_i', A60: 'l3_i',
@@ -4124,7 +4248,65 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       return updatedState;
     });
   };
-  
+ // Arreglo ordenado: CERVICAL (índice 0), TORACICA (1), LUMBROSACRA (2)
+const polisegSteps = [
+  { value: 'cervical_multinivel',   title: 'CERVICAL',    displayText: 'CERVICAL' },
+  { value: 'toracica_multinivel',   title: 'TORACICA',    displayText: 'TORACICA' },
+  { value: 'lumbrosaca_multinivel', title: 'LUMBROSACRA', displayText: 'LUMBROSACRA' },
+];
+
+// Ejemplo de función para “forzar” un estado ON/OFF en la UI
+// en lugar de un "toggle" ciego.
+function setButtonState(value, desiredOn) {
+  const currentlyOn = activeButtons[value];
+  if (desiredOn && !currentlyOn) {
+    toggleButton(value); // lo enciende
+  } else if (!desiredOn && currentlyOn) {
+    toggleButton(value); // lo apaga
+  }
+}
+
+function handlePolisegmentariaClick(clickedValue) {
+  const index = polisegSteps.findIndex(item => item.value === clickedValue);
+  if (index === -1) return;
+
+  const isCurrentlyActive = activeButtons[clickedValue];
+
+  if (!isCurrentlyActive) {
+    // --- CASO 1: Activar un botón que estaba apagado ---
+
+    // (A) Enciende en la UI los niveles del inicio (0) hasta el clicado (index-1),
+    //     sin meterlos a conclusiones
+    for (let i = 0; i < index; i++) {
+      const { value } = polisegSteps[i];
+      // Fuerza ON en la UI
+      setButtonState(value, true);
+      // Asegúrate de sacarlos de conclusiones (no se mostrarán en el reporte)
+      updateConclusions({ value, remove: true });
+    }
+
+    // (B) Enciende el botón clicado en la UI y SÍ lo mete a conclusiones
+    const { value, title } = polisegSteps[index];
+    setButtonState(value, true);
+    updateConclusions({ value, title }); // ESTE es el que se guarda en reporte
+
+    // (C) Apaga (UI) y quita de conclusiones todos los posteriores
+    for (let i = index + 1; i < polisegSteps.length; i++) {
+      const { value } = polisegSteps[i];
+      setButtonState(value, false);
+      updateConclusions({ value, remove: true });
+    }
+
+  } else {
+    // --- CASO 2: El botón ya estaba activo => apaga todo ---
+    for (let i = 0; i < polisegSteps.length; i++) {
+      const { value } = polisegSteps[i];
+      setButtonState(value, false);
+      updateConclusions({ value, remove: true });
+    }
+  }
+}
+
 
   const handleCheckboxChangeLeft = (event) => {
     handleCheckboxChange(event, 'left');
@@ -4535,7 +4717,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                         checked={checkedStateLeft.A97}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A49}
+                      {checkedStateLeft.A97}
                     </td>
                     <td>
                       <input
@@ -4546,7 +4728,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                         checked={checkedStateLeft.A98}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A50}
+                      {checkedStateLeft.A98}
                     </td>
                     <td>
                       <input
@@ -4557,7 +4739,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                         checked={checkedStateLeft.A99}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A51}
+                      {checkedStateLeft.A99}
                     </td>
                     <td>
                       <input
@@ -4568,7 +4750,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                         checked={checkedStateLeft.A100}
                         onChange={handleCheckboxChangeLeft}
                       />
-                      {checkedStateLeft.A52}
+                      {checkedStateLeft.A100}
                     </td>
                     <td>&nbsp;R&nbsp;</td>
                     <td>
@@ -4580,7 +4762,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                         checked={checkedStateRight.A101}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A53}
+                      {checkedStateRight.A101}
                     </td>
                     <td>
                       <input
@@ -4591,7 +4773,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                         checked={checkedStateRight.A102}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A54}
+                      {checkedStateRight.A102}
                     </td>
                     <td>
                       <input
@@ -4602,7 +4784,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                         checked={checkedStateRight.A103}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A55}
+                      {checkedStateRight.A103}
                     </td>
                     <td>
                       <input
@@ -4613,7 +4795,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
                         checked={checkedStateRight.A104}
                         onChange={handleCheckboxChangeRight}
                       />
-                      {checkedStateRight.A56}
+                      {checkedStateRight.A104}
                     </td>
                   </tr>
                 </tbody>
@@ -4895,29 +5077,31 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       />           
       </Accordion>
 
-      <Accordion title='POLISEGMENTARIA' value='POLISEGMENTARIA' type='external'>
-      <ConclusionButtonR
-    value='cervical_multinivel'
-    title='CERVICAL'
-    displayText='CERVICAL'
-    pressed={activeButtons['cervical_multinivel']}
-    onClick={() => handleButtonPress1('cervical_multinivel', "CERVICAL")}
-  />
+      <Accordion title="POLISEGMENTARIA" value="POLISEGMENTARIA" type="external">
   <ConclusionButtonR
-    value='toracica_multinivel'
-    title='TORÁCICA'
-    displayText='TORÁCICA'
-    pressed={activeButtons['toracica_multinivel']}
-    onClick={() => handleButtonPress1('toracica_multinivel', "TORÁCICA")}
+    value="cervical_multinivel"
+    title="CERVICAL"
+    displayText="CERVICAL"
+    pressed={activeButtons['cervical_multinivel']}
+    onClick={() => handlePolisegmentariaClick('cervical_multinivel')}
   />
- <ConclusionButtonR
-   value='lumbrosaca_multinivel'
-   title='LUMBOSACRA'
-   displayText='LUMBOSACRA'
-   pressed={activeButtons['lumbrosaca_multinivel']}
-   onClick={() => handleButtonPress1('lumbrosaca_multinivel', 'LUMBOSACRA')}
- />
-      </Accordion>    
+  
+  <ConclusionButtonR
+    value="toracica_multinivel"
+    title="TORACICA"
+    displayText="TORACICA"
+    pressed={activeButtons['toracica_multinivel']}
+    onClick={() => handlePolisegmentariaClick('toracica_multinivel')}
+  />
+
+  <ConclusionButtonR
+    value="lumbrosaca_multinivel"
+    title="LUMBROSACRA"
+    displayText="LUMBROSACRA"
+    pressed={activeButtons['lumbrosaca_multinivel']}
+    onClick={() => handlePolisegmentariaClick('lumbrosaca_multinivel')}
+  />
+</Accordion>
       </AccordionContainer> 
     </div>
   );

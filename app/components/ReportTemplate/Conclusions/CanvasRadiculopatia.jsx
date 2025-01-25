@@ -1,4 +1,4 @@
-import { ReportContextR } from '@/src/context'
+import { ReportContextR, useButtonContext  } from '@/src/context'
 import Image from 'next/image'
 import { useContext } from 'react'
 
@@ -6,7 +6,7 @@ import { useContext } from 'react'
 export function ConclusionCanvasR ({ img: {src, alt, useMap, width, height}, rules }) {
   // Utiliza el contexto para obtener las conclusiones
   const { conclusions } = useContext(ReportContextR)
-  
+  const { activeButtons } = useButtonContext()
   return (
     <div className='image-container relative'>
       <Image
@@ -25,7 +25,11 @@ export function ConclusionCanvasR ({ img: {src, alt, useMap, width, height}, rul
           const isImageArray = Array.isArray(image); // Verifica si es un array
           
           // Comprueba si la conclusión coincide con la regla
-          if (conclusions.find(cl => cl.value === expectedValue)) {
+          //if (conclusions.find(cl => cl.value === expectedValue)) {
+            //if (activeButtons[expectedValue]){
+              const inConclusions = conclusions.some(cl => cl.value === expectedValue)
+              const inActiveButtons = activeButtons[expectedValue]
+              if (inConclusions || inActiveButtons) {
             return isImageArray ? (
               // Renderiza ambas imágenes si es un array
               image.map((img, index) => (

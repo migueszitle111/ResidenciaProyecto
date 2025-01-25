@@ -172,8 +172,6 @@
   width: 100%;
   margin: 10px;
   height: 20vh;
-  
-
   z-index: 1;
 }
 
@@ -225,7 +223,6 @@
   text-align: center;
   margin : 10px;
   border: 2px solid #c44900; 
-
 }
 
 .vertical-orinetation {
@@ -367,8 +364,6 @@
   margin-bottom: 15px;
   margin-left: 135px;
 }
-
-
 .cuadro3 {
   width: 40px;
   height: 40px;
@@ -380,7 +375,6 @@
   margin-bottom: 15px;
   margin-left: 10px;
 }
-
 .cuadro3-expanded {
   width: 98px;
   height: 92px;
@@ -388,7 +382,6 @@
   margin-bottom: 15px;
   margin-left: 10px;
 }
-
 /*Circulos donde se insertan las imagenes*/
 .circulo {
   width: 50px;
@@ -400,14 +393,11 @@
   margin-top: 10px;
   display: flex;
 }
-
 /* Cuando el elemento está siendo arrastrado (tamaño original) */
 .circulo-expanded {
   width: 240px;
-  height: 120px;
-  
+  height: 120px; 
 }
-
 .circulo2 {
   width: 40px;
   height: 40px;
@@ -432,7 +422,6 @@
 .circulo2 > .dropArea2{
   border-radius: 100%;
 }
-
 
 .circulo3 {
   width: 40px;
@@ -468,7 +457,6 @@
   background-color: transparent;
   pointer-events: none;
   margin-top: 5px;
-  
 }
 
 .lineaImg-expanded {
@@ -502,7 +490,6 @@
   margin-left: 60px;
   transform: scale(1.1); /* Escala la imagen un poco al expandir */
 }
-
 
 .cruzImg{
   width: 90px; /* Ajusta el ancho para que sea responsivo */
@@ -649,7 +636,6 @@
   width: 50px;
   height: 50px;
   margin-left: 90px;
-  
 }
 
 .cuadroIMG2 {
@@ -809,10 +795,13 @@
 
 /* Detalles referentes a la impresion */
 @media print {
+ 
 
   .conclusion-container {
-    height: 985px !important;
+    height: 100% !important;
+    width: 100%;
     overflow: visible !important;
+    border: #1C1C1C 1px solid;
     
   }
 
@@ -847,10 +836,10 @@
   }
 
   .image-container {
-    margin-top: -20px;
-    position: relative;
-    width: 100%;
-    height: 100%;
+    flex-wrap: wrap;
+    margin-top: -10px;
+    width: 80%;
+    height: 86%;
     /* border: rgb(0, 60, 255) 2px solid; */
   }
 

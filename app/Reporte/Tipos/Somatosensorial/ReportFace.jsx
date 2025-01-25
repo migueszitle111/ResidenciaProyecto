@@ -300,26 +300,107 @@ const Reporte = () => {
           rules={[
 
             {
-              expectedValue: 'indenme', 
+              expectedValue: 'radial_superficial', 
              
                 image: 
                   {
-                    src: 'SomatosensorialImg/imagen_combinada.png',
+                    src: 'SomatosensorialImg/SUPERIORES.png',
+                    alt: 'Modelo',
+                  },
+            },
+            {
+              expectedValue: 'antebraqueal_cutaneo_lateral', 
+             
+                image: 
+                  {
+                    src: 'SomatosensorialImg/SUPERIORES.png',
+                    alt: 'Modelo',
+                  },
+                 
+            },
+            {
+              expectedValue: 'mediano', 
+             
+                image: 
+                  {
+                    src: 'SomatosensorialImg/SUPERIORES.png',
                     alt: 'Modelo',
                   },
                  
             },
 
             {
-              expectedValue: 'alterada', 
+              expectedValue: 'ulnar', 
              
                 image: 
                   {
-                    src: 'SomatosensorialImg/imagen_combinada.png',
+                    src: 'SomatosensorialImg/SUPERIORES.png',
                     alt: 'Modelo',
                   },
                  
             },
+
+            {
+              expectedValue: 'tibial', 
+             
+                image: 
+                  {
+                    src: 'SomatosensorialImg/INFERIORES.png',
+                    alt: 'Modelo',
+                  },
+                 
+            },
+
+            {
+              expectedValue: 'peroneo_superficial', 
+             
+                image: 
+                  {
+                    src: 'SomatosensorialImg/INFERIORES.png',
+                    alt: 'Modelo',
+                  },
+                 
+            },
+            {
+              expectedValue: 'sural', 
+             
+                image: 
+                  {
+                    src: 'SomatosensorialImg/INFERIORES.png',
+                    alt: 'Modelo',
+                  },
+                 
+            },
+            {
+              expectedValue: 'safeno', 
+             
+                image: 
+                  {
+                    src: 'SomatosensorialImg/INFERIORES.png',
+                    alt: 'Modelo',
+                  },
+                 
+            },
+            {
+              expectedValue: 'femorocutaneo_lateral', 
+             
+                image: 
+                  {
+                    src: 'SomatosensorialImg/INFERIORES.png',
+                    alt: 'Modelo',
+                  },
+                 
+            },
+            {
+              expectedValue: 'pudendo', 
+             
+                image: 
+                  {
+                    src: 'SomatosensorialImg/INFERIORES.png',
+                    alt: 'Modelo',
+                  },
+                 
+            },           
             {
               expectedValue: 'derechotrigemino',  
              
@@ -371,10 +452,6 @@ const Reporte = () => {
                   },
                
             },
-
-
-
-
 
             /*cortical superior*/
             {

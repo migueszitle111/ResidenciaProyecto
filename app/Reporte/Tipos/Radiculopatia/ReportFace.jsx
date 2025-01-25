@@ -8,7 +8,6 @@ import './EstilosCruz.css';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
 
-
 const DropArea = () => {
   const [droppedItems, setDroppedItems] = useState([]);
 
@@ -106,12 +105,12 @@ const Reporte = () => {
   // Mapa de checkbox y rutas de imágenes
   const imageMap = {
     left: {
-      A1: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz1' },
-      A2: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz2' },
-      A3: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz3' },
-      A4: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz4' },
+      A1: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz1'   },
+      A2: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz2'   },
+      A3: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz3'   },
+      A4: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz4'   },
 
-      A9: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz9' },
+      A9: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz9'   },
       A10: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz10' },
       A11: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz11' },
       A12: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz12' },
@@ -139,7 +138,7 @@ const Reporte = () => {
       A97: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz97' },
       A98: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz98' },
       A99: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz99' },
-      A100: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz100' },
+      A100: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz100'},
 
       A49: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz49' },
       A50: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz50' },
@@ -173,10 +172,10 @@ const Reporte = () => {
 
     },
     right: {
-      A5: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz5' },
-      A6: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz6' },
-      A7: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz7' },
-      A8: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz8' },
+      A5: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz5'   },
+      A6: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz6'   },
+      A7: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz7'   },
+      A8: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz8'   },
 
       A13: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz13' },
       A14: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz14' },
@@ -203,10 +202,10 @@ const Reporte = () => {
       A47: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz47' },
       A48: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz48' },
 
-      A101: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz101' },
-      A102: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz102' },
-      A103: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz103' },
-      A104: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz104' },
+      A101: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz101'},
+      A102: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz102'},
+      A103: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz103'},
+      A104: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz104'},
 
       A53: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz53' },
       A54: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz54' },
@@ -228,7 +227,6 @@ const Reporte = () => {
       A79: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz79' },
       A80: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz80' },
 
-
       A85: { src: '/assets/Simbolos/S_Cruz 1.png', className: 'cruz85' },
       A86: { src: '/assets/Simbolos/S_Cruz 2.png', className: 'cruz86' },
       A87: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz87' },
@@ -245,119 +243,122 @@ const Reporte = () => {
   useEffect(() => {
     if (!hasMounted) return;
   
+    // 1) Texto que viene de los botones ConclusionButtonR
     const conclusionText = conclusions.map(cl => cl.title).join(' ');
   
+    // 2) Función para saber si en un grupo hay algo a la izquierda/derecha
     const checkGroup = (leftKeys, rightKeys) => {
-      let isLeftMarked = false;
-      let isRightMarked = false;
+      let isLeftMarked = leftKeys.some(k => checkedStateLeft[k]);
+      let isRightMarked = rightKeys.some(k => checkedStateRight[k]);
   
-      leftKeys.forEach(key => {
-        if (checkedStateLeft[key]) {
-          isLeftMarked = true;
-        }
-      });
-  
-      rightKeys.forEach(key => {
-        if (checkedStateRight[key]) {
-          isRightMarked = true;
-        }
-      });
-  
-      if (isLeftMarked && isRightMarked) {
-        return 'BILATERAL';
-      } else if (isLeftMarked) {
-        return 'IZQUIERDA';
-      } else if (isRightMarked) {
-        return 'DERECHA';
-      } else {
-        return null;
-      }
+      if (isLeftMarked && isRightMarked) return 'BILATERAL';
+      if (isLeftMarked) return 'IZQUIERDA';
+      if (isRightMarked) return 'DERECHA';
+      return null;
     };
   
+    // 3) Grupos de niveles
     const groups = [
-      { name: 'C4', left: ['A1', 'A2', 'A3', 'A4'], right: ['A5', 'A6', 'A7', 'A8'] },
-      { name: 'C5', left: ['A9', 'A10', 'A11', 'A12'], right: ['A13', 'A14', 'A15', 'A16'] },
-      { name: 'C6', left: ['A17', 'A18', 'A19', 'A20'], right: ['A21', 'A22', 'A23', 'A24'] },
-      { name: 'C7', left: ['A25', 'A26', 'A27', 'A28'], right: ['A29', 'A30', 'A31', 'A32'] },
-      { name: 'C8', left: ['A33', 'A34', 'A35', 'A36'], right: ['A37', 'A38', 'A39', 'A40'] },
-      { name: 'T1', left: ['A41', 'A42', 'A43', 'A44'], right: ['A45', 'A46', 'A47', 'A48'] },
-      { name: 'L2', left: ['A49', 'A50', 'A51', 'A52'], right: ['A53', 'A54', 'A55', 'A56'] },
-      { name: 'L3', left: ['A57', 'A58', 'A59', 'A60'], right: ['A61', 'A62', 'A63', 'A64'] },
-      { name: 'L4', left: ['A65', 'A66', 'A67', 'A68'], right: ['A69', 'A70', 'A71', 'A72'] },
-      { name: 'L5', left: ['A73', 'A74', 'A75', 'A76'], right: ['A77', 'A78', 'A79', 'A80'] },
-      { name: 'S1', left: ['A81', 'A82', 'A83', 'A84'], right: ['A85', 'A86', 'A87', 'A88'] },
-      { name: 'S2', left: ['A89', 'A90', 'A91', 'A92'], right: ['A93', 'A94', 'A95', 'A96'] },
+      { name: 'C4', left: ['A1','A2','A3','A4'], right: ['A5','A6','A7','A8'] },
+      { name: 'C5', left: ['A9','A10','A11','A12'], right: ['A13','A14','A15','A16'] },
+      { name: 'C6', left: ['A17','A18','A19','A20'], right: ['A21','A22','A23','A24'] },
+      { name: 'C7', left: ['A25','A26','A27','A28'], right: ['A29','A30','A31','A32'] },
+      { name: 'C8', left: ['A33','A34','A35','A36'], right: ['A37','A38','A39','A40'] },
+      { name: 'T1', left: ['A41','A42','A43','A44'], right: ['A45','A46','A47','A48'] },
+      { name: 'L1', left: ['A97','A98','A99','A100'], right: ['A101','A102','A103','A104'] },
+      { name: 'L2', left: ['A49','A50','A51','A52'], right: ['A53','A54','A55','A56'] },
+      { name: 'L3', left: ['A57','A58','A59','A60'], right: ['A61','A62','A63','A64'] },
+      { name: 'L4', left: ['A65','A66','A67','A68'], right: ['A69','A70','A71','A72'] },
+      { name: 'L5', left: ['A73','A74','A75','A76'], right: ['A77','A78','A79','A80'] },
+      { name: 'S1', left: ['A81','A82','A83','A84'], right: ['A85','A86','A87','A88'] },
+      { name: 'S2', left: ['A89','A90','A91','A92'], right: ['A93','A94','A95','A96'] },
     ];
   
+    // 4) Agrupar qué lados están marcados
     const groupedStatus = groups.reduce((acc, group) => {
       const status = checkGroup(group.left, group.right);
       if (status) {
-        if (!acc[status]) {
-          acc[status] = [];
-        }
+        if (!acc[status]) acc[status] = [];
         acc[status].push(group.name);
       }
       return acc;
     }, {});
   
+    // 5) Ajustar plural de IZQUIERDA / IZQUIERDAS, etc.
     const translateStatus = (status, count) => {
       if (count > 1) {
         switch (status) {
-          case 'BILATERAL':
-            return 'BILATERALES';
-          case 'IZQUIERDA':
-            return 'IZQUIERDAS';
-          case 'DERECHA':
-            return 'DERECHAS';
-          default:
-            return status;
+          case 'BILATERAL':  return 'BILATERALES';
+          case 'IZQUIERDA':  return 'IZQUIERDAS';
+          case 'DERECHA':    return 'DERECHAS';
+          default:           return status;
         }
       }
       return status;
     };
   
+    // 6) Construir el texto adicional
     const additionalText = Object.entries(groupedStatus)
-      .map(([status, groupNames]) => `${groupNames.join(', ')} ${translateStatus(status, groupNames.length)}`)
-      .join(', ');
+      .map(([status, groupNames]) =>
+        `${groupNames.join(', ')} ${translateStatus(status, groupNames.length)}`)
+      .join(', ');  // p.e. "C4 IZQUIERDA, C5 BILATERALES, L4 DERECHA"
   
-    const words = conclusionText.split(' ');
-    let combinedText;
+    // 7) Lógica para combinar 'conclusionText' y 'additionalText'
+    let combinedText = conclusionText.trim();
+    const words = combinedText.split(' ');
   
-    if (words.length >= 2 && words[0].toUpperCase() === "RADICULOPATIA") {
-      const firstTwoWords = words.slice(0, 2).join(' ');
-      const remainingText = words.slice(2).join(' ');
-      combinedText = additionalText
-        ? `${firstTwoWords} ${additionalText}, ${remainingText}`
-        : conclusionText;
-    } else {
-      combinedText = conclusionText;
+    // Si hay 'RADICULOPATIA' como primer palabra y hay 'additionalText', 
+    // la insertamos después de "RADICULOPATIA ...".
+    if (additionalText) {
+      if (words.length >= 2 && words[0].toUpperCase() === "RADICULOPATIA") {
+        // Por ej: RADICULOPATIA AGUDA => [ "RADICULOPATIA", "AGUDA" ]
+        const firstTwoWords = words.slice(0, 2).join(' ');
+        const remainingText = words.slice(2).join(' ');
+        
+        // Si no hay texto "remainingText", pues es solo RADICULOPATIA ...
+        combinedText = remainingText
+          ? `${firstTwoWords} ${additionalText}, ${remainingText}`
+          : `${firstTwoWords} ${additionalText}`;
+        
+      } else {
+        // Caso: no empieza con "RADICULOPATIA ...", 
+        // => agregamos al final o lo ponemos solo.
+        if (!combinedText) {
+          // Si 'conclusionText' está vacío
+          combinedText = additionalText;
+        } else {
+          // Si había algo => lo unimos con coma
+          combinedText = `${combinedText} , ${additionalText}`;
+        }
+      }
     }
   
-    // Ajuste específico para radiculopatía crónica + cualquier fase (ACTIVA, INACTIVA, ANTIGUA)
+    // 8) Ajuste específico para “radiculopatía crónica + fase activa/inactiva/antigua”
     const isCronica = words[1]?.toUpperCase() === "CRONICA";
     const phases = ["activa", "inactiva", "antigua"];
-    const selectedPhase = conclusions.find(c => phases.includes(c.value)); 
-    // selectedPhase será el objeto {value: "activa", title:"ACTIVA"} por ejemplo, si existe.
-    
+    const selectedPhase = conclusions.find(c => phases.includes(c.value));
+    // Por ej. si hay {value:'activa', title:'ACTIVA'}
+  
     if (isCronica && selectedPhase) {
-      const phaseWord = selectedPhase.title; // Por ejemplo "ACTIVA", "INACTIVA" o "ANTIGUA"
+      const phaseWord = selectedPhase.title; // "ACTIVA" / "INACTIVA" / "ANTIGUA"
       const ctWords = combinedText.split(' ');
       const cronicaIndex = ctWords.findIndex(w => w.toUpperCase() === "CRONICA");
       const phaseIndex = ctWords.findIndex(w => w.toUpperCase() === phaseWord.toUpperCase());
   
       if (cronicaIndex !== -1 && phaseIndex !== -1 && phaseIndex > cronicaIndex) {
-        // Remover la fase de su posición actual
+        // Removemos la fase de su posición actual
         const [extractedPhase] = ctWords.splice(phaseIndex, 1);
-        // Insertar la fase justo después de "CRONICA" con una coma
+        // La insertamos justo después de "CRONICA" con una coma
         ctWords.splice(cronicaIndex + 1, 0, "", extractedPhase);
-  
         combinedText = ctWords.join(' ');
       }
     }
   
-    setCopyConclusions(combinedText);
+    // 9) Finalmente, actualizar tu 'copyConclusions'
+    setCopyConclusions(combinedText.trim());
   
   }, [hasMounted, conclusions, checkedStateLeft, checkedStateRight]);
+  
   
 
 

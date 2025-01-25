@@ -213,7 +213,6 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       <h1 className=' text-xl font-bold text-white'>
         DISTRIBUCION
       </h1>
-
       <ConclusionButton value='bulbar' title='BULBAR' displayText={'BULBAR'}   dangerouslySetInnerHTML={{ __html: ' BULBAR' }}/>
       <ConclusionButton value='proximal' title='PROXIMAL' displayText={'PROXIMAL'}/>
       <ConclusionButton value='distal' title='DISTAL' displayText={'DISTAL'}/>

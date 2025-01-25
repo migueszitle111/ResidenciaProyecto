@@ -296,7 +296,7 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           setStep('G1');
         }}>
       <ConclusionButton
-        value="izquierdo"
+        value="superior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -307,7 +307,7 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           setStep('G1');
         }}>
       <ConclusionButton
-        value="derecho"
+        value="superior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -318,7 +318,7 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           setStep('G1');
         }}>
       <ConclusionButton
-        value="bilateral"
+        value="superior_bilateral"
         title=" BILATERAL,"
         displayText="BILATERAL "
         
@@ -343,7 +343,7 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           setStep('G2');
         }}>
       <ConclusionButton
-        value="izquierdo"
+        value="superior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -354,7 +354,7 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           setStep('G2');
         }}>
       <ConclusionButton
-        value="derecho"
+        value="superior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -365,7 +365,7 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           setStep('G2');
         }}>
       <ConclusionButton
-        value="bilateral"
+        value="superior_bilateral"
         title=" BILATERAL,"
         displayText="BILATERAL "
         
@@ -390,7 +390,7 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           setStep('G3');
         }}>
       <ConclusionButton
-        value="izquierdo"
+        value="superior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -401,7 +401,7 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           setStep('G3');
         }}>
       <ConclusionButton
-        value="derecho"
+        value="superior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -412,7 +412,7 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           setStep('G3');
         }}>
       <ConclusionButton
-        value="bilateral"
+        value="superior_bilateral"
         title=" BILATERAL,"
         displayText="BILATERAL "
         
@@ -436,7 +436,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep }) => (
           setStep('H4');
         }}>
       <ConclusionButton
-        value="izquierdo"
+        value="superior_izquierdoindemne"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -446,7 +446,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep }) => (
           setStep('H4');
         }}>
       <ConclusionButton
-        value="derecho"
+        value="superior_derechoindemne"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -456,7 +456,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep }) => (
           setStep('H4');
         }}>
       <ConclusionButton
-        value="bilateral"
+        value="superior_bilateralindemne"
         title=" BILATERAL"
         displayText="BILATERAL "
         
@@ -611,7 +611,7 @@ const StepB2 = ({ handlePrevStep, handleNextStep, setStep }) => (
     <h1 className="text-xl font-bold text-white">INFERIORES</h1>
     <div onClick={handleNextStep}> 
     </div>
-    <div onClick={() => setStep('')}>
+    <div onClick={() => setStep('F4_i')}>
       <ConclusionButton value="inferior_indenme" title="VÍA SOMATOSENSORIAL CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />   
        </div>
     <div onClick={() => setStep('C1_i')}>
@@ -737,7 +737,7 @@ const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
           setStep('G1_i');
         }}>
       <ConclusionButton
-        value="izquierdo"
+        value="inferior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -748,7 +748,7 @@ const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
           setStep('G1_i');
         }}>
       <ConclusionButton
-        value="derecho"
+        value="inferior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -759,7 +759,7 @@ const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
           setStep('G1_i');
         }}>
       <ConclusionButton
-        value="bilateral"
+        value="inferior_bilateral"
         title=" BILATERAL,"
         displayText="BILATERAL "
         
@@ -784,7 +784,7 @@ const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
           setStep('G2_i');
         }}>
       <ConclusionButton
-        value="izquierdo"
+        value="inferior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -795,7 +795,7 @@ const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
           setStep('G2_i');
         }}>
       <ConclusionButton
-        value="derecho"
+        value="inferior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -806,7 +806,7 @@ const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
           setStep('G2_i');
         }}>
       <ConclusionButton
-        value="bilateral"
+        value="inferior_bilateral"
         title=" BILATERAL,"
         displayText="BILATERAL "
         
@@ -831,7 +831,7 @@ const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
           setStep('G3_i');
         }}>
       <ConclusionButton
-        value="izquierdo"
+        value="inferior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -842,7 +842,7 @@ const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
           setStep('G3_i');
         }}>
       <ConclusionButton
-        value="derecho"
+        value="inferior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -853,7 +853,7 @@ const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
           setStep('G3_i');
         }}>
       <ConclusionButton
-        value="bilateral"
+        value="inferior_bilateral"
         title=" BILATERAL,"
         displayText="BILATERAL "
         
@@ -877,7 +877,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep }) => (
           setStep('H4_i');
         }}>
       <ConclusionButton
-        value="izquierdo"
+        value="inferior_izquierdoindemne"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -887,7 +887,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep }) => (
           setStep('H4_i');
         }}>
       <ConclusionButton
-        value="derecho"
+        value="inferior_derechoindemne"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -897,7 +897,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep }) => (
           setStep('H4_i');
         }}>
       <ConclusionButton
-        value="bilateral"
+        value="inferior_bilateralindemne"
         title=" BILATERAL"
         displayText="BILATERAL "
         
@@ -919,7 +919,6 @@ const StepG1_i = ({ setStep, selectedImages, handleUndo, handleImageChange, sele
     
       <ConclusionButton value={`${selectedSide}corticali`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
       <ConclusionButton value={`${selectedSide}subcorticali`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}cervicali`} title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N26: Tracto gracilis-sustancia gris medular)." displayText="CERVICAL" />
       <ConclusionButton value={`${selectedSide}toracicoi`} title=", TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
       <ConclusionButton value={`${selectedSide}lumbosacroi`} title=", TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
       <ConclusionButton value={`${selectedSide}perifericoi`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
@@ -938,10 +937,8 @@ const StepG2_i = ({ setStep, selectedImages, handleUndo, handleImageChange, sele
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>NIVEL INFERIOR: </h1>
-    
       <ConclusionButton value={`${selectedSide}corticali`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
       <ConclusionButton value={`${selectedSide}subcorticali`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}cervicali`} title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N26: Tracto gracilis-sustancia gris medular)." displayText="CERVICAL" />
       <ConclusionButton value={`${selectedSide}toracicoi`} title=", TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
       <ConclusionButton value={`${selectedSide}lumbosacroi`} title=", TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
       <ConclusionButton value={`${selectedSide}perifericoi`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
@@ -959,18 +956,14 @@ const StepG3_i = ({ setStep, selectedImages, handleUndo, handleImageChange, sele
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>NIVEL INFERIOR: </h1>
-    
       <ConclusionButton value={`${selectedSide}corticali`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
       <ConclusionButton value={`${selectedSide}subcorticali`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}cervicali`} title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N26: Tracto gracilis-sustancia gris medular)." displayText="CERVICAL" />
       <ConclusionButton value={`${selectedSide}toracicoi`} title=", TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
       <ConclusionButton value={`${selectedSide}lumbosacroi`} title=", TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
       <ConclusionButton value={`${selectedSide}perifericoi`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
        
   </div>
 );
-
-
 
 const StepH1_i = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
   return (

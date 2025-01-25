@@ -91,70 +91,108 @@ const Reporte = () => {
   // Condiciona la imagen
   const imageSrc1 = isTrigeminoSelected ? newImage1 : defaultImage1;
 
-  
-
-
   // Estados para el historial de imagenes
   const [history, setHistory] = useState([]); 
   const [Future,setFuture] = useState([]); 
-
   useEffect(() => {
-    // Regex para detectar dermatomas
-    const dermatomaRegex = /^A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS\s?(.*)$/i;
-    // Regex para detectar topografía
-    const topografiaRegex = /^TOPOGRÁFICAMENTE A NIVEL/i;
-  
-    const rest = [];
-    const dermatomes = [];
-    const topografia = [];
-  
-    conclusions.forEach((cl) => {
-      const titleTrimmed = cl.title.trim();
-  
-      // Detectar si es dermatoma
-      const matchDerma = dermatomaRegex.exec(titleTrimmed);
-      if (matchDerma) {
-        dermatomes.push(matchDerma[1]); // p.ej. "C4"
-        return;
+  // 1) Define prioridades para las frases "normales".
+  const priorityNormal = {
+    "VÍA SOMATOSENSORIAL": 1,
+    "CON INTEGRIDAD FUNCIONAL AFERENTE": 2,
+    "CON DEFECTO FUNCIONAL AFERENTE": 3,
+    "POR RETARDO EN LA CONDUCCIÓN": 4,
+    "POR BLOQUEO EN LA CONDUCCIÓN": 5,
+    "AXONAL": 6,
+    "POR AUSENCIA DE RESPUESTA EVOCABLE": 7,
+    "LEVE": 8,
+    "MODERADO": 9,
+    "SEVERO": 10,
+    "Y PERDIDA AXONAL SECUNDARIA": 11,
+    "Y RETARDO SECUNDARIO EN LA CONDUCCIÓN": 12,
+    "PARA LADO IZQUIERDO": 13,
+    "PARA LADO DERECHO": 14,
+    "BILATERAL": 15,
+    "A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE NERVIO": 16,
+    "DERMATOMAS": 17,
+    "TOPOGRÁFICAMENTE A NIVEL": 18
+  };
+
+  // 2) Define prioridades para topografías finales (todas al final).
+  //    Nota: El "orden" de estos determina cómo aparecen *entre sí*.
+  //    (p.ej., 1 < 2 < 3...) dentro del bloque final.
+  const priorityTopos = {
+    // SUPERIORES
+    "CORTICAL (N20-P25": 1,
+    "SUBCORTICAL (P14": 2,
+    "CERVICAL (N11-N13": 3,
+    "PERIFÉRICO (N4-N9": 4,
+
+    // INFERIORES
+    "CORTICAL (P37-N45": 5,
+    "SUBCORTICAL (P31": 6,
+    "CERVICAL (N26": 7,
+    "TORÁCICO (N24": 8,
+    "LUMBOSACRO (N20": 9,
+    "PERIFÉRICO (P9-N18": 10
+  };
+
+  // 3) Separamos las conclusiones en dos arreglos: normal vs. topo
+  const normalArray = [];
+  const topoArray = [];
+
+  conclusions.forEach((cl) => {
+    const raw = cl.title.trim();
+    const up = raw.toUpperCase();
+
+    // Ver si entra en el bloque "topo"
+    let foundTopoKey = null;
+    Object.keys(priorityTopos).forEach((key) => {
+      if (up.includes(key)) {
+        foundTopoKey = key; 
       }
-  
-      // Detectar si es topografía
-      if (topografiaRegex.test(titleTrimmed)) {
-        topografia.push(titleTrimmed);
-        return;
-      }
-  
-      // Si no es dermatoma ni topografía, va a "rest"
-      rest.push(titleTrimmed);
     });
-  
-    // 1) Unimos "rest" en un solo string
-    const textRest = rest.join(' ');
-  
-    // 2) Si hay dermatomas, construimos la frase única
-    let textDermatomes = '';
-    if (dermatomes.length > 0) {
-      textDermatomes = 'A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS ' 
-        + dermatomes.join('-') + '.';
+
+    if (foundTopoKey) {
+      // Es topografía final
+      topoArray.push({
+        text: raw,
+        priority: priorityTopos[foundTopoKey] || 999
+      });
+    } else {
+      // Es normal
+      let prio = 999;
+      Object.keys(priorityNormal).forEach((key) => {
+        if (up.includes(key)) {
+          prio = priorityNormal[key];
+        }
+      });
+
+      normalArray.push({
+        text: raw,
+        priority: prio
+      });
     }
+  });
+
+  // 4) Ordenamos cada arreglo por su priority
+  normalArray.sort((a, b) => a.priority - b.priority);
+  topoArray.sort((a, b) => a.priority - b.priority);
+
+  // 5) Concatenamos: primero normales, luego topográficos
+  const finalArray = [...normalArray, ...topoArray];
+
+  // 6) Convertimos a un solo párrafo
+  const finalParagraph = finalArray
+    .map((item) => item.text.replace(/^,\s*/, "")) // quita coma inicial
+    .join(" ");
+
+  // 7) Guardamos el resultado en tu state
+  setCopyConclusions(finalParagraph);
+
+}, [conclusions]);
+
   
-    // 3) Unimos topografía (puede haber una o varias)
-    const textTopografia = topografia.join(', ');
   
-    // 4) Finalmente, ensamblamos en el orden: rest -> dermatomas -> topografia
-    //    usando un array de partes, para NO agregar comas extra.
-    const parts = [];
-    if (textRest) parts.push(textRest);          // p.ej. "VÍA SOMATOSENSORIAL..."
-    if (textDermatomes) parts.push(textDermatomes);
-    if (textTopografia) parts.push(textTopografia);
-  
-    // 5) Unimos con comas
-    const finalConclusion = parts.join(', ');
-  
-    // 6) Guardamos
-    setCopyConclusions(finalConclusion);
-  
-  }, [conclusions]);
   
   
   
@@ -298,109 +336,164 @@ const Reporte = () => {
           }}
           
           rules={[
-
+            //Superiores 
             {
-              expectedValue: 'radial_superficial', 
+              expectedValue: 'superior_derecho', 
              
                 image: 
                   {
-                    src: 'SomatosensorialImg/SUPERIORES.png',
+                    src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
                     alt: 'Modelo',
                   },
             },
             {
-              expectedValue: 'antebraqueal_cutaneo_lateral', 
+              expectedValue: 'superior_izquierdo', 
              
                 image: 
                   {
-                    src: 'SomatosensorialImg/SUPERIORES.png',
+                    src: 'SomatosensorialImg/SUPERIORDERECHA.png',
                     alt: 'Modelo',
                   },
-                 
-            },
-            {
-              expectedValue: 'mediano', 
-             
-                image: 
-                  {
-                    src: 'SomatosensorialImg/SUPERIORES.png',
-                    alt: 'Modelo',
-                  },
-                 
             },
 
             {
-              expectedValue: 'ulnar', 
+              expectedValue: 'superior_bilateral', 
              
-                image: 
+                image: [
                   {
-                    src: 'SomatosensorialImg/SUPERIORES.png',
+                    src: 'SomatosensorialImg/SUPERIORDERECHA.png',
                     alt: 'Modelo',
                   },
-                 
+                  {
+                    src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+                    alt: 'Modelo',
+                  }
+                ]
+            },
+            {
+              expectedValue: 'superior_bilateralindemne', 
+             
+                image: [
+                  {
+                    src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+                    alt: 'Modelo',
+                  }
+                ]
             },
 
             {
-              expectedValue: 'tibial', 
+              expectedValue: 'superior_derechoindemne', 
+             
+                image: [
+                  {
+                    src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+                    alt: 'Modelo',
+                  }
+                ]
+            },
+            {
+              expectedValue: 'superior_izquierdoindemne', 
+             
+                image: [
+                  {
+                    src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+                    alt: 'Modelo',
+                  }
+                ]
+            },
+            //inferiores
+            {
+              expectedValue: 'inferior_derecho', 
              
                 image: 
                   {
-                    src: 'SomatosensorialImg/INFERIORES.png',
+                    src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
                     alt: 'Modelo',
                   },
-                 
+            },
+            {
+              expectedValue: 'inferior_izquierdo', 
+             
+                image: 
+                  {
+                    src: 'SomatosensorialImg/INFERIORDERECHA.png',
+                    alt: 'Modelo',
+                  },
             },
 
             {
-              expectedValue: 'peroneo_superficial', 
+              expectedValue: 'inferior_bilateral', 
              
-                image: 
+                image: [
                   {
-                    src: 'SomatosensorialImg/INFERIORES.png',
+                    src: 'SomatosensorialImg/INFERIORDERECHA.png',
                     alt: 'Modelo',
                   },
-                 
+                  {
+                    src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+                    alt: 'Modelo',
+                  }
+                ]
             },
             {
-              expectedValue: 'sural', 
+              expectedValue: 'inferior_bilateralindemne', 
              
-                image: 
+                image: [
                   {
-                    src: 'SomatosensorialImg/INFERIORES.png',
+                    src: 'SomatosensorialImg/INFERIORDERECHA.png',
                     alt: 'Modelo',
                   },
-                 
+                  {
+                    src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+                    alt: 'Modelo',
+                  }
+                ]
+            },
+
+            {
+              expectedValue: 'inferior_derechoindemne', 
+             
+                image: [
+                  {
+                    src: 'SomatosensorialImg/INFERIORDERECHA.png',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+                    alt: 'Modelo',
+                  }
+                ]
             },
             {
-              expectedValue: 'safeno', 
+              expectedValue: 'inferior_izquierdoindemne', 
              
-                image: 
+                image: [
                   {
-                    src: 'SomatosensorialImg/INFERIORES.png',
+                    src: 'SomatosensorialImg/INFERIORDERECHA.png',
                     alt: 'Modelo',
                   },
-                 
+                  {
+                    src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+                    alt: 'Modelo',
+                  }
+                ]
             },
-            {
-              expectedValue: 'femorocutaneo_lateral', 
-             
-                image: 
-                  {
-                    src: 'SomatosensorialImg/INFERIORES.png',
-                    alt: 'Modelo',
-                  },
-                 
-            },
-            {
-              expectedValue: 'pudendo', 
-             
-                image: 
-                  {
-                    src: 'SomatosensorialImg/INFERIORES.png',
-                    alt: 'Modelo',
-                  },
-                 
-            },           
+
+
+//trigemino
+           
             {
               expectedValue: 'derechotrigemino',  
              

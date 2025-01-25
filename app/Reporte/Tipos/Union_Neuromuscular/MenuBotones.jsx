@@ -410,8 +410,6 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
     );
   };
     
-
-
 const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) => {
   
   const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div

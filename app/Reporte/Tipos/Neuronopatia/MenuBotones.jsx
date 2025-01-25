@@ -5,7 +5,6 @@ import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage'
 import { useImageState } from '../../MetodosBotones';
 import './Style.css';
 
-
 // Metodos de movimiento entre menus
 const SimpleMultiStepForm = () => {
   const [step, setStep] = useState('A');

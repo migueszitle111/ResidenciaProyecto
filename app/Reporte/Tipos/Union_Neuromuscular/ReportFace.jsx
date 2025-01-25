@@ -295,7 +295,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
         </div>
         {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
         <div>
-          <div className='con-img'> 
+          <div className='con-img '> 
         
         {/* Codigo para desplegar las imagenes dentro de un array */}
         {selectedImages.map((image, index) => (
@@ -315,7 +315,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
         ))}
 
         {/* Despliego de las imagenes dentro del array */}
-        <div className='conclusion-container'>
+        <div className='conclusion-container '>
         <ConclusionCanvas 
         
           img={{

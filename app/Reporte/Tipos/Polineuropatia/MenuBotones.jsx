@@ -1,8 +1,8 @@
-import { useState,useContext} from 'react';
+import { ReportContext } from '@/src/context';
+import { useContext, useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
-import { ReportContext } from '@/src/context'
 
 // Numero de pasos 
 const stepsArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I1', 'I2', 'J', 'K', 'L', 'M', 'N'];
@@ -33,6 +33,23 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     else if (step === 'J') setStep('K');
     else if (step === 'K') setStep('N');
   };
+
+  const handleNextStep4 = () => {
+    if (step === 'A') setStep('B');
+    else if (step === 'B') setStep('C');
+    else if (step === 'C') setStep('D');
+    else if (step === 'D') setStep('E');
+    else if (step === 'E') setStep('F');
+    else if (step === 'F') setStep('F2');
+    else if (step === 'F2') setStep('G');
+    else if (step === 'G') setStep('H');
+    else if (step === 'H') setStep('I1');
+    else if (step === 'I1') setStep('J');
+    else if (step === 'J') setStep('K');
+    else if (step === 'K') setStep('N');
+  };
+
+
 
   // Paso anterior, se ponen los pasos de abajo hacia arriba
   const handlePrevStep = () => {
@@ -77,7 +94,20 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
   const handlePrevStep3 = () => {
     if (step === 'M') setStep('G');
   };
+
+  const handleNextStep5 = () => {
+    if (step === 'C') setStep('D');
+    else if (step === 'D') setStep('E');
+    else if (step === 'E') setStep('F');
+    else if (step === 'F') setStep('G');
+    else if (step === 'G') setStep('H');
+    else if (step === 'H') setStep('I1');
+    else if (step === 'I1') setStep('K');
+    else if (step === 'K') setStep('N');
+  };
   
+
+
   // Renderizado de los pasos en circulos
   const renderTopStepNumbers = () => {
     if (!showStepNumber || step === 'Final') {
@@ -132,6 +162,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
           handleNextStep2={handleNextStep2}
           handlePrevStep3={handlePrevStep3}
           handleNextStep3={handleNextStep3}
+          handleNextStep5={handleNextStep5}
         />
       ) : null}
 
@@ -171,6 +202,21 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         handleNextStep2={handleNextStep2}
         handlePrevStep3={handlePrevStep3}
         handleNextStep3={handleNextStep3}
+        handleNextStep4={handleNextStep4}
+        />
+      ) : null}
+
+      {step === 'F2' ? (
+        <StepF2
+        handlePrevStep={handlePrevStep}
+        handleNextStep={handleNextStep}
+        handlePrevStep1={handlePrevStep1}
+        handleNextStep1={handleNextStep1}
+        handlePrevStep2={handlePrevStep2}
+        handleNextStep2={handleNextStep2}
+        handlePrevStep3={handlePrevStep3}
+        handleNextStep3={handleNextStep3}
+        handleNextStep4={handleNextStep4}
         />
       ) : null}
 
@@ -329,7 +375,7 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
       <div className='button-bar'>
         <button onClick={() =>{ 
           removeConclusion('hereditaria');
-          removeConclusion('adquirida');          
+          removeConclusion('adquirida');
           handlePrevStep}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -356,7 +402,7 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
   );
 };
 
-const StepC = ({ handleNextStep, handlePrevStep }) => {
+const StepC = ({ handleNextStep, handlePrevStep, handleNextStep5 }) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
     <div>
@@ -384,9 +430,13 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
         TIPO
       </h1>
 
+      <div onClick={ handleNextStep5 }>
+        <ConclusionButton value='desmielinizante' title=' TIPO DESMIELINIZANTE' displayText={'DESMIELINIZANTE'}/>
+      </div>
+
       <div onClick={ handleNextStep }>
         <ConclusionButton value='aximal' title=' TIPO AXONAL' displayText={'AXONAL'}/>
-        <ConclusionButton value='desmielinizante' title=' TIPO DESMIELINIZANTE' displayText={'DESMIELINIZANTE'}/>
+        
         <ConclusionButton value='aximal2' title=' PRIMARIAMENTE AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'PRIMARIAMENTE AXONAL CON DESMIELINIZACIÓN SECUNDARIA'}/>                
         <ConclusionButton value='desmielinizante2' title=' PRIMARIAMENTE DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA' displayText={'PRIMARIAMENTE DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA'}/>
       </div>
@@ -470,7 +520,7 @@ const StepE = ({ handleNextStep, handlePrevStep }) => {
   );
 };
 
-const StepF = ({ handleNextStep, handlePrevStep, handleNextStep2 }) => {
+const StepF = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
     <div>
@@ -501,10 +551,9 @@ const StepF = ({ handleNextStep, handlePrevStep, handleNextStep2 }) => {
         <ConclusionButton value='sensitiva' title=' DE FIBRAS SENSITIVAS' displayText={'SENSITIVA'}/>
       </div>
 
-      <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS,' displayText={'MIXTA'} />
-      <div onClick={handleNextStep}>
-            <ConclusionButton value = 'predominio_sentitivo' title = ' PREDOMINIO SENSITIVO,' displayText={'• PREDOMINIO SENSITIVO'}/>
-            <ConclusionButton value = 'predominio_motor' title = ' PREDOMINIO MOTOR,'displayText={'• PREDOMINIO MOTOR'} />
+      
+      <div onClick={handleNextStep4}>
+        <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS,' displayText={'MIXTA'} />     
       </div>
 
 
@@ -514,6 +563,41 @@ const StepF = ({ handleNextStep, handlePrevStep, handleNextStep2 }) => {
             <ConclusionButton value = 'predominio_motor' title = ' DE FIBRAS MIXTAS PREDOMINIO MOTOR,'displayText={'PREDOMINIO MOTOR'} />
           </div>
         </Accordion> */}
+    </div>
+  );
+};
+
+const StepF2 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+    <div>
+      <div className='button-bar'>
+        <button onClick={() =>{
+          removeConclusion('motora')
+          removeConclusion('sensitiva')
+          removeConclusion('mixta')
+          removeConclusion('predominio_sentitivo')
+          handlePrevStep}} id='prev' className={`print-button dont-print `}>
+          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+      </div>
+      <h1 className=' text-xl font-bold text-white'>
+        FIBRAS
+      </h1>
+
+
+      <div onClick={handleNextStep4}>
+            <ConclusionButton value = 'predominio_sentitivo' title = ' PREDOMINIO SENSITIVO,' displayText={'• PREDOMINIO SENSITIVO'}/>
+            <ConclusionButton value = 'predominio_motor' title = ' PREDOMINIO MOTOR,'displayText={'• PREDOMINIO MOTOR'} />
+      </div>
     </div>
   );
 };
@@ -557,6 +641,7 @@ const StepG = ({ handleNextStep, handlePrevStep, handleNextStep3 }) => {
     </div>
   );
 };
+
 
 const StepH = ({ handleNextStep, handleNextStep1, handlePrevStep }) => {
   const { removeConclusion } = useContext(ReportContext)

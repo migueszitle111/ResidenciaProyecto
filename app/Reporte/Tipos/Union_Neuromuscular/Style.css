@@ -146,6 +146,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  background-color: #ee1010;
 }
 
 .info-container {
@@ -761,14 +762,17 @@
 @media print {
 
   @page {
-    size: A4;
     margin: 1cm; /* Ajustar según sea necesario */
   }
+
+  /* .conclusion-container {
+    display: none;
+  } */
+
   .conclusion-container {
     width: 90%;
     min-height: 88vh;
     overflow: visible;
-    /* border: greenyellow 2px solid; */
   }
 
   .cuadro-expanded {
@@ -812,7 +816,7 @@
   }
 
   .image-container {
-    margin-left: 10%;
+    /* margin-left: 10%; */
     position: relative;
     width: 100%;
     height: 100%;

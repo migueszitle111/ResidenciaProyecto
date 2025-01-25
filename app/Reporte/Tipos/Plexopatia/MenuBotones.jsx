@@ -1,6 +1,6 @@
 import { ReportContext } from '@/src/context';
 import { useContext, useEffect, useState } from 'react';
-import { Accordion, darvalor,AccordionContainer,InternalAccordionContainer} from '../../../components/ReportTemplate/Accordion';
+import { Accordion, AccordionContainer, darvalor, InternalAccordionContainer } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
@@ -801,9 +801,9 @@ const StepB1 = ({ handleNextStep, handlePrevStep }) => {
             removeConclusion('derecha_C')
             removeConclusion('bilateral_C')
             removeConclusion('plexopatia_cervical')
-            removeConclusion('plexopatia_cervical')
-            removeConclusion('plexopatia_cervical')
-          
+            removeConclusion('plexopatia_braquial')
+            removeConclusion('plexopatia_lumbosacra')
+
           handlePrevStep}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -980,10 +980,16 @@ const StepC2 = ({ handleNextStep1, handlePrevStep1 }) => {
 };
 
 const StepC3 = ({ handleNextStep2, handlePrevStep2 }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep2} id='prev' className={`print-button dont-print `}>
+        
+        <button onClick={() => {
+          removeConclusion('aguda');
+          removeConclusion('subaguda');
+          removeConclusion('cronica');
+          handlePrevStep2}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
 
@@ -1083,6 +1089,7 @@ const StepD2B = ({ handleNextStep6, handlePrevStep6, ubicaciond2b }) => {
 };
 
 const StepD3 = ({ handleNextStep2, handlePrevStep2, handleNextStep7, ubicaciond3 }) => {
+  
   return (
     <div>
       <div className='button-bar'>
@@ -1135,7 +1142,12 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+
+        <button onClick={() => {
+          removeConclusion('AXONAL COMPLETA');
+          removeConclusion('con_denervación_difusa');
+          removeConclusion('con_denervación_abundante');
+          handlePrevStep2}} id='prev' className={`print-button dont-print `}>
           <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
 

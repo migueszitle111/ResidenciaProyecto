@@ -1,35 +1,31 @@
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 
-export function NerviusButtonBILATERALIZQ({ title, value, displayText, additionalInfo }) {
+export function NerviusButtonBILATERALIZQ({ title, value, displayText }) {
   const { conclusions } = useContext(ReportContext);
   const [selectedButton, setSelectedButton] = useState(null);
 
   // Verifica si el valor ya está en las conclusiones
   const isSelected = conclusions.find(cl => cl.value === value);
 
-  // Clase condicional para el botón
+  // Clase condicional para que el botón seleccionado sea visible y los demás transparentes
   const classnames = 'cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in ' + 
     (selectedButton === value ? 'bg-[#c44900]' : 'bg-transparent') + ' rounded-[50px] z-50 relative';
 
-  // Función para manejar el clic
+  // Función para mostrar o esconder el botón seleccionado sin afectar las conclusiones
   function handleClick() {
-    setSelectedButton(prev => (prev === value ? null : value));
+    if (selectedButton === value) {
+      // Si ya está seleccionado, deseleccionarlo (hacerlo invisible)
+      setSelectedButton(null);
+    } else {
+      // Si no está seleccionado, seleccionarlo (hacerlo visible)
+      setSelectedButton(value);
+    }
   }
 
   return (
-    <div>
-      {/* Botón principal */}
-      <div className={classnames} onClick={handleClick}>
-        {displayText || title}
-      </div>
-
-      {/* Información adicional que aparece cuando el botón está seleccionado */}
-      {selectedButton === value && additionalInfo && (
-        <div className="mt-2 p-2 bg-gray-200 text-black rounded-md shadow-md">
-          {additionalInfo}
-        </div>
-      )}
+    <div className={classnames} onClick={handleClick}>
+      {displayText || title}
     </div>
   );
 }

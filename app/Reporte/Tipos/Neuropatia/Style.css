@@ -437,7 +437,7 @@
   height: 100%; /* O cualquier tamaño que necesites */
 }
 
-.dropArea {
+/* .dropArea {
   top: 10px;
   left: 10px;
   width: 100%;
@@ -445,7 +445,7 @@
   position: absolute;
   overflow: hidden;
   background-color: transparent;
-}
+} */
 
 
 .cuadro {

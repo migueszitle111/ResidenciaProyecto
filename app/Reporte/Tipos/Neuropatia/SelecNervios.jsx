@@ -162,7 +162,7 @@ export function checkDivs(copyConclusions) {
       </>
     );
   }
-  if (copyConclusions.includes('MEDIANO DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('MEDIANO BILATERAL DERECHO, FOCALIZADA A NIVEL') ) {
     return (
       <>
         <div style={{ position: 'absolute', top: '17.6%', left: '48.0%', borderRadius: '50%' }}
@@ -403,13 +403,13 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILAR DERECHO, FOCALIZADA A NIVEL') ) {// FALTA 
+  if (copyConclusions.includes('AXILAR DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL DEL ESPACIO CUADRANGULAR, ')) {// FALTA 
     return (
       <>
         <div style={{ position: 'absolute', top: '18.9%', left: '39.8%', borderRadius: 100, }}
           className={`.dont-print-Nerviusgrande`}><NerviusButton value='car' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '19.1%', left: '38.5%', borderRadius: 100, }}
-          className={`.dont-print-Nerviusgrande`}><NerviusButton value='car' title='DEL ESPACIO CUANDRANGULAR,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><NerviusButton value='car' title='DEL ESPACIO CUADRANGULAR,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '19.3%', left: '37.2%', borderRadius: 100, }}
           className={`.dont-print-Nerviusgrande`}><NerviusButton value='car' title='MEDIAL AL CUELLO QUIRURGICO DEL HUMERO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '19.0%', left: '36.0%', borderRadius: 100, }}

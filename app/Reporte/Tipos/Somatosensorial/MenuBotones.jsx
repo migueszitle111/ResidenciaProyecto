@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import {Accordion,AccordionContainer,InternalAccordionContainer } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
+import { ReportContext } from '@/src/context'
 import './Style.css';
 import { Inter } from 'next/font/google';
 const stepsArray = ['A', 'B1', 'B2'];
@@ -20,7 +21,6 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       setStep(stepsArray[currentIndex + 1]);
     }
   };
-
   // Botón "Anterior"
   const handlePrevStep = () => {
     const currentIndex = stepsArray.indexOf(step);
@@ -28,7 +28,6 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       setStep(stepsArray[currentIndex - 1]);
     }
   };
-
   return (
     <div>
       {/* Renderizado condicional de cada paso */}
@@ -71,6 +70,12 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'H2_i' && (<StepH2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
       {step === 'H3_i' && (<StepH3_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
       {step === 'H4_i' && (<StepH4_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
+      {/*trigemino*/}
+      {step === 'AT' && ( <StepAT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+      {step === 'BT' && ( <StepBT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
+
+
+
     </div>
   );
 };
@@ -81,7 +86,7 @@ const StepA = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSi
     <div className='button-bar'>
       <button onClick={() => setStep('A')} id='prev' className={`print-button dont-print `}>
       </button>
-      <button onClick={() => setStep('')} id='next' className={`print-button dont-print `}>
+      <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
         <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
       </button>
     </div>
@@ -113,31 +118,31 @@ const StepA = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSi
      <InternalAccordionContainer> 
      <Accordion title='CERVICAL' type='internal'> 
        <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value="c4" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
-         <ConclusionButton value="c5" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
-         <ConclusionButton value="c6" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
-         <ConclusionButton value="c7" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
-         <ConclusionButton value="c8" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value="t1" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+         <ConclusionButton value="c4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value="c5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
+         <ConclusionButton value="c6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
+         <ConclusionButton value="c7" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
+         <ConclusionButton value="c8" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value="t1" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
       </div>
       </Accordion>
       </InternalAccordionContainer> 
       <InternalAccordionContainer> 
       <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t2" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
-        <ConclusionButton value="t3" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
-        <ConclusionButton value="t4" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value="t5" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value="t6" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value="t2" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
+        <ConclusionButton value="t3" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
+        <ConclusionButton value="t4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
+        <ConclusionButton value="t5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
+        <ConclusionButton value="t6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t7" title= "A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value="t8" title= "A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value="t9" title= "A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value="t10" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value="t11" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value="t12" title="A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        <ConclusionButton value="t7" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
+        <ConclusionButton value="t8" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
+        <ConclusionButton value="t9" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
+        <ConclusionButton value="t10" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
+        <ConclusionButton value="t11" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
+        <ConclusionButton value="t12" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
         </div>
       </Accordion>
       </InternalAccordionContainer> 
@@ -157,15 +162,28 @@ const StepA = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSi
     </Accordion>
     </InternalAccordionContainer> 
     </AccordionContainer>
-    <div onClick={() => setStep('')} >
-    <ConclusionButton value={`${selectedSide}trigemino`} title=", A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />
+    <div onClick={() => setStep('AT')} >
+    <ConclusionButton value=''title="VÍA SOMATOSENSORIAL, A TRAVÉS DEL TRACTO Y NUCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGEMINO" />
     </div>
 </div>
 );
 
-const StepB1 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepB1 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+
+  return (
   <div>
     <div className='button-bar'>
+    <button onClick={() => {
+        removeConclusion('superior_indemne')
+        removeConclusion('superior_alterada')
+        removeConclusion('mediano')
+        removeConclusion('ulnar')
+        removeConclusion('radial_superficial')
+        removeConclusion('antebraqueal_cutaneo_lateral')
+        setStep('A')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
       <button className="print-button dont-print">
         <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
       </button>
@@ -180,11 +198,19 @@ const StepB1 = ({ handlePrevStep, handleNextStep, setStep }) => (
   </div>
 
 );
+}
 
-const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('B1')} className="print-button dont-print">
+      <button onClick={() => {
+        removeConclusion('retardo_en_la_conduccion')
+        removeConclusion('bloqueo_en_la_conduccion')
+        removeConclusion('deficit_neuronal')
+        removeConclusion('sin_respuesta')
+        setStep('B1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
 
@@ -207,12 +233,20 @@ const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
   </div>
 );
+}
 
 
-const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+
+  return(
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('C1')} className="print-button dont-print">
+      <button onClick={() => {
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        setStep('C1')} }className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button className="print-button dont-print">
@@ -227,12 +261,19 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => (
 
     </div>
   </div>
-);
+);}
 
-const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) =>{
+  const { removeConclusion } = useContext(ReportContext)
+
+  return (
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('C1')} className="print-button dont-print">
+    <button onClick={() => {
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        setStep('C1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button  className="print-button dont-print">
@@ -247,12 +288,16 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => (
 
     </div>
   </div>
-);
+);}
 
-const StepE1 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepE1 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('D1')} className="print-button dont-print">
+      <button onClick={() =>{ 
+         removeConclusion('perdida_axonal_secundaria')
+        setStep('D1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button onClick={() => setStep('F1')} id='prev' className={`print-button dont-print `}>
@@ -262,12 +307,16 @@ const StepE1 = ({ handlePrevStep, handleNextStep, setStep }) => (
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
       <ConclusionButton value="perdida_axonal_secundaria" title=", Y PERDIDA AXONAL SECUNDARIA " displayText="PERDIDA AXONAL SECUNDARIA" />
   </div>
-);
+);}
 
-const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) =>{
+  const { removeConclusion } = useContext(ReportContext)
+  return(
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('D2')} className="print-button dont-print">
+      <button onClick={() => {
+        removeConclusion('retardo_secundario_en_la_conduccion')
+        setStep('D2')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       
@@ -278,12 +327,18 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title=", Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="RETARDO SECUNDARIO EN LA CONDUCCIÓN" />
   </div>
-);
+);}
 
-const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
+const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('E1')} className="print-button dont-print">
+      <button onClick={() => {
+        removeConclusion('superior_izquierdo')
+        removeConclusion('superior_derecho')
+        removeConclusion('superior_bilateral')
+        setStep('E1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button  className="print-button dont-print">
@@ -299,7 +354,6 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         value="superior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
       />
     </div>
     <div  onClick={() => {
@@ -310,7 +364,6 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         value="superior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
       />
     </div>
     <div onClick={() => {
@@ -326,11 +379,19 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
     </div>
   </div>
 );
+}
 
-const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
+const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  report(
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('E2')} className="print-button dont-print">
+      <button onClick={() => {
+        removeConclusion('superior_izquierdo')
+        removeConclusion('superior_derecho')
+        removeConclusion('superior_bilateral')
+        setStep('E2')}
+        } className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button  className="print-button dont-print">
@@ -373,11 +434,17 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
     </div>
   </div>
 );
+}
 
-const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
+const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  return(
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('C1')} className="print-button dont-print">
+      <button onClick={() => {
+        removeConclusion('superior_izquierdo')
+        removeConclusion('superior_derecho')
+        removeConclusion('superior_bilateral')
+        setStep('C1')}}className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button  className="print-button dont-print">
@@ -393,7 +460,6 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         value="superior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
       />
     </div>
     <div  onClick={() => {
@@ -415,11 +481,10 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         value="superior_bilateral"
         title=" BILATERAL,"
         displayText="BILATERAL "
-        
       />
     </div>
   </div>
-);
+);}
 
 const StepF4 = ({ handlePrevStep, handleNextStep, setStep }) => (
   <div>
@@ -464,64 +529,209 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
   </div>
 );
-const StepG1 = ({ setStep, selectedImages, handleUndo, handleImageChange, selectedSide }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('F1')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('H1')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
-    </div>
-    <h1 className='text-xl font-bold text-white'>NIVEL SUPERIOR: </h1>
-   
-      <ConclusionButton value={`${selectedSide}corticals`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value={`${selectedSide}subcorticals`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medialNúcleo tectal). " displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}cervicals`} title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsalesTracto cuneatus). " displayText="CERVICAL" />
-      <ConclusionButton value={`${selectedSide}perifericos`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas (IA-II)- Plexo braquial). " displayText="PERIFERICO" />
-          
-  </div>
-);
 
-const StepG2 = ({ setStep, selectedImages, handleUndo, handleImageChange, selectedSide }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('F2')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('H2')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
+const StepG1 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
+  const { updateConclusions } = useContext(ReportContext);
+  // Array de niveles en orden (de CORTICAL a PERIFÉRICO)
+  const levels = [
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico - Área somestésica primaria).',
+      value: `${selectedSide}corticals`,
+      displayText: 'CORTICAL',
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medial - Núcleo tectal).',
+      value: `${selectedSide}subcorticals`,
+      displayText: 'SUBCORTICAL',
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsales - Tracto cuneatus).',
+      value: `${selectedSide}cervicals`,
+      displayText: 'CERVICAL',
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas - Plexo braquial).',
+      value: `${selectedSide}perifericos`,
+      displayText: 'PERIFÉRICO',
+    },
+  ];
+  // Función para manejar el clic en cualquiera de los 4 niveles
+  const handleConclusionClick = (clickedTitle, clickedValue) => {
+    const index = levels.findIndex((item) => item.value === clickedValue);
+    if (index === -1) return;
+    // Activamos todos los niveles desde 0 hasta `index`.
+    // Para que solo se muestre el texto del botón que se pulsó,
+    // en los demás niveles ponemos title: ''.
+    for (let i = 0; i <= index; i++) {
+      updateConclusions({
+        title: i === index ? levels[i].title : '', // Solo el clicado conserva su texto
+        value: levels[i].value,
+      });
+    }
+  };
+  return (
+    <div>
+      <div className='button-bar'>
+        {/* Botón de Anterior */}
+        <button onClick={() => setStep('F1')} id='prev' className='print-button dont-print'>
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        {/* Botón de Siguiente */}
+        <button onClick={() => setStep('H1')} id='next' className='print-button dont-print'>
+          <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+        </button>
+      </div>
+      <h1 className='text-xl font-bold text-white'>NIVEL:</h1>
+      {/* Renderizamos cada botón en base al array */}
+      {levels.map((item) => (
+        <ConclusionButton
+          key={item.value}
+          value={item.value}
+          title={item.title}
+          displayText={item.displayText}
+          onClick={() => handleConclusionClick(item.title, item.value)}
+        />
+      ))}
     </div>
-    <h1 className='text-xl font-bold text-white'>NIVEL SUPERIOR: </h1>
-   
-      <ConclusionButton value={`${selectedSide}corticals`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value={`${selectedSide}subcorticals`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medialNúcleo tectal). " displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}cervicals`} title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsalesTracto cuneatus). " displayText="CERVICAL" />
-      <ConclusionButton value={`${selectedSide}perifericos`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas (IA-II)- Plexo braquial). " displayText="PERIFERICO" />
-          
-  </div>
-);
-const StepG3 = ({ setStep, selectedImages, handleUndo, handleImageChange, selectedSide }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('F3')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('H3')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
+  );
+};
+
+
+const StepG2 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
+  const { updateConclusions } = useContext(ReportContext);
+  // Array de niveles en orden (de CORTICAL a PERIFÉRICO)
+  const levels = [
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico - Área somestésica primaria).',
+      value: `${selectedSide}corticals`,
+      displayText: 'CORTICAL',
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medial - Núcleo tectal).',
+      value: `${selectedSide}subcorticals`,
+      displayText: 'SUBCORTICAL',
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsales - Tracto cuneatus).',
+      value: `${selectedSide}cervicals`,
+      displayText: 'CERVICAL',
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas - Plexo braquial).',
+      value: `${selectedSide}perifericos`,
+      displayText: 'PERIFÉRICO',
+    },
+  ];
+  // Función para manejar el clic en cualquiera de los 4 niveles
+  const handleConclusionClick = (clickedTitle, clickedValue) => {
+    const index = levels.findIndex((item) => item.value === clickedValue);
+    if (index === -1) return;
+    // Activamos todos los niveles desde 0 hasta `index`.
+    // Para que solo se muestre el texto del botón que se pulsó,
+    // en los demás niveles ponemos title: ''.
+    for (let i = 0; i <= index; i++) {
+      updateConclusions({
+        title: i === index ? levels[i].title : '', // Solo el clicado conserva su texto
+        value: levels[i].value,
+      });
+    }
+  };
+  return (
+    <div>
+      <div className='button-bar'>
+        {/* Botón de Anterior */}
+        <button onClick={() => setStep('F2')} id='prev' className='print-button dont-print'>
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        {/* Botón de Siguiente */}
+        <button onClick={() => setStep('H2')} id='next' className='print-button dont-print'>
+          <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+        </button>
+      </div>
+      <h1 className='text-xl font-bold text-white'>NIVEL:</h1>
+      {/* Renderizamos cada botón en base al array */}
+      {levels.map((item) => (
+        <ConclusionButton
+          key={item.value}
+          value={item.value}
+          title={item.title}
+          displayText={item.displayText}
+          onClick={() => handleConclusionClick(item.title, item.value)}
+        />
+      ))}
     </div>
-    <h1 className='text-xl font-bold text-white'>NIVEL SUPERIOR: </h1>
-   
-      <ConclusionButton value={`${selectedSide}corticals`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value={`${selectedSide}subcorticals`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medialNúcleo tectal). " displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}cervicals`} title=", TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsalesTracto cuneatus). " displayText="CERVICAL" />
-      <ConclusionButton value={`${selectedSide}perifericos`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas (IA-II)- Plexo braquial). " displayText="PERIFERICO" />
-          
-  </div>
-);
+  );
+};
+
+
+const StepG3 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
+  const { updateConclusions } = useContext(ReportContext);
+  // Array de niveles en orden (de CORTICAL a PERIFÉRICO)
+  const levels = [
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL CORTICAL (N20-P25: Núcleo talámico - Área somestésica primaria).',
+      value: `${selectedSide}corticals`,
+      displayText: 'CORTICAL',
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P14-N18: Lemnisco medial - Núcleo tectal).',
+      value: `${selectedSide}subcorticals`,
+      displayText: 'SUBCORTICAL',
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL CERVICAL (N11-N13: Raíces y astas dorsales - Tracto cuneatus).',
+      value: `${selectedSide}cervicals`,
+      displayText: 'CERVICAL',
+    },
+    {
+      title: 'TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (N4-N9: Fibras nerviosas - Plexo braquial).',
+      value: `${selectedSide}perifericos`,
+      displayText: 'PERIFÉRICO',
+    },
+  ];
+  // Función para manejar el clic en cualquiera de los 4 niveles
+  const handleConclusionClick = (clickedTitle, clickedValue) => {
+    const index = levels.findIndex((item) => item.value === clickedValue);
+    if (index === -1) return;
+    // Activamos todos los niveles desde 0 hasta `index`.
+    // Para que solo se muestre el texto del botón que se pulsó,
+    // en los demás niveles ponemos title: ''.
+    for (let i = 0; i <= index; i++) {
+      updateConclusions({
+        title: i === index ? levels[i].title : '', // Solo el clicado conserva su texto
+        value: levels[i].value,
+      });
+    }
+  };
+  return (
+    <div>
+      <div className='button-bar'>
+        {/* Botón de Anterior */}
+        <button onClick={() => setStep('F3')} id='prev' className='print-button dont-print'>
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        {/* Botón de Siguiente */}
+        <button onClick={() => setStep('H3')} id='next' className='print-button dont-print'>
+          <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+        </button>
+      </div>
+      <h1 className='text-xl font-bold text-white'>NIVEL:</h1>
+      {/* Renderizamos cada botón en base al array */}
+      {levels.map((item) => (
+        <ConclusionButton
+          key={item.value}
+          value={item.value}
+          title={item.title}
+          displayText={item.displayText}
+          onClick={() => handleConclusionClick(item.title, item.value)}
+        />
+      ))}
+    </div>
+  );
+};
 
 const StepH1 = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
   return (
@@ -568,11 +778,9 @@ const StepH3 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
         <button onClick={() => setStep('G3')} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
-
         <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
           <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
         </button>
-      
         <button onClick={handlePrint} className={`print-button dont-print`}>
           <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -587,11 +795,9 @@ const StepH4 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
         <button onClick={() => setStep('F4')} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
-
         <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
           <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
         </button>
-      
         <button onClick={handlePrint} className={`print-button dont-print`}>
           <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -599,7 +805,6 @@ const StepH4 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
         </div>
   );
 };
-
 //Inferiores 
 const StepB2 = ({ handlePrevStep, handleNextStep, setStep }) => (
   <div>
@@ -618,10 +823,7 @@ const StepB2 = ({ handlePrevStep, handleNextStep, setStep }) => (
       <ConclusionButton value="interior_alterada" title="VÍA SOMATOSENSORIAL CON DEFECTO FUNCIONAL" displayText="ALTERADA " />
     </div>
   </div>
-
 );
-
-
 const StepC1_i = ({ handlePrevStep, handleNextStep, setStep }) => (
   <div>
     <div className='button-bar'>
@@ -648,8 +850,6 @@ const StepC1_i = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
   </div>
 );
-
-
 const StepD1_i = ({ handlePrevStep, handleNextStep, setStep }) => (
   <div>
     <div className='button-bar'>
@@ -665,11 +865,9 @@ const StepD1_i = ({ handlePrevStep, handleNextStep, setStep }) => (
       <ConclusionButton value="leve" title=" LEVE " displayText="LEVE " />
       <ConclusionButton value="moderado" title=" MODERADO " displayText=" MODERADO " />
       <ConclusionButton value="severo" title=" SEVERO " displayText="SEVERO " />
-
     </div>
   </div>
 );
-
 const StepD2_i = ({ handlePrevStep, handleNextStep, setStep }) => (
   <div>
     <div className='button-bar'>
@@ -689,7 +887,6 @@ const StepD2_i = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
   </div>
 );
-
 const StepE1_i = ({ handlePrevStep, handleNextStep, setStep }) => (
   <div>
     <div className='button-bar'>
@@ -704,7 +901,6 @@ const StepE1_i = ({ handlePrevStep, handleNextStep, setStep }) => (
       <ConclusionButton value="perdida_axonal_secundaria" title=", Y PERDIDA AXONAL SECUNDARIA " displayText="PERDIDA AXONAL SECUNDARIA" />
   </div>
 );
-
 const StepE2_i = ({ handlePrevStep, handleNextStep, setStep }) => (
   <div>
     <div className='button-bar'>
@@ -720,7 +916,6 @@ const StepE2_i = ({ handlePrevStep, handleNextStep, setStep }) => (
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title=", Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="RETARDO SECUNDARIO EN LA CONDUCCIÓN" />
   </div>
 );
-
 const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
   <div>
     <div className='button-bar'>
@@ -740,7 +935,6 @@ const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         value="inferior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
       />
     </div>
     <div  onClick={() => {
@@ -751,7 +945,6 @@ const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         value="inferior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
       />
     </div>
     <div onClick={() => {
@@ -761,13 +954,11 @@ const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
       <ConclusionButton
         value="inferior_bilateral"
         title=" BILATERAL,"
-        displayText="BILATERAL "
-        
+        displayText="BILATERAL "      
       />
     </div>
   </div>
 );
-
 const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
   <div>
     <div className='button-bar'>
@@ -809,12 +1000,10 @@ const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="inferior_bilateral"
         title=" BILATERAL,"
         displayText="BILATERAL "
-        
       />
     </div>
   </div>
 );
-
 const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
   <div>
     <div className='button-bar'>
@@ -861,7 +1050,6 @@ const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
     </div>
   </div>
 );
-
 const StepF4_i = ({ handlePrevStep, handleNextStep, setStep }) => (
   <div>
     <div className='button-bar'>
@@ -905,65 +1093,260 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
   </div>
 );
-const StepG1_i = ({ setStep, selectedImages, handleUndo, handleImageChange, selectedSide }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('F1_i')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('H1_i')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
-    </div>
-    <h1 className='text-xl font-bold text-white'>NIVEL INFERIOR: </h1>
-    
-      <ConclusionButton value={`${selectedSide}corticali`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value={`${selectedSide}subcorticali`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}toracicoi`} title=", TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
-      <ConclusionButton value={`${selectedSide}lumbosacroi`} title=", TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
-      <ConclusionButton value={`${selectedSide}perifericoi`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
-       
-  </div>
-);
 
-const StepG2_i = ({ setStep, selectedImages, handleUndo, handleImageChange, selectedSide }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('F2_i')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('H2_i')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
+const StepG1_i = ({
+  setStep,
+  selectedSide,
+  // otras props que necesites (por ejemplo selectedImages, handleUndo, handleImageChange, etc.)
+}) => {
+  // Usamos el contexto para actualizar conclusiones
+  const { updateConclusions } = useContext(ReportContext);
+
+  // Array de los 5 niveles, en el orden que desees "acumular".
+  const levels = [
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). ',
+      value: `${selectedSide}corticali`,
+      displayText: 'CORTICAL',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilis - Lemnisco medial).',
+      value: `${selectedSide}subcorticali`,
+      displayText: 'SUBCORTICAL',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales - Tracto gracilis). ',
+      value: `${selectedSide}toracicoi`,
+      displayText: 'TORÁCICO',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular - Raíces dorsales).',
+      value: `${selectedSide}lumbosacroi`,
+      displayText: 'LUMBOSACRO',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II) - Plexo sacro).',
+      value: `${selectedSide}perifericoi`,
+      displayText: 'PERIFERICO',
+    },
+  ];
+
+  /**
+   * handleConclusionClick
+   * - Encuentra el índice del nivel clicado.
+   * - “Activa” desde 0 hasta ese índice, pero
+   *   solo deja el `title` en el clicado (i === index).
+   */
+  const handleConclusionClick = (clickedTitle, clickedValue) => {
+    const index = levels.findIndex(item => item.value === clickedValue);
+    if (index === -1) return;
+
+    for (let i = 0; i <= index; i++) {
+      updateConclusions({
+        title: i === index ? levels[i].title : '', // Solo el clicado conserva título
+        value: levels[i].value,
+      });
+    }
+  };
+
+  return (
+    <div>
+      <div className='button-bar'>
+        {/* Botón de "Anterior" */}
+        <button onClick={() => setStep('F1_i')} id='prev' className='print-button dont-print'>
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        {/* Botón de "Siguiente" */}
+        <button onClick={() => setStep('H1_i')} id='next' className='print-button dont-print'>
+          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(0.5)' }} />
+        </button>
+      </div>
+
+      <h1 className='text-xl font-bold text-white'>NIVEL INFERIOR:</h1>
+
+      {/* Render de los 5 niveles como botones */}
+      {levels.map(item => (
+        <ConclusionButton
+          key={item.value}
+          value={item.value}
+          title={item.title}
+          displayText={item.displayText}
+          onClick={() => handleConclusionClick(item.title, item.value)}
+        />
+      ))}
     </div>
-    <h1 className='text-xl font-bold text-white'>NIVEL INFERIOR: </h1>
-      <ConclusionButton value={`${selectedSide}corticali`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value={`${selectedSide}subcorticali`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}toracicoi`} title=", TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
-      <ConclusionButton value={`${selectedSide}lumbosacroi`} title=", TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
-      <ConclusionButton value={`${selectedSide}perifericoi`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
-       
-  </div>
-);
-const StepG3_i = ({ setStep, selectedImages, handleUndo, handleImageChange, selectedSide }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('F3_i')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('H3_i')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
+  );
+};
+const StepG2_i = ({
+  setStep,
+  selectedSide,
+  // otras props que necesites (por ejemplo selectedImages, handleUndo, handleImageChange, etc.)
+}) => {
+  // Usamos el contexto para actualizar conclusiones
+  const { updateConclusions } = useContext(ReportContext);
+
+  // Array de los 5 niveles, en el orden que desees "acumular".
+  const levels = [
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). ',
+      value: `${selectedSide}corticali`,
+      displayText: 'CORTICAL',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilis - Lemnisco medial).',
+      value: `${selectedSide}subcorticali`,
+      displayText: 'SUBCORTICAL',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales - Tracto gracilis). ',
+      value: `${selectedSide}toracicoi`,
+      displayText: 'TORÁCICO',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular - Raíces dorsales).',
+      value: `${selectedSide}lumbosacroi`,
+      displayText: 'LUMBOSACRO',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II) - Plexo sacro).',
+      value: `${selectedSide}perifericoi`,
+      displayText: 'PERIFERICO',
+    },
+  ];
+
+  /**
+   * handleConclusionClick
+   * - Encuentra el índice del nivel clicado.
+   * - “Activa” desde 0 hasta ese índice, pero
+   *   solo deja el `title` en el clicado (i === index).
+   */
+  const handleConclusionClick = (clickedTitle, clickedValue) => {
+    const index = levels.findIndex(item => item.value === clickedValue);
+    if (index === -1) return;
+
+    for (let i = 0; i <= index; i++) {
+      updateConclusions({
+        title: i === index ? levels[i].title : '', // Solo el clicado conserva título
+        value: levels[i].value,
+      });
+    }
+  };
+
+  return (
+    <div>
+      <div className='button-bar'>
+        {/* Botón de "Anterior" */}
+        <button onClick={() => setStep('F2_i')} id='prev' className='print-button dont-print'>
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        {/* Botón de "Siguiente" */}
+        <button onClick={() => setStep('H2_i')} id='next' className='print-button dont-print'>
+          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(0.5)' }} />
+        </button>
+      </div>
+
+      <h1 className='text-xl font-bold text-white'>NIVEL INFERIOR:</h1>
+
+      {/* Render de los 5 niveles como botones */}
+      {levels.map(item => (
+        <ConclusionButton
+          key={item.value}
+          value={item.value}
+          title={item.title}
+          displayText={item.displayText}
+          onClick={() => handleConclusionClick(item.title, item.value)}
+        />
+      ))}
     </div>
-    <h1 className='text-xl font-bold text-white'>NIVEL INFERIOR: </h1>
-      <ConclusionButton value={`${selectedSide}corticali`} title=", TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). " displayText="CORTICAL" />
-      <ConclusionButton value={`${selectedSide}subcorticali`} title=", TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilisLemnisco medial)." displayText="SUBCORTICAL" />
-      <ConclusionButton value={`${selectedSide}toracicoi`} title=", TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales-Tracto gracilis). " displayText="TORÁCICO" />
-      <ConclusionButton value={`${selectedSide}lumbosacroi`} title=", TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular- Raíces dorsales)." displayText="LUMBOSACRO" />
-      <ConclusionButton value={`${selectedSide}perifericoi`} title=", TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II)- Plexo sacro)." displayText="PERIFERICO" />
-       
-  </div>
-);
+  );
+};
+
+const StepG3_i = ({
+  setStep,
+  selectedSide,
+  // otras props que necesites (por ejemplo selectedImages, handleUndo, handleImageChange, etc.)
+}) => {
+  // Usamos el contexto para actualizar conclusiones
+  const { updateConclusions } = useContext(ReportContext);
+
+  // Array de los 5 niveles, en el orden que desees "acumular".
+  const levels = [
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL CORTICAL (P37-N45: Núcleo talámico-Área somestésica primaria). ',
+      value: `${selectedSide}corticali`,
+      displayText: 'CORTICAL',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL SUBCORTICAL (P31-N34: Núcleo gracilis - Lemnisco medial).',
+      value: `${selectedSide}subcorticali`,
+      displayText: 'SUBCORTICAL',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL TORÁCICO (N24: Astas dorsales - Tracto gracilis). ',
+      value: `${selectedSide}toracicoi`,
+      displayText: 'TORÁCICO',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL LUMBOSACRO (N20: Cono medular - Raíces dorsales).',
+      value: `${selectedSide}lumbosacroi`,
+      displayText: 'LUMBOSACRO',
+    },
+    {
+      title: ', TOPOGRÁFICAMENTE A NIVEL PERIFÉRICO (P9-N18: Fibras nerviosas (IA-II) - Plexo sacro).',
+      value: `${selectedSide}perifericoi`,
+      displayText: 'PERIFERICO',
+    },
+  ];
+
+  /**
+   * handleConclusionClick
+   * - Encuentra el índice del nivel clicado.
+   * - “Activa” desde 0 hasta ese índice, pero
+   *   solo deja el `title` en el clicado (i === index).
+   */
+  const handleConclusionClick = (clickedTitle, clickedValue) => {
+    const index = levels.findIndex(item => item.value === clickedValue);
+    if (index === -1) return;
+
+    for (let i = 0; i <= index; i++) {
+      updateConclusions({
+        title: i === index ? levels[i].title : '', // Solo el clicado conserva título
+        value: levels[i].value,
+      });
+    }
+  };
+
+  return (
+    <div>
+      <div className='button-bar'>
+        {/* Botón de "Anterior" */}
+        <button onClick={() => setStep('F3_i')} id='prev' className='print-button dont-print'>
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        {/* Botón de "Siguiente" */}
+        <button onClick={() => setStep('H3_i')} id='next' className='print-button dont-print'>
+          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(0.5)' }} />
+        </button>
+      </div>
+
+      <h1 className='text-xl font-bold text-white'>NIVEL INFERIOR:</h1>
+
+      {/* Render de los 5 niveles como botones */}
+      {levels.map(item => (
+        <ConclusionButton
+          key={item.value}
+          value={item.value}
+          title={item.title}
+          displayText={item.displayText}
+          onClick={() => handleConclusionClick(item.title, item.value)}
+        />
+      ))}
+    </div>
+  );
+};
 
 const StepH1_i = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
   return (
@@ -1041,6 +1424,72 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo, handleImageChange, hand
         </div>
   );
 };
+
+//Trigemino
+const StepAT = ({ handlePrevStep, handleNextStep, setStep}) => (
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => setStep('A')} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={() => setStep('BT')} className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <div  onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="izquierdo_trigemino"
+        title=" PARA LADO IZQUIERDO "
+        displayText="IZQUIERDO"
+       
+      />
+    </div>
+    <div  onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="derecho_trigemino"
+        title=" PARA LADO DERECHO "
+        displayText="DERECHO"
+       
+      />
+    </div>
+    <div onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="bilateral_trigemino"
+        title=" BILATERAL,"
+        displayText="BILATERAL "
+        
+      />
+    </div>
+  </div>
+);
+
+const StepBT = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+  return (
+    <div>
+      <div className='button-bar'>
+        <button onClick={() => setStep('AT')} className="print-button dont-print">
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
+          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+        </button>
+      
+        <button onClick={handlePrint} className={`print-button dont-print`}>
+          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+      </div>
+        </div>
+  );
+};
+
 
 
 export default SimpleMultiStepForm;

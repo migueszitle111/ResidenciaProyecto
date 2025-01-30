@@ -1,26 +1,27 @@
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 
-export function NerviusButtonBILATERAL({ title, value, displayText }) {
+export function NerviusButtonBILATERALIZQ({ title, value, displayText }) {
+  // Necesitas la función updateConclusions:
   const { updateConclusions, conclusions } = useContext(ReportContext);
+
   const [selectedButton, setSelectedButton] = useState(null);
 
-  // Verifica si el valor ya está en las conclusiones
   const isSelected = conclusions.find(cl => cl.value === value);
 
-  // Clase condicional para que el botón seleccionado sea visible y los demás transparentes
   const classnames = 'cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in ' + 
-    (selectedButton === value ? 'bg-[#c44900]' : 'bg-transparent') + ' rounded-[50px] z-50 relative';
+    (selectedButton === value ? 'bg-[#c44900]' : 'bg-transparent') + 
+    ' rounded-[50px] z-50 relative';
 
-  // Función para actualizar las conclusiones y mostrar o esconder el botón seleccionado
   function handleClick() {
     if (selectedButton === value) {
-      // Si ya está seleccionado, deseleccionarlo (hacerlo invisible)
+      // Si ya está seleccionado, deseleccionarlo
       setSelectedButton(null);
     } else {
-      // Si no está seleccionado, seleccionarlo (hacerlo visible) 
+      // Si no está seleccionado, lo seleccionamos
       setSelectedButton(value);
     }
+    // AÑADIR esta línea para actualizar el texto en la conclusión:
     updateConclusions({ title, value });
   }
 
@@ -30,9 +31,3 @@ export function NerviusButtonBILATERAL({ title, value, displayText }) {
     </div>
   );
 }
-
-
-
-
-
-

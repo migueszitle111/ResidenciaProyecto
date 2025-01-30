@@ -1084,4 +1084,3 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
 //<ConclusionButton value='ILIOINGUINAL' title=' DE NERVIO ILIOINGUINAL' displayText='ILIOINGUINAL' />
 export default SimpleMultiStepForm;
 
-

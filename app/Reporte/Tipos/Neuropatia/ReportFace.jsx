@@ -1,5 +1,5 @@
 import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL';
-
+import { checkDivsBILATERALIZQ } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERALIZQ';
 import { checkDivs } from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
 import { checkDivsSegmentar } from '@/app/Reporte/Tipos/Neuropatia/SelecSegmentariaNerv';
 import { ReportContext } from '@/src/context';
@@ -1094,6 +1094,7 @@ const Reporte = () => {
               </div>
               <div><DropArea /> </div>
               <div>{checkDivsBILATERAL(copyConclusions)}</div>
+              <div>{checkDivsBILATERALIZQ(copyConclusions)}</div>
               <div>{checkDivs(copyConclusions)}</div>
               <div>{checkDivsSegmentar(copyConclusions)}</div>
               

@@ -1,10 +1,11 @@
 import { ReportContext } from '@/src/context';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
+import { exportToPdf } from './ReportFace';
 
 // Numero de pasos 
 const stepsArray = ['A', 'B', 'C', 'D', 'E', 'I'];
@@ -415,9 +416,10 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
 const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) => {
   
   const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
-    
-    const [imageSrc, setImageSrc] = useState(null);
-    const [isUploadAllowed, setIsUploadAllowed] = useState(false); // Estado para controlar si la carga está permitida
+  const [imageSrc, setImageSrc] = useState(null);
+  const [isUploadAllowed, setIsUploadAllowed] = useState(false);
+  const [isPageVisible, setPageVisibility] = useState(false);
+
     const toggleDivSize = (index) => {
       // Cambiar el estado del tamaño del div al hacer clic
       setExpandedDivs((prevState) => ({
@@ -491,13 +493,14 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
     }
   
     if (infoContainer) {
-      infoContainer.style.display = "flex";
-      infoContainer.style.backgroundColor = "white";
+
+      infoContainer.style.backgroundColor = "red";
       infoContainer.style.alignItems = "left";
       infoContainer.style.borderRadius = "4px";
       infoContainer.style.overflow = "hidden";
       infoContainer.style.width = "100%";
       infoContainer.style.margin = "10px";
+      infoContainer.style.padding = "10px";
       infoContainer.style.height = "20vh";
       infoContainer.style.zIndex = "1";
     }
@@ -507,6 +510,7 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
       infoTextareaContainer.style.top = "0";
       infoTextareaContainer.style.width = "40vh";
       infoTextareaContainer.style.zIndex = "1";
+      infoTextareaContainer.style.backgroundColor = "blue";
     }
   
     if (infoTextarea) {
@@ -609,32 +613,36 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
     }
   };
   
-  
-  
-  
+  const elementRef = useRef(null); // Referencia al contenedor que se capturará como imagen
+  const textareaRef = useRef(null); // Referencia al textarea que contiene las conclusiones
+
+  const handleExportPdf = () => {
+    const elementRef = { current: document.querySelector('.conclusion-container') }; // Ajusta el selector según tu estructura
+    const textareaRef = { current: document.querySelector('textarea') }; // Ajusta el selector según tu estructura
+    exportToPdf(elementRef, textareaRef, 'mi_reporte.pdf');
+  };
+
   return (
     <div>
       <div className='button-bar'>
         <button onClick={handlePrevStep} className={`print-button`}>
-        <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
         <button onClick={handlePrint} className={`print-button`}>
-          <img src="/I_Print.svg" style={{filter: 'invert(1)'}}/>
+          <img src="/I_Print.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
-        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-
-        <button onClick={handleSaveAsPDF} className={`print-button`}>
-        <img src="/I_Save.svg" style={{filter: 'invert(1)'}}/>
+        <button onClick={handleExportPdf} className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
+          <img src="/I_Print.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}}/>
+        <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
       </div>
-
 
       <div className='container-grid'>
             {[1].map((index) => (

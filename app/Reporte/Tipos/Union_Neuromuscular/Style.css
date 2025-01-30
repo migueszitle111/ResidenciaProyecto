@@ -146,7 +146,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  background-color: #ee1010;
+  background-color: #000000;
 }
 
 .info-container {
@@ -304,6 +304,8 @@
   width: 100%; /* O cualquier tamaño que necesites */
   height: 100%; /* O cualquier tamaño que necesites */
 }
+
+
 
 .dropArea {
   top: 10px;
@@ -758,6 +760,7 @@
 }
 
 
+
 /* Detalles referentes a la impresion */
 @media print {
 
@@ -768,11 +771,17 @@
   /* .conclusion-container {
     display: none;
   } */
+/* 
+  .con-img{
+    visibility: hidden;
+  } */
 
   .conclusion-container {
     width: 90%;
     min-height: 88vh;
     overflow: visible;
+    position: relative;
+
   }
 
   .cuadro-expanded {

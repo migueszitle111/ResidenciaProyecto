@@ -1,11 +1,43 @@
 import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
 
+
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
+export const exportToPdf = (elementRef, textareaRef, fileName = 'reporte.pdf') => {
+  const input = elementRef?.current;
+  const textarea = textareaRef?.current;
+
+  if (!input || !textarea) {
+    console.error("Elemento no encontrado en el DOM.");
+    return;
+  }
+
+  html2canvas(input).then((canvas) => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const imgWidth = 210; // A4 size in mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    // Agregar la imagen al PDF
+    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+    // Agregar el texto de las conclusiones al PDF
+    const text = textarea.value;
+    const textLines = pdf.splitTextToSize(text, imgWidth - 20); // Ajustar el texto al ancho de la página
+    pdf.setFontSize(12);
+    pdf.text(textLines, 10, imgHeight + 10); // Añadir el texto debajo de la imagen
+
+    // Guardar el PDF
+    pdf.save(fileName);
+  });
+};
 
 const DropArea = () => {
   const [droppedItems, setDroppedItems] = useState([]);
@@ -183,6 +215,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
       });
     }, []);
 
+    const textareaRef = useRef(null);
+
 
   // Codigo para imprimir en click
   useEffect(() => {
@@ -251,46 +285,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
             <SimpleMultiStepForm showStepNumber={true}/>
           </div>
           
-          {/*
-          <div className={`dont-print ${isPageVisible ? '' : 'hidden'}`}>
-          <AccordionContainer>
-            <Accordion title='Fibras'>
-              <ConclusionButton value='motora_asta_anterior_medular' title='Fibra motora-asta anterior medular' />
-              <ConclusionButton value='sentitiva_ganglio_de_la_raiz_dorsal' title='Fibra sensitiva-ganglio de la raiz dorsal' />
-            </Accordion>
-            <Accordion title='Clasificación'>
-              <ConclusionButton value='hereditaria' title='Clasificación hereditaria' />                
-              <ConclusionButton value='adquirida' title='Clasificación adquirida' />
-            </Accordion>
-            <Accordion title='Denervación'>
-              <ConclusionButton value='activa_abundante_difusa' title='Denervación activa abundante difusa' />
-              <ConclusionButton value='activa_moderada_progresiva ' title='Denervación activa moderada progresiva' />
-              <ConclusionButton value='activa_moderada' title='Denervación activa moderada' />
-              <ConclusionButton value='activa_leve_en_fase_de_resolucion' title='Denervación activa leve en fase de resolución' />
-              <ConclusionButton value='sin_denervacion_activa' title='Sin denervación activa' />
-            </Accordion>
-            <Accordion title='Distribución'>
-              <ConclusionButton value='bulbar' title='Distribución bulbar' />
-              <ConclusionButton value='cervical_miembros_superiores' title='Distribución cervical y miembros superiores' />
-              <ConclusionButton value='toracico' title='Distribución toracico' />
-              <ConclusionButton value='lumbar_miembros_inferiores' title='Distribución lumbar y miembros inferiores' />
-            </Accordion>
-            <Accordion title='Lateralidad'>
-              <ConclusionButton value='simetrica' title='Lateralidad simetrica' />
-              <ConclusionButton value='asimetrica' title='Lateralidad asimetrica' />
-            </Accordion>
-            <Accordion title = 'Reinervación'>
-              <Accordion title = '> Activa'>
-              <ConclusionButton value = 'abundante' title = 'Con abundantes datos de reinervación' />
-              <ConclusionButton value = 'moderada' title = 'Con moderados datos de reinervación' />
-              <ConclusionButton value = 'escasa' title = 'Con escasos datos de reinervación' />
-              </Accordion>
-              <ConclusionButton value = 'nulo' title = 'Sin datos de reinervación' />
-            </Accordion>
-          </AccordionContainer>
-          </div>
-          */}
-
+          
           </div>
         </div>
         {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
@@ -364,7 +359,10 @@ const formattedConclusions = formatConclusions(copyConclusions);
             },
           ]}
         /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
+       
+  
         <textarea
+          ref={textareaRef}
           value={copyConclusions}
           onChange={handleTextareaChange}
         />

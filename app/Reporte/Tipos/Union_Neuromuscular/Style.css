@@ -1,3 +1,35 @@
+/* Nuevos estilos que aplicarán solo en modo export */
+.pdf-export-mode .conclusion-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding:10px;
+  border-radius: 10px;
+  background-color: white;
+  margin-top: 10px;
+
+}
+
+.pdf-export-mode .info-container {
+  display: flex;
+  background-color: white;
+  align-items: left;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;  
+  margin-top: 3px;
+  height: 20vh;
+  margin-bottom: 0px;
+  
+
+  z-index: 1; 
+
+}
+
+
 /* Seccion de Datos de perfil y Titulo de reporte*/
 .head{
   display: flex;
@@ -158,6 +190,7 @@
   width: 100%;  
   margin: 10px;
   height: 20vh;
+  margin-bottom: 0px;
   
 
   z-index: 1; 
@@ -171,6 +204,7 @@
   background-color: transparent; 
   resize: none; 
   padding: 5px;
+  
 }
 
 .print-button {
@@ -229,10 +263,10 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 10px;
+  padding:10px;
   border-radius: 10px;
   background-color: #1C1C1C;
-  margin: 10px;
+  margin-top: 10px;
 }
 
 .dont-print {

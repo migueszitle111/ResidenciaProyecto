@@ -10,32 +10,30 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 export const exportToPdf = (elementRef, conclusionDivRef, fileName = 'reporte.pdf') => {
-  const input = elementRef?.current;         // .conclusion-container
-  const conclusionDiv = conclusionDivRef?.current; // tu div editable
+  const input = elementRef?.current;
+  if (!input) return;
 
-  if (!input || !conclusionDiv) {
-    console.error("Elemento no encontrado en el DOM.");
-    return;
-  }
+  // 1) Agregar la clase pdf-export-mode al body o a un contenedor padre
+  document.body.classList.add('pdf-export-mode');
 
-  html2canvas(input).then((canvas) => {
+  // 2) Capturar
+  html2canvas(input, {
+    scale: 4,
+    useCORS: true,
+    backgroundColor: '#FFFFFF'
+  }).then((canvas) => {
+    // 3) Quitar la clase para volver a estilos originales
+    document.body.classList.remove('pdf-export-mode');
+
+    // 4) Generar PDF
     const pdf = new jsPDF('p', 'mm', 'a4');
-    const imgWidth = 210; 
+    const imgWidth = 150;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    // Agregar screenshot
-    const imgData = canvas.toDataURL('image/png');
-    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-
-    // Obtener texto desde el DIV editable
-    const text = conclusionDiv.innerText; // o .textContent
-    const textLines = pdf.splitTextToSize(text, imgWidth - 20);
-
-    pdf.setFontSize(12);
-    pdf.text(textLines, 10, imgHeight + 10);
-    pdf.save(fileName);
+    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 30, 10, imgWidth, imgHeight);
+    pdf.save(fileName || 'reporte.pdf');
   });
 };
+
 
 const DropArea = () => {
   const [droppedItems, setDroppedItems] = useState([]);
@@ -368,15 +366,16 @@ const formattedConclusions = formatConclusions(copyConclusions);
     style={{
       position: 'absolute',
       width: '100%',
-      height: '80%',
-      padding: '5px',
+      height: '100%',
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
       outline: 'none',
       overflow: 'auto',
       resize: 'none',
       fontSize: '14px',
-      padding: '15px',
+      paddingTop: '10px',
+      paddingLeft: '10px',
+      paddingRight: '10px',
 
     }}
     onInput={(e) => {

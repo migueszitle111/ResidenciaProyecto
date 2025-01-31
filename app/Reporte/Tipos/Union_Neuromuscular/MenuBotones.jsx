@@ -11,7 +11,7 @@ import { exportToPdf } from './ReportFace';
 const stepsArray = ['A', 'B', 'C', 'D', 'E', 'I'];
 
 // Metodos de movimiento entre menus
-const SimpleMultiStepForm = ({ showStepNumber }) => {
+const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef }) => {
   const [step, setStep] = useState('A');
 
   const {
@@ -115,6 +115,8 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
           handleUndo={handleUndo}
           handleImageChange={handleImageChange}
           handlePrint={handlePrint}
+          conclusionDivRef={conclusionDivRef}
+          elementRef={elementRef}
         />
       ) : null}
     </div>
@@ -411,7 +413,7 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
     );
   };
     
-const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) => {
+const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,conclusionDivRef,elementRef }) => {
   
   const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
   const [imageSrc, setImageSrc] = useState(null);
@@ -459,165 +461,8 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
       setIsUploadAllowed(false);
   };
 
-
-  const handleSaveAsPDF = () => {
-    const conclusionContainer = document.querySelector('.conclusion-container');
-    const infoContainer = document.querySelector('.info-container');
-    const infoTextareaContainer = document.querySelector('.box-container');
-    const infoTextarea = document.querySelector('.info-container textarea');
-    const cuadroExpanded = document.querySelector('.cuadro-expanded');
-    const cuadro2Expanded = document.querySelector('.cuadro2-expanded');
-    const circuloExpanded = document.querySelector('.circulo-expanded');
-    const dropArea = document.querySelector('.dropArea');
-  
-    // Guarda los estilos originales de todos los elementos relevantes
-    const originalStyles = {
-      conclusion: conclusionContainer?.getAttribute("style"),
-      info: infoContainer?.getAttribute("style"),
-      textareaContainer: infoTextareaContainer?.getAttribute("style"),
-      textarea: infoTextarea?.getAttribute("style"),
-      cuadroExpanded: cuadroExpanded?.getAttribute("style"),
-      cuadro2Expanded: cuadro2Expanded?.getAttribute("style"),
-      circuloExpanded: circuloExpanded?.getAttribute("style"),
-      dropArea: dropArea?.getAttribute("style"),
-    };
-  
-    // Aplica estilos específicos de impresión
-    if (conclusionContainer) {
-      conclusionContainer.style.width = "90%";
-      conclusionContainer.style.minHeight = "88vh";
-      conclusionContainer.style.overflow = "visible";
-      conclusionContainer.style.padding = "10px";
-    }
-  
-    if (infoContainer) {
-
-      infoContainer.style.backgroundColor = "red";
-      infoContainer.style.alignItems = "left";
-      infoContainer.style.borderRadius = "4px";
-      infoContainer.style.overflow = "hidden";
-      infoContainer.style.width = "100%";
-      infoContainer.style.margin = "10px";
-      infoContainer.style.padding = "10px";
-      infoContainer.style.height = "20vh";
-      infoContainer.style.zIndex = "1";
-    }
-  
-    if (infoTextareaContainer) {
-      infoTextareaContainer.style.position = "absolute";
-      infoTextareaContainer.style.top = "0";
-      infoTextareaContainer.style.width = "40vh";
-      infoTextareaContainer.style.zIndex = "1";
-      infoTextareaContainer.style.backgroundColor = "blue";
-    }
-  
-    if (infoTextarea) {
-      infoTextarea.style.width = "100%";
-      infoTextarea.style.height = "100%";
-      infoTextarea.style.fontSize = "14px";
-      infoTextarea.style.textAlign = "justify";
-      infoTextarea.style.backgroundColor = "transparent";
-      infoTextarea.style.resize = "none";
-      infoTextarea.style.padding = "5px";
-      infoTextarea.style.whiteSpace = "pre-wrap"; // Asegura que el texto se ajuste correctamente
-    }
-  
-    if (cuadroExpanded) {
-      cuadroExpanded.style.width = "20vw";
-      cuadroExpanded.style.height = "10vh";
-    }
-  
-    if (cuadro2Expanded) {
-      cuadro2Expanded.style.width = "98px";
-      cuadro2Expanded.style.height = "92px";
-      cuadro2Expanded.style.marginTop = "15px";
-      cuadro2Expanded.style.marginBottom = "15px";
-      cuadro2Expanded.style.marginLeft = "135px";
-    }
-  
-    if (circuloExpanded) {
-      circuloExpanded.style.width = "240.57vw";
-      circuloExpanded.style.height = "12.63vh";
-      circuloExpanded.style.position = "absolute";
-      circuloExpanded.style.left = "5vw";
-      circuloExpanded.style.bottom = "10vh";
-    }
-  
-    if (dropArea) {
-      dropArea.style.top = "0px";
-      dropArea.style.left = "8px";
-      dropArea.style.width = "100%";
-      dropArea.style.height = "985px";
-      dropArea.style.position = "absolute";
-      dropArea.style.overflow = "hidden";
-    }
-  
-    // Genera el PDF
-    html2canvas(conclusionContainer)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF('p', 'mm', 'a4');
-  
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-        const imgWidth = pageWidth;
-        const imgHeight = (canvas.height * pageWidth) / canvas.width;
-  
-        // Centra la imagen en la página
-        const x = 0;
-        const y = (pageHeight - imgHeight) / 2;
-  
-        pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
-        pdf.save("conclusion.pdf");
-  
-        // Restaura los estilos originales
-        restoreOriginalStyles(originalStyles, {
-          conclusionContainer,
-          infoContainer,
-          infoTextareaContainer,
-          infoTextarea,
-          cuadroExpanded,
-          cuadro2Expanded,
-          circuloExpanded,
-          dropArea,
-        });
-      })
-      .catch((error) => {
-        console.error("Error al generar el PDF:", error);
-  
-        // Restaura los estilos originales en caso de error
-        restoreOriginalStyles(originalStyles, {
-          conclusionContainer,
-          infoContainer,
-          infoTextareaContainer,
-          infoTextarea,
-          cuadroExpanded,
-          cuadro2Expanded,
-          circuloExpanded,
-          dropArea,
-        });
-      });
-  };
-  
-  const restoreOriginalStyles = (originalStyles, elements) => {
-    for (const [key, element] of Object.entries(elements)) {
-      if (element) {
-        if (originalStyles[key]) {
-          element.setAttribute("style", originalStyles[key]);
-        } else {
-          element.removeAttribute("style");
-        }
-      }
-    }
-  };
-  
-  const elementRef = useRef(null); // Referencia al contenedor que se capturará como imagen
-  const textareaRef = useRef(null); // Referencia al textarea que contiene las conclusiones
-
   const handleExportPdf = () => {
-    const elementRef = { current: document.querySelector('.conclusion-container') }; // Ajusta el selector según tu estructura
-    const textareaRef = { current: document.querySelector('textarea') }; // Ajusta el selector según tu estructura
-    exportToPdf(elementRef, textareaRef, 'mi_reporte.pdf');
+    exportToPdf(elementRef, conclusionDivRef, 'mi_reporte.pdf');
   };
 
   return (
@@ -635,7 +480,7 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint }) =
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={handleExportPdf} className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Print.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
         </button>
 

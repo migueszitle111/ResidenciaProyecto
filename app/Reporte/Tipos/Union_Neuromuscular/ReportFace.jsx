@@ -6,35 +6,33 @@ import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
 
-
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-export const exportToPdf = (elementRef, textareaRef, fileName = 'reporte.pdf') => {
-  const input = elementRef?.current;
-  const textarea = textareaRef?.current;
+export const exportToPdf = (elementRef, conclusionDivRef, fileName = 'reporte.pdf') => {
+  const input = elementRef?.current;         // .conclusion-container
+  const conclusionDiv = conclusionDivRef?.current; // tu div editable
 
-  if (!input || !textarea) {
+  if (!input || !conclusionDiv) {
     console.error("Elemento no encontrado en el DOM.");
     return;
   }
 
   html2canvas(input).then((canvas) => {
-    const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF('p', 'mm', 'a4');
-    const imgWidth = 210; // A4 size in mm
+    const imgWidth = 210; 
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    // Agregar la imagen al PDF
+    // Agregar screenshot
+    const imgData = canvas.toDataURL('image/png');
     pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
-    // Agregar el texto de las conclusiones al PDF
-    const text = textarea.value;
-    const textLines = pdf.splitTextToSize(text, imgWidth - 20); // Ajustar el texto al ancho de la página
-    pdf.setFontSize(12);
-    pdf.text(textLines, 10, imgHeight + 10); // Añadir el texto debajo de la imagen
+    // Obtener texto desde el DIV editable
+    const text = conclusionDiv.innerText; // o .textContent
+    const textLines = pdf.splitTextToSize(text, imgWidth - 20);
 
-    // Guardar el PDF
+    pdf.setFontSize(12);
+    pdf.text(textLines, 10, imgHeight + 10);
     pdf.save(fileName);
   });
 };
@@ -215,7 +213,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
       });
     }, []);
 
-    const textareaRef = useRef(null);
+    const conclusionDivRef = useRef(null);
+    const elementRef = useRef(null);
 
 
   // Codigo para imprimir en click
@@ -282,7 +281,10 @@ const formattedConclusions = formatConclusions(copyConclusions);
 {/* Menu de opciones */}
 
           <div className={`mx-4 dont-print ${isPageVisible ? '' : 'hidden'}`}>
-            <SimpleMultiStepForm showStepNumber={true}/>
+            <SimpleMultiStepForm 
+              conclusionDivRef={conclusionDivRef}
+              elementRef={elementRef}
+            showStepNumber={true}/>
           </div>
           
           
@@ -310,7 +312,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
         ))}
 
         {/* Despliego de las imagenes dentro del array */}
-        <div className='conclusion-container '>
+        <div ref={elementRef} className='conclusion-container '>
         <ConclusionCanvas 
         
           img={{
@@ -358,14 +360,33 @@ const formattedConclusions = formatConclusions(copyConclusions);
               }
             },
           ]}
-        /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
-       
-  
-        <textarea
-          ref={textareaRef}
-          value={copyConclusions}
-          onChange={handleTextareaChange}
         />
+<div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
+  <div
+     ref={conclusionDivRef} 
+     contentEditable
+    style={{
+      position: 'absolute',
+      width: '100%',
+      height: '80%',
+      padding: '5px',
+      whiteSpace: 'pre-wrap',
+      wordWrap: 'break-word',
+      outline: 'none',
+      overflow: 'auto',
+      resize: 'none',
+      fontSize: '14px',
+      padding: '15px',
+
+    }}
+    onInput={(e) => {
+      setCopyConclusions(e.currentTarget.innerText);
+    }}
+  >
+    {copyConclusions}
+
+</div>
+
       </div>
       <div><DropArea /> </div>
         </div>

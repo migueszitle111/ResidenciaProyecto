@@ -1,8 +1,8 @@
-import { ReportContextN } from '@/src/context';
+import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 
 export function NerviusButton({ title, value, displayText }) {
-  const { updateConclusions, conclusions } = useContext(ReportContextN);
+  const { updateConclusions, conclusions } = useContext(ReportContext);
   const [selectedButton, setSelectedButton] = useState(null);
   
   // Verifica si el valor ya está en las conclusiones

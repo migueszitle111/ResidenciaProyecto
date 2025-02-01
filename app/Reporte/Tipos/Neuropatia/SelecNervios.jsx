@@ -162,7 +162,7 @@ export function checkDivs(copyConclusions) {
       </>
     );
   }
-  if (copyConclusions.includes('MEDIANO BILATERAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('MEDIANO DERECHO, FOCALIZADA A NIVEL') ) {
     return (
       <>
         <div style={{ position: 'absolute', top: '17.6%', left: '48.0%', borderRadius: '50%' }}

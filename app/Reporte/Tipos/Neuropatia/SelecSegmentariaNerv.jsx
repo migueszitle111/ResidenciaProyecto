@@ -3,7 +3,7 @@ import { SegmentariaButton } from '@/app/components/ReportTemplate/Conclusions/B
 
 export function checkDivsSegmentar(copyConclusions) {
 
-  if (copyConclusions.includes('MEDIANO IZQUIERDO, SEGMENTARIA A NIVEL') || copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {
+  if (copyConclusions.includes('MEDIANO IZQUIERDO, SEGMENTARIA A NIVEL') || copyConclusions.includes('MEDIANO  BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '17.3%', left: '57.4%', transform: 'rotate(60deg)', borderRadius: '50%' }}
@@ -242,7 +242,7 @@ export function checkDivsSegmentar(copyConclusions) {
       </>
     );
   }
-  if (copyConclusions.includes('MEDIANO DERECHO, SEGMENTARIA A NIVEL') || copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
+  if (copyConclusions.includes('MEDIANO DERECHO, SEGMENTARIA A NIVEL') || copyConclusions.includes('MEDIANO  BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.2%', left: '41.4%', transform: 'rotate(100deg)' }}
@@ -519,7 +519,7 @@ export function checkDivsSegmentar(copyConclusions) {
     );
 
   }
-  if (copyConclusions.includes('INTEROSEO ANTERIOR DERECHO, SEGMENTARIA A NIVEL') || copyConclusions.includes('INTEROSEO ANTERIOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if (copyConclusions.includes('INTEROSEO ANTERIOR DERECHO, SEGMENTARIA A NIVEL') || copyConclusions.includes('INTEROSEO ANTERIOR  BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '31.6%', left: '32.5%', transform: 'rotate(100deg)' }}

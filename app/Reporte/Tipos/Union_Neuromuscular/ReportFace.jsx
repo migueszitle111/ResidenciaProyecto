@@ -9,31 +9,65 @@ import './Style.css';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-export const exportToPdf = (elementRef, conclusionDivRef, fileName = 'reporte.pdf') => {
+
+export const exportToPdf = (
+  
+  elementRef,
+  conclusionDivRef,
+  fileName = 'reporte.pdf',
+  userData = {}
+) => {
   const input = elementRef?.current;
   if (!input) return;
 
-  // 1) Agregar la clase pdf-export-mode al body o a un contenedor padre
   document.body.classList.add('pdf-export-mode');
 
-  // 2) Capturar
   html2canvas(input, {
     scale: 4,
     useCORS: true,
     backgroundColor: '#FFFFFF'
   }).then((canvas) => {
-    // 3) Quitar la clase para volver a estilos originales
     document.body.classList.remove('pdf-export-mode');
 
-    // 4) Generar PDF
+    // 1. Generar PDF
     const pdf = new jsPDF('p', 'mm', 'a4');
     const imgWidth = 150;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 30, 10, imgWidth, imgHeight);
+    pdf.addImage(
+      canvas.toDataURL('image/png'),
+      'PNG',
+      30, // X
+      10, // Y
+      imgWidth,
+      imgHeight
+    );
+
+    // 2. Extraer los datos del usuario (o usa destructuring)
+    const {
+      name = '',
+      lastname = '',
+      email = '',
+      especialidad = '',
+      cedula = '',
+    } = userData;
+
+    pdf.setFont('times'); // Fuente elegante
+    pdf.setFontSize(10); // Tamaño de fuente más grande
+    pdf.setTextColor(0, 0, 102); // Azul marino
+
+    // 3. Dibujar el texto "footer" con la info de usuario
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    // Por ejemplo, 10mm desde la izquierda, y 10mm desde el fondo
+    pdf.text(
+      `Nombre: ${name} ${lastname} | Email: ${email} | Esp: ${especialidad} | Cédula: ${cedula}`,
+      10,
+      pageHeight - 10
+    );
+
+    // 4. Guardar PDF
     pdf.save(fileName || 'reporte.pdf');
   });
 };
-
 
 const DropArea = () => {
   const [droppedItems, setDroppedItems] = useState([]);
@@ -99,7 +133,6 @@ const DropArea = () => {
   );
 };
 
-
 const Reporte = () => {
   
   // Carga datos de usuario
@@ -112,8 +145,6 @@ const Reporte = () => {
   // Estados para el historial de imagenes
   const [history, setHistory] = useState([]); 
   const [Future,setFuture] = useState([]); 
-
-
 
   function formatConclusions(copyConclusions) {
     const keywords = ["BULBAR", "PROXIMAL", "DISTAL"];

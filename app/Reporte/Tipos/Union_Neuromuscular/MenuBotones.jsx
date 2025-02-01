@@ -1,6 +1,7 @@
 import { ReportContext } from '@/src/context';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { useSession } from "next-auth/react";
 import { useContext, useRef, useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
@@ -12,6 +13,8 @@ const stepsArray = ['A', 'B', 'C', 'D', 'E', 'I'];
 
 // Metodos de movimiento entre menus
 const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef }) => {
+  const { data: session } = useSession();
+
   const [step, setStep] = useState('A');
 
   const {
@@ -414,7 +417,7 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
   };
     
 const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,conclusionDivRef,elementRef }) => {
-  
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
   const [imageSrc, setImageSrc] = useState(null);
   const [isUploadAllowed, setIsUploadAllowed] = useState(false);
@@ -462,7 +465,18 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,conc
   };
 
   const handleExportPdf = () => {
-    exportToPdf(elementRef, conclusionDivRef, 'mi_reporte.pdf');
+    exportToPdf(
+      elementRef,
+      conclusionDivRef,
+      'mi_reporte.pdf',
+      {
+        name: session?.user?.name || '',
+        lastname: session?.user?.lastname || '',
+        email: session?.user?.email || '',
+        especialidad: session?.user?.especialidad || '',
+        cedula: session?.user?.cedula || ''
+      }
+    );
   };
 
   return (

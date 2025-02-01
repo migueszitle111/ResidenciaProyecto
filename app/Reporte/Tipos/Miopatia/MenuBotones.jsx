@@ -1,6 +1,6 @@
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
-import { Accordion } from '../../../components/ReportTemplate/Accordion';
+import { Accordion, AccordionContainer } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
@@ -170,15 +170,19 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
     <div>
       <div className='button-bar'>
         <button  onClick={() => {
-          removeConclusion('evolucion_aguda')
-          removeConclusion('evolucion_subaguda')
-          removeConclusion('evolucion_cronica')
-          removeConclusion('evolucion_antigua')
-          removeConclusion('adquirida')
-          removeConclusion('hereditaria')
-          handlePrevStep}} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+            removeConclusion('evolucion_aguda')
+            removeConclusion('evolucion_subaguda')
+            removeConclusion('evolucion_cronica')
+            removeConclusion('evolucion_antigua')
+            removeConclusion('adquirida')
+            removeConclusion('hereditaria')
+
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
+
+
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
         <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
@@ -204,13 +208,14 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={() => {
-          removeConclusion('intensidad_leve')
-          removeConclusion('intensidad_moderada')
-          removeConclusion('intensidad_severa')
+        <button  onClick={() => {
+            removeConclusion('intensidad_leve')
+            removeConclusion('intensidad_moderada')
+            removeConclusion('intensidad_severa')
 
-          handlePrevStep}} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
@@ -241,15 +246,16 @@ const StepD = ({ handleNextStep, handlePrevStep }) => {
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={() => {
-          removeConclusion('denervacion_severa')
-          removeConclusion('denervacion_abundante')
-          removeConclusion('denervacion_progresiva')
-          removeConclusion('denervacion_discreta')
-          removeConclusion('denervacion_ausente')
+        <button  onClick={() => {
+            removeConclusion('denervacion_severa')
+            removeConclusion('denervacion_abundante')
+            removeConclusion('denervacion_progresiva')
+            removeConclusion('denervacion_discreta')
+            removeConclusion('denervacion_ausente')
 
-          handlePrevStep}} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
@@ -282,11 +288,13 @@ const StepE = ({ handleNextStep, handlePrevStep }) => {
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={() => {
-          removeConclusion('descargas_miotonicas');
-          removeConclusion('descargas_repetitivas_complejas');
-          handlePrevStep}} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        <button  onClick={() => {
+            removeConclusion('descargas_miotonicas');
+            removeConclusion('descargas_repetitivas_complejas');
+
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
@@ -316,17 +324,19 @@ const StepF = ({ handlePrevStep, handleNextStep }) => {
     <div>
       <div className='button-bar'>
         <button  onClick={() => {
-          removeConclusion('distribucion_proximal')
-          removeConclusion('distribucion_distal')
-          removeConclusion('distribucion_generalizada')
-          removeConclusion('anillo_oseo')
-          removeConclusion('duchenne_becker')
-          removeConclusion('emery_dreifuss')
-          removeConclusion('facioescapulohumeral')
-          removeConclusion('oculofaringea')
+            removeConclusion('distribucion_proximal')
+            removeConclusion('distribucion_distal')
+            removeConclusion('distribucion_generalizada')
+            removeConclusion('generalizada1')
+            removeConclusion('anillo_oseo')
+            removeConclusion('duchenne_becker')
+            removeConclusion('emery_dreifuss')
+            removeConclusion('facioescapulohumeral')
+            removeConclusion('oculofaringea')
           
-          handlePrevStep}} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
@@ -346,16 +356,18 @@ const StepF = ({ handlePrevStep, handleNextStep }) => {
         <ConclusionButton value='distribucion_distal' title=' DE DISTRIBUCIÓN DISTAL,' displayText={'DISTAL'}/>
         <ConclusionButton value='generalizada1' title=' DE DISTRIBUCIÓN GENERALIZADA,' displayText={'GENERALIZADA'}/>
       </div>
-        <Accordion title='DISTROFIA'>
-          <div onClick={ handleNextStep }>
-            <ConclusionButton value='anillo_oseo' title=' POR DISTROFIA DE CINTURAS,' displayText={'CINTURAS'}/>
-            <ConclusionButton value='duchenne_becker' title=' POR DISTROFIA DE DUCHENNE/BECKER,' displayText={'DUCHENNE/BECKER'}/>
-            <ConclusionButton value='emery_dreifuss' title=' POR DISTROFIA DE EMERY-DREIFUSS,' displayText={'EMERY-DREIFUSS'}/>
-            <ConclusionButton value='facioescapulohumeral' title=' POR DISTROFIA FACIOESCAPULOHUMERAL,' displayText={'FACIOESCAPULOHUMERAL'}/>
-            <ConclusionButton value='oculofaringea' title=' POR DISTROFIA OCULOFARINGEA,' displayText={'OCULOFARINGEA'}/>
-          </div>
-        </Accordion>
-
+      
+        <AccordionContainer>
+          <Accordion title='DISTROFIA' value='DISTROFIA' type='external'>
+            <div onClick={ handleNextStep }>
+              <ConclusionButton value='anillo_oseo' title=' POR DISTROFIA DE CINTURAS,' displayText={'CINTURAS'}/>
+              <ConclusionButton value='duchenne_becker' title=' POR DISTROFIA DE DUCHENNE/BECKER,' displayText={'DUCHENNE/BECKER'}/>
+              <ConclusionButton value='emery_dreifuss' title=' POR DISTROFIA DE EMERY-DREIFUSS,' displayText={'EMERY-DREIFUSS'}/>
+              <ConclusionButton value='facioescapulohumeral' title=' POR DISTROFIA FACIOESCAPULOHUMERAL,' displayText={'FACIOESCAPULOHUMERAL'}/>
+              <ConclusionButton value='oculofaringea' title=' POR DISTROFIA OCULOFARINGEA,' displayText={'OCULOFARINGEA'}/>
+            </div>
+          </Accordion>
+        </AccordionContainer>
       
     </div>
   );
@@ -366,11 +378,13 @@ const StepG = ({ handleNextStep, handlePrevStep }) => {
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={() => {
-          removeConclusion('con_reinervacion')
-          removeConclusion('sin_reinervacion')
-          handlePrevStep}} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        <button  onClick={() => {
+            removeConclusion('con_reinervacion')
+            removeConclusion('sin_reinervacion')
+          
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
@@ -402,13 +416,14 @@ const StepH = ({ handlePrevStep, handleNextStep }) => {
     <div>
       <div className='button-bar'>
         <button  onClick={() => {
-          removeConclusion('completo')
-          removeConclusion('parcial_funcional')
-          removeConclusion('pobre')
-          removeConclusion('nulo')
-
-          handlePrevStep}} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+            removeConclusion('completo')
+            removeConclusion('parcial_funcional')
+            removeConclusion('pobre')
+            removeConclusion('nulo')
+          
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>

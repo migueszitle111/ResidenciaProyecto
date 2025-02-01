@@ -205,13 +205,12 @@ const StepB = ({ handleNextStep, handlePrevStep,handleNextStep2 }) => {
   return (
     <div>
       <div className='button-bar'>
-      <button  onClick={() => {
-            // 1) Quitamos las conclusiones que StepA pudo haber agregado
+        <button  onClick={() => {
             removeConclusion('1')
             removeConclusion('sentitiva_ganglio_de_la_raiz_dorsal')
             removeConclusion('2')
             removeConclusion('3')
-            // 2) Regresamos a StepA
+
             handlePrevStep()
           }} className={`print-button`}>
           <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>

@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 // Componente OverheadMenu
 const OverheadMenu = () => {
@@ -45,7 +45,7 @@ const OverheadMenu = () => {
   // Renderiza el menú de navegación
   return (
     <div>
-      <nav className="bg-[#1c1c1c] text-white">
+      <nav className="bg-[#000000] text-white">
         <ul className="flex space-x-4 md:space-x-20 justify-center items-center py-2">
           <li>
             <a href="/">

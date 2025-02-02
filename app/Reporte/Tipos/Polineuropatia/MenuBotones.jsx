@@ -785,7 +785,7 @@ const StepF2 = ({ handleNextStep, handlePrevStep5, handleNextStep5 }) => {
   return (
     <div>
       <div className='button-bar'>
-        <button  onClick={() => {
+      <button  onClick={() => {
             removeConclusion('predominio_sentitivo')
             removeConclusion('predominio_motor')
 

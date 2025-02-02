@@ -1,7 +1,7 @@
 
-import { useState } from "react";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { useState } from "react";
 
 //La version dos es igual, salvo el color del fondo, en este caso gris.
 const EditableCardV2 = () => {

@@ -126,7 +126,7 @@ const Overhead = () => {
 
   return (
     <div className="relative z-10 Conteiner text-xs">
-      <header className="bg-[#1C1C1C] px-1 pt-2 flex items-center justify-between">
+      <header className="bg-[#000000] px-1 pt-2 flex items-center justify-between">
           {/*Buscador */}
           <div className="hidden md:flex items-center space-x-4">
           <div className="relative flex items-center">
@@ -154,7 +154,7 @@ const Overhead = () => {
               <input
                 type="text"
                 placeholder="    Buscar"
-                className="px-4 py-1 bg-[#1C1C1C] text-white text-sm rounded-full placeholder-white border border-white focus:outline-none focus:border-[#D06D33] transition-all pr-8 "
+                className="px-4 py-1 bg-[#000000] text-white text-sm rounded-full placeholder-white border border-white focus:outline-none focus:border-[#D06D33] transition-all pr-8 "
                 value={searchQuery}
                 onChange={handleSearchChange}
                 onKeyPress={handleSearchKeyPress}

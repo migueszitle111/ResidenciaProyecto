@@ -86,10 +86,10 @@ body {
 .buttonSmenu {
   font-family: LuxoraGrotesk;
   font-size: 15px;
-  background-color: #1c1c1c;
+  background-color: #1a1a1a;
   color: #fff;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
   height: 80px;
   width: 100px;
   display: flex;
@@ -97,7 +97,7 @@ body {
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
 }
 
 .buttonSmenu:hover {

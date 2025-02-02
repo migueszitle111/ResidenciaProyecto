@@ -1,8 +1,8 @@
 "use client"
-import React, { useState, useEffect } from "react";
-import images from "../exports";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import images from "../exports";
 
 const EventRoulette = () => {
   // Estado del componente
@@ -76,7 +76,7 @@ const EventRoulette = () => {
               exit="exit"
               transition={{ duration: 2 }}
             >
-               {isAdmin && (
+              {isAdmin && (
               <button
                 onClick={() => removeImage(index)}
                 className="absolute top-0 right-0 m-2 md:m-5 bg-red-500 text-white px-2 py-1 rounded-md"

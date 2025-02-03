@@ -8,9 +8,8 @@
   width: 100%;
   padding:10px;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   margin-top: 10px;
-
 }
 
 .pdf-export-mode .info-container {
@@ -23,10 +22,7 @@
   margin-top: 3px;
   height: 20vh;
   margin-bottom: 0px;
-  
-
   z-index: 1; 
-
 }
 
 
@@ -40,11 +36,9 @@
   gap : 10vh;
   padding-top: 2vh;
 }
-
 .head h1{
   font-size: 25px;
 }
-
 /* Titulo del reporte */
 .report-container{
   display: flex;
@@ -191,12 +185,10 @@
   margin: 10px;
   height: 20vh;
   margin-bottom: 0px;
-  
-
   z-index: 1; 
 }
 
-.info-container textarea {
+.info-container p {
   width: 100%;
   height: 100%;
   font-size: 14px;

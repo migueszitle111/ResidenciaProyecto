@@ -1,21 +1,20 @@
 import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
+import Registro from "C:/Users/migue/OneDrive/Escritorio/ProyectoPruebas/ResidenciaProyecto/app/Reporte/Tipos/Somatosensorial/page.js";
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
-
+import NextImage from 'next/image';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-
 export const exportToPdf = (
-  
   elementRef,
   conclusionDivRef,
   fileName = 'reporte.pdf',
-  userData = {}
+  userData = {},
 ) => {
   const input = elementRef?.current;
   if (!input) return;
@@ -23,26 +22,35 @@ export const exportToPdf = (
   document.body.classList.add('pdf-export-mode');
 
   html2canvas(input, {
-    scale: 4,
+    scale: 4, // Aumenta la resolución
     useCORS: true,
     backgroundColor: '#FFFFFF'
   }).then((canvas) => {
     document.body.classList.remove('pdf-export-mode');
 
-    // 1. Generar PDF
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const imgWidth = 150;
+    // Crear el PDF en formato A4
+    const pdf = new jsPDF('p', 'mm', 'a4'); // 'p' es para orientación vertical
+    const pageWidth = pdf.internal.pageSize.getWidth();  // 210mm
+    const pageHeight = pdf.internal.pageSize.getHeight(); // 297mm
+
+    // Ajustar tamaño de la imagen para ocupar el ancho completo
+    const imgWidth = pageWidth - 40; // Margen de 10mm a cada lado
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    // Centrar la imagen en el PDF
+    const xPos = (pageWidth - imgWidth) / 2;
+    const yPos = (pageHeight - imgHeight) / 2; // Para centrar también en vertical
+
     pdf.addImage(
       canvas.toDataURL('image/png'),
       'PNG',
-      30, // X
-      10, // Y
+      xPos,
+      yPos,
       imgWidth,
       imgHeight
     );
 
-    // 2. Extraer los datos del usuario (o usa destructuring)
+    // Agregar la información del usuario en el pie de página
     const {
       name = '',
       lastname = '',
@@ -51,23 +59,20 @@ export const exportToPdf = (
       cedula = '',
     } = userData;
 
-    pdf.setFont('times'); // Fuente elegante
-    pdf.setFontSize(10); // Tamaño de fuente más grande
-    pdf.setTextColor(0, 0, 102); // Azul marino
+    pdf.setFont('times');
+    pdf.setFontSize(8);
+    pdf.setTextColor(156, 156, 156);
 
-    // 3. Dibujar el texto "footer" con la info de usuario
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    // Por ejemplo, 10mm desde la izquierda, y 10mm desde el fondo
-    pdf.text(
-      `Nombre: ${name} ${lastname} | Email: ${email} | Esp: ${especialidad} | Cédula: ${cedula}`,
-      10,
-      pageHeight - 10
-    );
-
-    // 4. Guardar PDF
+    // pdf.text(
+    //   `${name} ${lastname} | ${email} | ${especialidad} | Cédula: ${cedula} `,
+    //   60,
+    //   pageHeight - 10
+    // );
+    // Guardar el PDF
     pdf.save(fileName || 'reporte.pdf');
   });
 };
+
 
 const DropArea = () => {
   const [droppedItems, setDroppedItems] = useState([]);
@@ -137,7 +142,8 @@ const Reporte = () => {
   
   // Carga datos de usuario
   const { data: session, status } = useSession();
-  const { name, lastname, cedula, especialidad } = session?.user || {};  const { conclusions } = useContext(ReportContext)
+  const {imagePreview} = Registro();
+  const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)
 
   const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
   const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
@@ -195,15 +201,37 @@ const formattedConclusions = formatConclusions(copyConclusions);
     useEffect(() => {
       const newConclusions = conclusions.map(cl => cl.title).join('');
       const formattedConclusions = formatConclusions(newConclusions);
-      setCopyConclusions(formattedConclusions);
+      setCopyConclusions(formattedConclusions );
   }, [conclusions]);
-
-
+  useEffect(() => {
+    const node = conclusionDivRef.current;
+    if (node && node.innerText !== copyConclusions) {
+      // Guardar posición del cursor
+      const selection = window.getSelection();
+      const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+      const { startOffset, startContainer } = range || {};
+      
+      // Actualizar contenido
+      node.innerText = copyConclusions;
+      
+      // Restaurar posición del cursor
+      if (range && startContainer) {
+        const newRange = document.createRange();
+        const childNodes = node.childNodes;
+        const textNode = childNodes.length > 0 ? childNodes[0] : document.createTextNode("");
+        if (!childNodes.length) node.appendChild(textNode);
+        
+        newRange.setStart(textNode, Math.min(startOffset, textNode.length));
+        newRange.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(newRange);
+      }
+    }
+  }, [copyConclusions]);
     // Para mantener constante la conclusione
     const handleTextareaChange = (event) => {
       setCopyConclusions(event.target.value)
     }
-
     // Funciones para el historial de imagenes, en caso de usar Undo te regresa a la imagen anterior
     const handleImageChange = useCallback((event) => {
       if (event.target.files && event.target.files[0]) {
@@ -260,7 +288,18 @@ const formattedConclusions = formatConclusions(copyConclusions);
     };
   }, []); 
 
-
+  const moveCaretToEnd = (element) => {
+    if (!element) return;
+    element.focus();
+    if (typeof window.getSelection !== "undefined" && typeof document.createRange !== "undefined") {
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      range.collapse(false); // Colapsa el rango al final del contenido
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+  };
   return (
     <div >
       {/* Clase que encapzula la información y el titulo de la pagina */}
@@ -389,41 +428,105 @@ const formattedConclusions = formatConclusions(copyConclusions);
               }
             },
           ]}
+          footertext={
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '16px',
+                fontSize: '12px',
+                color: '#9C9C9C'
+              }}
+            >
+              {/* Nombre */}
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <NextImage 
+                  src="/assets/IconSVG/I_Profile.svg" 
+                  alt="Usuario" 
+                  width={16} 
+                  height={16} 
+                  style={{ marginRight: '4px' }}
+                />
+                <span>{name} {lastname}</span>
+              </div>
+             
+              {/* Email */}
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <NextImage 
+                  src="/assets/IconSVG/I_Email.svg" 
+                  alt="Email" 
+                  width={16} 
+                  height={16} 
+                  style={{ marginRight: '4px' }}
+                />
+                <span>{email}</span>
+              </div>
+            
+              {/* Especialidad */}
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <NextImage 
+                  src="/assets/IconSVG/I_Brain.svg" 
+                  alt="Especialidad" 
+                  width={16} 
+                  height={16} 
+                  style={{ marginRight: '4px' }}
+                />
+                <span>{especialidad}</span>
+              </div>
+             
+              {/* Cédula */}
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <NextImage 
+                  src="/assets/IconSVG/I_Test.svg" 
+                  alt="Cédula" 
+                  width={16} 
+                  height={16} 
+                  style={{ marginRight: '4px' }}
+                />
+                <span>Cédula: {cedula}</span>
+              </div>
+            </div>
+          }
+          userImageUrl={imageUrl}  // Aquí se pasa la URL de la imagen del usuario
+
         />
+  
 <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
-  <div
-     ref={conclusionDivRef} 
-     contentEditable
-    style={{
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      whiteSpace: 'pre-wrap',
-      wordWrap: 'break-word',
-      outline: 'none',
-      overflow: 'auto',
-      resize: 'none',
-      fontSize: '14px',
-      paddingTop: '10px',
-      paddingLeft: '10px',
-      paddingRight: '10px',
-
-    }}
-    onInput={(e) => {
-      setCopyConclusions(e.currentTarget.innerText);
-    }}
-  >
-    {copyConclusions}
-
+<div
+  ref={conclusionDivRef}
+  contentEditable
+  style={{
+    position: 'absolute',
+    width: '95%',
+    height: '100%',
+    outline: 'none',
+    resize: 'none',
+    fontSize: '12px',
+    paddingTop: '8px',
+    marginLeft: '10px',
+  }}
+  onInput={(e) => {
+    setCopyConclusions(e.currentTarget.innerText);
+  }}
+  onFocus={(e) => {
+    // Mover el cursor al final del contenido
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.selectNodeContents(e.target);
+    range.collapse(false); // Colapsar al final
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }}
+  suppressContentEditableWarning={true}
+/>
 </div>
-
       </div>
       <div><DropArea /> </div>
         </div>
         </div>
         </div>
       </div>
-    </div>
   )
 }
 

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useContext } from 'react'
 
 // Se recibe el objeto de la imagen y las reglas
-export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rules }) {
+export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rules ,footertext='', userImageUrl = '' }) {
   // Utiliza el contexto para obtener las conclusiones
   const { conclusions } = useContext(ReportContext)
   
@@ -51,6 +51,47 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
           return null; // Retorna null si no se cumple la condición
         })
       }
+      {/* Imagen del usuario en la esquina superior derecha */}
+      {userImageUrl && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 5,
+            right: 5,
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            overflow: 'hidden',
+            zIndex: 20
+          }}
+        >
+          <Image 
+            src={userImageUrl}
+            alt="User Profile"
+            layout="fill"
+            objectFit="cover"
+          />
+        </div>
+      )}
+      {/* Se agrega el footer sobre la imagen */}
+      {footertext && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            textAlign: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.7)', // Opcional, para mejorar la legibilidad
+            color: '#9C9C9C',
+            fontSize: '12px',
+            margin: '5.5px'
+          }}
+        >
+          {footertext}
+        </div>
+      )}
+      
     </div>
   )
 }

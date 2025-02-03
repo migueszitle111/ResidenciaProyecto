@@ -408,10 +408,7 @@ const Reporte = () => {
               expectedValue: 'superior_derechoindemne', 
              
                 image: [
-                  {
-                    src: 'SomatosensorialImg/SUPERIORDERECHA.png',
-                    alt: 'Modelo',
-                  },
+                 
                   {
                     src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
                     alt: 'Modelo',
@@ -421,16 +418,13 @@ const Reporte = () => {
             {
               expectedValue: 'superior_izquierdoindemne', 
              
-                image: [
+                image: 
                   {
                     src: 'SomatosensorialImg/SUPERIORDERECHA.png',
                     alt: 'Modelo',
                   },
-                  {
-                    src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
-                    alt: 'Modelo',
-                  }
-                ]
+                 
+                
             },
             //inferiores
             {
@@ -484,30 +478,24 @@ const Reporte = () => {
             {
               expectedValue: 'inferior_derechoindemne', 
              
-                image: [
-                  {
-                    src: 'SomatosensorialImg/INFERIORDERECHA.png',
-                    alt: 'Modelo',
-                  },
+                image: 
+                  
                   {
                     src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
                     alt: 'Modelo',
                   }
-                ]
+                
             },
             {
               expectedValue: 'inferior_izquierdoindemne', 
              
-                image: [
+                image: 
                   {
                     src: 'SomatosensorialImg/INFERIORDERECHA.png',
                     alt: 'Modelo',
-                  },
-                  {
-                    src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
-                    alt: 'Modelo',
                   }
-                ]
+                
+                
             },
 //trigemino
             {

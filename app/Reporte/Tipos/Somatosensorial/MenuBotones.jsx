@@ -43,7 +43,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'F1' && (<StepF1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide} />)}
       {step === 'F2' && (<StepF2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide}  />)}
       {step === 'F3' && (<StepF3 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep}setSelectedSide={setSelectedSide}   />)}
-      {step === 'F4' && (<StepF4 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep}  />)}
+      {step === 'F4' && (<StepF4 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep}setSelectedSide={setSelectedSide} />)}
       {step === 'G1' && (<StepG1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
       {step === 'G2' && (<StepG2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
       {step === 'G3' && (<StepG3 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
@@ -62,7 +62,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'F1_i' && (<StepF1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide} />)}
       {step === 'F2_i' && (<StepF2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide}  />)}
       {step === 'F3_i' && (<StepF3_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep}setSelectedSide={setSelectedSide}   />)}
-      {step === 'F4_i' && (<StepF4_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep}  />)}
+      {step === 'F4_i' && (<StepF4_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide}  />)}
       {step === 'G1_i' && (<StepG1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
       {step === 'G2_i' && (<StepG2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
       {step === 'G3_i' && (<StepG3_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
@@ -490,7 +490,7 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
   </div>
 );}
 
-const StepF4 = ({ handlePrevStep, handleNextStep, setStep }) =>{
+const StepF4 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{
   const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
@@ -509,6 +509,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep }) =>{
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
+          setSelectedSide('izquierdo');
           setStep('H4');
         }}>
       <ConclusionButton
@@ -519,6 +520,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep }) =>{
       />
     </div>
     <div  onClick={() => {
+          setSelectedSide('derecho');
           setStep('H4');
         }}>
       <ConclusionButton
@@ -529,6 +531,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep }) =>{
       />
     </div>
     <div onClick={() => {
+          setSelectedSide('bilateral');
           setStep('H4');
         }}>
       <ConclusionButton
@@ -1148,7 +1151,7 @@ const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
     </div>
   </div>
 );}
-const StepF4_i = ({ handlePrevStep, handleNextStep, setStep }) => {
+const StepF4_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => {
   const { removeConclusion } = useContext(ReportContext)
 
   return(
@@ -1169,6 +1172,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep }) => {
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
+          setSelectedSide('izquierdo');
           setStep('H4_i');
         }}>
       <ConclusionButton
@@ -1179,6 +1183,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep }) => {
       />
     </div>
     <div  onClick={() => {
+          setSelectedSide('derecho');
           setStep('H4_i');
         }}>
       <ConclusionButton
@@ -1189,6 +1194,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep }) => {
       />
     </div>
     <div onClick={() => {
+          setSelectedSide('bilateral');
           setStep('H4_i');
         }}>
       <ConclusionButton

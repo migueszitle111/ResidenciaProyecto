@@ -143,7 +143,6 @@ const StepA = ({ handleNextStep }) => {
       <h1 className=' text-xl font-bold text-white'>
         CLASIFICACION
       </h1>
-
         <div onClick={ handleNextStep }>
           <ConclusionButton value='adquirido' title='BLOQUEO DE LA UNION NEUROMUSCULAR ADQUIRIDO,' displayText={'ADQUIRIDO'}/>
           <ConclusionButton value='hereditario' title='BLOQUEO DE LA UNION NEUROMUSCULAR HEREDITARIO,' displayText={'HEREDITARIO'}/>
@@ -330,8 +329,6 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
       <ConclusionButton value = 'recuperacion_parcial' title = ' CON RECUPERACIÓN PARCIAL AL REPOSO' displayText={'PARCIAL AL REPOSO'}/>
       <ConclusionButton value = 'recuperacion_nula' title = ' SIN RECUPERACIÓN AL REPOSO' displayText={'SIN RECUPERACIÓN'}/>
       </div>
-
-      
     </div>
   );
 };

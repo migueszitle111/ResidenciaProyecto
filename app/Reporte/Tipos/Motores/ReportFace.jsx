@@ -320,7 +320,8 @@ const Reporte = () => {
             },
 
           ]}
-        /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
+        /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
+          <textarea
         value={copyConclusions}
         defaultValue=""
         onChange={handleTextareaChange}

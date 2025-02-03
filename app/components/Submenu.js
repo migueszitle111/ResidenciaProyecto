@@ -9,7 +9,7 @@ const Submenu = () => {
   const allpages = [
     {
       name: "Reporte",
-      imagen: "/assets/SubmenuSvg/I_Reporte_Blanco.png",
+      imagen: "/assets/SubmenuSvg/mEDX_Reporte.svg",
       path: "/Reporte",
     },
     {
@@ -79,7 +79,7 @@ const Submenu = () => {
   };
   return (
     <div>
-      <nav className="p-8 text-white">
+      <nav className="p-4 text-white">
         <Slider {...settings}>
           {allpages.map((page) => (
             <li key={page.name} flex space-x-20 justify-center aling-center>

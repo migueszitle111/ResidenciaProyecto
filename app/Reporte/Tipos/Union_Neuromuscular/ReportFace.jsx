@@ -1,6 +1,5 @@
 import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
-import Registro from "C:/Users/migue/OneDrive/Escritorio/ProyectoPruebas/ResidenciaProyecto/app/Reporte/Tipos/Somatosensorial/page.js";
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
@@ -142,7 +141,6 @@ const Reporte = () => {
   
   // Carga datos de usuario
   const { data: session, status } = useSession();
-  const {imagePreview} = Registro();
   const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)
 
   const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones

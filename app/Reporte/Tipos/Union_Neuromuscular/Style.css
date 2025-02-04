@@ -23,6 +23,7 @@
   height: 20vh;
   margin-bottom: 0px;
   z-index: 1; 
+
 }
 
 
@@ -228,6 +229,9 @@
   justify-content: space-between;
   width: 100%;
   padding-bottom: 1vh;
+  z-index: 10;
+
+  
 }
 
 .button-bar button, .button-bar input[type="file"], .button-bar label {
@@ -341,6 +345,9 @@
   position: absolute;
   overflow: hidden;
   background-color: transparent;
+  z-index: 1;
+
+
 }
 
 
@@ -353,6 +360,7 @@
   margin-left: 10px;
   margin-top: 10px;
   display: flex;
+  z-index: 1;
 }
 
 /* Cuando el elemento está siendo arrastrado (tamaño original) */
@@ -360,6 +368,7 @@
   width: 240px;
   height: 120px;
   margin-left: -10px;
+  z-index: 1;
 }
 
 .cuadro2 {
@@ -372,6 +381,7 @@
   margin-top: 5px;
   margin-bottom: 15px;
   margin-left: 40px;
+  z-index: 1;
 }
 
 .cuadro2-expanded {
@@ -380,6 +390,7 @@
   margin-top: 15px;
   margin-bottom: 15px;
   margin-left: 135px;
+  z-index: 1;
 }
 
 
@@ -393,6 +404,7 @@
   margin-top:  5px;
   margin-bottom: 15px;
   margin-left: 10px;
+  z-index: 1;
 }
 
 .cuadro3-expanded {
@@ -401,6 +413,7 @@
   margin-top:  15px;
   margin-bottom: 15px;
   margin-left: 10px;
+  z-index: 1;
 }
 
 /*Circulos donde se insertan las imagenes*/
@@ -413,12 +426,14 @@
   margin-left: -5px;
   margin-top: 10px;
   display: flex;
+  z-index: 1;
 }
 
 /* Cuando el elemento está siendo arrastrado (tamaño original) */
 .circulo-expanded {
   width: 240px;
   height: 120px;
+  z-index: 1;
   
 }
 
@@ -433,6 +448,7 @@
   margin-bottom: 15px;
   margin-left: 40px;
   border-radius: 100%;
+  z-index: 1;
 }
 
 .circulo2-expanded {
@@ -441,10 +457,12 @@
   margin-top:  15px;
   margin-bottom: 15px;
   margin-left: 135px;
+  z-index: 1;
 }
 
 .circulo2 > .dropArea2{
   border-radius: 100%;
+  z-index: 1;
 }
 
 
@@ -459,6 +477,7 @@
   margin-bottom: 15px;
   margin-left: 10px;
   border-radius: 100%;
+  z-index: 1;
 }
 
 .circulo3-expanded {
@@ -467,10 +486,12 @@
   margin-top:  15px;
   margin-bottom: 15px;
   margin-left: 10px;
+  z-index: 1;
 }
 
 .circulo3 > .dropArea2{
   border-radius: 100%;
+  z-index: 1;
 }
 
 
@@ -482,6 +503,7 @@
   background-color: transparent;
   pointer-events: none;
   margin-top: 5px;
+  z-index: 1;
   
 }
 
@@ -493,6 +515,7 @@
   margin-bottom: 10px;
   margin-left: 55px;
   transform: scale(1.1); /* Escala la imagen un poco al expandir */
+  z-index: 1;
 }
 
 .lineaImg2{
@@ -504,6 +527,7 @@
   pointer-events: none;
   margin-top: 5px;
   margin-left: 35px;
+  z-index: 1;
   
 }
 
@@ -515,6 +539,7 @@
   margin-bottom: 10px;
   margin-left: 60px;
   transform: scale(1.1); /* Escala la imagen un poco al expandir */
+  z-index: 1;
 }
 
 

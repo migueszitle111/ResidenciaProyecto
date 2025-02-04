@@ -79,13 +79,8 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
           style={{
             position: 'absolute',
             bottom: 0,
-            left: 0,
-            right: 0,
-            textAlign: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.7)', // Opcional, para mejorar la legibilidad
-            color: '#9C9C9C',
-            fontSize: '12px',
-            margin: '5.5px'
+            display: 'inline-flex',
+            marginBottom: '10px',
           }}
         >
           {footertext}

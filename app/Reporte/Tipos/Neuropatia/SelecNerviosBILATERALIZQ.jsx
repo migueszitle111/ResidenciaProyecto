@@ -158,13 +158,15 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari61' title='/DE DEDOS II-III,' displayText=' ' /> </div>
         <div style={{ position: 'absolute', top: '44.2%', left: '69.6%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari62' title='/DE DEDOS II-III,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '45.0%', left: '69.8%', }}
-          className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari63' title='/DE DEDOS II-III,' displayText=' ' /> </div>
+        
 
 
       </>);
 
   }
+  /*<div style={{ position: 'absolute', top: '45.0%', left: '69.8%', }}
+          className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari63' title='/DE DEDOS II-III,' displayText=' ' /> </div>
+  */
   if (
     copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO IZQUIERDO') &&
     copyConclusions.includes('FOCALIZADA A NIVEL') &&

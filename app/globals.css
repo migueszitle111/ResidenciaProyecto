@@ -83,6 +83,20 @@ body {
 .buttommenu:hover {
   color: #c44900;
 }
+
+nav {
+  padding: 0 20px; /* Añade un padding a los lados para separar el carrusel de los bordes de la pantalla */
+}
+
+/* Sobrescribe los estilos de react-slick */
+.slick-slide {
+  padding: 0 20px; /* Ajusta el padding horizontal */
+}
+
+.slick-list {
+  margin: 0 -10px; /* Compensa el padding de los slides */
+}
+
 .buttonSmenu {
   font-family: LuxoraGrotesk;
   font-size: 15px;
@@ -90,19 +104,20 @@ body {
   color: #fff;
   cursor: pointer;
   border-radius: 10px;
-  height: 80px;
+  height: 100px;
   width: 100px;
   display: flex;
   align-items: center;
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  /* border: 1px solid #fff; */
+  margin: 0 10px; /* Añade un margen horizontal para separar los botones */
 }
 
 .buttonSmenu:hover {
   background: linear-gradient(to bottom right, #000000, #1c1c1c);
 }
+
 .grayscale {
   filter: grayscale(100%);
 }

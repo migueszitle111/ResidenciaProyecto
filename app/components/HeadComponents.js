@@ -9,7 +9,7 @@ const HeadComponents = () => {
     <div>
       <Overhead />
       <OverheadMenu />
-      <hr className="bg-grey h-0.5" />
+      <hr className="bg-white" style={{ height: '0.2px' }} />
     </div>
   );
 };

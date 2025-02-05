@@ -48,6 +48,7 @@ const Submenu = () => {
       path: "/Patrocinio",
     },
   ];
+
   const settings = {
     dots: true,
     arrows: true,
@@ -55,36 +56,40 @@ const Submenu = () => {
     speed: 500,
     slidesToShow: 8,
     slidesToScroll: 1,
-
+    centerMode: false, // Desactiva el modo centrado
     responsive: [
       {
-        breakpoint: 1024, // Ajusta el número de elementos para pantallas más grandes (1024px y superiores)
+        breakpoint: 1024,
         settings: {
           slidesToShow: 6,
+          centerMode: false,
         },
       },
       {
-        breakpoint: 768, // Ajusta el número de elementos para tabletas y dispositivos más pequeños (768px y superiores)
+        breakpoint: 768,
         settings: {
           slidesToShow: 4,
+          centerMode: false,
         },
       },
       {
-        breakpoint: 480, // Ajusta el número de elementos para dispositivos móviles (480px y superiores)
+        breakpoint: 480,
         settings: {
           slidesToShow: 3,
+          centerMode: false,
         },
       },
     ],
   };
+
   return (
-    <div>
+    <div className="w-full">
       <nav className="p-4 text-white">
         <Slider {...settings}>
           {allpages.map((page) => (
-            <li key={page.name} flex space-x-20 justify-center aling-center>
+            <div key={page.name} className="px-1">
               <a href={page.path}>
-                <button className="buttonSmenu flex items-center space-x-2">
+                <button className="buttonSmenu">
                   <Image
                     src={page.imagen}
                     alt={page.name}
@@ -94,12 +99,13 @@ const Submenu = () => {
                   {page.name}
                 </button>
               </a>
-            </li>
+            </div>
           ))}
         </Slider>
       </nav>
     </div>
   );
 };
+
 
 export default Submenu;

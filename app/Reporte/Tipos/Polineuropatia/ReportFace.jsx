@@ -95,7 +95,8 @@ const DropArea = () => {
     function formatConclusions(copyConclusions) {
         const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
         const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
-        const keywords4 = ["ASIMÉTRICA PROXIMAL.", "ASIMÉTRICA DISTAL.", "ASIMÉTRICA SEGMENTARIA.", "ASIMÉTRICA GENERALIZADA.", "SIMÉTRICA PROXIMAL.", "SIMÉTRICA DISTAL", "SIMÉTRICA SEGMENTARIA.", "SIMÉTRICA GENERALIZADA.", "MULTIFOCAL PROXIMAL.", "MULTIFOCAL DISTAL", "MULTIFOCAL SEGMENTARIA.", "MULTIFOCAL GENERALIZADA."];
+        const keywords4 = ["ASIMÉTRICA PROXIMAL.", "ASIMÉTRICA DISTAL.", "ASIMÉTRICA SEGMENTARIA.", "ASIMÉTRICA GENERALIZADA.", "SIMÉTRICA PROXIMAL.", "SIMÉTRICA DISTAL.", "SIMÉTRICA SEGMENTARIA.", "SIMÉTRICA GENERALIZADA.", "MULTIFOCAL PROXIMAL.", "MULTIFOCAL DISTAL.", "MULTIFOCAL SEGMENTARIA.", "MULTIFOCAL GENERALIZADA."];
+        const keywords5 = ["PROXIMAL", "DISTAL", "SEGMENTARIA", "GENERALIZADA"]; // Nueva condición específica
         const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL"];
         const specificKeywords = ["C5", "C6", "C7", "C8", "T1"]; // Nueva condición específica
         let words = copyConclusions.split(' ');
@@ -174,6 +175,15 @@ const DropArea = () => {
             // Insertar la conjunción antes de la última palabra clave
             words.splice(lastKeywordIndex, 0, conjunction);
         }
+    
+        // Verificar las palabras clave específicas en keywords5 y agregar punto y doble salto de línea
+        for (let i = 0; i < words.length; i++) {
+            if (keywords5.includes(words.slice(i, i + 1).join(''))) { // Comparar con las palabras clave de 1 palabra
+                words[i] = words[i].trim() + '.'; // Agregar punto y doble salto de línea después de la palabra clave y eliminar espacio en blanco
+            }
+        }
+
+        
     
         // Unir las palabras con espacios
         let formattedConclusions = words.join(' ');

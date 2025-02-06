@@ -1,11 +1,10 @@
 'use client'
-import React from 'react';
-import './Style.css';
 import { ReportContextProvider } from '@/src/context';
 import FooterComponents from '../../../components/FooterComponents';
 import HeadComponents from '../../../components/HeadComponents';
-import ReportFace from './ReportFace';
 import MenuReportes from '../../../components/ReportTemplate/MenuReportes';
+import ReportFace from './ReportFace';
+import './Style.css';
 
 const Page = () => {
   return (

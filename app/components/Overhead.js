@@ -93,8 +93,8 @@ const Overhead = () => {
       case "patrocinio":
         router.push("/Patrocinio");
         break;
-      case "valores":
-        router.push("/Valores");
+      case "Tecnicas":
+        router.push("/Tecnicas");
         break;
 
       default:

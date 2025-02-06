@@ -798,7 +798,7 @@ const StepF = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
 
       
       <div onClick={handleNextStep4}>
-        <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS,' displayText={'MIXTA'} />     
+        <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS,' displayText={'MIXTA'} />
       </div>
 
 
@@ -996,7 +996,7 @@ const StepG2 = ({ handleNextStep, handlePrevStep5, handleNextStep5 }) => {
       </h1>
 
       <div onClick={ handleNextStep5 }>
-      <ConclusionButton value = 'intensidad_leve' title = ' INTENSIDAD LEVE aaaa' displayText={'LEVE'}/>
+      <ConclusionButton value = 'intensidad_leve' title = ' INTENSIDAD LEVE' displayText={'LEVE'}/>
       <ConclusionButton value = 'intensidad_moderada' title = ' INTENSIDAD MODERADA' displayText={'MODERADA'}/>
       </div>
 
@@ -1194,10 +1194,10 @@ const StepI3 = ({ handlePrevStep5,handleNextStep1, handleNextStep5 }) => {
         EXTENSION
       </h1>
       <div onClick={handleNextStep5}>
-      <ConclusionButton value = 'proximal' title = ' PROXIMAL.' displayText={'PROXIMAL'}/>
-      <ConclusionButton value = 'distal' title = ' DISTAL.' displayText={'DISTAL'} />
-      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA.' displayText={'SEGMENTARIA'}/>
-      <ConclusionButton value = 'proximal' title = ' GENERALIZADA.' displayText={'GENERALIZADA'}/>
+      <ConclusionButton value = 'proximal' title = ' PROXIMAL' displayText={'PROXIMAL'}/>
+      <ConclusionButton value = 'distal' title = ' DISTAL' displayText={'DISTAL'} />
+      <ConclusionButton value = 'proximal'title = ' SEGMENTARIA' displayText={'SEGMENTARIA'}/>
+      <ConclusionButton value = 'proximal' title = ' GENERALIZADA' displayText={'GENERALIZADA'}/>
       </div>
 
       

@@ -84,7 +84,7 @@ const Submenu = () => {
 
   return (
     <div className="w-full">
-      <nav className="p-4 text-white">
+      <nav className="p-2 text-white">
         <Slider {...settings}>
           {allpages.map((page) => (
             <div key={page.name} className="px-1">

@@ -74,7 +74,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       return (<div>
         
         <div onClick={ handleNextStep1 }>
-          <ConclusionButton value='pre_total' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL aaa'}/>
+          <ConclusionButton value='pre_total' title=' PREGANGLIONAR TOTALaaa' displayText={'PREGANGLIONAR TOTALaaa'}/>
         </div>
         <InternalAccordionContainer>
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'} type='internal'>
@@ -124,7 +124,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='pre_totald' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
-<AccordionContainer>
+      <AccordionContainer>
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'}>
           <ConclusionButton value='c5si' title=' C5' displayText={'C5'}/>
           <ConclusionButton value='c6si' title=' C6' displayText={'C6'}/>
@@ -160,7 +160,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
             <ConclusionButton value='tron10000i' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
           </div>
         </Accordion>
-</AccordionContainer>
+    </AccordionContainer>
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='salidai' title=' A NIVEL DE SALIDA TORÁCICA' displayText={'SALIDA TORÁCICA'}/>
         </div></div>
@@ -171,7 +171,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         <div onClick={ handleNextStep1 }>
           <ConclusionButton value='pre_totali' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
-<AccordionContainer>
+      <AccordionContainer>
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'}>
           <ConclusionButton value='c5s' title=' C5' displayText={'C5'}/>
           <ConclusionButton value='c6s' title=' C6' displayText={'C6'}/>
@@ -1040,8 +1040,8 @@ const StepD2 = ({ handleNextStep1, handlePrevStep1, handleNextStep5, handleNextS
     <div>
       <div className='button-bar'>
         <button  onClick={() => {
+          removeConclusion('pre_total');
           removeConclusion('c5sd');
-          removeConclusion('c6sd');
           removeConclusion('c6sd');
           removeConclusion('c7md');
           removeConclusion('c8fd');
@@ -1052,7 +1052,6 @@ const StepD2 = ({ handleNextStep1, handlePrevStep1, handleNextStep5, handleNextS
           removeConclusion('CordonD');
           removeConclusion('prueba1000');
           removeConclusion('tron1000d');
-          removeConclusion('divid');
           removeConclusion('tron10000d');
           removeConclusion('salidad');
           removeConclusion('pre_totald');
@@ -1061,7 +1060,24 @@ const StepD2 = ({ handleNextStep1, handlePrevStep1, handleNextStep5, handleNextS
           removeConclusion('c7mi');
           removeConclusion('c8fi');
           removeConclusion('t1fi');
-
+          removeConclusion('troncosI');
+          removeConclusion('diviI');
+          removeConclusion('CordonI');
+          removeConclusion('tron1000i');
+          removeConclusion('divii');
+          removeConclusion('tron10000i');
+          removeConclusion('salidai');
+          removeConclusion('pre_totali');
+          removeConclusion('c5s');
+          removeConclusion('c6s');
+          removeConclusion('c7m');
+          removeConclusion('c8f');
+          removeConclusion('t1f');
+          removeConclusion('troncosB');
+          removeConclusion('divi');
+          removeConclusion('CordonB');
+          removeConclusion('tron1000');
+          removeConclusion('tron10000');
 
             handlePrevStep1()
           }} className={`print-button`}>
@@ -1084,12 +1100,27 @@ const StepD2 = ({ handleNextStep1, handlePrevStep1, handleNextStep5, handleNextS
   );
 };
 
-const StepD2A = ({handleNextStep5, assignFirstValue, assignSecondValue, assignThirdValue, muestralog, handlePrevStep5, ubicaciond2a}) => {
+const StepD2A = ({handleNextStep5, handlePrevStep5, ubicaciond2a}) => {
   return (
     <div>
       <div className='button-bar'>
-        <button  onClick={handlePrevStep5} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+      <button  onClick={() => {
+          removeConclusion('supd');
+          removeConclusion('mediod');
+          removeConclusion('infd');
+
+          removeConclusion('supi');
+          removeConclusion('medioi');
+          removeConclusion('infi');
+
+          removeConclusion('sup');
+          removeConclusion('medio');
+          removeConclusion('inf');
+
+
+            handlePrevStep5()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
@@ -1112,8 +1143,22 @@ const StepD2B = ({ handleNextStep6, handlePrevStep6, ubicaciond2b }) => {
   return (
     <div>
       <div className='button-bar'>
-        <button  onClick={handlePrevStep6} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+      <button  onClick={() => {
+            removeConclusion('laterald');
+            removeConclusion('posteriord');
+            removeConclusion('mediald');
+
+            removeConclusion('laterali');
+            removeConclusion('posteriori');
+            removeConclusion('mediali');
+
+            removeConclusion('lateral');
+            removeConclusion('posterior');
+            removeConclusion('medial');
+
+            handlePrevStep6()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
@@ -1137,8 +1182,40 @@ const StepD3 = ({ handleNextStep2, handlePrevStep2, handleNextStep7, ubicaciond3
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={handlePrevStep2} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+      <button  onClick={() => {
+            removeConclusion('preganglionar_totald');
+            removeConclusion('holad');
+            removeConclusion('postganglionar_totald');
+            removeConclusion('ilihipogastrico_e_ilinguinald');
+            removeConclusion('genitocrural_y_femorocutáneo_laterald');
+            removeConclusion('plexo_lumbard');
+            removeConclusion('plexo_lumbosacrod');
+            removeConclusion('plexo_sacrod');
+            removeConclusion('plexo_pudendod');
+
+            removeConclusion('preganglionar_totali');
+            removeConclusion('holai');
+            removeConclusion('postganglionar_totali');
+            removeConclusion('ilihipogastrico_e_ilinguinali');
+            removeConclusion('genitocrural_y_femorocutáneo_laterali');
+            removeConclusion('plexo_lumbari');
+            removeConclusion('plexo_lumbosacroi');
+            removeConclusion('plexo_sacroi');
+            removeConclusion('plexo_pudendoi');
+
+            removeConclusion('preganglionar_total');
+            removeConclusion('hola');
+            removeConclusion('postganglionar_total');
+            removeConclusion('ilihipogastrico_e_ilinguinal');
+            removeConclusion('genitocrural_y_femorocutáneo_lateral');
+            removeConclusion('plexo_lumbar');
+            removeConclusion('plexo_lumbosacro');
+            removeConclusion('plexo_sacro');
+            removeConclusion('plexo_pudendo');
+
+            handlePrevStep2()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
@@ -1162,8 +1239,40 @@ const StepD3A = ({ handleNextStep7, handlePrevStep7, ubicaciond3a }) => {
   return (
     <div>
       <div className='button-bar'>
-        <button  onClick={handlePrevStep7} id='prev' className={`print-button dont-print `}>
-          <img src="/I_Out.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        <button  onClick={() => {
+            removeConclusion('preganglionar_totald');
+            removeConclusion('holad');
+            removeConclusion('postganglionar_totald');
+            removeConclusion('ilihipogastrico_e_ilinguinald');
+            removeConclusion('genitocrural_y_femorocutáneo_laterald');
+            removeConclusion('plexo_lumbard');
+            removeConclusion('plexo_lumbosacrod');
+            removeConclusion('plexo_sacrod');
+            removeConclusion('plexo_pudendod');
+
+            removeConclusion('preganglionar_totali');
+            removeConclusion('holai');
+            removeConclusion('postganglionar_totali');
+            removeConclusion('ilihipogastrico_e_ilinguinali');
+            removeConclusion('genitocrural_y_femorocutáneo_laterali');
+            removeConclusion('plexo_lumbari');
+            removeConclusion('plexo_lumbosacroi');
+            removeConclusion('plexo_sacroi');
+            removeConclusion('plexo_pudendoi');
+
+            removeConclusion('preganglionar_total');
+            removeConclusion('hola');
+            removeConclusion('postganglionar_total');
+            removeConclusion('ilihipogastrico_e_ilinguinal');
+            removeConclusion('genitocrural_y_femorocutáneo_lateral');
+            removeConclusion('plexo_lumbar');
+            removeConclusion('plexo_lumbosacro');
+            removeConclusion('plexo_sacro');
+            removeConclusion('plexo_pudendo');
+
+            handlePrevStep7()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
         <button onClick={() => window.location.reload()} className={`print-button`}>

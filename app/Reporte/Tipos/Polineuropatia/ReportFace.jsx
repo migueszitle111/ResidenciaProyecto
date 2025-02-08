@@ -97,6 +97,7 @@ const DropArea = () => {
         const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
         const keywords4 = ["ASIMÉTRICA PROXIMAL.", "ASIMÉTRICA DISTAL.", "ASIMÉTRICA SEGMENTARIA.", "ASIMÉTRICA GENERALIZADA.", "SIMÉTRICA PROXIMAL.", "SIMÉTRICA DISTAL.", "SIMÉTRICA SEGMENTARIA.", "SIMÉTRICA GENERALIZADA.", "MULTIFOCAL PROXIMAL.", "MULTIFOCAL DISTAL.", "MULTIFOCAL SEGMENTARIA.", "MULTIFOCAL GENERALIZADA."];
         const keywords5 = ["PROXIMAL", "DISTAL", "SEGMENTARIA", "GENERALIZADA"]; // Nueva condición específica
+        const keywords6 = ["FIBRAS MIXTAS"]; // Nueva condición específica
         const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL"];
         const specificKeywords = ["C5", "C6", "C7", "C8", "T1"]; // Nueva condición específica
         let words = copyConclusions.split(' ');
@@ -182,8 +183,15 @@ const DropArea = () => {
                 words[i] = words[i].trim() + '.'; // Agregar punto y doble salto de línea después de la palabra clave y eliminar espacio en blanco
             }
         }
-
-        
+    
+        // Verificar la palabra clave específica en keywords6 (FIBRAS MIXTAS)
+        for (let i = 0; i < words.length; i++) {
+            if (keywords6.includes(words.slice(i, i + 2).join(' '))) {
+                if (!words.slice(i, i + 5).join(' ').includes("PREDOMINIO SENSITIVO") && !words.slice(i, i + 5).join(' ').includes("PREDOMINIO MOTOR")) {
+                    words[i + 1] += ','; // Agregar coma al final de 'MIXTAS' si no contiene 'PREDOMINIO SENSITIVO' o 'PREDOMINIO MOTOR'
+                }
+            }
+        }
     
         // Unir las palabras con espacios
         let formattedConclusions = words.join(' ');
@@ -424,7 +432,6 @@ const DropArea = () => {
         </div>
         <div><DropArea /> </div>
             </div>
-            
             </div>
             </div>
         </div>

@@ -89,7 +89,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
           <ConclusionButton value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
         </div> */}
         <AccordionContainer>
-        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL 1'}  type='external'>
+        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}  type='external'>
           <div onClick={handleNextStep1}>
             <ConclusionButton value='troncosD' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
@@ -137,7 +137,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
           <ConclusionButton value='post_totali' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
         </div> */}
 
-        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL 2'}>
+        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
           <div onClick={handleNextStep1}>
             <ConclusionButton value='troncosI' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
@@ -184,7 +184,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
           <ConclusionButton value='post_total' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
         </div> */}
 
-        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL 3'}>
+        <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
           <div onClick={handleNextStep1}>
             <ConclusionButton value='troncosB' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
@@ -279,7 +279,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         </div>
 
         <div onClick={ handleNextStep2 }>
-          <ConclusionButton value='postganglionar_totald' title=' POSTGANGLIONAR TOTAL 4' displayText={'POSTGANGLIONAR TOTAL 4'}/>
+          <ConclusionButton value='postganglionar_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
         </div>
         <AccordionContainer>
         <Accordion title='POSTGANGLIONAR PACIAL' value='POSTGANGLIONAR PACIAL' type='external'> 
@@ -307,7 +307,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
         </div>
 
         <div onClick={ handleNextStep2 }>
-          <ConclusionButton value='postganglionar_totali' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL 5'}/>
+          <ConclusionButton value='postganglionar_totali' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}/>
         </div>
         <AccordionContainer>
         <Accordion title='POSTGANGLIONAR PACIAL' value='POSTGANGLIONAR PACIAL' type='external'>
@@ -1049,7 +1049,7 @@ const StepC3 = ({ handleNextStep2, handlePrevStep2 }) => {
       </h1>
 
       <div onClick={ handleNextStep2 }>
-      <ConclusionButton value='aguda' title=' AGUDA 3' />
+      <ConclusionButton value='aguda' title=' AGUDA' />
       <ConclusionButton value='subaguda' title=' SUBAGUDA' />
       <ConclusionButton value='cronica' title=' CRONICA' />
       </div>

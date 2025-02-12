@@ -1,8 +1,8 @@
-import { useState,useContext} from 'react';
+import { ReportContext } from '@/src/context';
+import { useContext, useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
-import { ReportContext } from '@/src/context'
 import './Style.css';
 
 // Numero de pasos
@@ -90,6 +90,8 @@ const StepB = ({ handlePrevStep, handleNextStep, setStep }) => {
   <div>
     <div className='button-bar'>
       <button onClick={() => {
+        removeConclusion('indenme')
+        removeConclusion('alterada')
         removeConclusion('retardo_en_la_conduccion')
         removeConclusion('bloqueo_en_la_conduccion')
         removeConclusion('deficit_neuronal')
@@ -194,10 +196,13 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
 };
 
 const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('C2')} className="print-button dont-print">
+      <button onClick={() =>{ 
+        removeConclusion('retardo_secundario_en_la_conduccions')
+        setStep('C2')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       
@@ -211,60 +216,76 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
 );
 };
 
-const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => (
-  <div>
-    <div className='button-bar'>
-      <button onClick={() => setStep('B')} className="print-button dont-print">
-        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-      </button>
-      <button onClick={()=>setStep('F')} className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
-    </div>
-    <h1 className="text-xl font-bold text-white">LADO:</h1>
-    <div  onClick={() => {
-          setSelectedSide('izquierdo');
-          setStep('F');
-        }}>
-      <ConclusionButton
-        value="izquierdo"
-        title="PARA LADO IZQUIERDO "
-        displayText="IZQUIERDO"
-       
-      />
-    </div>
-    <div  onClick={() => {
-          setSelectedSide('derecho');
-          setStep('F');
-        }}>
-      <ConclusionButton
-        value="derecho"
-        title="PARA LADO DERECHO "
-        displayText="DERECHO"
-       
-      />
-    </div>
-    <div onClick={() => {
-          setSelectedSide('bilateral');
-          setStep('F');
-        }}>
-      <ConclusionButton
-        value="bilateral"
-        title="BILATERAL,"
-        displayText="BILATERAL "
-        
-      />
-    </div>
-  </div>
-);
+const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+      <div>
+        <div className='button-bar'>
+          <button onClick={() =>{ 
+            removeConclusion('izquierdo')
+            removeConclusion('derecho')
+            removeConclusion('bilateral')
+            setStep('D1')}} className="print-button dont-print">
+            <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+          </button>
+
+          <button onClick={()=>setStep('F')} className="print-button dont-print">
+            <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+          </button>
+        </div>
+        <h1 className="text-xl font-bold text-white">LADO:</h1>
+        <div  onClick={() => {
+              setSelectedSide('izquierdo');
+              setStep('F');
+            }}>
+          <ConclusionButton
+            value="izquierdo"
+            title="PARA LADO IZQUIERDO "
+            displayText="IZQUIERDO"
+          
+          />
+        </div>
+        <div  onClick={() => {
+              setSelectedSide('derecho');
+              setStep('F');
+            }}>
+          <ConclusionButton
+            value="derecho"
+            title="PARA LADO DERECHO "
+            displayText="DERECHO"
+          
+          />
+        </div>
+        <div onClick={() => {
+              setSelectedSide('bilateral');
+              setStep('F');
+            }}>
+          <ConclusionButton
+            value="bilateral"
+            title="BILATERAL,"
+            displayText="BILATERAL "
+            
+          />
+        </div>
+      </div>
+  );
+};
 
 
-const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
+const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
   <div>
     <div className='button-bar'>
-      <button onClick={() => setStep('A')} className="print-button dont-print">
-        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      <button onClick={() =>{ 
+          removeConclusion('izquierdo')
+          removeConclusion('derecho')
+          removeConclusion('bilateral')
+
+          setStep('D2')}} className="print-button dont-print">
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
+
       <button onClick={() => setStep('J2')} className="print-button dont-print">
         <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
       </button>
@@ -277,7 +298,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
         value="izquierdo"
         title="PARA LADO IZQUIERDO, A TRAVES DEL TALLO CEREBERAL."
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -287,7 +308,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
         value="derecho"
         title="PARA LADO DERECHO, A TRAVES DEL TALLO CEREBERAL. "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -302,29 +323,37 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => (
     </div>
   </div>
 );
+};
 
 
 
-const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => (
-  <div>
-    <div className='button-bar'>
-      <button onClick={() => setStep('E')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('G')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
+const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+    <div>
+      <div className='button-bar'>
+        <button onClick={() =>{ 
+          removeConclusion('rostral')
+          removeConclusion('caudal')
+          removeConclusion('tallo_cerebral')
+          setStep('E')}} className="print-button dont-print">
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button onClick={() => setStep('G')} id='next' className={`print-button dont-print `}>
+          <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+        </button>
+      </div>
+      <h1 className='text-xl font-bold text-white'>REGION: </h1>
+    
+      <div onClick={() => setStep('G')}>
+        <ConclusionButton value='rostral' title=' A TRAVÉS DE REGION ROSTRAL (III-V) DEL TALLO CEREBRAL ' displayText='ROSTRAL' />
+        <ConclusionButton value='caudal' title=' A TRAVÉS DE REGION CAUDAL (I-III) DEL TALLO CEREBERAL' displayText='CAUDAL' />
+        <ConclusionButton value='tallo_cerebral' title=' A TRAVES DEL TALLO CEREBERAL (I-V)' displayText='TALLO CEREBRAL' />
+      </div>
     </div>
-    <h1 className='text-xl font-bold text-white'>REGION: </h1>
-  
-    <div onClick={() => setStep('G')}>
-      <ConclusionButton value='rostral' title=' A TRAVÉS DE REGION ROSTRAL (III-V) DEL TALLO CEREBRAL ' displayText='ROSTRAL' />
-      <ConclusionButton value='caudal' title=' A TRAVÉS DE REGION CAUDAL (I-III) DEL TALLO CEREBERAL' displayText='CAUDAL' />
-      <ConclusionButton value='tallo_cerebral' title=' A TRAVES DEL TALLO CEREBERAL (I-V)' displayText='TALLO CEREBRAL' />
-    </div>
-
-</div>
-);
+  );
+};
 
 // ...
 const StepG = ({
@@ -333,6 +362,7 @@ const StepG = ({
   // otras props que necesites
 }) => {
   const { updateConclusions } = useContext(ReportContext)
+  const { removeConclusion } = useContext(ReportContext)
 
   // Array de los 5 niveles, EN ORDEN.
   // Nota que "value" incluye "selectedSide".
@@ -388,13 +418,21 @@ const StepG = ({
   return (
     <div>
       <div className='button-bar'>
-      <button onClick={() => setStep('F')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
+        <button onClick={() =>{ 
+          removeConclusion(`${selectedSide}nervio_auditivo`)
+          removeConclusion(`${selectedSide}nucleo_coclear`)
+          removeConclusion(`${selectedSide}completo_olivar_trapezoide`)
+          removeConclusion(`${selectedSide}lemnisco_lateral`)
+          removeConclusion(`${selectedSide}coliculo_inferior`)
+
+          setStep('F')}} className="print-button dont-print">
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
       <button onClick={() => setStep('H')} id='next' className={`print-button dont-print `}>
         <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
       </button>
-       
+
       </div>
 
       <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
@@ -445,47 +483,63 @@ const StepG = ({
 
 
 
-const StepH = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('G')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('I')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
-    </div>
-    <h1 className='text-xl font-bold text-white'>UMBRAL AUDITIVO: </h1>
-    <div onClick={() => setStep('I')}>
-    <ConclusionButton value='normoacusia' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON NORMOACUSIA' displayText='NORMOACUSIA '/> 
-    <ConclusionButton value='hipoacusia_leve' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA LEVE' displayText='HIPOACUSIA LEVE'/> 
-    <ConclusionButton value='hipoacusia_moderada' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA MODERADA' displayText='HIPOACUSIA MODERADA'/> 
-    <ConclusionButton value='hipoacusia_severa' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA SEVERA' displayText='HIPOACUSIA SEVERA'/> 
-    <ConclusionButton value='hipocusia_profunda' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA PROFUNDA' displayText='HIPOACUSIA PROFUNDA'/> 
-    </div>
+const StepH = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+    <div>
+      <div className='button-bar'>
+        <button onClick={() =>{ 
+          removeConclusion('normoacusia')
+          removeConclusion('hipoacusia_leve')
+          removeConclusion('hipoacusia_moderada')
+          removeConclusion('hipoacusia_severa')
+          removeConclusion('hipocusia_profunda')
 
-  </div>
-);
+          setStep('G')}} className="print-button dont-print">
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
 
-const StepI = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => (
-  <div>
-    <div className='button-bar'>
-    <button onClick={() => setStep('H')} id='prev' className={`print-button dont-print `}>
-        <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
-      </button>
-      <button onClick={() => setStep('J')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
-      </button>
+        <button onClick={() => setStep('I')} id='next' className={`print-button dont-print `}>
+          <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+        </button>
+      </div>
+      <h1 className='text-xl font-bold text-white'>UMBRAL AUDITIVO: </h1>
+      <div onClick={() => setStep('I')}>
+      <ConclusionButton value='normoacusia' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON NORMOACUSIA' displayText='NORMOACUSIA '/> 
+      <ConclusionButton value='hipoacusia_leve' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA LEVE' displayText='HIPOACUSIA LEVE'/> 
+      <ConclusionButton value='hipoacusia_moderada' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA MODERADA' displayText='HIPOACUSIA MODERADA'/> 
+      <ConclusionButton value='hipoacusia_severa' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA SEVERA' displayText='HIPOACUSIA SEVERA'/> 
+      <ConclusionButton value='hipocusia_profunda' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA PROFUNDA' displayText='HIPOACUSIA PROFUNDA'/> 
+      </div>
     </div>
-    <h1 className='text-xl font-bold text-white'>TIPO: </h1>
-    <div onClick={() => setStep('J')}>
-    <ConclusionButton value='neurosensorial' title=' DE TIPO NEUROSENSORIAL.' displayText='NEUROSENSORIAL'/> 
-    <ConclusionButton value='conductiva' title=' DE TIPO CONDUCTIVA.' displayText='CONDUCTIVA'/> 
+  );
+};
+
+const StepI = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+    <div>
+      <div className='button-bar'>
+        <button onClick={() =>{ 
+          removeConclusion('neurosensorial')
+          removeConclusion('conductiva')
+
+          setStep('H')}} className="print-button dont-print">
+          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button onClick={() => setStep('J')} id='next' className={`print-button dont-print `}>
+          <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+        </button>
+      </div>
+      <h1 className='text-xl font-bold text-white'>TIPO: </h1>
+      <div onClick={() => setStep('J')}>
+      <ConclusionButton value='neurosensorial' title=' DE TIPO NEUROSENSORIAL.' displayText='NEUROSENSORIAL'/> 
+      <ConclusionButton value='conductiva' title=' DE TIPO CONDUCTIVA.' displayText='CONDUCTIVA'/> 
+      </div>
     </div>
-
-
-  </div>
-);
+  );
+};
 
 const DropArea2 = ({ isExpanded }) => {
   const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
@@ -568,7 +622,7 @@ const DropArea2 = ({ isExpanded }) => {
 
 const StepJ = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
     const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
-    
+    const { removeConclusion } = useContext(ReportContext)
     const [imageSrc, setImageSrc] = useState(null);
     const [isUploadAllowed, setIsUploadAllowed] = useState(false); // Estado para controlar si la carga está permitida
     const toggleDivSize = (index) => {
@@ -615,7 +669,11 @@ const StepJ = ({ setStep, selectedImages, handleUndo, handleImageChange, handleP
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={() => setStep('I')} className="print-button dont-print">
+        <button onClick={() =>{ 
+          removeConclusion('neurosensorial')
+          removeConclusion('conductiva')
+
+          setStep('I')}} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 

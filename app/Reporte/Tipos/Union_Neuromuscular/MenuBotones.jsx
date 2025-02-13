@@ -1,8 +1,6 @@
 import { ReportContext } from '@/src/context';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import { useSession } from "next-auth/react";
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import { useImageState } from '../../MetodosBotones';
@@ -185,7 +183,7 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
 
       <div onClick={ handleNextStep }>
         <ConclusionButton value='tipo_presinaptico' title=' TIPO PRESINÁPTICO ' displayText={'PRESINÁPTICO'}/>                
-        <ConclusionButton value='tipo_postsinaptico' title=' TIPO POSTSINÁPTICO' displayText={'POSTSINÁPTICO'}/>
+        <ConclusionButton value='tipo_postsinaptico' title=' TIPO POSTSINÁPTICO ' displayText={'POSTSINÁPTICO'}/>
       </div>
       
       
@@ -218,9 +216,9 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       <h1 className=' text-xl font-bold text-white'>
         DISTRIBUCION
       </h1>
-      <ConclusionButton value='bulbar' title='BULBAR' displayText={'BULBAR'}   dangerouslySetInnerHTML={{ __html: ' BULBAR' }}/>
-      <ConclusionButton value='proximal' title='PROXIMAL' displayText={'PROXIMAL'}/>
-      <ConclusionButton value='distal' title='DISTAL' displayText={'DISTAL'}/>
+      <ConclusionButton value='bulbar' title='BULBAR ' displayText={'BULBAR '}   dangerouslySetInnerHTML={{ __html: ' BULBAR' }}/>
+      <ConclusionButton value='proximal' title='PROXIMAL ' displayText={'PROXIMAL '}/>
+      <ConclusionButton value='distal' title='DISTAL ' displayText={'DISTAL '}/>
     </div>
   );
 };

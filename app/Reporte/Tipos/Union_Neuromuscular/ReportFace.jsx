@@ -1,13 +1,12 @@
 import { ReportContext } from '@/src/context';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
-import NextImage from 'next/image';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 
 export const exportToPdf = (
   elementRef,

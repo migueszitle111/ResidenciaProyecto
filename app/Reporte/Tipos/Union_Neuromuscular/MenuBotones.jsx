@@ -1,6 +1,4 @@
 import { ReportContext } from '@/src/context';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import { useSession } from "next-auth/react";
 import { useContext, useRef, useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
@@ -413,12 +411,14 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
     );
   };
     
-const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,conclusionDivRef,elementRef }) => {
+const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,conclusionDivRef,elementRef,selectedImages }) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const [expandedDivs, setExpandedDivs] = useState({}); // Estado para manejar el tamaño de cada div
   const [imageSrc, setImageSrc] = useState(null);
   const [isUploadAllowed, setIsUploadAllowed] = useState(false);
   const [isPageVisible, setPageVisibility] = useState(false);
+  const { conclusions } = useContext(ReportContext)
+
 
     const toggleDivSize = (index) => {
       // Cambiar el estado del tamaño del div al hacer clic
@@ -461,20 +461,66 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,conc
       setIsUploadAllowed(false);
   };
 
-  const handleExportPdf = () => {
-    exportToPdf(
-      elementRef,
-      conclusionDivRef,
-      'mi_reporte.pdf',
-      {
-        name: session?.user?.name || '',
-        lastname: session?.user?.lastname || '',
-        email: session?.user?.email || '',
-        especialidad: session?.user?.especialidad || '',
-        cedula: session?.user?.cedula || ''
-      }
-    );
-  };
+// Función que llama a la API para crear el PDF:
+// menubotones.jsx (o donde tengas StepI)
+const handleExportPdf = async () => {
+  try {
+    // 1) conclusiones (array con {value, title})
+    const arrayConclusiones = conclusions;
+
+    // 2) imágenes arrastradas
+    const imagenes = selectedImages.map((img) => {
+      const base64Src = img.src.replace("data:image/png;base64,", ""); // Codifica en Base64
+      return {
+        src: base64Src,
+        x: img.position.x,
+        y: img.position.y,
+        width: parseInt(img.size.width, 10),
+        height: parseInt(img.size.height, 10),
+      };
+    });
+
+    // 3) Datos de usuario
+    const userData = {
+      name: session?.user?.name ?? "",
+      lastname: session?.user?.lastname ?? "",
+      email: session?.user?.email ?? "",
+      cedula: session?.user?.cedula ?? "",
+      especialidad: session?.user?.especialidad ?? "",
+      imageUrl: session?.user?.imageUrl ?? "",
+    };
+
+    // 4) POST a tu endpoint /api/pdf/generate-pdf
+    const response = await fetch("/api/pdf/generate-pdf?tipo=union", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        conclusiones: arrayConclusiones,
+        imagenes, // Imágenes ya codificadas en Base64
+        userData,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al generar el PDF (status " + response.status + ")");
+    }
+
+    // 5) Descargar PDF
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "reporte.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Error generando el PDF:", error);
+    alert("Error generando el PDF: " + error.message);
+  }
+};
+
 
   return (
     <div>

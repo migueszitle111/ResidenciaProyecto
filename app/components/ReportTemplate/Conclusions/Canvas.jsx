@@ -76,12 +76,20 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
       {/* Se agrega el footer sobre la imagen */}
       {footertext && (
         <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            display: 'inline-flex',
-            marginBottom: '10px',
-          }}
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          display: 'flex',       // O "inline-flex"
+          flexWrap: 'wrap',      // Si quieres que ocupe varias líneas si no cabe
+          gap: '8px',            // Espacio entre cada bloque (opcional)
+          marginBottom: '10px',
+          alignItems: 'center',  // Alinear verticalmente los iconos y texto
+          fontSize: '10px',       // Ajusta según necesites
+          lineHeight: '1.2',     // Para evitar que al escalar salga cortado
+          color: '#9C9C9C',
+          width: '100%',         // O el ancho que te convenga
+        }}
         >
           {footertext}
         </div>

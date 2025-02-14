@@ -9,51 +9,6 @@ import NextImage from 'next/image';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-export const exportToPdf = (
-  elementRef,
-  conclusionDivRef,
-  fileName = 'reporte.pdf',
-  userData = {},
-) => {
-  const input = elementRef?.current;
-  if (!input) return;
-
-  document.body.classList.add('pdf-export-mode');
-  
-  html2canvas(input, {
-    scale: 4, // Aumenta la resolución
-    useCORS: true,
-    backgroundColor: '#FFFFFF'
-  }).then((canvas) => {
-    document.body.classList.remove('pdf-export-mode');
-  
-    // Crear el PDF en formato A4
-    const pdf = new jsPDF('p', 'mm', 'a4'); // 'p' es para orientación vertical
-    const pageWidth = pdf.internal.pageSize.getWidth();  // 210mm
-    const pageHeight = pdf.internal.pageSize.getHeight(); // 297mm
-
-    // Ajustar tamaño de la imagen para ocupar el ancho completo
-    const imgWidth = pageWidth - 40; // Margen de 10mm a cada lado
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    // Centrar la imagen en el PDF
-    const xPos = (pageWidth - imgWidth) / 2;
-    const yPos = (pageHeight - imgHeight) / 2; // Para centrar también en vertical
-
-    pdf.addImage(
-      canvas.toDataURL('image/png'),
-      'PNG',
-      xPos,
-      yPos,
-      imgWidth,
-      imgHeight
-    );
-    // Guardar el PDF
-    pdf.save(fileName || 'reporte.pdf');
-  });
-};
-
-
 const DropArea = () => {
   const [droppedItems, setDroppedItems] = useState([]);
 
@@ -215,15 +170,25 @@ const formattedConclusions = formatConclusions(copyConclusions);
     // Funciones para el historial de imagenes, en caso de usar Undo te regresa a la imagen anterior
     const handleImageChange = useCallback((event) => {
       if (event.target.files && event.target.files[0]) {
-        setHistory((prevHistory) => [...prevHistory, selectedImages]);
-        setSelectedImages((prevImages) => [...prevImages, { 
-          src: URL.createObjectURL(event.target.files[0]), 
-          position: { x: Math.random() * 200, y: Math.random() * 200 }, 
-          size: { width: 200, height: 200 } 
-        }]);
-        setFuture([]);
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const base64 = e.target.result.replace("data:image/png;base64,", "");
+          setSelectedImages((prevImages) => [
+            ...prevImages,
+            {
+              src: base64, // Guarda solo el Base64 sin el prefijo
+              position: { x: Math.random() * 200, y: Math.random() * 200 },
+              size: { width: 200, height: 200 },
+            },
+          ]);
+          setHistory((prevHistory) => [...prevHistory, selectedImages]);
+          setFuture([]);
+        };
+        reader.readAsDataURL(file);
       }
     }, [selectedImages]);
+    
     
     const handleUndo = useCallback(() => {
       if (history.length > 0) {
@@ -408,21 +373,11 @@ const formattedConclusions = formatConclusions(copyConclusions);
               }
             },
           ]}
-          footertext={
-            <div
-              style={{
-                display: 'inline-flex',
-                fontSize: '8px',
-                color: '#9C9C9C',
-              }}
-            >
-              {/* Grupo Nombre */}
-              <span
-                style={{
-                  display: 'inline-flex',
-                }}
-              >
-                <svg
+          const footertext = {
+            <>
+              {/* Bloque Nombre */}
+              <div id="footerName"style={{ display: 'inline-flex' , alignItems: 'center'  }}>
+              <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="8"
                   height="8"
@@ -434,19 +389,13 @@ const formattedConclusions = formatConclusions(copyConclusions);
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 
                            0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                 </svg>
+
                 <span>{name} {lastname}</span>
-              </span>
+              </div>
           
-              {/* Grupo Email */}
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  flexShrink: 0,
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                <svg
+              {/* Bloque Email */}
+              <div id="footerEmail" style={{ display: 'inline-flex', alignItems: 'center' }}>
+              <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="8"
                   height="8"
@@ -458,19 +407,13 @@ const formattedConclusions = formatConclusions(copyConclusions);
                   <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 
                            2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                 </svg>
+
                 <span>{email}</span>
-              </span>
+              </div>
           
-              {/* Grupo Especialidad */}
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  flexShrink: 0,
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                <svg
+              {/* Bloque Especialidad */}
+              <div  id="footerEspecialidad" style={{ display: 'inline-flex', alignItems: 'center' }}>
+              <svg
                   version="1.1"
                   id="ICONOS"
                   xmlns="http://www.w3.org/2000/svg"
@@ -509,18 +452,11 @@ const formattedConclusions = formatConclusions(copyConclusions);
                   </g>
                 </svg>
                 <span>{especialidad}</span>
-              </span>
+              </div>
           
-              {/* Grupo Cédula */}
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  flexShrink: 0,
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                <svg
+              {/* Bloque Cédula */}
+              <div  id="footerCedula" style={{ display: 'inline-flex', alignItems: 'center' }}>
+              <svg
                   version="1.1"
                   id="ICONOS"
                   xmlns="http://www.w3.org/2000/svg"
@@ -556,16 +492,19 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     </g>
                   </g>
                 </svg>
+
                 <span>Cédula: {cedula}</span>
-              </span>
-            </div>
+              </div>
+            </>
           }
+          
           userImageUrl={imageUrl}  // Aquí se pasa la URL de la imagen del usuario
 
         />
   
 <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
 <div
+  id="conclusionDiv"
   ref={conclusionDivRef}
   contentEditable
   style={{
@@ -594,7 +533,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
   suppressContentEditableWarning={true}
 />
 </div>
-<div><DropArea /> </div>
+<div id="dropArea"><DropArea /> </div>
 
       </div>
         </div>

@@ -1,0 +1,93 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #fff;
+}
+
+/* Contenedor principal para centrar y limitar ancho */
+.container {
+  width: 700px;
+  height: 800px;
+  margin: 10px auto;
+  align-items: center;
+  position: relative;
+
+}
+
+/* Logo del usuario (si existe) arriba a la derecha */
+.user-logo {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  opacity: 50%;
+  border-radius: 0%;
+  object-fit: cover;
+}
+
+/* "image-stack": imagen base + overlays */
+.image-stack {
+  position: relative;
+  width: 700px;
+  height: 900px;
+  overflow: hidden;
+  justify-content: center;
+  z-index: 0;
+}
+.drop-area-container {
+  position: relative;
+  top: 10px;
+left: 10px;
+width: 10%;
+height: 10%;
+
+}
+
+.dragged-image {
+  transform-origin: top left;
+  contain: content;
+}
+
+.image-stack img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 700px;
+  object-fit: contain;
+  align-items: center;
+}
+
+/* Bloque de datos de usuario (Name, Email, etc.) */
+.user-data {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 10px;
+  opacity: 50%;
+  margin-top: 150px;
+  align-items: center;
+  justify-content: center; /* Centra horizontalmente los elementos */
+}
+.user-data svg {
+  margin-right: 4px;
+}
+.user-data > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Conclusiones */
+#conclusionDiv {
+  margin-top: -150px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}

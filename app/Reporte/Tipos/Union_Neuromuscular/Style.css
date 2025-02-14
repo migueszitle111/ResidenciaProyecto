@@ -20,11 +20,18 @@
   overflow: hidden;
   width: 100%;  
   margin-top: 3px;
-  height: 20vh;
+  height: 35vh;
   margin-bottom: 0px;
   z-index: 1; 
 
 }
+/* Cuando inicias la exportación, agregas la clase pdf-export-mode al body */
+.pdf-export-mode svg {
+  /* O bien 2) un pequeño transform para bajarlos */
+   transform: translateY(2.4px) !important; 
+  /* Usa !important si necesitas sobrescribir estilos inline */
+}
+
 
 
 /* Seccion de Datos de perfil y Titulo de reporte*/

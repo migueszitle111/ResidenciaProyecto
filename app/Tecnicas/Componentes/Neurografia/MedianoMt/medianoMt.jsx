@@ -97,7 +97,7 @@ const MedianoMt = () => {
                 {currentImageIndex === 0 && <button className="btnM5" onClick={() => handleButtonClick('Dorso de la mano o antebrazo.', { top: '12%', left: '24%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnM6" onClick={() => handleButtonClick('1. Muñeca: 8 cm proximal a electrodo activo, entre los tendones del palmar mayor y palmar menor, realizando una línea imaginaria con intersección dirigida al pliegue cutáneo del carpo, haciéndose horizontal en tercio distal del antebrazo.\n2. Codo: Fosa antecubital, solo medial al pulso de la arteria braquial.', { top: '20%', left: '24%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/MedianoMt-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/MedianoMt-T-01.png",{ top: '5%', left: '-10%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/MedianoMt-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 
             {/* Segunda Imagen */}
                 {currentImageIndex === 1 && <button className="btnM7" onClick={() => handleButtonClick('Texto desde el boton 1', { top: '60%', left: '24%' })}></button>}

@@ -798,7 +798,7 @@ const StepF = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
 
       
       <div onClick={handleNextStep4}>
-        <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS,' displayText={'MIXTA'} />
+        <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS ' displayText={'MIXTA'} />
       </div>
 
 
@@ -832,7 +832,7 @@ const StepF2 = ({ handleNextStep, handlePrevStep4, handleNextStep4}) => {
         <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+        <button onClick={handleNextStep4} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
       </div>
@@ -884,7 +884,7 @@ const StepF3 = ({handleNextStep5, handleNextStep6}) => {
 
       
       <div onClick={handleNextStep6}>
-        <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS,' displayText={'MIXTA'} />
+        <ConclusionButton value='mixta' title=' DE FIBRAS MIXTAS ' displayText={'MIXTA'} />
       </div>
 
     </div>

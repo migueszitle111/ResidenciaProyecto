@@ -97,7 +97,7 @@ const Reporte = () => {
       const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
       const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
       const keywords4 = ["INTENSIDAD LEVE.", "INTENSIDAD MODERADA.", "INTENSIDAD SEVERA."];
-      const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL"];
+      const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL", "L2", "L3", "L4", "L5",, "S1", "S2"];
       const specificKeywords = ["C5", "C6", "C7", "C8", "T1"]; // Nueva condición específica
       let words = copyConclusions.split(' ');
   

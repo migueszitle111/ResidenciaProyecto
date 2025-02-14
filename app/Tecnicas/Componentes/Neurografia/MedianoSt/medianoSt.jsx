@@ -98,8 +98,8 @@ const MedianoSt = () => {
                 {currentImageIndex === 0 && <button className="btn2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '65%', left: '24%'})}>T</button>}
                 {currentImageIndex === 0 && <button className="btn3" onClick={() => handleButtonClick('3-4 cm del electrodo de registo, discretamente distal a articulación interfalángica distal.', { top: '65%', left: '24%'})}>R</button>}
                 {currentImageIndex === 0 && <button className="btn4" onClick={() => handleButtonClick('Muñeca: 14 cm distal al electrodo de registro, entre los tendones palmar mayor y palmar menor.', { top: '65%', left: '24%'})}>E</button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Mediano-DedoG.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Mediano-Dedo.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Mediano-Dedo.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Mediano-DedoG.png",{ top: '2%', left: '2%' })}></button>}
             {/* Segunda Imagen */}
                 {currentImageIndex === 1 && <button className="btn5" onClick={() => handleButtonClick('Ligeramente distal a articulación metacarpofalángica, evitando colocar electrodo sobre el pliegue cutáneo.', { top: '65%', left: '24%' })}>A</button>}
                 {currentImageIndex === 1 && <button className="btn6" onClick={() => handleButtonClick('Dorso de la mano.', { top: '65%', left: '24%' })}>T</button>}

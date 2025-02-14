@@ -74,7 +74,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       return (<div>
         
         <div onClick={ handleNextStep1 }>
-          <ConclusionButton value='pre_total' title=' PREGANGLIONAR TOTALaaa' displayText={'PREGANGLIONAR TOTALaaa'}/>
+          <ConclusionButton value='pre_total' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
         <InternalAccordionContainer>
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'} type='internal'>
@@ -441,6 +441,29 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     else if (step === 'C2') setStep('B2');
     else if (step === 'B2') setStep('A');
   };
+
+  // const handleNextStep2 = () => {
+  //   if (step === 'A') setStep('B3');
+  //   else if (step === 'B3') setStep('C3');
+  //   else if (step === 'C3') setStep('D3');
+  //   else if (step === 'D3') setStep('E3');
+  //   else if (step === 'E3') setStep('F3');
+  //   else if (step === 'F3') setStep('G3');
+  //   else if (step === 'G3') setStep('H3');
+  //   else if (step === 'H3') setStep('I2');
+  // };
+
+  // // Paso anterior, se ponen los pasos de abajo hacia arriba
+  // const handlePrevStep2 = () => {
+  //   if (step === 'I2') setStep('H3');
+  //   else if (step === 'H3') setStep('G3');
+  //   else if (step === 'G3') setStep('F3');
+  //   else if (step === 'F3') setStep('E3');
+  //   else if (step === 'D3') setStep('C3');
+  //   else if (step === 'C3') setStep('B3');
+  //   else if (step === 'B3') setStep('A');
+  // };
+  
   const handleNextStep2 = () => {
     if (step === 'A') setStep('B3');
     else if (step === 'B3') setStep('C3');
@@ -629,15 +652,17 @@ const cambiotexto = () =>{
         handlePrevStep2={handlePrevStep2}
         handleNextStep2={handleNextStep2}
         handleNextStep7={handleNextStep7}
+        handlePrevStep7={handlePrevStep7}
         ubicaciond3={ubicaciond3}
         />
       ) : null}
 
       {step === 'D3A' ? (
         <StepD3A
-        handlePrevStep7={handlePrevStep7}
         handleNextStep2={handleNextStep2}
         handleNextStep7={handleNextStep7}
+        handlePrevStep7={handlePrevStep7}
+
         ubicaciond3a={ubicaciond3a}
         />
       ) : null}
@@ -1053,6 +1078,7 @@ const StepD2 = ({ handleNextStep1, handlePrevStep1, handleNextStep5, handleNextS
           removeConclusion('prueba1000');
           removeConclusion('tron1000d');
           removeConclusion('tron10000d');
+          removeConclusion('salida');
           removeConclusion('salidad');
           removeConclusion('pre_totald');
           removeConclusion('c5si');
@@ -1177,12 +1203,90 @@ const StepD2B = ({ handleNextStep6, handlePrevStep6, ubicaciond2b }) => {
   );
 };
 
-const StepD3 = ({ handleNextStep2, handlePrevStep2, handleNextStep7, ubicaciond3 }) => {
-  
+// const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
+//   const {removeConclusion} = useContext(ReportContext)
+//   return (
+//     <div>
+//       <div className='button-bar'>
+//         <button  onClick={() => {
+//             removeConclusion("AXONAL COMPLETA");
+//             removeConclusion("con_denervación_difusa");
+//             removeConclusion("con_denervación_abundante");
+//             removeConclusion("con_denervación_progresiva");
+//             removeConclusion("con_denervación discreta");
+//             removeConclusion("sin_denervación");
+//             removeConclusion("AXONAL INCOMPLETA");
+//             removeConclusion("DESMIELINIZANTE");
+//             removeConclusion("por_retardo_en_la_conduccion");
+//             removeConclusion("por_bloqueo_parcial_en_la_conducción");
+//             removeConclusion("por_bloqueo_completo_en_la_conduccion");
+//             removeConclusion("MIXTA");
+//             removeConclusion("primariamente_desmielinizante_con_perdida_axonal_secundaria");
+//             removeConclusion("primariamente_axonal_con_desmielinizacion_secundaria");
+
+//             handlePrevStep2()
+//           }} className={`print-button`}>
+//           <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+//         </button>
+
+//         <button onClick={() => window.location.reload()} className={`print-button`}>
+//         <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+//         </button>
+
+//         <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
+//         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
+//         </button>
+//       </div>
+
+//       <h1 className=' text-xl font-bold text-white'>
+//         TIPO
+//       </h1>
+//       <AccordionContainer>
+//       <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type="external">
+//           <div onClick={handleNextStep2}>
+//           <ConclusionButton value='con_denervación_difusa' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+//           <ConclusionButton value='con_denervación_abundante' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+//           <ConclusionButton value='con_denervación_progresiva' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+//           <ConclusionButton value='con_denervación discreta' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+//           <ConclusionButton value='sin_denervación' title=', DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
+//           </div>
+//         </Accordion>
+
+//         <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type="external">
+//           <div onClick={handleNextStep2}>
+//           <ConclusionButton value='con_denervación_difusa' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+//           <ConclusionButton value='con_denervación_abundante' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+//           <ConclusionButton value='con_denervación_progresiva' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+//           <ConclusionButton value='con_denervación discreta' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+//           <ConclusionButton value='sin_denervación' title=', DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
+//           </div>
+//         </Accordion>
+
+//         <Accordion title='DESMIELINIZANTE' value='DESMIELINIZANTE' type="external">
+//           <div onClick={handleNextStep4}>
+//           <ConclusionButton value='por_retardo_en_la_conduccion' title=', DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
+//           <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=', DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
+//           <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=', DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
+//           </div>
+//         </Accordion>
+
+//         <Accordion title='MIXTA' value='MIXTA' type="external">
+//           <div onClick={handleNextStep2}>
+//           <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=', DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
+//           <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=', DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
+//           </div>
+//         </Accordion>
+//         </AccordionContainer>
+//     </div>
+//   );
+// };
+
+const StepD3 = ({handlePrevStep2, handleNextStep2, ubicaciond3 }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
-      <button  onClick={() => {
+        <button  onClick={() => {
             removeConclusion('preganglionar_totald');
             removeConclusion('holad');
             removeConclusion('postganglionar_totald');
@@ -1192,7 +1296,6 @@ const StepD3 = ({ handleNextStep2, handlePrevStep2, handleNextStep7, ubicaciond3
             removeConclusion('plexo_lumbosacrod');
             removeConclusion('plexo_sacrod');
             removeConclusion('plexo_pudendod');
-
             removeConclusion('preganglionar_totali');
             removeConclusion('holai');
             removeConclusion('postganglionar_totali');
@@ -1202,7 +1305,6 @@ const StepD3 = ({ handleNextStep2, handlePrevStep2, handleNextStep7, ubicaciond3
             removeConclusion('plexo_lumbosacroi');
             removeConclusion('plexo_sacroi');
             removeConclusion('plexo_pudendoi');
-
             removeConclusion('preganglionar_total');
             removeConclusion('hola');
             removeConclusion('postganglionar_total');
@@ -1213,10 +1315,33 @@ const StepD3 = ({ handleNextStep2, handlePrevStep2, handleNextStep7, ubicaciond3
             removeConclusion('plexo_sacro');
             removeConclusion('plexo_pudendo');
 
+
+            removeConclusion('L2d');
+            removeConclusion('L3d');
+            removeConclusion('L4d');
+            removeConclusion('L5d');
+            removeConclusion('S1d');
+            removeConclusion('S2d');
+
+            removeConclusion('L2i');
+            removeConclusion('L3i');
+            removeConclusion('L4i');
+            removeConclusion('L5i');
+            removeConclusion('S1i');
+            removeConclusion('S2i');
+
+            removeConclusion('L2');
+            removeConclusion('L3');
+            removeConclusion('L4');
+            removeConclusion('L5');
+            removeConclusion('S1');
+            removeConclusion('S2');
+
             handlePrevStep2()
           }} className={`print-button`}>
           <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
+
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
         <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
@@ -1235,42 +1360,34 @@ const StepD3 = ({ handleNextStep2, handlePrevStep2, handleNextStep7, ubicaciond3
   );
 };
 
-const StepD3A = ({ handleNextStep7, handlePrevStep7, ubicaciond3a }) => {
+const StepD3A = ({ handleNextStep7, handlePrevStep2, ubicaciond3a }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
         <button  onClick={() => {
-            removeConclusion('preganglionar_totald');
-            removeConclusion('holad');
-            removeConclusion('postganglionar_totald');
-            removeConclusion('ilihipogastrico_e_ilinguinald');
-            removeConclusion('genitocrural_y_femorocutáneo_laterald');
-            removeConclusion('plexo_lumbard');
-            removeConclusion('plexo_lumbosacrod');
-            removeConclusion('plexo_sacrod');
-            removeConclusion('plexo_pudendod');
+            removeConclusion('L2d');
+            removeConclusion('L3d');
+            removeConclusion('L4d');
+            removeConclusion('L5d');
+            removeConclusion('S1d');
+            removeConclusion('S2d');
 
-            removeConclusion('preganglionar_totali');
-            removeConclusion('holai');
-            removeConclusion('postganglionar_totali');
-            removeConclusion('ilihipogastrico_e_ilinguinali');
-            removeConclusion('genitocrural_y_femorocutáneo_laterali');
-            removeConclusion('plexo_lumbari');
-            removeConclusion('plexo_lumbosacroi');
-            removeConclusion('plexo_sacroi');
-            removeConclusion('plexo_pudendoi');
+            removeConclusion('L2i');
+            removeConclusion('L3i');
+            removeConclusion('L4i');
+            removeConclusion('L5i');
+            removeConclusion('S1i');
+            removeConclusion('S2i');
 
-            removeConclusion('preganglionar_total');
-            removeConclusion('hola');
-            removeConclusion('postganglionar_total');
-            removeConclusion('ilihipogastrico_e_ilinguinal');
-            removeConclusion('genitocrural_y_femorocutáneo_lateral');
-            removeConclusion('plexo_lumbar');
-            removeConclusion('plexo_lumbosacro');
-            removeConclusion('plexo_sacro');
-            removeConclusion('plexo_pudendo');
+            removeConclusion('L2');
+            removeConclusion('L3');
+            removeConclusion('L4');
+            removeConclusion('L5');
+            removeConclusion('S1');
+            removeConclusion('S2');
 
-            handlePrevStep7()
+            handlePrevStep2()
           }} className={`print-button`}>
           <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>

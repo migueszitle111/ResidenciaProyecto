@@ -1,7 +1,7 @@
 import { ReportContext } from '@/src/context';
 import { useContext } from 'react';
 
-export function NerviusButtonBILATERAL({ title, value, displayText }) {
+export function NerviusButtonSegmenBILATERAL({ title, value, displayText }) {
   const { updateConclusions, conclusions } = useContext(ReportContext);
 
   // Mapeo de valores opuestos
@@ -39,7 +39,7 @@ export function NerviusButtonBILATERAL({ title, value, displayText }) {
     }
   }
 
-  const classnames = `cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in 
+  const classnames = `cursor-pointer w-[3.5px] h-[18px] text-xs flex items-center justify-center text-white transition-colors duration-300 ease-in 
     ${isSelected ? 'bg-[#c44900]' : 'bg-transparent'} rounded-[50px] z-50 relative`;
 
   return (
@@ -48,10 +48,3 @@ export function NerviusButtonBILATERAL({ title, value, displayText }) {
     </div>
   );
 }
-
-
-
-
-
-
-

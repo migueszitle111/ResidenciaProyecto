@@ -158,7 +158,7 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari61' title='/DE DEDOS II-III,' displayText=' ' /> </div>
         <div style={{ position: 'absolute', top: '44.2%', left: '69.6%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari62' title='/DE DEDOS II-III,' displayText=' ' /> </div>
-        
+
 
 
       </>);
@@ -372,6 +372,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari7' title='/DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '37.5%', left: '70.2%', borderRadius: 100, }}
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari8' title='/DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
+
+
+
       </>);
 
   }
@@ -385,6 +388,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari1' title='/DEL TRIANGULO POSTERIOR DEL CUELLO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '14.0%', left: '48.4%', borderRadius: 100, }}
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari2' title='/DEL FORAMEN YUGULAR,' displayText=' ' /></div>
+
+
+
 
       </>);
   }
@@ -983,6 +989,8 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari10' title='/DE PALMA,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '42.2%', left: '29.5%', borderRadius: 100, }}
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari11' title='/DE PALMA,' displayText=' ' /></div>
+
+
       </>);
 
   }
@@ -1313,6 +1321,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
       <div style={{ position: 'absolute', top: '22.6%', left: '46.8%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari11' title='/DEL DIAFRAGMA,' displayText=' ' /> </div>
+
+
+      
     </>);
   }
   if (copyConclusions.includes('FRÉNICO BILATERAL CON PREDOMINIO DERECHO') &&
@@ -1345,6 +1356,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
       <div style={{ position: 'absolute', top: '22.6%', left: '52.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari11' title='/DEL DIAFRAGMA,' displayText=' ' /> </div>
+
+
+    
+
     </>);
   }
   if (copyConclusions.includes('TORACODORSAL BILATERAL CON PREDOMINIO DERECHO') &&
@@ -1366,6 +1381,8 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari6' title='/TORACICO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '22.8%', left: '57.4%', borderRadius: 100, }}
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari7' title='/TORACICO,' displayText=' ' /></div>
+
+
 
       </>);
 

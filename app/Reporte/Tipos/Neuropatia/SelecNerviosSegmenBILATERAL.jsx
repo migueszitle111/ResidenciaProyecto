@@ -3928,7 +3928,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
 
     </>);
   }
-  if (opyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
+  if (copyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '29.8%', left: '48.8%', transform: 'rotate(180deg)', }}

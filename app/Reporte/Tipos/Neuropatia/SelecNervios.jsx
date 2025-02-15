@@ -403,7 +403,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILAR DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL DEL ESPACIO CUADRANGULAR, ')) {// FALTA 
+  if (copyConclusions.includes('AXILAR DERECHO, FOCALIZADA A NIVEL') ) {// FALTA 
     return (
       <>
         <div style={{ position: 'absolute', top: '18.9%', left: '39.8%', borderRadius: 100, }}
@@ -2706,7 +2706,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PLANTAR LATERAL IZQUIERDO, FOCALIZADA A NIVEL') || copyConclusions.includes('PLANTAR LATERAL BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('PLANTAR LATERAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
     return (<>
       <div style={{ position: 'absolute', top: '70.6%', left: '55.8%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL TOBILLO,' displayText=' ' /> </div>
@@ -2732,7 +2732,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PLANTAR MEDIAL DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('PLANTAR MEDIAL BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('PLANTAR MEDIAL DERECHO, FOCALIZADA A NIVEL') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '70.6%', left: '42.5%', }}
@@ -2754,7 +2754,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PLANTAR MEDIAL IZQUIERDO, FOCALIZADA A NIVEL') || copyConclusions.includes('PLANTAR MEDIAL BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('PLANTAR MEDIAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '70.6%', left: '55.5%', }}
@@ -2775,7 +2775,7 @@ export function checkDivs(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL ANTEPIE,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('PUDENDO DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('PUDENDO DERECHO, FOCALIZADA A NIVEL')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '36.1%', left: '48.7%', }}
@@ -2790,7 +2790,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO IZQUIERDO, FOCALIZADA A NIVEL') || copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('PUDENDO IZQUIERDO, FOCALIZADA A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '36.1%', left: '49.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
@@ -2804,7 +2804,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL IZQUIERDO, FOCALIZADA A NIVEL') || copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('FACIAL IZQUIERDO, FOCALIZADA A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '5.2%', left: '52.2%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
@@ -2849,7 +2849,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL DERECHO, FOCALIZADA A NIVEL') || copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('FACIAL DERECHO, FOCALIZADA A NIVEL') ) {
     return (<>
       <div style={{ position: 'absolute', top: '5.2%', left: '46.5%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>

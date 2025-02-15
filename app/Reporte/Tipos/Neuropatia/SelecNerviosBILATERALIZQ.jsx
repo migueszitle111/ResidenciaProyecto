@@ -1708,6 +1708,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari7' title='/DEL PIRIFORME,' displayText=' ' /></div>
 
 
+          
+
+
       </>);
   }
   if (copyConclusions.includes('GLUTEO INFERIOR BILATERAL CON PREDOMINIO IZQUIERDO') &&
@@ -2104,7 +2107,7 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO DERECHO') &&
+  if (copyConclusions.includes('OBTURADOR2 BILATERAL CON PREDOMINIO DERECHO') &&
     copyConclusions.includes('FOCALIZADA A NIVEL') &&
     ['PROXIMAL A CANAL OBTURADOR,', 'CANAL OBTURADOR,', 'MUSLO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
@@ -2147,7 +2150,7 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO IZQUIERDO') &&
+  if (copyConclusions.includes('OBTURADOR2 BILATERAL CON PREDOMINIO IZQUIERDO') &&
     copyConclusions.includes('FOCALIZADA A NIVEL') &&
     ['PROXIMAL A CANAL OBTURADOR,', 'CANAL OBTURADOR,', 'MUSLO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
@@ -2894,6 +2897,8 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari8' title='/DEL ANTEPIE,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '73.3%', left: '36.2%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari9' title='/DEL ANTEPIE,' displayText=' ' /> </div>
+
+        
 
     </>);
   }

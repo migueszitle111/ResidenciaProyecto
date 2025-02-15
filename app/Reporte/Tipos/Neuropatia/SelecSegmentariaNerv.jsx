@@ -3824,7 +3824,7 @@ export function checkDivsSegmentar(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('OBTURADOR IZQUIERDO, SEGMENTARIA A NIVEL') || copyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {
+  if (copyConclusions.includes('OBTURADOR IZQUIERDO, SEGMENTARIA A NIVEL') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '29.8%', left: '50.5%', transform: 'rotate(180deg)', }}
@@ -3928,7 +3928,7 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('OBTURADOR DERECHO, SEGMENTARIA A NIVEL') || copyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
+  if (copyConclusions.includes('OBTURADOR DERECHO, SEGMENTARIA A NIVEL') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '29.8%', left: '48.8%', transform: 'rotate(180deg)', }}

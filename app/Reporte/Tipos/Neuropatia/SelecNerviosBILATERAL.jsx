@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
 import { NerviusButtonBILATERAL } from '@/app/components/ReportTemplate/Conclusions/Botton-NerviusBILATERAL';
-import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 
 export function checkDivsBILATERAL(copyConclusions) {
 

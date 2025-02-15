@@ -2,6 +2,7 @@ import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosB
 import { checkDivsBILATERALIZQ } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERALIZQ';
 import { checkDivs } from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
 import { checkDivsSegmentar } from '@/app/Reporte/Tipos/Neuropatia/SelecSegmentariaNerv';
+import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
 import { ReportContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -1097,6 +1098,7 @@ const Reporte = () => {
               <div>{checkDivsBILATERALIZQ(copyConclusions)}</div>
               <div>{checkDivs(copyConclusions)}</div>
               <div>{checkDivsSegmentar(copyConclusions)}</div>
+              <div>{checkDivsSegmentarBilateral(copyConclusions)}</div>
               
             </div>
 

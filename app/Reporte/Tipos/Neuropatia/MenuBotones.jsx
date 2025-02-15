@@ -63,6 +63,8 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
 
       {step === 'CDD' && <StepCDD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
 
+      {step === 'CGI' && <StepCGI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
+
       {step === 'CDI' && <StepCDI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
 
       {step === 'D' && <StepD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
@@ -220,7 +222,7 @@ const StepB1 = ({ handleNextStep, handlePrevStep, setStep }) => (
     <Accordion title='BILATERIAL' value={'BILATERAL'} type='internal'>
       <div onClick={() => setStep('CG')}>
         <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO DERECHO,' displayText={'PREDOMINIO DERECHO'} /></div>
-      <div onClick={() => setStep('CG')}>
+      <div onClick={() => setStep('CGI')}>
         <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} /></div>
       <div onClick={() => setStep('CG')}>
         <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} /></div>
@@ -245,6 +247,31 @@ const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
     <div onClick={() => setStep('CDD')}>
       <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
     <div onClick={() => setStep('CDD')}>
+      <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
+    <div onClick={() => setStep('D')}>
+      <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
+  </div>
+);
+
+
+
+
+const StepCGI = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => (
+  <div>
+    <div className='button-bar'>
+      <button onClick={handlePrevStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_Out.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className=' text-xl font-bold text-white'>
+      UBICACION
+    </h1>
+    <div onClick={() => setStep('CDI')}>
+      <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
+    <div onClick={() => setStep('CDI')}>
       <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
     <div onClick={() => setStep('D')}>
       <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
@@ -335,7 +362,7 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => (
     <h1 className=' text-xl font-bold text-white '>
       SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO
     </h1>
-    <div onClick={() => setStep('CDI')}>
+    <div onClick={() => setStep('D')}>
       <ConclusionButton value='seguir' displayText={'LISTO'} />
     </div>
   </div>

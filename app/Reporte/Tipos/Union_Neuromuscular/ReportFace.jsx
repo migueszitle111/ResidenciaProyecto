@@ -1,3 +1,4 @@
+//ReportFace.jsx
 import { ReportContext } from '@/src/context';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -44,10 +45,6 @@ const DropArea = () => {
       className="dropArea"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
-      style={{
-        //border: '2px dashed #ccc',
-        //position: 'relative'
-      }}
     >
       {droppedItems.length === 0 ? (
         <p></p>
@@ -172,11 +169,11 @@ const formattedConclusions = formatConclusions(copyConclusions);
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.onload = (e) => {
-          const base64 = e.target.result.replace("data:image/png;base64,", "");
+          const base64 = e.target.result; // Keep the full data URL
           setSelectedImages((prevImages) => [
             ...prevImages,
             {
-              src: base64, // Guarda solo el Base64 sin el prefijo
+              src: base64, // Full data URL
               position: { x: Math.random() * 200, y: Math.random() * 200 },
               size: { width: 200, height: 200 },
             },
@@ -187,7 +184,6 @@ const formattedConclusions = formatConclusions(copyConclusions);
         reader.readAsDataURL(file);
       }
     }, [selectedImages]);
-    
     
     const handleUndo = useCallback(() => {
       if (history.length > 0) {
@@ -296,6 +292,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
             <SimpleMultiStepForm 
               conclusionDivRef={conclusionDivRef}
               elementRef={elementRef}
+              selectedImages={selectedImages}
             showStepNumber={true}/>
           </div>
           

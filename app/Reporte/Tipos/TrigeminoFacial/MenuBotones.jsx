@@ -335,7 +335,7 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
     <div>
       <div className='button-bar'>
         <button onClick={() =>{
-          removeConclusion(`${selectedSide}aferente_ipsilaterall`)
+          removeConclusion(`${selectedSide}aferente_ipsilateral`)
           removeConclusion('integracion_pontina')
           removeConclusion('nucleo_y_formacion_reticular')
           removeConclusion('eferente')
@@ -382,7 +382,7 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
       <div>
         <div className='button-bar'>
           <button onClick={() =>{
-            removeConclusion(`${selectedSide}aferente_ipsilaterall`)
+            removeConclusion(`${selectedSide}aferente_ipsilateral`)
             removeConclusion('integracion_pontina')
             removeConclusion('nucleo_y_formacion_reticular')
             removeConclusion('eferente')

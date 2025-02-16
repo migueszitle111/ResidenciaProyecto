@@ -1,3 +1,4 @@
+//API codigo
 // Importa la versión completa para desarrollo y las alternativas para producción
 import puppeteerLib from "puppeteer";
 import chromium from "@sparticuz/chromium"; // nueva alternativa para entornos serverless
@@ -8,12 +9,14 @@ export async function POST(req) {
   try {
     // Leer los datos del cuerpo de la solicitud
     const body = await req.json();
-    const { conclusiones, imagenes, userData } = body;
+    const { conclusiones,  userData,SelectedImages } = body;
+    console.log("imagenes", SelectedImages);
 
     // Serialización a querystring
     const conclusionesStr = encodeURIComponent(JSON.stringify(conclusiones ?? []));
-    const imagenesStr = encodeURIComponent(JSON.stringify(imagenes ?? []));
     const userDataStr = encodeURIComponent(JSON.stringify(userData ?? {}));
+    const imagenesStr = encodeURIComponent(JSON.stringify(SelectedImages ?? []));
+
 
     // Definir la URL SSR
     let baseUrl = "http://localhost:3000";
@@ -21,7 +24,7 @@ export async function POST(req) {
       baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
     }
     let targetUrl = `${baseUrl}/ReporteImprimir/UnionMuscular?` + 
-      `conclusiones=${conclusionesStr}&imagenes=${imagenesStr}&userData=${userDataStr}`;
+      `conclusiones=${conclusionesStr}&userData=${userDataStr}&selectedImages=${imagenesStr}`;
 
     // Iniciar Puppeteer
     const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
@@ -35,7 +38,7 @@ export async function POST(req) {
     });
 
     const page = await browser.newPage();
-    await page.goto(targetUrl, { waitUntil: "networkidle0", timeout: 60000 });
+    await page.goto(targetUrl, { waitUntil: "networkidle2", timeout: 30000 });
     await page.waitForTimeout(1000);
 
     const pdfBuffer = await page.pdf({

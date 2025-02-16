@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 /* Contenedor principal para centrar y limitar ancho */
@@ -40,19 +40,17 @@ body {
   justify-content: center;
   z-index: 0;
 }
-.drop-area-container {
+.image-container {
   position: relative;
   top: 10px;
 left: 10px;
 width: 10%;
 height: 10%;
+background-color: transparent;
+z-index: 0;
 
 }
 
-.dragged-image {
-  transform-origin: top left;
-  contain: content;
-}
 
 .image-stack img {
   position: absolute;

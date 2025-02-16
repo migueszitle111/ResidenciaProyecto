@@ -1,16 +1,15 @@
+//Generar PDF Servidor
 // app/ReporteImprimir/UnionMuscular/page.jsx
 import React from 'react'
 // app/layout.js
 import '../UnionMuscular/style.css'
-
 // Forzamos SSR sin caché
 export const dynamic = 'force-dynamic'
 
-
 export default function Page({ searchParams }) {
   const conclusiones = JSON.parse(searchParams.conclusiones || "[]");
-  const imagenesBase64 = JSON.parse(searchParams.imagenes || "[]");
   const userData = JSON.parse(searchParams.userData || "{}");
+  const selectedImages = JSON.parse(searchParams.selectedImages || "[]");
 
   const showBulbar = !!conclusiones.find((c) => c.value === "bulbar");
   const showPresinaptico = !!conclusiones.find((c) => c.value === "tipo_presinaptico");
@@ -29,35 +28,20 @@ export default function Page({ searchParams }) {
       )}
 
       <div className="container">
-        {/* Contenedor principal para las imágenes arrastradas */}
-        <div className="drop-area-container">
-        {imagenesBase64.map((img, i) => (
-  <div
-    key={i}
-    className="dragged-image"
-    style={{
-      position: 'absolute',
-      left: `${img.x}px`,
-      top: `${img.y}px`,
-      width: `${img.width}px`,
-      height: `${img.height}px`,
-      zIndex: 1000 + i,
-      pointerEvents: 'none',
-    }}
-  >
-    <img
-      src={`${img.src}`} // Usar la fuente Base64 directamente
-      alt={`arrastrada-${i}`}
-      style={{
-        width: '100%',
-        height: '100%',
-        objectFit: 'contain',
-        position: 'absolute',
-      }}
-    />
-  </div>
-))}
-
+        <div className="image-container">
+        {selectedImages.map((img, index) => (
+          <img
+            key={index}
+            src={img.src} // Full data URL included
+            style={{
+              position: "absolute",
+              left: `${img.position.x}px`,
+              top: `${img.position.y}px`,
+              width: img.size.width,
+              height: img.size.height,
+            }}
+          />
+        ))}
         </div>
         <div className="image-stack">
           <img

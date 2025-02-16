@@ -52,7 +52,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'D1' && <StepD1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'D2' && <StepD2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'E' && <StepE handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>}
-      {step === 'E2' && <StepE2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>}
+      {step === 'E2' && <StepE2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}selectedSide={selectedSide}/>}
       {step === 'F' && <StepF handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} />}
       {step === 'F2' && <StepF2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} />}
       {step === 'G1' && <StepG1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
@@ -290,12 +290,17 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
 };
 
 
-const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide,selectedSide }) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
     <div className='button-bar'>
       <button onClick={() => {
+            removeConclusion(`${selectedSide}led_flash`)
+            removeConclusion(`${selectedSide}nervio_optico`)
+            removeConclusion(`${selectedSide}quiasma_optico`)
+            removeConclusion(`${selectedSide}tracto_optico`)
+            removeConclusion(`${selectedSide}nucleo_geniculado`)
             removeConclusion('indenme')
             removeConclusion('izquierdo')
             removeConclusion('derecho')
@@ -377,10 +382,10 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
             title=' AL ESTIMULO LUMINOSO DE LAS FIBRAS RETINO-TÁLAMOCORTICALES.' displayText='LED FLASH'
           />
     </div>
-    <div onClick={() => setStep('G1')}>
-      <ConclusionButton value='damero_total' title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA' displayText='DAMERO TOTAL' />
+    <div onClick={() => setStep('G12')}>
+      <ConclusionButton value='damero_total' title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA ' displayText='DAMERO TOTAL' />
     </div>
-    <div onClick={() => setStep('G2')}>
+    <div onClick={() => setStep('G22')}>
     <ConclusionButton value='damero_hemicampos' title=' AL ESTÍMULAR ÁREA RETROQUIASMATICA' displayText='DAMERO HEMICAMPOS' />
     </div>
   </div>
@@ -411,15 +416,15 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
     <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
     <div onClick={() => setStep('H')}>
     <ConclusionButton
-            value={``}
+            value={`${selectedSide}led_flash`}
             title=' AL ESTIMULO LUMINOSO DE LAS FIBRAS RETINO-TÁLAMOCORTICALES.' displayText='LED FLASH'
           />
     </div>
-    <div onClick={() => setStep('G12')}>
-      <ConclusionButton value='damero_total' title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA' displayText='DAMERO TOTAL' />
+    <div onClick={() => setStep('H')}>
+      <ConclusionButton value='damero_total' title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA MEDIANTE CAMPO COMPLETO.' displayText='DAMERO TOTAL' />
     </div>
-    <div onClick={() => setStep('G22')}>
-    <ConclusionButton value='damero_hemicampos' title=' AL ESTÍMULAR ÁREA RETROQUIASMATICA' displayText='DAMERO HEMICAMPOS' />
+    <div onClick={() => setStep('H')}>
+    <ConclusionButton value='damero_hemicampos' title=' AL ESTÍMULAR ÁREA RETROQUIASMATICA MEDIANTE HEMICAMPOS.' displayText='DAMERO HEMICAMPOS' />
     </div>
   </div>
 );
@@ -469,6 +474,10 @@ const StepG2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide}) => {
   <div>
   <div className='button-bar'>
     <button onClick={() => {
+       removeConclusion(`${selectedSide}led_flash`)
+       removeConclusion(`${selectedSide}nervio_optico`)
+       removeConclusion(`${selectedSide}quiasma_optico`)
+
             removeConclusion(`${selectedSide}tracto_optico`)
             removeConclusion(`${selectedSide}nucleo_geniculado`)
             setStep('F')
@@ -500,8 +509,12 @@ const StepG12 = ({ handleNextStep, handlePrevStep, setStep,selectedSide}) => {
   <div>
     <div className='button-bar'>
       <button onClick={() => {
-            removeConclusion(`${selectedSide}tracto_optico`)
+            removeConclusion(`${selectedSide}led_flash`)
+            removeConclusion(`${selectedSide}nervio_optico`)
             removeConclusion(`${selectedSide}quiasma_optico`)
+     
+                 removeConclusion(`${selectedSide}tracto_optico`)
+                 removeConclusion(`${selectedSide}nucleo_geniculado`)
             setStep('F2')
           }} id='prev' className={`print-button dont-print `}>
         <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
@@ -535,8 +548,12 @@ const StepG22 = ({ handleNextStep, handlePrevStep, setStep,selectedSide}) => {
   <div className='button-bar'>
     <button onClick={() => {
            
-            removeConclusion(`${selectedSide}tracto_optico`)
-            removeConclusion(`${selectedSide}nucleo_geniculado`)
+           removeConclusion(`${selectedSide}led_flash`)
+           removeConclusion(`${selectedSide}nervio_optico`)
+           removeConclusion(`${selectedSide}quiasma_optico`)
+    
+                removeConclusion(`${selectedSide}tracto_optico`)
+                removeConclusion(`${selectedSide}nucleo_geniculado`)
             setStep('F2')
           }} id='prev' className={`print-button dont-print `}>
       <img src="/I_Out.svg" alt="Anterior" style={{filter: 'invert(1)'}} />
@@ -693,7 +710,7 @@ const StepH = ({ setStep, selectedImages, handleUndo, handleImageChange, handleP
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={() => setStep('I')} className="print-button dont-print">
+        <button onClick={() => setStep('G2')} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 

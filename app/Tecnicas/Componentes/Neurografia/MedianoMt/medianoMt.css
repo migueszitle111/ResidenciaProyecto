@@ -121,7 +121,7 @@
     top: 30%;
     left: 45%;
     transform: translate(685%, 140%);
-    background-color: transparent;
+    background-color: blue;
     border: none;
     border-radius: 50%;
     z-index: 1;

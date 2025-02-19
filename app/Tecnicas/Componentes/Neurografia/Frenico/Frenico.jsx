@@ -109,8 +109,8 @@ const Frenico = () => {
                         alt="Cuadro dinámico"
                         style={{
                             position: 'absolute',
-                            maxWidth: '18vw',
-                            maxHeight: '18vh',
+                            maxWidth: '17vw',
+                            maxHeight: '17vh',
                             transition: 'transform 0.3s ease',
                         }}
                         className="zoomable-image"

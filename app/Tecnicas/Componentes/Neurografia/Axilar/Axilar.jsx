@@ -71,7 +71,7 @@ const Axilar = () => {
                 {currentImageIndex === 0 && <button className="btnAx3" onClick={() => handleButtonClick('En la región más prominente de las fibras medias del musculo Deltoides, o punto medio trazando una línea imaginaria entre articulación acromioclavicular y área de inserción deltoidea.', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnAx4" onClick={() => handleButtonClick('Inserción deltoidea, unión del tercio proximal y medio del brazo.', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/Axilar-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/Axilar-T-01.png",{ top: '5%', left: '5%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/Axilar-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 
             </div>
             {textBoxVisible && (
@@ -93,8 +93,8 @@ const Axilar = () => {
                     alt="Cuadro dinámico"
                     style={{
                         position: 'absolute',
-                        maxWidth: '25vw',
-                        maxHeight: '20vh',
+                        maxWidth: '17vw',
+                        maxHeight: '17vh',
                         transition: 'transform 0.3s ease',
                     }}
                     className="zoomable-imageAx"

@@ -78,11 +78,11 @@ const RadialSt = () => {
                 {currentImageIndex === 1 && <button className="btnRSt7" onClick={() => handleButtonClick('Dorso de la mano.', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnRSt8" onClick={() => handleButtonClick('1. Muñeca: En la parte media distal del radio 10/12/14 cm proximal al electrodo activo cara volar del antebrazo.', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/RadialSt-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/RadialSt-T-01.png",{ top: '5%', left: '-10%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/RadialSt-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 
             </div>
             {textBoxVisible && (
-                <div className="text-boxRst" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxUSt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}
@@ -100,16 +100,16 @@ const RadialSt = () => {
                     alt="Cuadro dinámico"
                     style={{
                         position: 'absolute',
-                        maxWidth: '25vw',
+                        maxWidth: '20vw',
                         maxHeight: '20vh',
                         transition: 'transform 0.3s ease',
                     }}
-                    className="zoomable-imageMt"
+                    className="zoomable-imageUlSt"
                     />
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default RadialSt

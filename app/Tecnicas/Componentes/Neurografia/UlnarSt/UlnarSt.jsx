@@ -102,7 +102,7 @@ const UlnarSt = () => {
                     alt="Cuadro dinámico"
                     style={{
                         position: 'absolute',
-                        maxWidth: '25vw',
+                        maxWidth: '20vw',
                         maxHeight: '20vh',
                         transition: 'transform 0.3s ease',
                     }}
@@ -112,6 +112,6 @@ const UlnarSt = () => {
             )}
         </div>
     );
-}
+};
 
 export default UlnarSt

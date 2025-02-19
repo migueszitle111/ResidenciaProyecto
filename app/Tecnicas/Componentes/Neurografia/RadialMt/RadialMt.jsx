@@ -71,6 +71,7 @@ const RadialMt = () => {
 
 
 
+
     return (
         
         <div  className=" py-20 gallery-container">
@@ -132,11 +133,11 @@ const RadialMt = () => {
 
             </div>
             {textBoxVisible && (
-                <div className="text-boxRMt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div className="text-boxUSt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
                     {textBoxContent}
                 </div>
             )}
-             {imageBoxVisible && (
+            {imageBoxVisible && (
             <div
                 className="image-boxM"
                 style={{
@@ -150,16 +151,17 @@ const RadialMt = () => {
                     alt="Cuadro dinámico"
                     style={{
                         position: 'absolute',
-                        maxWidth: '25vw',
+                        maxWidth: '20vw',
                         maxHeight: '20vh',
                         transition: 'transform 0.3s ease',
                     }}
-                    className="zoomable-imageMt"
+                    className="zoomable-imageUlSt"
                     />
                 </div>
             )}
         </div>
     );
-}
+};
+
 
 export default RadialMt

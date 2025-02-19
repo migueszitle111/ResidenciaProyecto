@@ -71,7 +71,7 @@ const CutaneoM = () => {
                 {currentImageIndex === 0 && <button className="btnCM3" onClick={() => handleButtonClick('A 12-14 cm en dirección distal del punto de estimulación sobre línea trazada hasta el pisiforme en la muñeca justo medial del tendón cubital anterior. ', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnCM4" onClick={() => handleButtonClick('3-4 cm distal a electrodo activo (utilizar barra)', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/CutaneoMd-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/CutaneoMd-T-01.png",{ top: '5%', left: '-10%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/CutaneoMd-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 
             </div>
             {textBoxVisible && (
@@ -93,8 +93,8 @@ const CutaneoM = () => {
                     alt="Cuadro dinámico"
                     style={{
                         position: 'absolute',
-                        maxWidth: '25vw',
-                        maxHeight: '20vh',
+                        maxWidth: '17vw',
+                        maxHeight: '17vh',
                         transition: 'transform 0.3s ease',
                     }}
                     className="zoomable-imageCm"

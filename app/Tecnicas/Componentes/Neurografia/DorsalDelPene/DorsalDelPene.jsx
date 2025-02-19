@@ -95,8 +95,8 @@ const DorsalDelPene = () => {
                         alt="Cuadro dinámico"
                         style={{
                             position: 'absolute',
-                            maxWidth: '18vw',
-                            maxHeight: '18vh',
+                            maxWidth: '16vw',
+                            maxHeight: '16vh',
                             transition: 'transform 0.3s ease',
                         }}
                         className="zoomable-image"

@@ -109,8 +109,8 @@ const PeroneoProfundo = () => {
                         alt="Cuadro dinámico"
                         style={{
                             position: 'absolute',
-                            maxWidth: '18vw',
-                            maxHeight: '18vh',
+                            maxWidth: '16vw',
+                            maxHeight: '16svh',
                             transition: 'transform 0.3s ease',
                         }}
                         className="zoomable-image"

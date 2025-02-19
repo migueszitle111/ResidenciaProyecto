@@ -104,8 +104,8 @@ const Supraescapular = () => {
                     alt="Cuadro dinámico"
                     style={{
                         position: 'absolute',
-                        maxWidth: '25vw',
-                        maxHeight: '20vh',
+                        maxWidth: '17vw',
+                        maxHeight: '17vh',
                         transition: 'transform 0.3s ease',
                     }}
                     className="zoomable-imageSp"

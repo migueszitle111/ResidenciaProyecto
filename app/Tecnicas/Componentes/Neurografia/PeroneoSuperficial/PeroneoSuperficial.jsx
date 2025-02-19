@@ -96,8 +96,8 @@ const PeroneoSuperficial = () => {
                         alt="Cuadro dinámico"
                         style={{
                             position: 'absolute',
-                            maxWidth: '18vw',
-                            maxHeight: '18vh',
+                            maxWidth: '16vw',
+                            maxHeight: '186h',
                             transition: 'transform 0.3s ease',
                         }}
                         className="zoomable-image"

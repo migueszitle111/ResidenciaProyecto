@@ -1,7 +1,7 @@
-import { useState } from "react"
-import ImageGallery from "react-image-gallery"
-import "react-image-gallery/styles/css/image-gallery.css"
-import "../Ciatico/Ciatico.css"
+import { useState } from "react";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+import "../Ciatico/Ciatico.css";
 
 
 const Ciatico = () => {
@@ -9,6 +9,10 @@ const Ciatico = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [imageBoxVisible, setImageBoxVisible] = useState(false);
+    const [imageBoxContent, setImageBoxContent] = useState('');
+    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
 
     const images = [
         {
@@ -24,15 +28,27 @@ const Ciatico = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
+        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
     };
 
-    const handleButtonClick = (content, position) => {
+    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
+            setTextBoxClass(customClass);
             setTextBoxVisible(true);
+        }
+    };
+
+    const handleImageBoxClick = (image, position) => {
+        if (imageBoxVisible && imageBoxContent === image) {
+            setImageBoxVisible(false);
+        } else {
+            setImageBoxContent(image);
+            setImageBoxPosition(position);
+            setImageBoxVisible(true);
         }
     };
 
@@ -57,20 +73,48 @@ const Ciatico = () => {
             {currentImageIndex === 0 && <button className="btnCt3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnCt4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnCt5" onClick={() => handleButtonClick('5', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/Ciatico-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/Ciatico-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
             {currentImageIndex === 1 && <button className="btnCt6" onClick={() => handleButtonClick('6', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnCt7" onClick={() => handleButtonClick('7', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnCt8" onClick={() => handleButtonClick('8', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnCt9" onClick={() => handleButtonClick('9', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/Ciatico-G-02.png",{ top: '2%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
-                <div className="text-boxCt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div
+                    className={`text-boxMs ${textBoxClass}`}
+                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
+                >
                     {textBoxContent}
+                </div>
+            )}
+            {imageBoxVisible && (
+                <div
+                    className="image-boxM"
+                    style={{
+                        top: imageBoxPosition.top,
+                        left: imageBoxPosition.left,
+                        position: 'absolute',
+                    }}
+                >
+                    <img
+                        src={imageBoxContent}
+                        alt="Cuadro dinámico"
+                        style={{
+                            position: 'absolute',
+                            maxWidth: '18vw',
+                            maxHeight: '18vh',
+                            transition: 'transform 0.3s ease',
+                        }}
+                        className="zoomable-image"
+                    />
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default Ciatico

@@ -1,7 +1,7 @@
-import { useState } from "react"
-import ImageGallery from "react-image-gallery"
-import "react-image-gallery/styles/css/image-gallery.css"
-import "../Facial/Facial.css"
+import { useState } from "react";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+import "../Facial/Facial.css";
 
 
 const Facial = () => {
@@ -9,6 +9,10 @@ const Facial = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [imageBoxVisible, setImageBoxVisible] = useState(false);
+    const [imageBoxContent, setImageBoxContent] = useState('');
+    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
 
     const images = [
         {
@@ -36,15 +40,27 @@ const Facial = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
+        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
     };
 
-    const handleButtonClick = (content, position) => {
+    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
+            setTextBoxClass(customClass);
             setTextBoxVisible(true);
+        }
+    };
+
+    const handleImageBoxClick = (image, position) => {
+        if (imageBoxVisible && imageBoxContent === image) {
+            setImageBoxVisible(false);
+        } else {
+            setImageBoxContent(image);
+            setImageBoxPosition(position);
+            setImageBoxVisible(true);
         }
     };
 
@@ -76,7 +92,8 @@ const Facial = () => {
             {currentImageIndex === 0 && <button className="btnFc10" onClick={() => handleButtonClick('10', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnFc11" onClick={() => handleButtonClick('11', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnFc12" onClick={() => handleButtonClick('12', { top: '12%', left: '32%' })}></button>}
-            
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-Facial-G.png",{ top: '2%', left: '2%' })}></button>}
+
             {currentImageIndex === 1 && <button className="btnFc13" onClick={() => handleButtonClick('1. Preauricular \n2. Postauricular \n3. Rama. 2 a 5 cm en dirección antero medial y orientado hacia el musculo correspondiente (con el estimulador bipolar, una colocación cómoda para el explorador es colocar el ánodo en el área preauricular-trago anterior y el cátodo en dirección medial hacia el musculo de registro).', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnFc14" onClick={() => handleButtonClick('Orbicularis oculi. Con electrodo de superficie colocado, lateral al borde externo de la órbita.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnFc15" onClick={() => handleButtonClick('Región frontal.', { top: '12%', left: '32%' })}></button>}
@@ -85,6 +102,8 @@ const Facial = () => {
             {currentImageIndex === 1 && <button className="btnFc18" onClick={() => handleButtonClick('Nasalis. Con electrodo de superficie colocado, lateral al centro de la nariz.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnFc19" onClick={() => handleButtonClick('Orbicularis oris. Con electrodo de superficie colocado, lateral al borde externo de la comisura labial.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnFc20" onClick={() => handleButtonClick('Inferior a la mitad del labio menor.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/02-Facial-G.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' })}></button>}
             
             {currentImageIndex === 2 && <button className="btnFc21" onClick={() => handleButtonClick('Región frontal.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 2 && <button className="btnFc22" onClick={() => handleButtonClick('Sobre dorso del tabique nasal 2 cm en dirección lateral, ipsilateral al lado estimulado.', { top: '12%', left: '32%' })}></button>}
@@ -92,6 +111,7 @@ const Facial = () => {
             {currentImageIndex === 2 && <button className="btnFc24" onClick={() => handleButtonClick('1. Preauricular \n2. Postauricular \n3. Rama. 2 a 5 cm en dirección antero medial y orientado hacia el musculo correspondiente (con el estimulador bipolar, una colocación cómoda para el explorador es colocar el ánodo en el área preauricular-trago anterior y el cátodo en dirección medial hacia el musculo de registro).', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 2 && <button className="btnFc25" onClick={() => handleButtonClick('25', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 2 && <button className="btnFc26" onClick={() => handleButtonClick('26', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/03-Facial-G.png",{ top: '2%', left: '2%' })}></button>}            
             
             {currentImageIndex === 3 && <button className="btnFc27" onClick={() => handleButtonClick('Región frontal.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 3 && <button className="btnFc28" onClick={() => handleButtonClick('Sobre el dorso del tabique nasal 1 cm en dirección lateral, ipsilateral al lado estimulado.', { top: '12%', left: '32%' })}></button>}
@@ -99,22 +119,49 @@ const Facial = () => {
             {currentImageIndex === 3 && <button className="btnFc30" onClick={() => handleButtonClick('30', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 3 && <button className="btnFc31" onClick={() => handleButtonClick('31', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 3 && <button className="btnFc32" onClick={() => handleButtonClick('32', { top: '12%', left: '32%' })}></button>}
-            
+            {currentImageIndex === 3 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/04-Facial-G.png",{ top: '2%', left: '2%' })}></button>}            
+                        
             {currentImageIndex === 4 && <button className="btnFc33" onClick={() => handleButtonClick('Región frontal', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 4 && <button className="btnFc34" onClick={() => handleButtonClick('Inferior a la mitad del labio menor.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 4 && <button className="btnFc35" onClick={() => handleButtonClick('Orbicularis oris. Con electrodo de superficie colocado, lateral al borde externo de la comisura labial.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 4 && <button className="btnFc36" onClick={() => handleButtonClick('36', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 4 && <button className="btnFc37" onClick={() => handleButtonClick('37', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 4 && <button className="btnFc38" onClick={() => handleButtonClick('38', { top: '12%', left: '32%' })}></button>}
-                        
+            {currentImageIndex === 4 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/05-Facial-G.png",{ top: '2%', left: '2%' })}></button>}            
+                                    
             </div>
             {textBoxVisible && (
-                <div className="text-boxFc" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div
+                    className={`text-boxMs ${textBoxClass}`}
+                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
+                >
                     {textBoxContent}
+                </div>
+            )}
+            {imageBoxVisible && (
+                <div
+                    className="image-boxM"
+                    style={{
+                        top: imageBoxPosition.top,
+                        left: imageBoxPosition.left,
+                        position: 'absolute',
+                    }}
+                >
+                    <img
+                        src={imageBoxContent}
+                        alt="Cuadro dinámico"
+                        style={{
+                            position: 'absolute',
+                            maxWidth: '18vw',
+                            maxHeight: '18vh',
+                            transition: 'transform 0.3s ease',
+                        }}
+                        className="zoomable-image"
+                    />
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default Facial

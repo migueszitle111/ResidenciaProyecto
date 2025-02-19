@@ -1,7 +1,7 @@
-import { useState } from "react"
-import ImageGallery from "react-image-gallery"
-import "react-image-gallery/styles/css/image-gallery.css"
-import "../Sural/Sural.css"
+import { useState } from "react";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+import "../Sural/Sural.css";
 
 
 const Sural = () => {
@@ -9,6 +9,10 @@ const Sural = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [imageBoxVisible, setImageBoxVisible] = useState(false);
+    const [imageBoxContent, setImageBoxContent] = useState('');
+    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
 
     const images = [
         {
@@ -24,15 +28,27 @@ const Sural = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
+        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
     };
 
-    const handleButtonClick = (content, position) => {
+    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
+            setTextBoxClass(customClass);
             setTextBoxVisible(true);
+        }
+    };
+
+    const handleImageBoxClick = (image, position) => {
+        if (imageBoxVisible && imageBoxContent === image) {
+            setImageBoxVisible(false);
+        } else {
+            setImageBoxContent(image);
+            setImageBoxPosition(position);
+            setImageBoxVisible(true);
         }
     };
 
@@ -58,20 +74,49 @@ const Sural = () => {
             {currentImageIndex === 0 && <button className="btnSr4" onClick={() => handleButtonClick('Línea media entre el borde posterior del maléolo lateral y el tendón de Aquiles', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnSr5" onClick={() => handleButtonClick('3 cm distal del electrodo de registo.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnSr6" onClick={() => handleButtonClick('Punto medio entre estimulo y registro.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/Sural-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/Sural-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
             {currentImageIndex === 1 && <button className="btnSr7" onClick={() => handleButtonClick('Dorso del pie.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnSr8" onClick={() => handleButtonClick('1.	Tobillo: De forma antidrómica, justo por detrás del maléolo lateral horizontal al borde inferior.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnSr9" onClick={() => handleButtonClick('Dorso del pie sobre la porción medial del quinto metatarsiano, justo lateral al tendón extensor largo del quinto dedo. ', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnSr10" onClick={() => handleButtonClick('3 cm distal del electrodo activo o en la articulacion metatarsofalangica del 5to dedo.', { top: '12%', left: '32%' })}></button>}
-
+            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/Sural-G-02.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/Sural-T-02.png",{ top: '5%', left: '2%' })}></button>}
+            
             </div>
             {textBoxVisible && (
-                <div className="text-boxSr" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div
+                    className={`text-boxMs ${textBoxClass}`}
+                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
+                >
                     {textBoxContent}
+                </div>
+            )}
+            {imageBoxVisible && (
+                <div
+                    className="image-boxM"
+                    style={{
+                        top: imageBoxPosition.top,
+                        left: imageBoxPosition.left,
+                        position: 'absolute',
+                    }}
+                >
+                    <img
+                        src={imageBoxContent}
+                        alt="Cuadro dinámico"
+                        style={{
+                            position: 'absolute',
+                            maxWidth: '18vw',
+                            maxHeight: '18vh',
+                            transition: 'transform 0.3s ease',
+                        }}
+                        className="zoomable-image"
+                    />
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default Sural

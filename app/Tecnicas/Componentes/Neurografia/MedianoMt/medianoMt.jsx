@@ -74,7 +74,6 @@ const MedianoMt = () => {
         }
     };
 
-
     return (
         
         <div  className=" py-20 gallery-container">
@@ -138,34 +137,37 @@ const MedianoMt = () => {
                 {currentImageIndex === 6 && <button className="btnM31" onClick={() => handleButtonClick('Texto desde el boton 2', { top: '12%', left: '24%' })}></button>}
             </div>
             {textBoxVisible && (
-                <div className="text-boxM" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div
+                    className={`text-boxMs ${textBoxClass}`}
+                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
+                >
                     {textBoxContent}
                 </div>
             )}
             {imageBoxVisible && (
-            <div
-                className="image-boxM"
-                style={{
-                    top: imageBoxPosition.top,
-                    left: imageBoxPosition.left,
-                    position: 'absolute',
-                }}
-            >
-                <img
-                    src={imageBoxContent}
-                    alt="Cuadro dinámico"
+                <div
+                    className="image-boxM"
                     style={{
+                        top: imageBoxPosition.top,
+                        left: imageBoxPosition.left,
                         position: 'absolute',
-                        maxWidth: '25vw',
-                        maxHeight: '20vh',
-                        transition: 'transform 0.3s ease',
                     }}
-                    className="zoomable-imageMt"
+                >
+                    <img
+                        src={imageBoxContent}
+                        alt="Cuadro dinámico"
+                        style={{
+                            position: 'absolute',
+                            maxWidth: '18vw',
+                            maxHeight: '18vh',
+                            transition: 'transform 0.3s ease',
+                        }}
+                        className="zoomable-image"
                     />
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default MedianoMt

@@ -1,7 +1,7 @@
-import { useState } from "react"
-import ImageGallery from "react-image-gallery"
-import "react-image-gallery/styles/css/image-gallery.css"
-import "../Frenico/Frenico.css"
+import { useState } from "react";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+import "../Frenico/Frenico.css";
 
 
 const Frenico = () => {
@@ -9,6 +9,10 @@ const Frenico = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [imageBoxVisible, setImageBoxVisible] = useState(false);
+    const [imageBoxContent, setImageBoxContent] = useState('');
+    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
 
     const images = [
         {
@@ -25,17 +29,30 @@ const Frenico = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
+        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
     };
 
-    const handleButtonClick = (content, position) => {
+    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
+            setTextBoxClass(customClass);
             setTextBoxVisible(true);
         }
     };
+
+    const handleImageBoxClick = (image, position) => {
+        if (imageBoxVisible && imageBoxContent === image) {
+            setImageBoxVisible(false);
+        } else {
+            setImageBoxContent(image);
+            setImageBoxPosition(position);
+            setImageBoxVisible(true);
+        }
+    };
+
 
 
     return (
@@ -59,20 +76,49 @@ const Frenico = () => {
             {currentImageIndex === 0 && <button className="btnFn4" onClick={() => handleButtonClick('1.	Cuello punto inferior: Sobre el borde superior de la clavícula entre las cabezas esternal y clavicular del musculo esternocleidomastoideo con posición a la neutra o ligeramente extendida. \n2.	Cuello punto medio: Borde posterior del músculo esternocleidomastoideo a nivel del cartílago tiroides.', { top: '12%', left: '32%'})}></button>}
             {currentImageIndex === 0 && <button className="btnFn5" onClick={() => handleButtonClick('Músculo Diafragma con electrodo de superficie sobre apófisis xifoides (algunas literaturas prefieren colocarlo 5cm por arriba de esta).', {  top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnFn6" onClick={() => handleButtonClick('De forma bilateral en el séptimo espacio intercostal horizontal a la tetilla o con referencia a línea media clavicular.', { top: '12%', left: '32%'})}></button>}
-        
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/frenico-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-Frenico-T.png",{ top: '5%', left: '2%' })}></button>}
+
             {currentImageIndex === 1 && <button className="btnFn7" onClick={() => handleButtonClick('Caudalmente a electrodo de registros, pero sobre noveno espacio intercostal.', {  top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnFn8" onClick={() => handleButtonClick('Músculo Diafragma con electrodo de superficie sobre octavo espacio intercostal en la línea axilar anterior', { top: '12%', left: '32%'})}></button>}
             {currentImageIndex === 1 && <button className="btnFn9" onClick={() => handleButtonClick('1.	Cuello punto inferior: Sobre el borde superior de la clavícula entre las cabezas esternal y clavicular del musculo esternocleidomastoideo con posición a la neutra o ligeramente extendida.', {  top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnFn10" onClick={() => handleButtonClick('Esternón.', { top: '12%', left: '32%'})}></button>}
-            
+            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/FrenicoG.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/02-Frenico-T.png",{ top: '5%', left: '2%' })}></button>}
+
             </div>
             {textBoxVisible && (
-                <div className="text-boxFn" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div
+                    className={`text-boxMs ${textBoxClass}`}
+                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
+                >
                     {textBoxContent}
+                </div>
+            )}
+            {imageBoxVisible && (
+                <div
+                    className="image-boxM"
+                    style={{
+                        top: imageBoxPosition.top,
+                        left: imageBoxPosition.left,
+                        position: 'absolute',
+                    }}
+                >
+                    <img
+                        src={imageBoxContent}
+                        alt="Cuadro dinámico"
+                        style={{
+                            position: 'absolute',
+                            maxWidth: '18vw',
+                            maxHeight: '18vh',
+                            transition: 'transform 0.3s ease',
+                        }}
+                        className="zoomable-image"
+                    />
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default Frenico

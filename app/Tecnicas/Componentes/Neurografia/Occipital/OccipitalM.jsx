@@ -1,7 +1,7 @@
-import { useState } from "react"
-import ImageGallery from "react-image-gallery"
-import "react-image-gallery/styles/css/image-gallery.css"
-import "../Occipital/OccipitalM.css"
+import { useState } from "react";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+import "../Occipital/OccipitalM.css";
 
 
 const OccipitalM = () => {
@@ -9,6 +9,10 @@ const OccipitalM = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [imageBoxVisible, setImageBoxVisible] = useState(false);
+    const [imageBoxContent, setImageBoxContent] = useState('');
+    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
 
     const images = [
         {
@@ -20,15 +24,27 @@ const OccipitalM = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
+        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
     };
 
-    const handleButtonClick = (content, position) => {
+    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
+            setTextBoxClass(customClass);
             setTextBoxVisible(true);
+        }
+    };
+
+    const handleImageBoxClick = (image, position) => {
+        if (imageBoxVisible && imageBoxContent === image) {
+            setImageBoxVisible(false);
+        } else {
+            setImageBoxContent(image);
+            setImageBoxPosition(position);
+            setImageBoxVisible(true);
         }
     };
 
@@ -52,15 +68,42 @@ const OccipitalM = () => {
                 {currentImageIndex === 0 && <button className="btnOc2" onClick={() => handleButtonClick('Electrodo de aguja subdérmico, colocado en trayecto del ápex, 1 cm lateral a la protuberancia occipital externa ipsilateral al lado a estimular (insertar de forma oblicua en dirección cefálica)', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnOc3" onClick={() => handleButtonClick('Espacio intervertebral C1-C2. Con electrodo de aguja monopolar (cátodo), 6-8 cm en dirección caudal de electrodo activo, 1 cm lateral a la línea media con referencia al borde inferior de la apófisis mastoides emulando las técnicas de estimulación de raíz (colocar ánodo 3-4 cm caudal).', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnOc4" onClick={() => handleButtonClick('Apófisis espinosa C7.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-OccipitalM-G.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-OccipitalM-T.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
-                <div className="text-boxOc" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                <div
+                    className={`text-boxMs ${textBoxClass}`}
+                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
+                >
                     {textBoxContent}
+                </div>
+            )}
+            {imageBoxVisible && (
+                <div
+                    className="image-boxM"
+                    style={{
+                        top: imageBoxPosition.top,
+                        left: imageBoxPosition.left,
+                        position: 'absolute',
+                    }}
+                >
+                    <img
+                        src={imageBoxContent}
+                        alt="Cuadro dinámico"
+                        style={{
+                            position: 'absolute',
+                            maxWidth: '18vw',
+                            maxHeight: '18vh',
+                            transition: 'transform 0.3s ease',
+                        }}
+                        className="zoomable-image"
+                    />
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default OccipitalM

@@ -71,6 +71,43 @@
     }
 }
 
+.btnIMs1 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(820%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(226, 226, 226);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnIMs2 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/I_Tabla_Gris.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(700%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
 
 .btnFn1 {
     position: absolute;
@@ -245,4 +282,8 @@
     white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
 
-
+.zoomable-imageMt:hover {
+    transform: scale(1.0); /* Ajusta el valor de escala según sea necesario */
+    transform-origin: top left; /* Expande hacia la derecha y hacia abajo */
+    position: center;
+}

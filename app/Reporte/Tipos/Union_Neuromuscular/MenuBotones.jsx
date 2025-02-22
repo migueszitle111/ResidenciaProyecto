@@ -1,24 +1,25 @@
 //Menubotones.jsx
-import { ReportContext } from '@/src/context';
+import { ReportContext,DropContext} from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useContext, useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import  MenuImagenes  from '../../../components/ReportTemplate/DinamicImagesMenu';
 import { useImageState } from '../../MetodosBotones';
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import { PDFDocument } from 'pdf-lib';
+
+
 
 // Numero de pasos 
 const stepsArray = ['A', 'B', 'C', 'D', 'E', 'I'];
 
 // Metodos de movimiento entre menus
-const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef,selectedImages }) => {
+const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, handleImageChange,droppedItems}) => {
   const { data: session } = useSession();
-
   const [step, setStep] = useState('A');
-  
-
   const {
     history,
-    handleImageChange,
     handleUndo,
     handlePrint
   } = useImageState();
@@ -59,7 +60,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef,selec
           >
             {item}
           </div>
-        ))}
+        ))}+
       </section>
     );
   };
@@ -112,12 +113,12 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef,selec
       {step === 'I' ? (
         <StepI
           handlePrevStep={handlePrevStep}
-          selectedImages={selectedImages}
           handleUndo={handleUndo}
           handleImageChange={handleImageChange}
           handlePrint={handlePrint}
           conclusionDivRef={conclusionDivRef}
           elementRef={elementRef}
+          droppedItems={droppedItems}
 
         />
       ) : null}
@@ -332,9 +333,10 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
   );
 };
 
-const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,conclusionDivRef,elementRef,selectedImages }) => {
+const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
+  const { droppedItems } = useContext(DropContext);
   const [expandedDivs, setExpandedDivs] = useState(() => {
     let obj = {};
     for (let i = 1; i <= 18; i++) {
@@ -343,65 +345,50 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,conc
     return obj;
   });
 
-// Función que llama a la API para crear el PDF:
-// menubotones.jsx (o donde tengas StepI)
-const handleExportPdf = async () => {
-  try {
-    // 1) conclusiones (array con {value, title})
-    const arrayConclusiones = conclusions;
-      // 2) imágenes arrastradas
-      const imagenes = selectedImages.map((img) => {
-       return {
-         src: img.src,
-         x: img.position.x,
-         y: img.position.y,
-         width: parseInt(img.size.width, 10),
-         height: parseInt(img.size.height, 10),
-       };
-     });
-     
-         // 3) Datos de usuario
-    const userData = {
-      name: session?.user?.name ?? "",
-      lastname: session?.user?.lastname ?? "",
-      email: session?.user?.email ?? "",
-      cedula: session?.user?.cedula ?? "",
-      especialidad: session?.user?.especialidad ?? "",
-      imageUrl: session?.user?.imageUrl ?? "",
-    };
+  
 
-    // 4) POST a tu endpoint /api/pdf/generate-pdf
-    const response = await fetch("/api/pdf/generate-pdf?tipo=union", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        conclusiones: arrayConclusiones,
-        userData,
-        imagenes, // Include selectedImages
+  const handleExportPdf = async () => {
+    try {
+       // 1) conclusiones (array con {value, title})
+    const conclusiones = conclusions;
 
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Error al generar el PDF (status " + response.status + ")");
+      const response = await fetch('/api/pdf/generate-pdf?tipo=union', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          conclusiones,
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
     }
-
-    // 5) Descargar PDF
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "reporte.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
-  } catch (error) {
-    console.error("Error generando el PDF:", error);
-    alert("Error generando el PDF: " + error.message);
-  }
-};
-
+  };
+  
 
   return (
     <div>

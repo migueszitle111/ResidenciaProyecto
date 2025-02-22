@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import './Style.css';
-import { ReportContextProvider } from '@/src/context';
+import { ReportContextProvider,DropProvider } from '@/src/context';
 import FooterComponents from '../../../components/FooterComponents';
 import HeadComponents from '../../../components/HeadComponents';
 import ReportFace from './ReportFace';
@@ -17,9 +17,11 @@ const Page = () => {
       <MenuReportes />
       </div>   
       {/* ReportFace enrollado en el contexto */}
+      <DropProvider>
       <ReportContextProvider>
         <ReportFace />
       </ReportContextProvider>
+      </DropProvider>
       <div className='dont-print'>
         <FooterComponents />
       </div>

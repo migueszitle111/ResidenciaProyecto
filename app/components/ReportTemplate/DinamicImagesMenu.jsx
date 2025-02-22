@@ -125,8 +125,6 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs ,draggedImageSrc}) => {
       [index]: !prevState[index],
     }));
   };
-  
-
   return (
     <div className='container-grid'>
             {[1].map((index) => (

@@ -1,15 +1,17 @@
-//Generar PDF Servidor
-// app/ReporteImprimir/UnionMuscular/page.jsx
-import React from 'react'
-// app/layout.js
-import '../UnionMuscular/style.css'
+import React from 'react';
+import '../UnionMuscular/style.css';
+import { PDFDocument } from 'pdf-lib';
+
+
 // Forzamos SSR sin caché
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 export default function Page({ searchParams }) {
   const conclusiones = JSON.parse(searchParams.conclusiones || "[]");
   const userData = JSON.parse(searchParams.userData || "{}");
-  const selectedImages = JSON.parse(searchParams.selectedImages || "[]");
+  const droppedItems = JSON.parse(searchParams.droppedItems ?? "[]");
+
+
 
   const showBulbar = !!conclusiones.find((c) => c.value === "bulbar");
   const showPresinaptico = !!conclusiones.find((c) => c.value === "tipo_presinaptico");
@@ -29,66 +31,69 @@ export default function Page({ searchParams }) {
 
       <div className="container">
         <div className="image-container">
-        {selectedImages.map((img, index) => (
-          <img
-            key={index}
-            src={img.src} // Full data URL included
-            style={{
-              position: "absolute",
-              left: `${img.position.x}px`,
-              top: `${img.position.y}px`,
-              width: img.size.width,
-              height: img.size.height,
-            }}
-          />
-        ))}
+        {droppedItems.map((item) => (
+        <div
+          key={item.id}
+          style={{
+            position: 'absolute',
+            left: item.x,
+            top: item.y,
+            // ancho, alto si hicieras resizing 
+          }}
+          dangerouslySetInnerHTML={{ __html: item.content }}
+        />
+      ))}
+      
         </div>
-        <div className="image-stack">
-          <img
-            src="/assets/UnionMuscularIMG/BP_UnionMuscular.png"
-            alt="Unión Neuromuscular Base"
-          />
+          <div className="image-stack">
+            <img
+              src="/assets/UnionMuscularIMG/BP_UnionMuscular.png"
+              alt="Unión Neuromuscular Base"
+            />
 
-          {showBulbar && (
-            <img
-              src="/assets/UnionMuscularIMG/UN_Bulbar.png"
-              alt="Bulbar"
-            />
-          )}
-          {showPresinaptico && (
-            <img
-              src="/assets/UnionMuscularIMG/UN_Presinaptico.png"
-              alt="Presináptico"
-            />
-          )}
-          {showPostsinaptico && (
-            <img
-              src="/assets/UnionMuscularIMG/UN_Postsinaptico.png"
-              alt="Postsináptico"
-            />
-          )}
-          {showDistal && (
-            <img
-              src="/assets/UnionMuscularIMG/UN_Distal.png"
-              alt="Distal"
-            />
-          )}
-          {showProximal && (
-            <img
-              src="/assets/UnionMuscularIMG/UN_Proximal.png"
-              alt="Proximal"
-            />
-          )}
-        </div>
+            {showBulbar && (
+              <img
+                src="/assets/UnionMuscularIMG/UN_Bulbar.png"
+                alt="Bulbar"
+              />
+            )}
+            {showPresinaptico && (
+              <img
+                src="/assets/UnionMuscularIMG/UN_Presinaptico.png"
+                alt="Presináptico"
+              />
+            )}
+            {showPostsinaptico && (
+              <img
+                src="/assets/UnionMuscularIMG/UN_Postsinaptico.png"
+                alt="Postsináptico"
+              />
+            )}
+            {showDistal && (
+              <img
+                src="/assets/UnionMuscularIMG/UN_Distal.png"
+                alt="Distal"
+              />
+            )}
+            {showProximal && (
+              <img
+                src="/assets/UnionMuscularIMG/UN_Proximal.png"
+                alt="Proximal"
+              />
+            )}
 
-         
+            
+          </div>
+       
 
         <div id="conclusionDiv">
           {conclusiones.map((c) => c.title).join(" ")}
         </div>
 
+      
+
         <div className="user-data">
-        {userData.name && (
+          {userData.name && (
             <div id="footerName">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

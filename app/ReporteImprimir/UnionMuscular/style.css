@@ -16,7 +16,6 @@ body {
   margin: 10px auto;
   align-items: center;
   position: relative;
-
 }
 
 /* Logo del usuario (si existe) arriba a la derecha */
@@ -30,6 +29,17 @@ body {
   border-radius: 0%;
   object-fit: cover;
 }
+/* .draggableDiv {
+  position: relative;
+}
+.draggableDiv img {
+  position: absolute;
+} */
+/* 
+.dragged-images {
+  position: relative;
+  background-color: violet;
+} */
 
 /* "image-stack": imagen base + overlays */
 .image-stack {
@@ -41,16 +51,20 @@ body {
   z-index: 0;
 }
 .image-container {
-  position: relative;
-  top: 10px;
+position: relative;
+top: 10px;
 left: 10px;
 width: 10%;
 height: 10%;
-background-color: transparent;
-z-index: 0;
-
+background-color: blue;
+overflow: hidden;
+justify-content: center;
+z-index: 1;
 }
 
+.image-container img {
+  object-fit: contain;
+}
 
 .image-stack img {
   position: absolute;

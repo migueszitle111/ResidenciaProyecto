@@ -1,17 +1,16 @@
 //ReportFace.jsx
-import { ReportContext } from '@/src/context';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { ReportContext ,DropContext} from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
+import { PDFDocument } from 'pdf-lib';
+
 
 const DropArea = () => {
-  const [droppedItems, setDroppedItems] = useState([]);
-
+  const { droppedItems, setDroppedItems } = useContext(DropContext);
   const handleDrop = (e) => {
     e.preventDefault();
     const data = e.dataTransfer.getData('text/html');
@@ -70,11 +69,11 @@ const DropArea = () => {
 };
 
 const Reporte = () => {
-  
+  const { droppedItems } = useContext(DropContext);
+
   // Carga datos de usuario
   const { data: session, status } = useSession();
   const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)
-
   const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
   const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
   const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
@@ -213,7 +212,6 @@ const formattedConclusions = formatConclusions(copyConclusions);
     const conclusionDivRef = useRef(null);
     const elementRef = useRef(null);
 
-
   // Codigo para imprimir en click
   useEffect(() => {
     const printButton = document.getElementById('print');
@@ -246,10 +244,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
       <div className='head'>
            {/* Titulo de la pagina */}
           <div className='report-container dont-print'>
-            
           </div>
-        </div>
-        
+        </div>       
       {/* Wrapper que encapsula la image, conclusión y lista de botones */}
       <div className="wrapper">
         {/* Componente de la caja de conclusión junto con la caja de notas */}
@@ -277,7 +273,6 @@ const formattedConclusions = formatConclusions(copyConclusions);
           <img src="/I_Folder.svg" alt="Subir" style={{filter: 'invert(1)'}} />
           </label>
             <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} style={{display: 'none'}}/>          </div>
-
           <div className={'vertical-container dont-print'}>
           <div className={`dont-print ${isPageVisible ? 'visible' : 'hidden'}`}>
           
@@ -290,13 +285,12 @@ const formattedConclusions = formatConclusions(copyConclusions);
 
           <div className={`mx-4 z-10 `}>
             <SimpleMultiStepForm 
+              showStepNumber={true}
               conclusionDivRef={conclusionDivRef}
               elementRef={elementRef}
-              selectedImages={selectedImages}
-            showStepNumber={true}/>
-          </div>
-          
-          
+              handleImageChange={handleImageChange}
+            />
+          </div>    
           </div>
         </div>
         {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
@@ -385,10 +379,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 
                            0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                 </svg>
-
                 <span>{name} {lastname}</span>
               </div>
-          
               {/* Bloque Email */}
               <div id="footerEmail" style={{ display: 'inline-flex', alignItems: 'center' }}>
               <svg
@@ -403,10 +395,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
                   <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 
                            2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                 </svg>
-
                 <span>{email}</span>
               </div>
-          
               {/* Bloque Especialidad */}
               <div  id="footerEspecialidad" style={{ display: 'inline-flex', alignItems: 'center' }}>
               <svg
@@ -449,7 +439,6 @@ const formattedConclusions = formatConclusions(copyConclusions);
                 </svg>
                 <span>{especialidad}</span>
               </div>
-          
               {/* Bloque Cédula */}
               <div  id="footerCedula" style={{ display: 'inline-flex', alignItems: 'center' }}>
               <svg
@@ -488,16 +477,12 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     </g>
                   </g>
                 </svg>
-
                 <span>Cédula: {cedula}</span>
               </div>
             </>
           }
-          
           userImageUrl={imageUrl}  // Aquí se pasa la URL de la imagen del usuario
-
         />
-  
 <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
 <div
   id="conclusionDiv"
@@ -538,5 +523,6 @@ const formattedConclusions = formatConclusions(copyConclusions);
       </div>
   )
 }
+
 
 export default Reporte

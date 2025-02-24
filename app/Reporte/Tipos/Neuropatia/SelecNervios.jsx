@@ -1,5 +1,3 @@
-import { ReportContext } from '@/src/context';
-import { useContext } from 'react';
 import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 
 export function checkDivs(copyConclusions) {
@@ -19,15 +17,15 @@ export function checkDivs(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}> <NerviusButton value='car' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
         <div style={{ position: 'absolute', top: '18.0%', left: '56.0%', borderRadius: '50%' }}
           className={`.dont-print-Nerviusgrande`}> <NerviusButton value='car' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '15%', left: '50.2%', borderRadius: '50%' }}
+        <div style={{ position: 'absolute', top: '15vh', left: '20.2vw', borderRadius: '50%' }}
           className={`.dont-print-Nerviusgrande`}> <NerviusButton value='car' title='SUPRACLAVICULAR,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '15.2%', left: '51.4%', borderRadius: '50%' }}
+        <div style={{ position: 'absolute', top: '15.2vh', left: '21.4vw', borderRadius: '50%' }}
           className={`.dont-print-Nerviusgrande`}> <NerviusButton value='car' title='SUPRACLAVICULAR,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '15.6%', left: '52.6%', borderRadius: '50%' }}
+        <div style={{ position: 'absolute', top: '15.6vh', left: '22.6vw', borderRadius: '50%' }}
           className={`.dont-print-Nerviusgrande`}> <NerviusButton value='car' title='SUPRACLAVICULAR,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '16.2%', left: '53.9%', borderRadius: '50%' }}
+        <div style={{ position: 'absolute', top: '16.2vh', left: '23.9vw', borderRadius: '50%' }}
           className={`.dont-print-Nerviusgrande`}> <NerviusButton value='car' title='SUPRACLAVICULAR,' displayText=' ' /> </div>
-        <div style={{ position: 'absolute', top: '16.7%', left: '55.0%', borderRadius: '50%' }}
+        <div style={{ position: 'absolute', top: '16.7vh', left: '25.0vw', borderRadius: '50%' }}
           className={`.dont-print-Nerviusgrande`}> <NerviusButton value='car' title='SUPRACLAVICULAR,' displayText=' ' /> </div>
         <div style={{ position: 'absolute', top: '17.2%', left: '56.1%', borderRadius: '50%' }}
           className={`.dont-print-Nerviusgrande`}> <NerviusButton value='car' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>

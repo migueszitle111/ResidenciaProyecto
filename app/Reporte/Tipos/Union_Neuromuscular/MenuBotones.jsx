@@ -5,11 +5,6 @@ import { useContext, useState } from 'react';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import  MenuImagenes  from '../../../components/ReportTemplate/DinamicImagesMenu';
 import { useImageState } from '../../MetodosBotones';
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import { PDFDocument } from 'pdf-lib';
-
-
 
 // Numero de pasos 
 const stepsArray = ['A', 'B', 'C', 'D', 'E', 'I'];

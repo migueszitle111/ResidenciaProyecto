@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import '/app/components/ReportTemplate/DinamicImagesMenu.css';
 
 const DraggableDiv = ({ children, isDraggable }) => {
@@ -41,6 +41,7 @@ const DraggableDiv = ({ children, isDraggable }) => {
 
 const DropArea2 = ({ isExpanded }) => {
   const [imageSrc, setImageSrc] = useState(null);
+  const [textValue, setTextValue] = useState("");
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -87,6 +88,8 @@ const DropArea2 = ({ isExpanded }) => {
         overflow: 'hidden',
       }}
     >
+     
+
       <input
         type="file"
         accept="image/*"
@@ -99,6 +102,10 @@ const DropArea2 = ({ isExpanded }) => {
           cursor: 'pointer',
         }}
       />
+
+
+
+
       {!imageSrc ? (
         <p></p>
       ) : (
@@ -119,6 +126,31 @@ const DropArea2 = ({ isExpanded }) => {
 };
 
 const MenuImagenes = ({ expandedDivs, setExpandedDivs ,draggedImageSrc}) => {
+  const [topLeftText, setTopLeftText] = useState("");
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setTopLeftText(value);
+    setHeaderText(value); // Actualiza el estado en el componente padre
+  };
+
+
+  // 1. Estado para controlar si se muestra u oculta el input
+  const [showInput, setShowInput] = useState(false);
+  const [inputVisible, setInputVisible] = useState(false);
+
+  useEffect(() => {
+    if (showInput) {
+      // Agrega un pequeño delay para activar la clase 'visible'
+      const timer = setTimeout(() => {
+        setInputVisible(true);
+      }, 10); // 10ms de delay
+      return () => clearTimeout(timer);
+    } else {
+      setInputVisible(false);
+    }
+  }, [showInput]);
+
   const toggleDivSize = (index) => {
     setExpandedDivs((prevState) => ({
       ...prevState,
@@ -458,6 +490,37 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs ,draggedImageSrc}) => {
                 </DraggableDiv>
               </div>
             ))}
+            
+        {/* 2. Botones para mostrar/ocultar el input */}
+      <div style={{ marginTop: 15, display: 'flex',gap: 5 }}>
+      <a class=" ml-[2px] px-10 py-2 w-[153px] h-9 relative rounded group overflow-hidden text-xs bg-white text-gray inline-block  flex items-center justify-center" onClick={() => setShowInput(true)}>
+          <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-red-600 group-hover:h-full opacity-90"></span>
+          <span class="relative group-hover:text-white" >Agregar Paciente</span>
+      </a>
+      <a class="px-10 py-2 w-[153px] h-9 relative rounded group overflow-hidden text-xs bg-white text-gray inline-block  flex items-center justify-center" onClick={() => setShowInput(false)}>
+          <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-red-600 group-hover:h-full opacity-90"></span>
+          <span class="relative group-hover:text-white">Quitar</span>
+      </a>
+             </div>
+
+     {/* Input con animación */}
+     {showInput && (
+        <div style={{ marginTop: 30, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+          <div className={`input-with-placeholder fade-in ${inputVisible ? 'visible' : ''}`}>
+            <textarea
+              id="username"
+              value={topLeftText}
+              onChange={(e) => setTopLeftText(e.target.value)}
+              required
+              rows="5"
+              cols="40"
+            ></textarea>
+            <label htmlFor="username">Nombre</label>
+          </div>
+        </div>
+      )}
+
+
 
     </div>
   );

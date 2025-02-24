@@ -6,8 +6,6 @@ import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de l
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
-import { PDFDocument } from 'pdf-lib';
-
 
 const DropArea = () => {
   const { droppedItems, setDroppedItems } = useContext(DropContext);
@@ -296,7 +294,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
         {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
         <div>
           <div className='con-img '> 
-        
+
         {/* Codigo para desplegar las imagenes dentro de un array */}
         {selectedImages.map((image, index) => (
           <Rnd
@@ -308,7 +306,6 @@ const formattedConclusions = formatConclusions(copyConclusions);
             onResizeStop={(e, direction, ref, delta, position) => handleResizeStop(index, e, direction, ref, delta, position)}
             lockAspectRatio={true}
             style={{ zIndex: 2 }} 
-
           >
             <img src={image.src} draggable="false" />
           </Rnd>

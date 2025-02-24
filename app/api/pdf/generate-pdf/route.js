@@ -427,16 +427,18 @@ const menuCss = `
           }
           .image-stack img {
             position: absolute;
-            top: 0; left: 0;
-            width: 700px; /* Ajusta según tu preferencia */
-            height: 750px;
+            top: 50px; /* Asegúrate de incluir las unidades */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 820px; /* Ajusta según tu preferencia */
+            height: 870px;
             object-fit: contain;
 
           }
 
           /* Conclusiones */
           #conclusionDiv {
-            margin-top: -150px;
+            margin-top: 50px;
             padding: 12px;
             font-size: 14px;
             line-height: 1.4;
@@ -452,6 +454,7 @@ const menuCss = `
             margin-top: 150px;
             align-items: center;
             justify-content: center;
+
           }
           .user-data svg {
             margin-right: 4px;

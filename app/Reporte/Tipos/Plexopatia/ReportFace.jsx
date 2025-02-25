@@ -532,13 +532,22 @@ const Reporte = () => {
                 alt: 'Modelo',
               }
             },
+
             {
               expectedValue: 'plexo_pudendo',
-              image: {
-                src: 'PlexoImg/PLE_P. Lumbosacro.png',
+              image: [
+              {
+                src: 'PlexoImg/Plexo pudendo derecho.png',
                 alt: 'Modelo',
-              }
+              },
+              {
+                src: 'PlexoImg/Plexo pudendo izquierdo.png',
+                alt: 'Modelo',
+              },
+            ],
             },
+
+
             {
               expectedValue: 'pre_totald', 
               image: {

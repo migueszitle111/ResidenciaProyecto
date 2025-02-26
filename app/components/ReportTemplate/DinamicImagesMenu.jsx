@@ -131,9 +131,7 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs ,draggedImageSrc}) => {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setTopLeftText(value);
-    setHeaderText(value); // Actualiza el estado en el componente padre
   };
-
 
   // 1. Estado para controlar si se muestra u oculta el input
   const [showInput, setShowInput] = useState(false);
@@ -157,8 +155,15 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs ,draggedImageSrc}) => {
       [index]: !prevState[index],
     }));
   };
+
+
   return (
     <div className='container-grid'>
+      {/* Mostrar el texto ingresado en la parte superior izquierda */}
+      <div style={{ position: 'absolute', top: '30%', left: '44%', padding: '10px', backgroundColor: 'white' }}>
+        {topLeftText}
+      </div>
+
             {[1].map((index) => (
               <div key={index} className={`DivPanel2 ${expandedDivs[index] ? 'DivPanel2-expanded' : ''}`}>
                 <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
@@ -492,25 +497,25 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs ,draggedImageSrc}) => {
             ))}
             
         {/* 2. Botones para mostrar/ocultar el input */}
-      <div style={{ marginTop: 15, display: 'flex',gap: 5 }}>
-      <a class=" ml-[2px] px-10 py-2 w-[153px] h-9 relative rounded group overflow-hidden text-xs bg-white text-gray inline-block  flex items-center justify-center" onClick={() => setShowInput(true)}>
-          <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-red-600 group-hover:h-full opacity-90"></span>
-          <span class="relative group-hover:text-white" >Agregar Paciente</span>
-      </a>
-      <a class="px-10 py-2 w-[153px] h-9 relative rounded group overflow-hidden text-xs bg-white text-gray inline-block  flex items-center justify-center" onClick={() => setShowInput(false)}>
-          <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-red-600 group-hover:h-full opacity-90"></span>
-          <span class="relative group-hover:text-white">Quitar</span>
-      </a>
-             </div>
+      <div style={{ marginTop: 15, display: 'flex', gap: 5 }}>
+        <a className="ml-[2px] px-10 py-2 w-[153px] h-9 relative rounded group overflow-hidden text-xs bg-white text-gray inline-block flex items-center justify-center" onClick={() => setShowInput(true)}>
+          <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-red-600 group-hover:h-full opacity-90"></span>
+          <span className="relative group-hover:text-white">Agregar Paciente</span>
+        </a>
+        <a className="px-10 py-2 w-[153px] h-9 relative rounded group overflow-hidden text-xs bg-white text-gray inline-block flex items-center justify-center" onClick={() => setShowInput(false)}>
+          <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-red-600 group-hover:h-full opacity-90"></span>
+          <span className="relative group-hover:text-white">Quitar</span>
+        </a>
+      </div>
 
-     {/* Input con animación */}
-     {showInput && (
+      {/* Input con animación */}
+      {showInput && (
         <div style={{ marginTop: 30, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
           <div className={`input-with-placeholder fade-in ${inputVisible ? 'visible' : ''}`}>
             <textarea
               id="username"
               value={topLeftText}
-              onChange={(e) => setTopLeftText(e.target.value)}
+              onChange={handleInputChange}
               required
               rows="5"
               cols="40"
@@ -519,9 +524,6 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs ,draggedImageSrc}) => {
           </div>
         </div>
       )}
-
-
-
     </div>
   );
 };

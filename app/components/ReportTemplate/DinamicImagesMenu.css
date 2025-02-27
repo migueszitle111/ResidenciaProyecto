@@ -360,6 +360,60 @@
     height: 100%; /* O cualquier tamaño que necesites */
   }
 
+  /* Botón del acordeón con tamaño fijo y responsivo */
+.accordion-button {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 300px; /* Máximo tamaño para evitar que sea demasiado grande */
+  min-width: 200px; /* Mínimo tamaño para que no se haga muy pequeño */
+  height: 50px; /* Fija la altura */
+  padding: 12px 18px; /* Espaciado interno */
+  font-size: 10px; /* Tamaño del texto */
+  font-weight: bold; /* Negrita */
+  text-align: center;
+  color: white;
+  background-color: #5a1f00; /* Color de fondo normal */
+  border-radius: 8px; /* Bordes redondeados */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  margin: 10px auto; /* Centra el botón */
+}
+
+/* Efecto hover */
+.accordion-button:hover {
+  background-color: #8F3400;
+}
+
+/* Cuando el acordeón está expandido */
+.accordion-button.expanded {
+  background-color: #c44900;
+  transform: scale(1.05);
+}
+
+/* Responsivo para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .accordion-button {
+    max-width: 250px;
+    height: 45px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .accordion-button {
+    max-width: 200px;
+    height: 40px;
+    font-size: 12px;
+  }
+}
+
+  
+
+
+
+
 
 /* Inicialmente oculto */
 .fade-in {
@@ -401,16 +455,19 @@
     border-radius: 5px;
     font-size: 14px;
     line-height: 1.5; /* Espaciado entre líneas */
+    margin-top: 45px; /* Espaciado adicional para bajarlo más */
+
     resize: none; /* Evita que el usuario redimensione el cuadro */
     overflow-y: auto; /* Permite el desplazamiento si el texto excede el espacio */
   }
   
   .input-with-placeholder textarea:valid + label,
   .input-with-placeholder textarea:focus + label {
-    height: 18%;
+    height: 1%;
     padding-left: 0;
     transform: translateY(-120%);
-    font-size: 12px;
+    font-size: 17px;
     color: white; /* Color al enfocar */
+    
   }
   

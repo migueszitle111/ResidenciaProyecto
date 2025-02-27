@@ -10,7 +10,7 @@ import { useImageState } from '../../MetodosBotones';
 const stepsArray = ['A', 'B', 'C', 'D', 'E', 'I'];
 
 // Metodos de movimiento entre menus
-const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, handleImageChange,droppedItems}) => {
+const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, handleImageChange,droppedItems,topLeftText,setTopLeftText}) => {
   const { data: session } = useSession();
   const [step, setStep] = useState('A');
   const {
@@ -114,6 +114,9 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, hand
           conclusionDivRef={conclusionDivRef}
           elementRef={elementRef}
           droppedItems={droppedItems}
+          topLeftText={topLeftText}
+          setTopLeftText={setTopLeftText}
+          
 
         />
       ) : null}
@@ -328,7 +331,7 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
   );
 };
 
-const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) => {
+const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText}) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
@@ -407,7 +410,8 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint}) =>
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
       </div>
 
-      <MenuImagenes expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />
+      <MenuImagenes expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}   topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText} />
 
     </div>
   );

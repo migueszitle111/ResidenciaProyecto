@@ -94,6 +94,119 @@ const Reporte = () => {
     setCopyConclusions(conclusions.map(cl => cl.title).join(''))
   }, [conclusions])
 
+
+  function formatConclusions(copyConclusions) {
+    const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
+    const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
+    const keywords4 = ["INTENSIDAD LEVE.", "INTENSIDAD MODERADA.", "INTENSIDAD SEVERA."];
+    const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL", "L2", "L3", "L4", "L5", "S1", "S2"];
+    const specificKeywords = ["C5", "C6", "C7", "C8", "T1"]; // Nueva condición específica
+    const prognosisKeywords = [
+        "Y PRONÓSTICO DE RECUPERACIÓN COMPLETA",
+        "Y PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONA",
+        "Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL",
+        "Y PRONÓSTICO DE RECUPERACIÓN NULA"
+    ]; // Nuevas palabras clave para el pronóstico
+
+    let words = copyConclusions.split(' ');
+
+    // Verificar la palabra clave específica en keywords2 (TROCO)
+    for (let i = 0; i < words.length; i++) {
+        if (keywords2.includes(words.slice(i, i + 6).join(' '))) {
+            let countAfterKeyword = 0;
+            for (let j = i + 6; j < words.length; j++) {
+                if (keywords.includes(words[j])) {
+                    countAfterKeyword++;
+                }
+            }
+
+            if (countAfterKeyword > 1) {
+                words[i + 5] += 'S'; // Agregar 'S' al final de 'TROCO' si hay más de dos palabras
+            }
+
+            break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
+        }
+    }
+
+    // Verificar la palabra clave específica en keywords3 (CORDON)
+    for (let i = 0; i < words.length; i++) {
+        if (keywords3.includes(words.slice(i, i + 6).join(' '))) {
+            let countAfterKeyword = 0;
+            for (let j = i + 6; j < words.length; j++) {
+                if (keywords.includes(words[j])) {
+                    countAfterKeyword++;
+                }
+            }
+
+            if (countAfterKeyword > 1) {
+                words[i + 5] += 'ES'; // Agregar 'ES' al final de 'CORDON' si hay más de dos palabras
+            }
+
+            break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
+        }
+    }
+
+    // Verificar las palabras clave específicas en keywords4 (INTENSIDAD) y agregar doble salto de línea
+    for (let i = 0; i < words.length; i++) {
+        if (keywords4.includes(words.slice(i, i + 2).join(' '))) { // Comparar con las palabras clave de 2 palabras
+            words[i + 1] += '\n\n'; // Agregar doble salto de línea después de la palabra clave
+        }
+    }
+
+    // Verificar las nuevas frases para "PRONÓSTICO DE RECUPERACIÓN"
+    for (let phrase of prognosisKeywords) {
+        // Reemplazar las frases con ellas mismas y un salto de línea adicional
+        const regex = new RegExp(phrase, 'g');
+        copyConclusions = copyConclusions.replace(regex, phrase + '\n\n');
+    }
+
+    // Nueva condición para "PREGANGLIONAR PARCIAL"
+    let firstKeywordIndex = words.findIndex(word => specificKeywords.includes(word));
+    if (firstKeywordIndex !== -1) {
+        words.splice(firstKeywordIndex, 0, "PREGANGLIONAR PARCIAL A NIVEL DE");
+    }
+
+    // Verificar y formatear las palabras clave generales (C5, C6, T1, etc.)
+    let keywordPositions = [];
+    for (let i = 0; i < words.length; i++) {
+        if (keywords.includes(words[i])) {
+            keywordPositions.push(i);
+        }
+    }
+
+    if (keywordPositions.length > 1) {
+        // Formatear las palabras clave con comas, excepto antes de la conjunción
+        for (let i = 0; i < keywordPositions.length - 2; i++) {
+            words[keywordPositions[i]] += ',';
+        }
+
+        // Verificar si la última palabra clave empieza con "I"
+        let lastKeywordIndex = keywordPositions[keywordPositions.length - 1];
+        let conjunction = 'Y';
+
+        if (words[lastKeywordIndex][0].toUpperCase() === 'I') {
+            conjunction = 'E';
+        }
+
+        // Insertar la conjunción antes de la última palabra clave
+        words.splice(lastKeywordIndex, 0, conjunction);
+    }
+
+    // Unir las palabras con espacios
+    let formattedConclusions = words.join(' ');
+
+    // Eliminar espacio en blanco antes de la palabra 'REINERVACIÓN'
+    formattedConclusions = formattedConclusions.replace(/\sREINERVACIÓN/g, 'REINERVACIÓN');
+
+    // Finalmente, agregar el formato con los saltos de línea a las frases de pronóstico
+    formattedConclusions = copyConclusions;
+
+    return formattedConclusions;
+}
+
+const formattedConclusions = formatConclusions(copyConclusions);
+
+
   // Para mantener constante la conclusione
   const handleTextareaChange = (event) => {
     setCopyConclusions(event.target.value)
@@ -136,6 +249,12 @@ const Reporte = () => {
       return newImages;
     });
   }, []);
+
+  useEffect(() => {
+    const newConclusions = conclusions.map(cl => cl.title).join('');
+    const formattedConclusions = formatConclusions(newConclusions);
+    setCopyConclusions(formattedConclusions);
+}, [conclusions]);
 
 
   // Codigo para imprimir en click

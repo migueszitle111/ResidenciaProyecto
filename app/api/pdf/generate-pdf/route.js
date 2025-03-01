@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV !== "production";
 const baseUrl = isDev ? 'http://localhost:3000' : (process.env.NEXT_PUBLIC_SITE_URL || 'https://tudominio.com');
 
 // Copiamos la estructura de tu page.jsx y estilo
-function buildHtml(conclusiones, userData, droppedItems) {
+function buildHtml(conclusiones, userData, droppedItems,topLeftText) {
 
 const menuCss = `
     
@@ -410,6 +410,11 @@ const menuCss = `
             border-radius: 0%;
             object-fit: cover;
           }
+            .paciente-name {
+            margin-top: 14px;
+            margin-left: 14px;
+
+            }
 
           .image-container {
             position: relative;
@@ -474,6 +479,9 @@ const menuCss = `
             ? `<img class="user-logo" src="${userData.imageUrl}" alt="Logo Usuario"/>`
             : ""
         }
+        <div class="paciente-name">
+          <strong>Paciente:</strong> ${topLeftText ?? ""}
+        </div>
 
         <div class="container">
           <!-- droppedItems con posicion:absolute -->
@@ -532,6 +540,8 @@ const menuCss = `
           <div id="conclusionDiv">
             ${conclusionesTexto}
           </div>
+
+        
 
           <div class="user-data">
             ${
@@ -618,7 +628,7 @@ const menuCss = `
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { conclusiones = [], userData = {}, droppedItems = [] } = body;
+    const { conclusiones = [], userData = {}, droppedItems = [], topLeftText = "" } = body;
 
     const isDev = process.env.NODE_ENV !== "production";
     const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
@@ -635,7 +645,7 @@ export async function POST(req) {
     const page = await browser.newPage();
 
     // Construimos el HTML con la misma estructura y CSS que en tu antigua page.jsx
-    const html = buildHtml(conclusiones, userData, droppedItems);
+    const html = buildHtml(conclusiones, userData, droppedItems, topLeftText);
 
     // Inyectamos el HTML
     await page.setContent(html, { waitUntil: "domcontentloaded" });

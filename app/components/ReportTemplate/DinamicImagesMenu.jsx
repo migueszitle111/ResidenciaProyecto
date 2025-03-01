@@ -161,9 +161,8 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs , topLeftText, setTopLeftT
 
 
   return (
+   
     <div className='container-grid'>
-      
-
             {[1].map((index) => (
               <div key={index} className={`DivPanel2 ${expandedDivs[index] ? 'DivPanel2-expanded' : ''}`}>
                 <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
@@ -496,29 +495,28 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs , topLeftText, setTopLeftT
               </div>
             ))}
           
-  {/* Accordion para mostrar/ocultar el input */}
-  <div className="w-full">
-  <div className="accordion-button" onClick={toggleAccordion}>
-  Ingresar Paciente
-</div>
-
-        
-{/* Input con animación */}
-{showInput && (
-  <div className={`fade-in ${inputVisible ? 'visible' : ''}`}>
-    <div className="input-with-placeholder">
-      <textarea
-        id="username"
-        value={topLeftText}
-        onChange={handleInputChange}
-        required
-      ></textarea>
-      <label htmlFor="username">Nombre</label>
-    </div>
-  </div>
-)}
-
-
+          <div className={`DivPanel4 ${showInput ? 'DivPanel4-expanded' : ''}`}>
+              {/* Accordion para mostrar/ocultar el input */}
+              <div className="w-full">
+              <div className="accordion-button" onClick={toggleAccordion}>
+              Ingresar Paciente
+            </div>
+            {/* Input con animación */}
+            {showInput && (
+              <div className={`fade-in ${inputVisible ? 'visible' : ''}`}>
+                <div className="input-with-placeholder">
+                  <textarea
+                    id="username"
+                    value={topLeftText}         // <---- usar el estado global
+                    onChange={handleInputChange} // <---- setear el nuevo texto
+                    required
+                  ></textarea>
+                  <label htmlFor="username">Nombre</label>
+                </div>
+              </div>
+            )}
+            
+            </div>
       </div>
     </div>
   );

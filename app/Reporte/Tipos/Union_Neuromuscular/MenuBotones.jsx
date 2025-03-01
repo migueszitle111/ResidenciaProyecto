@@ -364,6 +364,8 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
             imageUrl: session?.user?.imageUrl,
           },
           droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
         }),
       });
   
@@ -395,9 +397,7 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
           <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={handlePrint} className={`print-button`}>
-          <img src="/I_Print.svg" style={{ filter: 'invert(1)' }} />
-        </button>
+        
 
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
@@ -410,8 +410,8 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
       </div>
 
-      <MenuImagenes expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}   topLeftText={topLeftText}
-        setTopLeftText={setTopLeftText} />
+      <MenuImagenes expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
 
     </div>
   );

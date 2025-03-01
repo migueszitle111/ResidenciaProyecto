@@ -8,7 +8,7 @@ import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
 
 
-const DropArea = ({ topLeftText })=> {
+const DropArea = ({ topLeftText }) => {
   const { droppedItems, setDroppedItems } = useContext(DropContext);
   const handleDrop = (e) => {
     e.preventDefault();
@@ -39,51 +39,38 @@ const DropArea = ({ topLeftText })=> {
   };
 
   return (
-    
     <div
       className="dropArea"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
-      style={{ position: 'relative' }} // Asegura posicionamiento relativo
     >
-      {/* 1) Aquí mostramos el texto en la parte superior izquierda */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '10px',
-          left: '10px',
-          backgroundColor: 'black',
-          fontSize: '16px',
-          color: 'white',
-          zIndex: 999,          
-          pointerEvents: 'none' // Para que no interfiera con el drop
-        }}
-      >
-        {topLeftText}
-      </div>
-
-      {/* 2) Renderizamos los elementos arrastrados (imagenes, etc.) */}
-      {droppedItems.map((item) => (
-        <Rnd
-          key={item.id}
-          default={{
-            x: item.x,
-            y: item.y,
-            width: 200,
-            height: 200
-          }}
-          onDragStop={(e, d) => updatePosition(item.id, d.x, d.y)}
-          style={{ position: 'absolute' }}
-        >
-          <div dangerouslySetInnerHTML={{ __html: item.content }} />
-        </Rnd>
-      ))}
+      {topLeftText && <p>{topLeftText }</p>}
+      {droppedItems.length === 0 ? (
+        <p></p>
+      ) : (
+        droppedItems.map((item) => (
+          <Rnd
+            key={item.id}
+            default={{
+              x: item.x,
+              y: item.y,
+              width: 200,
+              height: 200
+            }}
+            onDragStop={(e, d) => updatePosition(item.id, d.x, d.y)}
+            style={{ position: 'absolute' }}
+          >
+            <div dangerouslySetInnerHTML={{ __html: item.content }} />
+          </Rnd>
+        ))
+      )}
     </div>
   );
 };
+
 const Reporte = () => {
   const { droppedItems } = useContext(DropContext);
-  const [topLeftText, setTopLeftText] = useState(""); // Estado en Reporte
+  const [topLeftText, setTopLeftText] = useState('');
 
   // Carga datos de usuario
   const { data: session, status } = useSession();
@@ -298,17 +285,13 @@ const formattedConclusions = formatConclusions(copyConclusions);
 {/* Menu de opciones */}
 
           <div className={`mx-4 z-10 `}>
-            {/* MOSTRAR EL TEXTO AQUÍ */}
-      {/* <div style={{ position: 'absolute', top: '30%', left: '44%', padding: '10px', backgroundColor: 'white' }}>
-        {topLeftText}
-      </div> */}
             <SimpleMultiStepForm 
               showStepNumber={true}
               conclusionDivRef={conclusionDivRef}
               elementRef={elementRef}
               handleImageChange={handleImageChange}
               topLeftText={topLeftText}
-              setTopLeftText={setTopLeftText} // Pasamos el estado
+              setTopLeftText={setTopLeftText}
             />
           </div>    
           </div>
@@ -316,7 +299,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
         {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
         <div>
           <div className='con-img '> 
-
+        
         {/* Codigo para desplegar las imagenes dentro de un array */}
         {selectedImages.map((image, index) => (
           <Rnd
@@ -328,6 +311,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
             onResizeStop={(e, direction, ref, delta, position) => handleResizeStop(index, e, direction, ref, delta, position)}
             lockAspectRatio={true}
             style={{ zIndex: 2 }} 
+
           >
             <img src={image.src} draggable="false" />
           </Rnd>
@@ -533,7 +517,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
   suppressContentEditableWarning={true}
 />
 </div>
-<div id="dropArea"><DropArea topLeftText={topLeftText}/> </div>
+<div id="dropArea"><DropArea topLeftText={topLeftText} />
+</div>
 
       </div>
         </div>

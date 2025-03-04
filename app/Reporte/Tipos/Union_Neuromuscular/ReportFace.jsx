@@ -44,7 +44,11 @@ const DropArea = ({ topLeftText }) => {
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      {topLeftText && <p>{topLeftText }</p>}
+     {topLeftText && (
+  <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '10px', fontSize: '19px' }} >
+    {topLeftText}
+  </p>
+)}
       {droppedItems.length === 0 ? (
         <p></p>
       ) : (
@@ -366,7 +370,10 @@ const formattedConclusions = formatConclusions(copyConclusions);
               }
             },
           ]}
+          
           const footertext = {
+            <>
+            {session && (
             <>
               {/* Bloque Nombre */}
               <div id="footerName"style={{ display: 'inline-flex' , alignItems: 'center'  }}>
@@ -483,6 +490,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
                 <span>Cédula: {cedula}</span>
               </div>
             </>
+          )}
+          </>
           }
           userImageUrl={imageUrl}  // Aquí se pasa la URL de la imagen del usuario
         />

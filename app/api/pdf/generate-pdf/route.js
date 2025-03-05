@@ -411,8 +411,8 @@ const menuCss = `
             object-fit: cover;
           }
             .paciente-name {
-            margin-top: 14px;
-            margin-left: 14px;
+            margin-top: 54px;
+            margin-left: 110px;
 
             }
 
@@ -443,7 +443,7 @@ const menuCss = `
 
           /* Conclusiones */
           #conclusionDiv {
-            margin-top: 50px;
+            margin-top:30px;
             padding: 12px;
             font-size: 14px;
             line-height: 1.4;

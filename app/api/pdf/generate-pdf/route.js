@@ -412,7 +412,7 @@ const menuCss = `
           }
             .paciente-name {
             margin-top: 54px;
-            margin-left: 110px;
+            margin-left: 100px;
 
             }
 
@@ -456,7 +456,7 @@ const menuCss = `
             gap: 16px;
             font-size: 10px;
             opacity: 50%;
-            margin-top: 150px;
+            margin-top: 110px;
             align-items: center;
             justify-content: center;
 
@@ -480,7 +480,7 @@ const menuCss = `
             : ""
         }
         <div class="paciente-name">
-          <strong>Paciente:</strong> ${topLeftText ?? ""}
+          ${topLeftText ?? ""}
         </div>
 
         <div class="container">

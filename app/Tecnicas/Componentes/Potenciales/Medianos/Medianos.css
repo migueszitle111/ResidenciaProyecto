@@ -1,0 +1,187 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btnMds1, .btnMds2, .btnMds3 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btnMds1, .btnMds2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+/* ################################# Botones de la primera imagen #########################*/
+
+.btnIMs1 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(820%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(226, 226, 226);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnIMs2 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/I_Tabla_Gris.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(700%, -365%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+/* Botón 1 */
+.btnMds1 {
+    position: absolute;
+    height: 2.3vw; /* Tamaño reducido */
+    width: 2.3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(685%, 140%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+/* Botón 2 */
+.btnMds2 {
+    position: absolute;
+    height: 2.3vw; /* Tamaño reducido */
+    width: 2.3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(585%, -355%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+/* Botón 3 */
+.btnMds3 {
+    position: absolute;
+    height: 2.3vw; /* Tamaño reducido */
+    width: 2.3vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(67%, -210%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+.text-boxM {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 27vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
+}
+
+.zoomable-imageMt:hover {
+    transform: scale(3.0); /* Ajusta el valor de escala según sea necesario */
+    transform-origin: top left; /* Expande hacia la derecha y hacia abajo */
+    position: center;
+}
+

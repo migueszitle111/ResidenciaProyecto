@@ -127,7 +127,7 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari48' title='/DE DEDOS II-III,' displayText=' ' /> </div>
         <div style={{ position: 'absolute', top: '44.2%', left: '73.5%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari49' title='/DE DEDOS II-III,' displayText=' ' /> </div>
-
+  
 
         <div style={{ position: 'absolute', top: '41.1%', left: '70.8%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari50' title='/DEL CARPO,' displayText=' ' /> </div>

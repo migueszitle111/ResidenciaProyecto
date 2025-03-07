@@ -579,7 +579,7 @@ export function checkDivsBILATERAL(copyConclusions) {
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='cari48' displayText=' ' /> </div>
 
 
-        <div style={{ position: 'absolute', top: '41.1%', left: '28.2%', }}
+        <div style={{ position: 'absolute', top: '44.2%', left: '25.5%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='cari49' displayText=' ' /> </div>
         <div style={{ position: 'absolute', top: '41.9%', left: '27.9%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='cari50' displayText=' ' /> </div>
@@ -593,7 +593,7 @@ export function checkDivsBILATERAL(copyConclusions) {
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='cari54' displayText=' ' /> </div>
 
 
-        <div style={{ position: 'absolute', top: '39.3%', left: '29.1%', }}
+        <div style={{ position: 'absolute', top: '45.0%', left: '26.8%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='cari55' displayText=' ' /> </div>
         <div style={{ position: 'absolute', top: '40.1%', left: '28.9%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='cari56' displayText=' ' /> </div>

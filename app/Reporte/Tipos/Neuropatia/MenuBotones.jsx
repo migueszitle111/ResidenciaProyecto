@@ -1019,13 +1019,13 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
         PRONOSTICO
       </h1>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='completo' title='Y PRONÓSTICO DE RECUPERACIÓN COMPLETA' displayText={'RECUPERACIÓN COMPLETA'} /></div>
+        <ConclusionButton value='completo' title='Y PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='parcial_funcional' title='Y PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
+        <ConclusionButton value='parcial_funcional' title='Y PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='pobre' title='Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
+        <ConclusionButton value='pobre' title='Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='nulo' title='Y PRONÓSTICO DE RECUPERACIÓN NULA' displayText={'RECUPERACION NULA'} /></div>
+        <ConclusionButton value='nulo' title='Y PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACION NULA'} /></div>
       </div>
         
   );
@@ -1933,13 +1933,13 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         PRONOSTICO
       </h1>
       <div onClick={() => setStep('I')}>
-        <ConclusionButton value='completo2' title='Y PRONÓSTICO DE RECUPERACIÓN COMPLETA' displayText={'RECUPERACIÓN COMPLETA'} /></div>
+        <ConclusionButton value='completo2' title='Y PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
       <div onClick={() => setStep('I')}>
-        <ConclusionButton value='parcial_funcional2' title='Y PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
+        <ConclusionButton value='parcial_funcional2' title='Y PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
       <div onClick={() => setStep('I')}>
-        <ConclusionButton value='pobre2' title='Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
+        <ConclusionButton value='pobre2' title='Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('I')}>
-        <ConclusionButton value='nulo2' title='Y PRONÓSTICO DE RECUPERACIÓN NULA' displayText={'RECUPERACION NULA'} /></div>
+        <ConclusionButton value='nulo2' title='Y PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACION NULA'} /></div>
       </div>
         
   );

@@ -1193,6 +1193,39 @@ const Reporte = () => {
             ],
             },
 
+            
+            {
+              expectedValue: 'pre_totalN',
+              image: [
+              {
+                src: 'PlexoImg/PLE_T superior.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco superior derecho.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Tronco superior izquierdo.png',
+                alt: 'Modelo',
+              }
+            ],
+            },
+
+            {
+              expectedValue: 'pre_Sacroi',
+              image: [
+              {
+                src: 'PlexoImg/Tronco lumbosacro izquierdo.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'PlexoImg/Plexo pudendo izquierdo.png',
+                alt: 'Modelo',
+              },
+            ],
+            },
+
 
 
           ]}

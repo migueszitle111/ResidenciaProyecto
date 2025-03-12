@@ -605,16 +605,15 @@ const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button onClick={() => setStep('D')} className={`print-button`}>
+          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
         </button>
+
       </div> <br></br><br></br><br></br><br></br>
-      <h1 className=' text-xl font-bold text-white '>
+      <h1 className=' text-xs font-bold text-white py-40 text-center'>
         SELECCIONAR EL NIVEL DE LESION CON EL PUNTERO
       </h1>
-      <div onClick={() => setStep('D')}>
-        <ConclusionButton value='seguir' displayText={'LISTO'} />
-      </div>
+
     </div>
   );
 };
@@ -638,11 +637,12 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button onClick={() => setStep('D')} className={`print-button`}>
+          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
         </button>
+
       </div> <br></br><br></br><br></br><br></br>
-      <h1 className=' text-xl font-bold text-white '>
+      <h1 className=' text-xs font-bold text-white py-40 text-center'>
         SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D')}>
@@ -671,11 +671,12 @@ const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button onClick={() => setStep('D')} className={`print-button`}>
+          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
         </button>
+
       </div> <br></br><br></br><br></br><br></br>
-      <h1 className=' text-xl font-bold text-white '>
+      <h1 className=' text-xs font-bold text-white py-40 text-center'>
       SELECCIONAR EL NIVEL DE LESION DEL LADO IZQUIERDO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D')}>
@@ -1054,13 +1055,15 @@ const StepR = ({ handlePrevStep, handleNextStep, setStep }) => {
           <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
         </button>
       </div>
-      <h1 className=' text-xl font-bold text-white py-4'>
+      <h1 className=' text-base font-bold text-white pt-40 text-center'>
         DESEAS AGREGAR UN NUEVO NERVIO?
       </h1>
-      <div onClick={() => setStep('I')}>
-        <ConclusionButton value='nulo' title=' ' displayText={'CONTINUAR'} /></div>
-      <div onClick={() => setStep('A2')}>
+      <div className='text-center pt-5' onClick={() => setStep('A2')}>
       <ConclusionButton value='salto' title='' displayText={'AGREGAR NUEVO'} /></div>  
+
+      <div className='text-center py-10' onClick={() => setStep('I')}>
+        <ConclusionButton value='nulo' title=' ' displayText={'FINALIZAR'} /></div>
+
       </div>
         
   );
@@ -1542,11 +1545,12 @@ const StepCD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button onClick={() => setStep('D2')} className={`print-button`}>
+          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
         </button>
+
       </div> <br></br><br></br><br></br><br></br>
-      <h1 className=' text-xl font-bold text-white '>
+      <h1 className=' text-xs font-bold text-white py-40 text-center'>
         SELECCIONAR EL NIVEL DE LESION CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D2')}>
@@ -1575,11 +1579,12 @@ const StepCDD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button onClick={() => setStep('D2')} className={`print-button`}>
+          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
         </button>
+
       </div> <br></br><br></br><br></br><br></br>
-      <h1 className=' text-xl font-bold text-white '>
+      <h1 className=' text-xs font-bold text-white py-40 text-center'>
         SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D2')}>
@@ -1608,11 +1613,12 @@ const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button onClick={() => setStep('D2')} className={`print-button`}>
+          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
         </button>
+
       </div> <br></br><br></br><br></br><br></br>
-      <h1 className=' text-xl font-bold text-white '>
+      <h1 className=' text-xs font-bold text-white py-40 text-center'>
       SELECCIONAR EL NIVEL DE LESION DEL LADO IZQUIERDO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D2')}>

@@ -74,7 +74,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       return (<div>
         
         <div onClick={ handleNextStep1 }>
-          <ConclusionButton value='pre_total' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
+          <ConclusionButton value='troncosB' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
         <InternalAccordionContainer>
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'} type='internal'>
@@ -122,7 +122,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     else if (myVariable1.includes("b")) {
       return (<div>
         <div onClick={ handleNextStep1 }>
-          <ConclusionButton value='pre_totald' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
+          <ConclusionButton value='troncosB' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
       <AccordionContainer>
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'}>
@@ -169,7 +169,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
     else if (myVariable1.includes("c")) {
       return (<div>
         <div onClick={ handleNextStep1 }>
-          <ConclusionButton value='pre_totali' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
+          <ConclusionButton value='troncosB' title=' PREGANGLIONAR TOTAL' displayText={'PREGANGLIONAR TOTAL'}/>
         </div>
       <AccordionContainer>
         <Accordion title=' PREGANGLIONAR PARCIAL' displayText={'PREGANGLIONAR PARCIAL'}>
@@ -316,7 +316,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
               <ConclusionButton value='genitocrural_y_femorocutáneo_laterali' title=' POSTGANGLIONAR PACIAL A NIVEL DE GENITOCRURAL Y FEMOROCUTANEO LATERAL' displayText={'GENITOCRURAL Y FEMOROCUTANEO LATERAL'}/>
               <ConclusionButton value='plexo_lumbari' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (FEMORAL Y OBTURADOR)' displayText={'PLEXO LUMBAR (FEMORAL Y OBTURADOR)'}/>
               <ConclusionButton value='plexo_lumbosacroi' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)' displayText={'TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)'}/>
-              <ConclusionButton value='plexo_sacroi' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)'}/>
+              <ConclusionButton value='pre_Sacroi' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'PLEXO SACRO'}/>
               <ConclusionButton value='plexo_pudendoi' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO PUDENDO' displayText={'PLEXO PUDENDO'}/>
             </div>
         </Accordion>
@@ -344,7 +344,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
               <ConclusionButton value='genitocrural_y_femorocutáneo_lateral' title=' POSTGANGLIONAR PACIAL A NIVEL DE GENITOCRURAL Y FEMOROCUTANEO LATERAL' displayText={'GENITOCRURAL Y FEMOROCUTANEO LATERAL'}/>
               <ConclusionButton value='plexo_lumbar' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (FEMORAL Y OBTURADOR)' displayText={'PLEXO LUMBAR (FEMORAL Y OBTURADOR)'}/>
               <ConclusionButton value='plexo_lumbosacro' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)' displayText={'TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)'}/>
-              <ConclusionButton value='plexo_sacro' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)'}/>
+              <ConclusionButton value='plexo_sacro' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'PLEXO SACRO'}/>
               <ConclusionButton value='plexo_pudendo' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO PUDENDO' displayText={'PLEXO PUDENDO'}/>
             </div>
         </Accordion>

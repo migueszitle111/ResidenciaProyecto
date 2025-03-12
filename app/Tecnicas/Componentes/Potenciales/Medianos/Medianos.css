@@ -69,7 +69,7 @@
 
 /* ################################# Botones de la primera imagen #########################*/
 
-.btnIMs1 {
+.btnIMds1 {
     position: absolute ;
     background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
     background-size: cover;
@@ -83,7 +83,7 @@
     background-color: transparent;
     border-radius: 20%;
     z-index: 1;
-    color: rgb(226, 226, 226);
+    color: rgb(1, 1, 1);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
@@ -112,18 +112,19 @@
 /* Botón 1 */
 .btnMds1 {
     position: absolute;
-    height: 2.3vw; /* Tamaño reducido */
-    width: 2.3vw;
-    top: 30%;
-    left: 45%;
-    transform: translate(685%, 140%);
-    background-color: transparent;
+    height: 3vw; /* Tamaño reducido */
+    width: 14vw;
+    top: 2%;
+    left: 2%;
+    transform: translate(0%, 0%);
+    background-color: rgba(66, 66, 66, 0.842);
     border: none;
-    border-radius: 50%;
+    border-radius: 10px;
     z-index: 1;
     color: white;
-    font-size: 1.5vw;
+    font-size: 0.8vw;
     transition:all .2s ease-in-out;
+    padding: 1%;
 }
 /* Botón 2 */
 .btnMds2 {
@@ -160,10 +161,10 @@
 
 
 
-.text-boxM {
+.text-boxMds {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 27vw;
+    width: 40vw;
     height: auto;
     display: flex;
     align-items: center;
@@ -174,7 +175,7 @@
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1em;
+    font-size: 0.7em;
     border: 1px solid #ddd;
     white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }

@@ -17,7 +17,7 @@ const Medianos = () => {
 
     const images = [
         {
-            original: "/assets/ImgTecnicas/Potenciales/Mediano-01.png",
+            original: "/assets/ImgTecnicas/Potenciales/Mediano-01-c.png",
             thumbnail: "/assets/ImgTecnicas/Potenciales/Mediano-01.png",
             
         },
@@ -73,13 +73,15 @@ const Medianos = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnMds1" onClick={() => handleButtonClick('1. Muñeca: 8 cm proximal a electrodo activo, entre los tendones del palmar mayor y palmar menor, realizando una línea imaginaria con intersección dirigida al pliegue cutáneo del carpo, haciéndose horizontal en tercio distal del antebrazo.\n2. Codo: Fosa antecubital, solo medial al pulso de la arteria braquial.', { top: '20%', left: '24%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnMds1" onClick={() => handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '70%', left: '50%' })}>Canal 1. Activo C5-referencia FPZ</button>}
                 {currentImageIndex === 0 && <button className="btnMds2" onClick={() => handleButtonClick('Primera articulación metacarpofalángica.', { top: '12%', left: '24%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnMds3" onClick={() => handleButtonClick('Músculo abductor corto del pulgar (ACP) (eminencia tenar lateral).', { top: '12%', left: '24%' })}></button>}
+
+            
             </div>
             {textBoxVisible && (
                 <div
-                    className={`text-boxMs ${textBoxClass}`}
+                    className={`text-boxMds ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
                     {textBoxContent}

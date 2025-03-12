@@ -232,16 +232,13 @@ const Reporte = () => {
 
             {
               expectedValue: 'indenme', 
-              image: [
+              image: 
               {
-                src: 'VisualImg/VN_VisualGreyLBI.png',
+                src: 'VisualImg/VI_Gris_BASE.png',
                 alt: 'Modelo',
               },
-              {
-                src: 'VisualImg/VN_VisualGreyRBI.png',
-                alt: 'Modelo',
-              }
-            ],
+             
+            
             },
             {
               expectedValue: 'alterada', 
@@ -263,13 +260,10 @@ const Reporte = () => {
 
                 image: [
                   {
-                    src: 'VisualImg/VN_VisualRedRBI.png',
+                    src: 'VisualImg/VN_VisualRedLBI.png',
                     alt: 'Modelo',
                   },
-                  {
-                    src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
-                    alt: 'Modelo',
-                  }
+                  
                 
                 ],
               
@@ -278,13 +272,10 @@ const Reporte = () => {
               expectedValue: 'derecholed_flash', 
               image: [
                 {
-                  src: 'VisualImg/VN_VisualRedLBI.png',
+                  src: 'VisualImg/VN_VisualRedRBI.png',
                   alt: 'Modelo',
                 },
-                {
-                  src: 'VisualImg/Via Afectada/LED DERECHO.png',
-                  alt: 'Modelo',
-                }
+              
               
               ],
             },
@@ -292,21 +283,143 @@ const Reporte = () => {
               expectedValue: 'bilateralled_flash', 
               image: [
                 {
-                  src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
+                  src: 'VisualImg/VN_VisualRedLBI.png',
                   alt: 'Modelo',
                 },
                 {
-                  src: 'VisualImg/Via Afectada/LED DERECHO.png',
+                  src: 'VisualImg/VN_VisualRedRBI.png',
                   alt: 'Modelo',
                 }
             ],
             },
+
+            {
+              expectedValue: 'izquierdodamero_total', 
+
+                image: [
+                  {
+                    src: 'VisualImg/Via Afectada/NERVIO OPTICO IZQUIERDO.png',
+                    alt: 'Modelo',
+                  },
+                  
+                
+                ],
+              
+            },
+            {
+              expectedValue: 'derechodamero_total', 
+              image: [
+                {
+                  src: 'VisualImg/Via Afectada/NERVIO OPTICO DERECHO.png',
+                  alt: 'Modelo',
+                },
+              
+              
+              ],
+            },
+            {
+              expectedValue: 'bilateraldamero_total', 
+              image: [
+                {
+                  src: 'VisualImg/Via Afectada/NERVIO OPTICO IZQUIERDO.png',
+                  alt: 'Modelo',
+                },
+                {
+                  src: 'VisualImg/Via Afectada/NERVIO OPTICO DERECHO.png',
+                  alt: 'Modelo',
+                }
+            ],
+            },
+
+            
+            {
+              expectedValue: 'izquierdodamero_hemicampos', 
+
+                image: [
+                  {
+                    src: 'VisualImg/VI_5.png',
+                    alt: 'Modelo',
+                  },
+                  
+                
+                ],
+              
+            },
+            {
+              expectedValue: 'derechodamero_hemicampos', 
+              image: [
+                {
+                  src: 'VisualImg/VI_4.png',
+                  alt: 'Modelo',
+                },
+              
+              
+              ],
+            },
+            {
+              expectedValue: 'bilateraldamero_hemicampos', 
+              image: [
+                {
+                  src: 'VisualImg/VI_5.png',
+                  alt: 'Modelo',
+                },
+                {
+                  src: 'VisualImg/VI_4.png',
+                  alt: 'Modelo',
+                }
+            ],
+            },
+
+//Alteradas
+
+
+{
+  expectedValue: 'izquierdoled_flashAlterada', 
+
+    image: [
+      {
+        src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
+        alt: 'Modelo',
+      },
+      
+    
+    ],
+  
+},
+{
+  expectedValue: 'derecholed_flashAlterada', 
+  image: [
+    {
+      src: 'VisualImg/Via Afectada/LED DERECHO.png',
+      alt: 'Modelo',
+    },
+  
+  
+  ],
+},
+{
+  expectedValue: 'bilateralled_flashAlterada', 
+  image: [
+    {
+      src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
+      alt: 'Modelo',
+    },
+    {
+      src: 'VisualImg/Via Afectada/LED DERECHO.png',
+      alt: 'Modelo',
+    }
+],
+},
+
+
+
+
            
             {
               expectedValue: 'izquierdonervio_optico', 
               image: 
                 {
-                  src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
+                  src: 'VisualImg/Via Afectada/NERVIO OPTICO IZQUIERDO.png',
                   alt: 'Modelo',
                 },
             },
@@ -315,7 +428,7 @@ const Reporte = () => {
               expectedValue: 'derechonervio_optico', 
               image: 
               {
-                src: 'VisualImg/Via Afectada/LED DERECHO.png',
+                src: 'VisualImg/Via Afectada/NERVIO OPTICO DERECHO.png',
                 alt: 'Modelo',
               }
               
@@ -324,11 +437,11 @@ const Reporte = () => {
               expectedValue: 'bilateralnervio_optico', 
               image: [
               {
-                src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
+                src: 'VisualImg/Via Afectada/NERVIO OPTICO IZQUIERDO.png',
                 alt: 'Modelo',
               },
               {
-                src: 'VisualImg/Via Afectada/LED DERECHO.png',
+                src: 'VisualImg/Via Afectada/NERVIO OPTICO DERECHO.png',
                 alt: 'Modelo',
               }
             ],

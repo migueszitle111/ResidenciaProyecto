@@ -297,11 +297,22 @@ const Reporte = () => {
       return status;
     };
   
-    // 6) Construir el texto adicional
-    const additionalText = Object.entries(groupedStatus)
-      .map(([status, groupNames]) =>
-        `${groupNames.join(', ')} ${translateStatus(status, groupNames.length)}`)
-      .join(', ');  // p.e. "C4 IZQUIERDA, C5 BILATERALES, L4 DERECHA"
+// 6) Construir el texto adicional usando un array y agregando "Y" antes del último elemento
+const additionalTextArray = Object.entries(groupedStatus)
+  .map(([status, groupNames]) =>
+    `${groupNames.join(', ')} ${translateStatus(status, groupNames.length)}`
+  );
+
+let additionalText = '';
+if (additionalTextArray.length > 1) {
+  additionalText =
+    additionalTextArray.slice(0, -1).join(', ') +
+    ' Y ' +
+    additionalTextArray[additionalTextArray.length - 1];
+} else if (additionalTextArray.length === 1) {
+  additionalText = additionalTextArray[0];
+}
+
   
     // 7) Lógica para combinar 'conclusionText' y 'additionalText'
     let combinedText = conclusionText.trim();
@@ -317,7 +328,7 @@ const Reporte = () => {
         
         // Si no hay texto "remainingText", pues es solo RADICULOPATIA ...
         combinedText = remainingText
-          ? `${firstTwoWords} ${additionalText}, ${remainingText}`
+          ? `${firstTwoWords} ${additionalText}${remainingText}`
           : `${firstTwoWords} ${additionalText}`;
         
       } else {

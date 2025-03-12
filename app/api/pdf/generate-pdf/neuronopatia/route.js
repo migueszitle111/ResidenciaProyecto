@@ -647,10 +647,6 @@ export async function POST(req) {
     };
     
     const sanitizedFinalConclusion = sanitizeText(finalConclusion);
-    
-
-
-
     // Construimos el HTML con la misma estructura y CSS que en tu antigua page.jsx
     const html = buildHtml(sanitizedFinalConclusion,userData, droppedItems, topLeftText);
 

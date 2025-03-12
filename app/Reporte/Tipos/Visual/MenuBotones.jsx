@@ -378,12 +378,12 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
     <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
     <div onClick={() => setStep('H')}>
     <ConclusionButton
-            value={`${selectedSide}led_flash`}
+            value={`${selectedSide}led_flashAlterada`}
             title=' AL ESTIMULO LUMINOSO DE LAS FIBRAS RETINO-TÁLAMOCORTICALES.' displayText='LED FLASH'
           />
     </div>
     <div onClick={() => setStep('G12')}>
-      <ConclusionButton value='damero_total' title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA ' displayText='DAMERO TOTAL' />
+      <ConclusionButton value='damero_total' title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA' displayText='DAMERO TOTAL' />
     </div>
     <div onClick={() => setStep('G22')}>
     <ConclusionButton value='damero_hemicampos' title=' AL ESTÍMULAR ÁREA RETROQUIASMATICA' displayText='DAMERO HEMICAMPOS' />
@@ -421,10 +421,10 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
           />
     </div>
     <div onClick={() => setStep('H')}>
-      <ConclusionButton value='damero_total' title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA MEDIANTE CAMPO COMPLETO.' displayText='DAMERO TOTAL' />
+      <ConclusionButton value={`${selectedSide}damero_total`} title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA MEDIANTE CAMPO COMPLETO.' displayText='DAMERO TOTAL' />
     </div>
     <div onClick={() => setStep('H')}>
-    <ConclusionButton value='damero_hemicampos' title=' AL ESTÍMULAR ÁREA RETROQUIASMATICA MEDIANTE HEMICAMPOS.' displayText='DAMERO HEMICAMPOS' />
+    <ConclusionButton value={`${selectedSide}damero_hemicampos`} title=' AL ESTÍMULAR ÁREA RETROQUIASMATICA MEDIANTE HEMICAMPOS.' displayText='DAMERO HEMICAMPOS' />
     </div>
   </div>
 );
@@ -454,14 +454,10 @@ const StepG1 = ({ handleNextStep, handlePrevStep, setStep,selectedSide}) => {
     <div onClick={() => setStep('H')}>
       <ConclusionButton
             value={`${selectedSide}nervio_optico`}
-            title=' TOPOGRÁFICAMENTE A NIVEL DE NERVIO ÓPTICO.' displayText='NERVIO ÓPTICO'
+            title='; TOPOGRÁFICAMENTE A NIVEL DE NERVIO ÓPTICO.' displayText='NERVIO ÓPTICO'
             
           />
-      <ConclusionButton
-            value={`${selectedSide}quiasma_optico`}
-            title=' TOPOGRÁFICAMENTE A NIVEL DE QUIASMA ÓPTICO.' displayText='QUIASMA ÓPTICO'
-            
-         />
+      
     </div>
   </div>
 );
@@ -491,13 +487,18 @@ const StepG2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide}) => {
   <h1 className='text-xl font-bold text-white'>NIVEL RETROQUIASMATICA: </h1>
   <div onClick={() => setStep('H')}>
   <ConclusionButton
+            value={`${selectedSide}quiasma_optico`}
+            title='; TOPOGRÁFICAMENTE A NIVEL DE QUIASMA ÓPTICO.' displayText='QUIASMA ÓPTICO'
+            
+         />
+  <ConclusionButton
             value={`${selectedSide}tracto_optico`}
-            title=' TOPOGRÁFICAMENTE A NIVEL DE TRACTO ÓPTICO.' displayText='TRACTO ÓPTICO'
+            title='; TOPOGRÁFICAMENTE A NIVEL DE TRACTO ÓPTICO.' displayText='TRACTO ÓPTICO'
             
          />
   <ConclusionButton
           value={`${selectedSide}nucleo_geniculado`}
-          title=' TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO GENICULADO.' displayText='NÚCLEO GENICULADO' 
+          title='; TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO GENICULADO.' displayText='NÚCLEO GENICULADO' 
          />
   </div>
 </div>
@@ -526,15 +527,11 @@ const StepG12 = ({ handleNextStep, handlePrevStep, setStep,selectedSide}) => {
     <h1 className='text-xl font-bold text-white'>NIVEL PREQUIASMATICA: </h1>
     <div onClick={() => setStep('H')}>
       <ConclusionButton
-            value={`${selectedSide}tracto_optico`}
-            title=' TOPOGRÁFICAMENTE A NIVEL DE NERVIO ÓPTICO.' displayText='NERVIO ÓPTICO'
+            value={`${selectedSide}nervio_optico`}
+            title='; TOPOGRÁFICAMENTE A NIVEL DE NERVIO ÓPTICO.' displayText='NERVIO ÓPTICO'
             
           />
-      <ConclusionButton
-            value={`${selectedSide}quiasma_optico`}
-            title=' TOPOGRÁFICAMENTE A NIVEL DE QUIASMA ÓPTICO.' displayText='QUIASMA ÓPTICO'
-            
-         />
+      
     </div>
   </div>
 );
@@ -565,13 +562,18 @@ const StepG22 = ({ handleNextStep, handlePrevStep, setStep,selectedSide}) => {
   <h1 className='text-xl font-bold text-white'>NIVEL RETROQUIASMATICA: </h1>
   <div onClick={() => setStep('H')}>
   <ConclusionButton
+            value={`${selectedSide}quiasma_optico`}
+            title='; TOPOGRÁFICAMENTE A NIVEL DE QUIASMA ÓPTICO.' displayText='QUIASMA ÓPTICO'
+            
+         />
+  <ConclusionButton
             value={`${selectedSide}tracto_optico`}
-            title=' TOPOGRÁFICAMENTE A NIVEL DE DE TRACTO ÓPTICO.' displayText='TRACTO ÓPTICO'
+            title='; TOPOGRÁFICAMENTE A NIVEL DE DE TRACTO ÓPTICO.' displayText='TRACTO ÓPTICO'
             
          />
   <ConclusionButton
           value={`${selectedSide}nucleo_geniculado`}
-          title=' TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO GENICULADO.' displayText='NÚCLEO GENICULADO' 
+          title='; TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO GENICULADO.' displayText='NÚCLEO GENICULADO' 
          />
   </div>
 </div>

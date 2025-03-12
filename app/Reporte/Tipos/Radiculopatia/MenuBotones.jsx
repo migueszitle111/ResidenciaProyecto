@@ -1902,28 +1902,28 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
           title="INTENSIDAD LEVE (+/+)"
           displayText="INTENSIDAD LEVE (+/+)"
           pressed={activeButtons["intensidad_leve"]}
-          onClick={() => handleButtonPress("intensidad_leve", "INTENSIDAD LEVE (+/+).", handleNextStep)}
+          onClick={() => handleButtonPress("intensidad_leve", "; INTENSIDAD LEVE (+/+).", handleNextStep)}
         />
         <ConclusionButtonR
           value="intensidad_moderada"
           title="INTENSIDAD MODERADA (++)"
           displayText="INTENSIDAD MODERADA (++)"
           pressed={activeButtons["intensidad_moderada"]}
-          onClick={() => handleButtonPress("intensidad_moderada", "INTENSIDAD MODERADA (++).", handleNextStep)}
+          onClick={() => handleButtonPress("intensidad_moderada", "; INTENSIDAD MODERADA (++).", handleNextStep)}
         />
         <ConclusionButtonR
           value="intensidad_severa"
           title="INTENSIDAD SEVERA (+++)"
           displayText="INTENSIDAD SEVERA (+++)"
           pressed={activeButtons["intensidad_severa"]}
-          onClick={() => handleButtonPress("intensidad_severa", "INTENSIDAD SEVERA (+++).", handleNextStep)}
+          onClick={() => handleButtonPress("intensidad_severa", "; INTENSIDAD SEVERA (+++).", handleNextStep)}
         />
         <ConclusionButtonR
           value="intensidad_difusa"
           title="INTENSIDAD DIFUSA (++++)"
           displayText="INTENSIDAD DIFUSA (++++)"
           pressed={activeButtons["intensidad_difusa"]}
-          onClick={() => handleButtonPress("intensidad_difusa", "INTENSIDAD DIFUSA (++++).", handleNextStep)}
+          onClick={() => handleButtonPress("intensidad_difusa", "; INTENSIDAD DIFUSA (++++).", handleNextStep)}
         />
       </div>
     </div>
@@ -3130,28 +3130,28 @@ const StepD1 = ({ handleNextStep1, handlePrevStep1 }) => {
           title="INTENSIDAD LEVE (+/+)"
           displayText="INTENSIDAD LEVE (+/+)"
           pressed={activeButtons["intensidad_leve"]}
-          onClick={() => handleButtonPress("intensidad_leve", "INTENSIDAD LEVE (+/+)", handleNextStep1)}
+          onClick={() => handleButtonPress("intensidad_leve", "; INTENSIDAD LEVE (+/+)", handleNextStep1)}
         />
         <ConclusionButtonR
           value="intensidad_moderada"
           title="INTENSIDAD MODERADA (++)"
           displayText="INTENSIDAD MODERADA (++)"
           pressed={activeButtons["intensidad_moderada"]}
-          onClick={() => handleButtonPress("intensidad_moderada", "INTENSIDAD MODERADA (++)", handleNextStep1)}
+          onClick={() => handleButtonPress("intensidad_moderada", "; INTENSIDAD MODERADA (++)", handleNextStep1)}
         />
         <ConclusionButtonR
           value="intensidad_severa"
           title="INTENSIDAD SEVERA (+++)"
           displayText="INTENSIDAD SEVERA (+++)"
           pressed={activeButtons["intensidad_severa"]}
-          onClick={() => handleButtonPress("intensidad_severa", "INTENSIDAD SEVERA (+++)", handleNextStep1)}
+          onClick={() => handleButtonPress("intensidad_severa", "; INTENSIDAD SEVERA (+++)", handleNextStep1)}
         />
         <ConclusionButtonR
           value="intensidad_difusa"
           title="INTENSIDAD DIFUSA (++++)"
           displayText="INTENSIDAD DIFUSA (++++)"
           pressed={activeButtons["intensidad_difusa"]}
-          onClick={() => handleButtonPress("intensidad_difusa", "INTENSIDAD DIFUSA (++++)", handleNextStep1)}
+          onClick={() => handleButtonPress("intensidad_difusa", "; INTENSIDAD DIFUSA (++++)", handleNextStep1)}
         />
       </div>
     </div>
@@ -5142,10 +5142,10 @@ const StepC2 = ({ handleNextStep2, handlePrevStep2 }) => {
       </h1>
 
       <div >
-      <ConclusionButtonR value='intensidad_leve' title='INTENSIDAD LEVE (+/+)'displayText='INTENSIDAD LEVE (+/+)' pressed={activeButtons["intensidad_leve"]} onClick={() => handleButtonPress("intensidad_leve", "INTENSIDAD LEVE (+/+)", handleNextStep2)}/>
-      <ConclusionButtonR value='intensidad_moderada' title='INTENSIDAD MODERADA (++)' displayText='INTENSIDAD MODERADA (++)' pressed={activeButtons["intensidad_moderada"]} onClick={() => handleButtonPress("intensidad_moderada", "INTENSIDAD MODERADA (+/+)", handleNextStep2)}/>
-      <ConclusionButtonR value='intensidad_severa' title='INTENSIDAD SEVERA (+++)' displayText='INTENSIDAD SEVERA (+++)' onClick={() => handleButtonPress("intensidad_severa", "INTENSIDAD SEVERA (+++)", handleNextStep2)}/>
-      <ConclusionButtonR value='intensidad_difusa' title='INTENSIDAD DIFUSA (++++)' displayText='INTENSIDAD DIFUSA (++++)'onClick={() => handleButtonPress("intensidad_difusa", "INTENSIDAD DIFUSA (++++)", handleNextStep2)}/>
+      <ConclusionButtonR value='intensidad_leve' title='INTENSIDAD LEVE (+/+)'displayText='INTENSIDAD LEVE (+/+)' pressed={activeButtons["intensidad_leve"]} onClick={() => handleButtonPress("intensidad_leve", "; INTENSIDAD LEVE (+/+)", handleNextStep2)}/>
+      <ConclusionButtonR value='intensidad_moderada' title='INTENSIDAD MODERADA (++)' displayText='INTENSIDAD MODERADA (++)' pressed={activeButtons["intensidad_moderada"]} onClick={() => handleButtonPress("intensidad_moderada", "; INTENSIDAD MODERADA (+/+)", handleNextStep2)}/>
+      <ConclusionButtonR value='intensidad_severa' title='INTENSIDAD SEVERA (+++)' displayText='INTENSIDAD SEVERA (+++)' onClick={() => handleButtonPress("intensidad_severa", "; INTENSIDAD SEVERA (+++)", handleNextStep2)}/>
+      <ConclusionButtonR value='intensidad_difusa' title='INTENSIDAD DIFUSA (++++)' displayText='INTENSIDAD DIFUSA (++++)'onClick={() => handleButtonPress("intensidad_difusa", "; INTENSIDAD DIFUSA (++++)", handleNextStep2)}/>
 
       </div>
 
@@ -5190,9 +5190,9 @@ const StepD2 = ({ handlePrevStep2, handleNextStep2 }) => {
       </h1>
 
       <div>
-      <ConclusionButtonR value='r_abundante' title='REINERVACION COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", " CON REINERVACION COLATERAL COMPENSATORIA ABUNDANTE.", handleNextStep2)}/>
-      <ConclusionButtonR value='r_minima' title='REINERVACION COLATERAL COMPENSATORIA MINIMA' displayText='MINIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "CON REINERVACION COLATERAL COMPENSATORIA MINIMA.", handleNextStep2)}/>
-      <ConclusionButtonR value='r_ausante' title='REINERVACION COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "SIN REINERVACION COLATERAL COMPENSATORIA.", handleNextStep2)}/>
+      <ConclusionButtonR value='r_abundante' title='REINERVACION COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", "CON REINERVACION COLATERAL ABUNDANTE.", handleNextStep2)}/>
+      <ConclusionButtonR value='r_minima' title='REINERVACION COLATERAL COMPENSATORIA MINIMA' displayText='MINIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "CON REINERVACION COLATERAL MINIMA.", handleNextStep2)}/>
+      <ConclusionButtonR value='r_ausante' title='REINERVACION COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "SIN REINERVACION COLATERAL.", handleNextStep2)}/>
       </div>
       
     </div>
@@ -5301,9 +5301,9 @@ const StepF1 = ({ handlePrevStep1, handleNextStep1 }) => {
         REINERVACION
       </h1>
       <div>
-      <ConclusionButtonR value='r_abundante' title='REINERVACION COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", "REINERVACION COLATERAL COMPENSATORIA ABUNDANTE,", handleNextStep1)}/>
-      <ConclusionButtonR value='r_minima' title='REINERVACION COLATERAL COMPENSATORIA MINIMA' displayText='MINIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "REINERVACION COLATERAL COMPENSATORIA MINIMA,", handleNextStep1)}/>
-      <ConclusionButtonR value='r_ausante' title='REINERVACION COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "REINERVACION COLATERAL COMPENSATORIA AUSENTE,", handleNextStep1)}/>
+      <ConclusionButtonR value='r_abundante' title='REINERVACION COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", "REINERVACION COLATERAL ABUNDANTE,", handleNextStep1)}/>
+      <ConclusionButtonR value='r_minima' title='REINERVACION COLATERAL COMPENSATORIA MINIMA' displayText='MINIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "REINERVACION COLATERAL MINIMA,", handleNextStep1)}/>
+      <ConclusionButtonR value='r_ausante' title='REINERVACION COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "REINERVACION COLATERAL AUSENTE,", handleNextStep1)}/>
       </div>
       
     </div>

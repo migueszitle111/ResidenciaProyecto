@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV !== "production";
 const baseUrl = isDev ? 'http://localhost:3000' : (process.env.NEXT_PUBLIC_SITE_URL || 'https://tudominio.com');
 
 // Copiamos la estructura de tu page.jsx y estilo
-function buildHtml(conclusiones, userData, droppedItems,topLeftText) {
+function buildHtml(finalConclusion, userData, droppedItems,topLeftText) {
 
 const menuCss = `
     
@@ -186,7 +186,7 @@ const menuCss = `
     margin-bottom: 15px;
     margin-left: 10px;
     z-index: 1;
-  }
+  } 
   
   /*Circulos donde se insertan las imagenes*/
   .circulo {
@@ -367,14 +367,13 @@ const menuCss = `
   }
   `;
 
-  const showBulbar = conclusiones.some((c) => c.value === "bulbar");
-  const showPresinaptico = conclusiones.some((c) => c.value === "tipo_presinaptico");
-  const showPostsinaptico = conclusiones.some((c) => c.value === "tipo_postsinaptico");
-  const showDistal = conclusiones.some((c) => c.value === "distal");
-  const showProximal = conclusiones.some((c) => c.value === "proximal");
-
-  // Convertimos array de conclusiones a texto
-  const conclusionesTexto = conclusiones.map(c => c.title).join(" ");
+  // Detección de palabra clave en el string final
+const strLower = finalConclusion.toLowerCase();
+const showBulbar       = strLower.includes("bulbar");
+const showPresinaptico = strLower.includes("presináptico");   
+const showPostsinaptico= strLower.includes("postsináptico");
+const showDistal       = strLower.includes("distal");
+const showProximal     = strLower.includes("proximal");
 
   return `
     <html>
@@ -420,30 +419,25 @@ const menuCss = `
             position: relative;
           }
 
-          .image-stack {
-            position: relative;
-            width: 700px;
-            height: 900px;
-            overflow: hidden;
-            justify-content: center;
-            z-index: 0;
-            object-fit: contain;
+              /* Colocamos la imagen base en 600×776, posición absoluta 0,0 */
+      .image-stack {
+        position: relative;
+        width: 600px;
+        height: 776px;
+        margin: 0 auto; /* si quieres centrar en la hoja */
+      }
+      .image-stack img {
+        position: absolute;
+        left: 0; top: 0;
+        width: 600px; 
+        height: 776px;
+        object-fit: contain;
+      }
 
-          }
-          .image-stack img {
-            position: absolute;
-            top: 50px; /* Asegúrate de incluir las unidades */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 820px; /* Ajusta según tu preferencia */
-            height: 870px;
-            object-fit: contain;
-
-          }
 
           /* Conclusiones */
           #conclusionDiv {
-            margin-top:30px;
+            margin-top:2px;
             padding: 12px;
             font-size: 14px;
             line-height: 1.4;
@@ -492,8 +486,8 @@ const menuCss = `
                   <div
                     style="
                       position: absolute;
-                       left: ${item.x + 50}px;
-                       top: ${item.y - 23}px;"
+                       left: ${item.x+43}px;
+                        top:  ${item.y-10}px;"
                   >
                     ${item.content}
                   </div>
@@ -538,7 +532,7 @@ const menuCss = `
           </div>
 
           <div id="conclusionDiv">
-            ${conclusionesTexto}
+               ${finalConclusion}        
           </div>
 
         
@@ -626,9 +620,19 @@ const menuCss = `
 }
 
 export async function POST(req) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Método no permitido" });
+  }
+
+  console.log("📩 Recibiendo solicitud en /api/pdf/union");
+  
   try {
+
+    
+
+
     const body = await req.json();
-    const { conclusiones = [], userData = {}, droppedItems = [], topLeftText = "" } = body;
+    const { finalConclusion = "", userData = {}, droppedItems = [], topLeftText = "" } = body;
 
     const isDev = process.env.NODE_ENV !== "production";
     const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
@@ -645,7 +649,7 @@ export async function POST(req) {
     const page = await browser.newPage();
 
     // Construimos el HTML con la misma estructura y CSS que en tu antigua page.jsx
-    const html = buildHtml(conclusiones, userData, droppedItems, topLeftText);
+    const html = buildHtml(finalConclusion,userData, droppedItems, topLeftText);
 
     // Inyectamos el HTML
     await page.setContent(html, { waitUntil: "domcontentloaded" });
@@ -665,7 +669,7 @@ export async function POST(req) {
     const pdfBuffer = await page.pdf({
       format: "A4",
       printBackground: true,
-      scale: 0.9  // Ajusta este valor según sea necesario
+      scale: 1  // Ajusta este valor según sea necesario
 
     });
 

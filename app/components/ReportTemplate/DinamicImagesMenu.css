@@ -20,6 +20,7 @@
     background-color: rgba(250, 250, 250, 0.678);
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
+    
   }
   
   
@@ -43,23 +44,7 @@
     position: relative;
     background-color: rgba(250, 250, 250, 0.678);
   }
-  
-  .DivPanel4 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90px;
-    flex-grow: 1;
-    margin: 2px;
-    border-radius: 5px;
-    transition: width 0.3s ease, z-index 0.3s ease;
-    position: relative;
-  }
-  
-  .DivPanel4-expanded {
-    width: 230px;
-    z-index: 10;
-  }
+ 
   
   
   .container-grid {
@@ -107,6 +92,23 @@
     
   }
   
+
+  
+  .cuadroIMG3 {
+    width: 40px;
+    height: 40px;
+    transition: width 0.3s ease, height 0.3s ease;
+    background-color: transparent;
+    position: relative;
+  }
+  
+  /* Cuando el elemento está siendo arrastrado (tamaño original) */
+  .cuadroIMG3-expanded {
+    width: 40px;
+    height: 40px;
+    
+  }
+
   
   /*CSS del componete que se utiliza para arastrar imagnes*/
   .draggableDiv {
@@ -323,14 +325,11 @@
   }
   
   .PuntoRojo{
-    width: 45px; /* Ajusta el ancho para que sea responsivo */
-    height: 45px; /* Mantiene la proporción de la imagen */
-    position: relative;
+    height: 40px; /* Mantiene la proporción de la imagen */
+    position: static;
     background-color: transparent;
     pointer-events: none;
-    margin: auto;
-    padding-bottom: 10px;
-  
+    align-items: center;
   }
   
   .lineaImg4{
@@ -338,18 +337,27 @@
     height: 84px;
   }
   
-  .dropArea2 {
-    width: 40px; /* Tamaño inicial */
-    height: 40px;
-    background-color: transparent;
-    transition: width 0.3s ease, height 0.3s ease; /* Transición suave */
-  }
-  
-  .dropArea2-expanded {
-    width: 88px; /* Mismo tamaño que cuadro2-expanded */
-    height: 92px;
-    transition: width 0.3s ease, height 0.3s ease;
-  }
+  /* Tamaño normal */
+.dropArea2 {
+  width: 40px; 
+  height: 40px;
+  background-color: transparent;
+  transition: width 0.3s ease, height 0.3s ease;
+  /* Mantener oculto si se necesita */
+  overflow: hidden;
+  position: relative;  /* Para el input en pos:absolute */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tamaño expandido */
+.dropArea2-expanded {
+  width: 90px;
+  height: 90px;
+  overflow: visible; /* Si quieres mostrar todo el contenido */
+}
+
   
   .lineaDv{
     background-color: black;
@@ -367,8 +375,6 @@
   /* Botón del acordeón con tamaño fijo y responsivo */
 .accordion-button {
   width: 100%; /* Ocupa todo el ancho disponible */
-  max-width: 100px; /* Máximo tamaño para evitar que sea demasiado grande */
-  min-width: 310px; /* Mínimo tamaño para que no se haga muy pequeño */
   height: 50px; /* Fija la altura */
   padding: 12px 18px; /* Espaciado interno */
   font-size: 13px; /* Tamaño del texto */
@@ -429,7 +435,6 @@
   transform: translateY(0);
 }
 
-
   
 /* ... todo tu CSS anterior ... */
 .input-with-placeholder {
@@ -438,6 +443,8 @@
   width: 100%;
   padding-top: 30px;
   box-sizing: border-box;
+  
+  
 }
 
 /* Label flotante */
@@ -473,3 +480,11 @@
   font-size: 13px;
   color: white;
 }
+
+.DivInput {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Asegura espacio entre columnas */
+}
+
+

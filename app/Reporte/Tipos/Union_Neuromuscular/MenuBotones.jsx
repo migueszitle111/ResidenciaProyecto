@@ -10,7 +10,7 @@ import { useImageState } from '../../MetodosBotones';
 const stepsArray = ['A', 'B', 'C', 'D', 'E', 'I'];
 
 // Metodos de movimiento entre menus
-const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, handleImageChange,droppedItems,topLeftText,setTopLeftText}) => {
+const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, handleImageChange,droppedItems,topLeftText,setTopLeftText,copyConclusions}) => {
   const { data: session } = useSession();
   const [step, setStep] = useState('A');
   const {
@@ -116,7 +116,10 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, hand
           droppedItems={droppedItems}
           topLeftText={topLeftText}
           setTopLeftText={setTopLeftText}
-          
+          copyConclusions={copyConclusions}
+          expandedDivs
+          setExpandedDivs
+
 
         />
       ) : null}
@@ -331,30 +334,32 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
   );
 };
 
-const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText}) => {
+const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions}) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
-  const [expandedDivs, setExpandedDivs] = useState(() => {
-    let obj = {};
-    for (let i = 1; i <= 18; i++) {
-      obj[i] = false;
-    }
-    return obj;
-  });
 
-  
+ const [expandedDivs, setExpandedDivs] = useState(() => {
+   let obj = {};
+   for (let i = 1; i <= 18; i++) {
+     obj[i] = false;
+   }
+   return obj;
+ });
 
   const handleExportPdf = async () => {
     try {
        // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
     const conclusiones = conclusions;
 
-      const response = await fetch('/api/pdf/generate-pdf?tipo=union', {
+
+      const response = await fetch('/api/pdf/generate-pdf/unionneuromuscular?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          conclusiones,
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
           userData: {
             name: session?.user?.name,
             lastname: session?.user?.lastname,
@@ -396,9 +401,6 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
         <button onClick={handlePrevStep} className={`print-button`}>
           <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
         </button>
-
-        
-
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>

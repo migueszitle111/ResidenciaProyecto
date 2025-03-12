@@ -1,11 +1,19 @@
 import { ReportContext } from '@/src/context'
 import Image from 'next/image'
-import { useContext } from 'react'
+import { useContext ,useEffect,useRef} from 'react'
 
 // Se recibe el objeto de la imagen y las reglas
 export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rules ,footertext='', userImageUrl = '' }) {
   // Utiliza el contexto para obtener las conclusiones
   const { conclusions } = useContext(ReportContext)
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (imgRef.current) {
+      console.log('Imagen offsetWidth:',  imgRef.current.offsetWidth);
+      console.log('Imagen offsetHeight:', imgRef.current.offsetHeight);
+    }
+  }, []);
   
   return (
     <div className='image-container relative'>
@@ -16,6 +24,8 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
         useMap={useMap}
         width={width}
         height={height}
+        ref={imgRef}
+
       />
       {
         // Se mapean las reglas para mostrar las imágenes

@@ -7,11 +7,49 @@ import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
 
-
-const DropArea = ({ topLeftText }) => {
+const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
   const { droppedItems, setDroppedItems } = useContext(DropContext);
+  const dropAreaRef = useRef(null);
+
+  useEffect(() => {
+    if (dropAreaRef.current) {
+      const rect = dropAreaRef.current.getBoundingClientRect();
+      console.log('DropArea dimensions:', rect.width, rect.height);
+    }
+  }, []);
+
+  const handleDragStop = (e, d, item) => {
+    const dropAreaRect = dropAreaRef.current.getBoundingClientRect();
+    const itemRect = e.target.getBoundingClientRect();
+    const itemCenterX = itemRect.left + itemRect.width / 2;
+    const itemCenterY = itemRect.top + itemRect.height / 2;
+
+    if (
+      itemCenterX < dropAreaRect.left ||
+      itemCenterX > dropAreaRect.right ||
+      itemCenterY < dropAreaRect.top ||
+      itemCenterY > dropAreaRect.bottom
+    ) {
+      setDroppedItems((prev) => prev.filter((i) => i.id !== item.id));
+    } else {
+      updatePosition(item.id, d.x, d.y);
+    }
+  };
+
   const handleDrop = (e) => {
     e.preventDefault();
+
+    // Leer el ID que guardamos en dataTransfer
+    const draggedId = e.dataTransfer.getData('app-id');
+    if (draggedId) {
+      // Colapsar ese ID en el estado global
+      setExpandedDivs(prev => ({
+        ...prev,
+        [draggedId]: false
+      }));
+    }
+
+    // Leer la parte text/html (nodo)
     const data = e.dataTransfer.getData('text/html');
     if (data) {
       const parser = new DOMParser();
@@ -38,17 +76,22 @@ const DropArea = ({ topLeftText }) => {
     );
   };
 
+  const removeItem = (id) => {
+    setDroppedItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
     <div
       className="dropArea"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
+      ref={dropAreaRef}
     >
-     {topLeftText && (
-  <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '10px', fontSize: '19px' }} >
-    {topLeftText}
-  </p>
-)}
+      {topLeftText && (
+        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'10px' }}>
+          {topLeftText}
+        </p>
+      )}
       {droppedItems.length === 0 ? (
         <p></p>
       ) : (
@@ -61,10 +104,18 @@ const DropArea = ({ topLeftText }) => {
               width: 200,
               height: 200
             }}
-            onDragStop={(e, d) => updatePosition(item.id, d.x, d.y)}
+            onDragStop={(e, d) => handleDragStop(e, d, item)}
             style={{ position: 'absolute' }}
           >
-            <div dangerouslySetInnerHTML={{ __html: item.content }} />
+            <div className="item-container" style={{ width: '100%', height: '100%' }}>
+              <button
+                className="delete-button"
+                onClick={() => removeItem(item.id)}
+              >
+                X
+              </button>
+              <div dangerouslySetInnerHTML={{ __html: item.content }} />
+            </div>
           </Rnd>
         ))
       )}
@@ -73,18 +124,29 @@ const DropArea = ({ topLeftText }) => {
 };
 
 const Reporte = () => {
-  const { droppedItems } = useContext(DropContext);
-  const [topLeftText, setTopLeftText] = useState('');
+    // Carga datos de usuario
+    const { data: session, status } = useSession();
+    const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)
+    const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
+    const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
+    const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
+    // Estados para el historial de imagenes
+    const [history, setHistory] = useState([]); 
+    const [Future,setFuture] = useState([]); 
+     // Aquí manejamos la expansión/colapso de símbolos en MenuImagenes
+    const [expandedDivs, setExpandedDivs] = useState({});
+    const { droppedItems } = useContext(DropContext);
+    const [topLeftText, setTopLeftText] = useState('');
+    const imgRef = useRef(null);
 
-  // Carga datos de usuario
-  const { data: session, status } = useSession();
-  const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)
-  const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
-  const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
-  const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
-  // Estados para el historial de imagenes
-  const [history, setHistory] = useState([]); 
-  const [Future,setFuture] = useState([]); 
+    useEffect(() => {
+      if (imgRef.current) {
+        console.log('Imagen offsetWidth:',  imgRef.current.offsetWidth);
+        console.log('Imagen offsetHeight:', imgRef.current.offsetHeight);
+      }
+    }, []);
+
+
 
   function formatConclusions(copyConclusions) {
     const keywords = ["BULBAR", "PROXIMAL", "DISTAL"];
@@ -296,6 +358,11 @@ const formattedConclusions = formatConclusions(copyConclusions);
               handleImageChange={handleImageChange}
               topLeftText={topLeftText}
               setTopLeftText={setTopLeftText}
+              copyConclusions={copyConclusions}  
+              ref={imgRef.current}
+
+              expandedDivs={expandedDivs}
+              setExpandedDivs={setExpandedDivs}
             />
           </div>    
           </div>
@@ -323,14 +390,19 @@ const formattedConclusions = formatConclusions(copyConclusions);
 
         {/* Despliego de las imagenes dentro del array */}
         <div ref={elementRef} className='conclusion-container '>
+
+        <div id="dropArea"><DropArea topLeftText={topLeftText}  expandedDivs={expandedDivs}
+                setExpandedDivs={setExpandedDivs}  />
+
+        </div>
         <ConclusionCanvas 
         
           img={{
             src: '/assets/UnionMuscularIMG/BP_UnionMuscular.png',
             alt: 'Modelo',
             useMap: '#image-map',
-            width: isPageVisible ? '600' : '800',
-            height: isPageVisible ? '600' : '800'
+            width: '600', 
+            height: '776' 
           }}
           
           rules={[
@@ -376,7 +448,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
             {session && (
             <>
               {/* Bloque Nombre */}
-              <div id="footerName"style={{ display: 'inline-flex' , alignItems: 'center'  }}>
+              <div id="footerName"style={{ display: 'inline-flex' , alignItems: 'center' ,paddingLeft: '65px' }}>
               <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="8"
@@ -494,7 +566,10 @@ const formattedConclusions = formatConclusions(copyConclusions);
           </>
           }
           userImageUrl={imageUrl}  // Aquí se pasa la URL de la imagen del usuario
+          
+
         />
+        
 <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
 <div
   id="conclusionDiv"
@@ -503,7 +578,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
   style={{
     position: 'absolute',
     width: '95%',
-    height: '100%',
+    height: 'auto',
     outline: 'none',
     resize: 'none',
     fontSize: '12px',
@@ -524,16 +599,15 @@ const formattedConclusions = formatConclusions(copyConclusions);
     selection.addRange(range);
   }}
   suppressContentEditableWarning={true}
-/>
-</div>
-<div id="dropArea"><DropArea topLeftText={topLeftText} />
-</div>
+  />
+
+      </div>
+      </div>
 
       </div>
         </div>
         </div>
         </div>
-      </div>
   )
 }
 

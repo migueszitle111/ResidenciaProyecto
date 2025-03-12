@@ -1,16 +1,21 @@
-
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '/app/components/ReportTemplate/DinamicImagesMenu.css';
 
-const DraggableDiv = ({ children, isDraggable }) => {
+// ----------------------------------------------------
+// Componente para arrastrar (igual que antes):
+// ----------------------------------------------------
+const DraggableDiv = ({ children, isDraggable,itemId}) => {
   const [isDragging, setIsDragging] = React.useState(false);
 
   const handleDragStart = (e) => {
     if (!isDraggable) return;
-
+     // Aquí guardas el "itemId" en dataTransfer
+     e.dataTransfer.setData('app-id', String(itemId))
+     
     e.dataTransfer.setData('text/html', e.target.outerHTML);
     e.dataTransfer.effectAllowed = 'move';
 
+    // Imagen invisible que sigue el mouse durante el drag:
     const dragImage = document.createElement('div');
     dragImage.style.width = '0px';
     dragImage.style.height = '0px';
@@ -31,18 +36,18 @@ const DraggableDiv = ({ children, isDraggable }) => {
       draggable={isDraggable}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      style={{
-        cursor: isDraggable ? 'move' : 'default'
-      }}
+      style={{ cursor: isDraggable ? 'move' : 'default' }}
     >
       {children}
     </div>
   );
 };
 
+// ----------------------------------------------------
+// Área donde se suelta una imagen (igual que antes):
+// ----------------------------------------------------
 const DropArea2 = ({ isExpanded }) => {
   const [imageSrc, setImageSrc] = useState(null);
-  const [textValue, setTextValue] = useState("");
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -51,9 +56,7 @@ const DropArea2 = ({ isExpanded }) => {
 
   const handleFileSelect = (files) => {
     if (files && files.length > 0) {
-      const fileArray = Array.from(files);
-      const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
-
+      const imageFiles = Array.from(files).filter(file => file.type.startsWith('image/'));
       if (imageFiles.length > 0) {
         const file = imageFiles[0];
         const reader = new FileReader();
@@ -89,8 +92,6 @@ const DropArea2 = ({ isExpanded }) => {
         overflow: 'hidden',
       }}
     >
-     
-
       <input
         type="file"
         accept="image/*"
@@ -103,12 +104,8 @@ const DropArea2 = ({ isExpanded }) => {
           cursor: 'pointer',
         }}
       />
-
-
-
-
       {!imageSrc ? (
-        <p></p>
+        <p style={{ pointerEvents: 'none' }}></p>
       ) : (
         <img
           src={imageSrc}
@@ -126,400 +123,342 @@ const DropArea2 = ({ isExpanded }) => {
   );
 };
 
-const MenuImagenes = ({ expandedDivs, setExpandedDivs , topLeftText, setTopLeftText}) => {
-
-  const handleInputChange = (e) => {
-    setTopLeftText(e.target.value); // Actualiza el estado en el padre
-  };
-
-  // 1. Estado para controlar si se muestra u oculta el input
+// ----------------------------------------------------
+// Componente principal con todos los símbolos
+// ----------------------------------------------------
+const MenuImagenes = ({ expandedDivs, setExpandedDivs, topLeftText, setTopLeftText }) => {
+  // 1. Manejo del textarea (acordeón)
   const [showInput, setShowInput] = useState(false);
   const [inputVisible, setInputVisible] = useState(false);
 
   useEffect(() => {
     if (showInput) {
-      // Agrega un pequeño delay para activar la clase 'visible'
       const timer = setTimeout(() => {
         setInputVisible(true);
-      }, 10); // 10ms de delay
+      }, 10);
       return () => clearTimeout(timer);
     } else {
       setInputVisible(false);
     }
   }, [showInput]);
 
-  const toggleDivSize = (index) => {
-    setExpandedDivs((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
+  const toggleAccordion = () => {
+    setShowInput(prev => !prev);
+  };
+
+  const handleTextChange = (e) => {
+    setTopLeftText(e.target.value);
+  };
+
+  // 2. Función para expandir/colapsar un ítem
+  const toggleDivSize = (id) => {
+    setExpandedDivs(prev => ({
+      ...prev,
+      [id]: !prev[id],
     }));
   };
 
-  const toggleAccordion = () => {
-    setShowInput((prev) => !prev);
-  };
+  // ----------------------------------------------------
+  // Definimos los datos de cada símbolo en un array:
+  // ----------------------------------------------------
+  const itemsData = [
+    // Ejemplo item (id = 1)
+    {
+      id: 1,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'cuadro',
+      containerClassExpanded: 'cuadro-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 2.png',
+      imageClass: 'lineaImg',
+      imageClassExpanded: 'lineaImg-expanded',
+      subContainerClass: 'cuadro2',
+      subContainerClassExpanded: 'cuadro2-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 2,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'cuadro',
+      containerClassExpanded: 'cuadro-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 4.png',
+      imageClass: 'lineaImg2',
+      imageClassExpanded: 'lineaImg2-expanded',
+      subContainerClass: 'cuadro3',
+      subContainerClassExpanded: 'cuadro3-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 3,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'cuadro',
+      containerClassExpanded: 'cuadro-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 3.png',
+      imageClass: 'lineaImg',
+      imageClassExpanded: 'lineaImg-expanded',
+      subContainerClass: 'cuadro2',
+      subContainerClassExpanded: 'cuadro2-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 4,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'cuadro',
+      containerClassExpanded: 'cuadro-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 2.png',
+      imageClass: 'lineaImg2',
+      imageClassExpanded: 'lineaImg2-expanded',
+      subContainerClass: 'cuadro3',
+      subContainerClassExpanded: 'cuadro3-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 5,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'cuadro',
+      containerClassExpanded: 'cuadro-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 1.png',
+      imageClass: 'lineaImg',
+      imageClassExpanded: 'lineaImg-expanded',
+      subContainerClass: 'cuadro2',
+      subContainerClassExpanded: 'cuadro2-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 6,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'cuadro',
+      containerClassExpanded: 'cuadro-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 5.png',
+      imageClass: 'lineaImg2',
+      imageClassExpanded: 'lineaImg2-expanded',
+      subContainerClass: 'cuadro3',
+      subContainerClassExpanded: 'cuadro3-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 7,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'circulo',
+      containerClassExpanded: 'circulo-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 2.png',
+      imageClass: 'lineaImg',
+      imageClassExpanded: 'lineaImg-expanded',
+      subContainerClass: 'circulo2',
+      subContainerClassExpanded: 'circulo2-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 8,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'circulo',
+      containerClassExpanded: 'circulo-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 4.png',
+      imageClass: 'lineaImg2',
+      imageClassExpanded: 'lineaImg2-expanded',
+      subContainerClass: 'circulo3',
+      subContainerClassExpanded: 'circulo3-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 9,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'circulo',
+      containerClassExpanded: 'circulo-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 3.png',
+      imageClass: 'lineaImg',
+      imageClassExpanded: 'lineaImg-expanded',
+      subContainerClass: 'circulo2',
+      subContainerClassExpanded: 'circulo2-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 10,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'circulo',
+      containerClassExpanded: 'circulo-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 2.png',
+      imageClass: 'lineaImg2',
+      imageClassExpanded: 'lineaImg2-expanded',
+      subContainerClass: 'circulo3',
+      subContainerClassExpanded: 'circulo3-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 11,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'circulo',
+      containerClassExpanded: 'circulo-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 1.png',
+      imageClass: 'lineaImg',
+      imageClassExpanded: 'lineaImg-expanded',
+      subContainerClass: 'circulo2',
+      subContainerClassExpanded: 'circulo2-expanded',
+      hasDropArea: true,
+    },
+    {
+      id: 12,
+      panelClass: 'DivPanel2',
+      panelClassExpanded: 'DivPanel2-expanded',
+      containerClass: 'circulo',
+      containerClassExpanded: 'circulo-expanded',
+      imageSrc: '/assets/Simbolos/S_Linea 5.png',
+      imageClass: 'lineaImg2',
+      imageClassExpanded: 'lineaImg2-expanded',
+      subContainerClass: 'circulo3',
+      subContainerClassExpanded: 'circulo3-expanded',
+      hasDropArea: true,
+    },
+    // Cruces (sin sub-container ni DropArea)
+    {
+      id: 13,
+      panelClass: 'DivPanel3',
+      panelClassExpanded: 'DivPanel3-expanded',
+      containerClass: 'cuadroIMG2',
+      containerClassExpanded: 'cuadroIMG2-expanded',
+      imageSrc: '/assets/Simbolos/S_Cruz 1.png',
+      imageClass: 'cruzImg',
+      hasDropArea: false,
+    },
+    {
+      id: 14,
+      panelClass: 'DivPanel3',
+      panelClassExpanded: 'DivPanel3-expanded',
+      containerClass: 'cuadroIMG2',
+      containerClassExpanded: 'cuadroIMG2-expanded',
+      imageSrc: '/assets/Simbolos/S_Cruz 2.png',
+      imageClass: 'cruzImg',
+      hasDropArea: false,
+    },
+    {
+      id: 15,
+      panelClass: 'DivPanel3',
+      panelClassExpanded: 'DivPanel3-expanded',
+      containerClass: 'cuadroIMG2',
+      containerClassExpanded: 'cuadroIMG2-expanded',
+      imageSrc: '/assets/Simbolos/S_Cruz 3.png',
+      imageClass: 'cruzImg',
+      hasDropArea: false,
+    },
+    {
+      id: 16,
+      panelClass: 'DivPanel3',
+      panelClassExpanded: 'DivPanel3-expanded',
+      containerClass: 'cuadroIMG2',
+      containerClassExpanded: 'cuadroIMG2-expanded',
+      imageSrc: '/assets/Simbolos/S_Cruz 4.png',
+      imageClass: 'cruzImg',
+      hasDropArea: false,
+    },
+    // Puntos rojos
+    {
+      id: 17,
+      panelClass: 'DivPanel3',
+      panelClassExpanded: 'DivPanel3-expanded',
+      containerClass: 'cuadroIMG3',
+      containerClassExpanded: 'cuadroIMG3-expanded',
+      imageSrc: '/assets/Simbolos/S_Circulo Rojo XXS (3.5px).png',
+      imageClass: 'PuntoRojo',
+      hasDropArea: false,
+    },
+    {
+      id: 18,
+      panelClass: 'DivPanel3',
+      panelClassExpanded: 'DivPanel3-expanded',
+      containerClass: 'cuadroIMG3',
+      containerClassExpanded: 'cuadroIMG3-expanded',
+      imageSrc: '/assets/Simbolos/S_Circulo Rojo XS (4px).png',
+      imageClass: 'PuntoRojo',
+      hasDropArea: false,
+    },
+  ];
 
+  // ----------------------------------------------------
+  // Render de cada ítem:
+  // ----------------------------------------------------
+  const renderItem = (item) => {
+    const isExpanded = !!expandedDivs[item.id];
+    return (
+      <div
+        key={item.id}
+        className={`${item.panelClass} ${isExpanded ? item.panelClassExpanded : ''}`}
+      >
+        <DraggableDiv isDraggable={isExpanded} itemId={item.id}>
+          <div
+            className={`${item.containerClass} ${isExpanded ? item.containerClassExpanded : ''}`}
+            onClick={() => toggleDivSize(item.id)}
+          >
+            {/* Imagen principal */}
+            <img
+              src={item.imageSrc}
+              className={`
+                ${item.imageClass || ''} 
+                ${isExpanded && item.imageClassExpanded ? item.imageClassExpanded : ''}
+              `}
+            />
 
-  return (
-   
-    <div className='container-grid'>
-            {[1].map((index) => (
-              <div key={index} className={`DivPanel2 ${expandedDivs[index] ? 'DivPanel2-expanded' : ''}`}>
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 2.png"
-                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}>
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-
-            {[2].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 4.png"
-                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-            
-
-            {[3].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 3.png"
-                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`}// Aplicar estilo a la imagen
-                    />
-                    <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            {[4].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 2.png"
-                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            {[5].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 1.png"
-                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`cuadro2 ${expandedDivs[index] ? 'cuadro2-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-            
-
-            {[6].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadro ${expandedDivs[index] ? 'cuadro-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 5.png"
-                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`cuadro3 ${expandedDivs[index] ? 'cuadro3-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            {[7].map((index) => (
-              <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                  <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                    <div
-                      className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
-                      onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                    >
-                      <img
-                        src="/assets/Simbolos/S_Linea 2.png"
-                        className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
-                      />
-                      <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
-                        <DropArea2 isExpanded={expandedDivs[index]} />
-                      </div>
-                    </div>
-                  </DraggableDiv>
-              </div>
-              ))}
-            
-            
-            {[8].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 4.png"
-                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            
-
-            {[9].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 3.png"
-                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            {[10].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 2.png"
-                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            {[11].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 1.png"
-                      className={`lineaImg ${expandedDivs[index] ? 'lineaImg-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`circulo2 ${expandedDivs[index] ? 'circulo2-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]}  />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-            
-
-            {[12].map((index) => (
-                <div key={index} className={`DivPanel2 ${expandedDivs[index]? 'DivPanel2-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`circulo ${expandedDivs[index] ? 'circulo-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Linea 5.png"
-                      className={`lineaImg2 ${expandedDivs[index] ? 'lineaImg2-expanded' : ''}`} // Aplicar estilo a la imagen
-                    />
-                    <div className={`circulo3 ${expandedDivs[index] ? 'circulo3-expanded' : ''}`}> 
-                      <DropArea2 isExpanded={expandedDivs[index]} />
-                    </div>
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-
-            {[13].map((index) => (
-                <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Cruz 1.png"
-                      className='cruzImg' // Aplicar estilo a la imagen
-                    />
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-      
-            {[14].map((index) => (
-                <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Cruz 2.png"
-                      className='cruzImg' // Aplicar estilo a la imagen
-                    />
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            {[15].map((index) => (
-                <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Cruz 3.png"
-                      className='cruzImg' // Aplicar estilo a la imagen
-                    />
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            {[16].map((index) => (
-                <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Cruz 4.png"
-                      className='cruzImg' // Aplicar estilo a la imagen
-                    />
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            {[17].map((index) => (
-                <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Circulo Rojo XXS (3.5px).png"
-                      className='PuntoRojo' // Aplicar estilo a la imagen
-                    />
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-
-            {[18].map((index) => (
-                <div key={index} className={`DivPanel3 ${expandedDivs[index]? 'DivPanel3-expanded' : ''}`} >
-                <DraggableDiv key={index} isDraggable={expandedDivs[index]}>
-                  <div
-                    className={`cuadroIMG2 ${expandedDivs[index] ? 'cuadroIMG2-expanded' : ''}`} // Aplica clase para expandir
-                    onClick={() => toggleDivSize(index)} // Cambia el tamaño al hacer clic
-                  >
-                    <img
-                      src="/assets/Simbolos/S_Circulo Rojo XS (4px).png"
-                      className='PuntoRojo' // Aplicar estilo a la imagen
-                    />
-                  </div>
-                </DraggableDiv>
-              </div>
-            ))}
-          
-          <div className={`DivPanel4 ${showInput ? 'DivPanel4-expanded' : ''}`}>
-              {/* Accordion para mostrar/ocultar el input */}
-              <div className="w-full">
-              <div className="accordion-button" onClick={toggleAccordion}>
-              Ingresar Paciente
-            </div>
-            {/* Input con animación */}
-            {showInput && (
-              <div className={`fade-in ${inputVisible ? 'visible' : ''}`}>
-                <div className="input-with-placeholder">
-                  <textarea
-                    id="username"
-                    value={topLeftText}         // <---- usar el estado global
-                    onChange={handleInputChange} // <---- setear el nuevo texto
-                    required
-                  ></textarea>
-                  <label htmlFor="username">Nombre</label>
-                </div>
+            {/* Sub-contenedor para el DropArea (solo si hasDropArea = true) */}
+            {item.hasDropArea && item.subContainerClass && (
+              <div
+                className={`
+                  ${item.subContainerClass} 
+                  ${isExpanded ? item.subContainerClassExpanded : ''}
+                `}
+              >
+                <DropArea2 isExpanded={isExpanded} />
               </div>
             )}
-            
-            </div>
+          </div>
+        </DraggableDiv>
       </div>
-    </div>
+    );
+  };
+
+  // ----------------------------------------------------
+  // Retorno principal
+  // ----------------------------------------------------
+  return (
+    <>
+      {/* Contenedor principal: ítems con dos columnas */}
+      <div className="container-grid">
+        {itemsData.map(renderItem)}
+      </div>
+  
+      {/* Fuera del container-grid, tu panel para el input */}
+      <div className={`DivInput ${showInput ? 'DivInput' : ''}`}>
+        <div className="w-full">
+          <div className="accordion-button" onClick={toggleAccordion}>
+            Ingresar Paciente
+          </div>
+          {showInput && (
+            <div className={`fade-in ${inputVisible ? 'visible' : ''}`}>
+              <div className="input-with-placeholder">
+                <textarea
+                  id="username"
+                  value={topLeftText}
+                  onChange={handleTextChange}
+                  required
+                />
+                <label htmlFor="username">Nombre</label>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
   );
-};
+}
+  
+  
 
 export default MenuImagenes;

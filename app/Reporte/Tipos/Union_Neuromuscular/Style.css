@@ -27,6 +27,7 @@
   border-top-left-radius: 15px;
   border-bottom-right-radius: 15px;
   padding: 0 15px;
+  
 }
 
 /* Informacion acerca del usuario */
@@ -37,6 +38,7 @@
   border-radius: 8px;
   overflow: hidden;
   width: 50vh;
+  
 }
 
 .box {
@@ -47,6 +49,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  
+  
 }
 
 .title {
@@ -60,6 +64,7 @@
   text-align: left;
   margin-bottom: 5px;
   color : white;
+  
 }
 
 /* Botones e Imagen */
@@ -119,9 +124,6 @@
   padding: 5px;
 }
 
-
-
-
 .print-button {
   background-color: #1C1C1C;
   padding: 8px;
@@ -165,13 +167,6 @@
   border: 2px solid #c44900; 
 }
 
-.vertical-orinetation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;  
-}
 
 .conclusion-container {
   display: flex;
@@ -184,10 +179,6 @@
   border-radius: 10px;
   background-color: #1C1C1C;
   margin-top: 10px;
-}
-
-.dont-print {
-  display: visible;
 }
 
 /* Estilos para Rnd (drag resize) - no siempre necesarios */
@@ -207,6 +198,7 @@
   width: 600px;  /* Mismo tamaño que la imagen base */
   height: 776px;
   z-index: 10;   
+  background-color: transparent;
   /* background-color: rgba(0,255,0,0.2);  */
 }
 
@@ -244,4 +236,33 @@
 /* Cuando haces hover sobre el contenedor, muestra la "X" */
 .item-container:hover .delete-button {
   display: block;
+}
+
+
+/**********************************************/
+/* Cuando entremos a la impresión, ocultamos .dont-print */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact; 
+    background-color: #ffffff !important;
+  }
+  @page {
+    size: A4;
+  }
+  .dont-print {
+    display: none !important;
+  }
+  .conclusion-container,
+  .wrapper ,
+  .vertical-container,
+  .info-container,
+  .button-bar,
+  .print-button,
+  .box-container,
+  .head,
+  .report-container,
+  .con-img {
+    background-color: white !important;
+  }
 }

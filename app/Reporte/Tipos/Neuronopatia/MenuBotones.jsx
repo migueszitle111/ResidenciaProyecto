@@ -9,7 +9,7 @@ import { useImageState } from '../../MetodosBotones';
 import './Style.css';
 
 // Metodos de movimiento entre menus
-const SimpleMultiStepForm = ({showStepNumber,conclusionDivRef, elementRef, handleImageChange,droppedItems,topLeftText,setTopLeftText,copyConclusions}) => {
+const SimpleMultiStepForm = ({showStepNumber,conclusionDivRef, elementRef, handleImageChange,droppedItems,topLeftText,setTopLeftText,copyConclusions,expandedDivs,setExpandedDivs}) => {
   const [step, setStep] = useState('A');
   const { data: session } = useSession();
 
@@ -162,8 +162,8 @@ const SimpleMultiStepForm = ({showStepNumber,conclusionDivRef, elementRef, handl
         topLeftText={topLeftText}
         setTopLeftText={setTopLeftText}
         copyConclusions={copyConclusions}
-        expandedDivs
-        setExpandedDivs
+        expandedDivs={expandedDivs}
+          setExpandedDivs={setExpandedDivs}
         />
       ) : null}
 
@@ -179,8 +179,8 @@ const SimpleMultiStepForm = ({showStepNumber,conclusionDivRef, elementRef, handl
         topLeftText={topLeftText}
         setTopLeftText={setTopLeftText}
         copyConclusions={copyConclusions}
-        expandedDivs
-        setExpandedDivs
+        expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}
         />
       ) : null}
     </div>
@@ -693,19 +693,10 @@ const StepG = ({ handlePrevStep, handleNextStep }) => {
   
 
 
-const StepH = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions}) => {
-  
- const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+const StepH = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs}) => {
+   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
    const { conclusions } = useContext(ReportContext)
    const { droppedItems } = useContext(DropContext);
- 
-  const [expandedDivs, setExpandedDivs] = useState(() => {
-    let obj = {};
-    for (let i = 1; i <= 18; i++) {
-      obj[i] = false;
-    }
-    return obj;
-  });
  
    const handleExportPdf = async () => {
      try {
@@ -780,18 +771,10 @@ const StepH = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
   );
 };
 
-const StepG1 = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions }) => {
+const StepG1 = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs }) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
     const { conclusions } = useContext(ReportContext)
     const { droppedItems } = useContext(DropContext);
-  
-   const [expandedDivs, setExpandedDivs] = useState(() => {
-     let obj = {};
-     for (let i = 1; i <= 18; i++) {
-       obj[i] = false;
-     }
-     return obj;
-   });
   
     const handleExportPdf = async () => {
       try {
@@ -800,7 +783,7 @@ const StepG1 = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,top
       const conclusiones = conclusions;
   
   
-        const response = await fetch('/api/pdf/generate-pdf?tipo=union', {
+        const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -859,7 +842,8 @@ const StepG1 = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,top
       </div>
       
     
-      <MenuImagenes expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
         setTopLeftText={setTopLeftText}   />
 
     </div>

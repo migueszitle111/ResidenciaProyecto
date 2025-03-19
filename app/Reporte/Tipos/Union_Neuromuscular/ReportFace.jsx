@@ -36,34 +36,39 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
     }
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
+  // EJEMPLO COMPLETO
+const handleDrop = (e) => {
+  e.preventDefault();
 
-    // Leer el ID que guardamos en dataTransfer
-    const draggedId = e.dataTransfer.getData('app-id');
-    if (draggedId) {
-      // Colapsar ese ID en el estado global
-      setExpandedDivs(prev => ({
+  // 1) Recuperamos ID como string
+  const draggedId = e.dataTransfer.getData('app-id');
+  // 2) Convertimos a número
+  const numericId = parseInt(draggedId, 10);
+
+  if (!isNaN(numericId)) {
+    // 3) Colapsar sólo el ítem arrastrado
+    setExpandedDivs(prev => ({
+      ...prev,
+      [numericId]: false
+    }));
+  }
+
+  // 3) Leer el HTML del ítem y añadirlo a droppedItems
+  const data = e.dataTransfer.getData('text/html');
+  if (data) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, 'text/html');
+    const element = doc.body.firstChild;
+    if (element) {
+      setDroppedItems((prev) => [
         ...prev,
-        [draggedId]: false
-      }));
+        { id: Date.now(), content: element.outerHTML, x: 0, y: 0 },
+      ]);
     }
+  }
+};
 
-    // Leer la parte text/html (nodo)
-    const data = e.dataTransfer.getData('text/html');
-    if (data) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(data, 'text/html');
-      const element = doc.body.firstChild;
-      if (element) {
-        setDroppedItems([
-          ...droppedItems,
-          { id: Date.now(), content: element.outerHTML, x: 0, y: 0 }
-        ]);
-      }
-    }
-  };
-
+ 
   const handleDragOver = (e) => {
     e.preventDefault();
   };
@@ -308,21 +313,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
   return (
     <div >
       {/* Clase que encapzula la información y el titulo de la pagina */}
-      <div className='head'>
+      <div className='head dont-print'>
            {/* Titulo de la pagina */}
           <div className='report-container dont-print'>
           </div>
         </div>       
       {/* Wrapper que encapsula la image, conclusión y lista de botones */}
-      <div className="wrapper">
+      <div className="wrapper " >
         {/* Componente de la caja de conclusión junto con la caja de notas */}
           {/* Se especifica dont-print para no ser incluidos en la vista de impresión */}
-          <div className='vertical-orientation dont-print'>
+          <div className='vertical-orientation'>
           {/* Lista de botones */}
-          <div className='button-bar'>
+          <div className='button-bar dont-print'>
           <button 
             id='unhide' 
-            className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`} 
+            className={`print-button  ${isPageVisible ? 'hidden' : 'visible'}`} 
             onClick={() => {
               setPageVisibility(true);
               setSelectedImages([]);
@@ -347,10 +352,9 @@ const formattedConclusions = formatConclusions(copyConclusions);
           <ConclusionBox />
             */}
           </div>
-
 {/* Menu de opciones */}
 
-          <div className={`mx-4 z-10 `}>
+          <div className={`mx-4 z-10  `}>
             <SimpleMultiStepForm 
               showStepNumber={true}
               conclusionDivRef={conclusionDivRef}
@@ -360,7 +364,6 @@ const formattedConclusions = formatConclusions(copyConclusions);
               setTopLeftText={setTopLeftText}
               copyConclusions={copyConclusions}  
               ref={imgRef.current}
-
               expandedDivs={expandedDivs}
               setExpandedDivs={setExpandedDivs}
             />
@@ -369,7 +372,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
         </div>
         {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
         <div>
-          <div className='con-img '> 
+          <div className='con-img'> 
         
         {/* Codigo para desplegar las imagenes dentro de un array */}
         {selectedImages.map((image, index) => (
@@ -402,7 +405,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
             alt: 'Modelo',
             useMap: '#image-map',
             width: '600', 
-            height: '776' 
+            height: '776'
+            
           }}
           
           rules={[
@@ -584,6 +588,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
     fontSize: '12px',
     paddingTop: '8px',
     marginLeft: '10px',
+    backgroundColor: 'rgb(255, 255, 255)',
     zIndex: '1',
   }}
   onInput={(e) => {

@@ -14,6 +14,12 @@ const Medianos = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+
+    const [modalVisible, setModalVisible] = useState(false);
+
+
+    
 
     const images = [
         {
@@ -48,6 +54,17 @@ const Medianos = () => {
         }
     };
 
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
+    };
+
+
     const handleImageBoxClick = (image, position) => {
         if (imageBoxVisible && imageBoxContent === image) {
             setImageBoxVisible(false);
@@ -58,59 +75,59 @@ const Medianos = () => {
         }
     };
 
-    return (
-        
-        <div  className=" py-20 gallery-container">
-        <ImageGallery items={images}
-            onSlide={handleSlide}
-            showFullscreenButton={false}
-            showPlayButton={false}
-            showBullets={false}
-            showNav={false}
-            showThumbnails={true}
-            thumbnailPosition="bottom"
-            bulletclass="bullet"
-        />
-        <div>
-            {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnMds1" onClick={() => handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '70%', left: '50%' })}>Canal 1. Activo C5-referencia FPZ</button>}
-                {currentImageIndex === 0 && <button className="btnMds2" onClick={() => handleButtonClick('Primera articulación metacarpofalángica.', { top: '12%', left: '24%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnMds3" onClick={() => handleButtonClick('Músculo abductor corto del pulgar (ACP) (eminencia tenar lateral).', { top: '12%', left: '24%' })}></button>}
+    const handleExtraImageClick = (image) => {
+        setExtraImage(image); // Cambiar la imagen extra al hacer clic
+    };
 
+    return (
+        <div class="gallery-wrapper">
             
-            </div>
-            {textBoxVisible && (
-                <div
-                    className={`text-boxMds ${textBoxClass}`}
-                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
-                >
-                    {textBoxContent}
+
+
+            <div  className="gallery-container">
+            <ImageGallery items={images}
+                onSlide={handleSlide}
+                showFullscreenButton={false}
+                showPlayButton={false}
+                showBullets={false}
+                showNav={false}
+                showThumbnails={true}
+                thumbnailPosition="bottom"
+                bulletclass="bullet"
+            />
+
+            <div>
+                {/* Primera Imagen */}
+                    {currentImageIndex === 0 && <button className="btnMds1" onClick={() => handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '74%', left: '50%' })}>Canal 1. Activo C5-referencia FPZ</button>}
+                    {currentImageIndex === 0 && <button className="btnMds2" onClick={() => handleButtonClick('Primera articulación metacarpofalángica.', { top: '74%', left: '50%' })}></button>}
+                    {currentImageIndex === 0 && <button className="btnMds3" onClick={() => handleButtonClick('Músculo abductor corto del pulgar (ACP) (eminencia tenar lateral).', { top: '74%', left: '50%' })}></button>}
+
+                    {currentImageIndex === 0 && <button className="btnIMds1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/MedianoMt-G-01.png")}></button>}
+                    {currentImageIndex === 0 && <button className="btnIMds2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/MedianoMt-T-01.png")}></button>}   
+
+
+                
                 </div>
-            )}
-            {imageBoxVisible && (
-                <div
-                    className="image-boxMds"
-                    style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
-                        position: 'absolute',
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '18vw',
-                            maxHeight: '18vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-image"
-                    />
+                {textBoxVisible && (
+                    <div
+                        className={`text-boxMds ${textBoxClass}`}
+                        style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
+                    >
+                        {textBoxContent}
+                    </div>
+                )}
+                {modalVisible && (
+                <div className="modal-overlay" onClick={closeModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="close-btn" onClick={closeModal}>×</button>
+                        <img src={extraImage} alt="Imagen Extra" className="modal-image"/>
+                    </div>
                 </div>
             )}
         </div>
+        </div>
     );
+    
 };
 
 export default Medianos

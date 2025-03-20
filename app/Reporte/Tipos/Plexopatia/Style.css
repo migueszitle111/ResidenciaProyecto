@@ -801,11 +801,9 @@
 
 /* Detalles referentes a la impresion */
 @media print {
-
   .conclusion-container {
     height: 985px !important;
     overflow: visible !important;
-    
   }
 
   .cuadro-expanded {
@@ -813,10 +811,10 @@
     height: 120px;
     margin-left: -10px;
   }
+
   .circulo-expanded {
     width: 240px;
     height: 120px;
-    
   }
 
   .dropArea {
@@ -827,7 +825,6 @@
     position: absolute;
     overflow: hidden;
     /* border: yellow 2px solid; */
-    
   }
 
   .print {
@@ -843,13 +840,14 @@
     position: relative;
     width: 100%;
     height: 100%;
+    background-color: rgb(255, 255, 255) !important; /* Asegura que el fondo sea blanco durante la impresión */
     /* border: rgb(0, 60, 255) 2px solid; */
   }
 
   .handle {
     position: relative;
   }
-  
+
   .box-container {
     position: absolute;
     top: 0;
@@ -868,23 +866,19 @@
     /* border: yellowgreen 2px solid; */
     resize: none;
     top: 4vh;
-    
   }
 
-  .head{
+  .head {
     display: flex;
     width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap : 10vh;
-
+    gap: 10vh;
   }
-  
+
   .rnd-image {
     left: -725px !important;
     top: -105px !important;
-
   }
-
 }

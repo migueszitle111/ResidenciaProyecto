@@ -1,12 +1,20 @@
 import { ReportContext } from '@/src/context'
 import Image from 'next/image'
-import { useContext } from 'react'
+import { useContext ,useEffect,useRef} from 'react'
 
 // Se recibe el objeto de la imagen y las reglas
-export function ConclusionCanvasV ({ img: {src, alt, useMap, width, height}, rules }) {
+export function ConclusionCanvasV ({ img: {src, alt, useMap, width, height}, rules,footertext='', userImageUrl = ''}) {
   // Utiliza el contexto para obtener las conclusiones
   const { conclusions } = useContext(ReportContext)
-  
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (imgRef.current) {
+      console.log('Imagen offsetWidth:',  imgRef.current.offsetWidth);
+      console.log('Imagen offsetHeight:', imgRef.current.offsetHeight);
+    }
+  }, []);
+
   return (
     <div className='image-container relative'>
       <Image
@@ -16,6 +24,8 @@ export function ConclusionCanvasV ({ img: {src, alt, useMap, width, height}, rul
         useMap={useMap}
         width={width}
         height={height}
+        ref={imgRef}
+
       />
       {
         // Se mapean las reglas para mostrar las imágenes
@@ -51,6 +61,54 @@ export function ConclusionCanvasV ({ img: {src, alt, useMap, width, height}, rul
           return null; // Retorna null si no se cumple la condición
         })
       }
+     { /* Imagen del usuario en la esquina superior derecha */}
+            {userImageUrl && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 5,
+                  right: 5,
+                  width: '50px',
+                  height: '50px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  backgroundColor: 'rgb(255, 255, 255)',
+      
+                  zIndex: 20
+                }}
+              >
+                <Image 
+                  src={userImageUrl}
+                  alt="User Profile"
+                  layout="fill"
+                  objectFit="cover"
+                  backgroundColor='rgb(255, 255, 255)'
+      
+                />
+              </div>
+            )}
+            {/* Se agrega el footer sobre la imagen */}
+            {footertext && (
+              <div
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                display: 'flex',       // O "inline-flex"
+                flexWrap: 'wrap',      // Si quieres que ocupe varias líneas si no cabe
+                gap: '8px',            // Espacio entre cada bloque (opcional)
+                marginBottom: '10px',
+                alignItems: 'center',  // Alinear verticalmente los iconos y texto
+                fontSize: '10px',       // Ajusta según necesites
+                lineHeight: '1.2',     // Para evitar que al escalar salga cortado
+                color: '#9C9C9C',
+                width: '100%',         // O el ancho que te convenga
+                backgroundColor: 'rgb(255, 255, 255)',
+              }}
+              >
+                {footertext}
+              </div>
+            )}
     </div>
   )
 }

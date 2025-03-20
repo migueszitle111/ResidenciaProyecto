@@ -34,34 +34,39 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
     }
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
+  // EJEMPLO COMPLETO
+const handleDrop = (e) => {
+  e.preventDefault();
 
-    // Leer el ID que guardamos en dataTransfer
-    const draggedId = e.dataTransfer.getData('app-id');
-    if (draggedId) {
-      // Colapsar ese ID en el estado global
-      setExpandedDivs(prev => ({
+  // 1) Recuperamos ID como string
+  const draggedId = e.dataTransfer.getData('app-id');
+  // 2) Convertimos a número
+  const numericId = parseInt(draggedId, 10);
+
+  if (!isNaN(numericId)) {
+    // 3) Colapsar sólo el ítem arrastrado
+    setExpandedDivs(prev => ({
+      ...prev,
+      [numericId]: false
+    }));
+  }
+
+  // 3) Leer el HTML del ítem y añadirlo a droppedItems
+  const data = e.dataTransfer.getData('text/html');
+  if (data) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, 'text/html');
+    const element = doc.body.firstChild;
+    if (element) {
+      setDroppedItems((prev) => [
         ...prev,
-        [draggedId]: false
-      }));
+        { id: Date.now(), content: element.outerHTML, x: 0, y: 0 },
+      ]);
     }
+  }
+};
 
-    // Leer la parte text/html (nodo)
-    const data = e.dataTransfer.getData('text/html');
-    if (data) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(data, 'text/html');
-      const element = doc.body.firstChild;
-      if (element) {
-        setDroppedItems([
-          ...droppedItems,
-          { id: Date.now(), content: element.outerHTML, x: 0, y: 0 }
-        ]);
-      }
-    }
-  };
-
+ 
   const handleDragOver = (e) => {
     e.preventDefault();
   };

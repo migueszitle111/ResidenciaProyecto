@@ -230,8 +230,51 @@ const Reporte = () => {
           }}
           
           rules={[
-          
 
+                      
+//Indemne
+{
+  expectedValue: 'indemne',  
+    image: 
+      {
+        src: 'AuditivaIMG/AG.png',
+        alt: 'Modelo',
+      },
+},
+
+          
+//Indemne
+{
+  expectedValue: 'derechoindemne',  
+    image: 
+      {
+        src: 'AuditivaIMG/AD.png',
+        alt: 'Modelo',
+      },
+},
+
+{
+  expectedValue: 'izquierdoindemne',  
+    image: 
+      {
+        src: 'AuditivaImg/AI.png',
+        alt: 'Modelo',
+      },
+},
+
+{
+  expectedValue: 'bilateralindemne', 
+  image: 
+  [{
+    src: 'AuditivaImg/AI.png',
+    alt: 'Modelo',
+  },
+  {
+    src: 'AuditivaIMG/AD.png',
+    alt: 'Modelo',
+  }],
+
+},
             {
               expectedValue: 'derecho',  
                 image: 

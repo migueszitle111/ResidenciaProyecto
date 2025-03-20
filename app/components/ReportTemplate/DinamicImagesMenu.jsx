@@ -46,12 +46,31 @@ const DraggableDiv = ({ children, isDraggable,itemId}) => {
 // ----------------------------------------------------
 // Área donde se suelta una imagen (igual que antes):
 // ----------------------------------------------------
-const DropArea2 = ({ isExpanded }) => {
+const DropArea2 = ({ isExpanded, setExpandedDivs }) => {
   const [imageSrc, setImageSrc] = useState(null);
 
   const handleDrop = (e) => {
     e.preventDefault();
+
+    // 1) Ver si viene un "app-id" arrastrado:
+    const draggedId = e.dataTransfer.getData('app-id'); 
+    if (draggedId) {
+      // Conviértelo a número y colapsa el div:
+      const numericId = parseInt(draggedId, 10);
+      if (!isNaN(numericId)) {
+        setExpandedDivs(prev => ({
+          ...prev,
+          [numericId]: false
+        }));
+      }
+    }
+
+    // 2) También admitir archivos de imagen (como ya tenías):
     handleFileSelect(e.dataTransfer.files);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
   };
 
   const handleFileSelect = (files) => {
@@ -67,11 +86,6 @@ const DropArea2 = ({ isExpanded }) => {
       }
     }
   };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
   const handleInputChange = (e) => {
     handleFileSelect(e.target.files);
   };
@@ -415,7 +429,8 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs, topLeftText, setTopLeftTe
                   ${isExpanded ? item.subContainerClassExpanded : ''}
                 `}
               >
-                <DropArea2 isExpanded={isExpanded} />
+                <DropArea2 isExpanded={isExpanded}
+                setExpandedDivs={setExpandedDivs} />
               </div>
             )}
           </div>

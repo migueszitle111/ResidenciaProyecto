@@ -16,7 +16,7 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
   }, []);
   
   return (
-    <div className='image-container relative'>
+    <div className='image-container relative' style={{ backgroundColor: 'rgb(255, 255, 255)' }} >
       <Image
         className='image-container__image'
         src={src}
@@ -25,7 +25,6 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
         width={width}
         height={height}
         ref={imgRef}
-
       />
       {
         // Se mapean las reglas para mostrar las imágenes
@@ -45,6 +44,9 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
                   alt={img.alt}
                   layout='fill'
                   className='absolute'
+                  backgroundColor='rgb(255, 255, 255)'
+
+                  
                 />
               ))
             ) : (
@@ -55,6 +57,8 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
                 alt={image.alt}
                 layout='fill'
                 className='absolute'
+                backgroundColor='rgb(255, 255, 255)'
+
               />
             );
           }
@@ -72,6 +76,8 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
             height: '50px',
             borderRadius: '50%',
             overflow: 'hidden',
+            backgroundColor: 'rgb(255, 255, 255)',
+
             zIndex: 20
           }}
         >
@@ -80,6 +86,8 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
             alt="User Profile"
             layout="fill"
             objectFit="cover"
+            backgroundColor='rgb(255, 255, 255)'
+
           />
         </div>
       )}
@@ -99,6 +107,7 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
           lineHeight: '1.2',     // Para evitar que al escalar salga cortado
           color: '#9C9C9C',
           width: '100%',         // O el ancho que te convenga
+          backgroundColor: 'rgb(255, 255, 255)',
         }}
         >
           {footertext}

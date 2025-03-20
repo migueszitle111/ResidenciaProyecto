@@ -51,7 +51,7 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'D1' && <StepD1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'D2' && <StepD2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
       {step === 'E' && <StepE handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>}
-      {step === 'E2' && <StepE2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>}
+      {step === 'E2' && <StepE2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}setSelectedSide={setSelectedSide} />}
       {step === 'F' && <StepF handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} />}
       {step === 'F2' && <StepF2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}  />}
       {step === 'G' && <StepG handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
@@ -77,7 +77,7 @@ const StepA = ({ handleNextStep ,setStep}) => (
     <div onClick={handleNextStep}> 
     </div>
     <div onClick={() => setStep('E2')}>
-      <ConclusionButton value="indenme" title="VÍA AUDITIVA CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
+      <ConclusionButton value="indemne" title="VÍA AUDITIVA CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
     <div onClick={() => setStep('B')}>
       <ConclusionButton value="alterada" title="VÍA AUDITIVA CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
     </div>
@@ -272,7 +272,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
 };
 
 
-const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => {
+const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
@@ -291,37 +291,40 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) => {
       </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
-    <div  onClick={() => {
-          setStep('J2');
-        }}>
-      <ConclusionButton
-        value="izquierdo"
-        title="PARA LADO IZQUIERDO, A TRAVES DEL TALLO CEREBERAL."
-        displayText="IZQUIERDO"
-
-      />
-    </div>
-    <div  onClick={() => {
-          setStep('J2');
-        }}>
-      <ConclusionButton
-        value="derecho"
-        title="PARA LADO DERECHO, A TRAVES DEL TALLO CEREBERAL. "
-        displayText="DERECHO"
-
-      />
-    </div>
-    <div onClick={() => {
-          setStep('J2');
-        }}>
-      <ConclusionButton
-        value="bilateral"
-        title="BILATERAL, A TRAVES DEL TALLO CEREBERAL."
-        displayText="BILATERAL "
-        
-      />
-    </div>
-  </div>
+        <div  onClick={() => {
+              setSelectedSide('izquierdo');
+              setStep('J2');
+            }}>
+          <ConclusionButton
+            value="izquierdoindemne"
+            title="PARA LADO IZQUIERDO A TRAVES DEL TALLO CEREBRAL."
+            displayText="IZQUIERDO"
+          
+          />
+        </div>
+        <div  onClick={() => {
+              setSelectedSide('derecho');
+              setStep('J2');
+            }}>
+          <ConclusionButton
+            value="derechoindemne"
+            title="PARA LADO DERECHO A TRAVES DEL TALLO CEREBRAL."
+            displayText="DERECHO"
+          
+          />
+        </div>
+        <div onClick={() => {
+              setSelectedSide('bilateral');
+              setStep('J2');
+            }}>
+          <ConclusionButton
+            value="bilateralindemne"
+            title="BILATERAL A TRAVES DEL TALLO CEREBRAL."
+            displayText="BILATERAL "
+            
+          />
+        </div>
+      </div>
 );
 };
 
@@ -349,7 +352,7 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
       <div onClick={() => setStep('G')}>
         <ConclusionButton value='rostral' title=' A TRAVÉS DE REGION ROSTRAL (III-V) DEL TALLO CEREBRAL ' displayText='ROSTRAL' />
         <ConclusionButton value='caudal' title=' A TRAVÉS DE REGION CAUDAL (I-III) DEL TALLO CEREBERAL' displayText='CAUDAL' />
-        <ConclusionButton value='tallo_cerebral' title=' A TRAVES DEL TALLO CEREBERAL (I-V)' displayText='TALLO CEREBRAL' />
+        <ConclusionButton value='tallo_cerebral' title=' A TRAVES DEL TALLO CEREBERAL (I-V)' displayText='TOTAL' />
       </div>
     </div>
   );
@@ -368,27 +371,27 @@ const StepG = ({
   // Nota que "value" incluye "selectedSide".
   const levels = [
     {
-      title: 'TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO',
+      title: '; TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO.',
       value: `${selectedSide}nervio_auditivo`,
       displayText: 'NERVIO AUDITIVO (I)'
     },
     {
-      title: 'TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR',
+      title: '; TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR.',
       value: `${selectedSide}nucleo_coclear`,
       displayText: 'NUCLEO COCLEAR (II)'
     },
     {
-      title: 'TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE..',
+      title: '; TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE.',
       value: `${selectedSide}completo_olivar_trapezoide`,
       displayText: 'COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)'
     },
     {
-      title: 'TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.',
+      title: '; TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.',
       value: `${selectedSide}lemnisco_lateral`,
       displayText: 'LEMNISCO LATERAL (IV)'
     },
     {
-      title: 'TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.',
+      title: '; TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.',
       value: `${selectedSide}coliculo_inferior`,
       displayText: 'COLÍCULO INFERIOR (V)'
     },
@@ -397,6 +400,7 @@ const StepG = ({
   // Cuando clican cualquiera de los 5, seleccionamos
   // a partir de ÉL hasta el final (incluyéndolo).
  const handleConclusionClick = (title, value) => {
+  setStep('H')
   const index = levels.findIndex(item => item.value === value);
   if (index === -1) {
     updateConclusions({ title, value });
@@ -456,7 +460,7 @@ const StepG = ({
       {/* Botón 3 (normal) */}
       <ConclusionButton
         value={`${selectedSide}completo_olivar_trapezoide`}
-        title="TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE."
+        title="; TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE."
         displayText="COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)"
         onClick={handleConclusionClick}
       />
@@ -464,7 +468,7 @@ const StepG = ({
       {/* Botón 4 (normal) */}
       <ConclusionButton
         value={`${selectedSide}lemnisco_lateral`}
-        title="TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL."
+        title="; TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL."
         displayText="LEMNISCO LATERAL (IV)"
         onClick={handleConclusionClick}
       />
@@ -472,7 +476,7 @@ const StepG = ({
       {/* Botón 5 (normal) */}
       <ConclusionButton
         value={`${selectedSide}coliculo_inferior`}
-        title="TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR."
+        title="; TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR."
         displayText="COLÍCULO INFERIOR (V)"
         onClick={handleConclusionClick}
       />
@@ -505,11 +509,11 @@ const StepH = ({ setStep, selectedImages, handleUndo, handleImageChange, handleP
       </div>
       <h1 className='text-xl font-bold text-white'>UMBRAL AUDITIVO: </h1>
       <div onClick={() => setStep('I')}>
-      <ConclusionButton value='normoacusia' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON NORMOACUSIA' displayText='NORMOACUSIA '/> 
-      <ConclusionButton value='hipoacusia_leve' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA LEVE' displayText='HIPOACUSIA LEVE'/> 
-      <ConclusionButton value='hipoacusia_moderada' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA MODERADA' displayText='HIPOACUSIA MODERADA'/> 
-      <ConclusionButton value='hipoacusia_severa' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA SEVERA' displayText='HIPOACUSIA SEVERA'/> 
-      <ConclusionButton value='hipocusia_profunda' title=' UMBRAL AUDITIVO PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA PROFUNDA' displayText='HIPOACUSIA PROFUNDA'/> 
+      <ConclusionButton value='normoacusia' title='  UMBRAL PARA TONOS ALTOS COMPATIBLE CON NORMOACUSIA' displayText='NORMOACUSIA '/> 
+      <ConclusionButton value='hipoacusia_leve' title=' UMBRAL PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA LEVE' displayText='HIPOACUSIA LEVE'/> 
+      <ConclusionButton value='hipoacusia_moderada' title=' UMBRAL PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA MODERADA' displayText='HIPOACUSIA MODERADA'/> 
+      <ConclusionButton value='hipoacusia_severa' title=' UMBRAL PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA SEVERA' displayText='HIPOACUSIA SEVERA'/> 
+      <ConclusionButton value='hipocusia_profunda' title=' UMBRAL PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA PROFUNDA' displayText='HIPOACUSIA PROFUNDA'/> 
       </div>
     </div>
   );

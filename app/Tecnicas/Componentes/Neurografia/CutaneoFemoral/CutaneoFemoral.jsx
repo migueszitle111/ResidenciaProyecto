@@ -67,17 +67,17 @@ const CutaneoFemoral = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnCf1" onClick={() => handleButtonClick('Inguinal. 4 cm distal de ligamento inguinal, lateral a la arteria femoral con presión firme.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnCf2" onClick={() => handleButtonClick('Región medial del muslo.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnCf3" onClick={() => handleButtonClick('Trazar una línea imaginaria desde el ligamento inguinal, lateral a la arteria femoral hasta el borde medial de la rótula y colocar el electrodo de superficie en la intersección de 14 cm distal de la ingle.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnCf4" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCf1" onClick={() => handleButtonClick('INGUINAL. 4 cm debajo del ligamento inguinal, lateral a la arteria femoral con presión firme', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCf2" onClick={() => handleButtonClick('Región medial del muslo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCf3" onClick={() => handleButtonClick('RAMA MEDIAL - Trazar una línea imaginaria desde el ligamento inguinal, lateral a la arteria femoral hasta el borde medial de la rótula y colocar el electrodo de superficie en la intersección de 14 cm distal de la ingle', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCf4" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/CutaneoFm-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/CutaneoFm-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
-            {currentImageIndex === 1 && <button className="btnCf5" onClick={() => handleButtonClick('Muslo lateral.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnCf6" onClick={() => handleButtonClick('Pierna: De forma antidrómica a 12 cm proximal del electrodo de registro, siguiendo una línea imaginaria con dirección a la tuberosidad isquiática.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnCf7" onClick={() => handleButtonClick('Línea media del muslo posterior, 6 cm proximal al pliegue del hueco poplíteo.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnCf8" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCf5" onClick={() => handleButtonClick('Muslo lateral', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCf6" onClick={() => handleButtonClick('MUSLO POSTERIOR. De forma antidrómica a 12 cm proximal del electrodo de registro, siguiendo una línea imaginaria con dirección a la tuberosidad isquiática', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCf7" onClick={() => handleButtonClick('RAMA POSTERIOR - Línea media del muslo posterior, 6 cm proximal del pliegue del hueco poplíteo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCf8" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/CutaneoFm-G-02.png",{ top: '2%', left: '2%' })}></button>}
             
             </div>

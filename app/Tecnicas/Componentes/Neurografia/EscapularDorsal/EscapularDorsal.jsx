@@ -64,10 +64,10 @@ const EscapularDorsal = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnEd1" onClick={() => handleButtonClick('No se requiere. En caso de modificar la técnica (no recomendable) con aguja monopolar, colocar su referencia con electrodos de superfice en el vértice de la escapula.', {  top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnEd2" onClick={() => handleButtonClick('Musculo Romboides mayor, con electrodo de aguja concéntrico, insertar en el borde medial del ángulo inferior de la escápula.', { top: '12%', left: '32%'})}></button>}
-            {currentImageIndex === 0 && <button className="btnEd3" onClick={() => handleButtonClick('Articulación acromoclavicular.', {  top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnEd4" onClick={() => handleButtonClick('1. ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', { top: '12%', left: '32%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnEd1" onClick={() => handleButtonClick('No se requiere. En caso de modificar la técnica (no recomendable) con aguja monopolar, colocar su referencia con electrodos de superfice en el vértice de la escapula', {  top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnEd2" onClick={() => handleButtonClick('RHOMBOIDEUS MAJOR C5 - Electrodo de aguja concéntrico, insertar en el borde medial del ángulo inferior de la escápula', { top: '12%', left: '32%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnEd3" onClick={() => handleButtonClick('Articulación acromoclavicular', {  top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnEd4" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio', { top: '12%', left: '32%'})}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/escapularDorsal-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/escapularDorsal-T-01.png",{ top: '2%', left: '2%' })}></button>}
 

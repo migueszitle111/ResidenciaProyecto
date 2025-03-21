@@ -64,12 +64,12 @@ const PeroneoSuperficial = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnPs1" onClick={() => handleButtonClick('Dorso del pie.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs2" onClick={() => handleButtonClick('3-4 cm del electrodo de registo, discretamente distal a articulación interfalángica distal.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs3" onClick={() => handleButtonClick('Colocado en la línea media entre el maléolo lateral y el tendón del tibial anterior, trasversal a la intersección de ambos maléolos; 2 cm distal a este punto recoge el registro en la rama cutánea dorsal medial, a 1 cm lateral para la rama cutáneo dorsal intermedia.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs4" onClick={() => handleButtonClick('3-4 cm del electrodo de registo, discretamente distal a articulación interfalángica distal.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs5" onClick={() => handleButtonClick('Colocado en la línea media entre el maléolo lateral y el tendón del tibial anterior, trasversal a la intersección de ambos maléolos; 2 cm distal a este punto recoge el registro en la rama cutánea dorsal medial, a 1 cm lateral para la rama cutáneo dorsal intermedia.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs6" onClick={() => handleButtonClick('1.	Pierna lateral: de forma antidrómica a 12-14 cm proximal del electrodo activo, anterior al musculo peroneo largo y adyacente al musculo tibial anterior.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPs1" onClick={() => handleButtonClick('Dorso del pie', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPs2" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPs3" onClick={() => handleButtonClick('2 cm distal: registro de la rama cutánea dorsal medial y 1 cm lateral rama cutánea dorsal intermedia ', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPs4" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPs5" onClick={() => handleButtonClick('INTERMALEOLAR - Electrodo de superficie, colocar preferetemente barra en la línea media, entre el maléolo lateral y el tendón del tibial anterior, transversal a la intersección de ambos maléolos', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPs6" onClick={() => handleButtonClick('PIERNA LATERAL. (Antidrómico) 12-14 cm proximal del electrodo activo, anterior al musculo peroneo largo y adyacente al musculo tibial anterior', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/PeroneoSp-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/PeroneoSp-T-01.png",{ top: '5%', left: '2%' })}></button>}
             

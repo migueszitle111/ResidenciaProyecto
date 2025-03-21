@@ -68,18 +68,18 @@ const Ciatico = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnCt1" onClick={() => handleButtonClick('1', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnCt2" onClick={() => handleButtonClick('2', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnCt3" onClick={() => handleButtonClick('3', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnCt4" onClick={() => handleButtonClick('4', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnCt5" onClick={() => handleButtonClick('5', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCt1" onClick={() => handleButtonClick('SACRO. Se inserta la aguja de estimulación monopolar alrededor de 1 cm medial y ligeramente caudal a la espina ilíaca postero superior, el ánodo será un electrodo de superficie colocado sobre la apófisis espinosa. Con este registro se puede determinar la conducción a través del plexo sacro, posterior a la evaluación del nervio Ciático y restando el cálculo de su latencia', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCt2" onClick={() => handleButtonClick('GLÚTEO. Se inserta una aguja monopolar (cátodo) de 0.75 mm en el pliegue glúteo a media distancia de la intersección entre la tuberosidad isquiática y el trocánter mayor, u horizontalmente con referencia a una línea trazada desde el vértice del hueco poplíteo. Electrodo de superficie cercano a aguja de estimulación como ánodo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCt3" onClick={() => handleButtonClick('Entre registro y estimulación', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCt4" onClick={() => handleButtonClick('HUECO POPL+ITEO. Con estimulador convencional de puntas, se realiza la estimulación respectiva de nervio Peroneo siguiendo el trayecto a nivel lateral', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnCt5" onClick={() => handleButtonClick('HUECO POPLÍTEO. Con estimulador convencional de puntas, se realiza la estimulación respectiva de nervio Tibial siguiendo el trayecto  a nivel medial', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/Ciatico-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/Ciatico-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
-            {currentImageIndex === 1 && <button className="btnCt6" onClick={() => handleButtonClick('6', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnCt7" onClick={() => handleButtonClick('7', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnCt8" onClick={() => handleButtonClick('8', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnCt9" onClick={() => handleButtonClick('9', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCt6" onClick={() => handleButtonClick('Articulación metatarsofalángica del quinto ortejo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCt7" onClick={() => handleButtonClick('EXTENSOR DIGITORUM BREVIS L5, S1 - Región anterolateral mediotarsiana proximal, trazar una línea imaginaria desde el centro del maléolo lateral hasta la articulación metatarsofalángica del quinto ortejo y colocar electrodo de superficie en el centro del tercio proximal', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCt8" onClick={() => handleButtonClick('ABDUCTOR HALLUCIS S1, S2 - Colocar electrodo de superficie ligeramente proximal y por debajo de la tuberosidad navicular, aproximadamente 1 cm en ambas direcciones', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnCt9" onClick={() => handleButtonClick('Base del primer metatarsiano, o en la articulación metatarsofalángica', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/Ciatico-G-02.png",{ top: '2%', left: '2%' })}></button>}
             
             </div>

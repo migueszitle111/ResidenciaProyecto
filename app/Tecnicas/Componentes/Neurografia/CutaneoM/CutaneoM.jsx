@@ -66,10 +66,10 @@ const CutaneoM = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnCM1" onClick={() => handleButtonClick('Codo: Punto medio trazado entre el borde medial del tendón del bíceps braquial y epicóndilo medial, 1-2 cm proximal del pliegue del codo o fosa cubital.', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnCM2" onClick={() => handleButtonClick('Antebrazo lateral.', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnCM3" onClick={() => handleButtonClick('A 12-14 cm en dirección distal del punto de estimulación sobre línea trazada hasta el pisiforme en la muñeca justo medial del tendón cubital anterior. ', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnCM4" onClick={() => handleButtonClick('3-4 cm distal a electrodo activo (utilizar barra)', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnCM1" onClick={() => handleButtonClick('CODO. Punto medio trazado entre el borde medial del tendón del bíceps braquial y epicóndilo medial, 1-2 cm proximal del pliegue del codo', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnCM2" onClick={() => handleButtonClick('Antebrazo lateral', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnCM3" onClick={() => handleButtonClick('ANTEBRAZO MEDIAL - 12 a 14 cm con dirección distal del punto de estimulación sobre línea trazada hasta el pisiforme en la muñeca, justo medial del tendón cubital anterior', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnCM4" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/CutaneoMd-G-01.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/CutaneoMd-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 

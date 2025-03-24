@@ -1,18 +1,20 @@
-import { useState,useContext } from 'react';
+import { useState,useContext} from 'react';
 import {Accordion,AccordionContainer,InternalAccordionContainer } from '../../../components/ReportTemplate/Accordion';
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
-import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
+import { useSession } from "next-auth/react";
 import { useImageState } from '../../MetodosBotones';
-import { ReportContext } from '@/src/context'
+import { ReportContext,DropContext } from '@/src/context'
+import  MenuImagenes  from '../../../components/ReportTemplate/DinamicImagesMenu';
+
 import './Style.css';
 import { Inter } from 'next/font/google';
 const stepsArray = ['A', 'B1', 'B2'];
 // Componente principal
-const SimpleMultiStepForm = ({ showStepNumber }) => {
+const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, droppedItems,topLeftText,setTopLeftText,copyConclusions,expandedDivs,setExpandedDivs }) => {
   const [step, setStep] = useState('A'); // Inicia en A (nuevo)
   const [selectedSide, setSelectedSide] = useState('');
   // Métodos del último paso (StepH)
-  const {selectedImages, history, handleImageChange, handleUndo, handlePrint } = useImageState();
+  const {selectedImages, history, handleUndo, handlePrint } = useImageState();
 
   // Botón "Siguiente"
   const handleNextStep = () => {
@@ -47,10 +49,10 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'G1' && (<StepG1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
       {step === 'G2' && (<StepG2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
       {step === 'G3' && (<StepG3 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
-      {step === 'H1' && (<StepH1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
-      {step === 'H2' && (<StepH2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
-      {step === 'H3' && (<StepH3 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
-      {step === 'H4' && (<StepH4 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
+      {step === 'H1' && (<StepH1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}/>)}
+      {step === 'H2' && (<StepH2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}/>)}
+      {step === 'H3' && (<StepH3 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}/>)}
+      {step === 'H4' && (<StepH4 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
       {/*Inferiores */}
       {step === 'B2' && (<StepB2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
       {step === 'C1_i' && (<StepC1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
@@ -66,13 +68,13 @@ const SimpleMultiStepForm = ({ showStepNumber }) => {
       {step === 'G1_i' && (<StepG1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
       {step === 'G2_i' && (<StepG2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
       {step === 'G3_i' && (<StepG3_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
-      {step === 'H1_i' && (<StepH1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
-      {step === 'H2_i' && (<StepH2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
-      {step === 'H3_i' && (<StepH3_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
-      {step === 'H4_i' && (<StepH4_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
+      {step === 'H1_i' && (<StepH1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
+      {step === 'H2_i' && (<StepH2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}/>)}
+      {step === 'H3_i' && (<StepH3_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}/>)}
+      {step === 'H4_i' && (<StepH4_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
       {/*trigemino*/}
       {step === 'AT' && ( <StepAT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
-      {step === 'BT' && ( <StepBT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} />)}
+      {step === 'BT' && ( <StepBT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
 
 
 
@@ -765,8 +767,59 @@ const StepG3 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
   );
 };
 
-const StepH1 = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+    const { conclusions } = useContext(ReportContext)
+    const { droppedItems } = useContext(DropContext);
   
+    const handleExportPdf = async () => {
+      try {
+         // 1) conclusiones (array con {value, title})
+      const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+      const conclusionFormateada = formatConclusions(copyConclusions);
+  
+      const conclusiones = conclusions;
+  
+  
+        const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            finalConclusion: conclusionFinal, // Envías la cadena final
+            conclusiones, // <--- envías el array de conclusiones
+            userData: {
+              name: session?.user?.name,
+              lastname: session?.user?.lastname,
+              email: session?.user?.email,
+              cedula: session?.user?.cedula,
+              especialidad: session?.user?.especialidad,
+              imageUrl: session?.user?.imageUrl,
+            },
+            droppedItems, // <--- envía también el array de items arrastrados
+            topLeftText, 
+  
+          }),
+        });
+    
+        if (!response.ok) {
+          throw new Error("Error al generar PDF");
+        }
+    
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'reporte-completo.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+    
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al generar PDF: ' + error.message);
+      }
+    };
   return (
     <div>
       <div className='button-bar'>
@@ -774,18 +827,77 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-      
-        <button onClick={handlePrint} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
         </div>
   );
 };
-const StepH2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint }) => {
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+  const { conclusions } = useContext(ReportContext)
+  const { droppedItems } = useContext(DropContext);
+
+  const handleExportPdf = async () => {
+    try {
+       // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    const conclusionFormateada = formatConclusions(copyConclusions);
+
+    const conclusiones = conclusions;
+
+
+      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
+    }
+  };
   return (
     <div>
       <div className='button-bar'>
@@ -793,36 +905,157 @@ const StepH2 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
-        </button>
       
-        <button onClick={handlePrint} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
+
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        </button>
+
       </div>
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
         </div>
   );
 };
-const StepH3 = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+const StepH3 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+  const { conclusions } = useContext(ReportContext)
+  const { droppedItems } = useContext(DropContext);
+
+  const handleExportPdf = async () => {
+    try {
+       // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    const conclusionFormateada = formatConclusions(copyConclusions);
+    const conclusiones = conclusions;
+      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
+    }
+  };
   return (
     <div>
       <div className='button-bar'>
         <button onClick={() => setStep('G3')} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
-        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+       
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-        <button onClick={handlePrint} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        </button>
+
       </div>
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
         </div>
   );
 };
-const StepH4 = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
+  
   const { removeConclusion } = useContext(ReportContext)
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+  const { conclusions } = useContext(ReportContext)
+  const { droppedItems } = useContext(DropContext);
+
+  const handleExportPdf = async () => {
+    try {
+       // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    const conclusionFormateada = formatConclusions(copyConclusions);
+
+    const conclusiones = conclusions;
+
+
+      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
+    }
+  };
   return (
     <div>
       <div className='button-bar'>
@@ -833,13 +1066,23 @@ const StepH4 = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
           setStep('F4')} }className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
-        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+       
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-        <button onClick={handlePrint} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        </button>
+
       </div>
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
         </div>
   );
 };
@@ -1207,7 +1450,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) =>
   </div>
 );}
 
-const StepG1_i = ({setStep,selectedSide,// otras props que necesites (por ejemplo selectedImages, handleUndo, handleImageChange, etc.)
+const StepG1_i = ({setStep,selectedSide,// otras props que necesites (por ejemplo selectedImages, handleUndo, etc.)
 }) => {
   const { removeConclusion } = useContext(ReportContext)
   // Usamos el contexto para actualizar conclusiones
@@ -1300,7 +1543,7 @@ const StepG1_i = ({setStep,selectedSide,// otras props que necesites (por ejempl
 const StepG2_i = ({
   setStep,
   selectedSide,
-  // otras props que necesites (por ejemplo selectedImages, handleUndo, handleImageChange, etc.)
+  // otras props que necesites (por ejemplo selectedImages, handleUndo, , etc.)
 }) => {
   const { removeConclusion } = useContext(ReportContext)
 
@@ -1394,7 +1637,7 @@ const StepG2_i = ({
 const StepG3_i = ({
   setStep,
   selectedSide,
-  // otras props que necesites (por ejemplo selectedImages, handleUndo, handleImageChange, etc.)
+  // otras props que necesites (por ejemplo selectedImages, handleUndo, , etc.)
 }) => {
   const { removeConclusion } = useContext(ReportContext)
   // Usamos el contexto para actualizar conclusiones
@@ -1484,7 +1727,56 @@ const StepG3_i = ({
   );
 };
 
-const StepH1_i = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+const StepH1_i = ({ setStep, selectedImages, handleUndo,handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+  const { conclusions } = useContext(ReportContext)
+  const { droppedItems } = useContext(DropContext);
+
+  const handleExportPdf = async () => {
+    try {
+       // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    const conclusionFormateada = formatConclusions(copyConclusions);
+    const conclusiones = conclusions;
+      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
+    }
+  };
   return (
     <div>
       <div className='button-bar'>
@@ -1492,18 +1784,76 @@ const StepH1_i = ({ setStep, selectedImages, handleUndo, handleImageChange, hand
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
-        </button>
       
-        <button onClick={handlePrint} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
+
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        </button>
+
       </div>
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
         </div>
   );
 };
-const StepH2_i = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+const StepH2_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+  const { conclusions } = useContext(ReportContext)
+  const { droppedItems } = useContext(DropContext);
+
+  const handleExportPdf = async () => {
+    try {
+       // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    const conclusionFormateada = formatConclusions(copyConclusions);
+    const conclusiones = conclusions;
+      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
+    }
+  };
   return (
     <div>
       <div className='button-bar'>
@@ -1511,18 +1861,76 @@ const StepH2_i = ({ setStep, selectedImages, handleUndo, handleImageChange, hand
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+       
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-      
-        <button onClick={handlePrint} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        </button>
+
       </div>
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
         </div>
   );
 };
-const StepH3_i = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+const StepH3_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+  const { conclusions } = useContext(ReportContext)
+  const { droppedItems } = useContext(DropContext);
+
+  const handleExportPdf = async () => {
+    try {
+       // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    const conclusionFormateada = formatConclusions(copyConclusions);
+    const conclusiones = conclusions;
+      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
+    }
+  };
   return (
     <div>
       <div className='button-bar'>
@@ -1530,20 +1938,77 @@ const StepH3_i = ({ setStep, selectedImages, handleUndo, handleImageChange, hand
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+        
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-      
-        <button onClick={handlePrint} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        </button>
+
       </div>
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
         </div>
   );
 };
-const StepH4_i = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+const StepH4_i = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
   const { removeConclusion } = useContext(ReportContext)
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+  const { conclusions } = useContext(ReportContext)
+  const { droppedItems } = useContext(DropContext);
 
+  const handleExportPdf = async () => {
+    try {
+       // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    const conclusionFormateada = formatConclusions(copyConclusions);
+    const conclusiones = conclusions;
+      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
+    }
+  };
   return (
     <div>
       <div className='button-bar'>
@@ -1555,14 +2020,23 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo, handleImageChange, hand
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+     
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-      
-        <button onClick={handlePrint} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
+
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        </button>
+
       </div>
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
         </div>
   );
 };
@@ -1620,8 +2094,57 @@ const StepAT = ({ handlePrevStep, handleNextStep, setStep}) => {
 );
 }
 
-const StepBT = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
+const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
   const { removeConclusion } = useContext(ReportContext)
+  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+  const { conclusions } = useContext(ReportContext)
+  const { droppedItems } = useContext(DropContext);
+
+  const handleExportPdf = async () => {
+    try {
+       // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    const conclusionFormateada = formatConclusions(copyConclusions);
+    const conclusiones = conclusions;
+      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
+    }
+  };
   return (
     <div>
       <div className='button-bar'>
@@ -1655,14 +2178,23 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handleImageChange, handle
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => window.location.reload()} className={`print-button dont-print`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
-        </button>
       
-        <button onClick={handlePrint} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
+
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        </button>
+
       </div>
+      <MenuImagenes  expandedDivs={expandedDivs}
+        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
+        setTopLeftText={setTopLeftText}   />
         </div>
   );
 };

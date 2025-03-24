@@ -1,16 +1,54 @@
-import { ReportContext } from '@/src/context';
+import { ReportContext ,DropContext} from '@/src/context';
 import { useSession } from "next-auth/react";
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import { ConclusionCanvasV } from '../../../components/ReportTemplate/Conclusions/CanvasViasVisual';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
 
-const DropArea = () => {
-  const [droppedItems, setDroppedItems] = useState([]);
+const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
+  const { droppedItems, setDroppedItems } = useContext(DropContext);
+  const dropAreaRef = useRef(null);
+
+  useEffect(() => {
+    if (dropAreaRef.current) {
+      const rect = dropAreaRef.current.getBoundingClientRect();
+      console.log('DropArea dimensions:', rect.width, rect.height);
+    }
+  }, []);
+
+  const handleDragStop = (e, d, item) => {
+    const dropAreaRect = dropAreaRef.current.getBoundingClientRect();
+    const itemRect = e.target.getBoundingClientRect();
+    const itemCenterX = itemRect.left + itemRect.width / 2;
+    const itemCenterY = itemRect.top + itemRect.height / 2;
+
+    if (
+      itemCenterX < dropAreaRect.left ||
+      itemCenterX > dropAreaRect.right ||
+      itemCenterY < dropAreaRect.top ||
+      itemCenterY > dropAreaRect.bottom
+    ) {
+      setDroppedItems((prev) => prev.filter((i) => i.id !== item.id));
+    } else {
+      updatePosition(item.id, d.x, d.y);
+    }
+  };
 
   const handleDrop = (e) => {
     e.preventDefault();
+
+    // Leer el ID que guardamos en dataTransfer
+    const draggedId = e.dataTransfer.getData('app-id');
+    if (draggedId) {
+      // Colapsar ese ID en el estado global
+      setExpandedDivs(prev => ({
+        ...prev,
+        [draggedId]: false
+      }));
+    }
+
+    // Leer la parte text/html (nodo)
     const data = e.dataTransfer.getData('text/html');
     if (data) {
       const parser = new DOMParser();
@@ -37,16 +75,22 @@ const DropArea = () => {
     );
   };
 
+  const removeItem = (id) => {
+    setDroppedItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
     <div
       className="dropArea"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
-      style={{
-        //border: '2px dashed #ccc',
-        position: 'relative'
-      }}
+      ref={dropAreaRef}
     >
+      {topLeftText && (
+        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'10px' }}>
+          {topLeftText}
+        </p>
+      )}
       {droppedItems.length === 0 ? (
         <p></p>
       ) : (
@@ -59,10 +103,18 @@ const DropArea = () => {
               width: 200,
               height: 200
             }}
-            onDragStop={(e, d) => updatePosition(item.id, d.x, d.y)}
+            onDragStop={(e, d) => handleDragStop(e, d, item)}
             style={{ position: 'absolute' }}
           >
-            <div dangerouslySetInnerHTML={{ __html: item.content }} />
+            <div className="item-container" style={{ width: '100%', height: '100%' }}>
+              <button
+                className="delete-button"
+                onClick={() => removeItem(item.id)}
+              >
+                X
+              </button>
+              <div dangerouslySetInnerHTML={{ __html: item.content }} />
+            </div>
           </Rnd>
         ))
       )}
@@ -70,15 +122,28 @@ const DropArea = () => {
   );
 };
 
-
 const Reporte = () => {
-  
-  // Carga datos de usuario
-  const { data: session, status } = useSession();
-  const { name, lastname, cedula, especialidad } = session?.user || {};  const { conclusions } = useContext(ReportContext)
-  const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
-  const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
-  const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
+ // Carga datos de usuario
+ const { data: session, status } = useSession();
+ const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)
+ const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
+ const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
+ const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
+ // Estados para el historial de imagenes
+
+  // Aquí manejamos la expansión/colapso de símbolos en MenuImagenes
+ const [expandedDivs, setExpandedDivs] = useState({});
+ const { droppedItems } = useContext(DropContext);
+ const [topLeftText, setTopLeftText] = useState('');
+ const imgRef = useRef(null);
+
+
+ useEffect(() => {
+  if (imgRef.current) {
+    console.log('Imagen offsetWidth:',  imgRef.current.offsetWidth);
+    console.log('Imagen offsetHeight:', imgRef.current.offsetHeight);
+  }
+}, []);
 
   // Imagen por defecto
   const defaultImage1 = '/assets/MioImg/MO_BASE_BLANCO_MOTORES.png';
@@ -258,92 +323,97 @@ const Reporte = () => {
       });
     }, []);
 
-
-  // Codigo para imprimir en click
-  useEffect(() => {
-    const printButton = document.getElementById('print');
-    const handlePrint = () => {
-      window.print();
-    };
-
-    printButton.addEventListener('click', handlePrint);
-
-    return () => {
-      printButton.removeEventListener('click', handlePrint);
-    };
-  }, []); 
-
-
+  const conclusionDivRef = useRef(null);
+  const elementRef = useRef(null);
+  
   return (
     <div >
-      {/* Wrapper que encapsula la image, conclusión y lista de botones */}
-      <div className="wrapper">
-        {/* Componente de la caja de conclusión junto con la caja de notas */}
-          {/* Se especifica dont-print para no ser incluidos en la vista de impresión */}
-          <div className='vertical-orientation dont-print'>
-          {/* Lista de botones */}
-          <div className='button-bar'>
-          <button 
-            id='unhide' 
-            className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`} 
-            onClick={() => {
-              setPageVisibility(true);
-              setSelectedImages([]);
-            }}
-          >
-          <img src="/I_Out.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
-          </button>
-          <button id='print' className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
-          </button>
-          
-          <button onClick={handleUndo} className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
-          </button>
-          <label htmlFor="file-upload" className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
-          <img src="/I_Folder.svg" alt="Subir" style={{filter: 'invert(1)'}} />
-          </label>
-          <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} style={{display: 'none'}}/>          
-          </div>
-
-          <div className={'vertical-container dont-print'}>
-          <div className={`dont-print ${isPageVisible ? 'visible' : 'hidden'}`}>
-          
-            {/*
-          <ConclusionBox />
-            */}
-          </div>
-
-{/* Menu de opciones */}
-
-          <div className={`mx-4 dont-print ${isPageVisible ? '' : 'hidden'}`}>
-            <SimpleMultiStepForm showStepNumber={true}/>
-          </div>
-        
-          </div>
+    {/* Clase que encapzula la información y el titulo de la pagina */}
+    <div className='head'>
+         {/* Titulo de la pagina */}
+        <div className='report-container dont-print'>
         </div>
-        {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
-        <div>
-          <div className='con-img'> 
-        {/* Codigo para desplegar las imagenes dentro de un array */}
-        {selectedImages.map((image, index) => (
-          <Rnd
-            className="rnd-image"
-            key={index}
-            size={image.size}
-            position={image.position}
-            onDragStop={(e, d) => handleDragStop(index, e, d)}
-            onResizeStop={(e, direction, ref, delta, position) => handleResizeStop(index, e, direction, ref, delta, position)}
-            lockAspectRatio={true}
-            style={{ zIndex: 2 }} 
+      </div>       
+    {/* Wrapper que encapsula la image, conclusión y lista de botones */}
+    <div className="wrapper">
+      {/* Componente de la caja de conclusión junto con la caja de notas */}
+        {/* Se especifica dont-print para no ser incluidos en la vista de impresión */}
+        <div className='vertical-orientation dont-print'>
+        {/* Lista de botones */}
+        <div className='button-bar'>
+        <button 
+          id='unhide' 
+          className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`} 
+          onClick={() => {
+            setPageVisibility(true);
+            setSelectedImages([]);
+          }}
+        >
+        <img src="/I_Out.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+        </button>
+        <button id='print' className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
+        <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+        <button onClick={handleUndo} className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
+        <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
+        </button>
+        <label htmlFor="file-upload" className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
+        <img src="/I_Folder.svg" alt="Subir" style={{filter: 'invert(1)'}} />
+        </label>
+          <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} style={{display: 'none'}}/>          </div>
+        <div className={'vertical-container dont-print'}>
+        <div className={`dont-print ${isPageVisible ? 'visible' : 'hidden'}`}>
+        
+          {/*
+        <ConclusionBox />
+          */}
+        </div>
 
-          >
-            <img src={image.src} draggable="false" />
-          </Rnd>
-        ))}
-
-        {/* Despliego de las imagenes dentro del array */}
-        <div className='conclusion-container'>
+      {/* Menu de opciones */}
+        <div className={`mx-4 z-10 `}>
+          <SimpleMultiStepForm 
+            showStepNumber={true}
+            conclusionDivRef={conclusionDivRef}
+            elementRef={elementRef}
+            handleImageChange={handleImageChange}
+            topLeftText={topLeftText}
+            setTopLeftText={setTopLeftText}
+            copyConclusions={copyConclusions}  
+            ref={imgRef.current}
+            expandedDivs={expandedDivs}
+            setExpandedDivs={setExpandedDivs}
+            />
+            </div>    
+            </div>
+          </div>
+         {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
+              <div>
+                <div className='con-img '> 
+              
+              {/* Codigo para desplegar las imagenes dentro de un array */}
+              {selectedImages.map((image, index) => (
+                <Rnd
+                  className="rnd-image"
+                  key={index}
+                  size={image.size}
+                  position={image.position}
+                  onDragStop={(e, d) => handleDragStop(index, e, d)}
+                  onResizeStop={(e, direction, ref, delta, position) => handleResizeStop(index, e, direction, ref, delta, position)}
+                  lockAspectRatio={true}
+                  style={{ zIndex: 2 }} 
+      
+                >
+                  <img src={image.src} draggable="false" />
+                </Rnd>
+              ))}
+      
+              {/* Despliego de las imagenes dentro del array */}
+              <div ref={elementRef} className='conclusion-container '>
+      
+              <div id="dropArea"><DropArea topLeftText={topLeftText}  expandedDivs={expandedDivs}
+                      setExpandedDivs={setExpandedDivs}  />
+      
+              </div>
         <ConclusionCanvasV
         
           img={{
@@ -859,27 +929,49 @@ const Reporte = () => {
               }
             ],
             },
-
-
-
-       
-
-
-           
-            
           ]}
-        /><div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
-        value={copyConclusions}
-        defaultValue=""
-        onChange={handleTextareaChange}
-      /></div>
-        </div>
-        </div>
-        <div><DropArea /> </div>
-        </div>
+        />
+         <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
+   <div
+    id="conclusionDiv"
+    ref={conclusionDivRef}
+    contentEditable
+    style={{
+    position: 'absolute',
+    width: '95%',
+    height: 'auto',
+    outline: 'none',
+    resize: 'none',
+    fontSize: '12px',
+    paddingTop: '8px',
+    marginLeft: '10px',
+    zIndex: '1',
+     }}
+     dangerouslySetInnerHTML={{ __html: copyConclusions }}
+     onBlur={(e) => {
+       // Cuando terminas de editar, puedes setear copyConclusions
+       setCopyConclusions(e.currentTarget.innerText);
+     }}
+     onFocus={(e) => {
+       // Mover el cursor al final del contenido
+       const range = document.createRange();
+       const selection = window.getSelection();
+       range.selectNodeContents(e.target);
+       range.collapse(false); // Colapsar al final
+       selection.removeAllRanges();
+       selection.addRange(range);
+     }}
+     suppressContentEditableWarning={true}
+     />
+    
       </div>
-    </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
   )
 }
+
 
 export default Reporte

@@ -1,9 +1,7 @@
 import { ReportContext,DropContext } from '@/src/context';
 import { useContext, useState } from 'react';
 import { useSession } from "next-auth/react";
-
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
-import { DraggableDiv } from '../../../components/ReportTemplate/DraggableImage';
 import  MenuImagenes  from '../../../components/ReportTemplate/DinamicImagesMenu';
 import { useImageState } from '../../MetodosBotones';
 import './Style.css';
@@ -609,90 +607,6 @@ const StepG = ({ handlePrevStep, handleNextStep }) => {
   );
 };
 
-
-
-  // Función para manejar la carga de la imagen
-  const DropArea2 = ({ isExpanded }) => {
-    const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
-  
-    const handleDrop = (e) => {
-      e.preventDefault();
-      handleFileSelect(e.dataTransfer.files);
-    };
-  
-    const handleFileSelect = (files) => {
-      if (files && files.length > 0) {
-        const fileArray = Array.from(files);
-        const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
-  
-        if (imageFiles.length > 0) {
-          const file = imageFiles[0]; // Solo tomamos la primera imagen
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            setImageSrc(event.target.result); // Reemplaza la imagen anterior
-          };
-          reader.readAsDataURL(file); // Lee el archivo como URL de datos
-        }
-      }
-    };
-  
-    const handleDragOver = (e) => {
-      e.preventDefault(); // Necesario para permitir el "drop"
-    };
-  
-    const handleInputChange = (e) => {
-      handleFileSelect(e.target.files);
-    };
-  
-    return (
-      <div
-        className={`dropArea2 ${isExpanded ? 'dropArea2-expanded' : ''}`}
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        style={{
-          width: isExpanded ? '96px' : '40px', // Ajusta el tamaño basado en el estado de expansión
-          height: isExpanded ? '90px' : '40px',
-          position: 'relative',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          transition: 'width 0.3s ease, height 0.3s ease', // Transiciones suaves
-          overflow: 'hidden', // Evita que el contenido se desborde
-        }}
-      >
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleInputChange}
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            opacity: 0,
-            cursor: 'pointer',
-          }}
-        />
-        {!imageSrc ? (
-          <p></p>
-        ) : (
-          <img
-            src={imageSrc}
-            alt="Cargada"
-            style={{
-              maxWidth: '100%',
-              maxHeight: '100%',
-              objectFit: 'cover', // Ajusta la imagen dentro del contenedor
-              pointerEvents: 'none', // Evita interacciones con la imagen
-              userSelect: 'none', // Evita que la imagen sea seleccionable
-            }}
-          />
-        )}
-      </div>
-    );
-  };
-  
-
-
 const StepH = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs}) => {
    const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
    const { conclusions } = useContext(ReportContext)
@@ -755,8 +669,12 @@ const StepH = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
         </button>
 
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
@@ -772,7 +690,7 @@ const StepH = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
 };
 
 const StepG1 = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs }) => {
-  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
+    const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
     const { conclusions } = useContext(ReportContext)
     const { droppedItems } = useContext(DropContext);
   
@@ -780,6 +698,8 @@ const StepG1 = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,top
       try {
          // 1) conclusiones (array con {value, title})
       const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+      const conclusionFormateada = formatConclusions(copyConclusions);
+
       const conclusiones = conclusions;
   
   
@@ -834,12 +754,16 @@ const StepG1 = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,top
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={handleExportPdf} className={`print-button dont-print`}>
-          <img src="/I_Print.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
 
-        <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
-      </div>
+        <button onClick={handleExportPdf} className={`print-button dont-print`}>
+          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />   
+        </div>
       
     
       <MenuImagenes  expandedDivs={expandedDivs}

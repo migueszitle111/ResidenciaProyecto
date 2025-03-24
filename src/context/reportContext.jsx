@@ -9,7 +9,7 @@ export const ReportContext = createContext({
 })
 
 export function ReportContextProvider({ children }) {
-  const [conclusions, setConclusions] = useState([{ title: '' }])
+  const [conclusions, setConclusions] = useState([]);
 
   // 1) Función para agregar/quitar conclusiones a modo "toggle"
   function updateConclusions(conclusion) {

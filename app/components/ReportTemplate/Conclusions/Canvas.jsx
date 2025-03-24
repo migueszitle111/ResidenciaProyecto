@@ -45,8 +45,6 @@ export function ConclusionCanvas ({ img: {src, alt, useMap, width, height}, rule
                   layout='fill'
                   className='absolute'
                   backgroundColor='rgb(255, 255, 255)'
-
-                  
                 />
               ))
             ) : (

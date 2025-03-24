@@ -5,6 +5,7 @@ import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de l
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
+
 const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
   const { droppedItems, setDroppedItems } = useContext(DropContext);
   const dropAreaRef = useRef(null);
@@ -34,39 +35,34 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
     }
   };
 
-  // EJEMPLO COMPLETO
-const handleDrop = (e) => {
-  e.preventDefault();
+  const handleDrop = (e) => {
+    e.preventDefault();
 
-  // 1) Recuperamos ID como string
-  const draggedId = e.dataTransfer.getData('app-id');
-  // 2) Convertimos a número
-  const numericId = parseInt(draggedId, 10);
-
-  if (!isNaN(numericId)) {
-    // 3) Colapsar sólo el ítem arrastrado
-    setExpandedDivs(prev => ({
-      ...prev,
-      [numericId]: false
-    }));
-  }
-
-  // 3) Leer el HTML del ítem y añadirlo a droppedItems
-  const data = e.dataTransfer.getData('text/html');
-  if (data) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(data, 'text/html');
-    const element = doc.body.firstChild;
-    if (element) {
-      setDroppedItems((prev) => [
+    // Leer el ID que guardamos en dataTransfer
+    const draggedId = e.dataTransfer.getData('app-id');
+    if (draggedId) {
+      // Colapsar ese ID en el estado global
+      setExpandedDivs(prev => ({
         ...prev,
-        { id: Date.now(), content: element.outerHTML, x: 0, y: 0 },
-      ]);
+        [draggedId]: false
+      }));
     }
-  }
-};
 
- 
+    // Leer la parte text/html (nodo)
+    const data = e.dataTransfer.getData('text/html');
+    if (data) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, 'text/html');
+      const element = doc.body.firstChild;
+      if (element) {
+        setDroppedItems([
+          ...droppedItems,
+          { id: Date.now(), content: element.outerHTML, x: 0, y: 0 }
+        ]);
+      }
+    }
+  };
+
   const handleDragOver = (e) => {
     e.preventDefault();
   };
@@ -125,6 +121,7 @@ const handleDrop = (e) => {
     </div>
   );
 };
+
 const Reporte = () => {
   
   // Carga datos de usuario
@@ -150,9 +147,8 @@ const Reporte = () => {
   }, []);
 
 
-
 function formatConclusions(copyConclusions) {
-  const keywords = ["BULBAR", "PROXIMAL", "DISTAL"];
+  const keywords = ["BULBAR", "CERVICAL", "TORÁCICA", "LUMBAR"];
   let words = copyConclusions.split(' ');
   let keywordPositions = [];
 
@@ -282,33 +278,6 @@ useEffect(() => {
   const conclusionDivRef = useRef(null);
   const elementRef = useRef(null);
 
-// // Codigo para imprimir en click
-// useEffect(() => {
-//   const printButton = document.getElementById('print');
-//   const handlePrint = () => {
-//     window.print();
-//   };
-
-//   printButton.addEventListener('click', handlePrint);
-
-//   return () => {
-//     printButton.removeEventListener('click', handlePrint);
-//   };
-// }, []); 
-
-const moveCaretToEnd = (element) => {
-  if (!element) return;
-  element.focus();
-  if (typeof window.getSelection !== "undefined" && typeof document.createRange !== "undefined") {
-    const range = document.createRange();
-    range.selectNodeContents(element);
-    range.collapse(false); // Colapsa el rango al final del contenido
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
-};
-
   return (
     <div >
       {/* Clase que encapzula la información y el titulo de la pagina */}
@@ -352,7 +321,7 @@ const moveCaretToEnd = (element) => {
             */}
           </div>
 
-{/* Menu de opciones */}
+        {/* Menu de opciones */}
           <div className={`mx-4 z-10 `}>
             <SimpleMultiStepForm 
               showStepNumber={true}
@@ -363,7 +332,6 @@ const moveCaretToEnd = (element) => {
               setTopLeftText={setTopLeftText}
               copyConclusions={copyConclusions}  
               ref={imgRef.current}
-
               expandedDivs={expandedDivs}
               setExpandedDivs={setExpandedDivs}
               />
@@ -399,7 +367,6 @@ const moveCaretToEnd = (element) => {
         
                 </div>
         <ConclusionCanvas 
-        
           img={{
             src: '/assets/NeuronoImg/BP_Neuronopatia.png',
             alt: 'Modelo',
@@ -570,12 +537,12 @@ const moveCaretToEnd = (element) => {
           userImageUrl={imageUrl}  // Aquí se pasa la URL de la imagen del usuario
         />
              
-<div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
-<div
-  id="conclusionDiv"
-  ref={conclusionDivRef}
-  contentEditable
-  style={{
+   <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
+   <div
+    id="conclusionDiv"
+    ref={conclusionDivRef}
+    contentEditable
+    style={{
     position: 'absolute',
     width: '95%',
     height: 'auto',
@@ -585,29 +552,28 @@ const moveCaretToEnd = (element) => {
     paddingTop: '8px',
     marginLeft: '10px',
     zIndex: '1',
-  }}
-  onInput={(e) => {
-    setCopyConclusions(e.currentTarget.innerText);
-  }}
-  onFocus={(e) => {
-    // Mover el cursor al final del contenido
-    const range = document.createRange();
-    const selection = window.getSelection();
-    range.selectNodeContents(e.target);
-    range.collapse(false); // Colapsar al final
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }}
-  suppressContentEditableWarning={true}
-  />
-
+     }}
+     onInput={(e) => {
+       setCopyConclusions(e.currentTarget.innerText);
+     }}
+     onFocus={(e) => {
+       // Mover el cursor al final del contenido
+       const range = document.createRange();
+       const selection = window.getSelection();
+       range.selectNodeContents(e.target);
+       range.collapse(false); // Colapsar al final
+       selection.removeAllRanges();
+       selection.addRange(range);
+     }}
+     suppressContentEditableWarning={true}
+     />
+    
       </div>
       </div>
-
       </div>
-        </div>
-        </div>
-        </div>
+      </div>
+      </div>
+      </div>
   )
 }
 

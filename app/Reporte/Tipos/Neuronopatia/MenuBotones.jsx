@@ -558,7 +558,6 @@ const StepF1 = ({ handlePrevStep1, handleNextStep1 }) => {
       </h1>
       <div onClick={handleNextStep1}>
       <ConclusionButton value = 'completo1' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETO.' displayText = 'COMPLETO'/>
-      <ConclusionButton value = 'parcial1' title = ' PRONÓSTICO DE RECUPERACIÓN PARCIAL.'  displayText = 'PARCIAL'/>
       <ConclusionButton value = 'pobre1' title = ' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.'  displayText = 'POBRE NO FUNCIONAL'/>
       <ConclusionButton value = 'nulo1' title = ' PRONÓSTICO DE RECUPERACIÓN NULO.'  displayText = 'NULO'/>
       <ConclusionButton value = 'incierto1' title = ' PRONÓSTICO DE RECUPERACIÓN INCIERTO.'  displayText = 'INCIERTO'/>

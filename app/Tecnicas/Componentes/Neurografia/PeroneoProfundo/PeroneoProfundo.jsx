@@ -69,21 +69,21 @@ const PeroneoProfundo = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnPp1" onClick={() => handleButtonClick('3 cm distal sobre dorso del segundo ortejo ', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPp2" onClick={() => handleButtonClick('Horizontal al espacio interdigital, entre las cabezas del primer y segundo metatarsiano.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPp3" onClick={() => handleButtonClick('1.	Tobillo: de forma antidrómica a 12 cm proximal del electrodo activo y justo lateral al tendón extensor largo del primer ortejo. En caso de pies de longitud considerable, el estimulo deberá aplicarse 2 cm distal del retináculo extensor.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPp4" onClick={() => handleButtonClick('Dorso del pie.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp1" onClick={() => handleButtonClick('3 cm distal sobre dorso del segundo ortejo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp2" onClick={() => handleButtonClick('DORSO DEL PIE - Horizontal al espacio interdigital, entre las cabezas del primer y segundo metatarsiano', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp3" onClick={() => handleButtonClick('TOBILLO. (Antidrómico) 12 cm proximal del electrodo activo y justo lateral al tendón extensor largo del primer ortejo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp4" onClick={() => handleButtonClick('Dorso del pie o pierna', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/PeroneoPf-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/PeroneoPf-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
-            {currentImageIndex === 1 && <button className="btnPp5" onClick={() => handleButtonClick('5', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnPp6" onClick={() => handleButtonClick('6', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnPp7" onClick={() => handleButtonClick('7', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPp5" onClick={() => handleButtonClick('Dorso del pie', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPp6" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPp7" onClick={() => handleButtonClick('INTERMALEOLAR - Electrodo de superficie, colocar preferetemente barra en la línea media, entre el maléolo lateral y el tendón del tibial anterior, transversal a la intersección de ambos maléolos', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPp8" onClick={() => handleButtonClick('8', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPp9" onClick={() => handleButtonClick('9', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPp10" onClick={() => handleButtonClick('10', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPp11" onClick={() => handleButtonClick('11', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnPp12" onClick={() => handleButtonClick('12', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPp12" onClick={() => handleButtonClick('INCHING - La estimulación se aplica de forma antidrómica como primer punto a 12 cm en dirección proximal del electrodo activo justo lateral al tendón extensor largo del primer ortejo en la región lateral de la pierna. Los siguientes puntos de estímulo de aplicaran cada centímetro en dirección distal hasta llegar al electrodo de registro', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/PeroneoPf-G-02.png",{ top: '2%', left: '2%' })}></button>}
             
             </div>

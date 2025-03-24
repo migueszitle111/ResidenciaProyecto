@@ -59,25 +59,29 @@
 .extra-image-container {
     flex: 1; /* La imagen lateral ocupa menos espacio */
     display: flex;
+    justify-content: center;
+    align-items: center;
     /*border: 2px solid #4a4a4a;  Borde para destacar */
-    padding: 5px;
+    padding: 2px;
     background-color: transparent;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 20vw; /* Ajusta el tamaño máximo */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    max-width: 25vw; /* Ajusta el tamaño máximo */
     height: auto;
-    margin-top: -25.5vw;
+    margin-bottom: 15vw;
 }
 
+
 /* Contenedor principal de la galería */
-.gallery-container {
+.gallery-containerUl {
     position: relative;
     width: 100%;
-    max-width: 60vw;
+    max-width: 65vw;
     height: auto;
     padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
     overflow: hidden;
     margin: auto;
     margin-top: 2px;
+    flex: 2;
 }
 
 /* Contenedor interno de la galería */
@@ -113,7 +117,7 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnMds1, .btnMds2, .btnMds3 {
+    .btnUl1, .btnUl2, .btnUl3 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -126,7 +130,7 @@
         max-width: 60vw;
     }
 
-    .btnMds1, .btnMds2 {
+    .btnUl1, .btnUl2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -139,7 +143,7 @@
 
 /* ################################# Botones de la primera imagen #########################*/
 
-.btnIMds1 {
+.btnIUl1 {
     position: absolute ;
     background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
     background-size: cover;
@@ -147,8 +151,8 @@
     border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
     height: 3.5vw; /* Tamaño reducido */
     width: 3.5vw;
-    top: 32%;
-    left: 45%;
+    top: 23%;
+    left: 35%;
     transform: translate(820%, -365%);
     background-color: transparent;
     border-radius: 20%;
@@ -158,7 +162,7 @@
     transition:all .2s ease-in-out;
 }
 
-.btnIMds2 {
+.btnIUl2 {
     position: absolute ;
     background-image: url('/assets/ValoresImg/I_Tabla_Gris.png');
     background-size: cover;
@@ -166,8 +170,8 @@
     border: 2px solid #4a4a4a;
     height: 3.5vw; /* Tamaño reducido */
     width: 3.5vw;
-    top: 32%;
-    left: 45%;
+    top: 23%;
+    left: 35%;
     transform: translate(700%, -365%);
     background-color: transparent;
     border-radius: 20%;
@@ -180,11 +184,11 @@
 
 
 /* Botón 1 */
-.btnMds1 {
+.btnUl1 {
     position: absolute;
     height: 3vw; /* Tamaño reducido */
     width: 14vw;
-    top: 2%;
+    top: 8%;
     left: 2%;
     transform: translate(0%, 0%);
     background-color: rgba(66, 66, 66, 0.842);
@@ -197,11 +201,11 @@
     padding: 1%;
 }
 /* Botón 2 */
-.btnMds2 {
+.btnUl2 {
     position: absolute;
     height: 3vw; /* Tamaño reducido */
     width: 14vw;
-    top: 10%;
+    top: 12%;
     left: 2%;
     transform: translate(0%, 0%);
     background-color: rgba(66, 66, 66, 0.842);
@@ -214,11 +218,11 @@
     padding: 1%;
 }
 /* Botón 3 */
-.btnMds3 {
+.btnUl3 {
     position: absolute;
     height: 3vw; /* Tamaño reducido */
     width: 14vw;
-    top: 18%;
+    top: 16%;
     left: 2%;
     transform: translate(0%, 0%);
     background-color: rgba(66, 66, 66, 0.842);
@@ -233,7 +237,7 @@
 
 
 
-.text-boxMds {
+.text-boxUl {
     position: absolute;
     transform: translate(-50%, -50%);
     width: 40vw;

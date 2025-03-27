@@ -542,84 +542,7 @@ const StepI = ({ setStep, selectedImages, handleUndo, handleImageChange, handleP
   );
 };
 
-const DropArea2 = ({ isExpanded }) => {
-  const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    handleFileSelect(e.dataTransfer.files);
-  };
-
-  const handleFileSelect = (files) => {
-    if (files && files.length > 0) {
-      const fileArray = Array.from(files);
-      const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
-
-      if (imageFiles.length > 0) {
-        const file = imageFiles[0]; // Solo tomamos la primera imagen
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          setImageSrc(event.target.result); // Reemplaza la imagen anterior
-        };
-        reader.readAsDataURL(file); // Lee el archivo como URL de datos
-      }
-    }
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault(); // Necesario para permitir el "drop"
-  };
-
-  const handleInputChange = (e) => {
-    handleFileSelect(e.target.files);
-  };
-
-  return (
-    <div
-      className={`dropArea2 ${isExpanded ? 'dropArea2-expanded' : ''}`}
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      style={{
-        width: isExpanded ? '96px' : '40px', // Ajusta el tamaño basado en el estado de expansión
-        height: isExpanded ? '90px' : '40px',
-        position: 'relative',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        transition: 'width 0.3s ease, height 0.3s ease', // Transiciones suaves
-        overflow: 'hidden', // Evita que el contenido se desborde
-      }}
-    >
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleInputChange}
-        style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          opacity: 0,
-          cursor: 'pointer',
-        }}
-      />
-      {!imageSrc ? (
-        <p></p>
-      ) : (
-        <img
-          src={imageSrc}
-          alt="Cargada"
-          style={{
-            maxWidth: '100%',
-            maxHeight: '100%',
-            objectFit: 'cover', // Ajusta la imagen dentro del contenedor
-            pointerEvents: 'none', // Evita interacciones con la imagen
-            userSelect: 'none', // Evita que la imagen sea seleccionable
-          }}
-        />
-      )}
-    </div>
-  );
-};
 
 const StepJ = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
@@ -630,12 +553,11 @@ const StepJ = ({ setStep, selectedImages, handleUndo, handleImageChange, handleP
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
 
     const conclusiones = conclusions;
 
 
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/auditiva?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -717,12 +639,11 @@ const StepJ2 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
 
     const conclusiones = conclusions;
 
 
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/auditiva?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -776,12 +776,11 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
       try {
          // 1) conclusiones (array con {value, title})
       const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-      const conclusionFormateada = formatConclusions(copyConclusions);
   
       const conclusiones = conclusions;
   
   
-        const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+        const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -854,12 +853,11 @@ const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint }) => {
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
 
     const conclusiones = conclusions;
 
 
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -934,9 +932,8 @@ const StepH3 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
     const conclusiones = conclusions;
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1012,12 +1009,11 @@ const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
 
     const conclusiones = conclusions;
 
 
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1736,9 +1732,8 @@ const StepH1_i = ({ setStep, selectedImages, handleUndo,handlePrint,topLeftText,
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
     const conclusiones = conclusions;
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1813,9 +1808,8 @@ const StepH2_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
     const conclusiones = conclusions;
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1890,9 +1884,8 @@ const StepH3_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
     const conclusiones = conclusions;
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1968,9 +1961,8 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftTex
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
     const conclusiones = conclusions;
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2104,9 +2096,8 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
     const conclusiones = conclusions;
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -697,7 +697,6 @@ const StepG1 = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,top
       try {
          // 1) conclusiones (array con {value, title})
       const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-      const conclusionFormateada = formatConclusions(copyConclusions);
 
       const conclusiones = conclusions;
   

@@ -17,69 +17,82 @@ function buildHtml({
 }) {
   // 1) Tus reglas de superposición con /assets/... en lugar de baseUrl
   const overlayRules = [
+  
     {
-      expectedValue: 'proximal',
+      expectedValue: 'distribucion_proximal', 
       image: {
-          src: '/assets/PolineuropatiaIMG/PO_Proximal.png',
-          alt: 'Modelo',
+        src: '/assets/MioImg/MI_Proximal.png',
+        alt: 'Modelo',
       }
+    },
+    {
+      expectedValue: 'distribucion_distal',
+      image: {
+        src: '/assets/MioImg/MI_Distal.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'distribucion_generalizada',
+      image: {
+        src: '/assets/MioImg/MI_Facial.png',
+        // AGREGAR 2 IMAGENES MAS AQUI
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'anillo_oseo',
+      image: {
+        src: '/assets/MioImg/MI_Distrofia de Anillo Oseo.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'duchenne_becker',
+      image: {
+        src: '/assets/MioImg/MI_Distrofia de Duchenne e Becker.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'emery_dreifuss',
+      image: {
+        src: '/assets/MioImg/MI_Distrofia de Emery-Dreifuss.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'facioescapulohumeral',
+      image: {
+        src: '/assets/MioImg/MI_Distrofia Facioescapulohumeral.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'oculofaringea',
+      image: {
+        src: '/assets/MioImg/MI_Distrofia Oculofaringea.png',
+        alt: 'Modelo',
+      }
+    },
+
+    {
+      expectedValue: 'generalizada1',
+      image:[{
+        src: '/assets/MioImg/MI_Facial.png',
+        alt: 'Modelo',
       },
       {
-      expectedValue: 'aximal2',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO2_Aximal.png',
-          alt: 'Modelo',
-      }
+        src: '/assets/MioImg/MI_Distal.png',
+        alt: 'Modelo',
       },
       {
-      expectedValue: 'desmielinizante2',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO2_Desmielinizante.png',
-          alt: 'Modelo',
+        src: '/assets/MioImg/MI_Proximal.png',
+        alt: 'Modelo',
       }
-      },
-      {
-      expectedValue: 'aximal',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Aximal.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'desmielinizante',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Desmielinizante.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'distal',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Distal.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'sensitiva',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Sensitivo.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'motora',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Motor.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'mixta',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Sensitivo-Motor.png',
-          alt: 'Modelo',
-      }
-      },
+    
+    ],
+    },
   ];
 
   // 2) Buscamos coincidencias con finalString
@@ -583,7 +596,7 @@ function buildHtml({
       </div>
       <!-- Bloque "image-stack" con la imagen base y overlays -->
       <div class="image-stack">
-        <img src="/assets/PolineuropatiaIMG/BP_Polineuropatia.png" alt="Imagen Base" />
+        <img src="/assets/MioImg/MI_Base Gris_Fondo Blanco.png" alt="Imagen Base" />
         ${overlayHtml}
       </div>
       <div id="conclusionDiv">

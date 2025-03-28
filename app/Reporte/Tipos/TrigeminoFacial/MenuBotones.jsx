@@ -510,12 +510,11 @@ const StepG = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,se
     try {
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusionFormateada = formatConclusions(copyConclusions);
 
     const conclusiones = conclusions;
 
 
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/trigeminofacial?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

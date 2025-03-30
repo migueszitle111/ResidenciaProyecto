@@ -13,6 +13,8 @@ const FemoralcutaneoLt = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -42,14 +44,14 @@ const FemoralcutaneoLt = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
     };
 
     return (
@@ -67,18 +69,18 @@ const FemoralcutaneoLt = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnFcL1" onClick={() => handleButtonClick('4 cm en dirección cefálica o ascendente del electrodo activo', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnFcL2" onClick={() => handleButtonClick('ORTODRÓMICA - Colocar electrodo de superficie a 1 cm medial de la espina iliaca anterosuperior', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnFcL3" onClick={() => handleButtonClick('MUSLO ANTERO-LATERAL. Aplicar la estimulación entre 12 a 16 cm distal del electrodo activo, sobre una línea tazada desde la espina iliaca anterosuperior hasta el borde lateral de la rótula', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/FemoralLt-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/FemoralLt-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFcL1" onClick={() => handleButtonClick('4 cm en dirección cefálica o ascendente del electrodo activo', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFcL2" onClick={() => handleButtonClick('ORTODRÓMICA - Colocar electrodo de superficie a 1 cm medial de la espina iliaca anterosuperior', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFcL3" onClick={() => handleButtonClick('MUSLO ANTERO-LATERAL. Aplicar la estimulación entre 12 a 16 cm distal del electrodo activo, sobre una línea tazada desde la espina iliaca anterosuperior hasta el borde lateral de la rótula', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/FemoralLt-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/FemoralLt-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
-            {currentImageIndex === 1 && <button className="btnFcL4" onClick={() => handleButtonClick('EIASs. Por arriba del ligamento inguinal 1 cm medial a la espina iliaca anterosuperior', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFcL5" onClick={() => handleButtonClick('EIASi. Por debajo del ligamento inguinal sobre el origen del musculo Sartorio', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFcL6" onClick={() => handleButtonClick('ANTIDRÓMICA. Colocar electrodo de superficie sobre la cara anterior del muslo a 16-20 cm distal de la espina ilíaca anterosuperior, siguiendo una línea imaginaria hasta el borde lateral de la rótula', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFcL7" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/FemoralLt-G-02.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/FemoralLt-T-02.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFcL4" onClick={() => handleButtonClick('EIASs. Por arriba del ligamento inguinal 1 cm medial a la espina iliaca anterosuperior', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFcL5" onClick={() => handleButtonClick('EIASi. Por debajo del ligamento inguinal sobre el origen del musculo Sartorio', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFcL6" onClick={() => handleButtonClick('ANTIDRÓMICA. Colocar electrodo de superficie sobre la cara anterior del muslo a 16-20 cm distal de la espina ilíaca anterosuperior, siguiendo una línea imaginaria hasta el borde lateral de la rótula', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFcL7" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo.', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/FemoralLt-G-02.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/FemoralLt-T-02.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
@@ -89,26 +91,10 @@ const FemoralcutaneoLt = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-                <div
-                    className="image-boxM"
-                    style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
-                        position: 'absolute',
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '16vw',
-                            maxHeight: '16vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-image"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

@@ -13,6 +13,8 @@ const AuricularM = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -38,14 +40,14 @@ const AuricularM = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
     };
 
 
@@ -64,12 +66,12 @@ const AuricularM = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnAu1" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. De forma antidrómica en el borde lateral del músculo esternocleidomastoideo, aproximadamente en su tercio medio u 8cm de distancia en dirección caudal del electrodo de registro', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAu2" onClick={() => handleButtonClick('LÓBULO DE LA OREJA - Con electrodos de superficie sobre la parte posterior y tercio inferior del lóbulo de la oreja', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnAu3" onClick={() => handleButtonClick('2 cm en dirección cefálica a electrodo activo', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAu4" onClick={() => handleButtonClick('Proceso espinoso C7', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-AuricularM-G.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-AuricularM-T.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAu1" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. De forma antidrómica en el borde lateral del músculo esternocleidomastoideo, aproximadamente en su tercio medio u 8cm de distancia en dirección caudal del electrodo de registro', {  top: '14%', left: '23%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAu2" onClick={() => handleButtonClick('LÓBULO DE LA OREJA - Con electrodos de superficie sobre la parte posterior y tercio inferior del lóbulo de la oreja', { top: '10%', left: '23%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnAu3" onClick={() => handleButtonClick('2 cm en dirección cefálica a electrodo activo', {  top: '10%', left: '23%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAu4" onClick={() => handleButtonClick('Proceso espinoso C7', { top: '10%', left: '23%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-AuricularM-G.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-AuricularM-T.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
@@ -80,26 +82,10 @@ const AuricularM = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-                <div
-                    className="image-boxM"
-                    style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
-                        position: 'absolute',
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '16vw',
-                            maxHeight: '16vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-image"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

@@ -244,7 +244,7 @@
 .text-boxFm {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 27vw;
+    width: 40vw;
     height: auto;
     display: flex;
     align-items: center;
@@ -255,7 +255,7 @@
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1em;
+    font-size: 0.9em;
     border: 1px solid #ddd;
     white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }

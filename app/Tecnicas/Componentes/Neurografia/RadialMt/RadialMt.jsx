@@ -13,6 +13,8 @@ const RadialMt = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -59,18 +61,16 @@ const RadialMt = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    // Funciones para abrir y cerrar el modal
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
     };
 
-
-
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
+    };
 
     return (
         
@@ -93,8 +93,8 @@ const RadialMt = () => {
                 {currentImageIndex === 0 && <button className="btnRMt4" onClick={() => handleButtonClick('EXTENSOR INDICIS C7, C8 - 4 cm en dirección proximal con relación a apófisis estiloides cubital, cara dorsal del tercio distal en antebrazo, lateral al borde del Cubito', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnRMt5" onClick={() => handleButtonClick('Apófisis estiloides cubital', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnRMt6" onClick={() => handleButtonClick('Dorso de la mano', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/RadialMt-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/RadialMt-T-01.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialMt-G-01.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialMt-T-01.png",{ top: '2%', left: '2%' })}></button>}
             
                 {currentImageIndex === 1 && <button className="btnRMt7" onClick={() => handleButtonClick('ERB. Fosa supraclavicular lateral al esternocleidomastoideo', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnRMt8" onClick={() => handleButtonClick('AXILA. a 1 cm distal entre borde lateral de los músculos Pectoral menor y porción corta del Bíceps braquial', { top: '12%', left: '32%'})}></button>}
@@ -105,7 +105,7 @@ const RadialMt = () => {
                 {currentImageIndex === 1 && <button className="btnRMt13" onClick={() => handleButtonClick('ANTEBRAZO. 4-6 cm en dirección proximal del electrodo activo, dorso del antebrazo sobre borde lateral del cubito', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnRMt14" onClick={() => handleButtonClick('EXTENSOR INDICIS C7, C8 - 4 cm en dirección proximal con relación a apófisis estiloides cubital, cara dorsal del tercio distal en antebrazo, lateral al borde del Cubito', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 1 && <button className="btnRMt15" onClick={() => handleButtonClick('Apófisis estiloides cubital', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/RadialMt-G-02.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialMt-G-02.png",{ top: '2%', left: '2%' })}></button>}
 
                 {currentImageIndex === 2 && <button className="btnRMt16" onClick={() => handleButtonClick('4 cm distal en misma orientación sobre borde del radio.', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 2 && <button className="btnRMt17" onClick={() => handleButtonClick('Antebrazo.', { top: '12%', left: '32%'})}></button>}
@@ -121,7 +121,7 @@ const RadialMt = () => {
                 {currentImageIndex === 4 && <button className="btnRMt25" onClick={() => handleButtonClick('EXTENSOR DIGITORUM COMMUNIS C7, C8 - Antebrazo en pronación, unión entre tercio proximal y medio de antebrazo, región dorsal punto medio con discreta desviación radial', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 4 && <button className="btnRMt26" onClick={() => handleButtonClick('CANAL DE TORSIÓN. Tercio medio del humero, en dirección lateral entre Bíceps y Tríceps braquiales', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 4 && <button className="btnRMt27" onClick={() => handleButtonClick('Antebrazo ventral', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 4 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/RadialMt-G-03.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 4 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialMt-G-03.png",{ top: '2%', left: '2%' })}></button>}
 
                 {currentImageIndex === 5 && <button className="btnRMt28" onClick={() => handleButtonClick('ERB. Fosa supraclavicular lateral al esternocleidomastoideo', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 5 && <button className="btnRMt29" onClick={() => handleButtonClick('TRICEPS BRACHIALIS C6, C7 - Cabeza lateral, tercio medio deL brazo borde lateral ligeramente posterior', { top: '12%', left: '32%'})}></button>}
@@ -129,7 +129,7 @@ const RadialMt = () => {
                 {currentImageIndex === 5 && <button className="btnRMt31" onClick={() => handleButtonClick('Sobre Bíceps braquial', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 5 && <button className="btnRMt32" onClick={() => handleButtonClick('En dirección distal sobre eje horizontal, 3-4 cm del electrodo activo', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 5 && <button className="btnRMt33" onClick={() => handleButtonClick('En dirección distal sobre eje horizontal, 3-4 cm del electrodo activo', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 5 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/RadialMt-G-04.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 5 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialMt-G-04.png",{ top: '2%', left: '2%' })}></button>}
 
             </div>
             {textBoxVisible && (
@@ -137,26 +137,10 @@ const RadialMt = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxM"
-                style={{
-                    top: imageBoxPosition.top,
-                    left: imageBoxPosition.left,
-                    position: 'absolute',
-                }}
-            >
-                <img
-                    src={imageBoxContent}
-                    alt="Cuadro dinámico"
-                    style={{
-                        position: 'absolute',
-                        maxWidth: '20vw',
-                        maxHeight: '20vh',
-                        transition: 'transform 0.3s ease',
-                    }}
-                    className="zoomable-imageUlSt"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

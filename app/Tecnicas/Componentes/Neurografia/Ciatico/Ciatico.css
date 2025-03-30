@@ -215,7 +215,7 @@
 .text-boxCt {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 27vw;
+    width: 48vw;
     height: auto;
     display: flex;
     align-items: center;

@@ -13,6 +13,8 @@ const CutaneoP = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -40,14 +42,14 @@ const CutaneoP = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
     };
 
     return (
@@ -69,8 +71,8 @@ const CutaneoP = () => {
                 {currentImageIndex === 0 && <button className="btnCP2" onClick={() => handleButtonClick('Antebrazo lateral', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnCP3" onClick={() => handleButtonClick('ANTEBRAZO POSTERIOR - 12 cm distal desde el punto de estímulo a lo largo de una línea que se traza hacia el dorso medio de la muñeca', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnCP4" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/CutaneoPst-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/CutaneoPst-T-01.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/CutaneoPst-G-01.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/CutaneoPst-T-01.png",{ top: '5%', left: '2%' })}></button>}
 
             </div>
             {textBoxVisible && (
@@ -78,26 +80,10 @@ const CutaneoP = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxM"
-                style={{
-                    top: imageBoxPosition.top,
-                    left: imageBoxPosition.left,
-                    position: 'absolute',
-                }}
-            >
-                <img
-                    src={imageBoxContent}
-                    alt="Cuadro dinámico"
-                    style={{
-                        position: 'absolute',
-                        maxWidth: '17vw',
-                        maxHeight: '17vh',
-                        transition: 'transform 0.3s ease',
-                    }}
-                    className="zoomable-imageCp"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

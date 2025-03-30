@@ -15,6 +15,9 @@ const MedianoMt = () => {
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
 
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+
     const images = [
         {
             original: "/assets/ValoresImg/01_01 Abductor Corto del Pulgar V3.png",
@@ -74,6 +77,18 @@ const MedianoMt = () => {
         }
     };
 
+    // Funciones para abrir y cerrar el modal
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
+    };
+
+
     return (
         
         <div  className=" py-20 gallery-container">
@@ -89,14 +104,14 @@ const MedianoMt = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnM1" onClick={() => handleButtonClick('PALMA. 7 cm distal del punto de la muñeca entre los dedos índice y medio', { top: '20%', left: '24%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnM2" onClick={() => handleButtonClick('Primera articulación metacarpofalángica', { top: '12%', left: '24%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnM3" onClick={() => handleButtonClick('ABDUCTOR POLLICIS BREVIS C8, T1 - (eminencia tenar lateral)', { top: '12%', left: '24%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnM4" onClick={() => handleButtonClick('MUÑECA. 8 cm proximal a electrodo activo, entre los tendones del palmar mayor y palmar menor, trazando una línea imaginaria con la intersección en el pliegue cutáneo del carpo, haciéndose horizontal en tercio distal del antebrazo', { top: '20%', left: '24%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnM5" onClick={() => handleButtonClick('Dorso de la mano o antebrazo', { top: '12%', left: '24%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnM6" onClick={() => handleButtonClick('CODO. Fosa antecubital, solo medial al pulso de la arteria braquial', { top: '20%', left: '24%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/MedianoMt-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/MedianoMt-T-01.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnM1" onClick={() => handleButtonClick('PALMA. 7 cm distal del punto de la muñeca entre los dedos índice y medio', { top: '10%', left: '24%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnM2" onClick={() => handleButtonClick('Primera articulación metacarpofalángica', { top: '10%', left: '24%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnM3" onClick={() => handleButtonClick('ABDUCTOR POLLICIS BREVIS C8, T1 - (eminencia tenar lateral)', { top: '10%', left: '24%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnM4" onClick={() => handleButtonClick('MUÑECA. 8 cm proximal a electrodo activo, entre los tendones del palmar mayor y palmar menor, trazando una línea imaginaria con la intersección en el pliegue cutáneo del carpo, haciéndose horizontal en tercio distal del antebrazo', { top: '15%', left: '24%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnM5" onClick={() => handleButtonClick('Dorso de la mano o antebrazo', { top: '10%', left: '24%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnM6" onClick={() => handleButtonClick('CODO. Fosa antecubital, solo medial al pulso de la arteria braquial', { top: '10%', left: '24%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/MedianoMt-G-01.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/MedianoMt-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 
             {/* Segunda Imagen */}
                 {currentImageIndex === 1 && <button className="btnM7" onClick={() => handleButtonClick('Primera articulación metacarpofalángica', { top: '60%', left: '24%' })}></button>}
@@ -106,8 +121,8 @@ const MedianoMt = () => {
                 {currentImageIndex === 1 && <button className="btnM11" onClick={() => handleButtonClick('CODO. Fosa antecubital, solo medial al pulso de la arteria braquial', { top: '60%', left: '24%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnM12" onClick={() => handleButtonClick('AXILA. Base del hueco axilar a 1cm distal entre el borde lateral de los músculos Pectoral menor y porción corta del Bíceps braquial', { top: '60%', left: '24%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnM13" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, lateral al esternocleidomastoideo', { top: '60%', left: '24%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/MedianoMt-G-02.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/MedianoMt-T-02.png",{ top: '5%', left: '-10%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/MedianoMt-G-02.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/MedianoMt-T-02.png",{ top: '5%', left: '-10%' })}></button>}
                 
 
             {/* Tercera Imagen */}
@@ -120,7 +135,7 @@ const MedianoMt = () => {
                 {currentImageIndex === 3 && <button className="btnM19" onClick={() => handleButtonClick('PRONATOR QUADRATUS C7, C8, T1 - Con aguja monopolar (o concéntrica sin necesidad de referencia) 2cm proximal de la apófisis estiloides cubital, cara dorsal de antebrazo entre huesos radio/cubito', { top: '12%', left: '24%' })}></button>}
                 {currentImageIndex === 3 && <button className="btnM20" onClick={() => handleButtonClick('Dorso de la mano o antebrazo', { top: '12%', left: '24%' })}></button>}
                 {currentImageIndex === 3 && <button className="btnM21" onClick={() => handleButtonClick('CODO. Fosa antecubital, solo medial al pulso de la arteria braquial', { top: '12%', left: '24%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/MedianoMt-G-02.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/MedianoMt-G-02.png",{ top: '2%', left: '2%' })}></button>}
             
             {/* Quinta Imagen */}
                 {currentImageIndex === 4 && <button className="btnM22" onClick={() => handleButtonClick('Distal al recorrido del tendón o 2 cm proximal aL pliegue de la muñeca', { top: '12%', left: '24%' })}></button>}
@@ -164,6 +179,13 @@ const MedianoMt = () => {
                         }}
                         className="zoomable-image"
                     />
+                </div>
+            )}
+
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

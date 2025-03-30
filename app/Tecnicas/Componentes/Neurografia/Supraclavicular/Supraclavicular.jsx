@@ -13,6 +13,8 @@ const Supraclavicular = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -38,16 +40,15 @@ const Supraclavicular = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
     };
 
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
+    };
 
 
     return (
@@ -65,12 +66,12 @@ const Supraclavicular = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnSpC1" onClick={() => handleButtonClick('Acromio', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnSpC2" onClick={() => handleButtonClick('3 cm en dirección caudal con electrodo de tira, horizontal al activo', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnSpC3" onClick={() => handleButtonClick('ÁREA SUPRACLAVICULAR - Electrodos adheribles de tira colocados sobre la superficie exterior de la diáfisis clavicular', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnSpC4" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. El cátodo se coloca en el borde posterior del músculo esternocleidomastoideo a nivel del margen inferior del cartílago tiroides', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-Supraclavicular-G.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-Supraclavicular-T.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC1" onClick={() => handleButtonClick('Acromio', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC2" onClick={() => handleButtonClick('3 cm en dirección caudal con electrodo de tira, horizontal al activo', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC3" onClick={() => handleButtonClick('ÁREA SUPRACLAVICULAR - Electrodos adheribles de tira colocados sobre la superficie exterior de la diáfisis clavicular', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC4" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. El cátodo se coloca en el borde posterior del músculo esternocleidomastoideo a nivel del margen inferior del cartílago tiroides', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Supraclavicular-G.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Supraclavicular-T.png",{ top: '5%', left: '2%' })}></button>}
 
             
             </div>
@@ -82,26 +83,10 @@ const Supraclavicular = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-                <div
-                    className="image-boxM"
-                    style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
-                        position: 'absolute',
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '16vw',
-                            maxHeight: '16vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-image"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

@@ -3,6 +3,9 @@ import { useState } from "react";
 import Medianos from "./Medianos/Medianos";
 import Ulnar from "./Ulnar/Ulnar";
 
+import mostrarMenuIcon from "/public/I_In.svg"; // Reemplaza con la ruta real
+import ocultarMenuIcon from "/public/I_Out.svg"; // Reemplaza con la ruta real
+
 const MenuBotonesPt = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [visibleSubMenu, setVisibleSubMenu] = useState(null);
@@ -66,12 +69,19 @@ const MenuBotonesPt = () => {
                 <div>Potenciales Evocados</div>
             </div>
 
-            {/* Botón para ocultar/mostrar menú */}
+            {/* Botón para ocultar/mostrar menú con imagen */}
             <button
-                className="bg-gray-700 text-white px-4 py-2 m-2 rounded-md"
+                className="bg-orange-500 text-white px-4 py-2 m-2 rounded-full flex items-center gap-2 "
                 onClick={toggleMenuVisibility}
             >
-                {menuVisible ? "Ocultar Menú" : "Mostrar Menú"}
+                <Image
+                    src={menuVisible ? ocultarMenuIcon : mostrarMenuIcon}
+                    alt={menuVisible ? "Ocultar Menú" : "Mostrar Menú"}
+                    width={34}
+                    height={34}
+                    style={{ filter: 'invert(1)' }}
+                />
+                {menuVisible ? " " : " "}
             </button>
 
             <div className="flex">
@@ -129,7 +139,6 @@ const MenuBotonesPt = () => {
                         <div className="flex min-h-screen flex-col items-center rounded p-2 m-4">
                             {selectedOption === "Nervios Medianos" && <Medianos />}
                             {selectedOption === "Nervios Ulnar" && <Ulnar />}
-
                         </div>
                     )}
                 </div>

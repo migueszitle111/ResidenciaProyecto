@@ -503,6 +503,105 @@
     transition:all .2s ease-in-out;
 }
 
+
+.btnPr29 {
+    position: absolute;
+    height: 2.7vw;
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-65%, -80%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+
+}
+.btnPr30 {
+    position: absolute;
+    height: 2.7vw;
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(55%, -5%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+
+}
+.btnPr31 {
+    position: absolute;
+    height: 2.7vw;
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(150%, 100%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+
+}
+.btnPr32 {
+    position: absolute;
+    height: 2.7vw;
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(185%, 210%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+
+}
+.btnPr33 {
+    position: absolute;
+    height: 2.7vw;
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(245%, 310%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+
+}
+.btnPr34 {
+    position: absolute;
+    height: 2.7vw;
+    width: 2.7vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(320%, 395%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+
+}
+
+
 .text-boxPr {
     position: absolute;
     transform: translate(-50%, -50%);

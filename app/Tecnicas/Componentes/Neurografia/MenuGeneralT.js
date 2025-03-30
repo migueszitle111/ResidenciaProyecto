@@ -36,11 +36,14 @@ import Trigemino from "./Trigemino/Trigemino";
 import UlnarMt from "./UlnarMt/UlnarMt";
 import UlnarSt from "./UlnarSt/UlnarSt";
 
+import mostrarMenuIcon from "/public/I_In.svg"; // Reemplaza con la ruta real
+import ocultarMenuIcon from "/public/I_Out.svg"; // Reemplaza con la ruta real
 
-const MenuGeneralT = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [subMenuVisibility, setSubMenuVisibility] = useState({});
-  const [visibleSubMenu, setVisibleSubMenu] = useState(null);
+
+const MenuBotonesPt = () => {
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [visibleSubMenu, setVisibleSubMenu] = useState(null);
+    const [menuVisible, setMenuVisible] = useState(true);
 
   const Neurolografia = [
     {
@@ -228,128 +231,140 @@ const MenuGeneralT = () => {
     { Menu: "Movimiento", Submenu: ["Tremor"] },
   ];
 
-  const handleClick = (option) => {
-    setSelectedOption(option);
-  };
+    const handleClick = (option) => {
+        setSelectedOption(option);
+        setMenuVisible(false); // Ocultar el menú al seleccionar una opción
+    };
 
-  const toggleSubMenuVisibility = (menuOption) => {
-    setVisibleSubMenu((prevMenu) =>
-      prevMenu === menuOption ? null : menuOption
-    );
-  };
+    const toggleSubMenuVisibility = (menuOption) => {
+        setVisibleSubMenu((prevMenu) =>
+            prevMenu === menuOption ? null : menuOption
+        );
+    };
 
-  return (
-    <div>
-      <div className="BannerTitlepage">
-        <div>Neurografía</div>
-      </div>
-      <div className="flex">
-        <div className="w-1/4 max-h-full">
-          <div className="p-1">
-            <div className="p-1">
-              <div className="bg-[#3f3c3c] mt-1 p-2 rounded-bl-lg rounded-2xl text-white text-justify flex flex-col truncate lg:truncate xl:truncate">
-                <h2 className="text-lg mb-4 truncate lg:truncate xl:truncate">
-                  Neurografía
-                </h2>
-                {Neurolografia.map((menuOption, menuIndex) => (
-                  <div key={menuIndex} className="ml-4">
-                    <button
-                      className={`w-full flex flex-col lg:w-auto text-left lg:text-justify hover:text-orange-600 active:bg-[#404040] text-white py-2 lg:py-3 rounded truncate lg:truncate xl:truncate ${
-                        visibleSubMenu === menuOption.Menu ? "bg-opacity-50" : ""
-                      }`}
-                      onClick={() => toggleSubMenuVisibility(menuOption.Menu)}
-                    >
-                      › {menuOption.Menu}
-                    </button>
-                    {visibleSubMenu === menuOption.Menu && (
-                      <div>
-                        {menuOption.Submenu.map((submenuOption, submenuIndex) => (
-                          <button
-                            key={submenuIndex}
-                            className={`w-full flex flex-col text-sm lg:w-auto text-left lg:text-justify py-2 px-4 lg:py-3 lg:px-6 rounded truncate lg:truncate xl:truncate ${
-                              selectedOption === submenuOption
-                                ? "text-orange-600"
-                                : "text-white"
-                            } hover:text-orange-600`}
-                            onClick={() => handleClick(submenuOption)}
-                          >
-                            {submenuOption}
-                          </button>
+    const toggleMenuVisibility = () => {
+        setMenuVisible(!menuVisible);
+    };
+
+    return (
+        <div>
+            <div className="BannerTitlepage">
+                <div>Neurolografia</div>
+            </div>
+
+            {/* Botón para ocultar/mostrar menú */}
+            <button
+                className="bg-black text-white px-4 py-2 m-2 rounded-3xl flex items-center gap-2 border border-orange-500"
+                onClick={toggleMenuVisibility}
+            >
+                <Image
+                    src={menuVisible ? ocultarMenuIcon : mostrarMenuIcon}
+                    alt={menuVisible ? "Ocultar Menú" : "Mostrar Menú"}
+                    width={34}
+                    height={34}
+                    style={{ filter: 'invert(1)' }}
+                />
+                {menuVisible ? " " : " "}
+            </button>
+
+            <div className="flex">
+                {/* Menú desplegable */}
+                {menuVisible && (
+                    <div className="w-1/5 max-h-full bg-[#3f3c3c] text-white p-4 rounded-2xl">
+                        <h2 className="text-lg mb-4">Neurolografia</h2>
+                        {Neurolografia.map((menuOption, menuIndex) => (
+                            <div key={menuIndex} className="ml-2">
+                                <button
+                                    className="w-full text-left py-2 hover:text-orange-600"
+                                    onClick={() => toggleSubMenuVisibility(menuOption.Menu)}
+                                >
+                                    › {menuOption.Menu}
+                                </button>
+                                {visibleSubMenu === menuOption.Menu && (
+                                    <div className="ml-4">
+                                        {menuOption.Submenu.map((submenuOption, submenuIndex) => (
+                                            <button
+                                                key={submenuIndex}
+                                                className={`w-full text-sm text-left py-1 hover:text-orange-600 ${
+                                                    selectedOption === submenuOption ? "text-orange-600" : ""
+                                                }`}
+                                                onClick={() => handleClick(submenuOption)}
+                                            >
+                                                {submenuOption}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         ))}
-                      </div>
+                    </div>
+                )}
+
+                {/* Contenido Principal */}
+                <div className="w-4/5 max-h-full">
+                    {!selectedOption ? (
+                        <div className="flex min-h-screen flex-col items-center p-10">
+                            <Image
+                                src="/L_B_Blanco.svg"
+                                alt="Logo de la empresa"
+                                width={120}
+                                height={120}
+                                className="w-52 h-52"
+                            />
+                            <h1 className="text-white text-4xl">Valores</h1>
+                            <p className="pt-16 text-white text-center text-xl italic">
+                              Bienvenido a la sección de Valores en donde podrá contar a
+                              disposición de la información que se encuentran disponibles en
+                              nuestra plataforma.
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="flex min-h-screen flex-col items-center rounded p-2 m-4">
+                            {selectedOption === "Mediano (motor)" && <MedianoMt />}
+                            {selectedOption === "Mediano (sensitivo)" && <MedianoSt />}
+                            {selectedOption === "Ulnar (motor)" && <UlnarMt />}
+                            {selectedOption === "Ulnar (sensitivo)" && <UlnarSt />}
+                            {selectedOption === "Radial (motor)" && <RadialMt />}
+                            {selectedOption === "Radial (sensitivo)" && <RadialSt />}
+                            {selectedOption === "Antebraquial cutáneo lateral" && <CutaneoL />}
+                            {selectedOption === "Antebraquial cutáneo medial" && <CutaneoM />}
+                            {selectedOption === "Antebraquial cutáneo posterior" && <CutaneoP />}
+                            {selectedOption === "Axilar" && <Axilar />}
+                            {selectedOption === "Musculocutáneo" && <Musculocutaneo />}
+                            {selectedOption === "Supraescapular" && <Supraescapular />}
+                            {selectedOption === "Escapular dorsal" && <EscapularDorsal />}
+                            {selectedOption === "Torácico largo" && <ToracicoLargo />}
+                            {selectedOption === "Toracodorsal" && <Toracodorsal />}
+
+                            {selectedOption === "Frénico" && <Frenico />}
+                            {selectedOption === "Espinal accesorio" && <Espinal />}
+                            {selectedOption === "Supraclavicular" && <Supraclavicular />}
+                            {selectedOption === "Auricular mayor" && <AuricularM />}
+                            {selectedOption === "Occipital mayor" && <OccipitalM />}
+                            {selectedOption === "Facial" && <Facial />}
+                            {selectedOption === "Trigémino" && <Trigemino />}
+
+                            {selectedOption === "Peroneo" && <Peroneo />}
+                            {selectedOption === "Peroneo superficial" && <PeroneoSuperficial />}
+                            {selectedOption === "Peroneo profundo" && <PeroneoProfundo />}
+                            {selectedOption === "Tibial" && <Tibial />}
+                            {selectedOption === "Sural" && <Sural />}
+                            {selectedOption === "Plantar" && <Plantar />}
+                            {selectedOption === "Femoral" && <Femoral />}
+                            {selectedOption === "Safeno" && <Safeno />}
+                            {selectedOption === "Femorocutáneo lateral" && <FemoralcutaneoLt />}
+                            {selectedOption === "Cutáneo femoral" && <CutaneoFemoral />} 
+                            
+                            {selectedOption === "Ciático" && <Ciatico />}
+                            {selectedOption === "Pudendo" && <Pudendo />}
+                            {selectedOption === "Dorsal del pene" && <DorsalDelPene />}
+                            
+                        </div>
                     )}
-                  </div>
-                ))}
-              </div>
+                </div>
             </div>
-          </div>
         </div>
-
-        <div className="w-3/4 max-h-full">
-          {!selectedOption && (
-            <div className="flex min-h-screen flex-col items-center p-10">
-              <Image
-                src="/L_B_Blanco.svg"
-                alt="Logo de la empresa"
-                width={120}
-                height={120}
-                className="w-52 h-52"
-              />
-              <h1 className="text-white text-4xl">Valores</h1>
-              <p className="pt-16 text-white text-center text-xl italic">
-                Bienvenido a la sección de Valores en donde podrá contar a
-                disposición de la información que se encuentran disponibles en
-                nuestra plataforma.
-              </p>
-            </div>
-          )}
-          {selectedOption && (
-            <div className="flex min-h-screen flex-col items-center rounded p-2 m-4">
-              {selectedOption === "Mediano (motor)" && <MedianoMt />}
-              {selectedOption === "Mediano (sensitivo)" && <MedianoSt />}
-              {selectedOption === "Ulnar (motor)" && <UlnarMt />}
-              {selectedOption === "Ulnar (sensitivo)" && <UlnarSt />}
-              {selectedOption === "Radial (motor)" && <RadialMt />}
-              {selectedOption === "Radial (sensitivo)" && <RadialSt />}
-              {selectedOption === "Antebraquial cutáneo lateral" && <CutaneoL />}
-              {selectedOption === "Antebraquial cutáneo medial" && <CutaneoM />}
-              {selectedOption === "Antebraquial cutáneo posterior" && <CutaneoP />}
-              {selectedOption === "Axilar" && <Axilar />}
-              {selectedOption === "Musculocutáneo" && <Musculocutaneo />}
-              {selectedOption === "Supraescapular" && <Supraescapular />}
-              {selectedOption === "Escapular dorsal" && <EscapularDorsal />}
-              {selectedOption === "Torácico largo" && <ToracicoLargo />}
-              {selectedOption === "Toracodorsal" && <Toracodorsal />}
-
-              {selectedOption === "Frénico" && <Frenico />}
-              {selectedOption === "Espinal accesorio" && <Espinal />}
-              {selectedOption === "Supraclavicular" && <Supraclavicular />}
-              {selectedOption === "Auricular mayor" && <AuricularM />}
-              {selectedOption === "Occipital mayor" && <OccipitalM />}
-              {selectedOption === "Facial" && <Facial />}
-              {selectedOption === "Trigémino" && <Trigemino />}
-
-              {selectedOption === "Peroneo" && <Peroneo />}
-              {selectedOption === "Peroneo superficial" && <PeroneoSuperficial />}
-              {selectedOption === "Peroneo profundo" && <PeroneoProfundo />}
-              {selectedOption === "Tibial" && <Tibial />}
-              {selectedOption === "Sural" && <Sural />}
-              {selectedOption === "Plantar" && <Plantar />}
-              {selectedOption === "Femoral" && <Femoral />}
-              {selectedOption === "Safeno" && <Safeno />}
-              {selectedOption === "Femorocutáneo lateral" && <FemoralcutaneoLt />}
-              {selectedOption === "Cutáneo femoral" && <CutaneoFemoral />} 
-              
-              {selectedOption === "Ciático" && <Ciatico />}
-              {selectedOption === "Pudendo" && <Pudendo />}
-              {selectedOption === "Dorsal del pene" && <DorsalDelPene />}
-              
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default MenuGeneralT;
+export default MenuBotonesPt;

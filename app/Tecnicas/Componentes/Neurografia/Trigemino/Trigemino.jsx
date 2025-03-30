@@ -13,6 +13,8 @@ const Trigemino = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -38,14 +40,14 @@ const Trigemino = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
     };
 
 
@@ -64,12 +66,12 @@ const Trigemino = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnTg1" onClick={() => handleButtonClick('ÁREA FRONTAL. El cátodo del estimulador se coloca en la esquina lateral superior del hueso frontal', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTg2" onClick={() => handleButtonClick('RAMA OFTÁLIMICA - El electrodo activo de superficie se coloca en el foramen supraorbitario', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTg3" onClick={() => handleButtonClick('Medial al elétrodo activo, 2-3 cm de distancia', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTg4" onClick={() => handleButtonClick('Región frontal contralateral', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-Trigemino-G.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-Trigemino-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTg1" onClick={() => handleButtonClick('ÁREA FRONTAL. El cátodo del estimulador se coloca en la esquina lateral superior del hueso frontal', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTg2" onClick={() => handleButtonClick('RAMA OFTÁLIMICA - El electrodo activo de superficie se coloca en el foramen supraorbitario', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTg3" onClick={() => handleButtonClick('Medial al elétrodo activo, 2-3 cm de distancia', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTg4" onClick={() => handleButtonClick('Región frontal contralateral', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Trigemino-G.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Trigemino-T.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
@@ -80,26 +82,10 @@ const Trigemino = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-                <div
-                    className="image-boxM"
-                    style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
-                        position: 'absolute',
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '18vw',
-                            maxHeight: '18vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-image"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

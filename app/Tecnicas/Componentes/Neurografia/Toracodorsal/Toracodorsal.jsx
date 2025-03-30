@@ -13,6 +13,8 @@ const Toracodorsal = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -40,14 +42,14 @@ const Toracodorsal = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
     };
 
 
@@ -66,12 +68,12 @@ const Toracodorsal = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnTd1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio', {  top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTd2" onClick={() => handleButtonClick('Articulación acromoclavicular', { top: '12%', left: '32%'})}></button>}
-            {currentImageIndex === 0 && <button className="btnTd3" onClick={() => handleButtonClick('LATISSIMUS DORSI C6, C7, C8 - Electrodo de aguja concéntrico insertado en el vientre muscular, pared posterior de la axila', {  top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTd4" onClick={() => handleButtonClick('No se requiere', { top: '12%', left: '32%'})}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/toracodorsal-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/toracodorsal-T-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTd1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio', {  top: '35%', left: '25%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTd2" onClick={() => handleButtonClick('Articulación acromoclavicular', { top: '35%', left: '25%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnTd3" onClick={() => handleButtonClick('LATISSIMUS DORSI C6, C7, C8 - Electrodo de aguja concéntrico insertado en el vientre muscular, pared posterior de la axila', {  top: '35%', left: '25%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTd4" onClick={() => handleButtonClick('No se requiere', { top: '35%', left: '25%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-T-01.png",{ top: '2%', left: '2%' })}></button>}
                 
             </div>
             {textBoxVisible && (
@@ -79,26 +81,10 @@ const Toracodorsal = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxM"
-                style={{
-                    top: imageBoxPosition.top,
-                    left: imageBoxPosition.left,
-                    position: 'absolute',
-                }}
-            >
-                <img
-                    src={imageBoxContent}
-                    alt="Cuadro dinámico"
-                    style={{
-                        position: 'absolute',
-                        maxWidth: '17vw',
-                        maxHeight: '17vh',
-                        transition: 'transform 0.3s ease',
-                    }}
-                    className="zoomable-imageTd"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

@@ -12,7 +12,9 @@ const Pudendo = () => {
     const [imageBoxVisible, setImageBoxVisible] = useState(false);
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [textBoxClass, setTextBoxClass] = useState('text-boxPd');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -27,7 +29,7 @@ const Pudendo = () => {
         setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxPd') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -38,14 +40,14 @@ const Pudendo = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
     };
 
 
@@ -64,41 +66,25 @@ const Pudendo = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnPd1" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de referencia', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPd2" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de captación', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPd3" onClick={() => handleButtonClick('ELECTRODO “ST. MARK”. Con la punta del dedo índice y direccionando con una leve rotación hacia izquierda o derecha (30 a 45°) dependiendo del lado a evaluar, con una palpación delicada se buscará una protuberancia de consistencia firme que corresponde a la espina isquiática', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/Pudendo-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/Pudendo-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPd1" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de referencia', { top: '60%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPd2" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de captación', { top: '60%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPd3" onClick={() => handleButtonClick('ELECTRODO “ST. MARK”. Con la punta del dedo índice y direccionando con una leve rotación hacia izquierda o derecha (30 a 45°) dependiendo del lado a evaluar, con una palpación delicada se buscará una protuberancia de consistencia firme que corresponde a la espina isquiática', { top: '60%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/Pudendo-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Sacro/Pudendo-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
                 <div
-                    className={`text-boxMs ${textBoxClass}`}
+                    className={`text-boxPd ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-                <div
-                    className="image-boxM"
-                    style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
-                        position: 'absolute',
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '16vw',
-                            maxHeight: '16vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-image"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

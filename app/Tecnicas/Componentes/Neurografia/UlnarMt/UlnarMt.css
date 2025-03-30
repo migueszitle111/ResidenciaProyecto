@@ -122,6 +122,7 @@
     font-size: 1.9vw;
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
+    
 }
 
 .btnUMt2 {
@@ -594,6 +595,153 @@
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
 }
+
+
+
+
+.btnUMt30 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-215%, -370%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+     
+}
+
+.btnUMt31 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(390%, -190%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+     
+}
+
+.btnUMt33 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(530%, -160%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+     
+}
+
+.btnUMt34 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(-280%, 460%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+     
+}
+.btnUMt35 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(430%, -405%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+     
+}
+.btnUMt36 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(460%, -90%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+     
+}
+
+.btnUMt37 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(620%, -165%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+     
+}
+
+.btnUMt38 {
+    position: absolute;
+    height: 2.4vw;
+    width: 2.4vw;
+    top: 30%;
+    left: 55%;
+    transform: translate(240%, 620%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: transparent;
+    font-size: 1.9vw;
+    font-family: 'Times New Roman';
+    transition:all .2s ease-in-out;
+     
+}
+
+
 
 
 

@@ -164,6 +164,129 @@
 }
 
 
+.btnPs7 {
+    position: absolute;
+    height: 2.3vw;
+    width: 2.3vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(-125%, 590%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs8 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(280%, 320%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs9 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(325%, 225%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs10 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(410%, 25%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs11 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(440%, -75%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs12 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(470%, -175%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs13 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(500%, -275%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+.btnPs14 {
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(530%, -375%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
 .text-boxPs {
     position: absolute;
     transform: translate(-50%, -50%);

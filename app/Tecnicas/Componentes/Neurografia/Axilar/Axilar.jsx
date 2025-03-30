@@ -13,6 +13,8 @@ const Axilar = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -40,14 +42,14 @@ const Axilar = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
     };
 
 
@@ -66,12 +68,12 @@ const Axilar = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnAx1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAx2" onClick={() => handleButtonClick('Articulación acromioclavicular', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnAx3" onClick={() => handleButtonClick('DELTOIDS MIDIUM C5, C6 - Punto medio entre articulación acromioclavicular y área de inserción deltoidea en region lateral del hombro', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAx4" onClick={() => handleButtonClick('Inserción deltoidea, unión del tercio proximal y medio del brazo', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/Axilar-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/Axilar-T-01.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAx1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio', {  top: '62%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAx2" onClick={() => handleButtonClick('Articulación acromioclavicular', { top: '62%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnAx3" onClick={() => handleButtonClick('DELTOIDS MIDIUM C5, C6 - Punto medio entre articulación acromioclavicular y área de inserción deltoidea en region lateral del hombro', {  top: '62%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAx4" onClick={() => handleButtonClick('Inserción deltoidea, unión del tercio proximal y medio del brazo', { top: '62%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/Axilar-G-01.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/Axilar-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 
             </div>
             {textBoxVisible && (
@@ -79,26 +81,11 @@ const Axilar = () => {
                     {textBoxContent}
                 </div>
             )}
-                        {imageBoxVisible && (
-            <div
-                className="image-boxM"
-                style={{
-                    top: imageBoxPosition.top,
-                    left: imageBoxPosition.left,
-                    position: 'absolute',
-                }}
-            >
-                <img
-                    src={imageBoxContent}
-                    alt="Cuadro dinámico"
-                    style={{
-                        position: 'absolute',
-                        maxWidth: '17vw',
-                        maxHeight: '17vh',
-                        transition: 'transform 0.3s ease',
-                    }}
-                    className="zoomable-imageAx"
-                    />
+            
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

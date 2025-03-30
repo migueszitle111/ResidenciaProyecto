@@ -12,7 +12,9 @@ const Frenico = () => {
     const [imageBoxVisible, setImageBoxVisible] = useState(false);
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [textBoxClass, setTextBoxClass] = useState('text-boxFn');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -32,7 +34,7 @@ const Frenico = () => {
         setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxFn') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -43,14 +45,14 @@ const Frenico = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
     };
 
 
@@ -70,51 +72,35 @@ const Frenico = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnFn1" onClick={() => handleButtonClick('De forma bilateral en el séptimo espacio intercostal horizontal a la tetilla o con referencia a línea media clavicular.1', {  top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnFn2" onClick={() => handleButtonClick('Sobre pectoral ipsilateral a estimulo.', { top: '12%', left: '32%'})}></button>}
-            {currentImageIndex === 0 && <button className="btnFn3" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. Borde posterior del músculo esternocleidomastoideo (ECM) a nivel del cartílago tiroides', {  top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnFn4" onClick={() => handleButtonClick('CUELLO PUNTO INFERIOR. Sobre el borde superior de la clavícula entre las cabezas esternal y clavicular del musculo ECM con posición a la neutra o ligeramente extendida', { top: '12%', left: '32%'})}></button>}
-            {currentImageIndex === 0 && <button className="btnFn5" onClick={() => handleButtonClick('DIAPHRAGM C3, C4, C5 - Electrodo de superficie sobre apófisis xifoides', {  top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnFn6" onClick={() => handleButtonClick('De forma bilateral en el séptimo espacio intercostal horizontal a línea media clavicular', { top: '12%', left: '32%'})}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/frenico-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/01-Frenico-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFn1" onClick={() => handleButtonClick('De forma bilateral en el séptimo espacio intercostal horizontal a la tetilla o con referencia a línea media clavicular.1', {  top: '65%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFn2" onClick={() => handleButtonClick('Sobre pectoral ipsilateral a estimulo.', { top: '65%', left: '50%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnFn3" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. Borde posterior del músculo esternocleidomastoideo (ECM) a nivel del cartílago tiroides', {  top: '65%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFn4" onClick={() => handleButtonClick('CUELLO PUNTO INFERIOR. Sobre el borde superior de la clavícula entre las cabezas esternal y clavicular del musculo ECM con posición a la neutra o ligeramente extendida', { top: '65%', left: '50%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnFn5" onClick={() => handleButtonClick('DIAPHRAGM C3, C4, C5 - Electrodo de superficie sobre apófisis xifoides', {  top: '65%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnFn6" onClick={() => handleButtonClick('De forma bilateral en el séptimo espacio intercostal horizontal a línea media clavicular', { top: '65%', left: '50%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/frenico-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Frenico-T.png",{ top: '5%', left: '2%' })}></button>}
 
-            {currentImageIndex === 1 && <button className="btnFn7" onClick={() => handleButtonClick('Caudalmente a electrodo de registros, pero sobre noveno espacio intercostal', {  top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFn8" onClick={() => handleButtonClick('DIAPHRAGM C3, C4, C5 - Electrodo de superficie sobre octavo espacio intercostal en la línea axilar anterior', { top: '12%', left: '32%'})}></button>}
-            {currentImageIndex === 1 && <button className="btnFn9" onClick={() => handleButtonClick('CUELLO PUNTO INFERIOR. Sobre el borde superior de la clavícula entre las cabezas esternal y clavicular del musculo ECM con posición a la neutra o ligeramente extendida', {  top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnFn10" onClick={() => handleButtonClick('Esternón', { top: '12%', left: '32%'})}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/FrenicoG.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Cervicales/02-Frenico-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFn7" onClick={() => handleButtonClick('Caudalmente a electrodo de registros, pero sobre noveno espacio intercostal', {  top: '65%', left: '50%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFn8" onClick={() => handleButtonClick('DIAPHRAGM C3, C4, C5 - Electrodo de superficie sobre octavo espacio intercostal en la línea axilar anterior', { top: '65%', left: '50%'})}></button>}
+            {currentImageIndex === 1 && <button className="btnFn9" onClick={() => handleButtonClick('CUELLO PUNTO INFERIOR. Sobre el borde superior de la clavícula entre las cabezas esternal y clavicular del musculo ECM con posición a la neutra o ligeramente extendida', {  top: '65%', left: '50%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnFn10" onClick={() => handleButtonClick('Esternón', { top: '65%', left: '50%'})}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/FrenicoG.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Frenico-T.png",{ top: '5%', left: '2%' })}></button>}
 
             </div>
             {textBoxVisible && (
                 <div
-                    className={`text-boxMs ${textBoxClass}`}
+                    className={`text-boxFn ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-                <div
-                    className="image-boxM"
-                    style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
-                        position: 'absolute',
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '17vw',
-                            maxHeight: '17vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-image"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

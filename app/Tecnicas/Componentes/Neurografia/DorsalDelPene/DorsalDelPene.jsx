@@ -13,6 +13,8 @@ const DorsalDelPene = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -38,15 +40,16 @@ const DorsalDelPene = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
     };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
+    };
+
 
 
     return (
@@ -69,8 +72,8 @@ const DorsalDelPene = () => {
             {currentImageIndex === 0 && <button className="btnDs3" onClick={() => handleButtonClick('DORSO DEL PENE (antidromico) - 1-2 cm distal del electrodo de referencia', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnDs4" onClick={() => handleButtonClick('ESTIMULADOR DE ANILLO. Colocar el cátodo en el cuello del glande ', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnDs5" onClick={() => handleButtonClick('ESTIMULADOR DE ANILLO. Colocar el ánodo justo en la mitad del glande', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/DorsalP-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/Sacro/DorsalP-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/DorsalP-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Sacro/DorsalP-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
@@ -81,26 +84,10 @@ const DorsalDelPene = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-                <div
-                    className="image-boxM"
-                    style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
-                        position: 'absolute',
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '16vw',
-                            maxHeight: '16vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-image"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

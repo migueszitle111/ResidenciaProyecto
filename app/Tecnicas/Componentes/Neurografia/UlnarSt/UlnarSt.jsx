@@ -13,6 +13,8 @@ const UlnarSt = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -44,14 +46,17 @@ const UlnarSt = () => {
         }
     };
 
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+
+
+    // Funciones para abrir y cerrar el modal
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
     };
 
 
@@ -70,17 +75,17 @@ const UlnarSt = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnUSt1" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnUSt2" onClick={() => handleButtonClick('DEDO MEÑIQUE O QUINTO DEDO - Ligeramente distal a la articulación metacarpofalángica, evitando colocar electrodo sobre pliegue cutáneo', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnUSt3" onClick={() => handleButtonClick('CUARTO DEDO - Ligeramente distal a la articulación metacarpofalángica, evitando colocar electrodo sobre pliegue cutáneo', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnUSt4" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnUSt5" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnarSt-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosSp/ulnarSt-T-01.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt1" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt2" onClick={() => handleButtonClick('DEDO MEÑIQUE O QUINTO DEDO - Ligeramente distal a la articulación metacarpofalángica, evitando colocar electrodo sobre pliegue cutáneo', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt3" onClick={() => handleButtonClick('CUARTO DEDO - Ligeramente distal a la articulación metacarpofalángica, evitando colocar electrodo sobre pliegue cutáneo', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt4" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt5" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnarSt-G-01.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnarSt-T-01.png",{ top: '2%', left: '2%' })}></button>}
             
-                {currentImageIndex === 1 && <button className="btnUSt6" onClick={() => handleButtonClick('4 cm distalmente sobre dorso del 4to dedo, falange proximal', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnUSt7" onClick={() => handleButtonClick('DORSO DE LA MANO - Punto medio entre 4to y 5to metacarpianos', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 1 && <button className="btnUSt8" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnUSt6" onClick={() => handleButtonClick('4 cm distalmente sobre dorso del 4to dedo, falange proximal', {  top: '10%', left: '70%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnUSt7" onClick={() => handleButtonClick('DORSO DE LA MANO - Punto medio entre 4to y 5to metacarpianos', { top: '10%', left: '70%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnUSt8" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior', {  top: '10%', left: '70%' })}></button>}
                 
             </div>
             {textBoxVisible && (
@@ -88,26 +93,10 @@ const UlnarSt = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxM"
-                style={{
-                    top: imageBoxPosition.top,
-                    left: imageBoxPosition.left,
-                    position: 'absolute',
-                }}
-            >
-                <img
-                    src={imageBoxContent}
-                    alt="Cuadro dinámico"
-                    style={{
-                        position: 'absolute',
-                        maxWidth: '20vw',
-                        maxHeight: '20vh',
-                        transition: 'transform 0.3s ease',
-                    }}
-                    className="zoomable-imageUlSt"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

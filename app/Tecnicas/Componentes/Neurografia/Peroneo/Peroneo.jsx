@@ -13,6 +13,8 @@ const Peroneo = () => {
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [extraImage, setExtraImage] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const images = [
         {
@@ -53,16 +55,16 @@ const Peroneo = () => {
             setTextBoxVisible(true);
         }
     };
-
-    const handleImageBoxClick = (image, position) => {
-        if (imageBoxVisible && imageBoxContent === image) {
-            setImageBoxVisible(false);
-        } else {
-            setImageBoxContent(image);
-            setImageBoxPosition(position);
-            setImageBoxVisible(true);
-        }
+    const openModal = (image) => {
+        setExtraImage(image);
+        setModalVisible(true);
     };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setExtraImage('');
+    };
+
 
 
     return (
@@ -80,40 +82,47 @@ const Peroneo = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnPr1" onClick={() => handleButtonClick('Articulación metatarsofalángica del quinto ortejo', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPr2" onClick={() => handleButtonClick('EXTENSOR DIGITORUM BREVIS L5, S1 - Región anterolateral mediotarsiana proximal, trazar una línea imaginaria desde el centro del maléolo lateral hasta la articulación metatarsofalángica del quinto ortejo y colocar electrodo de superficie en el centro del tercio proximal', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPr3" onClick={() => handleButtonClick('TOBILLO. 8 cm proximal del electrodo activo, discretamente lateral al tendón del tibial anterior', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPr4" onClick={() => handleButtonClick('Dorso del pie o talón', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPr5" onClick={() => handleButtonClick('FÍBULA. Detrás y discretamente por debajo de la cabeza del peroné', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPr6" onClick={() => handleButtonClick('RODILLA. En el punto de la sección transversal entre el tendón lateral de los isquiotibiales y el pliegue del hueco poplíteo', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/01-Peroneo-G.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => handleImageBoxClick("/assets/ValoresImg/MiembrosInf/01-Peroneo-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPr1" onClick={() => handleButtonClick('Articulación metatarsofalángica del quinto ortejo', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPr2" onClick={() => handleButtonClick('EXTENSOR DIGITORUM BREVIS L5, S1 - Región anterolateral mediotarsiana proximal, trazar una línea imaginaria desde el centro del maléolo lateral hasta la articulación metatarsofalángica del quinto ortejo y colocar electrodo de superficie en el centro del tercio proximal', { top: '14%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPr3" onClick={() => handleButtonClick('TOBILLO. 8 cm proximal del electrodo activo, discretamente lateral al tendón del tibial anterior', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPr4" onClick={() => handleButtonClick('Dorso del pie o talón', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPr5" onClick={() => handleButtonClick('FÍBULA. Detrás y discretamente por debajo de la cabeza del peroné', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPr6" onClick={() => handleButtonClick('RODILLA. En el punto de la sección transversal entre el tendón lateral de los isquiotibiales y el pliegue del hueco poplíteo', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/01-Peroneo-G.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/01-Peroneo-T.png",{ top: '5%', left: '2%' })}></button>}
             
-            {currentImageIndex === 1 && <button className="btnPr7" onClick={() => handleButtonClick('RODILLA. En el punto de la sección transversal entre el tendón lateral de los isquiotibiales y el pliegue del hueco poplíteo', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnPr8" onClick={() => handleButtonClick('Tibia medial o rotula', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnPr9" onClick={() => handleButtonClick('FÍBULA. Detrás y discretamente por debajo de la cabeza del peroné', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnPr10" onClick={() => handleButtonClick('TIBIALIS ANTERIOR L4, L5 - Cara lateral de la tibia, el electrodo de superficie se coloca en la unión del tercio proximal y medio de la pierna, en el punto exacto de una línea trazada entre la tuberosidad tibial anterior y el maléolo lateral', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnPr11" onClick={() => handleButtonClick('4 cm distal al electrodo activo sobre el tendón del Tibial anterior', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPr7" onClick={() => handleButtonClick('RODILLA. En el punto de la sección transversal entre el tendón lateral de los isquiotibiales y el pliegue del hueco poplíteo', { top: '10%', left: '75%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPr8" onClick={() => handleButtonClick('Tibia medial o rotula', { top: '10%', left: '75%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPr9" onClick={() => handleButtonClick('FÍBULA. Detrás y discretamente por debajo de la cabeza del peroné', { top: '10%', left: '75%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPr10" onClick={() => handleButtonClick('TIBIALIS ANTERIOR L4, L5 - Cara lateral de la tibia, el electrodo de superficie se coloca en la unión del tercio proximal y medio de la pierna, en el punto exacto de una línea trazada entre la tuberosidad tibial anterior y el maléolo lateral', { top: '12%', left: '75%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPr11" onClick={() => handleButtonClick('4 cm distal al electrodo activo sobre el tendón del Tibial anterior', { top: '10%', left: '75%' })}></button>}
             
-            {currentImageIndex === 2 && <button className="btnPr12" onClick={() => handleButtonClick('RODILLA. En el punto de la sección transversal entre el tendón lateral de los isquiotibiales y el pliegue del hueco poplíteo', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnPr13" onClick={() => handleButtonClick('FÍBULA. Detrás y discretamente por debajo de la cabeza del peroné', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnPr14" onClick={() => handleButtonClick('PERONEUS LONGUS L5, S1 - El electrodo de superficie se coloca a 8 cm distal del punto de estimulación de la fíbula sobre una línea trazada entre maléolo lateral y la cabeza del peroné', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnPr15" onClick={() => handleButtonClick('4 cm distal del electrodo activo sobre el recorrido del tendón', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnPr16" onClick={() => handleButtonClick('Tibia medial', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPr12" onClick={() => handleButtonClick('RODILLA. En el punto de la sección transversal entre el tendón lateral de los isquiotibiales y el pliegue del hueco poplíteo', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPr13" onClick={() => handleButtonClick('FÍBULA. Detrás y discretamente por debajo de la cabeza del peroné', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPr14" onClick={() => handleButtonClick('PERONEUS LONGUS L5, S1 - El electrodo de superficie se coloca a 8 cm distal del punto de estimulación de la fíbula sobre una línea trazada entre maléolo lateral y la cabeza del peroné', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPr15" onClick={() => handleButtonClick('4 cm distal del electrodo activo sobre el recorrido del tendón', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 2 && <button className="btnPr16" onClick={() => handleButtonClick('Tibia medial', { top: '10%', left: '23%' })}></button>}
             
-            {currentImageIndex === 3 && <button className="btnPr17" onClick={() => handleButtonClick('RODILLA. En el punto de la sección transversal entre el tendón lateral de los isquiotibiales y el pliegue del hueco poplíteo', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 3 && <button className="btnPr18" onClick={() => handleButtonClick('FÍBULA. Detrás y discretamente por debajo de la cabeza del peroné', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 3 && <button className="btnPr19" onClick={() => handleButtonClick('Tibia medial', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 3 && <button className="btnPr20" onClick={() => handleButtonClick('EXTENSOR HALLUCIS LONGUS L5-S1 - Electrodo de superficie colocado entre el tercio distal y medio de la pierna a 2 cm lateral del borde de la tibia', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 3 && <button className="btnPr21" onClick={() => handleButtonClick('4 cm distal del electrodo activo', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 3 && <button className="btnPr17" onClick={() => handleButtonClick('RODILLA. En el punto de la sección transversal entre el tendón lateral de los isquiotibiales y el pliegue del hueco poplíteo', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 3 && <button className="btnPr18" onClick={() => handleButtonClick('FÍBULA. Detrás y discretamente por debajo de la cabeza del peroné', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 3 && <button className="btnPr19" onClick={() => handleButtonClick('Tibia medial', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 3 && <button className="btnPr20" onClick={() => handleButtonClick('EXTENSOR HALLUCIS LONGUS L5-S1 - Electrodo de superficie colocado entre el tercio distal y medio de la pierna a 2 cm lateral del borde de la tibia', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 3 && <button className="btnPr21" onClick={() => handleButtonClick('4 cm distal del electrodo activo', { top: '10%', left: '23%' })}></button>}
             
-            {currentImageIndex === 4 && <button className="btnPr22" onClick={() => handleButtonClick('22', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 4 && <button className="btnPr23" onClick={() => handleButtonClick('TIBIALIS ANTERIOR L4, L5 - Cara lateral de la tibia, el electrodo de superficie se coloca en la unión del tercio proximal y medio de la pierna, en el punto exacto de una línea trazada entre la tuberosidad tibial anterior y el maléolo lateral', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 4 && <button className="btnPr24" onClick={() => handleButtonClick('4 cm distal al electrodo activo sobre el tendón del Tibial anterior', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 4 && <button className="btnPr25" onClick={() => handleButtonClick('Rotula', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 4 && <button className="btnPr26" onClick={() => handleButtonClick('Articulación metatarsofalángica del quinto ortejo', { top: '12%', left: '32%' })}></button>}           
-            {currentImageIndex === 4 && <button className="btnPr27" onClick={() => handleButtonClick('EXTENSOR DIGITORUM BREVIS L5, S1 - Región anterolateral mediotarsiana proximal, trazar una línea imaginaria desde el centro del maléolo lateral hasta la articulación metatarsofalángica del quinto ortejo y colocar electrodo de superficie en el centro del tercio proximal', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 4 && <button className="btnPr28" onClick={() => handleButtonClick('28', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr22" onClick={() => handleButtonClick('22', { top: '60%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr23" onClick={() => handleButtonClick('TIBIALIS ANTERIOR L4, L5 - Cara lateral de la tibia, el electrodo de superficie se coloca en la unión del tercio proximal y medio de la pierna, en el punto exacto de una línea trazada entre la tuberosidad tibial anterior y el maléolo lateral', { top: '58%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr24" onClick={() => handleButtonClick('4 cm distal al electrodo activo sobre el tendón del Tibial anterior', { top: '60%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr25" onClick={() => handleButtonClick('Rotula', { top: '60%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr26" onClick={() => handleButtonClick('Articulación metatarsofalángica del quinto ortejo', { top: '60%', left: '23%' })}></button>}           
+            {currentImageIndex === 4 && <button className="btnPr27" onClick={() => handleButtonClick('EXTENSOR DIGITORUM BREVIS L5, S1 - Región anterolateral mediotarsiana proximal, trazar una línea imaginaria desde el centro del maléolo lateral hasta la articulación metatarsofalángica del quinto ortejo y colocar electrodo de superficie en el centro del tercio proximal', { top: '58%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr28" onClick={() => handleButtonClick('28', { top: '60%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr29" onClick={() => handleButtonClick('29', { top: '60%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr30" onClick={() => handleButtonClick('30', { top: '60%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr31" onClick={() => handleButtonClick('31', { top: '60%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr32" onClick={() => handleButtonClick('32', { top: '60%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr33" onClick={() => handleButtonClick('33', { top: '60%', left: '23%' })}></button>}
+            {currentImageIndex === 4 && <button className="btnPr34" onClick={() => handleButtonClick('34', { top: '60%', left: '23%' })}></button>}
+            
             
             </div>
             {textBoxVisible && (
@@ -124,26 +133,10 @@ const Peroneo = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-                <div
-                    className="image-boxM"
-                    style={{
-                        top: imageBoxPosition.top,
-                        left: imageBoxPosition.left,
-                        position: 'absolute',
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            position: 'absolute',
-                            maxWidth: '18vw',
-                            maxHeight: '18vh',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        className="zoomable-image"
-                    />
+            {modalVisible && (
+                <div className="modal-gallery">
+                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}
         </div>

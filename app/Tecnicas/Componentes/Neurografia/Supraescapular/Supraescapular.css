@@ -123,6 +123,7 @@
     color: white;
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
+
 }
 .btnSp2 {
     position: absolute;
@@ -172,11 +173,11 @@
 
 .btnSp5 {
     position: absolute;
-    height: 2vw;
-    width: 2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(-85%, 690%);
+    transform: translate(-95%, 560%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -185,13 +186,14 @@
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
+
 .btnSp6 {
     position: absolute;
-    height: 2vw;
-    width: 2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(100%, 355%);
+    transform: translate(65%, 270%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -202,11 +204,11 @@
 }
 .btnSp7 {
     position: absolute;
-    height: 2.3vw;
-    width: 2.3vw;
+    height: 2.7vw;
+    width: 2.7vw;
     top: 30%;
     left: 45%;
-    transform: translate(380%, -60%);
+    transform: translate(325%, -95%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -217,11 +219,11 @@
 }
 .btnSp8 {
     position: absolute;
-    height: 2vw;
-    width: 2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(-25%, -540%);
+    transform: translate(-50%, -520%);
     background-color: transparent;
     border: none;
     border-radius: 50%;

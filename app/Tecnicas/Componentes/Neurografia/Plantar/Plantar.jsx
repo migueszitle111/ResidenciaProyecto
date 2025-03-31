@@ -96,7 +96,8 @@ const Plantar = () => {
             {currentImageIndex === 2 && <button className="btnPt14" onClick={() => handleButtonClick('Sobre el vértice del talon', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 2 && <button className="btnPt15" onClick={() => handleButtonClick('TOBILLO RETROMALEOLAR - De forma antidrómica y con intensidad submáxima a 10 cm en dirección proximal del electrodo activo', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 2 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Plantar-G-03.png",{ top: '2%', left: '2%' })}></button>}
-
+            {currentImageIndex === 2 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Plantar-T-03.png",{ top: '5%', left: '2%' })}></button>}
+            
             </div>
             {textBoxVisible && (
                 <div
@@ -108,9 +109,11 @@ const Plantar = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-                </div>
+                <button className={`print-button`} onClick={closeModal}>
+                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                </button>
+                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+            </div>
             )}
         </div>
     );

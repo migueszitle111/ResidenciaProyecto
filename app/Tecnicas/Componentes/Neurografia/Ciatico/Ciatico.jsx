@@ -75,15 +75,15 @@ const Ciatico = () => {
             {currentImageIndex === 0 && <button className="btnCt3" onClick={() => handleButtonClick('Entre registro y estimulación', { top: '62%', left: '50%' })}></button>}
             {currentImageIndex === 0 && <button className="btnCt4" onClick={() => handleButtonClick('HUECO POPL+ITEO. Con estimulador convencional de puntas, se realiza la estimulación respectiva de nervio Peroneo siguiendo el trayecto a nivel lateral', { top: '62%', left: '50%' })}></button>}
             {currentImageIndex === 0 && <button className="btnCt5" onClick={() => handleButtonClick('HUECO POPLÍTEO. Con estimulador convencional de puntas, se realiza la estimulación respectiva de nervio Tibial siguiendo el trayecto  a nivel medial', { top: '62%', left: '50%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/Ciatico-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Sacro/Ciatico-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
             {currentImageIndex === 1 && <button className="btnCt6" onClick={() => handleButtonClick('Articulación metatarsofalángica del quinto ortejo', { top: '62%', left: '50%' })}></button>}
             {currentImageIndex === 1 && <button className="btnCt7" onClick={() => handleButtonClick('EXTENSOR DIGITORUM BREVIS L5, S1 - Región anterolateral mediotarsiana proximal, trazar una línea imaginaria desde el centro del maléolo lateral hasta la articulación metatarsofalángica del quinto ortejo y colocar electrodo de superficie en el centro del tercio proximal', { top: '62%', left: '50%' })}></button>}
             {currentImageIndex === 1 && <button className="btnCt8" onClick={() => handleButtonClick('ABDUCTOR HALLUCIS S1, S2 - Colocar electrodo de superficie ligeramente proximal y por debajo de la tuberosidad navicular, aproximadamente 1 cm en ambas direcciones', { top: '62%', left: '50%' })}></button>}
             {currentImageIndex === 1 && <button className="btnCt9" onClick={() => handleButtonClick('Base del primer metatarsiano, o en la articulación metatarsofalángica', { top: '62%', left: '50%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/Ciatico-G-02.png",{ top: '2%', left: '2%' })}></button>}
-            
+            {currentImageIndex === 1 && <button className="btnICt3" onClick={() => openModal("/assets/ValoresImg/Sacro/Ciatico-G-02.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/Ciatico-G-01.png",{ top: '2%', left: '2%' })}></button>}
             </div>
             {textBoxVisible && (
                 <div
@@ -95,9 +95,11 @@ const Ciatico = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-                </div>
+                <button className={`print-button`} onClick={closeModal}>
+                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                </button>
+                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+            </div>
             )}
         </div>
     );

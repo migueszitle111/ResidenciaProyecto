@@ -263,8 +263,8 @@ const DropArea = ({
           default={{
             x: item.x,
             y: item.y,
-            width: 180,
-            height: 180
+            width: 200,
+            height: 200
           }}
           onDragStop={(e, d) => handleDragStop(e, d, item)}
           style={{ position: 'absolute' }}

@@ -1216,7 +1216,7 @@ const imageMapRight = {
   position: absolute;
   width: 450px;
   height: 550px;
-  object-fit: cover; /* o fill si prefieres deformar */
+  object-fit: fill; /* o fill si prefieres deformar */
   z-index: 1;
   }
 

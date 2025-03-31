@@ -1,12 +1,12 @@
 'use client'
 import React from 'react';
 import { useState } from 'react';
-import './Style.css';
 import { ReportContextProvider,DropProvider } from '@/src/context';
 import FooterComponents from '../../../components/FooterComponents';
 import HeadComponents from '../../../components/HeadComponents';
 import ReportFace from './ReportFace';
 import MenuReportes from '../../../components/ReportTemplate/MenuReportes';
+import './Style.css';
 
 const Page = () => {
     // Estado global para el texto

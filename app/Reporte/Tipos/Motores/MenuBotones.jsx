@@ -419,13 +419,14 @@ const StepG = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,se
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
+const [isLoading, setIsLoading] = useState(false);
 
   const handleExportPdf = async () => {
     try {
-       // 1) conclusiones (array con {value, title})
+    setIsLoading(true); // ⌛ Mostrar overlay
+    // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
     const conclusiones = conclusions;
-    
       const response = await fetch('/api/pdf/generate-pdf/motoracorticoespinal?route', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -449,7 +450,6 @@ const StepG = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,se
       if (!response.ok) {
         throw new Error("Error al generar PDF");
       }
-  
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -459,12 +459,24 @@ const StepG = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,se
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
+    } finally {
+      document.body.style.cursor = 'default';
+      setIsLoading(false); // ✅ Ocultar overlay
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="loading-overlay">
+        <div className="hourglass">
+        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

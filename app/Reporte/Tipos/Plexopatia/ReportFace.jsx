@@ -128,8 +128,7 @@ const handleDrop = (e) => {
   );
 };
 const Reporte = () => {
-  
-  const { data: session, status } = useSession();
+     const { data: session, status } = useSession();
      const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)
      const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
      const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
@@ -333,20 +332,7 @@ const Reporte = () => {
     const conclusionDivRef = useRef(null);
     const elementRef = useRef(null);
 
-  // Codigo para imprimir en click
-  useEffect(() => {
-    const printButton = document.getElementById('print');
-    const handlePrint = () => {
-      window.print();
-    };
-
-    printButton.addEventListener('click', handlePrint);
-
-    return () => {
-      printButton.removeEventListener('click', handlePrint);
-    };
-  }, []); 
-
+  
   const moveCaretToEnd = (element) => {
     if (!element) return;
     element.focus();
@@ -364,7 +350,6 @@ const Reporte = () => {
   return (
     <div >
       {/* Clase que encapzula la información y el titulo de la pagina */}
-        
       {/* Wrapper que encapsula la image, conclusión y lista de botones */}
       <div className="wrapper">
         {/* Componente de la caja de conclusión junto con la caja de notas */}
@@ -394,9 +379,8 @@ const Reporte = () => {
           </label>
             <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} style={{display: 'none'}}/>          </div>
 
-          <div className={'vertical-container dont-print'}>
+        <div className={'vertical-container dont-print'}>
           <div className={`dont-print ${isPageVisible ? 'visible' : 'hidden'}`}>
-          
             {/*
           <ConclusionBox />
             */}

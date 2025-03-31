@@ -982,6 +982,8 @@ const imageSrc1 = isTrigeminoSelected ? newImage1 : defaultImage1;
         padding: 12px;
         font-size: 14px;
         line-height: 1.4;
+        text-align: justify;
+
       }
       .user-data {
         display: flex;

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<svg width="376" height="376" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" version="1.0">
+ <g class="layer">
+  <title>Layer 1</title>
+  <g fill="#000000" id="svg_1" transform="matrix(0.1 0 0 -0.1 0 0)">
+   <path d="m1050,-630l0,-40l835,0l835,0l0,40l0,40l-835,0l-835,0l0,-40z" fill="#ff7f00" id="svg_2"/>
+   <path d="m1170,-967l0,-197l325,-326l325,-325l-325,-325l-325,-326l0,-262l0,-262l710,0l710,0l0,263l0,262l-320,320c-176,176 -320,324 -320,330c0,6 144,154 320,330l320,320l0,197l0,198l-710,0l-710,0l0,-197zm1340,-21l0,-137l-315,-315l-315,-315l-310,310l-310,310l0,142l0,143l625,0l625,0l0,-138zm-313,-1204l313,-313l0,-202l0,-203l-625,0l-625,0l0,207l0,208l307,307c170,170 310,308 313,308c3,0 146,-141 317,-312z" fill="#ff7f00" id="svg_3"/>
+   <path d="m1050,-3130l0,-40l835,0l835,0l0,40l0,40l-835,0l-835,0l0,-40z" fill="#ff7f00" id="svg_4"/>
+  </g>
+ </g>
+</svg>

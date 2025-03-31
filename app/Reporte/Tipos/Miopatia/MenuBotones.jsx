@@ -462,18 +462,17 @@ const StepH = ({ handlePrevStep, handleNextStep }) => {
 
 
 const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs }) => {
-  
     const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
-      const { conclusions } = useContext(ReportContext)
-      const { droppedItems } = useContext(DropContext);
+    const { conclusions } = useContext(ReportContext)
+    const { droppedItems } = useContext(DropContext);
+    const [isLoading, setIsLoading] = useState(false);
     
       const handleExportPdf = async () => {
         try {
-           // 1) conclusiones (array con {value, title})
+        setIsLoading(true); // ⌛ Mostrar overlay
+        // 1) conclusiones (array con {value, title})
         const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
         const conclusiones = conclusions;
-    
-    
           const response = await fetch('/api/pdf/generate-pdf/miopia?route', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -497,7 +496,6 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
           if (!response.ok) {
             throw new Error("Error al generar PDF");
           }
-      
           const blob = await response.blob();
           const url = window.URL.createObjectURL(blob);
           const link = document.createElement('a');
@@ -507,12 +505,24 @@ const StepI = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
           link.click();
           document.body.removeChild(link);
           window.URL.revokeObjectURL(url);
-      
         } catch (error) {
           console.error('Error:', error);
           alert('Error al generar PDF: ' + error.message);
+        } finally {
+          document.body.style.cursor = 'default';
+          setIsLoading(false); // ✅ Ocultar overlay
         }
       };
+    
+      if (isLoading) {
+        return (
+          <div className="loading-overlay">
+            <div className="hourglass">
+            <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+            </div>
+          </div>
+        );
+      }
   return (
     <div>
       <div className='button-bar'>
@@ -549,53 +559,64 @@ const StepI1 = ({ handlePrevStep1, handleUndo, handleImageChange, handlePrint,to
       const { conclusions } = useContext(ReportContext)
       const { droppedItems } = useContext(DropContext);
     
-      const handleExportPdf = async () => {
-        try {
-           // 1) conclusiones (array con {value, title})
-        const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+      const [isLoading, setIsLoading] = useState(false);
+
+  const handleExportPdf = async () => {
+    try {
+    setIsLoading(true); // ⌛ Mostrar overlay
+    // 1) conclusiones (array con {value, title})
+    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    const conclusiones = conclusions;
+      const response = await fetch('/api/pdf/generate-pdf/miopia?route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          finalConclusion: conclusionFinal, // Envías la cadena final
+          conclusiones, // <--- envías el array de conclusiones
+          userData: {
+            name: session?.user?.name,
+            lastname: session?.user?.lastname,
+            email: session?.user?.email,
+            cedula: session?.user?.cedula,
+            especialidad: session?.user?.especialidad,
+            imageUrl: session?.user?.imageUrl,
+          },
+          droppedItems, // <--- envía también el array de items arrastrados
+          topLeftText, 
+
+        }),
+      });
   
-        const conclusiones = conclusions;
-    
-    
-          const response = await fetch('/api/pdf/generate-pdf/miopia?route', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              finalConclusion: conclusionFinal, // Envías la cadena final
-              conclusiones, // <--- envías el array de conclusiones
-              userData: {
-                name: session?.user?.name,
-                lastname: session?.user?.lastname,
-                email: session?.user?.email,
-                cedula: session?.user?.cedula,
-                especialidad: session?.user?.especialidad,
-                imageUrl: session?.user?.imageUrl,
-              },
-              droppedItems, // <--- envía también el array de items arrastrados
-              topLeftText, 
-    
-            }),
-          });
-      
-          if (!response.ok) {
-            throw new Error("Error al generar PDF");
-          }
-      
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'reporte-completo.pdf';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-      
-        } catch (error) {
-          console.error('Error:', error);
-          alert('Error al generar PDF: ' + error.message);
-        }
-      };
+      if (!response.ok) {
+        throw new Error("Error al generar PDF");
+      }
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'reporte-completo.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al generar PDF: ' + error.message);
+    } finally {
+      document.body.style.cursor = 'default';
+      setIsLoading(false); // ✅ Ocultar overlay
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="loading-overlay">
+        <div className="hourglass">
+        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

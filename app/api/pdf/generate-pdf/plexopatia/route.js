@@ -17,7 +17,6 @@ function buildHtml({
 }) {
   // 1) Tus reglas de superposición con /assets/... en lugar de baseUrl
   const overlayRules = [
-  
     {
       expectedValue: 'pre_total', 
       image: {
@@ -214,22 +213,19 @@ function buildHtml({
         alt: 'Modelo',
       }
     },
-
     {
       expectedValue: 'plexo_pudendo',
       image: [
-      {
-        src: '/assets/PlexoImg/Plexo pudendo derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Plexo pudendo izquierdo.png',
-        alt: 'Modelo',
-      },
-    ],
+        {
+          src: '/assets/PlexoImg/Plexo pudendo derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Plexo pudendo izquierdo.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
-
     {
       expectedValue: 'pre_totald', 
       image: {
@@ -741,180 +737,176 @@ function buildHtml({
         alt: 'Modelo',
       }
     },
-
     {
       expectedValue: 'troncosD',
       image: [
-      {
-        src: '/assets/PlexoImg/Tronco superior derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco medio derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco inferior derecho.png',
-        alt: 'Modelo',
-      }
-    ],
+        {
+          src: '/assets/PlexoImg/Tronco superior derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco medio derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco inferior derecho.png',
+          alt: 'Modelo',
+        }
+      ],
     },
-
     {
       expectedValue: 'troncosI',
       image: [
-      {
-        src: '/assets/PlexoImg/Tronco superior izquierdo.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco medio izquierdo.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco inferior izquierdo.png',
-        alt: 'Modelo',
-      }
-    ],
+        {
+          src: '/assets/PlexoImg/Tronco superior izquierdo.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco medio izquierdo.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco inferior izquierdo.png',
+          alt: 'Modelo',
+        }
+      ],
     },
-
     {
       expectedValue: 'troncosB',
       image: [
-      {
-        src: '/assets/PlexoImg/Tronco superior derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco medio derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco inferior derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco superior izquierdo.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco medio izquierdo.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco inferior izquierdo.png',
-        alt: 'Modelo',
-      }
-    ],
+        {
+          src: '/assets/PlexoImg/Tronco superior derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco medio derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco inferior derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco superior izquierdo.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco medio izquierdo.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco inferior izquierdo.png',
+          alt: 'Modelo',
+        }
+      ],
     },
-
-
     {
       expectedValue: 'CordonI',
       image: [
-      {
-        src: '/assets/PlexoImg/Cordon lateral izquierdo.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Cordon posterior izquierdo.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Cordon medial izquierdo.png',
-        alt: 'Modelo',
-      }
-    ],
+        {
+          src: '/assets/PlexoImg/Cordon lateral izquierdo.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Cordon posterior izquierdo.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Cordon medial izquierdo.png',
+          alt: 'Modelo',
+        }
+      ],
     },
-    
     {
       expectedValue: 'CordonD',
       image: [
-      {
-        src: '/assets/PlexoImg/Cordon lateral derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Cordon posterior derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Cordon medial derecho.png',
-        alt: 'Modelo',
-      }
-    ],
+        {
+          src: '/assets/PlexoImg/Cordon lateral derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Cordon posterior derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Cordon medial derecho.png',
+          alt: 'Modelo',
+        }
+      ],
     },
-
     {
       expectedValue: 'CordonB',
       image: [
-      {
-        src: '/assets/PlexoImg/Cordon lateral derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Cordon posterior derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Cordon medial derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Cordon lateral izquierdo.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Cordon posterior izquierdo.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Cordon medial izquierdo.png',
-        alt: 'Modelo',
-      }
-    ],
+        {
+          src: '/assets/PlexoImg/Cordon lateral derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Cordon posterior derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Cordon medial derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Cordon lateral izquierdo.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Cordon posterior izquierdo.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Cordon medial izquierdo.png',
+          alt: 'Modelo',
+        }
+      ],
     },
-
-    
     {
       expectedValue: 'pre_totalN',
       image: [
-      {
-        src: '/assets/PlexoImg/PLE_T superior.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco superior derecho.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Tronco superior izquierdo.png',
-        alt: 'Modelo',
-      }
-    ],
+        {
+          src: '/assets/PlexoImg/PLE_T superior.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco superior derecho.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Tronco superior izquierdo.png',
+          alt: 'Modelo',
+        }
+      ],
     },
-
     {
       expectedValue: 'pre_Sacroi',
       image: [
-      {
-        src: '/assets/PlexoImg/Tronco lumbosacro izquierdo.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/PlexoImg/Plexo pudendo izquierdo.png',
-        alt: 'Modelo',
-      },
-    ],
+        {
+          src: '/assets/PlexoImg/Tronco lumbosacro izquierdo.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/PlexoImg/Plexo pudendo izquierdo.png',
+          alt: 'Modelo',
+        },
+      ],
     },
   ];
 
   // 2) Buscamos coincidencias con finalString
   const matchedImages = [];
   const conclusionLower = finalString.toLowerCase();
+  console.log('Final =>', finalString); // Debug
 
+  // === AQUÍ el cambio principal: usar RegExp con word boundary ( \b ) ===
   for (const rule of overlayRules) {
-    if (conclusionLower.includes(rule.expectedValue.toLowerCase())) {
+    const ruleLower = rule.expectedValue.toLowerCase();
+    // Construimos una regex tipo: \bc5sd\b
+    const re = new RegExp(`\\b${ruleLower}\\b`);
+
+    if (re.test(conclusionLower)) {
       if (Array.isArray(rule.image)) {
         matchedImages.push(...rule.image);
       } else {
@@ -942,365 +934,363 @@ function buildHtml({
     )
     .join("");
 
-  // CSS embebido
-   // CSS embebido (tu DinamicImagesMenu, etc.)
-   const menuCss = `
-   .DivPanel2 {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    margin: 2px;
-    border-radius: 5px;
-    transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
-    position: relative;
-  
-  }
-  
-  .DivPanel2-expanded {
-    width: 230px;
-    z-index: 10; /* Asegura que el div expandido esté en la parte superior */
-    position: relative;
-    background-color: rgba(250, 250, 250, 0.678);
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-  }
-  
-  
-  .DivPanel3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    margin: 2px;
-    border-radius: 5px;
-    transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
-    position: relative;
-  
-  }
-  
-  .DivPanel3-expanded {
-    width: 95px;
-    z-index: 10; /* Asegura que el div expandido esté en la parte superior */
-    position: relative;
-    background-color: rgba(250, 250, 250, 0.678);
-  }
-  
-  .DivPanel4{
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    flex-basis: 200;
-    margin: 2px;
-    border-radius: 5px;
-  }
-  
-  .DivPanel4-expanded{
-    width: 230px;
-    
-  }
-  
-  
-  .cuadroIMG {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    position: relative;
-    margin-left: 30px;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadroIMG-expanded {
-    width: 50px;
-    height: 50px;
-    margin-left: 90px;
-    
-  }
-  
-  .cuadroIMG2 {
-    width: 90px;
-    height: 30px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    position: relative;
-    margin-left: 10px;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadroIMG2-expanded {
-    width: 90px;
-    height: 30px;
-    margin-left: 10px;
-    
-  }
-  
-  
-  /*CSS del componete que se utiliza para arastrar imagnes*/
-  .draggableDiv {
-    transition: all 0.2s ease;
-    position: absolute;
-    z-index: 9999; /* Prueba */
+  // CSS embebido (tu DinamicImagesMenu, etc.)
+  const menuCss = `
+  .DivPanel2 {
+   display: flex;
+   justify-content: center; /* Centra horizontalmente */
+   align-items: center; /* Centra verticalmente */
+   background-color: rgba(255, 255, 255, 0.253);
+   width: 90px;
+   flex-grow: 1;
+   margin: 2px;
+   border-radius: 5px;
+   transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
+   position: relative;
+ 
+ }
+ 
+ .DivPanel2-expanded {
+   width: 230px;
+   z-index: 10; /* Asegura que el div expandido esté en la parte superior */
+   position: relative;
+   background-color: rgba(250, 250, 250, 0.678);
+   justify-content: center; /* Centra horizontalmente */
+   align-items: center; /* Centra verticalmente */
+ }
+ 
+ 
+ .DivPanel3 {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(255, 255, 255, 0.253);
+   width: 90px;
+   flex-grow: 1;
+   margin: 2px;
+   border-radius: 5px;
+   transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
+   position: relative;
+ 
+ }
+ 
+ .DivPanel3-expanded {
+   width: 95px;
+   z-index: 10; /* Asegura que el div expandido esté en la parte superior */
+   position: relative;
+   background-color: rgba(250, 250, 250, 0.678);
+ }
+ 
+ .DivPanel4{
+   background-color: rgba(255, 255, 255, 0.253);
+   width: 90px;
+   flex-grow: 1;
+   flex-basis: 200;
+   margin: 2px;
+   border-radius: 5px;
+ }
+ 
+ .DivPanel4-expanded{
+   width: 230px;
+   
+ }
+ 
+ 
+ .cuadroIMG {
+   width: 50px;
+   height: 50px;
+   transition: width 0.3s ease, height 0.3s ease;
+   background-color: transparent;
+   position: relative;
+   margin-left: 30px;
+ }
+ 
+ /* Cuando el elemento está siendo arrastrado (tamaño original) */
+ .cuadroIMG-expanded {
+   width: 50px;
+   height: 50px;
+   margin-left: 90px;
+   
+ }
+ 
+ .cuadroIMG2 {
+   width: 90px;
+   height: 30px;
+   transition: width 0.3s ease, height 0.3s ease;
+   background-color: transparent;
+   position: relative;
+   margin-left: 10px;
+ }
+ 
+ /* Cuando el elemento está siendo arrastrado (tamaño original) */
+ .cuadroIMG2-expanded {
+   width: 90px;
+   height: 30px;
+   margin-left: 10px;
+   
+ }
+ 
+ 
+ /*CSS del componete que se utiliza para arastrar imagnes*/
+ .draggableDiv {
+   transition: all 0.2s ease;
+   position: absolute;
+   z-index: 9999; /* Prueba */
 
-  }
-  
-  .draggableDiv.expanded {
-    transform: scale(1.1); /* Expande el tamaño del div mientras el clic está sostenido */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Añade sombra */
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
-    
-  }
+ }
+ 
+ .draggableDiv.expanded {
+   transform: scale(1.1); /* Expande el tamaño del div mientras el clic está sostenido */
+   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Añade sombra */
+   background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
+   
+ }
 
-  
+ 
 .cuadro {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    margin: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-    display: flex;
-    z-index: 1;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadro-expanded {
-    width: 240px;
-    height: 120px;
-    margin-left: -10px;
-    background-color: transparent;
-    z-index: 1;
-  }
-  
-  .cuadro2 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    margin-left: 40px;
-    z-index: 2;
-  }
-  
-  .cuadro2-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 135px;
-    z-index: 1;
-  }
-  
-  
-  .cuadro3 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  }
-  
-  .cuadro3-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  } 
-  
-  /*Circulos donde se insertan las imagenes*/
-  .circulo {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    margin: 10px;
-    margin-left: -5px;
-    margin-top: 10px;
-    display: flex;
-    z-index: 1;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .circulo-expanded {
-    width: 240px;
-    height: 120px;
-    z-index: 1;
-    
-  }
-  
-  .circulo2 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 40px;
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  .circulo2-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 135px;
-    z-index: 1;
-  }
-  
-  .circulo2 > .dropArea2{
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  
-  .circulo3 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  .circulo3-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  }
-  
-  .circulo3 > .dropArea2{
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  
-  .lineaImg{
-    width: 130px; /* Ajusta el ancho para que sea responsivo */
-    height: 40px; /* Mantiene la proporción de la imagen */
-    transition: transform 0.3s ease; /* Añade una transición suave para efectos */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    margin-top: 5px;
-    z-index: 1;
-    
-  }
-  
-  .lineaImg-expanded {
-    width: 130px;
-    height: auto;
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 55px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-  }
-  
-  .lineaImg2{
-    width: 130px; /* Ajusta el ancho para que sea responsivo */
-    height: 40px; /* Mantiene la proporción de la imagen */
-    transition: transform 0.3s ease; /* Añade una transición suave para efectos */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    margin-top: 5px;
-    margin-left: 35px;
-    z-index: 1;
-    
-  }
-  
-  .lineaImg2-expanded {
-    width: 130px;
-    height: auto;
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 60px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-  }
-  
-  
-  .cruzImg{
-    width: 90px; /* Ajusta el ancho para que sea responsivo */
-    height: 25px; /* Mantiene la proporción de la imagen */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    align-items: center;
-  }
-  
-  .PuntoRojo{
-    width: 45px; /* Ajusta el ancho para que sea responsivo */
-    height: 45px; /* Mantiene la proporción de la imagen */
-    position: relative;
-    background-color: transparent;
-    pointer-events: none;
-    margin: auto;
-    padding-bottom: 10px;
-  
-  }
-  
-  .lineaImg4{
-    width: 84px;
-    height: 84px;
-  }
-  
-  .dropArea2 {
-    width: 40px; /* Tamaño inicial */
-    height: 40px;
-    background-color: transparent;
-    transition: width 0.3s ease, height 0.3s ease; /* Transición suave */
-  }
-  
-  .dropArea2-expanded {
-    width: 88px; /* Mismo tamaño que cuadro2-expanded */
-    height: 92px;
-    transition: width 0.3s ease, height 0.3s ease;
-  }
-  
-  .lineaDv{
-    background-color: black;
-    border: solid 0.5px black;
-    width:120px;
-    height: 1px;
-  }
+   width: 50px;
+   height: 50px;
+   transition: width 0.3s ease, height 0.3s ease;
+   background-color: transparent;
+   margin: 10px;
+   margin-left: 10px;
+   margin-top: 10px;
+   display: flex;
+   z-index: 1;
+ }
+ 
+ /* Cuando el elemento está siendo arrastrado (tamaño original) */
+ .cuadro-expanded {
+   width: 240px;
+   height: 120px;
+   margin-left: -10px;
+   background-color: transparent;
+   z-index: 1;
+ }
+ 
+ .cuadro2 {
+   width: 40px;
+   height: 40px;
+   background-color: white;
+   transition: width 0.3s ease, height 0.3s ease;
+   border: 1px solid black; /* Borde opcional */
+   position: absolute;
+   margin-top: 5px;
+   margin-bottom: 15px;
+   margin-left: 40px;
+   z-index: 2;
+ }
+ 
+ .cuadro2-expanded {
+   width: 98px;
+   height: 92px;
+   margin-top: 15px;
+   margin-bottom: 15px;
+   margin-left: 135px;
+   z-index: 1;
+ }
+ 
+ 
+ .cuadro3 {
+   width: 40px;
+   height: 40px;
+   background-color: white;
+   transition: width 0.3s ease, height 0.3s ease;
+   border: 1px solid black; /* Borde opcional */
+   position: absolute;
+   margin-top:  5px;
+   margin-bottom: 15px;
+   margin-left: 10px;
+   z-index: 1;
+ }
+ 
+ .cuadro3-expanded {
+   width: 98px;
+   height: 92px;
+   margin-top:  15px;
+   margin-bottom: 15px;
+   margin-left: 10px;
+   z-index: 1;
+ } 
+ 
+ /*Circulos donde se insertan las imagenes*/
+ .circulo {
+   width: 50px;
+   height: 50px;
+   transition: width 0.3s ease, height 0.3s ease;
+   background-color: transparent;
+   margin: 10px;
+   margin-left: -5px;
+   margin-top: 10px;
+   display: flex;
+   z-index: 1;
+ }
+ 
+ /* Cuando el elemento está siendo arrastrado (tamaño original) */
+ .circulo-expanded {
+   width: 240px;
+   height: 120px;
+   z-index: 1;
+   
+ }
+ 
+ .circulo2 {
+   width: 40px;
+   height: 40px;
+   background-color: white;
+   transition: width 0.3s ease, height 0.3s ease;
+   border: 1px solid black; /* Borde opcional */
+   position: absolute;
+   margin-top:  5px;
+   margin-bottom: 15px;
+   margin-left: 40px;
+   border-radius: 100%;
+   z-index: 1;
+ }
+ 
+ .circulo2-expanded {
+   width: 98px;
+   height: 92px;
+   margin-top:  15px;
+   margin-bottom: 15px;
+   margin-left: 135px;
+   z-index: 1;
+ }
+ 
+ .circulo2 > .dropArea2{
+   border-radius: 100%;
+   z-index: 1;
+ }
+ 
+ 
+ .circulo3 {
+   width: 40px;
+   height: 40px;
+   background-color: white;
+   transition: width 0.3s ease, height 0.3s ease;
+   border: 1px solid black; /* Borde opcional */
+   position: absolute;
+   margin-top:  5px;
+   margin-bottom: 15px;
+   margin-left: 10px;
+   border-radius: 100%;
+   z-index: 1;
+ }
+ 
+ .circulo3-expanded {
+   width: 98px;
+   height: 92px;
+   margin-top:  15px;
+   margin-bottom: 15px;
+   margin-left: 10px;
+   z-index: 1;
+ }
+ 
+ .circulo3 > .dropArea2{
+   border-radius: 100%;
+   z-index: 1;
+ }
+ 
+ 
+ .lineaImg{
+   width: 130px; /* Ajusta el ancho para que sea responsivo */
+   height: 40px; /* Mantiene la proporción de la imagen */
+   transition: transform 0.3s ease; /* Añade una transición suave para efectos */
+   position: static;
+   background-color: transparent;
+   pointer-events: none;
+   margin-top: 5px;
+   z-index: 1;
+   
+ }
+ 
+ .lineaImg-expanded {
+   width: 130px;
+   height: auto;
+   position: static;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 55px;
+   transform: scale(1.1); /* Escala la imagen un poco al expandir */
+   z-index: 1;
+ }
+ 
+ .lineaImg2{
+   width: 130px; /* Ajusta el ancho para que sea responsivo */
+   height: 40px; /* Mantiene la proporción de la imagen */
+   transition: transform 0.3s ease; /* Añade una transición suave para efectos */
+   position: static;
+   background-color: transparent;
+   pointer-events: none;
+   margin-top: 5px;
+   margin-left: 35px;
+   z-index: 1;
+   
+ }
+ 
+ .lineaImg2-expanded {
+   width: 130px;
+   height: auto;
+   position: static;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 60px;
+   transform: scale(1.1); /* Escala la imagen un poco al expandir */
+   z-index: 1;
+ }
+ 
+ 
+ .cruzImg{
+   width: 90px; /* Ajusta el ancho para que sea responsivo */
+   height: 25px; /* Mantiene la proporción de la imagen */
+   position: static;
+   background-color: transparent;
+   pointer-events: none;
+   align-items: center;
+ }
+ 
+ .PuntoRojo{
+   width: 45px; /* Ajusta el ancho para que sea responsivo */
+   height: 45px; /* Mantiene la proporción de la imagen */
+   position: relative;
+   background-color: transparent;
+   pointer-events: none;
+   margin: auto;
+   padding-bottom: 10px;
+ 
+ }
+ 
+ .lineaImg4{
+   width: 84px;
+   height: 84px;
+ }
+ 
+ .dropArea2 {
+   width: 40px; /* Tamaño inicial */
+   height: 40px;
+   background-color: transparent;
+   transition: width 0.3s ease, height 0.3s ease; /* Transición suave */
+ }
+ 
+ .dropArea2-expanded {
+   width: 88px; /* Mismo tamaño que cuadro2-expanded */
+   height: 92px;
+   transition: width 0.3s ease, height 0.3s ease;
+ }
+ 
+ .lineaDv{
+   background-color: black;
+   border: solid 0.5px black;
+   width:120px;
+   height: 1px;
+ }
 
-  .containerImg {
-    position: relative; /* Permite que Draggable funcione correctamente */
-    width: 100%; /* O cualquier tamaño que necesites */
-    height: 100%; /* O cualquier tamaño que necesites */
-  }
-  `;
-
+ .containerImg {
+   position: relative; /* Permite que Draggable funcione correctamente */
+   width: 100%; /* O cualquier tamaño que necesites */
+   height: 100%; /* O cualquier tamaño que necesites */
+ }
+ `;
 
   return `
 <html>

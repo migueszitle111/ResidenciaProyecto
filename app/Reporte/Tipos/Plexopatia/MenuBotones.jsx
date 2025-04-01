@@ -2160,6 +2160,7 @@ const StepI = ({
       setIsLoading(true); // ⌛ Mostrar overlay
       // 1) conclusiones (array con {value, title})
       const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+      console.log(conclusionFinal)
       const conclusiones = conclusions;
         const response = await fetch('/api/pdf/generate-pdf/plexopatia?route', {
           method: 'POST',
@@ -2269,6 +2270,8 @@ const StepI1 = ({
     setIsLoading(true); // ⌛ Mostrar overlay
     // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    console.log(conclusionFinal)
+
     const conclusiones = conclusions;
       const response = await fetch('/api/pdf/generate-pdf/plexopatia?route', {
         method: 'POST',
@@ -2386,6 +2389,8 @@ const StepI2 = ({
     setIsLoading(true); // ⌛ Mostrar overlay
     // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
+    console.log(conclusionFinal)
+
     const conclusiones = conclusions;
       const response = await fetch('/api/pdf/generate-pdf/plexopatia?route', {
         method: 'POST',

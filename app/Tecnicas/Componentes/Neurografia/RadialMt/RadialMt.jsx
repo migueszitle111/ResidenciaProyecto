@@ -111,12 +111,14 @@ const RadialMt = () => {
                 {currentImageIndex === 2 && <button className="btnRMt17" onClick={() => handleButtonClick('Antebrazo.', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 2 && <button className="btnRMt18" onClick={() => handleButtonClick('BRACHIORRADIALIS C5, C6 - Antebrazo en punto medio de pronación/supinación y codo en flexión de 90°, tercio proximal 4 cm distal a pliegue del codo sobre borde del radio', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 2 && <button className="btnRMt19" onClick={() => handleButtonClick('CANAL DE TORSIÓN. tercio medio del humero, en dirección lateral entre Bíceps y Tríceps braquiales', { top: '12%', left: '32%'})}></button>}
-                
+                {currentImageIndex === 2 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialMt-G-03.png",{ top: '2%', left: '2%' })}></button>}
+
                 {currentImageIndex === 3 && <button className="btnRMt20" onClick={() => handleButtonClick('4 cm distal en misma orientación sobre borde del cubito', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 3 && <button className="btnRMt21" onClick={() => handleButtonClick('EXTENSOR CARPI RADIALIS LONGUS C5, C6, C7 - Antebrazo en pronación y extensión de codo, 4-5 cm distal al epicóndilo lateral y horizontal al borde lateral del cubito, debajo del supinador largo (braquiorradial)', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 3 && <button className="btnRMt22" onClick={() => handleButtonClick('Antebrazo', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 3 && <button className="btnRMt23" onClick={() => handleButtonClick('CANAL DE TORSIÓN. Tercio medio del humero, en dirección lateral entre Bíceps y Tríceps braquiales', { top: '12%', left: '32%'})}></button>}
-                
+                {currentImageIndex === 3 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialMt-G-03.png",{ top: '2%', left: '2%' })}></button>}
+
                 {currentImageIndex === 4 && <button className="btnRMt24" onClick={() => handleButtonClick('4 cm distal en misma orientación entre cubito y radio', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 4 && <button className="btnRMt25" onClick={() => handleButtonClick('EXTENSOR DIGITORUM COMMUNIS C7, C8 - Antebrazo en pronación, unión entre tercio proximal y medio de antebrazo, región dorsal punto medio con discreta desviación radial', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 4 && <button className="btnRMt26" onClick={() => handleButtonClick('CANAL DE TORSIÓN. Tercio medio del humero, en dirección lateral entre Bíceps y Tríceps braquiales', {  top: '12%', left: '32%' })}></button>}
@@ -139,9 +141,11 @@ const RadialMt = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-                </div>
+                <button className={`print-button`} onClick={closeModal}>
+                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                </button>
+                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+            </div>
             )}
         </div>
     );

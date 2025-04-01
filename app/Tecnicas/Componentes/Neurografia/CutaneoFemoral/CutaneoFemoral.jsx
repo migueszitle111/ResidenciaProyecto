@@ -81,6 +81,7 @@ const CutaneoFemoral = () => {
             {currentImageIndex === 1 && <button className="btnCf7" onClick={() => handleButtonClick('RAMA POSTERIOR - Línea media del muslo posterior, 6 cm proximal del pliegue del hueco poplíteo', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 1 && <button className="btnCf8" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-G-02.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
@@ -93,9 +94,11 @@ const CutaneoFemoral = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-                </div>
+                <button className={`print-button`} onClick={closeModal}>
+                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                </button>
+                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+            </div>
             )}
         </div>
     );

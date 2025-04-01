@@ -35,9 +35,10 @@ import Toracodorsal from "./Toracodorsal/Toracodorsal";
 import Trigemino from "./Trigemino/Trigemino";
 import UlnarMt from "./UlnarMt/UlnarMt";
 import UlnarSt from "./UlnarSt/UlnarSt";
+import "/app/Tecnicas/Componentes/Neurografia/StyleM.css"
 
-import mostrarMenuIcon from "/public/I_In.svg"; // Reemplaza con la ruta real
-import ocultarMenuIcon from "/public/I_Out.svg"; // Reemplaza con la ruta real
+import mostrarMenuIcon from "/public/assets/IconSVG/I_Crop.svg"; // Reemplaza con la ruta real
+import ocultarMenuIcon from "/public/assets/IconSVG/I_Expand.svg"; // Reemplaza con la ruta real
 
 
 const MenuBotonesPt = () => {
@@ -254,7 +255,8 @@ const MenuBotonesPt = () => {
 
             {/* Botón para ocultar/mostrar menú */}
             <button
-                className="bg-black text-white px-4 py-2 m-2 rounded-3xl flex items-center gap-2 border border-orange-500"
+                className="bg-black px-4 py-2 m-2 flex items-center  border border-orange-500 round-button"
+                style={{ borderRadius: '100%' }}
                 onClick={toggleMenuVisibility}
             >
                 <Image

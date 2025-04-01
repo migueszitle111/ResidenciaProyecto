@@ -109,6 +109,7 @@ const UlnarMt = () => {
                 {currentImageIndex === 1 && <button className="btnUMt12" onClick={() => handleButtonClick('ABDUCTOR DIGITI MINIMI C8, T1 - (eminencia hipotenar medial)', {  top: '10%', left: '55%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnUMt13" onClick={() => handleButtonClick('Articulación metacarpofalángica del quinto dedo', { top: '10%', left: '55%'})}></button>}
                 {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnar-G-02.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnar-T-01.png",{ top: '2%', left: '2%' })}></button>}
 
                 {currentImageIndex === 2 && <button className="btnUMt14" onClick={() => handleButtonClick('Articulación metacarpofalángica del dedo índice', {  top: '62%', left: '70%' })}></button>}
                 {currentImageIndex === 2 && <button className="btnUMt15" onClick={() => handleButtonClick('INTEROSEUS DORSALIS C8, T1 - Espacio dorsal línea media de membrana cutánea entre dedos pulgar e índice', { top: '62%', left: '70%'})}></button>}
@@ -142,7 +143,7 @@ const UlnarMt = () => {
                 {currentImageIndex === 6 && <button className="btnUMt35" onClick={() => handleButtonClick('1', { top: '10%', left: '25%'})}></button>}
                 {currentImageIndex === 6 && <button className="btnUMt36" onClick={() => handleButtonClick('2', {  top: '10%', left: '25%' })}></button>}
                 {currentImageIndex === 6 && <button className="btnUMt37" onClick={() => handleButtonClick('3', {  top: '10%', left: '25%' })}></button>}
-                {currentImageIndex === 6 && <button className="btnUMt38" onClick={() => handleButtonClick('3', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 6 && <button className="btnUMt38" onClick={() => handleButtonClick('4', {  top: '10%', left: '25%' })}></button>}
                 {currentImageIndex === 6 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnar-G-07.png",{ top: '2%', left: '2%' })}></button>}
 
             </div>
@@ -157,9 +158,11 @@ const UlnarMt = () => {
                         
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-                </div>
+                <button className={`print-button`} onClick={closeModal}>
+                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                </button>
+                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+            </div>
             )}
         </div>
     );

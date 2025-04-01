@@ -614,7 +614,7 @@
     font-size: 1.9vw;
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
-     
+
 }
 
 .btnUMt31 {
@@ -632,7 +632,7 @@
     font-size: 1.9vw;
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
-     
+
 }
 
 .btnUMt33 {
@@ -650,7 +650,7 @@
     font-size: 1.9vw;
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
-     
+
 }
 
 .btnUMt34 {
@@ -668,7 +668,7 @@
     font-size: 1.9vw;
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
-     
+
 }
 .btnUMt35 {
     position: absolute;
@@ -685,7 +685,7 @@
     font-size: 1.9vw;
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
-     
+
 }
 .btnUMt36 {
     position: absolute;
@@ -702,7 +702,7 @@
     font-size: 1.9vw;
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
-     
+
 }
 
 .btnUMt37 {
@@ -720,25 +720,24 @@
     font-size: 1.9vw;
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
-     
+
 }
 
 .btnUMt38 {
     position: absolute;
-    height: 2.4vw;
-    width: 2.4vw;
+    height: 2.8vw;
+    width: 22vw;
     top: 30%;
     left: 55%;
-    transform: translate(240%, 620%);
+    transform: translate(-25%, 540%);
     background-color: transparent;
     border: none;
-    border-radius: 50%;
+    border-radius: 10%;
     z-index: 1;
     color: transparent;
     font-size: 1.9vw;
     font-family: 'Times New Roman';
     transition:all .2s ease-in-out;
-     
 }
 
 

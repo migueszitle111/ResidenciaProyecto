@@ -86,7 +86,8 @@ const UlnarSt = () => {
                 {currentImageIndex === 1 && <button className="btnUSt6" onClick={() => handleButtonClick('4 cm distalmente sobre dorso del 4to dedo, falange proximal', {  top: '10%', left: '70%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnUSt7" onClick={() => handleButtonClick('DORSO DE LA MANO - Punto medio entre 4to y 5to metacarpianos', { top: '10%', left: '70%'})}></button>}
                 {currentImageIndex === 1 && <button className="btnUSt8" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior', {  top: '10%', left: '70%' })}></button>}
-                
+                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnarSt-G-02.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnarSt-T-01.png",{ top: '2%', left: '2%' })}></button>}
             </div>
             {textBoxVisible && (
                 <div className="text-boxUSt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
@@ -95,9 +96,11 @@ const UlnarSt = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-                </div>
+                <button className={`print-button`} onClick={closeModal}>
+                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                </button>
+                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+            </div>
             )}
         </div>
     );

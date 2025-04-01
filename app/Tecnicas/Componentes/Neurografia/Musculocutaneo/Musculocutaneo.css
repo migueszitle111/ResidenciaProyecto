@@ -111,11 +111,43 @@
 
 .btnMc1 {
     position: absolute;
+    height: 3.2vw;
+    width: 3.2vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(700%, -65%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+
+}
+.btnMc2 {
+    position: absolute;
+    height: 3.4vw;
+    width: 3.4vw;
+    top: 30%;
+    left: 45%;
+    transform: translate(275%, 90%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+    color: white;
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+
+}
+.btnMc3 {
+    position: absolute;
     height: 2.8vw;
     width: 2.8vw;
     top: 30%;
     left: 45%;
-    transform: translate(-695%, -22%);
+    transform: translate(-450%, -265%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -123,44 +155,15 @@
     color: white;
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
-}
-.btnMc2 {
-    position: absolute;
-    height: 3vw;
-    width: 3vw;
-    top: 30%;
-    left: 45%;
-    transform: translate(-220%, -195%);
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-    z-index: 1;
-    color: white;
-    font-size: 1.5vw;
-    transition:all .2s ease-in-out;
-}
-.btnMc3 {
-    position: absolute;
-    height: 2.5vw;
-    width: 2.5vw;
-    top: 30%;
-    left: 45%;
-    transform: translate(640%, 204%);
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-    z-index: 1;
-    color: white;
-    font-size: 1.5vw;
-    transition:all .2s ease-in-out;
+
 }
 .btnMc4 {
     position: absolute;
-    height: 2.5vw;
-    width: 2.5vw;
+    height: 2.8vw;
+    width: 2.8vw;
     top: 30%;
     left: 45%;
-    transform: translate(1165%, 310%);
+    transform: translate(-920%, -360%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -168,6 +171,7 @@
     color: white;
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
+
 }
 
 .text-boxMc {

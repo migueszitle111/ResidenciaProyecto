@@ -8,6 +8,7 @@
     overflow: hidden;
     margin: auto;
     margin-top: 2px;
+
 }
 
 .modal-overlay {
@@ -42,12 +43,13 @@
 /* Imagen dentro del modal */
 .modal-image {
     width: 90%;  /* La imagen ocupará el 90% del modal */
-    max-width: 45vw; /* Más pequeña que la galería (60vw) */
+    max-width: 27vw; /* Más pequeña que la galería (60vw) */
     max-height: 60vh; /* Evita que imágenes altas ocupen demasiado espacio */
     object-fit: contain; /* Mantiene la proporción sin recortar */
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     margin-bottom: 180px;
+    border: 2px solid #ffffff;
 }
 
 /* Botón de cierre */
@@ -64,9 +66,38 @@
     border-radius: 50%;
 }
 
+.print-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    background-color: #1C1C1C;
+    padding: 8px;
+    text-align: left;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #c44900;
+}
+
+
+.print-button:hover {
+background-color: #c44900;
+color: white;
+}
+
+.print-button.active {
+background-color: #c44900;
+color: white;
+}
+
 .close-btn:hover {
     background: darkred;
 }
+
+
 
 .extra-image-container {
     flex: 1; /* La imagen lateral ocupa menos espacio */
@@ -586,7 +617,6 @@
     border-radius: 50%;
     z-index: 1;
 }
-
 .btnM29 {
     position: absolute;
     height: 2.3vw; /* Tamaño reducido */
@@ -599,28 +629,42 @@
     border-radius: 50%;
     z-index: 1;
 }
-/* ################################# Botones de la Septima imagen #########################*/
+
+
+
 .btnM30 {
     position: absolute;
     height: 2.2vw; /* Tamaño reducido */
     width: 2.2vw;
     top: 25%;
     left: 50%;
-    transform: translate(-365%, 255%);
+    transform: translate(-375%, 220%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
     z-index: 1;
-    
 }
 
 .btnM31 {
     position: absolute;
-    height: 3.5vw; /* Tamaño reducido */
-    width: 3.5vw;
+    height: 3.8vw; /* Tamaño reducido */
+    width: 3.8vw;
     top: 25%;
     left: 50%;
-    transform: translate(-555%, -5%);
+    transform: translate(-210%, -175%);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.btnM32 {
+    position: absolute;
+    height: 3.8vw; /* Tamaño reducido */
+    width: 3.8vw;
+    top: 25%;
+    left: 50%;
+    transform: translate(10%, -270%);
     background-color: transparent;
     border: none;
     border-radius: 50%;

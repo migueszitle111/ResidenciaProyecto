@@ -84,7 +84,9 @@ const AuricularM = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
+                    <button className={`print-button`} onClick={closeModal}>
+                        <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                    </button>
                     <img src={extraImage} alt="Imagen Extra" className="modal-image" />
                 </div>
             )}

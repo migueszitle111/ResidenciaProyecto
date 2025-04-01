@@ -75,6 +75,8 @@ const RadialSt = () => {
                 {currentImageIndex === 0 && <button className="btnRSt2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnRSt3" onClick={() => handleButtonClick('BASE DE PULGAR - Dorso de la mano entre los tendones del extensor largo y corto del pulgar, 1 cm distal al borde el radio.', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnRSt4" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo, borde lateral del segundo metacarpiano', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-G-01.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 
                 {currentImageIndex === 1 && <button className="btnRSt5" onClick={() => handleButtonClick('3 distal a elétrodo activo sobre articulación interfalángica', {  top: '12%', left: '32%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnRSt6" onClick={() => handleButtonClick('DORSO DEL PULGAR - Discretamente distal a la primera articulación metacarpofalángica ', { top: '12%', left: '32%'})}></button>}
@@ -91,9 +93,11 @@ const RadialSt = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-                </div>
+                <button className={`print-button`} onClick={closeModal}>
+                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                </button>
+                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+            </div>
             )}
         </div>
     );

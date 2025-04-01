@@ -81,6 +81,7 @@ const Safeno = () => {
             {currentImageIndex === 1 && <button className="btnSf7" onClick={() => handleButtonClick('REGISTRO PROXIMAL (Pierna medial-anterior) - 15 cm distal desde el punto de estimulación marcado previamente, colocar el electrodo de registro entre el borde medial de la tibia y el Gastrocnemio medial', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnSf8" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo pudiendo ser útil la barra de registro', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Safeno-G-02.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Safeno-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
@@ -93,9 +94,11 @@ const Safeno = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-                </div>
+                <button className={`print-button`} onClick={closeModal}>
+                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                </button>
+                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+            </div>
             )}
         </div>
     );

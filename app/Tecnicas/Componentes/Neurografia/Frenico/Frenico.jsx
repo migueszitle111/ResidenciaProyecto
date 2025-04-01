@@ -86,7 +86,7 @@ const Frenico = () => {
             {currentImageIndex === 1 && <button className="btnFn9" onClick={() => handleButtonClick('CUELLO PUNTO INFERIOR. Sobre el borde superior de la clavícula entre las cabezas esternal y clavicular del musculo ECM con posición a la neutra o ligeramente extendida', {  top: '65%', left: '50%' })}></button>}
             {currentImageIndex === 1 && <button className="btnFn10" onClick={() => handleButtonClick('Esternón', { top: '65%', left: '50%'})}></button>}
             {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/FrenicoG.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Frenico-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Frenico-T.png",{ top: '5%', left: '2%' })}></button>}
 
             </div>
             {textBoxVisible && (
@@ -99,9 +99,11 @@ const Frenico = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                    <button className="close-btn" onClick={closeModal}>×</button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-                </div>
+                <button className={`print-button`} onClick={closeModal}>
+                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                </button>
+                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+            </div>
             )}
         </div>
     );

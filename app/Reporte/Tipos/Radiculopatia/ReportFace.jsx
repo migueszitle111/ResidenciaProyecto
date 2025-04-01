@@ -3,6 +3,8 @@ import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState, useRef } from 'react';
 import { Rnd } from 'react-rnd';
 import { ConclusionCanvasR } from '../../../components/ReportTemplate/Conclusions/CanvasRadiculopatia';
+import { ConclusionCanvasR2 } from '../../../components/ReportTemplate/Conclusions/CanvasRadiculopatia2';
+
 import './EstilosCruz.css';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
@@ -639,7 +641,7 @@ const Reporte = () => {
                   <tr>
                     {/* VISTA FRONTAL */}
                     <td style={{ position:'relative' }}>
-                      <ConclusionCanvasR
+                      <ConclusionCanvasR2
                         img={{
                           src: imageSrc1,
                           alt: 'Modelo Frontal',

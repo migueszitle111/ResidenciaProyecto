@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { useState } from 'react';
-import { ReportContextProviderR,CheckboxProvider,ButtonContextProvider,DropProviderR  } from '@/src/context';
+import { ReportContextProviderR,CheckboxProvider,ButtonContextProvider,DropProvider  } from '@/src/context';
 import FooterComponents from '../../../components/FooterComponents';
 import HeadComponents from '../../../components/HeadComponents';
 import MenuReportes from '../../../components/ReportTemplate/MenuReportes';
@@ -23,7 +23,7 @@ const Page = () => {
         />
       </div>   
       {/* ReportFace enrollado en el contexto */}
-        <DropProviderR>
+        <DropProvider>
       <ReportContextProviderR>
      <ButtonContextProvider >
       < CheckboxProvider>
@@ -31,7 +31,7 @@ const Page = () => {
       </ CheckboxProvider>
       </ButtonContextProvider>
       </ReportContextProviderR>
-      </DropProviderR>
+      </DropProvider>
       <div className='dont-print'>
         <FooterComponents />
       </div>

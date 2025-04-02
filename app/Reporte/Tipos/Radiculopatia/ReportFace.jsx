@@ -1,4 +1,4 @@
-import { CheckboxContext, ReportContextR, useButtonContext, DropContextR } from '@/src/context';
+import { CheckboxContext, ReportContextR, useButtonContext, DropContext } from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useState, useRef } from 'react';
 import { Rnd } from 'react-rnd';
@@ -151,14 +151,8 @@ const imageMap = {
  * Cada DropArea recibe su lista de droppedItems y setDroppedItems para independizar
  * el frontal del posterior.
  */
-const DropArea = ({
-  droppedItems,
-  setDroppedItems,
-  topLeftText,
-  expandedDivs,
-  setExpandedDivs,
-  style = {}
-}) => {
+const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
+  const { droppedItems, setDroppedItems } = useContext(DropContext);
   const dropAreaRef = useRef(null);
 
   useEffect(() => {
@@ -169,20 +163,18 @@ const DropArea = ({
   }, []);
 
   const handleDragStop = (e, d, item) => {
-    if (!dropAreaRef.current) return;
     const dropAreaRect = dropAreaRef.current.getBoundingClientRect();
     const itemRect = e.target.getBoundingClientRect();
     const itemCenterX = itemRect.left + itemRect.width / 2;
     const itemCenterY = itemRect.top + itemRect.height / 2;
 
-    // Si el item sale fuera del dropArea, lo removemos
     if (
       itemCenterX < dropAreaRect.left ||
       itemCenterX > dropAreaRect.right ||
       itemCenterY < dropAreaRect.top ||
       itemCenterY > dropAreaRect.bottom
     ) {
-      setDroppedItems(prev => prev.filter(i => i.id !== item.id));
+      setDroppedItems((prev) => prev.filter((i) => i.id !== item.id));
     } else {
       updatePosition(item.id, d.x, d.y);
     }
@@ -191,32 +183,26 @@ const DropArea = ({
   const handleDrop = (e) => {
     e.preventDefault();
 
-    // (1) Si venía de un 'expandDiv'
+    // Leer el ID que guardamos en dataTransfer
     const draggedId = e.dataTransfer.getData('app-id');
-    const numericId = parseInt(draggedId, 10);
-    if (!isNaN(numericId)) {
-      // colapsa el div en caso de que uses "expandedDivs"
-      setExpandedDivs?.((prev) => ({
+    if (draggedId) {
+      // Colapsar ese ID en el estado global
+      setExpandedDivs(prev => ({
         ...prev,
-        [numericId]: false
+        [draggedId]: false
       }));
     }
 
-    // (2) Leer HTML y agregarlo a la lista
+    // Leer la parte text/html (nodo)
     const data = e.dataTransfer.getData('text/html');
     if (data) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(data, 'text/html');
       const element = doc.body.firstChild;
       if (element) {
-        setDroppedItems((prev) => [
-          ...prev,
-          {
-            id: Date.now(),
-            content: element.outerHTML,
-            x: 0,
-            y: 0
-          }
+        setDroppedItems([
+          ...droppedItems,
+          { id: Date.now(), content: element.outerHTML, x: 0, y: 0 }
         ]);
       }
     }
@@ -240,49 +226,43 @@ const DropArea = ({
 
   return (
     <div
-      ref={dropAreaRef}
+      className="dropArea"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        ...style
-        // border: '1px dashed blue' // para depurar
-      }}
+      ref={dropAreaRef}
     >
       {topLeftText && (
-        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize:'19px', paddingTop:'10px' }}>
+        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'10px' }}>
           {topLeftText}
         </p>
       )}
-
-      {droppedItems.map((item) => (
-        <Rnd
-          key={item.id}
-          default={{
-            x: item.x,
-            y: item.y,
-            width: 200,
-            height: 200
-          }}
-          onDragStop={(e, d) => handleDragStop(e, d, item)}
-          style={{ position: 'absolute' }}
-        >
-          <div className="item-container" style={{ width: '100%', height: '100%' }}>
-            <button
-              className="delete-button"
-              onClick={() => removeItem(item.id)}
-            >
-              X
-            </button>
-            {/* Renderiza el contenido arrastrado */}
-            <div dangerouslySetInnerHTML={{ __html: item.content }} />
-          </div>
-        </Rnd>
-      ))}
+      {droppedItems.length === 0 ? (
+        <p></p>
+      ) : (
+        droppedItems.map((item) => (
+          <Rnd
+            key={item.id}
+            default={{
+              x: item.x,
+              y: item.y,
+              width: 200,
+              height: 200
+            }}
+            onDragStop={(e, d) => handleDragStop(e, d, item)}
+            style={{ position: 'absolute' }}
+          >
+            <div className="item-container" style={{ width: '100%', height: '100%' }}>
+              <button
+                className="delete-button"
+                onClick={() => removeItem(item.id)}
+              >
+                X
+              </button>
+              <div dangerouslySetInnerHTML={{ __html: item.content }} />
+            </div>
+          </Rnd>
+        ))
+      )}
     </div>
   );
 };
@@ -299,12 +279,7 @@ const Reporte = () => {
   }, []);
 
   // Estados globales de DropArea frontal y posterior
-  const {
-    droppedItemsFront,
-    setDroppedItemsFront,
-    droppedItemsBack,
-    setDroppedItemsBack,
-  } = useContext(DropContextR);
+
 
   // Datos del usuario
   const { data: session } = useSession();
@@ -905,14 +880,10 @@ const Reporte = () => {
                         userImageUrl={imageUrl}
                       />
 
-                      {/* DropArea frontal */}
-                      <DropArea
-                        topLeftText={topLeftText}
-                        expandedDivs={expandedDivs}
-                        setExpandedDivs={setExpandedDivs}
-                        droppedItems={droppedItemsFront}
-                        setDroppedItems={setDroppedItemsFront}
-                      />
+                      <div id="dropArea"><DropArea topLeftText={topLeftText}  expandedDivs={expandedDivs}
+                      setExpandedDivs={setExpandedDivs}  />
+      
+              </div>
                     </td>
 
                     {/* VISTA POSTERIOR */}
@@ -1201,14 +1172,7 @@ const Reporte = () => {
                         userImageUrl={imageUrl}
                       />
 
-                      {/* DropArea posterior */}
-                      <DropArea
-                        topLeftText={topLeftText}
-                        expandedDivs={expandedDivs}
-                        setExpandedDivs={setExpandedDivs}
-                        droppedItems={droppedItemsBack}
-                        setDroppedItems={setDroppedItemsBack}
-                      />
+                     
                     </td>
                   </tr>
                 </tbody>

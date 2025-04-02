@@ -1,6 +1,6 @@
 
 import { Accordion ,AccordionContainer,InternalAccordionContainer} from '@/app/components/ReportTemplate/Accordion';
-import { CheckboxContext, ReportContextR, useButtonContext,DropContextR  } from '@/src/context';
+import { CheckboxContext, ReportContextR, useButtonContext,DropContext  } from '@/src/context';
 import { useSession } from "next-auth/react";
 import  MenuImagenes  from '../../../components/ReportTemplate/DinamicImagesMenu';
 import { useContext, useState,useEffect } from 'react';
@@ -3297,7 +3297,7 @@ const StepE = ({ handlePrevStep, topLeftText,setTopLeftText, copyConclusions,exp
   };
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContextR)
-  const {droppedItemsFront, setDroppedItemsFront, droppedItemsBack, setDroppedItemsBack, } = useContext(DropContextR);
+  const { droppedItems } = useContext(DropContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleExportPdf = async () => {
@@ -3321,8 +3321,7 @@ const StepE = ({ handlePrevStep, topLeftText,setTopLeftText, copyConclusions,exp
             especialidad: session?.user?.especialidad,
             imageUrl: session?.user?.imageUrl,
           },
-          droppedItemsFront, 
-          droppedItemsBack,
+          droppedItems, // <--- envía también el array de items arrastrados
           topLeftText, 
           checkedLeft: checkedStateLeft,
           checkedRight: checkedStateRight,

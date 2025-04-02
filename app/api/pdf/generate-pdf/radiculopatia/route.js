@@ -5,7 +5,6 @@ const isDev = process.env.NODE_ENV !== "production";
 const baseUrl = isDev
   ? "http://localhost:3000"
   : process.env.NEXT_PUBLIC_SITE_URL || "https://tudominio.com";
-
 /**
  * Construye el HTML final para exportar el PDF de radiculopatía.
  */
@@ -13,15 +12,13 @@ function buildHtml({
   finalConclusion = "",
   finalString = "",        // Cadena con todos los "values" (ej: c5_i, c6_d, etc.)
   userData = {},
-  droppedItemsFront,
-  droppedItemsBack,
+  droppedItems= [],
   topLeftText = "",
   checkedLeft = {},
   checkedRight = {},
 }) {
   // EJEMPLO de info del usuario
   const { name, lastname, cedula, email, especialidad, imageUrl } = userData;
-
   /**********************************************
    * A) MAPEO de cruces => dónde aparecen
    **********************************************/
@@ -158,12 +155,9 @@ const imageMapRight = {
   A95: { src: '/assets/Simbolos/S_Cruz 3.png', className: 'cruz95' },
   A96: { src: '/assets/Simbolos/S_Cruz 4.png', className: 'cruz96' },
 };
-
-
   // Generar HTML de las cruces marcadas (lado izq y lado der)
   function getCrossesHtml() {
     let html = "";
-
     // Lado izquierdo
     for (const key of Object.keys(checkedLeft)) {
       if (checkedLeft[key]) {
@@ -185,7 +179,6 @@ const imageMapRight = {
     return html;
   }
   const crossesHtml = getCrossesHtml();
-
   /**********************************************
    * B) MAPEO de overlays => según conclusiones
    **********************************************/
@@ -219,7 +212,6 @@ const imageMapRight = {
         alt: 'Modelo',
       }
     },
-  
     {
       expectedValue: 'c6s_i', 
       image: {
@@ -227,7 +219,6 @@ const imageMapRight = {
         alt: 'Modelo',
       }
     },
-    
     {
       expectedValue: 'c6s_d', 
       image: {
@@ -246,7 +237,7 @@ const imageMapRight = {
           src: '/assets/RadiculopatiaImg/C6-C7s anterior derecho.png',
           alt: 'Modelo',
         }
-  ]
+      ]
     },
     {
       expectedValue: 'c7s_i', 
@@ -255,7 +246,6 @@ const imageMapRight = {
         alt: 'Modelo',
       }
     },
-    
     {
       expectedValue: 'c7s_d', 
       image: {
@@ -407,12 +397,10 @@ const imageMapRight = {
       image:[ {
         src: '/assets/RadiculopatiaImg/S1s anterior izquierdo.png',
         alt: 'Modelo',
-       
       },{
         src: '/assets/RadiculopatiaImg/S1s anterior derecho.png',
         alt: 'Modelo',
       }
-    
     ],                        
     },
     {
@@ -422,7 +410,6 @@ const imageMapRight = {
         alt: 'Modelo',
       }
     },
-  
     {
       expectedValue: 'lumbrosaca_multinivel', 
       image: {
@@ -438,7 +425,6 @@ const imageMapRight = {
       }
     },
   ];
-
   const backRules = [
     {
       expectedValue: 'c5_d', 
@@ -541,8 +527,6 @@ const imageMapRight = {
         src: '/assets/RadiculopatiaPosteriorImg/C6s posterior derecho.png',
         alt: 'Modelo',
       }
-    
-    
     ],
     },
     {
@@ -570,10 +554,8 @@ const imageMapRight = {
         src: '/assets/RadiculopatiaPosteriorImg/C6s posterior derecho.png',
         alt: 'Modelo',
       }
-    
     ],
     },
-  
     {
       expectedValue: 'c8_d', 
       image: {
@@ -681,7 +663,6 @@ const imageMapRight = {
     {
       src: '/assets/RadiculopatiaPosteriorImg/s1s posterior derecho.png',
       alt: 'Modelo',
-  
     }
     ],
     },
@@ -707,7 +688,6 @@ const imageMapRight = {
       }
     },
   ];
-
   function getOverlayHtml(rules) {
     const matched = [];
     const textLower = finalString.toLowerCase();
@@ -741,35 +721,8 @@ const imageMapRight = {
   }
   const overlayHtmlFront = getOverlayHtml(frontRules);
   const overlayHtmlBack  = getOverlayHtml(backRules);
-
   /**********************************************
-   * C) droppedItems => HTML con posición absoluta
-   **********************************************/
-  function buildDroppedItemsHtml(droppedItems = []) {
-    // Cada item: { id, content, x, y }
-    // content es HTML (ej <div>algo</div>)
-    return droppedItems.map((item) => {
-      return `
-        <div
-          style="
-            position: absolute;
-             left: ${item.x + 43}px;
-                  top: ${item.y - 10}px;
-            width: auto;  /* ajusta para tu gusto */
-            height: auto; /* ajusta para tu gusto */
-            z-index: 999; /* para que se vea encima */
-            object-fit: cover;
-
-          "
-        >
-          ${item.content}
-        </div>
-      `;
-    }).join('\n');
   }
-  const droppedItemsFrontHtml = buildDroppedItemsHtml(droppedItemsFront);
-  const droppedItemsBackHtml  = buildDroppedItemsHtml(droppedItemsBack);
-
   /**********************************************
    * D) CSS embebido (estilos de tu PDF)
    **********************************************/
@@ -785,9 +738,7 @@ const imageMapRight = {
     border-radius: 5px;
     transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
     position: relative;
-  
   }
-  
   .DivPanel2-expanded {
     width: 230px;
     z-index: 10; /* Asegura que el div expandido esté en la parte superior */
@@ -796,8 +747,6 @@ const imageMapRight = {
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
   }
-  
-  
   .DivPanel3 {
     display: flex;
     justify-content: center;
@@ -809,16 +758,13 @@ const imageMapRight = {
     border-radius: 5px;
     transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
     position: relative;
-  
   }
-  
   .DivPanel3-expanded {
     width: 95px;
     z-index: 10; /* Asegura que el div expandido esté en la parte superior */
     position: relative;
     background-color: rgba(250, 250, 250, 0.678);
   }
-  
   .DivPanel4{
     background-color: rgba(255, 255, 255, 0.253);
     width: 90px;
@@ -827,13 +773,9 @@ const imageMapRight = {
     margin: 2px;
     border-radius: 5px;
   }
-  
   .DivPanel4-expanded{
-    width: 230px;
-    
+    width: 230px; 
   }
-  
-  
   .cuadroIMG {
     width: 50px;
     height: 50px;
@@ -842,17 +784,14 @@ const imageMapRight = {
     position: relative;
     margin-left: 30px;
   }
-  
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .cuadroIMG-expanded {
     // width: 50px;
     // height: 50px;
       width: 20px;
     height: 20px;
-    margin-left: 90px;
-    
+    margin-left: 90px; 
   }
-  
   .cuadroIMG2 {
     width: 90px;
     height: 30px;
@@ -861,34 +800,25 @@ const imageMapRight = {
     position: relative;
     margin-left: 10px;
   }
-  
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .cuadroIMG2-expanded {
     // width: 90px;
     // height: 30px;
     width: 70px;
     height: 10px;
-    margin-left: 10px;
-    
+    margin-left: 10px; 
   }
-  
-  
   /*CSS del componete que se utiliza para arastrar imagnes*/
   .draggableDiv {
     transition: all 0.2s ease;
     position: absolute;
     z-index: 9999; /* Prueba */
-
   }
-  
   .draggableDiv.expanded {
     transform: scale(1.1); /* Expande el tamaño del div mientras el clic está sostenido */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Añade sombra */
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
-    
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */ 
   }
-
-  
 .cuadro {
     width: 50px;
     height: 50px;
@@ -900,7 +830,6 @@ const imageMapRight = {
     display: flex;
     z-index: 1;
   }
-  
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .cuadro-expanded {
     // width: 240px;
@@ -911,7 +840,6 @@ const imageMapRight = {
     background-color: transparent;
     z-index: 1;
   }
-  
   .cuadro2 {
     width: 40px;
     height: 40px;
@@ -924,7 +852,6 @@ const imageMapRight = {
     margin-left: 40px;
     z-index: 2;
   }
-  
   .cuadro2-expanded {
     // width: 98px;
     // height: 92px;
@@ -935,8 +862,6 @@ const imageMapRight = {
     margin-left: 135px;
     z-index: 1;
   }
-  
-  
   .cuadro3 {
     width: 40px;
     height: 40px;
@@ -949,7 +874,6 @@ const imageMapRight = {
     margin-left: 10px;
     z-index: 1;
   }
-  
   .cuadro3-expanded {
     // width: 98px;
     // height: 92px;
@@ -1157,11 +1081,8 @@ const imageMapRight = {
     width: 100%; /* O cualquier tamaño que necesites */
     height: 100%; /* O cualquier tamaño que necesites */
   }
-
-
   
   /* Estilos base (puedes pegar tu EstilosCruz.css, tus .wrapper, etc.) */
-
   body {
     margin: 0;
     padding: 0;
@@ -1228,7 +1149,6 @@ const imageMapRight = {
     // border: 1px solid #333;
     font-size: 14px;
     text-align: justify;
-
   }
 
   /* Ejemplo: cruces */
@@ -1318,6 +1238,7 @@ const imageMapRight = {
 .cruz102 { z-index: 3; position: absolute; width: 80px; height: 20px; top:  47.8%; right: 40.2%; }
 .cruz103 { z-index: 3; position: absolute; width: 80px; height: 20px; top:  47.8%; right: 39.4%; }
 .cruz104 { z-index: 3; position: absolute; width: 80px; height: 20px; top:  47.8%; right: 38.6%; }
+
 /* Lumbar L2 lado Izquierdo */
 .cruz49 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; left: 41%;   }
 .cruz50 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; left: 40.2%; }
@@ -1371,6 +1292,7 @@ const imageMapRight = {
 .cruz82 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; left: 40.2%; }
 .cruz83 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; left: 39.4%; }
 .cruz84 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; left: 38.6%; }
+
 /* Torácica S1 lado Derecho */
 .cruz85 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; right: 41%;   }
 .cruz86 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; right: 40.2%; }
@@ -1387,9 +1309,7 @@ const imageMapRight = {
 .cruz94 { z-index: 3; position: absolute; width: 80px; height: 20px;top: 68%; right: 40.2%; }
 .cruz95 { z-index: 3; position: absolute; width: 80px; height: 20px;top: 68%; right: 39.4%; }
 .cruz96 { z-index: 3; position: absolute; width: 80px; height: 20px;top: 68%; right: 38.6%; }
-
 `;
-
   /**********************************************
    * E) Armado final del HTML
    **********************************************/
@@ -1406,64 +1326,62 @@ const imageMapRight = {
   <body>
     <div class="page-container">
       <!-- HEADER con datos del usuario -->
-     
-
       <!-- Texto Superior Izquierdo (si aplica) -->
       ${
         topLeftText
           ? `<div style="position:absolute; top:60px; left:20px; color:red;">${topLeftText}</div>`
           : ""
       }
-
       <!-- Fila con las 2 imágenes (frontal y posterior) -->
       <div class="images-row">
         <!-- Imagen Frontal + Overlays + Dropped Items -->
         <div class="image-wrapper">
           <img class="base-image" src="/assets/RadiculopatiaImg/Columna/RA_Columna_1_FondoB.png" alt="Frontal" />
           ${overlayHtmlFront }
-          ${droppedItemsFront
+          ${droppedItems
             .map(
               (item) => `
                 <div
                   style="
                     position: absolute;
-                    left: ${item.x -46}px;
-                    top: ${item.y -25}px;
-                  "
+                    left: ${item.x-48}px;
+                    top: ${item.y - 10}px;
+                    z-index: 999;
+
+                 "
                 >
                   ${item.content}
                 </div>
-              `
+                `
             )
             .join("")}
-
         </div>
-
         <!-- Imagen Posterior + Overlays + Dropped Items -->
         <div class="image-wrapper">
           <img class="base-image" src="/assets/RadiculopatiaImg/Columna/RA_Columna_2_FondoB.png" alt="Posterior" />
-          ${overlayHtmlBack},
-          ${droppedItemsBack
-            .map(
-              (item) => `
-                <div
-                  style="
-                    position: absolute;
-                     left: ${item.x -66}px;
-                    top: ${item.y -20}px;
-                  "
-                >
-                  ${item.content}
-                </div>
-              `
-            )
-            .join("")}
+          ${overlayHtmlBack}
+          // Para canvas2 (posterior), restamos el ancho del canvas1 (por ejemplo, 450px)
+${droppedItems
+  .map(
+    (item) => `
+      <div
+        style="
+          position: absolute;
+          left: ${item.x - 647}px;
+          top: ${item.y-10}px;
+          z-index: 999;
+        "
+      >
+        ${item.content}
+      </div>
+    `
+  )
+  .join("")}
+
         </div>
       </div>
-
       <!-- Cruces (checkboxes marcados) -->
       ${crossesHtml}
-
       <!-- Conclusiones -->
       <div class="conclusion-box">
         ${finalConclusion || ''}
@@ -1472,10 +1390,8 @@ const imageMapRight = {
   </body>
   </html>
   `;
-
   return html;
 }
-
 /**
  * Handler principal para tu endpoint /api/pdf/generate-pdf/radiculopatia
  */
@@ -1486,28 +1402,23 @@ export async function POST(req) {
       finalConclusion = "",
       conclusiones = [],        // array {value, title}
       userData = {},
-      droppedItemsFront = [],
-      droppedItemsBack  = [],
+      droppedItems = [],
       topLeftText = "",
       checkedLeft = {},
       checkedRight = {},
     } = body;
-
     // Construir la cadena de "values" => c5_i, c5_d, lumbrosaca_multinivel, etc.
     const finalString = conclusiones.map((c) => c.value).join(" ");
-
     // Llamamos a buildHtml
     const html = buildHtml({
       finalConclusion,
       finalString,
       userData,
-      droppedItemsFront,
-      droppedItemsBack,
+      droppedItems,
       topLeftText,
       checkedLeft,
       checkedRight,
     });
-
     // Generar PDF con puppeteer
     const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
     const executablePath = isDev ? undefined : await chromium.executablePath;
@@ -1519,10 +1430,8 @@ export async function POST(req) {
     });
     const page = await browser.newPage();
     await page.goto(baseUrl, { waitUntil: "networkidle2" });
-
     // Seteamos el HTML
     await page.setContent(html, { waitUntil: "networkidle2" });
-
     // Generar el PDF
     const pdfBuffer = await page.pdf({
       format: "A4",
@@ -1530,9 +1439,7 @@ export async function POST(req) {
       scale: 1,
        landscape: true, 
     });
-
     await browser.close();
-
     // Retornar el PDF
     return new Response(pdfBuffer, {
       headers: {

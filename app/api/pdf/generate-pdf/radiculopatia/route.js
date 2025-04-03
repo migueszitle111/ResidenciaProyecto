@@ -712,7 +712,7 @@ const imageMapRight = {
             top: 0; left: 0;
             width: 450px;  /* ajusta para tu gusto */
             height: 550px; /* ajusta para tu gusto */
-            object-fit: cover;
+            object-fit: fill;
             z-index: 2;
           "
         />
@@ -1344,8 +1344,8 @@ const imageMapRight = {
                 <div
                   style="
                     position: absolute;
-                    left: ${item.x-48}px;
-                    top: ${item.y - 10}px;
+                    left: ${item.x}px;
+                    top: ${item.y}px;
                     z-index: 999;
 
                  "

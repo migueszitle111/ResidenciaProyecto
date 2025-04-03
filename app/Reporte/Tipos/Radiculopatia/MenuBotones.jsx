@@ -3395,10 +3395,12 @@ const StepE3 = ({ handlePrevStep3,topLeftText,setTopLeftText, copyConclusions,ex
   };
     const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
     const { conclusions } = useContext(ReportContextR)
-    const {droppedItemsFront, setDroppedItemsFront, droppedItemsBack, setDroppedItemsBack, } = useContext(DropContextR);
+    const { droppedItems } = useContext(DropContext);
+    const [isLoading, setIsLoading] = useState(false);
   
     const handleExportPdf = async () => {
       try {
+      setIsLoading(true); // ⌛ Mostrar overlay
          // 1) conclusiones (array con {value, title})
       const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
       const conclusiones = conclusions;
@@ -3417,10 +3419,9 @@ const StepE3 = ({ handlePrevStep3,topLeftText,setTopLeftText, copyConclusions,ex
               especialidad: session?.user?.especialidad,
               imageUrl: session?.user?.imageUrl,
             },
-            droppedItemsFront, 
-            droppedItemsBack,
+            droppedItems, // <--- envía también el array de items arrastrados
             topLeftText, 
-  
+           
           }),
         });
         if (!response.ok) {
@@ -3439,12 +3440,21 @@ const StepE3 = ({ handlePrevStep3,topLeftText,setTopLeftText, copyConclusions,ex
       } catch (error) {
         console.error('Error:', error);
         alert('Error al generar PDF: ' + error.message);
+      }finally {
+        document.body.style.cursor = 'default';
+        setIsLoading(false); // ✅ Ocultar overlay
       }
     };
   
-
-
-
+    if (isLoading) {
+      return (
+        <div className="loading-overlay">
+          <div className="hourglass">
+          <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+          </div>
+        </div>
+      );
+    }
   return (
     <div>
       <div className='button-bar'>

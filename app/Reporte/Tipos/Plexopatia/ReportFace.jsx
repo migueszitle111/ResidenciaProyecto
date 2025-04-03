@@ -1333,6 +1333,9 @@ const Reporte = () => {
               },
             ],
             },
+
+
+
           ]}
 
           const footertext = {

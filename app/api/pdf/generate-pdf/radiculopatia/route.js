@@ -786,10 +786,10 @@ const imageMapRight = {
   }
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .cuadroIMG-expanded {
-    // width: 50px;
-    // height: 50px;
-      width: 20px;
-    height: 20px;
+    width: 50px;
+    height: 50px;
+    //   width: 20px;
+    // height: 20px;
     margin-left: 90px; 
   }
   .cuadroIMG2 {
@@ -802,10 +802,10 @@ const imageMapRight = {
   }
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .cuadroIMG2-expanded {
-    // width: 90px;
-    // height: 30px;
-    width: 70px;
-    height: 10px;
+    width: 90px;
+    height: 30px;
+    // width: 70px;
+    // height: 10px;
     margin-left: 10px; 
   }
   /*CSS del componete que se utiliza para arastrar imagnes*/
@@ -832,10 +832,10 @@ const imageMapRight = {
   }
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .cuadro-expanded {
-    // width: 240px;
-    // height: 120px;
-    width: 210px;
-    height: 90px;
+    width: 240px;
+    height: 120px;
+    // width: 210px;
+    // height: 90px;
     margin-left: -10px;
     background-color: transparent;
     z-index: 1;
@@ -853,10 +853,10 @@ const imageMapRight = {
     z-index: 2;
   }
   .cuadro2-expanded {
-    // width: 98px;
-    // height: 92px;
-     width: 68px;
-    height: 62px;
+    width: 98px;
+    height: 92px;
+    //  width: 68px;
+    // height: 62px;
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: 135px;
@@ -875,10 +875,10 @@ const imageMapRight = {
     z-index: 1;
   }
   .cuadro3-expanded {
-    // width: 98px;
-    // height: 92px;
-     width: 68px;
-    height: 62px;
+    width: 98px;
+    height: 92px;
+    //  width: 68px;
+    // height: 62px;
     margin-top:  15px;
     margin-bottom: 15px;
     margin-left: 10px;
@@ -900,10 +900,10 @@ const imageMapRight = {
   
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .circulo-expanded {
-    // width: 240px;
-    // height: 120px;
-    width: 210px;
-    height: 90px;
+    width: 240px;
+    height: 120px;
+    // width: 210px;
+    // height: 90px;
     z-index: 1;
     
   }
@@ -923,10 +923,10 @@ const imageMapRight = {
   }
   
   .circulo2-expanded {
-    // width: 98px;
-    // height: 92px;
-     width: 68px;
-    height: 62px;
+    width: 98px;
+    height: 92px;
+    //  width: 68px;
+    // height: 62px;
     margin-top:  15px;
     margin-bottom: 15px;
     margin-left: 135px;
@@ -954,10 +954,10 @@ const imageMapRight = {
   }
   
   .circulo3-expanded {
-    // width: 98px;
-    // height: 92px;
-     width: 68px;
-    height: 62px;
+    width: 98px;
+    height: 92px;
+    //  width: 68px;
+    // height: 62px;
     margin-top:  15px;
     margin-bottom: 15px;
     margin-left: 10px;
@@ -1155,160 +1155,235 @@ const imageMapRight = {
   ${/* Pegamos tus .cruz1, .cruz2, etc. aquí: */''}
   ${/* Si lo deseas más compacto, ajusta top/left. */''}
     
+// /* Cruz 1 a 4 izquierdo (originalmente top: 4.5%; left: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz1 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.0%; left: 42.3%; }
+// .cruz2 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.0%; left: 41.5%; }
+// .cruz3 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.0%; left: 40.7%; }
+// .cruz4 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.0%; left: 40%; }
+
+// /* Cruz 9 a 12 izquierdo (originalmente top: 6.3%; left: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz9  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.8%; left: 42.3%; }
+// .cruz10 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.8%; left: 41.5%; }
+// .cruz11 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.8%; left: 40.7%; }
+// .cruz12 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.8%; left: 40%; }
+
+// /* Cruz 17 a 20 izquierdo (originalmente top: 8%; left: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz17 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.5%; left: 42.3%; }
+// .cruz18 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.5%; left: 41.5%; }
+// .cruz19 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.5%; left: 40.7%; }
+// .cruz20 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.5%; left: 40%; }
+
+// /* Cruz 25 a 28 izquierdo (originalmente top: 9.8%; left: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz25 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.3%; left: 42.3%; }
+// .cruz26 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.3%; left: 41.5%; }
+// .cruz27 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.3%; left: 40.7%; }
+// .cruz28 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.3%; left: 40%; }
+
+// /* Cruz 33 a 36 izquierdo (originalmente top: 12.2%; left: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz33 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.7%; left: 42.3%; }
+// .cruz34 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.7%; left: 41.5%; }
+// .cruz35 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.7%; left: 40.7%; }
+// .cruz36 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.7%; left: 40%; }
+
+// /* Cruz 41 a 44 izquierdo (originalmente top: 14.5%; left: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz41 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14%; left: 42.3%; }
+// .cruz42 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14%; left: 41.5%; }
+// .cruz43 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14%; left: 40.7%; }
+// .cruz44 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14%; left: 40%; }
+
+/* Lumbar L1 lado Izquierdo (originalmente top: 47.8%; left: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz97  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.3%; left: 42%; }
+.cruz98  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.3%; left: 41.2%; }
+.cruz99  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.3%; left: 40.4%; }
+.cruz100 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.3%; left: 39.6%; }
+
+/* Lumbar L2 lado Izquierdo (originalmente top: 51%; left: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz49 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.5%; left: 42%; }
+.cruz50 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.5%; left: 41.2%; }
+.cruz51 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.5%; left: 40.4%; }
+.cruz52 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.5%; left: 39.6%; }
+
+/* Lumbar L3 lado Izquierdo (originalmente top: 54.5%; left: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz57 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54%; left: 42%; }
+.cruz58 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54%; left: 41.2%; }
+.cruz59 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54%; left: 40.4%; }
+.cruz60 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54%; left: 39.6%; }
+
+/* Lumbar L4 lado Izquierdo (originalmente top: 57.8%; left: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz65 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.3%; left: 42%; }
+.cruz66 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.3%; left: 41.2%; }
+.cruz67 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.3%; left: 40.4%; }
+.cruz68 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.3%; left: 39.6%; }
+
+/* Lumbar L5 lado Izquierdo (originalmente top: 61%; left: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz73 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 60.5%; left: 42%; }
+.cruz74 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 60.5%; left: 41.2%; }
+.cruz75 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 60.5%; left: 40.4%; }
+.cruz76 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 60.5%; left: 39.6%; }
+
+/* Torácica S1 lado Izquierdo (originalmente top: 64.9%; left: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz81 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.4%; left: 42%; }
+.cruz82 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.4%; left: 41.2%; }
+.cruz83 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.4%; left: 40.4%; }
+.cruz84 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.4%; left: 39.6%; }
+
+/* Torácica S2 lado Izquierdo (originalmente top: 68%; left: 41.5%, 40.5%, 39.5%, 38.8%) */
+.cruz89 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 67.5%; left: 42.5%; }
+.cruz90 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 67.5%; left: 41.5%; }
+.cruz91 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 67.5%; left: 40.5%; }
+.cruz92 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 67.5%; left: 39.8%; }
+/* Cruz 5 a 8 derecho (originalmente top: 4.5%; right: 41.3%, 40.5%, 39.7%, 39%) */
+.cruz5 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.0%; right: 42.3%; }
+.cruz6 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.0%; right: 41.5%; }
+.cruz7 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.0%; right: 40.7%; }
+.cruz8 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.0%; right: 40%; }
+
+// /* Cruz 13 a 16 derecho (originalmente top: 6.3%; right: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz13 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.8%; right: 42.3%; }
+// .cruz14 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.8%; right: 41.5%; }
+// .cruz15 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.8%; right: 40.7%; }
+// .cruz16 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.8%; right: 40%; }
+
+// /* Cruz 21 a 24 derecho (originalmente top: 8%; right: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz21 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.5%; right: 42.3%; }
+// .cruz22 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.5%; right: 41.5%; }
+// .cruz23 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.5%; right: 40.7%; }
+// .cruz24 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.5%; right: 40%; }
+
+// /* Cruz 29 a 32 derecho (originalmente top: 9.8%; right: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz29 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.3%; right: 42.3%; }
+// .cruz30 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.3%; right: 41.5%; }
+// .cruz31 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.3%; right: 40.7%; }
+// .cruz32 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.3%; right: 40%; }
+
+// /* Cruz 37 a 40 derecho (originalmente top: 12.2%; right: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz37 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.7%; right: 42.3%; }
+// .cruz38 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.7%; right: 41.5%; }
+// .cruz39 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.7%; right: 40.7%; }
+// .cruz40 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.7%; right: 40%; }
+
+// /* Cruz 45 a 48 derecho (originalmente top: 14.5%; right: 41.3%, 40.5%, 39.7%, 39%) */
+// .cruz45 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14%; right: 42.3%; }
+// .cruz46 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14%; right: 41.5%; }
+// .cruz47 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14%; right: 40.7%; }
+// .cruz48 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14%; right: 40%; }
+
+/* Lumbar L1 lado derecho (originalmente top: 47.8%; right: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz101 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.3%; right: 42%; }
+.cruz102 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.3%; right: 41.2%; }
+.cruz103 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.3%; right: 40.4%; }
+.cruz104 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.3%; right: 39.6%; }
+
+/* Lumbar L2 lado derecho (originalmente top: 51%; right: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz53 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.5%; right: 42%; }
+.cruz54 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.5%; right: 41.2%; }
+.cruz55 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.5%; right: 40.4%; }
+.cruz56 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.5%; right: 39.6%; }
+
+/* Lumbar L3 lado derecho (originalmente top: 54.5%; right: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz61 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54%; right: 42%; }
+.cruz62 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54%; right: 41.2%; }
+.cruz63 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54%; right: 40.4%; }
+.cruz64 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54%; right: 39.6%; }
+
+/* Lumbar L4 lado derecho (originalmente top: 57.8%; right: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz69 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.3%; right: 42%; }
+.cruz70 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.3%; right: 41.2%; }
+.cruz71 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.3%; right: 40.4%; }
+.cruz72 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.3%; right: 39.6%; }
+
+/* Lumbar L5 lado derecho (originalmente top: 61%; right: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz77 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 60.5%; right: 42%; }
+.cruz78 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 60.5%; right: 41.2%; }
+.cruz79 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 60.5%; right: 40.4%; }
+.cruz80 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 60.5%; right: 39.6%; }
+
+/* Torácica S1 lado derecho (originalmente top: 64.9%; right: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz85 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.4%; right: 42%; }
+.cruz86 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.4%; right: 41.2%; }
+.cruz87 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.4%; right: 40.4%; }
+.cruz88 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.4%; right: 39.6%; }
+
+/* Torácica S2 lado derecho (originalmente top: 68%; right: 41%, 40.2%, 39.4%, 38.6%) */
+.cruz93 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 67.5%; right: 42%; }
+.cruz94 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 67.5%; right: 41.2%; }
+.cruz95 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 67.5%; right: 40.4%; }
+.cruz96 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 67.5%; right: 39.6%; }
+/* --- Izquierdas (Cervicales) --- */
+
 /* Cruz 1 a 4 izquierdo */
-.cruz1 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.5%; left: 41.3%; }
-.cruz2 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.5%; left: 40.5%; }
-.cruz3 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.5%; left: 39.7%; }
-.cruz4 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.5%; left: 39%;   }
+.cruz1 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.5%; left: 42.3%; }
+.cruz2 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.5%; left: 41.5%; }
+.cruz3 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.5%; left: 40.7%; }
+.cruz4 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.5%; left: 40%; }
 
-/* Cruz 5 a 8 derecho*/
-.cruz5 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.5%; right: 41.3%; }
-.cruz6 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.5%; right: 40.5%; }
-.cruz7 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.5%; right: 39.7%; }
-.cruz8 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 4.5%; right: 39%;   }
+/* Cruz 9 a 12 izquierdo */
+.cruz9  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.3%; left: 42.3%; }
+.cruz10 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.3%; left: 41.5%; }
+.cruz11 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.3%; left: 40.7%; }
+.cruz12 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.3%; left: 40%; }
 
-/* Cruz 9 a 12 izquierdo*/
-.cruz9 {  z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; left: 41.3%; }
-.cruz10 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; left: 40.5%; }
-.cruz11 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; left: 39.7%; }
-.cruz12 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; left: 39%;   }
+/* Cruz 17 a 20 izquierdo */
+.cruz17 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.0%; left: 42.3%; }
+.cruz18 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.0%; left: 41.5%; }
+.cruz19 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.0%; left: 40.7%; }
+.cruz20 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.0%; left: 40%; }
 
-/* Cruz 13 a 16 derecho*/
-.cruz13 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; right: 41.3%; }
-.cruz14 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; right: 40.5%; }
-.cruz15 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; right: 39.7%; }
-.cruz16 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; right: 39%;   }
+/* Cruz 25 a 28 izquierdo */
+.cruz25 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.8%; left: 42.3%; }
+.cruz26 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.8%; left: 41.5%; }
+.cruz27 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.8%; left: 40.7%; }
+.cruz28 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.8%; left: 40%; }
 
-/* Cruz 17 a 20 izquierdo*/
-.cruz17 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8%; left: 41.3%; }
-.cruz18 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8%; left: 40.5%; }
-.cruz19 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8%; left: 39.7%; }
-.cruz20 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8%; left: 39%;   }
+/* Cruz 33 a 36 izquierdo */
+.cruz33 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.2%; left: 42.3%; }
+.cruz34 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.2%; left: 41.5%; }
+.cruz35 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.2%; left: 40.7%; }
+.cruz36 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.2%; left: 40%; }
 
-/* Cruz 21 a 24 derecho*/
-.cruz21 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8%; right: 41.3%; }
-.cruz22 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8%; right: 40.5%; }
-.cruz23 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8%; right: 39.7%; }
-.cruz24 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8%; right: 39%;   }
+/* Cruz 41 a 44 izquierdo */
+.cruz41 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 16.5%; left: 42.3%; }
+.cruz42 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 16.5%; left: 41.5%; }
+.cruz43 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 16.5%; left: 40.7%; }
+.cruz44 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 16.5%; left: 40%; }
 
-/* Cruz 25 a 28 izquierdo*/
-.cruz25 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.8%; left: 41.3%; }
-.cruz26 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.8%; left: 40.5%; }
-.cruz27 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.8%; left: 39.7%; }
-.cruz28 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.8%; left: 39%;   }
+/* --- Derechas (Cervicales) --- */
 
-/* Cruz 29 a 32 derecho*/
-.cruz29 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.8%; right:41.3%; }
-.cruz30 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.8%; right:40.5%; }
-.cruz31 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.8%; right:39.7%; }
-.cruz32 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.8%; right:39%;   }
+/* Cruz 5 a 8 derecho */
+.cruz5 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.5%; right: 42.3%; }
+.cruz6 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.5%; right: 41.5%; }
+.cruz7 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.5%; right: 40.7%; }
+.cruz8 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.5%; right: 40%; }
 
-/* Cruz 33 a 36 izquierdo */ 
-.cruz33 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.2%; left: 41.3%; }
-.cruz34 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.2%; left: 40.5%; }
-.cruz35 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.2%; left: 39.7%; }
-.cruz36 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.2%; left: 39%;   }
+/* Cruz 13 a 16 derecho */
+.cruz13 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.3%; right: 42.3%; }
+.cruz14 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.3%; right: 41.5%; }
+.cruz15 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.3%; right: 40.7%; }
+.cruz16 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.3%; right: 40%; }
 
-/* Cruz 37 a 40 derecho*/
-.cruz37 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.2%; right: 41.3%; }
-.cruz38 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.2%; right: 40.5%; }
-.cruz39 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.2%; right: 39.7%; }
-.cruz40 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.2%; right: 39%;   }
+/* Cruz 21 a 24 derecho */
+.cruz21 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.0%; right: 42.3%; }
+.cruz22 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.0%; right: 41.5%; }
+.cruz23 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.0%; right: 40.7%; }
+.cruz24 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.0%; right: 40%; }
 
-/* Cruz 41 a 44 izquierdo*/
-.cruz41 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.5%; left: 41.3%; }
-.cruz42 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.5%; left: 40.5%; }
-.cruz43 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.5%; left: 39.7%; }
-.cruz44 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.5%; left: 39%;   }
+/* Cruz 29 a 32 derecho */
+.cruz29 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.8%; right: 42.3%; }
+.cruz30 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.8%; right: 41.5%; }
+.cruz31 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.8%; right: 40.7%; }
+.cruz32 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.8%; right: 40%; }
 
-/* Cruz 45 a 48 derecho*/
-.cruz45 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.5%; right: 41.3%; }
-.cruz46 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.5%; right: 40.5%; }
-.cruz47 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.5%; right: 39.7%; }
-.cruz48 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.5%; right: 39%;   }
+/* Cruz 37 a 40 derecho */
+.cruz37 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.2%; right: 42.3%; }
+.cruz38 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.2%; right: 41.5%; }
+.cruz39 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.2%; right: 40.7%; }
+.cruz40 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.2%; right: 40%; }
 
-/* Lumbar L1 lado Izquierdo */
-.cruz97 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.8%;left: 41%;    }
-.cruz98 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.8%;left: 40.2%;  }
-.cruz99 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 47.8%;left: 39.4%;  }
-.cruz100 { z-index: 3; position: absolute; width: 80px; height: 20px; top:47.8%; left:38.6%;  }
-
-/* Lumbar L1 lado derecho */
-.cruz101 { z-index: 3; position: absolute; width: 80px; height: 20px; top:  47.8%; right: 41%;   }
-.cruz102 { z-index: 3; position: absolute; width: 80px; height: 20px; top:  47.8%; right: 40.2%; }
-.cruz103 { z-index: 3; position: absolute; width: 80px; height: 20px; top:  47.8%; right: 39.4%; }
-.cruz104 { z-index: 3; position: absolute; width: 80px; height: 20px; top:  47.8%; right: 38.6%; }
-
-/* Lumbar L2 lado Izquierdo */
-.cruz49 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; left: 41%;   }
-.cruz50 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; left: 40.2%; }
-.cruz51 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; left: 39.4%; }
-.cruz52 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; left: 38.6%; }
-
-/* Lumbar L2 lado Derecho */
-.cruz53 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; right: 41%;   }
-.cruz54 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; right: 40.2%; }
-.cruz55 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; right: 39.4%; }
-.cruz56 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 51%; right: 38.6%; }
-
-/* Lumbar L3 lado Izquierdo */
-.cruz57 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54.5%; left: 41%;   }
-.cruz58 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54.5%; left: 40.2%; }
-.cruz59 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54.5%; left: 39.4%; }
-.cruz60 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54.5%; left: 38.6%; }
-
-/* Lumbar L3 lado Derecho */
-.cruz61 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54.5%; right: 41%;   }
-.cruz62 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54.5%; right: 40.2%; }
-.cruz63 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54.5%; right: 39.4%; }
-.cruz64 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 54.5%; right: 38.6%; }
-
-/* Lumbar L4 lado Izquierdo */
-.cruz65 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.8%; left: 41%;   }
-.cruz66 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.8%; left: 40.2%; }
-.cruz67 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.8%; left: 39.4%; }
-.cruz68 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.8%; left: 38.6%; }
-
-/* Lumbar L4 lado Derecho */
-.cruz69 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.8%; right: 41%;   }
-.cruz70 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.8%; right: 40.2%; }
-.cruz71 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.8%; right: 39.4%; }
-.cruz72 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 57.8%; right: 38.6%; }
-
-/* Lumbar L5 lado Izquierdo */
-.cruz73 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 61%; left: 41%;   }
-.cruz74 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 61%; left: 40.2%; }
-.cruz75 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 61%; left: 39.4%; }
-.cruz76 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 61%; left: 38.6%; }
-
-/* Lumbar L5 lado Derecho */
-.cruz77 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 61%; right: 41%;   }
-.cruz78 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 61%; right: 40.2%; }
-.cruz79 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 61%; right: 39.4%; }
-.cruz80 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 61%; right: 38.6%; }
-
-/* Torácica S1 lado Izquierdo */
-.cruz81 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; left: 41%;   }
-.cruz82 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; left: 40.2%; }
-.cruz83 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; left: 39.4%; }
-.cruz84 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; left: 38.6%; }
-
-/* Torácica S1 lado Derecho */
-.cruz85 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; right: 41%;   }
-.cruz86 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; right: 40.2%; }
-.cruz87 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; right: 39.4%; }
-.cruz88 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 64.9%; right: 38.6%; }
-
-/* Torácica S2 lado Izquierdo */
-.cruz89 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 68%; left: 41.5%; }
-.cruz90 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 68%; left: 40.5%; }
-.cruz91 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 68%; left: 39.5%; }
-.cruz92 {z-index: 3; position: absolute; width: 80px; height: 20px; top: 68%; left: 38.8%; }
-/* Torácica S2 lado Derecho */
-.cruz93 { z-index: 3; position: absolute; width: 80px; height: 20px;top: 68%; right: 41%;   }
-.cruz94 { z-index: 3; position: absolute; width: 80px; height: 20px;top: 68%; right: 40.2%; }
-.cruz95 { z-index: 3; position: absolute; width: 80px; height: 20px;top: 68%; right: 39.4%; }
-.cruz96 { z-index: 3; position: absolute; width: 80px; height: 20px;top: 68%; right: 38.6%; }
+/* Cruz 45 a 48 derecho */
+.cruz45 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 16.5%; right: 42.3%; }
+.cruz46 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 16.5%; right: 41.5%; }
+.cruz47 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 16.5%; right: 40.7%; }
+.cruz48 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 16.5%; right: 40%; }
 `;
   /**********************************************
    * E) Armado final del HTML
@@ -1329,7 +1404,8 @@ const imageMapRight = {
       <!-- Texto Superior Izquierdo (si aplica) -->
       ${
         topLeftText
-          ? `<div style="position:absolute; top:60px; left:20px; color:red;">${topLeftText}</div>`
+          ? `<div style="position:absolute;  margin-top: 54px;
+            margin-left: 100px; color:black;  z-index: 999;">${topLeftText}</div>`
           : ""
       }
       <!-- Fila con las 2 imágenes (frontal y posterior) -->
@@ -1344,9 +1420,9 @@ const imageMapRight = {
                 <div
                   style="
                     position: absolute;
-                    left: ${item.x}px;
-                    top: ${item.y}px;
-                    z-index: 999;
+                  left: ${item.x+43}px;
+                        top:  ${item.y-10}px;"
+                    z-index: 998;
 
                  "
                 >
@@ -1369,7 +1445,7 @@ ${droppedItems
           position: absolute;
           left: ${item.x - 647}px;
           top: ${item.y-10}px;
-          z-index: 999;
+          z-index: 998;
         "
       >
         ${item.content}

@@ -1404,7 +1404,7 @@ const imageMapRight = {
       <!-- Texto Superior Izquierdo (si aplica) -->
       ${
         topLeftText
-          ? `<div style="position:absolute;  margin-top: 54px;
+          ? `<div style="position:absolute;  margin-top: 30px;
             margin-left: 100px; color:black;  z-index: 999;">${topLeftText}</div>`
           : ""
       }

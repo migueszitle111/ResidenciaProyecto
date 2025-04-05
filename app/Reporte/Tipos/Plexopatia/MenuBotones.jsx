@@ -12,26 +12,10 @@ import MenuImagenes from '../../../components/ReportTemplate/DinamicImagesMenu';
 import { useImageState } from '../../MetodosBotones';
 import ReportFace from './ReportFace';
 
-/**
- * NOTA: Si en algún futuro quisieras simplificar todavía más la lógica de
- * "siguiente paso" y "paso anterior", podrías agrupar todos tus pasos en
- * un array y recorrerlo con un índice actual. Pero por ahora, esta limpieza
- * elimina lo que no se usaba y mantiene la misma lógica.
- */
-
-// -- Array de pasos usado en caso de que quieras renderizar la numeración arriba --
-const stepsArray = [
-  'A1','B1','B2','B3','C1','C2','C3',
-  'D1','D2','D3','E1','E2','E3','F1',
-  'F2','F3','G1','G2','G3','H2','H3',
-  'D2A','D3A','I1','I2','I3'
-];
-
-// ----------------------------------------------------------------------------
-
-const SimpleMultiStepForm = ({
-  showStepNumber,
-  conclusionDivRef,
+// Numero de pasos 
+const stepsArray = ['A1','B1','B2','B3','C1','C2','C3','D1','D2','D3','E1','E2','E3','F1','F2','F3','G1','G2','G3','H2','H3', 'D2A', 'D2A', 'D3A', 'I1', 'I2', 'I3'];
+// Metodos de movimiento entre menus
+const SimpleMultiStepForm = ({ showStepNumber, conclusionDivRef,
   elementRef,
   handleImageChange,
   droppedItems,
@@ -45,47 +29,58 @@ const SimpleMultiStepForm = ({
   const [myVariable, setMyVariable] = useState([]);
   const [myVariable1, setMyVariable1] = useState([]);
   const [myVariable2, setMyVariable2] = useState([]);
-  const [text, setText] = useState("");
+  const [text, setText]=useState("");
 
-  useEffect(() => {
+  useEffect(()=>{
     setText("hola");
-  }, []);
+  },[]);
 
-  const { selectedImages, history, handleUndo, handlePrint } = useImageState();
+  const {
+    selectedImages,
+    history,
+   
+  } = useImageState();
 
-  // Ejemplos de funciones que asignan valores a estados, por si las usas en tu flujo
+  // Function to assign the first value to the variable
   const assignFirstValue = () => {
-    setMyVariable((prevValues) => [...prevValues, "Hello, World!"]);
-  };
-  const assignSecondValue = () => {
-    setMyVariable((prevValues) => [...prevValues, "Second Value"]);
-  };
-  const assignThirdValue = () => {
-    setMyVariable((prevValues) => [...prevValues, "Third Value"]);
-  };
-  const ladoizquierda = () => {
-    setMyVariable1((prevValues) => [...prevValues, "b"]);
-  };
-  const ladoderecho = () => {
-    setMyVariable1((prevValues) => [...prevValues, "a"]);
-  };
-  const ladobilateral = () => {
-    setMyVariable1((prevValues) => [...prevValues, "c"]);
-  };
-  const ladoizquierda1 = () => {
-    setMyVariable2((prevValues) => [...prevValues, "b"]);
-  };
-  const ladoderecho1 = () => {
-    setMyVariable2((prevValues) => [...prevValues, "a"]);
-  };
-  const ladobilateral1 = () => {
-    setMyVariable2((prevValues) => [...prevValues, "c"]);
+    setMyVariable(prevValues => [...prevValues, "Hello, World!"]);
   };
 
-  /**
-   *  Retornos condicionales
-   *  Para tu UI en D2, D2A, D2B, D3, D3A
-   */
+  // Function to assign the second value to the variable
+  const assignSecondValue = () => {
+    setMyVariable(prevValues => [...prevValues, "Second Value"]);
+  };
+
+  const assignThirdValue = () => {
+    setMyVariable(prevValues => [...prevValues, "Third Value"]);
+  };
+
+  const ladoizquierda = () => {
+    setMyVariable1(prevValues => [...prevValues, "b"]);
+  };
+
+  // Function to assign the second value to the variable
+  const ladoderecho = () => {
+    setMyVariable1(prevValues => [...prevValues, "a"]);
+  };
+
+  const ladobilateral = () => {
+    setMyVariable1(prevValues => [...prevValues, "c"]);
+  };
+
+  const ladoizquierda1 = () => {
+    setMyVariable2(prevValues => [...prevValues, "b"]);
+  };
+
+  // Function to assign the second value to the variable
+  const ladoderecho1 = () => {
+    setMyVariable2(prevValues => [...prevValues, "a"]);
+  };
+
+  const ladobilateral1 = () => {
+    setMyVariable2(prevValues => [...prevValues, "c"]);
+  };
+
   const ubicaciond2 = () => {
     if (myVariable1.includes("a")) {
       return (<div>
@@ -405,10 +400,16 @@ const SimpleMultiStepForm = ({
     }
     return null;
   };
-  // -------------------------------------------------
-  // Manejo de pasos para "CERVICAL" y "BRAQUIAL" y "LUMBOSACRO"
-  // -------------------------------------------------
 
+  const muestralog =() =>{
+    if(myVariable.includes("Hello, World!", "Second Value")){
+      console.log("hola");
+      return(<div><ReportFace text={text}/></div>)
+    }
+    //else if(myVariable.includes())
+  };
+  
+  // Siguiente paso, se ponen los pasos de arriba hacia abajo
   const handleNextStep = () => {
     if (step === 'A') setStep('B1');
     else if (step === 'B1') setStep('C1');
@@ -418,7 +419,8 @@ const SimpleMultiStepForm = ({
     else if (step === 'F1') setStep('G1');
     else if (step === 'G1') setStep('I');
   };
-
+  
+  // Paso anterior, se ponen los pasos de abajo hacia arriba
   const handlePrevStep = () => {
     if (step === 'I') setStep('G1');
     else if (step === 'G1') setStep('F1');
@@ -440,6 +442,7 @@ const SimpleMultiStepForm = ({
     else if (step === 'H2') setStep('I1');
   };
 
+  // Paso anterior, se ponen los pasos de abajo hacia arriba
   const handlePrevStep1 = () => {
     if (step === 'I1') setStep('H2');
     else if (step === 'H2') setStep('G2');
@@ -451,6 +454,28 @@ const SimpleMultiStepForm = ({
     else if (step === 'B2') setStep('A');
   };
 
+  // const handleNextStep2 = () => {
+  //   if (step === 'A') setStep('B3');
+  //   else if (step === 'B3') setStep('C3');
+  //   else if (step === 'C3') setStep('D3');
+  //   else if (step === 'D3') setStep('E3');
+  //   else if (step === 'E3') setStep('F3');
+  //   else if (step === 'F3') setStep('G3');
+  //   else if (step === 'G3') setStep('H3');
+  //   else if (step === 'H3') setStep('I2');
+  // };
+
+  // // Paso anterior, se ponen los pasos de abajo hacia arriba
+  // const handlePrevStep2 = () => {
+  //   if (step === 'I2') setStep('H3');
+  //   else if (step === 'H3') setStep('G3');
+  //   else if (step === 'G3') setStep('F3');
+  //   else if (step === 'F3') setStep('E3');
+  //   else if (step === 'D3') setStep('C3');
+  //   else if (step === 'C3') setStep('B3');
+  //   else if (step === 'B3') setStep('A');
+  // };
+  
   const handleNextStep2 = () => {
     if (step === 'A') setStep('B3');
     else if (step === 'B3') setStep('C3');
@@ -462,6 +487,7 @@ const SimpleMultiStepForm = ({
     else if (step === 'H3') setStep('I2');
   };
 
+  // Paso anterior, se ponen los pasos de abajo hacia arriba
   const handlePrevStep2 = () => {
     if (step === 'I2') setStep('H3');
     else if (step === 'H3') setStep('G3');
@@ -472,43 +498,51 @@ const SimpleMultiStepForm = ({
     else if (step === 'C3') setStep('B3');
     else if (step === 'B3') setStep('A');
   };
-
-  // Pasos extra
+  
   const handleNextStep4 = () => {
     if (step === 'E3') setStep('H3');
     else if (step === 'E2') setStep('H2');
     else if (step === 'D1') setStep('G1');
   };
-  const handleNextStep5 = () => {
-    if (step === 'D2') setStep('D2A');
-    else if (step === 'D2A') setStep('E2');
-  };
-  const handleNextStep6 = () => {
-    if (step === 'D2') setStep('D2B');
-    else if (step === 'D2B') setStep('E2');
-  };
-  const handleNextStep7 = () => {
-    if (step === 'D3') setStep('D3A');
-    else if (step === 'D3A') setStep('E3');
-  };
+  const handleNextStep5=()=>{
+    if (step === 'D2') setStep('D2A')
+    else if (step === 'D2A') setStep('E2')
+  }
+  const handleNextStep6=()=>{
+    if (step === 'D2') setStep('D2B')
+    else if (step === 'D2B') setStep('E2')
+  }
+  const handleNextStep7=()=>{
+    if (step === 'D3') setStep('D3A')
+    else if (step === 'D3A') setStep('E3')
+  }
   const handlePrevStep5 = () => {
     if (step === 'E2') setStep('D2A');
-    else if (step === 'D2A') setStep('D2');
+    else if (step === 'D2A') setStep('D2')
   };
   const handlePrevStep6 = () => {
     if (step === 'E2') setStep('D2B');
-    else if (step === 'D2B') setStep('D2');
+    else if (step === 'D2B') setStep('D2')
   };
   const handlePrevStep7 = () => {
     if (step === 'E3') setStep('D3A');
-    else if (step === 'D3A') setStep('D3');
+    else if (step === 'D3A') setStep('D3')
   };
+const cambiotexto = () =>{
+  switch(op){
+    case "a":
+      
 
-  // Render de la barra superior de pasos (sólo si lo usas realmente):
+  }
+};
+
+  // Renderizado de los pasos en circulos
   const renderTopStepNumbers = () => {
-    if (!showStepNumber || step === 'Final') return null;
+    if (!showStepNumber || step === 'Final') {
+      return null;
+    }
     return (
-      <section className="mt-2 mb-4 flex justify-between">
+      <section className='mt-2 mb-4 flex justify-between'>
         {stepsArray.map((item) => (
           <div
             key={item}
@@ -525,136 +559,209 @@ const SimpleMultiStepForm = ({
 
   return (
     <div>
-      {/* Si NO quieres ver la numeración arriba, comenta o quita la línea de abajo */}
-      {/* {renderTopStepNumbers()} */}
-
-      {step === 'A' && (
+      {/* Metodos que toman cada paso
+      {renderTopStepNumbers()}*/}
+      {step === 'A' ? (
         <StepA
           handleNextStep={handleNextStep}
           handleNextStep1={handleNextStep1}
           handleNextStep2={handleNextStep2}
         />
-      )}
-      {step === 'B1' && <StepB1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
-      {step === 'B2' && (
-        <StepB2
-          handlePrevStep1={handlePrevStep1}
-          handleNextStep1={handleNextStep1}
-          ladoizquierda={ladoizquierda}
-          ladoderecho={ladoderecho}
-          ladobilateral={ladobilateral}
-        />
-      )}
-      {step === 'B3' && (
-        <StepB3
-          handlePrevStep2={handlePrevStep2}
-          handleNextStep2={handleNextStep2}
-          ladoizquierda1={ladoizquierda1}
-          ladoderecho1={ladoderecho1}
-          ladobilateral1={ladobilateral1}
-        />
-      )}
+      ) : null}
 
-      {step === 'C1' && <StepC1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
-      {step === 'C2' && (
-        <StepC2 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />
-      )}
-      {step === 'C3' && (
-        <StepC3 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />
-      )}
-      {step === 'D1' && (
-        <StepD1
+      {step === 'B1' ? (
+        <StepB1
           handlePrevStep={handlePrevStep}
           handleNextStep={handleNextStep}
-          handleNextStep4={handleNextStep4}
         />
-      )}
-      {step === 'D2' && (
-        <StepD2
-          handlePrevStep1={handlePrevStep1}
-          handleNextStep1={handleNextStep1}
-          handleNextStep5={handleNextStep5}
-          handleNextStep6={handleNextStep6}
-          ubicaciond2={ubicaciond2}
-        />
-      )}
-      {step === 'D2A' && (
-        <StepD2A
-          handleNextStep5={handleNextStep5}
-          handlePrevStep5={handlePrevStep5}
-          ubicaciond2a={ubicaciond2a}
-          assignFirstValue={assignFirstValue}
-          assignSecondValue={assignSecondValue}
-          assignThirdValue={assignThirdValue}
-        />
-      )}
-      {step === 'D2B' && (
-        <StepD2B
-          handleNextStep6={handleNextStep6}
-          handlePrevStep6={handlePrevStep6}
-          ubicaciond2b={ubicaciond2b}
-        />
-      )}
-      {step === 'D3' && (
-        <StepD3
-          handlePrevStep2={handlePrevStep2}
-          handleNextStep2={handleNextStep2}
-          handleNextStep7={handleNextStep7}
-          handlePrevStep7={handlePrevStep7}
-          ubicaciond3={ubicaciond3}
-        />
-      )}
-      {step === 'D3A' && (
-        <StepD3A
-          handleNextStep2={handleNextStep2}
-          handleNextStep7={handleNextStep7}
-          handlePrevStep7={handlePrevStep7}
-          ubicaciond3a={ubicaciond3a}
-        />
-      )}
-      {step === 'E1' && <StepE1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
-      {step === 'E2' && (
-        <StepE2
-          handlePrevStep1={handlePrevStep1}
-          handleNextStep1={handleNextStep1}
-          handleNextStep4={handleNextStep4}
-        />
-      )}
-      {step === 'E3' && (
-        <StepE3
-          handlePrevStep2={handlePrevStep2}
-          handleNextStep2={handleNextStep2}
-          handleNextStep4={handleNextStep4}
-        />
-      )}
-      {step === 'F1' && <StepF1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
-      {step === 'F2' && (
-        <StepF2 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />
-      )}
-      {step === 'F3' && (
-        <StepF3 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />
-      )}
-      {step === 'G1' && <StepG1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />}
-      {step === 'G2' && (
-        <StepG2 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />
-      )}
-      {step === 'G3' && (
-        <StepG3 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />
-      )}
-      {step === 'H2' && (
-        <StepH2 handlePrevStep1={handlePrevStep1} handleNextStep1={handleNextStep1} />
-      )}
-      {step === 'H3' && (
-        <StepH3 handlePrevStep2={handlePrevStep2} handleNextStep2={handleNextStep2} />
-      )}
+      ) : null}
 
-      {step === 'I' && (
+      {step === 'B2' ? (
+        <StepB2
+        handlePrevStep1={handlePrevStep1}
+        handleNextStep1={handleNextStep1}
+        ladoizquierda={ladoizquierda}
+        ladoderecho={ladoderecho}
+        ladobilateral={ladobilateral}
+        />
+      ) : null}
+
+      {step === 'B3' ? (
+        <StepB3
+        handlePrevStep2={handlePrevStep2}
+        handleNextStep2={handleNextStep2}
+        ladoizquierda1={ladoizquierda1}
+        ladoderecho1={ladoderecho1}
+        ladobilateral1={ladobilateral1}
+        />
+      ) : null}
+
+      {step === 'C1' ? (
+        <StepC1
+        handlePrevStep={handlePrevStep}
+        handleNextStep={handleNextStep}
+        />
+      ) : null}
+
+      {step === 'C2' ? (
+        <StepC2
+        handlePrevStep1={handlePrevStep1}
+        handleNextStep1={handleNextStep1}
+        />
+      ) : null}
+
+      {step === 'C3' ? (
+        <StepC3
+        handlePrevStep2={handlePrevStep2}
+        handleNextStep2={handleNextStep2}
+        />
+      ) : null}
+
+      {step === 'D1' ? (
+        <StepD1
+        handlePrevStep={handlePrevStep}
+        handleNextStep={handleNextStep}
+        handleNextStep4={handleNextStep4}
+        />
+      ) : null}
+
+      {step === 'D2' ? (
+        <StepD2
+        handlePrevStep1={handlePrevStep1}
+        handleNextStep1={handleNextStep1}
+        handleNextStep5={handleNextStep5}
+        handleNextStep6={handleNextStep6}
+        ubicaciond2={ubicaciond2}
+        />
+      ) : null}
+
+      {step === 'D2A' ? (
+        <StepD2A
+        handleNextStep1={handleNextStep1}
+        handleNextStep5={handleNextStep5}
+        handleNextStep6={handleNextStep6}
+        handlePrevStep5={handlePrevStep5}
+        ubicaciond2a={ubicaciond2a}
+        assignFirstValue={assignFirstValue}
+        assignSecondValue={assignSecondValue}
+        assignThirdValue={assignThirdValue}
+        muestralog={muestralog}
+        />
+      ) : null}
+
+      {step === 'D2B' ? (
+        <StepD2B
+        handlePrevStep6={handlePrevStep6}
+        handleNextStep1={handleNextStep1}
+        handleNextStep5={handleNextStep5}
+        handleNextStep6={handleNextStep6}
+        ubicaciond2b={ubicaciond2b}
+        />
+      ) : null}
+
+      {step === 'D3' ? (
+        <StepD3
+        handlePrevStep2={handlePrevStep2}
+        handleNextStep2={handleNextStep2}
+        handleNextStep7={handleNextStep7}
+        handlePrevStep7={handlePrevStep7}
+        ubicaciond3={ubicaciond3}
+        />
+      ) : null}
+
+      {step === 'D3A' ? (
+        <StepD3A
+        handleNextStep2={handleNextStep2}
+        handleNextStep7={handleNextStep7}
+        handlePrevStep7={handlePrevStep7}
+
+        ubicaciond3a={ubicaciond3a}
+        />
+      ) : null}
+
+      {step === 'E1' ? (
+        <StepE1
+        handlePrevStep={handlePrevStep}
+        handleNextStep={handleNextStep}
+        />
+      ) : null}
+
+      {step === 'E2' ? (
+        <StepE2
+        handlePrevStep1={handlePrevStep1}
+        handleNextStep1={handleNextStep1}
+        handleNextStep4={handleNextStep4}
+        />
+      ) : null}
+
+      {step === 'E3' ? (
+        <StepE3
+        handlePrevStep2={handlePrevStep2}
+        handleNextStep2={handleNextStep2}
+        handleNextStep4={handleNextStep4}
+        />
+      ) : null}
+
+      {step === 'F1' ? (
+        <StepF1
+        handlePrevStep={handlePrevStep}
+        handleNextStep={handleNextStep}
+        />
+      ) : null}
+
+      {step === 'F2' ? (
+        <StepF2
+        handlePrevStep1={handlePrevStep1}
+        handleNextStep1={handleNextStep1}
+        />
+      ) : null}
+
+      {step === 'F3' ? (
+        <StepF3
+        handlePrevStep2={handlePrevStep2}
+        handleNextStep2={handleNextStep2}
+        />
+      ) : null}
+
+      {step === 'G1' ? (
+        <StepG1
+        handlePrevStep={handlePrevStep}
+        handleNextStep={handleNextStep}
+        />
+      ) : null}
+
+      {step === 'G2' ? (
+        <StepG2
+        handlePrevStep1={handlePrevStep1}
+        handleNextStep1={handleNextStep1}
+        />
+      ) : null}
+
+      {step === 'G3' ? (
+        <StepG3
+        handlePrevStep2={handlePrevStep2}
+        handleNextStep2={handleNextStep2}
+        />
+      ) : null}
+
+      {step === 'H2' ? (
+        <StepH2
+        handlePrevStep1={handlePrevStep1}
+        handleNextStep1={handleNextStep1}
+        />
+      ) : null}
+
+      {step === 'H3' ? (
+        <StepH3
+        handlePrevStep2={handlePrevStep2}
+        handleNextStep2={handleNextStep2}
+        />
+      ) : null}
+ {step === 'I' && (
         <StepI
           handlePrevStep={handlePrevStep}
           selectedImages={selectedImages}
-          handleUndo={handleUndo}
           handleImageChange={handleImageChange}
-          handlePrint={handlePrint}
           conclusionDivRef={conclusionDivRef}
           elementRef={elementRef}
           droppedItems={droppedItems}
@@ -669,9 +776,7 @@ const SimpleMultiStepForm = ({
         <StepI1
           handlePrevStep1={handlePrevStep1}
           selectedImages={selectedImages}
-          handleUndo={handleUndo}
           handleImageChange={handleImageChange}
-          handlePrint={handlePrint}
           conclusionDivRef={conclusionDivRef}
           elementRef={elementRef}
           droppedItems={droppedItems}
@@ -686,9 +791,7 @@ const SimpleMultiStepForm = ({
         <StepI2
           handlePrevStep2={handlePrevStep2}
           selectedImages={selectedImages}
-          handleUndo={handleUndo}
           handleImageChange={handleImageChange}
-          handlePrint={handlePrint}
           conclusionDivRef={conclusionDivRef}
           elementRef={elementRef}
           droppedItems={droppedItems}
@@ -703,416 +806,387 @@ const SimpleMultiStepForm = ({
   );
 };
 
-// -----------------------------------------------------------------------------
-// Definición de cada Step (para no romper tu estructura original)
-// -----------------------------------------------------------------------------
 
-const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2 }) => {
+///////////////// Menu de cada paso /////////////////
+
+const StepA = ({ handleNextStep,handleNextStep1,handleNextStep2 }) => {
+  
   return (
     <div>
-      <div className="button-bar">
-        <button className="print-button">
-          <img src="" style={{ filter: 'invert(0.5)' }} />
+      <div className='button-bar'>
+      <button className={`print-button`}>
+          <img src="" style={{filter: 'invert(0.5)'}}/>
         </button>
-        <button className="print-button">
-          <img src="" style={{ filter: 'invert(0.5)' }} />
+
+        <button className={`print-button`}>
+          <img src="" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">PLEXO</h1>
+      <h1 className=' text-xl font-bold text-white'>
+        PLEXO
+      </h1>
       <div onClick={darvalor}>
         <div onClick={handleNextStep}>
-          <ConclusionButton
-            value="plexopatia_cervical"
-            title="PLEXOPATIA CERVICAL"
-            displayText="CERVICAL"
-          />
+          <ConclusionButton value='plexopatia_cervical' title='PLEXOPATIA CERVICAL' displayText={'CERVICAL'}/>
         </div>
+
         <div onClick={handleNextStep1}>
-          <ConclusionButton
-            value="plexopatia_braquial"
-            title="PLEXOPATIA BRAQUIAL"
-            displayText="BRAQUIAL"
-          />
+          <ConclusionButton value='plexopatia_braquial' title='PLEXOPATIA BRAQUIAL' displayText={'BRAQUIAL'}/>
         </div>
+
         <div onClick={handleNextStep2}>
-          <ConclusionButton
-            value="plexopatia_lumbosacra"
-            title="PLEXOPATIA LUMBOSACRA"
-            displayText="LUMBOSACRO"
-          />
+          <ConclusionButton value='plexopatia_lumbosacra' title='PLEXOPATIA LUMBOSACRA' displayText={'LUMBOSACRO'}/>
         </div>
+      </div>
+        <div className='my-2 flex justify-end items-center'>
       </div>
     </div>
   );
 };
 
 const StepB1 = ({ handleNextStep, handlePrevStep }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const { removeConclusion } = useContext(ReportContext)
 
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('izquierda_C');
-            removeConclusion('derecha_C');
-            removeConclusion('bilateral_C');
-            removeConclusion('plexopatia_cervical');
-            removeConclusion('plexopatia_braquial');
-            removeConclusion('plexopatia_lumbosacra');
-            handlePrevStep();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion('izquierda_C')
+            removeConclusion('derecha_C')
+            removeConclusion('bilateral_C')
+            removeConclusion('plexopatia_cervical')
+            removeConclusion('plexopatia_braquial')
+            removeConclusion('plexopatia_lumbosacra')
+
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+        
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
+      </div>
+      <h1 className=' text-xl font-bold text-white'>
+        LADO
+      </h1>
+      
+      <div onClick={ handleNextStep }>
+      <ConclusionButton value='izquierda_C' title=' IZQUIERDA,' displayText={'IZQUIERDA'}/>
+      <ConclusionButton value='derecha_C' title=' DERECHA' displayText={'DERECHA'}   dangerouslySetInnerHTML={{ __html: 'DERECHA,<br>' }} />
+      <ConclusionButton value='bilateral_C' title=' BILATERAL,' displayText={'BILATERAL'}/>
+      </div>
 
-        <button id="prev" className="print-button dont-print">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
-        </button>
-      </div>
-      <h1 className="text-xl font-bold text-white">LADO</h1>
-      <div onClick={handleNextStep}>
-        <ConclusionButton value="izquierda_C" title=" IZQUIERDA," displayText="IZQUIERDA" />
-        <ConclusionButton
-          value="derecha_C"
-          title=" DERECHA"
-          displayText="DERECHA"
-          dangerouslySetInnerHTML={{ __html: 'DERECHA,<br>' }}
-        />
-        <ConclusionButton value="bilateral_C" title=" BILATERAL," displayText="BILATERAL" />
-      </div>
+      
     </div>
   );
 };
 
-const StepB2 = ({
-  handleNextStep1,
-  handlePrevStep1,
-  ladoizquierda,
-  ladoderecho,
-  ladobilateral
-}) => {
-  const { removeConclusion } = useContext(ReportContext);
+const StepB2 = ({ handleNextStep1, handlePrevStep1, ladoizquierda, ladoderecho, ladobilateral}) => {
+  const { removeConclusion } = useContext(ReportContext)
 
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('izquierda');
-            removeConclusion('derecha');
-            removeConclusion('bilateral');
-            removeConclusion('plexopatia_cervical');
-            removeConclusion('plexopatia_braquial');
-            removeConclusion('plexopatia_lumbosacra');
-            handlePrevStep1();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+      <button  onClick={() => {
+            removeConclusion('izquierda')
+            removeConclusion('derecha')
+            removeConclusion('bilateral')
+            removeConclusion('plexopatia_cervical')
+            removeConclusion('plexopatia_braquial')
+            removeConclusion('plexopatia_lumbosacra')
+
+            handlePrevStep1()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">LADO</h1>
-      <div onClick={handleNextStep1}>
+      <h1 className=' text-xl font-bold text-white'>
+        LADO
+      </h1>
+      <div onClick={ handleNextStep1 }>
         <div onClick={ladoizquierda}>
-          <ConclusionButton value="izquierda" title=" IZQUIERDA," displayText="IZQUIERDA" />
-        </div>
+        <ConclusionButton value='izquierda' title=' IZQUIERDA,' displayText={'IZQUIERDA'}/></div>
         <div onClick={ladoderecho}>
-          <ConclusionButton value="derecha" title=" DERECHA," displayText="DERECHA" />
-        </div>
+        <ConclusionButton value='derecha' title=' DERECHA,' displayText={'DERECHA'}/></div>
         <div onClick={ladobilateral}>
-          <ConclusionButton value="bilateral" title=" BILATERAL," displayText="BILATERAL" />
-        </div>
+        <ConclusionButton value='bilateral' title=' BILATERAL,' displayText={'BILATERAL'}/></div>
       </div>
+
+      
     </div>
   );
 };
 
-const StepB3 = ({
-  handleNextStep2,
-  handlePrevStep2,
-  ladoizquierda1,
-  ladoderecho1,
-  ladobilateral1
-}) => {
-  const { removeConclusion } = useContext(ReportContext);
+const StepB3 = ({ handleNextStep2, handlePrevStep2, ladoizquierda1, ladoderecho1, ladobilateral1 }) => {
+  const { removeConclusion } = useContext(ReportContext)
 
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('izquierda');
-            removeConclusion('derecha');
-            removeConclusion('bilateral');
-            removeConclusion('plexopatia_cervical');
-            removeConclusion('plexopatia_braquial');
-            removeConclusion('plexopatia_lumbosacra');
-            handlePrevStep2();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+      <button  onClick={() => {
+            removeConclusion('izquierda')
+            removeConclusion('derecha')
+            removeConclusion('bilateral')
+            removeConclusion('plexopatia_cervical')
+            removeConclusion('plexopatia_braquial')
+            removeConclusion('plexopatia_lumbosacra')
+
+            handlePrevStep2()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">LADO</h1>
-      <div onClick={handleNextStep2}>
+      <h1 className=' text-xl font-bold text-white'>
+        LADO
+      </h1>
+      <div onClick={ handleNextStep2 }>
         <div onClick={ladoizquierda1}>
-          <ConclusionButton value="izquierda" title=" IZQUIERDA," displayText="IZQUIERDA" />
-        </div>
+        <ConclusionButton value='izquierda' title=' IZQUIERDA,' displayText={'IZQUIERDA'}/></div>
         <div onClick={ladoderecho1}>
-          <ConclusionButton value="derecha" title=" DERECHA," displayText="DERECHA" />
-        </div>
+        <ConclusionButton value='derecha' title=' DERECHA,' displayText={'DERECHA'}/></div>
         <div onClick={ladobilateral1}>
-          <ConclusionButton value="bilateral" title=" BILATERAL," displayText="BILATERAL" />
-        </div>
+        <ConclusionButton value='bilateral' title=' BILATERAL,' displayText={'BILATERAL'}/></div>
       </div>
+
+      
     </div>
   );
 };
 
 const StepC1 = ({ handleNextStep, handlePrevStep }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const { removeConclusion } = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('aguda');
-            removeConclusion('subaguda');
-            removeConclusion('cronica');
-            handlePrevStep();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+      <button  onClick={() => {
+          removeConclusion('aguda');
+          removeConclusion('subaguda');
+          removeConclusion('cronica');
+
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+
+        <button id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">EVOLUCION</h1>
-      <div onClick={handleNextStep}>
-        <ConclusionButton value="aguda" title=" AGUDA" />
-        <ConclusionButton value="subaguda" title=" SUBAGUDA" />
-        <ConclusionButton value="cronica" title=" CRONICA" />
+      <h1 className=' text-xl font-bold text-white'>
+        EVOLUCION
+      </h1>
+
+      <div onClick={ handleNextStep }>
+      <ConclusionButton value='aguda' title=' AGUDA' />
+      <ConclusionButton value='subaguda' title=' SUBAGUDA' />
+      <ConclusionButton value='cronica' title=' CRONICA' />
       </div>
     </div>
   );
 };
 
 const StepC2 = ({ handleNextStep1, handlePrevStep1 }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('aguda');
-            removeConclusion('subaguda');
-            removeConclusion('cronica');
-            handlePrevStep1();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+      <button  onClick={() => {
+          removeConclusion('aguda');
+          removeConclusion('subaguda');
+          removeConclusion('cronica');
+
+            handlePrevStep1()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+
+        <button id='prev' className={`print-button dont-print `}>
+          <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">EVOLUCION</h1>
-      <div onClick={handleNextStep1}>
-        <ConclusionButton value="aguda" title=" AGUDA" />
-        <ConclusionButton value="subaguda" title=" SUBAGUDA" />
-        <ConclusionButton value="cronica" title=" CRONICA" />
+      <h1 className=' text-xl font-bold text-white'>
+        EVOLUCION
+      </h1>
+      <div onClick={ handleNextStep1 }>
+      <ConclusionButton value='aguda' title=' AGUDA' />
+      <ConclusionButton value='subaguda' title=' SUBAGUDA' />
+      <ConclusionButton value='cronica' title=' CRONICA' />
       </div>
+
+      
     </div>
   );
 };
 
 const StepC3 = ({ handleNextStep2, handlePrevStep2 }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('aguda');
-            removeConclusion('subaguda');
-            removeConclusion('cronica');
-            handlePrevStep2();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+      <button  onClick={() => {
+          removeConclusion('aguda');
+          removeConclusion('subaguda');
+          removeConclusion('cronica');
+
+            handlePrevStep2()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">EVOLUCION</h1>
-      <div onClick={handleNextStep2}>
-        <ConclusionButton value="aguda" title=" AGUDA" />
-        <ConclusionButton value="subaguda" title=" SUBAGUDA" />
-        <ConclusionButton value="cronica" title=" CRONICA" />
+      <h1 className=' text-xl font-bold text-white'>
+        EVOLUCION
+      </h1>
+
+      <div onClick={ handleNextStep2 }>
+      <ConclusionButton value='aguda' title=' AGUDA' />
+      <ConclusionButton value='subaguda' title=' SUBAGUDA' />
+      <ConclusionButton value='cronica' title=' CRONICA' />
       </div>
+
+      
     </div>
   );
 };
 
-// ----------------------------------------------------------------
-// D2
-// ----------------------------------------------------------------
-
-const StepD2 = ({
-  handleNextStep1,
-  handlePrevStep1,
-  handleNextStep5,
-  handleNextStep6,
-  ubicaciond2
-}) => {
-  const { removeConclusion } = useContext(ReportContext);
+const StepD2 = ({ handleNextStep1, handlePrevStep1, handleNextStep5, handleNextStep6, ubicaciond2 }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            // Limpieza de conclusiones
-            removeConclusion('pre_total');
-            removeConclusion('c5sd');
-            removeConclusion('c6sd');
-            removeConclusion('c7md');
-            removeConclusion('c8fd');
-            removeConclusion('t1fd');
-            removeConclusion('post_totald');
-            removeConclusion('troncosD');
-            removeConclusion('divid');
-            removeConclusion('CordonD');
-            removeConclusion('prueba1000');
-            removeConclusion('tron1000d');
-            removeConclusion('tron10000d');
-            removeConclusion('salida');
-            removeConclusion('salidad');
-            removeConclusion('pre_totald');
-            removeConclusion('c5si');
-            removeConclusion('c6si');
-            removeConclusion('c7mi');
-            removeConclusion('c8fi');
-            removeConclusion('t1fi');
-            removeConclusion('troncosI');
-            removeConclusion('diviI');
-            removeConclusion('CordonI');
-            removeConclusion('tron1000i');
-            removeConclusion('divii');
-            removeConclusion('tron10000i');
-            removeConclusion('salidai');
-            removeConclusion('pre_totali');
-            removeConclusion('c5s');
-            removeConclusion('c6s');
-            removeConclusion('c7m');
-            removeConclusion('c8f');
-            removeConclusion('t1f');
-            removeConclusion('troncosB');
-            removeConclusion('divi');
-            removeConclusion('CordonB');
-            removeConclusion('tron1000');
-            removeConclusion('tron10000');
-            handlePrevStep1();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+        <button  onClick={() => {
+          removeConclusion('pre_total');
+          removeConclusion('c5sd');
+          removeConclusion('c6sd');
+          removeConclusion('c7md');
+          removeConclusion('c8fd');
+          removeConclusion('t1fd');
+          removeConclusion('post_totald');
+          removeConclusion('troncosD');
+          removeConclusion('divid');
+          removeConclusion('CordonD');
+          removeConclusion('prueba1000');
+          removeConclusion('tron1000d');
+          removeConclusion('tron10000d');
+          removeConclusion('salida');
+          removeConclusion('salidad');
+          removeConclusion('pre_totald');
+          removeConclusion('c5si');
+          removeConclusion('c6si');
+          removeConclusion('c7mi');
+          removeConclusion('c8fi');
+          removeConclusion('t1fi');
+          removeConclusion('troncosI');
+          removeConclusion('diviI');
+          removeConclusion('CordonI');
+          removeConclusion('tron1000i');
+          removeConclusion('divii');
+          removeConclusion('tron10000i');
+          removeConclusion('salidai');
+          removeConclusion('pre_totali');
+          removeConclusion('c5s');
+          removeConclusion('c6s');
+          removeConclusion('c7m');
+          removeConclusion('c8f');
+          removeConclusion('t1f');
+          removeConclusion('troncosB');
+          removeConclusion('divi');
+          removeConclusion('CordonB');
+          removeConclusion('tron1000');
+          removeConclusion('tron10000');
+
+            handlePrevStep1()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id="prev" onClick={handleNextStep1} className="print-button dont-print ">
-          <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+        <button id='prev' onClick={handleNextStep1} className={`print-button dont-print `}>
+        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">UBICACION</h1>
+      <h1 className=' text-xl font-bold text-white'>
+        UBICACION
+      </h1>
       <div>{ubicaciond2()}</div>
     </div>
   );
 };
 
-const StepD2A = ({
-  handleNextStep5,
-  handlePrevStep5,
-  ubicaciond2a,
-  assignFirstValue,
-  assignSecondValue,
-  assignThirdValue
-}) => {
+const StepD2A = ({handleNextStep5, handlePrevStep5, ubicaciond2a}) => {
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('supd');
-            removeConclusion('mediod');
-            removeConclusion('infd');
-            removeConclusion('supi');
-            removeConclusion('medioi');
-            removeConclusion('infi');
-            removeConclusion('sup');
-            removeConclusion('medio');
-            removeConclusion('inf');
-            handlePrevStep5();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+      <button  onClick={() => {
+          removeConclusion('supd');
+          removeConclusion('mediod');
+          removeConclusion('infd');
+
+          removeConclusion('supi');
+          removeConclusion('medioi');
+          removeConclusion('infi');
+
+          removeConclusion('sup');
+          removeConclusion('medio');
+          removeConclusion('inf');
+
+
+            handlePrevStep5()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id="prev" onClick={handleNextStep5} className="print-button dont-print ">
-          <img src="/I_In.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+        <button id='prev' onClick={handleNextStep5} className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">TRONCO</h1>
-      {/* Opcional: llamadas a tus funciones de prueba */}
-      {/* <button onClick={assignFirstValue}>Asignar 1</button> */}
+      <h1 className=' text-xl font-bold text-white'>
+        TRONCO
+      </h1>
       <div>{ubicaciond2a()}</div>
     </div>
   );
@@ -1121,56 +1195,125 @@ const StepD2A = ({
 const StepD2B = ({ handleNextStep6, handlePrevStep6, ubicaciond2b }) => {
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
+      <div className='button-bar'>
+      <button  onClick={() => {
             removeConclusion('laterald');
             removeConclusion('posteriord');
             removeConclusion('mediald');
+
             removeConclusion('laterali');
             removeConclusion('posteriori');
             removeConclusion('mediali');
+
             removeConclusion('lateral');
             removeConclusion('posterior');
             removeConclusion('medial');
-            handlePrevStep6();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+
+            handlePrevStep6()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id="prev" onClick={handleNextStep6} className="print-button dont-print ">
-          <img src="/I_In.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+        <button id='prev' onClick={handleNextStep6} className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">CORDONES</h1>
+      <h1 className=' text-xl font-bold text-white'>
+        CORDONES
+      </h1>
       <div>{ubicaciond2b()}</div>
     </div>
   );
 };
 
-// ----------------------------------------------------------------
-// D3
-// ----------------------------------------------------------------
+// const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
+//   const {removeConclusion} = useContext(ReportContext)
+//   return (
+//     <div>
+//       <div className='button-bar'>
+//         <button  onClick={() => {
+//             removeConclusion("AXONAL COMPLETA");
+//             removeConclusion("con_denervación_difusa");
+//             removeConclusion("con_denervación_abundante");
+//             removeConclusion("con_denervación_progresiva");
+//             removeConclusion("con_denervación discreta");
+//             removeConclusion("sin_denervación");
+//             removeConclusion("AXONAL INCOMPLETA");
+//             removeConclusion("DESMIELINIZANTE");
+//             removeConclusion("por_retardo_en_la_conduccion");
+//             removeConclusion("por_bloqueo_parcial_en_la_conducción");
+//             removeConclusion("por_bloqueo_completo_en_la_conduccion");
+//             removeConclusion("MIXTA");
+//             removeConclusion("primariamente_desmielinizante_con_perdida_axonal_secundaria");
+//             removeConclusion("primariamente_axonal_con_desmielinizacion_secundaria");
 
-const StepD3 = ({
-  handlePrevStep2,
-  handleNextStep2,
-  handleNextStep7,
-  handlePrevStep7,
-  ubicaciond3
-}) => {
-  const { removeConclusion } = useContext(ReportContext);
+//             handlePrevStep2()
+//           }} className={`print-button`}>
+//           <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+//         </button>
+
+//         <button onClick={() => window.location.reload()} className={`print-button`}>
+//         <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+//         </button>
+
+//         <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
+//         <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
+//         </button>
+//       </div>
+
+//       <h1 className=' text-xl font-bold text-white'>
+//         TIPO
+//       </h1>
+//       <AccordionContainer>
+//       <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type="external">
+//           <div onClick={handleNextStep2}>
+//           <ConclusionButton value='con_denervación_difusa' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+//           <ConclusionButton value='con_denervación_abundante' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+//           <ConclusionButton value='con_denervación_progresiva' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+//           <ConclusionButton value='con_denervación discreta' title=', DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+//           <ConclusionButton value='sin_denervación' title=', DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
+//           </div>
+//         </Accordion>
+
+//         <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type="external">
+//           <div onClick={handleNextStep2}>
+//           <ConclusionButton value='con_denervación_difusa' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+//           <ConclusionButton value='con_denervación_abundante' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+//           <ConclusionButton value='con_denervación_progresiva' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+//           <ConclusionButton value='con_denervación discreta' title=', DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+//           <ConclusionButton value='sin_denervación' title=', DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
+//           </div>
+//         </Accordion>
+
+//         <Accordion title='DESMIELINIZANTE' value='DESMIELINIZANTE' type="external">
+//           <div onClick={handleNextStep4}>
+//           <ConclusionButton value='por_retardo_en_la_conduccion' title=', DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
+//           <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=', DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
+//           <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=', DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
+//           </div>
+//         </Accordion>
+
+//         <Accordion title='MIXTA' value='MIXTA' type="external">
+//           <div onClick={handleNextStep2}>
+//           <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=', DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
+//           <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=', DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
+//           </div>
+//         </Accordion>
+//         </AccordionContainer>
+//     </div>
+//   );
+// };
+
+const StepD3 = ({handlePrevStep2, handleNextStep2, ubicaciond3 }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
+      <div className='button-bar'>
+        <button  onClick={() => {
             removeConclusion('preganglionar_totald');
             removeConclusion('holad');
             removeConclusion('postganglionar_totald');
@@ -1198,103 +1341,106 @@ const StepD3 = ({
             removeConclusion('plexo_lumbosacro');
             removeConclusion('plexo_sacro');
             removeConclusion('plexo_pudendo');
+
+
             removeConclusion('L2d');
             removeConclusion('L3d');
             removeConclusion('L4d');
             removeConclusion('L5d');
             removeConclusion('S1d');
             removeConclusion('S2d');
+
             removeConclusion('L2i');
             removeConclusion('L3i');
             removeConclusion('L4i');
             removeConclusion('L5i');
             removeConclusion('S1i');
             removeConclusion('S2i');
+
             removeConclusion('L2');
             removeConclusion('L3');
             removeConclusion('L4');
             removeConclusion('L5');
             removeConclusion('S1');
             removeConclusion('S2');
-            handlePrevStep2();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+
+            handlePrevStep2()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">UBICACION</h1>
+      <h1 className=' text-xl font-bold text-white'>
+        UBICACION
+      </h1>
+
       <div>{ubicaciond3()}</div>
     </div>
   );
 };
 
-const StepD3A = ({
-  handleNextStep2,
-  handleNextStep7,
-  handlePrevStep7,
-  ubicaciond3a
-}) => {
-  const { removeConclusion } = useContext(ReportContext);
+const StepD3A = ({ handleNextStep7, handlePrevStep2, ubicaciond3a }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
+      <div className='button-bar'>
+        <button  onClick={() => {
             removeConclusion('L2d');
             removeConclusion('L3d');
             removeConclusion('L4d');
             removeConclusion('L5d');
             removeConclusion('S1d');
             removeConclusion('S2d');
+
             removeConclusion('L2i');
             removeConclusion('L3i');
             removeConclusion('L4i');
             removeConclusion('L5i');
             removeConclusion('S1i');
             removeConclusion('S2i');
+
             removeConclusion('L2');
             removeConclusion('L3');
             removeConclusion('L4');
             removeConclusion('L5');
             removeConclusion('S1');
             removeConclusion('S2');
-            handlePrevStep7();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+
+            handlePrevStep2()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id="prev" onClick={handleNextStep7} className="print-button dont-print ">
-          <img src="/I_In.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
+        <button id='prev' onClick={handleNextStep7} className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">DIVISIONES</h1>
+      <h1 className=' text-xl font-bold text-white'>
+        DIVISIONES
+      </h1>
       <div>{ubicaciond3a()}</div>
     </div>
   );
 };
 
 const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
+      <div className='button-bar'>
+        <button  onClick={() => {
             removeConclusion("AXONAL COMPLETA");
             removeConclusion("con_denervación_difusa");
             removeConclusion("con_denervación_abundante");
@@ -1307,122 +1453,60 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
             removeConclusion("por_bloqueo_parcial_en_la_conducción");
             removeConclusion("por_bloqueo_completo_en_la_conduccion");
             removeConclusion("MIXTA");
-            removeConclusion(
-              "primariamente_desmielinizante_con_perdida_axonal_secundaria"
-            );
-            removeConclusion(
-              "primariamente_axonal_con_desmielinizacion_secundaria"
-            );
-            handlePrevStep();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+            removeConclusion("primariamente_desmielinizante_con_perdida_axonal_secundaria");
+            removeConclusion("primariamente_axonal_con_desmielinizacion_secundaria");
+
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={handleNextStep} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
 
-      <h1 className="text-xl font-bold text-white">TIPO</h1>
+      <h1 className=' text-xl font-bold text-white'>
+        TIPO
+      </h1>
       <AccordionContainer>
-        <Accordion title="AXONAL COMPLETA" value="AXONAL COMPLETA" type="external">
+        <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type="external">
           <div onClick={handleNextStep}>
-            <ConclusionButton
-              value="con_denervación_difusa"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),"
-              displayText="DIFUSA (++++)"
-            />
-            <ConclusionButton
-              value="con_denervación_abundante"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),"
-              displayText="ABUNDANTE (+++)"
-            />
-            <ConclusionButton
-              value="con_denervación_progresiva"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),"
-              displayText="PROGRESIVA (++)"
-            />
-            <ConclusionButton
-              value="con_denervación discreta"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),"
-              displayText="DISCRETA (+/+)"
-            />
-            <ConclusionButton
-              value="sin_denervación"
-              title=" DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,"
-              displayText="AUSENTE"
-            />
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'AUSENTE'}/>
           </div>
         </Accordion>
 
-        <Accordion title="AXONAL INCOMPLETA" value="AXONAL INCOMPLETA" type="external">
+        <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type="external">
           <div onClick={handleNextStep}>
-            <ConclusionButton
-              value="con_denervación_difusa"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),"
-              displayText="DIFUSA (++++)"
-            />
-            <ConclusionButton
-              value="con_denervación_abundante"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),"
-              displayText="ABUNDANTE (+++)"
-            />
-            <ConclusionButton
-              value="con_denervación_progresiva"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),"
-              displayText="PROGRESIVA (++)"
-            />
-            <ConclusionButton
-              value="con_denervación discreta"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),"
-              displayText="DISCRETA (+/+)"
-            />
-            <ConclusionButton
-              value="sin_denervación"
-              title=" DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
-            />
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
-        <Accordion title="DESMIELINIZANTE" value="DESMIELINIZANTE" type="external">
+        <Accordion title='DESMIELINIZANTE' value='DESMIELINIZANTE' type="external">
           <div onClick={handleNextStep4}>
-            <ConclusionButton
-              value="por_retardo_en_la_conduccion"
-              title=" DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,"
-              displayText="RETARDO EN LA CONDUCCIÓN"
-            />
-            <ConclusionButton
-              value="por_bloqueo_parcial_en_la_conducción"
-              title=" DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,"
-              displayText="BLOQUEO PARCIAL EN LA CONDUCCIÓN"
-            />
-            <ConclusionButton
-              value="por_bloqueo_completo_en_la_conduccion"
-              title=" DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,"
-              displayText="BLOQUEO COMPLETO EN LA CONDUCCIÓN"
-            />
+          <ConclusionButton value='por_retardo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
           </div>
         </Accordion>
 
-        <Accordion title="MIXTA" value="MIXTA" type="external">
+        <Accordion title='MIXTA' value='MIXTA' type="external">
           <div onClick={handleNextStep}>
-            <ConclusionButton
-              value="primariamente_desmielinizante_con_perdida_axonal_secundaria"
-              title=" DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,"
-              displayText="DESMIELINIZANTE-AXONAL"
-            />
-            <ConclusionButton
-              value="primariamente_axonal_con_desmielinizacion_secundaria"
-              title=" DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,"
-              displayText="AXONAL-DESMIELINIZANTE"
-            />
+          <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
+          <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
           </div>
         </Accordion>
       </AccordionContainer>
@@ -1430,709 +1514,567 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
   );
 };
 
-// ----------------------------------------------------------------
-// E1, E2, E3
-// ----------------------------------------------------------------
-
-const StepE1 = ({ handlePrevStep, handleNextStep }) => {
-  const { removeConclusion } = useContext(ReportContext);
+const StepE2 = ({ handleNextStep1, handlePrevStep1, handleNextStep4 }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('intensidad_leve');
-            removeConclusion('intensidad_leverada');
-            removeConclusion('intensidad_severa');
-            handlePrevStep();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
-        </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-        </button>
-        <button onClick={handleNextStep} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
-        </button>
-      </div>
-      <h1 className="text-xl font-bold text-white">INTENSIDAD</h1>
-      <div onClick={handleNextStep}>
-        <ConclusionButton
-          value="intensidad_leve"
-          title=" INTENSIDAD LEVE. "
-          displayText="LEVE "
-        />
-        <ConclusionButton
-          value="intensidad_leverada"
-          title=" INTENSIDAD MODERADA. "
-          displayText="MODERADA "
-        />
-        <ConclusionButton
-          value="intensidad_severa"
-          title=" INTENSIDAD SEVERA. "
-          displayText="SEVERA "
-        />
-      </div>
-    </div>
-  );
-};
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("AXONAL COMPLETA");
+            removeConclusion("con_denervación_difusa");
+            removeConclusion("con_denervación_abundante");
+            removeConclusion("con_denervación_progresiva");
+            removeConclusion("con_denervación discreta");
+            removeConclusion("sin_denervación");
+            removeConclusion("AXONAL INCOMPLETA");
+            removeConclusion("DESMIELINIZANTE");
+            removeConclusion("por_retardo_en_la_conduccion");
+            removeConclusion("por_bloqueo_parcial_en_la_conducción");
+            removeConclusion("por_bloqueo_completo_en_la_conduccion");
+            removeConclusion("MIXTA");
+            removeConclusion("primariamente_desmielinizante_con_perdida_axonal_secundaria");
+            removeConclusion("primariamente_axonal_con_desmielinizacion_secundaria");
 
-const StepE2 = ({ handlePrevStep1, handleNextStep1, handleNextStep4 }) => {
-  const { removeConclusion } = useContext(ReportContext);
-  return (
-    <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('AXONAL COMPLETA');
-            removeConclusion('con_denervación_difusa');
-            removeConclusion('con_denervación_abundante');
-            removeConclusion('con_denervación_progresiva');
-            removeConclusion('con_denervación discreta');
-            removeConclusion('sin_denervación');
-            removeConclusion('AXONAL INCOMPLETA');
-            removeConclusion('DESMIELINIZANTE');
-            removeConclusion('por_retardo_en_la_conduccion');
-            removeConclusion('por_bloqueo_parcial_en_la_conducción');
-            removeConclusion('por_bloqueo_completo_en_la_conduccion');
-            removeConclusion('MIXTA');
-            removeConclusion(
-              'primariamente_desmielinizante_con_perdida_axonal_secundaria'
-            );
-            removeConclusion(
-              'primariamente_axonal_con_desmielinizacion_secundaria'
-            );
-            handlePrevStep1();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+            handlePrevStep1()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={handleNextStep1} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button onClick={handleNextStep1} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
 
-      <h1 className="text-xl font-bold text-white">TIPO</h1>
+      <h1 className=' text-xl font-bold text-white'>
+        TIPO
+      </h1>
       <AccordionContainer>
-        <Accordion title="AXONAL COMPLETA" value="AXONAL COMPLETA" type="external">
+      <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type="external">
           <div onClick={handleNextStep1}>
-            <ConclusionButton
-              value="con_denervación_difusa"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),"
-              displayText="DIFUSA (++++)"
-            />
-            <ConclusionButton
-              value="con_denervación_abundante"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),"
-              displayText="ABUNDANTE (+++)"
-            />
-            <ConclusionButton
-              value="con_denervación_progresiva"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),"
-              displayText="PROGRESIVA (++)"
-            />
-            <ConclusionButton
-              value="con_denervación discreta"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),"
-              displayText="DISCRETA (+/+)"
-            />
-            <ConclusionButton
-              value="sin_denervación"
-              title=" DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
-            />
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
-        <Accordion title="AXONAL INCOMPLETA" value="AXONAL INCOMPLETA" type="external">
+        <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type="external">
           <div onClick={handleNextStep1}>
-            <ConclusionButton
-              value="con_denervación_difusa"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),"
-              displayText="DIFUSA (++++)"
-            />
-            <ConclusionButton
-              value="con_denervación_abundante"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),"
-              displayText="ABUNDANTE (+++)"
-            />
-            <ConclusionButton
-              value="con_denervación_progresiva"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),"
-              displayText="PROGRESIVA (++)"
-            />
-            <ConclusionButton
-              value="con_denervación discreta"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),"
-              displayText="DISCRETA (+/+)"
-            />
-            <ConclusionButton
-              value="sin_denervación"
-              title=" DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
-            />
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
-        <Accordion title="DESMIELINIZANTE" value="DESMIELINIZANTE" type="external">
+        <Accordion title='DESMIELINIZANTE' value='DESMIELINIZANTE' type="external">
           <div onClick={handleNextStep4}>
-            <ConclusionButton
-              value="por_retardo_en_la_conduccion"
-              title=" DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,"
-              displayText="RETARDO EN LA CONDUCCIÓN"
-            />
-            <ConclusionButton
-              value="por_bloqueo_parcial_en_la_conducción"
-              title=" DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,"
-              displayText="BLOQUEO PARCIAL EN LA CONDUCCIÓN"
-            />
-            <ConclusionButton
-              value="por_bloqueo_completo_en_la_conduccion"
-              title=" DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,"
-              displayText="BLOQUEO COMPLETO EN LA CONDUCCIÓN"
-            />
+          <ConclusionButton value='por_retardo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
           </div>
         </Accordion>
 
-        <Accordion title="MIXTA" value="MIXTA" type="external">
-          <div onClick={handleNextStep1}>
-            <ConclusionButton
-              value="primariamente_desmielinizante_con_perdida_axonal_secundaria"
-              title=" DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,"
-              displayText="DESMIELINIZANTE-AXONAL"
-            />
-            <ConclusionButton
-              value="primariamente_axonal_con_desmielinizacion_secundaria"
-              title=" DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,"
-              displayText="AXONAL-DESMIELINIZANTE"
-            />
+        <Accordion title='MIXTA'value='MIXTA' type="external">
+          <div onClick={handleNextStep1} >
+          <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
+          <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
           </div>
         </Accordion>
-      </AccordionContainer>
+        </AccordionContainer>
     </div>
   );
 };
 
 const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('AXONAL COMPLETA');
-            removeConclusion('con_denervación_difusa');
-            removeConclusion('con_denervación_abundante');
-            removeConclusion('con_denervación_progresiva');
-            removeConclusion('con_denervación discreta');
-            removeConclusion('sin_denervación');
-            removeConclusion('AXONAL INCOMPLETA');
-            removeConclusion('DESMIELINIZANTE');
-            removeConclusion('por_retardo_en_la_conduccion');
-            removeConclusion('por_bloqueo_parcial_en_la_conducción');
-            removeConclusion('por_bloqueo_completo_en_la_conduccion');
-            removeConclusion('MIXTA');
-            removeConclusion(
-              'primariamente_desmielinizante_con_perdida_axonal_secundaria'
-            );
-            removeConclusion(
-              'primariamente_axonal_con_desmielinizacion_secundaria'
-            );
-            handlePrevStep2();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("AXONAL COMPLETA");
+            removeConclusion("con_denervación_difusa");
+            removeConclusion("con_denervación_abundante");
+            removeConclusion("con_denervación_progresiva");
+            removeConclusion("con_denervación discreta");
+            removeConclusion("sin_denervación");
+            removeConclusion("AXONAL INCOMPLETA");
+            removeConclusion("DESMIELINIZANTE");
+            removeConclusion("por_retardo_en_la_conduccion");
+            removeConclusion("por_bloqueo_parcial_en_la_conducción");
+            removeConclusion("por_bloqueo_completo_en_la_conduccion");
+            removeConclusion("MIXTA");
+            removeConclusion("primariamente_desmielinizante_con_perdida_axonal_secundaria");
+            removeConclusion("primariamente_axonal_con_desmielinizacion_secundaria");
+
+            handlePrevStep2()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button onClick={handleNextStep2} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">TIPO</h1>
+
+      <h1 className=' text-xl font-bold text-white'>
+        TIPO
+      </h1>
       <AccordionContainer>
-        <Accordion title="AXONAL COMPLETA" value="AXONAL COMPLETA" type="external">
+      <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type="external">
           <div onClick={handleNextStep2}>
-            <ConclusionButton
-              value="con_denervación_difusa"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),"
-              displayText="DIFUSA (++++)"
-            />
-            <ConclusionButton
-              value="con_denervación_abundante"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),"
-              displayText="ABUNDANTE (+++)"
-            />
-            <ConclusionButton
-              value="con_denervación_progresiva"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),"
-              displayText="PROGRESIVA (++)"
-            />
-            <ConclusionButton
-              value="con_denervación discreta"
-              title=" DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),"
-              displayText="DISCRETA (+/+)"
-            />
-            <ConclusionButton
-              value="sin_denervación"
-              title=" DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
-            />
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
-        <Accordion title="AXONAL INCOMPLETA" value="AXONAL INCOMPLETA" type="external">
+        <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type="external">
           <div onClick={handleNextStep2}>
-            <ConclusionButton
-              value="con_denervación_difusa"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),"
-              displayText="DIFUSA (++++)"
-            />
-            <ConclusionButton
-              value="con_denervación_abundante"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),"
-              displayText="ABUNDANTE (+++)"
-            />
-            <ConclusionButton
-              value="con_denervación_progresiva"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),"
-              displayText="PROGRESIVA (++)"
-            />
-            <ConclusionButton
-              value="con_denervación discreta"
-              title=" DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),"
-              displayText="DISCRETA (+/+)"
-            />
-            <ConclusionButton
-              value="sin_denervación"
-              title=" DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
-            />
+          <ConclusionButton value='con_denervación_difusa' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++),' displayText={'DIFUSA (++++)'}/>
+          <ConclusionButton value='con_denervación_abundante' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++),' displayText={'ABUNDANTE (+++)'}/>
+          <ConclusionButton value='con_denervación_progresiva' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++),' displayText={'PROGRESIVA (++)'}/>
+          <ConclusionButton value='con_denervación discreta' title=' DE TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+),' displayText={'DISCRETA (+/+)'}/>
+          <ConclusionButton value='sin_denervación' title=' DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,' displayText={'ASUSENTE'}/>
           </div>
         </Accordion>
 
-        <Accordion title="DESMIELINIZANTE" value="DESMIELINIZANTE" type="external">
+        <Accordion title='DESMIELINIZANTE' value='DESMIELINIZANTE' type="external">
           <div onClick={handleNextStep4}>
-            <ConclusionButton
-              value="por_retardo_en_la_conduccion"
-              title=" DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,"
-              displayText="RETARDO EN LA CONDUCCIÓN"
-            />
-            <ConclusionButton
-              value="por_bloqueo_parcial_en_la_conducción"
-              title=" DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,"
-              displayText="BLOQUEO PARCIAL EN LA CONDUCCIÓN"
-            />
-            <ConclusionButton
-              value="por_bloqueo_completo_en_la_conduccion"
-              title=" DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,"
-              displayText="BLOQUEO COMPLETO EN LA CONDUCCIÓN"
-            />
+          <ConclusionButton value='por_retardo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR RETARDO EN LA CONDUCCIÓN,' displayText={'RETARDO EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_parcial_en_la_conducción' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN,' displayText={'BLOQUEO PARCIAL EN LA CONDUCCIÓN'}/>
+          <ConclusionButton value='por_bloqueo_completo_en_la_conduccion' title=' DE TIPO DESMIELINIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN,' displayText={'BLOQUEO COMPLETO EN LA CONDUCCIÓN'}/>
           </div>
         </Accordion>
 
-        <Accordion title="MIXTA" value="MIXTA" type="external">
+        <Accordion title='MIXTA' value='MIXTA' type="external">
           <div onClick={handleNextStep2}>
-            <ConclusionButton
-              value="primariamente_desmielinizante_con_perdida_axonal_secundaria"
-              title=" DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,"
-              displayText="DESMIELINIZANTE-AXONAL"
-            />
-            <ConclusionButton
-              value="primariamente_axonal_con_desmielinizacion_secundaria"
-              title=" DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,"
-              displayText="AXONAL-DESMIELINIZANTE"
-            />
+          <ConclusionButton value='primariamente_desmielinizante_con_perdida_axonal_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA,' displayText={'DESMIELINIZANTE-AXONAL'}/>
+          <ConclusionButton value='primariamente_axonal_con_desmielinizacion_secundaria' title=' DE TIPO MIXTA PRIMARIAMENTE AXONAL CON DESMIELINIZACÓN SECUNDARIA,' displayText={'AXONAL-DESMIELINIZANTE'}/>
           </div>
         </Accordion>
-      </AccordionContainer>
+        </AccordionContainer>
     </div>
   );
 };
 
-// ----------------------------------------------------------------
-// F1, F2, F3
-// ----------------------------------------------------------------
-
-const StepF1 = ({ handleNextStep, handlePrevStep }) => {
-  const { removeConclusion } = useContext(ReportContext);
+const StepE1 = ({ handlePrevStep, handleNextStep }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('reinervacion_activa');
-            removeConclusion('sin_reinervacion_inactiva');
-            handlePrevStep();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+      <button  onClick={() => {
+            removeConclusion("intensidad_leve");
+            removeConclusion("intensidad_leverada");
+            removeConclusion("intensidad_severa");
+
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={handleNextStep} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+
+        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">REINERVACIÓN</h1>
-      <div onClick={handleNextStep}>
-        <ConclusionButton
-          value="reinervacion_activa"
-          title="REINERVACIÓN ACTIVA;"
-          displayText="ACTIVA"
-        />
-        <ConclusionButton
-          value="sin_reinervacion_inactiva"
-          title="REINERVACIÓN INACTIVA;"
-          displayText="INACTIVA"
-        />
+      <h1 className=' text-xl font-bold text-white'>
+        INTENSIDAD
+      </h1>
+      
+      <div onClick={ handleNextStep }>
+        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE. ' displayText={'LEVE '}/>
+        <ConclusionButton value='intensidad_leverada' title=' INTENSIDAD MODERADA. ' displayText={'MODERADA '}/>
+        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA. ' displayText={'SEVERA '}/>
       </div>
     </div>
   );
 };
 
 const StepF2 = ({ handlePrevStep1, handleNextStep1 }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('intensidad_leve');
-            removeConclusion('intensidad_leverada');
-            removeConclusion('intensidad_severa');
-            handlePrevStep1();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("intensidad_leve");
+            removeConclusion("intensidad_leverada");
+            removeConclusion("intensidad_severa");
+
+            handlePrevStep1()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={handleNextStep1} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+
+        <button onClick={handleNextStep1} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">INTENSIDAD</h1>
-      <div onClick={handleNextStep1}>
-        <ConclusionButton
-          value="intensidad_leve"
-          title=" INTENSIDAD LEVE. "
-          displayText="LEVE "
-        />
-        <ConclusionButton
-          value="intensidad_leverada"
-          title=" INTENSIDAD MODERADA. "
-          displayText="MODERADA "
-        />
-        <ConclusionButton
-          value="intensidad_severa"
-          title=" INTENSIDAD SEVERA. "
-          displayText="SEVERA "
-        />
+      <h1 className=' text-xl font-bold text-white'>
+        INTENSIDAD
+      </h1>
+      
+      <div onClick={ handleNextStep1 }>
+        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE. ' displayText={'LEVE '}/>
+        <ConclusionButton value='intensidad_leverada' title=' INTENSIDAD MODERADA. ' displayText={'MODERADA '}/>
+        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA. ' displayText={'SEVERA '}/>
       </div>
+
+      
     </div>
   );
 };
 
 const StepF3 = ({ handlePrevStep2, handleNextStep2 }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('intensidad_leve');
-            removeConclusion('intensidad_leverada');
-            removeConclusion('intensidad_severa');
-            handlePrevStep2();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("intensidad_leve");
+            removeConclusion("intensidad_leverada");
+            removeConclusion("intensidad_severa");
+
+            handlePrevStep2()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={handleNextStep2} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+
+        <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">INTENSIDAD</h1>
-      <div onClick={handleNextStep2}>
-        <ConclusionButton
-          value="intensidad_leve"
-          title=" INTENSIDAD LEVE. "
-          displayText="LEVE "
-        />
-        <ConclusionButton
-          value="intensidad_leverada"
-          title=" INTENSIDAD MODERADA. "
-          displayText="MODERADA "
-        />
-        <ConclusionButton
-          value="intensidad_severa"
-          title=" INTENSIDAD SEVERA. "
-          displayText="SEVERA "
-        />
+      <h1 className=' text-xl font-bold text-white'>
+        INTENSIDAD
+      </h1>
+      
+      <div onClick={ handleNextStep2 }>
+        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE. ' displayText={'LEVE '}/>
+        <ConclusionButton value='intensidad_leverada' title=' INTENSIDAD MODERADA. ' displayText={'MODERADA '}/>
+        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA. ' displayText={'SEVERA '}/>
       </div>
+
+      
     </div>
   );
 };
 
-// ----------------------------------------------------------------
-// G1, G2, G3
-// ----------------------------------------------------------------
-
-const StepG1 = ({ handlePrevStep, handleNextStep }) => {
-  const { removeConclusion } = useContext(ReportContext);
+const StepF1 = ({ handleNextStep, handlePrevStep }) => {
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('completo');
-            removeConclusion('parcial_funcional');
-            removeConclusion('pobre');
-            removeConclusion('nulo');
-            handlePrevStep();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("reinervacion_activa");
+            removeConclusion("sin_reinervacion_inactiva");
+
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+
+        <button onClick={handleNextStep} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">PRONÓSTICO</h1>
-      <div onClick={handleNextStep}>
-        <ConclusionButton
-          value="completo"
-          title=" PRONÓSTICO DE RECUPERACIÓN COMPLETA."
-          displayText="RECUPERACIÓN COMPLETA"
-        />
-        <ConclusionButton
-          value="parcial_funcional"
-          title=" PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL."
-          displayText="RECUPERACIÓN PARCIAL"
-        />
-        <ConclusionButton
-          value="pobre"
-          title=" PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL."
-          displayText="POBRE NO FUNCIONAL"
-        />
-        <ConclusionButton
-          value="nulo"
-          title=" PRNÓSTICO DE RECUPERACIÓN NULO."
-          displayText="RECUPERACIÓN NULO"
-        />
+      <h1 className=' text-xl font-bold text-white'>
+        REINERVACIÓN
+      </h1>
+
+      <div onClick={ handleNextStep }>
+        <ConclusionButton value='reinervacion_activa' title='REINERVACIÓN ACTIVA;' displayText={'ACTIVA'}/>                
+        <ConclusionButton value='sin_reinervacion_inactiva' title='REINERVACIÓN INACTIVA;' displayText={'INACTIVA'}/>
       </div>
+      
+      
     </div>
   );
 };
 
 const StepG2 = ({ handleNextStep1, handlePrevStep1 }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('reinervacion_activa');
-            removeConclusion('sin_reinervacion_inactiva');
-            handlePrevStep1();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("reinervacion_activa");
+            removeConclusion("sin_reinervacion_inactiva");
+
+            handlePrevStep1()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={handleNextStep1} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+
+        <button onClick={handleNextStep1} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">REINERVACIÓN</h1>
-      <div onClick={handleNextStep1}>
-        <ConclusionButton
-          value="reinervacion_activa"
-          title="REINERVACIÓN ACTIVA; "
-          displayText="ACTIVA"
-        />
-        <ConclusionButton
-          value="sin_reinervacion_inactiva"
-          title="REINERVACIÓN INACTIVA; "
-          displayText="INACTIVA"
-        />
+      <h1 className=' text-xl font-bold text-white'>
+        REINERVACIÓN
+      </h1>
+
+      <div onClick={ handleNextStep1 }>
+        <ConclusionButton value='reinervacion_activa' title='REINERVACIÓN ACTIVA; ' displayText={'ACTIVA'}/>                
+        <ConclusionButton value='sin_reinervacion_inactiva' title='REINERVACIÓN INACTIVA; ' displayText={'INACTIVA'}/>
       </div>
+      
+      
     </div>
   );
 };
 
 const StepG3 = ({ handleNextStep2, handlePrevStep2 }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const {removeConclusion} = useContext(ReportContext)
   return (
     <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('reinervacion_activa');
-            removeConclusion('sin_reinervacion_inactiva');
-            handlePrevStep2();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("reinervacion_activa");
+            removeConclusion("sin_reinervacion_inactiva");
+
+            handlePrevStep2()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
-        <button onClick={handleNextStep2} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+
+        <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">REINERVACIÓN</h1>
+      <h1 className=' text-xl font-bold text-white'>
+        REINERVACIÓN
+      </h1>
+
+      <div onClick={ handleNextStep2 }>
+        <ConclusionButton value='reinervacion_activa' title='REINERVACIÓN ACTIVA; ' displayText={'ACTIVA'}/>
+        <ConclusionButton value='sin_reinervacion_inactiva' title='REINERVACIÓN INACTIVA; ' displayText={'INACTIVA'}/>
+      </div>
+      
+      
+    </div>
+  );
+};
+
+const StepG1 = ({handlePrevStep, handleNextStep }) => {
+  const {removeConclusion} = useContext(ReportContext)
+  return (
+    <div>
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("completo");
+            removeConclusion("parcial_funcional");
+            removeConclusion("pobre");
+            removeConclusion("nulo");
+
+            handlePrevStep()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+        <button id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
+        </button>
+      </div>
+      <h1 className=' text-xl font-bold text-white'>
+        PRONÓSTICO
+      </h1><div onClick={handleNextStep}>
+        <ConclusionButton value = 'completo' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'}/>
+        <ConclusionButton value = 'parcial_funcional' title = ' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL'}/>
+        <ConclusionButton value = 'pobre' title = ' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.'displayText={'POBRE NO FUNCIONAL'} />
+        <ConclusionButton value = 'nulo' title = ' PRNÓSTICO DE RECUPERACIÓN NULO.' displayText={'RECUPERACIÓN NULO'}/></div>
+    </div>
+  );
+};
+
+const StepH2 = ({handlePrevStep1, handleNextStep1 }) => {
+  const {removeConclusion} = useContext(ReportContext)
+  return (
+    <div>
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("completo");
+            removeConclusion("parcial_funcional");
+            removeConclusion("pobre");
+            removeConclusion("nulo");
+
+            handlePrevStep1()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+        <button id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
+        </button>
+      </div>
+      <h1 className=' text-xl font-bold text-white'>
+        PRONÓSTICO
+      </h1><div onClick={handleNextStep1}>
+        <ConclusionButton value = 'completo' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'}/>
+        <ConclusionButton value = 'parcial_funcional' title = ' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL'}/>
+        <ConclusionButton value = 'pobre' title = ' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.'displayText={'POBRE NO FUNCIONAL'} />
+        <ConclusionButton value = 'nulo' title = ' PRNÓSTICO DE RECUPERACIÓN NULO.' displayText={'RECUPERACIÓN NULO'}/></div>
+    </div>
+  );
+};
+
+const StepH3 = ({handlePrevStep2, handleNextStep2 }) => {
+  const {removeConclusion} = useContext(ReportContext)
+  return (
+    <div>
+      <div className='button-bar'>
+        <button  onClick={() => {
+            removeConclusion("completo");
+            removeConclusion("parcial_funcional");
+            removeConclusion("pobre");
+            removeConclusion("nulo");
+
+            handlePrevStep2()
+          }} className={`print-button`}>
+          <img src="/I_Out.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+        <button onClick={() => window.location.reload()} className={`print-button`}>
+        <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
+        </button>
+
+        <button onClick={handleNextStep2} id='prev' className={`print-button dont-print `}>
+        <img src="/I_X.webp" style={{filter: 'invert(0.5)'}}/>
+        </button>
+      </div>
+      <h1 className=' text-xl font-bold text-white'>
+        PRONÓSTICO
+      </h1>
       <div onClick={handleNextStep2}>
-        <ConclusionButton
-          value="reinervacion_activa"
-          title="REINERVACIÓN ACTIVA; "
-          displayText="ACTIVA"
-        />
-        <ConclusionButton
-          value="sin_reinervacion_inactiva"
-          title="REINERVACIÓN INACTIVA; "
-          displayText="INACTIVA"
-        />
-      </div>
+        <ConclusionButton value = 'completo' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'}/>
+        <ConclusionButton value = 'parcial_funcional' title = ' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL'}/>
+        <ConclusionButton value = 'pobre' title = ' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.'displayText={'POBRE NO FUNCIONAL'} />
+        <ConclusionButton value = 'nulo' title = ' PRNÓSTICO DE RECUPERACIÓN NULO.' displayText={'RECUPERACIÓN NULO'}/></div>
     </div>
   );
 };
 
-// ----------------------------------------------------------------
-// H2, H3
-// ----------------------------------------------------------------
+const DropArea2 = ({ isExpanded }) => {
+  const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
 
-const StepH2 = ({ handlePrevStep1, handleNextStep1 }) => {
-  const { removeConclusion } = useContext(ReportContext);
+  const handleDrop = (e) => {
+    e.preventDefault();
+    handleFileSelect(e.dataTransfer.files);
+  };
+
+  const handleFileSelect = (files) => {
+    if (files && files.length > 0) {
+      const fileArray = Array.from(files);
+      const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
+
+      if (imageFiles.length > 0) {
+        const file = imageFiles[0]; // Solo tomamos la primera imagen
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          setImageSrc(event.target.result); // Reemplaza la imagen anterior
+        };
+        reader.readAsDataURL(file); // Lee el archivo como URL de datos
+      }
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault(); // Necesario para permitir el "drop"
+  };
+
+  const handleInputChange = (e) => {
+    handleFileSelect(e.target.files);
+  };
+
   return (
-    <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('completo');
-            removeConclusion('parcial_funcional');
-            removeConclusion('pobre');
-            removeConclusion('nulo');
-            handlePrevStep1();
+    <div
+      className={`dropArea2 ${isExpanded ? 'dropArea2-expanded' : ''}`}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      style={{
+        width: isExpanded ? '96px' : '40px', // Ajusta el tamaño basado en el estado de expansión
+        height: isExpanded ? '90px' : '40px',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        transition: 'width 0.3s ease, height 0.3s ease', // Transiciones suaves
+        overflow: 'hidden', // Evita que el contenido se desborde
+      }}
+    >
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleInputChange}
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          opacity: 0,
+          cursor: 'pointer',
+        }}
+      />
+      {!imageSrc ? (
+        <p></p>
+      ) : (
+        <img
+          src={imageSrc}
+          alt="Cargada"
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            objectFit: 'cover', // Ajusta la imagen dentro del contenedor
+            pointerEvents: 'none', // Evita interacciones con la imagen
+            userSelect: 'none', // Evita que la imagen sea seleccionable
           }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
-        </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-        </button>
-        <button id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
-        </button>
-      </div>
-      <h1 className="text-xl font-bold text-white">PRONÓSTICO</h1>
-      <div onClick={handleNextStep1}>
-        <ConclusionButton
-          value="completo"
-          title=" PRONÓSTICO DE RECUPERACIÓN COMPLETA."
-          displayText="RECUPERACIÓN COMPLETA"
         />
-        <ConclusionButton
-          value="parcial_funcional"
-          title=" PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL."
-          displayText="RECUPERACIÓN PARCIAL"
-        />
-        <ConclusionButton
-          value="pobre"
-          title=" PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL."
-          displayText="POBRE NO FUNCIONAL"
-        />
-        <ConclusionButton
-          value="nulo"
-          title=" PRNÓSTICO DE RECUPERACIÓN NULO."
-          displayText="RECUPERACIÓN NULO"
-        />
-      </div>
+      )}
     </div>
   );
 };
-
-const StepH3 = ({ handlePrevStep2, handleNextStep2 }) => {
-  const { removeConclusion } = useContext(ReportContext);
-  return (
-    <div>
-      <div className="button-bar">
-        <button
-          onClick={() => {
-            removeConclusion('completo');
-            removeConclusion('parcial_funcional');
-            removeConclusion('pobre');
-            removeConclusion('nulo');
-            handlePrevStep2();
-          }}
-          className="print-button"
-        >
-          <img src="/I_Out.svg" style={{ filter: 'invert(1)' }} />
-        </button>
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-        </button>
-        <button onClick={handleNextStep2} id="prev" className="print-button dont-print ">
-          <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
-        </button>
-      </div>
-      <h1 className="text-xl font-bold text-white">PRONÓSTICO</h1>
-      <div onClick={handleNextStep2}>
-        <ConclusionButton
-          value="completo"
-          title=" PRONÓSTICO DE RECUPERACIÓN COMPLETA."
-          displayText="RECUPERACIÓN COMPLETA"
-        />
-        <ConclusionButton
-          value="parcial_funcional"
-          title=" PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL."
-          displayText="RECUPERACIÓN PARCIAL"
-        />
-        <ConclusionButton
-          value="pobre"
-          title=" PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL."
-          displayText="POBRE NO FUNCIONAL"
-        />
-        <ConclusionButton
-          value="nulo"
-          title=" PRNÓSTICO DE RECUPERACIÓN NULO."
-          displayText="RECUPERACIÓN NULO"
-        />
-      </div>
-    </div>
-  );
-};
+  
 
 // ----------------------------------------------------------------
 // I, I1, I2 -> Secciones finales para imprimir / PDF

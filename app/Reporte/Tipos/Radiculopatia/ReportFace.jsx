@@ -232,7 +232,7 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
       ref={dropAreaRef}
     >
       {topLeftText && (
-        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'10px' }}>
+        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'1px'}}>
           {topLeftText}
         </p>
       )}

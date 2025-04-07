@@ -405,6 +405,7 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs, topLeftText, setTopLeftTe
     return (
       <div
         key={item.id}
+        data-item-id={item.id}  // <- le agregamos este data-attribute
         className={`${item.panelClass} ${isExpanded ? item.panelClassExpanded : ''}`}
       >
         <DraggableDiv isDraggable={isExpanded} itemId={item.id}>

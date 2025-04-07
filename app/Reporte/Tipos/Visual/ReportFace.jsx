@@ -364,7 +364,7 @@ return (
 
                 image: [
                   {
-                    src: 'VisualImg/Via Afectada/NERVIO OPTICO IZQUIERDO.png',
+                    src: 'VisualImg/VN_VisualRedLBI.png',
                     alt: 'Modelo',
                   },
                   
@@ -376,7 +376,7 @@ return (
               expectedValue: 'derechodamero_total', 
               image: [
                 {
-                  src: 'VisualImg/Via Afectada/NERVIO OPTICO DERECHO.png',
+                  src: 'VisualImg/VN_VisualRedRBI.png',
                   alt: 'Modelo',
                 },
               
@@ -387,11 +387,11 @@ return (
               expectedValue: 'bilateraldamero_total', 
               image: [
                 {
-                  src: 'VisualImg/Via Afectada/NERVIO OPTICO IZQUIERDO.png',
+                  src: 'VisualImg/VN_VisualRedLBI.png',
                   alt: 'Modelo',
                 },
                 {
-                  src: 'VisualImg/Via Afectada/NERVIO OPTICO DERECHO.png',
+                  src: 'VisualImg/VN_VisualRedRBI.png',
                   alt: 'Modelo',
                 }
             ],

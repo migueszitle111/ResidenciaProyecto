@@ -27,7 +27,7 @@ export function NerviusButtonSegmenBILATERAL({ title, value, displayText }) {
       updateConclusions({ title: '', value: oppositeValue });
     }
   }
-  const classnames = `cursor-pointer w-[3.5px] h-[18px] text-xs flex items-center justify-center text-white transition-colors duration-300 ease-in 
+  const classnames = `cursor-pointer w-[3.5px] h-[18px] text-xs flex items-center justify-center text-white transition-colors duration-300 ease-in  
     ${isSelected ? 'bg-[#c44900]' : 'bg-transparent'} rounded-[50px] z-50 relative`;
 
   return (

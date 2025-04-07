@@ -9,11 +9,13 @@ import './Style.css';
 
 import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL';
 import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
+import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
 
 function Reporte({ copyConclusions }) {
   return (
     <div>
       {checkDivsBILATERAL(copyConclusions)}
+      {checkDivsSegmentarBilateral(copyConclusions)}
     </div>
   );
 }
@@ -646,7 +648,7 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
         SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D')}>
-        <ConclusionButton value='seguir' displayText={'LISTO'} />
+        
       </div>
     </div>
   );
@@ -680,7 +682,7 @@ const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => {
       SELECCIONAR EL NIVEL DE LESION DEL LADO IZQUIERDO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D')}>
-        <ConclusionButton value='seguir' displayText={'LISTO'} />
+        
       </div>
     </div>
   );
@@ -1554,7 +1556,7 @@ const StepCD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
         SELECCIONAR EL NIVEL DE LESION CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D2')}>
-        <ConclusionButton value='seguir2' displayText={'LISTO'} />
+        
       </div>
     </div>
   );
@@ -1588,7 +1590,7 @@ const StepCDD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
         SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D2')}>
-        <ConclusionButton value='seguir2' displayText={'LISTO'} />
+        
       </div>
     </div>
   );
@@ -1622,7 +1624,7 @@ const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
       SELECCIONAR EL NIVEL DE LESION DEL LADO IZQUIERDO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D2')}>
-        <ConclusionButton value='seguir2' displayText={'LISTO'} />
+        
       </div>
     </div>
   );

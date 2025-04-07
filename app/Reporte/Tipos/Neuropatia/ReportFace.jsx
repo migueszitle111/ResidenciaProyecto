@@ -1213,11 +1213,12 @@ const formattedConclusions = formatConclusions(copyConclusions);
 
               </div>
               <div><DropArea /> </div>
+              <div>{checkDivsSegmentarBilateral(copyConclusions)}</div>
               <div>{checkDivsBILATERAL(copyConclusions)}</div>
               <div>{checkDivsBILATERALIZQ(copyConclusions)}</div>
               <div>{checkDivs(copyConclusions)}</div>
               <div>{checkDivsSegmentar(copyConclusions)}</div>
-              <div>{checkDivsSegmentarBilateral(copyConclusions)}</div>
+              
               
             </div>
 

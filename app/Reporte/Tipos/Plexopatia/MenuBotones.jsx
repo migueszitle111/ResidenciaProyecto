@@ -128,7 +128,7 @@ const SimpleMultiStepForm = ({
             <ConclusionButton value='tron1000d' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
-            <ConclusionButton value='divid' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
+            <ConclusionButton value='CordonD' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep6}>
             <ConclusionButton value='tron10000d' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
@@ -175,7 +175,7 @@ const SimpleMultiStepForm = ({
             <ConclusionButton value='tron1000i' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
-            <ConclusionButton value='divii' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
+            <ConclusionButton value='CordonI' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep6}>
             <ConclusionButton value='tron10000i' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>
@@ -222,7 +222,7 @@ const SimpleMultiStepForm = ({
             <ConclusionButton value='tron1000' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
-            <ConclusionButton value='divi' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
+            <ConclusionButton value='CordonB' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
           </div>
           <div onClick={handleNextStep6}>
             <ConclusionButton value='tron10000' title=' POSTGANGLIONAR PARCIAL A NIVEL DE CORDON' displayText={'CORDONES (INFRACLAVICULAR)'}/>

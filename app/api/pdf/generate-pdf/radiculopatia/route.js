@@ -1159,7 +1159,6 @@ img[src$="S_Linea 3.png"] {
 }
 
 
-
   .lineaImg{
     width: 100px; /* Ajusta el ancho para que sea responsivo */
     height: 40px; /* Mantiene la proporción de la imagen */
@@ -1173,12 +1172,12 @@ img[src$="S_Linea 3.png"] {
   }
   
   .lineaImg-expanded {
-    width:95px;
+    width:100px;
     height: 85px;
     position: static;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 10px;
-    margin-left: 65px;
+    margin-left: 50px;
     transform: scale(1.1); /* Escala la imagen un poco al expandir */
     z-index: 1;
   }

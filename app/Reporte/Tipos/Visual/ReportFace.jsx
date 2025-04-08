@@ -308,16 +308,12 @@ return (
             },
             {
               expectedValue: 'alterada', 
-              image: [
+              image: 
               {
-                src: 'VisualImg/VN_VisualGreyLBI.png',
+                src: 'VisualImg/VI_Gris_BASE.png',
                 alt: 'Modelo',
               },
-              {
-                src: 'VisualImg/VN_VisualGreyRBI.png',
-                alt: 'Modelo',
-              }
-            ],
+             
             },
             
 
@@ -439,16 +435,27 @@ return (
        {
        expectedValue: 'izquierdoled_flashAlterada', 
        image: [
+         {
+          src: 'VisualImg/VN_VisualRedLBI.png',
+          alt: 'Modelo',
+        },
       {
         src: 'VisualImg/Via Afectada/LED IZQUIERDO.png',
         alt: 'Modelo',
-      },
+      }
+
+
        ],
        },
        {
        expectedValue: 'derecholed_flashAlterada', 
        image: [
-         {
+        {
+          src: 'VisualImg/VN_VisualRedRBI.png',
+          alt: 'Modelo',
+        }
+
+        , {
            src: 'VisualImg/Via Afectada/LED DERECHO.png',
            alt: 'Modelo',
          },
@@ -466,24 +473,37 @@ return (
          alt: 'Modelo',
        }
            ],
-             },           
+             },   
+             
+             
             {
               expectedValue: 'izquierdonervio_optico', 
-              image: 
+              image: [
+                {
+                  src: 'VisualImg/VI_5.png',
+
+                  alt: 'Modelo',
+                },
                 {
                   src: 'VisualImg/Via Afectada/NERVIO OPTICO IZQUIERDO.png',
                   alt: 'Modelo',
                 },
+              ],
             },
 
             {
               expectedValue: 'derechonervio_optico', 
-              image: 
+              image: [
+                {
+                  src: 'VisualImg/VI_4.png',
+
+                  alt: 'Modelo',
+                },
               {
                 src: 'VisualImg/Via Afectada/NERVIO OPTICO DERECHO.png',
                 alt: 'Modelo',
               }
-              
+            ],
             },
             {
               expectedValue: 'bilateralnervio_optico', 
@@ -501,20 +521,32 @@ return (
 
             {
               expectedValue: 'izquierdoquiasma_optico', 
-              image: 
+              image: [
+                
+                {
+                  src: 'VisualImg/VI_5.png',
+                  alt: 'Modelo',
+                },
                 {
                   src: 'VisualImg/Via Afectada/QUIASMA OPTICO IZQUIERDO.png',
                   alt: 'Modelo',
-                },
+                }
+              ],
             },
 
             {
               expectedValue: 'derechoquiasma_optico', 
               image: 
+              [
+                {
+                  src: 'VisualImg/VI_4.png',
+                  alt: 'Modelo',
+                },
                 {
                   src: 'VisualImg/Via Afectada/QUIASMA OPTICO DERECHO.png',
                   alt: 'Modelo',
                 },
+              ],
             },
 
             {
@@ -533,20 +565,32 @@ return (
 
             {
               expectedValue: 'izquierdotracto_optico', 
-              image: 
+              image: [
+                
+                {
+                  src: 'VisualImg/VI_5.png',
+                  alt: 'Modelo',
+                }, 
                 {
                   src: 'VisualImg/Via Afectada/TRACTO OPTICO IZQUIERDO.png',
                   alt: 'Modelo',
                 },
+              ],
             },
 
             {
               expectedValue: 'derechotracto_optico', 
-              image: 
+              image: [
+                
+                {
+                  src: 'VisualImg/VI_4.png',
+                  alt: 'Modelo',
+                }, 
                 {
                   src: 'VisualImg/Via Afectada/TRACTO OPTICO DERECHO.png',
                   alt: 'Modelo',
                 },
+              ],
             },
 
             {
@@ -565,20 +609,32 @@ return (
             
             {
               expectedValue: 'izquierdonucleo_geniculado', 
-              image: 
+              image: [
+                
+                {
+                  src: 'VisualImg/VI_5.png',
+                  alt: 'Modelo',
+                }, 
                 {
                   src: 'VisualImg/Via Afectada/NUCLEO GENICULADO IZQUIERDO.png',
                   alt: 'Modelo',
                 },
+              ],
             },
 
             {
               expectedValue: 'derechonucleo_geniculado', 
-              image: 
+              image: [
+                
+                {
+                  src: 'VisualImg/VI_4.png',
+                  alt: 'Modelo',
+                },  
                 {
                   src: 'VisualImg/Via Afectada/NUCLEO GENICULADO DERECHO.png',
                   alt: 'Modelo',
                 },
+              ],
             },
 
             {

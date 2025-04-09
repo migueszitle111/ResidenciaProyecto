@@ -398,11 +398,6 @@ alt: 'Modelo',
                 src: 'AuditivaIMG/AD.png',
                 alt: 'Modelo',
               }],
-
-              // {
-              //   src: 'AuditivaIMG/imagen_combinadaAuditiva.png',
-              //   alt: 'Modelo',
-              // },
             
             },
 

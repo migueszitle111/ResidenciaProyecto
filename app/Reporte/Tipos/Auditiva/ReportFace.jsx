@@ -321,6 +321,15 @@ const Reporte = () => {
         alt: 'Modelo',
       },
 },
+//alterada
+{
+  expectedValue: 'alterada', 
+image: 
+{
+src: 'AuditivaIMG/AG.png',
+alt: 'Modelo',
+},
+},
 
           
 //Indemne
@@ -357,39 +366,46 @@ const Reporte = () => {
 },
             {
               expectedValue: 'derecho',  
-                image: 
+              image: 
                   {
-                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_3-D.png',
+                    src: 'AuditivaIMG/AI.png',
                     alt: 'Modelo',
                   },
+                
+                
             },
 
             {
               expectedValue: 'izquierdo',  
-                image: 
+              image: 
+            
                   {
-                    src: 'AuditivaImg/Vía Afectada/AU_3.png',
+                    src: 'AuditivaIMG/AD.png',
                     alt: 'Modelo',
                   },
+                
+                
             },
 
             {
               expectedValue: 'bilateral', 
               image: 
-              {
-                src: 'AuditivaIMG/imagen_combinadaAuditiva.png',
+              [{
+                src: 'AuditivaImg/AI.png',
                 alt: 'Modelo',
               },
+              {
+                src: 'AuditivaIMG/AD.png',
+                alt: 'Modelo',
+              }],
+
+              // {
+              //   src: 'AuditivaIMG/imagen_combinadaAuditiva.png',
+              //   alt: 'Modelo',
+              // },
             
             },
 
-            {
-              expectedValue: 'alterada', 
-              image: {
-                src: 'AuditivaIMG/imagen_combinadaAuditiva.png',
-                alt: 'Modelo',
-              }
-            },
             // Vía coliculo_inferior
 
             {

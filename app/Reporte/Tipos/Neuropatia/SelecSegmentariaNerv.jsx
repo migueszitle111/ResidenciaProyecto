@@ -4201,31 +4201,31 @@ export function checkDivsSegmentar(copyConclusions) {
     return (
       <>
         <div style={{ position: 'absolute', top: '69.9%', left: '41.1%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car1' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>     
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car1' title='DEL TOBILLO,' displayText=' ' /></div>     
         <div style={{ position: 'absolute', top: '70.4%', left: '41.1%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car2' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car2' title='DEL TOBILLO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '70.8%', left: '41.1%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car3' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car3' title='DEL TOBILLO,' displayText=' ' /></div>
         
         <div style={{ position: 'absolute', top: '71.2%', left: '40.9%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car4' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car4' title='DEL TOBILLO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '71.6%', left: '40.9%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car5' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car5' title='DEL TOBILLO,' displayText=' ' /></div>
         
         <div style={{ position: 'absolute', top: '72.0%', left: '40.6%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car6' title='DEL TOBILLO,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car6' title='DEL RETROPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '72.4%', left: '40.6%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car7' title='DEL TOBILLO,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car7' title='DEL RETROPIE,' displayText=' ' /></div>
         
         <div style={{ position: 'absolute', top: '72.9%', left: '40.3%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car8' title='DEL TOBILLO,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car8' title='DEL RETROPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '73.3%', left: '40.1%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car9' title='DEL TOBILLO,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car9' title='DEL RETROPIE,' displayText=' ' /></div>
         
         <div style={{ position: 'absolute', top: '73.6%', left: '39.8%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car10' title='DEL DORSO DEL PIE,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car10' title='DEL RETROPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '74.1%', left: '39.6%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car11' title='DEL DORSO DEL PIE,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car11' title='DEL RETROPIE,' displayText=' ' /></div>
         
         <div style={{ position: 'absolute', top: '74.4%', left: '39.2%', transform: 'rotate(90deg)', }}
           className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='car12' title='DEL ANTEPIE,' displayText=' ' /></div>
@@ -4245,27 +4245,27 @@ export function checkDivsSegmentar(copyConclusions) {
     return (
       <>
         <div style={{ position: 'absolute', top: '69.9%', left: '57.8%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari1' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari1' title='DEL TOBILLO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '70.4%', left: '57.8%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari2' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari2' title='DEL TOBILLO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '70.8%', left: '58.0%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari3' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari3' title='DEL TOBILLO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '71.2%', left: '58.2%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari4' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari4' title='DEL TOBILLO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '71.6%', left: '58.4%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari5' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari5' title='DEL TOBILLO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '72.0%', left: '58.6%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari6' title='DEL TOBILLO,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari6' title='DEL RETROPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '72.4%', left: '58.8%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari7' title='DEL TOBILLO,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari7' title='DEL RETROPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '72.8%', left: '59.0%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari8' title='DEL TOBILLO,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari8' title='DEL RETROPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '73.2%', left: '59.2%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari9' title='DEL TOBILLO,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari9' title='DEL RETROPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '73.6%', left: '59.4%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari10' title='DEL DORSO DEL PIE,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari10' title='DEL RETROPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '74.0%', left: '59.4%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari10' title='DEL DORSO DEL PIE,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari10' title='DEL RETROPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '74.4%', left: '60.0%', transform: 'rotate(90deg)', }}
           className={`.dont-print-Nerviusgrande`}><SegmentariaButton value='cari11' title='DEL ANTEPIE,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '74.8%', left: '59.6%', transform: 'rotate(90deg)', }}

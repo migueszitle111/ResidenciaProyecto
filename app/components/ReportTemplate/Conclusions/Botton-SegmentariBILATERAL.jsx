@@ -6,7 +6,7 @@ export function NerviusButtonSegmenBILATERAL({ title, value, displayText }) {
 
   // Mapeo de valores opuestos
   const opposites = Object.fromEntries(
-    Array.from({ length: 80 }, (_, i) => [`car${i + 1}`, `cari${i + 1}`])
+    Array.from({ length: 580 }, (_, i) => [`car${i + 1}`, `cari${i + 1}`])
   );
 
   const isSelected = conclusions.some(cl => cl?.value === value);

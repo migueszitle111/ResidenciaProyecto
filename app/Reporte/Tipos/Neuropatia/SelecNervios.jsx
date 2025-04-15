@@ -2,9 +2,8 @@ import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botto
 
 export function checkDivs(copyConclusions) {
 
- 
 
-  if (copyConclusions.includes('MEDIANO IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('MEDIANO IZQUIERDO, FOCALIZADA A NIVEL'||'MEDIANO IZQUIERDO, FOCAL A NIVEL') ) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.2%', left: '50.5%', borderRadius: '50%' }}
@@ -2862,7 +2861,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL IZQUIERDO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('FACIAL IZQUIERDO, FOCALIZADA A NIVEL'))  {
     return (<>
       <div style={{ position: 'absolute', top: '5.6%', left: '52.2%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>

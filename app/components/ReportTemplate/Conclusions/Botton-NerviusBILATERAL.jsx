@@ -29,7 +29,7 @@ export function NerviusButtonBILATERAL({ title, value, displayText }) {
   }
 
   const classnames = `cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in 
-    ${isSelected ? 'bg-[#c44900]' : 'bg-transparent'} rounded-[50px] z-50 relative`;
+    ${isSelected ? 'bg-[#ff0000]' : 'bg-transparent'} rounded-[50px] z-50 relative`;
 
   return (
     <div className={classnames} onClick={handleClick}>

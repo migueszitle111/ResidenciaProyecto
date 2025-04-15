@@ -10,6 +10,10 @@ import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de l
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
+import { checkDivs2 } from './selecNervio2';
+import { checkDivsSegmentarBilateral2 } from './SelecNerviosSegmenBILATERAL2';
+import { checkDivsBILATERAL2 } from './SelecNerviosBILATERAL2';
+import { checkDivsSegmentar2 } from './SelecSegmentariaNerv2';
 
 
 const DropArea = () => {
@@ -432,6 +436,13 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'AXILAR2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Axilar.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'MUSCULOCUTANEO',
                     image: {
                       src: 'NeuropatiaImg/NO_Musculocutaneo.png',
@@ -483,6 +494,13 @@ const formattedConclusions = formatConclusions(copyConclusions);
                   },
                   {
                     expectedValue: 'FACIAL',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Facial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'FACIAL2',
                     image: {
                       src: 'NeuropatiaImg/NO_Facial.png',
                       alt: 'Modelo',
@@ -1214,10 +1232,14 @@ const formattedConclusions = formatConclusions(copyConclusions);
               </div>
               <div><DropArea /> </div>
               <div>{checkDivsSegmentarBilateral(copyConclusions)}</div>
+              <div>{checkDivsSegmentarBilateral2(copyConclusions)}</div>
               <div>{checkDivsBILATERAL(copyConclusions)}</div>
+              <div>{checkDivsBILATERAL2(copyConclusions)}</div>
               <div>{checkDivsBILATERALIZQ(copyConclusions)}</div>
               <div>{checkDivs(copyConclusions)}</div>
+              <div>{checkDivs2(copyConclusions)}</div>
               <div>{checkDivsSegmentar(copyConclusions)}</div>
+              <div>{checkDivsSegmentar2(copyConclusions)}</div>
               
               
             </div>

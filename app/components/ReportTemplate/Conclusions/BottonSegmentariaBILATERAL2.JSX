@@ -1,7 +1,7 @@
 import { ReportContext } from '@/src/context';
 import { useContext } from 'react';
 
-export function NerviusButtonSegmenBILATERAL({ title, value, displayText }) {
+export function NerviusButtonSegmenBILATERAL2({ title, value, displayText }) {
   const { updateConclusions, conclusions } = useContext(ReportContext);
 
   // Mapeo de valores opuestos

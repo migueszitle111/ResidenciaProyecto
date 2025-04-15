@@ -10,7 +10,7 @@ export function NerviusButtonBILATERALIZQ({ title, value, displayText }) {
   const isSelected = conclusions.find(cl => cl.value === value);
 
   const classnames = 'cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in ' + 
-    (selectedButton === value ? 'bg-[#c44900]' : 'bg-transparent') + 
+    (selectedButton === value ? 'bg-[#ff0000]' : 'bg-transparent') + 
     ' rounded-[50px] z-50 relative';
 
   function handleClick() {

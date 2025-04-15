@@ -10,7 +10,7 @@ export function SegmentariaButton({ title, value, displayText }) {
 
   // Clase condicional para que sea completamente transparente por defecto y se pinte al hacer clic o hover
   const classnames = 'cursor-pointer w-[3.5px] h-[18px] text-xs flex items-center justify-center text-white transition-colors duration-300 ease-in ' +
-  (selectedButton === value ? 'bg-[#c44900]' : 'bg-transparent')  + ' rounded-[50px]';
+  (selectedButton === value ? 'bg-[#ff0000]' : 'bg-transparent')  + ' rounded-[50px]';
 
   // Función para actualizar las conclusiones
   function handleClick() {

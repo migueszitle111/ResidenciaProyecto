@@ -2,11 +2,11 @@ import { ReportContext } from '@/src/context';
 import { useContext } from 'react';
 
 export function NerviusButtonBILATERAL({ title, value, displayText }) {
-  const { updateConclusions, conclusions } = useContext(ReportContext);
+  const { updateConclusions, conclusions, buttonsDisabledBILT } = useContext(ReportContext);
 
   // Mapeo de valores opuestos
   const opposites = Object.fromEntries(
-    Array.from({ length: 80 }, (_, i) => [`car${i + 1}`, `cari${i + 1}`])
+    Array.from({ length: 250 }, (_, i) => [`car${i + 1}`, `cari${i + 1}`])
   );
 
   const isSelected = conclusions.some(cl => cl?.value === value);
@@ -21,6 +21,8 @@ export function NerviusButtonBILATERAL({ title, value, displayText }) {
   }
 
   function handleClick() {
+    if (buttonsDisabledBILT) return; // Evita interacción si está bloqueado
+
     updateConclusions({ title, value });
 
     if (oppositeValue) {
@@ -29,7 +31,9 @@ export function NerviusButtonBILATERAL({ title, value, displayText }) {
   }
 
   const classnames = `cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in 
-    ${isSelected ? 'bg-[#ff0000]' : 'bg-transparent'} rounded-[50px] z-50 relative`;
+    ${isSelected ? 'bg-[#ff0000]' : 'bg-transparent'} 
+    ${buttonsDisabledBILT ? 'opacity-50 pointer-events-none' : ''} 
+    rounded-[50px] z-50 relative`;
 
   return (
     <div className={classnames} onClick={handleClick}>

@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
 
+
 // Valor inicial del contexto
 export const ReportContext = createContext({
   conclusions: [],
@@ -8,8 +9,17 @@ export const ReportContext = createContext({
   removeConclusion: () => {}
 })
 
+
 export function ReportContextProvider({ children }) {
   const [conclusions, setConclusions] = useState([]);
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
+  const [buttonsDisabled2, setButtonsDisabled2] = useState(false);
+  const [buttonsDisabledSegm, setbuttonsDisabledSegm] = useState(false);
+  const [buttonsDisabledSegm2, setbuttonsDisabledSegm2] = useState(false);
+  const [buttonsDisabledBILT, setbuttonsDisabledBILT] = useState(false);
+  const [buttonsDisabledBILT2, setbuttonsDisabledBILT2] = useState(false);
+  const [buttonsDisabledBITSeg, setbuttonsDisabledBITSeg] = useState(false);
+  const [buttonsDisabledBITSeg2, setbuttonsDisabledBITSeg2] = useState(false);
 
   // 1) Función para agregar/quitar conclusiones a modo "toggle"
   function updateConclusions(conclusion) {
@@ -39,7 +49,23 @@ export function ReportContextProvider({ children }) {
     conclusions,
     updateConclusions,
     setInitialConclusions,
-    removeConclusion // <- solo si lo vas a usar
+    removeConclusion, // <- solo si lo vas a usar
+    buttonsDisabled,
+    setButtonsDisabled,
+    buttonsDisabled2,
+    setButtonsDisabled2,
+    buttonsDisabledSegm,
+    setbuttonsDisabledSegm,
+    buttonsDisabledSegm2,
+    setbuttonsDisabledSegm2,
+    buttonsDisabledBILT,
+    setbuttonsDisabledBILT,
+    buttonsDisabledBILT2,
+    setbuttonsDisabledBILT2,
+    buttonsDisabledBITSeg,
+    setbuttonsDisabledBITSeg,
+    buttonsDisabledBITSeg2,
+    setbuttonsDisabledBITSeg2,
   }
 
   return (

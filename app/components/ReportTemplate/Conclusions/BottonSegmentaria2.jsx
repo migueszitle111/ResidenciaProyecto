@@ -2,32 +2,32 @@ import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 
 export function SegmentariaButton2({ title, value, displayText }) {
-const { updateConclusions, conclusions } = useContext(ReportContext);
-const [selectedButton, setSelectedButton] = useState(null);
+    const { updateConclusions, conclusions, buttonsDisabledSegm2 } = useContext(ReportContext);
+    const [selectedButton, setSelectedButton] = useState(null);
 
 // Verifica si el valor ya está en las conclusiones
 const isSelected = conclusions.find(cl => cl.value === value);
 
-// Clase condicional para que sea completamente transparente por defecto y se pinte al hacer clic o hover
+// Clase condicional con opacidad y bloqueo de eventos si está deshabilitado
 const classnames = 'cursor-pointer w-[3.5px] h-[18px] text-xs flex items-center justify-center text-white transition-colors duration-300 ease-in ' +
-(selectedButton === value ? 'bg-[#ff0000]' : 'bg-transparent')  + ' rounded-[50px]';
+    (selectedButton === value ? 'bg-[#ff0000]' : 'bg-transparent') +
+    (buttonsDisabledSegm2 ? ' opacity-50 pointer-events-none' : '') + ' rounded-[50px]';
 
 // Función para actualizar las conclusiones
 function handleClick() {
-if (selectedButton === value) {
-    // Si ya está seleccionado, deseleccionarlo (hacerlo invisible)
+    if (buttonsDisabledSegm2) return; // Evita interacción si está bloqueado
+
+    if (selectedButton === value) {
     setSelectedButton(null);
-} else {
-    // Si no está seleccionado, seleccionarlo (hacerlo visible)
+    } else {
     setSelectedButton(value);
-}
-updateConclusions({ title, value });
+    }
+    updateConclusions({ title, value });
 }
 
 return (
-<div className={classnames} onClick={handleClick}>
+    <div className={classnames} onClick={handleClick}>
     {displayText || title}
-</div>
+    </div>
 );
 }
-

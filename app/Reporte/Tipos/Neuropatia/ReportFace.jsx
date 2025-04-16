@@ -407,7 +407,23 @@ const formattedConclusions = formatConclusions(copyConclusions);
 
                   },
                   {
+                    expectedValue: 'MEDIANO2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_1_Mediano.png',
+                      alt: 'Modelo',
+                    }
+
+                  },
+                  {
                     expectedValue: 'INTEROSEOANTERIOR',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Interoseo Anterior.png',
+                      alt: 'Modelo',
+                    }
+
+                  },
+                  {
+                    expectedValue: 'INTEROSEOANTERIOR2',
                     image: {
                       src: 'NeuropatiaImg/NO_Interoseo Anterior.png',
                       alt: 'Modelo',
@@ -422,7 +438,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'ACCESORIO2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Accesorio.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'ANTEBRAQUIAL_CUTANEO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Antebraquial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'ANTEBRAQUIAL_CUTANEO2',
                     image: {
                       src: 'NeuropatiaImg/NO_Antebraquial.png',
                       alt: 'Modelo',
@@ -450,15 +480,35 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'MUSCULOCUTANEO2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Musculocutaneo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'RADIAL_SUPERFICIAL',
                     image: {
                       src: 'NeuropatiaImg/NO_Radial Superficial.png',
                       alt: 'Modelo',
                     }
                   },
-                  
+                  {
+                    expectedValue: 'RADIAL_SUPERFICIAL2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Radial Superficial.png',
+                      alt: 'Modelo',
+                    }
+                  },
                   {
                     expectedValue: 'INTEROSEO_POSTERIOR',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Interoseo Posterior.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'INTEROSEO_POSTERIOR2',
                     image: {
                       src: 'NeuropatiaImg/NO_Interoseo Posterior.png',
                       alt: 'Modelo',
@@ -472,7 +522,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'RADIAL2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Radial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'SUPRAESCAPULAR',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Supraescapular - Subescapular.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'SUPRAESCAPULAR2',
                     image: {
                       src: 'NeuropatiaImg/NO_Supraescapular - Subescapular.png',
                       alt: 'Modelo',
@@ -486,7 +550,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'ULNAR2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Ulnar.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'DORSAL_CUTANEO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Dorsal Cutaneo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'DORSAL_CUTANEO2',
                     image: {
                       src: 'NeuropatiaImg/NO_Dorsal Cutaneo.png',
                       alt: 'Modelo',
@@ -514,7 +592,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'FRENICO2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Frenico.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'TORACICO_LARGO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Toracico_largo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'TORACICO_LARGO2',
                     image: {
                       src: 'NeuropatiaImg/NO_Toracico_largo.png',
                       alt: 'Modelo',
@@ -528,7 +620,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'TORACODORSAL2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Toracodorsal.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'CIATICO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Ciatico.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'CIATICO2',
                     image: {
                       src: 'NeuropatiaImg/NO_Ciatico.png',
                       alt: 'Modelo',
@@ -542,7 +648,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'GLUTEO_MEDIO2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Gluteo Medio.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'GLUTEO_INFERIOR',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Gluteo Sup.Inf FC.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'GLUTEO_INFERIOR2',
                     image: {
                       src: 'NeuropatiaImg/NO_Gluteo Sup.Inf FC.png',
                       alt: 'Modelo',
@@ -556,7 +676,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'FEMORAL2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Femoral.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'SAFENO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Safeno.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'SAFENO2',
                     image: {
                       src: 'NeuropatiaImg/NO_Safeno.png',
                       alt: 'Modelo',
@@ -584,7 +718,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'OBTURADOR2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Obturador.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'NERVIO_PERONEO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Peroneo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'NERVIO_PERONEO2',
                     image: {
                       src: 'NeuropatiaImg/NO_Peroneo.png',
                       alt: 'Modelo',
@@ -598,7 +746,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'PERONEO_SUPERFICIAL2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Peroneo Superficial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'PERONEO_PROFUNDO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Peroneo Profundo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PERONEO_PROFUNDO2',
                     image: {
                       src: 'NeuropatiaImg/NO_Peroneo Profundo.png',
                       alt: 'Modelo',
@@ -612,7 +774,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'TIBIAL2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Tibial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'SURAL',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Sural.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'SURAL2',
                     image: {
                       src: 'NeuropatiaImg/NO_Sural.png',
                       alt: 'Modelo',
@@ -626,6 +802,13 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'PLANTAR_MEDIAL2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Plantar Medial.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'PLANTAR_LATERAL',
                     image: {
                       src: 'NeuropatiaImg/NO_Plantar Lateral.png',
@@ -633,7 +816,21 @@ const formattedConclusions = formatConclusions(copyConclusions);
                     }
                   },
                   {
+                    expectedValue: 'PLANTAR_LATERAL2',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Plantar Lateral.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
                     expectedValue: 'PUDENDO',
+                    image: {
+                      src: 'NeuropatiaImg/NO_Pudendo.png',
+                      alt: 'Modelo',
+                    }
+                  },
+                  {
+                    expectedValue: 'PUDENDO2',
                     image: {
                       src: 'NeuropatiaImg/NO_Pudendo.png',
                       alt: 'Modelo',

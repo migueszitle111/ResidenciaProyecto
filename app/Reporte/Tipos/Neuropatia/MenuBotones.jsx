@@ -603,7 +603,7 @@ const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
 };
 
 const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
+  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledSegm } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
@@ -621,8 +621,15 @@ const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => setStep('D')} className={`print-button`}>
-          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
+        <button
+          onClick={() => {
+            setButtonsDisabled(true);
+            setbuttonsDisabledSegm(true); 
+            setStep('D');            
+          }}
+          className={`print-button`}
+        >
+          <img src="/I_In.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
       </div> <br></br><br></br><br></br><br></br>
@@ -635,7 +642,7 @@ const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => {
 };
 
 const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
+  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT, setbuttonsDisabledBITSeg } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
@@ -653,8 +660,15 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => setStep('D')} className={`print-button`}>
-          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
+        <button
+          onClick={() => {
+            setbuttonsDisabledBILT(true); 
+            setbuttonsDisabledBITSeg(true); 
+            setStep('D');            
+          }}
+          className={`print-button`}
+        >
+          <img src="/I_In.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
       </div> <br></br><br></br><br></br><br></br>
@@ -669,7 +683,7 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
 };
 
 const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
+  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT, setbuttonsDisabledBITSeg } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
@@ -687,8 +701,16 @@ const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => setStep('D')} className={`print-button`}>
-          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
+        <button
+          onClick={() => {
+            
+            setbuttonsDisabledBILT(true); 
+            setbuttonsDisabledBITSeg(true); 
+            setStep('D');             
+          }}
+          className={`print-button`}
+        >
+          <img src="/I_In.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
       </div> <br></br><br></br><br></br><br></br>
@@ -1171,81 +1193,81 @@ const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) =>
       </h1>
   <AccordionContainer>
       <Accordion title='MIEMBROS SUPERIORES' value='NERVIOS SUPERIORES2' type='external'>
-        <div onClick={() => { setSelectedSide('MEDIANO'); setStep('B12'); }}>
+        <div onClick={() => { setSelectedSide('MEDIANO2'); setStep('B12'); }}>
           <ConclusionButton value='MEDIANO2' title=' DE NERVIO MEDIANO' displayText='MEDIANO' /></div>
-        <div onClick={() => { setSelectedSide('INTEROSEOANTERIOR'); setStep('B12'); }}>
-          <ConclusionButton value='INTEROSEOANTERIOR' title=' DE NERVIO INTEROSEO ANTERIOR' displayText='INTEROSEO ANTERIOR' /></div>
+        <div onClick={() => { setSelectedSide('INTEROSEOANTERIOR2'); setStep('B12'); }}>
+          <ConclusionButton value='INTEROSEOANTERIOR2' title=' DE NERVIO INTEROSEO ANTERIOR' displayText='INTEROSEO ANTERIOR' /></div>
         {/* <div onClick={() => { setSelectedSide('ACCESORIO'); setStep('B12'); }}>
           <ConclusionButton value='ACCESORIO2' title=' DE NERVIO ACCESORIO' displayText='ACCESORIO' /></div> */}
-        <div onClick={() => { setSelectedSide('AXILAR'); setStep('B12'); }}>
+        <div onClick={() => { setSelectedSide('AXILAR2'); setStep('B12'); }}>
           <ConclusionButton value='AXILAR2' title=' DE NERVIO AXILAR' displayText='AXILAR' /></div>
-        <div onClick={() => { setSelectedSide('MUSCULOCUTANEO'); setStep('B12'); }}>
-          <ConclusionButton value='MUSCULOCUTANEO' title=' DE NERVIO MUSCULOCUTÁNEO' displayText='MUSCULOCUTÁNEO' /></div>
-        <div onClick={() => { setSelectedSide('RADIAL'); setStep('B12'); }}>
-          <ConclusionButton value='RADIAL' title=' DE NERVIO RADIAL' displayText='RADIAL' /></div>
-        <div onClick={() => { setSelectedSide('RADIAL_SUPERFICIAL'); setStep('B12'); }}>
-          <ConclusionButton value='RADIAL_SUPERFICIAL' title=' DE NERVIO RADIAL SUPERFICIAL' displayText='RADIAL SUPERFICIAL' /></div>
-        <div onClick={() => { setSelectedSide('INTEROSEO_POSTERIOR'); setStep('B12'); }}>
-          <ConclusionButton value='INTEROSEO_POSTERIOR' title=' DE NERVIO INTEROSEO POSTERIOR' displayText='INTEROSEO POSTERIOR' /></div>
-        <div onClick={() => { setSelectedSide('SUPRAESCAPULAR'); setStep('B12'); }}>
-          <ConclusionButton value='SUPRAESCAPULAR' title=' DE NERVIO SUPRAESCAPULAR' displayText='SUPRAESCAPULAR' /></div>
-        <div onClick={() => { setSelectedSide('ULNAR'); setStep('B12'); }}>
-          <ConclusionButton value='ULNAR' title=' DE NERVIO ULNAR' displayText='ULNAR' /></div>
-        <div onClick={() => { setSelectedSide('DORSAL_CUTANEO'); setStep('B12'); }}>
-          <ConclusionButton value='DORSAL_CUTANEO' title=' DE NERVIO DORSAL CUTANEO' displayText='DORSAL CUTANEO' /></div>
+        <div onClick={() => { setSelectedSide('MUSCULOCUTANEO2'); setStep('B12'); }}>
+          <ConclusionButton value='MUSCULOCUTANEO2' title=' DE NERVIO MUSCULOCUTÁNEO' displayText='MUSCULOCUTÁNEO' /></div>
+        <div onClick={() => { setSelectedSide('RADIAL2'); setStep('B12'); }}>
+          <ConclusionButton value='RADIAL2' title=' DE NERVIO RADIAL' displayText='RADIAL' /></div>
+        <div onClick={() => { setSelectedSide('RADIAL_SUPERFICIAL2'); setStep('B12'); }}>
+          <ConclusionButton value='RADIAL_SUPERFICIAL2' title=' DE NERVIO RADIAL SUPERFICIAL' displayText='RADIAL SUPERFICIAL' /></div>
+        <div onClick={() => { setSelectedSide('INTEROSEO_POSTERIOR2'); setStep('B12'); }}>
+          <ConclusionButton value='INTEROSEO_POSTERIOR2' title=' DE NERVIO INTEROSEO POSTERIOR' displayText='INTEROSEO POSTERIOR' /></div>
+        <div onClick={() => { setSelectedSide('SUPRAESCAPULAR2'); setStep('B12'); }}>
+          <ConclusionButton value='SUPRAESCAPULAR2' title=' DE NERVIO SUPRAESCAPULAR' displayText='SUPRAESCAPULAR' /></div>
+        <div onClick={() => { setSelectedSide('ULNAR2'); setStep('B12'); }}>
+          <ConclusionButton value='ULNAR2' title=' DE NERVIO ULNAR' displayText='ULNAR' /></div>
+        <div onClick={() => { setSelectedSide('DORSAL_CUTANEO2'); setStep('B12'); }}>
+          <ConclusionButton value='DORSAL_CUTANEO2' title=' DE NERVIO DORSAL CUTANEO' displayText='DORSAL CUTANEO' /></div>
         {/* <div onClick={() => { setSelectedSide('FRENICO'); setStep('B1'); }}>
           <ConclusionButton value='FRENICO' title=' DE NERVIO FRÉNICO' displayText='FRÉNICO' /></div> */}
-        <div onClick={() => { setSelectedSide('TORACODORSAL'); setStep('B12'); }}>
-          <ConclusionButton value='TORACODORSAL' title=' DE NERVIO TORACODORSAL' displayText='TORACODORSAL' /></div>
-        <div onClick={() => { setSelectedSide('TORACICO_LARGO'); setStep('B12'); }}>
-          <ConclusionButton value='TORACICO_LARGO' title=' DE NERVIO TORÁCICO LARGO' displayText='TORÁCICO LARGO' /></div>
+        <div onClick={() => { setSelectedSide('TORACODORSAL2'); setStep('B12'); }}>
+          <ConclusionButton value='TORACODORSAL2' title=' DE NERVIO TORACODORSAL' displayText='TORACODORSAL' /></div>
+        <div onClick={() => { setSelectedSide('TORACICO_LARGO2'); setStep('B12'); }}>
+          <ConclusionButton value='TORACICO_LARGO2' title=' DE NERVIO TORÁCICO LARGO' displayText='TORÁCICO LARGO' /></div>
       </Accordion>
 
-      <Accordion title='CRANEALES' value='CRANEALES' type='external'>
-        <div onClick={() => { setSelectedSide('FRENICO'); setStep('B12'); }}>
-          <ConclusionButton value='FRENICO' title=' DE NERVIO FRÉNICO' displayText='FRÉNICO' /></div>
-        <div onClick={() => { setSelectedSide('ACCESORIO'); setStep('B12'); }}>
-          <ConclusionButton value='ACCESORIO' title=' DE NERVIO ACCESORIO' displayText='ACCESORIO' /></div>
-        <div onClick={() => { setSelectedSide('FACIAL'); setStep('B12'); }}>
-            <ConclusionButton value='FACIAL' title=' DE NERVIO FACIAL' displayText='FACIAL' /></div>
+      <Accordion title='CRANEALES' value='CRANEALES2' type='external'>
+        <div onClick={() => { setSelectedSide('FRENICO2'); setStep('B12'); }}>
+          <ConclusionButton value='FRENICO2' title=' DE NERVIO FRÉNICO' displayText='FRÉNICO' /></div>
+        <div onClick={() => { setSelectedSide('ACCESORIO2'); setStep('B12'); }}>
+          <ConclusionButton value='ACCESORIO2' title=' DE NERVIO ACCESORIO' displayText='ACCESORIO' /></div>
+        <div onClick={() => { setSelectedSide('FACIAL2'); setStep('B12'); }}>
+            <ConclusionButton value='FACIAL2' title=' DE NERVIO FACIAL' displayText='FACIAL' /></div>
       </Accordion>
 
       <Accordion title='MIEMBROS INFERIORES' value='NERVIOS INFERIORES2' type='external'>
-        <div onClick={() => { setSelectedSide('CIATICO'); setStep('B12'); }}>
-          <ConclusionButton value='CIATICO' title=' DE NERVIO CIATICO' displayText='CIATICO' /></div>
+        <div onClick={() => { setSelectedSide('CIATICO2'); setStep('B12'); }}>
+          <ConclusionButton value='CIATICO2' title=' DE NERVIO CIATICO' displayText='CIATICO' /></div>
         <div onClick={() => { setSelectedSide('GLUTEO_INFERIOR'); setStep('B12'); }}>
-          <ConclusionButton value='GLUTEO_INFERIOR' title=' DE NERVIO GLUTEO INFERIOR' displayText='GLUTEO INFERIOR' /></div>
-        <div onClick={() => { setSelectedSide('GLUTEO_MEDIO'); setStep('B12'); }}>
-          <ConclusionButton value='GLUTEO_MEDIO' title=' DE NERVIO GLUTEO SUPERIOR' displayText='GLUTEO SUPERIOR' /></div>
-        <div onClick={() => { setSelectedSide('FEMORAL'); setStep('B12'); }}>
-          <ConclusionButton value='FEMORAL' title=' DE NERVIO FEMORAL' displayText='FEMORAL' /></div>
-        <div onClick={() => { setSelectedSide('SAFENO'); setStep('B12'); }}>
-          <ConclusionButton value='SAFENO' title=' DE NERVIO SAFENO' displayText='SAFENO' /></div>
-        <div onClick={() => { setSelectedSide('OBTURADOR'); setStep('B12'); }}>
-          <ConclusionButton value='OBTURADOR' title=' DE NERVIO OBTURADOR' displayText='OBTURADOR' /></div>
-        <div onClick={() => { setSelectedSide('NERVIO_PERONEO'); setStep('B12'); }}>
-          <ConclusionButton value='NERVIO_PERONEO' title=' DE NERVIO PERONEO' displayText='PERONEO' /></div>
-        <div onClick={() => { setSelectedSide('PERONEO_SUPERFICIAL'); setStep('B12'); }}>
-          <ConclusionButton value='PERONEO_SUPERFICIAL' title=' DE NERVIO PERONEO SUPERFICIAL' displayText='PERONEO SUPERFICIAL' /></div>
-        <div onClick={() => { setSelectedSide('PERONEO_PROFUNDO'); setStep('B12'); }}>
-          <ConclusionButton value='PERONEO_PROFUNDO' title=' DE NERVIO PERONEO PROFUNDO' displayText='PERONEO PROFUNDO' /></div>
-        <div onClick={() => { setSelectedSide('TIBIAL'); setStep('B12'); }}>
-          <ConclusionButton value='TIBIAL' title=' DE NERVIO TIBIAL' displayText='TIBIAL' /></div>
-        <div onClick={() => { setSelectedSide('SURAL'); setStep('B12'); }}>
-          <ConclusionButton value='SURAL' title=' DE NERVIO SURAL' displayText='SURAL' /></div>
-        <div onClick={() => { setSelectedSide('PLANTAR_MEDIAL'); setStep('B12'); }}>
-          <ConclusionButton value='PLANTAR_MEDIAL' title=' DE NERVIO PLANTAR MEDIAL' displayText='PLANTAR MEDIAL' /></div>
-        <div onClick={() => { setSelectedSide('PLANTAR_LATERAL'); setStep('B12'); }}>
-          <ConclusionButton value='PLANTAR_LATERAL' title=' DE NERVIO PLANTAR LATERAL' displayText='PLANTAR LATERAL' /></div>
-        <div onClick={() => { setSelectedSide('PUDENDO'); setStep('B12'); }}>
-          <ConclusionButton value='PUDENDO' title=' DE NERVIO PUDENDO' displayText='PUDENDO' /></div>
+          <ConclusionButton value='GLUTEO_INFERIOR2' title=' DE NERVIO GLUTEO INFERIOR' displayText='GLUTEO INFERIOR' /></div>
+        <div onClick={() => { setSelectedSide('GLUTEO_MEDIO2'); setStep('B12'); }}>
+          <ConclusionButton value='GLUTEO_MEDIO2' title=' DE NERVIO GLUTEO SUPERIOR' displayText='GLUTEO SUPERIOR' /></div>
+        <div onClick={() => { setSelectedSide('FEMORAL2'); setStep('B12'); }}>
+          <ConclusionButton value='FEMORAL2' title=' DE NERVIO FEMORAL' displayText='FEMORAL' /></div>
+        <div onClick={() => { setSelectedSide('SAFENO2'); setStep('B12'); }}>
+          <ConclusionButton value='SAFENO2' title=' DE NERVIO SAFENO' displayText='SAFENO' /></div>
+        <div onClick={() => { setSelectedSide('OBTURADOR2'); setStep('B12'); }}>
+          <ConclusionButton value='OBTURADOR2' title=' DE NERVIO OBTURADOR' displayText='OBTURADOR' /></div>
+        <div onClick={() => { setSelectedSide('NERVIO_PERONEO2'); setStep('B12'); }}>
+          <ConclusionButton value='NERVIO_PERONEO2' title=' DE NERVIO PERONEO' displayText='PERONEO' /></div>
+        <div onClick={() => { setSelectedSide('PERONEO_SUPERFICIAL2'); setStep('B12'); }}>
+          <ConclusionButton value='PERONEO_SUPERFICIAL2' title=' DE NERVIO PERONEO SUPERFICIAL' displayText='PERONEO SUPERFICIAL' /></div>
+        <div onClick={() => { setSelectedSide('PERONEO_PROFUNDO2'); setStep('B12'); }}>
+          <ConclusionButton value='PERONEO_PROFUNDO2' title=' DE NERVIO PERONEO PROFUNDO' displayText='PERONEO PROFUNDO' /></div>
+        <div onClick={() => { setSelectedSide('TIBIAL2'); setStep('B12'); }}>
+          <ConclusionButton value='TIBIAL2' title=' DE NERVIO TIBIAL' displayText='TIBIAL' /></div>
+        <div onClick={() => { setSelectedSide('SURAL2'); setStep('B12'); }}>
+          <ConclusionButton value='SURAL2' title=' DE NERVIO SURAL' displayText='SURAL' /></div>
+        <div onClick={() => { setSelectedSide('PLANTAR_MEDIAL2'); setStep('B12'); }}>
+          <ConclusionButton value='PLANTAR_MEDIAL2' title=' DE NERVIO PLANTAR MEDIAL' displayText='PLANTAR MEDIAL' /></div>
+        <div onClick={() => { setSelectedSide('PLANTAR_LATERAL2'); setStep('B12'); }}>
+          <ConclusionButton value='PLANTAR_LATERAL2' title=' DE NERVIO PLANTAR LATERAL' displayText='PLANTAR LATERAL' /></div>
+        <div onClick={() => { setSelectedSide('PUDENDO2'); setStep('B12'); }}>
+          <ConclusionButton value='PUDENDO2' title=' DE NERVIO PUDENDO' displayText='PUDENDO' /></div>
       </Accordion>
 
       <Accordion title='SACRO' value='SACRO2' type='external'>
-        <div onClick={() => { setSelectedSide('CIATICO'); setStep('B12'); }}>
-          <ConclusionButton value='CIATICO' title=' DE NERVIO CIATICO' displayText='CIATICO' /></div>
-        <div onClick={() => { setSelectedSide('PUDENDO'); setStep('B12'); }}>
-          <ConclusionButton value='PUDENDO' title=' DE NERVIO PUDENDO' displayText='PUDENDO' /></div>
+        <div onClick={() => { setSelectedSide('CIATICO2'); setStep('B12'); }}>
+          <ConclusionButton value='CIATICO2' title=' DE NERVIO CIATICO' displayText='CIATICO' /></div>
+        <div onClick={() => { setSelectedSide('PUDENDO2'); setStep('B12'); }}>
+          <ConclusionButton value='PUDENDO2' title=' DE NERVIO PUDENDO' displayText='PUDENDO' /></div>
       </Accordion>
       </AccordionContainer>
     </div>
@@ -1558,7 +1580,9 @@ const StepCL2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
 };
 
 const StepCD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
+  const { removeConclusion, setButtonsDisabled2, setbuttonsDisabledSegm2 } = useContext(ReportContext);
+
+
   return (
     <div>
       <div className='button-bar'>
@@ -1576,13 +1600,21 @@ const StepCD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => setStep('D2')} className={`print-button`}>
-          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
+
+        <button
+          onClick={() => {
+            setButtonsDisabled2(true); // 🔒 Desactiva los NerviusButton
+            setbuttonsDisabledSegm2(true);
+            setStep('D2');            // ➡️ Avanza de paso
+          }}
+          className={`print-button`}
+        >
+          <img src="/I_In.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
       </div> <br></br><br></br><br></br><br></br>
       <h1 className=' text-xs font-bold text-white py-40 text-center'>
-        SELECCIONAR EL NIVEL DE LESION CON EL PUNTERO
+        SELECCIONAR EL NIVEL DE LESION CON EL PUNTERO 
       </h1>
       <div onClick={() => setStep('D2')}>
         
@@ -1592,7 +1624,7 @@ const StepCD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
 };
 
 const StepCDD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
+  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT2,setbuttonsDisabledBITSeg2 } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
@@ -1610,13 +1642,21 @@ const StepCDD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => setStep('D2')} className={`print-button`}>
-          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
+        <button
+          onClick={() => {
+            
+            setbuttonsDisabledBILT2(true); 
+            setbuttonsDisabledBITSeg2(true); 
+            setStep('D2');            
+          }}
+          className={`print-button`}
+        >
+          <img src="/I_In.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
       </div> <br></br><br></br><br></br><br></br>
       <h1 className=' text-xs font-bold text-white py-40 text-center'>
-        SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO
+        SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO 
       </h1>
       <div onClick={() => setStep('D2')}>
         
@@ -1626,7 +1666,7 @@ const StepCDD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
 };
 
 const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
+  const { removeConclusion, setButtonsDisabled } = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>
@@ -1644,8 +1684,15 @@ const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button onClick={() => setStep('D2')} className={`print-button`}>
-          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
+        <button
+          onClick={() => {
+            setbuttonsDisabledBILT2(true); 
+            setbuttonsDisabledBITSeg2(true); 
+            setStep('D2');            
+          }}
+          className={`print-button`}
+        >
+          <img src="/I_In.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
       </div> <br></br><br></br><br></br><br></br>

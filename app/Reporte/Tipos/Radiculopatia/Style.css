@@ -352,7 +352,6 @@ input[type="checkbox"] {
   overflow: hidden;
   background-color: transparent;
   z-index: 999;   
-
 }
 
 .btnInsert{
@@ -380,9 +379,6 @@ input[type="checkbox"] {
   flex-basis: 48%; /* Cada elemento hijo ocupará aproximadamente la mitad del contenedor */
   box-sizing: border-box; /* Asegura que el padding y border se incluyan en el ancho total */
 }
-
-
-
 
 /* Detalles referentes a la impresion */
 @media print {
@@ -456,24 +452,38 @@ input[type="checkbox"] {
 }
 
 .delete-button {
-  display: none;       /* por defecto oculto */
-  position: absolute;  
-  top: 0;
-  right: 0;
+  position: absolute;
+  top: 1px;
+  right: 5px;
+  width: 25px;
+  background-color: #1C1C1C;
+  padding: 8px;
+  text-align: left;
+  font-size: 10px;
   cursor: pointer;
-  border: none;
-  background: rgb(255, 22, 22);
-  color: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  border-radius: 100%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #c44900;
+}
+/* 1) Oculto por defecto */
+.delete-button {
+  display: none !important;
 }
 
-/* Cuando haces hover sobre el contenedor, muestra la "X" */
+.delete-button:hover {
+background-color: #c44900;
+color: white;
+}
+/* 2) Solo al pasar el cursor sobre el elemento padre .item-container */
 .item-container:hover .delete-button {
-  display: block;
+  display: block !important;
 }
 
+.delete-button.active {
+background-color: #c44900;
+color: white;
+}
 
 .loading-overlay {
   position: fixed;

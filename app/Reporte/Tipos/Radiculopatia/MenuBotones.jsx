@@ -431,7 +431,7 @@ function setButtonState(value, desiredOn) {
       <AccordionContainer>
         
       {/* Acordeón externo: CERVICAL */}
-  <Accordion title="CERVICAL" value= "CERVICAL" type="external" onToggle={(isOpen) => {
+  <Accordion title="CERVICAL"  value= "CERVICAL" type="external" onToggle={(isOpen) => {
     /* fuerza el estado visual */
     setButtonState('CERVICAL', isOpen);
 
@@ -1054,12 +1054,12 @@ function setButtonState(value, desiredOn) {
           </InternalAccordionContainer>
           {/* Botón de conclusión para "CERVICAL MULTINIVEL" */}
           <ConclusionButtonR
-            value="cervical_multinivel"
-            title="CERVICAL MULTINIVEL"
+            value="cervical_multinivel2"
+            title="MULTINIVEL"
             displayText="CERVICAL MULTINIVEL"
-            pressed={activeButtons['cervical_multinivel']}
+            pressed={activeButtons['cervical_multinivel2']}
             onClick={() =>
-              handleButtonPress('cervical_multinivel', 'MULTINIVEL')
+              handleButtonPress('cervical_multinivel2', 'MULTINIVEL')
             }
           />
         </Accordion>
@@ -1808,12 +1808,12 @@ function setButtonState(value, desiredOn) {
 
           {/* Botón de conclusión para "LUMBROSACA MULTINIVEL" */}
           <ConclusionButtonR
-            value="lumbrosaca_multinivel"
+            value="lumbrosaca_multinivel2"
             title="LUMBROSACA MULTINIVEL"
             displayText="LUMBROSACA MULTINIVEL"
-            pressed={activeButtons['lumbrosaca_multinivel']}
+            pressed={activeButtons['lumbrosaca_multinivel2']}
             onClick={() =>
-              handleButtonPress('lumbrosaca_multinivel', 'MULTINIVEL')
+              handleButtonPress('lumbrosaca_multinivel2', 'MULTINIVEL')
             }
           />
         </Accordion>
@@ -2679,11 +2679,11 @@ function setButtonState(value, desiredOn) {
         </Accordion>
         </InternalAccordionContainer>
         <ConclusionButtonR
-        value='cervical_multinivel'
+        value='cervical_multinivel2'
         title='CERVICAL MULTINIVEL'
         displayText="CERVICAL MULTINIVEL"
-        pressed={activeButtons["cervical_multinivel"]}
-        onClick={() => handleButtonPress1("cervical_multinivel", "MULTINIVEL")}
+        pressed={activeButtons["cervical_multinivel2"]}
+        onClick={() => handleButtonPress1("cervical_multinivel2", "MULTINIVEL")}
       />                        
       </Accordion>
 
@@ -3064,11 +3064,11 @@ function setButtonState(value, desiredOn) {
         
         </InternalAccordionContainer>
         <ConclusionButtonR
-        value='lumbrosaca_multinivel'
+        value='lumbrosaca_multinivel2'
         title='LUMBROSACA MULTINIVEL'
         displayText="LUMBROSACA MULTINIVEL"
-        pressed={activeButtons["lumbrosaca_multinivel"]}
-        onClick={() => handleButtonPress1("lumbrosaca_multinivel", " MULTINIVEL")}
+        pressed={activeButtons["lumbrosaca_multinivel2"]}
+        onClick={() => handleButtonPress1("lumbrosaca_multinivel2", "MULTINIVEL")}
       />
       </Accordion>
 
@@ -4002,11 +4002,11 @@ function setButtonState(value, desiredOn) {
         </InternalAccordionContainer>
 
         <ConclusionButtonR
-        value='cervical_multinivel'
+        value='cervical_multinivel2'
         title='CERVICAL MULTINIVEL'
         displayText="CERVICAL MULTINIVEL"
-        pressed={activeButtons["cervical_multinivel"]}
-        onClick={() => handleButtonPress1("cervical_multinivel", "MULTINIVEL")}
+        pressed={activeButtons["cervical_multinivel2"]}
+        onClick={() => handleButtonPress1("cervical_multinivel2", "MULTINIVEL")}
       />             
       </Accordion>
       <Accordion title='TORÁCICO' value='TORÁCICA' type='external'>
@@ -4387,11 +4387,11 @@ function setButtonState(value, desiredOn) {
         </InternalAccordionContainer>
 
         <ConclusionButtonR
-        value='lumbrosaca_multinivel'
+        value='lumbrosaca_multinivel2'
         title='LUMBROSACA MULTINIVEL'
         displayText="LUMBROSACA MULTINIVEL"
-        pressed={activeButtons["lumbrosaca_multinivel"]}
-        onClick={() => handleButtonPress1("lumbrosaca_multinivel", "MULTINIVEL")}
+        pressed={activeButtons["lumbrosaca_multinivel2"]}
+        onClick={() => handleButtonPress1("lumbrosaca_multinivel2", "MULTINIVEL")}
       />
                 
       </Accordion>

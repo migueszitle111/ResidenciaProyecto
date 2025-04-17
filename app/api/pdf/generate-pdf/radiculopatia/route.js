@@ -426,7 +426,21 @@ const imageMapRight = {
       }
     },
     {
+      expectedValue: 'cervical_multinivel2', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Cervical_I.png',
+        alt: 'Modelo',
+      }
+    },
+    {
       expectedValue: 'lumbrosaca_multinivel', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Lumbar_I.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'lumbrosaca_multinivel2', 
       image: {
         src: '/assets/RadiculopatiaImg/Multinivel/Columna_Lumbar_I.png',
         alt: 'Modelo',
@@ -714,7 +728,21 @@ const imageMapRight = {
       }
     },
     {
+      expectedValue: 'cervical_multinivel2', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Cervical_D.png',
+        alt: 'Modelo',
+      }
+    },
+    {
       expectedValue: 'lumbrosaca_multinivel', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Lumbar_D.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'lumbrosaca_multinivel2', 
       image: {
         src: '/assets/RadiculopatiaImg/Multinivel/Columna_Lumbar_D.png',
         alt: 'Modelo',

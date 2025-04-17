@@ -255,9 +255,11 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
             <div className="item-container" style={{ width: '100%', height: '100%' }}>
               <button
                 className="delete-button"
+                
                 onClick={() => removeItem(item.id)}
               >
-                X
+                        <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+
               </button>
               <div dangerouslySetInnerHTML={{ __html: item.content }} />
             </div>
@@ -370,14 +372,33 @@ const Reporte = () => {
     // También extraemos los niveles de multinivel de los botones:
     const selections = [];
     if (activeButtons["cervical_multinivel"]) selections.push("CERVICAL");
-    if (activeButtons["toracica_multinivel"]) selections.push("TORACICO");
+    if (activeButtons["toracica_multinivel"]) selections.push("TORACICA");
     if (activeButtons["lumbrosaca_multinivel"]) selections.push("LUMBROSACRA");
     const formattedLevels = formatSelection(selections);
     
     // Si se encontró la conclusión base, usamos esa parte y la concatenamos con los niveles formateados.
     if (baseConclusion && formattedLevels) {
-      combinedText = baseConclusion.title + " " + formattedLevels;
-    } // Si no, se queda como estaba.
+      // 1) construir el texto base + niveles
+      const head = `${baseConclusion.title} ${formattedLevels}`;
+    
+      // 2) excluir de las conclusiones todo lo que no es ni la base ni ninguno de los multisegmentos:
+      const excluded = [
+        baseConclusion.value,
+        'cervical_multinivel',
+        'toracica_multinivel',
+        'lumbrosaca_multinivel'
+      ];
+      const rest = conclusions
+        .filter(cl => !excluded.includes(cl.value))
+        .map(cl => cl.title)
+        .join(' ');  // aquí sólo irían otras conclusiones si las hubiera
+    
+      // 3) combinar
+      combinedText = rest
+        ? `${head} ${rest}`
+        : head;
+    }
+    
   
     // (2) Reubicar la fase (ACTIVA/INACTIVA/ANTIGUA) solo si es “RADICULOPATIA CRONICA”
     {
@@ -885,6 +906,13 @@ const Reporte = () => {
                             }
                           },
                           {
+                            expectedValue: 'cervical_multinivel2', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Cervical_I.png',
+                              alt: 'Modelo',
+                            }
+                          },
+                          {
                             expectedValue: 'LUMBOSACRO', 
                             image: {
                               src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_I.png',
@@ -893,6 +921,13 @@ const Reporte = () => {
                           },
                           {
                             expectedValue: 'lumbrosaca_multinivel', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_I.png',
+                              alt: 'Modelo',
+                            }
+                          },
+                          {
+                            expectedValue: 'lumbrosaca_multinivel2', 
                             image: {
                               src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_I.png',
                               alt: 'Modelo',
@@ -1199,6 +1234,14 @@ const Reporte = () => {
                           },
 
                           {
+                            expectedValue: 'cervical_multinivel2', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Cervical_D.png',
+                              alt: 'Modelo',
+                            }
+                          },
+
+                          {
                             expectedValue: 'LUMBOSACRO', 
                             image: {
                               src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_D.png',
@@ -1207,6 +1250,13 @@ const Reporte = () => {
                           },
                           {
                             expectedValue: 'lumbrosaca_multinivel', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_D.png',
+                              alt: 'Modelo',
+                            }
+                          },
+                          {
+                            expectedValue: 'lumbrosaca_multinivel2', 
                             image: {
                               src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_D.png',
                               alt: 'Modelo',

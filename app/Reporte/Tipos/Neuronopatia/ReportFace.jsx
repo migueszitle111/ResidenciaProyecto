@@ -123,7 +123,6 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
 };
 
 const Reporte = () => {
-  
   // Carga datos de usuario
   const { data: session, status } = useSession();
   const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)

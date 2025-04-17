@@ -662,6 +662,7 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
 
         <button
           onClick={() => {
+            setButtonsDisabled(true);
             setbuttonsDisabledBILT(true); 
             setbuttonsDisabledBITSeg(true); 
             setStep('D');            
@@ -703,7 +704,7 @@ const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => {
 
         <button
           onClick={() => {
-            
+            setButtonsDisabled(true);
             setbuttonsDisabledBILT(true); 
             setbuttonsDisabledBITSeg(true); 
             setStep('D');             

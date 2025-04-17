@@ -112,7 +112,7 @@ const SimpleMultiStepForm = ({
         <AccordionContainer>
         <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}  type='external'>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='troncosD' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='troncosD' title=' POSTGANGLIONAR TOTAL A NIVEL DE TRONCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='CordonD' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
@@ -160,7 +160,7 @@ const SimpleMultiStepForm = ({
 
         <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='troncosI' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='troncosI' title=' POSTGANGLIONAR TOTAL A NIVEL DE TRONCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='CordonI' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
@@ -207,7 +207,7 @@ const SimpleMultiStepForm = ({
 
         <Accordion value='post_totald' title=' POSTGANGLIONAR TOTAL' displayText={'POSTGANGLIONAR TOTAL'}>
           <div onClick={handleNextStep1}>
-            <ConclusionButton value='troncosB' title=' POSTGANGLIONAR TOTAL A NIVEL DE TROCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='troncosB' title=' POSTGANGLIONAR TOTAL A NIVEL DE TRONCOS' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='CordonB' title=' POSTGANGLIONAR TOTAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
@@ -2154,6 +2154,8 @@ const StepI = ({
   expandedDivs,
   setExpandedDivs
 }) => {
+  const { removeConclusion } = useContext(ReportContext);
+
    const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
     const { conclusions } = useContext(ReportContext)
     const { droppedItems } = useContext(DropContext);
@@ -2264,6 +2266,8 @@ const StepI1 = ({
   expandedDivs,
   setExpandedDivs
 }) => {
+  const { removeConclusion } = useContext(ReportContext);
+
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
@@ -2383,6 +2387,8 @@ const StepI2 = ({
   expandedDivs,
   setExpandedDivs
 }) => {
+  const { removeConclusion } = useContext(ReportContext);
+
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);

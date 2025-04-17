@@ -346,8 +346,8 @@ input[type="checkbox"] {
   left: 1px;
   right: 1px;
   bottom: 1px;
-  width: 1198px;
-  height: 774px;
+  width: 200%;
+  height: 100%;
   position: absolute;
   overflow: hidden;
   background-color: transparent;

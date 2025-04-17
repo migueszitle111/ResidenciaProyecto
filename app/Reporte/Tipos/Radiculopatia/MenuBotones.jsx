@@ -234,6 +234,8 @@ const SimpleMultiStepForm = ({
     handleNextStep3,
     handlePrevStep3,
   } = useStep();
+
+  
   return (
     <div>
       {step === 'A' && (
@@ -341,8 +343,8 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
   } = useContext(CheckboxContext);
   const { activeButtons, toggleButton } = useButtonContext();
   const { updateConclusions } = useContext(ReportContextR);
+
   // Manejo de checkboxes “lado izquierdo”
-  
 
   function handleCheckboxChangeLeft(event) {
     const { id, checked } = event.target;
@@ -385,12 +387,6 @@ const StepB = ({ handleNextStep, handlePrevStep}) => {
       return newState;
     });
   }
-// Arreglo ordenado: CERVICAL (índice 0), TORACICA (1), LUMBROSACRA (2)
-const polisegSteps = [
-  { value: 'cervical_multinivel',   title: 'CERVICAL',    displayText: 'CERVICAL' },
-  { value: 'toracica_multinivel',   title: 'TORACICA',    displayText: 'TORACICA' },
-  { value: 'lumbrosaca_multinivel', title: 'LUMBROSACRA', displayText: 'LUMBROSACRA' },
-];
 
 // Ejemplo de función para “forzar” un estado ON/OFF en la UI
 // en lugar de un "toggle" ciego.
@@ -402,48 +398,6 @@ function setButtonState(value, desiredOn) {
     toggleButton(value); // lo apaga
   }
 }
-
-function handlePolisegmentariaClick(clickedValue) {
-  const index = polisegSteps.findIndex(item => item.value === clickedValue);
-  if (index === -1) return;
-
-  const isCurrentlyActive = activeButtons[clickedValue];
-
-  if (!isCurrentlyActive) {
-    // --- CASO 1: Activar un botón que estaba apagado ---
-
-    // (A) Enciende en la UI los niveles del inicio (0) hasta el clicado (index-1),
-    //     sin meterlos a conclusiones
-    for (let i = 0; i < index; i++) {
-      const { value } = polisegSteps[i];
-      // Fuerza ON en la UI
-      setButtonState(value, true);
-      // Asegúrate de sacarlos de conclusiones (no se mostrarán en el reporte)
-      updateConclusions({ value, remove: true });
-    }
-
-    // (B) Enciende el botón clicado en la UI y SÍ lo mete a conclusiones
-    const { value, title } = polisegSteps[index];
-    setButtonState(value, true);
-    updateConclusions({ value, title }); // ESTE es el que se guarda en reporte
-
-    // (C) Apaga (UI) y quita de conclusiones todos los posteriores
-    for (let i = index + 1; i < polisegSteps.length; i++) {
-      const { value } = polisegSteps[i];
-      setButtonState(value, false);
-      updateConclusions({ value, remove: true });
-    }
-
-  } else {
-    // --- CASO 2: El botón ya estaba activo => apaga todo ---
-    for (let i = 0; i < polisegSteps.length; i++) {
-      const { value } = polisegSteps[i];
-      setButtonState(value, false);
-      updateConclusions({ value, remove: true });
-    }
-  }
-}
-
 
   // Manejo de botones de conclusión
   const handleButtonPress = (value, title, nextStepFunction) => {
@@ -475,8 +429,19 @@ function handlePolisegmentariaClick(clickedValue) {
        *    <AccordionContainer> maneja que solo uno se abra
        */}
       <AccordionContainer>
-        {/* Acordeón externo: CERVICAL */}
-        <Accordion title="CERVICAL" value= "CERVICAL" type="external">
+        
+      {/* Acordeón externo: CERVICAL */}
+  <Accordion title="CERVICAL" value= "CERVICAL" type="external" onToggle={(isOpen) => {
+    /* fuerza el estado visual */
+    setButtonState('CERVICAL', isOpen);
+
+    /* sincroniza conclusiones */
+    if (isOpen) {
+      updateConclusions({ value: 'CERVICAL', title: '' });
+    } else {
+      updateConclusions({ value: 'CERVICAL', remove: true });
+    }
+  }} >
           {/** 
            * 2) Acordeones Internos: 
            *    <InternalAccordionContainer> permite abrir varios simultáneamente
@@ -1094,12 +1059,30 @@ function handlePolisegmentariaClick(clickedValue) {
             displayText="CERVICAL MULTINIVEL"
             pressed={activeButtons['cervical_multinivel']}
             onClick={() =>
-              handleButtonPress('cervical_multinivel', 'CERVICAL MULTINIVEL')
+              handleButtonPress('cervical_multinivel', 'MULTINIVEL')
             }
           />
         </Accordion>
         {/* Acordeón externo: LUMBAR */}
-        <Accordion title="LUMBAR" value="LUMBAR" type="external">
+        {/* TORÁCICA  "interno" o "external"  */}
+        <Accordion title="TORÁCICO" value="TORÁCICA" type="external">
+        <ConclusionInputR
+        valueKey="toracica_input"
+        placeholder="Ingrese texto..."
+        style={{ width: "290px", height: "60px",color: "white",backgroundColor: '#1c1c1c',border: '1px solid white',borderRadius: '5px',padding: '5px',margin: '5px'}}
+      />
+        </Accordion>
+        <Accordion title="LUMBOSACRO" value="LUMBAR" type="external"  onToggle={(isOpen) => {
+    /* fuerza el estado visual */
+    setButtonState('LUMBOSACRO', isOpen);
+
+    /* sincroniza conclusiones */
+    if (isOpen) {
+      updateConclusions({ value: 'LUMBOSACRO', title: '' });
+    } else {
+      updateConclusions({ value: 'LUMBOSACRO', remove: true });
+    }
+  }}>
         <InternalAccordionContainer>
             {/* L1 (interno) */}
             <Accordion title="L1" type="internal">
@@ -1830,35 +1813,30 @@ function handlePolisegmentariaClick(clickedValue) {
             displayText="LUMBROSACA MULTINIVEL"
             pressed={activeButtons['lumbrosaca_multinivel']}
             onClick={() =>
-              handleButtonPress('lumbrosaca_multinivel', 'LUMBROSACA MULTINIVEL')
+              handleButtonPress('lumbrosaca_multinivel', 'MULTINIVEL')
             }
           />
         </Accordion>
 
-        {/* TORÁCICA  "interno" o "external"  */}
-        <Accordion title="TORÁCICA" value="TORÁCICA" type="external">
-        <ConclusionInputR
-        valueKey="toracica_input"
-        placeholder="Ingrese texto..."
-        style={{ width: "290px", height: "60px",color: "white",backgroundColor: '#1c1c1c',border: '1px solid white',borderRadius: '5px',padding: '5px',margin: '5px'}}
-      />
-        </Accordion>
-
-        <Accordion title="POLISEGMENTARIA" value="POLISEGMENTARIA" type="external">
+  <Accordion title="POLISEGMENTARIO" value="POLISEGMENTARIA" type="external">
   <ConclusionButtonR
     value="cervical_multinivel"
     title="CERVICAL"
     displayText="CERVICAL"
     pressed={activeButtons['cervical_multinivel']}
-    onClick={() => handlePolisegmentariaClick('cervical_multinivel')}
+    onClick={() =>
+      handleButtonPress('cervical_multinivel', 'CERVICAL')
+    }
   />
   
   <ConclusionButtonR
     value="toracica_multinivel"
-    title="TORACICA"
+    title="TORACICO"
     displayText="TORACICA"
     pressed={activeButtons['toracica_multinivel']}
-    onClick={() => handlePolisegmentariaClick('toracica_multinivel')}
+    onClick={() =>
+      handleButtonPress('toracica_multinivel', 'TORACICA')
+    }
   />
 
   <ConclusionButtonR
@@ -1866,7 +1844,9 @@ function handlePolisegmentariaClick(clickedValue) {
     title="LUMBROSACRA"
     displayText="LUMBROSACRA"
     pressed={activeButtons['lumbrosaca_multinivel']}
-    onClick={() => handlePolisegmentariaClick('lumbrosaca_multinivel')}
+    onClick={() =>
+      handleButtonPress('lumbrosaca_multinivel', 'LUMBROSACRA')
+    }
   />
 </Accordion>
 
@@ -2195,6 +2175,9 @@ const StepC1 = ({ handleNextStep1, handlePrevStep1}) => {
   const { updateConclusions } = useContext(ReportContextR);
   const [buttonStates, setButtonStates] = useState({});
   const { activeButtons, toggleButton } = useButtonContext(); //
+
+
+  
   const conclusionMapping = {
        A1: 'c4_i',  A2: 'c4_i',  A3: 'c4_i',  A4: 'c4_i',
        A5: 'c4_d',  A6: 'c4_d',  A7: 'c4_d',  A8: 'c4_d',
@@ -2266,57 +2249,54 @@ const polisegSteps = [
   { value: 'lumbrosaca_multinivel', title: 'LUMBROSACRA', displayText: 'LUMBROSACRA' },
 ];
 
-// Ejemplo de función para “forzar” un estado ON/OFF en la UI
-// en lugar de un "toggle" ciego.
+
+
 function setButtonState(value, desiredOn) {
   const currentlyOn = activeButtons[value];
-  if (desiredOn && !currentlyOn) {
-    toggleButton(value); // lo enciende
-  } else if (!desiredOn && currentlyOn) {
-    toggleButton(value); // lo apaga
-  }
+  if (desiredOn && !currentlyOn) toggleButton(value);
+  if (!desiredOn && currentlyOn)  toggleButton(value);
 }
 
-function handlePolisegmentariaClick(clickedValue) {
-  const index = polisegSteps.findIndex(item => item.value === clickedValue);
-  if (index === -1) return;
+// function handlePolisegmentariaClick(clickedValue) {
+//   const index = polisegSteps.findIndex(item => item.value === clickedValue);
+//   if (index === -1) return;
 
-  const isCurrentlyActive = activeButtons[clickedValue];
+//   const isCurrentlyActive = activeButtons[clickedValue];
 
-  if (!isCurrentlyActive) {
-    // --- CASO 1: Activar un botón que estaba apagado ---
+//   if (!isCurrentlyActive) {
+//     // --- CASO 1: Activar un botón que estaba apagado ---
 
-    // (A) Enciende en la UI los niveles del inicio (0) hasta el clicado (index-1),
-    //     sin meterlos a conclusiones
-    for (let i = 0; i < index; i++) {
-      const { value } = polisegSteps[i];
-      // Fuerza ON en la UI
-      setButtonState(value, true);
-      // Asegúrate de sacarlos de conclusiones (no se mostrarán en el reporte)
-      updateConclusions({ value, remove: true });
-    }
+//     // (A) Enciende en la UI los niveles del inicio (0) hasta el clicado (index-1),
+//     //     sin meterlos a conclusiones
+//     for (let i = 0; i < index; i++) {
+//       const { value } = polisegSteps[i];
+//       // Fuerza ON en la UI
+//       setButtonState(value, true);
+//       // Asegúrate de sacarlos de conclusiones (no se mostrarán en el reporte)
+//       updateConclusions({ value, remove: true });
+//     }
 
-    // (B) Enciende el botón clicado en la UI y SÍ lo mete a conclusiones
-    const { value, title } = polisegSteps[index];
-    setButtonState(value, true);
-    updateConclusions({ value, title }); // ESTE es el que se guarda en reporte
+//     // (B) Enciende el botón clicado en la UI y SÍ lo mete a conclusiones
+//     const { value, title } = polisegSteps[index];
+//     setButtonState(value, true);
+//     updateConclusions({ value, title }); // ESTE es el que se guarda en reporte
 
-    // (C) Apaga (UI) y quita de conclusiones todos los posteriores
-    for (let i = index + 1; i < polisegSteps.length; i++) {
-      const { value } = polisegSteps[i];
-      setButtonState(value, false);
-      updateConclusions({ value, remove: true });
-    }
+//     // (C) Apaga (UI) y quita de conclusiones todos los posteriores
+//     for (let i = index + 1; i < polisegSteps.length; i++) {
+//       const { value } = polisegSteps[i];
+//       setButtonState(value, false);
+//       updateConclusions({ value, remove: true });
+//     }
 
-  } else {
-    // --- CASO 2: El botón ya estaba activo => apaga todo ---
-    for (let i = 0; i < polisegSteps.length; i++) {
-      const { value } = polisegSteps[i];
-      setButtonState(value, false);
-      updateConclusions({ value, remove: true });
-    }
-  }
-}
+//   } else {
+//     // --- CASO 2: El botón ya estaba activo => apaga todo ---
+//     for (let i = 0; i < polisegSteps.length; i++) {
+//       const { value } = polisegSteps[i];
+//       setButtonState(value, false);
+//       updateConclusions({ value, remove: true });
+//     }
+//   }
+// }
 
   
 
@@ -2415,7 +2395,17 @@ function handlePolisegmentariaClick(clickedValue) {
         NIVEL
       </h1>
     <AccordionContainer>
-      <Accordion title='CERVICAL' value='CERVICAL' type='external'>
+      <Accordion  title='CERVICAL' value='CERVICAL' type='external'  onToggle={(isOpen) => {
+    /* fuerza el estado visual */
+    setButtonState('CERVICAL', isOpen);
+
+    /* sincroniza conclusiones */
+    if (isOpen) {
+      updateConclusions({ value: 'CERVICAL', title: '' });
+    } else {
+      updateConclusions({ value: 'CERVICAL', remove: true });
+    }
+  }}>
       <InternalAccordionContainer>
         <Accordion title='C4' type='internal'>
           <table cellpadding='3'>
@@ -2693,11 +2683,29 @@ function handlePolisegmentariaClick(clickedValue) {
         title='CERVICAL MULTINIVEL'
         displayText="CERVICAL MULTINIVEL"
         pressed={activeButtons["cervical_multinivel"]}
-        onClick={() => handleButtonPress1("cervical_multinivel", "CERVICAL MULTINIVEL")}
+        onClick={() => handleButtonPress1("cervical_multinivel", "MULTINIVEL")}
       />                        
       </Accordion>
 
-      <Accordion title='LUMBAR' value='LUMBAR' type='external'>
+      <Accordion title='TORÁCICO' value='TORÁCICA' type='external'>
+      <ConclusionInputR
+        valueKey="toracica_input"
+        placeholder="Ingrese texto..."
+        style={{ width: "290px", height: "60px",color: "white",backgroundColor: '#1c1c1c',border: '1px solid white',borderRadius: '5px',padding: '5px',margin: '5px'}}
+      />          
+      </Accordion>
+
+      <Accordion title='LUMBOSACRO' value='LUMBAR' type='external'onToggle={(isOpen) => {
+    /* fuerza el estado visual */
+    setButtonState('LUMBOSACRO', isOpen);
+
+    /* sincroniza conclusiones */
+    if (isOpen) {
+      updateConclusions({ value: 'LUMBOSACRO', title: '' });
+    } else {
+      updateConclusions({ value: 'LUMBOSACRO', remove: true });
+    }
+  }}>
         <InternalAccordionContainer>
             {/* L1 (interno) */}
             <Accordion title="L1" type="internal">
@@ -3060,33 +3068,30 @@ function handlePolisegmentariaClick(clickedValue) {
         title='LUMBROSACA MULTINIVEL'
         displayText="LUMBROSACA MULTINIVEL"
         pressed={activeButtons["lumbrosaca_multinivel"]}
-        onClick={() => handleButtonPress1("lumbrosaca_multinivel", "LUMBROSACA MULTINIVEL")}
+        onClick={() => handleButtonPress1("lumbrosaca_multinivel", " MULTINIVEL")}
       />
       </Accordion>
 
-      <Accordion title='TORÁCICA' value='TORÁCICA' type='external'>
-      <ConclusionInputR
-        valueKey="toracica_input"
-        placeholder="Ingrese texto..."
-        style={{ width: "290px", height: "60px",color: "white",backgroundColor: '#1c1c1c',border: '1px solid white',borderRadius: '5px',padding: '5px',margin: '5px'}}
-      />          
-      </Accordion>
 
-      <Accordion title="POLISEGMENTARIA" value="POLISEGMENTARIA" type="external">
+      <Accordion title="POLISEGMENTARIO" value="POLISEGMENTARIA" type="external">
   <ConclusionButtonR
     value="cervical_multinivel"
     title="CERVICAL"
     displayText="CERVICAL"
     pressed={activeButtons['cervical_multinivel']}
-    onClick={() => handlePolisegmentariaClick('cervical_multinivel')}
+    onClick={() =>
+      handleButtonPress1('cervical_multinivel', 'CERVICAL')
+    }
   />
   
   <ConclusionButtonR
     value="toracica_multinivel"
-    title="TORACICA"
+    title="TORACICO"
     displayText="TORACICA"
     pressed={activeButtons['toracica_multinivel']}
-    onClick={() => handlePolisegmentariaClick('toracica_multinivel')}
+    onClick={() =>
+      handleButtonPress1('toracica_multinivel', 'TORACICA')
+    }
   />
 
   <ConclusionButtonR
@@ -3094,7 +3099,9 @@ function handlePolisegmentariaClick(clickedValue) {
     title="LUMBROSACRA"
     displayText="LUMBROSACRA"
     pressed={activeButtons['lumbrosaca_multinivel']}
-    onClick={() => handlePolisegmentariaClick('lumbrosaca_multinivel')}
+    onClick={() =>
+      handleButtonPress1('lumbrosaca_multinivel', 'LUMBROSACRA')
+    }
   />
 </Accordion>
       </AccordionContainer>    
@@ -3545,12 +3552,7 @@ const StepB2 = ({ handleNextStep2, handlePrevStep2 }) => {
       return updatedState;
     });
   };
- // Arreglo ordenado: CERVICAL (índice 0), TORACICA (1), LUMBROSACRA (2)
-const polisegSteps = [
-  { value: 'cervical_multinivel',   title: 'CERVICAL',    displayText: 'CERVICAL' },
-  { value: 'toracica_multinivel',   title: 'TORACICA',    displayText: 'TORACICA' },
-  { value: 'lumbrosaca_multinivel', title: 'LUMBROSACRA', displayText: 'LUMBROSACRA' },
-];
+ 
 
 // Ejemplo de función para “forzar” un estado ON/OFF en la UI
 // en lugar de un "toggle" ciego.
@@ -3563,46 +3565,46 @@ function setButtonState(value, desiredOn) {
   }
 }
 
-function handlePolisegmentariaClick(clickedValue) {
-  const index = polisegSteps.findIndex(item => item.value === clickedValue);
-  if (index === -1) return;
+// function handlePolisegmentariaClick(clickedValue) {
+//   const index = polisegSteps.findIndex(item => item.value === clickedValue);
+//   if (index === -1) return;
 
-  const isCurrentlyActive = activeButtons[clickedValue];
+//   const isCurrentlyActive = activeButtons[clickedValue];
 
-  if (!isCurrentlyActive) {
-    // --- CASO 1: Activar un botón que estaba apagado ---
+//   if (!isCurrentlyActive) {
+//     // --- CASO 1: Activar un botón que estaba apagado ---
 
-    // (A) Enciende en la UI los niveles del inicio (0) hasta el clicado (index-1),
-    //     sin meterlos a conclusiones
-    for (let i = 0; i < index; i++) {
-      const { value } = polisegSteps[i];
-      // Fuerza ON en la UI
-      setButtonState(value, true);
-      // Asegúrate de sacarlos de conclusiones (no se mostrarán en el reporte)
-      updateConclusions({ value, remove: true });
-    }
+//     // (A) Enciende en la UI los niveles del inicio (0) hasta el clicado (index-1),
+//     //     sin meterlos a conclusiones
+//     for (let i = 0; i < index; i++) {
+//       const { value } = polisegSteps[i];
+//       // Fuerza ON en la UI
+//       setButtonState(value, true);
+//       // Asegúrate de sacarlos de conclusiones (no se mostrarán en el reporte)
+//       updateConclusions({ value, remove: true });
+//     }
 
-    // (B) Enciende el botón clicado en la UI y SÍ lo mete a conclusiones
-    const { value, title } = polisegSteps[index];
-    setButtonState(value, true);
-    updateConclusions({ value, title }); // ESTE es el que se guarda en reporte
+//     // (B) Enciende el botón clicado en la UI y SÍ lo mete a conclusiones
+//     const { value, title } = polisegSteps[index];
+//     setButtonState(value, true);
+//     updateConclusions({ value, title }); // ESTE es el que se guarda en reporte
 
-    // (C) Apaga (UI) y quita de conclusiones todos los posteriores
-    for (let i = index + 1; i < polisegSteps.length; i++) {
-      const { value } = polisegSteps[i];
-      setButtonState(value, false);
-      updateConclusions({ value, remove: true });
-    }
+//     // (C) Apaga (UI) y quita de conclusiones todos los posteriores
+//     for (let i = index + 1; i < polisegSteps.length; i++) {
+//       const { value } = polisegSteps[i];
+//       setButtonState(value, false);
+//       updateConclusions({ value, remove: true });
+//     }
 
-  } else {
-    // --- CASO 2: El botón ya estaba activo => apaga todo ---
-    for (let i = 0; i < polisegSteps.length; i++) {
-      const { value } = polisegSteps[i];
-      setButtonState(value, false);
-      updateConclusions({ value, remove: true });
-    }
-  }
-}
+//   } else {
+//     // --- CASO 2: El botón ya estaba activo => apaga todo ---
+//     for (let i = 0; i < polisegSteps.length; i++) {
+//       const { value } = polisegSteps[i];
+//       setButtonState(value, false);
+//       updateConclusions({ value, remove: true });
+//     }
+//   }
+// }
 
 
   const handleCheckboxChangeLeft = (event) => {
@@ -3713,7 +3715,17 @@ function handlePolisegmentariaClick(clickedValue) {
         NIVEL
       </h1>
       <AccordionContainer>
-      <Accordion title='CERVICAL' value="CERVICAL" type= 'external' >
+      <Accordion title='CERVICAL' value="CERVICAL" type= 'external' onToggle={(isOpen) => {
+    /* fuerza el estado visual */
+    setButtonState('CERVICAL', isOpen);
+
+    /* sincroniza conclusiones */
+    if (isOpen) {
+      updateConclusions({ value: 'CERVICAL', title: '' });
+    } else {
+      updateConclusions({ value: 'CERVICAL', remove: true });
+    }
+  }}>
         <InternalAccordionContainer>
         <Accordion title='C4' type='internal' >
           <table cellpadding='3'>
@@ -3994,10 +4006,28 @@ function handlePolisegmentariaClick(clickedValue) {
         title='CERVICAL MULTINIVEL'
         displayText="CERVICAL MULTINIVEL"
         pressed={activeButtons["cervical_multinivel"]}
-        onClick={() => handleButtonPress1("cervical_multinivel", "CERVICAL MULTINIVEL")}
+        onClick={() => handleButtonPress1("cervical_multinivel", "MULTINIVEL")}
       />             
       </Accordion>
-      <Accordion title='LUMBAR' value='LUMBAR' type='external'>
+      <Accordion title='TORÁCICO' value='TORÁCICA' type='external'>
+      <ConclusionInputR
+        valueKey="toracica_input"
+        value='toracica_input'
+        placeholder="Ingrese texto..."
+        style={{ width: "290px", height: "60px",color: "white",backgroundColor: '#1c1c1c',border: '1px solid white',borderRadius: '5px',padding: '5px',margin: '5px'}}
+      />           
+      </Accordion>
+      <Accordion title='LUMBOSACRO' value='LUMBAR' type='external'onToggle={(isOpen) => {
+    /* fuerza el estado visual */
+    setButtonState('LUMBOSACRO', isOpen);
+
+    /* sincroniza conclusiones */
+    if (isOpen) {
+      updateConclusions({ value: 'LUMBOSACRO', title: '' });
+    } else {
+      updateConclusions({ value: 'LUMBOSACRO', remove: true });
+    }
+  }}>
       <InternalAccordionContainer>
             {/* L1 (interno) */}
             <Accordion title="L1" type="internal">
@@ -4361,34 +4391,32 @@ function handlePolisegmentariaClick(clickedValue) {
         title='LUMBROSACA MULTINIVEL'
         displayText="LUMBROSACA MULTINIVEL"
         pressed={activeButtons["lumbrosaca_multinivel"]}
-        onClick={() => handleButtonPress1("lumbrosaca_multinivel", "LUMBROSACA MULTINIVEL")}
+        onClick={() => handleButtonPress1("lumbrosaca_multinivel", "MULTINIVEL")}
       />
                 
       </Accordion>
 
-      <Accordion title='TORÁCICA' value='TORÁCICA' type='external'>
-      <ConclusionInputR
-        valueKey="toracica_input"
-        placeholder="Ingrese texto..."
-        style={{ width: "290px", height: "60px",color: "white",backgroundColor: '#1c1c1c',border: '1px solid white',borderRadius: '5px',padding: '5px',margin: '5px'}}
-      />           
-      </Accordion>
+     
 
-      <Accordion title="POLISEGMENTARIA" value="POLISEGMENTARIA" type="external">
+      <Accordion title="POLISEGMENTARIO" value="POLISEGMENTARIA" type="external">
   <ConclusionButtonR
     value="cervical_multinivel"
     title="CERVICAL"
     displayText="CERVICAL"
     pressed={activeButtons['cervical_multinivel']}
-    onClick={() => handlePolisegmentariaClick('cervical_multinivel')}
+    onClick={() =>
+      handleButtonPress('cervical_multinivel', 'CERVICAL')
+    }
   />
   
   <ConclusionButtonR
     value="toracica_multinivel"
-    title="TORACICA"
+    title="TORACICO"
     displayText="TORACICA"
     pressed={activeButtons['toracica_multinivel']}
-    onClick={() => handlePolisegmentariaClick('toracica_multinivel')}
+    onClick={() =>
+      handleButtonPress('toracica_multinivel', 'TORACICA')
+    }
   />
 
   <ConclusionButtonR
@@ -4396,7 +4424,9 @@ function handlePolisegmentariaClick(clickedValue) {
     title="LUMBROSACRA"
     displayText="LUMBROSACRA"
     pressed={activeButtons['lumbrosaca_multinivel']}
-    onClick={() => handlePolisegmentariaClick('lumbrosaca_multinivel')}
+    onClick={() =>
+      handleButtonPress('lumbrosaca_multinivel', 'LUMBROSACRA')
+    }
   />
 </Accordion>
       </AccordionContainer> 

@@ -59,7 +59,7 @@ export function InternalAccordionContainer({ children }) {
 }
 
 // Componente Accordion
-export function Accordion({ children, value, title, type = 'external' }) {
+export function Accordion({ children, value, title, type = 'external',  onToggle }) {
   const { activeValue, setActiveValue } = useContext(AccordionValuesContext);
   const { activeInternalValues, toggleInternalValue } = useContext(InternalAccordionContext);
 
@@ -71,13 +71,22 @@ export function Accordion({ children, value, title, type = 'external' }) {
     : !!activeInternalValues[value]; // true/false
 
   function handleClick() {
-    if (isExternal) {
-      setActiveValue(isActive ? null : value);
-    } else {
-      toggleInternalValue(value);
-    }
-    // Ejemplo de uso de darvalor (opcional)
-    console.log('Nuevo valor:', darvalor());
+     /* ✅ NUEVO: calculamos el estado que tendrá después del clic */
+     const willBeActive = !isActive;
+
+     // 1️⃣  actualizamos el estado correspondiente
+     if (isExternal) {
+       setActiveValue(willBeActive ? value : null);
+     } else {
+       toggleInternalValue(value);
+     }
+ 
+     // 2️⃣  avisamos al padre (si lo pidió)
+     onToggle?.(willBeActive);
+ 
+     // 3️⃣  (opcional) demo
+     console.log('Nuevo valor:', darvalor());
+  
   }
 
   return (

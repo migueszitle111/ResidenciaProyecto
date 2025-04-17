@@ -307,11 +307,8 @@ const Reporte = () => {
             useMap: '#image-map',
             width: isPageVisible ? '600' : '800',
             height: isPageVisible ? '600' : '800'
-          }}
-          
+          }}          
           rules={[
-
-                      
 //Indemne
 {
   expectedValue: 'indemne',  
@@ -329,9 +326,7 @@ image:
 src: 'AuditivaIMG/AG.png',
 alt: 'Modelo',
 },
-},
-
-          
+},        
 //Indemne
 {
   expectedValue: 'derechoindemne',  
@@ -341,7 +336,6 @@ alt: 'Modelo',
         alt: 'Modelo',
       },
 },
-
 {
   expectedValue: 'izquierdoindemne',  
     image: 
@@ -350,7 +344,6 @@ alt: 'Modelo',
         alt: 'Modelo',
       },
 },
-
 {
   expectedValue: 'bilateralindemne', 
   image: 
@@ -362,29 +355,22 @@ alt: 'Modelo',
     src: 'AuditivaIMG/AD.png',
     alt: 'Modelo',
   }],
-
 },
             {
               expectedValue: 'derecho',  
               image: 
                   {
-                    src: 'AuditivaIMG/AI.png',
-                    alt: 'Modelo',
-                  },
-                
-                
-            },
-
-            {
-              expectedValue: 'izquierdo',  
-              image: 
-            
-                  {
                     src: 'AuditivaIMG/AD.png',
                     alt: 'Modelo',
                   },
-                
-                
+            },
+            {
+              expectedValue: 'izquierdo',  
+              image: 
+                  {
+                    src: 'AuditivaIMG/AI.png',
+                    alt: 'Modelo',
+                  },    
             },
 
             {
@@ -405,18 +391,20 @@ alt: 'Modelo',
 
             {
               expectedValue: 'derechocoliculo_inferior',  
-                image: 
-                  {
-                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_5-D.png',
-                    alt: 'Modelo',
-                  },
+              image: 
+              {
+                src: 'AuditivaImg/Vía Afectada/AU_5.png',
+                alt: 'Modelo',
+              },
             },
 
             {
               expectedValue: 'izquierdocoliculo_inferior',  
-                image: 
+               
+
+                  image: 
                   {
-                    src: 'AuditivaImg/Vía Afectada/AU_5.png',
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_5-D.png',
                     alt: 'Modelo',
                   },
             },
@@ -437,18 +425,20 @@ alt: 'Modelo',
             //lemnisco_lateral
             {
               expectedValue: 'derecholemnisco_lateral',  
-                image: 
-                  {
-                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_4-D.png',
-                    alt: 'Modelo',
-                  },
+              image: 
+              {
+                src: 'AuditivaImg/Vía Afectada/AU_4.png',
+                alt: 'Modelo',
+              },
             },
 
             {
               expectedValue: 'izquierdolemnisco_lateral',  
-                image: 
+               
+
+                  image: 
                   {
-                    src: 'AuditivaImg/Vía Afectada/AU_4.png',
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_4-D.png',
                     alt: 'Modelo',
                   },
             },
@@ -469,18 +459,18 @@ alt: 'Modelo',
             //completo_olivar_trapezoide
             {
               expectedValue: 'derechocompleto_olivar_trapezoide',  
-                image: 
-                  {
-                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_3-D.png',
-                    alt: 'Modelo',
-                  },
+              image: 
+              {
+                src: 'AuditivaImg/Vía Afectada/AU_3.png',
+                alt: 'Modelo',
+              },
             },
 
             {
               expectedValue: 'izquierdocompleto_olivar_trapezoide',  
-                image: 
+                  image: 
                   {
-                    src: 'AuditivaImg/Vía Afectada/AU_3.png',
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_3-D.png',
                     alt: 'Modelo',
                   },
             },
@@ -502,19 +492,21 @@ alt: 'Modelo',
             //nucleo_coclear
             {
               expectedValue: 'derechonucleo_coclear',  
-                image: 
+              image: 
                   {
-                    src: 'AuditivaImg/Vía Afectada/AU_2.png',
+                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_2-D.png',
+                  
                     alt: 'Modelo',
                   },
             },
 
             {
               expectedValue: 'izquierdonucleo_coclear',  
-                image: 
+                
+
+                  image: 
                   {
-                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_2-D.png',
-                  
+                    src: 'AuditivaImg/Vía Afectada/AU_2.png',
                     alt: 'Modelo',
                   },
             },
@@ -537,20 +529,21 @@ alt: 'Modelo',
 
             {
               expectedValue: 'derechonervio_auditivo',  
-                image: 
-                  {
-                    src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_1-D.png',
-                    alt: 'Modelo',
-                  },
+              image: 
+              {
+                src: 'AuditivaImg/Vía Afectada/AU_1.png',
+                alt: 'Modelo',
+              },
             },
 
             {
-              expectedValue: 'izquierdonervio_auditivo',  
-                image: 
-                  {
-                    src: 'AuditivaImg/Vía Afectada/AU_1.png',
-                    alt: 'Modelo',
-                  },
+              expectedValue: 'izquierdonervio_auditivo', 
+              image: 
+              {
+                src: 'AuditivaIMG/Vía Afectada/Vía Derecha/AU_1-D.png',
+                alt: 'Modelo',
+              }, 
+               
             },
 
             {

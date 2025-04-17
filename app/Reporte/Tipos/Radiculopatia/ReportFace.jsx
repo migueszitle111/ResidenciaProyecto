@@ -1,6 +1,6 @@
 import { CheckboxContext, ReportContextR, useButtonContext, DropContext } from '@/src/context';
 import { useSession } from "next-auth/react";
-import { useCallback, useContext, useEffect, useState, useRef } from 'react';
+import { useLayoutEffect,useCallback, useContext, useEffect, useState, useRef } from 'react';
 import { Rnd } from 'react-rnd';
 import { ConclusionCanvasR } from '../../../components/ReportTemplate/Conclusions/CanvasRadiculopatia';
 import { ConclusionCanvasR2 } from '../../../components/ReportTemplate/Conclusions/CanvasRadiculopatia2';
@@ -8,6 +8,7 @@ import { ConclusionCanvasR2 } from '../../../components/ReportTemplate/Conclusio
 import './EstilosCruz.css';
 import SimpleMultiStepForm from './MenuBotones';
 import './Style.css';
+
 
 // Mapa de checkbox y rutas de imágenes
 const imageMap = {
@@ -232,7 +233,7 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
       ref={dropAreaRef}
     >
       {topLeftText && (
-        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'1px'}}>
+        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '15px', paddingTop:'4px' }}>
           {topLeftText}
         </p>
       )}
@@ -266,8 +267,6 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
     </div>
   );
 };
-
-
 /**
  * Componente principal: Renderiza la interfaz de Radiculopatía con dos imágenes (frontal/posterior),
  * cada una con su propia zona de arrastre (DropArea).
@@ -346,16 +345,39 @@ const Reporte = () => {
   ))
     ? newImage2
     : defaultImage2;
-
-
+    const formatSelection = (selected) => {
+      if (!selected || selected.length === 0) return '';
+      if (selected.length === 1) return selected[0];
+      if (selected.length === 2) return selected.join(' Y ');
+      return selected.slice(0, -1).join(', ') + ' Y ' + selected[selected.length - 1];
+    };
+    
   /**********************************************************
    *   LÓGICA PARA COMBINAR CHECKBOXES (NIVELES) + CONCLUSIONES
    **********************************************************/
   useEffect(() => {
+
     if (!hasMounted) return;
-  
-    // (1) Texto base de todas las conclusiones
+
+    // (1) Texto base de todas las conclusiones.
+    // Aquí se combinan todas las conclusiones registradas.
     let combinedText = conclusions.map(cl => cl.title).join(' ').trim();
+  
+    // (1b) Opcionalmente, si la parte base siempre es la radiculopatía (ej. "RADICULOPATIA AGUDA"),
+    // la puedes separar de la parte multinivel.
+    // En este ejemplo, asumiremos que la parte base es la primera conclusión (o la que tenga cierto valor).
+    const baseConclusion = conclusions.find(cl => cl.value === "radiculopatia_aguda" || cl.value === "radiculopatia_subaguda" || cl.value === "radiculopatia_cronica" || cl.value === "radiculopatia_sensitiva");
+    // También extraemos los niveles de multinivel de los botones:
+    const selections = [];
+    if (activeButtons["cervical_multinivel"]) selections.push("CERVICAL");
+    if (activeButtons["toracica_multinivel"]) selections.push("TORACICO");
+    if (activeButtons["lumbrosaca_multinivel"]) selections.push("LUMBROSACRA");
+    const formattedLevels = formatSelection(selections);
+    
+    // Si se encontró la conclusión base, usamos esa parte y la concatenamos con los niveles formateados.
+    if (baseConclusion && formattedLevels) {
+      combinedText = baseConclusion.title + " " + formattedLevels;
+    } // Si no, se queda como estaba.
   
     // (2) Reubicar la fase (ACTIVA/INACTIVA/ANTIGUA) solo si es “RADICULOPATIA CRONICA”
     {
@@ -365,11 +387,10 @@ const Reporte = () => {
       const selectedPhase = conclusions.find(c => phases.includes(c.value));
   
       if (isCronica && selectedPhase) {
-        const phaseWord = selectedPhase.title; // p.e. "ACTIVA"
+        const phaseWord = selectedPhase.title; // por ejemplo "ACTIVA"
         const cronicaIndex = words.findIndex(w => w.toUpperCase() === "CRONICA");
-        const phaseIndex   = words.findIndex(w => w.toUpperCase() === phaseWord.toUpperCase());
+        const phaseIndex = words.findIndex(w => w.toUpperCase() === phaseWord.toUpperCase());
         if (cronicaIndex !== -1 && phaseIndex !== -1 && phaseIndex > cronicaIndex) {
-          // Extraemos la fase y la insertamos tras "CRONICA"
           const [extractedPhase] = words.splice(phaseIndex, 1);
           words.splice(cronicaIndex + 1, 0, extractedPhase);
           combinedText = words.join(' ');
@@ -620,8 +641,8 @@ const Reporte = () => {
                         img={{
                           src: imageSrc1,
                           alt: 'Modelo Frontal',
-                          width: isPageVisible ? '600' : '800',
-                          height: isPageVisible ? '600' : '800'
+                          width: isPageVisible ? '450' : '450',
+                          height: isPageVisible ? '450' : '450'
                         }}
                         rules={[
                           {
@@ -848,6 +869,14 @@ const Reporte = () => {
                           
                           ],                        
                           },
+
+                          {
+                            expectedValue: 'CERVICAL', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Cervical_I.png',
+                              alt: 'Modelo',
+                            }
+                          },
                           {
                             expectedValue: 'cervical_multinivel', 
                             image: {
@@ -855,7 +884,13 @@ const Reporte = () => {
                               alt: 'Modelo',
                             }
                           },
-  
+                          {
+                            expectedValue: 'LUMBOSACRO', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_I.png',
+                              alt: 'Modelo',
+                            }
+                          },
                           {
                             expectedValue: 'lumbrosaca_multinivel', 
                             image: {
@@ -865,6 +900,13 @@ const Reporte = () => {
                           },
                           {
                             expectedValue: 'toracica_multinivel', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Toracica_I.png',
+                              alt: 'Modelo',
+                            }
+                          },
+                          {
+                            expectedValue: 'toracica_input', 
                             image: {
                               src: 'RadiculopatiaImg/Multinivel/Columna_Toracica_I.png',
                               alt: 'Modelo',
@@ -892,8 +934,8 @@ const Reporte = () => {
                         img={{
                           src: imageSrc2,
                           alt: 'Modelo Posterior',
-                          width: isPageVisible ? '600' : '800',
-                          height: isPageVisible ? '600' : '800'
+                          width: isPageVisible ? '450' : '450',
+                          height: isPageVisible ? '450' : '450'
                         }}
                         rules={[
                           {
@@ -1142,9 +1184,24 @@ const Reporte = () => {
                           ],
                           },
                           {
+                            expectedValue: 'CERVICAL', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Cervical_D.png',
+                              alt: 'Modelo',
+                            }
+                          },
+                          {
                             expectedValue: 'cervical_multinivel', 
                             image: {
                               src: 'RadiculopatiaImg/Multinivel/Columna_Cervical_D.png',
+                              alt: 'Modelo',
+                            }
+                          },
+
+                          {
+                            expectedValue: 'LUMBOSACRO', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Lumbar_D.png',
                               alt: 'Modelo',
                             }
                           },
@@ -1157,6 +1214,13 @@ const Reporte = () => {
                           },
                           {
                             expectedValue: 'toracica_multinivel', 
+                            image: {
+                              src: 'RadiculopatiaImg/Multinivel/Columna_Toracica_D.png',
+                              alt: 'Modelo',
+                            }
+                          },
+                          {
+                            expectedValue: 'toracica_input', 
                             image: {
                               src: 'RadiculopatiaImg/Multinivel/Columna_Toracica_D.png',
                               alt: 'Modelo',

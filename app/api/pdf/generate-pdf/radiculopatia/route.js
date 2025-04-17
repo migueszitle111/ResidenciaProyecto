@@ -17,6 +17,21 @@ function buildHtml({
   checkedLeft = {},
   checkedRight = {},
 }) {
+  // ——— 1) Definir rutas de base por defecto y para “sensitiva” ———
+  const defaultBaseFront     = '/assets/RadiculopatiaImg/Columna/RA_Columna_1_FondoB.png';
+  const defaultBaseBack      = '/assets/RadiculopatiaImg/Columna/RA_Columna_2_FondoB.png';
+  const sensitivaBaseFront   = '/assets/RadiculopatiaImg/Columna/BASE ANTERIOR.png';
+  const sensitivaBaseBack    = '/assets/RadiculopatiaImg/Columna/BASE POSTERIOR.png';
+
+  // ——— 2) Detectar “radiculopatia_sensitiva” en la cadena de valores ———
+  const isSensitiva = finalString
+    .toLowerCase()
+    .includes('radiculopatia_sensitiva');
+
+  // ——— 3) Elegir la imagen base según corresponda ———
+  const baseFront = isSensitiva ? sensitivaBaseFront : defaultBaseFront;
+  const baseBack  = isSensitiva ? sensitivaBaseBack  : defaultBaseBack;
+
   // EJEMPLO de info del usuario
   const { name, lastname, cedula, email, especialidad, imageUrl } = userData;
   /**********************************************
@@ -424,6 +439,31 @@ const imageMapRight = {
         alt: 'Modelo',
       }
     },
+
+    {
+      expectedValue: 'CERVICAL', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Cervical_I.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'LUMBOSACRO', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Lumbar_I.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'TORACICA', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Toracica_I.png',
+        alt: 'Modelo',
+      }
+    },
+
+
+
   ];
   const backRules = [
     {
@@ -687,14 +727,35 @@ const imageMapRight = {
         alt: 'Modelo',
       }
     },
+
+
+    {
+      expectedValue: 'CERVICAL', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Cervical_D.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'LUMBOSACRO', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Lumbar_D.png',
+        alt: 'Modelo',
+      }
+    },
+    {
+      expectedValue: 'TORACICA', 
+      image: {
+        src: '/assets/RadiculopatiaImg/Multinivel/Columna_Toracica_D.png',
+        alt: 'Modelo',
+      }
+    },
   ];
 
 
   // C) Separar droppedItems en front y back
  //  **********************************************/
-  // Asumimos dropArea total 1198 de ancho => la mitad 599
-  // A la derecha => item.x >= 599 => back
-  const HALF_WIDTH = 599;
+  const HALF_WIDTH = 450;
 
   // Arrays para cada vista
   const frontItems = [];
@@ -707,67 +768,46 @@ const imageMapRight = {
     } else {
       // Está en la mitad posterior; restamos 599 a X
       const localX = item.x - HALF_WIDTH;
-      frontItems.push
       backItems.push({ ...item, x: localX });
     }
   }
-
-    // D) Factor de escala global: 599×774 => 450×550
-    const scaleX = 450 / 599;
-    const scaleY = 550 / 774;
-  
-    /**********************************************
-     * Para que los droppedItems aparezcan más pequeños,
-     * añadimos transform: scale(0.8).
-     **********************************************/
-    const scaleFactorItems = 0.8;
   
     // Generar HTML de items frontales
-    const droppedFrontHtml = frontItems
-      .map((item) => {
-        const width = item.width || 200;
-        const height = item.height || 200;
-        const scaledX = item.x * scaleX;
-        const scaledY = item.y * scaleY;
-        const scaledW = width * scaleX;
-        const scaledH = height * scaleY;
-        return `
-          <div 
-            data-item-id="${item.id}"
-          style="
-            position:absolute;
-            left:${scaledX - 5}px;
-            top:${scaledY + 9}px;
-            width:${scaledW}px;
-            height:${scaledH}px;
-            transform: scale(${scaleFactorItems});
-            transform-origin: top left;
-            z-index: 99;
-          ">
-            ${item.content}
-          </div>
-        `;
-      })
-      .join("");
+// Si tus coordenadas ya vienen en pixeles no los multipliques por 450
+const scaleFactorItems = 1; // ajuste este valor si es necesario (ej. 0.5, 0.8, etc.)
+
+const droppedFrontHtml = frontItems.map((item) => {
+  const width = item.width || 200;    // ajusta tamaños reales de tus imágenes
+  const height = item.height || 200;
+  return `
+    <div data-item-id="${item.id}" style="
+      position:absolute;
+      left:${item.x+10}px;
+      top:${item.y+17}px;
+      width:${width}px;
+      height:${height}px;
+      transform: scale(${scaleFactorItems});
+      transform-origin: top left;
+      z-index: 99;">
+      ${item.content}
+    </div>`;
+}).join("");
+
   
     // Generar HTML de items posteriores
     const droppedBackHtml = backItems
       .map((item) => {
         const width = item.width || 200;
         const height = item.height || 200;
-        const scaledX = item.x * scaleX;
-        const scaledY = item.y * scaleY;
-        const scaledW = width * scaleX;
-        const scaledH = height * scaleY;
         return `
           <div 
           data-item-id="${item.id}"
           style="
             position:absolute;
-            left:${scaledX + 9}px;
-            top:${scaledY + 10}px;
-            width:${scaledW}px;
-            height:${scaledH}px;
+             left:${item.x+10}px;
+             top:${item.y+20}px;
+            width:${width}px;
+      height:${height}px;
             transform: scale(${scaleFactorItems});
             transform-origin: top left;
             z-index: 99;
@@ -803,7 +843,7 @@ const imageMapRight = {
                 position: absolute;
                 top: 0; left: 0;
                 width: 450px;
-                height: 550px;
+                height: 600px;
                 object-fit: fill;
                 z-index: 2;
               "
@@ -838,7 +878,7 @@ const imageMapRight = {
             position: absolute;
             top: 0; left: 0;
             width: 450px;  /* ajusta para tu gusto */
-            height: 550px; /* ajusta para tu gusto */
+            height: 600px; /* ajusta para tu gusto */
             object-fit: fill;
             z-index: 2;
           "
@@ -855,7 +895,7 @@ const imageMapRight = {
    **********************************************/
   const embeddedCSS = `
 
-  .user-logo {
+      .user-logo {
         position: absolute;
         top: 10px;
         right: 20px;
@@ -864,18 +904,25 @@ const imageMapRight = {
         opacity: 50%;
         border-radius: 0%;
         object-fit: cover;
+        z-index: 9999;
       }
 
-        .user-data {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        font-size: 10px;
-        opacity: 50%;
-        margin-top: 10px;
-        align-items: center;
-        justify-content: center;
-      }
+    .user-data {
+  position: absolute;    /* importa que esté fuera del flujo */
+  bottom: 30px;          /* distancia al borde inferior de la página */
+  left: 50%;             /* para centrarlo horizontalmente */
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 10px;
+  opacity: 0.5;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 40px); /* opcional, para que no ocupe toda la anchura */
+  z-index: 1000;
+}
+
       .user-data svg {
         margin-right: 4px;
       }
@@ -897,7 +944,9 @@ const imageMapRight = {
     border-radius: 5px;
     transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
     position: relative;
+  
   }
+  
   .DivPanel2-expanded {
     width: 230px;
     z-index: 10; /* Asegura que el div expandido esté en la parte superior */
@@ -906,6 +955,8 @@ const imageMapRight = {
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
   }
+  
+  
   .DivPanel3 {
     display: flex;
     justify-content: center;
@@ -917,13 +968,16 @@ const imageMapRight = {
     border-radius: 5px;
     transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
     position: relative;
+  
   }
+  
   .DivPanel3-expanded {
     width: 95px;
     z-index: 10; /* Asegura que el div expandido esté en la parte superior */
     position: relative;
     background-color: rgba(250, 250, 250, 0.678);
   }
+  
   .DivPanel4{
     background-color: rgba(255, 255, 255, 0.253);
     width: 90px;
@@ -932,9 +986,13 @@ const imageMapRight = {
     margin: 2px;
     border-radius: 5px;
   }
+  
   .DivPanel4-expanded{
-    width: 230px; 
+    width: 230px;
+    
   }
+  
+  
   .cuadroIMG {
     width: 50px;
     height: 50px;
@@ -942,18 +1000,16 @@ const imageMapRight = {
     background-color: transparent;
     position: relative;
     margin-left: 30px;
-    z-index: 200;
   }
+  
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .cuadroIMG-expanded {
     width: 50px;
     height: 50px;
-    //   width: 20px;
-    // height: 20px;
-    margin-left: 90px; 
-        z-index: 200;
-
+    margin-left: 90px;
+    
   }
+  
   .cuadroIMG2 {
     width: 90px;
     height: 30px;
@@ -961,28 +1017,33 @@ const imageMapRight = {
     background-color: transparent;
     position: relative;
     margin-left: 10px;
-        z-index: 200;
-
   }
+  
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .cuadroIMG2-expanded {
     width: 90px;
     height: 30px;
-    // width: 70px;
-    // height: 10px;
-    margin-left: 10px; 
+    margin-left: 10px;
+    
   }
+  
+  
   /*CSS del componete que se utiliza para arastrar imagnes*/
   .draggableDiv {
     transition: all 0.2s ease;
     position: absolute;
     z-index: 9999; /* Prueba */
+
   }
+  
   .draggableDiv.expanded {
     transform: scale(1.1); /* Expande el tamaño del div mientras el clic está sostenido */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Añade sombra */
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */ 
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
+    
   }
+
+  
 .cuadro {
     width: 50px;
     height: 50px;
@@ -992,19 +1053,18 @@ const imageMapRight = {
     margin-left: 10px;
     margin-top: 10px;
     display: flex;
-        z-index: 200;
-
+    z-index: 1;
   }
+  
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .cuadro-expanded {
     width: 240px;
     height: 120px;
-    // width: 210px;
-    // height: 90px;
     margin-left: -10px;
     background-color: transparent;
     z-index: 1;
   }
+  
   .cuadro2 {
     width: 40px;
     height: 40px;
@@ -1015,19 +1075,19 @@ const imageMapRight = {
     margin-top: 5px;
     margin-bottom: 15px;
     margin-left: 40px;
-        z-index: 200;
-
+    z-index: 1;
   }
+  
   .cuadro2-expanded {
     width: 98px;
     height: 92px;
-    //  width: 68px;
-    // height: 62px;
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: 135px;
     z-index: 1;
   }
+  
+  
   .cuadro3 {
     width: 40px;
     height: 40px;
@@ -1038,19 +1098,42 @@ const imageMapRight = {
     margin-top:  5px;
     margin-bottom: 15px;
     margin-left: 10px;
-        z-index: 200;
-
+    z-index: 1;
   }
+  
   .cuadro3-expanded {
     width: 98px;
     height: 92px;
-    //  width: 68px;
-    // height: 62px;
     margin-top:  15px;
     margin-bottom: 15px;
     margin-left: 10px;
     z-index: 1;
   } 
+
+   
+  /* Selector de atributo para la imagen que termine en S_Linea 5.png */
+img[src$="S_Linea 1.png"] {
+    width: 110px;
+    height: auto; /* Ajusta el ancho para que sea responsivo */
+    position: static;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    margin-left: 55px;
+    transform: scale(1.1); /* Escala la imagen un poco al expandir */
+    z-index: 1;
+}
+  /* Selector de atributo para la imagen que termine en S_Linea 5.png */
+img[src$="S_Linea 4.png"] {
+    width: 110px;
+    height: auto;
+    position: static;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 70px;
+    transform: scale(1.1); /* Escala la imagen un poco al expandir */
+    z-index: 1;
+}
+
   
   /*Circulos donde se insertan las imagenes*/
   .circulo {
@@ -1062,16 +1145,13 @@ const imageMapRight = {
     margin-left: -5px;
     margin-top: 10px;
     display: flex;
-        z-index: 200;
-
+    z-index: 1;
   }
   
   /* Cuando el elemento está siendo arrastrado (tamaño original) */
   .circulo-expanded {
     width: 240px;
     height: 120px;
-    // width: 210px;
-    // height: 90px;
     z-index: 1;
     
   }
@@ -1087,8 +1167,7 @@ const imageMapRight = {
     margin-bottom: 15px;
     margin-left: 40px;
     border-radius: 100%;
-        z-index: 200;
-
+    z-index: 1;
   }
   
   .circulo2-expanded {
@@ -1102,7 +1181,7 @@ const imageMapRight = {
   
   .circulo2 > .dropArea2{
     border-radius: 100%;
-    z-index: 200;
+    z-index: 1;
   }
   
   
@@ -1117,7 +1196,7 @@ const imageMapRight = {
     margin-bottom: 15px;
     margin-left: 10px;
     border-radius: 100%;
-    z-index: 200;
+    z-index: 1;
   }
   
   .circulo3-expanded {
@@ -1131,73 +1210,49 @@ const imageMapRight = {
   
   .circulo3 > .dropArea2{
     border-radius: 100%;
-    z-index: 200;
+    z-index: 1;
   }
- 
-  /* Selector de atributo para la imagen que termine en S_Linea 5.png */
-img[src$="S_Linea 5.png"] {
-    width:105px;
-    height: 70px;
-    position: static;
-    margin-top: 35px;
-    margin-bottom: 10px;
-    margin-left: 60px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-}
-
-  /* Selector de atributo para la imagen que termine en S_Linea 5.png */
-img[src$="S_Linea 3.png"] {
-    width:110px;
-    height: 85px;
-    position: static;
-    margin-top:38px;
-    margin-bottom: 10px;
-    margin-left: 45px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-}
-
-
+  
+  
   .lineaImg{
-    width: 100px; /* Ajusta el ancho para que sea responsivo */
+    width: 130px; /* Ajusta el ancho para que sea responsivo */
     height: 40px; /* Mantiene la proporción de la imagen */
     transition: transform 0.3s ease; /* Añade una transición suave para efectos */
     position: static;
     background-color: transparent;
     pointer-events: none;
     margin-top: 5px;
-    z-index: 200;
+    z-index: 1;
     
   }
   
   .lineaImg-expanded {
-    width:100px;
-    height: 85px;
+    width: 130px;
+    height: auto;
     position: static;
-    margin-top: 5px;
+    margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 50px;
+    margin-left: 55px;
     transform: scale(1.1); /* Escala la imagen un poco al expandir */
     z-index: 1;
   }
   
   .lineaImg2{
     width: 130px; /* Ajusta el ancho para que sea responsivo */
-    height: 30px; /* Mantiene la proporción de la imagen */
+    height: 40px; /* Mantiene la proporción de la imagen */
     transition: transform 0.3s ease; /* Añade una transición suave para efectos */
     position: static;
     background-color: transparent;
     pointer-events: none;
     margin-top: 5px;
     margin-left: 35px;
-    z-index: 200;
+    z-index: 1;
     
   }
   
   .lineaImg2-expanded {
-    width:130px;
-    height: 85px;
+    width: 130px;
+    height: auto;
     position: static;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -1214,9 +1269,6 @@ img[src$="S_Linea 3.png"] {
     background-color: transparent;
     pointer-events: none;
     align-items: center;
-        z-index: 200;
-        margin-top: 10px;
-
   }
   
   .PuntoRojo{
@@ -1227,36 +1279,25 @@ img[src$="S_Linea 3.png"] {
     pointer-events: none;
     margin: auto;
     padding-bottom: 10px;
-        z-index: 200;
-
   
   }
   
   .lineaImg4{
     width: 84px;
     height: 84px;
-        z-index: 200;
-
   }
   
   .dropArea2 {
-  width: 10px; /* Tamaño inicial */
-  height: 10px;
-  background-color: transparent;
-  transition: width 0.3s ease, height 0.3s ease; /* Transición suave */
-  display: flex;              /* Para centrar en ambos ejes */
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;           /* Recorta cualquier exceso */
+    width: 40px; /* Tamaño inicial */
+    height: 40px;
+    background-color: transparent;
+    transition: width 0.3s ease, height 0.3s ease; /* Transición suave */
   }
   
   .dropArea2-expanded {
-  width: 68px;
-  height: 62px;
-  transition: width 0.3s ease, height 0.3s ease;
-  max-width: 100%;    /* Que la imagen nunca sobrepase la dropArea */
-  max-height: 100%;
-  object-fit: contain; /* Ajuste sin deformar */
+    width: 88px; /* Mismo tamaño que cuadro2-expanded */
+    height: 92px;
+    transition: width 0.3s ease, height 0.3s ease;
   }
   
   .lineaDv{
@@ -1310,17 +1351,16 @@ img[src$="S_Linea 3.png"] {
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    margin-top: 10px;
     position: relative;
   }
 
   .image-wrapper {
-    margin-top:15px;
+    // margin-top:15px;
     position: relative;
     width: 450px;  /* ajusta para tu gusto */
-    height: 550px; /* ajusta para tu gusto */
+    height: 600px; /* ajusta para tu gusto */
     padding: 0px;
-    // border: 1px solid #ccc;
+    //  border: 1px solid #ccc;
     // background-color:blue;
     
   }
@@ -1329,7 +1369,7 @@ img[src$="S_Linea 3.png"] {
   padding:0px;
   position: absolute;
   width: 450px;
-  height: 550px;
+  height: 600px;
   object-fit: fill; /* o fill si prefieres deformar */
   z-index: 1;
   }
@@ -1350,10 +1390,10 @@ img[src$="S_Linea 3.png"] {
   ${/* Si lo deseas más compacto, ajusta top/left. */''}
     
 /* Lumbar L1 lado Izquierdo (originalmente top: 47.8%; left: 41%, 40.2%, 39.4%, 38.6%) */
-.cruz97  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.3%; left: 42%; }
-.cruz98  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.3%; left: 41.2%; }
-.cruz99  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.3%; left: 40.4%; }
-.cruz100 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.3%; left: 39.6%; }
+.cruz97  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50%; left: 42%; }
+.cruz98  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50%; left: 41.2%; }
+.cruz99  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50%; left: 40.4%; }
+.cruz100 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50%; left: 39.6%; }
 
 /* Lumbar L2 lado Izquierdo (originalmente top: 51%; left: 41%, 40.2%, 39.4%, 38.6%) */
 .cruz49 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 53.5%; left: 42%; }
@@ -1389,16 +1429,16 @@ img[src$="S_Linea 3.png"] {
 .cruz89 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 70.5%; left: 42.5%; }
 .cruz90 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 70.5%; left: 41.5%; }
 .cruz91 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 70.5%; left: 40.5%; }
-.cruz92 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 70.5%; left: 39.8%; }
+.cruz92 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 70.5%; left: 39.6%; }
 
 
 // lumbares
 
 /* Lumbar L1 lado derecho (originalmente top: 47.8%; right: 41%, 40.2%, 39.4%, 38.6%) */
-.cruz101 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.3%; right: 42%; }
-.cruz102 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.3%; right: 41.2%; }
-.cruz103 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.3%; right: 40.4%; }
-.cruz104 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50.3%; right: 39.6%; }
+.cruz101 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50%; right: 42%; }
+.cruz102 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50%; right: 41.2%; }
+.cruz103 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50%; right: 40.4%; }
+.cruz104 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 50%; right: 39.6%; }
 
 /* Lumbar L2 lado derecho (originalmente top: 51%; right: 41%, 40.2%, 39.4%, 38.6%) */
 .cruz53 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 53.5%; right: 42%; }
@@ -1439,78 +1479,78 @@ img[src$="S_Linea 3.png"] {
 /* --- Izquierdas (Cervicales) ----------------------------------------------------------------- */
 
 /* Cruz 1 a 4 izquierdo */
-.cruz1 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; left: 42.3%; }
-.cruz2 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; left: 41.5%; }
-.cruz3 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; left: 40.7%; }
-.cruz4 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; left: 40%; }
+.cruz1 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 3.2%; left: 42.3%; }
+.cruz2 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 3.2%; left: 41.5%; }
+.cruz3 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 3.2%; left: 40.7%; }
+.cruz4 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 3.2%; left: 40%; }
 
 /* Cruz 9 a 12 izquierdo */
-.cruz9  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.4%; left: 42.3%; }
-.cruz10 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.4%; left: 41.5%; }
-.cruz11 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.4%; left: 40.7%; }
-.cruz12 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.4%; left: 40%; }
+.cruz9  { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.4%; left: 42.3%; }
+.cruz10 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.4%; left: 41.5%; }
+.cruz11 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.4%; left: 40.7%; }
+.cruz12 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.4%; left: 40%; }
 
 /* Cruz 17 a 20 izquierdo */
-.cruz17 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.4%; left: 42.3%; }
-.cruz18 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.4%; left: 41.5%; }
-.cruz19 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.4%; left: 40.7%; }
-.cruz20 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.4%; left: 40%; }
+.cruz17 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.4%; left: 42.3%; }
+.cruz18 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.4%; left: 41.5%; }
+.cruz19 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.4%; left: 40.7%; }
+.cruz20 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.4%; left: 40%; }
 
 /* Cruz 25 a 28 izquierdo */
-.cruz25 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.4%; left: 42.3%; }
-.cruz26 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.4%; left: 41.5%; }
-.cruz27 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.4%; left: 40.7%; }
-.cruz28 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.4%; left: 40%; }
+.cruz25 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.4%; left: 42.3%; }
+.cruz26 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.4%; left: 41.5%; }
+.cruz27 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.4%; left: 40.7%; }
+.cruz28 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.4%; left: 40%; }
 
 /* Cruz 33 a 36 izquierdo */
-.cruz33 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.7%; left: 42.3%; }
-.cruz34 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.7%; left: 41.5%; }
-.cruz35 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.7%; left: 40.7%; }
-.cruz36 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.7%; left: 40%; }
+.cruz33 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.9%; left: 42.3%; }
+.cruz34 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.9%; left: 41.5%; }
+.cruz35 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.9%; left: 40.7%; }
+.cruz36 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.9%; left: 40%; }
 
 /* Cruz 41 a 44 izquierdo */
-.cruz41 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 17.4%; left: 42.3%; }
-.cruz42 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 17.4%; left: 41.5%; }
-.cruz43 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 17.4%; left: 40.7%; }
-.cruz44 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 17.4%; left: 40%; }
+.cruz41 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.6%; left: 42.3%; }
+.cruz42 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.6%; left: 41.5%; }
+.cruz43 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.6%; left: 40.7%; }
+.cruz44 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.6%; left: 40%; }
 
 /* --- Derechas (Cervicales) --- */
 
 /* Cruz 5 a 8 derecho */
-.cruz5 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; right: 42.3%; }
-.cruz6 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; right: 41.5%; }
-.cruz7 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; right: 40.7%; }
-.cruz8 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 6.3%; right: 40%; }
+.cruz5 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 3.2%; right: 42.3%; }
+.cruz6 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 3.2%; right: 41.5%; }
+.cruz7 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 3.2%; right: 40.7%; }
+.cruz8 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 3.2%; right: 40%; }
 
 /* Cruz 13 a 16 derecho */
-.cruz13 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.4%; right: 42.3%; }
-.cruz14 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.4%; right: 41.5%; }
-.cruz15 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.4%; right: 40.7%; }
-.cruz16 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 8.4%; right: 40%; }
+.cruz13 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.4%; right: 42.3%; }
+.cruz14 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.4%; right: 41.5%; }
+.cruz15 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.4%; right: 40.7%; }
+.cruz16 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 5.4%; right: 40%; }
 
 /* Cruz 21 a 24 derecho */
-.cruz21 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.4%; right: 42.3%; }
-.cruz22 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.4%; right: 41.5%; }
-.cruz23 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.4%; right: 40.7%; }
-.cruz24 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 10.4%; right: 40%; }
+.cruz21 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.4%; right: 42.3%; }
+.cruz22 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.4%; right: 41.5%; }
+.cruz23 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.4%; right: 40.7%; }
+.cruz24 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 7.4%; right: 40%; }
 
 /* Cruz 29 a 32 derecho */
-.cruz29 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.4%; right: 42.3%; }
-.cruz30 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.4%; right: 41.5%; }
-.cruz31 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.4%; right: 40.7%; }
-.cruz32 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 12.4%; right: 40%; }
+.cruz29 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.4%; right: 42.3%; }
+.cruz30 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.4%; right: 41.5%; }
+.cruz31 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.4%; right: 40.7%; }
+.cruz32 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 9.4%; right: 40%; }
 
 /* Cruz 37 a 40 derecho */
-.cruz37 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.7%; right: 42.3%; }
-.cruz38 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.7%; right: 41.5%; }
-.cruz39 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.7%; right: 40.7%; }
-.cruz40 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.7%; right: 40%; }
+.cruz37 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.9%; right: 42.3%; }
+.cruz38 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.9%; right: 41.5%; }
+.cruz39 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.9%; right: 40.7%; }
+.cruz40 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 11.9%; right: 40%; }
 
 /* Cruz 45 a 48 derecho */
-.cruz45 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 17.4%; right: 42.3%; }
-.cruz46 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 17.4%; right: 41.5%; }
-.cruz47 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 17.4%; right: 40.7%; }
-.cruz48 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 17.4%; right: 40%; }
+.cruz45 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.6%; right: 42.3%; }
+.cruz46 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.6%; right: 41.5%; }
+.cruz47 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.6%; right: 40.7%; }
+.cruz48 { z-index: 3; position: absolute; width: 80px; height: 20px; top: 14.6%; right: 40%; }
 
 
 
@@ -1525,6 +1565,7 @@ img[src$="S_Linea 3.png"] {
   <html lang="es">
   <head>
     <meta charset="UTF-8" />
+      <base href="${baseUrl}" />
     <style>
       ${embeddedCSS}
     </style>
@@ -1553,15 +1594,15 @@ ${
       <div class="images-row">
         <!-- Imagen Frontal + Overlays -->
         <div class="image-wrapper">
-          <img class="base-image" src="/assets/RadiculopatiaImg/Columna/RA_Columna_1_FondoB.png" alt="Frontal" />
+          <img class="base-image" src="${baseFront}"  alt="Frontal" />
           ${overlayHtmlFront }
           ${droppedFrontHtml}
-        }
+        
 
         </div>
         <!-- Imagen Posterior + Overlays -->
         <div class="image-wrapper">
-          <img class="base-image" src="/assets/RadiculopatiaImg/Columna/RA_Columna_2_FondoB.png" alt="Posterior" />
+          <img class="base-image" src="${baseBack}"  alt="Posterior" />
           ${overlayHtmlBack}
           ${droppedBackHtml}
 
@@ -1717,25 +1758,25 @@ export async function POST(req) {
       headless: true,
     });
     const page = await browser.newPage();
-    // Ajustar el viewport a 450×550 (mismo que en el HTML)
     await page.setViewport({
-      width: 450,
-      height: 550,
+      width: 1200,   // A4 landscape width aproximado
+      height: 600,  // A4 landscape height aproximado
       deviceScaleFactor: 1
     });
-    await page.goto(baseUrl, { waitUntil: "networkidle2" });
+    
     // Seteamos el HTML
     await page.setContent(html, { waitUntil: "networkidle2" });
     // Generar el PDF
     const pdfBuffer = await page.pdf({
       format: "A4",
-      width: "450px",
-      height: "550px",
       margin: { top: 0, right: 0, bottom: 0, left: 0 },
       printBackground: true,
+      width: 1200,   // A4 landscape width aproximado
+      height: 600,  // A4 landscape height aproximado
       scale: 1,
-       landscape: true, 
+      landscape: true, 
     });
+    
     await browser.close();
     // Retornar el PDF
     return new Response(pdfBuffer, {

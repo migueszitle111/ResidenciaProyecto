@@ -545,6 +545,7 @@ const StepI = ({ setStep, selectedImages, handleUndo, handleImageChange, handleP
 
 
 const StepJ = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
+  const { removeConclusion } = useContext(ReportContext)
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
@@ -648,6 +649,8 @@ const StepJ = ({ setStep, selectedImages, handleUndo, handleImageChange, handleP
 };
 
 const StepJ2 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
+  const { removeConclusion } = useContext(ReportContext)
+
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);

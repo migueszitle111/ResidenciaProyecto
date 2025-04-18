@@ -28,511 +28,528 @@ const imageSrc1 = isTrigeminoSelected ? newImage1 : defaultImage1;
 
   // 1) Tus reglas de superposición con /assets/... en lugar de baseUrl
   const overlayRules = [
-    //Superiores 
+    // Superior — versión 2
     {
-      expectedValue: 'superior_derecho', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          },
-    },
-    {
-      expectedValue: 'superior_izquierdo', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-    },
-
-    {
-      expectedValue: 'superior_bilateral', 
-     
-        image: [
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-    {
-      expectedValue: 'superior_bilateralindemne', 
-     
-        image: [
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-
-    {
-      expectedValue: 'superior_derechoindemne', 
-     
-        image: [
-         
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-    {
-      expectedValue: 'superior_izquierdoindemne', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-         
-        
-    },
-    //inferiores
-    {
-      expectedValue: 'inferior_derecho', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          },
-    },
-    {
-      expectedValue: 'inferior_izquierdo', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-    },
-
-    {
-      expectedValue: 'inferior_bilateral', 
-     
-        image: [
-          {
-            src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-    {
-      expectedValue: 'inferior_bilateralindemne', 
-     
-        image: [
-          {
-            src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-
-    {
-      expectedValue: 'inferior_derechoindemne', 
-     
-        image: 
-          
-          {
-            src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        
-    },
-    {
-      expectedValue: 'inferior_izquierdoindemne', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-            alt: 'Modelo',
-          }
-        
-        
-    },
-//trigemino
-    {
-      expectedValue: 'derecho_trigemino',  
-     
-        image: 
-        [
-    
-          {
-            
-            src: 'MioImg/Base_Cerebro.png',
-            alt: 'Modelo',
-          },
-          {
-            
-            src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/TR_1.png',
-            alt: 'Modelo',
-          },
-        
-        ]
-    },
-
-    {
-      expectedValue: "izquierdo_trigemino",  
-     
-        image: 
-        [
-           {
-          src: 'MioImg/Base_Cerebro.png',
-          alt: 'Modelo',
-
-           },
-          {
-            src: '/assets/SomatosensorialImg/Vía Afectada/TR_2.png',
-            alt: 'Modelo',
-          }
-        
-       ]
-    },
-
-    {
-      expectedValue: 'bilateral_trigemino', 
-      image: [
-      {
-        src: 'MioImg/Base_Cerebro.png',
+      expectedValue: 'superior_derecho',
+      image: {
+        src: '/assets/SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
         alt: 'Modelo',
       },
-      {
-        src: '/assets/SomatosensorialImg/imagen_combinadaTRI.png',
+    },
+    {
+      expectedValue: 'superior_izquierdo',
+      image: {
+        src: '/assets/SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
         alt: 'Modelo',
-      }
-    ],
+      },
     },
     {
-      expectedValue: 'trigemino',  
-     
-        image: 
-          {
-            src: 'MioImg/Base_Cerebro.png',
-            alt: 'Modelo',
-          },
-
-        
-        
-       
+      expectedValue: 'superior_bilateral',
+      image: [
+        {
+          src: '/assets/SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
-    /*cortical superior*/
+  
+    // Superiores — imágenes finales
     {
-      expectedValue: 'izquierdocorticals', 
-      image: 
+      expectedValue: 'superior_derecho',
+      image: {
+        src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'superior_izquierdo',
+      image: {
+        src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'superior_bilateral',
+      image: [
+        {
+          src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+          alt: 'Modelo',
+        },
+      ],
+    },
+  
+    // Superior indemne
+    {
+      expectedValue: 'superior_derechoindemne',
+      image: {
+        src: '/assets/SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'superior_izquierdoindemne',
+      image: {
+        src: '/assets/SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'superior_bilateralindemne',
+      image: [
+        {
+          src: '/assets/SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+          alt: 'Modelo',
+        },
+      ],
+    },
+    {
+      expectedValue: 'superior_bilateralindemne',
+      image: [
+        {
+          src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+          alt: 'Modelo',
+        },
+      ],
+    },
+    {
+      expectedValue: 'superior_derechoindemne',
+      image: [
+        {
+          src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+          alt: 'Modelo',
+        },
+      ],
+    },
+    {
+      expectedValue: 'superior_izquierdoindemne',
+      image: {
+        src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+    },
+  
+    // Inferiores — versión 2 indemne
+    {
+      expectedValue: 'inferior_derechoindemne',
+      image: {
+        src: '/assets/SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'inferior_izquierdoindemne',
+      image: {
+        src: '/assets/SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'inferior_bilateralindemne',
+      image: [
+        {
+          src: '/assets/SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+          alt: 'Modelo',
+        },
+      ],
+    },
+  
+    // Inferiores — versión 2
+    {
+      expectedValue: 'inferior_derecho',
+      image: {
+        src: '/assets/SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'inferior_izquierdo',
+      image: {
+        src: '/assets/SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'inferior_bilateral',
+      image: [
+        {
+          src: '/assets/SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+          alt: 'Modelo',
+        },
+      ],
+    },
+  
+    // Inferiores — imágenes finales
+    {
+      expectedValue: 'inferior_derecho',
+      image: {
+        src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'inferior_izquierdo',
+      image: {
+        src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'inferior_bilateral',
+      image: [
+        {
+          src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
+          alt: 'Modelo',
+        },
+      ],
+    },
+    {
+      expectedValue: 'inferior_bilateralindemne',
+      image: [
+        {
+          src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
+          alt: 'Modelo',
+        },
+      ],
+    },
+    {
+      expectedValue: 'inferior_derechoindemne',
+      image: {
+        src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'inferior_izquierdoindemne',
+      image: {
+        src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+    },
+  
+    // Trigémino
+    {
+      expectedValue: 'derecho_trigemino',
+      image: [
+        { src: '/assets/MioImg/Base_Cerebro.png', alt: 'Modelo' },
+        { src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/TR_1.png', alt: 'Modelo' },
+      ],
+    },
+    {
+      expectedValue: 'izquierdo_trigemino',
+      image: [
+        { src: '/assets/MioImg/Base_Cerebro.png', alt: 'Modelo' },
+        { src: '/assets/SomatosensorialImg/Vía Afectada/TR_2.png',       alt: 'Modelo' },
+      ],
+    },
+    {
+      expectedValue: 'bilateral_trigemino',
+      image: [
+        { src: '/assets/MioImg/Base_Cerebro.png',              alt: 'Modelo' },
+        { src: '/assets/SomatosensorialImg/imagen_combinadaTRI.png', alt: 'Modelo' },
+      ],
+    },
+    {
+      expectedValue: 'trigemino',
+      image: {
+        src: '/assets/MioImg/Base_Cerebro.png',
+        alt: 'Modelo',
+      },
+    },
+  
+    // Cortical superior
+    {
+      expectedValue: 'izquierdocorticals',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CORTICAL D.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'derechocorticals',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CORTICAL I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'bilateralcorticals',
+      image: [
         {
           src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CORTICAL D.png',
           alt: 'Modelo',
         },
+        {
+          src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CORTICAL I.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
+  
+    // Subcortical superior
     {
-      expectedValue: 'derechocorticals', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CORTICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralcorticals', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CORTICAL D.png',
+      expectedValue: 'izquierdosubcorticals',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR SUBCORTICAL D.png',
         alt: 'Modelo',
       },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CORTICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
     },
-     /*subcortical superior*/
-     {
-      expectedValue: 'izquierdosubcorticals', 
-      image: 
+    {
+      expectedValue: 'derechosubcorticals',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR SUBCORTICAL I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'bilateralsubcorticals',
+      image: [
         {
           src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR SUBCORTICAL D.png',
           alt: 'Modelo',
         },
+        {
+          src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR SUBCORTICAL I.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
+  
+    // Cervical superior
     {
-      expectedValue: 'derechosubcorticals', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR SUBCORTICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralsubcorticals', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR SUBCORTICAL D.png',
+      expectedValue: 'izquierdocervicals',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CERVICAL D.png',
         alt: 'Modelo',
       },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR SUBCORTICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
     },
-     /*cervical superior*/
-     {
-      expectedValue: 'izquierdocervicals', 
-      image: 
+    {
+      expectedValue: 'derechocervicals',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CERVICAL I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'bilateralcervicals',
+      image: [
         {
           src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CERVICAL D.png',
           alt: 'Modelo',
         },
+        {
+          src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CERVICAL I.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
+  
+    // Periférico superior
     {
-      expectedValue: 'derechocervicals', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CERVICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralcervicals', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CERVICAL D.png',
+      expectedValue: 'izquierdoperifericos',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_6-D.png',
         alt: 'Modelo',
       },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CERVICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
     },
-     /*periferico superior*/
-     {
-      expectedValue: 'izquierdoperifericos', 
-      image: 
+    {
+      expectedValue: 'derechoperifericos',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_6.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'bilateralperifericos',
+      image: [
         {
           src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_6-D.png',
           alt: 'Modelo',
         },
+        {
+          src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_6.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
+  
+    // Cortical inferior
     {
-      expectedValue: 'derechoperifericos', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_6.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralperifericos', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_6-D.png',
+      expectedValue: 'izquierdocorticali',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR CORTICAL D.png',
         alt: 'Modelo',
       },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_6.png',
-        alt: 'Modelo',
-      }
-    ],
     },
-
-    /*cortical inferior*/
     {
-      expectedValue: 'izquierdocorticali', 
-      image: 
+      expectedValue: 'derechocorticali',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR CORTICAL I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'bilateralcorticali',
+      image: [
         {
           src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR CORTICAL D.png',
           alt: 'Modelo',
         },
+        {
+          src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR CORTICAL I.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
+  
+    // Subcortical inferior
     {
-      expectedValue: 'derechocorticali', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR CORTICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralcorticali', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR CORTICAL D.png',
+      expectedValue: 'izquierdosubcorticali',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR SUBCORTICAL D.png',
         alt: 'Modelo',
       },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR CORTICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
     },
-    /*subcortical inferior*/
     {
-      expectedValue: 'izquierdosubcorticali', 
-      image: 
+      expectedValue: 'derechosubcorticali',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR SUBCORTICAL I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'bilateralsubcorticali',
+      image: [
         {
           src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR SUBCORTICAL D.png',
           alt: 'Modelo',
         },
+        {
+          src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR SUBCORTICAL I.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
+  
+    // Torácico inferior
     {
-      expectedValue: 'derechosubcorticali', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR SUBCORTICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralsubcorticali', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR SUBCORTICAL D.png',
+      expectedValue: 'izquierdotoracicoi',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR TORACICO D.png',
         alt: 'Modelo',
       },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR SUBCORTICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
     },
-
-    /*cervical inferior*/
-
-
-    /*toracico inferior*/
     {
-      expectedValue: 'izquierdotoracicoi', 
-      image: 
+      expectedValue: 'derechotoracicoi',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR TORACICO I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'bilateraltoracicoi',
+      image: [
         {
           src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR TORACICO D.png',
           alt: 'Modelo',
         },
+        {
+          src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR TORACICO I.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
+  
+    // Lumbosacro inferior
     {
-      expectedValue: 'derechotoracicoi', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR TORACICO I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateraltoracicoi', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR TORACICO D.png',
+      expectedValue: 'izquierdolumbosacroi',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR LUMBAR D.png',
         alt: 'Modelo',
       },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR TORACICO I.png',
-        alt: 'Modelo',
-      }
-    ],
     },
-
-    /*lumbosacro inferior*/
     {
-      expectedValue: 'izquierdolumbosacroi', 
-      image: 
+      expectedValue: 'derecholumbosacroi',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR LUMBAR I.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'bilaterallumbosacroi',
+      image: [
         {
           src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR LUMBAR D.png',
           alt: 'Modelo',
         },
+        {
+          src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR LUMBAR I.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
+  
+    // Periférico inferior
     {
-      expectedValue: 'derecholumbosacroi', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR LUMBAR I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilaterallumbosacroi', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR LUMBAR D.png',
+      expectedValue: 'izquierdoperifericoi',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_1-D.png',
         alt: 'Modelo',
       },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR LUMBAR I.png',
-        alt: 'Modelo',
-      }
-    ],
     },
-
-    /*periferico inferior*/
-
     {
-      expectedValue: 'izquierdoperifericoi', 
-      image: 
+      expectedValue: 'derechoperifericoi',
+      image: {
+        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_1.png',
+        alt: 'Modelo',
+      },
+    },
+    {
+      expectedValue: 'bilateralperifericoi',
+      image: [
         {
           src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_1-D.png',
           alt: 'Modelo',
         },
+        {
+          src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_1.png',
+          alt: 'Modelo',
+        },
+      ],
     },
-
-    {
-      expectedValue: 'derechoperifericoi', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_1.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralperifericoi', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_1-D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_1.png',
-        alt: 'Modelo',
-      }
-    ],
-    },        
   ];
+  
 
   // 2) Buscamos coincidencias con finalString
   const matchedImages = [];

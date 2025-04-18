@@ -425,6 +425,37 @@ const Reporte = () => {
           }}
           
           rules={[
+
+            {
+              expectedValue: 'superior_derecho',  
+              image: 
+                  {
+                    src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+                    alt: 'Modelo',
+                  },
+            },
+            {
+              expectedValue: 'superior_izquierdo',  
+              image: 
+                  {
+                    src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+                    alt: 'Modelo',
+                  },    
+            },
+
+            {
+              expectedValue: 'superior_bilateral', 
+              image: 
+              [{
+                src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+                alt: 'Modelo',
+              }],
+            
+            },
             //Superiores 
             {
               expectedValue: 'superior_derecho', 
@@ -459,6 +490,37 @@ const Reporte = () => {
                   }
                 ]
             },
+            {
+              expectedValue: 'superior_derechoindemne',  
+              image: 
+                  {
+                    src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+                    alt: 'Modelo',
+                  },
+            },
+            {
+              expectedValue: 'superior_izquierdoindemne',  
+              image: 
+                  {
+                    src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+                    alt: 'Modelo',
+                  },    
+            },
+
+            {
+              expectedValue: 'superior_bilateralindemne', 
+              image: 
+              [{
+                src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+                alt: 'Modelo',
+              }],
+            
+            },
+
             {
               expectedValue: 'superior_bilateralindemne', 
              
@@ -495,6 +557,69 @@ const Reporte = () => {
                   },
                  
                 
+            },
+
+            {
+              expectedValue: 'inferior_derechoindemne',  
+              image: 
+                  {
+                    src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+                    alt: 'Modelo',
+                  },
+            },
+            {
+              expectedValue: 'inferior_izquierdoindemne',  
+              image: 
+                  {
+                    src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+                    alt: 'Modelo',
+                  },    
+            },
+
+            {
+              expectedValue: 'inferior_bilateralindemne', 
+              image: 
+              [{
+                src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+                alt: 'Modelo',
+              }],
+            
+            },
+
+
+            {
+              expectedValue: 'inferior_derecho',  
+              image: 
+                  {
+                    src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+                    alt: 'Modelo',
+                  },
+            },
+            {
+              expectedValue: 'inferior_izquierdo',  
+              image: 
+                  {
+                    src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+                    alt: 'Modelo',
+                  },    
+            },
+
+            {
+              expectedValue: 'inferior_bilateral', 
+              image: 
+              [{
+                src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
+                alt: 'Modelo',
+              },
+              {
+                src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
+                alt: 'Modelo',
+              }],
+            
             },
             //inferiores
             {

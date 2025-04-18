@@ -4405,7 +4405,7 @@ function setButtonState(value, desiredOn) {
     displayText="CERVICAL"
     pressed={activeButtons['cervical_multinivel']}
     onClick={() =>
-      handleButtonPress('cervical_multinivel', 'CERVICAL')
+      handleButtonPress1('cervical_multinivel', 'CERVICAL')
     }
   />
   
@@ -4415,7 +4415,7 @@ function setButtonState(value, desiredOn) {
     displayText="TORACICA"
     pressed={activeButtons['toracica_multinivel']}
     onClick={() =>
-      handleButtonPress('toracica_multinivel', 'TORACICA')
+      handleButtonPress1('toracica_multinivel', 'TORACICA')
     }
   />
 
@@ -4425,7 +4425,7 @@ function setButtonState(value, desiredOn) {
     displayText="LUMBROSACRA"
     pressed={activeButtons['lumbrosaca_multinivel']}
     onClick={() =>
-      handleButtonPress('lumbrosaca_multinivel', 'LUMBROSACRA')
+      handleButtonPress1('lumbrosaca_multinivel', 'LUMBROSACRA')
     }
   />
 </Accordion>

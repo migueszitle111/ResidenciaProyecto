@@ -481,8 +481,8 @@ const StepE1 = ({ handlePrevStep1, handleNextStep1 }) => {
       </h1>
 
       <div onClick={handleNextStep1}>
-      <ConclusionButton value = 'completo' title = ' SIMETRICA;' displayText = 'SIMETRICA'/>
-      <ConclusionButton value = 'parcial' title = ' ASIMETRICA;'  displayText = 'ASIMETRICA'/></div>
+      <ConclusionButton value = '9' title = ' SIMETRICA;' displayText = 'SIMETRICA'/>
+      <ConclusionButton value = '10' title = ' ASIMETRICA;'  displayText = 'ASIMETRICA'/></div>
     </div>
   );
 };

@@ -374,14 +374,27 @@ const Reporte = () => {
     if (activeButtons["cervical_multinivel"]) selections.push("CERVICAL");
     if (activeButtons["toracica_multinivel"]) selections.push("TORACICA");
     if (activeButtons["lumbrosaca_multinivel"]) selections.push("LUMBROSACRA");
+    
+    // 1) formatear niveles
     const formattedLevels = formatSelection(selections);
     
-    // Si se encontró la conclusión base, usamos esa parte y la concatenamos con los niveles formateados.
-    if (baseConclusion && formattedLevels) {
-      // 1) construir el texto base + niveles
-      const head = `${baseConclusion.title} ${formattedLevels}`;
+    // 2) añadir prefijo POLISEGMENTARIA
+    const isPoliseg = selections.length > 0;
+    const prefijoPoli = isPoliseg ? "POLISEGMENTARIA " : "";
+    const formattedWithPrefix = formattedLevels
+      ? prefijoPoli + formattedLevels
+      : "";
     
-      // 2) excluir de las conclusiones todo lo que no es ni la base ni ninguno de los multisegmentos:
+    // 3) construir el encabezado usando el prefijo si aplica
+    if (baseConclusion) {
+      let head;
+      if (formattedWithPrefix) {
+        head = `${baseConclusion.title} ${formattedWithPrefix}`;
+      } else {
+        head = baseConclusion.title;
+      }
+    
+      // luego filtras y unes el resto de conclusiones como ya tenías
       const excluded = [
         baseConclusion.value,
         'cervical_multinivel',
@@ -391,14 +404,12 @@ const Reporte = () => {
       const rest = conclusions
         .filter(cl => !excluded.includes(cl.value))
         .map(cl => cl.title)
-        .join(' ');  // aquí sólo irían otras conclusiones si las hubiera
+        .join(' ');
     
-      // 3) combinar
       combinedText = rest
         ? `${head} ${rest}`
         : head;
     }
-    
   
     // (2) Reubicar la fase (ACTIVA/INACTIVA/ANTIGUA) solo si es “RADICULOPATIA CRONICA”
     {

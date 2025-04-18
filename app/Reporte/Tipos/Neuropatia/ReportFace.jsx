@@ -1,7 +1,7 @@
 import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL';
 import { checkDivsBILATERALIZQ } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERALIZQ';
 import { checkDivs } from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
-import { checkDivsSegmentar } from '@/app/Reporte/Tipos/Neuropatia/SelecSegmentariaNerv';
+
 import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
 import { ReportContext ,DropContext} from '@/src/context';
 import { useSession } from "next-auth/react";
@@ -14,6 +14,7 @@ import { checkDivs2 } from './selecNervio2';
 import { checkDivsSegmentarBilateral2 } from './SelecNerviosSegmenBILATERAL2';
 import { checkDivsBILATERAL2 } from './SelecNerviosBILATERAL2';
 import { checkDivsSegmentar2 } from './SelecSegmentariaNerv2';
+import { checkDivsSegmentar } from './SelecSegmentariaNerv';
 
 
 const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
@@ -1490,8 +1491,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
                 value={copyConclusions} defaultValue="" onChange={handleTextareaChange} />
 
               </div>
-                            <div>{checkDivsSegmentarBilateral(copyConclusions)}</div>
-              <div>{checkDivsSegmentarBilateral2(copyConclusions)}</div>
+
               <div>{checkDivsBILATERAL(copyConclusions)}</div>
               <div>{checkDivsBILATERAL2(copyConclusions)}</div>
               <div>{checkDivsBILATERALIZQ(copyConclusions)}</div>
@@ -1499,7 +1499,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
               <div>{checkDivs2(copyConclusions)}</div>
               <div>{checkDivsSegmentar(copyConclusions)}</div>
               <div>{checkDivsSegmentar2(copyConclusions)}</div>
-              
+              <div>{checkDivsSegmentarBilateral(copyConclusions)}</div>
+              <div>{checkDivsSegmentarBilateral2(copyConclusions)}</div>
               
             </div>
 

@@ -1,13 +1,46 @@
+/**********************************************************************
+ *  PDF ‑ Radiculopatía
+ *********************************************************************/
 import puppeteerLib from "puppeteer";
-import chromium from "@sparticuz/chromium";
+import chromium      from "@sparticuz/chromium";
 
-const isDev = process.env.NODE_ENV !== "production";
+const isDev  = process.env.NODE_ENV !== "production";
 const baseUrl = isDev
   ? "http://localhost:3000"
   : process.env.NEXT_PUBLIC_SITE_URL || "https://tudominio.com";
-/**
- * Construye el HTML final para exportar el PDF de radiculopatía.
- */
+
+/* ------------------------------------------------------------------ *
+ * UTILIDAD: embellecer la conclusión                                 *
+ * ------------------------------------------------------------------ */
+function formatConclusion(text = '') {                     // <<< NEW
+  if (!text.trim()) return '';
+
+  // 1) Todo en minúsculas y espacios simples
+  let t = text.toLowerCase().replace(/\s+/g, ' ').trim();
+
+  // 2) Corrección rápida de tildes / vocabulario
+  const accentFix = {
+    radiculopatia: 'radiculopatía',
+    toracica:      'torácica',
+    lumbrosaca:    'lumbrosacra',
+    lumbrosacro:   'lumbosacro',
+    lumbosacra:    'lumbosacra',
+    cervical:      'cervical'
+  };
+  for (const [plain, accented] of Object.entries(accentFix)) {
+    const re = new RegExp(`\\b${plain}\\b`, 'gi');
+    t = t.replace(re, accented);
+  }
+
+  // 3) Primera letra mayúscula tras punto o inicio
+  t = t.replace(/(^|[.!?]\s+)([a-záéíóúñ])/g,
+                (m, p1, p2) => p1 + p2.toUpperCase());
+
+  return t;
+}  
+
+// * Construye el HTML final para exportar el PDF de radiculopatía.
+//  */
 function buildHtml({
   finalConclusion = "",
   finalString = "",        // Cadena con todos los "values" (ej: c5_i, c6_d, etc.)
@@ -1749,26 +1782,32 @@ ${
   `;
   return html;
 }
-/**
- * Handler principal para tu endpoint /api/pdf/generate-pdf/radiculopatia
- */
+
+/* ------------------------------------------------------------------ *
+ * Handler principal /api/pdf/generate‑pdf/radiculopatia              *
+ * ------------------------------------------------------------------ */
 export async function POST(req) {
   try {
     const body = await req.json();
     const {
       finalConclusion = "",
-      conclusiones = [],        // array {value, title}
-      userData = {},
-      droppedItems = [],
-      topLeftText = "",
-      checkedLeft = {},
-      checkedRight = {},
+      conclusiones    = [],   // array {value, title}
+      userData        = {},
+      droppedItems    = [],
+      topLeftText     = "",
+      checkedLeft     = {},
+      checkedRight    = {},
     } = body;
-    // Construir la cadena de "values" => c5_i, c5_d, lumbrosaca_multinivel, etc.
-    const finalString = conclusiones.map((c) => c.value).join(" ");
-    // Llamamos a buildHtml
+
+    // 1) Cadena con los "values" de las conclusiones
+    const finalString = conclusiones.map(c => c.value).join(" ");
+
+    // 2) Embellecer la conclusión
+    const formattedConclusion = formatConclusion(finalConclusion);   // <<< NEW
+
+    // 3) Construir el HTML
     const html = buildHtml({
-      finalConclusion,
+      finalConclusion: formattedConclusion,                          // <<< NEW
       finalString,
       userData,
       droppedItems,
@@ -1776,42 +1815,43 @@ export async function POST(req) {
       checkedLeft,
       checkedRight,
     });
-    // Generar PDF con puppeteer
-    const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
+
+    /* ---------- Puppeteer (sin cambios) -------------------------- */
+    const puppeteer      = isDev ? puppeteerLib : require("puppeteer-core");
     const executablePath = isDev ? undefined : await chromium.executablePath;
+
     const browser = await puppeteer.launch({
-      args: isDev ? [] : chromium.args,
+      args:            isDev ? [] : chromium.args,
       defaultViewport: isDev ? undefined : chromium.defaultViewport,
       executablePath,
-      headless: true,
+      headless:        true,
     });
+
     const page = await browser.newPage();
     await page.setViewport({
-      width: 1200,   // A4 landscape width aproximado
-      height: 600,  // A4 landscape height aproximado
-      deviceScaleFactor: 1
+      width:  1200,  // A4 landscape aprox
+      height:  600,
+      deviceScaleFactor: 1,
     });
-    
-    // Seteamos el HTML
+
     await page.setContent(html, { waitUntil: "networkidle2" });
-    // Generar el PDF
+
     const pdfBuffer = await page.pdf({
       format: "A4",
       margin: { top: 0, right: 0, bottom: 0, left: 0 },
       printBackground: true,
-      width: 1200,   // A4 landscape width aproximado
-      height: 600,  // A4 landscape height aproximado
-      scale: 1,
-      landscape: true, 
+      width:  1200,
+      height: 600,
+      scale:  1,
+      landscape: true,
     });
-    
+
     await browser.close();
-    // Retornar el PDF
+
     return new Response(pdfBuffer, {
       headers: {
-        "Content-Type": "application/pdf",
-        "Content-Disposition":
-          'attachment; filename="reporte-radiculopatia.pdf"',
+        "Content-Type":        "application/pdf",
+        "Content-Disposition": 'attachment; filename="reporte-radiculopatia.pdf"',
       },
     });
   } catch (error) {

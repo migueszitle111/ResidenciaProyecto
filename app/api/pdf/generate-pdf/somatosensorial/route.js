@@ -550,7 +550,6 @@ const imageSrc1 = isTrigeminoSelected ? newImage1 : defaultImage1;
     },
   ];
   
-
   // 2) Buscamos coincidencias con finalString
   const matchedImages = [];
   const conclusionLower = finalString.toLowerCase();
@@ -646,7 +645,6 @@ const imageSrc1 = isTrigeminoSelected ? newImage1 : defaultImage1;
     
   }
   
-  
   .cuadroIMG {
     width: 50px;
     height: 50px;
@@ -661,7 +659,6 @@ const imageSrc1 = isTrigeminoSelected ? newImage1 : defaultImage1;
     width: 50px;
     height: 50px;
     margin-left: 90px;
-    
   }
   
   .cuadroIMG2 {
@@ -678,16 +675,13 @@ const imageSrc1 = isTrigeminoSelected ? newImage1 : defaultImage1;
     width: 90px;
     height: 30px;
     margin-left: 10px;
-    
   }
-  
   
   /*CSS del componete que se utiliza para arastrar imagnes*/
   .draggableDiv {
     transition: all 0.2s ease;
     position: absolute;
     z-index: 9999; /* Prueba */
-
   }
   
   .draggableDiv.expanded {

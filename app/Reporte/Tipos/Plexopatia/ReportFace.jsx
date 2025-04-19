@@ -171,7 +171,6 @@ const Reporte = () => {
               if (countAfterKeyword > 1) {
                   words[i + 5] += 'S'; // Agregar 'S' al final de 'TROCO' si hay más de dos palabras
               }
-  
               break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
           }
       }
@@ -332,7 +331,6 @@ const Reporte = () => {
     const conclusionDivRef = useRef(null);
     const elementRef = useRef(null);
 
-  
   const moveCaretToEnd = (element) => {
     if (!element) return;
     element.focus();

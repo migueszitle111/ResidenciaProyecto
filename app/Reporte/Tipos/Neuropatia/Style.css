@@ -444,28 +444,11 @@
   margin: 10px;
 }
 
-.dont-print {
-  display: visible;
+
+.dont-print-Nervius {
+ z-index: 20;
 }
 
-.dont-print1 {
-  display: visible;
-  background-color: transparent;
-  
-}
-
-.dont-print-Nervius :hover {
-  
-  display: visible = false;
-  background-color: rgb(4, 4, 190);
-  border-radius: 100px;
-}
-.dont-print-Nervius  {
-  
-  display: visible;
-  background-color:transparent;
-  border-radius: 100px;
-}
 
 .handle {
   width: 10px;

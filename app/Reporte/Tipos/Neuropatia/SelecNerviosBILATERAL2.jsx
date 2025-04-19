@@ -2572,6 +2572,267 @@ export function checkDivsBILATERAL2(copyConclusions) {
     </>);
   }
 
+
+
+  if (copyConclusions.includes('ANTEBRAQUIAL LATERAL BILATERAL CON PREDOMINIO IZQUIERDO, FOCAL A NIVEL')) {
+    return (<>
+      {/* <div style={{ position: 'absolute', top: '16.3%', left: '50.6%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '16.3%', left: '52.0%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar2' title='SUPRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '16.5%', left: '53.2%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar3' title='SUPRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '17.0%', left: '54.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar4' title='SUPRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '17.5%', left: '55.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar5' title='INFRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '18.1%', left: '56.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar6' title='INFRACLAVICULAR,' displayText=' ' /></div> */}
+      <div style={{ position: 'absolute', top: '18.7%', left: '57.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar7' title='DE AXILA,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '19.4%', left: '58.2%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar8' title='DE AXILA,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '19.8%', left: '59.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar9' title='DE AXILA,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '20.5%', left: '60.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar10' title='DE AXILA,' displayText=' ' /></div>
+      
+      <div style={{ position: 'absolute', top: '21.2%', left: '61.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar11' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '21.7%', left: '62.0%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar12' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '22.3%', left: '62.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar13' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+      
+      <div style={{ position: 'absolute', top: '23.1%', left: '63.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar14' title='DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '23.8%', left: '63.9%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar15' title='DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '24.6%', left: '64.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar16' title='DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '25.3%', left: '64.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar17' title='DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+      
+      <div style={{ position: 'absolute', top: '26.0%', left: '65.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar18' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '26.8%', left: '65.6%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar19' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
+      
+      <div style={{ position: 'absolute', top: '27.6%', left: '65.9%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar20' title='DEL CODO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '28.3%', left: '66.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar21' title='DEL CODO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '29.1%', left: '66.8%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar22' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '29.9%', left: '67.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar23' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '30.7%', left: '67.8%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar24' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '31.5%', left: '68.0%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar25' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '32.3%', left: '68.3%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar26' title='DEL TERCIO MEDIO DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '33.1%', left: '68.6%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar27' title='DEL TERCIO MEDIO DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '33.9%', left: '68.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar28' title='DEL TERCIO MEDIO DEL ANTEBRAZO,' displayText=' ' /></div>
+
+
+{/* <div style={{ position: 'absolute', top: '16.3%', left: '48.2%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caarii1' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '16.3%', left: '47.0%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caarii2' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '16.5%', left: '45.6%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caarii3' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '17.0%', left: '44.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caarii4' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '17.5%', left: '43.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caarii5' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '18.1%', left: '42.4%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caarii6' displayText=' ' /></div> */}
+      <div style={{ position: 'absolute', top: '18.7%', left: '41.5%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caarii7' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '19.3%', left: '40.5%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caarii8' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '19.7%', left: '39.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caarii9' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '20.5%', left: '38.5%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii10' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '21.2%', left: '37.5%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii11' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '21.7%', left: '36.6%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii12' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '22.3%', left: '35.9%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii13' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '23.1%', left: '35.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii14' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '23.8%', left: '34.9%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii15' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '24.6%', left: '34.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii16' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '25.3%', left: '34.0%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii17' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '26.0%', left: '33.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii18' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '26.8%', left: '33.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii19' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '27.6%', left: '32.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii20' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '28.3%', left: '32.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii21' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '29.1%', left: '31.8%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii22' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '29.9%', left: '31.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii23' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '30.7%', left: '31.0%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii24' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '31.5%', left: '30.5%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii25' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '32.3%', left: '30.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii26' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '33.1%', left: '30.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii27' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '33.9%', left: '30.1%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii28' displayText=' ' /></div>
+
+
+    </>);
+
+  }
+  if (copyConclusions.includes('ANTEBRAQUIAL LATERAL BILATERAL CON PREDOMINIO DERECHO, FOCAL A NIVEL')) {
+    return (<>
+      {/* <div style={{ position: 'absolute', top: '16.3%', left: '48.2%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caar1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '16.3%', left: '47.0%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caar2' title='SUPRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '16.5%', left: '45.6%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caar3' title='SUPRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '17.0%', left: '44.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caar4' title='SUPRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '17.5%', left: '43.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caar5' title='INFRACLAVICULAR,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '18.1%', left: '42.4%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caar6' title='INFRACLAVICULAR,' displayText=' ' /></div> */}
+      <div style={{ position: 'absolute', top: '18.7%', left: '41.5%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caar7' title='DE AXILA,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '19.3%', left: '40.5%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caar8' title='DE AXILA,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '19.7%', left: '39.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERAL2 value='caar9' title='DE AXILA,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '20.5%', left: '38.5%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar10' title='DE AXILA,' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '21.2%', left: '37.5%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar11' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '21.7%', left: '36.6%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar12' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '22.3%', left: '35.9%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar13' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '23.1%', left: '35.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar14' title='DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '23.8%', left: '34.9%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar15' title='DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '24.6%', left: '34.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar16' title='DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '25.3%', left: '34.0%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar17' title='DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '26.0%', left: '33.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar18' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '26.8%', left: '33.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar19' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
+      
+      <div style={{ position: 'absolute', top: '27.6%', left: '32.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar20' title='DEL CODO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '28.3%', left: '32.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar21' title='DEL CODO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '29.1%', left: '31.8%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar22' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '29.9%', left: '31.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar23' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '30.7%', left: '31.0%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar24' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '31.5%', left: '30.5%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar25' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '32.3%', left: '30.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar26' title='DEL TERCIO MEDIO DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '33.1%', left: '30.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar27' title='DEL TERCIO MEDIO DEL ANTEBRAZO,' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '33.9%', left: '30.1%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar28' title='DEL TERCIO MEDIO DEL ANTEBRAZO,' displayText=' ' /></div>
+
+{/* <div style={{ position: 'absolute', top: '16.3%', left: '50.6%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii1' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '16.3%', left: '52.0%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii2' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '16.5%', left: '53.2%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii3' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '17.0%', left: '54.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii4' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '17.5%', left: '55.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii5' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '18.1%', left: '56.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii6' displayText=' ' /></div> */}
+      <div style={{ position: 'absolute', top: '18.7%', left: '57.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii7' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '19.4%', left: '58.2%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii8' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '19.8%', left: '59.3%', borderRadius: '50%', }}
+        className={`.dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii9' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '20.5%', left: '60.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii10' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '21.2%', left: '61.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii11' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '21.7%', left: '62.0%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii12' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '22.3%', left: '62.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii13' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '23.1%', left: '63.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii14' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '23.8%', left: '63.9%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii15' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '24.6%', left: '64.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii16' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '25.3%', left: '64.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii17' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '26.0%', left: '65.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii18' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '26.8%', left: '65.6%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii19' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '27.6%', left: '65.9%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii20' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '28.3%', left: '66.4%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii21' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '29.1%', left: '66.8%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii22' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '29.9%', left: '67.2%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii23' displayText=' ' /></div>
+
+      <div style={{ position: 'absolute', top: '30.7%', left: '67.8%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii24' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '31.5%', left: '68.0%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii25' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '32.3%', left: '68.3%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii26' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '33.1%', left: '68.6%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii27' displayText=' ' /></div>
+      <div style={{ position: 'absolute', top: '33.9%', left: '68.7%', borderRadius: '50%', }}
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caarii28' displayText=' ' /></div>
+
+    </>);
+
+  }
+
+
   if (copyConclusions.includes('CIATICO BILATERAL CON PREDOMINIO DERECHO, FOCAL A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '35.5%', left: '44.6%', }}
@@ -5373,6 +5634,159 @@ export function checkDivsBILATERAL2(copyConclusions) {
 
     </>);
   }
+
+  if (copyConclusions.includes('ILIOINGUINAL BILATERAL CON PREDOMINIO DERECHO, FOCAL A NIVEL') ) {
+    return (<>
+
+<div style={{ position: 'absolute', top: '29.7%', left: '48.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar1' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '30.0%', left: '47.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar2' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '30.6%', left: '46.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar3' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.2%', left: '45.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar4' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.5%', left: '44.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar5' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.7%', left: '43.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar6' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '32.2%', left: '42.3%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar7' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '33.0%', left: '41.4%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar8' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '34.0%', left: '41.0%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar9' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '35.1%', left: '41.2%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar10' title='INGUINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '36.0%', left: '41.4%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar11' title='INGUINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '36.9%', left: '41.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar12' title='INGUINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '37.8%', left: '42.3%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar13' title='INGUINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '38.7%', left: '42.9%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar14' title='GENITAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '39.4%', left: '43.8%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar15' title='GENITAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '40.0%', left: '44.8%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar16' title='GENITAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '40.5%', left: '45.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar17' title='GENITAL,' displayText=' ' /> </div>
+
+
+<div style={{ position: 'absolute', top: '29.7%', left: '50.2%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii1' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '30.0%', left: '51.2%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii2' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '30.6%', left: '52.2%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii3' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.2%', left: '53.4%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii4' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.5%', left: '54.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii5' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.7%', left: '55.7%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii6' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '32.4%', left: '56.7%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii7' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '33.2%', left: '57.4%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii8' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '34.1%', left: '57.8%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii9' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '35.1%', left: '57.8%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii10' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '36.0%', left: '57.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii11' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '36.9%', left: '57.1%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii12' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '37.8%', left: '56.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii13' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '38.7%', left: '56.0%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii14' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '39.4%', left: '55.0%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii15' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '40.0%', left: '53.9%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii16' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '40.5%', left: '52.9%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii17' displayText=' ' /> </div>
+
+    </>);
+  }
+  if (copyConclusions.includes('ILIOINGUINAL BILATERAL CON PREDOMINIO IZQUIERDO, FOCAL A NIVEL') ) {
+    return (<>
+      <div style={{ position: 'absolute', top: '29.7%', left: '50.2%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar1' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '30.0%', left: '51.2%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar2' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '30.6%', left: '52.2%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar3' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.2%', left: '53.4%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar4' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.5%', left: '54.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar5' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.7%', left: '55.7%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar6' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '32.4%', left: '56.7%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar7' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '33.2%', left: '57.4%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar8' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '34.1%', left: '57.8%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar9' title='ABDOMINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '35.1%', left: '57.8%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar10' title='INGUINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '36.0%', left: '57.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar11' title='INGUINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '36.9%', left: '57.1%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar12' title='INGUINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '37.8%', left: '56.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar13' title='INGUINAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '38.7%', left: '56.0%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar14' title='GENITAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '39.4%', left: '55.0%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar15' title='GENITAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '40.0%', left: '53.9%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar16' title='GENITAL,' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '40.5%', left: '52.9%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caar17' title='GENITAL,' displayText=' ' /> </div>
+
+<div style={{ position: 'absolute', top: '29.7%', left: '48.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii1' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '30.0%', left: '47.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii2' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '30.6%', left: '46.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii3' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.2%', left: '45.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii4' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.5%', left: '44.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii5' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '31.7%', left: '43.5%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii6' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '32.2%', left: '42.3%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii7' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '33.0%', left: '41.4%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii8' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '34.0%', left: '41.0%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii9' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '35.1%', left: '41.2%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii10' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '36.0%', left: '41.4%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii11' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '36.9%', left: '41.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii12' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '37.8%', left: '42.3%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii13' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '38.7%', left: '42.9%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii14' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '39.4%', left: '43.8%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii15' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '40.0%', left: '44.8%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii16' displayText=' ' /> </div>
+      <div style={{ position: 'absolute', top: '40.5%', left: '45.6%', }}
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERAL2 value='caarii17' displayText=' ' /> </div>
+
+    </>);
+  }
+
+
   if (copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO DERECHO, FOCAL A NIVEL')) {
     return (<>
 

@@ -206,7 +206,7 @@
   left: 0;
   width: 600px;  /* Mismo tamaño que la imagen base */
   height: 776px;
-  z-index: 0;   
+  z-index: 10;   
   /* background-color: rgba(0,255,0,0.2);  */
 }
 

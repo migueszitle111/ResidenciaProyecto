@@ -1494,7 +1494,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
 
               <div>{checkDivsBILATERAL(copyConclusions)}</div>
               <div>{checkDivsBILATERAL2(copyConclusions)}</div>
-              <div>{checkDivsBILATERALIZQ(copyConclusions)}</div>
+              {/* <div>{checkDivsBILATERALIZQ(copyConclusions)}</div> */}
               <div>{checkDivs(copyConclusions)}</div>
               <div>{checkDivs2(copyConclusions)}</div>
               <div>{checkDivsSegmentar(copyConclusions)}</div>

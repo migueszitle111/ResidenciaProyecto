@@ -1699,9 +1699,10 @@ const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
 
         <button
           onClick={() => {
+            setButtonsDisabled(true);
             setbuttonsDisabledBILT2(true); 
             setbuttonsDisabledBITSeg2(true); 
-            setStep('D2');            
+            setStep('D2');             
           }}
           className={`print-button`}
         >

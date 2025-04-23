@@ -879,7 +879,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
     );
 
   }
-  if ( copyConclusions.includes('INTEROSEO ANTERIOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if ( copyConclusions.includes('INTERÓSEO ANTERIOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '32.4%', left: '32.5%', transform: 'rotate(100deg)' }}
@@ -970,7 +970,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('INTEROSEO ANTERIOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if ( copyConclusions.includes('INTERÓSEO ANTERIOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '32.4%', left: '66.5%', transform: 'rotate(90deg)' }}
@@ -2377,7 +2377,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTEROSEO POSTERIOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if (copyConclusions.includes('INTERÓSEO POSTERIOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
 
@@ -2461,7 +2461,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('INTEROSEO POSTERIOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if ( copyConclusions.includes('INTERÓSEO POSTERIOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
 <div style={{ position: 'absolute', top: '30.7%', left: '67.2%', transform: 'rotate(70deg)' }}
@@ -2545,7 +2545,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('DORSAL CUTANEO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if (copyConclusions.includes('DORSAL CUTÁNEO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
 <div style={{ position: 'absolute', top: '34.6%', left: '34.0%', transform: 'rotate(80deg)' }}
@@ -2635,7 +2635,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('DORSAL CUTANEO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if ( copyConclusions.includes('DORSAL CUTÁNEO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
 <div style={{ position: 'absolute', top: '34.7%', left: '65.4%', transform: 'rotate(80deg)' }}
@@ -4733,7 +4733,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('CIATICO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
+  if (copyConclusions.includes('CIÁTICO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '34.8%', left: '46.4%', transform: 'rotate(160deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car1' title='DE LA ESCOTADURA CIATICA MAYOR,' displayText=' ' /> </div>
@@ -5021,7 +5021,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
 
     </>);
   }
-  if ( copyConclusions.includes('CIATICO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {/* SEGUIR AQUI */
+  if ( copyConclusions.includes('CIÁTICO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {/* SEGUIR AQUI */
     return (<>
 
 <div style={{ position: 'absolute', top: '34.8%', left: '54.4%', transform: 'rotate(190deg)', }}
@@ -5310,7 +5310,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
 
     </>);
   }
-  if ( copyConclusions.includes('GLUTEO INFERIOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if ( copyConclusions.includes('GLÚTEO INFERIOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.6%', left: '46.4%', transform: 'rotate(130deg)', }}
@@ -5383,7 +5383,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLUTEO INFERIOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if (copyConclusions.includes('GLÚTEO INFERIOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '52.8%', transform: 'rotate(40deg)', }}
@@ -5457,7 +5457,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('GLUTEO SUPERIOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if ( copyConclusions.includes('GLÚTEO SUPERIOR BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
     <div style={{ position: 'absolute', top: '34.6%', left: '53.6%', transform: 'rotate(60deg)', }}
@@ -5509,7 +5509,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('GLUTEO SUPERIOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
+  if ( copyConclusions.includes('GLÚTEO SUPERIOR BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.6%', left: '45.7%', transform: 'rotate(110deg)', }}
@@ -7082,7 +7082,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PERONEO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {
+  if (copyConclusions.includes('PERONEO COMÚN BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '51.0%', left: '56.5%', transform: 'rotate(260deg)' }}
@@ -7340,7 +7340,7 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
 
     </>);
   }
-  if ( copyConclusions.includes('PERONEO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
+  if ( copyConclusions.includes('PERONEO COMÚN BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '51.0%', left: '42.9%', transform: 'rotate(95deg)' }}
@@ -9354,9 +9354,9 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
 
 
 <div style={{ position: 'absolute', top: '37.4%', left: '49.0%', transform: 'rotate(170deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car1' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car1' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '37.8%', left: '48.6%', transform: 'rotate(170deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car2' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car2' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
 
 <div style={{ position: 'absolute', top: '37.2%', left: '50.4%', transform: 'rotate(200deg)' }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car1' displayText=' ' /> </div>
@@ -9368,9 +9368,9 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
   if (copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '37.2%', left: '50.4%', transform: 'rotate(200deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car1' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car1' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '37.6%', left: '50.9%', transform: 'rotate(200deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car2' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car2' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
 
 
 <div style={{ position: 'absolute', top: '37.4%', left: '49.0%', transform: 'rotate(170deg)' }}

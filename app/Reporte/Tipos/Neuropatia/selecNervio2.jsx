@@ -303,7 +303,7 @@ export function checkDivs2(copyConclusions) {
     );
 
   }
-  if (copyConclusions.includes('INTEROSEO ANTERIOR DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('INTERÓSEO ANTERIOR DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '33.4%', left: '32.5%', borderRadius: 100, }}
@@ -325,7 +325,7 @@ export function checkDivs2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTEROSEO ANTERIOR IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('INTERÓSEO ANTERIOR IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '33.4%', left: '66.5%', borderRadius: 100, }}
@@ -811,7 +811,7 @@ export function checkDivs2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTEROSEO POSTERIOR DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('INTERÓSEO POSTERIOR DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '31.2%', left: '31.6%', borderRadius: 100, }}
@@ -839,7 +839,7 @@ export function checkDivs2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTEROSEO POSTERIOR IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('INTERÓSEO POSTERIOR IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '31.2%', left: '67.2%', borderRadius: 100, }}
@@ -867,7 +867,7 @@ export function checkDivs2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('DORSAL CUTANEO DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('DORSAL CUTÁNEO DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.2%', left: '33.8%', borderRadius: 100, }}
@@ -895,7 +895,7 @@ export function checkDivs2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('DORSAL CUTANEO IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('DORSAL CUTÁNEO IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.2%', left: '64.7%', borderRadius: 100, }}
@@ -1630,7 +1630,7 @@ export function checkDivs2(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('CIATICO DERECHO, FOCAL A NIVEL') ) {
+  if (copyConclusions.includes('CIÁTICO DERECHO, FOCAL A NIVEL') ) {
     return (<>
 
 
@@ -1653,9 +1653,9 @@ export function checkDivs2(copyConclusions) {
       <div style={{ position: 'absolute', top: '39.0%', left: '43.0%', }}
         className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='car8' title='EMERGENCIA PIRAMIDAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '39.8%', left: '42.8%', }}
-        className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='car9' title='DEL PLIEGUE GLUTEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='car9' title='DEL PLIEGUE GLÚTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '40.6%', left: '42.6%', }}
-        className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='car10' title='DEL PLIEGUE GLUTEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='car10' title='DEL PLIEGUE GLÚTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '41.4%', left: '42.4%', }}
         className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='car11' title='DEL MUSLO TERCIO PROXIMAL,' displayText=' ' /> </div>
 
@@ -1730,7 +1730,7 @@ export function checkDivs2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('CIATICO IZQUIERDO, FOCAL A NIVEL') ) {
+  if (copyConclusions.includes('CIÁTICO IZQUIERDO, FOCAL A NIVEL') ) {
     return (<>
       
       
@@ -1752,9 +1752,9 @@ export function checkDivs2(copyConclusions) {
       <div style={{ position: 'absolute', top: '39.0%', left: '55.8%', }}
         className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='cari8' title='EMERGENCIA PIRAMIDAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '39.8%', left: '56.0%', }}
-        className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='cari9' title='DEL PLIEGUE GLUTEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='cari9' title='DEL PLIEGUE GLÚTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '40.6%', left: '56.3%', }}
-        className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='cari10' title='DEL PLIEGUE GLUTEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='cari10' title='DEL PLIEGUE GLÚTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '41.4%', left: '56.5%', }}
         className={`.dont-print-Nerviusgrande`}  > <NerviusButton2 value='cari11' title='DEL MUSLO TERCIO PROXIMAL,' displayText=' ' /> </div>
 
@@ -1829,7 +1829,7 @@ export function checkDivs2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('GLUTEO INFERIOR DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('GLÚTEO INFERIOR DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '45.7%', borderRadius: 100, }}
@@ -1854,7 +1854,7 @@ export function checkDivs2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLUTEO INFERIOR IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('GLÚTEO INFERIOR IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '52.7%', borderRadius: 100, }}
@@ -1876,7 +1876,7 @@ export function checkDivs2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLUTEO SUPERIOR IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('GLÚTEO SUPERIOR IZQUIERDO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '53.9%', borderRadius: 100, }}
@@ -1897,7 +1897,7 @@ export function checkDivs2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLUTEO SUPERIOR DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('GLÚTEO SUPERIOR DERECHO, FOCAL A NIVEL') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '45.7%', borderRadius: 100, }}
@@ -2299,7 +2299,7 @@ export function checkDivs2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PERONEO DERECHO, FOCAL A NIVEL') ) {
+  if (copyConclusions.includes('PERONEO COMÚN DERECHO, FOCAL A NIVEL') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '53.4%', left: '41.8%', }}
@@ -2417,7 +2417,7 @@ export function checkDivs2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PERONEO IZQUIERDO, FOCAL A NIVEL') ) {
+  if (copyConclusions.includes('PERONEO COMÚN IZQUIERDO, FOCAL A NIVEL') ) {
     return (<>
       <div style={{ position: 'absolute', top: '51.0%', left: '56.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='cari1' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
@@ -3163,12 +3163,12 @@ export function checkDivs2(copyConclusions) {
     return (<>
 
       <div style={{ position: 'absolute', top: '37.1%', left: '48.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='car1' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='car1' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '37.7%', left: '47.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='car2' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='car2' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '38.0%', left: '48.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='car3' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='car3' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '38.9%', left: '48.5%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='car4' title='DEL CANAL PUDENDO,' displayText=' ' /> </div>
 
@@ -3177,12 +3177,12 @@ export function checkDivs2(copyConclusions) {
   if (copyConclusions.includes('PUDENDO IZQUIERDO, FOCAL A NIVEL')) {
     return (<>
       <div style={{ position: 'absolute', top: '37.1%', left: '49.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='cari1' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='cari1' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '37.7%', left: '50.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='cari2' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='cari2' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '38.0%', left: '49.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='cari3' title='DEL FORAMEN CIATICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='cari3' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '38.9%', left: '49.9%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton2 value='cari4' title='DEL CANAL PUDENDO,' displayText=' ' /> </div>
 

@@ -146,7 +146,7 @@ const StepA = ({ handleNextStep, setStep }) => (
       </button>
     </div>
     <h1 className=' text-xl font-bold text-white'>
-      EVOLUCION
+      EVOLUCIÓN
     </h1>
     <div onClick={handleNextStep}>
     </div>
@@ -225,7 +225,7 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
         <div onClick={() => { setSelectedSide('MEDIANO'); setStep('B1'); }}>
           <ConclusionButton value='MEDIANO' title=' DE NERVIO MEDIANO' displayText='MEDIANO' /></div>
         <div onClick={() => { setSelectedSide('INTEROSEOANTERIOR'); setStep('B1'); }}>
-          <ConclusionButton value='INTEROSEOANTERIOR' title=' DE NERVIO INTEROSEO ANTERIOR' displayText='INTEROSEO ANTERIOR' /></div>
+          <ConclusionButton value='INTEROSEOANTERIOR' title=' DE NERVIO INTERÓSEO ANTERIOR' displayText='INTERÓSEO ANTERIOR' /></div>
         {/* <div onClick={() => { setSelectedSide('ACCESORIO'); setStep('B1'); }}>
           <ConclusionButton value='ACCESORIO' title=' DE NERVIO ACCESORIO' displayText='ACCESORIO' /></div> */}
         <div onClick={() => { setSelectedSide('AXILAR'); setStep('B1'); }}>
@@ -237,13 +237,13 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
         <div onClick={() => { setSelectedSide('RADIAL_SUPERFICIAL'); setStep('B1'); }}>
           <ConclusionButton value='RADIAL_SUPERFICIAL' title=' DE NERVIO RADIAL SUPERFICIAL' displayText='RADIAL SUPERFICIAL' /></div>
         <div onClick={() => { setSelectedSide('INTEROSEO_POSTERIOR'); setStep('B1'); }}>
-          <ConclusionButton value='INTEROSEO_POSTERIOR' title=' DE NERVIO INTEROSEO POSTERIOR' displayText='INTEROSEO POSTERIOR' /></div>
+          <ConclusionButton value='INTEROSEO_POSTERIOR' title=' DE NERVIO INTERÓSEO POSTERIOR' displayText='INTERÓSEO POSTERIOR' /></div>
         <div onClick={() => { setSelectedSide('SUPRAESCAPULAR'); setStep('B1'); }}>
           <ConclusionButton value='SUPRAESCAPULAR' title=' DE NERVIO SUPRAESCAPULAR' displayText='SUPRAESCAPULAR' /></div>
         <div onClick={() => { setSelectedSide('ULNAR'); setStep('B1'); }}>
           <ConclusionButton value='ULNAR' title=' DE NERVIO ULNAR' displayText='ULNAR' /></div>
         <div onClick={() => { setSelectedSide('DORSAL_CUTANEO'); setStep('B1'); }}>
-          <ConclusionButton value='DORSAL_CUTANEO' title=' DE NERVIO DORSAL CUTANEO' displayText='DORSAL CUTANEO' /></div>
+          <ConclusionButton value='DORSAL_CUTANEO' title=' DE NERVIO DORSAL CUTÁNEO' displayText='DORSAL CUTÁNEO' /></div>
         {/* <div onClick={() => { setSelectedSide('FRENICO'); setStep('B1'); }}>
           <ConclusionButton value='FRENICO' title=' DE NERVIO FRÉNICO' displayText='FRÉNICO' /></div> */}
         <div onClick={() => { setSelectedSide('TORACODORSAL'); setStep('B1'); }}>
@@ -269,9 +269,9 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
       <Accordion title='MIEMBROS INFERIORES' value='NERVIOS INFERIORES' type='external'>
 
         <div onClick={() => { setSelectedSide('GLUTEO_INFERIOR'); setStep('B1'); }}>
-          <ConclusionButton value='GLUTEO_INFERIOR' title=' DE NERVIO GLUTEO INFERIOR' displayText='GLUTEO INFERIOR' /></div>
+          <ConclusionButton value='GLUTEO_INFERIOR' title=' DE NERVIO GLÚTEO INFERIOR' displayText='GLÚTEO INFERIOR' /></div>
         <div onClick={() => { setSelectedSide('GLUTEO_MEDIO'); setStep('B1'); }}>
-          <ConclusionButton value='GLUTEO_MEDIO' title=' DE NERVIO GLUTEO SUPERIOR' displayText='GLUTEO SUPERIOR' /></div>
+          <ConclusionButton value='GLUTEO_MEDIO' title=' DE NERVIO GLÚTEO SUPERIOR' displayText='GLÚTEO SUPERIOR' /></div>
         <div onClick={() => { setSelectedSide('FEMORAL'); setStep('B1'); }}>
           <ConclusionButton value='FEMORAL' title=' DE NERVIO FEMORAL' displayText='FEMORAL' /></div>
         <div onClick={() => { setSelectedSide('SAFENO'); setStep('B1'); }}>
@@ -279,7 +279,7 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
         <div onClick={() => { setSelectedSide('OBTURADOR'); setStep('B1'); }}>
           <ConclusionButton value='OBTURADOR' title=' DE NERVIO OBTURADOR' displayText='OBTURADOR' /></div>
         <div onClick={() => { setSelectedSide('NERVIO_PERONEO'); setStep('B1'); }}>
-          <ConclusionButton value='NERVIO_PERONEO' title=' DE NERVIO PERONEO' displayText='PERONEO' /></div>
+          <ConclusionButton value='NERVIO_PERONEO' title=' DE NERVIO PERONEO COMÚN' displayText='PERONEO COMÚN' /></div>
         <div onClick={() => { setSelectedSide('PERONEO_SUPERFICIAL'); setStep('B1'); }}>
           <ConclusionButton value='PERONEO_SUPERFICIAL' title=' DE NERVIO PERONEO SUPERFICIAL' displayText='PERONEO SUPERFICIAL' /></div>
         <div onClick={() => { setSelectedSide('PERONEO_PROFUNDO'); setStep('B1'); }}>
@@ -299,7 +299,7 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
 
       <Accordion title='SACRO' value='SACRO' type='external'>
         <div onClick={() => { setSelectedSide('CIATICO'); setStep('B1'); }}>
-          <ConclusionButton value='CIATICO' title=' DE NERVIO CIATICO' displayText='CIATICO' /></div>
+          <ConclusionButton value='CIATICO' title=' DE NERVIO CIÁTICO' displayText='CIÁTICO' /></div>
         <div onClick={() => { setSelectedSide('PUDENDO'); setStep('B1'); }}>
           <ConclusionButton value='PUDENDO' title=' DE NERVIO PUDENDO' displayText='PUDENDO' /></div>
       </Accordion>
@@ -411,7 +411,7 @@ const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        UBICACION
+        UBICACIÓN
       </h1>
       <div onClick={() => setStep('CDD')}>
         <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA '} /></div>
@@ -475,7 +475,7 @@ const StepCGI = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        UBICACION
+        UBICACIÓN
       </h1>
       <div onClick={() => setStep('CDI')}>
         <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
@@ -538,7 +538,7 @@ const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        UBICACION
+        UBICACIÓN
       </h1>
       <div onClick={() => setStep('CD')}>
         <ConclusionButton value='focalizada' title=' FOCALIZADA A NIVEL ' displayText={'FOCALIZADA'} /></div>
@@ -599,7 +599,7 @@ const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        UBICACION
+        UBICACIÓN
       </h1>
 
       <div onClick={() => setStep('CD')}>
@@ -843,7 +843,7 @@ const StepD = ({ handlePrevStep, handleNextStep, setStep }) => {
       <AccordionContainer>
       <Accordion title='MIXTA' value='MIXTA' type='external'>
         <div onClick={() => setStep('E')}>
-          <ConclusionButton value=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' title=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' displayText={'DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA '} /></div>
+          <ConclusionButton value=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' title=' TIPO DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA ' displayText={'DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA '} /></div>
         <div onClick={() => setStep('E')}>
           <ConclusionButton value=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA ' title=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'  AXONAL CON DESMIELINIZACIÓN SECUNDARIA'} /></div>
       </Accordion>
@@ -1068,7 +1068,7 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        PRONOSTICO
+        PRONÓSTICO
       </h1>
       <div onClick={() => setStep('R')}>
         <ConclusionButton value='completo' title='Y PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
@@ -1077,7 +1077,7 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
       <div onClick={() => setStep('R')}>
         <ConclusionButton value='pobre' title='Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='nulo' title='Y PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACION NULA'} /></div>
+        <ConclusionButton value='nulo' title='Y PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
       </div>
         
   );
@@ -1131,7 +1131,7 @@ const StepA2 = ({ handleNextStep, setStep }) => (
       </button>
     </div>
     <h1 className=' text-xl font-bold text-white'>
-      EVOLUCION
+      EVOLUCIÓN
     </h1>
     <div onClick={handleNextStep}>
     </div>
@@ -1209,7 +1209,7 @@ const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) =>
         <div onClick={() => { setSelectedSide('MEDIANO2'); setStep('B12'); }}>
           <ConclusionButton value='MEDIANO2' title=' DE NERVIO MEDIANO' displayText='MEDIANO' /></div>
         <div onClick={() => { setSelectedSide('INTEROSEOANTERIOR2'); setStep('B12'); }}>
-          <ConclusionButton value='INTEROSEOANTERIOR2' title=' DE NERVIO INTEROSEO ANTERIOR' displayText='INTEROSEO ANTERIOR' /></div>
+          <ConclusionButton value='INTEROSEOANTERIOR2' title=' DE NERVIO INTERÓSEO ANTERIOR' displayText='INTERÓSEO ANTERIOR' /></div>
         {/* <div onClick={() => { setSelectedSide('ACCESORIO'); setStep('B12'); }}>
           <ConclusionButton value='ACCESORIO2' title=' DE NERVIO ACCESORIO' displayText='ACCESORIO' /></div> */}
         <div onClick={() => { setSelectedSide('AXILAR2'); setStep('B12'); }}>
@@ -1221,13 +1221,13 @@ const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) =>
         <div onClick={() => { setSelectedSide('RADIAL_SUPERFICIAL2'); setStep('B12'); }}>
           <ConclusionButton value='RADIAL_SUPERFICIAL2' title=' DE NERVIO RADIAL SUPERFICIAL' displayText='RADIAL SUPERFICIAL' /></div>
         <div onClick={() => { setSelectedSide('INTEROSEO_POSTERIOR2'); setStep('B12'); }}>
-          <ConclusionButton value='INTEROSEO_POSTERIOR2' title=' DE NERVIO INTEROSEO POSTERIOR' displayText='INTEROSEO POSTERIOR' /></div>
+          <ConclusionButton value='INTEROSEO_POSTERIOR2' title=' DE NERVIO INTERÓSEO POSTERIOR' displayText='INTERÓSEO POSTERIOR' /></div>
         <div onClick={() => { setSelectedSide('SUPRAESCAPULAR2'); setStep('B12'); }}>
           <ConclusionButton value='SUPRAESCAPULAR2' title=' DE NERVIO SUPRAESCAPULAR' displayText='SUPRAESCAPULAR' /></div>
         <div onClick={() => { setSelectedSide('ULNAR2'); setStep('B12'); }}>
           <ConclusionButton value='ULNAR2' title=' DE NERVIO ULNAR' displayText='ULNAR' /></div>
         <div onClick={() => { setSelectedSide('DORSAL_CUTANEO2'); setStep('B12'); }}>
-          <ConclusionButton value='DORSAL_CUTANEO2' title=' DE NERVIO DORSAL CUTANEO' displayText='DORSAL CUTANEO' /></div>
+          <ConclusionButton value='DORSAL_CUTANEO2' title=' DE NERVIO DORSAL CUTÁNEO' displayText='DORSAL CUTÁNEO' /></div>
         {/* <div onClick={() => { setSelectedSide('FRENICO'); setStep('B1'); }}>
           <ConclusionButton value='FRENICO' title=' DE NERVIO FRÉNICO' displayText='FRÉNICO' /></div> */}
         <div onClick={() => { setSelectedSide('TORACODORSAL2'); setStep('B12'); }}>
@@ -1247,11 +1247,11 @@ const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) =>
 
       <Accordion title='MIEMBROS INFERIORES' value='NERVIOS INFERIORES2' type='external'>
         <div onClick={() => { setSelectedSide('CIATICO2'); setStep('B12'); }}>
-          <ConclusionButton value='CIATICO2' title=' DE NERVIO CIATICO' displayText='CIATICO' /></div>
+          <ConclusionButton value='CIATICO2' title=' DE NERVIO CIÁTICO' displayText='CIÁTICO' /></div>
         <div onClick={() => { setSelectedSide('GLUTEO_INFERIOR'); setStep('B12'); }}>
-          <ConclusionButton value='GLUTEO_INFERIOR2' title=' DE NERVIO GLUTEO INFERIOR' displayText='GLUTEO INFERIOR' /></div>
+          <ConclusionButton value='GLUTEO_INFERIOR2' title=' DE NERVIO GLÚTEO INFERIOR' displayText='GLÚTEO INFERIOR' /></div>
         <div onClick={() => { setSelectedSide('GLUTEO_MEDIO2'); setStep('B12'); }}>
-          <ConclusionButton value='GLUTEO_MEDIO2' title=' DE NERVIO GLUTEO SUPERIOR' displayText='GLUTEO SUPERIOR' /></div>
+          <ConclusionButton value='GLUTEO_MEDIO2' title=' DE NERVIO GLÚTEO SUPERIOR' displayText='GLÚTEO SUPERIOR' /></div>
         <div onClick={() => { setSelectedSide('FEMORAL2'); setStep('B12'); }}>
           <ConclusionButton value='FEMORAL2' title=' DE NERVIO FEMORAL' displayText='FEMORAL' /></div>
         <div onClick={() => { setSelectedSide('SAFENO2'); setStep('B12'); }}>
@@ -1259,7 +1259,7 @@ const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) =>
         <div onClick={() => { setSelectedSide('OBTURADOR2'); setStep('B12'); }}>
           <ConclusionButton value='OBTURADOR2' title=' DE NERVIO OBTURADOR' displayText='OBTURADOR' /></div>
         <div onClick={() => { setSelectedSide('NERVIO_PERONEO2'); setStep('B12'); }}>
-          <ConclusionButton value='NERVIO_PERONEO2' title=' DE NERVIO PERONEO' displayText='PERONEO' /></div>
+          <ConclusionButton value='NERVIO_PERONEO2' title=' DE NERVIO PERONEO COMÚN' displayText='PERONEO COMÚN' /></div>
         <div onClick={() => { setSelectedSide('PERONEO_SUPERFICIAL2'); setStep('B12'); }}>
           <ConclusionButton value='PERONEO_SUPERFICIAL2' title=' DE NERVIO PERONEO SUPERFICIAL' displayText='PERONEO SUPERFICIAL' /></div>
         <div onClick={() => { setSelectedSide('PERONEO_PROFUNDO2'); setStep('B12'); }}>
@@ -1278,7 +1278,7 @@ const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) =>
 
       <Accordion title='SACRO' value='SACRO2' type='external'>
         <div onClick={() => { setSelectedSide('CIATICO2'); setStep('B12'); }}>
-          <ConclusionButton value='CIATICO2' title=' DE NERVIO CIATICO' displayText='CIATICO' /></div>
+          <ConclusionButton value='CIATICO2' title=' DE NERVIO CIÁTICO' displayText='CIÁTICO' /></div>
         <div onClick={() => { setSelectedSide('PUDENDO2'); setStep('B12'); }}>
           <ConclusionButton value='PUDENDO2' title=' DE NERVIO PUDENDO' displayText='PUDENDO' /></div>
       </Accordion>
@@ -1389,7 +1389,7 @@ const StepCG2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        UBICACION
+        UBICACIÓN
       </h1>
       <div onClick={() => setStep('CDD2')}>
         <ConclusionButton value='focalizada2' title=' FOCAL A NIVEL ' displayText={'FOCALIZADA '} /></div>
@@ -1453,7 +1453,7 @@ const StepCGI2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => 
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        UBICACION
+        UBICACIÓN
       </h1>
       <div onClick={() => setStep('CDI2')}>
         <ConclusionButton value='focalizada2' title=' FOCAL A NIVEL ' displayText={'FOCALIZADA '} /></div>
@@ -1516,7 +1516,7 @@ const StepC2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        UBICACION
+        UBICACIÓN
       </h1>
       <div onClick={() => setStep('CD2')}>
         <ConclusionButton value='focalizada2' title=' FOCAL A NIVEL ' displayText={'FOCALIZADA'} /></div>
@@ -1577,7 +1577,7 @@ const StepCL2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        UBICACION
+        UBICACIÓN
       </h1>
 
       <div onClick={() => setStep('CD2')}>
@@ -1803,7 +1803,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
       <AccordionContainer>
       <Accordion title='MIXTA' value='MIXTA' type='external'>
         <div onClick={() => setStep('E2')}>
-          <ConclusionButton value=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA2' title=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' displayText={'DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA '} /></div>
+          <ConclusionButton value=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA2' title=' TIPO DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA ' displayText={'DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA '} /></div>
         <div onClick={() => setStep('E2')}>
           <ConclusionButton value=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA2' title=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'  AXONAL CON DESMIELINIZACIÓN SECUNDARIA'} /></div>
       </Accordion>
@@ -2028,7 +2028,7 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        PRONOSTICO
+        PRONÓSTICO
       </h1>
       <div onClick={() => setStep('I')}>
         <ConclusionButton value='completo2' title='Y PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
@@ -2037,7 +2037,7 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
       <div onClick={() => setStep('I')}>
         <ConclusionButton value='pobre2' title='Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('I')}>
-        <ConclusionButton value='nulo2' title='Y PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACION NULA'} /></div>
+        <ConclusionButton value='nulo2' title='Y PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
       </div>
         
   );

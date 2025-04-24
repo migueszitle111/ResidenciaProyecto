@@ -140,11 +140,11 @@ const StepA = ({ handleNextStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        CLASIFICACION
+        CLASIFICACIÓN
       </h1>
         <div onClick={ handleNextStep }>
-          <ConclusionButton value='adquirido' title='BLOQUEO DE LA UNION NEUROMUSCULAR ADQUIRIDO,' displayText={'ADQUIRIDO'}/>
-          <ConclusionButton value='hereditario' title='BLOQUEO DE LA UNION NEUROMUSCULAR HEREDITARIO,' displayText={'HEREDITARIO'}/>
+          <ConclusionButton value='adquirido' title='BLOQUEO DE LA UNIÓN NEUROMUSCULAR ADQUIRIDO,' displayText={'ADQUIRIDO'}/>
+          <ConclusionButton value='hereditario' title='BLOQUEO DE LA UNIÓN NEUROMUSCULAR HEREDITARIO,' displayText={'HEREDITARIO'}/>
         </div>
 
         <div className='my-2 flex justify-end items-center'>
@@ -179,7 +179,7 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        FISIOPATOLOGIA
+        FISIOPATOLOGÍA
       </h1>
 
       <div onClick={ handleNextStep }>
@@ -215,7 +215,7 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        DISTRIBUCION
+        DISTRIBUCIÓN
       </h1>
       <ConclusionButton value='bulbar' title='BULBAR ' displayText={'BULBAR '}   dangerouslySetInnerHTML={{ __html: ' BULBAR' }}/>
       <ConclusionButton value='proximal' title='PROXIMAL ' displayText={'PROXIMAL '}/>
@@ -249,8 +249,8 @@ const StepD = ({ handleNextStep, handlePrevStep }) => {
         AGREGADO (opcional)
       </h1>
       <div onClick={ handleNextStep }>
-      <ConclusionButton value='activa_abundante_difusa' title=' (RIESGO ALTO DE COMPROMISO RESPIRATORIO)' displayText={'(RIESGO ALTO DE COMPROMISO RESPIRATORIO)'}/>
-      <ConclusionButton value='activa_moderada_progresiva ' title=' (RIESGO BAJO DE COMPROMISO RESPIRATORIO)' displayText={'(RIESGO BAJO DE COMPROMISO RESPIRATORIO)'}/>
+      <ConclusionButton value='activa_abundante_difusa' title=' (ALTO COMPROMISO RESPIRATORIO)' displayText={'RIESGO ALTO DE COMPROMISO RESPIRATORIO'}/>
+      <ConclusionButton value='activa_moderada_progresiva ' title=' (BAJO COMPROMISO RESPIRATORIO)' displayText={'RIESGO BAJO DE COMPROMISO RESPIRATORIO'}/>
       </div>      
     </div>
   );
@@ -283,9 +283,9 @@ const StepE = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={handleNextStep}>
-        <ConclusionButton value='intensidad_leve' title=' INTENSIDAD LEVE' displayText={'LEVE'}/>
-        <ConclusionButton value='intensidad_moderada' title=' INTENSIDAD MODERADA - APRECIABLE CON MANIOBRAS DE ACTIVACIÓN' displayText={'MODERADA'}/>
-        <ConclusionButton value='intensidad_severa' title=' INTENSIDAD SEVERA - APRECIABLE EN REGISTROS BASALES' displayText={'SEVERA'}/>
+        <ConclusionButton value='intensidad_leve' title=' DE INTENSIDAD LEVE' displayText={'LEVE'}/>
+        <ConclusionButton value='intensidad_moderada' title=' DE INTENSIDAD MODERADA - APRECIABLE CON MANIOBRAS DE ACTIVACIÓN' displayText={'MODERADA'}/>
+        <ConclusionButton value='intensidad_severa' title=' DE INTENSIDAD SEVERA - APRECIABLE EN REGISTROS BASALES' displayText={'SEVERA'}/>
       </div>      
     </div>
   );
@@ -317,9 +317,9 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
         RECUPERACIÓN
       </h1>
       <div onClick={ handleNextStep }>
-      <ConclusionButton value = 'recuperacion_completa' title = ' CON RECUPERACIÓN COMPLETA AL REPOSO' displayText={'COMPLETO AL REPOSO'}/>
-      <ConclusionButton value = 'recuperacion_parcial' title = ' CON RECUPERACIÓN PARCIAL AL REPOSO' displayText={'PARCIAL AL REPOSO'}/>
-      <ConclusionButton value = 'recuperacion_nula' title = ' SIN RECUPERACIÓN AL REPOSO' displayText={'SIN RECUPERACIÓN'}/>
+      <ConclusionButton value = 'recuperacion_completa' title = ' CON RECUPERACIÓN COMPLETA AL REPOSO.' displayText={'COMPLETO AL REPOSO'}/>
+      <ConclusionButton value = 'recuperacion_parcial' title = ' CON RECUPERACIÓN PARCIAL AL REPOSO.' displayText={'PARCIAL AL REPOSO'}/>
+      <ConclusionButton value = 'recuperacion_nula' title = ' SIN RECUPERACIÓN AL REPOSO.' displayText={'SIN RECUPERACIÓN'}/>
       </div>
     </div>
   );

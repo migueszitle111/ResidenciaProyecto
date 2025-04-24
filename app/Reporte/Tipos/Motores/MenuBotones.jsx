@@ -67,13 +67,13 @@ const StepA = ({ handleNextStep ,setStep}) => (
         <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>
-    <h1 className="text-xl font-bold text-white">VÍA MOTORA CORTICOESPINAL</h1>
+    <h1 className="text-xl font-bold text-white">VÍA CORTICOESPINAL</h1>
     <div onClick={handleNextStep}> 
     </div>
     <div onClick={() => setStep('E2')}>
-      <ConclusionButton value="indenme" title="VÍA MOTORA CORTICOESPINAL CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
+      <ConclusionButton value="indenme" title="VÍA CORTICOESPINAL CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
     <div onClick={() => setStep('B')}>
-      <ConclusionButton value="alterada" title="VÍA MOTORA CORTICOESPINAL CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
+      <ConclusionButton value="alterada" title="VÍA CORTICOESPINAL CON DEFECTO " displayText="ALTERADA " />
     </div>
   </div>
 );
@@ -106,7 +106,7 @@ const StepB = ({ handlePrevStep, handleNextStep, setStep }) => {
         <ConclusionButton value="bloqueo_en_la_conduccion" title="POR BLOQUEO EN LA CONDUCCIÓN " displayText="BLOQUEO EN LA CONDUCCIÓN" />
       </div>
       <div onClick={() => setStep('C2')}>
-        <ConclusionButton value="deficit_neuronal" title="AXONAL " displayText="POR DEFICIT NEURONAL" />
+        <ConclusionButton value="deficit_neuronal" title="AXONAL " displayText="DEFICIT AXONAL" />
       </div>
       <div onClick={() => setStep('E')}>
         <ConclusionButton value="sin_respuesta" title="POR AUSENCIA DE RESPUESTA EVOCABLE " displayText="SIN RESPUETA" />
@@ -185,7 +185,7 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
           </button>
       </div>
       <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
-        <ConclusionButton value="perdida_axonal_secundaria" title=" Y PERDIDA AXONAL SECUNDARIA " displayText="PERDIDA AXONAL SECUNDARIA" />
+        <ConclusionButton value="perdida_axonal_secundaria" title=" Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
     </div>
   );
 };
@@ -206,7 +206,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
           </button>
       </div>
       <h1 className="text-xl font-bold text-white">AXONAL:</h1>
-        <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="RETARDO SECUNDARIO EN LA CONDUCCIÓN" />
+        <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
     </div>
   );
 };
@@ -257,7 +257,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
           }}>
         <ConclusionButton
           value="bilateral"
-          title="BILATERAL,"
+          title="DE FORMA BILATERAL,"
           displayText="BILATERAL"
           
         />
@@ -314,7 +314,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
           }}>
         <ConclusionButton
           value="bilateral"
-          title="BILATERAL,"
+          title="DE FORMA BILATERAL,"
           displayText="BILATERAL"
           
         />
@@ -343,18 +343,18 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
           <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
         </button>
       </div>
-      <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
+      <h1 className='text-xl font-bold text-white'>ESTÍMULO: </h1>
     <div onClick={() => setStep('G')}>
       <ConclusionButton
         value="cortical"
-        title='A TRAVÉS DE REGION MEDULAR ANTEROLATERAL AL ESTIMULO EN CORTEZA MOTORA PRIMARIA'
+        title='A TRAVÉS DE REGIÓN MEDULAR ANTEROLATERAL AL ESTÍMULO EN CORTEZA MOTORA PRIMARIA'
         displayText='CORTICAL'
       />
     </div>
     <div onClick={() => setStep('G')}>
       <ConclusionButton
         value={`${selectedSide}cervical`}
-        title='A TRAVÉS DE REGION MEDULAR ANTEROLATERAL AL ESTIMULO EN ASTAS Y RAICES CERVICALES ANTERIORES'
+        title='A TRAVÉS DE REGIÓN MEDULAR ANTEROLATERAL AL ESTÍMULO EN ASTAS Y RAÍCES CERVICALES'
         displayText='CERVICAL'
         
       />
@@ -362,7 +362,7 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
     <div onClick={() => setStep('G')}>
       <ConclusionButton
         value={`${selectedSide}lumbasacro`}
-        title='A TRAVÉS DE REGION MEDULAR ANTEROLATERAL AL ESTIMULO EN ASTAS Y RAICES LUMBOSACRAS ANTERIORES'
+        title='A TRAVÉS DE REGIÓN MEDULAR ANTEROLATERAL AL ESTÍMULO EN ASTAS Y RAÍCES LUMBOSACRAS'
         displayText='LUMBOSACRO'
         
       />
@@ -387,18 +387,18 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
           <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
         </button>
       </div>
-      <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
+      <h1 className='text-xl font-bold text-white'>ESTÍMULO: </h1>
     <div onClick={() => setStep('G')}>
       <ConclusionButton
         value="cortical"
-        title='A TRAVÉS DE REGION MEDULAR ANTEROLATERAL AL ESTIMULO EN CORTEZA MOTORA PRIMARIA'
+        title='A TRAVÉS DE REGIÓN MEDULAR ANTEROLATERAL AL ESTÍMULO EN CORTEZA MOTORA PRIMARIA'
         displayText='CORTICAL'
       />
     </div>
     <div onClick={() => setStep('G')}>
       <ConclusionButton
         value="cervicaL"
-        title='A TRAVÉS DE REGION MEDULAR ANTEROLATERAL AL ESTIMULO EN ASTAS Y RAICES CERVICALES ANTERIORES'
+        title='A TRAVÉS DE REGIÓN MEDULAR ANTEROLATERAL AL ESTÍMULO EN ASTAS Y RAÍCES CERVICALES'
         displayText='CERVICAL'
         
       />
@@ -406,7 +406,7 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
     <div onClick={() => setStep('G')}>
       <ConclusionButton
         value="lumbasacro"
-        title='A TRAVÉS DE REGION MEDULAR ANTEROLATERAL AL ESTIMULO EN ASTAS Y RAICES LUMBOSACRAS ANTERIORES'
+        title='A TRAVÉS DE REGIÓN MEDULAR ANTEROLATERAL AL ESTÍMULO EN ASTAS Y RAÍCES LUMBOSACRAS'
         displayText='LUMBOSACRO'
         
       />

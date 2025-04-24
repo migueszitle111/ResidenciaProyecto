@@ -1394,7 +1394,7 @@ const StepCG2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CDD2')}>
         <ConclusionButton value='focalizada2' title=' FOCAL A NIVEL ' displayText={'FOCALIZADA '} /></div>
       <div onClick={() => setStep('CDD2')}>
-        <ConclusionButton value='segmentaria2' title=' DEL SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
+        <ConclusionButton value='segmentaria2' title=' EN SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D2')}>
         <ConclusionButton value={`${selectedSide}_COMPgeneralizada2`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
     </div>
@@ -1458,7 +1458,7 @@ const StepCGI2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => 
       <div onClick={() => setStep('CDI2')}>
         <ConclusionButton value='focalizada2' title=' FOCAL A NIVEL ' displayText={'FOCALIZADA '} /></div>
       <div onClick={() => setStep('CDI2')}>
-        <ConclusionButton value='segmentaria2' title=' DEL SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
+        <ConclusionButton value='segmentaria2' title=' EN SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D2')}>
         <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
     </div>
@@ -1521,7 +1521,7 @@ const StepC2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CD2')}>
         <ConclusionButton value='focalizada2' title=' FOCAL A NIVEL ' displayText={'FOCALIZADA'} /></div>
       <div onClick={() => setStep('CD2')}>
-        <ConclusionButton value='segmentaria2' title=' DEL SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
+        <ConclusionButton value='segmentaria2' title=' EN SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D2')}>
         <ConclusionButton value={`${selectedSide}_IZQgeneralizada2`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
     </div>
@@ -1583,7 +1583,7 @@ const StepCL2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CD2')}>
         <ConclusionButton value='focalizada2' title=' FOCAL A NIVEL ' displayText={'FOCALIZADA'} /></div>
       <div onClick={() => setStep('CD2')}>
-        <ConclusionButton value='segmentaria2' title=' DEL SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
+        <ConclusionButton value='segmentaria2' title=' EN SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D2')}>
         <ConclusionButton value={`${selectedSide}_DERgeneralizada2`} title=' GENERALIZADA, ' displayText='GENERALIZADA' /></div>
 

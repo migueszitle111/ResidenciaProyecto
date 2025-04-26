@@ -29,6 +29,7 @@
   padding: 0 15px;
 }
 
+
 /* Informacion acerca del usuario */
 .box-container {
   display: flex;
@@ -122,6 +123,7 @@
 
 
 
+
 .print-button {
   background-color: #1C1C1C;
   padding: 8px;
@@ -186,9 +188,7 @@
   margin-top: 10px;
 }
 
-.dont-print {
-  display: visible;
-}
+
 
 /* Estilos para Rnd (drag resize) - no siempre necesarios */
 .handle {
@@ -225,21 +225,7 @@
   z-index: 3;
 }
 
-/* Titulo del reporte */
-.report-container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #1c1c1c;
-  color: rgb(255, 255, 255);
-  font-family: "Quando";
-  font-size: 25px;
-  height: 100%;
-  width: 90vh;
-  border-top-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  padding: 0 15px;
-}
+
 
 /* Informacion acerca del usuario */
 .box-container {
@@ -431,6 +417,49 @@
   width: 100%;  
 }
 
+body.pdf-exporting .conclusion-container {
+  background-color: #fff !important;   /* fuerza blanco sólo en modo PDF */
+  margin: 0%;
+  border-radius: 0px;
+  box-shadow: none !important; /* Elimina la sombra en PDF */
+  border: none !important; /* Elimina el borde en PDF */
+}
+
+
+.delete-button {
+  position: absolute;
+  top: -20px;
+  right: 140px;
+  width: 25px;
+  background-color: #1C1C1C;
+  padding: 8px;
+  text-align: left;
+  font-size: 10px;
+  cursor: pointer;
+  border-radius: 100%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #c44900;
+}
+/* 1) Oculto por defecto */
+.delete-button {
+  display: none !important;
+}
+
+.delete-button:hover {
+background-color: #c44900;
+color: white;
+}
+/* 2) Solo al pasar el cursor sobre el elemento padre .item-container */
+.item-container:hover .delete-button {
+  display: block !important;
+}
+
+/* .delete-button.active {
+background-color: #c44900;
+color: white;
+} */
+
 .conclusion-container {
   display: flex;
   position: relative;
@@ -443,6 +472,7 @@
   background-color: #1C1C1C;
   margin: 10px;
 }
+
 
 .dont-print-Nervius {
  z-index: 20;

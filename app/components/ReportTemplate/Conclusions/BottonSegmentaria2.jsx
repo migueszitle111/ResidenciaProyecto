@@ -1,3 +1,5 @@
+'use client';
+
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 

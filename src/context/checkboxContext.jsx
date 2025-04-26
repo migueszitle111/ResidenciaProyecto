@@ -1,3 +1,5 @@
+'use client';       // 👈  debe ser la primera línea
+
 import { createContext, useState, useEffect } from 'react';
 
 // Contexto para mostrar imágenes de los checkboxes

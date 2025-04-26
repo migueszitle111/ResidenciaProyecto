@@ -45,6 +45,7 @@ const MenuBotonesPt = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [visibleSubMenu, setVisibleSubMenu] = useState(null);
     const [menuVisible, setMenuVisible] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
 
   const Neurolografia = [
     {
@@ -101,136 +102,136 @@ const MenuBotonesPt = () => {
   ];
 
   //Matriz de opciones de Miografia  y submenús
-  const Miografia = [
-    {
-      Menu: "Craniobulbar",
-      Submenu: [
-        "Facial Cranio Bulbar",
-        "Trigémino",
-        "Lingual",
-        "Cervical",
-        "Frénico",
-      ],
-    },
-    {
-      Menu: "Superior",
-      Submenu: [
-        "Mediano",
-        "Ulnar",
-        "Radial",
-        "Axilar",
-        "Musculocutáneo",
-        "Supraescapular Superior",
-        "Dorsal Escapular",
-        "Torácico Largo",
-        "Subescapular y Toracodorsal",
-        "Pectoral",
-      ],
-    },
-    {
-      Menu: "Inferior",
-      Submenu: [
-        "Ciático",
-        "Tibial",
-        "Peroneo Común",
-        "Glúteo Superior",
-        "Glúteo Inferior",
-        "Pudendo",
-        "Femoral",
-        "Obturador",
-      ],
-    },
-    { Menu: "Tronco", Submenu: ["Paraespinales"] },
-  ];
+  // const Miografia = [
+  //   {
+  //     Menu: "Craniobulbar",
+  //     Submenu: [
+  //       "Facial Cranio Bulbar",
+  //       "Trigémino",
+  //       "Lingual",
+  //       "Cervical",
+  //       "Frénico",
+  //     ],
+  //   },
+  //   {
+  //     Menu: "Superior",
+  //     Submenu: [
+  //       "Mediano",
+  //       "Ulnar",
+  //       "Radial",
+  //       "Axilar",
+  //       "Musculocutáneo",
+  //       "Supraescapular Superior",
+  //       "Dorsal Escapular",
+  //       "Torácico Largo",
+  //       "Subescapular y Toracodorsal",
+  //       "Pectoral",
+  //     ],
+  //   },
+  //   {
+  //     Menu: "Inferior",
+  //     Submenu: [
+  //       "Ciático",
+  //       "Tibial",
+  //       "Peroneo Común",
+  //       "Glúteo Superior",
+  //       "Glúteo Inferior",
+  //       "Pudendo",
+  //       "Femoral",
+  //       "Obturador",
+  //     ],
+  //   },
+  //   { Menu: "Tronco", Submenu: ["Paraespinales"] },
+  // ];
 
-  //Matriz de opciones de Potenciales Provocados  y submenús
+  // //Matriz de opciones de Potenciales Provocados  y submenús
 
-  const PotencialesProvocados = [
-    {
-      Menu: "Somatosensoriales",
-      Submenu: [
-        "Nervios Medianos",
-        "Nervios Ulnar",
-        "Tibial",
-        "Peroneo",
-        "Nervios Trigéminos",
-        "Pudendo",
-        "Radial Superficial",
-        "Nervios Musculocutáneo",
-        "Femorocutáneo o lateral",
-        "Safeno",
-        "Peroneo superficial",
-        "Sural",
-        "Plantar",
-        "Calcáneo",
-        "Segmentarios Dermatomales",
-      ],
-    },
-    {
-      Menu: "Auditivos",
-      Submenu: [
-        "Latencia Corta Tallo Cerebral",
-        "Latencia Mediana",
-        "Latencia Larga",
-      ],
-    },
-    { Menu: "Visuales", Submenu: ["Damero", "Leds"] },
-    { Menu: "Motores", Submenu: ["Superiores", "Inferiores", "Faciales"] },
-    {
-      Menu: "Cognitivos Relacionados a Eventos",
-      Submenu: ["P300 Visual", "P300 Auditivo"],
-    },
-  ];
+  // const PotencialesProvocados = [
+  //   {
+  //     Menu: "Somatosensoriales",
+  //     Submenu: [
+  //       "Nervios Medianos",
+  //       "Nervios Ulnar",
+  //       "Tibial",
+  //       "Peroneo",
+  //       "Nervios Trigéminos",
+  //       "Pudendo",
+  //       "Radial Superficial",
+  //       "Nervios Musculocutáneo",
+  //       "Femorocutáneo o lateral",
+  //       "Safeno",
+  //       "Peroneo superficial",
+  //       "Sural",
+  //       "Plantar",
+  //       "Calcáneo",
+  //       "Segmentarios Dermatomales",
+  //     ],
+  //   },
+  //   {
+  //     Menu: "Auditivos",
+  //     Submenu: [
+  //       "Latencia Corta Tallo Cerebral",
+  //       "Latencia Mediana",
+  //       "Latencia Larga",
+  //     ],
+  //   },
+  //   { Menu: "Visuales", Submenu: ["Damero", "Leds"] },
+  //   { Menu: "Motores", Submenu: ["Superiores", "Inferiores", "Faciales"] },
+  //   {
+  //     Menu: "Cognitivos Relacionados a Eventos",
+  //     Submenu: ["P300 Visual", "P300 Auditivo"],
+  //   },
+  // ];
   //Matriz de opciones de Pruebas especiales  y submenús
 
-  const PruebasEspeciales = [
-    {
-      Menu: "Estimulación Repetitiva",
-      Submenu: [
-        "Facial",
-        "Distal",
-        "Proximal",
-        "Tests Provocativos",
-        "Altas Frecuencias",
-        "Test de Ejercicio",
-      ],
-    },
-    {
-      Menu: "Fibra Única",
-      Submenu: ["Fibra Única", "Densidad de Fibra", "Macro y Escaneo"],
-    },
-    {
-      Menu: "Autonómicos",
-      Submenu: [
-        "Respuesta sináptica de la Piel",
-        "Reflejo pupilar",
-        "Variabilidad R-R",
-        "Periodo Silente",
-      ],
-    },
-    {
-      Menu: "Respuestas Tardías",
-      Submenu: [
-        "Reflejo del parpadeo",
-        "Onda F",
-        "Reflejo H",
-        "Reflejo bulbocavernoso",
-      ],
-    },
-    {
-      Menu: "Esotéricas",
-      Submenu: [
-        "Reflejo Masetero",
-        "Reflejo Palmo Mentoniano",
-        "Laríngeo Recurrente",
-        "Raíces Nerviosas",
-        "Nervios Intercostales",
-        "Glúteo Superior",
-        "Reflejos Pudendos Sexuales",
-      ],
-    },
-    { Menu: "Movimiento", Submenu: ["Tremor"] },
-  ];
+  // const PruebasEspeciales = [
+  //   {
+  //     Menu: "Estimulación Repetitiva",
+  //     Submenu: [
+  //       "Facial",
+  //       "Distal",
+  //       "Proximal",
+  //       "Tests Provocativos",
+  //       "Altas Frecuencias",
+  //       "Test de Ejercicio",
+  //     ],
+  //   },
+  //   {
+  //     Menu: "Fibra Única",
+  //     Submenu: ["Fibra Única", "Densidad de Fibra", "Macro y Escaneo"],
+  //   },
+  //   {
+  //     Menu: "Autonómicos",
+  //     Submenu: [
+  //       "Respuesta sináptica de la Piel",
+  //       "Reflejo pupilar",
+  //       "Variabilidad R-R",
+  //       "Periodo Silente",
+  //     ],
+  //   },
+  //   {
+  //     Menu: "Respuestas Tardías",
+  //     Submenu: [
+  //       "Reflejo del parpadeo",
+  //       "Onda F",
+  //       "Reflejo H",
+  //       "Reflejo bulbocavernoso",
+  //     ],
+  //   },
+  //   {
+  //     Menu: "Esotéricas",
+  //     Submenu: [
+  //       "Reflejo Masetero",
+  //       "Reflejo Palmo Mentoniano",
+  //       "Laríngeo Recurrente",
+  //       "Raíces Nerviosas",
+  //       "Nervios Intercostales",
+  //       "Glúteo Superior",
+  //       "Reflejos Pudendos Sexuales",
+  //     ],
+  //   },
+  //   { Menu: "Movimiento", Submenu: ["Tremor"] },
+  // ];
 
     const handleClick = (option) => {
         setSelectedOption(option);
@@ -246,6 +247,18 @@ const MenuBotonesPt = () => {
     const toggleMenuVisibility = () => {
         setMenuVisible(!menuVisible);
     };
+
+    // Combinar todos los submenús en un solo arreglo
+    const allOptions = [
+      ...Neurolografia.flatMap((item) => item.Submenu),
+      // ...Miografia.flatMap((item) => item.Submenu),
+      // ...PotencialesProvocados.flatMap((item) => item.Submenu),
+      // ...PruebasEspeciales.flatMap((item) => item.Submenu),
+    ];
+
+    const filteredOptions = allOptions.filter((option) =>
+        option.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div>
@@ -270,10 +283,36 @@ const MenuBotonesPt = () => {
             </button>
 
             <div className="flex">
-                {/* Menú desplegable */}
                 {menuVisible && (
                     <div className="w-1/5 max-h-full bg-[#3f3c3c] text-white p-4 rounded-2xl">
                         <h2 className="text-lg mb-4">Neurolografia</h2>
+
+                        {/* Buscador con autocompletado */}
+                        <input
+                            type="text"
+                            placeholder="Buscar..."
+                            className="w-full mb-4 p-2 text-black rounded"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        {searchTerm && (
+                            <ul className="bg-white text-black rounded shadow max-h-48 overflow-y-auto">
+                                {filteredOptions.map((option, index) => (
+                                    <li
+                                        key={index}
+                                        className="p-2 hover:bg-orange-200 cursor-pointer"
+                                        onClick={() => handleClick(option)}
+                                    >
+                                        {option}
+                                    </li>
+                                ))}
+                                {filteredOptions.length === 0 && (
+                                    <li className="p-2 text-gray-500">Sin resultados</li>
+                                )}
+                            </ul>
+                        )}
+
+                        {/* Menú original */}
                         {Neurolografia.map((menuOption, menuIndex) => (
                             <div key={menuIndex} className="ml-2">
                                 <button

@@ -205,11 +205,11 @@ const StepA = ({ handleNextStep, handleNextStep1 }) => {
       </h1>
       
       <div onClick={ handleNextStep }>
-        <ConclusionButton value='1' title='NEURONOPATÍA MOTORA-ASTA ANTERIOR MEDULAR' displayText='MOTORA-ASTA ANTERIOR MEDULAR'/>
+        <ConclusionButton value='1' title='NEURONOPATÍA MOTORA (ASTA ANTERIOR MEDULAR)' displayText='MOTORAS - ASTA ANTERIOR MEDULAR'/>
       </div>
 
       <div onClick={ handleNextStep1 }>
-        <ConclusionButton value='sentitiva_ganglio_de_la_raiz_dorsal' title='NEURONOPATÍA SENSITIVA-GANGLIO DE LA RAÍZ DORSAL' displayText='SENSITIVA-GANGLIO DE LA RAÍZ DORSAL'/>
+        <ConclusionButton value='sentitiva_ganglio_de_la_raiz_dorsal' title='NEURONOPATÍA SENSITIVA (GANGLIO DE LA RAÍZ DORSAL)' displayText='SENSITIVAS - GANGLIO DE LA RAÍZ DORSAL'/>
       </div>
     </div>
   );
@@ -284,7 +284,7 @@ const StepB1 = ({ handleNextStep1, handlePrevStep1 }) => {
       </div>
 
       <h1 className=' text-xl font-bold text-white'>
-        CLASIFICACION
+        CLASIFICACIÓN
       </h1>
 
       <div onClick={ handleNextStep1 }>
@@ -324,7 +324,7 @@ const StepC = ({ handleNextStep, handlePrevStep }) => {
       </div>
 
       <h1 className=' text-xl font-bold text-white'>
-        DENERVACIÓN
+        INESTABILIDAD DE MEMBRANA
       </h1>
 
       <div onClick={ handleNextStep }>
@@ -401,12 +401,12 @@ const StepD1 = ({ handleNextStep1, handlePrevStep1 }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        DISTRIBUCION
+        DISTRIBUCIÓN
       </h1>
 
       <div onClick={handleNextStep1}>
-      <ConclusionButton value='generalizada' title=' DISTRIBUCION GENERALIZADA' displayText='GENERALIZADA'/>
-      <ConclusionButton value='parcial' title=' DISTRIBUCION PARCIAL' displayText='PARCIAL'/>
+      <ConclusionButton value='generalizada' title=' DISTRIBUCIÓN GENERALIZADA' displayText='GENERALIZADA'/>
+      <ConclusionButton value='parcial' title=' DISTRIBUCIÓN PARCIAL' displayText='PARCIAL'/>
       </div>
 
       
@@ -444,8 +444,8 @@ const StepE = ({ handlePrevStep, handleNextStep }) => {
       </h1>
 
       <div onClick={handleNextStep}>
-        <ConclusionButton value = '9' title = ' SIMÉTRICA;' displayText = 'SIMÉTRICA'/>
-        <ConclusionButton value = '10' title = ' ASIMÉTRICA;'  displayText = 'ASIMÉTRICA'/>
+        <ConclusionButton value = '9' title = ' SIMÉTRICA.' displayText = 'SIMÉTRICA'/>
+        <ConclusionButton value = '10' title = ' ASIMÉTRICA.'  displayText = 'ASIMÉTRICA'/>
       </div>
     </div>
   );
@@ -481,8 +481,8 @@ const StepE1 = ({ handlePrevStep1, handleNextStep1 }) => {
       </h1>
 
       <div onClick={handleNextStep1}>
-      <ConclusionButton value = '9' title = ' SIMETRICA;' displayText = 'SIMETRICA'/>
-      <ConclusionButton value = '10' title = ' ASIMETRICA;'  displayText = 'ASIMETRICA'/></div>
+      <ConclusionButton value = '9' title = ' SIMÉTRICA;' displayText = 'SIMÉTRICA'/>
+      <ConclusionButton value = '10' title = ' ASIMÉTRICA;'  displayText = 'ASIMÉTRICA'/></div>
     </div>
   );
 };
@@ -518,9 +518,9 @@ const StepF = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={ handleNextStep }>
-        <ConclusionButton value = '11' title = ' REINERVACIÓN ABUNDANTE Y' displayText= 'ABUNDANTE'/>
-        <ConclusionButton value = '12' title = ' REINERVACIÓN DISCRETA Y' displayText= 'DISCRETA'/>
-        <ConclusionButton value = '13' title = ' SIN REINERVACIÓN Y' displayText= 'AUSENTE '/>
+        <ConclusionButton value = '11' title = ' REINERVACIÓN ABUNDANTE;' displayText= 'ABUNDANTE'/>
+        <ConclusionButton value = '12' title = ' REINERVACIÓN DISCRETA;' displayText= 'DISCRETA'/>
+        <ConclusionButton value = '13' title = ' SIN REINERVACIÓN;' displayText= 'AUSENTE '/>
       </div>
     </div>
   );
@@ -554,7 +554,7 @@ const StepF1 = ({ handlePrevStep1, handleNextStep1 }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        PRONOSTICO
+        PRONÓSTICO DE RECUPERACIÓN
       </h1>
       <div onClick={handleNextStep1}>
       <ConclusionButton value = 'completo1' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETO.' displayText = 'COMPLETO'/>
@@ -593,7 +593,7 @@ const StepG = ({ handlePrevStep, handleNextStep }) => {
       </div>
 
       <h1 className=' text-xl font-bold text-white'>
-        PRONÓSTICO
+        PRONÓSTICO DE RECUPERACIÓN 
       </h1>
 
       <div onClick={ handleNextStep }>

@@ -125,7 +125,7 @@ const SimpleMultiStepForm = ({
       <AccordionContainer>
         <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'} type='external'>
           <div onClick={handleNextStep5}>
-            <ConclusionButton value='tron1000d' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='tron1000d' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='CordonD' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
@@ -172,7 +172,7 @@ const SimpleMultiStepForm = ({
       
         <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'}>
           <div onClick={handleNextStep5}>
-            <ConclusionButton value='tron1000i' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='tron1000i' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='CordonI' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
@@ -219,7 +219,7 @@ const SimpleMultiStepForm = ({
       
         <Accordion value='prueba1000' title=' POSTGANGLIONAR PARCIAL' displayText={'POSTGANGLIONAR PARCIAL'}>
           <div onClick={handleNextStep5}>
-            <ConclusionButton value='tron1000' title=' POSTGANGLIONAR PACIAL A NIVEL DE TROCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
+            <ConclusionButton value='tron1000' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO' displayText={'TRONCOS (SUPRACLAVICULAR)'}/>
           </div>
           <div onClick={ handleNextStep1 }>
             <ConclusionButton value='CordonB' title=' POSTGANGLIONAR PACIAL A NIVEL DE DIVISIONES' displayText={'DIVISIONES (CLAVICULAR)'}/>
@@ -305,11 +305,11 @@ const SimpleMultiStepForm = ({
         <AccordionContainer>
         <Accordion title='POSTGANGLIONAR PACIAL' value='POSTGANGLIONAR PACIAL' type='external'> 
             <div onClick={ handleNextStep2 }>
-              <ConclusionButton value='ilihipogastrico_e_ilinguinald' title=' POSTGANGLIONAR PACIAL A NIVEL DE ILIHIPOGASTRICO E ILIINGUINAL' displayText={'ILIHIPOGASTRICO E ILIINGUINAL'}/>
-              <ConclusionButton value='genitocrural_y_femorocutáneo_laterald' title=' POSTGANGLIONAR PACIAL A NIVEL DE GENITOCRURAL Y FEMOROCUTANEO LATERAL' displayText={'GENITOCRURAL Y FEMOROCUTANEO LATERAL'}/>
+              <ConclusionButton value='ilihipogastrico_e_ilinguinald' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (ILIOHIPOGÁSTRICO E ILIOINGUINAL)' displayText={'PLEXO LUMBAR (ILIOHIPOGÁSTRICO E ILIOINGUINAL)'}/>
+              <ConclusionButton value='genitocrural_y_femorocutáneo_laterald' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (GENITOCRURAL Y FEMOROCUTÁNEO LATERAL)' displayText={'PLEXO LUMBAR (GENITOCRURAL Y FEMOROCUTÁNEO LATERAL)'}/>
               <ConclusionButton value='plexo_lumbard' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (FEMORAL Y OBTURADOR)' displayText={'PLEXO LUMBAR (FEMORAL Y OBTURADOR)'}/>
-              <ConclusionButton value='plexo_lumbosacrod' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)' displayText={'TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)'}/>
-              <ConclusionButton value='plexo_sacrod' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'PLEXO SACRO'}/>
+              <ConclusionButton value='plexo_lumbosacrod' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO LUMBOSACRO (CIÁTICO MENOR Y MAYOR)' displayText={'TRONCO LUMBOSACRO (CIÁTICO MENOR Y MAYOR)'}/>
+              <ConclusionButton value='plexo_sacrod' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO SACRO' displayText={'PLEXO SACRO'}/>
               <ConclusionButton value='plexo_pudendod' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO PUDENDO' displayText={'PLEXO PUDENDO'}/>
             </div>
         </Accordion>
@@ -333,11 +333,11 @@ const SimpleMultiStepForm = ({
         <AccordionContainer>
         <Accordion title='POSTGANGLIONAR PACIAL' value='POSTGANGLIONAR PACIAL' type='external'>
             <div onClick={ handleNextStep2 }>
-              <ConclusionButton value='ilihipogastrico_e_ilinguinali' title=' POSTGANGLIONAR PACIAL A NIVEL DE ILIHIPOGASTRICO E ILIINGUINAL' displayText={'ILIHIPOGASTRICO E ILIINGUINAL'}/>
-              <ConclusionButton value='genitocrural_y_femorocutáneo_laterali' title=' POSTGANGLIONAR PACIAL A NIVEL DE GENITOCRURAL Y FEMOROCUTANEO LATERAL' displayText={'GENITOCRURAL Y FEMOROCUTANEO LATERAL'}/>
+              <ConclusionButton value='ilihipogastrico_e_ilinguinali' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (ILIOHIPOGÁSTRICO E ILIOINGUINAL)' displayText={'PLEXO LUMBAR (ILIOHIPOGÁSTRICO E ILIOINGUINAL)'}/>
+              <ConclusionButton value='genitocrural_y_femorocutáneo_laterali' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (GENITOCRURAL Y FEMOROCUTÁNEO LATERAL)' displayText={'PLEXO LUMBAR (GENITOCRURAL Y FEMOROCUTÁNEO LATERAL)'}/>
               <ConclusionButton value='plexo_lumbari' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (FEMORAL Y OBTURADOR)' displayText={'PLEXO LUMBAR (FEMORAL Y OBTURADOR)'}/>
-              <ConclusionButton value='plexo_lumbosacroi' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)' displayText={'TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)'}/>
-              <ConclusionButton value='pre_Sacroi' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'PLEXO SACRO'}/>
+              <ConclusionButton value='plexo_lumbosacroi' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO LUMBOSACRO (CIÁTICO MENOR Y MAYOR)' displayText={'TRONCO LUMBOSACRO (CIÁTICO MENOR Y MAYOR)'}/>
+              <ConclusionButton value='pre_Sacroi' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO SACRO' displayText={'PLEXO SACRO'}/>
               <ConclusionButton value='plexo_pudendoi' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO PUDENDO' displayText={'PLEXO PUDENDO'}/>
             </div>
         </Accordion>
@@ -361,11 +361,11 @@ const SimpleMultiStepForm = ({
         <AccordionContainer>
         <Accordion title='POSTGANGLIONAR PACIAL'>
             <div onClick={ handleNextStep2 }>
-              <ConclusionButton value='ilihipogastrico_e_ilinguinal' title=' POSTGANGLIONAR PACIAL A NIVEL DE ILIHIPOGASTRICO E ILIINGUINAL' displayText={'ILIHIPOGASTRICO E ILIINGUINAL'}/>
-              <ConclusionButton value='genitocrural_y_femorocutáneo_lateral' title=' POSTGANGLIONAR PACIAL A NIVEL DE GENITOCRURAL Y FEMOROCUTANEO LATERAL' displayText={'GENITOCRURAL Y FEMOROCUTANEO LATERAL'}/>
+              <ConclusionButton value='ilihipogastrico_e_ilinguinal' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (ILIOHIPOGÁSTRICO E ILIOINGUINAL' displayText={'PLEXO LUMBAR (ILIOHIPOGÁSTRICO E ILIOINGUINAL)'}/>
+              <ConclusionButton value='genitocrural_y_femorocutáneo_lateral' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (GENITOCRURAL Y FEMOROCUTÁNEO LATERAL)' displayText={'PLEXO LUMBAR (GENITOCRURAL Y FEMOROCUTÁNEO LATERAL)'}/>
               <ConclusionButton value='plexo_lumbar' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO LUMBAR (FEMORAL Y OBTURADOR)' displayText={'PLEXO LUMBAR (FEMORAL Y OBTURADOR)'}/>
-              <ConclusionButton value='plexo_lumbosacro' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)' displayText={'TRONCO LUMBOSACRO (CIATICO MENOR Y MAYOR)'}/>
-              <ConclusionButton value='plexo_sacro' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO SACRO' displayText={'PLEXO SACRO'}/>
+              <ConclusionButton value='plexo_lumbosacro' title=' POSTGANGLIONAR PACIAL A NIVEL DE TRONCO LUMBOSACRO (CIÁTICO MENOR Y MAYOR)' displayText={'TRONCO LUMBOSACRO (CIÁTICO MENOR Y MAYOR)'}/>
+              <ConclusionButton value='plexo_sacro' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO SACRO' displayText={'PLEXO SACRO'}/>
               <ConclusionButton value='plexo_pudendo' title=' POSTGANGLIONAR PACIAL A NIVEL DE PLEXO PUDENDO' displayText={'PLEXO PUDENDO'}/>
             </div>
         </Accordion>
@@ -727,21 +727,21 @@ const StepA = ({ handleNextStep, handleNextStep1, handleNextStep2 }) => {
         <div onClick={handleNextStep}>
           <ConclusionButton
             value="plexopatia_cervical"
-            title="PLEXOPATIA CERVICAL"
+            title="PLEXOPATÍA CERVICAL"
             displayText="CERVICAL"
           />
         </div>
         <div onClick={handleNextStep1}>
           <ConclusionButton
             value="plexopatia_braquial"
-            title="PLEXOPATIA BRAQUIAL"
+            title="PLEXOPATÍA BRAQUIAL"
             displayText="BRAQUIAL"
           />
         </div>
         <div onClick={handleNextStep2}>
           <ConclusionButton
             value="plexopatia_lumbosacra"
-            title="PLEXOPATIA LUMBOSACRA"
+            title="PLEXOPATÍA LUMBOSACRA"
             displayText="LUMBOSACRO"
           />
         </div>
@@ -781,11 +781,11 @@ const StepB1 = ({ handleNextStep, handlePrevStep }) => {
       </div>
       <h1 className="text-xl font-bold text-white">LADO</h1>
       <div onClick={handleNextStep}>
-        <ConclusionButton value="izquierda_C" title=" IZQUIERDA," displayText="IZQUIERDA" />
+        <ConclusionButton value="izquierda_C" title=" IZQUIERDA," displayText="IZQUIERDO" />
         <ConclusionButton
           value="derecha_C"
           title=" DERECHA"
-          displayText="DERECHA"
+          displayText="DERECHO"
           dangerouslySetInnerHTML={{ __html: 'DERECHA,<br>' }}
         />
         <ConclusionButton value="bilateral_C" title=" BILATERAL," displayText="BILATERAL" />
@@ -832,10 +832,10 @@ const StepB2 = ({
       <h1 className="text-xl font-bold text-white">LADO</h1>
       <div onClick={handleNextStep1}>
         <div onClick={ladoizquierda}>
-          <ConclusionButton value="izquierda" title=" IZQUIERDA," displayText="IZQUIERDA" />
+          <ConclusionButton value="izquierda" title=" IZQUIERDA," displayText="IZQUIERDO" />
         </div>
         <div onClick={ladoderecho}>
-          <ConclusionButton value="derecha" title=" DERECHA," displayText="DERECHA" />
+          <ConclusionButton value="derecha" title=" DERECHA," displayText="DERECHO" />
         </div>
         <div onClick={ladobilateral}>
           <ConclusionButton value="bilateral" title=" BILATERAL," displayText="BILATERAL" />
@@ -883,10 +883,10 @@ const StepB3 = ({
       <h1 className="text-xl font-bold text-white">LADO</h1>
       <div onClick={handleNextStep2}>
         <div onClick={ladoizquierda1}>
-          <ConclusionButton value="izquierda" title=" IZQUIERDA," displayText="IZQUIERDA" />
+          <ConclusionButton value="izquierda" title=" IZQUIERDA," displayText="IZQUIERDO" />
         </div>
         <div onClick={ladoderecho1}>
-          <ConclusionButton value="derecha" title=" DERECHA," displayText="DERECHA" />
+          <ConclusionButton value="derecha" title=" DERECHA," displayText="DERECHO" />
         </div>
         <div onClick={ladobilateral1}>
           <ConclusionButton value="bilateral" title=" BILATERAL," displayText="BILATERAL" />
@@ -919,11 +919,11 @@ const StepC1 = ({ handleNextStep, handlePrevStep }) => {
           <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">EVOLUCION</h1>
+      <h1 className="text-xl font-bold text-white">EVOLUCIÓN</h1>
       <div onClick={handleNextStep}>
         <ConclusionButton value="aguda" title=" AGUDA" />
         <ConclusionButton value="subaguda" title=" SUBAGUDA" />
-        <ConclusionButton value="cronica" title=" CRONICA" />
+        <ConclusionButton value="cronica" title=" CRÓNICA" />
       </div>
     </div>
   );
@@ -954,11 +954,11 @@ const StepC2 = ({ handleNextStep1, handlePrevStep1 }) => {
           <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">EVOLUCION</h1>
+      <h1 className="text-xl font-bold text-white">EVOLUCIÓN</h1>
       <div onClick={handleNextStep1}>
         <ConclusionButton value="aguda" title=" AGUDA" />
         <ConclusionButton value="subaguda" title=" SUBAGUDA" />
-        <ConclusionButton value="cronica" title=" CRONICA" />
+        <ConclusionButton value="cronica" title=" CRÓNICA" />
       </div>
     </div>
   );
@@ -989,11 +989,11 @@ const StepC3 = ({ handleNextStep2, handlePrevStep2 }) => {
           <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">EVOLUCION</h1>
+      <h1 className="text-xl font-bold text-white">EVOLUCIÓN</h1>
       <div onClick={handleNextStep2}>
         <ConclusionButton value="aguda" title=" AGUDA" />
         <ConclusionButton value="subaguda" title=" SUBAGUDA" />
-        <ConclusionButton value="cronica" title=" CRONICA" />
+        <ConclusionButton value="cronica" title=" CRÓNICA" />
       </div>
     </div>
   );
@@ -1071,7 +1071,7 @@ const StepD2 = ({
           <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">UBICACION</h1>
+      <h1 className="text-xl font-bold text-white">UBICACIÓN</h1>
       <div>{ubicaciond2()}</div>
     </div>
   );
@@ -1235,7 +1235,7 @@ const StepD3 = ({
           <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
         </button>
       </div>
-      <h1 className="text-xl font-bold text-white">UBICACION</h1>
+      <h1 className="text-xl font-bold text-white">UBICACIÓN</h1>
       <div>{ubicaciond3()}</div>
     </div>
   );
@@ -1390,7 +1390,7 @@ const StepD1 = ({ handleNextStep, handlePrevStep, handleNextStep4 }) => {
             <ConclusionButton
               value="sin_denervación"
               title=" DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
+              displayText="AUSENTE"
             />
           </div>
         </Accordion>
@@ -1551,7 +1551,7 @@ const StepE2 = ({ handlePrevStep1, handleNextStep1, handleNextStep4 }) => {
             <ConclusionButton
               value="sin_denervación"
               title=" DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
+              displayText="AUSENTE"
             />
           </div>
         </Accordion>
@@ -1581,7 +1581,7 @@ const StepE2 = ({ handlePrevStep1, handleNextStep1, handleNextStep4 }) => {
             <ConclusionButton
               value="sin_denervación"
               title=" DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
+              displayText="AUSENTE"
             />
           </div>
         </Accordion>
@@ -1692,7 +1692,7 @@ const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
             <ConclusionButton
               value="sin_denervación"
               title=" DE TIPO AXONAL COMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
+              displayText="AUSENTE"
             />
           </div>
         </Accordion>
@@ -1722,7 +1722,8 @@ const StepE3 = ({ handleNextStep2, handlePrevStep2, handleNextStep4 }) => {
             <ConclusionButton
               value="sin_denervación"
               title=" DE TIPO AXONAL INCOMPLETA SIN DENERVACIÓN,"
-              displayText="ASUSENTE"
+              displayText="A
+              USENTE"
             />
           </div>
         </Accordion>

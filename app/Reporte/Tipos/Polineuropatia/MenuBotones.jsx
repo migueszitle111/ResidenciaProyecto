@@ -512,14 +512,14 @@ const StepA = ({ handleNextStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        EVOLUCION
+        EVOLUCIÓN
       </h1>
 
         <div onClick={ handleNextStep }>
-          <ConclusionButton value='aguda' title='POLINEUROPATIA AGUDA' displayText={'AGUDA'}/>                
-          <ConclusionButton value='subaguda' title='POLINEUROPATIA SUBAGUDA' displayText={'SUBAGUDA'}/>
-          <ConclusionButton value='cronica' title='POLINEUROPATIA CRÓNICA' displayText={'CRÓNICA'}/>
-          <ConclusionButton value='antigua' title='POLINEUROPATIA ANTIGUA' displayText={'ANTIGUA'}/>
+          <ConclusionButton value='aguda' title='POLINEUROPATÍA AGUDA' displayText={'AGUDA'}/>                
+          <ConclusionButton value='subaguda' title='POLINEUROPATÍA SUBAGUDA' displayText={'SUBAGUDA'}/>
+          <ConclusionButton value='cronica' title='POLINEUROPATÍA CRÓNICA' displayText={'CRÓNICA'}/>
+          <ConclusionButton value='antigua' title='POLINEUROPATÍA ANTIGUA' displayText={'ANTIGUA'}/>
         </div>
 
         <div className='my-2 flex justify-end items-center'>
@@ -605,8 +605,8 @@ const StepC = ({ handleNextStep, handlePrevStep, handleNextStep5 }) => {
         <ConclusionButton value='desmielinizante' title=' TIPO DESMIELINIZANTE' displayText={'DESMIELINIZANTE'}/>
       </div>
       <div onClick={ handleNextStep }>
-        <ConclusionButton value='aximal2' title=' PRIMARIAMENTE AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'PRIMARIAMENTE AXONAL CON DESMIELINIZACIÓN SECUNDARIA'}/>                
-        <ConclusionButton value='desmielinizante2' title=' PRIMARIAMENTE DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA' displayText={'PRIMARIAMENTE DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA'}/>
+        <ConclusionButton value='aximal2' title=' PRIMARIAMENTE AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'AXONAL > DESMIELINIZANTE'}/>                
+        <ConclusionButton value='desmielinizante2' title=' PRIMARIAMENTE DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA' displayText={'DESMIELINIZANTE > AXONAL'}/>
       </div>
 
       
@@ -644,8 +644,8 @@ const StepD = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={ handleNextStep }>
-      <ConclusionButton value='activa_abundante_difusa' title=' (DISFUNCIÓN AUTONÓMICA POSITIVA)' displayText={'(DISFUNCIÓN AUTONÓMICA POSITIVA)'}/>
-      <ConclusionButton value='activa_moderada_progresiva' title=' (DISFUNCIÓN AUTONÓMICA NEGATIVA)' displayText={'(DISFUNCIÓN AUTONÓMICA NEGATIVA)'}/>
+      <ConclusionButton value='activa_abundante_difusa' title=' (DISFUNCIÓN AUTONÓMICA POSITIVA)' displayText={'DISFUNCIÓN AUTONÓMICA +'}/>
+      <ConclusionButton value='activa_moderada_progresiva' title=' (DISFUNCIÓN AUTONÓMICA NEGATIVA)' displayText={'DISFUNCIÓN AUTONÓMICA -'}/>
       </div>
 
       
@@ -681,8 +681,8 @@ const StepD2 = ({ handleNextStep, handlePrevStep5, handleNextStep5 }) => {
       </h1>
 
       <div onClick={ handleNextStep5 }>
-      <ConclusionButton value='activa_abundante_difusa' title=' (DISFUNCIÓN AUTONÓMICA POSITIVA)' displayText={'(DISFUNCIÓN AUTONÓMICA POSITIVA)'}/>
-      <ConclusionButton value='activa_moderada_progresiva' title=' (DISFUNCIÓN AUTONÓMICA NEGATIVA)' displayText={'(DISFUNCIÓN AUTONÓMICA NEGATIVA)'}/>
+      <ConclusionButton value='activa_abundante_difusa' title=' (DISFUNCIÓN AUTONÓMICA POSITIVA)' displayText={' DISFUNCIÓN AUTONÓMICA +'}/>
+      <ConclusionButton value='activa_moderada_progresiva' title=' (DISFUNCIÓN AUTONÓMICA NEGATIVA)' displayText={'DISFUNCIÓN AUTONÓMICA -'}/>
       </div>
 
       
@@ -720,7 +720,7 @@ const StepE = ({ handleNextStep, handlePrevStep }) => {
       </h1>
 
       <div onClick={handleNextStep}>
-        <ConclusionButton value='rapidamente_progresiva' title=' RAPIDAMENTE PROGRESIVA' displayText={'RAPIDAMENTE PROGRESIVA'}/>
+        <ConclusionButton value='rapidamente_progresiva' title=' RÁPIDAMENTE PROGRESIVA' displayText={'RÁPIDAMENTE PROGRESIVA'}/>
         <ConclusionButton value='lentamente_progresiva' title=' LENTAMENTE PROGRESIVA' displayText={'LENTAMENTE PROGRESIVA'}/>
         <ConclusionButton value='recidivante_recurrente' title=' RECIDIVANTE/RECURRENTE' displayText={'RECIDIVANTE/RECURRENTE'}/>
         <ConclusionButton value='remitente_regresiva' title=' REMITENTE/REGRESIVA' displayText={'REMITENTE/REGRESIVA'}/>
@@ -1043,7 +1043,7 @@ const StepH = ({ handleNextStep, handleNextStep1, handlePrevStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        TOPOGRAFIA
+        TOPOGRAFÍA
       </h1>
       
       <div onClick={ handleNextStep }>
@@ -1081,7 +1081,7 @@ const StepH2 = ({handlePrevStep5, handleNextStep5}) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        TOPOGRAFIA
+        TOPOGRAFÍA
       </h1>
       
       <div onClick={ handleNextStep5 }>
@@ -1121,7 +1121,7 @@ const StepI1 = ({ handlePrevStep,handleNextStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        EXTENSION
+        EXTENSIÓN
       </h1>
       <div onClick={handleNextStep}>
       <ConclusionButton value = 'proximal' title = ' PROXIMAL.' displayText={'PROXIMAL'}/>
@@ -1160,7 +1160,7 @@ const StepI2 = ({ handlePrevStep1,handleNextStep1 }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        EXTENSION
+        EXTENSIÓN
       </h1>
       <div onClick={handleNextStep1}>
       <ConclusionButton value = 'proximal' title = ' PROXIMAL.' displayText={'PROXIMAL'}/>
@@ -1200,7 +1200,7 @@ const StepI3 = ({ handlePrevStep5,handleNextStep1, handleNextStep5 }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        EXTENSION
+        EXTENSIÓN
       </h1>
       <div onClick={handleNextStep5}>
       <ConclusionButton value = 'proximal' title = ' PROXIMAL' displayText={'PROXIMAL'}/>
@@ -1274,7 +1274,7 @@ const StepK = ({ handlePrevStep, handleNextStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        PRONÓSTICO
+        PRONÓSTICO DE RECUPERACIÓN
       </h1>
       <div onClick={handleNextStep}>
       <ConclusionButton value = 'pronostico_recuperacion_completa' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'COMPLETA'}/>
@@ -1312,7 +1312,7 @@ const StepK2 = ({ handlePrevStep5, handleNextStep5 }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        PRONÓSTICO
+        PRONÓSTICO DE RECUPERACIÓN
       </h1>
       <div onClick={handleNextStep5}>
       <ConclusionButton value = 'pronostico_recuperacion_completa' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'COMPLETA'}/>
@@ -1419,7 +1419,7 @@ const StepM = ({ handlePrevStep3,handleNextStep3 }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        DENERVACION
+        INESTABILIDAD DE MEMBRANA
       </h1>
       
       <div onClick={handleNextStep3}>

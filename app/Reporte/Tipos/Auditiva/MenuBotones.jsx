@@ -76,7 +76,7 @@ const StepA = ({ handleNextStep ,setStep}) => (
     <div onClick={() => setStep('E2')}>
       <ConclusionButton value="indemne" title="VÍA AUDITIVA CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
     <div onClick={() => setStep('B')}>
-      <ConclusionButton value="alterada" title="VÍA AUDITIVA CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
+      <ConclusionButton value="alterada" title="VÍA AUDITIVA CON DEFECTO " displayText="ALTERADA " />
     </div>
   </div>
 );
@@ -109,7 +109,7 @@ const StepB = ({ handlePrevStep, handleNextStep, setStep }) => {
       <ConclusionButton value="bloqueo_en_la_conduccion" title="POR BLOQUEO EN LA CONDUCCIÓN " displayText="BLOQUEO EN LA CONDUCCIÓN" />
     </div>
     <div onClick={() => setStep('C2')}>
-      <ConclusionButton value="deficit_neuronal" title="AXONAL " displayText="POR DEFICIT NEURONAL" />
+      <ConclusionButton value="deficit_neuronal" title="AXONAL " displayText="DEFICIT AXONAL" />
     </div>
     <div onClick={() => setStep('E')}>
       <ConclusionButton value="sin_respuesta" title="POR AUSENCIA DE RESPUESTA EVOCABLE " displayText="SIN RESPUETA" />
@@ -187,7 +187,7 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
-      <ConclusionButton value="perdida_axonal_secundaria" title=" Y PERDIDA AXONAL SECUNDARIA " displayText="PERDIDA AXONAL SECUNDARIA" />
+      <ConclusionButton value="perdida_axonal_secundaria" title=" Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
   </div>
 );
 };
@@ -208,7 +208,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
-      <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="RETARDO SECUNDARIO EN LA CONDUCCIÓN" />
+      <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
   </div>
 );
 };
@@ -259,7 +259,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
             }}>
           <ConclusionButton
             value="bilateral"
-            title="BILATERAL,"
+            title="DE FORMA BILATERAL,"
             displayText="BILATERAL "
             
           />
@@ -294,7 +294,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => {
             }}>
           <ConclusionButton
             value="izquierdoindemne"
-            title="PARA LADO IZQUIERDO A TRAVES DEL TALLO CEREBRAL."
+            title="PARA LADO IZQUIERDO A TRAVÉS DEL TALLO CEREBRAL."
             displayText="IZQUIERDO"
           
           />
@@ -305,7 +305,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => {
             }}>
           <ConclusionButton
             value="derechoindemne"
-            title="PARA LADO DERECHO A TRAVES DEL TALLO CEREBRAL."
+            title="PARA LADO DERECHO A TRAVÉS DEL TALLO CEREBRAL."
             displayText="DERECHO"
           
           />
@@ -316,7 +316,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => {
             }}>
           <ConclusionButton
             value="bilateralindemne"
-            title="BILATERAL A TRAVES DEL TALLO CEREBRAL."
+            title="DE FORMA BILATERAL A TRAVÉS DEL TALLO CEREBRAL."
             displayText="BILATERAL "
             
           />
@@ -344,12 +344,12 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
           <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
         </button>
       </div>
-      <h1 className='text-xl font-bold text-white'>REGION: </h1>
+      <h1 className='text-xl font-bold text-white'>REGIÓN: </h1>
     
       <div onClick={() => setStep('G')}>
-        <ConclusionButton value='rostral' title=' A TRAVÉS DE REGION ROSTRAL (III-V) DEL TALLO CEREBRAL ' displayText='ROSTRAL' />
-        <ConclusionButton value='caudal' title=' A TRAVÉS DE REGION CAUDAL (I-III) DEL TALLO CEREBERAL' displayText='CAUDAL' />
-        <ConclusionButton value='tallo_cerebral' title=' A TRAVES DEL TALLO CEREBERAL (I-V)' displayText='TOTAL' />
+        <ConclusionButton value='rostral' title=' A TRAVÉS DE REGIÓN ROSTRAL DEL TALLO CEREBRAL' displayText='ROSTRAL (III-V)' />
+        <ConclusionButton value='caudal' title=' A TRAVÉS DE REGIÓN CAUDAL DEL TALLO CEREBERAL' displayText='CAUDAL (I-III)' />
+        <ConclusionButton value='tallo_cerebral' title=' A TRAVÉS DEL TALLO CEREBERAL' displayText='TOTAL (I-V)' />
       </div>
     </div>
   );
@@ -373,7 +373,7 @@ const StepG = ({
       displayText: 'NERVIO AUDITIVO (I)'
     },
     {
-      title: '; TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR.',
+      title: '; TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO COCLEAR.',
       value: `${selectedSide}nucleo_coclear`,
       displayText: 'NUCLEO COCLEAR (II)'
     },
@@ -388,7 +388,7 @@ const StepG = ({
       displayText: 'LEMNISCO LATERAL (IV)'
     },
     {
-      title: '; TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR.',
+      title: '; TOPOGRÁFICAMENTE A NIVEL DE COLÍCULO INFERIOR.',
       value: `${selectedSide}coliculo_inferior`,
       displayText: 'COLÍCULO INFERIOR (V)'
     },
@@ -441,7 +441,7 @@ const StepG = ({
       {/* Botón 1 (especial) */}
       <ConclusionButton
         value={`${selectedSide}nervio_auditivo`}
-        title="TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO."
+        title="; TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO."
         displayText="NERVIO AUDITIVO (I)"
         onClick={handleConclusionClick}   // <--- Pasamos la función
       />
@@ -449,7 +449,7 @@ const StepG = ({
       {/* Botón 2 (normal) */}
       <ConclusionButton
         value={`${selectedSide}nucleo_coclear`}
-        title="TOPOGRÁFICAMENTE A NIVEL DE NUCLEO COCLEAR."
+        title="; TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO COCLEAR."
         displayText="NUCLEO COCLEAR (II)"
         onClick={handleConclusionClick}   // <--- misma función
       />
@@ -473,7 +473,7 @@ const StepG = ({
       {/* Botón 5 (normal) */}
       <ConclusionButton
         value={`${selectedSide}coliculo_inferior`}
-        title="; TOPOGRÁFICAMENTE A EXPENSAS DE COLÍCULO INFERIOR."
+        title="; TOPOGRÁFICAMENTE A NIVEL DE COLÍCULO INFERIOR."
         displayText="COLÍCULO INFERIOR (V)"
         onClick={handleConclusionClick}
       />

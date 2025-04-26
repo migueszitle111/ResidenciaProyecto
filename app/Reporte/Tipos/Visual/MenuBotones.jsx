@@ -71,7 +71,7 @@ const StepA = ({ handleNextStep ,setStep, setSelectedConclusions}) => (
     <div onClick={() => setStep('E2')}>
       <ConclusionButton value="indenme" title="VÍA VISUAL CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
     <div onClick={() => setStep('B')}>
-      <ConclusionButton value="alterada" title="VÍA VISUAL CON DEFECTO FUNCIONAL " displayText="ALTERADA " />
+      <ConclusionButton value="alterada" title="VÍA VISUAL CON DEFECTO " displayText="ALTERADA " />
     </div>
   </div>
 );
@@ -107,7 +107,7 @@ const StepB = ({ handlePrevStep, handleNextStep, setStep }) => {
       <ConclusionButton value="bloqueo_en_la_conduccion" title="POR BLOQUEO EN LA CONDUCCIÓN " displayText="BLOQUEO EN LA CONDUCCIÓN" />
     </div>
     <div onClick={() => setStep('C2')}>
-      <ConclusionButton value="deficit_neuronal" title="AXONAL " displayText="POR DEFICIT NEURONAL" />
+      <ConclusionButton value="deficit_neuronal" title="AXONAL " displayText="DÉFICIT AXONAL" />
     </div>
     <div onClick={() => setStep('E')}>
       <ConclusionButton value="sin_respuesta" title="POR AUSENCIA DE RESPUESTA EVOCABLE " displayText="SIN RESPUETA" />
@@ -188,7 +188,7 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
-      <ConclusionButton value="perdida_axonal_secundaria" title=" Y PERDIDA AXONAL SECUNDARIA " displayText="PERDIDA AXONAL SECUNDARIA" />
+      <ConclusionButton value="perdida_axonal_secundaria" title=" Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
   </div>
 );
 };
@@ -212,7 +212,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
     
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
      <div >
-      <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="RETARDO SECUNDARIO EN LA CONDUCCIÓN" />
+      <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
      </div>
   </div>
 );
@@ -270,7 +270,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
         }}>
       <ConclusionButton
         value="bilateral"
-        title="BILATERAL,"
+        title="DE FORMA BILATERAL,"
         displayText="BILATERAL"
         
       />
@@ -332,7 +332,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide,select
         }}>
       <ConclusionButton
         value="bilateral"
-        title="BILATERAL,"
+        title="DE FORMA BILATERAL,"
         displayText="BILATERAL"
         
       />
@@ -365,18 +365,18 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
         <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
       </button>
     </div>
-    <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
+    <h1 className='text-xl font-bold text-white'>ESTÍMULO: </h1>
     <div onClick={() => setStep('H')}>
     <ConclusionButton
             value={`${selectedSide}led_flashAlterada`}
-            title=' AL ESTIMULO LUMINOSO DE LAS FIBRAS RETINO-TÁLAMOCORTICALES.' displayText='LED FLASH'
+            title=' AL ESTÍMULO LUMINOSO.' displayText='LED FLASH'
           />
     </div>
     <div onClick={() => setStep('G12')}>
-      <ConclusionButton value='damero_total' title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA' displayText='DAMERO TOTAL' />
+      <ConclusionButton value='damero_total' title=' AL ESTIMULAR ÁREA PREQUIASMÁTICA' displayText='DAMERO TOTAL' />
     </div>
     <div onClick={() => setStep('G22')}>
-    <ConclusionButton value='damero_hemicampos' title=' AL ESTÍMULAR ÁREA RETROQUIASMATICA' displayText='DAMERO HEMICAMPOS' />
+    <ConclusionButton value='damero_hemicampos' title=' AL ESTIMULAR ÁREA RETROQUIASMÁTICA' displayText='DAMERO HEMICAMPOS' />
     </div>
   </div>
 );
@@ -403,18 +403,18 @@ const StepF2 = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
         <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
       </button>
     </div>
-    <h1 className='text-xl font-bold text-white'>ESTIMULO: </h1>
+    <h1 className='text-xl font-bold text-white'>ESTÍMULO: </h1>
     <div onClick={() => setStep('H')}>
     <ConclusionButton
             value={`${selectedSide}led_flash`}
-            title=' AL ESTIMULO LUMINOSO DE LAS FIBRAS RETINO-TÁLAMOCORTICALES.' displayText='LED FLASH'
+            title=' AL ESTÍMULO LUMINOSO.' displayText='LED FLASH'
           />
     </div>
     <div onClick={() => setStep('H')}>
-      <ConclusionButton value={`${selectedSide}damero_total`} title=' AL ESTÍMULAR ÁREA PREQUIASMÁTICA MEDIANTE CAMPO COMPLETO.' displayText='DAMERO TOTAL' />
+      <ConclusionButton value={`${selectedSide}damero_total`} title=' AL ESTIMULAR ÁREA PREQUIASMÁTICA MEDIANTE CAMPO COMPLETO.' displayText='DAMERO TOTAL' />
     </div>
     <div onClick={() => setStep('H')}>
-    <ConclusionButton value={`${selectedSide}damero_hemicampos`} title=' AL ESTÍMULAR ÁREA RETROQUIASMATICA MEDIANTE HEMICAMPOS.' displayText='DAMERO HEMICAMPOS' />
+    <ConclusionButton value={`${selectedSide}damero_hemicampos`} title=' AL ESTIMULAR ÁREA RETROQUIASMÁTICA MEDIANTE HEMICAMPOS.' displayText='DAMERO HEMICAMPOS' />
     </div>
   </div>
 );

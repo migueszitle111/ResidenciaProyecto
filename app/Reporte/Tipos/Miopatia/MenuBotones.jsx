@@ -158,14 +158,14 @@ const StepA = ({ handleNextStep }) => {
 
         </div>
           <h1 className=' text-xl font-bold text-white'>
-            EVOLUCION
+            EVOLUCIÓN
           </h1>
 
           <div onClick={ handleNextStep }>
-            <ConclusionButton value='evolucion_aguda' title='MIOPATIA AGUDA' displayText={'AGUDA'}/>
-            <ConclusionButton value='evolucion_subaguda' title='MIOPATIA SUBAGUDA' displayText={'SUBAGUDA'}/>
-            <ConclusionButton value='evolucion_cronica' title='MIOPATIA CRÓNICA' displayText={'CRÓNICA'}/>
-            <ConclusionButton value='evolucion_antigua' title='MIOPATIA ANTIGUA' displayText={'ANTIGUA'}/>
+            <ConclusionButton value='evolucion_aguda' title='MIOPATÍA AGUDA' displayText={'AGUDA'}/>
+            <ConclusionButton value='evolucion_subaguda' title='MIOPATÍA SUBAGUDA' displayText={'SUBAGUDA'}/>
+            <ConclusionButton value='evolucion_cronica' title='MIOPATÍA CRÓNICA' displayText={'CRÓNICA'}/>
+            <ConclusionButton value='evolucion_antigua' title='MIOPATÍA ANTIGUA' displayText={'ANTIGUA'}/>
           </div>
 
         <div className='my-2 flex justify-end items-center'>
@@ -203,7 +203,7 @@ const StepB = ({ handleNextStep, handlePrevStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        CLASIFICACION
+        CLASIFICACIÓN
       </h1>
       <div onClick={ handleNextStep }>
         <ConclusionButton value='adquirida' title=' ADQUIRIDA,' displayText={'ADQUIRIDA'}/>
@@ -277,15 +277,15 @@ const StepD = ({ handleNextStep, handlePrevStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        DENERVACIÓN
+        INESTABILIDAD DE MEMBRANA
       </h1>
 
       <div onClick={ handleNextStep }>
-        <ConclusionButton value='denervacion_severa' title=' CON DENERVACIÓN DIFUSA (++++)' displayText={'DIFUSA (++++)'}/>
-        <ConclusionButton value='denervacion_abundante' title=' CON DENERVACIÓN ABUNDANTE (+++)' displayText={'ABUNDANTE (+++)'}/>
-        <ConclusionButton value='denervacion_progresiva' title=' CON DENERVACIÓN PROGRESIVA (++)' displayText={'PROGRESIVA (++)'}/>
-        <ConclusionButton value='denervacion_discreta' title=' CON DENERVACIÓN DISCRETA (+)' displayText={'DISCRETA (+/+)'}/>
-        <ConclusionButton value='denervacion_ausente' title=' CON DENERVACIÓN AUSENTE' displayText={'AUSENTE'}/>
+        <ConclusionButton value='denervacion_severa' title=' CON ACTIVIDAD PATOLÓGICA DIFUSA (++++)' displayText={'DIFUSA (++++)'}/>
+        <ConclusionButton value='denervacion_abundante' title=' CON ACTIVIDAD PATOLÓGICA ABUNDANTE (+++)' displayText={'ABUNDANTE (+++)'}/>
+        <ConclusionButton value='denervacion_progresiva' title=' CON ACTIVIDAD PATOLÓGICA PROGRESIVA (++)' displayText={'PROGRESIVA (++)'}/>
+        <ConclusionButton value='denervacion_discreta' title=' CON ACTIVIDAD PATOLÓGICA DISCRETA (+)' displayText={'DISCRETA (+/+)'}/>
+        <ConclusionButton value='denervacion_ausente' title=' CON ACTIVIDAD PATOLÓGICA AUSENTE (-)' displayText={'AUSENTE (-)'}/>
       </div>
 
       
@@ -362,19 +362,19 @@ const StepF = ({ handlePrevStep, handleNextStep }) => {
       </h1>
       
       <div onClick={ handleNextStep }>
-        <ConclusionButton value='distribucion_proximal' title=' DE DISTRIBUCIÓN PROXIMAL,' displayText={'PROXIMAL'}/>
-        <ConclusionButton value='distribucion_distal' title=' DE DISTRIBUCIÓN DISTAL,' displayText={'DISTAL'}/>
-        <ConclusionButton value='generalizada1' title=' DE DISTRIBUCIÓN GENERALIZADA,' displayText={'GENERALIZADA'}/>
+        <ConclusionButton value='distribucion_proximal' title=' DE DISTRIBUCIÓN PROXIMAL.' displayText={'PROXIMAL'}/>
+        <ConclusionButton value='distribucion_distal' title=' DE DISTRIBUCIÓN DISTAL.' displayText={'DISTAL'}/>
+        <ConclusionButton value='generalizada1' title=' DE DISTRIBUCIÓN GENERALIZADA.' displayText={'GENERALIZADA'}/>
       </div>
       
         <AccordionContainer>
           <Accordion title='DISTROFIA' value='DISTROFIA' type='external'>
             <div onClick={ handleNextStep }>
-              <ConclusionButton value='anillo_oseo' title=' POR DISTROFIA DE CINTURAS,' displayText={'CINTURAS'}/>
-              <ConclusionButton value='duchenne_becker' title=' POR DISTROFIA DE DUCHENNE/BECKER,' displayText={'DUCHENNE/BECKER'}/>
-              <ConclusionButton value='emery_dreifuss' title=' POR DISTROFIA DE EMERY-DREIFUSS,' displayText={'EMERY-DREIFUSS'}/>
-              <ConclusionButton value='facioescapulohumeral' title=' POR DISTROFIA FACIOESCAPULOHUMERAL,' displayText={'FACIOESCAPULOHUMERAL'}/>
-              <ConclusionButton value='oculofaringea' title=' POR DISTROFIA OCULOFARINGEA,' displayText={'OCULOFARINGEA'}/>
+              <ConclusionButton value='anillo_oseo' title=' POR DISTROFIA DE CINTURAS.' displayText={'CINTURAS'}/>
+              <ConclusionButton value='duchenne_becker' title=' POR DISTROFIA DE DUCHENNE/BECKER.' displayText={'DUCHENNE/BECKER'}/>
+              <ConclusionButton value='emery_dreifuss' title=' POR DISTROFIA DE EMERY-DREIFUSS.' displayText={'EMERY-DREIFUSS'}/>
+              <ConclusionButton value='facioescapulohumeral' title=' POR DISTROFIA FACIOESCAPULOHUMERAL.' displayText={'FACIOESCAPULOHUMERAL'}/>
+              <ConclusionButton value='oculofaringea' title=' POR DISTROFIA OCULOFARINGEA.' displayText={'OCULOFARINGEA'}/>
             </div>
           </Accordion>
         </AccordionContainer>
@@ -406,7 +406,7 @@ const StepG = ({ handleNextStep, handlePrevStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        REGENERARCION
+        REGENERARCIÓN
       </h1>
 
       <div onClick={ handleNextStep }>
@@ -445,13 +445,13 @@ const StepH = ({ handlePrevStep, handleNextStep }) => {
         </button>
       </div>
       <h1 className=' text-xl font-bold text-white'>
-        PRONÓSTICO
+        PRONÓSTICO DE RECUPERACIÓN
       </h1>
       <div onClick={ handleNextStep }>
-        <ConclusionButton value = 'completo' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETA' displayText={'COMPLETA'}/>
-        <ConclusionButton value = 'parcial_funcional' title = ' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL' displayText={'PARCIAL FUNCIONAL'}/>
-        <ConclusionButton value = 'pobre' title = ' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL' displayText={'POBRE NO FUNCIONAL'}/>
-        <ConclusionButton value = 'nulo' title = ' PRONÓSTICO DE RECUPERACIÓN NULO' displayText={'NULO'}/>
+        <ConclusionButton value = 'completo' title = ' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'COMPLETA'}/>
+        <ConclusionButton value = 'parcial_funcional' title = ' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'PARCIAL FUNCIONAL'}/>
+        <ConclusionButton value = 'pobre' title = ' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'POBRE NO FUNCIONAL'}/>
+        <ConclusionButton value = 'nulo' title = ' PRONÓSTICO DE RECUPERACIÓN NULO.' displayText={'NULO'}/>
       </div>
       
     </div>

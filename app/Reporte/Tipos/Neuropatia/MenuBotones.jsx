@@ -2080,6 +2080,9 @@ const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclus
     try {
       setIsLoading(true);
   
+
+
+
       /* —— A) forzamos fondo blanco —— */
       document.body.classList.add('pdf-exporting');
       await new Promise(r => requestAnimationFrame(r));   // deja al DOM pintar
@@ -2094,7 +2097,9 @@ const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclus
         } else {
           canvasDataUrl = await htmlToImage.toPng(reportRef.current, {
             cacheBust: true,
-            filter(node) { return node.nodeName !== 'TEXTAREA'; }
+            filter: node =>
+              node.nodeName !== 'TEXTAREA' &&
+              !node.classList?.contains('top-left-text'),   // <—— excluye
           });
         }
       }
@@ -2102,7 +2107,14 @@ const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclus
       const payload = {
         finalConclusion:  copyConclusions,
         conclusiones,
-        userData: { /* … */ },
+        userData: {
+          name: session?.user?.name,
+          lastname: session?.user?.lastname,
+          email: session?.user?.email,
+          cedula: session?.user?.cedula,
+          especialidad: session?.user?.especialidad,
+          imageUrl: session?.user?.imageUrl,
+        },
         droppedItems,
         topLeftText,
         baseImgData,

@@ -2068,20 +2068,16 @@ const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclus
   const [isUploadAllowed, setIsUploadAllowed] = useState(false); // Estado para controlar si la carga está permitida
   const { removeConclusion } = useContext(ReportContext)
 
-  
   const resetStep = () => {
     setExpandedDivs({});
     setImageSrc(null);
     setIsUploadAllowed(false);
   };
-  const conclusiones = conclusions;
 
+  const conclusiones = conclusions;
   const handleExportPdf = async () => {
     try {
       setIsLoading(true);
-  
-
-
 
       /* —— A) forzamos fondo blanco —— */
       document.body.classList.add('pdf-exporting');

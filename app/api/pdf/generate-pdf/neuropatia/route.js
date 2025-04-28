@@ -32,14 +32,14 @@ textarea{
 .stack{
   position:relative;
   width:1000px;
-  height:1200px;
+  height:1500px;
   margin:0 auto;
 }
 .stack img{
   position:absolute;
   inset:0;
   width:1000px;
-  height:1200px;
+  height:1500px;
   object-fit:contain;
 }
 .base  { z-index:1; }
@@ -51,18 +51,27 @@ textarea{
   z-index:3;
 }
 
-.conclusion-container{
+.conclusion-container {
   background:#fff;
-  position:absolute;          /* fuera del flujo  */
-  top:945px;                  /* súbelo / bájalo a tu gusto   */
-  left:50%; transform:translateX(-50%);
-  width:calc(100% - 3cm);     /* respeta márgenes @page (1 cm + 1.5 cm) */
-  padding:10px;
+  position:absolute;         
+  top: 1151px;                
+  left:0; right:0;          
+  margin-inline:0cm;        
+  margin-block-start:0cm; 
+ padding:0cm;      
   background:#fff;
-  font-size:18px; line-height:1.3;
-  z-index:4;                  
-  text-align: justify;
-}
+  font-size:17px;
+  z-index:4;    
+  margin-top: 2px;   
+  white-space: pre-line;  
+ line-height:1.8;          
+ text-align:justify;       
+ text-justify:inter-word;  
+ text-align-last:justify;  
+ hyphens:auto;
+ -webkit-hyphens:auto;
+ -ms-hyphens:auto;
+}   
 
 
 .user-logo{             /* lo paso a la hoja global para que no se repita */
@@ -151,14 +160,14 @@ function buildHtml({
 
     <!-- Imagen Base -->
     <div class="stack">
-      <img src="${baseImgData}" class="base" />
-      ${overlayHtml}
+     
+    
       ${canvasImage ? `<img src="${canvasImage}" class="paint" />` : ''}
-      <div class="buttons-wrapper">${buttonsOverlay}</div>
+     
     </div>
 
     <!-- Conclusiones -->
-    <div class="conclusion-container" style="margin-top:20px; padding:10px;">
+    <div class="conclusion-container">
       ${finalConclusion}
     </div>
 

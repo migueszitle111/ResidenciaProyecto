@@ -1075,13 +1075,13 @@ export function checkDivsBILATERAL2(copyConclusions) {
       <div style={{ position: 'absolute', top: '23.8%', left: '33.7%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.6%', left: '33.4%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar' title='DEL DEL CANAL DE TORSION,' displayText=' ' /></div>
 
 
       <div style={{ position: 'absolute', top: '25.5%', left: '33.2%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar19' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar19' title='DEL DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.3%', left: '33.1%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar20' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar20' title='DEL DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.1%', left: '33.0%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar21' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.9%', left: '32.9%', borderRadius: '50%', }}
@@ -1275,12 +1275,12 @@ export function checkDivsBILATERAL2(copyConclusions) {
       <div style={{ position: 'absolute', top: '23.8%', left: '65.1%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar17' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.6%', left: '65.3%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar18' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar18' title='DEL DEL CANAL DE TORSION,' displayText=' ' /></div>
 
       <div style={{ position: 'absolute', top: '25.5%', left: '65.5%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar19' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar19' title='DEL DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.3%', left: '65.6%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar20' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar20' title='DEL DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.1%', left: '65.6%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButtonBILATERAL2 value='caar21' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.9%', left: '65.6%', borderRadius: '50%', }}

@@ -1676,19 +1676,19 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '23.2%', left: '33.8%', transform: 'rotate(120deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar15' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.6%', left: '33.7%', transform: 'rotate(120deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar16' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar16' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.0%', left: '33.4%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar17' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar17' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.4%', left: '33.4%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar18' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar18' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.8%', left: '33.2%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar19' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar19' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.3%', left: '33.2%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar20' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar20' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.7%', left: '33.1%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar21' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar21' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.1%', left: '33.1%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar22' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar22' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.5%', left: '33.0%', transform: 'rotate(100deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar23' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.9%', left: '33.0%', transform: 'rotate(100deg)', }}
@@ -1941,19 +1941,19 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '23.2%', left: '64.8%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii15' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.6%', left: '65.2%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii16' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii16' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.0%', left: '65.4%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii17' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii17' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.4%', left: '65.4%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii18' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii18' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.8%', left: '65.6%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii19' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii19' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.3%', left: '65.6%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii20' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii20' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.7%', left: '65.8%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii21' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii21' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.1%', left: '65.8%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii22' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii22' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.5%', left: '66.0%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii23' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.9%', left: '66.0%', transform: 'rotate(60deg)', }}

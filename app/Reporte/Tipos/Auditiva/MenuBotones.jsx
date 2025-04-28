@@ -630,9 +630,9 @@ const StepJ = ({ setStep, selectedImages, handleUndo, handleImageChange, handleP
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
           <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button>
+        </button> */}
 
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
@@ -724,9 +724,9 @@ return (
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
           <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button>
+        </button> */}
 
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />

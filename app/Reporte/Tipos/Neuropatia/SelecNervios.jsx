@@ -591,13 +591,13 @@ export function checkDivs(copyConclusions) {
       <div style={{ position: 'absolute', top: '23.8%', left: '33.7%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButton value='car' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.6%', left: '33.4%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButton value='car' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButton value='car' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
 
 
       <div style={{ position: 'absolute', top: '25.5%', left: '33.2%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButton value='car19' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButton value='car19' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.3%', left: '33.1%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButton value='car20' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButton value='car20' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.1%', left: '33.0%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButton value='car21' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.9%', left: '32.9%', borderRadius: '50%', }}
@@ -694,12 +694,12 @@ export function checkDivs(copyConclusions) {
       <div style={{ position: 'absolute', top: '23.8%', left: '65.1%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButton value='cari18' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.6%', left: '65.3%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButton value='cari19' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButton value='cari19' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
 
       <div style={{ position: 'absolute', top: '25.5%', left: '65.5%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButton value='cari20' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButton value='cari20' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.3%', left: '65.6%', borderRadius: '50%', }}
-        className={`dont-print-Nervius`}><NerviusButton value='cari21' title='CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButton value='cari21' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.1%', left: '65.6%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButton value='cari22' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.9%', left: '65.6%', borderRadius: '50%', }}

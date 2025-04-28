@@ -9,6 +9,7 @@ import  MenuImagenes  from '../../../components/ReportTemplate/DinamicImagesMenu
 import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL';
 import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botton-Nervius';
 import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
+import * as htmlToImage from "html-to-image";   // npm i html-to-image
 import './Style.css';
 
 function Reporte({ copyConclusions }) {
@@ -19,11 +20,22 @@ function Reporte({ copyConclusions }) {
     </div>
   );
 }
+// ⬇︎  SIN “: string”
+export async function urlToDataURI(url) {
+  const blob = await fetch(url).then(r => r.blob());
+  return await new Promise((ok) => {
+    const fr = new FileReader();
+    fr.onload = () => ok(fr.result);   // data:image/png;base64,…
+    fr.readAsDataURL(blob);
+  });
+}
+
+
 // Numero de pasos 
 //const stepsArray = ['A', 'B', 'B1', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
 // Metodos de movimiento entre menus
-const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, handleImageChange,droppedItems,topLeftText,setTopLeftText,copyConclusions,expandedDivs,setExpandedDivs }) => {
+const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, handleImageChange,droppedItems,topLeftText,setTopLeftText,copyConclusions,expandedDivs,setExpandedDivs, reportRef }) => {
   const [step, setStep] = useState('A');
   const [selectedSide, setSelectedSide] = useState('');
   const {
@@ -85,6 +97,8 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, hand
       {step === 'R' && <StepR handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
 
       {step === 'I' && <StepI handlePrevStep={handlePrevStep} selectedImages={selectedImages} handleNextStep={handleNextStep} setStep={setStep} 
+        reportRef={reportRef}     //  👈  ¡Nuevo!
+
         conclusionDivRef={conclusionDivRef}
         elementRef={elementRef}
         droppedItems={droppedItems}
@@ -2045,88 +2059,7 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
 
 
 
-const DropArea2 = ({ isExpanded }) => {
-  const [imageSrc, setImageSrc] = useState(null); // Estado para la imagen cargada
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    handleFileSelect(e.dataTransfer.files);
-  };
-
-  const handleFileSelect = (files) => {
-    if (files && files.length > 0) {
-      const fileArray = Array.from(files);
-      const imageFiles = fileArray.filter((file) => file.type.startsWith('image/'));
-
-      if (imageFiles.length > 0) {
-        const file = imageFiles[0]; // Solo tomamos la primera imagen
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          setImageSrc(event.target.result); // Reemplaza la imagen anterior
-        };
-        reader.readAsDataURL(file); // Lee el archivo como URL de datos
-      }
-    }
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault(); // Necesario para permitir el "drop"
-  };
-
-  const handleInputChange = (e) => {
-    handleFileSelect(e.target.files);
-  };
-
-  return (
-    <div
-      className={`dropArea2 ${isExpanded ? 'dropArea2-expanded' : ''}`}
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      style={{
-        width: isExpanded ? '96px' : '40px', // Ajusta el tamaño basado en el estado de expansión
-        height: isExpanded ? '90px' : '40px',
-        position: 'relative',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        transition: 'width 0.3s ease, height 0.3s ease', // Transiciones suaves
-        overflow: 'hidden', // Evita que el contenido se desborde
-      }}
-    >
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleInputChange}
-        style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          opacity: 0,
-          cursor: 'pointer',
-        }}
-      />
-      {!imageSrc ? (
-        <p></p>
-      ) : (
-        <img
-          src={imageSrc}
-          alt="Cargada"
-          style={{
-            maxWidth: '100%',
-            maxHeight: '100%',
-            objectFit: 'cover', // Ajusta la imagen dentro del contenedor
-            pointerEvents: 'none', // Evita interacciones con la imagen
-            userSelect: 'none', // Evita que la imagen sea seleccionable
-          }}
-        />
-      )}
-    </div>
-  );
-};
-
-
-
-const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs }) => {
+const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs,reportRef}) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
@@ -2141,56 +2074,72 @@ const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclus
     setIsUploadAllowed(false);
   };
 
+  const conclusiones = conclusions;
   const handleExportPdf = async () => {
     try {
-      setIsLoading(true); // ⌛ Mostrar overlay
+      setIsLoading(true);
 
-       // 1) conclusiones (array con {value, title})
-    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-
-    const conclusiones = conclusions;
-
-
-      const response = await fetch('/api/pdf/generate-pdf/neuropatia?route', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          finalConclusion: conclusionFinal, // Envías la cadena final
-          conclusiones, // <--- envías el array de conclusiones
-          userData: {
-            name: session?.user?.name,
-            lastname: session?.user?.lastname,
-            email: session?.user?.email,
-            cedula: session?.user?.cedula,
-            especialidad: session?.user?.especialidad,
-            imageUrl: session?.user?.imageUrl,
-          },
-          droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
-
-        }),
-      });
+      /* —— A) forzamos fondo blanco —— */
+      document.body.classList.add('pdf-exporting');
+      await new Promise(r => requestAnimationFrame(r));   // deja al DOM pintar
   
-      if (!response.ok) {
-        throw new Error("Error al generar PDF");
+      /* —— B) capturamos y enviamos —— */
+      const baseImgData = await urlToDataURI('/assets/NeuronoImg/BP_Neuronopatia.png');
+  
+      let canvasDataUrl = '';
+      if (reportRef.current) {
+        if (reportRef.current.toDataURL) {
+          canvasDataUrl = reportRef.current.toDataURL('image/png');
+        } else {
+          canvasDataUrl = await htmlToImage.toPng(reportRef.current, {
+            cacheBust: true,
+            filter: node =>
+              node.nodeName !== 'TEXTAREA' &&
+              !node.classList?.contains('top-left-text'),   // <—— excluye
+          });
+        }
       }
   
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'reporte-completo.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      const payload = {
+        finalConclusion:  copyConclusions,
+        conclusiones,
+        userData: {
+          name: session?.user?.name,
+          lastname: session?.user?.lastname,
+          email: session?.user?.email,
+          cedula: session?.user?.cedula,
+          especialidad: session?.user?.especialidad,
+          imageUrl: session?.user?.imageUrl,
+        },
+        droppedItems,
+        topLeftText,
+        baseImgData,
+        canvasImage: canvasDataUrl,
+      };
   
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error al generar PDF: ' + error.message);
+      const res = await fetch('/api/pdf/generate-pdf/neuropatia', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Error al generar PDF');
+  
+      const blob = await res.blob();
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = 'reporte-completo.pdf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error(err);
+      alert('Error al generar PDF: ' + err.message);
     } finally {
-      document.body.style.cursor = 'default';
-      setIsLoading(false); // ✅ Ocultar overlay
+      /* —— C) restauramos el color original —— */
+      document.body.classList.remove('pdf-exporting');
+      setIsLoading(false);
     }
   };
 

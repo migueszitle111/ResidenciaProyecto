@@ -507,7 +507,7 @@ const Reporte = () => {
         combinedText = `${head} ${additionalText}${tail}`;
       } else {
         // Si no hay ";", lo pegamos al final
-        combinedText += ` ${additionalText}`;
+        combinedText += `${additionalText}`;
       }
     } else if (additionalText) {
       // Caso normal: no es "RADICULOPATIA" + [AGUDA/SUBAGUDA/CRONICA/SENSITIVA],

@@ -4517,9 +4517,9 @@ const StepD2 = ({ handlePrevStep2, handleNextStep2 }) => {
       </h1>
 
       <div>
-      <ConclusionButtonR value='r_abundante' title='REINERVACION COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", "CON REINERVACION COLATERAL ABUNDANTE.", handleNextStep2)}/>
-      <ConclusionButtonR value='r_minima' title='REINERVACION COLATERAL COMPENSATORIA MÍNIMA' displayText='MÍNIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "CON REINERVACION COLATERAL MINIMA.", handleNextStep2)}/>
-      <ConclusionButtonR value='r_ausante' title='REINERVACION COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "SIN REINERVACION COLATERAL.", handleNextStep2)}/>
+      <ConclusionButtonR value='r_abundante' title='REINERVACIÓN COLATERAL COMPENSATORIA ABUNDANTE' displayText='ABUNDATE'pressed={activeButtons["r_abundante"]} onClick={() => handleButtonPress("r_abundante", "CON REINERVACION COLATERAL ABUNDANTE.", handleNextStep2)}/>
+      <ConclusionButtonR value='r_minima' title='REINERVACIÓN COLATERAL COMPENSATORIA MÍNIMA' displayText='MÍNIMA' pressed={activeButtons["r_minima"]} onClick={() => handleButtonPress("r_minima", "CON REINERVACION COLATERAL MINIMA.", handleNextStep2)}/>
+      <ConclusionButtonR value='r_ausante' title='REINERVACIÓN COLATERAL COMPENSATORIA AUSENTE' displayText='AUSENTE' pressed={activeButtons["r_ausente"]} onClick={() => handleButtonPress("r_ausente", "SIN REINERVACION COLATERAL.", handleNextStep2)}/>
       </div>
       
     </div>

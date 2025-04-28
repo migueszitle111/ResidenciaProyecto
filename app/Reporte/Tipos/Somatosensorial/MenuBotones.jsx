@@ -74,8 +74,37 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
       {step === 'H4_i' && (<StepH4_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
       {/*trigemino*/}
       {step === 'AT' && ( <StepAT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
-      {step === 'BT' && ( <StepBT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
+       {step === 'CDIT' && (<StepCDIT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+       {step === 'DDAT' && (<StepDDAT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {step === 'DDIT' && (<StepDDIT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} /> )}
+       {step === 'D1AT' && (<StepD1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
+       {step === 'D2AT' && (<StepD2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
+       {step === 'E1AT' && (<StepE1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+       {step === 'E2AT' && ( <StepE2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+       {step === 'F1AT' && (<StepF1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide} />)}
+       {step === 'F2AT' && (<StepF2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide}  />)}
+       {step === 'F3AT' && (<StepF3AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep}setSelectedSide={setSelectedSide}   />)}
+       {step === 'G1AT' && (<StepG1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {step === 'G2AT' && (<StepG2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {step === 'G3AT' && (<StepG3AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
 
+      {step === 'BT' && ( <StepBT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
+       {/*Dermatomas*/}
+       {/*Inicia en el paso StepA para seleccionar los dermatomas*/}
+       {step === 'BD' && (<StepBD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {step === 'CDI' && (<StepCDI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+       {step === 'DDA' && (<StepDDA handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {step === 'DDI' && (<StepDDI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} /> )}
+       {step === 'D1A' && (<StepD1A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
+       {step === 'D2A' && ( <StepD2A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
+       {step === 'F3A' && (<StepF3A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep}setSelectedSide={setSelectedSide}   />)}
+       {step === 'E1A' && ( <StepE1A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+       {step === 'E2A' && ( <StepE2A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+       {step === 'F1A' && (<StepF1A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide} />)}
+       {step === 'F2A' && (<StepF2A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide}  />)}
+       {step === 'G1A' && (<StepG1A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {step === 'G2A' && (<StepG2A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {step === 'G3A' && (<StepG3A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
 
 
     </div>
@@ -88,7 +117,7 @@ const StepA = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSi
     <div className='button-bar'>
       <button onClick={() => setStep('A')} id='prev' className={`print-button dont-print `}>
       </button>
-      <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
+      <button onClick={() => setStep('BD')} id='next' className={`print-button dont-print `}>
         <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
       </button>
     </div>
@@ -115,54 +144,9 @@ const StepA = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSi
      <ConclusionButton value="pudendo" title=', A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE NERVIO PUDENDO.' displayText="NERVIO PUDENDO"></ConclusionButton>
     </div>
     </Accordion>
-    <InternalAccordionContainer> 
-    <Accordion  title='DERMATOMAS' type='internal'>
-     <InternalAccordionContainer> 
-     <Accordion title='CERVICAL' type='internal'> 
-       <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value="c4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
-         <ConclusionButton value="c5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
-         <ConclusionButton value="c6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
-         <ConclusionButton value="c7" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
-         <ConclusionButton value="c8" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value="t1" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
-      </div>
-      </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
-      <Accordion  title='TORACICO' type='internal'>
-        <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t2" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
-        <ConclusionButton value="t3" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
-        <ConclusionButton value="t4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value="t5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value="t6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
-        </div>
-        < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t7" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value="t8" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value="t9" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value="t10" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value="t11" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value="t12" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
-        </div>
-      </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
-      <Accordion  title='LUMBOSACRO' type='internal'>
-        <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="l1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
-        <ConclusionButton value="l2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
-        <ConclusionButton value="l3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
-        <ConclusionButton value="l4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value="l5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
-        <ConclusionButton value="s1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value="s2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
-        </div>
-      </Accordion>
-      </InternalAccordionContainer> 
-    </Accordion>
-    </InternalAccordionContainer> 
+    <div onClick={() => setStep('BD')} >
+    <ConclusionButton value='dermatomas'title="VÍA SOMATOSENSORIAL" displayText="DERMATOMAS" />
+    </div>
     </AccordionContainer>
     <div onClick={() => setStep('AT')} >
     <ConclusionButton value='tri'title="VÍA SOMATOSENSORIAL, A TRAVÉS DEL TRACTO Y NÚCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO." displayText="TRIGÉMINO" />
@@ -388,7 +372,7 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
 
 const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
   const { removeConclusion } = useContext(ReportContext)
-  report(
+  return(
   <div>
     <div className='button-bar'>
       <button onClick={() => {
@@ -1669,10 +1653,7 @@ const StepG3_i = ({
   ];
 
   /**
-   * handleConclusionClick
-   * - Encuentra el índice del nivel clicado.
-   * - “Activa” desde 0 hasta ese índice, pero
-   *   solo deja el `title` en el clicado (i === index).
+
    */
   const handleConclusionClick = (clickedTitle, clickedValue) => {
     const index = levels.findIndex(item => item.value === clickedValue);
@@ -2032,9 +2013,827 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftTex
         </div>
   );
 };
+//Dermatomas
+const StepBD = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+  <div>
+    <div className='button-bar'>
+    <button onClick={() => {
+      removeConclusion('dermatomas_indemne')
+      removeConclusion('dermatomas_alterada')
+      removeConclusion('dermatomas')
+      removeConclusion('retardo_en_la_conduccion')
+      removeConclusion('bloqueo_en_la_conduccion')
+      removeConclusion('deficit_neuronal')
+      removeConclusion('sin_respuesta')
+      removeConclusion('leve')
+      removeConclusion('moderado')
+      removeConclusion('severo')
+      removeConclusion('perdida_axonal_secundaria')
+      removeConclusion('retardo_secundario_en_la_conduccion')
+      removeConclusion('dermatomas_izquierdo')
+      removeConclusion('dermatomas_derecho')
+      removeConclusion('dermatomas_bilateral')
+
+        setStep('A')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button className="print-button dont-print">
+        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white"> </h1>
+    <div onClick={() => setStep('DDI')}>
+      <ConclusionButton value="dermatomas_indemne" title="CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />   
+    </div>
+    <div onClick={() => setStep('DDA')}>
+      <ConclusionButton value="dermatomas_alterada" title="CON DEFECTO" displayText="ALTERADA " />
+    </div>
+  </div>
+
+);
+}
+
+const StepCDI = ({ handlePrevStep, handleNextStep, setStep}) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+      removeConclusion('izquierdo_dermatomas')
+      removeConclusion('derecho_dermatomas')
+      removeConclusion('bilateral_dermatomas')
+        setStep('BD')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button  className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <div  onClick={() => {
+          setStep('DDI');
+        }}>
+      <ConclusionButton
+        value="izquierdo_dermatomas"
+        title=" PARA LADO IZQUIERDO "
+        displayText="IZQUIERDO"
+       
+      />
+    </div>
+    <div  onClick={() => {
+          setStep('DDI');
+        }}>
+      <ConclusionButton
+        value="derecho_dermatomas"
+        title=" PARA LADO DERECHO "
+        displayText="DERECHO"
+       
+      />
+    </div>
+    <div onClick={() => {
+          setStep('DDI');
+        }}>
+      <ConclusionButton
+        value="bilateral_dermatomas"
+        title=" DE FORMA BILATERAL,"
+        displayText="BILATERAL "
+        
+      />
+    </div>
+  </div>
+);
+}
+
+
+const StepDDI = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+  <div>
+    <div className='button-bar'>
+    <button onClick={() => {
+        removeConclusion('c4')
+        removeConclusion('c5')
+        removeConclusion('c6')
+        removeConclusion('c7')
+        removeConclusion('c8')
+        removeConclusion('t1')
+        removeConclusion('t2')
+        removeConclusion('t3')
+        removeConclusion('t4')
+        removeConclusion('t5')
+        removeConclusion('t6')
+        removeConclusion('t7')
+        removeConclusion('t8')
+        removeConclusion('t9')
+        removeConclusion('t10')
+        removeConclusion('t11')
+        removeConclusion('t12')
+        removeConclusion('l1')
+        removeConclusion('l2')
+        removeConclusion('l3')
+        removeConclusion('l4')
+        removeConclusion('l5')
+        removeConclusion('s1')
+        removeConclusion('s2')
+        setStep('CDI')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
+        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+      </button>
+    </div>
+    <h1 className='text-xl font-bold text-white'>DERMATOMAS</h1>
+   <AccordionContainer>
+    <InternalAccordionContainer> 
+    <Accordion  title='DERMATOMAS' type='internal'>
+     <InternalAccordionContainer> 
+     <Accordion title='CERVICAL' type='internal'> 
+       <div style={{ display: 'flex', gap: '8px' }}>
+         <ConclusionButton value="c4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value="c5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
+         <ConclusionButton value="c6" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
+         <ConclusionButton value="c7" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
+         <ConclusionButton value="c8" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value="t1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+      </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='TORACICO' type='internal'>
+        <div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="t2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
+        <ConclusionButton value="t3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
+        <ConclusionButton value="t4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
+        <ConclusionButton value="t5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
+        <ConclusionButton value="t6" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        </div>
+        < div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="t7" title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
+        <ConclusionButton value="t8" title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
+        <ConclusionButton value="t9" title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
+        <ConclusionButton value="t10" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
+        <ConclusionButton value="t11" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
+        <ConclusionButton value="t12" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='LUMBOSACRO' type='internal'>
+        <div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="l1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value="l2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
+        <ConclusionButton value="l3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
+        <ConclusionButton value="l4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
+        <ConclusionButton value="l5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
+        <ConclusionButton value="s1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
+        <ConclusionButton value="s2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+    </Accordion>
+    </InternalAccordionContainer> 
+    </AccordionContainer>
+    
+</div>
+)};
+
+const StepDDA = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('retardo_en_la_conduccion')
+        removeConclusion('bloqueo_en_la_conduccion')
+        removeConclusion('deficit_neuronal')
+        removeConclusion('sin_respuesta')
+        removeConclusion('dermatomas')
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        removeConclusion('perdida_axonal_secundaria')
+        removeConclusion('retardo_secundario_en_la_conduccion')
+        removeConclusion('dermatomas_izquierdo')
+        removeConclusion('dermatomas_derecho')
+        removeConclusion('dermatomas_bilateral')
+        setStep('BD')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+
+      <button  className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">FISIOPATOLOGÍA</h1>
+    <div onClick={() => setStep('D1A')}>
+      <ConclusionButton value="retardo_en_la_conduccion" title="POR RETARDO EN LA CONDUCCIÓN" displayText=" RETARDO EN LA CONDUCCIÓN " />
+    </div>
+    <div onClick={() => setStep('G3A')}>
+      <ConclusionButton value="bloqueo_en_la_conduccion" title=" POR BLOQUEO EN LA CONDUCCIÓN" displayText=" BLOQUEO EN LA CONDUCCIÓN " />
+    </div>
+    <div onClick={() => setStep('D2A')}>
+      <ConclusionButton value="deficit_neuronal" title=" AXONAL" displayText=" DÉFICIT AXONAL" />
+    </div>
+    <div onClick={() => setStep('G3A')}>
+      <ConclusionButton value="sin_respuesta" title=" POR AUSENCIA DE RESPUESTA EVOCABLE" displayText=" SIN RESPUETA" />
+    </div>
+  </div>
+);
+}
+
+const StepD1A = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        setStep('DDA')} }className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">GRADO:</h1>
+    <div onClick={() => setStep('E1A')}>
+      <ConclusionButton value="leve" title=" LEVE " displayText="LEVE " />
+      <ConclusionButton value="moderado" title=" MODERADO " displayText=" MODERADO " />
+      <ConclusionButton value="severo" title=" SEVERO " displayText="SEVERO " />
+
+    </div>
+  </div>
+);}
+
+
+const StepD2A = ({ handlePrevStep, handleNextStep, setStep }) =>{
+  const { removeConclusion } = useContext(ReportContext)
+
+  return (
+  <div>
+    <div className='button-bar'>
+    <button onClick={() => {
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        setStep('DDA')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button  className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">GRADO:</h1>
+    <div onClick={() => setStep('E2A')}>
+      <ConclusionButton value="leve" title=" LEVE " displayText="LEVE" />
+      <ConclusionButton value="moderado" title=" MODERADO " displayText="MODERADO" />
+      <ConclusionButton value="severo" title=" SEVERO " displayText=" SEVERO" />
+
+    </div>
+  </div>
+);}
+
+const StepE1A = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() =>{ 
+         removeConclusion('perdida_axonal_secundaria')
+        setStep('D1A')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={() => setStep('G1A')} id='prev' className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+      <ConclusionButton value="perdida_axonal_secundaria" title=", Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
+  </div>
+);}
+
+const StepE2A = ({ handlePrevStep, handleNextStep, setStep }) =>{
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('retardo_secundario_en_la_conduccion')
+        setStep('D2A')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      
+      <button onClick={() => setStep('G2A')} id='prev' className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">AXONAL:</h1>
+      <ConclusionButton value="retardo_secundario_en_la_conduccion" title=", Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
+  </div>
+);}
+
+
+const StepF1A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('dermatomas_izquierdo')
+        removeConclusion('dermatomas_derecho')
+        removeConclusion('dermatomas_bilateral')
+        setStep('E1A')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button  className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <div  onClick={() => {
+          // setSelectedSide('izquierdo');
+          setStep('G1A');
+        }}>
+      <ConclusionButton
+        value="dermatomas_izquierdo"
+        title=" PARA LADO IZQUIERDO "
+        displayText="IZQUIERDO"
+      />
+    </div>
+    <div  onClick={() => {
+          // setSelectedSide('derecho');
+          setStep('G1A');
+        }}>
+      <ConclusionButton
+        value="dermatomas_derecho"
+        title=" PARA LADO DERECHO "
+        displayText="DERECHO"
+      />
+    </div>
+    <div onClick={() => {
+          // setSelectedSide('bilateral');
+          setStep('G1A');
+        }}>
+      <ConclusionButton
+        value="dermatomas_bilateral"
+        title=" DE FORMA BILATERAL,"
+        displayText="BILATERAL "
+        
+      />
+    </div>
+  </div>
+);
+}
+
+const StepF2A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('dermatomas_izquierdo')
+        removeConclusion('dermatomas_derecho')
+        removeConclusion('dermatomas_bilateral')
+        setStep('E2A')}
+        } className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button  className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <div  onClick={() => {
+          // setSelectedSide('izquierdo');
+          setStep('G2A');
+        }}>
+      <ConclusionButton
+        value="dermatomas_izquierdo"
+        title=" PARA LADO IZQUIERDO "
+        displayText="IZQUIERDO"
+       
+      />
+    </div>
+    <div  onClick={() => {
+          // setSelectedSide('derecho');
+          setStep('G2A');
+        }}>
+      <ConclusionButton
+        value="dermatomas_derecho"
+        title=" PARA LADO DERECHO "
+        displayText="DERECHO"
+       
+      />
+    </div>
+    <div onClick={() => {
+          // setSelectedSide('bilateral');
+          setStep('G2A');
+        }}>
+      <ConclusionButton
+        value="dermatomas_bilateral"
+        title=" DE FORMA BILATERAL,"
+        displayText="BILATERAL "
+        
+      />
+    </div>
+  </div>
+);
+}
+
+
+const StepF3A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('dermatomas_izquierdo')
+        removeConclusion('dermatomas_derecho')
+        removeConclusion('dermatomas_bilateral')
+        setStep('E2A')}
+        } className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button  className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <div  onClick={() => {
+          // setSelectedSide('izquierdo');
+          setStep('G3A');
+        }}>
+      <ConclusionButton
+        value="dermatomas_izquierdo"
+        title=" PARA LADO IZQUIERDO "
+        displayText="IZQUIERDO"
+       
+      />
+    </div>
+    <div  onClick={() => {
+          // setSelectedSide('derecho');
+          setStep('G3A');
+        }}>
+      <ConclusionButton
+        value="dermatomas_derecho"
+        title=" PARA LADO DERECHO "
+        displayText="DERECHO"
+       
+      />
+    </div>
+    <div onClick={() => {
+          // setSelectedSide('bilateral');
+          setStep('G3A');
+        }}>
+      <ConclusionButton
+        value="dermatomas_bilateral"
+        title=" DE FORMA BILATERAL,"
+        displayText="BILATERAL "
+        
+      />
+    </div>
+  </div>
+
+);}
+
+
+
+
+
+const StepG1A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+         removeConclusion('c4')
+         removeConclusion('c5')
+         removeConclusion('c6')
+         removeConclusion('c7')
+         removeConclusion('c8')
+         removeConclusion('t1')
+         removeConclusion('t2')
+         removeConclusion('t3')
+         removeConclusion('t4')
+         removeConclusion('t5')
+         removeConclusion('t6')
+         removeConclusion('t7')
+         removeConclusion('t8')
+         removeConclusion('t9')
+         removeConclusion('t10')
+         removeConclusion('t11')
+         removeConclusion('t12')
+         removeConclusion('l1')
+         removeConclusion('l2')
+         removeConclusion('l3')
+         removeConclusion('l4')
+         removeConclusion('l5')
+         removeConclusion('s1')
+         removeConclusion('s2')
+         removeConclusion('dermatomas')
+        setStep('F1A')}} id='prev' className={`print-button dont-print `}>
+      </button>
+      <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
+        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+      </button>
+    </div>
+    <h1 className='text-xl font-bold text-white'>DERMATOMAS</h1>
+    <AccordionContainer>
+   </AccordionContainer>
+   <AccordionContainer>
+    <InternalAccordionContainer> 
+    <Accordion  title='DERMATOMAS' type='internal'>
+     <InternalAccordionContainer> 
+     <Accordion title='CERVICAL' type='internal'> 
+       <div style={{ display: 'flex', gap: '8px' }}>
+         <ConclusionButton value="c4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value="c5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
+         <ConclusionButton value="c6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
+         <ConclusionButton value="c7" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
+         <ConclusionButton value="c8" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value="t1" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+      </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='TORACICO' type='internal'>
+        <div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="t2" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
+        <ConclusionButton value="t3" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
+        <ConclusionButton value="t4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
+        <ConclusionButton value="t5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
+        <ConclusionButton value="t6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        </div>
+        < div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="t7" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
+        <ConclusionButton value="t8" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
+        <ConclusionButton value="t9" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
+        <ConclusionButton value="t10" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
+        <ConclusionButton value="t11" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
+        <ConclusionButton value="t12" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='LUMBOSACRO' type='internal'>
+        <div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="l1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value="l2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
+        <ConclusionButton value="l3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
+        <ConclusionButton value="l4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
+        <ConclusionButton value="l5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
+        <ConclusionButton value="s1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
+        <ConclusionButton value="s2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+    </Accordion>
+    </InternalAccordionContainer> 
+    </AccordionContainer>
+</div>
+)};
+
+const StepG2A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSide }) =>{
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => 
+        {
+          removeConclusion('c4')
+          removeConclusion('c5')
+          removeConclusion('c6')
+          removeConclusion('c7')
+          removeConclusion('c8')
+          removeConclusion('t1')
+          removeConclusion('t2')
+          removeConclusion('t3')
+          removeConclusion('t4')
+          removeConclusion('t5')
+          removeConclusion('t6')
+          removeConclusion('t7')
+          removeConclusion('t8')
+          removeConclusion('t9')
+          removeConclusion('t10')
+          removeConclusion('t11')
+          removeConclusion('t12')
+          removeConclusion('l1')
+          removeConclusion('l2')
+          removeConclusion('l3')
+          removeConclusion('l4')
+          removeConclusion('l5')
+          removeConclusion('s1')
+          removeConclusion('s2')
+          removeConclusion('dermatomas')
+        setStep('F2A')}} id='prev' className={`print-button dont-print `}>
+      </button>
+      <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
+        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+      </button>
+    </div>
+    <h1 className='text-xl font-bold text-white'>DERMATOMAS</h1>
+    <AccordionContainer>
+   </AccordionContainer>
+   <AccordionContainer>
+    <InternalAccordionContainer> 
+    <Accordion  title='DERMATOMAS' type='internal'>
+     <InternalAccordionContainer> 
+     <Accordion title='CERVICAL' type='internal'> 
+       <div style={{ display: 'flex', gap: '8px' }}>
+         <ConclusionButton value="c4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value="c5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
+         <ConclusionButton value="c6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
+         <ConclusionButton value="c7" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
+         <ConclusionButton value="c8" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value="t1" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+      </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='TORACICO' type='internal'>
+        <div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="t2" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
+        <ConclusionButton value="t3" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
+        <ConclusionButton value="t4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
+        <ConclusionButton value="t5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
+        <ConclusionButton value="t6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        </div>
+        < div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="t7" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
+        <ConclusionButton value="t8" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
+        <ConclusionButton value="t9" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
+        <ConclusionButton value="t10" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
+        <ConclusionButton value="t11" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
+        <ConclusionButton value="t12" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='LUMBOSACRO' type='internal'>
+        <div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="l1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value="l2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
+        <ConclusionButton value="l3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
+        <ConclusionButton value="l4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
+        <ConclusionButton value="l5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
+        <ConclusionButton value="s1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
+        <ConclusionButton value="s2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+    </Accordion>
+    </InternalAccordionContainer> 
+    </AccordionContainer>
+</div>
+)};
+
+const StepG3A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSide }) =>{
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => 
+        {
+          removeConclusion('c4')
+          removeConclusion('c5')
+          removeConclusion('c6')
+          removeConclusion('c7')
+          removeConclusion('c8')
+          removeConclusion('t1')
+          removeConclusion('t2')
+          removeConclusion('t3')
+          removeConclusion('t4')
+          removeConclusion('t5')
+          removeConclusion('t6')
+          removeConclusion('t7')
+          removeConclusion('t8')
+          removeConclusion('t9')
+          removeConclusion('t10')
+          removeConclusion('t11')
+          removeConclusion('t12')
+          removeConclusion('l1')
+          removeConclusion('l2')
+          removeConclusion('l3')
+          removeConclusion('l4')
+          removeConclusion('l5')
+          removeConclusion('s1')
+          removeConclusion('s2')
+          removeConclusion('dermatomas')
+        setStep('F3A')}} id='prev' className={`print-button dont-print `}>
+      </button>
+      <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
+        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+      </button>
+    </div>
+    <h1 className='text-xl font-bold text-white'>DERMATOMAS</h1>
+    <AccordionContainer>
+   </AccordionContainer>
+   <AccordionContainer>
+    <InternalAccordionContainer> 
+    <Accordion  title='DERMATOMAS' type='internal'>
+     <InternalAccordionContainer> 
+     <Accordion title='CERVICAL' type='internal'> 
+       <div style={{ display: 'flex', gap: '8px' }}>
+         <ConclusionButton value="c4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value="c5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
+         <ConclusionButton value="c6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
+         <ConclusionButton value="c7" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
+         <ConclusionButton value="c8" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value="t1" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+      </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='TORACICO' type='internal'>
+        <div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="t2" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
+        <ConclusionButton value="t3" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
+        <ConclusionButton value="t4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
+        <ConclusionButton value="t5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
+        <ConclusionButton value="t6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        </div>
+        < div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="t7" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
+        <ConclusionButton value="t8" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
+        <ConclusionButton value="t9" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
+        <ConclusionButton value="t10" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
+        <ConclusionButton value="t11" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
+        <ConclusionButton value="t12" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+      <InternalAccordionContainer> 
+      <Accordion  title='LUMBOSACRO' type='internal'>
+        <div style={{ display: 'flex', gap: '8px' }}>
+        <ConclusionButton value="l1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value="l2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
+        <ConclusionButton value="l3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
+        <ConclusionButton value="l4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
+        <ConclusionButton value="l5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
+        <ConclusionButton value="s1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
+        <ConclusionButton value="s2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        </div>
+      </Accordion>
+      </InternalAccordionContainer> 
+    </Accordion>
+    </InternalAccordionContainer> 
+    </AccordionContainer>
+</div>
+)};
+
 
 //Trigemino
-const StepAT = ({ handlePrevStep, handleNextStep, setStep}) => {
+
+const StepAT = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+  <div>
+    <div className='button-bar'>
+    <button onClick={() => {
+      removeConclusion('dermatomas_indemne')
+      removeConclusion('dermatomas_alterada')
+      removeConclusion('dermatomas')
+      removeConclusion('retardo_en_la_conduccion')
+      removeConclusion('bloqueo_en_la_conduccion')
+      removeConclusion('deficit_neuronal')
+      removeConclusion('sin_respuesta')
+      removeConclusion('leve')
+      removeConclusion('moderado')
+      removeConclusion('severo')
+      removeConclusion('perdida_axonal_secundaria')
+      removeConclusion('retardo_secundario_en_la_conduccion')
+      removeConclusion('tri')
+      removeConclusion('izquierdo_trigemino')
+      removeConclusion('derecho_trigemino')
+      removeConclusion('bilateral_trigemino')
+      removeConclusion('trigemino_indemne')
+      removeConclusion('trigemino_alterada')
+
+        setStep('A')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button className="print-button dont-print">
+        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white"> </h1>
+    <div onClick={() => setStep('CDIT')}>
+      <ConclusionButton value="trigemino_indemne" title="CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />   
+    </div>
+    <div onClick={() => setStep('DDAT')}>
+      <ConclusionButton value="trigemino_alterada" title="CON DEFECTO" displayText="ALTERADA " />
+    </div>
+  </div>
+
+);
+}
+
+const StepCDIT = ({ handlePrevStep, handleNextStep, setStep}) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
@@ -2044,7 +2843,255 @@ const StepAT = ({ handlePrevStep, handleNextStep, setStep}) => {
         removeConclusion('derecho_trigemino')
         removeConclusion('bilateral_trigemino')
         removeConclusion('tri')
+       
         setStep('A')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={() => setStep('BT')} className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <div  onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="izquierdo_trigemino"
+        title=" PARA LADO IZQUIERDO "
+        displayText="IZQUIERDO"
+       
+      />
+    </div>
+    <div  onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="derecho_trigemino"
+        title=" PARA LADO DERECHO "
+        displayText="DERECHO"
+       
+      />
+    </div>
+    <div onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="bilateral_trigemino"
+        title=" DE FORMA BILATERAL,"
+        displayText="BILATERAL "
+        
+      />
+    </div>
+  </div>
+)
+}
+
+
+
+const StepDDAT = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('retardo_en_la_conduccion')
+        removeConclusion('bloqueo_en_la_conduccion')
+        removeConclusion('deficit_neuronal')
+        removeConclusion('sin_respuesta')
+        removeConclusion('tri')
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        removeConclusion('perdida_axonal_secundaria')
+        removeConclusion('retardo_secundario_en_la_conduccion')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        setStep('BD')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+
+      <button  className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">FISIOPATOLOGÍA</h1>
+    <div onClick={() => setStep('D1AT')}>
+      <ConclusionButton value="retardo_en_la_conduccion" title="POR RETARDO EN LA CONDUCCIÓN" displayText=" RETARDO EN LA CONDUCCIÓN " />
+    </div>
+    <div onClick={() => setStep('F3AT')}>
+      <ConclusionButton value="bloqueo_en_la_conduccion" title=" POR BLOQUEO EN LA CONDUCCIÓN" displayText=" BLOQUEO EN LA CONDUCCIÓN " />
+    </div>
+    <div onClick={() => setStep('D2AT')}>
+      <ConclusionButton value="deficit_neuronal" title=" AXONAL" displayText=" DÉFICIT AXONAL" />
+    </div>
+    <div onClick={() => setStep('F3AT')}>
+      <ConclusionButton value="sin_respuesta" title=" POR AUSENCIA DE RESPUESTA EVOCABLE" displayText=" SIN RESPUETA" />
+    </div>
+  </div>
+);
+}
+
+const StepD1AT = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        setStep('DDAT')} }className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">GRADO:</h1>
+    <div onClick={() => setStep('E1AT')}>
+      <ConclusionButton value="leve" title=" LEVE " displayText="LEVE " />
+      <ConclusionButton value="moderado" title=" MODERADO " displayText=" MODERADO " />
+      <ConclusionButton value="severo" title=" SEVERO " displayText="SEVERO " />
+
+    </div>
+  </div>
+);}
+
+
+const StepD2AT = ({ handlePrevStep, handleNextStep, setStep }) =>{
+  const { removeConclusion } = useContext(ReportContext)
+
+  return (
+  <div>
+    <div className='button-bar'>
+    <button onClick={() => {
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        setStep('DDAT')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button  className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">GRADO:</h1>
+    <div onClick={() => setStep('E2AT')}>
+      <ConclusionButton value="leve" title=" LEVE " displayText="LEVE" />
+      <ConclusionButton value="moderado" title=" MODERADO " displayText="MODERADO" />
+      <ConclusionButton value="severo" title=" SEVERO " displayText=" SEVERO" />
+
+    </div>
+  </div>
+);}
+
+const StepE1AT = ({ handlePrevStep, handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() =>{ 
+         removeConclusion('perdida_axonal_secundaria')
+        setStep('D1AT')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={() => setStep('F1AT')} id='prev' className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+      <ConclusionButton value="perdida_axonal_secundaria" title=", Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
+  </div>
+);}
+
+const StepE2AT = ({ handlePrevStep, handleNextStep, setStep }) =>{
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('retardo_secundario_en_la_conduccion')
+        setStep('D2AT')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      
+      <button onClick={() => setStep('F2AT')} id='prev' className={`print-button dont-print `}>
+          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">AXONAL:</h1>
+      <ConclusionButton value="retardo_secundario_en_la_conduccion" title=", Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
+  </div>
+);}
+
+
+const StepF1AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('tri')
+       
+        setStep('E1AT')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={() => setStep('BT')} className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <div  onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="izquierdo_trigemino"
+        title=" PARA LADO IZQUIERDO "
+        displayText="IZQUIERDO"
+       
+      />
+    </div>
+    <div  onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="derecho_trigemino"
+        title=" PARA LADO DERECHO "
+        displayText="DERECHO"
+       
+      />
+    </div>
+    <div onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="bilateral_trigemino"
+        title=" DE FORMA BILATERAL,"
+        displayText="BILATERAL "
+        
+      />
+    </div>
+  </div>
+);
+
+}
+
+const StepF2AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('tri')
+        setStep('E2AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
       <button onClick={() => setStep('BT')} className="print-button dont-print">
@@ -2085,6 +3132,68 @@ const StepAT = ({ handlePrevStep, handleNextStep, setStep}) => {
   </div>
 );
 }
+
+
+
+const StepF3AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('tri')
+       
+        setStep('E1AT')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button onClick={() => setStep('BT')} className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <div  onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="izquierdo_trigemino"
+        title=" PARA LADO IZQUIERDO "
+        displayText="IZQUIERDO"
+       
+      />
+    </div>
+    <div  onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="derecho_trigemino"
+        title=" PARA LADO DERECHO "
+        displayText="DERECHO"
+       
+      />
+    </div>
+    <div onClick={() => {
+          setStep('BT');
+        }}>
+      <ConclusionButton
+        value="bilateral_trigemino"
+        title=" DE FORMA BILATERAL,"
+        displayText="BILATERAL "
+        
+      />
+    </div>
+  </div>
+);
+
+}
+
+
+
+
+
+
 
 const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
   const { removeConclusion } = useContext(ReportContext)
@@ -2164,24 +3273,40 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
           removeConclusion('l5')
           removeConclusion('s1')
           removeConclusion('s2')
+          removeConclusion('dermatomas')
+          removeConclusion('izquierdo_dermatomas')
+          removeConclusion('derecho_dermatomas')
+          removeConclusion('bilateral_dermatomas')
+          removeConclusion('dermatomas_indemne')
+          removeConclusion('dermatomas_alterada')
+          removeConclusion('trigemino_indemne')
+          removeConclusion('trigemino_alterada')
+          removeConclusion('retardo_en_la_conduccion')
+          removeConclusion('bloqueo_en_la_conduccion')
+          removeConclusion('deficit_neuronal')
+          removeConclusion('sin_respuesta')
+          removeConclusion('leve')
+          removeConclusion('moderado')
+          removeConclusion('severo')
+          removeConclusion('perdida_axonal_secundaria')
+          removeConclusion('retardo_secundario_en_la_conduccion')
+          removeConclusion('izquierdo_trigemino')
+          removeConclusion('derecho_trigemino')
+          removeConclusion('bilateral_trigemino')
+          removeConclusion('tri')
 
           setStep('AT')}} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
-
-      
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-
         <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
           <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
-
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
         </button>
-
       </div>
       <MenuImagenes  expandedDivs={expandedDivs}
         setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
@@ -2189,7 +3314,4 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
         </div>
   );
 };
-
-
-
 export default SimpleMultiStepForm;

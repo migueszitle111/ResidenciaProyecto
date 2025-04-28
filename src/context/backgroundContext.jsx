@@ -1,3 +1,5 @@
+'use client';       // 👈  debe ser la primera línea
+
 import React, { createContext, useContext, useState } from 'react';
 
 const ButtonContext = createContext();

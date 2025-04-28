@@ -1,3 +1,5 @@
+'use client';
+
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 
@@ -13,6 +15,7 @@ export function SegmentariaButton({ title, value, displayText }) {
   const classnames = 'cursor-pointer w-[3.5px] h-[18px] text-xs flex items-center justify-center text-white transition-colors duration-300 ease-in ' +
     (selectedButton === value ? 'bg-[#ff0000]' : 'bg-transparent') +
     (buttonsDisabledSegm ? ' opacity-50 pointer-events-none' : '') + ' rounded-[50px] z-50 relative';
+    
 
   // Función para actualizar las conclusiones
   function handleClick() {

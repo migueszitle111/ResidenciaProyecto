@@ -1,20 +1,20 @@
-import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL';
-import { checkDivsBILATERALIZQ } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERALIZQ';
-import { checkDivs } from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
 
-import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
 import { ReportContext ,DropContext} from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
-import './Style.css';
 import { checkDivs2 } from './selecNervio2';
 import { checkDivsSegmentarBilateral2 } from './SelecNerviosSegmenBILATERAL2';
 import { checkDivsBILATERAL2 } from './SelecNerviosBILATERAL2';
 import { checkDivsSegmentar2 } from './SelecSegmentariaNerv2';
 import { checkDivsSegmentar } from './SelecSegmentariaNerv';
+import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL';
+import { checkDivsBILATERALIZQ } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERALIZQ';
+import { checkDivs } from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
+import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
+import './Style.css';
 
 
 const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
@@ -98,7 +98,7 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
       ref={dropAreaRef}
     >
       {topLeftText && (
-        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'10px' }}>
+        <p className="top-left-text" style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'10px' }}>
           {topLeftText}
         </p>
       )}
@@ -133,6 +133,8 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
   );
 };
 
+
+
 const Reporte = () => {
   // Carga datos de usuario
   const { data: session, status } = useSession();
@@ -146,6 +148,9 @@ const Reporte = () => {
   const [topLeftText, setTopLeftText] = useState('');
   const [expandedDivs, setExpandedDivs] = useState({});
   const imgRef = useRef(null);
+//Imagen de fondo completa
+  const reportRef = useRef(null);          // 👈  este será nuestro “canvas”
+
 
 
 
@@ -410,6 +415,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
          {/* Menu de opciones */}
            <div className={`mx-4 z-10 `}>
              <SimpleMultiStepForm 
+               reportRef={reportRef}
                showStepNumber={true}
                conclusionDivRef={conclusionDivRef}
                elementRef={elementRef}
@@ -417,7 +423,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
                topLeftText={topLeftText}
                setTopLeftText={setTopLeftText}
                copyConclusions={copyConclusions}  
-               ref={imgRef.current}
+               ref={imgRef}
                expandedDivs={expandedDivs}
                setExpandedDivs={setExpandedDivs}
                />
@@ -426,7 +432,7 @@ const formattedConclusions = formatConclusions(copyConclusions);
              </div>
             {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
                  <div>
-                   <div className='con-img '> 
+            <div className='con-img' ref={reportRef} id="reporte-completo"> 
                  
                  {/* Codigo para desplegar las imagenes dentro de un array */}
                  {selectedImages.map((image, index) => (
@@ -457,8 +463,8 @@ const formattedConclusions = formatConclusions(copyConclusions);
                   src: '/assets/NeuronoImg/BP_Neuronopatia.png',
                   alt: 'Modelo',
                   useMap: '#image-map',
-                  width: isPageVisible ? '600' : '800',
-                  height: isPageVisible ? '600' : '800'
+                  width: isPageVisible ? '600' : '600',
+                  height: isPageVisible ? '600' : '600'
                 }}
 
                 rules={[
@@ -1486,8 +1492,9 @@ const formattedConclusions = formatConclusions(copyConclusions);
 
 
                 ]}
+                
               />
-              <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}><textarea
+              <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'} `}><textarea
                 value={copyConclusions} defaultValue="" onChange={handleTextareaChange} />
 
               </div>

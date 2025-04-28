@@ -1,3 +1,5 @@
+'use client';       // 👈  debe ser la primera línea
+
 import { createContext, useState } from 'react'
 
 

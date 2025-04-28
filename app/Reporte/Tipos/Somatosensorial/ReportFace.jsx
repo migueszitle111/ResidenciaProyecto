@@ -159,127 +159,123 @@ const Reporte = () => {
   // Estados para el historial de imagenes
   const [history, setHistory] = useState([]); 
   const [Future,setFuture] = useState([]); 
+
   useEffect(() => {
-    // 1) Define prioridades para las frases "normales".
-    const priorityNormal = {
-      "VÍA SOMATOSENSORIAL": 1,
-      "CON INTEGRIDAD FUNCIONAL AFERENTE": 2,
-      "CON DEFECTO FUNCIONAL AFERENTE": 3,
-      "POR RETARDO EN LA CONDUCCIÓN": 4,
-      "POR BLOQUEO EN LA CONDUCCIÓN": 5,
-      "AXONAL": 6,
-      "POR AUSENCIA DE RESPUESTA EVOCABLE": 7,
-      "LEVE": 8,
-      "MODERADO": 9,
-      "SEVERO": 10,
-      "Y PERDIDA AXONAL SECUNDARIA": 11,
-      "Y RETARDO SECUNDARIO EN LA CONDUCCIÓN": 12,
-      "PARA LADO IZQUIERDO": 13,
-      "PARA LADO DERECHO": 14,
-      "BILATERAL": 15,
-      "A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE NERVIO": 16,
-      "DERMATOMAS": 17,
-      "TOPOGRÁFICAMENTE A NIVEL": 18
+    /* ---------- PRIORIDADES ---------- */
+    const priority = {
+      // 1- Eje principal
+      'VÍA SOMATOSENSORIAL': 1,
+  
+      // 2- Estado funcional
+      'CON INTEGRIDAD FUNCIONAL': 2,
+      'CON DEFECTO': 2,
+  
+      // 3- Fisiopatología primaria
+      'POR RETARDO EN LA CONDUCCIÓN': 3,
+      'POR BLOQUEO EN LA CONDUCCIÓN': 3,
+      'AXONAL': 3,
+      'POR AUSENCIA DE RESPUESTA EVOCABLE': 3,
+  
+      // 4- Fisiopatología secundaria
+      'Y PÉRDIDA AXONAL SECUNDARIA': 4,
+      'Y RETARDO SECUNDARIO EN LA CONDUCCIÓN': 4,
+  
+      // 5- Grado
+      'LEVE': 5,
+      'MODERADO': 5,
+      'SEVERO': 5,
+  
+      // 6- Lado
+      'PARA LADO IZQUIERDO': 6,
+      'PARA LADO DERECHO': 6,
+      'DE FORMA BILATERAL': 6,
+  
+      // 7- Frase dermatomas
+      'A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS': 7,
+
+        };
+  
+    /* ---------- TOPOS SE QUEDAN AL FINAL ---------- */
+    const priorityTopo = {
+      'CORTICAL (N20-P25': 1,  'SUBCORTICAL (P14': 2,  'CERVICAL (N11-N13': 3,  'PERIFÉRICO (N4-N9': 4,
+      'CORTICAL (P37-N45': 5,  'SUBCORTICAL (P31': 6,  'TORÁCICO (N24': 7,
+      'LUMBOSACRO (N20': 8,    'PERIFÉRICO (P9-N18': 9
     };
   
-    // 2) Define prioridades para topografías finales (todas al final).
-    //    Nota: El "orden" de estos determina cómo aparecen *entre sí*.
-    //    (p.ej., 1 < 2 < 3...) dentro del bloque final.
-    const priorityTopos = {
-      // SUPERIORES
-      "CORTICAL (N20-P25": 1,
-      "SUBCORTICAL (P14": 2,
-      "CERVICAL (N11-N13": 3,
-      "PERIFÉRICO (N4-N9": 4,
+    /* ---------- CLASIFICAMOS ---------- */
+    const normal   = [];
+    const topos    = [];
+    const dermas   = [];           // C4, C5, …
   
-      // INFERIORES
-      "CORTICAL (P37-N45": 5,
-      "SUBCORTICAL (P31": 6,
-      "CERVICAL (N26": 7,
-      "TORÁCICO (N24": 8,
-      "LUMBOSACRO (N20": 9,
-      "PERIFÉRICO (P9-N18": 10
-    };
+    const dermaRe  = /DERMATOMAS\s+([A-Z0-9]+)/i;
   
-    // Expresión regular para detectar si la conclusión es un DERMATOMA.
-    // Busca algo como:
-    //   "A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS <derma>"
-    // Y captura ese <derma> (C4, T1, etc.).
-    const dermatomaRegex = /DERMATOMAS\s+([A-Z0-9]+)/i;
+    conclusions.forEach(({ title }) => {
+      const txt = title.trim();
+      const up  = txt.toUpperCase();
   
-    // Arrays provisionales
-    const normalArray = [];
-    const topoArray = [];
-    const dermatomas = []; // aquí guardaremos, por ejemplo, C4, T1, L5...
+      // ➊ ¿Topografía?
+      const tk = Object.keys(priorityTopo).find(k => up.includes(k));
+      if (tk) { topos.push({ p: priorityTopo[tk], t: txt }); return; }
   
-    // 3) Separamos las conclusiones
-    conclusions.forEach((cl) => {
-      const raw = cl.title.trim();
-      const up = raw.toUpperCase();
+      // ➋ ¿Dermatoma individual?
+      const m = up.match(dermaRe);
+      if (m)   { dermas.push(m[1]); return; }
   
-      // --- 3.1) Revisa si es topográfico final (priorityTopos) ---
-      let foundTopoKey = null;
-      Object.keys(priorityTopos).forEach((key) => {
-        if (up.includes(key)) {
-          foundTopoKey = key;
-        }
-      });
-      if (foundTopoKey) {
-        topoArray.push({
-          text: raw,
-          priority: priorityTopos[foundTopoKey] || 999
-        });
-        return;
-      }
-  
-      // --- 3.2) Revisa si es un dermatoma ---
-      const matchDerma = raw.match(dermatomaRegex);
-      if (matchDerma) {
-        // matchDerma[1] es lo que está después de "DERMATOMAS"
-        dermatomas.push(matchDerma[1]); // p.ej. "C4"
-        return; // no lo añadimos a normalArray (para que no repita)
-      }
-  
-      // --- 3.3) Si no es topográfico ni dermatoma, es "normal" ---
-      let prio = 999;
-      Object.keys(priorityNormal).forEach((key) => {
-        if (up.includes(key)) {
-          prio = priorityNormal[key];
-        }
-      });
-  
-      normalArray.push({
-        text: raw,
-        priority: prio
-      });
+      // ➌ Todo lo demás
+      const pk = Object.keys(priority).find(k => up.includes(k)) || '';
+      normal.push({ p: priority[pk] ?? 99, t: txt });
     });
   
-    // 4) Si hemos acumulado dermatomas, creamos una sola frase
-    //    Ej: "A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4-T1-L5."
-    if (dermatomas.length > 0) {
-      const joined = dermatomas.join('-'); // los une con guion
-      normalArray.push({
-        text: `VÍA SOMATOSENSORIAL A TRAVÉS DE REGION MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS ${joined}.`,
-        priority: priorityNormal["DERMATOMAS"] || 17 // usa la prioridad 17
+    /* ---------- FRASE UNIFICADA PARA DERMATOMAS ---------- */
+    if (dermas.length) {
+      const ord = dermas
+        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+        .map(d => d.toUpperCase());
+  
+      // C7 y C8  /  C6-C7 y C8
+      const list =
+        ord.length === 1 ? ord[0] :
+        ord.length === 2 ? `${ord[0]} y ${ord[1]}` :
+        `${ord.slice(0, -1).join('-')} y ${ord.slice(-1)}`;
+  
+      normal.push({
+        p: priority['A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS'],
+        t: `A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS ${list}.`
       });
     }
   
-    // 5) Ordenamos normalArray y topoArray según su priority
-    normalArray.sort((a, b) => a.priority - b.priority);
-    topoArray.sort((a, b) => a.priority - b.priority);
-  
-    // 6) Concatenamos: primero normales, luego topográficos
-    const finalArray = [...normalArray, ...topoArray];
-  
-    // 7) Convertimos a un solo párrafo
-    const finalParagraph = finalArray
-      .map((item) => item.text.replace(/^,\s*/, "")) // Quita coma inicial, si existiera
-      .join(" ");
-  
-    // 8) Guardamos el resultado en tu state
-    setCopyConclusions(finalParagraph);
+   /* ---------- ORDEN Y CONCATENACIÓN ---------- */
+let finalTxt = [
+  ...normal.sort((a, b) => a.p - b.p),
+  ...topos .sort((a, b) => a.p - b.p)
+]
+  .map(({ t }) => t.replace(/^,\s*/, ''))   // limpia coma inicial
+  .join(' ')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+/* ---------- REORDENA SOLO TRIGÉMINO ---------- */
+const TRIG_PATH =
+  'A TRAVÉS DEL TRACTO Y NÚCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO.';
+
+if (finalTxt.toUpperCase().includes(TRIG_PATH.toUpperCase())) {
+  // 1) quita el bloque (con o sin coma delante)
+  finalTxt = finalTxt.replace(
+    new RegExp(',?\\s*' + TRIG_PATH.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'),
+    ''
+  )
+  // 2) quita punto final (si quedó) y agrega el bloque al final
+  .replace(/\.\s*$/, '')
+  .trim() + ' ' + TRIG_PATH;
+}
+
+setCopyConclusions(finalTxt);
+
   }, [conclusions]);
   
+
+
+
     // Para mantener constante la conclusione
     const handleTextareaChange = (event) => {
       setCopyConclusions(event.target.value)

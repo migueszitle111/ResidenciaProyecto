@@ -23,39 +23,39 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 <div style={{ position: 'absolute', top: '21.3%', left: '61.2%', transform: 'rotate(80deg)' }}
   className={`dont-print-Nervius`}> <NerviusButtonSegmenBILATERAL2 value='caar8' title='DE AXILA,' displayText=' ' />  </div>
 <div style={{ position: 'absolute', top: '21.8%', left: '61.4%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar9' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar9' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '22.2%', left: '61.8%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar10' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar10' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '22.6%', left: '62.0%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar11' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar11' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '23.0%', left: '62.3%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar12' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar12' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '23.4%', left: '62.6%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar13' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar13' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '23.7%', left: '63.0%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar14' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar14' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '24.1%', left: '63.3%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar15' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar15' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '24.5%', left: '63.6%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar16' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar16' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '24.9%', left: '63.9%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar17' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar17' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '25.3%', left: '64.2%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar18' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar18' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '25.6%', left: '64.5%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar19' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar19' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '26.1%', left: '64.7%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar20' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar20' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '26.5%', left: '64.8%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar21' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar21' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '26.9%', left: '64.9%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar22' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar22' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '27.2%', left: '65.0%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar23' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar23' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '27.6%', left: '65.2%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar24' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar24' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '27.9%', left: '65.4%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar25' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar25' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '28.3%', left: '65.5%', transform: 'rotate(80deg)', }}
   className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar26' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '28.6%', left: '65.5%', transform: 'rotate(80deg)', }}
@@ -69,13 +69,13 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 <div style={{ position: 'absolute', top: '30.1%', left: '65.8%', transform: 'rotate(80deg)' }}
   className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL CODO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '30.5%', left: '65.9%', transform: 'rotate(80deg)' }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '30.9%', left: '65.9%', transform: 'rotate(80deg)' }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '31.3%', left: '66.4%', transform: 'rotate(80deg)' }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '31.6%', left: '66.4%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '32.0%', left: '66.7%', transform: 'rotate(80deg)', }}
   className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar36' title='PRONADOR REDONDO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '32.3%', left: '66.7%', transform: 'rotate(80deg)', }}
@@ -85,37 +85,37 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 <div style={{ position: 'absolute', top: '33.1%', left: '66.9%', transform: 'rotate(80deg)', }}
   className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar39' title='PRONADOR REDONDO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '33.5%', left: '67.4%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '33.8%', left: '67.4%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '34.2%', left: '67.4%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '34.5%', left: '67.6%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '34.9%', left: '67.8%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '35.2%', left: '67.8%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar45' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar45' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '35.6%', left: '68.0%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar46' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar46' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '36.0%', left: '68.2%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar47' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar47' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '36.4%', left: '68.4%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar48' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar48' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '36.7%', left: '68.6%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar49' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar49' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '37.1%', left: '68.6%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar50' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar50' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '37.5%', left: '68.9%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar51' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar51' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '37.9%', left: '69.2%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar52' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar52' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '38.3%', left: '69.4%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar53' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar53' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '38.7%', left: '69.6%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar54' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar54' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '39.0%', left: '69.8%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar55' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+  className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar55' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '39.6%', left: '70.2%', transform: 'rotate(80deg)', }}
   className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar56' title='DEL CARPO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '39.1%', left: '70.1%', transform: 'rotate(80deg)', }}
@@ -461,39 +461,39 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '21.3%', left: '38.9%', transform: 'rotate(100deg)' }}
         className={`dont-print-Nervius`}> <NerviusButtonSegmenBILATERAL2 value='caar8' title='DE AXILA,' displayText=' ' />  </div>
       <div style={{ position: 'absolute', top: '21.8%', left: '38.4%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar9' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar9' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.2%', left: '38.0%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar10' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar10' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.6%', left: '37.7%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar11' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar11' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.0%', left: '37.4%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar12' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar12' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.4%', left: '37.1%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar13' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar13' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.7%', left: '36.7%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar14' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar14' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.1%', left: '36.4%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar15' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar15' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.5%', left: '36.1%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar16' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar16' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.9%', left: '35.8%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar17' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar17' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.3%', left: '35.5%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar18' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar18' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.6%', left: '35.4%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar19' title='DEL TERCIO MEDIAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar19' title='DEL TERCIO MEDIAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.1%', left: '35.1%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar20' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar20' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.5%', left: '34.9%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar21' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar21' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.9%', left: '34.8%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar22' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar22' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.2%', left: '34.9%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar23' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar23' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.6%', left: '34.5%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar24' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar24' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.9%', left: '34.5%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar25' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar25' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '28.3%', left: '34.2%', transform: 'rotate(100deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar26' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '28.6%', left: '33.8%', transform: 'rotate(100deg)', }}
@@ -507,13 +507,13 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '30.1%', left: '33.5%', transform: 'rotate(100deg)' }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL CODO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '30.5%', left: '33.2%', transform: 'rotate(100deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '30.9%', left: '33.3%', transform: 'rotate(100deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '31.3%', left: '32.8%', transform: 'rotate(100deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '31.6%', left: '32.8%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '32.0%', left: '32.4%', transform: 'rotate(100deg)', }}
         className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar36' title='PRONADOR REDONDO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '32.3%', left: '32.4%', transform: 'rotate(100deg)', }}
@@ -523,37 +523,37 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '33.1%', left: '32.1%', transform: 'rotate(100deg)', }}
         className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar39' title='PRONADOR REDONDO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '33.5%', left: '31.7%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}  ><NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '33.8%', left: '31.6%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '34.2%', left: '31.4%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '34.5%', left: '31.3%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '34.9%', left: '31.1%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '35.2%', left: '31.0%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar45' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar45' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '35.6%', left: '30.8%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar46' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar46' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '36.0%', left: '30.7%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar47' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar47' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '36.4%', left: '30.5%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar48' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar48' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '36.7%', left: '30.4%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar49' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar49' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '37.1%', left: '30.1%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar50' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar50' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '37.5%', left: '29.8%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar51' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar51' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '37.9%', left: '29.6%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar52' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar52' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '38.3%', left: '29.4%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar53' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar53' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '38.7%', left: '29.2%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar54' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar54' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '39.0%', left: '29.4%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar55' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar55' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '39.6%', left: '29.2%', transform: 'rotate(100deg)', }}
         className={`dont-print-Nervius`} ><NerviusButtonSegmenBILATERAL2 value='caar56' title='DEL CARPO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '39.1%', left: '28.1%', transform: 'rotate(100deg)', }}
@@ -1305,13 +1305,13 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
         <div style={{ position: 'absolute', top: '27.1%', left: '65.9%', transform: 'rotate(70deg)', }}
           className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar29' title='DE AXILA,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '27.5%', left: '66.1%', transform: 'rotate(70deg)', }}
-          className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+          className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '27.9%', left: '66.4%', transform: 'rotate(70deg)', }}
-          className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+          className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '28.3%', left: '66.4%', transform: 'rotate(70deg)', }}
           className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO PROXIMAL DE BRAZO' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '28.6%', left: '66.7%', transform: 'rotate(70deg)', }}
-          className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+          className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '29.0%', left: '66.7%', transform: 'rotate(70deg)', }}
           className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '29.4%', left: '67.0%', transform: 'rotate(70deg)', }}
@@ -1509,13 +1509,13 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '27.1%', left: '33.2%', transform: 'rotate(110deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar30' title='DE AXILA,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.5%', left: '33.0%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '27.9%', left: '32.7%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '28.2%', left: '32.5%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '28.6%', left: '32.2%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '29.0%', left: '32.1%', transform: 'rotate(100deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '29.4%', left: '31.8%', transform: 'rotate(100deg)', }}
@@ -1664,17 +1664,17 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '20.9%', left: '35.3%', transform: 'rotate(120deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar9' title='DE AXILA,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '21.2%', left: '34.8%', transform: 'rotate(120deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar10' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar10' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '21.6%', left: '34.6%', transform: 'rotate(120deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar11' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar11' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.1%', left: '34.5%', transform: 'rotate(120deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar12' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar12' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.4%', left: '34.4%', transform: 'rotate(120deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar13' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar13' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.8%', left: '34.1%', transform: 'rotate(120deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar14' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar14' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.2%', left: '33.8%', transform: 'rotate(120deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar15' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar15' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.6%', left: '33.7%', transform: 'rotate(120deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar16' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.0%', left: '33.4%', transform: 'rotate(110deg)', }}
@@ -1929,17 +1929,17 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '20.9%', left: '64.0%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii9' title='DE AXILA,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '21.2%', left: '64.4%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii10' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii10' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '21.6%', left: '64.6%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii11' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii11' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.1%', left: '64.7%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii12' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii12' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.4%', left: '64.7%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii13' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii13' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.8%', left: '64.8%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii14' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii14' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.2%', left: '64.8%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii15' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii15' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.6%', left: '65.2%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii16' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.0%', left: '65.4%', transform: 'rotate(60deg)', }}
@@ -2912,41 +2912,41 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '29.7%', left: '35.0%', transform: 'rotate(90deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar26' title='DEL CODO/CANAL CUBITAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '30.1%', left: '34.9%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar27' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar27' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '30.5%', left: '34.8%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar28' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar28' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '30.9%', left: '34.8%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar29' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar29' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '31.3%', left: '34.7%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '31.7%', left: '34.7%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '32.1%', left: '34.4%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '32.5%', left: '34.4%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '32.9%', left: '34.2%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '33.3%', left: '34.1%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '33.7%', left: '33.9%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar36' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar36' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '34.1%', left: '33.9%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar37' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar37' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '34.5%', left: '33.6%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar38' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar38' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '34.9%', left: '33.2%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar39' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar39' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '35.3%', left: '33.2%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '35.7%', left: '32.9%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '36.1%', left: '32.7%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '36.5%', left: '32.5%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '36.8%', left: '32.2%', transform: 'rotate(90deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '37.2%', left: '32.2%', transform: 'rotate(90deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar45' title='DEL CARPO/CANAL DE GUYON,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '37.6%', left: '31.7%', transform: 'rotate(90deg)', }}
@@ -3220,41 +3220,41 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '29.3%', left: '64.0%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar26' title='DEL CODO/CANAL CUBITAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '29.7%', left: '64.1%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar27' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar27' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '30.1%', left: '64.3%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar28' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar28' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '30.5%', left: '64.4%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar29' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar29' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '30.9%', left: '64.6%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO PROXIMAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '31.3%', left: '64.6%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '31.7%', left: '64.8%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '32.1%', left: '64.9%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '32.5%', left: '65.1%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '32.9%', left: '65.2%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '33.3%', left: '65.4%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar36' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar36' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '33.7%', left: '65.3%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar37' title='DEL TERCIO MEDIAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar37' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '34.1%', left: '65.5%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar38' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar38' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '34.5%', left: '65.6%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar39' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar39' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '34.9%', left: '65.8%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '35.3%', left: '65.9%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '35.7%', left: '66.1%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '36.1%', left: '66.2%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '36.5%', left: '66.4%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO DISTAL DE ANTEBRAZO,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO DISTAL DEL ANTEBRAZO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '36.8%', left: '66.6%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar45' title='DEL CARPO/CANAL DE GUYON,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '37.2%', left: '66.8%', transform: 'rotate(60deg)', }}
@@ -3965,29 +3965,29 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '20.9%', left: '59.1%', borderRadius: '50%', transform: 'rotate(80deg)' }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar4' title=' DE AXILA,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '21.3%', left: '59.3%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar5' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar5' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '21.7%', left: '59.5%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar6' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar6' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '22.1%', left: '59.7%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar7' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar7' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.5%', left: '59.9%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar8' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar8' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.9%', left: '60.2%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar9' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar9' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.3%', left: '60.6%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar10' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar10' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.7%', left: '60.9%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar11' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar11' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '24.1%', left: '61.2%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar12' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar12' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.5%', left: '61.5%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar13' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar13' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.9%', left: '61.8%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar14' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar14' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '25.3%', left: '62.1%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar15' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar15' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '25.7%', left: '62.3%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar16' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar16' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '26.1%', left: '62.5%', borderRadius: '50%', transform: 'rotate(80deg)' }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar17' title=' DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.5%', left: '62.7%', borderRadius: '50%', transform: 'rotate(80deg)' }}
@@ -4141,29 +4141,29 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '20.9%', left: '40.2%', borderRadius: '50%', transform: 'rotate(80deg)' }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar4' title=' DE AXILA,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '21.3%', left: '39.9%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar5' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar5' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '21.7%', left: '39.7%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar6' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar6' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '22.1%', left: '39.5%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar7' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar7' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.5%', left: '39.2%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar8' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar8' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '22.9%', left: '38.9%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar9' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar9' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.3%', left: '38.7%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar10' title=' DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar10' title=' DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.7%', left: '38.5%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar11' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar11' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '24.1%', left: '38.3%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar12' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar12' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.5%', left: '38.0%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar13' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar13' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.9%', left: '37.8%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar14' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar14' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '25.3%', left: '37.5%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar15' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar15' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '25.7%', left: '37.4%', borderRadius: '50%', transform: 'rotate(80deg)' }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar16' title=' DEL TERCIO MEDIO DE BRAZO,' displayText=' ' /></div>      
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar16' title=' DEL TERCIO MEDIO DEL BRAZO,' displayText=' ' /></div>      
       <div style={{ position: 'absolute', top: '26.1%', left: '37.2%', borderRadius: '50%', transform: 'rotate(80deg)' }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar17' title=' DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.5%', left: '37.0%', borderRadius: '50%', transform: 'rotate(80deg)' }}
@@ -4604,7 +4604,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '28.2%', left: '32.5%', transform: 'rotate(100deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL CODO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '28.6%', left: '32.2%', transform: 'rotate(100deg)', }}
-        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO PROXIMAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '29.0%', left: '32.1%', transform: 'rotate(100deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '29.4%', left: '31.8%', transform: 'rotate(100deg)', }}
@@ -7122,63 +7122,63 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '57.8%', left: '59.3%', transform: 'rotate(265deg)' }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar18' title='DE CABEZA DE PERONE,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.2%', left: '59.5%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar19' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar19' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.6%', left: '59.6%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar20' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar20' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.0%', left: '59.6%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar21' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>  
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar21' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>  
   <div style={{ position: 'absolute', top: '59.4%', left: '59.6%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar22' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar22' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.8%', left: '59.6%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar23' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar23' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '60.2%', left: '59.6%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar24' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar24' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '60.6%', left: '59.6%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar25' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar25' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.0%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar26' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar26' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.4%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar27' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar27' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.8%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar28' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar28' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.2%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar29' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar29' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.6%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.0%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.4%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.8%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
   <div style={{ position: 'absolute', top: '63.8%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '64.2%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '64.6%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar36' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar36' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.0%', left: '59.7%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar37' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar37' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.4%', left: '59.5%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar38' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar38' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.8%', left: '59.0%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar39' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar39' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.2%', left: '59.0%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar40' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar40' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.6%', left: '59.2%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar41' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar41' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '67.0%', left: '59.0%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar42' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar42' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '67.4%', left: '58.8%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar43' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar43' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '67.8%', left: '59.0%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar44' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar44' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '68.2%', left: '58.6%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar45' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar45' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '68.6%', left: '58.6%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar46' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar46' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.0%', left: '58.5%', transform: 'rotate(265deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar47' title='TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar47' title='TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.4%', left: '58.5%', transform: 'rotate(265deg)' }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar48' title='DEL TOBILLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.8%', left: '58.5%', transform: 'rotate(265deg)' }}
@@ -7372,71 +7372,71 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       <div style={{ position: 'absolute', top: '56.2%', left: '40.8%', transform: 'rotate(95deg)' }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar14' title='DE CABEZA DE PERONE,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '56.6%', left: '40.6%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar15' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar15' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '57.0%', left: '40.3%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar16' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar16' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '57.4%', left: '40.1%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar17' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar17' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '57.8%', left: '40.1%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar18' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar18' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.2%', left: '40.0%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar19' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar19' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.6%', left: '39.8%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar20' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar20' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.0%', left: '39.8%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar21' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar21' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.4%', left: '39.8%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar22' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar22' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.8%', left: '39.6%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar23' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar23' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '60.2%', left: '39.6%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar24' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar24' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '60.6%', left: '39.6%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar25' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar25' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.0%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar26' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar26' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.4%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar27' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar27' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.8%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar28' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar28' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.2%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar29' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar29' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.6%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar30' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.0%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>  
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar31' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>  
       <div style={{ position: 'absolute', top: '63.0%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar32' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.4%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar33' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.8%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar34' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '64.2%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar35' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '64.6%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar36' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar36' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.0%', left: '39.7%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar37' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar37' title='DEL TERCIO MEDIO DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.4%', left: '39.9%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar38' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar38' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.8%', left: '40.0%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar39' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar39' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.2%', left: '40.0%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar40' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.6%', left: '40.2%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar41' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '67.0%', left: '40.2%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar42' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '67.4%', left: '40.4%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar43' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '67.8%', left: '40.6%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar44' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '68.2%', left: '40.6%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar45' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar45' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '68.6%', left: '40.6%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar46' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar46' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.0%', left: '40.8%', transform: 'rotate(95deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar47' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar47' title='DEL TERCIO DISTAL DE LA PIERNA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.4%', left: '40.8%', transform: 'rotate(95deg)' }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar48' title='DEL TOBILLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.8%', left: '40.8%', transform: 'rotate(95deg)' }}

@@ -155,9 +155,9 @@ const MedianoMt = () => {
                 {currentImageIndex === 5 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/MedianoMt-G-04.png",{ top: '2%', left: '2%' })}></button>}
             
             {/* Septima Imagen */}
-                {currentImageIndex === 6 && <button className="btnM30" onClick={() => handleButtonClick('Texto desde el boton 1', { top: '12%', left: '24%' })}></button>}
-                {currentImageIndex === 6 && <button className="btnM31" onClick={() => handleButtonClick('Texto desde el boton 2', { top: '12%', left: '24%' })}></button>}
-                {currentImageIndex === 6 && <button className="btnM32" onClick={() => handleButtonClick('Texto desde el boton 3', { top: '12%', left: '24%' })}></button>}
+                {currentImageIndex === 6 && <button className="btnM30" onClick={() => handleButtonClick('MUÑECA. Se realiza a intervalos de 1 cm a lo largo del trayecto del nervio Mediano. La referencia 0 se asigna al pliegue cutáneo del carpo: Los puntos de estimulación distales se marcan con un signo negativo y los puntos proximales con un signo positivo o neutral.', { top: '12%', left: '24%' })}></button>}
+                {currentImageIndex === 6 && <button className="btnM31" onClick={() => handleButtonClick('ABDUCTOR POLLICIS BREVIS C8, T1 - (eminencia tenar lateral)', { top: '12%', left: '24%' })}></button>}
+                {currentImageIndex === 6 && <button className="btnM32" onClick={() => handleButtonClick('Primera articulación metacarpofalángica', { top: '12%', left: '24%' })}></button>}
                 {currentImageIndex === 6 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/MedianoMt-G-05.png",{ top: '2%', left: '2%' })}></button>}
             
             </div>

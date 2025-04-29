@@ -75,17 +75,17 @@ const UlnarSt = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnUSt1" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior', {  top: '10%', left: '25%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnUSt2" onClick={() => handleButtonClick('DEDO MEÑIQUE O QUINTO DEDO - Ligeramente distal a la articulación metacarpofalángica, evitando colocar electrodo sobre pliegue cutáneo', { top: '10%', left: '25%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnUSt3" onClick={() => handleButtonClick('CUARTO DEDO - Ligeramente distal a la articulación metacarpofalángica, evitando colocar electrodo sobre pliegue cutáneo', {  top: '10%', left: '25%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnUSt4" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal', { top: '10%', left: '25%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnUSt5" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt1" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior.', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt2" onClick={() => handleButtonClick('DEDO MEÑIQUE O QUINTO DEDO - Ligeramente distal a la articulación metacarpofalángica, evitando colocar electrodo sobre pliegue cutáneo.', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt3" onClick={() => handleButtonClick('CUARTO DEDO - Ligeramente distal a la articulación metacarpofalángica, evitando colocar electrodo sobre pliegue cutáneo.', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt4" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal.', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnUSt5" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal.', {  top: '10%', left: '25%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnarSt-G-01.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnarSt-T-01.png",{ top: '2%', left: '2%' })}></button>}
             
-                {currentImageIndex === 1 && <button className="btnUSt6" onClick={() => handleButtonClick('4 cm distalmente sobre dorso del 4to dedo, falange proximal', {  top: '10%', left: '70%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnUSt7" onClick={() => handleButtonClick('DORSO DE LA MANO - Punto medio entre 4to y 5to metacarpianos', { top: '10%', left: '70%'})}></button>}
-                {currentImageIndex === 1 && <button className="btnUSt8" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior', {  top: '10%', left: '70%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnUSt6" onClick={() => handleButtonClick('4 cm distalmente sobre dorso del 4to dedo, falange proximal.', {  top: '10%', left: '70%' })}></button>}
+                {currentImageIndex === 1 && <button className="btnUSt7" onClick={() => handleButtonClick('DORSO DE LA MANO - Punto medio entre 4to y 5to metacarpianos.', { top: '10%', left: '70%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnUSt8" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior.', {  top: '10%', left: '70%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnarSt-G-02.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnarSt-T-01.png",{ top: '2%', left: '2%' })}></button>}
             </div>

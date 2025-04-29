@@ -66,10 +66,10 @@ const Supraclavicular = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnSpC1" onClick={() => handleButtonClick('Acromio', {  top: '10%', left: '25%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnSpC2" onClick={() => handleButtonClick('3 cm en dirección caudal con electrodo de tira, horizontal al activo', { top: '10%', left: '25%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnSpC3" onClick={() => handleButtonClick('ÁREA SUPRACLAVICULAR - Electrodos adheribles de tira colocados sobre la superficie exterior de la diáfisis clavicular', {  top: '10%', left: '25%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnSpC4" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. El cátodo se coloca en el borde posterior del músculo esternocleidomastoideo a nivel del margen inferior del cartílago tiroides', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC1" onClick={() => handleButtonClick('Acromio.', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC2" onClick={() => handleButtonClick('3 cm en dirección caudal con electrodo de tira, horizontal al activo.', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC3" onClick={() => handleButtonClick('ÁREA SUPRACLAVICULAR - Electrodos adheribles de tira colocados sobre la superficie exterior de la diáfisis clavicular.', {  top: '10%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnSpC4" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. El cátodo se coloca en el borde posterior del músculo esternocleidomastoideo a nivel del margen inferior del cartílago tiroides.', { top: '10%', left: '25%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Supraclavicular-G.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Supraclavicular-T.png",{ top: '5%', left: '2%' })}></button>}
 

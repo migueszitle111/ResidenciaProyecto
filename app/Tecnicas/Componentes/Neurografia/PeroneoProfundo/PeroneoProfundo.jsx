@@ -71,10 +71,10 @@ const PeroneoProfundo = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnPp1" onClick={() => handleButtonClick('3 cm distal sobre dorso del segundo ortejo', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPp2" onClick={() => handleButtonClick('DORSO DEL PIE - Horizontal al espacio interdigital, entre las cabezas del primer y segundo metatarsiano', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPp3" onClick={() => handleButtonClick('TOBILLO. (Antidrómico) 12 cm proximal del electrodo activo y justo lateral al tendón extensor largo del primer ortejo', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPp4" onClick={() => handleButtonClick('Dorso del pie o pierna', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp1" onClick={() => handleButtonClick('3 cm distal sobre dorso del segundo ortejo.', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp2" onClick={() => handleButtonClick('DORSO DEL PIE - Horizontal al espacio interdigital, entre las cabezas del primer y segundo metatarsiano.', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp3" onClick={() => handleButtonClick('TOBILLO. (Antidrómico) 12 cm proximal del electrodo activo y justo lateral al tendón extensor largo del primer ortejo.', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPp4" onClick={() => handleButtonClick('Dorso del pie o pierna.', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoPf-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoPf-T-01.png",{ top: '5%', left: '2%' })}></button>}
             

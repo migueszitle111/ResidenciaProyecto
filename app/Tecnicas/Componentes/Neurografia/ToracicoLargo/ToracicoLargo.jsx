@@ -67,10 +67,10 @@ const ToracicoLargo = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnTl1" onClick={() => handleButtonClick('Se colocan sobre el mismo segmento siguiendo la curvatura costal de forma horizontal de 3 a 4 cm más anteriormente que el electrodo activo', {  top: '62%', left: '50%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTl2" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio', { top: '62%', left: '50%'})}></button>}
-            {currentImageIndex === 0 && <button className="btnTl3" onClick={() => handleButtonClick('Articulación acromoclavicular', {  top: '62%', left: '50%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTl4" onClick={() => handleButtonClick('SERRATUS ANTERIOR C5, C6, C7 - Electrodos de superficie sobre la quinta o sexta costilla en la línea media axilar', { top: '62%', left: '50%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnTl1" onClick={() => handleButtonClick('Se colocan sobre el mismo segmento siguiendo la curvatura costal de forma horizontal de 3 a 4 cm más anteriormente que el electrodo activo.', {  top: '62%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTl2" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', { top: '62%', left: '50%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnTl3" onClick={() => handleButtonClick('Articulación acromoclavicular.', {  top: '62%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTl4" onClick={() => handleButtonClick('SERRATUS ANTERIOR C5, C6, C7 - Electrodos de superficie sobre la quinta o sexta costilla en la línea media axilar.', { top: '62%', left: '50%'})}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracicoLg-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracicoLg-T-01.png",{ top: '2%', left: '2%' })}></button>}
                 

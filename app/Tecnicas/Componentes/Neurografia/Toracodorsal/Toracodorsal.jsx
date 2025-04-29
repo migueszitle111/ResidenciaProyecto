@@ -68,10 +68,10 @@ const Toracodorsal = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnTd1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio', {  top: '35%', left: '25%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTd2" onClick={() => handleButtonClick('Articulación acromoclavicular', { top: '35%', left: '25%'})}></button>}
-            {currentImageIndex === 0 && <button className="btnTd3" onClick={() => handleButtonClick('LATISSIMUS DORSI C6, C7, C8 - Electrodo de aguja concéntrico insertado en el vientre muscular, pared posterior de la axila', {  top: '35%', left: '25%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTd4" onClick={() => handleButtonClick('No se requiere', { top: '35%', left: '25%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnTd1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', {  top: '35%', left: '25%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTd2" onClick={() => handleButtonClick('Articulación acromoclavicular.', { top: '35%', left: '25%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnTd3" onClick={() => handleButtonClick('LATISSIMUS DORSI C6, C7, C8 - Electrodo de aguja concéntrico insertado en el vientre muscular, pared posterior de la axila.', {  top: '35%', left: '25%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTd4" onClick={() => handleButtonClick('No se requiere.', { top: '35%', left: '25%'})}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-T-01.png",{ top: '2%', left: '2%' })}></button>}
                 

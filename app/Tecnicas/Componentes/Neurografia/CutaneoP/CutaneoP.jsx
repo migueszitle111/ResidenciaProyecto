@@ -67,10 +67,10 @@ const CutaneoP = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnCP1" onClick={() => handleButtonClick('BRAZO. 2 cm en dirección proximal al epicóndilo lateral, entre los músculos braquiorradial (supinador largo) y la cabeza lateral del tríceps', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnCP2" onClick={() => handleButtonClick('Antebrazo lateral', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnCP3" onClick={() => handleButtonClick('ANTEBRAZO POSTERIOR - 12 cm distal desde el punto de estímulo a lo largo de una línea que se traza hacia el dorso medio de la muñeca', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnCP4" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnCP1" onClick={() => handleButtonClick('BRAZO. 2 cm en dirección proximal al epicóndilo lateral, entre los músculos braquiorradial (supinador largo) y la cabeza lateral del tríceps.', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnCP2" onClick={() => handleButtonClick('Antebrazo lateral.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnCP3" onClick={() => handleButtonClick('ANTEBRAZO POSTERIOR - 12 cm distal desde el punto de estímulo a lo largo de una línea que se traza hacia el dorso medio de la muñeca.', {  top: '12%', left: '32%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnCP4" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo.', { top: '12%', left: '32%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/CutaneoPst-G-01.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/CutaneoPst-T-01.png",{ top: '5%', left: '2%' })}></button>}
 

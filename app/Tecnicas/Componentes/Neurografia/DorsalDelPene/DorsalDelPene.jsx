@@ -68,10 +68,10 @@ const DorsalDelPene = () => {
         <div>
             {/* Primera Imagen */}
             {currentImageIndex === 0 && <button className="btnDs1" onClick={() => handleButtonClick('Sínfisis del pubis.', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnDs2" onClick={() => handleButtonClick('Colocar en la base del pene antes de la colocación del electrodo activo', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnDs3" onClick={() => handleButtonClick('DORSO DEL PENE (antidromico) - 1-2 cm distal del electrodo de referencia', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnDs4" onClick={() => handleButtonClick('ESTIMULADOR DE ANILLO. Colocar el cátodo en el cuello del glande ', { top: '12%', left: '32%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnDs5" onClick={() => handleButtonClick('ESTIMULADOR DE ANILLO. Colocar el ánodo justo en la mitad del glande', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnDs2" onClick={() => handleButtonClick('Colocar en la base del pene antes de la colocación del electrodo activo.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnDs3" onClick={() => handleButtonClick('DORSO DEL PENE (antidromico) - 1-2 cm distal del electrodo de referencia.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnDs4" onClick={() => handleButtonClick('ESTIMULADOR DE ANILLO. Colocar el cátodo en el cuello del glande.', { top: '12%', left: '32%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnDs5" onClick={() => handleButtonClick('ESTIMULADOR DE ANILLO. Colocar el ánodo justo en la mitad del glande.', { top: '12%', left: '32%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/DorsalP-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Sacro/DorsalP-T-01.png",{ top: '5%', left: '2%' })}></button>}
             

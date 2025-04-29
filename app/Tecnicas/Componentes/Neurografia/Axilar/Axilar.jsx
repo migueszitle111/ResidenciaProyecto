@@ -68,10 +68,10 @@ const Axilar = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnAx1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio', {  top: '62%', left: '25%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAx2" onClick={() => handleButtonClick('Articulación acromioclavicular', { top: '62%', left: '25%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnAx3" onClick={() => handleButtonClick('DELTOIDS MIDIUM C5, C6 - Punto medio entre articulación acromioclavicular y área de inserción deltoidea en region lateral del hombro', {  top: '62%', left: '25%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAx4" onClick={() => handleButtonClick('Inserción deltoidea, unión del tercio proximal y medio del brazo', { top: '62%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnAx1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', {  top: '62%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAx2" onClick={() => handleButtonClick('Articulación acromioclavicular.', { top: '62%', left: '25%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnAx3" onClick={() => handleButtonClick('DELTOIDS MIDIUM C5, C6 - Punto medio entre articulación acromioclavicular y área de inserción deltoidea en region lateral del hombro.', {  top: '62%', left: '25%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAx4" onClick={() => handleButtonClick('Inserción deltoidea, unión del tercio proximal y medio del brazo.', { top: '62%', left: '25%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/Axilar-G-01.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/Axilar-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 

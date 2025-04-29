@@ -66,10 +66,10 @@ const AuricularM = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnAu1" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. De forma antidrómica en el borde lateral del músculo esternocleidomastoideo, aproximadamente en su tercio medio u 8cm de distancia en dirección caudal del electrodo de registro', {  top: '14%', left: '23%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAu2" onClick={() => handleButtonClick('LÓBULO DE LA OREJA - Con electrodos de superficie sobre la parte posterior y tercio inferior del lóbulo de la oreja', { top: '10%', left: '23%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnAu3" onClick={() => handleButtonClick('2 cm en dirección cefálica a electrodo activo', {  top: '10%', left: '23%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnAu4" onClick={() => handleButtonClick('Proceso espinoso C7', { top: '10%', left: '23%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnAu1" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. De forma antidrómica en el borde lateral del músculo esternocleidomastoideo, aproximadamente en su tercio medio u 8cm de distancia en dirección caudal del electrodo de registro.', {  top: '14%', left: '23%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAu2" onClick={() => handleButtonClick('LÓBULO DE LA OREJA - Con electrodos de superficie sobre la parte posterior y tercio inferior del lóbulo de la oreja.', { top: '10%', left: '23%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnAu3" onClick={() => handleButtonClick('2 cm en dirección cefálica a electrodo activo.', {  top: '10%', left: '23%' })}></button>}
+                {currentImageIndex === 0 && <button className="btnAu4" onClick={() => handleButtonClick('Proceso espinoso C7.', { top: '10%', left: '23%'})}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-AuricularM-G.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-AuricularM-T.png",{ top: '5%', left: '2%' })}></button>}
             

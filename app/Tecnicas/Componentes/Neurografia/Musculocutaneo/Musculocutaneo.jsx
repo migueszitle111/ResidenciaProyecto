@@ -67,10 +67,10 @@ const Musculocutaneo = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnMc1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio', { top: '62%', left: '50%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnMc2" onClick={() => handleButtonClick('Articulación acromoclavicular', { top: '62%', left: '50%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnMc3" onClick={() => handleButtonClick('BICEPS BRACHII C5, C6 - Electrodo colocado sobre el vientre muscular más prominente del Bíceps braquial o punto medio ventral del brazo', { top: '62%', left: '50%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnMc4" onClick={() => handleButtonClick('Tendón del bíceps braquiai en el codo', { top: '62%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnMc1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', { top: '62%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnMc2" onClick={() => handleButtonClick('Articulación acromoclavicular.', { top: '62%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnMc3" onClick={() => handleButtonClick('BICEPS BRACHII C5, C6 - Electrodo colocado sobre el vientre muscular más prominente del Bíceps braquial o punto medio ventral del brazo.', { top: '62%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnMc4" onClick={() => handleButtonClick('Tendón del bíceps braquiai en el codo.', { top: '62%', left: '50%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/musculocutaneo-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/musculocutaneo-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 

@@ -494,7 +494,7 @@ const Reporte = () => {
     //     es una de ["AGUDA","SUBAGUDA","CRONICA","SENSITIVA"]
     const words = combinedText.split(' ');
     const allowedEvolutions = ["AGUDA","SUBAGUDA","CRONICA","SENSITIVA"];
-    const isRadiculo = words[0]?.toUpperCase() === "RADICULOPATIA";
+    const isRadiculo = words[0]?.toUpperCase() === "RADICULOPATÍA";
     const secondWord = words[1]?.toUpperCase();
   
     if (additionalText && isRadiculo && allowedEvolutions.includes(secondWord)) {

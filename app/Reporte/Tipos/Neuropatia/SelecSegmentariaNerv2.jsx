@@ -66,15 +66,15 @@ export function checkDivsSegmentar2(copyConclusions) {
 <div style={{ position: 'absolute', top: '27.9%', left: '65.4%', transform: 'rotate(80deg)', }}
   className={`dont-print-Nervius`}><SegmentariaButton2 value='cari25' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '28.3%', left: '65.5%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari26' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari26' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 
 <div style={{ position: 'absolute', top: '28.6%', left: '65.5%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari27' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari27' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '29.0%', left: '65.6%', transform: 'rotate(80deg)', }}
-  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari28' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari28' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 
 <div style={{ position: 'absolute', top: '29.3%', left: '65.6%', transform: 'rotate(80deg)' }}
-  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari29' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari29' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '29.7%', left: '65.8%', transform: 'rotate(80deg)' }}
   className={`dont-print-Nervius`}><SegmentariaButton2 value='cari30' title='DEL CODO,' displayText=' ' /></div>
 
@@ -338,15 +338,15 @@ export function checkDivsSegmentar2(copyConclusions) {
 <div style={{ position: 'absolute', top: '27.9%', left: '34.5%', transform: 'rotate(100deg)', }}
   className={`dont-print-Nervius`}><SegmentariaButton2 value='cari25' title='DEL TERCIO DISTAL DE BRAZO,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '28.3%', left: '34.2%', transform: 'rotate(100deg)', }}
-  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari26' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari26' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 
 <div style={{ position: 'absolute', top: '28.6%', left: '33.8%', transform: 'rotate(100deg)', }}
-  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari27' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari27' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '29.0%', left: '33.8%', transform: 'rotate(100deg)', }}
-  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari28' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari28' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 
 <div style={{ position: 'absolute', top: '29.3%', left: '33.8%', transform: 'rotate(100deg)' }}
-  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari29' title='LIGAMENTO STRUTHERS,' displayText=' ' /></div>
+  className={`dont-print-Nervius`}><SegmentariaButton2 value='cari29' title='DEL LIGAMENTO STRUTHERS,' displayText=' ' /></div>
 <div style={{ position: 'absolute', top: '29.7%', left: '33.6%', transform: 'rotate(100deg)' }}
   className={`dont-print-Nervius`}><SegmentariaButton2 value='cari30' title='DEL CODO,' displayText=' ' /></div>
 
@@ -694,17 +694,17 @@ export function checkDivsSegmentar2(copyConclusions) {
         <div style={{ position: 'absolute', top: '19.1%', left: '61.9%', transform: 'rotate(180deg)', }}
           className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari6' title='MEDIAL AL CUELLO QUIRURGICO DEL HUMERO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '19.1%', left: '62.5%', transform: 'rotate(180deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari7' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari7' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '19.1%', left: '63.2%', transform: 'rotate(180deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari8' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari8' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '18.3%', left: '62.4%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari9' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari9' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '17.5%', left: '62.0%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari10' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari10' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '17.9%', left: '62.3%', transform: 'rotate(90deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari11' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari11' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '19.1%', left: '64.0%', transform: 'rotate(180deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari12' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='cari12' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
       </>);
 
   }
@@ -724,19 +724,19 @@ export function checkDivsSegmentar2(copyConclusions) {
         <div style={{ position: 'absolute', top: '19.5%', left: '37.2%', transform: 'rotate(180deg)', }}
           className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car6' title='MEDIAL AL CUELLO QUIRURGICO DEL HUMERO,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '18.8%', left: '36.6%', transform: 'rotate(100deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car7' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car7' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '18.4%', left: '36.6%', transform: 'rotate(100deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car8' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car8' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '18.0%', left: '36.9%', transform: 'rotate(100deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car9' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car9' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '17.6%', left: '36.9%', transform: 'rotate(100deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car10' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car10' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '19.3%', left: '34.6%', transform: 'rotate(180deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car11' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car11' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '19.0%', left: '35.2%', transform: 'rotate(180deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car12' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car12' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
         <div style={{ position: 'absolute', top: '19.0%', left: '35.8%', transform: 'rotate(180deg)', }}
-          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car13' title='DE SU DIVICION TERMINAL,' displayText=' ' /></div>
+          className={`.dont-print-Nerviusgrande`}><SegmentariaButton2 value='car13' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
       </>);
   }
 
@@ -1034,19 +1034,19 @@ export function checkDivsSegmentar2(copyConclusions) {
       <div style={{ position: 'absolute', top: '23.2%', left: '33.8%', transform: 'rotate(120deg)', }}
         className={`dont-print-Nervius`}><SegmentariaButton2 value='car15' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.6%', left: '33.7%', transform: 'rotate(120deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='car16' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='car16' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.0%', left: '33.4%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='car17' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='car17' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.4%', left: '33.4%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='car18' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='car18' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.8%', left: '33.2%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='car19' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='car19' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.3%', left: '33.2%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='car20' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='car20' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.7%', left: '33.1%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='car21' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='car21' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.1%', left: '33.1%', transform: 'rotate(110deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='car22' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='car22' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.5%', left: '33.0%', transform: 'rotate(100deg)', }}
         className={`dont-print-Nervius`}><SegmentariaButton2 value='car23' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.9%', left: '33.0%', transform: 'rotate(100deg)', }}
@@ -1170,19 +1170,19 @@ export function checkDivsSegmentar2(copyConclusions) {
       <div style={{ position: 'absolute', top: '23.2%', left: '64.8%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`}><SegmentariaButton2 value='cari15' title='DEL TERCIO PROXIMAL DE BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '23.6%', left: '65.2%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari16' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari16' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.0%', left: '65.4%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari17' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari17' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.4%', left: '65.4%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari18' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari18' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '24.8%', left: '65.6%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari19' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari19' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.3%', left: '65.6%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari20' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari20' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '25.7%', left: '65.8%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari21' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari21' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.1%', left: '65.8%', transform: 'rotate(60deg)', }}
-        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari22' title='DEL CANAL DE TORSION,' displayText=' ' /></div>
+        className={`dont-print-Nervius`}><SegmentariaButton2 value='cari22' title='DEL CANAL DE TORSIÓN,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.5%', left: '66.0%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`}><SegmentariaButton2 value='cari23' title='DEL TERCIO DISTAL DEL BRAZO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '26.9%', left: '66.0%', transform: 'rotate(60deg)', }}
@@ -2013,21 +2013,21 @@ export function checkDivsSegmentar2(copyConclusions) {
       <div style={{ position: 'absolute', top: '18.8%', left: '52.9%', transform: 'rotate(110deg)', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari10' title='SUPRACLAVICULAR,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '19.3%', left: '52.8%', transform: 'rotate(110deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari11' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari11' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '19.7%', left: '52.8%', transform: 'rotate(110deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari12' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari12' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '20.1%', left: '52.7%', transform: 'rotate(110deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari13' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari13' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '20.6%', left: '52.7%', transform: 'rotate(110deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari14' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari14' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.0%', left: '52.7%', transform: 'rotate(110deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari15' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari15' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.4%', left: '52.6%', transform: 'rotate(110deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari16' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari16' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.9%', left: '52.6%', transform: 'rotate(110deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari17' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari17' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '22.3%', left: '52.2%', transform: 'rotate(110deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari18' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari18' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '22.7%', left: '52.2%', transform: 'rotate(110deg)', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari19' title='DEL DIAFRAGMA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '23.1%', left: '52.2%', transform: 'rotate(110deg)', }}
@@ -2058,21 +2058,21 @@ export function checkDivsSegmentar2(copyConclusions) {
       <div style={{ position: 'absolute', top: '19.1%', left: '46.4%', transform: 'rotate(60deg)', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car10' title='SUPRACLAVICULAR,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '19.5%', left: '46.3%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car11' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car11' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '19.9%', left: '46.3%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car12' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car12' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '20.2%', left: '46.3%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car13' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car13' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '20.6%', left: '46.3%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car14' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car14' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.0%', left: '46.4%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car15' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car15' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.4%', left: '46.4%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car16' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car16' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.8%', left: '46.6%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car17' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car17' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '22.2%', left: '46.6%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car18' title='DEL TORAX,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car18' title='DEL TÓRAX,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '22.6%', left: '46.8%', transform: 'rotate(60deg)', }}
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car19' title='DEL DIAFRAGMA,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '23.1%', left: '46.8%', transform: 'rotate(60deg)', }}
@@ -2101,22 +2101,22 @@ export function checkDivsSegmentar2(copyConclusions) {
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari6' title='INMEDIATO A SU EMERGENCIA DE AXILA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '20.7%', left: '56.7%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari7' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari7' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.1%', left: '56.9%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari8' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari8' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '21.4%', left: '57.1%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari9' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari9' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.8%', left: '57.3%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari10' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari10' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '22.2%', left: '57.3%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari11' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari11' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '22.8%', left: '57.3%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari12' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari12' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '23.0%', left: '57.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari13' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari13' title='TORÁCICO,' displayText=' ' /> </div>
 
     </>);
   }
@@ -2138,21 +2138,21 @@ export function checkDivsSegmentar2(copyConclusions) {
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car6' title='INMEDIATO A SU EMERGENCIA DE AXILA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '20.7%', left: '42.2%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car7' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car7' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.1%', left: '42.0%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car8' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car8' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '21.4%', left: '41.9%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car9' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car9' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.8%', left: '41.9%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car10' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car10' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '22.2%', left: '41.8%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car11' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car11' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '22.6%', left: '41.6%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car12' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car12' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '23.0%', left: '41.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car13' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car13' title='TORÁCICO,' displayText=' ' /> </div>
 
 
     </>);
@@ -2176,43 +2176,43 @@ export function checkDivsSegmentar2(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari6' title='INMEDIATO A SU EMERGENCIA DE AXILA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '21.1%', left: '57.2%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari7' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari7' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.5%', left: '57.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari8' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari8' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '21.8%', left: '57.6%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari9' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari9' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '22.2%', left: '57.8%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari10' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari10' title='TORÁCICO,' displayText=' ' /> </div>
 
 
 <div style={{ position: 'absolute', top: '22.6%', left: '58.0%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari11' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari11' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '23.0%', left: '58.2%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari12' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari12' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '23.4%', left: '58.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari13' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari13' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '23.8%', left: '58.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari14' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari14' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '24.2%', left: '58.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari15' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari15' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '24.6%', left: '58.2%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari16' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari16' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '25.0%', left: '58.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari17' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari17' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '25.4%', left: '58.2%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari18' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari18' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '25.8%', left: '58.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari19' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari19' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '26.2%', left: '58.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari20' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari20' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '26.6%', left: '58.1%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari21' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari21' title='TORÁCICO,' displayText=' ' /> </div>
 
     </>);
   }
@@ -2233,43 +2233,43 @@ export function checkDivsSegmentar2(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car6' title='INMEDIATO A SU EMERGENCIA DE AXILA,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '21.1%', left: '41.7%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car7' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car7' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '21.5%', left: '41.5%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car8' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car8' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '21.8%', left: '41.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car9' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car9' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '22.2%', left: '41.2%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car10' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car10' title='TORÁCICO,' displayText=' ' /> </div>
 
 
 <div style={{ position: 'absolute', top: '22.6%', left: '41.3%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car11' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car11' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '23.0%', left: '41.1%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car12' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car12' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '23.4%', left: '40.9%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car13' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car13' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '23.8%', left: '40.7%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car14' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car14' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '24.2%', left: '40.6%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car15' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car15' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '24.6%', left: '40.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car16' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car16' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '25.0%', left: '40.6%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car17' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car17' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '25.4%', left: '40.4%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car18' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car18' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '25.8%', left: '40.6%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car19' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car19' title='TORÁCICO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '26.2%', left: '40.6%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car20' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car20' title='TORÁCICO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '26.6%', left: '41.1%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car21' title='TORACICO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car21' title='TORÁCICO,' displayText=' ' /> </div>
 
 
     </>);
@@ -3945,22 +3945,22 @@ export function checkDivsSegmentar2(copyConclusions) {
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari32' title='CANAL OBTURADOR,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '42.0%', left: '56.0%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari33' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari33' title='DE MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '42.4%', left: '56.0%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari34' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari34' title='DE MUSLO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '42.8%', left: '55.7%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari35' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari35' title='DE MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '43.1%', left: '55.7%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari36' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari36' title='DE MUSLO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '43.4%', left: '55.2%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari37' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari37' title='DE MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '43.8%', left: '55.2%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari38' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari38' title='DE MUSLO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '44.1%', left: '55.0%', transform: 'rotate(80deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari39' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari39' title='DE MUSLO,' displayText=' ' /> </div>
 
     </>);
   }
@@ -4046,22 +4046,22 @@ export function checkDivsSegmentar2(copyConclusions) {
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car32' title='CANAL OBTURADOR,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '42.0%', left: '43.0%', transform: 'rotate(70deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car33' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car33' title='DE MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '42.4%', left: '43.0%', transform: 'rotate(70deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car34' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car34' title='DE MUSLO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '42.8%', left: '43.1%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car35' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car35' title='DE MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '43.1%', left: '43.1%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car36' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car36' title='DE MUSLO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '43.4%', left: '43.4%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car37' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car37' title='DE MUSLO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '43.8%', left: '43.4%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car38' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car38' title='DE MUSLO,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '44.1%', left: '43.6%', transform: 'rotate(60deg)', }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car39' title='MUSLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car39' title='DE MUSLO,' displayText=' ' /> </div>
 
     </>);
   }
@@ -4069,30 +4069,30 @@ export function checkDivsSegmentar2(copyConclusions) {
     return (<>
 
 <div style={{ position: 'absolute', top: '51.0%', left: '56.5%', transform: 'rotate(260deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari1' title='DEL HUECO POPLITEO' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari1' title='DEL HUECO POPLÍTEO' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '51.4%', left: '56.7%', transform: 'rotate(260deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari2' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari2' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '51.8%', left: '57.0%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari3' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari3' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '52.3%', left: '57.0%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari4' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari4' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '52.6%', left: '57.1%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari5' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari5' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.0%', left: '56.9%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari6' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari6' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.4%', left: '56.9%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari7' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari7' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.8%', left: '57.3%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari8' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari8' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '54.2%', left: '57.6%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari9' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari9' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '54.6%', left: '57.8%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari10' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari10' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 
 <div style={{ position: 'absolute', top: '55.0%', left: '58.0%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari11' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari11' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '55.4%', left: '58.0%', transform: 'rotate(265deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari12' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari12' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '55.8%', left: '58.2%', transform: 'rotate(265deg)' }}
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari13' title=' DE CABEZA DE PERONE,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '56.2%', left: '58.6%', transform: 'rotate(265deg)' }}
@@ -4207,17 +4207,17 @@ export function checkDivsSegmentar2(copyConclusions) {
     return (<>
 
 <div style={{ position: 'absolute', top: '51.0%', left: '42.9%', transform: 'rotate(95deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car1' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car1' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '51.4%', left: '42.7%', transform: 'rotate(95deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car2' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car2' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '51.8%', left: '42.5%', transform: 'rotate(95deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car3' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car3' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '52.2%', left: '42.3%', transform: 'rotate(95deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car4' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car4' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '52.6%', left: '42.1%', transform: 'rotate(95deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car5' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car5' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.0%', left: '41.9%', transform: 'rotate(95deg)' }}
-        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car6' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car6' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.4%', left: '41.9%', transform: 'rotate(95deg)' }}
         className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car7' title='DE CABEZA DE PERONE,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.8%', left: '41.9%', transform: 'rotate(95deg)' }}
@@ -4637,23 +4637,23 @@ export function checkDivsSegmentar2(copyConclusions) {
 <div style={{ position: 'absolute', top: '55.4%', left: '43.1%', transform: 'rotate(95deg)' }}
     className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car12' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '55.8%', left: '43.1%', transform: 'rotate(95deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car13' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car13' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '56.2%', left: '43.1%', transform: 'rotate(95deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car14' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car14' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '56.6%', left: '42.8%', transform: 'rotate(95deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car15' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car15' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '57.0%', left: '42.6%', transform: 'rotate(95deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car16' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car16' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '57.4%', left: '42.6%', transform: 'rotate(95deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car17' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car17' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '57.8%', left: '42.4%', transform: 'rotate(95deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car18' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car18' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 
 
 <div style={{ position: 'absolute', top: '58.2%', left: '42.4%', transform: 'rotate(95deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car19' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car19' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '58.6%', left: '42.2%', transform: 'rotate(95deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car20' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car20' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '59.0%', left: '42.0%', transform: 'rotate(95deg)' }}
     className={`.dont-print-Nervius`} > <SegmentariaButton2 value='car21' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '59.4%', left: '42.0%', transform: 'rotate(95deg)' }}
@@ -4812,21 +4812,21 @@ export function checkDivsSegmentar2(copyConclusions) {
 <div style={{ position: 'absolute', top: '55.4%', left: '56.3%', transform: 'rotate(265deg)' }}
     className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari13' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '55.8%', left: '56.3%', transform: 'rotate(265deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari14' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari14' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '56.2%', left: '56.4%', transform: 'rotate(265deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari15' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari15' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '56.6%', left: '56.4%', transform: 'rotate(265deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari16' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari16' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '57.0%', left: '56.4%', transform: 'rotate(265deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari17' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari17' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '57.4%', left: '56.6%', transform: 'rotate(265deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari18' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari18' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '57.8%', left: '56.9%', transform: 'rotate(265deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari19' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari19' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '58.2%', left: '56.9%', transform: 'rotate(265deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari20' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari20' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '58.6%', left: '57.2%', transform: 'rotate(265deg)' }}
-    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari21' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+    className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari21' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '59.0%', left: '57.4%', transform: 'rotate(265deg)' }}
     className={`.dont-print-Nervius`} > <SegmentariaButton2 value='cari22' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
 
@@ -5340,21 +5340,21 @@ export function checkDivsSegmentar2(copyConclusions) {
   if (copyConclusions.includes('FACIAL IZQUIERDO, EN SEGMENTO A NIVEL') || copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {/* SEGUIR AQUI */
     return (<>
       <div style={{ position: 'absolute', top: '5.2%', left: '51.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari1' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari1' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.2%', left: '51.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari2' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari2' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '5.3%', left: '52.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari3' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari3' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.4%', left: '52.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari4' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari4' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.7%', left: '53.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari5' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari5' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '5.9%', left: '53.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari6' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari6' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '6.4%', left: '54.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari7' title='RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari7' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '8.2%', left: '50.4%', }}
         className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='cari8' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
@@ -5415,19 +5415,19 @@ export function checkDivsSegmentar2(copyConclusions) {
   if (copyConclusions.includes('FACIAL DERECHO, EN SEGMENTO A NIVEL') || copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {/* SEGUIR AQUI */
     return (<>
       <div style={{ position: 'absolute', top: '5.1%', left: '48.2%', transform: 'rotate(180deg)' }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car1' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car1' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.3%', left: '47.8%', transform: 'rotate(180deg)' }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car2' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car2' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.2%', left: '47.3%', transform: 'rotate(180deg)' }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car3' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car3' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.3%', left: '46.7%', transform: 'rotate(180deg)' }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car4' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car4' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.6%', left: '46.0%', transform: 'rotate(180deg)' }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car5' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car5' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '6.0%', left: '45.5%', transform: 'rotate(180deg)' }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car6' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car6' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '6.6%', left: '44.9%', transform: 'rotate(180deg)' }}
-        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car7' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car7' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '8.2%', left: '48.4%', }}
         className={`.dont-print-Nerviusgrande`} > <SegmentariaButton2 value='car8' title='RAMA 1,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.2%', left: '47.8%', }}

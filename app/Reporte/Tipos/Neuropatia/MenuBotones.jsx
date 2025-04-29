@@ -1693,7 +1693,7 @@ const StepCDD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
 };
 
 const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
-  const { removeConclusion, setButtonsDisabled } = useContext(ReportContext)
+  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT2, setbuttonsDisabledBITSeg2} = useContext(ReportContext)
   return (
     <div>
       <div className='button-bar'>

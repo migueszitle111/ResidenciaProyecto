@@ -111,13 +111,13 @@
 
 .btnMc1 {
     position: absolute;
-    height: 3.2vw;
-    width: 3.2vw;
+    height: 2.5vw;
+    width: 2.5vw;
     top: 30%;
     left: 45%;
-    transform: translate(700%, -65%);
+    transform: translate(130%, -450%);
     background-color: transparent;
-    border: none;
+    border: none; 
     border-radius: 50%;
     z-index: 1;
     color: white;
@@ -127,11 +127,11 @@
 }
 .btnMc2 {
     position: absolute;
-    height: 3.4vw;
-    width: 3.4vw;
+    height: 2.8vw;
+    width: 2.8vw;
     top: 30%;
     left: 45%;
-    transform: translate(275%, 90%);
+    transform: translate(220%, -135%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -143,11 +143,11 @@
 }
 .btnMc3 {
     position: absolute;
-    height: 2.8vw;
-    width: 2.8vw;
+    height: 2.5vw;
+    width: 2.5vw;
     top: 30%;
     left: 45%;
-    transform: translate(-450%, -265%);
+    transform: translate(0%, 375%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -159,11 +159,11 @@
 }
 .btnMc4 {
     position: absolute;
-    height: 2.8vw;
-    width: 2.8vw;
+    height: 2.5vw;
+    width: 2.5vw;
     top: 30%;
     left: 45%;
-    transform: translate(-920%, -360%);
+    transform: translate(-60%, 680%);
     background-color: transparent;
     border: none;
     border-radius: 50%;

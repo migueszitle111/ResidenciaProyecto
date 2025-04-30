@@ -875,7 +875,7 @@ const StepE = ({ handleNextStep, handlePrevStep, setStep }) => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
               removeConclusion(' MOTORAS ');
               removeConclusion(' SENSITIVAS ');
-              removeConclusion(' MIXTAS (SENSITIVO-MOTOTA)');
+              removeConclusion(' MIXTAS (SENSITIVO-MOROTA)');
 
               // 2) Regresamos 
               setStep('D')
@@ -899,7 +899,7 @@ const StepE = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div onClick={() => setStep('F')}>
         <ConclusionButton value=' SENSITIVAS ' title=' DE FIBRAS SENSITIVAS, ' displayText={' SENSITIVAS '} /></div>
       <div onClick={() => setStep('F')}>
-        <ConclusionButton value=' MIXTAS (SENSITIVO-MOTOTA)' title=' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA), ' displayText={' MIXTAS (SENSITIVO-MOTOTA) '} /></div>
+        <ConclusionButton value=' MIXTAS (SENSITIVO-MOROTA)' title=' DE FIBRAS MIXTAS (SENSITIVO-MOROTA), ' displayText={' MIXTAS (SENSITIVO-MOROTA) '} /></div>
     </div>
   );
 };
@@ -913,7 +913,7 @@ const StepE1 = ({ handleNextStep, handlePrevStep, setStep }) => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
               removeConclusion(' MOTORAS ');
               removeConclusion(' SENSITIVAS ');
-              removeConclusion(' MIXTAS (SENSITIVO-MOTOTA)');
+              removeConclusion(' MIXTAS (SENSITIVO-MOROTA)');
 
               // 2) Regresamos 
               setStep('D')
@@ -937,7 +937,7 @@ const StepE1 = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div onClick={() => setStep('F1')}>
         <ConclusionButton value=' SENSITIVAS ' title=' DE FIBRAS SENSITIVAS, ' displayText={' SENSITIVAS '} /></div>
       <div onClick={() => setStep('F1')}>
-        <ConclusionButton value=' MIXTAS (SENSITIVO-MOTOTA)' title=' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA), ' displayText={' MIXTAS (SENSITIVO-MOTOTA) '} /></div>
+        <ConclusionButton value=' MIXTAS (SENSITIVO-MOROTA)' title=' DE FIBRAS MIXTAS (SENSITIVO-MOROTA), ' displayText={' MIXTAS (SENSITIVO-MOROTA) '} /></div>
     </div>
   );
 };
@@ -1835,7 +1835,7 @@ const StepE2 = ({ handleNextStep, handlePrevStep, setStep }) => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
               removeConclusion(' MOTORAS2 ');
               removeConclusion(' SENSITIVAS2 ');
-              removeConclusion(' MIXTAS (SENSITIVO-MOTOTA)2');
+              removeConclusion(' MIXTAS (SENSITIVO-MOROTA)2');
 
               // 2) Regresamos 
               setStep('D2')
@@ -1859,7 +1859,7 @@ const StepE2 = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div onClick={() => setStep('F2')}>
         <ConclusionButton value=' SENSITIVAS2' title=' DE FIBRAS SENSITIVAS, ' displayText={' SENSITIVAS '} /></div>
       <div onClick={() => setStep('F2')}>
-        <ConclusionButton value=' MIXTAS (SENSITIVO-MOTOTA)2' title=' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA), ' displayText={' MIXTAS (SENSITIVO-MOTOTA) '} /></div>
+        <ConclusionButton value=' MIXTAS (SENSITIVO-MOROTA)2' title=' DE FIBRAS MIXTAS (SENSITIVO-MOROTA), ' displayText={' MIXTAS (SENSITIVO-MOROTA) '} /></div>
     </div>
   );
 };
@@ -1873,7 +1873,7 @@ const StepE12 = ({ handleNextStep, handlePrevStep, setStep }) => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
               removeConclusion(' MOTORAS2 ');
               removeConclusion(' SENSITIVAS2 ');
-              removeConclusion(' MIXTAS (SENSITIVO-MOTOTA)2');
+              removeConclusion(' MIXTAS (SENSITIVO-MOROTA)2');
 
               // 2) Regresamos 
               setStep('D')
@@ -1897,7 +1897,7 @@ const StepE12 = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div onClick={() => setStep('F12')}>
         <ConclusionButton value=' SENSITIVAS2' title=' DE FIBRAS SENSITIVAS, ' displayText={' SENSITIVAS '} /></div>
       <div onClick={() => setStep('F12')}>
-        <ConclusionButton value=' MIXTAS (SENSITIVO-MOTOTA)2' title=' DE FIBRAS MIXTAS (SENSITIVO-MOTOTA), ' displayText={' MIXTAS (SENSITIVO-MOTOTA) '} /></div>
+        <ConclusionButton value=' MIXTAS (SENSITIVO-MOROTA)2' title=' DE FIBRAS MIXTAS (SENSITIVO-MOROTA), ' displayText={' MIXTAS (SENSITIVO-MOROTA) '} /></div>
     </div>
   );
 };

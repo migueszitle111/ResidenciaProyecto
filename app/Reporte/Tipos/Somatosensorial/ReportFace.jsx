@@ -235,8 +235,8 @@ const Reporte = () => {
       // C7 y C8  /  C6-C7 y C8
       const list =
         ord.length === 1 ? ord[0] :
-        ord.length === 2 ? `${ord[0]} y ${ord[1]}` :
-        `${ord.slice(0, -1).join('-')} y ${ord.slice(-1)}`;
+        ord.length === 2 ? `${ord[0]}-${ord[1]}` :
+        `${ord.slice(0, -1).join('-')}-${ord.slice(-1)}`;
   
       normal.push({
         p: priority['A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS'],
@@ -554,6 +554,848 @@ setCopyConclusions(finalTxt);
                  
                 
             },
+
+                       /*indemne*/
+///////////////////////////c4di
+{
+  expectedValue: 'bilateralc4di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc4di',  
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc4di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+   
+},
+////////////////////////////////c5di
+{
+  expectedValue: 'bilateralc5di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc5di',  
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc5di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+   
+},
+///////////////////////////////////c6di
+{
+  expectedValue: 'bilateralc6di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc6di',  
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc6di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+   
+},
+////////////////////////////////////////////////////////////
+{
+  expectedValue: 'bilateralc7di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc7di',  
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc7di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+   
+},
+///////////////////////////////////////////c8di
+
+{
+  expectedValue: 'bilateralc8di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc8di',  
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc8di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t1di
+{
+  expectedValue: 'bilateralt1di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot1di',  
+    image: [
+      {
+        src: 'SomatosensorialImg/SUPERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot1di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/SUPERIORDERECHA.png',
+        alt: 'Modelo',
+      }, 
+},
+//////////////////////////////////////////////t2di
+{
+  expectedValue: 'derechot2di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot2di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt2di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////t3di
+{
+  expectedValue: 'derechot3di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot3di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt3di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////t4di
+{
+  expectedValue: 'derechot4di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot4di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt4di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////t5di
+{
+  expectedValue: 'derechot5di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot5di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt5di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////t6di
+{
+  expectedValue: 'derechot6di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot6di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt6di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////t7di
+{
+  expectedValue: 'derechot7di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot7di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt7di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+
+//////////////////////////////////////////////t8di
+{
+  expectedValue: 'derechot8di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot8di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt8di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+
+//////////////////////////////////////////////t9di
+{
+  expectedValue: 'derechot9di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot9di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt9di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////t10di
+{
+  expectedValue: 'derechot10di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot10di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt10di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////t11di
+{
+  expectedValue: 'derechot11di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot11di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt11di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////t12di
+{
+  expectedValue: 'derechot12di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdot12di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateralt12di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////l1di
+{
+  expectedValue: 'derechotl1di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdol1di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilaterall1di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////l2di
+{
+  expectedValue: 'derechol2di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdol2di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilaterall2di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////l3di
+{
+  expectedValue: 'derechol3di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdol3di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilaterall3di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+////////////////////////////////////////////////l4di
+{
+  expectedValue: 'derechol4di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdol4di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilaterall4di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+}, 
+//////////////////////////////////////////////l5di
+{
+  expectedValue: 'derechol5di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdol5di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilaterall5di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+//////////////////////////////////////////////s1di
+{
+  expectedValue: 'derechos1di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdos1di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilaterals1di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+/////////////////////////////////////////////////////////s2di
+{
+  expectedValue: 'derechos2di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdos2di', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilaterals2di', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             {
               expectedValue: 'inferior_derechoindemne',  

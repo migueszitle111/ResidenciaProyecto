@@ -80,7 +80,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
        {step === 'D1AT' && (<StepD1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
        {step === 'D2AT' && (<StepD2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
        {step === 'E1AT' && (<StepE1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
-       {step === 'E2AT' && ( <StepE2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+       {step === 'E2AT' && (<StepE2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
        {step === 'F1AT' && (<StepF1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide} />)}
        {step === 'F2AT' && (<StepF2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide}  />)}
        {step === 'F3AT' && (<StepF3AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep}setSelectedSide={setSelectedSide}   />)}
@@ -93,6 +93,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
        {/*Inicia en el paso StepA para seleccionar los dermatomas*/}
        {step === 'BD' && (<StepBD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
        {step === 'CDI' && (<StepCDI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+       {step === 'CDA' && (<StepCDA handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
        {step === 'DDA' && (<StepDDA handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
        {step === 'DDI' && (<StepDDI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} /> )}
        {step === 'D1A' && (<StepD1A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
@@ -2044,10 +2045,10 @@ const StepBD = ({ handlePrevStep, handleNextStep, setStep }) => {
       </button>
     </div>
     <h1 className="text-xl font-bold text-white"> </h1>
-    <div onClick={() => setStep('DDI')}>
+    <div onClick={() => setStep('CDI')}>
       <ConclusionButton value="dermatomas_indemne" title="CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />   
     </div>
-    <div onClick={() => setStep('DDA')}>
+    <div onClick={() => setStep('CDA')}>
       <ConclusionButton value="dermatomas_alterada" title="CON DEFECTO" displayText="ALTERADA " />
     </div>
   </div>
@@ -2055,7 +2056,7 @@ const StepBD = ({ handlePrevStep, handleNextStep, setStep }) => {
 );
 }
 
-const StepCDI = ({ handlePrevStep, handleNextStep, setStep}) => {
+const StepCDI = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
@@ -2074,9 +2075,10 @@ const StepCDI = ({ handlePrevStep, handleNextStep, setStep}) => {
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
           setStep('DDI');
+          setSelectedSide('izquierdo');
         }}>
       <ConclusionButton
-        value="izquierdo_dermatomas"
+        value="izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -2084,9 +2086,11 @@ const StepCDI = ({ handlePrevStep, handleNextStep, setStep}) => {
     </div>
     <div  onClick={() => {
           setStep('DDI');
+          setSelectedSide('derecho');
+
         }}>
       <ConclusionButton
-        value="derecho_dermatomas"
+        value="derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -2094,9 +2098,11 @@ const StepCDI = ({ handlePrevStep, handleNextStep, setStep}) => {
     </div>
     <div onClick={() => {
           setStep('DDI');
+          setSelectedSide('bilateral');
+
         }}>
       <ConclusionButton
-        value="bilateral_dermatomas"
+        value="bilateral"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
         
@@ -2105,6 +2111,66 @@ const StepCDI = ({ handlePrevStep, handleNextStep, setStep}) => {
   </div>
 );
 }
+
+const StepCDA = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return (
+  <div>
+    <div className='button-bar'>
+      <button onClick={() => {
+      removeConclusion('izquierdo_dermatomas')
+      removeConclusion('derecho_dermatomas')
+      removeConclusion('bilateral_dermatomas')
+        setStep('BD')}} className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+      </button>
+      <button  className="print-button dont-print">
+        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+      </button>
+    </div>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <div  onClick={() => {
+          setStep('DDA');
+          setSelectedSide('izquierdo');
+
+        }}>
+      <ConclusionButton
+        value="izquierdo"
+        title=" PARA LADO IZQUIERDO "
+        displayText="IZQUIERDO"
+       
+      />
+    </div>
+    <div  onClick={() => {
+          setStep('DDA');
+          setSelectedSide('derecho');
+
+        }}>
+      <ConclusionButton
+        value="derecho"
+        title=" PARA LADO DERECHO "
+        displayText="DERECHO"
+       
+      />
+    </div>
+    <div onClick={() => {
+          setStep('DDA');
+          setSelectedSide('bilateral');
+
+        }}>
+      <ConclusionButton
+        value="bilateral"
+        title=" DE FORMA BILATERAL,"
+        displayText="BILATERAL "
+        
+      />
+    </div>
+  </div>
+);
+}
+
+
+
 
 
 const StepDDI = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSide }) => {
@@ -2151,44 +2217,44 @@ const StepDDI = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
      <InternalAccordionContainer> 
      <Accordion title='CERVICAL' type='internal'> 
        <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value="c4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
-         <ConclusionButton value="c5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
-         <ConclusionButton value="c6" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
-         <ConclusionButton value="c7" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
-         <ConclusionButton value="c8" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value="t1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+         <ConclusionButton value={`${selectedSide}c4di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value={`${selectedSide}c5di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
+         <ConclusionButton value={`${selectedSide}c6di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
+         <ConclusionButton value={`${selectedSide}c7di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
+         <ConclusionButton value={`${selectedSide}c8di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value={`${selectedSide}t1di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
       </div>
       </Accordion>
       </InternalAccordionContainer> 
       <InternalAccordionContainer> 
       <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
-        <ConclusionButton value="t3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
-        <ConclusionButton value="t4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value="t5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value="t6" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t2di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
+        <ConclusionButton value={`${selectedSide}t3di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
+        <ConclusionButton value={`${selectedSide}t4di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
+        <ConclusionButton value={`${selectedSide}t5di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
+        <ConclusionButton value={`${selectedSide}t6di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t7" title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value="t8" title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value="t9" title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value="t10" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value="t11" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value="t12" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        <ConclusionButton value={`${selectedSide}t7di`} title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
+        <ConclusionButton value={`${selectedSide}t8di`} title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
+        <ConclusionButton value={`${selectedSide}t9di`} title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
+        <ConclusionButton value={`${selectedSide}t10di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
+        <ConclusionButton value={`${selectedSide}t11di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
+        <ConclusionButton value={`${selectedSide}t12di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
         </div>
       </Accordion>
       </InternalAccordionContainer> 
       <InternalAccordionContainer> 
       <Accordion  title='LUMBOSACRO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="l1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
-        <ConclusionButton value="l2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
-        <ConclusionButton value="l3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
-        <ConclusionButton value="l4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value="l5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
-        <ConclusionButton value="s1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value="s2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        <ConclusionButton value={`${selectedSide}l1di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value={`${selectedSide}l2di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
+        <ConclusionButton value={`${selectedSide}l3di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
+        <ConclusionButton value={`${selectedSide}l4di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
+        <ConclusionButton value={`${selectedSide}l5di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
+        <ConclusionButton value={`${selectedSide}s1di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
+        <ConclusionButton value={`${selectedSide}s2di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
         </div>
       </Accordion>
       </InternalAccordionContainer> 
@@ -2409,7 +2475,7 @@ const StepF2A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
-          // setSelectedSide('izquierdo');
+          setSelectedSide('izquierdo');
           setStep('G2A');
         }}>
       <ConclusionButton
@@ -2420,7 +2486,7 @@ const StepF2A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
       />
     </div>
     <div  onClick={() => {
-          // setSelectedSide('derecho');
+          setSelectedSide('derecho');
           setStep('G2A');
         }}>
       <ConclusionButton
@@ -2431,7 +2497,7 @@ const StepF2A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
       />
     </div>
     <div onClick={() => {
-          // setSelectedSide('bilateral');
+          setSelectedSide('bilateral');
           setStep('G2A');
         }}>
       <ConclusionButton
@@ -2465,7 +2531,7 @@ const StepF3A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
-          // setSelectedSide('izquierdo');
+          setSelectedSide('izquierdo');
           setStep('G3A');
         }}>
       <ConclusionButton
@@ -2476,7 +2542,7 @@ const StepF3A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
       />
     </div>
     <div  onClick={() => {
-          // setSelectedSide('derecho');
+          setSelectedSide('derecho');
           setStep('G3A');
         }}>
       <ConclusionButton
@@ -2487,7 +2553,7 @@ const StepF3A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
       />
     </div>
     <div onClick={() => {
-          // setSelectedSide('bilateral');
+          setSelectedSide('bilateral');
           setStep('G3A');
         }}>
       <ConclusionButton
@@ -2551,44 +2617,44 @@ const StepG1A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
      <InternalAccordionContainer> 
      <Accordion title='CERVICAL' type='internal'> 
        <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value="c4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
-         <ConclusionButton value="c5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
-         <ConclusionButton value="c6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
-         <ConclusionButton value="c7" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
-         <ConclusionButton value="c8" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value="t1" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+         <ConclusionButton value={`${selectedSide}c4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value={`${selectedSide}c5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
+         <ConclusionButton value={`${selectedSide}c6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
+         <ConclusionButton value={`${selectedSide}c7da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
+         <ConclusionButton value={`${selectedSide}c8da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value={`${selectedSide}t1da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
       </div>
       </Accordion>
       </InternalAccordionContainer> 
       <InternalAccordionContainer> 
       <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t2" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
-        <ConclusionButton value="t3" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
-        <ConclusionButton value="t4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value="t5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value="t6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t2da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
+        <ConclusionButton value={`${selectedSide}t3da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
+        <ConclusionButton value={`${selectedSide}t4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
+        <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
+        <ConclusionButton value={`${selectedSide}t6d`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t7" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value="t8" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value="t9" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value="t10" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value="t11" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value="t12" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
+        <ConclusionButton value={`${selectedSide}t8da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
+        <ConclusionButton value={`${selectedSide}t9da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
+        <ConclusionButton value={`${selectedSide}t10da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
+        <ConclusionButton value={`${selectedSide}t11da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
+        <ConclusionButton value={`${selectedSide}t12da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
         </div>
       </Accordion>
       </InternalAccordionContainer> 
       <InternalAccordionContainer> 
       <Accordion  title='LUMBOSACRO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="l1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
-        <ConclusionButton value="l2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
-        <ConclusionButton value="l3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
-        <ConclusionButton value="l4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value="l5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
-        <ConclusionButton value="s1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value="s2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        <ConclusionButton value={`${selectedSide}l1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value={`${selectedSide}l2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
+        <ConclusionButton value={`${selectedSide}l3da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
+        <ConclusionButton value={`${selectedSide}l4da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
+        <ConclusionButton value={`${selectedSide}l5da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
+        <ConclusionButton value={`${selectedSide}s1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
+        <ConclusionButton value={`${selectedSide}s2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
         </div>
       </Accordion>
       </InternalAccordionContainer> 
@@ -2645,44 +2711,44 @@ const StepG2A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
      <InternalAccordionContainer> 
      <Accordion title='CERVICAL' type='internal'> 
        <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value="c4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
-         <ConclusionButton value="c5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
-         <ConclusionButton value="c6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
-         <ConclusionButton value="c7" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
-         <ConclusionButton value="c8" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value="t1" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+         <ConclusionButton value={`${selectedSide}c4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value={`${selectedSide}c5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
+         <ConclusionButton value={`${selectedSide}c6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
+         <ConclusionButton value={`${selectedSide}c7da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
+         <ConclusionButton value={`${selectedSide}c8da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value={`${selectedSide}t1da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
       </div>
       </Accordion>
       </InternalAccordionContainer> 
       <InternalAccordionContainer> 
       <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t2" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
-        <ConclusionButton value="t3" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
-        <ConclusionButton value="t4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value="t5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value="t6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t2da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
+        <ConclusionButton value={`${selectedSide}t3da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
+        <ConclusionButton value={`${selectedSide}t4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
+        <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
+        <ConclusionButton value={`${selectedSide}t6d`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t7" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value="t8" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value="t9" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value="t10" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value="t11" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value="t12" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
+        <ConclusionButton value={`${selectedSide}t8da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
+        <ConclusionButton value={`${selectedSide}t9da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
+        <ConclusionButton value={`${selectedSide}t10da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
+        <ConclusionButton value={`${selectedSide}t11da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
+        <ConclusionButton value={`${selectedSide}t12da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
         </div>
       </Accordion>
       </InternalAccordionContainer> 
       <InternalAccordionContainer> 
       <Accordion  title='LUMBOSACRO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="l1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
-        <ConclusionButton value="l2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
-        <ConclusionButton value="l3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
-        <ConclusionButton value="l4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value="l5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
-        <ConclusionButton value="s1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value="s2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        <ConclusionButton value={`${selectedSide}l1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value={`${selectedSide}l2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
+        <ConclusionButton value={`${selectedSide}l3da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
+        <ConclusionButton value={`${selectedSide}l4da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
+        <ConclusionButton value={`${selectedSide}l5da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
+        <ConclusionButton value={`${selectedSide}s1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
+        <ConclusionButton value={`${selectedSide}s2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
         </div>
       </Accordion>
       </InternalAccordionContainer> 
@@ -2739,44 +2805,44 @@ const StepG3A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
      <InternalAccordionContainer> 
      <Accordion title='CERVICAL' type='internal'> 
        <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value="c4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
-         <ConclusionButton value="c5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
-         <ConclusionButton value="c6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
-         <ConclusionButton value="c7" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
-         <ConclusionButton value="c8" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value="t1" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+         <ConclusionButton value={`${selectedSide}c4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value={`${selectedSide}c5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
+         <ConclusionButton value={`${selectedSide}c6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
+         <ConclusionButton value={`${selectedSide}c7da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
+         <ConclusionButton value={`${selectedSide}c8da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
+         <ConclusionButton value={`${selectedSide}t1da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
       </div>
       </Accordion>
       </InternalAccordionContainer> 
       <InternalAccordionContainer> 
       <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t2" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
-        <ConclusionButton value="t3" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
-        <ConclusionButton value="t4" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value="t5" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value="t6" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t2da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
+        <ConclusionButton value={`${selectedSide}t3da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
+        <ConclusionButton value={`${selectedSide}t4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
+        <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
+        <ConclusionButton value={`${selectedSide}t6d`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="t7" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value="t8" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value="t9" title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value="t10" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value="t11" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value="t12" title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
+        <ConclusionButton value={`${selectedSide}t8da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
+        <ConclusionButton value={`${selectedSide}t9da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
+        <ConclusionButton value={`${selectedSide}t10da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
+        <ConclusionButton value={`${selectedSide}t11da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
+        <ConclusionButton value={`${selectedSide}t12da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
         </div>
       </Accordion>
       </InternalAccordionContainer> 
       <InternalAccordionContainer> 
       <Accordion  title='LUMBOSACRO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value="l1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
-        <ConclusionButton value="l2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
-        <ConclusionButton value="l3" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
-        <ConclusionButton value="l4" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value="l5" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
-        <ConclusionButton value="s1" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value="s2" title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        <ConclusionButton value={`${selectedSide}l1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value={`${selectedSide}l2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
+        <ConclusionButton value={`${selectedSide}l3da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
+        <ConclusionButton value={`${selectedSide}l4da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
+        <ConclusionButton value={`${selectedSide}l5da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
+        <ConclusionButton value={`${selectedSide}s1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
+        <ConclusionButton value={`${selectedSide}s2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
         </div>
       </Accordion>
       </InternalAccordionContainer> 

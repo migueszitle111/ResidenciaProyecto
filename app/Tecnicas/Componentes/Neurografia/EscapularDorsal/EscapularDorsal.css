@@ -112,11 +112,11 @@
 
 .btnEd1 {
     position: absolute;
-    height: 2vw;
-    width: 2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(410%, 640%);
+    transform: translate(340%, 695%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -127,11 +127,11 @@
 }
 .btnEd2 {
     position: absolute;
-    height: 2vw;
-    width: 2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(600%, 450%);
+    transform: translate(505%, 530%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -142,11 +142,11 @@
 }
 .btnEd3 {
     position: absolute;
-    height: 2.4vw;
-    width: 2.4vw;
+    height: 2.8vw;
+    width: 2.8vw;
     top: 30%;
     left: 45%;
-    transform: translate(325%, -145%);
+    transform: translate(275%, -205%);
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -157,11 +157,11 @@
 }
 .btnEd4 {
     position: absolute;
-    height: 2vw;
-    width: 2vw;
+    height: 2.4vw;
+    width: 2.4vw;
     top: 30%;
     left: 45%;
-    transform: translate(290%, -415%);
+    transform: translate(240%, -455%);
     background-color: transparent;
     border: none;
     border-radius: 50%;

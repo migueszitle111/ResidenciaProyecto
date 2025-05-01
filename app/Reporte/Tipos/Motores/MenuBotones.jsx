@@ -188,7 +188,9 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
           </button>
       </div>
       <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+      <div onClick={() => setStep('E')}>
         <ConclusionButton value="perdida_axonal_secundaria" title=" Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
+        </div>
     </div>
   );
 };
@@ -212,7 +214,9 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
           </button>
       </div>
       <h1 className="text-xl font-bold text-white">AXONAL:</h1>
+      <div onClick={handleNextStep}>
         <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
+    </div>
     </div>
   );
 };
@@ -223,6 +227,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
     <div>
       <div className='button-bar'>
         <button onClick={() =>{ 
+            removeConclusion('retardo_secundario_en_la_conduccion')
             removeConclusion('izquierdo_alterada')
             removeConclusion('derecho_alterada')
             removeConclusion('bilateral_alterada')
@@ -337,7 +342,7 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
     <div>
       <div className='button-bar'>
       <button onClick={() =>{
-          removeConclusion('cortical')
+          removeConclusion(`${selectedSide}cortical`)
           removeConclusion(`${selectedSide}cervical`)
           removeConclusion(`${selectedSide}lumbasacro`)
 
@@ -352,7 +357,7 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
       <h1 className='text-xl font-bold text-white'>ESTÍMULO: </h1>
     <div onClick={() => setStep('G')}>
       <ConclusionButton
-        value="cortical"
+        value={`${selectedSide}cortical`}
         title='A TRAVÉS DE REGIÓN MEDULAR ANTEROLATERAL AL ESTÍMULO EN CORTEZA MOTORA PRIMARIA'
         displayText='CORTICAL'
       />

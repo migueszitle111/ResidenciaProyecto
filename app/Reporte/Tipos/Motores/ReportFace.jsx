@@ -406,6 +406,41 @@ const Reporte = () => {
             },
 
             {
+              expectedValue: 'bilateralcortical', 
+             
+                image: [
+                  {
+                    src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
+                    alt: 'Modelo',
+                  },
+                  {
+                    src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
+                    alt: 'Modelo',
+                  }]
+            },
+
+            {
+              expectedValue: 'izquierdocortical', 
+              image: 
+                {
+                  src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
+                  alt: 'Modelo',
+                },
+            },
+            {
+              expectedValue: 'derechocortical', 
+              image: 
+                {
+                  src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
+                  alt: 'Modelo',
+                },
+            },
+
+
+
+
+
+            {
               expectedValue: 'bilaterallumbasacro', 
              
                 image: [

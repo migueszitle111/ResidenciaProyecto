@@ -177,7 +177,13 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
   <div>
     <div className='button-bar'>
       <button onClick={() => {
-            // Al volver a C1, borramos lo que StepD1 pudo agregar
+            
+            removeConclusion('indenme')
+            removeConclusion('alterada')
+            removeConclusion('retardo_en_la_conduccion')
+            removeConclusion('bloqueo_en_la_conduccion')
+            removeConclusion('deficit_neuronal')
+            removeConclusion('sin_respuesta')
             removeConclusion('perdida_axonal_secundaria')
             setStep('C1')
           }} className="print-button dont-print">
@@ -188,7 +194,9 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+    <div onClick={() => setStep('E')}>
       <ConclusionButton value="perdida_axonal_secundaria" title=" Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
+      </div>
   </div>
 );
 };
@@ -199,7 +207,12 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
   <div>
     <div className='button-bar'>
       <button onClick={() =>  {
-            // Al volver a C2, borramos lo que StepD2 pudo agregar
+             removeConclusion('indenme')
+             removeConclusion('alterada')
+             removeConclusion('retardo_en_la_conduccion')
+             removeConclusion('bloqueo_en_la_conduccion')
+             removeConclusion('deficit_neuronal')
+             removeConclusion('sin_respuesta')
             removeConclusion('retardo_secundario_en_la_conduccion')
             setStep('C2')
           }} className="print-button dont-print">
@@ -211,7 +224,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
     </div>
     
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
-     <div >
+    <div onClick={() => setStep('E')}>
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
      </div>
   </div>
@@ -355,6 +368,7 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
             removeConclusion(`${selectedSide}quiasma_optico`)
             removeConclusion(`${selectedSide}tracto_optico`)
             removeConclusion(`${selectedSide}nucleo_geniculado`)
+            removeConclusion(`${selectedSide}led_flashAlterada`)
             removeConclusion('damero_total')
             removeConclusion('damero_hemicampos')
             setStep('E')

@@ -35,7 +35,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
       {/* Renderizado condicional de cada paso */}
       {/* StepA (nuevo), que antes era StepF */}
       {step === 'A' && (<StepA handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} /> )}
-      {step === 'B1' && (<StepB1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+      {step === 'B1' && (<StepB1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}/> )}
       {step === 'C1' && ( <StepC1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
       {step === 'C2' && (<StepC2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
       {step === 'D1' && (<StepD1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
@@ -54,7 +54,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
       {step === 'H3' && (<StepH3 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}/>)}
       {step === 'H4' && (<StepH4 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
       {/*Inferiores */}
-      {step === 'B2' && (<StepB2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+      {step === 'B2' && (<StepB2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}/>)}
       {step === 'C1_i' && (<StepC1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
       {step === 'C2_i' && (<StepC2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
       {step === 'D1_i' && (<StepD1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
@@ -73,7 +73,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
       {step === 'H3_i' && (<StepH3_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}/>)}
       {step === 'H4_i' && (<StepH4_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
       {/*trigemino*/}
-      {step === 'AT' && ( <StepAT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
+      {step === 'AT' && ( <StepAT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide} selectedSide={selectedSide}/>)}
        {step === 'CDIT' && (<StepCDIT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
        {step === 'DDAT' && (<StepDDAT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
        {step === 'DDIT' && (<StepDDIT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} /> )}
@@ -90,7 +90,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
       {step === 'BT' && ( <StepBT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} selectedSide={selectedSide}/>)}
        {/*Dermatomas*/}
        {/*Inicia en el paso StepA para seleccionar los dermatomas*/}
-       {step === 'BD' && (<StepBD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {step === 'BD' && (<StepBD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}/> )}
        {step === 'CDI' && (<StepCDI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
        {step === 'CDA' && (<StepCDA handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
        {step === 'DDA' && (<StepDDA handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
@@ -154,7 +154,7 @@ const StepA = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSi
 </div>
 );
 
-const StepB1 = ({ handlePrevStep, handleNextStep, setStep }) => {
+const StepB1 = ({ handlePrevStep, handleNextStep, setStep ,selectedSide}) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
@@ -169,6 +169,91 @@ const StepB1 = ({ handlePrevStep, handleNextStep, setStep }) => {
         removeConclusion('superior_izquierdoindemne')
         removeConclusion('superior_derechoindemne')
         removeConclusion('superior_bilateralindemne')
+        removeConclusion(`${selectedSide}c4di`)
+        removeConclusion(`${selectedSide}c5di`)
+        removeConclusion(`${selectedSide}c6di`)
+        removeConclusion(`${selectedSide}c7di`)
+        removeConclusion(`${selectedSide}c8di`)
+        removeConclusion(`${selectedSide}t1di`)
+        removeConclusion(`${selectedSide}t2di`)
+        removeConclusion(`${selectedSide}t3di`)
+        removeConclusion(`${selectedSide}t4di`)
+        removeConclusion(`${selectedSide}t5di`)
+        removeConclusion(`${selectedSide}t6di`)
+        removeConclusion(`${selectedSide}t7di`)
+        removeConclusion(`${selectedSide}t8di`)
+        removeConclusion(`${selectedSide}t9di`)
+        removeConclusion(`${selectedSide}t10di`)
+        removeConclusion(`${selectedSide}t11di`)
+        removeConclusion(`${selectedSide}t12di`)
+        removeConclusion(`${selectedSide}l2di`)
+        removeConclusion(`${selectedSide}l3di`)
+        removeConclusion(`${selectedSide}l4di`)
+        removeConclusion(`${selectedSide}l5di`)
+        removeConclusion(`${selectedSide}s1di`)
+        removeConclusion(`${selectedSide}s2di`)
+
+        removeConclusion(`${selectedSide}c4da`)
+        removeConclusion(`${selectedSide}c5da`)
+        removeConclusion(`${selectedSide}c6da`)
+        removeConclusion(`${selectedSide}c7da`)
+        removeConclusion(`${selectedSide}c8da`)
+        removeConclusion(`${selectedSide}t1da`)
+        removeConclusion(`${selectedSide}t2da`)
+        removeConclusion(`${selectedSide}t3da`)
+        removeConclusion(`${selectedSide}t4da`)
+        removeConclusion(`${selectedSide}t5da`)
+        removeConclusion(`${selectedSide}t6da`)
+        removeConclusion(`${selectedSide}t7da`)
+        removeConclusion(`${selectedSide}t8da`)
+        removeConclusion(`${selectedSide}t9da`)
+        removeConclusion(`${selectedSide}t10da`)
+        removeConclusion(`${selectedSide}t11da`)
+        removeConclusion(`${selectedSide}t12da`)
+        removeConclusion(`${selectedSide}l2da`)
+        removeConclusion(`${selectedSide}l3da`)
+        removeConclusion(`${selectedSide}l4da`)
+        removeConclusion(`${selectedSide}l5da`)
+        removeConclusion(`${selectedSide}s1da`)
+        removeConclusion(`${selectedSide}s2da`)
+
+       removeConclusion('izquierdo_trigemino')
+       removeConclusion('derecho_trigemino')
+       removeConclusion('bilateral_trigemino')
+       removeConclusion('izquierdo_trigeminoindemne')
+       removeConclusion('derecho_trigeminoindemne')
+       removeConclusion('bilateral_trigeminoindemne')
+       removeConclusion('izquierdo_trigeminoalterada')
+       removeConclusion('derecho_trigeminoalterada')
+       removeConclusion('bilateral_trigeminoalterada')
+       removeConclusion('izquierdo_trigeminoindemne')
+
+       removeConclusion('derecho_der')
+       removeConclusion('izquierdo_der')
+       removeConclusion('bilateral_der')
+
+       removeConclusion('dermatomas')
+       removeConclusion('izquierdo_dermatomas')
+       removeConclusion('derecho_dermatomas')
+       removeConclusion('bilateral_dermatomas')
+       removeConclusion('dermatomas_indemne')
+       removeConclusion('dermatomas_alterada')
+       removeConclusion('trigemino_indemne')
+       removeConclusion('trigemino_alterada')
+       removeConclusion('retardo_en_la_conduccion')
+       removeConclusion('bloqueo_en_la_conduccion')
+       removeConclusion('deficit_neuronal')
+       removeConclusion('sin_respuesta')
+       removeConclusion('leve')
+       removeConclusion('moderado')
+       removeConclusion('severo')
+       removeConclusion('perdida_axonal_secundaria')
+       removeConclusion('retardo_secundario_en_la_conduccion')
+       removeConclusion('izquierdo_trigemino')
+       removeConclusion('derecho_trigemino')
+       removeConclusion('bilateral_trigemino')
+       removeConclusion('tri')
+
         
         setStep('A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
@@ -286,6 +371,9 @@ const StepE1 = ({ handlePrevStep, handleNextStep, setStep }) => {
     <div className='button-bar'>
       <button onClick={() =>{ 
          removeConclusion('perdida_axonal_secundaria')
+         removeConclusion('dermatomas_izquierdo')
+         removeConclusion('dermatomas_derecho')
+         removeConclusion('dermatomas_bilateral')
         setStep('D1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -294,7 +382,9 @@ const StepE1 = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+    <div onClick={() => setStep('F1')}>
       <ConclusionButton value="perdida_axonal_secundaria" title=", Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
+  </div>
   </div>
 );}
 
@@ -305,6 +395,9 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) =>{
     <div className='button-bar'>
       <button onClick={() => {
         removeConclusion('retardo_secundario_en_la_conduccion')
+        removeConclusion('dermatomas_izquierdo')
+        removeConclusion('dermatomas_derecho')
+        removeConclusion('dermatomas_bilateral')
         setStep('D2')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -314,7 +407,9 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) =>{
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
+    <div onClick={() => setStep('F2')}>
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title=", Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
+  </div>
   </div>
 );}
 
@@ -327,6 +422,45 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         removeConclusion('superior_izquierdo')
         removeConclusion('superior_derecho')
         removeConclusion('superior_bilateral')
+        removeConclusion('superior_indemne')
+        removeConclusion('superior_alterada')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('izquierdo_trigeminoindemne')
+        removeConclusion('derecho_trigeminoindemne')
+        removeConclusion('bilateral_trigeminoindemne')
+        removeConclusion('izquierdo_trigeminoalterada')
+        removeConclusion('derecho_trigeminoalterada')
+        removeConclusion('bilateral_trigeminoalterada')
+        removeConclusion('izquierdo_trigeminoindemne')
+ 
+        removeConclusion('derecho_der')
+        removeConclusion('izquierdo_der')
+        removeConclusion('bilateral_der')
+ 
+        removeConclusion('dermatomas')
+        removeConclusion('izquierdo_dermatomas')
+        removeConclusion('derecho_dermatomas')
+        removeConclusion('bilateral_dermatomas')
+        removeConclusion('dermatomas_indemne')
+        removeConclusion('dermatomas_alterada')
+        removeConclusion('trigemino_indemne')
+        removeConclusion('trigemino_alterada')
+        removeConclusion('retardo_en_la_conduccion')
+        removeConclusion('bloqueo_en_la_conduccion')
+        removeConclusion('deficit_neuronal')
+        removeConclusion('sin_respuesta')
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        removeConclusion('perdida_axonal_secundaria')
+        removeConclusion('retardo_secundario_en_la_conduccion')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('tri')
+        
         setStep('E1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -379,6 +513,42 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         removeConclusion('superior_izquierdo')
         removeConclusion('superior_derecho')
         removeConclusion('superior_bilateral')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('izquierdo_trigeminoindemne')
+        removeConclusion('derecho_trigeminoindemne')
+        removeConclusion('bilateral_trigeminoindemne')
+        removeConclusion('izquierdo_trigeminoalterada')
+        removeConclusion('derecho_trigeminoalterada')
+        removeConclusion('bilateral_trigeminoalterada')
+        removeConclusion('izquierdo_trigeminoindemne')
+ 
+        removeConclusion('derecho_der')
+        removeConclusion('izquierdo_der')
+        removeConclusion('bilateral_der')
+ 
+        removeConclusion('dermatomas')
+        removeConclusion('izquierdo_dermatomas')
+        removeConclusion('derecho_dermatomas')
+        removeConclusion('bilateral_dermatomas')
+        removeConclusion('dermatomas_indemne')
+        removeConclusion('dermatomas_alterada')
+        removeConclusion('trigemino_indemne')
+        removeConclusion('trigemino_alterada')
+        removeConclusion('retardo_en_la_conduccion')
+        removeConclusion('bloqueo_en_la_conduccion')
+        removeConclusion('deficit_neuronal')
+        removeConclusion('sin_respuesta')
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        removeConclusion('perdida_axonal_secundaria')
+        removeConclusion('retardo_secundario_en_la_conduccion')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('tri')
         setStep('E2')}
         } className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
@@ -434,6 +604,42 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         removeConclusion('superior_izquierdo')
         removeConclusion('superior_derecho')
         removeConclusion('superior_bilateral')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('izquierdo_trigeminoindemne')
+        removeConclusion('derecho_trigeminoindemne')
+        removeConclusion('bilateral_trigeminoindemne')
+        removeConclusion('izquierdo_trigeminoalterada')
+        removeConclusion('derecho_trigeminoalterada')
+        removeConclusion('bilateral_trigeminoalterada')
+        removeConclusion('izquierdo_trigeminoindemne')
+ 
+        removeConclusion('derecho_der')
+        removeConclusion('izquierdo_der')
+        removeConclusion('bilateral_der')
+ 
+        removeConclusion('dermatomas')
+        removeConclusion('izquierdo_dermatomas')
+        removeConclusion('derecho_dermatomas')
+        removeConclusion('bilateral_dermatomas')
+        removeConclusion('dermatomas_indemne')
+        removeConclusion('dermatomas_alterada')
+        removeConclusion('trigemino_indemne')
+        removeConclusion('trigemino_alterada')
+        removeConclusion('retardo_en_la_conduccion')
+        removeConclusion('bloqueo_en_la_conduccion')
+        removeConclusion('deficit_neuronal')
+        removeConclusion('sin_respuesta')
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        removeConclusion('perdida_axonal_secundaria')
+        removeConclusion('retardo_secundario_en_la_conduccion')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('tri')
         setStep('C1')}}className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -486,6 +692,42 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{
         removeConclusion('superior_derechoindemne')
         removeConclusion('superior_bilateralindemne')
         removeConclusion('superior_indemne')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('izquierdo_trigeminoindemne')
+        removeConclusion('derecho_trigeminoindemne')
+        removeConclusion('bilateral_trigeminoindemne')
+        removeConclusion('izquierdo_trigeminoalterada')
+        removeConclusion('derecho_trigeminoalterada')
+        removeConclusion('bilateral_trigeminoalterada')
+        removeConclusion('izquierdo_trigeminoindemne')
+ 
+        removeConclusion('derecho_der')
+        removeConclusion('izquierdo_der')
+        removeConclusion('bilateral_der')
+ 
+        removeConclusion('dermatomas')
+        removeConclusion('izquierdo_dermatomas')
+        removeConclusion('derecho_dermatomas')
+        removeConclusion('bilateral_dermatomas')
+        removeConclusion('dermatomas_indemne')
+        removeConclusion('dermatomas_alterada')
+        removeConclusion('trigemino_indemne')
+        removeConclusion('trigemino_alterada')
+        removeConclusion('retardo_en_la_conduccion')
+        removeConclusion('bloqueo_en_la_conduccion')
+        removeConclusion('deficit_neuronal')
+        removeConclusion('sin_respuesta')
+        removeConclusion('leve')
+        removeConclusion('moderado')
+        removeConclusion('severo')
+        removeConclusion('perdida_axonal_secundaria')
+        removeConclusion('retardo_secundario_en_la_conduccion')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('tri')
         setStep('B1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -1098,7 +1340,7 @@ const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,
   );
 };
 //Inferiores 
-const StepB2 = ({ handlePrevStep, handleNextStep, setStep }) =>{
+const StepB2 = ({ handlePrevStep, handleNextStep, setStep,selectedSide }) =>{
   const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
@@ -1116,6 +1358,90 @@ const StepB2 = ({ handlePrevStep, handleNextStep, setStep }) =>{
         removeConclusion('inferior_izquierdoindemne')
         removeConclusion('inferior_derechoindemne')
         removeConclusion('inferior_bilateralindemne')
+        removeConclusion(`${selectedSide}c4di`)
+        removeConclusion(`${selectedSide}c5di`)
+        removeConclusion(`${selectedSide}c6di`)
+        removeConclusion(`${selectedSide}c7di`)
+        removeConclusion(`${selectedSide}c8di`)
+        removeConclusion(`${selectedSide}t1di`)
+        removeConclusion(`${selectedSide}t2di`)
+        removeConclusion(`${selectedSide}t3di`)
+        removeConclusion(`${selectedSide}t4di`)
+        removeConclusion(`${selectedSide}t5di`)
+        removeConclusion(`${selectedSide}t6di`)
+        removeConclusion(`${selectedSide}t7di`)
+        removeConclusion(`${selectedSide}t8di`)
+        removeConclusion(`${selectedSide}t9di`)
+        removeConclusion(`${selectedSide}t10di`)
+        removeConclusion(`${selectedSide}t11di`)
+        removeConclusion(`${selectedSide}t12di`)
+        removeConclusion(`${selectedSide}l2di`)
+        removeConclusion(`${selectedSide}l3di`)
+        removeConclusion(`${selectedSide}l4di`)
+        removeConclusion(`${selectedSide}l5di`)
+        removeConclusion(`${selectedSide}s1di`)
+        removeConclusion(`${selectedSide}s2di`)
+
+        removeConclusion(`${selectedSide}c4da`)
+        removeConclusion(`${selectedSide}c5da`)
+        removeConclusion(`${selectedSide}c6da`)
+        removeConclusion(`${selectedSide}c7da`)
+        removeConclusion(`${selectedSide}c8da`)
+        removeConclusion(`${selectedSide}t1da`)
+        removeConclusion(`${selectedSide}t2da`)
+        removeConclusion(`${selectedSide}t3da`)
+        removeConclusion(`${selectedSide}t4da`)
+        removeConclusion(`${selectedSide}t5da`)
+        removeConclusion(`${selectedSide}t6da`)
+        removeConclusion(`${selectedSide}t7da`)
+        removeConclusion(`${selectedSide}t8da`)
+        removeConclusion(`${selectedSide}t9da`)
+        removeConclusion(`${selectedSide}t10da`)
+        removeConclusion(`${selectedSide}t11da`)
+        removeConclusion(`${selectedSide}t12da`)
+        removeConclusion(`${selectedSide}l2da`)
+        removeConclusion(`${selectedSide}l3da`)
+        removeConclusion(`${selectedSide}l4da`)
+        removeConclusion(`${selectedSide}l5da`)
+        removeConclusion(`${selectedSide}s1da`)
+        removeConclusion(`${selectedSide}s2da`)
+
+       removeConclusion('izquierdo_trigemino')
+       removeConclusion('derecho_trigemino')
+       removeConclusion('bilateral_trigemino')
+       removeConclusion('izquierdo_trigeminoindemne')
+       removeConclusion('derecho_trigeminoindemne')
+       removeConclusion('bilateral_trigeminoindemne')
+       removeConclusion('izquierdo_trigeminoalterada')
+       removeConclusion('derecho_trigeminoalterada')
+       removeConclusion('bilateral_trigeminoalterada')
+       removeConclusion('izquierdo_trigeminoindemne')
+
+       removeConclusion('derecho_der')
+       removeConclusion('izquierdo_der')
+       removeConclusion('bilateral_der')
+
+       removeConclusion('dermatomas')
+       removeConclusion('izquierdo_dermatomas')
+       removeConclusion('derecho_dermatomas')
+       removeConclusion('bilateral_dermatomas')
+       removeConclusion('dermatomas_indemne')
+       removeConclusion('dermatomas_alterada')
+       removeConclusion('trigemino_indemne')
+       removeConclusion('trigemino_alterada')
+       removeConclusion('retardo_en_la_conduccion')
+       removeConclusion('bloqueo_en_la_conduccion')
+       removeConclusion('deficit_neuronal')
+       removeConclusion('sin_respuesta')
+       removeConclusion('leve')
+       removeConclusion('moderado')
+       removeConclusion('severo')
+       removeConclusion('perdida_axonal_secundaria')
+       removeConclusion('retardo_secundario_en_la_conduccion')
+       removeConclusion('izquierdo_trigemino')
+       removeConclusion('derecho_trigemino')
+       removeConclusion('bilateral_trigemino')
+       removeConclusion('tri')
         setStep('A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -1223,6 +1549,9 @@ const StepE1_i = ({ handlePrevStep, handleNextStep, setStep }) => {
     <div className='button-bar'>
       <button onClick={() => {
         removeConclusion('perdida_axonal_secundaria')
+        removeConclusion('superior_izquierdo')
+        removeConclusion('superior_derecho')
+        removeConclusion('superior_bilateral')
         setStep('D1_i')} }className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -1231,7 +1560,9 @@ const StepE1_i = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+    <div onClick={() => setStep('F1_i')}>
       <ConclusionButton value="perdida_axonal_secundaria" title=", Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
+      </div>
   </div>
 );}
 const StepE2_i = ({ handlePrevStep, handleNextStep, setStep }) => {
@@ -1241,6 +1572,9 @@ const StepE2_i = ({ handlePrevStep, handleNextStep, setStep }) => {
     <div className='button-bar'>
       <button onClick={() => {
         removeConclusion('retardo_secundario_en_la_conduccion')
+        removeConclusion('superior_izquierdo')
+        removeConclusion('superior_derecho')
+        removeConclusion('superior_bilateral')
         setStep('D2_i')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -2062,7 +2396,7 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftTex
 
 
 //Dermatomas
-const StepBD = ({ handlePrevStep, handleNextStep, setStep }) => {
+const StepBD = ({ handlePrevStep, handleNextStep, setStep,selectedSide }) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
@@ -2083,6 +2417,90 @@ const StepBD = ({ handlePrevStep, handleNextStep, setStep }) => {
       removeConclusion('dermatomas_izquierdo')
       removeConclusion('dermatomas_derecho')
       removeConclusion('dermatomas_bilateral')
+      removeConclusion(`${selectedSide}c4di`)
+      removeConclusion(`${selectedSide}c5di`)
+      removeConclusion(`${selectedSide}c6di`)
+      removeConclusion(`${selectedSide}c7di`)
+      removeConclusion(`${selectedSide}c8di`)
+      removeConclusion(`${selectedSide}t1di`)
+      removeConclusion(`${selectedSide}t2di`)
+      removeConclusion(`${selectedSide}t3di`)
+      removeConclusion(`${selectedSide}t4di`)
+      removeConclusion(`${selectedSide}t5di`)
+      removeConclusion(`${selectedSide}t6di`)
+      removeConclusion(`${selectedSide}t7di`)
+      removeConclusion(`${selectedSide}t8di`)
+      removeConclusion(`${selectedSide}t9di`)
+      removeConclusion(`${selectedSide}t10di`)
+      removeConclusion(`${selectedSide}t11di`)
+      removeConclusion(`${selectedSide}t12di`)
+      removeConclusion(`${selectedSide}l2di`)
+      removeConclusion(`${selectedSide}l3di`)
+      removeConclusion(`${selectedSide}l4di`)
+      removeConclusion(`${selectedSide}l5di`)
+      removeConclusion(`${selectedSide}s1di`)
+      removeConclusion(`${selectedSide}s2di`)
+
+      removeConclusion(`${selectedSide}c4da`)
+      removeConclusion(`${selectedSide}c5da`)
+      removeConclusion(`${selectedSide}c6da`)
+      removeConclusion(`${selectedSide}c7da`)
+      removeConclusion(`${selectedSide}c8da`)
+      removeConclusion(`${selectedSide}t1da`)
+      removeConclusion(`${selectedSide}t2da`)
+      removeConclusion(`${selectedSide}t3da`)
+      removeConclusion(`${selectedSide}t4da`)
+      removeConclusion(`${selectedSide}t5da`)
+      removeConclusion(`${selectedSide}t6da`)
+      removeConclusion(`${selectedSide}t7da`)
+      removeConclusion(`${selectedSide}t8da`)
+      removeConclusion(`${selectedSide}t9da`)
+      removeConclusion(`${selectedSide}t10da`)
+      removeConclusion(`${selectedSide}t11da`)
+      removeConclusion(`${selectedSide}t12da`)
+      removeConclusion(`${selectedSide}l2da`)
+      removeConclusion(`${selectedSide}l3da`)
+      removeConclusion(`${selectedSide}l4da`)
+      removeConclusion(`${selectedSide}l5da`)
+      removeConclusion(`${selectedSide}s1da`)
+      removeConclusion(`${selectedSide}s2da`)
+
+     removeConclusion('izquierdo_trigemino')
+     removeConclusion('derecho_trigemino')
+     removeConclusion('bilateral_trigemino')
+     removeConclusion('izquierdo_trigeminoindemne')
+     removeConclusion('derecho_trigeminoindemne')
+     removeConclusion('bilateral_trigeminoindemne')
+     removeConclusion('izquierdo_trigeminoalterada')
+     removeConclusion('derecho_trigeminoalterada')
+     removeConclusion('bilateral_trigeminoalterada')
+     removeConclusion('izquierdo_trigeminoindemne')
+
+     removeConclusion('derecho_der')
+     removeConclusion('izquierdo_der')
+     removeConclusion('bilateral_der')
+
+     removeConclusion('dermatomas')
+     removeConclusion('izquierdo_dermatomas')
+     removeConclusion('derecho_dermatomas')
+     removeConclusion('bilateral_dermatomas')
+     removeConclusion('dermatomas_indemne')
+     removeConclusion('dermatomas_alterada')
+     removeConclusion('trigemino_indemne')
+     removeConclusion('trigemino_alterada')
+     removeConclusion('retardo_en_la_conduccion')
+     removeConclusion('bloqueo_en_la_conduccion')
+     removeConclusion('deficit_neuronal')
+     removeConclusion('sin_respuesta')
+     removeConclusion('leve')
+     removeConclusion('moderado')
+     removeConclusion('severo')
+     removeConclusion('perdida_axonal_secundaria')
+     removeConclusion('retardo_secundario_en_la_conduccion')
+     removeConclusion('izquierdo_trigemino')
+     removeConclusion('derecho_trigemino')
+     removeConclusion('bilateral_trigemino')
+     removeConclusion('tri')
 
         setStep('A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
@@ -2175,7 +2593,7 @@ const StepCDA = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>
-    <h1 className="text-xl font-bold text-white">LADOs:</h1>
+    <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
           setStep('DDA');
           setSelectedSide('izquierdo');
@@ -2419,7 +2837,14 @@ const StepE1A = ({ handlePrevStep, handleNextStep, setStep }) => {
   <div>
     <div className='button-bar'>
       <button onClick={() =>{ 
+         removeConclusion('superior_izquierdo')
+         removeConclusion('superior_derecho')
+         removeConclusion('superior_bilateral')
          removeConclusion('perdida_axonal_secundaria')
+         removeConclusion('dermatomas_izquierdo')
+         removeConclusion('dermatomas_derecho')
+         removeConclusion('dermatomas_bilateral')
+         
         setStep('D1A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -2428,7 +2853,9 @@ const StepE1A = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+    <div onClick={() => setStep('G1A')}>
       <ConclusionButton value="perdida_axonal_secundaria" title=", Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
+      </div>
   </div>
 );}
 
@@ -2438,6 +2865,12 @@ const StepE2A = ({ handlePrevStep, handleNextStep, setStep }) =>{
   <div>
     <div className='button-bar'>
       <button onClick={() => {
+         removeConclusion('superior_izquierdo')
+         removeConclusion('superior_derecho')
+         removeConclusion('superior_bilateral')
+         removeConclusion('dermatomas_izquierdo')
+         removeConclusion('dermatomas_derecho')
+         removeConclusion('dermatomas_bilateral')
         removeConclusion('retardo_secundario_en_la_conduccion')
         setStep('D2A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
@@ -2447,8 +2880,11 @@ const StepE2A = ({ handlePrevStep, handleNextStep, setStep }) =>{
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
     </div>
-    <h1 className="text-xl font-bold text-white">AXONAL:</h1>
+    <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+    <div onClick={() => setStep('G2A')}>
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title=", Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
+      </div>
+
   </div>
 );}
 
@@ -2904,7 +3340,7 @@ const StepG3A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
 
 //Trigemino
 
-const StepAT = ({ handlePrevStep, handleNextStep, setStep }) => {
+const StepAT = ({ handlePrevStep, handleNextStep, setStep,selectedSide }) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
   <div>
@@ -2928,6 +3364,90 @@ const StepAT = ({ handlePrevStep, handleNextStep, setStep }) => {
       removeConclusion('bilateral_trigemino')
       removeConclusion('trigemino_indemne')
       removeConclusion('trigemino_alterada')
+      removeConclusion(`${selectedSide}c4di`)
+      removeConclusion(`${selectedSide}c5di`)
+      removeConclusion(`${selectedSide}c6di`)
+      removeConclusion(`${selectedSide}c7di`)
+      removeConclusion(`${selectedSide}c8di`)
+      removeConclusion(`${selectedSide}t1di`)
+      removeConclusion(`${selectedSide}t2di`)
+      removeConclusion(`${selectedSide}t3di`)
+      removeConclusion(`${selectedSide}t4di`)
+      removeConclusion(`${selectedSide}t5di`)
+      removeConclusion(`${selectedSide}t6di`)
+      removeConclusion(`${selectedSide}t7di`)
+      removeConclusion(`${selectedSide}t8di`)
+      removeConclusion(`${selectedSide}t9di`)
+      removeConclusion(`${selectedSide}t10di`)
+      removeConclusion(`${selectedSide}t11di`)
+      removeConclusion(`${selectedSide}t12di`)
+      removeConclusion(`${selectedSide}l2di`)
+      removeConclusion(`${selectedSide}l3di`)
+      removeConclusion(`${selectedSide}l4di`)
+      removeConclusion(`${selectedSide}l5di`)
+      removeConclusion(`${selectedSide}s1di`)
+      removeConclusion(`${selectedSide}s2di`)
+
+      removeConclusion(`${selectedSide}c4da`)
+      removeConclusion(`${selectedSide}c5da`)
+      removeConclusion(`${selectedSide}c6da`)
+      removeConclusion(`${selectedSide}c7da`)
+      removeConclusion(`${selectedSide}c8da`)
+      removeConclusion(`${selectedSide}t1da`)
+      removeConclusion(`${selectedSide}t2da`)
+      removeConclusion(`${selectedSide}t3da`)
+      removeConclusion(`${selectedSide}t4da`)
+      removeConclusion(`${selectedSide}t5da`)
+      removeConclusion(`${selectedSide}t6da`)
+      removeConclusion(`${selectedSide}t7da`)
+      removeConclusion(`${selectedSide}t8da`)
+      removeConclusion(`${selectedSide}t9da`)
+      removeConclusion(`${selectedSide}t10da`)
+      removeConclusion(`${selectedSide}t11da`)
+      removeConclusion(`${selectedSide}t12da`)
+      removeConclusion(`${selectedSide}l2da`)
+      removeConclusion(`${selectedSide}l3da`)
+      removeConclusion(`${selectedSide}l4da`)
+      removeConclusion(`${selectedSide}l5da`)
+      removeConclusion(`${selectedSide}s1da`)
+      removeConclusion(`${selectedSide}s2da`)
+
+     removeConclusion('izquierdo_trigemino')
+     removeConclusion('derecho_trigemino')
+     removeConclusion('bilateral_trigemino')
+     removeConclusion('izquierdo_trigeminoindemne')
+     removeConclusion('derecho_trigeminoindemne')
+     removeConclusion('bilateral_trigeminoindemne')
+     removeConclusion('izquierdo_trigeminoalterada')
+     removeConclusion('derecho_trigeminoalterada')
+     removeConclusion('bilateral_trigeminoalterada')
+     removeConclusion('izquierdo_trigeminoindemne')
+
+     removeConclusion('derecho_der')
+     removeConclusion('izquierdo_der')
+     removeConclusion('bilateral_der')
+
+     removeConclusion('dermatomas')
+     removeConclusion('izquierdo_dermatomas')
+     removeConclusion('derecho_dermatomas')
+     removeConclusion('bilateral_dermatomas')
+     removeConclusion('dermatomas_indemne')
+     removeConclusion('dermatomas_alterada')
+     removeConclusion('trigemino_indemne')
+     removeConclusion('trigemino_alterada')
+     removeConclusion('retardo_en_la_conduccion')
+     removeConclusion('bloqueo_en_la_conduccion')
+     removeConclusion('deficit_neuronal')
+     removeConclusion('sin_respuesta')
+     removeConclusion('leve')
+     removeConclusion('moderado')
+     removeConclusion('severo')
+     removeConclusion('perdida_axonal_secundaria')
+     removeConclusion('retardo_secundario_en_la_conduccion')
+     removeConclusion('izquierdo_trigemino')
+     removeConclusion('derecho_trigemino')
+     removeConclusion('bilateral_trigemino')
+     removeConclusion('tri')
 
         setStep('A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
@@ -2958,6 +3478,10 @@ const StepCDIT = ({ handlePrevStep, handleNextStep, setStep}) => {
         removeConclusion('derecho_trigemino')
         removeConclusion('bilateral_trigemino')
         removeConclusion('tri')
+        removeConclusion('izquierdo_trigeminoindemne')
+        removeConclusion('derecho_trigeminoindemne')
+        removeConclusion('bilateral_trigeminoindemne')
+
        
         setStep('A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
@@ -3109,6 +3633,9 @@ const StepE1AT = ({ handlePrevStep, handleNextStep, setStep }) => {
     <div className='button-bar'>
       <button onClick={() =>{ 
          removeConclusion('perdida_axonal_secundaria')
+         removeConclusion('dermatomas_izquierdo')
+         removeConclusion('dermatomas_derecho')
+         removeConclusion('dermatomas_bilateral')
         setStep('D1AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -3117,7 +3644,9 @@ const StepE1AT = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+    <div onClick={() => setStep('F1AT')}>
       <ConclusionButton value="perdida_axonal_secundaria" title=", Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
+      </div>
   </div>
 );}
 
@@ -3128,6 +3657,9 @@ const StepE2AT = ({ handlePrevStep, handleNextStep, setStep }) =>{
     <div className='button-bar'>
       <button onClick={() => {
         removeConclusion('retardo_secundario_en_la_conduccion')
+        removeConclusion('dermatomas_izquierdo')
+        removeConclusion('dermatomas_derecho')
+        removeConclusion('dermatomas_bilateral')
         setStep('D2AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -3152,6 +3684,14 @@ const StepF1AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         removeConclusion('derecho_trigemino')
         removeConclusion('bilateral_trigemino')
         removeConclusion('tri')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('tri')
+        removeConclusion('izquierdo_trigeminoindemne')
+        removeConclusion('derecho_trigeminoindemne')
+        removeConclusion('bilateral_trigeminoindemne')
+        
        
         setStep('E1AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
@@ -3205,6 +3745,14 @@ const StepF2AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         removeConclusion('izquierdo_trigemino')
         removeConclusion('derecho_trigemino')
         removeConclusion('bilateral_trigemino')
+        removeConclusion('izquierdo_trigemino')
+        removeConclusion('derecho_trigemino')
+        removeConclusion('bilateral_trigemino')
+        removeConclusion('tri')
+        removeConclusion('izquierdo_trigeminoindemne')
+        removeConclusion('derecho_trigeminoindemne')
+        removeConclusion('bilateral_trigeminoindemne')
+        
         removeConclusion('tri')
         setStep('E2AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
@@ -3260,6 +3808,11 @@ const StepF3AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         removeConclusion('derecho_trigemino')
         removeConclusion('bilateral_trigemino')
         removeConclusion('tri')
+       
+        removeConclusion('izquierdo_trigeminoindemne')
+        removeConclusion('derecho_trigeminoindemne')
+        removeConclusion('bilateral_trigeminoindemne')
+        
        
         setStep('E1AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />

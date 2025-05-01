@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "build:pdf-css": "tailwindcss -i ./app/globals.css -o ./tailwind.pdf.css --minify"

@@ -1303,38 +1303,38 @@ setCopyConclusions(finalTxt);
 /////////////////////////////////////////////////////////////////////////////c4da
 
 
-{
-  expectedValue: 'derecho_der', 
+// {
+//   expectedValue: 'derecho_der', 
  
-    image: 
-      {
-        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
-        alt: 'Modelo',
-      },
-},
-{
-  expectedValue: 'izquierdo_der', 
+//     image: 
+//       {
+//         src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+//         alt: 'Modelo',
+//       },
+// },
+// {
+//   expectedValue: 'izquierdo_der', 
  
-    image: 
-      {
-        src: 'SomatosensorialImg/INFERIORDERECHA.png',
-        alt: 'Modelo',
-      },
-},
-{
-  expectedValue: 'bilateral_der', 
+//     image: 
+//       {
+//         src: 'SomatosensorialImg/INFERIORDERECHA.png',
+//         alt: 'Modelo',
+//       },
+// },
+// {
+//   expectedValue: 'bilateral_der', 
  
-    image: [
-      {
-        src: 'SomatosensorialImg/INFERIORDERECHA.png',
-        alt: 'Modelo',
-      },
-      {
-        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
-        alt: 'Modelo',
-      }
-    ]
-},
+//     image: [
+//       {
+//         src: 'SomatosensorialImg/INFERIORDERECHA.png',
+//         alt: 'Modelo',
+//       },
+//       {
+//         src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+//         alt: 'Modelo',
+//       }
+//     ]
+// },
 
 
 

@@ -112,6 +112,37 @@ function buildHtml({
     },
 
     {
+      expectedValue: 'bilateralcortical', 
+     
+        image: [
+          {
+            src: '/assets/CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
+            alt: 'Modelo',
+          },
+          {
+            src: '/assets/CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
+            alt: 'Modelo',
+          }]
+    },
+
+    {
+      expectedValue: 'izquierdocortical', 
+      image: 
+        {
+          src: '/assets/CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
+          alt: 'Modelo',
+        },
+    },
+    {
+      expectedValue: 'derechocortical', 
+      image: 
+        {
+          src: '/assets/CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
+          alt: 'Modelo',
+        },
+    },
+
+    {
       expectedValue: 'bilaterallumbasacro', 
      
         image: [

@@ -187,7 +187,9 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
+    <div onClick={() => setStep('E')}>
       <ConclusionButton value="perdida_axonal_secundaria" title=" Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
+      </div>
   </div>
 );
 };
@@ -208,7 +210,9 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
+    <div onClick={() => setStep('E')}>
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
+      </div>
   </div>
 );
 };

@@ -155,7 +155,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, hand
 const StepA = ({ handleNextStep, setStep }) => (
   <div>
     <div className='button-bar'>
-      <button onClick={handleNextStep} className="print-button">
+      <button  className="print-button">
         <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>

@@ -87,8 +87,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
        {step === 'G1AT' && (<StepG1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
        {step === 'G2AT' && (<StepG2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
        {step === 'G3AT' && (<StepG3AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
-
-      {step === 'BT' && ( <StepBT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} />)}
+      {step === 'BT' && ( <StepBT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} selectedSide={selectedSide}/>)}
        {/*Dermatomas*/}
        {/*Inicia en el paso StepA para seleccionar los dermatomas*/}
        {step === 'BD' && (<StepBD handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
@@ -103,8 +102,8 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
        {step === 'E2A' && ( <StepE2A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
        {step === 'F1A' && (<StepF1A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide} />)}
        {step === 'F2A' && (<StepF2A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide}  />)}
-       {step === 'G1A' && (<StepG1A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
-       {step === 'G2A' && (<StepG2A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {step === 'G1A' && (<StepG1A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}selectedSide={selectedSide}/>)}
+       {step === 'G2A' && (<StepG2A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}selectedSide={selectedSide}/>)}
        {step === 'G3A' && (<StepG3A handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
 
 
@@ -756,9 +755,12 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
     const { conclusions } = useContext(ReportContext)
     const { droppedItems } = useContext(DropContext);
+    const [isLoading, setIsLoading] = useState(false);
+
   
     const handleExportPdf = async () => {
       try {
+        setIsLoading(true); // ⌛ Mostrar overlay
          // 1) conclusiones (array con {value, title})
       const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
   
@@ -802,8 +804,21 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
       } catch (error) {
         console.error('Error:', error);
         alert('Error al generar PDF: ' + error.message);
+      } finally {
+        document.body.style.cursor = 'default';
+        setIsLoading(false); // ✅ Ocultar overlay
       }
     };
+    if (isLoading) {
+      return (
+        <div className="loading-overlay">
+          <div className="hourglass">
+          <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+          </div>
+        </div>
+      );
+    }
+
   return (
     <div>
       <div className='button-bar'>
@@ -989,9 +1004,12 @@ const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleExportPdf = async () => {
     try {
+      setIsLoading(true); // ⌛ Mostrar overlay
+
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
 
@@ -1035,8 +1053,20 @@ const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
+    } finally {
+      document.body.style.cursor = 'default';
+      setIsLoading(false); // ✅ Ocultar overlay
     }
   };
+  if (isLoading) {
+    return (
+      <div className="loading-overlay">
+        <div className="hourglass">
+        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+        </div>
+      </div>
+    );
+  }
   return (
     <div>
       <div className='button-bar'>
@@ -1938,9 +1968,12 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftTex
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleExportPdf = async () => {
     try {
+      setIsLoading(true); // ⌛ Mostrar overlay
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
     const conclusiones = conclusions;
@@ -1977,12 +2010,23 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftTex
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
+    } finally {
+      document.body.style.cursor = 'default';
+      setIsLoading(false); // ✅ Ocultar overlay
     }
   };
+  if (isLoading) {
+    return (
+      <div className="loading-overlay">
+        <div className="hourglass">
+        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+        </div>
+      </div>
+    );
+  }
   return (
     <div>
       <div className='button-bar'>
@@ -2014,6 +2058,9 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftTex
         </div>
   );
 };
+
+
+
 //Dermatomas
 const StepBD = ({ handlePrevStep, handleNextStep, setStep }) => {
   const { removeConclusion } = useContext(ReportContext)
@@ -2128,14 +2175,14 @@ const StepCDA = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>
-    <h1 className="text-xl font-bold text-white">LADO:</h1>
+    <h1 className="text-xl font-bold text-white">LADOs:</h1>
     <div  onClick={() => {
           setStep('DDA');
           setSelectedSide('izquierdo');
 
         }}>
       <ConclusionButton
-        value="izquierdo"
+        value="izquierdo_der"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -2147,7 +2194,7 @@ const StepCDA = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
 
         }}>
       <ConclusionButton
-        value="derecho"
+        value="derecho_der"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -2159,7 +2206,7 @@ const StepCDA = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
 
         }}>
       <ConclusionButton
-        value="bilateral"
+        value="bilateral_der"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
         
@@ -2179,30 +2226,32 @@ const StepDDI = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
   <div>
     <div className='button-bar'>
     <button onClick={() => {
-        removeConclusion('c4')
-        removeConclusion('c5')
-        removeConclusion('c6')
-        removeConclusion('c7')
-        removeConclusion('c8')
-        removeConclusion('t1')
-        removeConclusion('t2')
-        removeConclusion('t3')
-        removeConclusion('t4')
-        removeConclusion('t5')
-        removeConclusion('t6')
-        removeConclusion('t7')
-        removeConclusion('t8')
-        removeConclusion('t9')
-        removeConclusion('t10')
-        removeConclusion('t11')
-        removeConclusion('t12')
-        removeConclusion('l1')
-        removeConclusion('l2')
-        removeConclusion('l3')
-        removeConclusion('l4')
-        removeConclusion('l5')
-        removeConclusion('s1')
-        removeConclusion('s2')
+        removeConclusion(`${selectedSide}c4di`)
+        removeConclusion(`${selectedSide}c5di`)
+        removeConclusion(`${selectedSide}c6di`)
+        removeConclusion(`${selectedSide}c7di`)
+        removeConclusion(`${selectedSide}c8di`)
+        removeConclusion(`${selectedSide}t1di`)
+        removeConclusion(`${selectedSide}t2di`)
+        removeConclusion(`${selectedSide}t3di`)
+        removeConclusion(`${selectedSide}t4di`)
+        removeConclusion(`${selectedSide}t5di`)
+        removeConclusion(`${selectedSide}t6di`)
+        removeConclusion(`${selectedSide}t7di`)
+        removeConclusion(`${selectedSide}t8di`)
+        removeConclusion(`${selectedSide}t9di`)
+        removeConclusion(`${selectedSide}t10di`)
+        removeConclusion(`${selectedSide}t11di`)
+        removeConclusion(`${selectedSide}t12di`)
+        removeConclusion(`${selectedSide}l2di`)
+        removeConclusion(`${selectedSide}l3di`)
+        removeConclusion(`${selectedSide}l4di`)
+        removeConclusion(`${selectedSide}l5di`)
+        removeConclusion(`${selectedSide}s1di`)
+        removeConclusion(`${selectedSide}s2di`)
+
+
+      
         setStep('CDI')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -2422,7 +2471,7 @@ const StepF1A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
-          // setSelectedSide('izquierdo');
+          setSelectedSide('izquierdo');
           setStep('G1A');
         }}>
       <ConclusionButton
@@ -2432,7 +2481,7 @@ const StepF1A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
       />
     </div>
     <div  onClick={() => {
-          // setSelectedSide('derecho');
+          setSelectedSide('derecho');
           setStep('G1A');
         }}>
       <ConclusionButton
@@ -2442,7 +2491,7 @@ const StepF1A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
       />
     </div>
     <div onClick={() => {
-          // setSelectedSide('bilateral');
+          setSelectedSide('bilateral');
           setStep('G1A');
         }}>
       <ConclusionButton
@@ -2633,7 +2682,7 @@ const StepG1A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
         <ConclusionButton value={`${selectedSide}t3da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
         <ConclusionButton value={`${selectedSide}t4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
         <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value={`${selectedSide}t6d`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
@@ -2727,7 +2776,7 @@ const StepG2A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
         <ConclusionButton value={`${selectedSide}t3da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
         <ConclusionButton value={`${selectedSide}t4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
         <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value={`${selectedSide}t6d`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
@@ -2821,7 +2870,7 @@ const StepG3A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
         <ConclusionButton value={`${selectedSide}t3da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
         <ConclusionButton value={`${selectedSide}t4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
         <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value={`${selectedSide}t6d`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
@@ -2922,7 +2971,7 @@ const StepCDIT = ({ handlePrevStep, handleNextStep, setStep}) => {
           setStep('BT');
         }}>
       <ConclusionButton
-        value="izquierdo_trigemino"
+        value="izquierdo_trigeminoindemne"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
        
@@ -2932,7 +2981,7 @@ const StepCDIT = ({ handlePrevStep, handleNextStep, setStep}) => {
           setStep('BT');
         }}>
       <ConclusionButton
-        value="derecho_trigemino"
+        value="derecho_trigeminoindemne"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
        
@@ -2942,7 +2991,7 @@ const StepCDIT = ({ handlePrevStep, handleNextStep, setStep}) => {
           setStep('BT');
         }}>
       <ConclusionButton
-        value="bilateral_trigemino"
+        value="bilateral_trigeminoindemne"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
         
@@ -3261,14 +3310,18 @@ const StepF3AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
 
 
 
-const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
+const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs ,selectedSide }) => {
   const { removeConclusion } = useContext(ReportContext)
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleExportPdf = async () => {
     try {
+      setIsLoading(true); // ⌛ Mostrar overlay
+
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
     const conclusiones = conclusions;
@@ -3309,36 +3362,88 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
+    } finally {
+      document.body.style.cursor = 'default';
+      setIsLoading(false); // ✅ Ocultar overlay
     }
   };
+  if (isLoading) {
+    return (
+      <div className="loading-overlay">
+        <div className="hourglass">
+        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className='button-bar'>
         <button onClick={() =>{ 
-          removeConclusion('c4')
-          removeConclusion('c5')
-          removeConclusion('c6')
-          removeConclusion('c7')
-          removeConclusion('c8')
-          removeConclusion('t1')
-          removeConclusion('t2')
-          removeConclusion('t3')
-          removeConclusion('t4')
-          removeConclusion('t5')
-          removeConclusion('t6')
-          removeConclusion('t7')
-          removeConclusion('t8')
-          removeConclusion('t9')
-          removeConclusion('t10')
-          removeConclusion('t11')
-          removeConclusion('t12')
-          removeConclusion('l1')
-          removeConclusion('l2')
-          removeConclusion('l3')
-          removeConclusion('l4')
-          removeConclusion('l5')
-          removeConclusion('s1')
-          removeConclusion('s2')
+           removeConclusion(`${selectedSide}c4di`)
+           removeConclusion(`${selectedSide}c5di`)
+           removeConclusion(`${selectedSide}c6di`)
+           removeConclusion(`${selectedSide}c7di`)
+           removeConclusion(`${selectedSide}c8di`)
+           removeConclusion(`${selectedSide}t1di`)
+           removeConclusion(`${selectedSide}t2di`)
+           removeConclusion(`${selectedSide}t3di`)
+           removeConclusion(`${selectedSide}t4di`)
+           removeConclusion(`${selectedSide}t5di`)
+           removeConclusion(`${selectedSide}t6di`)
+           removeConclusion(`${selectedSide}t7di`)
+           removeConclusion(`${selectedSide}t8di`)
+           removeConclusion(`${selectedSide}t9di`)
+           removeConclusion(`${selectedSide}t10di`)
+           removeConclusion(`${selectedSide}t11di`)
+           removeConclusion(`${selectedSide}t12di`)
+           removeConclusion(`${selectedSide}l2di`)
+           removeConclusion(`${selectedSide}l3di`)
+           removeConclusion(`${selectedSide}l4di`)
+           removeConclusion(`${selectedSide}l5di`)
+           removeConclusion(`${selectedSide}s1di`)
+           removeConclusion(`${selectedSide}s2di`)
+
+           removeConclusion(`${selectedSide}c4da`)
+           removeConclusion(`${selectedSide}c5da`)
+           removeConclusion(`${selectedSide}c6da`)
+           removeConclusion(`${selectedSide}c7da`)
+           removeConclusion(`${selectedSide}c8da`)
+           removeConclusion(`${selectedSide}t1da`)
+           removeConclusion(`${selectedSide}t2da`)
+           removeConclusion(`${selectedSide}t3da`)
+           removeConclusion(`${selectedSide}t4da`)
+           removeConclusion(`${selectedSide}t5da`)
+           removeConclusion(`${selectedSide}t6da`)
+           removeConclusion(`${selectedSide}t7da`)
+           removeConclusion(`${selectedSide}t8da`)
+           removeConclusion(`${selectedSide}t9da`)
+           removeConclusion(`${selectedSide}t10da`)
+           removeConclusion(`${selectedSide}t11da`)
+           removeConclusion(`${selectedSide}t12da`)
+           removeConclusion(`${selectedSide}l2da`)
+           removeConclusion(`${selectedSide}l3da`)
+           removeConclusion(`${selectedSide}l4da`)
+           removeConclusion(`${selectedSide}l5da`)
+           removeConclusion(`${selectedSide}s1da`)
+           removeConclusion(`${selectedSide}s2da`)
+   
+          removeConclusion('izquierdo_trigemino')
+          removeConclusion('derecho_trigemino')
+          removeConclusion('bilateral_trigemino')
+          removeConclusion('izquierdo_trigeminoindemne')
+          removeConclusion('derecho_trigeminoindemne')
+          removeConclusion('bilateral_trigeminoindemne')
+          removeConclusion('izquierdo_trigeminoalterada')
+          removeConclusion('derecho_trigeminoalterada')
+          removeConclusion('bilateral_trigeminoalterada')
+          removeConclusion('izquierdo_trigeminoindemne')
+ 
+          removeConclusion('derecho_der')
+          removeConclusion('izquierdo_der')
+          removeConclusion('bilateral_der')
+
           removeConclusion('dermatomas')
           removeConclusion('izquierdo_dermatomas')
           removeConclusion('derecho_dermatomas')

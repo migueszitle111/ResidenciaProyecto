@@ -55,7 +55,9 @@ const OverheadMenu = () => {
             </a>
           </li>
           <li>
-            <a href="/Educacion">
+            {/* <a href="/Educacion"> */}
+            <a href="/NoDisponible">
+
               <button className="buttommenu inline-block hover:border-b hover:border-gray-500">
                 Educación
               </button>
@@ -69,7 +71,9 @@ const OverheadMenu = () => {
             </a>
           </li>
           <li>
-            <a href="/Evento">
+            {/* <a href="/Evento"> */}
+            <a href="/NoDisponible">
+
               <button className="buttommenu inline-block hover:border-b hover:border-gray-500">
                 Evento
               </button>

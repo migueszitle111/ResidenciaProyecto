@@ -414,13 +414,13 @@ const Reporte = () => {
     // (2) Reubicar la fase (ACTIVA/INACTIVA/ANTIGUA) solo si es “RADICULOPATIA CRONICA”
     {
       const words = combinedText.split(' ');
-      const isCronica = words[1]?.toUpperCase() === "CRONICA";
+      const isCronica = words[1]?.toUpperCase() === "CRÓNICA";
       const phases = ["activa", "inactiva", "antigua"];
       const selectedPhase = conclusions.find(c => phases.includes(c.value));
   
       if (isCronica && selectedPhase) {
         const phaseWord = selectedPhase.title; // por ejemplo "ACTIVA"
-        const cronicaIndex = words.findIndex(w => w.toUpperCase() === "CRONICA");
+        const cronicaIndex = words.findIndex(w => w.toUpperCase() === "CRÓNICA");
         const phaseIndex = words.findIndex(w => w.toUpperCase() === phaseWord.toUpperCase());
         if (cronicaIndex !== -1 && phaseIndex !== -1 && phaseIndex > cronicaIndex) {
           const [extractedPhase] = words.splice(phaseIndex, 1);
@@ -493,7 +493,7 @@ const Reporte = () => {
     // (4) Insertar 'additionalText' si empieza con "RADICULOPATIA" y la 2a palabra
     //     es una de ["AGUDA","SUBAGUDA","CRONICA","SENSITIVA"]
     const words = combinedText.split(' ');
-    const allowedEvolutions = ["AGUDA","SUBAGUDA","CRONICA","SENSITIVA"];
+    const allowedEvolutions = ["AGUDA","SUBAGUDA","CRÓNICA","SENSITIVA"];
     const isRadiculo = words[0]?.toUpperCase() === "RADICULOPATÍA";
     const secondWord = words[1]?.toUpperCase();
   

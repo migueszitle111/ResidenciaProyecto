@@ -176,6 +176,9 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
       <div className='button-bar'>
         <button onClick={() =>{ 
             removeConclusion('perdida_axonal_secundaria')
+            removeConclusion('izquierdo_indemne')
+            removeConclusion('derecho_indemne')
+            removeConclusion('bilateral_indemne')
           setStep('C1')}} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
@@ -197,6 +200,9 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
       <div className='button-bar'>
         <button onClick={() =>{ 
             removeConclusion('retardo_secundario_en_la_conduccion')
+            removeConclusion('izquierdo_indemne')
+            removeConclusion('derecho_indemne')
+            removeConclusion('bilateral_indemne')
           setStep('C2')}} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
@@ -217,9 +223,9 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
     <div>
       <div className='button-bar'>
         <button onClick={() =>{ 
-            removeConclusion('izquierdo')
-            removeConclusion('derecho')
-            removeConclusion('bilateral')
+            removeConclusion('izquierdo_alterada')
+            removeConclusion('derecho_alterada')
+            removeConclusion('bilateral_alterada')
             setStep('D1')}} className="print-button dont-print">
             <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
           </button>
@@ -234,7 +240,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
             setStep('F');
           }}>
         <ConclusionButton
-          value="izquierdo"
+          value="izquierdo_alterada"
           title="PARA LADO IZQUIERDO,"
           displayText="IZQUIERDO"
         
@@ -245,7 +251,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
             setStep('F');
           }}>
         <ConclusionButton
-          value="derecho"
+          value="derecho_alterada"
           title="PARA LADO DERECHO,"
           displayText="DERECHO"
         
@@ -256,7 +262,7 @@ const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
             setStep('F');
           }}>
         <ConclusionButton
-          value="bilateral"
+          value="bilateral_alterada"
           title="DE FORMA BILATERAL,"
           displayText="BILATERAL"
           
@@ -274,9 +280,9 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
     <div>
       <div className='button-bar'>
         <button onClick={() =>{ 
-            removeConclusion('izquierdo')
-            removeConclusion('derecho')
-            removeConclusion('bilateral')
+            removeConclusion('izquierdo_indemne')
+            removeConclusion('derecho_indemne')
+            removeConclusion('bilateral_indemne')
 
             setStep('D2')}} className="print-button dont-print">
             <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
@@ -291,7 +297,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
             setStep('F2');
           }}>
         <ConclusionButton
-          value="izquierdo"
+          value="izquierdo_indemne"
           title="PARA LADO IZQUIERDO,"
           displayText="IZQUIERDO"
         
@@ -302,7 +308,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
             setStep('F2');
           }}>
         <ConclusionButton
-          value="derecho"
+          value="derecho_indemne"
           title="PARA LADO DERECHO,"
           displayText="DERECHO"
         
@@ -313,7 +319,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
             setStep('F2');
           }}>
         <ConclusionButton
-          value="bilateral"
+          value="bilateral_indemne"
           title="DE FORMA BILATERAL,"
           displayText="BILATERAL"
           
@@ -482,8 +488,6 @@ const [isLoading, setIsLoading] = useState(false);
     <div>
       <div className='button-bar'>
         <button onClick={() =>{ 
-            removeConclusion('')
-
           setStep('F')}} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
@@ -491,9 +495,7 @@ const [isLoading, setIsLoading] = useState(false);
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
-          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button> */}
+
 
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />

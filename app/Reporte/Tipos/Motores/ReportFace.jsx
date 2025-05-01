@@ -310,9 +310,29 @@ const Reporte = () => {
           }}
           
           rules={[
+          
             {
-              expectedValue: 'alterada', 
-              image: [
+              expectedValue: 'izquierdo_indemne', 
+              image: 
+                {
+                  src:'CorticoespinalImg/INFERIOR D.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'derecho_indemne', 
+              image: 
+                {
+                  src:'CorticoespinalImg/INFERIOR I.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'bilateral_indemne', 
+              image: 
+                [
                 {
                   src: 'CorticoespinalImg/INFERIOR D.png',
                   alt: 'Modelo',
@@ -322,23 +342,38 @@ const Reporte = () => {
                   alt: 'Modelo',
                 }]
             },
-           
-           
 
             {
-              expectedValue: 'indenme', 
-             
-                image: [
-                  {
-                    src: 'CorticoespinalImg/INFERIOR D.png',
-                    alt: 'Modelo',
-                  },
-                  {
-                    src: 'CorticoespinalImg/INFERIOR I.png',
-                    alt: 'Modelo',
-                  }]
+              expectedValue: 'izquierdo_alterada', 
+              image: 
+                {
+                  src:'CorticoespinalImg/INFERIOR D.png',
+                  alt: 'Modelo',
+                },
             },
 
+            {
+              expectedValue: 'derecho_alterada', 
+              image: 
+                {
+                  src:'CorticoespinalImg/INFERIOR I.png',
+                  alt: 'Modelo',
+                },
+            },
+
+            {
+              expectedValue: 'bilateral_alterada', 
+              image: 
+                [
+                {
+                  src: 'CorticoespinalImg/INFERIOR D.png',
+                  alt: 'Modelo',
+                },
+                {
+                  src: 'CorticoespinalImg/INFERIOR I.png',
+                  alt: 'Modelo',
+                }]
+            },
             {
               expectedValue: 'bilateralcervical', 
              

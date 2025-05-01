@@ -30,22 +30,30 @@ const Submenu = () => {
     {
       name: "Perlas",
       imagen: "/assets/SubmenuSvg/Perlas.svg",
-      path: "/Perlas",
+      path: "/NoDisponible",
+      // path: "/Perlas",
+
     },
     {
       name: "Ultrasonidos",
       imagen: "/assets/SubmenuSvg/Ultrasonido.svg",
-      path: "/Ultrasonido",
+      path: "/NoDisponible",
+      // path: "/Ultrasonido",
+
     },
     {
       name: "Monitoreo",
       imagen: "/assets/SubmenuSvg/Monitoreo.svg",
-      path: "/Monitoreo",
+      path: "/NoDisponible",
+      // path: "/Monitoreo",
+
     },
     {
       name: "Patrocinio",
       imagen: "/assets/SubmenuSvg/Patrocinio.svg",
-      path: "/Patrocinio",
+      path: "/NoDisponible",
+      // path: "/Patrocinio",
+
     },
   ];
 

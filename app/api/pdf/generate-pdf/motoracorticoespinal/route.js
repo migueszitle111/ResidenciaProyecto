@@ -18,8 +18,27 @@ function buildHtml({
   // 1) Tus reglas de superposición con /assets/... en lugar de baseUrl
   const overlayRules = [
     {
-      expectedValue: 'alterada', 
-      image: [
+      expectedValue: 'izquierdo_indemne', 
+      image: 
+        {
+          src:'/assets/CorticoespinalImg/INFERIOR D.png',
+          alt: 'Modelo',
+        },
+    },
+
+    {
+      expectedValue: 'derecho_indemne', 
+      image: 
+        {
+          src:'/assets/CorticoespinalImg/INFERIOR I.png',
+          alt: 'Modelo',
+        },
+    },
+
+    {
+      expectedValue: 'bilateral_indemne', 
+      image: 
+        [
         {
           src: '/assets/CorticoespinalImg/INFERIOR D.png',
           alt: 'Modelo',
@@ -29,20 +48,38 @@ function buildHtml({
           alt: 'Modelo',
         }]
     },
+
     {
-      expectedValue: 'indenme', 
-     
-        image: [
-          {
-            src: '/assets/CorticoespinalImg/INFERIOR D.png',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/CorticoespinalImg/INFERIOR I.png',
-            alt: 'Modelo',
-          }]
+      expectedValue: 'izquierdo_alterada', 
+      image: 
+        {
+          src:'/assets/CorticoespinalImg/INFERIOR D.png',
+          alt: 'Modelo',
+        },
     },
 
+    {
+      expectedValue: 'derecho_alterada', 
+      image: 
+        {
+          src:'/assets/CorticoespinalImg/INFERIOR I.png',
+          alt: 'Modelo',
+        },
+    },
+
+    {
+      expectedValue: 'bilateral_alterada', 
+      image: 
+        [
+        {
+          src: '/assets/CorticoespinalImg/INFERIOR D.png',
+          alt: 'Modelo',
+        },
+        {
+          src: '/assets/CorticoespinalImg/INFERIOR I.png',
+          alt: 'Modelo',
+        }]
+    },
     {
       expectedValue: 'bilateralcervical', 
      

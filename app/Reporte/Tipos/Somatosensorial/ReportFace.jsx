@@ -421,37 +421,6 @@ setCopyConclusions(finalTxt);
           }}
           
           rules={[
-
-            {
-              expectedValue: 'superior_derecho',  
-              image: 
-                  {
-                    src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
-                    alt: 'Modelo',
-                  },
-            },
-            {
-              expectedValue: 'superior_izquierdo',  
-              image: 
-                  {
-                    src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
-                    alt: 'Modelo',
-                  },    
-            },
-
-            {
-              expectedValue: 'superior_bilateral', 
-              image: 
-              [{
-                src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
-                alt: 'Modelo',
-              }],
-            
-            },
             //Superiores 
             {
               expectedValue: 'superior_derecho', 
@@ -486,36 +455,8 @@ setCopyConclusions(finalTxt);
                   }
                 ]
             },
-            {
-              expectedValue: 'superior_derechoindemne',  
-              image: 
-                  {
-                    src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
-                    alt: 'Modelo',
-                  },
-            },
-            {
-              expectedValue: 'superior_izquierdoindemne',  
-              image: 
-                  {
-                    src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
-                    alt: 'Modelo',
-                  },    
-            },
+           
 
-            {
-              expectedValue: 'superior_bilateralindemne', 
-              image: 
-              [{
-                src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
-                alt: 'Modelo',
-              }],
-            
-            },
 
             {
               expectedValue: 'superior_bilateralindemne', 
@@ -1358,107 +1299,862 @@ setCopyConclusions(finalTxt);
 },
 
 
+//alteradasdermatomas
+/////////////////////////////////////////////////////////////////////////////c4da
+
+
+{
+  expectedValue: 'derecho_der', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'izquierdo_der', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+},
+{
+  expectedValue: 'bilateral_der', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/INFERIORDERECHA.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
+        alt: 'Modelo',
+      }
+    ]
+},
 
 
 
 
 
 
+{
+  expectedValue: 'bilateralc4da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc4da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc4da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      },
+   
+},
+////////////////////////////////c5da
+{
+  expectedValue: 'bilateralc5da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc5da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc5da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      },
+   
+},
+///////////////////////////////////c6da
 
+{
+  expectedValue: 'bilateralc6da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc6da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc6da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      },
+   
+},
+///////////////////////////////////////////////c7da
+{
+  expectedValue: 'bilateralc7da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc7da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc7da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      },
+   
+},
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            {
-              expectedValue: 'inferior_derechoindemne',  
-              image: 
-                  {
-                    src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
-                    alt: 'Modelo',
-                  },
-            },
-            {
-              expectedValue: 'inferior_izquierdoindemne',  
-              image: 
-                  {
-                    src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
-                    alt: 'Modelo',
-                  },    
-            },
-
-            {
-              expectedValue: 'inferior_bilateralindemne', 
-              image: 
-              [{
-                src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
-                alt: 'Modelo',
-              }],
-            
-            },
-
-
-            {
-              expectedValue: 'inferior_derecho',  
-              image: 
-                  {
-                    src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
-                    alt: 'Modelo',
-                  },
-            },
-            {
-              expectedValue: 'inferior_izquierdo',  
-              image: 
-                  {
-                    src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
-                    alt: 'Modelo',
-                  },    
-            },
-
-            {
-              expectedValue: 'inferior_bilateral', 
-              image: 
-              [{
-                src: 'SomatosensorialImg/Versión 2/Izquierda/SO_2_Gris I.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'SomatosensorialImg/Versión 2/Derecha/SO_2_Gris D.png',
-                alt: 'Modelo',
-              }],
-            
-            },
+////////////////////////////////////////////c8da
+{
+  expectedValue: 'bilateralc8da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechoc8da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdoc8da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t1da
+{
+  expectedValue: 'bilateralt1da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot1da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot1da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t2da
+{
+  expectedValue: 'bilateralt2da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot2da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot2da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+///////////////////////////////////////////////t3da
+{
+  expectedValue: 'bilateralt3da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot3da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot3da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t4da
+{
+  expectedValue: 'bilateralt4da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot4da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot4da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t5da
+{
+  expectedValue: 'bilateralt5da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot5da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot5da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t6da
+{
+  expectedValue: 'bilateralt6da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot6da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot6da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t7da
+{
+  expectedValue: 'bilateralt7da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot7da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot7da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t8da
+{
+  expectedValue: 'bilateralt8da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot8da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot8da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+///////////////////////////////////////////////t9da
+{
+  expectedValue: 'bilateralt9da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot9da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot9da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t10da
+{
+  expectedValue: 'bilateralt10da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot10da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot10da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t11da
+{
+  expectedValue: 'bilateralt11da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot11da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot11da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////t12da
+{
+  expectedValue: 'bilateralt12da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechot12da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdot12da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////l1da
+{
+  expectedValue: 'bilaterall1da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechol1da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdol1da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+///////////////////////////////////////////////l2da
+{
+  expectedValue: 'bilaterall2da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechol2da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdol2da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////l3da
+{
+  expectedValue: 'bilaterall3da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechol3da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdol3da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////l4da
+{
+  expectedValue: 'bilaterall4da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechol4da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdol4da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+},
+//////////////////////////////////////////////l5da
+{
+  expectedValue: 'bilaterall5da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechol5da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdol5da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }, 
+},
+//////////////////////////////////////////////s1da
+{
+  expectedValue: 'bilaterals1da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechos1da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdos1da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+   
+},
+//////////////////////////////////////////////s2da
+{
+  expectedValue: 'bilaterals2da', 
+ 
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      },
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'derechos2da',  
+    image: [
+      {
+        src: 'SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
+        alt: 'Modelo',
+      }
+    ]
+},
+{
+  expectedValue: 'izquierdos2da', 
+ 
+    image: 
+      {
+        src: 'SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
+        alt: 'Modelo',
+      },
+},
             //inferiores
             {
               expectedValue: 'inferior_derecho', 
@@ -1531,6 +2227,57 @@ setCopyConclusions(finalTxt);
                 
             },
 //trigemino
+{
+  expectedValue: 'derecho_trigeminoindemne',  
+ 
+    image: 
+    [
+
+      {
+        
+        src: 'MioImg/Base_Cerebro.png',
+        alt: 'Modelo',
+      },
+      {
+        
+        src: 'SomatosensorialImg/TRI_1.png',
+        alt: 'Modelo',
+      },
+    
+    ]
+},
+
+{
+  expectedValue: "izquierdo_trigeminoindemne",  
+ 
+    image: 
+    [
+       {
+      src: 'MioImg/Base_Cerebro.png',
+      alt: 'Modelo',
+
+       },
+      {
+        src: 'SomatosensorialImg/TRI_2.png',
+        alt: 'Modelo',
+      }
+    
+   ]
+},
+
+{
+  expectedValue: 'bilateral_trigeminoindemne', 
+  image: [
+  {
+    src: 'MioImg/Base_Cerebro.png',
+    alt: 'Modelo',
+  },
+  {
+    src: 'SomatosensorialImg/imagen_combinadaTRI.png',
+    alt: 'Modelo',
+  }
+],
+},
             {
               expectedValue: 'derecho_trigemino',  
              
@@ -1582,6 +2329,7 @@ setCopyConclusions(finalTxt);
               }
             ],
             },
+
             {
               expectedValue: 'trigemino',  
              

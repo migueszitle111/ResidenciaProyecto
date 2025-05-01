@@ -103,7 +103,8 @@ export default function Perfil() {
                   Motora Corticoespinal
                 </button>
               </a>
-              <a href="./Reporte/Tipos/TrigeminoFacial">
+              {/* <a href="./Reporte/Tipos/TrigeminoFacial"> */}
+              <a >
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">
                   Trigémino-Facial
                 </button>

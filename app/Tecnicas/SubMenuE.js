@@ -18,29 +18,39 @@ export default function SubMenuE() {
                     Neurografía
                     </button>
                 </a>
-                <a href="./Valores/Componentes/Elementos">
+                {/* <a href="./Valores/Componentes/Elementos"> */}
+                <a>
+
                     <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-base overflow-hidden">
                     Miografía
                     </button>
                 </a>
-                <a href="./Tecnicas/Componentes/Potenciales">
+                {/* <a href="./Tecnicas/Componentes/Potenciales"> */}
+                <a>
+
                     <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-base overflow-hidden">
                     Potenciales Evocados
                     </button>
                 </a>
-                <a href="./Componentes/Elementos">
+                {/* <a href="./Componentes/Elementos"> */}
+                <a>
+
                     <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-base overflow-hidden">
                     Pruebas Especiales
                     </button>
                 </a>
-                <a href="./Componentes/Elementos">
+                {/* <a href="./Componentes/Elementos"> */}
+                <a >
+
                     <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-base overflow-hidden">
-                    Valores
+                    Valores - Tablas
                     </button>
                 </a>
-                <a href="./Componentes/Elementos">
+                {/* <a href="./Componentes/Elementos"> */}
+                <a>
+
                     <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-base overflow-hidden">
-                    Protocolo
+                    Protocolos
                     </button>
                 </a>
                 </div>

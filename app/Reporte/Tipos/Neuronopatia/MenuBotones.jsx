@@ -618,7 +618,7 @@ const StepH = ({ handlePrevStep, handleUndo, handleImageChange, handlePrint,topL
       const conclusionFinal = copyConclusions;
       const conclusiones = conclusions;
   
-      const response = await fetch('/api/pdf/generate-pdf/neuronopatia?route', {
+      const response = await fetch('/api/pdf/generate-pdf/neuronopatia', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,12 +1,44 @@
+// --------------------------- IMPORTS ---------------------------
+import { NextResponse }        from 'next/server';           // sin “type”
+import puppeteer               from 'puppeteer';             // Dev
+import puppeteerCore           from 'puppeteer-core';        // Prod (λ)
+import chromium                from '@sparticuz/chromium-min';
 
-import puppeteer from "puppeteer-core";
-import chromium  from "@sparticuz/chromium";
-export const runtime = "nodejs";
+export const runtime = 'nodejs';          // ⚠️ va después de los imports
+export const dynamic = 'force-dynamic';   // (opcional) evita caché de Vercel
 
-const isDev = process.env.NODE_ENV !== "production";
+// ---------------------------------------------------------------
+const isDev  = process.env.NODE_ENV !== 'production';
 const baseUrl = isDev
-  ? "http://localhost:3000"
+  ? 'http://localhost:3000'
   : process.env.NEXT_PUBLIC_SITE_URL;
+
+
+// ───────────────────────── helpers ────────────────────────────
+async function launchBrowser() {
+  if (isDev) {
+    // Puppeteer normal en local
+    return puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+  }
+  // Puppeteer‑core + Chromium empaquetado en Vercel
+  const executablePath = await chromium.executablePath(
+    'https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar'
+  );
+
+  return puppeteerCore.launch({
+    executablePath,
+    args: chromium.args,
+    headless: chromium.headless,
+    defaultViewport: chromium.defaultViewport,
+  });
+}
+
+
+
+
 
 // Copiamos la estructura de tu page.jsx y estilo
 function buildHtml(finalConclusion, userData, droppedItems,topLeftText) {
@@ -620,30 +652,21 @@ const showSensitiva     = strLower.includes("dorsal");
     </html>
   `;
 }
-
 export async function POST(req) {
   try {
-    console.log('🔹 Handler START');
     const body = await req.json();
-    const { finalConclusion = "", userData = {}, droppedItems = [], topLeftText = "" } = body;
+    const {
+      finalConclusion = '',
+      userData        = {},
+      droppedItems    = [],
+      topLeftText     = '',
+    } = body;
 
-    const executablePath = process.env.NODE_ENV === 'production'
-    ? await chromium.executablePath()   // <— llamada correcta
-    : undefined;                        // usa Chromium local
-    console.log('🔹 Lanzando Puppeteer');
-
-     // ──────────── 2.  Lanza navegador
-     const browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath,
-      headless: chromium.headless,
-    });
-
-    console.log('🔹 Navegador abierto — cargando HTML');
-    
+    const browser = await launchBrowser();
     const page = await browser.newPage();
 
+    // 1) Carga tus assets públicos (para fuentes / imágenes externas)
+    await page.goto(baseUrl, { waitUntil: 'networkidle2' });
     const sanitizeText = (text) => {
       return text
         .replace(/&/g, "&amp;")
@@ -657,33 +680,30 @@ export async function POST(req) {
     // Construimos el HTML con la misma estructura y CSS que en tu antigua page.jsx
     const html = buildHtml(sanitizedFinalConclusion,userData, droppedItems, topLeftText);
 
-    console.log('baseUrl', baseUrl)
-    // 1) Abre la URL pública para que cargue tu CSS y tus assets
-    await page.goto(baseUrl, { waitUntil: "networkidle2" });
 
-    // 2) Inyecta tu HTML generado (inline <style> + <body>…) sobre esa pestaña
-    await page.setContent(html, { waitUntil: "networkidle2" });
+    await page.setContent(html, { waitUntil: 'networkidle0' });
 
-
-    // Generamos PDF
-    const pdfBuffer = await page.pdf({
-      format: "A4",
+    // 3) Genera el PDF
+    const pdf = await page.pdf({
+      format: 'A4',
       printBackground: true,
-      scale: 1  // Ajusta este valor según sea necesario
-
+      margin: { top: '10px', right: '10px', bottom: '10px', left: '10px' },
     });
 
     await browser.close();
 
-    // Enviamos el PDF al cliente
-    return new Response(pdfBuffer, {
+    return new NextResponse(pdf, {
+      status: 200,
       headers: {
-        "Content-Type": "application/pdf",
-        "Content-Disposition": 'attachment; filename="reporte.pdf"',
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename=reporte.pdf',
       },
     });
-  } catch (error) {
-    console.error("Error generando PDF:", error);
-    return new Response("Error generando PDF: " + error.message, { status: 500 });
+  } catch (err) {
+    console.error('Error generando PDF:', err);
+    return NextResponse.json(
+      { message: 'Error generando PDF' },
+      { status: 500 },
+    );
   }
 }

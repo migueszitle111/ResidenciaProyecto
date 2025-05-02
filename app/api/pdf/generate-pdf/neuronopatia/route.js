@@ -627,16 +627,17 @@ export async function POST(req) {
     const body = await req.json();
     const { finalConclusion = "", userData = {}, droppedItems = [], topLeftText = "" } = body;
 
-    const executablePath = isDev
-    ? undefined
-    : await chromium.executablePath;
+    const executablePath = process.env.NODE_ENV === 'production'
+    ? await chromium.executablePath()   // <— llamada correcta
+    : undefined;                        // usa Chromium local
     console.log('🔹 Lanzando Puppeteer');
 
-    const browser = await puppeteer.launch({
-      args:             isDev ? [] : chromium.args,
-      defaultViewport:  isDev ? undefined : chromium.defaultViewport,
+     // ──────────── 2.  Lanza navegador
+     const browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
       executablePath,
-      headless:         true,
+      headless: chromium.headless,
     });
 
     console.log('🔹 Navegador abierto — cargando HTML');

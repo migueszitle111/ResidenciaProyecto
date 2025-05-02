@@ -628,15 +628,15 @@ export async function POST(req) {
     const body = await req.json();
     const { finalConclusion = "", userData = {}, droppedItems = [], topLeftText = "" } = body;
 
-    const isDev = process.env.NODE_ENV !== "production";
-    const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
-    const executablePath = isDev ? undefined : await chromium.executablePath;
+    const executablePath = isDev
+    ? undefined
+    : await chromium.executablePath();
 
     const browser = await puppeteer.launch({
-      args:      isDev ? [] : chromium.args,
-      defaultViewport: isDev ? undefined : chromium.defaultViewport,
-      executablePath: isDev ? undefined : await chromium.executablePath,
-      headless:  true,
+      args:             isDev ? [] : chromium.args,
+      defaultViewport:  isDev ? undefined : chromium.defaultViewport,
+      executablePath,
+      headless:         true,
     });
 
 

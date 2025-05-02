@@ -37,7 +37,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
       {step === 'A' && (<StepA handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} /> )}
       {step === 'B1' && (<StepB1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}/> )}
       {step === 'C1' && ( <StepC1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
-      {step === 'C2' && (<StepC2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
+      {/* {step === 'C2' && (<StepC2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)} */}
       {step === 'D1' && (<StepD1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
       {step === 'D2' && ( <StepD2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
       {step === 'E1' && ( <StepE1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
@@ -56,7 +56,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
       {/*Inferiores */}
       {step === 'B2' && (<StepB2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}/>)}
       {step === 'C1_i' && (<StepC1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
-      {step === 'C2_i' && (<StepC2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
+      {/* {step === 'C2_i' && (<StepC2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)} */}
       {step === 'D1_i' && (<StepD1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
       {step === 'D2_i' && (<StepD2_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
       {step === 'E1_i' && (<StepE1_i handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
@@ -76,7 +76,7 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
       {step === 'AT' && ( <StepAT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide} selectedSide={selectedSide}/>)}
        {step === 'CDIT' && (<StepCDIT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
        {step === 'DDAT' && (<StepDDAT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
-       {step === 'DDIT' && (<StepDDIT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} /> )}
+       {/* {step === 'DDIT' && (<StepDDIT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} /> )} */}
        {step === 'D1AT' && (<StepD1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
        {step === 'D2AT' && (<StepD2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />)}
        {step === 'E1AT' && (<StepE1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>)}
@@ -84,9 +84,9 @@ const SimpleMultiStepForm = ({ showStepNumber,conclusionDivRef, elementRef, drop
        {step === 'F1AT' && (<StepF1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide} />)}
        {step === 'F2AT' && (<StepF2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep} setSelectedSide={setSelectedSide}  />)}
        {step === 'F3AT' && (<StepF3AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep}  setStep={setStep}setSelectedSide={setSelectedSide}   />)}
-       {step === 'G1AT' && (<StepG1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
+       {/* {step === 'G1AT' && (<StepG1AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
        {step === 'G2AT' && (<StepG2AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}/>)}
-       {step === 'G3AT' && (<StepG3AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)}
+       {step === 'G3AT' && (<StepG3AT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide}  />)} */}
       {step === 'BT' && ( <StepBT handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs} selectedSide={selectedSide}/>)}
        {/*Dermatomas*/}
        {/*Inicia en el paso StepA para seleccionar los dermatomas*/}

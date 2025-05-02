@@ -1,6 +1,10 @@
-import { NerviusButtonBILATERAL2 } from "/ResidenciaProyecto/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL2.jsx";
+import { NerviusButtonBILATERAL2 } from "@/app/components/ReportTemplate/Conclusions/BottonNervBILATERAL2";
+
 
 export function checkDivsBILATERAL2(copyConclusions) {
+
+
+
 
   if (copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO DERECHO, FOCAL A NIVEL')) {// FALTA 
     return (

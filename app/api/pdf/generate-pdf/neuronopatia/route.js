@@ -623,12 +623,14 @@ const showSensitiva     = strLower.includes("dorsal");
 
 export async function POST(req) {
   try {
+    console.log('🔹 Handler START');
     const body = await req.json();
     const { finalConclusion = "", userData = {}, droppedItems = [], topLeftText = "" } = body;
 
     const executablePath = isDev
     ? undefined
     : await chromium.executablePath;
+    console.log('🔹 Lanzando Puppeteer');
 
     const browser = await puppeteer.launch({
       args:             isDev ? [] : chromium.args,
@@ -637,7 +639,8 @@ export async function POST(req) {
       headless:         true,
     });
 
-
+    console.log('🔹 Navegador abierto — cargando HTML');
+    
     const page = await browser.newPage();
 
     const sanitizeText = (text) => {
@@ -653,11 +656,12 @@ export async function POST(req) {
     // Construimos el HTML con la misma estructura y CSS que en tu antigua page.jsx
     const html = buildHtml(sanitizedFinalConclusion,userData, droppedItems, topLeftText);
 
-  // 1) Abre la URL pública para que cargue tu CSS y tus assets
-await page.goto(baseUrl, { waitUntil: "networkidle2" });
+    console.log('baseUrl', baseUrl)
+    // 1) Abre la URL pública para que cargue tu CSS y tus assets
+    await page.goto(baseUrl, { waitUntil: "networkidle2" });
 
-// 2) Inyecta tu HTML generado (inline <style> + <body>…) sobre esa pestaña
-await page.setContent(html, { waitUntil: "networkidle2" });
+    // 2) Inyecta tu HTML generado (inline <style> + <body>…) sobre esa pestaña
+    await page.setContent(html, { waitUntil: "networkidle2" });
 
 
     // Generamos PDF

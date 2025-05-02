@@ -12,7 +12,6 @@
   "dependencies": {
     "@sparticuz/chromium": "^132.0.0",
     "@sparticuz/chromium-min": "^133.0.0",
-
     "0g": "^0.0.9",
     "aws4": "^1.12.0",
     "axios": "^1.6.5",
@@ -33,6 +32,7 @@
     "nodemailer": "^6.9.8",
     "pdf-lib": "^1.17.1",
     "pdfmake": "^0.2.18",
+    "puppeteer": "^23.10.4",
     "puppeteer-core": "^10.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

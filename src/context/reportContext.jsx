@@ -23,6 +23,7 @@ export function ReportContextProvider({ children }) {
   const [buttonsDisabledBITSeg, setbuttonsDisabledBITSeg] = useState(false);
   const [buttonsDisabledBITSeg2, setbuttonsDisabledBITSeg2] = useState(false);
 
+
   // 1) Función para agregar/quitar conclusiones a modo "toggle"
   function updateConclusions(conclusion) {
     setConclusions((prevConclusions) => {
@@ -68,6 +69,7 @@ export function ReportContextProvider({ children }) {
     setbuttonsDisabledBITSeg,
     buttonsDisabledBITSeg2,
     setbuttonsDisabledBITSeg2,
+
   }
 
   return (

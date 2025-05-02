@@ -1,5 +1,5 @@
 
-import { NerviusButtonSegmenBILATERAL2 } from '@/app/components/ReportTemplate/Conclusions/BottonSegmentariaBILATERAL2';
+import { NerviusButtonSegmenBILATERAL2 } from "../../../components/ReportTemplate/Conclusions/BottonSegmentariaBILATERAL2";
 
 export function checkDivsSegmentarBilateral2(copyConclusions) {
 

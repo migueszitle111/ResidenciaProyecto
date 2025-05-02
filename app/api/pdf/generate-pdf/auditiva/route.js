@@ -1,8 +1,7 @@
 
-export const runtime = "nodejs";
-
 import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium";
+import chromium  from "@sparticuz/chromium";
+export const runtime = "nodejs";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -821,10 +820,10 @@ export async function POST(req) {
     const executablePath = isDev ? undefined : await chromium.executablePath;
 
     const browser = await puppeteer.launch({
-      args: isDev ? [] : chromium.args,
+      args:      isDev ? [] : chromium.args,
       defaultViewport: isDev ? undefined : chromium.defaultViewport,
-      executablePath,
-      headless: true,
+      executablePath: isDev ? undefined : await chromium.executablePath,
+      headless:  true,
     });
 
     // Armamos la cadena final con value

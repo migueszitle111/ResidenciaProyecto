@@ -5,8 +5,8 @@ import { useSession } from "next-auth/react";
 import { useImageState } from '../../MetodosBotones';
 import { ReportContext,DropContext } from '@/src/context'
 import  MenuImagenes  from '../../../components/ReportTemplate/DinamicImagesMenu';
-
 import './Style.css';
+
 import { Inter } from 'next/font/google';
 const stepsArray = ['A', 'B1', 'B2'];
 // Componente principal

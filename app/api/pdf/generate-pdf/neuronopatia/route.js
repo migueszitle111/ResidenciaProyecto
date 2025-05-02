@@ -4,11 +4,9 @@ import chromium  from "@sparticuz/chromium";
 export const runtime = "nodejs";
 
 const isDev = process.env.NODE_ENV !== "production";
-
-// URL base: localhost en dev, tu dominio en prod
 const baseUrl = isDev
   ? "http://localhost:3000"
-  : process.env.NEXT_PUBLIC_SITE_URL || "https://medxproapp.com";
+  : process.env.NEXT_PUBLIC_SITE_URL;
 
 // Copiamos la estructura de tu page.jsx y estilo
 function buildHtml(finalConclusion, userData, droppedItems,topLeftText) {
@@ -655,19 +653,12 @@ export async function POST(req) {
     // Construimos el HTML con la misma estructura y CSS que en tu antigua page.jsx
     const html = buildHtml(sanitizedFinalConclusion,userData, droppedItems, topLeftText);
 
-    // Inyectamos el HTML
-    await page.setContent(html, { waitUntil: "domcontentloaded" });
+  // 1) Abre la URL pública para que cargue tu CSS y tus assets
+await page.goto(baseUrl, { waitUntil: "networkidle2" });
 
-        // Primero "visita" la raíz
-    await page.goto(baseUrl, {
-      waitUntil: 'networkidle2',
-    });
-    
-    // Luego setContent con tu HTML
-    await page.setContent(html, {
-      waitUntil: 'networkidle2'
-    });
-    
+// 2) Inyecta tu HTML generado (inline <style> + <body>…) sobre esa pestaña
+await page.setContent(html, { waitUntil: "networkidle2" });
+
 
     // Generamos PDF
     const pdfBuffer = await page.pdf({

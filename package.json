@@ -31,7 +31,6 @@
     "nodemailer": "^6.9.8",
     "pdf-lib": "^1.17.1",
     "pdfmake": "^0.2.18",
-    "puppeteer": "^19.11.1",
     "puppeteer-core": "^10.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.3.1",

@@ -1,12 +1,15 @@
-import puppeteerLib from "puppeteer";
+
+export const runtime = "nodejs";
+
+import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 
 const isDev = process.env.NODE_ENV !== "production";
 
-// Ajusta el puerto si tu Next corre en otro (por ejemplo 3001)
+// URL base: localhost en dev, tu dominio en prod
 const baseUrl = isDev
   ? "http://localhost:3000"
-  : process.env.NEXT_PUBLIC_SITE_URL || "https://tudominio.com";
+  : process.env.NEXT_PUBLIC_SITE_URL || "https://medxproapp.com";
 
 function buildHtml({
   finalConclusion, // texto visible (títulos, etc.)

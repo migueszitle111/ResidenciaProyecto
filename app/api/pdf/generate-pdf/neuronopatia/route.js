@@ -628,7 +628,7 @@ export async function POST(req) {
 
     const executablePath = isDev
     ? undefined
-    : await chromium.executablePath();
+    : await chromium.executablePath;
 
     const browser = await puppeteer.launch({
       args:             isDev ? [] : chromium.args,

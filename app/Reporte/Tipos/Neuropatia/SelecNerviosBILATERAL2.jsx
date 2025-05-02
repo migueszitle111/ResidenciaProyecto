@@ -1,4 +1,4 @@
-import { NerviusButtonBILATERAL2 } from "@/app/components/ReportTemplate/Conclusions/BottonNervBILATERAL2";
+import { NerviusButtonBILATERAL2 } from "/ResidenciaProyecto/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL2.jsx";
 
 export function checkDivsBILATERAL2(copyConclusions) {
 

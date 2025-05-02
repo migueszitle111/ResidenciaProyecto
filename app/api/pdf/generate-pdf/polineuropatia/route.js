@@ -1,13 +1,14 @@
-import puppeteerLib from "puppeteer";
-import chromium from "@sparticuz/chromium";
+
+import puppeteer from "puppeteer-core";
+import chromium  from "@sparticuz/chromium";
+export const runtime = "nodejs";
 
 const isDev = process.env.NODE_ENV !== "production";
 
-// Ajusta el puerto si tu Next corre en otro (por ejemplo 3001)
+// URL base: localhost en dev, tu dominio en prod
 const baseUrl = isDev
   ? "http://localhost:3000"
-  : process.env.NEXT_PUBLIC_SITE_URL || "https://tudominio.com";
-
+  : process.env.NEXT_PUBLIC_SITE_URL || "https://medxproapp.com";
 function buildHtml({
   finalConclusion, // texto visible (títulos, etc.)
   finalString,     // texto para detectar overlays
@@ -710,12 +711,11 @@ export async function POST(req) {
     const executablePath = isDev ? undefined : await chromium.executablePath;
 
     const browser = await puppeteer.launch({
-      args: isDev ? [] : chromium.args,
+      args:      isDev ? [] : chromium.args,
       defaultViewport: isDev ? undefined : chromium.defaultViewport,
-      executablePath,
-      headless: true,
+      executablePath: isDev ? undefined : await chromium.executablePath,
+      headless:  true,
     });
-
     // Armamos la cadena final con value
     const finalString = conclusiones.map((cl) => cl.value).join(" ");
     const page = await browser.newPage();

@@ -1,10 +1,15 @@
 // app/api/pdf/generate-pdf/neuropatia/route.js
-export const runtime = 'nodejs';
 
-import puppeteerDev from 'puppeteer';          // solo se usa en local
-import chromium     from '@sparticuz/chromium';
+import puppeteer from "puppeteer-core";
+import chromium  from "@sparticuz/chromium";
+export const runtime = "nodejs";
 
-const isDev  = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV !== "production";
+
+// URL base: localhost en dev, tu dominio en prod
+const baseUrl = isDev
+  ? "http://localhost:3000"
+  : process.env.NEXT_PUBLIC_SITE_URL || "https://medxproapp.com";
 
 /* ---------- 1.  CSS incrustado ---------- */
 const pdfCSS = /* css */ `

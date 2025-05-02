@@ -1,10 +1,14 @@
-import puppeteerLib from "puppeteer";
-import chromium from "@sparticuz/chromium";
+
+import puppeteer from "puppeteer-core";
+import chromium  from "@sparticuz/chromium";
+export const runtime = "nodejs";
 
 const isDev = process.env.NODE_ENV !== "production";
+
+// URL base: localhost en dev, tu dominio en prod
 const baseUrl = isDev
   ? "http://localhost:3000"
-  : process.env.NEXT_PUBLIC_SITE_URL || "https://tudominio.com";
+  : process.env.NEXT_PUBLIC_SITE_URL || "https://medxproapp.com";
 /**
  * Construye el HTML final para exportar el PDF de radiculopatía.
  */
@@ -1779,12 +1783,14 @@ export async function POST(req) {
     // Generar PDF con puppeteer
     const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
     const executablePath = isDev ? undefined : await chromium.executablePath;
-    const browser = await puppeteer.launch({
-      args: isDev ? [] : chromium.args,
+
+      const browser = await puppeteer.launch({
+      args:      isDev ? [] : chromium.args,
       defaultViewport: isDev ? undefined : chromium.defaultViewport,
-      executablePath,
-      headless: true,
+      executablePath: isDev ? undefined : await chromium.executablePath,
+      headless:  true,
     });
+    
     const page = await browser.newPage();
     await page.setViewport({
       width: 1200,   // A4 landscape width aproximado

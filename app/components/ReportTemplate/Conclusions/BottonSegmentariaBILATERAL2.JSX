@@ -17,7 +17,7 @@ export function NerviusButtonSegmenBILATERAL2({ title, value, displayText }) {
   // Verificar si hay algún "carX" en las conclusiones
   const hasCarSelected = conclusions.some(cl => cl?.value && cl.value.startsWith('car'));
 
-  // Si el botón es "cariX" y no hay ningún "carX" seleccionado, no se muestra
+  // Si el botón es "cariX" y no hay ningún "carX" seledccionado, 
   if (value.startsWith('caarii') && !hasCarSelected) {
     return null;
   }

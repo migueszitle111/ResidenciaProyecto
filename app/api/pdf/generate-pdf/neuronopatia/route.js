@@ -667,6 +667,7 @@ export async function POST(req) {
 
     // 1) Carga tus assets públicos (para fuentes / imágenes externas)
     await page.goto(baseUrl, { waitUntil: 'networkidle2' });
+    
     const sanitizeText = (text) => {
       return text
         .replace(/&/g, "&amp;")

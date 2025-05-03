@@ -1,15 +1,44 @@
 // app/api/pdf/generate-pdf/neuropatia/route.js
 
-import puppeteer from "puppeteer-core";
-import chromium  from "@sparticuz/chromium";
-export const runtime = "nodejs";
+// --------------------------- IMPORTS ---------------------------
+import { NextResponse }        from 'next/server';           // sin “type”
+import puppeteer               from 'puppeteer';             // Dev
+import puppeteerCore           from 'puppeteer-core';        // Prod (λ)
+import chromium                from '@sparticuz/chromium-min';
 
-const isDev = process.env.NODE_ENV !== "production";
+export const runtime = 'nodejs';          // ⚠️ va después de los imports
+export const dynamic = 'force-dynamic';   // (opcional) evita caché de Vercel
 
-// URL base: localhost en dev, tu dominio en prod
+// ---------------------------------------------------------------
+const isDev  = process.env.NODE_ENV !== 'production';
 const baseUrl = isDev
-  ? "http://localhost:3000"
-  : process.env.NEXT_PUBLIC_SITE_URL || "https://medxproapp.com";
+  ? 'http://localhost:3000'
+  : process.env.NEXT_PUBLIC_SITE_URL;
+
+
+// ───────────────────────── helpers ────────────────────────────
+async function launchBrowser() {
+  if (isDev) {
+    // Puppeteer normal en local
+    return puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+  }
+  // Puppeteer‑core + Chromium empaquetado en Vercel
+  const executablePath = await chromium.executablePath(
+    'https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar'
+  );
+
+  return puppeteerCore.launch({
+    executablePath,
+    args: chromium.args,
+    headless: chromium.headless,
+    defaultViewport: chromium.defaultViewport,
+  });
+}
+
+
 
 /* ---------- 1.  CSS incrustado ---------- */
 const pdfCSS = /* css */ `
@@ -303,12 +332,9 @@ export async function POST(req){
       baseImgData
     });
 
-    /* 3-B  lanzamos Puppeteer */
-    const puppeteer = isDev
-      ? puppeteerDev                              // Full Puppeteer en local
-      : (await import('puppeteer-core')).default; // Core + Chromium en prod
+  
 
-    const browser = await puppeteer.launch({
+    const browser = await launchBrowser({
       args:            isDev ? [] : chromium.args,
       executablePath:  isDev ? undefined : await chromium.executablePath,
       defaultViewport: { width: 800, height: 1100 },
@@ -323,18 +349,28 @@ export async function POST(req){
     });
     await page.setContent(html, { waitUntil: 'networkidle0' });
 
-    const pdfBuffer = await page.pdf({ format:'A4', printBackground:true });
-    await browser.close();
+    await page.setContent(html, { waitUntil: 'networkidle0' });
 
-    return new Response(pdfBuffer,{
-      headers:{
-        'Content-Type':        'application/pdf',
-        'Content-Disposition': 'attachment; filename="reporte-neuropatia.pdf"',
-      },
+    // 3) Genera el PDF
+    const pdf = await page.pdf({
+      format: 'A4',
+      printBackground: true,
     });
 
-  }catch(err){
-    console.error('[PDF] error:', err);
-    return new Response('Error generando PDF: ' + err.message, { status:500 });
+    await browser.close();
+
+    return new NextResponse(pdf, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename=reporte.pdf',
+      },
+    });
+  } catch (err) {
+    console.error('Error generando PDF:', err);
+    return NextResponse.json(
+      { message: 'Error generando PDF' },
+      { status: 500 },
+    );
   }
 }

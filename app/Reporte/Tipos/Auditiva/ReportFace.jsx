@@ -302,7 +302,7 @@ const Reporte = () => {
         <ConclusionCanvasV 
         
           img={{
-            src: 'AuditivaIMG/AU_BASE_BLANCO.png',
+            src: '/assets/AuditivaIMG/AU_BASE_BLANCO.png',
             alt: 'Modelo',
             useMap: '#image-map',
             width: isPageVisible ? '600' : '800',

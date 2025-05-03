@@ -198,7 +198,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
   <div>
     <div className='button-bar'>
       <button onClick={() =>{ 
-        removeConclusion('retardo_secundario_en_la_conduccions')
+        removeConclusion('retardo_secundario_en_la_conduccion')
         setStep('C2')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
@@ -280,6 +280,10 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => {
           removeConclusion('izquierdo')
           removeConclusion('derecho')
           removeConclusion('bilateral')
+          removeConclusion('indemne')
+          removeConclusion('izquierdoindemne')
+          removeConclusion('derechoindemne')
+          removeConclusion('bilateralindemne')
 
           setStep('D2')}} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />

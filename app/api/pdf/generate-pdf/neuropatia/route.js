@@ -66,14 +66,14 @@ textarea{
 .stack{
   position:relative;
   width:1000px;
-  height:1500px;
+  height:1400px;
   margin:0 auto;
 }
 .stack img{
   position:absolute;
   inset:0;
   width:1000px;
-  height:1500px;
+  height:1400px;
   object-fit:contain;
 }
 .base  { z-index:1; }

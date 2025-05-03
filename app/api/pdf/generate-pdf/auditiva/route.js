@@ -843,16 +843,7 @@ export async function POST(req) {
       topLeftText = "",
     } = body;
 
-    const isDev = process.env.NODE_ENV !== "production";
-    const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
-    const executablePath = isDev ? undefined : await chromium.executablePath;
-
-    const browser = await puppeteer.launch({
-      args:      isDev ? [] : chromium.args,
-      defaultViewport: isDev ? undefined : chromium.defaultViewport,
-      executablePath: isDev ? undefined : await chromium.executablePath,
-      headless:  true,
-    });
+    const browser = await launchBrowser();
 
     // Armamos la cadena final con value
     const finalString = conclusiones.map((cl) => cl.value).join(" ");

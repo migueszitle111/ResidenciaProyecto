@@ -747,20 +747,12 @@ export async function POST(req) {
       topLeftText = "",
     } = body;
 
-    const isDev = process.env.NODE_ENV !== "production";
-    const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
-    const executablePath = isDev ? undefined : await chromium.executablePath;
+    const browser = await launchBrowser();
+    const page = await browser.newPage();
 
-    const browser = await puppeteer.launch({
-      args:      isDev ? [] : chromium.args,
-      defaultViewport: isDev ? undefined : chromium.defaultViewport,
-      executablePath: isDev ? undefined : await chromium.executablePath,
-      headless:  true,
-    });
 
     // Armamos la cadena final con value
     const finalString = conclusiones.map((cl) => cl.value).join(" ");
-    const page = await browser.newPage();
 
     // Función para sanitizar (opcional)
     const sanitizeText = (text) => {
@@ -797,7 +789,6 @@ export async function POST(req) {
     scale: 1,
   });
 
-    await browser.close();
 
     await browser.close();
 

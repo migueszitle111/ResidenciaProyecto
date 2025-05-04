@@ -101,7 +101,6 @@ textarea{
  line-height:1.8;          
  text-align:justify;       
  text-justify:inter-word;  
- text-align-last:justify;  
  hyphens:auto;
  -webkit-hyphens:auto;
  -ms-hyphens:auto;

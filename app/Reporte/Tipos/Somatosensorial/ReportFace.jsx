@@ -163,27 +163,27 @@ const Reporte = () => {
   useEffect(() => {
     /* ---------- PRIORIDADES ---------- */
     const priority = {
-      // 1- Eje principal
-      'VÍA SOMATOSENSORIAL': 1,
-  
-      // 2- Estado funcional
-      'CON INTEGRIDAD FUNCIONAL': 2,
-      'CON DEFECTO': 2,
-  
-      // 3- Fisiopatología primaria
-      'POR RETARDO EN LA CONDUCCIÓN': 3,
-      'POR BLOQUEO EN LA CONDUCCIÓN': 3,
-      'AXONAL': 3,
-      'POR AUSENCIA DE RESPUESTA EVOCABLE': 3,
-  
-      // 4- Fisiopatología secundaria
-      'Y PÉRDIDA AXONAL SECUNDARIA': 4,
-      'Y RETARDO SECUNDARIO EN LA CONDUCCIÓN': 4,
-  
-      // 5- Grado
-      'LEVE': 5,
-      'MODERADO': 5,
-      'SEVERO': 5,
+     /* 1. Eje principal */
+  'VÍA SOMATOSENSORIAL': 1,
+
+  /* 2. Estado funcional */
+  'CON INTEGRIDAD FUNCIONAL': 2,
+  'CON DEFECTO': 2,
+
+  /* 3. Fisiopatología primaria */
+  'POR RETARDO EN LA CONDUCCIÓN': 3,
+  'POR BLOQUEO EN LA CONDUCCIÓN': 3,
+  'AXONAL': 3,
+  'POR AUSENCIA DE RESPUESTA EVOCABLE': 3,
+
+  /* 4. ⬅️  Grado (antes era 5) */
+  'LEVE': 4,
+  'MODERADO': 4,
+  'SEVERO': 4,
+
+  /* 5. ⬅️  Fisiopatología secundaria (antes era 4) */
+  'Y PÉRDIDA AXONAL SECUNDARIA': 5,
+  'Y RETARDO SECUNDARIO EN LA CONDUCCIÓN': 5,
   
       // 6- Lado
       'PARA LADO IZQUIERDO': 6,
@@ -253,7 +253,21 @@ let finalTxt = [
   .join(' ')
   .replace(/\s+/g, ' ')
   .trim();
+/* --- NUEVO BLOQUE: mueve el grado delante del secundario --- */
+const gradoRE   = '(LEVE|MODERADO|SEVERO)';
 
+finalTxt = finalTxt
+  // “…SECUNDARIA MODERADO” → “MODERADO …SECUNDARIA”
+  .replace(
+    new RegExp(`Y\\s+PÉRDIDA\\s+AXONAL\\s+SECUNDARIA\\s+${gradoRE}`, 'i'),
+    '$1 Y PÉRDIDA AXONAL SECUNDARIA'
+  )
+  // “…CONDUCCIÓN MODERADO” → “MODERADO …CONDUCCIÓN”
+  .replace(
+    new RegExp(`Y\\s+RETARDO\\s+SECUNDARIO\\s+EN\\s+LA\\s+CONDUCCIÓN\\s+${gradoRE}`, 'i'),
+    '$1 Y RETARDO SECUNDARIO EN LA CONDUCCIÓN'
+  );
+  
 /* ---------- REORDENA SOLO TRIGÉMINO ---------- */
 const TRIG_PATH =
   'A TRAVÉS DEL TRACTO Y NÚCLEO MESENCEFÁLICO AL ESTÍMULO DE NERVIO TRIGÉMINO.';

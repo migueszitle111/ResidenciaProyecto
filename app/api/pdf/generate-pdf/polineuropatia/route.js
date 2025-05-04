@@ -560,6 +560,7 @@ function buildHtml({
         font-size: 14px;
         line-height: 1.4;
         text-align: justify;
+        white-space: pre-line;
 
       }
       .user-data {

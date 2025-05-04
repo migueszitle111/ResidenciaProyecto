@@ -625,7 +625,10 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
     fontSize: '12px',
     paddingTop: '8px',
     marginLeft: '10px',
+    paddingRight: '10px',
     zIndex: '1',
+    textAlign: 'justify',      // ← añade esto
+    whiteSpace: 'pre-line', 
   }}
   dangerouslySetInnerHTML={{ __html: copyConclusions }}
   onBlur={(e) => {

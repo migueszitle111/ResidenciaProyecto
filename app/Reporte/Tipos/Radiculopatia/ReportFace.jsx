@@ -468,9 +468,9 @@ const Reporte = () => {
     const translateStatus = (status, count) => {
       if (count > 1) {
         switch(status) {
-          case 'BILATERAL': return 'BILATERALES';
-          case 'IZQUIERDA': return 'IZQUIERDAS';
-          case 'DERECHA':   return 'DERECHAS';
+          case 'BILATERAL': return 'BILATERAL';
+          case 'IZQUIERDA': return 'IZQUIERDA';
+          case 'DERECHA':   return 'DERECHA';
         }
       }
       return status; // singular

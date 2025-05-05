@@ -2102,7 +2102,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                   type="checkbox"
                   id="c6s_i"
                   checked={!!activeButtons["c6s_i"]}
-                  onChange={(e) => handleCheckboxChange(e, "c6s_i", "C6-C8 IZQUIERDO", groupC6C7)}
+                  onChange={(e) => handleCheckboxChange(e, "c6s_i", "C6-C8 IZQUIERDO.", groupC6C7)}
                 />
                 <label htmlFor="c6s_i"> L </label>
               </td>
@@ -2111,7 +2111,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                   type="checkbox"
                   id="c6s_d"
                   checked={!!activeButtons["c6s_d"]}
-                  onChange={(e) => handleCheckboxChange(e, "c6s_d", "C6-C8 DERECHO", groupC6C7)}
+                  onChange={(e) => handleCheckboxChange(e, "c6s_d", "C6-C8 DERECHO.", groupC6C7)}
                 />
                 <label htmlFor="c6s_d"> R </label>
               </td>
@@ -2120,7 +2120,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                   type="checkbox"
                   id="c6s_bi"
                   checked={!!activeButtons["c6s_bi"]}
-                  onChange={(e) => handleCheckboxChange(e, "c6s_bi", "C6-C8 BILATERAL", groupC6C7)}
+                  onChange={(e) => handleCheckboxChange(e, "c6s_bi", "C6-C8 BILATERAL.", groupC6C7)}
                 />
                 <label htmlFor="c6s_bi"> L & R </label>
               </td>
@@ -2137,7 +2137,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                   type="checkbox"
                   id="s1s_i"
                   checked={!!activeButtons["s1s_i"]}
-                  onChange={(e) => handleCheckboxChange(e, "s1s_i", "S1 IZQUIERDO", groupS1)}
+                  onChange={(e) => handleCheckboxChange(e, "s1s_i", "S1 IZQUIERDO.", groupS1)}
                 />
                 <label htmlFor="s1s_i"> L </label>
               </td>
@@ -2146,7 +2146,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                   type="checkbox"
                   id="s1s_d"
                   checked={!!activeButtons["s1s_d"]}
-                  onChange={(e) => handleCheckboxChange(e, "s1s_d", "S1 DERECHO", groupS1)}
+                  onChange={(e) => handleCheckboxChange(e, "s1s_d", "S1 DERECHO.", groupS1)}
                 />
                 <label htmlFor="s1s_d"> R </label>
               </td>
@@ -2155,7 +2155,7 @@ const StepS1 = ({ handleNextStep3, handlePrevStep3 }) => {
                   type="checkbox"
                   id="s1s_bi"
                   checked={!!activeButtons["s1s_bi"]}
-                  onChange={(e) => handleCheckboxChange(e, "s1s_bi", "S1 BILATERAL", groupS1)}
+                  onChange={(e) => handleCheckboxChange(e, "s1s_bi", "S1 BILATERAL.", groupS1)}
                 />
                 <label htmlFor="s1s_bi"> L & R </label>
               </td>
@@ -2256,47 +2256,6 @@ function setButtonState(value, desiredOn) {
   if (desiredOn && !currentlyOn) toggleButton(value);
   if (!desiredOn && currentlyOn)  toggleButton(value);
 }
-
-// function handlePolisegmentariaClick(clickedValue) {
-//   const index = polisegSteps.findIndex(item => item.value === clickedValue);
-//   if (index === -1) return;
-
-//   const isCurrentlyActive = activeButtons[clickedValue];
-
-//   if (!isCurrentlyActive) {
-//     // --- CASO 1: Activar un botón que estaba apagado ---
-
-//     // (A) Enciende en la UI los niveles del inicio (0) hasta el clicado (index-1),
-//     //     sin meterlos a conclusiones
-//     for (let i = 0; i < index; i++) {
-//       const { value } = polisegSteps[i];
-//       // Fuerza ON en la UI
-//       setButtonState(value, true);
-//       // Asegúrate de sacarlos de conclusiones (no se mostrarán en el reporte)
-//       updateConclusions({ value, remove: true });
-//     }
-
-//     // (B) Enciende el botón clicado en la UI y SÍ lo mete a conclusiones
-//     const { value, title } = polisegSteps[index];
-//     setButtonState(value, true);
-//     updateConclusions({ value, title }); // ESTE es el que se guarda en reporte
-
-//     // (C) Apaga (UI) y quita de conclusiones todos los posteriores
-//     for (let i = index + 1; i < polisegSteps.length; i++) {
-//       const { value } = polisegSteps[i];
-//       setButtonState(value, false);
-//       updateConclusions({ value, remove: true });
-//     }
-
-//   } else {
-//     // --- CASO 2: El botón ya estaba activo => apaga todo ---
-//     for (let i = 0; i < polisegSteps.length; i++) {
-//       const { value } = polisegSteps[i];
-//       setButtonState(value, false);
-//       updateConclusions({ value, remove: true });
-//     }
-//   }
-// }
 
   
 

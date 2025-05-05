@@ -66,14 +66,14 @@ textarea{
 .stack{
   position:relative;
   width:1000px;
-  height:1500px;
+  height:1400px;
   margin:0 auto;
 }
 .stack img{
   position:absolute;
   inset:0;
   width:1000px;
-  height:1500px;
+  height:1400px;
   object-fit:contain;
 }
 .base  { z-index:1; }
@@ -101,7 +101,6 @@ textarea{
  line-height:1.8;          
  text-align:justify;       
  text-justify:inter-word;  
- text-align-last:justify;  
  hyphens:auto;
  -webkit-hyphens:auto;
  -ms-hyphens:auto;

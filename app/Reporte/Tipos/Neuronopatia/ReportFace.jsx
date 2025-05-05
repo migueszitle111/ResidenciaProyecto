@@ -146,57 +146,54 @@ const Reporte = () => {
   }, []);
 
 
-function formatConclusions(copyConclusions) {
-  const keywords = ["BULBAR", "CERVICAL", "TORÁCICA", "LUMBAR"];
-  let words = copyConclusions.split(' ');
-  let keywordPositions = [];
+/* ---------- 1.  Formatear conclusiones ---------- */
+function formatConclusions(text) {
 
-  // Identificar las posiciones de las palabras clave
-  for (let i = 0; i < words.length; i++) {
-      if (keywords.includes(words[i])) {
-          keywordPositions.push(i);
-      }
+  /* 1A)  insertamos el salto SIEMPRE                */
+  text = text.replace(
+    /\.?\s*REINERVACIÓN/gi,   // punto opcional + espacios
+    '.\n\n REINERVACIÓN'      // punto + 2 saltos + espacio
+  );
+
+  /* 1B)  comas y conjunción (opcional)              */
+  const keywords = ['BULBAR', 'CERVICAL', 'TORÁCICA', 'LUMBAR'];
+  const words    = text.split(' ');                 // ←  **split por espacio**
+  const pos      = words
+    .map((w, i) => (keywords.includes(w) ? i : -1))
+    .filter(i => i !== -1);
+
+  if (pos.length < 2) return text;                  // ya tiene el salto
+
+  for (let i = 0; i < pos.length - 2; i++) {
+    words[pos[i]] += ',';
   }
-
-  // Si no se encontraron palabras clave, devolver la cadena original
-  if (keywordPositions.length === 0) {
-      return copyConclusions;
-  }
-
-  // Si solo hay una palabra clave, devolver la cadena original
-  if (keywordPositions.length === 1) {
-      return copyConclusions;
-  }
-
-  // Formatear las palabras clave con comas, excepto antes de la conjunción
-  for (let i = 0; i < keywordPositions.length - 2; i++) {
-      words[keywordPositions[i]] += ',';
-  }
-
-  // Verificar si la última palabra clave empieza con "I"
-  let lastKeywordIndex = keywordPositions[keywordPositions.length - 1];
-  let secondLastKeywordIndex = keywordPositions[keywordPositions.length - 2];
-  let conjunction = 'Y';
-
-  if (words[lastKeywordIndex][0].toUpperCase() === 'I') {
-      conjunction = 'O';
-  }
-
-  // Insertar la conjunción antes de la última palabra clave
-  words.splice(lastKeywordIndex, 0, conjunction);
+  const last = pos.at(-1);
+  const conj = words[last][0].toUpperCase() === 'I' ? 'O' : 'Y';
+  words.splice(last, 0, conj);
 
   return words.join(' ');
 }
+
+/* ---------- 2.  Donde armas la cadena base ---------- */
+
+useEffect(() => {
+  const newConclusions = conclusions      // ←  **espacio entre títulos**
+        .map(cl => cl.title)
+        .join(' ');
+  setCopyConclusions( formatConclusions(newConclusions) );
+}, [conclusions]);
 
 // Ejemplo de uso
 const formattedConclusions = formatConclusions(copyConclusions);
 
   // Actualizar las conclusiones
   useEffect(() => {
-    const newConclusions = conclusions.map(cl => cl.title).join('');
+    const newConclusions = conclusions.map(cl => cl.title).join(' ');
     const formattedConclusions = formatConclusions(newConclusions);
     setCopyConclusions(formattedConclusions );
 }, [conclusions]);
+
+
 
 useEffect(() => {
   const node = conclusionDivRef.current;
@@ -550,7 +547,10 @@ useEffect(() => {
     fontSize: '12px',
     paddingTop: '8px',
     marginLeft: '10px',
+    paddingRight: '10px',
     zIndex: '1',
+    textAlign: 'justify',      // ← añade esto
+    whiteSpace: 'pre-line', 
      }}
      onInput={(e) => {
        setCopyConclusions(e.currentTarget.innerText);

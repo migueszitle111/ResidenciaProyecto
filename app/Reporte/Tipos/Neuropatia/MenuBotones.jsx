@@ -1048,9 +1048,15 @@ const StepG = ({ handleNextStep, handlePrevStep, setStep }) => {
         REINERVACIÓN
       </h1>
       <div onClick={() => setStep('H')}>
+<<<<<<< HEAD
         <ConclusionButton value=' CON REINERVACIÓN ACTIVA ' title=' REINERVACIÓN ACTIVA; ' displayText={'REINERVACIÓN ACTIVA'}/></div>
       <div onClick={() => setStep('H')}>
         <ConclusionButton value='  REINERVACIÓN ACTIVA ' title=' REINERVACIÓN INACTIVA; ' displayText={'REINERVACIÓN INACTIVA'} /></div>
+=======
+        <ConclusionButton value=' CON REINERVACIÓN ACTIVA ' title='REINERVACIÓN ACTIVA; ' /></div>
+      <div onClick={() => setStep('H')}>
+        <ConclusionButton value='  REINERVACIÓN ACTIVA ' title='REINERVACIÓN INACTIVA; ' /></div>
+>>>>>>> c2b5e1a6ac50da66edb5f821381bcf5278b76b8a
     </div>
   );
 };
@@ -1085,6 +1091,7 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
         PRONÓSTICO
       </h1>
       <div onClick={() => setStep('R')}>
+<<<<<<< HEAD
         <ConclusionButton value='completo' title='PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
       <div onClick={() => setStep('R')}>
         <ConclusionButton value='parcial_funcional' title='PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
@@ -1092,6 +1099,15 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
         <ConclusionButton value='pobre' title='PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('R')}>
         <ConclusionButton value='nulo' title='PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
+=======
+        <ConclusionButton value='completo' title=' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
+      <div onClick={() => setStep('R')}>
+        <ConclusionButton value='parcial_funcional' title=' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
+      <div onClick={() => setStep('R')}>
+        <ConclusionButton value='pobre' title=' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
+      <div onClick={() => setStep('R')}>
+        <ConclusionButton value='nulo' title=' PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
+>>>>>>> c2b5e1a6ac50da66edb5f821381bcf5278b76b8a
       </div>
         
   );
@@ -1301,10 +1317,6 @@ const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) =>
   );
 };
 
-//<ConclusionButton value='ANTEBRAQUIAL_CUTANEO' title=' DE NERVIO ANTEBRAQUIAL CUTÁNEO' displayText='ANTEBRAQUIAL CUTÁNEO' />
-
-// <ConclusionButton value='FEMOROCUTÁNEO_LATERAL' title=' DE NERVIO FEMOROCUTÁNEO LATERAL' displayText='FEMOROCUTÁNEO LATERAL' />
-//<ConclusionButton value='ILIOINGUINAL' title=' DE NERVIO ILIOINGUINAL' displayText='ILIOINGUINAL' />
 
 const StepB12 = ({ handleNextStep, handlePrevStep, setStep }) => {
   const { removeConclusion } = useContext(ReportContext)
@@ -1414,9 +1426,6 @@ const StepCG2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
     </div>
   );
 };
-
-
-
 
 const StepCGI2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
   const { removeConclusion } = useContext(ReportContext)
@@ -1734,7 +1743,6 @@ const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
   );
 };
 
-
 const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
@@ -2008,9 +2016,15 @@ const StepG2 = ({ handleNextStep, handlePrevStep, setStep }) => {
         REINERVACIÓN
       </h1>
       <div onClick={() => setStep('H2')}>
+<<<<<<< HEAD
         <ConclusionButton value=' CON REINERVACIÓN ACTIVA2' title=' REINERVACIÓN ACTIVA; ' displayText={'REINERVACIÓN ACTIVA'}/></div>
       <div onClick={() => setStep('H2')}>
         <ConclusionButton value='  REINERVACIÓN ACTIVA2' title=' REINERVACIÓN INACTIVA; ' displayText={'REINERVACIÓN INACTIVA'}/></div>
+=======
+        <ConclusionButton value=' CON REINERVACIÓN ACTIVA2' title='REINERVACIÓN ACTIVA; ' /></div>
+      <div onClick={() => setStep('H2')}>
+        <ConclusionButton value='  REINERVACIÓN ACTIVA2' title='REINERVACIÓN INACTIVA; ' /></div>
+>>>>>>> c2b5e1a6ac50da66edb5f821381bcf5278b76b8a
     </div>
   );
 };
@@ -2045,6 +2059,7 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         PRONÓSTICO
       </h1>
       <div onClick={() => setStep('I')}>
+<<<<<<< HEAD
         <ConclusionButton value='completo2' title='PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
       <div onClick={() => setStep('I')}>
         <ConclusionButton value='parcial_funcional2' title='PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
@@ -2052,12 +2067,19 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         <ConclusionButton value='pobre2' title='PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('I')}>
         <ConclusionButton value='nulo2' title='PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
+=======
+        <ConclusionButton value='completo2' title=' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
+      <div onClick={() => setStep('I')}>
+        <ConclusionButton value='parcial_funcional2' title=' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
+      <div onClick={() => setStep('I')}>
+        <ConclusionButton value='pobre2' title=' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
+      <div onClick={() => setStep('I')}>
+        <ConclusionButton value='nulo2' title=' PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
+>>>>>>> c2b5e1a6ac50da66edb5f821381bcf5278b76b8a
       </div>
         
   );
 };
-
-
 
 const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs,reportRef}) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
@@ -2160,30 +2182,20 @@ const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclus
             // 1) Quitamos las conclusiones que StepA pudo haber agregado
             removeConclusion(' ');
 
-
             // 2) Regresamos 
             setStep('H')
           }} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
 
-
       <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
-          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button> */}
-
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
         </button>
-
-      
-
       </div>
-
 
        <MenuImagenes  expandedDivs={expandedDivs}
               setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
@@ -2191,9 +2203,6 @@ const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclus
     </div>
   );
 };
-//<ConclusionButton value='ANTEBRAQUIAL_CUTANEO' title=' DE NERVIO ANTEBRAQUIAL CUTÁNEO' displayText='ANTEBRAQUIAL CUTÁNEO' />
 
-// <ConclusionButton value='FEMOROCUTÁNEO_LATERAL' title=' DE NERVIO FEMOROCUTÁNEO LATERAL' displayText='FEMOROCUTÁNEO LATERAL' />
-//<ConclusionButton value='ILIOINGUINAL' title=' DE NERVIO ILIOINGUINAL' displayText='ILIOINGUINAL' />
 export default SimpleMultiStepForm;
 

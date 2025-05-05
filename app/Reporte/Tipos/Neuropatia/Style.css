@@ -418,7 +418,7 @@
 }
 
 body.pdf-exporting .conclusion-container {
-  background-color: #fff !important;   /* fuerza blanco sólo en modo PDF */
+  background-color: #ffffff !important;   /* fuerza blanco sólo en modo PDF */
   margin: 0%;
   border-radius: 0px;
   box-shadow: none !important; /* Elimina la sombra en PDF */

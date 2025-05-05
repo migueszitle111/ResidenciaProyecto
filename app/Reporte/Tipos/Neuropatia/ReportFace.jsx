@@ -161,6 +161,7 @@ const Reporte = () => {
 
 
   function formatConclusions(copyConclusions) {
+
     const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
     const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
     const keywords4 = ["INTENSIDAD LEVE.", "INTENSIDAD MODERADA.", "INTENSIDAD SEVERA."];
@@ -221,7 +222,7 @@ const Reporte = () => {
     // Verificar las palabras clave específicas en keywords4 (INTENSIDAD) y agregar doble salto de línea
     for (let i = 0; i < words.length; i++) {
         if (keywords4.includes(words.slice(i, i + 2).join(' '))) { // Comparar con las palabras clave de 2 palabras
-            words[i + 1] += '\n\n'; // Agregar doble salto de línea después de la palabra clave
+            words[i + 1] += '\n'; // Agregar doble salto de línea después de la palabra clave
         }
     }
 
@@ -264,14 +265,30 @@ const Reporte = () => {
         words.splice(lastKeywordIndex, 0, conjunction);
     }
 
-    // Unir las palabras con espacios
-    let formattedConclusions = words.join(' ');
+     // 1️⃣  Al final de todos los reemplazos junta de nuevo el texto
+  let formattedConclusions = words.join(' ');
 
-    // Eliminar espacio en blanco antes de la palabra 'REINERVACIÓN'
-    formattedConclusions = formattedConclusions.replace(/\sREINERVACIÓN/g, 'REINERVACIÓN');
+  /* ⬇️  NUEVO: sustituir el espacio que precede a “REINERVACIÓN” por dos saltos */
+  formattedConclusions = formattedConclusions.replace(
+    / \bREINERVACIÓN\b/g,          // espacio + palabra
+    '\nREINERVACIÓN'             // doble salto + palabra
+  );
+
+  /* 3️⃣ salto doble DESPUÉS del pronóstico */
+formattedConclusions = formattedConclusions.replace(
+  /(PRONÓSTICO DE RECUPERACIÓN (?:COMPLETA|PARCIAL FUNCIONAL|POBRE NO FUNCIONAL|NULA)\.)\s*/gi,
+  '$1\n\n'                   // “.…\n\n”
+);
+
+/* 4️⃣ salto doble ANTES del siguiente diagnóstico */
+formattedConclusions = formattedConclusions.replace(
+  /([.;])\s*(MONO NEUROPATÍA|POLI NEUROPATÍA|NEURONOPATÍA|RADICULOPATÍA|PLEXOPATÍA)/gi,
+  '$1\n\n$2'                 // “…;\n\nMONO NEUROPATÍA…”
+);
+
 
     // Finalmente, agregar el formato con los saltos de línea a las frases de pronóstico
-    formattedConclusions = copyConclusions;
+    formattedConclusions;
 
     return formattedConclusions;
 }

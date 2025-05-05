@@ -2089,9 +2089,13 @@ const StepH1_i = ({ setStep, selectedImages, handleUndo,handlePrint,topLeftText,
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleExportPdf = async () => {
     try {
+      setIsLoading(true); // ⌛ Mostrar overlay
+
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
     const conclusiones = conclusions;
@@ -2132,7 +2136,19 @@ const StepH1_i = ({ setStep, selectedImages, handleUndo,handlePrint,topLeftText,
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
+    } finally {
+      document.body.style.cursor = 'default';
+      setIsLoading(false); // ✅ Ocultar overlay
     }
+  };
+  if (isLoading) {
+    return (
+      <div className="loading-overlay">
+        <div className="hourglass">
+        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+        </div>
+      </div>
+    );
   };
   return (
     <div>
@@ -2145,10 +2161,6 @@ const StepH1_i = ({ setStep, selectedImages, handleUndo,handlePrint,topLeftText,
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-
-        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
-          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button> */}
 
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
@@ -2165,9 +2177,13 @@ const StepH2_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleExportPdf = async () => {
     try {
+      setIsLoading(true); // ⌛ Mostrar overlay
+
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
     const conclusiones = conclusions;
@@ -2208,7 +2224,19 @@ const StepH2_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
+    } finally {
+      document.body.style.cursor = 'default';
+      setIsLoading(false); // ✅ Ocultar overlay
     }
+  };
+  if (isLoading) {
+    return (
+      <div className="loading-overlay">
+        <div className="hourglass">
+        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+        </div>
+      </div>
+    );
   };
   return (
     <div>
@@ -2221,10 +2249,6 @@ const StepH2_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-
-        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
-          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button> */}
 
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
@@ -2241,9 +2265,11 @@ const StepH3_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleExportPdf = async () => {
     try {
+      setIsLoading(true); // ⌛ Mostrar overlay
        // 1) conclusiones (array con {value, title})
     const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
     const conclusiones = conclusions;
@@ -2284,7 +2310,19 @@ const StepH3_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
+    } finally {
+      document.body.style.cursor = 'default';
+      setIsLoading(false); // ✅ Ocultar overlay
     }
+  };
+  if (isLoading) {
+    return (
+      <div className="loading-overlay">
+        <div className="hourglass">
+        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+        </div>
+      </div>
+    );
   };
   return (
     <div>
@@ -2297,10 +2335,6 @@ const StepH3_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-
-        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
-          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button> */}
 
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />

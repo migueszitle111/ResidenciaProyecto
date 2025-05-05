@@ -1048,15 +1048,9 @@ const StepG = ({ handleNextStep, handlePrevStep, setStep }) => {
         REINERVACIÓN
       </h1>
       <div onClick={() => setStep('H')}>
-<<<<<<< HEAD
         <ConclusionButton value=' CON REINERVACIÓN ACTIVA ' title=' REINERVACIÓN ACTIVA; ' displayText={'REINERVACIÓN ACTIVA'}/></div>
       <div onClick={() => setStep('H')}>
         <ConclusionButton value='  REINERVACIÓN ACTIVA ' title=' REINERVACIÓN INACTIVA; ' displayText={'REINERVACIÓN INACTIVA'} /></div>
-=======
-        <ConclusionButton value=' CON REINERVACIÓN ACTIVA ' title='REINERVACIÓN ACTIVA; ' /></div>
-      <div onClick={() => setStep('H')}>
-        <ConclusionButton value='  REINERVACIÓN ACTIVA ' title='REINERVACIÓN INACTIVA; ' /></div>
->>>>>>> c2b5e1a6ac50da66edb5f821381bcf5278b76b8a
     </div>
   );
 };
@@ -1091,7 +1085,6 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
         PRONÓSTICO
       </h1>
       <div onClick={() => setStep('R')}>
-<<<<<<< HEAD
         <ConclusionButton value='completo' title='PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
       <div onClick={() => setStep('R')}>
         <ConclusionButton value='parcial_funcional' title='PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
@@ -1099,15 +1092,6 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
         <ConclusionButton value='pobre' title='PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('R')}>
         <ConclusionButton value='nulo' title='PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
-=======
-        <ConclusionButton value='completo' title=' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
-      <div onClick={() => setStep('R')}>
-        <ConclusionButton value='parcial_funcional' title=' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
-      <div onClick={() => setStep('R')}>
-        <ConclusionButton value='pobre' title=' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
-      <div onClick={() => setStep('R')}>
-        <ConclusionButton value='nulo' title=' PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
->>>>>>> c2b5e1a6ac50da66edb5f821381bcf5278b76b8a
       </div>
         
   );
@@ -2016,15 +2000,9 @@ const StepG2 = ({ handleNextStep, handlePrevStep, setStep }) => {
         REINERVACIÓN
       </h1>
       <div onClick={() => setStep('H2')}>
-<<<<<<< HEAD
         <ConclusionButton value=' CON REINERVACIÓN ACTIVA2' title=' REINERVACIÓN ACTIVA; ' displayText={'REINERVACIÓN ACTIVA'}/></div>
       <div onClick={() => setStep('H2')}>
         <ConclusionButton value='  REINERVACIÓN ACTIVA2' title=' REINERVACIÓN INACTIVA; ' displayText={'REINERVACIÓN INACTIVA'}/></div>
-=======
-        <ConclusionButton value=' CON REINERVACIÓN ACTIVA2' title='REINERVACIÓN ACTIVA; ' /></div>
-      <div onClick={() => setStep('H2')}>
-        <ConclusionButton value='  REINERVACIÓN ACTIVA2' title='REINERVACIÓN INACTIVA; ' /></div>
->>>>>>> c2b5e1a6ac50da66edb5f821381bcf5278b76b8a
     </div>
   );
 };
@@ -2059,7 +2037,6 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         PRONÓSTICO
       </h1>
       <div onClick={() => setStep('I')}>
-<<<<<<< HEAD
         <ConclusionButton value='completo2' title='PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
       <div onClick={() => setStep('I')}>
         <ConclusionButton value='parcial_funcional2' title='PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
@@ -2067,15 +2044,6 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         <ConclusionButton value='pobre2' title='PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('I')}>
         <ConclusionButton value='nulo2' title='PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
-=======
-        <ConclusionButton value='completo2' title=' PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
-      <div onClick={() => setStep('I')}>
-        <ConclusionButton value='parcial_funcional2' title=' PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
-      <div onClick={() => setStep('I')}>
-        <ConclusionButton value='pobre2' title=' PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
-      <div onClick={() => setStep('I')}>
-        <ConclusionButton value='nulo2' title=' PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
->>>>>>> c2b5e1a6ac50da66edb5f821381bcf5278b76b8a
       </div>
         
   );

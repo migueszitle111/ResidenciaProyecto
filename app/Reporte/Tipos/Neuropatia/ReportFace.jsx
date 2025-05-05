@@ -167,11 +167,18 @@ const Reporte = () => {
     const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL", "L2", "L3", "L4", "L5", "S1", "S2"];
     const specificKeywords = ["C5", "C6", "C7", "C8", "T1"]; // Nueva condición específica
     const prognosisKeywords = [
-        "Y PRONÓSTICO DE RECUPERACIÓN COMPLETA.",
-        "Y PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.",
-        "Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.",
-        "Y PRONÓSTICO DE RECUPERACIÓN NULA."
+        "PRONÓSTICO DE RECUPERACIÓN COMPLETA.",
+        "PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.",
+        "PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.",
+        "PRONÓSTICO DE RECUPERACIÓN NULA."
     ]; // Nuevas palabras clave para el pronóstico
+
+    const keywords5 = ["FOCALIZADA A NIVEL", "FOCAL A NIVEL"];
+
+    // Nueva condición para insertar "MONO" si existe la frase clave
+    if (copyConclusions.includes(keywords5[0])) {
+        copyConclusions = 'MONO ' + copyConclusions;
+    }
 
     let words = copyConclusions.split(' ');
 

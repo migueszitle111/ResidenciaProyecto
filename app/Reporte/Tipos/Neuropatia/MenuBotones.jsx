@@ -165,11 +165,11 @@ const StepA = ({ handleNextStep, setStep }) => (
     <div onClick={handleNextStep}>
     </div>
     <div onClick={() => setStep('B')}>
-      <ConclusionButton value='evolucion_aguda' title='MONO NEUROPATÍA AGUDA' displayText="MONO NEUROPATÍA AGUDA" /></div>
+      <ConclusionButton value='evolucion_aguda' title='NEUROPATÍA AGUDA' displayText="NEUROPATÍA AGUDA" /></div>
     <div onClick={() => setStep('B')}>
-      <ConclusionButton value='evolucion_subaguda' title='MONO NEUROPATÍA SUBAGUDA' displayText="MONO NEUROPATÍA SUBAGUDA" /></div>
+      <ConclusionButton value='evolucion_subaguda' title='NEUROPATÍA SUBAGUDA' displayText="NEUROPATÍA SUBAGUDA" /></div>
     <div onClick={() => setStep('B')}>
-      <ConclusionButton value='evolucion_cronica' title='MONO NEUROPATÍA CRÓNICA ' displayText="MONO NEUROPATÍA CRÓNICA" />
+      <ConclusionButton value='evolucion_cronica' title='NEUROPATÍA CRÓNICA ' displayText="NEUROPATÍA CRÓNICA" />
     </div>
     <div className='my-2 flex justify-end items-center'>
     </div>
@@ -432,7 +432,7 @@ const StepCG = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CDD')}>
         <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D')}>
-        <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
+        <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA ' displayText={'GENERALIZADA'} /></div>
     </div>
   );
 };
@@ -496,7 +496,7 @@ const StepCGI = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CDI')}>
         <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D')}>
-        <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
+        <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA ' displayText={'GENERALIZADA'} /></div>
     </div>
   );
 };
@@ -559,7 +559,7 @@ const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CD')}>
         <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D')}>
-        <ConclusionButton value={`${selectedSide}_IZQgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
+        <ConclusionButton value={`${selectedSide}_IZQgeneralizada`} title=' GENERALIZADA ' displayText={'GENERALIZADA'} /></div>
     </div>
   );
 };
@@ -621,7 +621,7 @@ const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CD')}>
         <ConclusionButton value='segmentaria' title=' SEGMENTARIA A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D')}>
-        <ConclusionButton value={`${selectedSide}_DERgeneralizada`} title=' GENERALIZADA, ' displayText='GENERALIZADA' /></div>
+        <ConclusionButton value={`${selectedSide}_DERgeneralizada`} title=' GENERALIZADA ' displayText='GENERALIZADA' /></div>
 
     </div>
 
@@ -660,7 +660,7 @@ const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => {
 
       </div> <br></br><br></br><br></br><br></br>
       <h1 className=' text-xs font-bold text-white py-40 text-center'>
-        SELECCIONAR EL NIVEL DE LESION CON EL PUNTERO
+        SELECCIONAR EL NIVEL DE LESIÓN CON EL PUNTERO
       </h1>
 
     </div>
@@ -700,7 +700,7 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
 
       </div> <br></br><br></br><br></br><br></br>
       <h1 className=' text-xs font-bold text-white py-40 text-center'>
-        SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO
+        SELECCIONAR EL NIVEL DE LESIÓN DEL LADO DERECHO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D')}>
         
@@ -742,7 +742,7 @@ const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => {
 
       </div> <br></br><br></br><br></br><br></br>
       <h1 className=' text-xs font-bold text-white py-40 text-center'>
-      SELECCIONAR EL NIVEL DE LESION DEL LADO IZQUIERDO CON EL PUNTERO
+      SELECCIONAR EL NIVEL DE LESIÓN DEL LADO IZQUIERDO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D')}>
         
@@ -761,7 +761,7 @@ const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div onClick={() => setStep('E')}>
         <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} /></div>
       <div onClick={() => setStep('F')}>
-        <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN ACTIVA' displayText={'SIN DENERVACIÓN ACTIVA'} /></div>
+        <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN (-)' displayText={'SIN DENERVACIÓN ACTIVA'} /></div>
 
 
     </Accordion>
@@ -826,7 +826,7 @@ const StepD = ({ handlePrevStep, handleNextStep, setStep }) => {
         <div onClick={() => setStep('E')}>
           <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} /></div>
         <div onClick={() => setStep('F')}>
-          <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN ACTIVA' displayText={'SIN DENERVACIÓN ACTIVA'} /></div>
+          <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN (-)' displayText={'SIN DENERVACIÓN'} /></div>
       </Accordion>
       </AccordionContainer>
       <AccordionContainer>
@@ -840,7 +840,7 @@ const StepD = ({ handlePrevStep, handleNextStep, setStep }) => {
         <div onClick={() => setStep('E')}>
           <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} /></div>
         <div onClick={() => setStep('F')}>
-          <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN ACTIVA' displayText={'SIN DENERVACIÓN ACTIVA'} /></div>
+          <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN (-)' displayText={'SIN DENERVACIÓN'} /></div>
       </Accordion>
       </AccordionContainer>
       <AccordionContainer>
@@ -972,11 +972,11 @@ const StepF = ({ handlePrevStep, handleNextStep, setStep }) => {
       </h1>
 
       <div onClick={() => setStep('G')}>
-        <ConclusionButton value=' LEVE (NEUROAPRAXIA)' title='INTENSIDAD LEVE ' displayText={' LEVE'} /></div>
+        <ConclusionButton value=' LEVE (NEUROAPRAXIA)' title='INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
       <div onClick={() => setStep('G')}>
-        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)' title='INTENSIDAD MODERADA ' displayText={' MODERADA '} /></div>
+        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)' title='INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
       <div onClick={() => setStep('G')}>
-        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title='INTENSIDAD SEVERA ' displayText={' SEVERA '} /></div>
+        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title='INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
     </div>
   );
 };
@@ -1011,11 +1011,11 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep }) => {
       </h1>
 
       <div onClick={() => setStep('H')}>
-        <ConclusionButton value=' LEVE (NEUROAPRAXIA)' title='INTENSIDAD LEVE ' displayText={' LEVE'} /></div>
+        <ConclusionButton value=' LEVE (NEUROAPRAXIA)' title='INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
       <div onClick={() => setStep('H')}>
-        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)' title='INTENSIDAD MODERADA ' displayText={' MODERADA '} /></div>
+        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)' title='INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
       <div onClick={() => setStep('H')}>
-        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title='INTENSIDAD SEVERA ' displayText={' SEVERA '} /></div>
+        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title='INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
     </div>
   );
 };
@@ -1048,9 +1048,9 @@ const StepG = ({ handleNextStep, handlePrevStep, setStep }) => {
         REINERVACIÓN
       </h1>
       <div onClick={() => setStep('H')}>
-        <ConclusionButton value=' CON REINERVACIÓN ACTIVA ' title=' CON REINERVACIÓN ACTIVA ' /></div>
+        <ConclusionButton value=' CON REINERVACIÓN ACTIVA ' title=' REINERVACIÓN ACTIVA; ' displayText={'REINERVACIÓN ACTIVA'}/></div>
       <div onClick={() => setStep('H')}>
-        <ConclusionButton value='  REINERVACIÓN ACTIVA ' title=' SIN REINERVACIÓN ACTIVA ' /></div>
+        <ConclusionButton value='  REINERVACIÓN ACTIVA ' title=' REINERVACIÓN INACTIVA; ' displayText={'REINERVACIÓN INACTIVA'} /></div>
     </div>
   );
 };
@@ -1085,13 +1085,13 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
         PRONÓSTICO
       </h1>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='completo' title='Y PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
+        <ConclusionButton value='completo' title='PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='parcial_funcional' title='Y PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
+        <ConclusionButton value='parcial_funcional' title='PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='pobre' title='Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
+        <ConclusionButton value='pobre' title='PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='nulo' title='Y PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
+        <ConclusionButton value='nulo' title='PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
       </div>
         
   );
@@ -1150,11 +1150,11 @@ const StepA2 = ({ handleNextStep, setStep }) => (
     <div onClick={handleNextStep}>
     </div>
     <div onClick={() => setStep('B2')}>
-      <ConclusionButton value='evolucion_aguda2' title='MONO NEUROPATÍA AGUDA' displayText="MONO NEUROPATÍA AGUDA" /></div>
+      <ConclusionButton value='evolucion_aguda2' title='NEUROPATÍA AGUDA' displayText="NEUROPATÍA AGUDA" /></div>
     <div onClick={() => setStep('B2')}>
-      <ConclusionButton value='evolucion_subaguda2' title='MONO NEUROPATÍA SUBAGUDA' displayText="MONO NEUROPATÍA SUBAGUDA" /></div>
+      <ConclusionButton value='evolucion_subaguda2' title='NEUROPATÍA SUBAGUDA' displayText="NEUROPATÍA SUBAGUDA" /></div>
     <div onClick={() => setStep('B2')}>
-      <ConclusionButton value='evolucion_cronica2' title='MONO NEUROPATÍA CRÓNICA ' displayText="MONO NEUROPATÍA CRÓNICA" />
+      <ConclusionButton value='evolucion_cronica2' title='NEUROPATÍA CRÓNICA ' displayText="NEUROPATÍA CRÓNICA" />
     </div>
     <div className='my-2 flex justify-end items-center'>
     </div>
@@ -1410,7 +1410,7 @@ const StepCG2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CDD2')}>
         <ConclusionButton value='segmentaria2' title=' EN SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D2')}>
-        <ConclusionButton value={`${selectedSide}_COMPgeneralizada2`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
+        <ConclusionButton value={`${selectedSide}_COMPgeneralizada2`} title=' GENERALIZADA ' displayText={'GENERALIZADA'} /></div>
     </div>
   );
 };
@@ -1474,7 +1474,7 @@ const StepCGI2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => 
       <div onClick={() => setStep('CDI2')}>
         <ConclusionButton value='segmentaria2' title=' EN SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D2')}>
-        <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
+        <ConclusionButton value={`${selectedSide}_COMPgeneralizada`} title=' GENERALIZADA ' displayText={'GENERALIZADA'} /></div>
     </div>
   );
 };
@@ -1537,7 +1537,7 @@ const StepC2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CD2')}>
         <ConclusionButton value='segmentaria2' title=' EN SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D2')}>
-        <ConclusionButton value={`${selectedSide}_IZQgeneralizada2`} title=' GENERALIZADA, ' displayText={'GENERALIZADA'} /></div>
+        <ConclusionButton value={`${selectedSide}_IZQgeneralizada2`} title=' GENERALIZADA ' displayText={'GENERALIZADA'} /></div>
     </div>
   );
 };
@@ -1599,7 +1599,7 @@ const StepCL2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div onClick={() => setStep('CD2')}>
         <ConclusionButton value='segmentaria2' title=' EN SEGMENTO A NIVEL ' displayText={'SEGMENTARIA'} /></div>
       <div onClick={() => setStep('D2')}>
-        <ConclusionButton value={`${selectedSide}_DERgeneralizada2`} title=' GENERALIZADA, ' displayText='GENERALIZADA' /></div>
+        <ConclusionButton value={`${selectedSide}_DERgeneralizada2`} title=' GENERALIZADA ' displayText='GENERALIZADA' /></div>
 
     </div>
 
@@ -1641,7 +1641,7 @@ const StepCD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
 
       </div> <br></br><br></br><br></br><br></br>
       <h1 className=' text-xs font-bold text-white py-40 text-center'>
-        SELECCIONAR EL NIVEL DE LESION CON EL PUNTERO 
+        SELECCIONAR EL NIVEL DE LESIÓN CON EL PUNTERO 
       </h1>
       <div onClick={() => setStep('D2')}>
         
@@ -1683,7 +1683,7 @@ const StepCDD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
 
       </div> <br></br><br></br><br></br><br></br>
       <h1 className=' text-xs font-bold text-white py-40 text-center'>
-        SELECCIONAR EL NIVEL DE LESION DEL LADO DERECHO CON EL PUNTERO 
+        SELECCIONAR EL NIVEL DE LESIÓN DEL LADO DERECHO CON EL PUNTERO 
       </h1>
       <div onClick={() => setStep('D2')}>
         
@@ -1725,7 +1725,7 @@ const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
 
       </div> <br></br><br></br><br></br><br></br>
       <h1 className=' text-xs font-bold text-white py-40 text-center'>
-      SELECCIONAR EL NIVEL DE LESION DEL LADO IZQUIERDO CON EL PUNTERO
+      SELECCIONAR EL NIVEL DE LESIÓN DEL LADO IZQUIERDO CON EL PUNTERO
       </h1>
       <div onClick={() => setStep('D2')}>
         
@@ -1786,7 +1786,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         <div onClick={() => setStep('E2')}>
           <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)2' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} /></div>
         <div onClick={() => setStep('F2')}>
-          <ConclusionButton value='SIN DENERVACIÓN ACTIVA2' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN ACTIVA' displayText={'SIN DENERVACIÓN ACTIVA'} /></div>
+          <ConclusionButton value='SIN DENERVACIÓN ACTIVA2' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN (-)' displayText={'SIN DENERVACIÓN'} /></div>
       </Accordion>
       </AccordionContainer>
       <AccordionContainer>
@@ -1800,7 +1800,7 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         <div onClick={() => setStep('E2')}>
           <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)2' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} /></div>
         <div onClick={() => setStep('F2')}>
-          <ConclusionButton value='SIN DENERVACIÓN ACTIVA2' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN ACTIVA' displayText={'SIN DENERVACIÓN ACTIVA'} /></div>
+          <ConclusionButton value='SIN DENERVACIÓN ACTIVA2' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN (-)' displayText={'SIN DENERVACIÓN'} /></div>
       </Accordion>
       </AccordionContainer>
       <AccordionContainer>
@@ -1932,11 +1932,11 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep }) => {
       </h1>
 
       <div onClick={() => setStep('G2')}>
-        <ConclusionButton value=' LEVE (NEUROAPRAXIA)2' title='INTENSIDAD LEVE ' displayText={' LEVE'} /></div>
+        <ConclusionButton value=' LEVE (NEUROAPRAXIA)2' title='INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
       <div onClick={() => setStep('G2')}>
-        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)2' title='INTENSIDAD MODERADA ' displayText={' MODERADA '} /></div>
+        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)2' title='INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
       <div onClick={() => setStep('G2')}>
-        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2' title='INTENSIDAD SEVERA ' displayText={' SEVERA '} /></div>
+        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2' title='INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
     </div>
   );
 };
@@ -1971,11 +1971,11 @@ const StepF12 = ({ handlePrevStep, handleNextStep, setStep }) => {
       </h1>
 
       <div onClick={() => setStep('H2')}>
-        <ConclusionButton value=' LEVE (NEUROAPRAXIA)2' title='INTENSIDAD LEVE ' displayText={' LEVE'} /></div>
+        <ConclusionButton value=' LEVE (NEUROAPRAXIA)2' title='INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
       <div onClick={() => setStep('H2')}>
-        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)2' title='INTENSIDAD MODERADA ' displayText={' MODERADA '} /></div>
+        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)2' title='INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
       <div onClick={() => setStep('H2')}>
-        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2' title='INTENSIDAD SEVERA ' displayText={' SEVERA '} /></div>
+        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2' title='INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
     </div>
   );
 };
@@ -2008,9 +2008,9 @@ const StepG2 = ({ handleNextStep, handlePrevStep, setStep }) => {
         REINERVACIÓN
       </h1>
       <div onClick={() => setStep('H2')}>
-        <ConclusionButton value=' CON REINERVACIÓN ACTIVA2' title=' CON REINERVACIÓN ACTIVA ' /></div>
+        <ConclusionButton value=' CON REINERVACIÓN ACTIVA2' title=' REINERVACIÓN ACTIVA; ' displayText={'REINERVACIÓN ACTIVA'}/></div>
       <div onClick={() => setStep('H2')}>
-        <ConclusionButton value='  REINERVACIÓN ACTIVA2' title=' SIN REINERVACIÓN ACTIVA ' /></div>
+        <ConclusionButton value='  REINERVACIÓN ACTIVA2' title=' REINERVACIÓN INACTIVA; ' displayText={'REINERVACIÓN INACTIVA'}/></div>
     </div>
   );
 };
@@ -2045,13 +2045,13 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
         PRONÓSTICO
       </h1>
       <div onClick={() => setStep('I')}>
-        <ConclusionButton value='completo2' title='Y PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
+        <ConclusionButton value='completo2' title='PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
       <div onClick={() => setStep('I')}>
-        <ConclusionButton value='parcial_funcional2' title='Y PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
+        <ConclusionButton value='parcial_funcional2' title='PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
       <div onClick={() => setStep('I')}>
-        <ConclusionButton value='pobre2' title='Y PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
+        <ConclusionButton value='pobre2' title='PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('I')}>
-        <ConclusionButton value='nulo2' title='Y PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
+        <ConclusionButton value='nulo2' title='PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
       </div>
         
   );

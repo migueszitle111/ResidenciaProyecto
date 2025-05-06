@@ -263,7 +263,7 @@ const MenuBotonesPt = () => {
     return (
         <div>
             <div className="BannerTitlepage">
-                <div>Neurolografia</div>
+                <div>Neurografía</div>
             </div>
 
             {/* Botón para ocultar/mostrar menú */}
@@ -285,7 +285,7 @@ const MenuBotonesPt = () => {
             <div className="flex">
                 {menuVisible && (
                     <div className="w-1/5 max-h-full bg-[#3f3c3c] text-white p-4 rounded-2xl">
-                        <h2 className="text-lg mb-4">Neurolografia</h2>
+                        <h2 className="text-lg mb-4">Neurografía</h2>
 
                         {/* Buscador con autocompletado */}
                         <input

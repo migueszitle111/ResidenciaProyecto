@@ -137,7 +137,7 @@ const UlnarMt = () => {
                 {currentImageIndex === 5 && <button className="btnUMt31" onClick={() => handleButtonClick('ABDUCTOR DIGITI MINIMI C8, T1 - (eminencia hipotenar medial).', {  top: '10%', left: '25%' })}></button>}
                 {currentImageIndex === 5 && <button className="btnUMt32" onClick={() => handleButtonClick('.', { top: '10%', left: '25%'})}></button>}
                 {currentImageIndex === 5 && <button className="btnUMt33" onClick={() => handleButtonClick('Articulación metacarpofalángica del quinto dedo.', { top: '10%', left: '25%'})}></button>}
-                {currentImageIndex === 5 && <button className="btnUMt34" onClick={() => handleButtonClick('3', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 5 && <button className="btnUMt34" onClick={() => handleButtonClick('CODO. Estimulación a intervalos de 1 cm a lo largo del trayecto del nervio Ulnar a través del codo. La referencia 0 corresponde a la intersección del olecranon y el epicóndilo medial; los puntos de estimulación distales se designan con un signo negativo y los puntos proximales con un signo positivo o neutral.', { top: '10%', left: '25%'})}></button>}
                 {currentImageIndex === 5 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnar-G-06.png",{ top: '2%', left: '2%' })}></button>}
 
                 {currentImageIndex === 6 && <button className="btnUMt35" onClick={() => handleButtonClick('Dorso de la mano.', { top: '10%', left: '25%'})}></button>}

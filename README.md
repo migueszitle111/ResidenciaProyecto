@@ -24,16 +24,7 @@ Asegúrate de tener Git instalado en tu sistema antes de ejecutar este comando.
 A continuación, asegúrate de tener un archivo `.env` en la raíz del directorio del proyecto con la configuración necesaria.
 
 ```plaintext
-MONGODB_URI=mongodb+srv://adminmed:JoJWYBbbUWYUFowp@medxpro.1xxmjpy.mongodb.net/authapp
-NEXTAUTH_SECRET=asdfaskfjdsafkadssadkf
-NEXTAUTH_URL=http://localhost:3000
 
-### 2.1 nuevo
-
-MONGODB_URI=mongodb+srv://adminmed:residencia2025_3@medxpro.1xxmjpy.mongodb.net/authapp
-NEXTAUTH_SECRET=asdfaskfjdsafkadssadkf
-NEXTAUTH_URL=http://localhost:3000
-```
 ### 3. Realiza la instalación
 
 Finalmente instala el proyecto por medio del comando `npm`, asegurate de tener las mismas versiones de las librerias del proyecto.

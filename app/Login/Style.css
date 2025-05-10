@@ -112,3 +112,26 @@
     transform: translateX(100%);
   }
 }
+
+
+/*/////////////////////////////////////////////*/
+
+/* Ajustes para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .form__field_login {
+    width: 100%; /* Ajusta el ancho al 90% del contenedor */
+    height: 50px; /* Reduce la altura para pantallas pequeñas */
+    font-size: 1.1rem; /* Ajusta el tamaño de fuente */
+    padding: 20px; /* Reduce el padding */
+  }
+
+  .alertb, .alertg {
+    max-width: 90%; /* Ajusta el ancho de las alertas */
+    margin-left: auto; /* Centra horizontalmente */
+    margin-right: auto;
+  }
+
+  .alertb .msg, .alertg .msg {
+    font-size: 16px; /* Reduce el tamaño de fuente en las alertas */
+  }
+}

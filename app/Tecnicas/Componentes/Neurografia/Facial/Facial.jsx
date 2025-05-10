@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; /*Se agrega useEffect*/
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "../Facial/Facial.css";
@@ -15,6 +15,8 @@ const Facial = () => {
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+
+    const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
     const images = [
         {
@@ -38,6 +40,24 @@ const Facial = () => {
             thumbnail: "/assets/ValoresImg/Cervicales/05-Facial.png",
         },
     ];
+
+    // Detecta el cambio de orientación
+    useEffect(() => {
+        const handleOrientationChange = () => {
+            if (window.innerHeight < window.innerWidth) {
+                setIsLandscape(true);  // En modo horizontal
+            } else {
+                setIsLandscape(false);  // En modo vertical
+            }
+        };
+
+        window.addEventListener('resize', handleOrientationChange);
+        
+        // Limpiar el evento al desmontar el componente
+        return () => {
+            window.removeEventListener('resize', handleOrientationChange);
+        };
+    }, []);
 
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
@@ -71,6 +91,15 @@ const Facial = () => {
     return (
         
         <div  className=" py-20 gallery-container">
+
+            {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
+           {!isLandscape && (
+                <div className="orientation-message">
+                    <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
+                    <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
+                </div>
+            )}
+            
         <ImageGallery items={images}
             onSlide={handleSlide}
             showFullscreenButton={false}

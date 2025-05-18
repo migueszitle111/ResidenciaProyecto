@@ -1,6 +1,25 @@
+"use client";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const Footer = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const handleProtectedClick = (route) => {
+    if (!session) {
+      const confirmLogin = window.confirm(
+        "Debes iniciar sesión para acceder. ¿Quieres iniciar sesión ahora?"
+      );
+      if (confirmLogin) {
+        router.push("/Login");
+      }
+    } else {
+      router.push(route);
+    }
+  };
+
   return (
     <footer className="bg-[#000000] text-white text-xs py-4 px-4 shadow-md z-10 flex flex-col lg:flex-row justify-between items-center">
       {/* Imagen y link */}
@@ -19,60 +38,58 @@ const Footer = () => {
           >
             Inicio
           </a>
-          <a
-            href="/Educacion"
+          <button
+            onClick={() => handleProtectedClick("/Educacion")}
             className="text-gray-700 inline-block ml-4 hover:border-b hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"
           >
             Educación
-          </a>
-          <a
-            href="/Reporte"
+          </button>
+          <button
+            onClick={() => handleProtectedClick("/Reporte")}
             className="text-gray-700 inline-block ml-4 hover:border-b hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"
           >
             Reporte
-          </a>
-          <a
-            href="/Evento"
+          </button>
+          <button
+            onClick={() => handleProtectedClick("/Evento")}
             className="text-gray-700 inline-block ml-4 hover:border-b hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"
           >
-            Evento
-          </a>
+            Eventos
+          </button>
         </div>
       </div>
 
-      {/*Redes sociales */}
-<div className="flex justify-center items-center h-16 w-32 lg:mt-0 lg:ml-2">
-  {/* Facebook */}
-  <a
-    href="https://www.facebook.com/profile.php?id=61572613422746"
-    className="text-gray-500 hover:text-orange-600"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <svg
-      className="h-5 w-5"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        fillRule="evenodd"
-        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797
-        c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443
-        2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-        clipRule="evenodd"
-      ></path>
-    </svg>
-  </a>
-
-  {/* Instagram */}
-  <a
-    href="https://www.instagram.com/medxproapp/"
-    className="text-gray-500 hover:text-orange-600 ml-4"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <svg
+      {/* Redes sociales */}
+      <div className="flex justify-center items-center h-16 w-32 lg:mt-0 lg:ml-2">
+        <a
+          href="https://www.facebook.com/profile.php?id=61572613422746"
+          className="text-gray-500 hover:text-orange-600"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {/* Facebook Icon */}
+          <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              fillRule="evenodd"
+              d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 
+              9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 
+              3.777-3.89 1.094 0 2.238.195 
+              2.238.195v2.46h-1.26c-1.243 
+              0-1.63.771-1.63 1.562V12h2.773l-.443 
+              2.89h-2.33v6.988C18.343 
+              21.128 22 16.991 22 12z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </a>
+        <a
+          href="https://www.instagram.com/medxproapp/"
+          className="text-gray-500 hover:text-orange-600 ml-4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {/* Instagram Icon */}
+          <svg
       className="w-5 h-5"
       fill="currentColor"
       viewBox="0 0 24 24"
@@ -97,12 +114,11 @@ const Footer = () => {
         clipRule="evenodd"
       ></path>
     </svg>
-  </a>
-</div>
-
+        </a>
+      </div>
 
       {/* Términos y condiciones */}
-      <div className="flex justify-center items-center gap-4  lg:mt-0">
+      <div className="flex justify-center items-center gap-4 lg:mt-0">
         <a
           href="#"
           className="text-gray-700 hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"

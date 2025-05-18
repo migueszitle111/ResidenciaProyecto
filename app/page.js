@@ -13,24 +13,26 @@ import LandingPage from "./components/LandingPage";
 const Home = () => {
   const { data: session } = useSession();
 
-  // Solo cliente
   const [isClient, setIsClient] = useState(false);
-  // Controla visualización del loader
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     setIsClient(true);
-    // Después de 1 segundo, oculta el loader
-    const t = setTimeout(() => {
-      setShowLoader(false);
-    }, 3000);
-    return () => clearTimeout(t);
-  }, []);
+
+    if (!session) {
+      const t = setTimeout(() => {
+        setShowLoader(false);
+      }, 3000); // Solo muestra loader si no hay sesión
+      return () => clearTimeout(t);
+    } else {
+      setShowLoader(false); // Oculta inmediatamente si hay sesión
+    }
+  }, [session]);
 
   if (!isClient) return null;
 
-  // 🚀 Loader fijo de 1 segundo
-  if (showLoader) {
+  // 🚀 Mostrar video solo si NO hay sesión
+  if (showLoader && !session) {
     return (
       <>
         <HeadComponents />
@@ -47,7 +49,6 @@ const Home = () => {
     );
   }
 
-  // 🚀 Aquí va el contenido real de tu app
   const isAdmin = session?.user?.roles === "admin";
 
   return (

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"; /*SE AGREGO useEffect*/
 import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css"
 import "../CutaneoL/CutaneoL.css"
@@ -16,6 +16,8 @@ const CutaneoL = () => {
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
 
+    const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
+
     const images = [
         {
             original: "/assets/ValoresImg/MiembrosSp/01-CutaneoL.png",
@@ -24,6 +26,24 @@ const CutaneoL = () => {
         },
 
     ];
+
+    // Detecta el cambio de orientación
+    useEffect(() => {
+        const handleOrientationChange = () => {
+            if (window.innerHeight < window.innerWidth) {
+                setIsLandscape(true);  // En modo horizontal
+            } else {
+                setIsLandscape(false);  // En modo vertical
+            }
+        };
+
+        window.addEventListener('resize', handleOrientationChange);
+        
+        // Limpiar el evento al desmontar el componente
+        return () => {
+            window.removeEventListener('resize', handleOrientationChange);
+        };
+    }, []);
 
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
@@ -55,6 +75,15 @@ const CutaneoL = () => {
     return (
         
         <div  className=" py-20 gallery-container">
+
+             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
+           {!isLandscape && (
+                <div className="orientation-message">
+                    <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
+                    <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
+                </div>
+            )}
+            
         <ImageGallery items={images}
             onSlide={handleSlide}
             showFullscreenButton={false}

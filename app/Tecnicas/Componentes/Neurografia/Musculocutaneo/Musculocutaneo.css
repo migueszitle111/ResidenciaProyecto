@@ -198,3 +198,26 @@
     transform-origin: top left; /* Expande hacia la derecha y hacia abajo */
 }
 
+/*DISENO DE MENSAJE DE PONER EL CELULAR EN HORIZONTAL*/
+
+.orientation-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    flex-direction: column; /* Apilar elementos verticalmente */
+    justify-content: center;   /* Centrado vertical */
+    align-items: center;       /* Centrado horizontal */
+    font-size: 20px;
+    z-index: 9999;
+    text-align: center;        /* Asegura que el texto esté centrado */
+}
+
+.rotate-gif {
+    width: 160px; /* Ajusta el tamaño del GIF */
+    margin-bottom: 15px; /* Espacio entre el GIF y el texto */
+}

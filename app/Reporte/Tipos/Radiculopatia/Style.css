@@ -525,3 +525,48 @@ color: white;
   animation: rotate 4s linear infinite;
 
 }
+
+/*############################## Ajutes para tamaños de pantallas #######################################################*/
+
+@media screen and (max-width: 768px) and (orientation: portrait) { /*Celular orientacion Vertical*/
+  .info-container textarea {
+      font-size: 11px; /* Ajusta según necesites */
+  }
+}
+
+
+@media screen and (max-width: 768px) and (orientation: landscape) {/* Celular orientacion Horizontal*/
+  .info-container textarea {
+      font-size: 13px; /* Tamaño en horizontal */
+  }
+}
+
+/* Ajustes para dispositivos pequeños (móviles) Vertical */
+@media (max-width: 768px) {
+  .head {
+    flex-direction: column;
+    padding-top: 1vh;
+    gap: 2vh;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    gap: 10px;
+    padding: 2vh;
+  }
+
+  .vertical-container {
+    width: 22.5rem;
+    margin: 0.7vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 30.2vh; /* Tamaño inicial mínimo en altura */
+    height: auto;       /* Permite que la altura se ajuste al contenido */
+  }
+  
+  .info-container {
+    width: 100%;
+    justify-content: center;
+    margin-left: -1px;
+  }
+}

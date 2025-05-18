@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; /*SE AGREGO useEffect*/
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "../UlnarMt/UlnarMt.css";
@@ -15,6 +15,8 @@ const UlnarMt = () => {
     const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+
+    const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
     const images = [
         {
@@ -48,6 +50,24 @@ const UlnarMt = () => {
         },
     ];
 
+    // Detecta el cambio de orientación
+    useEffect(() => {
+        const handleOrientationChange = () => {
+            if (window.innerHeight < window.innerWidth) {
+                setIsLandscape(true);  // En modo horizontal
+            } else {
+                setIsLandscape(false);  // En modo vertical
+            }
+        };
+
+        window.addEventListener('resize', handleOrientationChange);
+        
+        // Limpiar el evento al desmontar el componente
+        return () => {
+            window.removeEventListener('resize', handleOrientationChange);
+        };
+    }, []);
+
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
@@ -79,6 +99,15 @@ const UlnarMt = () => {
     return (
         
         <div  className=" py-20 gallery-container">
+
+             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
+           {!isLandscape && (
+                <div className="orientation-message">
+                    <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
+                    <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
+                </div>
+            )}
+            
         <ImageGallery items={images}
             onSlide={handleSlide}
             showFullscreenButton={false}
@@ -137,7 +166,7 @@ const UlnarMt = () => {
                 {currentImageIndex === 5 && <button className="btnUMt31" onClick={() => handleButtonClick('ABDUCTOR DIGITI MINIMI C8, T1 - (eminencia hipotenar medial).', {  top: '10%', left: '25%' })}></button>}
                 {currentImageIndex === 5 && <button className="btnUMt32" onClick={() => handleButtonClick('.', { top: '10%', left: '25%'})}></button>}
                 {currentImageIndex === 5 && <button className="btnUMt33" onClick={() => handleButtonClick('Articulación metacarpofalángica del quinto dedo.', { top: '10%', left: '25%'})}></button>}
-                {currentImageIndex === 5 && <button className="btnUMt34" onClick={() => handleButtonClick('3', { top: '10%', left: '25%'})}></button>}
+                {currentImageIndex === 5 && <button className="btnUMt34" onClick={() => handleButtonClick('CODO. Estimulación a intervalos de 1 cm a lo largo del trayecto del nervio Ulnar a través del codo. La referencia 0 corresponde a la intersección del olecranon y el epicóndilo medial; los puntos de estimulación distales se designan con un signo negativo y los puntos proximales con un signo positivo o neutral.', { top: '10%', left: '25%'})}></button>}
                 {currentImageIndex === 5 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/ulnar-G-06.png",{ top: '2%', left: '2%' })}></button>}
 
                 {currentImageIndex === 6 && <button className="btnUMt35" onClick={() => handleButtonClick('Dorso de la mano.', { top: '10%', left: '25%'})}></button>}

@@ -19,3 +19,35 @@
 background-color: #c44900;
 color: white;
 }
+
+/*############################## Ajutes para tamaños de pantallas #######################################################*/
+    
+/* Ajustes para dispositivos pequeños (móviles) Vertical */
+@media (max-width: 768px) {
+    .w-4\/5 {
+        width: 100%;
+    }
+
+    .w-1\/5 {
+        width: 100%;
+        height: fit-content;
+    }
+}
+
+@media screen and (max-width: 915px) and  (orientation: landscape) {/* Celular orientacion Horizontal*/
+    .w-1\/5 {
+        width: 25%;
+        margin-left: 10px;
+        height: fit-content;
+    }
+
+    /*.w-4\/5 {
+    }
+
+    .gallery-container {
+    }*/
+
+    .flex {
+        justify-content: center;
+    }
+}

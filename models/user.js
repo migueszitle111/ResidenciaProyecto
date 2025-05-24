@@ -1,50 +1,27 @@
-// Importa mongoose y Schema de mongoose
-import mongoose, { Schema, models } from "mongoose";
+// app/models/user.js
+import mongoose, { Schema, model, models } from "mongoose";
 
-// Define el esquema del usuario
 const userSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    lastname: {
-        type: String,
-        required: true,
-    },
-    cedula: {
-        type: String,
-        required: true,
-    },
-    especialidad: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    roles: {
-        type: String,
-        enum: ['user', 'admin'],
-        default: 'user',
-    },
+  name:                { type: String, required: true },
+  lastname:            { type: String, required: true },
+  cedula:              { type: String, required: true },
+  especialidad:        { type: String, required: true },
+  email:               { type: String, required: true, unique: true },
 
-    imageUrl: {
-        type: String,
-        required: false,
-    },
-    
-},
-    { timestamps: true } // Registra la fecha de creación y modificación
-);
+  // Para cuentas Google no hay contraseña obligatoria
+  password:            { type: String },
 
+  roles:               { type: String, enum: ["user", "admin"], default: "user" },
+  imageUrl:            { type: String },
 
-const User = models.User || mongoose.model("User", userSchema);  // Define el modelo "User" si no existe o reutiliza el existente
+  // Nuevo para controlar OAuth y suscripción
+  provider:            { type: String, enum: ["credentials", "google"], default: "credentials" },
+  subscriptionActive:  { type: Boolean, default: false },
+}, {
+  timestamps: true
+});
 
+// Evita recompilar el modelo si ya existe (en hot-reload de Next.js)
+const User = models.User || model("User", userSchema);
 
 export default User;

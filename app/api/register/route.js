@@ -1,3 +1,4 @@
+// /app/api/register/route.js
 // Importa la función connectMongoDB desde el módulo de MongoDB
 import { connectMongoDB } from "@/lib/mongodb";
 // Importa el modelo User para interactuar con la base de datos

@@ -1,4 +1,4 @@
-//app/stripe/route.js
+//app/stripe/webhook/route.js
 import Stripe       from "stripe";
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "@/lib/mongodb";

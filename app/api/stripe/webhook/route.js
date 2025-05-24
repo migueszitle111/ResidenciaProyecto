@@ -18,13 +18,13 @@ export async function POST(req) {
   const sig = req.headers.get("stripe-signature");
   console.log("🔔 [Webhook] signature:", sig);
 
-  // Lee el body crudo para verificar la firma
-  const buf = await req.arrayBuffer();
+  // Obtén el body CRUDO como texto para verificar firma correctamente
+  const rawBody = await req.text();
 
   let event;
   try {
     event = stripe.webhooks.constructEvent(
-      buf,
+      rawBody,
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
@@ -37,7 +37,7 @@ export async function POST(req) {
     );
   }
 
-  // Solo nos importa el evento de pago completado
+  // Procesa solo el pago completado
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
     console.log("📥 [Webhook] checkout.session.completed:", session);
@@ -51,7 +51,7 @@ export async function POST(req) {
     console.log("🔍 [Webhook] encontrado user:", user);
 
     if (user) {
-      // Si ya existe, marca su suscripción como activa
+      // Si ya existe, marca su suscripción activa
       user.subscriptionActive = true;
       await user.save();
       console.log(
@@ -59,14 +59,14 @@ export async function POST(req) {
         user.email
       );
     } else {
-      // Si no existe, créalo (usuario de Google via Stripe)
+      // Si no existe, créalo como usuario Google
       const newUser = await User.create({
         name: session.customer_details?.name || "",
         lastname: "",
         cedula: "",
         especialidad: "",
         email: session.customer_email,
-        password: "", // Sin contraseña para OAuth
+        password: "",
         roles: "user",
         provider: "google",
         subscriptionActive: true,

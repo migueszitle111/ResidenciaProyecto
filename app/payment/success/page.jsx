@@ -6,10 +6,20 @@ import { signIn } from "next-auth/react";
 import { motion } from "framer-motion";
 
 export default function SuccessPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
   useEffect(() => {
-    // Auto-iniciar sesión con Google y redirigir a home
-    signIn("google", { callbackUrl: "/" });
-  }, []);
+    if (status === "loading") return;
+
+    if (status === "authenticated") {
+      // Ya autentificado, redirige al inicio
+      router.replace("/");
+    } else if (status === "unauthenticated") {
+      // Intenta login silencioso sin selector de cuenta
+      signIn("google", { callbackUrl: "/", prompt: "none" });
+    }
+  }, [status, router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black to-gray-900 p-4">
@@ -28,6 +38,14 @@ export default function SuccessPage() {
         <p className="text-white mb-6">
           Redirigiéndote a la plataforma...
         </p>
+        {status === "unauthenticated" && (
+          <button
+            onClick={() => signIn("google", { callbackUrl: "/" })}
+            className="mt-4 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full"
+          >
+            Haz clic aquí para iniciar sesión
+          </button>
+        )}
       </motion.div>
     </div>
   );

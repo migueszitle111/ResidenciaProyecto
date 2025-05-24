@@ -1,4 +1,4 @@
-// app/payment/success/page.jsx
+// ===== File: app/payment/success/page.jsx =====
 "use client";
 
 import { useEffect } from "react";
@@ -7,16 +7,15 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 export default function SuccessPage() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "loading") return;
-
-    if (status === "authenticated") {
-      router.replace("/");
-    } else if (status === "unauthenticated") {
-      signIn("google", { callbackUrl: "/", prompt: "none" });
+    if (status === 'loading') return;
+    if (status === 'authenticated') {
+      router.replace('/');
+    } else {
+      signIn('google', { callbackUrl: '/', prompt: 'none' });
     }
   }, [status, router]);
 
@@ -31,20 +30,7 @@ export default function SuccessPage() {
         <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600 mb-4">
           ¡Bienvenido a MedxProapp!
         </h1>
-        <p className="text-white mb-2">
-          Tu suscripción se ha activado con éxito.
-        </p>
-        <p className="text-white mb-6">
-          Redirigiéndote a la plataforma...
-        </p>
-        {status === "unauthenticated" && (
-          <button
-            onClick={() => signIn("google", { callbackUrl: "/" })}
-            className="mt-4 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full"
-          >
-            Haz clic aquí para iniciar sesión
-          </button>
-        )}
+        <p className="text-white mb-6">Redirigiéndote a la plataforma...</p>
       </motion.div>
     </div>
   );

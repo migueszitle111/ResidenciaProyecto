@@ -1,14 +1,13 @@
-//app/api/auth/[...nextauth]/route.js
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider      from "next-auth/providers/google";
-import bcrypt              from "bcryptjs";
-import Stripe              from "stripe";
+import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcryptjs";
+import Stripe from "stripe";
 
 import { connectMongoDB } from "@/lib/mongodb";
-import User               from "@/models/user";
+import User from "@/models/user";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion:"2023-10-16" });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
 
 export const authOptions = {
   providers: [
@@ -20,24 +19,23 @@ export const authOptions = {
         const user = await User.findOne({ email: credentials.email });
         if (!user) return null;
 
-        // Si no ha pagado, bloquea el acceso
-        if (!user.subscriptionActive) {
+        // Solo bloquea pagos pendientes para users de Google
+        if (user.provider === "google" && !user.subscriptionActive) {
           throw new Error("NEED_PAYMENT");
         }
 
-        const match = await bcrypt.compare(credentials.password, user.password);
-        if (!match) return null;
+        // Comprueba contraseña solo para provider="credentials"
+        if (user.provider === "credentials") {
+          const match = await bcrypt.compare(credentials.password, user.password);
+          if (!match) return null;
+        }
 
-        return {
-          email: user.email,
-          name:  user.name,
-          roles: user.roles,
-        };
+        return { email: user.email, name: user.name, roles: user.roles };
       },
     }),
 
     GoogleProvider({
-      clientId:     process.env.GOOGLE_ID,
+      clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
       authorization: { params: { prompt: "select_account" } },
     }),
@@ -46,31 +44,20 @@ export const authOptions = {
   session: { strategy: "jwt" },
 
   callbacks: {
-    /** 1) Intercepta Google: si ya existe y pagó, deja pasar;
-     *   si existe y no pagó, redirige a Stripe; si no existe, 
-     *   crea registro tras el pago en el webhook. */
     async signIn({ user, account }) {
-      if (account.provider !== "google") 
-        return true;
-
+      if (account.provider !== "google") return true;
+      // Si viene de Google, comprueba pago o lanza Stripe Checkout
       await connectMongoDB();
       const dbUser = await User.findOne({ email: user.email });
+      if (dbUser?.subscriptionActive) return true;
 
-      if (dbUser?.subscriptionActive) {
-        // Ya pagó → deja pasar
-        return true;
-      }
-
-      // Nunca estuvo en tu BD o no ha pagado → crea Checkout Session
       const checkout = await stripe.checkout.sessions.create({
-        mode:          "subscription",
-        line_items:    [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-        customer_email:user.email,
+        mode: 'subscription',
+        line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+        customer_email: user.email,
         success_url: `${process.env.NEXTAUTH_URL}/payment/success`,
-        cancel_url:    process.env.NEXTAUTH_URL,
+        cancel_url: process.env.NEXTAUTH_URL,
       });
-
-      // NextAuth redirige automáticamente a checkout.url
       return checkout.url;
     },
 
@@ -89,7 +76,7 @@ export const authOptions = {
 
   pages: {
     signIn: "/",
-    error:  "/Login?error=NEED_PAYMENT",
+    error: "/Login?error=NEED_PAYMENT",
   },
 
   secret: process.env.NEXTAUTH_SECRET,

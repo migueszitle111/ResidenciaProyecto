@@ -1,13 +1,14 @@
-//app/api/stripe/webhook/route.js
-import Stripe          from "stripe";
+// ===== File: app/api/stripe/webhook/route.js =====
+import Stripe from "stripe";
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "@/lib/mongodb";
-import User            from "@/models/user";
+import User from "@/models/user";
 
 export const runtime = "nodejs";
 
 export async function POST(req) {
   console.log("🔔 [Webhook] llamada recibida");
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
   const sig = req.headers.get("stripe-signature");
   console.log("🔔 [Webhook] signature:", sig);
 
@@ -37,15 +38,15 @@ export async function POST(req) {
       console.log("✅ [Webhook] subscriptionActive actualizado para:", user.email);
     } else {
       const newUser = await User.create({
-        name:                session.customer_details?.name || "",
-        lastname:            "",
-        cedula:              "",
-        especialidad:        "",
-        email:               session.customer_email,
-        password:            "",
-        roles:               "user",
-        provider:           "google",
-        subscriptionActive:  true,
+        name: session.customer_details?.name || "",
+        lastname: "",
+        cedula: "",
+        especialidad: "",
+        email: session.customer_email,
+        password: "",
+        roles: "user",
+        provider: "google",
+        subscriptionActive: true,
       });
       console.log("✅ [Webhook] creado nuevo user:", newUser);
     }

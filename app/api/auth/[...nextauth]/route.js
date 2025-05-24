@@ -1,3 +1,4 @@
+//app/api/auth/[...nextauth]/route.js
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider      from "next-auth/providers/google";
@@ -65,7 +66,7 @@ export const authOptions = {
         mode:          "subscription",
         line_items:    [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
         customer_email:user.email,
-        success_url:   `${process.env.NEXTAUTH_URL}/payment/success`,
+        success_url:   `${process.env.NEXTAUTH_URL}/success`,
         cancel_url:    process.env.NEXTAUTH_URL,
       });
 

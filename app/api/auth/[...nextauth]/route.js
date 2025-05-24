@@ -66,7 +66,7 @@ export const authOptions = {
         mode:          "subscription",
         line_items:    [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
         customer_email:user.email,
-        success_url:   `${process.env.NEXTAUTH_URL}/success`,
+        success_url: `${process.env.NEXTAUTH_URL}/payment/success`,
         cancel_url:    process.env.NEXTAUTH_URL,
       });
 

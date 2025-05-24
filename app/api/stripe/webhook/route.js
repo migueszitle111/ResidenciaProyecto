@@ -19,6 +19,8 @@ export async function POST(req) {
   }
 
   if (event.type === "checkout.session.completed") {
+      console.log("📥 Stripe webhook recibido:", session);
+
     const session = event.data.object;
     await connectMongoDB();
 

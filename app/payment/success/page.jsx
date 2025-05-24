@@ -1,4 +1,4 @@
-// app/success/page.jsx
+// app/payment/success/page.jsx
 "use client";
 
 import { useEffect } from "react";

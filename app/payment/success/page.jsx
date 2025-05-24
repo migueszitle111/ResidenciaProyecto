@@ -2,7 +2,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { signIn } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 export default function SuccessPage() {
@@ -13,10 +14,8 @@ export default function SuccessPage() {
     if (status === "loading") return;
 
     if (status === "authenticated") {
-      // Ya autentificado, redirige al inicio
       router.replace("/");
     } else if (status === "unauthenticated") {
-      // Intenta login silencioso sin selector de cuenta
       signIn("google", { callbackUrl: "/", prompt: "none" });
     }
   }, [status, router]);

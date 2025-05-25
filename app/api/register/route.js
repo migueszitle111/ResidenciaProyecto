@@ -5,7 +5,9 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
 export async function POST(req) {
-  const { name, lastname, cedula, especialidad, email, password, roles, imageUrl } = await req.json();
+  const { name, lastname, cedula, especialidad, email, password, roles, imageUrl } =
+    await req.json();
+
   const hashedPassword = await bcrypt.hash(password, 10);
   await connectMongoDB();
   await User.create({
@@ -18,7 +20,11 @@ export async function POST(req) {
     roles,
     imageUrl,
     provider: "credentials",
-    subscriptionActive: true,  // marcamos activo desde registro
+    subscriptionActive: true, // activo al registrarse
   });
-  return NextResponse.json({ message: "Usuario creado correctamente" }, { status: 201 });
+
+  return NextResponse.json(
+    { message: "Usuario creado correctamente" },
+    { status: 201 }
+  );
 }

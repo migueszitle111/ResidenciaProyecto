@@ -19,28 +19,20 @@ export const authOptions = {
       name: "Credentials",
       credentials: {},
       async authorize(credentials) {
-        // Conecta a MongoDB
         await connectMongoDB();
         const user = await User.findOne({ email: credentials.email });
         if (!user) return null;
 
-        // Si es usuario Google, comprueba que haya pagado
+        // Si vino por Google y no ha pagado, bloquea
         if (user.provider === "google" && !user.subscriptionActive) {
           throw new Error("NEED_PAYMENT");
         }
-
-        // Si es credencial normal, valida la contraseña
+        // Si vino por credentials, valida contraseña
         if (user.provider === "credentials") {
           const match = await bcrypt.compare(credentials.password, user.password);
           if (!match) return null;
         }
-
-        // Devuelve los datos necesarios para el token
-        return {
-          email: user.email,
-          name: user.name,
-          roles: user.roles,
-        };
+        return { email: user.email, name: user.name, roles: user.roles };
       },
     }),
 
@@ -54,38 +46,31 @@ export const authOptions = {
   session: { strategy: "jwt" },
 
   callbacks: {
-    // Intercepta el login de Google para lanzar Stripe Checkout si hace falta
+    // Al hacer signIn con Google, si no ha pagado lanza Checkout
     async signIn({ user, account }) {
-      if (account.provider !== "google") {
-        return true;
-      }
+      if (account.provider !== "google") return true;
 
-      // Conecta a MongoDB y comprueba si ya existe y pagó
       await connectMongoDB();
       const dbUser = await User.findOne({ email: user.email });
-      if (dbUser?.subscriptionActive) {
-        return true;
-      }
+      // Si ya pagó, pasa
+      if (dbUser?.subscriptionActive) return true;
 
-      // Si no pagó aún, inicia Checkout
+      // Si no, crea sesión de Checkout
       const checkout = await stripe.checkout.sessions.create({
         mode: "subscription",
         line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
         customer_email: user.email,
-        success_url: `${process.env.NEXTAUTH_URL}/payment/success`,
+        success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: process.env.NEXTAUTH_URL,
       });
-      // NextAuth redirige automáticamente a checkout.url
       return checkout.url;
     },
 
-    // Adjunta user al JWT
     async jwt({ token, user }) {
       if (user) token.user = user;
       return token;
     },
 
-    // Adjunta toda la info del user a la sesión
     async session({ session, token }) {
       await connectMongoDB();
       const dbUser = await User.findOne({ email: token.user.email });
@@ -94,7 +79,6 @@ export const authOptions = {
     },
   },
 
-  // Páginas personalizadas
   pages: {
     signIn: "/",
     error: "/Login?error=NEED_PAYMENT",

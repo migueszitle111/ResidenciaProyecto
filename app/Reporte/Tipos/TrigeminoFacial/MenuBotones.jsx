@@ -63,7 +63,7 @@ const StepA = ({ handleNextStep ,setStep}) => (
   <div>
     <div className='button-bar'>
       <button className="print-button dont-print">
-        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <img src="" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>
     <h1 className="text-xl font-bold text-white">VÍA TRIGÉMINO-FACIAL</h1>

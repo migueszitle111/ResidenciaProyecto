@@ -117,8 +117,8 @@ const StepA = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelectedSi
     <div className='button-bar'>
       <button onClick={() => setStep('A')} id='prev' className={`print-button dont-print `}>
       </button>
-      <button onClick={() => setStep('BD')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+      <button  id='next' className={`print-button dont-print `}>
+        <img src="" style={{filter: 'invert(0.5)'}} />
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>VÍA SOMATOSENSORIAL </h1>
@@ -254,17 +254,21 @@ const StepB1 = ({ handlePrevStep, handleNextStep, setStep ,selectedSide}) => {
        removeConclusion('bilateral_trigemino')
        removeConclusion('tri')
 
-        
+
         setStep('A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button className="print-button dont-print">
-        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">SUPERIORES </h1>
     <div onClick={() => setStep('F4')}>
-      <ConclusionButton value="superior_indemne" title="VÍA SOMATOSENSORIAL CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />   
+      <ConclusionButton value="superior_indemne" title="VÍA SOMATOSENSORIAL CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />
     </div>
     <div onClick={() => setStep('C1')}>
       <ConclusionButton value="superior_alterada" title="VÍA SOMATOSENSORIAL CON DEFECTO" displayText="ALTERADA " />
@@ -288,9 +292,13 @@ const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => {
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
 
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">FISIOPATOLOGÍA</h1>
     <div onClick={() => setStep('D1')}>
@@ -323,9 +331,13 @@ const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
         setStep('C1')} }className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('E1')}>
@@ -350,9 +362,13 @@ const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) =>{
         setStep('C1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('E2')}>
@@ -369,7 +385,7 @@ const StepE1 = ({ handlePrevStep, handleNextStep, setStep }) => {
   return(
   <div>
     <div className='button-bar'>
-      <button onClick={() =>{ 
+      <button onClick={() =>{
          removeConclusion('perdida_axonal_secundaria')
          removeConclusion('dermatomas_izquierdo')
          removeConclusion('dermatomas_derecho')
@@ -401,7 +417,7 @@ const StepE2 = ({ handlePrevStep, handleNextStep, setStep }) =>{
         setStep('D2')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      
+
       <button onClick={() => setStep('F2')} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -434,11 +450,11 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         removeConclusion('derecho_trigeminoalterada')
         removeConclusion('bilateral_trigeminoalterada')
         removeConclusion('izquierdo_trigeminoindemne')
- 
+
         removeConclusion('derecho_der')
         removeConclusion('izquierdo_der')
         removeConclusion('bilateral_der')
- 
+
         removeConclusion('dermatomas')
         removeConclusion('izquierdo_dermatomas')
         removeConclusion('derecho_dermatomas')
@@ -460,13 +476,17 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         removeConclusion('derecho_trigemino')
         removeConclusion('bilateral_trigemino')
         removeConclusion('tri')
-        
+
         setStep('E1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -497,7 +517,7 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         value="superior_bilateral"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -523,11 +543,11 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         removeConclusion('derecho_trigeminoalterada')
         removeConclusion('bilateral_trigeminoalterada')
         removeConclusion('izquierdo_trigeminoindemne')
- 
+
         removeConclusion('derecho_der')
         removeConclusion('izquierdo_der')
         removeConclusion('bilateral_der')
- 
+
         removeConclusion('dermatomas')
         removeConclusion('izquierdo_dermatomas')
         removeConclusion('derecho_dermatomas')
@@ -553,9 +573,13 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         } className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -566,7 +590,7 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         value="superior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -577,7 +601,7 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         value="superior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -588,7 +612,7 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         value="superior_bilateral"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -614,11 +638,11 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         removeConclusion('derecho_trigeminoalterada')
         removeConclusion('bilateral_trigeminoalterada')
         removeConclusion('izquierdo_trigeminoindemne')
- 
+
         removeConclusion('derecho_der')
         removeConclusion('izquierdo_der')
         removeConclusion('bilateral_der')
- 
+
         removeConclusion('dermatomas')
         removeConclusion('izquierdo_dermatomas')
         removeConclusion('derecho_dermatomas')
@@ -643,9 +667,13 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         setStep('C1')}}className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -666,7 +694,7 @@ const StepF3 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => 
         value="superior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -687,7 +715,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{
   return (
   <div>
     <div className='button-bar'>
-      <button onClick={() =>{ 
+      <button onClick={() =>{
         removeConclusion('superior_izquierdoindemne')
         removeConclusion('superior_derechoindemne')
         removeConclusion('superior_bilateralindemne')
@@ -702,11 +730,11 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{
         removeConclusion('derecho_trigeminoalterada')
         removeConclusion('bilateral_trigeminoalterada')
         removeConclusion('izquierdo_trigeminoindemne')
- 
+
         removeConclusion('derecho_der')
         removeConclusion('izquierdo_der')
         removeConclusion('bilateral_der')
- 
+
         removeConclusion('dermatomas')
         removeConclusion('izquierdo_dermatomas')
         removeConclusion('derecho_dermatomas')
@@ -731,9 +759,13 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{
         setStep('B1')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={handleNextStep} className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -744,7 +776,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{
         value="superior_izquierdoindemne"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -755,7 +787,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{
         value="superior_derechoindemne"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -766,7 +798,7 @@ const StepF4 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{
         value="superior_bilateralindemne"
         title=" DE FORMA BILATERAL"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -826,8 +858,12 @@ const StepG1 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
         </button>
 
         {/* Botón de Siguiente */}
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
         <button onClick={() => setStep('H1')} id='next' className='print-button dont-print'>
-          <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+          <img src="/I_In.svg" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL:</h1>
@@ -900,8 +936,12 @@ const StepG2 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
         </button>
 
         {/* Botón de Siguiente */}
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
         <button onClick={() => setStep('H2')} id='next' className='print-button dont-print'>
-          <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+          <img src="/I_In.svg" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL:</h1>
@@ -974,8 +1014,12 @@ const StepG3 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
         </button>
 
         {/* Botón de Siguiente */}
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
         <button onClick={() => setStep('H3')} id='next' className='print-button dont-print'>
-          <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+          <img src="/I_In.svg" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL:</h1>
@@ -999,16 +1043,16 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
     const { droppedItems } = useContext(DropContext);
     const [isLoading, setIsLoading] = useState(false);
 
-  
+
     const handleExportPdf = async () => {
       try {
         setIsLoading(true); // ⌛ Mostrar overlay
          // 1) conclusiones (array con {value, title})
       const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-  
+
       const conclusiones = conclusions;
-  
-  
+
+
         const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1024,15 +1068,15 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
               imageUrl: session?.user?.imageUrl,
             },
             droppedItems, // <--- envía también el array de items arrastrados
-            topLeftText, 
-  
+            topLeftText,
+
           }),
         });
-    
+
         if (!response.ok) {
           throw new Error("Error al generar PDF");
         }
-    
+
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -1042,7 +1086,7 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
-    
+
       } catch (error) {
         console.error('Error:', error);
         alert('Error al generar PDF: ' + error.message);
@@ -1072,7 +1116,7 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-     
+
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
         </button>
@@ -1113,15 +1157,15 @@ const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint }) => {
             imageUrl: session?.user?.imageUrl,
           },
           droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
+          topLeftText,
 
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al generar PDF");
       }
-  
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -1131,8 +1175,8 @@ const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint }) => {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
-    
+
+
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
@@ -1157,7 +1201,7 @@ const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint }) => {
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-      
+
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
@@ -1201,15 +1245,15 @@ const StepH3 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
             imageUrl: session?.user?.imageUrl,
           },
           droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
+          topLeftText,
 
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al generar PDF");
       }
-  
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -1219,7 +1263,7 @@ const StepH3 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
+
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
@@ -1243,7 +1287,7 @@ const StepH3 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
         <button onClick={() => setStep('G3')} className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
-       
+
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
@@ -1260,7 +1304,7 @@ const StepH3 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
   );
 };
 const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
-  
+
   const { removeConclusion } = useContext(ReportContext)
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
@@ -1292,15 +1336,15 @@ const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,
             imageUrl: session?.user?.imageUrl,
           },
           droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
+          topLeftText,
 
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al generar PDF");
       }
-  
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -1310,7 +1354,7 @@ const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
+
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
@@ -1338,7 +1382,7 @@ const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,
           setStep('F4')} }className="print-button dont-print">
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
-       
+
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
@@ -1355,7 +1399,7 @@ const StepH4 = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftText,
         </div>
   );
 };
-//Inferiores 
+//Inferiores
 const StepB2 = ({ handlePrevStep, handleNextStep, setStep,selectedSide }) =>{
   const { removeConclusion } = useContext(ReportContext)
   return (
@@ -1368,7 +1412,7 @@ const StepB2 = ({ handlePrevStep, handleNextStep, setStep,selectedSide }) =>{
         removeConclusion('safeno')
         removeConclusion('femorocutaneo_lateral')
         removeConclusion('pudendo')
-        removeConclusion('tibial') 
+        removeConclusion('tibial')
         removeConclusion('inferior_indemne')
         removeConclusion('interior_alterada')
         removeConclusion('inferior_izquierdoindemne')
@@ -1466,10 +1510,10 @@ const StepB2 = ({ handlePrevStep, handleNextStep, setStep,selectedSide }) =>{
       </button>
     </div>
     <h1 className="text-xl font-bold text-white">INFERIORES</h1>
-    <div onClick={handleNextStep}> 
+    <div onClick={handleNextStep}>
     </div>
     <div onClick={() => setStep('F4_i')}>
-      <ConclusionButton value="inferior_indemne" title="VÍA SOMATOSENSORIAL CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />   
+      <ConclusionButton value="inferior_indemne" title="VÍA SOMATOSENSORIAL CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />
        </div>
     <div onClick={() => setStep('C1_i')}>
       <ConclusionButton value="interior_alterada" title="VÍA SOMATOSENSORIAL CON DEFECTO" displayText="ALTERADA " />
@@ -1490,9 +1534,13 @@ const StepC1_i = ({ handlePrevStep, handleNextStep, setStep }) => {
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
 
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">FISIOPATOLOGÍA</h1>
     <div onClick={() => setStep('D1_i')}>
@@ -1521,9 +1569,13 @@ const StepD1_i = ({ handlePrevStep, handleNextStep, setStep }) => {
         setStep('C1_i')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('E1_i')}>
@@ -1538,16 +1590,20 @@ const StepD2_i = ({ handlePrevStep, handleNextStep, setStep }) => {
   return(
   <div>
     <div className='button-bar'>
-      <button onClick={() =>{ 
+      <button onClick={() =>{
          removeConclusion('leve')
          removeConclusion('moderado')
          removeConclusion('severo')
         setStep('C1_i')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('E2_i')}>
@@ -1571,9 +1627,13 @@ const StepE1_i = ({ handlePrevStep, handleNextStep, setStep }) => {
         setStep('D1_i')} }className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
+      <button onClick={() => window.location.reload()} className="print-button">
+        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+      </button>
+
       <button onClick={() => setStep('F1_i')} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button>
+      </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
     <div onClick={() => setStep('F1_i')}>
@@ -1594,13 +1654,19 @@ const StepE2_i = ({ handlePrevStep, handleNextStep, setStep }) => {
         setStep('D2_i')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      
+
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
       <button onClick={() => setStep('F2_i')} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
+    <div onClick={() => setStep('F2_i')}>
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title=", Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
+  </div>
   </div>
 );}
 const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
@@ -1615,9 +1681,13 @@ const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         setStep('E1_i')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -1647,12 +1717,12 @@ const StepF1_i= ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
       <ConclusionButton
         value="inferior_bilateral"
         title=" DE FORMA BILATERAL,"
-        displayText="BILATERAL "      
+        displayText="BILATERAL "
       />
     </div>
   </div>
 );}
-const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{ 
+const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>{
   const { removeConclusion } = useContext(ReportContext)
   return(
   <div>
@@ -1664,9 +1734,13 @@ const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         setStep('E2_i')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -1677,7 +1751,7 @@ const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="inferior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -1688,7 +1762,7 @@ const StepF2_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="inferior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -1715,9 +1789,13 @@ const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         setStep('C1_i')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -1728,7 +1806,7 @@ const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="inferior_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -1739,7 +1817,7 @@ const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="inferior_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -1750,7 +1828,7 @@ const StepF3_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="inferior_bilateral"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -1761,7 +1839,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) =>
   return(
   <div>
     <div className='button-bar'>
-      <button onClick={() =>{ 
+      <button onClick={() =>{
         removeConclusion('inferior_izquierdoindemne')
         removeConclusion('inferior_derechoindemne')
         removeConclusion('inferior_bilateralindemne')
@@ -1770,9 +1848,13 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) =>
         setStep('B2')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={handleNextStep} className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -1783,7 +1865,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) =>
         value="inferior_izquierdoindemne"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -1794,7 +1876,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) =>
         value="inferior_derechoindemne"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -1805,7 +1887,7 @@ const StepF4_i = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) =>
         value="inferior_bilateralindemne"
         title=" DE FORMA BILATERAL"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -1874,15 +1956,19 @@ const StepG1_i = ({setStep,selectedSide,// otras props que necesites (por ejempl
           removeConclusion(`${selectedSide}toracicoi`)
           removeConclusion(`${selectedSide}lumbosacroi`)
           removeConclusion(`${selectedSide}perifericoi`)
-        
+
 
           setStep('F1_i')}} id='prev' className='print-button dont-print'>
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
         {/* Botón de "Siguiente" */}
         <button onClick={() => setStep('H1_i')} id='next' className='print-button dont-print'>
-          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(0.5)' }} />
+          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
 
@@ -1973,9 +2059,13 @@ const StepG2_i = ({
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
         {/* Botón de "Siguiente" */}
         <button onClick={() => setStep('H2_i')} id='next' className='print-button dont-print'>
-          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(0.5)' }} />
+          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
 
@@ -2058,14 +2148,18 @@ const StepG3_i = ({
           removeConclusion(`${selectedSide}toracicoi`)
           removeConclusion(`${selectedSide}lumbosacroi`)
           removeConclusion(`${selectedSide}perifericoi`)
-        
+
           setStep('F3_i')} }id='prev' className='print-button dont-print'>
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
         {/* Botón de "Siguiente" */}
         <button onClick={() => setStep('H3_i')} id='next' className='print-button dont-print'>
-          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(0.5)' }} />
+          <img src="/I_In.svg" alt="Siguiente" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
 
@@ -2114,15 +2208,15 @@ const StepH1_i = ({ setStep, selectedImages, handleUndo,handlePrint,topLeftText,
             imageUrl: session?.user?.imageUrl,
           },
           droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
+          topLeftText,
 
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al generar PDF");
       }
-  
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -2132,7 +2226,7 @@ const StepH1_i = ({ setStep, selectedImages, handleUndo,handlePrint,topLeftText,
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
+
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
@@ -2157,7 +2251,7 @@ const StepH1_i = ({ setStep, selectedImages, handleUndo,handlePrint,topLeftText,
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-      
+
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
@@ -2202,15 +2296,15 @@ const StepH2_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
             imageUrl: session?.user?.imageUrl,
           },
           droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
+          topLeftText,
 
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al generar PDF");
       }
-  
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -2220,7 +2314,7 @@ const StepH2_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
+
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
@@ -2245,7 +2339,7 @@ const StepH2_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-       
+
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
@@ -2288,15 +2382,15 @@ const StepH3_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
             imageUrl: session?.user?.imageUrl,
           },
           droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
+          topLeftText,
 
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al generar PDF");
       }
-  
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -2306,7 +2400,7 @@ const StepH3_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
+
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
@@ -2331,7 +2425,7 @@ const StepH3_i = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-        
+
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
@@ -2376,15 +2470,15 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftTex
             imageUrl: session?.user?.imageUrl,
           },
           droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
+          topLeftText,
 
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al generar PDF");
       }
-  
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -2422,14 +2516,14 @@ const StepH4_i = ({ setStep, selectedImages, handleUndo,  handlePrint,topLeftTex
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-     
+
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
 
-        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
           <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button>
+        </button> */}
 
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
@@ -2561,7 +2655,7 @@ const StepBD = ({ handlePrevStep, handleNextStep, setStep,selectedSide }) => {
     </div>
     <h1 className="text-xl font-bold text-white"> </h1>
     <div onClick={() => setStep('CDI')}>
-      <ConclusionButton value="dermatomas_indemne" title="CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />   
+      <ConclusionButton value="dermatomas_indemne" title="CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />
     </div>
     <div onClick={() => setStep('CDA')}>
       <ConclusionButton value="dermatomas_alterada" title="CON DEFECTO" displayText="ALTERADA " />
@@ -2583,9 +2677,13 @@ const StepCDI = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         setStep('BD')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -2596,7 +2694,7 @@ const StepCDI = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         value="izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -2608,7 +2706,7 @@ const StepCDI = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         value="derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -2620,7 +2718,7 @@ const StepCDI = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         value="bilateral"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -2639,9 +2737,13 @@ const StepCDA = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         setStep('BD')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -2653,7 +2755,7 @@ const StepCDA = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         value="izquierdo_der"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -2665,7 +2767,7 @@ const StepCDA = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         value="derecho_der"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -2677,7 +2779,7 @@ const StepCDA = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => 
         value="bilateral_der"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -2719,66 +2821,72 @@ const StepDDI = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
         removeConclusion(`${selectedSide}s2di`)
 
 
-      
+
         setStep('CDI')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
+
+      <button onClick={() => window.location.reload()} className="print-button">
+        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+      </button>
+
+
       <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+        <img src="/I_In.svg" style={{filter: 'invert(1)'}} />
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>DERMATOMAS</h1>
    <AccordionContainer>
-    <InternalAccordionContainer> 
+    <InternalAccordionContainer>
     <Accordion  title='DERMATOMAS' type='internal'>
-     <InternalAccordionContainer> 
-     <Accordion title='CERVICAL' type='internal'> 
+     <InternalAccordionContainer>
+     <Accordion title='CERVICAL' type='internal'>
        <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value={`${selectedSide}c4di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value={`${selectedSide}c4di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" />
          <ConclusionButton value={`${selectedSide}c5di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
          <ConclusionButton value={`${selectedSide}c6di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
          <ConclusionButton value={`${selectedSide}c7di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
          <ConclusionButton value={`${selectedSide}c8di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value={`${selectedSide}t1di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+         <ConclusionButton value={`${selectedSide}t1di`}  title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   />
       </div>
       </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
       <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value={`${selectedSide}t2di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
         <ConclusionButton value={`${selectedSide}t3di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
         <ConclusionButton value={`${selectedSide}t4di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value={`${selectedSide}t5di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value={`${selectedSide}t6di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t5di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />
+        <ConclusionButton value={`${selectedSide}t6di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value={`${selectedSide}t7di`} title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value={`${selectedSide}t8di`} title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value={`${selectedSide}t9di`} title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value={`${selectedSide}t10di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value={`${selectedSide}t11di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value={`${selectedSide}t12di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        <ConclusionButton value={`${selectedSide}t7di`} title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />
+        <ConclusionButton value={`${selectedSide}t8di`} title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />
+        <ConclusionButton value={`${selectedSide}t9di`} title= "A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />
+        <ConclusionButton value={`${selectedSide}t10di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />
+        <ConclusionButton value={`${selectedSide}t11di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />
+        <ConclusionButton value={`${selectedSide}t12di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />
         </div>
       </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
       <Accordion  title='LUMBOSACRO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value={`${selectedSide}l1di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value={`${selectedSide}l1di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/>
         <ConclusionButton value={`${selectedSide}l2di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
         <ConclusionButton value={`${selectedSide}l3di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
         <ConclusionButton value={`${selectedSide}l4di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value={`${selectedSide}l5di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
-        <ConclusionButton value={`${selectedSide}s1di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value={`${selectedSide}s2di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        <ConclusionButton value={`${selectedSide}l5di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/>
+        <ConclusionButton value={`${selectedSide}s1di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" />
+        <ConclusionButton value={`${selectedSide}s2di`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />
         </div>
       </Accordion>
-      </InternalAccordionContainer> 
+      </InternalAccordionContainer>
     </Accordion>
-    </InternalAccordionContainer> 
+    </InternalAccordionContainer>
     </AccordionContainer>
-    
+
 </div>
 )};
 
@@ -2805,9 +2913,13 @@ const StepDDA = ({ handlePrevStep, handleNextStep, setStep }) => {
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
 
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">FISIOPATOLOGÍA</h1>
     <div onClick={() => setStep('D1A')}>
@@ -2839,9 +2951,13 @@ const StepD1A = ({ handlePrevStep, handleNextStep, setStep }) => {
         setStep('DDA')} }className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('E1A')}>
@@ -2867,9 +2983,13 @@ const StepD2A = ({ handlePrevStep, handleNextStep, setStep }) =>{
         setStep('DDA')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('E2A')}>
@@ -2886,7 +3006,7 @@ const StepE1A = ({ handlePrevStep, handleNextStep, setStep }) => {
   return(
   <div>
     <div className='button-bar'>
-      <button onClick={() =>{ 
+      <button onClick={() =>{
          removeConclusion('superior_izquierdo')
          removeConclusion('superior_derecho')
          removeConclusion('superior_bilateral')
@@ -2894,13 +3014,19 @@ const StepE1A = ({ handlePrevStep, handleNextStep, setStep }) => {
          removeConclusion('dermatomas_izquierdo')
          removeConclusion('dermatomas_derecho')
          removeConclusion('dermatomas_bilateral')
-         
+
         setStep('D1A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
+
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+
       <button onClick={() => setStep('G1A')} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button>
+      </button>
     </div>
     <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
     <div onClick={() => setStep('G1A')}>
@@ -2925,7 +3051,11 @@ const StepE2A = ({ handlePrevStep, handleNextStep, setStep }) =>{
         setStep('D2A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      
+
+      <button onClick={() => window.location.reload()} className="print-button">
+        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+      </button>
+
       <button onClick={() => setStep('G2A')} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -2951,9 +3081,13 @@ const StepF1A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         setStep('E1A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -2984,7 +3118,7 @@ const StepF1A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         value="dermatomas_bilateral"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -3004,9 +3138,13 @@ const StepF2A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         } className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -3017,7 +3155,7 @@ const StepF2A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         value="dermatomas_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -3028,7 +3166,7 @@ const StepF2A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         value="dermatomas_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -3039,7 +3177,7 @@ const StepF2A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         value="dermatomas_bilateral"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -3060,9 +3198,13 @@ const StepF3A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         } className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -3073,7 +3215,7 @@ const StepF3A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         value="dermatomas_izquierdo"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -3084,7 +3226,7 @@ const StepF3A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         value="dermatomas_derecho"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -3095,7 +3237,7 @@ const StepF3A = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =>
         value="dermatomas_bilateral"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -3137,64 +3279,70 @@ const StepG1A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
          removeConclusion('s1')
          removeConclusion('s2')
          removeConclusion('dermatomas')
-        setStep('F1A')}} id='prev' className={`print-button dont-print `}>
+        setStep('F1A')}} id='prev' className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
+
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
       <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+        <img src="/I_In.svg" style={{filter: 'invert(1)'}} />
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>DERMATOMAS</h1>
     <AccordionContainer>
    </AccordionContainer>
    <AccordionContainer>
-    <InternalAccordionContainer> 
+    <InternalAccordionContainer>
     <Accordion  title='DERMATOMAS' type='internal'>
-     <InternalAccordionContainer> 
-     <Accordion title='CERVICAL' type='internal'> 
+     <InternalAccordionContainer>
+     <Accordion title='CERVICAL' type='internal'>
        <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value={`${selectedSide}c4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value={`${selectedSide}c4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" />
          <ConclusionButton value={`${selectedSide}c5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
          <ConclusionButton value={`${selectedSide}c6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
          <ConclusionButton value={`${selectedSide}c7da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
          <ConclusionButton value={`${selectedSide}c8da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value={`${selectedSide}t1da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+         <ConclusionButton value={`${selectedSide}t1da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   />
       </div>
       </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
       <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value={`${selectedSide}t2da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
         <ConclusionButton value={`${selectedSide}t3da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
         <ConclusionButton value={`${selectedSide}t4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value={`${selectedSide}t6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />
+        <ConclusionButton value={`${selectedSide}t6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value={`${selectedSide}t8da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value={`${selectedSide}t9da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value={`${selectedSide}t10da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value={`${selectedSide}t11da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value={`${selectedSide}t12da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />
+        <ConclusionButton value={`${selectedSide}t8da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />
+        <ConclusionButton value={`${selectedSide}t9da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />
+        <ConclusionButton value={`${selectedSide}t10da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />
+        <ConclusionButton value={`${selectedSide}t11da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />
+        <ConclusionButton value={`${selectedSide}t12da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />
         </div>
       </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
       <Accordion  title='LUMBOSACRO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value={`${selectedSide}l1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value={`${selectedSide}l1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/>
         <ConclusionButton value={`${selectedSide}l2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
         <ConclusionButton value={`${selectedSide}l3da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
         <ConclusionButton value={`${selectedSide}l4da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value={`${selectedSide}l5da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
-        <ConclusionButton value={`${selectedSide}s1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value={`${selectedSide}s2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        <ConclusionButton value={`${selectedSide}l5da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/>
+        <ConclusionButton value={`${selectedSide}s1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" />
+        <ConclusionButton value={`${selectedSide}s2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />
         </div>
       </Accordion>
-      </InternalAccordionContainer> 
+      </InternalAccordionContainer>
     </Accordion>
-    </InternalAccordionContainer> 
+    </InternalAccordionContainer>
     </AccordionContainer>
 </div>
 )};
@@ -3204,7 +3352,7 @@ const StepG2A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
   return(
   <div>
     <div className='button-bar'>
-      <button onClick={() => 
+      <button onClick={() =>
         {
           removeConclusion('c4')
           removeConclusion('c5')
@@ -3231,64 +3379,70 @@ const StepG2A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
           removeConclusion('s1')
           removeConclusion('s2')
           removeConclusion('dermatomas')
-        setStep('F2A')}} id='prev' className={`print-button dont-print `}>
+        setStep('F2A')}} id='prev' className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
+
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
       <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+        <img src="/I_In.svg" style={{filter: 'invert(1)'}} />
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>DERMATOMAS</h1>
     <AccordionContainer>
    </AccordionContainer>
    <AccordionContainer>
-    <InternalAccordionContainer> 
+    <InternalAccordionContainer>
     <Accordion  title='DERMATOMAS' type='internal'>
-     <InternalAccordionContainer> 
-     <Accordion title='CERVICAL' type='internal'> 
+     <InternalAccordionContainer>
+     <Accordion title='CERVICAL' type='internal'>
        <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value={`${selectedSide}c4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value={`${selectedSide}c4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" />
          <ConclusionButton value={`${selectedSide}c5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
          <ConclusionButton value={`${selectedSide}c6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
          <ConclusionButton value={`${selectedSide}c7da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
          <ConclusionButton value={`${selectedSide}c8da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value={`${selectedSide}t1da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+         <ConclusionButton value={`${selectedSide}t1da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   />
       </div>
       </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
       <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value={`${selectedSide}t2da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
         <ConclusionButton value={`${selectedSide}t3da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
         <ConclusionButton value={`${selectedSide}t4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value={`${selectedSide}t6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />
+        <ConclusionButton value={`${selectedSide}t6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value={`${selectedSide}t8da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value={`${selectedSide}t9da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value={`${selectedSide}t10da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value={`${selectedSide}t11da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value={`${selectedSide}t12da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />
+        <ConclusionButton value={`${selectedSide}t8da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />
+        <ConclusionButton value={`${selectedSide}t9da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />
+        <ConclusionButton value={`${selectedSide}t10da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />
+        <ConclusionButton value={`${selectedSide}t11da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />
+        <ConclusionButton value={`${selectedSide}t12da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />
         </div>
       </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
       <Accordion  title='LUMBOSACRO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value={`${selectedSide}l1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value={`${selectedSide}l1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/>
         <ConclusionButton value={`${selectedSide}l2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
         <ConclusionButton value={`${selectedSide}l3da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
         <ConclusionButton value={`${selectedSide}l4da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value={`${selectedSide}l5da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
-        <ConclusionButton value={`${selectedSide}s1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value={`${selectedSide}s2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        <ConclusionButton value={`${selectedSide}l5da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/>
+        <ConclusionButton value={`${selectedSide}s1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" />
+        <ConclusionButton value={`${selectedSide}s2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />
         </div>
       </Accordion>
-      </InternalAccordionContainer> 
+      </InternalAccordionContainer>
     </Accordion>
-    </InternalAccordionContainer> 
+    </InternalAccordionContainer>
     </AccordionContainer>
 </div>
 )};
@@ -3298,7 +3452,7 @@ const StepG3A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
   return(
   <div>
     <div className='button-bar'>
-      <button onClick={() => 
+      <button onClick={() =>
         {
           removeConclusion('c4')
           removeConclusion('c5')
@@ -3325,64 +3479,70 @@ const StepG3A = ({handleNextStep,handlePrevStep,setStep,selectedSide,setSelected
           removeConclusion('s1')
           removeConclusion('s2')
           removeConclusion('dermatomas')
-        setStep('F3A')}} id='prev' className={`print-button dont-print `}>
+        setStep('F3A')}} id='prev' className="print-button dont-print">
+        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
+
+      <button onClick={() => window.location.reload()} className="print-button">
+        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+      </button>
+
       <button onClick={() => setStep('BT')} id='next' className={`print-button dont-print `}>
-        <img src="/I_In.svg" style={{filter: 'invert(0.5)'}} />
+        <img src="/I_In.svg" style={{filter: 'invert(1)'}} />
       </button>
     </div>
     <h1 className='text-xl font-bold text-white'>DERMATOMAS</h1>
     <AccordionContainer>
    </AccordionContainer>
    <AccordionContainer>
-    <InternalAccordionContainer> 
+    <InternalAccordionContainer>
     <Accordion  title='DERMATOMAS' type='internal'>
-     <InternalAccordionContainer> 
-     <Accordion title='CERVICAL' type='internal'> 
+     <InternalAccordionContainer>
+     <Accordion title='CERVICAL' type='internal'>
        <div style={{ display: 'flex', gap: '8px' }}>
-         <ConclusionButton value={`${selectedSide}c4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" /> 
+         <ConclusionButton value={`${selectedSide}c4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C4" displayText="C4" />
          <ConclusionButton value={`${selectedSide}c5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C5" displayText="C5" />
          <ConclusionButton value={`${selectedSide}c6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C6" displayText="C6" />
          <ConclusionButton value={`${selectedSide}c7da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C7" displayText="C7" />
          <ConclusionButton value={`${selectedSide}c8da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS C8" displayText="C8" />
-         <ConclusionButton value={`${selectedSide}t1da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   /> 
+         <ConclusionButton value={`${selectedSide}t1da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T1" displayText="T1"   />
       </div>
       </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
       <Accordion  title='TORACICO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
         <ConclusionButton value={`${selectedSide}t2da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T2" displayText="T2"   />
         <ConclusionButton value={`${selectedSide}t3da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T3" displayText="T3"   />
         <ConclusionButton value={`${selectedSide}t4da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T4" displayText="T4"   />
-        <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />   
-        <ConclusionButton value={`${selectedSide}t6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />   
+        <ConclusionButton value={`${selectedSide}t5da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T5" displayText="T5"   />
+        <ConclusionButton value={`${selectedSide}t6da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T6" displayText="T6"   />
         </div>
         < div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />   
-        <ConclusionButton value={`${selectedSide}t8da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />   
-        <ConclusionButton value={`${selectedSide}t9da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />   
-        <ConclusionButton value={`${selectedSide}t10da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />   
-        <ConclusionButton value={`${selectedSide}t11da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />   
-        <ConclusionButton value={`${selectedSide}t12da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />   
+        <ConclusionButton value={`${selectedSide}t7da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T7" displayText="T7" />
+        <ConclusionButton value={`${selectedSide}t8da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T8" displayText="T8"  />
+        <ConclusionButton value={`${selectedSide}t9da`} title= "VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T9" displayText="T9"  />
+        <ConclusionButton value={`${selectedSide}t10da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T10" displayText="T10"  />
+        <ConclusionButton value={`${selectedSide}t11da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T11" displayText="T11"  />
+        <ConclusionButton value={`${selectedSide}t12da`} title="VÍA SOMATOSENSORIAL A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS T12" displayText="T12"  />
         </div>
       </Accordion>
-      </InternalAccordionContainer> 
-      <InternalAccordionContainer> 
+      </InternalAccordionContainer>
+      <InternalAccordionContainer>
       <Accordion  title='LUMBOSACRO' type='internal'>
         <div style={{ display: 'flex', gap: '8px' }}>
-        <ConclusionButton value={`${selectedSide}l1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/> 
+        <ConclusionButton value={`${selectedSide}l1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L1" displayText="L1"/>
         <ConclusionButton value={`${selectedSide}l2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L2" displayText="L2"/>
         <ConclusionButton value={`${selectedSide}l3da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L3" displayText="L3"/>
         <ConclusionButton value={`${selectedSide}l4da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L4" displayText="L4"/>
-        <ConclusionButton value={`${selectedSide}l5da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/> 
-        <ConclusionButton value={`${selectedSide}s1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" /> 
-        <ConclusionButton value={`${selectedSide}s2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />      
+        <ConclusionButton value={`${selectedSide}l5da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS L5" displayText="L5"/>
+        <ConclusionButton value={`${selectedSide}s1da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S1" displayText="S1" />
+        <ConclusionButton value={`${selectedSide}s2da`} title="A TRAVÉS DE REGIÓN MEDULAR POSTERIOR AL ESTÍMULO DE DERMATOMAS S2" displayText="S2" />
         </div>
       </Accordion>
-      </InternalAccordionContainer> 
+      </InternalAccordionContainer>
     </Accordion>
-    </InternalAccordionContainer> 
+    </InternalAccordionContainer>
     </AccordionContainer>
 </div>
 )};
@@ -3508,7 +3668,7 @@ const StepAT = ({ handlePrevStep, handleNextStep, setStep,selectedSide }) => {
     </div>
     <h1 className="text-xl font-bold text-white"> </h1>
     <div onClick={() => setStep('CDIT')}>
-      <ConclusionButton value="trigemino_indemne" title="CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />   
+      <ConclusionButton value="trigemino_indemne" title="CON INTEGRIDAD FUNCIONAL" displayText="INDEMNE" />
     </div>
     <div onClick={() => setStep('DDAT')}>
       <ConclusionButton value="trigemino_alterada" title="CON DEFECTO" displayText="ALTERADA " />
@@ -3532,13 +3692,17 @@ const StepCDIT = ({ handlePrevStep, handleNextStep, setStep}) => {
         removeConclusion('derecho_trigeminoindemne')
         removeConclusion('bilateral_trigeminoindemne')
 
-       
+
         setStep('A')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={() => setStep('BT')} className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -3548,7 +3712,7 @@ const StepCDIT = ({ handlePrevStep, handleNextStep, setStep}) => {
         value="izquierdo_trigeminoindemne"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -3558,7 +3722,7 @@ const StepCDIT = ({ handlePrevStep, handleNextStep, setStep}) => {
         value="derecho_trigeminoindemne"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -3568,7 +3732,7 @@ const StepCDIT = ({ handlePrevStep, handleNextStep, setStep}) => {
         value="bilateral_trigeminoindemne"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -3600,9 +3764,13 @@ const StepDDAT = ({ handlePrevStep, handleNextStep, setStep }) => {
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
 
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">FISIOPATOLOGÍA</h1>
     <div onClick={() => setStep('D1AT')}>
@@ -3634,9 +3802,13 @@ const StepD1AT = ({ handlePrevStep, handleNextStep, setStep }) => {
         setStep('DDAT')} }className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('E1AT')}>
@@ -3662,9 +3834,13 @@ const StepD2AT = ({ handlePrevStep, handleNextStep, setStep }) =>{
         setStep('DDAT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button  className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">GRADO:</h1>
     <div onClick={() => setStep('E2AT')}>
@@ -3681,7 +3857,7 @@ const StepE1AT = ({ handlePrevStep, handleNextStep, setStep }) => {
   return(
   <div>
     <div className='button-bar'>
-      <button onClick={() =>{ 
+      <button onClick={() =>{
          removeConclusion('perdida_axonal_secundaria')
          removeConclusion('dermatomas_izquierdo')
          removeConclusion('dermatomas_derecho')
@@ -3689,6 +3865,12 @@ const StepE1AT = ({ handlePrevStep, handleNextStep, setStep }) => {
         setStep('D1AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
+
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+
       <button onClick={() => setStep('F1AT')} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
@@ -3713,13 +3895,19 @@ const StepE2AT = ({ handlePrevStep, handleNextStep, setStep }) =>{
         setStep('D2AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      
+
+      <button onClick={() => window.location.reload()} className="print-button">
+        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+      </button>
+
       <button onClick={() => setStep('F2AT')} id='prev' className={`print-button dont-print `}>
           <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
         </button>
     </div>
     <h1 className="text-xl font-bold text-white">AXONAL:</h1>
+    <div onClick={() => setStep('F2AT')}>
       <ConclusionButton value="retardo_secundario_en_la_conduccion" title=", Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
+  </div>
   </div>
 );}
 
@@ -3741,14 +3929,18 @@ const StepF1AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         removeConclusion('izquierdo_trigeminoindemne')
         removeConclusion('derecho_trigeminoindemne')
         removeConclusion('bilateral_trigeminoindemne')
-        
-       
+
+
         setStep('E1AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={() => setStep('BT')} className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -3758,7 +3950,7 @@ const StepF1AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="izquierdo_trigemino"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -3768,7 +3960,7 @@ const StepF1AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="derecho_trigemino"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -3778,7 +3970,7 @@ const StepF1AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="bilateral_trigemino"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -3802,14 +3994,18 @@ const StepF2AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         removeConclusion('izquierdo_trigeminoindemne')
         removeConclusion('derecho_trigeminoindemne')
         removeConclusion('bilateral_trigeminoindemne')
-        
+
         removeConclusion('tri')
         setStep('E2AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={() => setStep('BT')} className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -3819,7 +4015,7 @@ const StepF2AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="izquierdo_trigemino"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -3829,7 +4025,7 @@ const StepF2AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="derecho_trigemino"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -3839,7 +4035,7 @@ const StepF2AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="bilateral_trigemino"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -3858,18 +4054,22 @@ const StepF3AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         removeConclusion('derecho_trigemino')
         removeConclusion('bilateral_trigemino')
         removeConclusion('tri')
-       
+
         removeConclusion('izquierdo_trigeminoindemne')
         removeConclusion('derecho_trigeminoindemne')
         removeConclusion('bilateral_trigeminoindemne')
-        
-       
+
+
         setStep('E1AT')}} className="print-button dont-print">
         <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
       </button>
-      <button onClick={() => setStep('BT')} className="print-button dont-print">
-        <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
-      </button>
+        <button onClick={() => window.location.reload()} className="print-button">
+          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
+        </button>
+
+        <button className="print-button dont-print">
+          <img src="" style={{ filter: 'invert(1)' }} />
+        </button>
     </div>
     <h1 className="text-xl font-bold text-white">LADO:</h1>
     <div  onClick={() => {
@@ -3879,7 +4079,7 @@ const StepF3AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="izquierdo_trigemino"
         title=" PARA LADO IZQUIERDO "
         displayText="IZQUIERDO"
-       
+
       />
     </div>
     <div  onClick={() => {
@@ -3889,7 +4089,7 @@ const StepF3AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="derecho_trigemino"
         title=" PARA LADO DERECHO "
         displayText="DERECHO"
-       
+
       />
     </div>
     <div onClick={() => {
@@ -3899,7 +4099,7 @@ const StepF3AT = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) =
         value="bilateral_trigemino"
         title=" DE FORMA BILATERAL,"
         displayText="BILATERAL "
-        
+
       />
     </div>
   </div>
@@ -3943,15 +4143,15 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
             imageUrl: session?.user?.imageUrl,
           },
           droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
+          topLeftText,
 
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al generar PDF");
       }
-  
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -3961,7 +4161,7 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
+
     } catch (error) {
       console.error('Error:', error);
       alert('Error al generar PDF: ' + error.message);
@@ -3983,7 +4183,7 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
   return (
     <div>
       <div className='button-bar'>
-        <button onClick={() =>{ 
+        <button onClick={() =>{
            removeConclusion(`${selectedSide}c4di`)
            removeConclusion(`${selectedSide}c5di`)
            removeConclusion(`${selectedSide}c6di`)
@@ -4031,7 +4231,7 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
            removeConclusion(`${selectedSide}l5da`)
            removeConclusion(`${selectedSide}s1da`)
            removeConclusion(`${selectedSide}s2da`)
-   
+
           removeConclusion('izquierdo_trigemino')
           removeConclusion('derecho_trigemino')
           removeConclusion('bilateral_trigemino')
@@ -4042,7 +4242,7 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
           removeConclusion('derecho_trigeminoalterada')
           removeConclusion('bilateral_trigeminoalterada')
           removeConclusion('izquierdo_trigeminoindemne')
- 
+
           removeConclusion('derecho_der')
           removeConclusion('izquierdo_der')
           removeConclusion('bilateral_der')
@@ -4075,9 +4275,9 @@ const StepBT = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
-        <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
+        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
           <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button>
+        </button> */}
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
         </button>

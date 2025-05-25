@@ -1068,7 +1068,7 @@ const StepD2 = ({
         </button>
 
         <button id="prev" onClick={handleNextStep1} className="print-button dont-print ">
-          <img src="/I_In.svg" style={{ filter: 'invert(0.5)' }} />
+          <img src="/I_In.svg" alt="Imprimir" style={{ filter: 'invert(1)' }} />
         </button>
       </div>
       <h1 className="text-xl font-bold text-white">UBICACIÓN</h1>
@@ -1085,6 +1085,7 @@ const StepD2A = ({
   assignSecondValue,
   assignThirdValue
 }) => {
+  const { removeConclusion } = useContext(ReportContext);
   return (
     <div>
       <div className="button-bar">

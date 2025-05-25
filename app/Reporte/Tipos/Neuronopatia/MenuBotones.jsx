@@ -278,8 +278,8 @@ const StepB1 = ({ handleNextStep1, handlePrevStep1 }) => {
         <img src="/I_Repeat.svg" style={{filter: 'invert(1)'}}/>
         </button>
 
-        <button id='prev' className={`print-button dont-print `}>
-          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+        <button onClick={handleNextStep1} className={`print-button`}>
+          <img src="/I_In.svg" style={{filter: 'invert(1)'}}/>
         </button>
       </div>
 

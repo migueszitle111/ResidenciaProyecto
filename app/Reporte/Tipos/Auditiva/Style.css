@@ -228,22 +228,39 @@
 }
 
 .delete-button {
-  display: none;       /* por defecto oculto */
-  position: absolute;  
-  top: 0;
-  right: 0;
+  position: absolute;
+  top: -10px;
+  right: 5px;
+  width: 30px;
+  background-color: #1C1C1C;
+  padding: 9px;
+  text-align: center;
+  font-size: 10px;
   cursor: pointer;
-  border: none;
-  background: rgb(255, 22, 22);
-  color: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  border-radius: 100%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #c44900;
+  color:aliceblue;
+  z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
+}
+/* 1) Oculto por defecto */
+.delete-button {
+  display: none !important;
 }
 
-/* Cuando haces hover sobre el contenedor, muestra la "X" */
+.delete-button:hover {
+background-color: #c44900;
+color: white;
+}
+/* 2) Solo al pasar el cursor sobre el elemento padre .item-container */
 .item-container:hover .delete-button {
-  display: block;
+  display: block !important;
+}
+
+.delete-button.active {
+background-color: #c44900;
+color: white;
 }
 
 

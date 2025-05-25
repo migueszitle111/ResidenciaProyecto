@@ -428,18 +428,20 @@ body.pdf-exporting .conclusion-container {
 
 .delete-button {
   position: absolute;
-  top: -20px;
-  right: 140px;
-  width: 25px;
+  top: -10px;
+  right: 5px;
+  width: 30px;
   background-color: #1C1C1C;
-  padding: 8px;
-  text-align: left;
+  padding: 9px;
+  text-align: center;
   font-size: 10px;
   cursor: pointer;
   border-radius: 100%;
   transition: all 0.3s ease;
   cursor: pointer;
   border: 1px solid #c44900;
+  color:aliceblue;
+  z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
 }
 /* 1) Oculto por defecto */
 .delete-button {
@@ -455,10 +457,10 @@ color: white;
   display: block !important;
 }
 
-/* .delete-button.active {
+.delete-button.active {
 background-color: #c44900;
 color: white;
-} */
+}
 
 .conclusion-container {
   display: flex;

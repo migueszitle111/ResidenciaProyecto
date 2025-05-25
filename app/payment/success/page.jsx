@@ -1,7 +1,4 @@
-// app/payment/success/page.jsx
-// app/payment/success/page.jsx
 "use client"
-
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"

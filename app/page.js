@@ -35,7 +35,7 @@ const Home = () => {
   if (showLoader && !session) {
     return (
       <>
-        <HeadComponents />
+        {/* <HeadComponents /> */}
         <div className="fixed top-0 left-0 w-full h-full z-[9999]">
           <video
             src="/assets/LandingPage/Videos/cierrevoz.mp4"

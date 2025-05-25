@@ -1,6 +1,4 @@
 // app/payment/success/ClientSuccess.jsx
-// app/payment/success/ClientSuccess.jsx
-
 "use client";
 
 import { useEffect, useState } from "react";

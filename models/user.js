@@ -2,11 +2,11 @@
 import mongoose, { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema({
-  name:                { type: String, required: true },
-  lastname:            { type: String, required: true },
-  cedula:              { type: String, required: true },
-  especialidad:        { type: String, required: true },
-  email:               { type: String, required: true, unique: true },
+  name:                { type: String },
+  lastname:            { type: String },
+  cedula:              { type: String },
+  especialidad:        { type: String },
+  email:               { type: String, unique: true },
 
   // Para cuentas Google no hay contraseña obligatoria
   password:            { type: String },

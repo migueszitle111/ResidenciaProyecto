@@ -1,6 +1,6 @@
 // components/LandingPage.jsx
 "use client";
-
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -27,6 +27,19 @@ export default function LandingPage() {
     AOS.init({ once: false, mirror: false, duration: 1000 });
   }, []);
 
+
+   const handleProtectedRoute = (route) => {
+     
+      const confirmResult = window.confirm(
+      );
+      if (confirmResult) {
+        router.push(route);
+      }
+   
+    
+  };
+
+  
      // 1) Define tus slides con un array de objetos
 // components/LandingPage.jsx
 // …
@@ -160,6 +173,7 @@ const bannerSlides = [
       data-aos-duration="800"
       data-aos-delay="200"
     >
+       <a href="/Registro" className="flex-shrink-0">
       <Image
         src="/assets/LandingPage/Page/LP-05.png"
         alt="Banner bottom"
@@ -167,6 +181,7 @@ const bannerSlides = [
         height={400}
         className="w-full h-auto object-cover"
       />
+      </a>
     </div>
   </div>
 </section>
@@ -206,6 +221,7 @@ const bannerSlides = [
           height={400}
           className="w-full h-auto object-cover rounded-3xl"
         />
+      
       </div>
     </div>
 
@@ -365,12 +381,16 @@ const bannerSlides = [
         data-aos-duration="800"
         data-aos-delay="150"
       >
+     <a href="https://buy.stripe.com/dRmaEX7CY4MM7Om5uYafS01" className="flex-shrink-0">
         <Image
           src="/assets/LandingPage/Page/LP-19.png"
           alt="Potenciales Evocados"
           fill
           className="object-cover"
         />
+
+      </a>
+        
       </div>
 
       {/* 3 */}

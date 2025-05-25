@@ -1,62 +1,99 @@
-// app/auth/reset-password/page.jsx
-"use client";
+// File: app/auth/reset-password/page.jsx
 
-import { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+"use client";
+export const dynamic = "force-dynamic";
+
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ResetPasswordPage() {
-  const params = useSearchParams();
   const router = useRouter();
-  const token  = params.get("token");
+  const params = useSearchParams();
+  const token = params.get("token");
 
-  const [pw, setPw]       = useState("");
-  const [confirm, setConfirm] = useState("");
-  const [error, setError] = useState("");
-  const [ok, setOk]       = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm]   = useState("");
+  const [error, setError]       = useState("");
+  const [success, setSuccess]   = useState(false);
+  const [loading, setLoading]   = useState(false);
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (pw !== confirm) return setError("Las contraseñas no coinciden");
-    const res = await fetch("/api/auth/reset-password", {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify({ token, password: pw })
-    });
-    const data = await res.json();
-    if (data.ok) setOk(true);
-    else setError(data.error);
-  }
+    if (!password || password !== confirm) {
+      setError("Las contraseñas no coinciden");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch("/api/auth/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSuccess(true);
+        setTimeout(() => router.replace("/Login"), 2000);
+      } else {
+        setError(data.message || "Error al restablecer contraseña");
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  if (ok) {
+  if (success) {
     return (
-      <div className="p-8 max-w-md mx-auto">
-        <h1>Contraseña actualizada</h1>
-        <button onClick={()=>router.push("/Login")}>
-          Inicia sesión con tu nueva contraseña
-        </button>
+      <div className="min-h-screen flex items-center justify-center">
+        <h2 className="text-2xl text-green-500">
+          Contraseña restablecida con éxito. Redirigiendo…
+        </h2>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-8 max-w-md mx-auto">
-      <h1>Crear nueva contraseña</h1>
-      {error && <p className="text-red-500">{error}</p>}
-      <input
-        type="password"
-        placeholder="Nueva contraseña"
-        value={pw}
-        onChange={e=>setPw(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Confirma contraseña"
-        value={confirm}
-        onChange={e=>setConfirm(e.target.value)}
-        required
-      />
-      <button type="submit">Guardar contraseña</button>
-    </form>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded shadow-md w-full max-w-sm"
+      >
+        <h1 className="text-xl font-bold mb-4">Restablecer contraseña</h1>
+
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+
+        <label className="block mb-2">
+          Nueva contraseña
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full mt-1 p-2 border rounded"
+          />
+        </label>
+
+        <label className="block mb-4">
+          Confirmar contraseña
+          <input
+            type="password"
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
+            required
+            className="w-full mt-1 p-2 border rounded"
+          />
+        </label>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        >
+          {loading ? "Procesando…" : "Restablecer contraseña"}
+        </button>
+      </form>
+    </div>
   );
 }

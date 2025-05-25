@@ -1,9 +1,5 @@
-// File: app/auth/reset-password/page.jsx
-
 "use client"               // 1️⃣ siempre en la línea 1
-
 export const dynamic = "force-dynamic"  // 2️⃣ justo después del "use client"
-
 import { useState } from "react"       // 3️⃣ ahora sí vienen las importaciones
 import { useRouter, useSearchParams } from "next/navigation"
 

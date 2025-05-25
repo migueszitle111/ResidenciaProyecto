@@ -75,19 +75,19 @@ export async function POST(request) {
     await resetPasswordToken.create({ email, token });
 
     const transporter = nodemailer.createTransport({
-      host: 'smtp-relay.brevo.com', // Servidor SMTP
-      port: 587, // Puerto para SMTP
+      host: 'smtp.hostinger.com', // Servidor SMTP
+      port: 465, // Puerto para SMTP
       secure: false,  // true para usar TLS, false para usar STARTTLS
       auth: {
-        user: 'residencia@medxproapp.com',
-        pass: 'VKcBJ4SbXEpRvT6n', 
+        user: 'soporte@medxproapp.com',
+        pass: 'Medxpro2025$', 
       },
       authMethod: 'PLAIN', // Método de autenticación
     });
     
     // Configura el contenido del correo electrónico
     const mailOptions = {
-      from: 'residencia@medxproapp.com',
+      from: 'soporte@medxproapp.com',
       to: email,
       subject: 'Solicitud de restablecimiento de contraseña',
       text: `Utiliza este token para restablecer tu contraseña: ${token} Nota: Solo es válido por 1 hora.`,

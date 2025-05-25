@@ -1,48 +1,52 @@
 // app/payment/success/page.jsx
-"use client";
-export const dynamic = "force-dynamic"; // Fuerza modo dinámico
+// app/payment/success/page.jsx
+"use client"
 
-
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
+import { motion } from "framer-motion"
 
 export default function SuccessPage() {
-  const router = useRouter();
-  const params = useSearchParams();
-  const sessionId = params.get("session_id");
-
-  const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState("");
+  const router = useRouter()
+  const [sessionId, setSessionId] = useState(null)
+  const [loading, setLoading]     = useState(true)
+  const [error, setError]         = useState("")
 
   useEffect(() => {
-    if (!sessionId) {
-      setError("Falta session_id en la URL");
-      setLoading(false);
-      return;
+    // 1) Extrae session_id de la URL
+    const params = new URL(window.location.href).searchParams
+    const sid = params.get("session_id")
+    if (!sid) {
+      setError("Falta session_id en la URL")
+      setLoading(false)
+      return
     }
-    fetch(`/api/stripe/verify?session_id=${sessionId}`)
-      .then(r => r.json())
+    setSessionId(sid)
+
+    // 2) Llama a tu API de verificación
+    fetch(`/api/stripe/verify?session_id=${sid}`)
+      .then(res => res.json())
       .then(data => {
-        if (data.ok) setLoading(false);
-        else {
-          setError(data.error || "Verificación fallida");
-          setLoading(false);
+        if (data.ok) {
+          setLoading(false)
+        } else {
+          setError(data.error || "Verificación fallida")
+          setLoading(false)
         }
       })
-      .catch(e => {
-        setError(e.message);
-        setLoading(false);
-      });
-  }, [sessionId]);
+      .catch(err => {
+        setError(err.message)
+        setLoading(false)
+      })
+  }, [])
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black text-white">
         Verificando suscripción…
       </div>
-    );
+    )
   }
 
   return (
@@ -82,5 +86,5 @@ export default function SuccessPage() {
         )}
       </motion.div>
     </div>
-  );
+  )
 }

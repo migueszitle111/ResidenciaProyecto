@@ -20,7 +20,7 @@ const TemaList = () => {
     const fetchTemarios = async () => {
       try {
         // Realiza la solicitud a la API para obtener los temas
-        const res = await fetch("http://localhost:3000/api/temarios", {
+        const res = await fetch("https://www.medxproapp.com/api/temarios", {
           cache: "no-store",
         });
 

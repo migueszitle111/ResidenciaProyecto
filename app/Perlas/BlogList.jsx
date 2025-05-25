@@ -20,7 +20,7 @@ const Blog = () => {
     const fetchTemarios = async () => {
       try {
         // Realiza una solicitud para obtener las publicaciones del blog desde la API
-        const res = await fetch("http://localhost:3000/api/posts", {
+        const res = await fetch("https://www.medxproapp.com/api/posts", {
           cache: "no-store",
         });
 

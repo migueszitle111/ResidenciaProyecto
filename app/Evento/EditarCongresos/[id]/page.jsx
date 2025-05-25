@@ -39,7 +39,7 @@ const EditarCongresos = ({ params }) => {
     if (id) {
       const fetchTemasDetails = async () => {
         try {
-          const res = await fetch(`http://localhost:3000/api/congresos/${id}`, {
+          const res = await fetch(`https://www.medxproapp.com/api/congresos/${id}`, {
             cache: "no-store",
           });
 
@@ -106,7 +106,7 @@ const EditarCongresos = ({ params }) => {
 
       // Actualizar el tema con la nueva información, incluida la URL de la imagen
       setUpdating(true); // Establecer updating en true al iniciar la actualización
-      const res = await fetch(`http://localhost:3000/api/congresos/${id}`, {
+      const res = await fetch(`https://www.medxproapp.com/api/congresos/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -33,7 +33,7 @@ export default function ResetPassword() {
       }
   
       // Enviar solicitud para verificar la existencia del correo en el servidor
-      const response = await fetch("http://localhost:3000/api/resetPassword", {
+      const response = await fetch("https://www.medxproapp.com/api/resetPassword", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

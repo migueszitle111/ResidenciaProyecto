@@ -4,7 +4,7 @@ export default function RemoveBoton({ id }) {
   const removePost = async () => {
     const confirmed = window.confirm('¿Estás seguro de eliminar este post?');
     if (confirmed) {
-      await fetch(`http://localhost:3000/api/posts?id=${id}`, {
+      await fetch(`https://www.medxproapp.com/api/posts?id=${id}`, {
         method: 'DELETE',
       });
       

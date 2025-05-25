@@ -4,7 +4,7 @@ export default function RemoveCurso({ id }) {
   const removeCurso = async () => {
     const confirmed = window.confirm('¿Estás seguro de eliminar este curso?');
     if (confirmed) {
-      await fetch(`http://localhost:3000/api/cursos?id=${id}`, {
+      await fetch(`https://www.medxproapp.com/api/cursos?id=${id}`, {
         method: 'DELETE',
       });
       

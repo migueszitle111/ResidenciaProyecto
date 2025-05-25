@@ -4,7 +4,7 @@ export default function RemoveBtn({ id }) {
   const removeTopic = async () => {
     const confirmed = window.confirm('¿Estás seguro de eliminar este tema?');
     if (confirmed) {
-      await fetch(`http://localhost:3000/api/topics?id=${id}`, {
+      await fetch(`https://www.medxproapp.com/api/topics?id=${id}`, {
         method: 'DELETE',
       });
       

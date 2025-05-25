@@ -13,7 +13,7 @@ const AgregarDiplomadosPage = () => {
 
   const handlePdfUpload = async ({ title, pdfContent }) => {
     try {
-      const res = await fetch("http://localhost:3000/api/diplomados", {
+      const res = await fetch("https://www.medxproapp.com/api/diplomados", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

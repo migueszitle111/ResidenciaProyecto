@@ -19,7 +19,7 @@ const CardsList = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/topics", {
+        const res = await fetch("https://www.medxproapp.com/api/topics", {
           cache: "no-store",
         });
 

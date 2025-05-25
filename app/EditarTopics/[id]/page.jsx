@@ -40,7 +40,7 @@ const EditarTopics = ({ params }) => {
     if (id) {
       const fetchTopicDetails = async () => {
         try {
-          const res = await fetch(`http://localhost:3000/api/topics/${id}`, {
+          const res = await fetch(`https://www.medxproapp.com/api/topics/${id}`, {
             cache: 'no-store',
           });
 
@@ -105,7 +105,7 @@ const EditarTopics = ({ params }) => {
 
       // Actualizar el tema con la nueva información, incluida la URL de la imagen
       setUpdating(true); // Establecer updating en true al iniciar la actualización
-      const res = await fetch(`http://localhost:3000/api/topics/${id}`, {
+      const res = await fetch(`https://www.medxproapp.com/api/topics/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -56,7 +56,7 @@ export default function Perlas() {
       const imageUrl = cloudinaryData.secure_url;
       
       // Envia la información del tema a la API
-      const res = await fetch("http://localhost:3000/api/posts", {
+      const res = await fetch("https://www.medxproapp.com/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

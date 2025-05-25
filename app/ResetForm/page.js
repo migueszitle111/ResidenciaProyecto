@@ -48,7 +48,7 @@ export default function ResetForm() {
       };
   
       // Enviar solicitud PUT para restablecer la contraseña
-      const response = await fetch("http://localhost:3000/api/resetPassword", {
+      const response = await fetch("https://www.medxproapp.com/api/resetPassword", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

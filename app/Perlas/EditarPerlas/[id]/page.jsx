@@ -51,7 +51,7 @@ const EditarPerlas = ({ params }) => {
     if (id) {
       const fetchTemasDetails = async () => {
         try {
-          const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+          const res = await fetch(`https://www.medxproapp.com/api/posts/${id}`, {
             cache: "no-store",
           });
 
@@ -106,7 +106,7 @@ const EditarPerlas = ({ params }) => {
 
       // Enviando la solicitud de modificación de la publicación
       setUpdating(true);
-      const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+      const res = await fetch(`https://www.medxproapp.com/api/posts/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

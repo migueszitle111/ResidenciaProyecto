@@ -46,7 +46,7 @@ export default function AgregarCursos() {
       const imageUrl = cloudinaryData.secure_url;
 
       // Luego puedes almacenar la URL de la imagen en tu base de datos junto con el título y descripción
-      const res = await fetch("http://localhost:3000/api/cursos", {
+      const res = await fetch("https://www.medxproapp.com/api/cursos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

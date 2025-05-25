@@ -62,7 +62,7 @@ export default function AgregarTopics() {
       const imageUrl = cloudinaryData.secure_url; // Obtiene la URL de la imagen subida a Cloudinary
 
       // Luego puedes almacenar la URL de la imagen en tu base de datos junto con el título y descripción
-      const res = await fetch("http://localhost:3000/api/topics", {
+      const res = await fetch("https://www.medxproapp.com/api/topics", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

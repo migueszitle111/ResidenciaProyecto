@@ -1,3 +1,4 @@
+//ap/api/resetPassword/route.js
 // Importa las dependencias necesarias
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";

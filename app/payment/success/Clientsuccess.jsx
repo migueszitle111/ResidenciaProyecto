@@ -1,4 +1,5 @@
 // app/payment/success/ClientSuccess.jsx
+// app/payment/success/ClientSuccess.jsx
 
 "use client";
 
@@ -22,16 +23,15 @@ export default function ClientSuccess() {
       return;
     }
     fetch(`/api/stripe/verify?session_id=${sessionId}`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.ok) {
-          setLoading(false);
-        } else {
+      .then(r => r.json())
+      .then(data => {
+        if (data.ok) setLoading(false);
+        else {
           setError(data.error || "Verificación fallida");
           setLoading(false);
         }
       })
-      .catch((e) => {
+      .catch(e => {
         setError(e.message);
         setLoading(false);
       });

@@ -1,4 +1,6 @@
-export const dynamic = "force-dynamic"; // ⚠️ fuerza a que siempre sea dinámico
+// app/payment/success/page.jsx
+
+export const dynamic = "force-dynamic"; // fuerza modo dinámico
 import ClientSuccess from "./ClientSuccess";
 
 export default function SuccessPage() {

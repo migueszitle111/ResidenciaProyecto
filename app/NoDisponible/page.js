@@ -33,7 +33,7 @@ export default function NoDisplonible() {
             posible.
           </p>
         </div>
-        <BannerPublicitarios />
+        
       </div>
       <hr className="bg-white h-0.5" />
       <Footer />

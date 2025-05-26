@@ -65,7 +65,7 @@ const Home = () => {
                 <Navbar />
               </div>
             )}
-            <CardsList />
+            {/* <CardsList /> */}
             <BannerPublicitarios />
           </>
         )}

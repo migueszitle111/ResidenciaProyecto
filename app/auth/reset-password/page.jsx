@@ -31,7 +31,7 @@ export default function ResetPasswordPage() {
     });
     if (res.ok) {
       setDone(true);
-      setTimeout(()=>router.replace("/Login"), 2000);
+      setTimeout(()=>router.replace("/"), 2000);
     } else {
       const { error: msg } = await res.json();
       setError(msg);

@@ -113,7 +113,6 @@ export default function Registro() {
         <div className="LogoRegistro mb-4">
           <Image src="/L_B_Blanco.svg" width={75} height={75} alt="Logo" />
         </div>
-        <h1 className="text-lg text-white">EMPIEZA GRATIS</h1>
         <h2 className="text-3xl text-white mt-2">Crea una nueva cuenta.</h2>
         <p className="text-base text-white mt-1">
           ¿Ya eres usuario?{" "}

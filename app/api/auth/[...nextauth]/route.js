@@ -1,5 +1,3 @@
-// File: app/api/auth/[...nextauth]/route.js
-
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -46,24 +44,39 @@ export const authOptions = {
   session: { strategy: "jwt" },
 
   callbacks: {
-    // Al hacer signIn con Google, si no ha pagado lanza Checkout
     async signIn({ user, account }) {
-      if (account.provider !== "google") return true;
-
       await connectMongoDB();
       const dbUser = await User.findOne({ email: user.email });
-      // Si ya pagó, pasa
-      if (dbUser?.subscriptionActive) return true;
 
-      // Si no, crea sesión de Checkout
-      const checkout = await stripe.checkout.sessions.create({
-        mode: "subscription",
-        line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-        customer_email: user.email,
-        success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: process.env.NEXTAUTH_URL,
-      });
-      return checkout.url;
+      // — Credenciales: si no pagó, lo mandamos a Checkout
+      if (account.provider === "credentials") {
+        if (!dbUser?.subscriptionActive) {
+          const checkout = await stripe.checkout.sessions.create({
+            mode: "subscription",
+            line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+            customer_email: user.email,
+            success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: process.env.NEXTAUTH_URL,
+          });
+          return checkout.url;
+        }
+        return true;
+      }
+
+      // — Google: tu flujo actual
+      if (account.provider === "google") {
+        if (dbUser?.subscriptionActive) return true;
+        const checkout = await stripe.checkout.sessions.create({
+          mode: "subscription",
+          line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+          customer_email: user.email,
+          success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: process.env.NEXTAUTH_URL,
+        });
+        return checkout.url;
+      }
+
+      return true;
     },
 
     async jwt({ token, user }) {

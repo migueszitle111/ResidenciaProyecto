@@ -5,6 +5,26 @@ export default function BannerPublicitarios() {
   return (
     <div>
       <div className="Conteiner mx-auto">
+      <div className="w-full lg:w-2/3 flex flex-col mx-auto m-5 rounded-tr-lg rounded-bl-lg p-5">
+        <Image
+          src="/assets/LandingPage/Page/Lp-16.png"
+          alt="Imagen superior"
+          width={1200}
+          height={300}
+          layout="responsive" // Hace la imagen responsiva
+          className="rounded-t-lg object-cover"
+        />
+      </div>
+      <div className="w-full lg:w-2/3 flex flex-col mx-auto m-5 rounded-tr-lg rounded-bl-lg p-5">
+        <Image
+          src="/assets/LandingPage/Page/Lp-10.png"
+          alt="Imagen superior"
+          width={1000}
+          height={300}
+          layout="responsive" // Hace la imagen responsiva
+          className="rounded-t-lg object-cover"
+        />
+      </div>
         <div>
           {/*Estilos y fondo del banner publicitario */}
           <div

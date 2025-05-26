@@ -140,3 +140,29 @@ nav {
 .animate-slideInRight {
   animation: slideInRight 0.5s ease-out;
 }
+
+/*############################## Ajutes para tamaños de pantallas #######################################################*/
+
+@media screen and (max-width: 768px) and (orientation: portrait) { /*Celular orientacion Vertical*/
+  .info-container textarea {
+      font-size: 11px; /* Ajusta según necesites */
+  }
+}
+
+
+@media screen and (max-width: 768px) and (orientation: landscape) {/* Celular orientacion Horizontal*/
+
+}
+
+/* Ajustes para dispositivos pequeños (móviles) Vertical */
+@media (max-width: 768px) {
+
+  .h-96 {
+    height: 17.5rem;
+    margin-top: 25px;
+  }
+
+  .h-48 {
+    height: 10rem;
+  }
+}

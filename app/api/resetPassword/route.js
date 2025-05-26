@@ -45,7 +45,7 @@ if (newPassword && confirmPassword) {
     await existingUser.save();
 
     // Devuelve un mensaje de éxito
-    return NextResponse.json({ message: "Contraseña actualizada exitosamente", redirectUrl: "/Login" }, { status: 200 });
+    return NextResponse.json({ message: "Contraseña actualizada exitosamente", redirectUrl: "/" }, { status: 200 });
   } catch (error) {
     console.error("Error processing PUT request:", error);
     return NextResponse.json({ message: "Error processing request" }, { status: 500 });

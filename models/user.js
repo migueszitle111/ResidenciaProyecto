@@ -8,15 +8,15 @@ const userSchema = new Schema({
   },
   lastname: {
     type: String,
-    required: function() { return this.provider === "credentials"; }
+    required: function() { return this.provider === "credentials" && this.isNew; }
   },
   cedula: {
     type: String,
-    required: function() { return this.provider === "credentials"; }
+    required: function() { return this.provider === "credentials" && this.isNew; }
   },
   especialidad: {
     type: String,
-    required: function() { return this.provider === "credentials"; }
+    required: function() { return this.provider === "credentials" && this.isNew; }
   },
   email: {
     type: String,

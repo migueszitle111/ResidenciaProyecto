@@ -1,8 +1,9 @@
-import Stripe from "stripe";
-import crypto from "crypto";
-import { NextResponse } from "next/server";
-import { connectMongoDB } from "@/lib/mongodb";
-import User from "@/models/user";
+// app/api/stripe/verify/route.js
+import Stripe            from "stripe";
+import crypto            from "crypto";
+import { NextResponse }  from "next/server";
+import { connectMongoDB }from "@/lib/mongodb";
+import User              from "@/models/user";
 import { sendPasswordReset, sendWelcomeEmail } from "@/lib/mail";
 
 export const runtime = "nodejs";
@@ -14,10 +15,10 @@ export async function GET(req) {
     return NextResponse.json({ ok: false, error: "Falta session_id" }, { status: 400 });
   }
 
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
+  const stripe  = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
   const session = await stripe.checkout.sessions.retrieve(session_id);
-
   await connectMongoDB();
+
   let user = await User.findOne({ email: session.customer_email });
 
   if (user) {
@@ -26,32 +27,52 @@ export async function GET(req) {
     user.subscriptionActive = true;
     await user.save();
 
-    // — Si es credentials y justo ahora pagó, le damos la bienvenida
+    // — Si es credentials y justo ahora pagó, enviamos bienvenida
     if (user.provider === "credentials" && !wasActive) {
       await sendWelcomeEmail(user.email);
     }
 
   } else {
-    // — NUEVO usuario Google: creamos y enviamos reset para fijar password
-    const token = crypto.randomBytes(32).toString("hex");
-    const expires = Date.now() + 3600_000;
+    // — NUEVO usuario credentials vs Google
+    if (session.metadata?.password) {
+      // — credentials: metadata trae name, lastname, cedula, especialidad, password...
+      const md = session.metadata;
+      user = await User.create({
+        name:               md.name,
+        lastname:           md.lastname,
+        cedula:             md.cedula,
+        especialidad:       md.especialidad,
+        email:              md.email,
+        password:           md.password,
+        roles:              md.roles,
+        imageUrl:           md.imageUrl,
+        provider:           "credentials",
+        subscriptionActive: true,
+      });
+      await sendWelcomeEmail(user.email);
 
-    user = await User.create({
-      name:                 session.customer_details?.name || "",
-      lastname:             "",
-      cedula:               "",
-      especialidad:         "",
-      email:                session.customer_email,
-      password:             "",
-      roles:                "user",
-      provider:             "google",
-      subscriptionActive:   true,
-      passwordResetToken:   token,
-      passwordResetExpires: expires,
-    });
+    } else {
+      // — Google: generamos token de reset para que cree contraseña
+      const token   = crypto.randomBytes(32).toString("hex");
+      const expires = Date.now() + 3600_000;
 
-    const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${token}`;
-    await sendPasswordReset(user.email, resetUrl);
+      user = await User.create({
+        name:                 session.customer_details?.name || "",
+        lastname:             "",
+        cedula:               "",
+        especialidad:         "",
+        email:                session.customer_email,
+        password:             "",
+        roles:                "user",
+        provider:             "google",
+        subscriptionActive:   true,
+        passwordResetToken:   token,
+        passwordResetExpires: expires,
+      });
+
+      const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${token}`;
+      await sendPasswordReset(user.email, resetUrl);
+    }
   }
 
   return NextResponse.json({ ok: true });

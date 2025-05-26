@@ -158,11 +158,11 @@ nav {
 @media (max-width: 768px) {
 
   .h-96 {
-    height: 17.5rem;
+    height: 15.3rem;
     margin-top: 25px;
   }
 
   .h-48 {
-    height: 10rem;
+    height: 9rem;
   }
 }

@@ -1,4 +1,4 @@
-// app/api/register/route.js
+// ===== File: app/api/register/route.js =====
 import { NextResponse } from "next/server";
 import Stripe          from "stripe";
 import bcrypt          from "bcryptjs";
@@ -14,7 +14,7 @@ export async function POST(req) {
   // 1) Hasheamos la contraseña
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  // 2) Creamos la sesión de Checkout pasando todos los datos en metadata
+  // 2) Creamos la sesión de Checkout con todos los datos en metadata
   const session = await stripe.checkout.sessions.create({
     mode: "subscription",
     payment_method_types: ["card"],
@@ -34,5 +34,6 @@ export async function POST(req) {
     cancel_url:  `${process.env.NEXTAUTH_URL}/Registro?canceled=true`,
   });
 
+  // 3) Devolvemos la URL de Stripe para redirigir en el cliente
   return NextResponse.json({ url: session.url });
 }

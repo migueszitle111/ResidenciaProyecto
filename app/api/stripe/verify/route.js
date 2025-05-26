@@ -1,9 +1,9 @@
-// app/api/stripe/verify/route.js
-import Stripe            from "stripe";
-import crypto            from "crypto";
-import { NextResponse }  from "next/server";
-import { connectMongoDB }from "@/lib/mongodb";
-import User              from "@/models/user";
+// ===== File: app/api/stripe/verify/route.js =====
+import Stripe             from "stripe";
+import crypto             from "crypto";
+import { NextResponse }   from "next/server";
+import { connectMongoDB } from "@/lib/mongodb";
+import User               from "@/models/user";
 import { sendPasswordReset, sendWelcomeEmail } from "@/lib/mail";
 
 export const runtime = "nodejs";
@@ -22,21 +22,22 @@ export async function GET(req) {
   let user = await User.findOne({ email: session.customer_email });
 
   if (user) {
-    // — EXISTENTE: activamos subscripción
+    // — EXISTENTE: activamos su subscripción
     const wasActive = user.subscriptionActive;
     user.subscriptionActive = true;
     await user.save();
 
-    // — Si es credentials y justo ahora pagó, enviamos bienvenida
+    // — Si es credentials y justo ahora pagó, mandamos bienvenida
     if (user.provider === "credentials" && !wasActive) {
       await sendWelcomeEmail(user.email);
     }
 
   } else {
-    // — NUEVO usuario credentials vs Google
-    if (session.metadata?.password) {
-      // — credentials: metadata trae name, lastname, cedula, especialidad, password...
-      const md = session.metadata;
+    // — NUEVO: diferenciamos credentials vs google según metadata
+    const md = session.metadata || {};
+
+    if (md.password) {
+      // → Nuevo registro por formulario (credentials)
       user = await User.create({
         name:               md.name,
         lastname:           md.lastname,
@@ -52,9 +53,9 @@ export async function GET(req) {
       await sendWelcomeEmail(user.email);
 
     } else {
-      // — Google: generamos token de reset para que cree contraseña
+      // → Nuevo registro via Google
       const token   = crypto.randomBytes(32).toString("hex");
-      const expires = Date.now() + 3600_000;
+      const expires = Date.now() + 3600_000; // 1h
 
       user = await User.create({
         name:                 session.customer_details?.name || "",

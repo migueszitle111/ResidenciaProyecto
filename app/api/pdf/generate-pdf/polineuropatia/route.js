@@ -569,7 +569,7 @@ function buildHtml({
         gap: 16px;
         font-size: 10px;
         opacity: 50%;
-        margin-top: 110px;
+        margin-top: 90px;
         align-items: center;
         justify-content: center;
       }

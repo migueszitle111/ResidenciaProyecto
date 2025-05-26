@@ -1,49 +1,44 @@
-"use client"
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { signIn } from "next-auth/react"
-import { motion } from "framer-motion"
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter }           from "next/navigation";
+import { signIn }              from "next-auth/react";
+import { motion }              from "framer-motion";
 
 export default function SuccessPage() {
-  const router = useRouter()
-  const [sessionId, setSessionId] = useState(null)
-  const [loading, setLoading]     = useState(true)
-  const [error, setError]         = useState("")
+  const router = useRouter();
+  const [loading, setLoading]     = useState(true);
+  const [error, setError]         = useState("");
+  const [provider, setProvider]   = useState(null);
 
   useEffect(() => {
-    // 1) Extrae session_id de la URL
-    const params = new URL(window.location.href).searchParams
-    const sid = params.get("session_id")
+    const params = new URL(window.location.href).searchParams;
+    const sid = params.get("session_id");
     if (!sid) {
-      setError("Falta session_id en la URL")
-      setLoading(false)
-      return
+      setError("Falta session_id en la URL");
+      setLoading(false);
+      return;
     }
-    setSessionId(sid)
 
-    // 2) Llama a tu API de verificación
     fetch(`/api/stripe/verify?session_id=${sid}`)
       .then(res => res.json())
       .then(data => {
         if (data.ok) {
-          setLoading(false)
+          setProvider(data.provider);
         } else {
-          setError(data.error || "Verificación fallida")
-          setLoading(false)
+          setError(data.error || "Verificación fallida");
         }
       })
-      .catch(err => {
-        setError(err.message)
-        setLoading(false)
-      })
-  }, [])
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black text-white">
         Verificando suscripción…
       </div>
-    )
+    );
   }
 
   return (
@@ -65,13 +60,13 @@ export default function SuccessPage() {
               Volver al inicio
             </button>
           </>
-        ) : (
+        ) : provider === "google" ? (
           <>
             <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600 mb-4">
-              ¡Bienvenido a MedxProapp!
+              ¡Listo!
             </h1>
             <p className="text-white mb-6">
-              Tu suscripción se ha activado con éxito.
+              Tu suscripción está activa. Inicia sesión con tu cuenta de Google:
             </p>
             <button
               onClick={() => signIn("google", { callbackUrl: "/" })}
@@ -80,8 +75,23 @@ export default function SuccessPage() {
               Iniciar sesión con Google
             </button>
           </>
+        ) : (
+          <>
+            <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600 mb-4">
+              ¡Bienvenido a MedxProapp!
+            </h1>
+            <p className="text-white mb-6">
+              ¡Tu suscripción está activa y ya puedes acceder!
+            </p>
+            <button
+              onClick={() => router.replace("/")}
+              className="bg-orange-500 hover:bg-orange-700 text-white px-6 py-3 rounded"
+            >
+              Entrar a la plataforma
+            </button>
+          </>
         )}
       </motion.div>
     </div>
-  )
+  );
 }

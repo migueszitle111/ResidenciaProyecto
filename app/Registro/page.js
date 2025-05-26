@@ -1,23 +1,23 @@
-// ===== File: app/registro/page.js =====
+// app/registro/page.js
 "use client";
 
 import React, { useState, useEffect } from "react";
 import Image            from "next/image";
 import { useRouter }    from "next/navigation";
+import { signIn }       from "next-auth/react";
 
 import Overhead     from "../components/Overhead";
 import OverheadMenu from "../components/OverheadMenu";
 
 export default function Registro() {
-  const [name, setName]             = useState("");
-  const [lastname, setLastname]     = useState("");
-  const [email, setMail]            = useState("");
-  const [cedula, setCedula]         = useState("");
+  const [name, setName]                 = useState("");
+  const [lastname, setLastname]         = useState("");
+  const [email, setMail]                = useState("");
+  const [cedula, setCedula]             = useState("");
   const [especialidad, setEspecialidad] = useState("");
-  const [password, setPassword]     = useState("");
-  const [error, setError]           = useState("");
-  const [roles]                     = useState("user");
-  const [newImage, setNewImage]     = useState(null);
+  const [password, setPassword]         = useState("");
+  const [error, setError]               = useState("");
+  const [newImage, setNewImage]         = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
   const router = useRouter();
@@ -60,7 +60,7 @@ export default function Registro() {
           especialidad,
           email,
           password,
-          roles,
+          roles: "user",
           imageUrl,
         }),
       });
@@ -145,22 +145,48 @@ export default function Registro() {
           />
 
           <div>
-            <p className="text-xs text-white mb-1">Logo de tu empresa (opcional):</p>
+            <p className="text-xs text-white mb-1">
+              Logo de tu empresa (opcional):
+            </p>
             <input type="file" onChange={handleImageChange}/>
             {imagePreview && (
               <div className="w-full h-40 mt-2">
-                <img src={imagePreview} alt="Vista previa" className="object-cover w-full h-full rounded"/>
+                <img
+                  src={imagePreview}
+                  alt="Vista previa"
+                  className="object-cover w-full h-full rounded"
+                />
               </div>
             )}
           </div>
 
-          {error && <div className="bg-red-500 text-white p-2 rounded">{error}</div>}
+          {error && (
+            <div className="bg-red-500 text-white p-2 rounded">
+              {error}
+            </div>
+          )}
 
+          {/* → FLOW “credentials” */}
           <button
             type="submit"
             className="w-full bg-orange-500 text-white py-3 rounded hover:bg-orange-700 transition"
           >
             Continuar al pago
+          </button>
+
+          {/* → FLOW “google” */}
+          <button
+            type="button"
+            onClick={() => signIn("google", {
+              callbackUrl: "/payment/success"  // o "/" si ya pagó antes
+            })}
+            className="w-full flex items-center justify-center gap-2 py-3 rounded text-white bg-red-600 hover:bg-red-800 transition"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 48 48">
+              <path fill="#FFC107" d="M43.6 20.5h-2.2v-.1H24v7.1h11.3c-1.5…"/>
+              <path fill="#1976D2" d="M43.6 20.5h-2.2v-.1H24v7.1h11.3c-1.2…"/>
+            </svg>
+            Continuar con Google
           </button>
         </form>
       </div>

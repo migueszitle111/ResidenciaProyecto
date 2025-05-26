@@ -84,7 +84,7 @@ export default function SuccessPage() {
               ¡Tu suscripción está activa y ya puedes acceder!
             </p>
             <button
-              onClick={() => router.replace("/")}
+              onClick={() => router.replace("/Login")}
               className="bg-orange-500 hover:bg-orange-700 text-white px-6 py-3 rounded"
             >
               Entrar a la plataforma

@@ -1,3 +1,4 @@
+// ===== File: app/api/stripe/verify/route.js =====
 import Stripe             from "stripe";
 import crypto             from "crypto";
 import { NextResponse }   from "next/server";
@@ -16,64 +17,49 @@ export async function GET(req) {
 
   const stripe  = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
   const session = await stripe.checkout.sessions.retrieve(session_id);
-
   await connectMongoDB();
+
+  // ¿Ya estaba en la DB?
   let user = await User.findOne({ email: session.customer_email });
-  let provider;
 
   if (user) {
-    // EXISTENTE
+    // => EXISTENTE: activamos si no estaba
     const wasActive = user.subscriptionActive;
     user.subscriptionActive = true;
     await user.save();
-    provider = user.provider;
 
+    // Si era credentials y justo pagó, enviamos bienvenida:
     if (user.provider === "credentials" && !wasActive) {
       await sendWelcomeEmail(user.email);
     }
 
   } else {
-    // NUEVO
-    // diferenciar credentials vs google según metadata
-    if (session.metadata?.password) {
-      // → credentials
-      user = await User.create({
-        name:               session.metadata.name,
-        lastname:           session.metadata.lastname,
-        cedula:             session.metadata.cedula,
-        especialidad:       session.metadata.especialidad,
-        email:              session.metadata.email,
-        password:           session.metadata.password,
-        roles:              session.metadata.roles,
-        imageUrl:           session.metadata.imageUrl,
-        provider:           "credentials",
-        subscriptionActive: true,
-      });
-      provider = "credentials";
-      await sendWelcomeEmail(user.email);
+    // => NUEVO: sacamos toda la metadata
+    const md = session.metadata || {};
 
-    } else {
-      // → google
-      const token   = crypto.randomBytes(32).toString("hex");
-      const expires = Date.now() + 3600_000;
-      user = await User.create({
-        name:                 session.customer_details?.name || "",
-        lastname:             "",
-        cedula:               "",
-        especialidad:         "",
-        email:                session.customer_email,
-        password:             "",
-        roles:                "user",
-        provider:             "google",
-        subscriptionActive:   true,
-        passwordResetToken:   token,
-        passwordResetExpires: expires,
-      });
-      provider = "google";
-      const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${token}`;
-      await sendPasswordReset(user.email, resetUrl);
-    }
+    // Generamos token para reset
+    const token   = crypto.randomBytes(32).toString("hex");
+    const expires = Date.now() + 3600_000;
+
+    user = await User.create({
+      name:                 md.name || session.customer_details?.name || "",
+      lastname:             md.lastname || "",
+      cedula:               md.cedula || "",
+      especialidad:         md.especialidad || "",
+      email:                session.customer_email,
+      password:             "",            // sin contraseña
+      roles:                md.roles || "user",
+      imageUrl:             md.imageUrl || "",
+      provider:             md.provider || "credentials",
+      subscriptionActive:   true,
+      passwordResetToken:   token,
+      passwordResetExpires: expires,
+    });
+
+    // Enviamos correo para crear contraseña
+    const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${token}`;
+    await sendPasswordReset(user.email, resetUrl);
   }
 
-  return NextResponse.json({ ok: true, provider });
+  return NextResponse.json({ ok: true });
 }

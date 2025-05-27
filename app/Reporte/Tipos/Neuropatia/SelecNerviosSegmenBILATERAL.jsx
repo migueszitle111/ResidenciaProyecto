@@ -9387,61 +9387,61 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
   if (copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {/* SEGUIR AQUI */
     return (<>
       <div style={{ position: 'absolute', top: '5.2%', left: '51.0%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car1' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car1' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.2%', left: '51.7%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car2' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car2' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.3%', left: '52.2%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car3' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car3' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.4%', left: '52.6%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car4' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car4' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.7%', left: '53.0%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car5' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car5' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.9%', left: '53.6%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car6' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car6' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '6.4%', left: '54.2%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car7' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car7' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '8.2%', left: '50.4%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car8' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car8' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.2%', left: '50.9%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car9' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car9' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.0%', left: '51.4%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car10' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car10' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.0%', left: '52.1%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car11' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car11' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.0%', left: '52.8%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car12' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car12' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.0%', left: '53.6%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car13' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car13' title='DEL FORAMEN ESTILOMASTOIDEO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.3%', left: '54.0%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car14' title='DISTAL A FOSA ESTILOMASTOIDEA,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car14' title='DEL FORAMEN ESTILOMASTOIDEO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '9.0%', left: '54.8%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car15' title='MALAR,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car15' title='DEL FORAMEN ESTILOMASTOIDEO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.0%', left: '54.5%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car16' title='MALAR,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car16' title='DEL FORAMEN ESTILOMASTOIDEO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.6%', left: '53.8%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car17' title='MALAR,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car17' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '9.2%', left: '53.6%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car18' title='MALAR,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car18' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '9.4%', left: '53.1%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car19' title='MALAR,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car19' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '9.8%', left: '52.5%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car20' title='MALAR,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car20' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '9.8%', left: '52.0%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car21' title='MALAR,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car21' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '9.7%', left: '51.3%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car22' title='MALAR,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car22' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.9%', left: '52.9%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car23' title='MADICULAR,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car23' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '10.9%', left: '53.5%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car24' title='MADICULAR,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car24' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.1%', left: '51.6%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car25' title='MADICULAR,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car25' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.1%', left: '52.2%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car26' title='MADICULAR,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car26' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.2%', left: '50.9%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car27' title='MADICULAR,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car27' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.2%', left: '50.3%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car28' title='MADICULAR,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car28' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
 
 
 <div style={{ position: 'absolute', top: '5.1%', left: '48.2%', transform: 'rotate(180deg)' }}
@@ -9506,61 +9506,61 @@ export function checkDivsSegmentarBilateral(copyConclusions) {
   if (copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {/* SEGUIR AQUI */
     return (<>
       <div style={{ position: 'absolute', top: '5.1%', left: '48.2%', transform: 'rotate(180deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car1' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car1' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.3%', left: '47.8%', transform: 'rotate(180deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car2' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car2' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.2%', left: '47.3%', transform: 'rotate(180deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car3' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car3' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.3%', left: '46.7%', transform: 'rotate(180deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car4' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car4' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '5.6%', left: '46.0%', transform: 'rotate(180deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car5' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car5' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '6.0%', left: '45.5%', transform: 'rotate(180deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car6' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car6' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '6.6%', left: '44.9%', transform: 'rotate(180deg)' }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car7' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car7' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '8.2%', left: '48.4%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car8' title='RAMA 1,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car8' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.2%', left: '47.8%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car9' title='RAMA 1,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car9' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.1%', left: '47.1%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car10' title='RAMA 1,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car10' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.1%', left: '46.4%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car11' title='RAMA 1,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car11' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.0%', left: '45.8%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car12' title='RAMA 1,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car12' title='INTRAPETROSO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.0%', left: '45.3%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car13' title='RAMA 1,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car13' title='DEL FORAMEN ESTILOMASTOIDEO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '8.6%', left: '44.6%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car14' title='CENTRAL RAMA 1,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car14' title='DEL FORAMEN ESTILOMASTOIDEO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '9.2%', left: '44.2%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car15' title='CENTRAL RAMA 1,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car15' title='DEL FORAMEN ESTILOMASTOIDEO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.0%', left: '44.5%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car16' title='CENTRAL RAMA 2,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car16' title='DEL FORAMEN ESTILOMASTOIDEO,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.6%', left: '45.2%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car17' title='MALAR,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car17' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '9.5%', left: '45.6%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car18' title='RAMA 2,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car18' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.0%', left: '46.2%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car19' title='RAMA 2,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car19' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.0%', left: '46.8%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car20' title='RAMA 2,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car20' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.1%', left: '47.4%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car21' title='RAMA 2,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car21' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '10.1%', left: '47.9%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car22' title='RAMA 2,' displayText=' ' /></div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car22' title='DE RAMA CERVICOFACIAL,' displayText=' ' /></div>
       <div style={{ position: 'absolute', top: '11.0%', left: '45.9%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car23' title='RAMA 3,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car23' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.0%', left: '46.3%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car24' title='RAMA 3,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car24' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.2%', left: '46.9%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car25' title='RAMA 3,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car25' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.2%', left: '47.5%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car26' title='RAMA 3,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car26' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.2%', left: '48.3%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car27' title='RAMA 3,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car27' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '11.2%', left: '48.8%', }}
-        className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL value='car28' title='RAMA 3,' displayText=' ' /> </div>
+        className={`dont-print-Nervius`} > <SegmentariaButton value='car28' title='DE RAMA CERVICOFACIAL,' displayText=' ' /> </div>
 
 
 

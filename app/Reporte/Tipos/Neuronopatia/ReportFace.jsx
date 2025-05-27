@@ -151,8 +151,8 @@ function formatConclusions(text) {
 
   /* 1A)  insertamos el salto SIEMPRE                */
   text = text.replace(
-    /\.?\s*REINERVACIÓN/gi,   // punto opcional + espacios
-    '.\n\n REINERVACIÓN'      // punto + 2 saltos + espacio
+    /\.?\s*(SIN\s+REINERVACIÓN|REINERVACIÓN)/gi,   // punto opcional + espacios + ambas frases
+    '.\n\n $1'      // punto + 2 saltos + espacio + frase encontrada
   );
 
   /* 1B)  comas y conjunción (opcional)              */

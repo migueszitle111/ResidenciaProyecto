@@ -931,7 +931,7 @@ const StepG2 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
           removeConclusion(`${selectedSide}subcorticals`)
           removeConclusion(`${selectedSide}cervicals`)
           removeConclusion(`${selectedSide}perifericos`)
-          setStep('F2')}}id='prev' className='print-button dont-print'>
+          setStep('F2')}} id='prev' className='print-button dont-print'>
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
@@ -1127,7 +1127,7 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
         </div>
   );
 };
-const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint }) => {
+const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs }) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
   const { conclusions } = useContext(ReportContext)
   const { droppedItems } = useContext(DropContext);
@@ -1201,7 +1201,6 @@ const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint }) => {
           <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
         </button>
 
-
         <button onClick={() => window.location.reload()} className={`print-button`}>
           <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
         </button>
@@ -1210,7 +1209,6 @@ const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint }) => {
         <button onClick={handleExportPdf} className={`print-button dont-print`}>
           <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
         </button>
-
       </div>
       <MenuImagenes  expandedDivs={expandedDivs}
         setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}

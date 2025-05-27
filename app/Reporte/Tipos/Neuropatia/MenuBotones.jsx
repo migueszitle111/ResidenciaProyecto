@@ -1091,7 +1091,9 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
       <div onClick={() => setStep('R')}>
         <ConclusionButton value='pobre' title='PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
       <div onClick={() => setStep('R')}>
-        <ConclusionButton value='nulo' title='PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div>
+        <ConclusionButton value='nulo' title='PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div> 
+      
+
       </div>
         
   );
@@ -1127,7 +1129,7 @@ const StepR = ({ handlePrevStep, handleNextStep, setStep }) => {
       <ConclusionButton value='salto' title='' displayText={'AGREGAR NUEVO'} /></div>  
 
       <div className='text-center py-10' onClick={() => setStep('I')}>
-        <ConclusionButton value='nulo' title=' ' displayText={'FINALIZAR'} /></div>
+        <ConclusionButton value='fin' title=' ' displayText={'FINALIZAR'} /></div>
 
       </div>
         

@@ -17,7 +17,6 @@ export async function POST(req) {
   }
 
   user.password             = await bcrypt.hash(password, 10);
-  user.provider             = "credentials";
   user.passwordResetToken   = undefined;
   user.passwordResetExpires = undefined;
   await user.save();

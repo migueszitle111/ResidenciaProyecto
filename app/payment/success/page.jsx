@@ -81,7 +81,8 @@ export default function SuccessPage() {
               ¡Bienvenido a MedxProapp!
             </h1>
             <p className="text-white mb-6">
-              ¡Tu suscripción está activa y ya puedes acceder!
+              Revisa tu correo electrónico. Recibirás un enlace para crear una nueva contraseña.
+              ¡Asigna tu contraseña y accede a Medxproapp.com!
             </p>
             <button
               onClick={() => router.replace("/Login")}

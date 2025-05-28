@@ -2,12 +2,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter }           from "next/navigation";
 import { signIn }              from "next-auth/react";
 import { motion }              from "framer-motion";
 
 export default function SuccessPage() {
-  const router = useRouter();
   const [loading, setLoading]   = useState(true);
   const [error, setError]       = useState("");
   const [provider, setProvider] = useState(null);
@@ -50,9 +48,9 @@ export default function SuccessPage() {
         transition={{ duration: 0.6 }}
         className="relative flex flex-col items-center bg-white bg-opacity-10 backdrop-blur-lg p-10 rounded-2xl shadow-2xl text-center max-w-md w-full"
       >
-        {/* Botón cerrar */}
+        {/* Botón cerrar ahora cierra la pestaña */}
         <button
-          onClick={() => router.back()}
+          onClick={() => window.close()}
           className="absolute top-3 right-3 text-white text-2xl hover:text-gray-300"
           aria-label="Cerrar"
         >
@@ -64,10 +62,10 @@ export default function SuccessPage() {
             <h1 className="text-3xl text-red-500 mb-4">¡Ups!</h1>
             <p className="text-white mb-6">{error}</p>
             <button
-              onClick={() => router.replace("/")}
+              onClick={() => window.close()}
               className="bg-orange-500 hover:bg-orange-700 text-white px-6 py-3 rounded"
             >
-              Volver al inicio
+              Cerrar
             </button>
           </>
         ) : provider === "google" ? (
@@ -88,7 +86,7 @@ export default function SuccessPage() {
         ) : (
           <>
             <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600 mb-4">
-              ¡Bienvenido a mEDXproapp!
+              ¡Bienvenido a MedxProapp!
             </h1>
             <p className="text-white mb-6">
               Acabamos de enviarte un correo para crear tu contraseña.  

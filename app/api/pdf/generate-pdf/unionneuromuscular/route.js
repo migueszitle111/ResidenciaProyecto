@@ -482,7 +482,7 @@ const showProximal     = strLower.includes("proximal");
             gap: 16px;
             font-size: 10px;
             opacity: 50%;
-            margin-top: 110px;
+            margin-top: 95px;
             align-items: center;
             justify-content: center;
 

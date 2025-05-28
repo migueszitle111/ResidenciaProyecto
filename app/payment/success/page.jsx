@@ -48,7 +48,7 @@ export default function SuccessPage() {
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative bg-white bg-opacity-10 backdrop-blur-lg p-10 rounded-2xl shadow-2xl text-center max-w-md"
+        className="relative flex flex-col items-center bg-white bg-opacity-10 backdrop-blur-lg p-10 rounded-2xl shadow-2xl text-center max-w-md w-full"
       >
         {/* Botón cerrar */}
         <button
@@ -96,7 +96,7 @@ export default function SuccessPage() {
             </p>
 
             {/* Recomendaciones */}
-            <div className="text-left text-sm text-white bg-white bg-opacity-5 p-4 rounded">
+            <div className="mx-auto mt-4 text-left text-sm text-white bg-white bg-opacity-5 p-4 rounded max-w-xs">
               <p className="font-semibold mb-2">¿No ves el correo?</p>
               <ul className="list-disc list-inside space-y-1">
                 <li>Revisa tu carpeta de Spam/Basura.</li>

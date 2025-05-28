@@ -387,8 +387,8 @@ const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
     
       <div onClick={() => setStep('G')}>
         <ConclusionButton value='rostral' title=' A TRAVÉS DE REGIÓN ROSTRAL DEL TALLO CEREBRAL' displayText='ROSTRAL (III-V)' />
-        <ConclusionButton value='caudal' title=' A TRAVÉS DE REGIÓN CAUDAL DEL TALLO CEREBERAL' displayText='CAUDAL (I-III)' />
-        <ConclusionButton value='tallo_cerebral' title=' A TRAVÉS DEL TALLO CEREBERAL' displayText='TOTAL (I-V)' />
+        <ConclusionButton value='caudal' title=' A TRAVÉS DE REGIÓN CAUDAL DEL TALLO CEREBRAL' displayText='CAUDAL (I-III)' />
+        <ConclusionButton value='tallo_cerebral' title=' A TRAVÉS DEL TALLO CEREBRAL' displayText='TOTAL (I-V)' />
       </div>
     </div>
   );

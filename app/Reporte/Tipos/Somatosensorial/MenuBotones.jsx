@@ -1129,61 +1129,62 @@ const StepH1 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
 };
 const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs }) => {
   const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
-  const { conclusions } = useContext(ReportContext)
-  const { droppedItems } = useContext(DropContext);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleExportPdf = async () => {
-    try {
-      setIsLoading(true); // ⌛ Mostrar overlay
-       // 1) conclusiones (array con {value, title})
-    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-
-    const conclusiones = conclusions;
+    const { conclusions } = useContext(ReportContext)
+    const { droppedItems } = useContext(DropContext);
+    const [isLoading, setIsLoading] = useState(false);
 
 
-      const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          finalConclusion: conclusionFinal, // Envías la cadena final
-          conclusiones, // <--- envías el array de conclusiones
-          userData: {
-            name: session?.user?.name,
-            lastname: session?.user?.lastname,
-            email: session?.user?.email,
-            cedula: session?.user?.cedula,
-            especialidad: session?.user?.especialidad,
-            imageUrl: session?.user?.imageUrl,
-          },
-          droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText,
+    const handleExportPdf = async () => {
+      try {
+        setIsLoading(true); // ⌛ Mostrar overlay
+         // 1) conclusiones (array con {value, title})
+      const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
 
-        }),
-      });
+      const conclusiones = conclusions;
 
-      if (!response.ok) {
-        throw new Error("Error al generar PDF");
+
+        const response = await fetch('/api/pdf/generate-pdf/somatosensorial?route', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            finalConclusion: conclusionFinal, // Envías la cadena final
+            conclusiones, // <--- envías el array de conclusiones
+            userData: {
+              name: session?.user?.name,
+              lastname: session?.user?.lastname,
+              email: session?.user?.email,
+              cedula: session?.user?.cedula,
+              especialidad: session?.user?.especialidad,
+              imageUrl: session?.user?.imageUrl,
+            },
+            droppedItems, // <--- envía también el array de items arrastrados
+            topLeftText,
+
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Error al generar PDF");
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'reporte-completo.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al generar PDF: ' + error.message);
+      } finally {
+        document.body.style.cursor = 'default';
+        setIsLoading(false); // ✅ Ocultar overlay
       }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'reporte-completo.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-
-
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error al generar PDF: ' + error.message);
-    } finally {
-      document.body.style.cursor = 'default';
-      setIsLoading(false); // ✅ Ocultar overlay
-    }
+    };
     if (isLoading) {
       return (
         <div className="loading-overlay">
@@ -1193,7 +1194,7 @@ const StepH2 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
         </div>
       );
     }
-  };
+
   return (
     <div>
       <div className='button-bar'>

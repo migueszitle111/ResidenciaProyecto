@@ -972,11 +972,11 @@ const StepF = ({ handlePrevStep, handleNextStep, setStep }) => {
       </h1>
 
       <div onClick={() => setStep('G')}>
-        <ConclusionButton value=' LEVE (NEUROAPRAXIA)' title='INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
+        <ConclusionButton value=' LEVE (NEUROAPRAXIA)' title=' INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
       <div onClick={() => setStep('G')}>
-        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)' title='INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
+        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)' title=' INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
       <div onClick={() => setStep('G')}>
-        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title='INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
+        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title=' INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
     </div>
   );
 };
@@ -1011,11 +1011,11 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep }) => {
       </h1>
 
       <div onClick={() => setStep('H')}>
-        <ConclusionButton value=' LEVE (NEUROAPRAXIA)' title='INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
+        <ConclusionButton value=' LEVE (NEUROAPRAXIA)' title=' INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
       <div onClick={() => setStep('H')}>
-        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)' title='INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
+        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)' title=' INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
       <div onClick={() => setStep('H')}>
-        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title='INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
+        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)' title=' INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
     </div>
   );
 };
@@ -1926,11 +1926,11 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep }) => {
       </h1>
 
       <div onClick={() => setStep('G2')}>
-        <ConclusionButton value=' LEVE (NEUROAPRAXIA)2' title='INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
+        <ConclusionButton value=' LEVE (NEUROAPRAXIA)2' title=' INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
       <div onClick={() => setStep('G2')}>
-        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)2' title='INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
+        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)2' title=' INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
       <div onClick={() => setStep('G2')}>
-        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2' title='INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
+        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2' title=' INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
     </div>
   );
 };
@@ -1965,11 +1965,11 @@ const StepF12 = ({ handlePrevStep, handleNextStep, setStep }) => {
       </h1>
 
       <div onClick={() => setStep('H2')}>
-        <ConclusionButton value=' LEVE (NEUROAPRAXIA)2' title='INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
+        <ConclusionButton value=' LEVE (NEUROAPRAXIA)2' title=' INTENSIDAD LEVE. ' displayText={' LEVE'} /></div>
       <div onClick={() => setStep('H2')}>
-        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)2' title='INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
+        <ConclusionButton value=' MODERADA (AXONOTMESIS INCOMPLETA)2' title=' INTENSIDAD MODERADA. ' displayText={' MODERADA '} /></div>
       <div onClick={() => setStep('H2')}>
-        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2' title='INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
+        <ConclusionButton value=' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2' title=' INTENSIDAD SEVERA. ' displayText={' SEVERA '} /></div>
     </div>
   );
 };

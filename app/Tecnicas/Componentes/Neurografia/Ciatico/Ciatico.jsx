@@ -74,28 +74,50 @@ const Ciatico = () => {
         setExtraImage('');
     };
 
+        const renderGalleryItem = (item) => (
+    <img
+        src={item.original}
+        alt=""
+        onContextMenu={e => e.preventDefault()}
+        draggable={false}
+        style={{ width: '100%' }}
+    />
+    );
+    const renderThumbInner = (item) => (
+        <img
+            src={item.thumbnail}
+            alt=""
+            onContextMenu={e => e.preventDefault()}
+            draggable={false}
+            style={{ width: '100%' }}
+        />
+    );
+
     return (
         
         <div  className=" py-20 gallery-container">
             
             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
-           {!isLandscape && (
+            {!isLandscape && (
                 <div className="orientation-message">
                     <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
         
-        <ImageGallery items={images}
-            onSlide={handleSlide}
-            showFullscreenButton={false}
-            showPlayButton={false}
-            showBullets={false}
-            showNav={false}
-            showThumbnails={true}
-            thumbnailPosition="bottom"s
-            bulletclass="bullet"
-        />
+            <ImageGallery
+                items={images}
+                onSlide={handleSlide}
+                showFullscreenButton={false}
+                showPlayButton={false}
+                showBullets={false}
+                showNav={false}
+                showThumbnails={true}
+                thumbnailPosition="bottom"
+                bulletclass="bullet"
+                renderItem={renderGalleryItem}
+                renderThumbInner={renderThumbInner} // <-- Añadido aquí
+            />
         <div>
             {/* Primera Imagen */}
             {currentImageIndex === 0 && <button className="btnCt1" onClick={() => handleButtonClick('SACRO. Se inserta la aguja de estimulación monopolar alrededor de 1 cm medial y ligeramente caudal a la espina ilíaca postero superior, el ánodo será un electrodo de superficie colocado sobre la apófisis espinosa. Con este registro se puede determinar la conducción a través del plexo sacro, posterior a la evaluación del nervio Ciático y restando el cálculo de su latencia.', { top: '62%', left: '50%' })}></button>}
@@ -123,11 +145,22 @@ const Ciatico = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                <button className={`print-button`} onClick={closeModal}>
-                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
-                </button>
-                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-            </div>
+                    <button className={`print-button`} onClick={closeModal}>
+                        <img
+                            src="/I_X.webp"
+                            style={{ filter: 'invert(1)' }}
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </button>
+                    <img
+                        src={extraImage}
+                        alt="Imagen Extra"
+                        className="modal-image"
+                        onContextMenu={e => e.preventDefault()}
+                        draggable={false}
+                    />
+                </div>
             )}
         </div>
     );

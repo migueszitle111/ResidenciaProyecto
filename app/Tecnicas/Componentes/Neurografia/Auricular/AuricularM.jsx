@@ -69,30 +69,50 @@ const AuricularM = () => {
         setModalVisible(false);
         setExtraImage('');
     };
-
+    const renderGalleryItem = (item) => (
+        <img
+            src={item.original}
+            alt=""
+            onContextMenu={e => e.preventDefault()}
+            draggable={false}
+            style={{ width: '100%' }}
+        />
+    );
+    const renderThumbInner = (item) => (
+        <img
+            src={item.thumbnail}
+            alt=""
+            onContextMenu={e => e.preventDefault()}
+            draggable={false}
+            style={{ width: '100%' }}
+        />
+    );
 
     return (
         
         <div  className=" py-20 gallery-container">
 
             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
-           {!isLandscape && (
+            {!isLandscape && (
                 <div className="orientation-message">
                     <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
             
-        <ImageGallery items={images}
-            onSlide={handleSlide}
-            showFullscreenButton={false}
-            showPlayButton={false}
-            showBullets={false}
-            showNav={false}
-            showThumbnails={true}
-            thumbnailPosition="bottom"
-            bulletclass="bullet"
-        />
+            <ImageGallery
+                items={images}
+                onSlide={handleSlide}
+                showFullscreenButton={false}
+                showPlayButton={false}
+                showBullets={false}
+                showNav={false}
+                showThumbnails={true}
+                thumbnailPosition="bottom"
+                bulletclass="bullet"
+                renderItem={renderGalleryItem}
+                renderThumbInner={renderThumbInner} // <-- Añadido aquí
+            />
         <div>
             {/* Primera Imagen */}
                 {currentImageIndex === 0 && <button className="btnAu1" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. De forma antidrómica en el borde lateral del músculo esternocleidomastoideo, aproximadamente en su tercio medio u 8cm de distancia en dirección caudal del electrodo de registro.', {  top: '14%', left: '23%' })}></button>}
@@ -114,9 +134,20 @@ const AuricularM = () => {
             {modalVisible && (
                 <div className="modal-gallery">
                     <button className={`print-button`} onClick={closeModal}>
-                        <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
+                        <img
+                            src="/I_X.webp"
+                            style={{ filter: 'invert(1)' }}
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
                     </button>
-                    <img src={extraImage} alt="Imagen Extra" className="modal-image" />
+                    <img
+                        src={extraImage}
+                        alt="Imagen Extra"
+                        className="modal-image"
+                        onContextMenu={e => e.preventDefault()}
+                        draggable={false}
+                    />
                 </div>
             )}
         </div>

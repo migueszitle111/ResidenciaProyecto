@@ -88,7 +88,7 @@ export default function SuccessPage() {
         ) : (
           <>
             <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600 mb-4">
-              ¡Bienvenido a MedxProapp!
+              ¡Bienvenido a mEDXproapp!
             </h1>
             <p className="text-white mb-6">
               Acabamos de enviarte un correo para crear tu contraseña.  

@@ -1,3 +1,4 @@
+// app/payment/success/page.jsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -7,9 +8,9 @@ import { motion }              from "framer-motion";
 
 export default function SuccessPage() {
   const router = useRouter();
-  const [loading, setLoading]     = useState(true);
-  const [error, setError]         = useState("");
-  const [provider, setProvider]   = useState(null);
+  const [loading, setLoading]   = useState(true);
+  const [error, setError]       = useState("");
+  const [provider, setProvider] = useState(null);
 
   useEffect(() => {
     const params = new URL(window.location.href).searchParams;
@@ -47,8 +48,17 @@ export default function SuccessPage() {
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="bg-white bg-opacity-10 backdrop-blur-lg p-10 rounded-2xl shadow-2xl text-center max-w-md"
+        className="relative bg-white bg-opacity-10 backdrop-blur-lg p-10 rounded-2xl shadow-2xl text-center max-w-md"
       >
+        {/* Botón cerrar */}
+        <button
+          onClick={() => router.back()}
+          className="absolute top-3 right-3 text-white text-2xl hover:text-gray-300"
+          aria-label="Cerrar"
+        >
+          ✕
+        </button>
+
         {error ? (
           <>
             <h1 className="text-3xl text-red-500 mb-4">¡Ups!</h1>
@@ -81,15 +91,28 @@ export default function SuccessPage() {
               ¡Bienvenido a MedxProapp!
             </h1>
             <p className="text-white mb-6">
-              Revisa tu correo electrónico. Recibirás un enlace para crear una nueva contraseña.
-              ¡Asigna tu contraseña y accede a Medxproapp.com!
+              Acabamos de enviarte un correo para crear tu contraseña.  
+              Una vez la asignes, vuelve aquí y pulsa ✕ para cerrar.
             </p>
-            <button
-              onClick={() => router.replace("/Login")}
-              className="bg-orange-500 hover:bg-orange-700 text-white px-6 py-3 rounded"
-            >
-              Entrar a la plataforma
-            </button>
+
+            {/* Recomendaciones */}
+            <div className="text-left text-sm text-white bg-white bg-opacity-5 p-4 rounded">
+              <p className="font-semibold mb-2">¿No ves el correo?</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Revisa tu carpeta de Spam/Basura.</li>
+                <li>Si usas móvil, abre tu app de Gmail, Outlook, Yahoo…</li>
+                <li>Busca “MedxProapp” en el buscador interno de tu correo.</li>
+              </ul>
+              <p className="mt-4">
+                Cualquier problema, escríbenos a{" "}
+                <a
+                  href="mailto:soporte@medxproapp.com"
+                  className="text-orange-300 underline"
+                >
+                  soporte@medxproapp.com
+                </a>.
+              </p>
+            </div>
           </>
         )}
       </motion.div>

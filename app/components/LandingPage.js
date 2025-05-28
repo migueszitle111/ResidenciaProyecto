@@ -214,6 +214,7 @@ const bannerSlides = [
         data-aos="zoom-in"
         data-aos-duration="800"
       >
+        <a href="https://buy.stripe.com/fZu3cv1eAa766Kif5yafS02" className="flex-shrink-0">
         <Image
           src="/assets/LandingPage/Page/LP-09.png"
           alt="Potenciales Evocados"
@@ -221,7 +222,7 @@ const bannerSlides = [
           height={400}
           className="w-full h-auto object-cover rounded-3xl"
         />
-      
+      </a>
       </div>
     </div>
 
@@ -233,13 +234,14 @@ const bannerSlides = [
         data-aos="fade-left"
         data-aos-duration="800"
       >
+        <a href="https://buy.stripe.com/6oUfZhcXi932ecKaPiafS03" className="flex-shrink-0">
         <Image
           src="/assets/LandingPage/Page/LP-08.png"
           alt="Estudios de Conducción Nerviosa"
           width={600}
           height={350}
           className="w-full h-auto object-cover rounded-3xl"
-        />
+        /></a>
       </div>
       {/* Monitoreo Trasquirúrgico */}
       <div

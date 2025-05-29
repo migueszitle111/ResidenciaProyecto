@@ -86,6 +86,25 @@ const Facial = () => {
         setExtraImage('');
     };
 
+    const renderGalleryItem = (item) => (
+    <img
+        src={item.original}
+        alt=""
+        onContextMenu={e => e.preventDefault()}
+        draggable={false}
+        style={{ width: '100%' }}
+    />
+    );
+    const renderThumbInner = (item) => (
+        <img
+            src={item.thumbnail}
+            alt=""
+            onContextMenu={e => e.preventDefault()}
+            draggable={false}
+            style={{ width: '100%' }}
+        />
+    );
+
 
 
     return (
@@ -93,14 +112,15 @@ const Facial = () => {
         <div  className=" py-20 gallery-container">
 
             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
-           {!isLandscape && (
+            {!isLandscape && (
                 <div className="orientation-message">
                     <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
             
-        <ImageGallery items={images}
+        <ImageGallery
+            items={images}
             onSlide={handleSlide}
             showFullscreenButton={false}
             showPlayButton={false}
@@ -109,6 +129,8 @@ const Facial = () => {
             showThumbnails={true}
             thumbnailPosition="bottom"
             bulletclass="bullet"
+            renderItem={renderGalleryItem}
+            renderThumbInner={renderThumbInner} // <-- Añadido aquí
         />
         <div>
             {/* Primera Imagen */}
@@ -175,11 +197,22 @@ const Facial = () => {
             )}
             {modalVisible && (
                 <div className="modal-gallery">
-                <button className={`print-button`} onClick={closeModal}>
-                    <img src="/I_X.webp" style={{filter: 'invert(1)'}}/>
-                </button>
-                <img src={extraImage} alt="Imagen Extra" className="modal-image" />
-            </div>
+                    <button className={`print-button`} onClick={closeModal}>
+                        <img
+                            src="/I_X.webp"
+                            style={{ filter: 'invert(1)' }}
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </button>
+                    <img
+                        src={extraImage}
+                        alt="Imagen Extra"
+                        className="modal-image"
+                        onContextMenu={e => e.preventDefault()}
+                        draggable={false}
+                    />
+                </div>
             )}
         </div>
     );

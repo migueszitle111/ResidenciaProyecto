@@ -1,3 +1,4 @@
+// app/api/auth/[...nextauth].js
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -6,6 +7,7 @@ import Stripe from "stripe";
 
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
+import { isAllowedForTrial } from "@/lib/allowedTrials";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-10-16",
@@ -48,32 +50,46 @@ export const authOptions = {
       await connectMongoDB();
       const dbUser = await User.findOne({ email: user.email });
 
-      // — Credenciales: si no pagó, lo mandamos a Checkout
+     // ¿Este correo tiene derecho a trial?
+     const giveTrial = isAllowedForTrial(user.email);
+
+      // —––– FLUJO “Credentials” –––—
       if (account.provider === "credentials") {
+        // Si no está activo, creamos sesión de Checkout con trial si aplica
         if (!dbUser?.subscriptionActive) {
-          const checkout = await stripe.checkout.sessions.create({
-            mode: "subscription",
-            line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-            customer_email: user.email,
-            success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: process.env.NEXTAUTH_URL,
-          });
-          return checkout.url;
+         const checkout = await stripe.checkout.sessions.create({
+           mode: "subscription",
+           payment_method_types: ["card"],
+           line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+           customer_email: user.email,
+           subscription_data: {
+             ...(giveTrial ? { trial_period_days: 90 } : {}),
+           },
+           success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+           cancel_url: process.env.NEXTAUTH_URL,
+         });
+         return checkout.url; // NextAuth redirige a Stripe Checkout
         }
         return true;
       }
 
-      // — Google: tu flujo actual
+      // —––– FLUJO “Google” –––—
       if (account.provider === "google") {
+        // Si ya pagó / está en trial activo, lo dejamos pasar
         if (dbUser?.subscriptionActive) return true;
-        const checkout = await stripe.checkout.sessions.create({
-          mode: "subscription",
-          line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-          customer_email: user.email,
-          success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: process.env.NEXTAUTH_URL,
-        });
-        return checkout.url;
+
+       const checkout = await stripe.checkout.sessions.create({
+         mode: "subscription",
+         payment_method_types: ["card"],
+         line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+         customer_email: user.email,
+         subscription_data: {
+           ...(giveTrial ? { trial_period_days: 90 } : {}),
+         },
+         success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+         cancel_url: process.env.NEXTAUTH_URL,
+       });
+       return checkout.url;
       }
 
       return true;

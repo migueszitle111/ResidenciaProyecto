@@ -156,7 +156,7 @@ const StepA = ({ handleNextStep, setStep }) => (
   <div>
     <div className='button-bar'>
       <button  className="print-button">
-        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
+        <img src="" style={{ filter: 'invert(0.5)' }} />
       </button>
     </div>
     <h1 className=' text-xl font-bold text-white'>
@@ -288,6 +288,8 @@ const StepB = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => 
           <ConclusionButton value='GLUTEO_MEDIO' title=' DE NERVIO GLÚTEO SUPERIOR' displayText='GLÚTEO SUPERIOR' /></div>
         <div onClick={() => { setSelectedSide('FEMORAL'); setStep('B1'); }}>
           <ConclusionButton value='FEMORAL' title=' DE NERVIO FEMORAL' displayText='FEMORAL' /></div>
+        <div onClick={() => { setSelectedSide('FEMOROCUTÁNEO_LATERAL'); setStep('B1'); }}>
+          <ConclusionButton value='FEMOROCUTÁNEO_LATERAL' title=' DE NERVIO FEMOROCUTÁNEO LATERAL' displayText='FEMOROCUTÁNEO LATERAL' /></div>
         <div onClick={() => { setSelectedSide('SAFENO'); setStep('B1'); }}>
           <ConclusionButton value='SAFENO' title=' DE NERVIO SAFENO' displayText='SAFENO' /></div>
         <div onClick={() => { setSelectedSide('OBTURADOR'); setStep('B1'); }}>
@@ -338,6 +340,36 @@ const StepB1 = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion('IZQUIERDO')
               removeConclusion('DERECHO')
               removeConclusion('BILATERAL')
+              removeConclusion('MEDIANO');
+              removeConclusion('INTEROSEOANTERIOR');
+              removeConclusion('ACCESORIO');
+              removeConclusion('AXILAR');
+              removeConclusion('MUSCULOCUTANEO');
+              removeConclusion('RADIAL');
+              removeConclusion('RADIAL_SUPERFICIAL');
+              removeConclusion('INTEROSEO_POSTERIOR');
+              removeConclusion('SUPRAESCAPULAR');
+              removeConclusion('ULNAR');
+              removeConclusion('DORSAL_CUTANEO');
+              removeConclusion('FRENICO');
+              removeConclusion('TORACODORSAL');
+              removeConclusion('TORACICO_LARGO');
+              removeConclusion('CIATICO');
+              removeConclusion('GLUTEO_INFERIOR');
+              removeConclusion('GLUTEO_MEDIO');
+              removeConclusion('FEMORAL');
+              removeConclusion('FEMOROCUTÁNEO_LATERAL');
+              removeConclusion('SAFENO');
+              removeConclusion('OBTURADOR');
+              removeConclusion('NERVIO_PERONEO');
+              removeConclusion('PERONEO_SUPERFICIAL');
+              removeConclusion('PERONEO_PROFUNDO');
+              removeConclusion('TIBIAL');
+              removeConclusion('SURAL');
+              removeConclusion('PLANTAR_MEDIAL');
+              removeConclusion('PLANTAR_LATERAL');
+              removeConclusion('PUDENDO');
+              removeConclusion('FACIAL');
 
               // 2) Regresamos 
               setStep('B')
@@ -447,6 +479,9 @@ const StepCGI = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div className='button-bar'>
         <button  onClick={() => {
             // 1) Quitamos las conclusiones que StepA pudo haber agregado
+            removeConclusion('IZQUIERDO')
+            removeConclusion('DERECHO')
+            removeConclusion('BILATERAL')
             removeConclusion('focalizada')
             removeConclusion('segmentaria')
             removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
@@ -509,6 +544,9 @@ const StepC = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('IZQUIERDO')
+              removeConclusion('DERECHO')
+              removeConclusion('BILATERAL')
               removeConclusion('focalizada')
               removeConclusion('segmentaria')
               // removeConclusion('car', 'cari1', 'car2', 'car3', 'car4', 'car5', 'car6', 'car7', 'car8', 'cari1', 'cari2', 'cari3', 'cari4', 'cari5', 'cari6', 'cari7', 'cari8')
@@ -571,6 +609,9 @@ const StepCL = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('IZQUIERDO')
+              removeConclusion('DERECHO')
+              removeConclusion('BILATERAL')
               removeConclusion('focalizada')
               removeConclusion('segmentaria')
               removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
@@ -635,6 +676,9 @@ const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('BILATERAL')
+              removeConclusion('focalizada')
+              removeConclusion('segmentaria')
               removeConclusion('seguir')
 
               // 2) Regresamos 
@@ -674,6 +718,9 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('BILATERAL')
+              removeConclusion('focalizada')
+              removeConclusion('segmentaria')
               removeConclusion('seguir')
 
               // 2) Regresamos 
@@ -716,6 +763,9 @@ const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('BILATERAL')
+              removeConclusion('focalizada')
+              removeConclusion('segmentaria')
               removeConclusion('seguir')
 
               // 2) Regresamos 
@@ -1106,7 +1156,6 @@ const StepR = ({ handlePrevStep, handleNextStep, setStep }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
-22
 
               // 2) Regresamos 
               setStep('H')
@@ -1139,30 +1188,42 @@ const StepR = ({ handlePrevStep, handleNextStep, setStep }) => {
 
 
 
-const StepA2 = ({ handleNextStep, setStep }) => (
-  <div>
-    <div className='button-bar'>
-      <button onClick={handleNextStep} className="print-button">
-        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
-      </button>
-    </div>
-    <h1 className=' text-xl font-bold text-white'>
-      EVOLUCIÓN
-    </h1>
-    <div onClick={handleNextStep}>
-    </div>
-    <div onClick={() => setStep('B2')}>
-      <ConclusionButton value='evolucion_aguda2' title='NEUROPATÍA AGUDA' displayText="NEUROPATÍA AGUDA" /></div>
-    <div onClick={() => setStep('B2')}>
-      <ConclusionButton value='evolucion_subaguda2' title='NEUROPATÍA SUBAGUDA' displayText="NEUROPATÍA SUBAGUDA" /></div>
-    <div onClick={() => setStep('B2')}>
-      <ConclusionButton value='evolucion_cronica2' title='NEUROPATÍA CRÓNICA ' displayText="NEUROPATÍA CRÓNICA" />
-    </div>
-    <div className='my-2 flex justify-end items-center'>
-    </div>
-  </div>
+const StepA2 = ({ handleNextStep, setStep }) => {
+  const { removeConclusion } = useContext(ReportContext)
+  return(
+    <div>
+      <div className='button-bar'>
+          <button  onClick={() => {
+                // 1) Quitamos las conclusiones que StepA pudo haber agregado
+                removeConclusion('evolucion_aguda2');
+                removeConclusion('evolucion_subaguda2');
+                removeConclusion('evolucion_cronica2');
 
-);
+                // 2) Regresamos 
+                setStep('R')
+              }} className="print-button dont-print">
+            <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
+          </button>
+        
+      </div>
+      <h1 className=' text-xl font-bold text-white'>
+        EVOLUCIÓN
+      </h1>
+      <div onClick={handleNextStep}>
+      </div>
+      <div onClick={() => setStep('B2')}>
+        <ConclusionButton value='evolucion_aguda2' title='NEUROPATÍA AGUDA' displayText="NEUROPATÍA AGUDA" /></div>
+      <div onClick={() => setStep('B2')}>
+        <ConclusionButton value='evolucion_subaguda2' title='NEUROPATÍA SUBAGUDA' displayText="NEUROPATÍA SUBAGUDA" /></div>
+      <div onClick={() => setStep('B2')}>
+        <ConclusionButton value='evolucion_cronica2' title='NEUROPATÍA CRÓNICA ' displayText="NEUROPATÍA CRÓNICA" />
+      </div>
+      <div className='my-2 flex justify-end items-center'>
+      </div>
+    </div>
+  );
+
+};
 
 const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) => {
   const { removeConclusion } = useContext(ReportContext)
@@ -1192,6 +1253,7 @@ const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) =>
         removeConclusion('GLUTEO_INFERIOR2');
         removeConclusion('GLUTEO_MEDIO2');
         removeConclusion('FEMORAL2');
+        removeConclusion('FEMOROCUTÁNEO_LATERAL2');
         removeConclusion('SAFENO2');
         removeConclusion('OBTURADOR2');
         removeConclusion('NERVIO_PERONEO2');
@@ -1270,6 +1332,8 @@ const StepB2 = ({ handleNextStep, handlePrevStep, setStep, setSelectedSide }) =>
           <ConclusionButton value='GLUTEO_MEDIO2' title=' DE NERVIO GLÚTEO SUPERIOR' displayText='GLÚTEO SUPERIOR' /></div>
         <div onClick={() => { setSelectedSide('FEMORAL2'); setStep('B12'); }}>
           <ConclusionButton value='FEMORAL2' title=' DE NERVIO FEMORAL' displayText='FEMORAL' /></div>
+        <div onClick={() => { setSelectedSide('FEMOROCUTÁNEO_LATERAL2'); setStep('B12'); }}>
+          <ConclusionButton value='FEMOROCUTÁNEO_LATERAL2' title=' DE NERVIO FEMOROCUTÁNEO LATERAL' displayText='FEMOROCUTÁNEO LATERAL' /></div>
         <div onClick={() => { setSelectedSide('SAFENO2'); setStep('B12'); }}>
           <ConclusionButton value='SAFENO2' title=' DE NERVIO SAFENO' displayText='SAFENO' /></div>
         <div onClick={() => { setSelectedSide('OBTURADOR2'); setStep('B12'); }}>
@@ -1314,6 +1378,39 @@ const StepB12 = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion('IZQUIERDO2')
               removeConclusion('DERECHO2')
               removeConclusion('BILATERAL2')
+              removeConclusion('evolucion_aguda2');
+              removeConclusion('evolucion_subaguda2');
+              removeConclusion('evolucion_cronica2');
+              removeConclusion('MEDIANO2');
+              removeConclusion('INTEROSEOANTERIOR2');
+              removeConclusion('ACCESORIO2');
+              removeConclusion('AXILAR2');
+              removeConclusion('MUSCULOCUTANEO2');
+              removeConclusion('RADIAL2');
+              removeConclusion('RADIAL_SUPERFICIAL2');
+              removeConclusion('INTEROSEO_POSTERIOR2');
+              removeConclusion('SUPRAESCAPULAR2');
+              removeConclusion('ULNAR2');
+              removeConclusion('DORSAL_CUTANEO2');
+              removeConclusion('FRENICO2');
+              removeConclusion('TORACODORSAL2');
+              removeConclusion('TORACICO_LARGO2');
+              removeConclusion('CIATICO2');
+              removeConclusion('GLUTEO_INFERIOR2');
+              removeConclusion('GLUTEO_MEDIO2');
+              removeConclusion('FEMORAL2');
+              removeConclusion('FEMOROCUTÁNEO_LATERAL2');
+              removeConclusion('SAFENO2');
+              removeConclusion('OBTURADOR2');
+              removeConclusion('NERVIO_PERONEO2');
+              removeConclusion('PERONEO_SUPERFICIAL2');
+              removeConclusion('PERONEO_PROFUNDO2');
+              removeConclusion('TIBIAL2');
+              removeConclusion('SURAL2');
+              removeConclusion('PLANTAR_MEDIAL2');
+              removeConclusion('PLANTAR_LATERAL2');
+              removeConclusion('PUDENDO2');
+              removeConclusion('FACIAL2');
 
               // 2) Regresamos 
               setStep('B2')
@@ -1359,6 +1456,9 @@ const StepCG2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('IZQUIERDO2')
+              removeConclusion('DERECHO2')
+              removeConclusion('BILATERAL2')
               removeConclusion('focalizada2')
               removeConclusion('segmentaria2')
               removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
@@ -1420,6 +1520,9 @@ const StepCGI2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => 
       <div className='button-bar'>
         <button  onClick={() => {
             // 1) Quitamos las conclusiones que StepA pudo haber agregado
+            removeConclusion('IZQUIERDO2')
+            removeConclusion('DERECHO2')
+            removeConclusion('BILATERAL2')
             removeConclusion('focalizada2')
             removeConclusion('segmentaria2')
             removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
@@ -1610,6 +1713,9 @@ const StepCD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('BILATERAL2')
+              removeConclusion('focalizada2')
+              removeConclusion('segmentaria2')
               removeConclusion('seguir2')
 
               // 2) Regresamos 
@@ -1652,6 +1758,9 @@ const StepCDD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('BILATERAL2')
+              removeConclusion('focalizada2')
+              removeConclusion('segmentaria2')
               removeConclusion('seguir2')
 
               // 2) Regresamos 
@@ -1694,6 +1803,9 @@ const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('BILATERAL2')
+              removeConclusion('focalizada2')
+              removeConclusion('segmentaria2')
               removeConclusion('seguir2')
 
               // 2) Regresamos 

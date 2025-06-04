@@ -3572,6 +3572,139 @@ export function checkDivsSegmentar(copyConclusions) {
 
     </>);
   }
+
+
+
+  if (copyConclusions.includes('FEMOROCUTÁNEO LATERAL DERECHO, SEGMENTARIA A NIVEL') || copyConclusions.includes('FEMOROCUTÁNEO LATERAL BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {
+    return (<>
+
+<div style={{ position: 'absolute', top: '34.2%', left: '43.4%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car1' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '34.6%', left: '43.1%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car2' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '35.0%', left: '42.9%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car3' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '35.3%', left: '42.4%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car4' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '35.7%', left: '42.1%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car5' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '36.0%', left: '41.8%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car6' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '36.4%', left: '41.5%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car7' title='DEL LIGAMENTO INGUINAL,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '36.8%', left: '41.2%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car8' title='DEL LIGAMENTO INGUINAL,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '37.2%', left: '41.0%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car9' title='DEL LIGAMENTO INGUINAL,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '37.6%', left: '40.9%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car10' title='DEL LIGAMENTO INGUINAL,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '38.0%', left: '40.6%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car11' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '38.4%', left: '40.6%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car12' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '38.8%', left: '40.6%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car13' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '39.2%', left: '40.4%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car14' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '39.6%', left: '40.2%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car15' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '40.0%', left: '40.0%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car16' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '40.4%', left: '40.0%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car17' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '40.8%', left: '39.6%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car18' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '41.2%', left: '39.6%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car19' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '41.6%', left: '39.5%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car20' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '42.0%', left: '39.5%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car21' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '42.4%', left: '39.3%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car22' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '42.8%', left: '39.3%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car23' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '43.2%', left: '39.4%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car24' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '43.6%', left: '39.4%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car25' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '44.0%', left: '39.5%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car26' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '44.4%', left: '39.5%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car27' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '44.8%', left: '39.6%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car28' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+<div style={{ position: 'absolute', top: '45.2%', left: '39.7%', transform: 'rotate(90deg)', }}
+    className={`dont-print-Nervius`} > <SegmentariaButton value='car29' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+
+    </>);
+  }
+  if (copyConclusions.includes('FEMOROCUTÁNEO LATERAL IZQUIERDO, SEGMENTARIA A NIVEL') || copyConclusions.includes('FEMOROCUTÁNEO LATERAL BILATERAL CON PREDOMINIO IZQUIERDO, SEGMENTARIA A NIVEL')) {/* SEGUIR AQUI */
+    return (<>
+    <div style={{ position: 'absolute', top: '34.2%', left: '56.2%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari1' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '34.6%', left: '56.5%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari2' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '35.0%', left: '56.8%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari3' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '35.3%', left: '57.3%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari4' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '35.7%', left: '57.5%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari5' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '36.0%', left: '57.7%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari6' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '36.4%', left: '57.9%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari7' title='DEL LIGAMENTO INGUINAL,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '36.8%', left: '58.1%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari8' title='DEL LIGAMENTO INGUINAL,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '37.2%', left: '58.2%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari9' title='DEL LIGAMENTO INGUINAL,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '37.6%', left: '58.4%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari10' title='DEL LIGAMENTO INGUINAL,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '38.0%', left: '58.5%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari11' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '38.4%', left: '58.6%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari12' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '38.8%', left: '58.9%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari13' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '39.2%', left: '59.2%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari14' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '39.6%', left: '59.2%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari15' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '40.0%', left: '59.4%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari16' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '40.4%', left: '59.7%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari17' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '40.8%', left: '59.9%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari18' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '41.2%', left: '59.9%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari19' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '41.7%', left: '59.9%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari20' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '42.1%', left: '59.8%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari21' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '42.4%', left: '59.8%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari22' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '42.8%', left: '59.7%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari23' title=' DEL TERCIO PROXIMAL DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '43.2%', left: '59.7%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari24' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '43.6%', left: '59.6%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari25' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '44.0%', left: '59.6%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari26' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '44.4%', left: '59.5%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari27' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '44.8%', left: '59.5%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari28' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+    <div style={{ position: 'absolute', top: '45.2%', left: '59.4%', transform: 'rotate(90deg)', }}
+        className={`dont-print-Nervius`} > <SegmentariaButton value='cari29' title=' DEL TERCIO MEDIO DEL MUSLO,' displayText=' ' /> </div>
+
+    </>);
+}
+
+
+
   if (copyConclusions.includes('SAFENO DERECHO, SEGMENTARIA A NIVEL') || copyConclusions.includes('SAFENO BILATERAL CON PREDOMINIO DERECHO, SEGMENTARIA A NIVEL')) {// FALTA VERIFICAR
     return (
       <>

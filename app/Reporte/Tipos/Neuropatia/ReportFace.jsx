@@ -790,13 +790,20 @@ const formattedConclusions = formatConclusions(copyConclusions);
                       alt: 'Modelo',
                     }
                   },
-                  //{
-                  //  expectedValue: 'FEMOROCUTÁNEO_LATERAL',
-                  //  image: {
-                  //    src: 'NeuropatiaImg/NO_Femorocutáneo femoral.png',
-                  //    alt: 'Modelo',
-                  //  }
-                  // },
+                  {
+                  expectedValue: 'FEMOROCUTÁNEO_LATERAL',
+                  image: {
+                    src: 'NeuropatiaImg/NO_Femorocutáneo femoral.png',
+                    alt: 'Modelo',
+                  }
+                  },
+                                    {
+                  expectedValue: 'FEMOROCUTÁNEO_LATERAL2',
+                  image: {
+                    src: 'NeuropatiaImg/NO_Femorocutáneo femoral.png',
+                    alt: 'Modelo',
+                  }
+                  },
                   {
                     expectedValue: 'ILIOINGUINAL',
                     image: {

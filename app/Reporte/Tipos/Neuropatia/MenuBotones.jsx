@@ -680,6 +680,29 @@ const StepCD = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion('focalizada')
               removeConclusion('segmentaria')
               removeConclusion('seguir')
+              removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
+              removeConclusion('car11'),removeConclusion('car12'),removeConclusion('car13'),removeConclusion('car14'),removeConclusion('car15'),removeConclusion('car16'),removeConclusion('car17'),removeConclusion('car18'),removeConclusion('car19'),removeConclusion('car20')
+              removeConclusion('car21'),removeConclusion('car22'),removeConclusion('car23'),removeConclusion('car24'),removeConclusion('car25'),removeConclusion('car26'),removeConclusion('car27'),removeConclusion('car28'),removeConclusion('car29'),removeConclusion('car30')
+              removeConclusion('car31'),removeConclusion('car32'),removeConclusion('car33'),removeConclusion('car34'),removeConclusion('car35'),removeConclusion('car36'),removeConclusion('car37'),removeConclusion('car38'),removeConclusion('car39'),removeConclusion('car40')
+              removeConclusion('car41'),removeConclusion('car42'),removeConclusion('car43'),removeConclusion('car44'),removeConclusion('car45'),removeConclusion('car46'),removeConclusion('car47'),removeConclusion('car48'),removeConclusion('car49'),removeConclusion('car50')
+              removeConclusion('car51'),removeConclusion('car52'),removeConclusion('car53'),removeConclusion('car54'),removeConclusion('car55'),removeConclusion('car56'),removeConclusion('car57'),removeConclusion('car58'),removeConclusion('car59'),removeConclusion('car60')
+              removeConclusion('car61'),removeConclusion('car62'),removeConclusion('car63'),removeConclusion('car64'), removeConclusion('car65'),removeConclusion('car66'),removeConclusion('car67'),removeConclusion('car68'),removeConclusion('car69'),removeConclusion('car70')
+              removeConclusion('car71'),removeConclusion('car72'),removeConclusion('car73'),removeConclusion('car74'),removeConclusion('car75'),removeConclusion('car76'),removeConclusion('car77'),removeConclusion('car78'),removeConclusion('car79'),removeConclusion('car80')
+              removeConclusion('car81'),removeConclusion('car82'),removeConclusion('car83'),removeConclusion('car84'),removeConclusion('car85'),removeConclusion('car86'),removeConclusion('car87'),removeConclusion('car88'),removeConclusion('car89'),removeConclusion('car90')
+              removeConclusion('car91'),removeConclusion('car92'),removeConclusion('car93'),removeConclusion('car94'),removeConclusion('car95'),removeConclusion('car96'),removeConclusion('car97'),removeConclusion('car98'),removeConclusion('car99'),removeConclusion('car100')
+              removeConclusion('car101'),removeConclusion('car102'),removeConclusion('car103'),removeConclusion('car104'),removeConclusion('car105'),removeConclusion('car106'),removeConclusion('car107'),removeConclusion('car108')
+              
+              removeConclusion('cari'),removeConclusion('cari1'),removeConclusion('cari2'),removeConclusion('cari3'),removeConclusion('cari4'),removeConclusion('cari5'),removeConclusion('cari6'),removeConclusion('cari7'),removeConclusion('cari8'),removeConclusion('cari9'),removeConclusion('cari10')
+              removeConclusion('cari11'),removeConclusion('cari12'),removeConclusion('cari13'),removeConclusion('cari14'),removeConclusion('cari15'),removeConclusion('cari16'),removeConclusion('cari17'),removeConclusion('cari18'),removeConclusion('cari19'),removeConclusion('cari20')
+              removeConclusion('cari21'),removeConclusion('cari22'),removeConclusion('cari23'),removeConclusion('cari24'),removeConclusion('cari25'),removeConclusion('cari26'),removeConclusion('cari27'),removeConclusion('cari28'),removeConclusion('cari29'),removeConclusion('cari30')
+              removeConclusion('cari31'),removeConclusion('cari32'),removeConclusion('cari33'),removeConclusion('cari34'),removeConclusion('cari35'),removeConclusion('cari36'),removeConclusion('cari37'),removeConclusion('cari38'),removeConclusion('cari39'),removeConclusion('cari40')
+              removeConclusion('cari41'),removeConclusion('cari42'),removeConclusion('cari43'),removeConclusion('cari44'),removeConclusion('cari45'),removeConclusion('cari46'),removeConclusion('cari47'),removeConclusion('cari48'),removeConclusion('cari49'),removeConclusion('cari50')
+              removeConclusion('cari51'),removeConclusion('cari52'),removeConclusion('cari53'),removeConclusion('cari54'),removeConclusion('cari55'),removeConclusion('cari56'),removeConclusion('cari57'),removeConclusion('cari58'),removeConclusion('cari59'),removeConclusion('cari60')
+              removeConclusion('cari61'),removeConclusion('cari62'),removeConclusion('cari63'),removeConclusion('cari64'), removeConclusion('cari65'),removeConclusion('cari66'),removeConclusion('cari67'),removeConclusion('cari68'),removeConclusion('cari69'),removeConclusion('cari70')
+              removeConclusion('cari71'),removeConclusion('cari72'),removeConclusion('cari73'),removeConclusion('cari74'),removeConclusion('cari75'),removeConclusion('cari76'),removeConclusion('cari77'),removeConclusion('cari78'),removeConclusion('cari79'),removeConclusion('cari80')
+              removeConclusion('cari81'),removeConclusion('cari82'),removeConclusion('cari83'),removeConclusion('cari84'),removeConclusion('cari85'),removeConclusion('cari86'),removeConclusion('cari87'),removeConclusion('cari88'),removeConclusion('cari89'),removeConclusion('cari90')
+              removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
+
 
               // 2) Regresamos 
               setStep('C')
@@ -722,6 +745,29 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion('focalizada')
               removeConclusion('segmentaria')
               removeConclusion('seguir')
+              removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
+              removeConclusion('car11'),removeConclusion('car12'),removeConclusion('car13'),removeConclusion('car14'),removeConclusion('car15'),removeConclusion('car16'),removeConclusion('car17'),removeConclusion('car18'),removeConclusion('car19'),removeConclusion('car20')
+              removeConclusion('car21'),removeConclusion('car22'),removeConclusion('car23'),removeConclusion('car24'),removeConclusion('car25'),removeConclusion('car26'),removeConclusion('car27'),removeConclusion('car28'),removeConclusion('car29'),removeConclusion('car30')
+              removeConclusion('car31'),removeConclusion('car32'),removeConclusion('car33'),removeConclusion('car34'),removeConclusion('car35'),removeConclusion('car36'),removeConclusion('car37'),removeConclusion('car38'),removeConclusion('car39'),removeConclusion('car40')
+              removeConclusion('car41'),removeConclusion('car42'),removeConclusion('car43'),removeConclusion('car44'),removeConclusion('car45'),removeConclusion('car46'),removeConclusion('car47'),removeConclusion('car48'),removeConclusion('car49'),removeConclusion('car50')
+              removeConclusion('car51'),removeConclusion('car52'),removeConclusion('car53'),removeConclusion('car54'),removeConclusion('car55'),removeConclusion('car56'),removeConclusion('car57'),removeConclusion('car58'),removeConclusion('car59'),removeConclusion('car60')
+              removeConclusion('car61'),removeConclusion('car62'),removeConclusion('car63'),removeConclusion('car64'), removeConclusion('car65'),removeConclusion('car66'),removeConclusion('car67'),removeConclusion('car68'),removeConclusion('car69'),removeConclusion('car70')
+              removeConclusion('car71'),removeConclusion('car72'),removeConclusion('car73'),removeConclusion('car74'),removeConclusion('car75'),removeConclusion('car76'),removeConclusion('car77'),removeConclusion('car78'),removeConclusion('car79'),removeConclusion('car80')
+              removeConclusion('car81'),removeConclusion('car82'),removeConclusion('car83'),removeConclusion('car84'),removeConclusion('car85'),removeConclusion('car86'),removeConclusion('car87'),removeConclusion('car88'),removeConclusion('car89'),removeConclusion('car90')
+              removeConclusion('car91'),removeConclusion('car92'),removeConclusion('car93'),removeConclusion('car94'),removeConclusion('car95'),removeConclusion('car96'),removeConclusion('car97'),removeConclusion('car98'),removeConclusion('car99'),removeConclusion('car100')
+              removeConclusion('car101'),removeConclusion('car102'),removeConclusion('car103'),removeConclusion('car104'),removeConclusion('car105'),removeConclusion('car106'),removeConclusion('car107'),removeConclusion('car108')
+              
+              removeConclusion('cari'),removeConclusion('cari1'),removeConclusion('cari2'),removeConclusion('cari3'),removeConclusion('cari4'),removeConclusion('cari5'),removeConclusion('cari6'),removeConclusion('cari7'),removeConclusion('cari8'),removeConclusion('cari9'),removeConclusion('cari10')
+              removeConclusion('cari11'),removeConclusion('cari12'),removeConclusion('cari13'),removeConclusion('cari14'),removeConclusion('cari15'),removeConclusion('cari16'),removeConclusion('cari17'),removeConclusion('cari18'),removeConclusion('cari19'),removeConclusion('cari20')
+              removeConclusion('cari21'),removeConclusion('cari22'),removeConclusion('cari23'),removeConclusion('cari24'),removeConclusion('cari25'),removeConclusion('cari26'),removeConclusion('cari27'),removeConclusion('cari28'),removeConclusion('cari29'),removeConclusion('cari30')
+              removeConclusion('cari31'),removeConclusion('cari32'),removeConclusion('cari33'),removeConclusion('cari34'),removeConclusion('cari35'),removeConclusion('cari36'),removeConclusion('cari37'),removeConclusion('cari38'),removeConclusion('cari39'),removeConclusion('cari40')
+              removeConclusion('cari41'),removeConclusion('cari42'),removeConclusion('cari43'),removeConclusion('cari44'),removeConclusion('cari45'),removeConclusion('cari46'),removeConclusion('cari47'),removeConclusion('cari48'),removeConclusion('cari49'),removeConclusion('cari50')
+              removeConclusion('cari51'),removeConclusion('cari52'),removeConclusion('cari53'),removeConclusion('cari54'),removeConclusion('cari55'),removeConclusion('cari56'),removeConclusion('cari57'),removeConclusion('cari58'),removeConclusion('cari59'),removeConclusion('cari60')
+              removeConclusion('cari61'),removeConclusion('cari62'),removeConclusion('cari63'),removeConclusion('cari64'), removeConclusion('cari65'),removeConclusion('cari66'),removeConclusion('cari67'),removeConclusion('cari68'),removeConclusion('cari69'),removeConclusion('cari70')
+              removeConclusion('cari71'),removeConclusion('cari72'),removeConclusion('cari73'),removeConclusion('cari74'),removeConclusion('cari75'),removeConclusion('cari76'),removeConclusion('cari77'),removeConclusion('cari78'),removeConclusion('cari79'),removeConclusion('cari80')
+              removeConclusion('cari81'),removeConclusion('cari82'),removeConclusion('cari83'),removeConclusion('cari84'),removeConclusion('cari85'),removeConclusion('cari86'),removeConclusion('cari87'),removeConclusion('cari88'),removeConclusion('cari89'),removeConclusion('cari90')
+              removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
+
 
               // 2) Regresamos 
               setStep('CG')
@@ -737,7 +783,7 @@ const StepCDD = ({ handleNextStep, handlePrevStep, setStep }) => {
           onClick={() => {
             setButtonsDisabled(true);
             setbuttonsDisabledBILT(true); 
-            setbuttonsDisabledBITSeg(true); 
+            setbuttonsDisabledBITSeg(true);
             setStep('D');            
           }}
           className={`print-button`}
@@ -767,6 +813,29 @@ const StepCDI = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion('focalizada')
               removeConclusion('segmentaria')
               removeConclusion('seguir')
+              removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
+              removeConclusion('car11'),removeConclusion('car12'),removeConclusion('car13'),removeConclusion('car14'),removeConclusion('car15'),removeConclusion('car16'),removeConclusion('car17'),removeConclusion('car18'),removeConclusion('car19'),removeConclusion('car20')
+              removeConclusion('car21'),removeConclusion('car22'),removeConclusion('car23'),removeConclusion('car24'),removeConclusion('car25'),removeConclusion('car26'),removeConclusion('car27'),removeConclusion('car28'),removeConclusion('car29'),removeConclusion('car30')
+              removeConclusion('car31'),removeConclusion('car32'),removeConclusion('car33'),removeConclusion('car34'),removeConclusion('car35'),removeConclusion('car36'),removeConclusion('car37'),removeConclusion('car38'),removeConclusion('car39'),removeConclusion('car40')
+              removeConclusion('car41'),removeConclusion('car42'),removeConclusion('car43'),removeConclusion('car44'),removeConclusion('car45'),removeConclusion('car46'),removeConclusion('car47'),removeConclusion('car48'),removeConclusion('car49'),removeConclusion('car50')
+              removeConclusion('car51'),removeConclusion('car52'),removeConclusion('car53'),removeConclusion('car54'),removeConclusion('car55'),removeConclusion('car56'),removeConclusion('car57'),removeConclusion('car58'),removeConclusion('car59'),removeConclusion('car60')
+              removeConclusion('car61'),removeConclusion('car62'),removeConclusion('car63'),removeConclusion('car64'), removeConclusion('car65'),removeConclusion('car66'),removeConclusion('car67'),removeConclusion('car68'),removeConclusion('car69'),removeConclusion('car70')
+              removeConclusion('car71'),removeConclusion('car72'),removeConclusion('car73'),removeConclusion('car74'),removeConclusion('car75'),removeConclusion('car76'),removeConclusion('car77'),removeConclusion('car78'),removeConclusion('car79'),removeConclusion('car80')
+              removeConclusion('car81'),removeConclusion('car82'),removeConclusion('car83'),removeConclusion('car84'),removeConclusion('car85'),removeConclusion('car86'),removeConclusion('car87'),removeConclusion('car88'),removeConclusion('car89'),removeConclusion('car90')
+              removeConclusion('car91'),removeConclusion('car92'),removeConclusion('car93'),removeConclusion('car94'),removeConclusion('car95'),removeConclusion('car96'),removeConclusion('car97'),removeConclusion('car98'),removeConclusion('car99'),removeConclusion('car100')
+              removeConclusion('car101'),removeConclusion('car102'),removeConclusion('car103'),removeConclusion('car104'),removeConclusion('car105'),removeConclusion('car106'),removeConclusion('car107'),removeConclusion('car108')
+              
+              removeConclusion('cari'),removeConclusion('cari1'),removeConclusion('cari2'),removeConclusion('cari3'),removeConclusion('cari4'),removeConclusion('cari5'),removeConclusion('cari6'),removeConclusion('cari7'),removeConclusion('cari8'),removeConclusion('cari9'),removeConclusion('cari10')
+              removeConclusion('cari11'),removeConclusion('cari12'),removeConclusion('cari13'),removeConclusion('cari14'),removeConclusion('cari15'),removeConclusion('cari16'),removeConclusion('cari17'),removeConclusion('cari18'),removeConclusion('cari19'),removeConclusion('cari20')
+              removeConclusion('cari21'),removeConclusion('cari22'),removeConclusion('cari23'),removeConclusion('cari24'),removeConclusion('cari25'),removeConclusion('cari26'),removeConclusion('cari27'),removeConclusion('cari28'),removeConclusion('cari29'),removeConclusion('cari30')
+              removeConclusion('cari31'),removeConclusion('cari32'),removeConclusion('cari33'),removeConclusion('cari34'),removeConclusion('cari35'),removeConclusion('cari36'),removeConclusion('cari37'),removeConclusion('cari38'),removeConclusion('cari39'),removeConclusion('cari40')
+              removeConclusion('cari41'),removeConclusion('cari42'),removeConclusion('cari43'),removeConclusion('cari44'),removeConclusion('cari45'),removeConclusion('cari46'),removeConclusion('cari47'),removeConclusion('cari48'),removeConclusion('cari49'),removeConclusion('cari50')
+              removeConclusion('cari51'),removeConclusion('cari52'),removeConclusion('cari53'),removeConclusion('cari54'),removeConclusion('cari55'),removeConclusion('cari56'),removeConclusion('cari57'),removeConclusion('cari58'),removeConclusion('cari59'),removeConclusion('cari60')
+              removeConclusion('cari61'),removeConclusion('cari62'),removeConclusion('cari63'),removeConclusion('cari64'), removeConclusion('cari65'),removeConclusion('cari66'),removeConclusion('cari67'),removeConclusion('cari68'),removeConclusion('cari69'),removeConclusion('cari70')
+              removeConclusion('cari71'),removeConclusion('cari72'),removeConclusion('cari73'),removeConclusion('cari74'),removeConclusion('cari75'),removeConclusion('cari76'),removeConclusion('cari77'),removeConclusion('cari78'),removeConclusion('cari79'),removeConclusion('cari80')
+              removeConclusion('cari81'),removeConclusion('cari82'),removeConclusion('cari83'),removeConclusion('cari84'),removeConclusion('cari85'),removeConclusion('cari86'),removeConclusion('cari87'),removeConclusion('cari88'),removeConclusion('cari89'),removeConclusion('cari90')
+              removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
+
 
               // 2) Regresamos 
               setStep('CGI')
@@ -926,6 +995,21 @@ const StepE = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion(' MOTORAS ');
               removeConclusion(' SENSITIVAS ');
               removeConclusion(' MIXTAS (SENSITIVO-MOTORA)');
+              removeConclusion('CON DENERVACIÓN DIFUSA (++++)');
+              removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)');
+              removeConclusion('CON DENERVACIÓN PROGRESIVA (++)');
+              removeConclusion('CON DENERVACIÓN DISCRETA (+/+)');
+              removeConclusion('SIN DENERVACIÓN ACTIVA');
+              removeConclusion('CON DENERVACIÓN DIFUSA (++++)');
+              removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)');
+              removeConclusion('CON DENERVACIÓN PROGRESIVA (++)');
+              removeConclusion('CON DENERVACIÓN DISCRETA (+/+)');
+              removeConclusion('SIN DENERVACIÓN ACTIVA');
+              removeConclusion('RETARDO EN LA CONDUCCIÓN');
+              removeConclusion('BLOQUEO PARCIAL EN LA CONDUCCIÓN');
+              removeConclusion('POR BLOQUEO COMPLETO EN LA CONDUCCIÓN');
+              removeConclusion('TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA');
+              removeConclusion('TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA');
 
               // 2) Regresamos 
               setStep('D')
@@ -964,6 +1048,21 @@ const StepE1 = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion(' MOTORAS ');
               removeConclusion(' SENSITIVAS ');
               removeConclusion(' MIXTAS (SENSITIVO-MOTORA)');
+              removeConclusion('CON DENERVACIÓN DIFUSA (++++)');
+              removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)');
+              removeConclusion('CON DENERVACIÓN PROGRESIVA (++)');
+              removeConclusion('CON DENERVACIÓN DISCRETA (+/+)');
+              removeConclusion('SIN DENERVACIÓN ACTIVA');
+              removeConclusion('CON DENERVACIÓN DIFUSA (++++)');
+              removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)');
+              removeConclusion('CON DENERVACIÓN PROGRESIVA (++)');
+              removeConclusion('CON DENERVACIÓN DISCRETA (+/+)');
+              removeConclusion('SIN DENERVACIÓN ACTIVA');
+              removeConclusion('RETARDO EN LA CONDUCCIÓN');
+              removeConclusion('BLOQUEO PARCIAL EN LA CONDUCCIÓN');
+              removeConclusion('POR BLOQUEO COMPLETO EN LA CONDUCCIÓN');
+              removeConclusion('TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA');
+              removeConclusion('TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA');
 
               // 2) Regresamos 
               setStep('D')
@@ -1002,6 +1101,9 @@ const StepF = ({ handlePrevStep, handleNextStep, setStep }) => {
               removeConclusion(' LEVE (NEUROAPRAXIA)');
               removeConclusion(' MODERADA (AXONOTMESIS INCOMPLETA)');
               removeConclusion(' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)');
+              removeConclusion(' MOTORAS ');
+              removeConclusion(' SENSITIVAS ');
+              removeConclusion(' MIXTAS (SENSITIVO-MOTORA)');
 
               // 2) Regresamos 
               setStep('E')
@@ -1041,6 +1143,9 @@ const StepF1 = ({ handlePrevStep, handleNextStep, setStep }) => {
               removeConclusion(' LEVE (NEUROAPRAXIA)');
               removeConclusion(' MODERADA (AXONOTMESIS INCOMPLETA)');
               removeConclusion(' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)');
+              removeConclusion(' MOTORAS ');
+              removeConclusion(' SENSITIVAS ');
+              removeConclusion(' MIXTAS (SENSITIVO-MOTORA)');
 
               // 2) Regresamos 
               setStep('E1')
@@ -1079,6 +1184,9 @@ const StepG = ({ handleNextStep, handlePrevStep, setStep }) => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
               removeConclusion(' CON REINERVACIÓN ACTIVA ');
               removeConclusion('  REINERVACIÓN ACTIVA ');
+              removeConclusion(' LEVE (NEUROAPRAXIA)');
+              removeConclusion(' MODERADA (AXONOTMESIS INCOMPLETA)');
+              removeConclusion(' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)');
 
               // 2) Regresamos 
               setStep('F')
@@ -1116,6 +1224,8 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
               removeConclusion('parcial_funcional');
               removeConclusion('pobre');
               removeConclusion('nulo');
+              removeConclusion(' CON REINERVACIÓN ACTIVA ');
+              removeConclusion('  REINERVACIÓN ACTIVA ');
 
               // 2) Regresamos 
               setStep('G')
@@ -1152,10 +1262,15 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
 const StepR = ({ handlePrevStep, handleNextStep, setStep }) => {
   const { removeConclusion } = useContext(ReportContext)
   return (
+    
     <div>
       <div className='button-bar'>
         <button  onClick={() => {
               // 1) Quitamos las conclusiones que StepA pudo haber agregado
+              removeConclusion('completo');
+              removeConclusion('parcial_funcional');
+              removeConclusion('pobre');
+              removeConclusion('nulo');
 
               // 2) Regresamos 
               setStep('H')
@@ -1612,7 +1727,9 @@ const StepC2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
               removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
 
               removeConclusion(`${selectedSide}_IZQgeneralizada2`)
-
+              removeConclusion('IZQUIERDO2')
+              removeConclusion('DERECHO2')
+              removeConclusion('BILATERAL2')
               // 2) Regresamos 
               setStep('B12')
             }} className="print-button dont-print">
@@ -1673,7 +1790,9 @@ const StepCL2 = ({ handleNextStep, handlePrevStep, setStep, selectedSide }) => {
               removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
 
               removeConclusion(`${selectedSide}_DERgeneralizada2`)
-
+              removeConclusion('IZQUIERDO2')
+              removeConclusion('DERECHO2')
+              removeConclusion('BILATERAL2')
               // 2) Regresamos 
               setStep('B12')
             }} className="print-button dont-print">
@@ -1717,6 +1836,51 @@ const StepCD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion('focalizada2')
               removeConclusion('segmentaria2')
               removeConclusion('seguir2')
+              removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
+              removeConclusion('car11'),removeConclusion('car12'),removeConclusion('car13'),removeConclusion('car14'),removeConclusion('car15'),removeConclusion('car16'),removeConclusion('car17'),removeConclusion('car18'),removeConclusion('car19'),removeConclusion('car20')
+              removeConclusion('car21'),removeConclusion('car22'),removeConclusion('car23'),removeConclusion('car24'),removeConclusion('car25'),removeConclusion('car26'),removeConclusion('car27'),removeConclusion('car28'),removeConclusion('car29'),removeConclusion('car30')
+              removeConclusion('car31'),removeConclusion('car32'),removeConclusion('car33'),removeConclusion('car34'),removeConclusion('car35'),removeConclusion('car36'),removeConclusion('car37'),removeConclusion('car38'),removeConclusion('car39'),removeConclusion('car40')
+              removeConclusion('car41'),removeConclusion('car42'),removeConclusion('car43'),removeConclusion('car44'),removeConclusion('car45'),removeConclusion('car46'),removeConclusion('car47'),removeConclusion('car48'),removeConclusion('car49'),removeConclusion('car50')
+              removeConclusion('car51'),removeConclusion('car52'),removeConclusion('car53'),removeConclusion('car54'),removeConclusion('car55'),removeConclusion('car56'),removeConclusion('car57'),removeConclusion('car58'),removeConclusion('car59'),removeConclusion('car60')
+              removeConclusion('car61'),removeConclusion('car62'),removeConclusion('car63'),removeConclusion('car64'), removeConclusion('car65'),removeConclusion('car66'),removeConclusion('car67'),removeConclusion('car68'),removeConclusion('car69'),removeConclusion('car70')
+              removeConclusion('car71'),removeConclusion('car72'),removeConclusion('car73'),removeConclusion('car74'),removeConclusion('car75'),removeConclusion('car76'),removeConclusion('car77'),removeConclusion('car78'),removeConclusion('car79'),removeConclusion('car80')
+              removeConclusion('car81'),removeConclusion('car82'),removeConclusion('car83'),removeConclusion('car84'),removeConclusion('car85'),removeConclusion('car86'),removeConclusion('car87'),removeConclusion('car88'),removeConclusion('car89'),removeConclusion('car90')
+              removeConclusion('car91'),removeConclusion('car92'),removeConclusion('car93'),removeConclusion('car94'),removeConclusion('car95'),removeConclusion('car96'),removeConclusion('car97'),removeConclusion('car98'),removeConclusion('car99'),removeConclusion('car100')
+              removeConclusion('car101'),removeConclusion('car102'),removeConclusion('car103'),removeConclusion('car104'),removeConclusion('car105'),removeConclusion('car106'),removeConclusion('car107'),removeConclusion('car108')
+              
+              removeConclusion('cari'),removeConclusion('cari1'),removeConclusion('cari2'),removeConclusion('cari3'),removeConclusion('cari4'),removeConclusion('cari5'),removeConclusion('cari6'),removeConclusion('cari7'),removeConclusion('cari8'),removeConclusion('cari9'),removeConclusion('cari10')
+              removeConclusion('cari11'),removeConclusion('cari12'),removeConclusion('cari13'),removeConclusion('cari14'),removeConclusion('cari15'),removeConclusion('cari16'),removeConclusion('cari17'),removeConclusion('cari18'),removeConclusion('cari19'),removeConclusion('cari20')
+              removeConclusion('cari21'),removeConclusion('cari22'),removeConclusion('cari23'),removeConclusion('cari24'),removeConclusion('cari25'),removeConclusion('cari26'),removeConclusion('cari27'),removeConclusion('cari28'),removeConclusion('cari29'),removeConclusion('cari30')
+              removeConclusion('cari31'),removeConclusion('cari32'),removeConclusion('cari33'),removeConclusion('cari34'),removeConclusion('cari35'),removeConclusion('cari36'),removeConclusion('cari37'),removeConclusion('cari38'),removeConclusion('cari39'),removeConclusion('cari40')
+              removeConclusion('cari41'),removeConclusion('cari42'),removeConclusion('cari43'),removeConclusion('cari44'),removeConclusion('cari45'),removeConclusion('cari46'),removeConclusion('cari47'),removeConclusion('cari48'),removeConclusion('cari49'),removeConclusion('cari50')
+              removeConclusion('cari51'),removeConclusion('cari52'),removeConclusion('cari53'),removeConclusion('cari54'),removeConclusion('cari55'),removeConclusion('cari56'),removeConclusion('cari57'),removeConclusion('cari58'),removeConclusion('cari59'),removeConclusion('cari60')
+              removeConclusion('cari61'),removeConclusion('cari62'),removeConclusion('cari63'),removeConclusion('cari64'), removeConclusion('cari65'),removeConclusion('cari66'),removeConclusion('cari67'),removeConclusion('cari68'),removeConclusion('cari69'),removeConclusion('cari70')
+              removeConclusion('cari71'),removeConclusion('cari72'),removeConclusion('cari73'),removeConclusion('cari74'),removeConclusion('cari75'),removeConclusion('cari76'),removeConclusion('cari77'),removeConclusion('cari78'),removeConclusion('cari79'),removeConclusion('cari80')
+              removeConclusion('cari81'),removeConclusion('cari82'),removeConclusion('cari83'),removeConclusion('cari84'),removeConclusion('cari85'),removeConclusion('cari86'),removeConclusion('cari87'),removeConclusion('cari88'),removeConclusion('cari89'),removeConclusion('cari90')
+              removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
+
+              removeConclusion('caar'), removeConclusion('caar1'),removeConclusion('caar2'),removeConclusion('caar3'), removeConclusion('caar4'), removeConclusion('caar5'), removeConclusion('caar6'), removeConclusion('caar7'),removeConclusion('caar8'),removeConclusion('caar9'),removeConclusion('caar10')
+              removeConclusion('caar11'),removeConclusion('caar12'),removeConclusion('caar13'),removeConclusion('caar14'),removeConclusion('caar15'),removeConclusion('caar16'),removeConclusion('caar17'),removeConclusion('caar18'),removeConclusion('caar19'),removeConclusion('caar20')
+              removeConclusion('caar21'),removeConclusion('caar22'),removeConclusion('caar23'),removeConclusion('caar24'),removeConclusion('caar25'),removeConclusion('caar26'),removeConclusion('caar27'),removeConclusion('caar28'),removeConclusion('caar29'),removeConclusion('caar30')
+              removeConclusion('caar31'),removeConclusion('caar32'),removeConclusion('caar33'),removeConclusion('caar34'),removeConclusion('caar35'),removeConclusion('caar36'),removeConclusion('caar37'),removeConclusion('caar38'),removeConclusion('caar39'),removeConclusion('caar40')
+              removeConclusion('caar41'),removeConclusion('caar42'),removeConclusion('caar43'),removeConclusion('caar44'),removeConclusion('caar45'),removeConclusion('caar46'),removeConclusion('caar47'),removeConclusion('caar48'),removeConclusion('caar49'),removeConclusion('caar50')
+              removeConclusion('caar51'),removeConclusion('caar52'),removeConclusion('caar53'),removeConclusion('caar54'),removeConclusion('caar55'),removeConclusion('caar56'),removeConclusion('caar57'),removeConclusion('caar58'),removeConclusion('caar59'),removeConclusion('caar60')
+              removeConclusion('caar61'),removeConclusion('caar62'),removeConclusion('caar63'),removeConclusion('caar64'), removeConclusion('caar65'),removeConclusion('caar66'),removeConclusion('caar67'),removeConclusion('caar68'),removeConclusion('caar69'),removeConclusion('caar70')
+              removeConclusion('caar71'),removeConclusion('caar72'),removeConclusion('caar73'),removeConclusion('caar74'),removeConclusion('caar75'),removeConclusion('caar76'),removeConclusion('caar77'),removeConclusion('caar78'),removeConclusion('caar79'),removeConclusion('caar80')
+              removeConclusion('caar81'),removeConclusion('caar82'),removeConclusion('caar83'),removeConclusion('caar84'),removeConclusion('caar85'),removeConclusion('caar86'),removeConclusion('caar87'),removeConclusion('caar88'),removeConclusion('caar89'),removeConclusion('caar90')
+              removeConclusion('caar91'),removeConclusion('caar92'),removeConclusion('caar93'),removeConclusion('caar94'),removeConclusion('caar95'),removeConclusion('caar96'),removeConclusion('caar97'),removeConclusion('caar98'),removeConclusion('caar99'),removeConclusion('caar100')
+              removeConclusion('caar101'),removeConclusion('caar102'),removeConclusion('caar103'),removeConclusion('caar104'),removeConclusion('caar105'),removeConclusion('caar106'),removeConclusion('caar107'),removeConclusion('caar108')
+              
+              removeConclusion('caarii'),removeConclusion('caarii1'),removeConclusion('caarii2'),removeConclusion('caarii3'),removeConclusion('caarii4'),removeConclusion('caarii5'),removeConclusion('caarii6'),removeConclusion('caarii7'),removeConclusion('caarii8'),removeConclusion('caarii9'),removeConclusion('caarii10')
+              removeConclusion('caarii11'),removeConclusion('caarii12'),removeConclusion('caarii13'),removeConclusion('caarii14'),removeConclusion('caarii15'),removeConclusion('caarii16'),removeConclusion('caarii17'),removeConclusion('caarii18'),removeConclusion('caarii19'),removeConclusion('caarii20')
+              removeConclusion('caarii21'),removeConclusion('caarii22'),removeConclusion('caarii23'),removeConclusion('caarii24'),removeConclusion('caarii25'),removeConclusion('caarii26'),removeConclusion('caarii27'),removeConclusion('caarii28'),removeConclusion('caarii29'),removeConclusion('caarii30')
+              removeConclusion('caarii31'),removeConclusion('caarii32'),removeConclusion('caarii33'),removeConclusion('caarii34'),removeConclusion('caarii35'),removeConclusion('caarii36'),removeConclusion('caarii37'),removeConclusion('caarii38'),removeConclusion('caarii39'),removeConclusion('caarii40')
+              removeConclusion('caarii41'),removeConclusion('caarii42'),removeConclusion('caarii43'),removeConclusion('caarii44'),removeConclusion('caarii45'),removeConclusion('caarii46'),removeConclusion('caarii47'),removeConclusion('caarii48'),removeConclusion('caarii49'),removeConclusion('caarii50')
+              removeConclusion('caarii51'),removeConclusion('caarii52'),removeConclusion('caarii53'),removeConclusion('caarii54'),removeConclusion('caarii55'),removeConclusion('caarii56'),removeConclusion('caarii57'),removeConclusion('caarii58'),removeConclusion('caarii59'),removeConclusion('caarii60')
+              removeConclusion('caarii61'),removeConclusion('caarii62'),removeConclusion('caarii63'),removeConclusion('caarii64'), removeConclusion('caarii65'),removeConclusion('caarii66'),removeConclusion('caarii67'),removeConclusion('caarii68'),removeConclusion('caarii69'),removeConclusion('caarii70')
+              removeConclusion('caarii71'),removeConclusion('caarii72'),removeConclusion('caarii73'),removeConclusion('caarii74'),removeConclusion('caarii75'),removeConclusion('caarii76'),removeConclusion('caarii77'),removeConclusion('caarii78'),removeConclusion('caarii79'),removeConclusion('caarii80')
+              removeConclusion('caarii81'),removeConclusion('caarii82'),removeConclusion('caarii83'),removeConclusion('caarii84'),removeConclusion('caarii85'),removeConclusion('caarii86'),removeConclusion('caarii87'),removeConclusion('caarii88'),removeConclusion('caarii89'),removeConclusion('caarii90')
+              removeConclusion('caarii91'),removeConclusion('caarii92'),removeConclusion('caarii93'),removeConclusion('caarii94'),removeConclusion('caarii95'),removeConclusion('caarii96'),removeConclusion('caarii97'),removeConclusion('caarii98'),removeConclusion('caarii99'),removeConclusion('caarii100')
 
               // 2) Regresamos 
               setStep('C2')
@@ -1762,6 +1926,51 @@ const StepCDD2 = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion('focalizada2')
               removeConclusion('segmentaria2')
               removeConclusion('seguir2')
+              removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
+              removeConclusion('car11'),removeConclusion('car12'),removeConclusion('car13'),removeConclusion('car14'),removeConclusion('car15'),removeConclusion('car16'),removeConclusion('car17'),removeConclusion('car18'),removeConclusion('car19'),removeConclusion('car20')
+              removeConclusion('car21'),removeConclusion('car22'),removeConclusion('car23'),removeConclusion('car24'),removeConclusion('car25'),removeConclusion('car26'),removeConclusion('car27'),removeConclusion('car28'),removeConclusion('car29'),removeConclusion('car30')
+              removeConclusion('car31'),removeConclusion('car32'),removeConclusion('car33'),removeConclusion('car34'),removeConclusion('car35'),removeConclusion('car36'),removeConclusion('car37'),removeConclusion('car38'),removeConclusion('car39'),removeConclusion('car40')
+              removeConclusion('car41'),removeConclusion('car42'),removeConclusion('car43'),removeConclusion('car44'),removeConclusion('car45'),removeConclusion('car46'),removeConclusion('car47'),removeConclusion('car48'),removeConclusion('car49'),removeConclusion('car50')
+              removeConclusion('car51'),removeConclusion('car52'),removeConclusion('car53'),removeConclusion('car54'),removeConclusion('car55'),removeConclusion('car56'),removeConclusion('car57'),removeConclusion('car58'),removeConclusion('car59'),removeConclusion('car60')
+              removeConclusion('car61'),removeConclusion('car62'),removeConclusion('car63'),removeConclusion('car64'), removeConclusion('car65'),removeConclusion('car66'),removeConclusion('car67'),removeConclusion('car68'),removeConclusion('car69'),removeConclusion('car70')
+              removeConclusion('car71'),removeConclusion('car72'),removeConclusion('car73'),removeConclusion('car74'),removeConclusion('car75'),removeConclusion('car76'),removeConclusion('car77'),removeConclusion('car78'),removeConclusion('car79'),removeConclusion('car80')
+              removeConclusion('car81'),removeConclusion('car82'),removeConclusion('car83'),removeConclusion('car84'),removeConclusion('car85'),removeConclusion('car86'),removeConclusion('car87'),removeConclusion('car88'),removeConclusion('car89'),removeConclusion('car90')
+              removeConclusion('car91'),removeConclusion('car92'),removeConclusion('car93'),removeConclusion('car94'),removeConclusion('car95'),removeConclusion('car96'),removeConclusion('car97'),removeConclusion('car98'),removeConclusion('car99'),removeConclusion('car100')
+              removeConclusion('car101'),removeConclusion('car102'),removeConclusion('car103'),removeConclusion('car104'),removeConclusion('car105'),removeConclusion('car106'),removeConclusion('car107'),removeConclusion('car108')
+              
+              removeConclusion('cari'),removeConclusion('cari1'),removeConclusion('cari2'),removeConclusion('cari3'),removeConclusion('cari4'),removeConclusion('cari5'),removeConclusion('cari6'),removeConclusion('cari7'),removeConclusion('cari8'),removeConclusion('cari9'),removeConclusion('cari10')
+              removeConclusion('cari11'),removeConclusion('cari12'),removeConclusion('cari13'),removeConclusion('cari14'),removeConclusion('cari15'),removeConclusion('cari16'),removeConclusion('cari17'),removeConclusion('cari18'),removeConclusion('cari19'),removeConclusion('cari20')
+              removeConclusion('cari21'),removeConclusion('cari22'),removeConclusion('cari23'),removeConclusion('cari24'),removeConclusion('cari25'),removeConclusion('cari26'),removeConclusion('cari27'),removeConclusion('cari28'),removeConclusion('cari29'),removeConclusion('cari30')
+              removeConclusion('cari31'),removeConclusion('cari32'),removeConclusion('cari33'),removeConclusion('cari34'),removeConclusion('cari35'),removeConclusion('cari36'),removeConclusion('cari37'),removeConclusion('cari38'),removeConclusion('cari39'),removeConclusion('cari40')
+              removeConclusion('cari41'),removeConclusion('cari42'),removeConclusion('cari43'),removeConclusion('cari44'),removeConclusion('cari45'),removeConclusion('cari46'),removeConclusion('cari47'),removeConclusion('cari48'),removeConclusion('cari49'),removeConclusion('cari50')
+              removeConclusion('cari51'),removeConclusion('cari52'),removeConclusion('cari53'),removeConclusion('cari54'),removeConclusion('cari55'),removeConclusion('cari56'),removeConclusion('cari57'),removeConclusion('cari58'),removeConclusion('cari59'),removeConclusion('cari60')
+              removeConclusion('cari61'),removeConclusion('cari62'),removeConclusion('cari63'),removeConclusion('cari64'), removeConclusion('cari65'),removeConclusion('cari66'),removeConclusion('cari67'),removeConclusion('cari68'),removeConclusion('cari69'),removeConclusion('cari70')
+              removeConclusion('cari71'),removeConclusion('cari72'),removeConclusion('cari73'),removeConclusion('cari74'),removeConclusion('cari75'),removeConclusion('cari76'),removeConclusion('cari77'),removeConclusion('cari78'),removeConclusion('cari79'),removeConclusion('cari80')
+              removeConclusion('cari81'),removeConclusion('cari82'),removeConclusion('cari83'),removeConclusion('cari84'),removeConclusion('cari85'),removeConclusion('cari86'),removeConclusion('cari87'),removeConclusion('cari88'),removeConclusion('cari89'),removeConclusion('cari90')
+              removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
+
+              removeConclusion('caar'), removeConclusion('caar1'),removeConclusion('caar2'),removeConclusion('caar3'), removeConclusion('caar4'), removeConclusion('caar5'), removeConclusion('caar6'), removeConclusion('caar7'),removeConclusion('caar8'),removeConclusion('caar9'),removeConclusion('caar10')
+              removeConclusion('caar11'),removeConclusion('caar12'),removeConclusion('caar13'),removeConclusion('caar14'),removeConclusion('caar15'),removeConclusion('caar16'),removeConclusion('caar17'),removeConclusion('caar18'),removeConclusion('caar19'),removeConclusion('caar20')
+              removeConclusion('caar21'),removeConclusion('caar22'),removeConclusion('caar23'),removeConclusion('caar24'),removeConclusion('caar25'),removeConclusion('caar26'),removeConclusion('caar27'),removeConclusion('caar28'),removeConclusion('caar29'),removeConclusion('caar30')
+              removeConclusion('caar31'),removeConclusion('caar32'),removeConclusion('caar33'),removeConclusion('caar34'),removeConclusion('caar35'),removeConclusion('caar36'),removeConclusion('caar37'),removeConclusion('caar38'),removeConclusion('caar39'),removeConclusion('caar40')
+              removeConclusion('caar41'),removeConclusion('caar42'),removeConclusion('caar43'),removeConclusion('caar44'),removeConclusion('caar45'),removeConclusion('caar46'),removeConclusion('caar47'),removeConclusion('caar48'),removeConclusion('caar49'),removeConclusion('caar50')
+              removeConclusion('caar51'),removeConclusion('caar52'),removeConclusion('caar53'),removeConclusion('caar54'),removeConclusion('caar55'),removeConclusion('caar56'),removeConclusion('caar57'),removeConclusion('caar58'),removeConclusion('caar59'),removeConclusion('caar60')
+              removeConclusion('caar61'),removeConclusion('caar62'),removeConclusion('caar63'),removeConclusion('caar64'), removeConclusion('caar65'),removeConclusion('caar66'),removeConclusion('caar67'),removeConclusion('caar68'),removeConclusion('caar69'),removeConclusion('caar70')
+              removeConclusion('caar71'),removeConclusion('caar72'),removeConclusion('caar73'),removeConclusion('caar74'),removeConclusion('caar75'),removeConclusion('caar76'),removeConclusion('caar77'),removeConclusion('caar78'),removeConclusion('caar79'),removeConclusion('caar80')
+              removeConclusion('caar81'),removeConclusion('caar82'),removeConclusion('caar83'),removeConclusion('caar84'),removeConclusion('caar85'),removeConclusion('caar86'),removeConclusion('caar87'),removeConclusion('caar88'),removeConclusion('caar89'),removeConclusion('caar90')
+              removeConclusion('caar91'),removeConclusion('caar92'),removeConclusion('caar93'),removeConclusion('caar94'),removeConclusion('caar95'),removeConclusion('caar96'),removeConclusion('caar97'),removeConclusion('caar98'),removeConclusion('caar99'),removeConclusion('caar100')
+              removeConclusion('caar101'),removeConclusion('caar102'),removeConclusion('caar103'),removeConclusion('caar104'),removeConclusion('caar105'),removeConclusion('caar106'),removeConclusion('caar107'),removeConclusion('caar108')
+              
+              removeConclusion('caarii'),removeConclusion('caarii1'),removeConclusion('caarii2'),removeConclusion('caarii3'),removeConclusion('caarii4'),removeConclusion('caarii5'),removeConclusion('caarii6'),removeConclusion('caarii7'),removeConclusion('caarii8'),removeConclusion('caarii9'),removeConclusion('caarii10')
+              removeConclusion('caarii11'),removeConclusion('caarii12'),removeConclusion('caarii13'),removeConclusion('caarii14'),removeConclusion('caarii15'),removeConclusion('caarii16'),removeConclusion('caarii17'),removeConclusion('caarii18'),removeConclusion('caarii19'),removeConclusion('caarii20')
+              removeConclusion('caarii21'),removeConclusion('caarii22'),removeConclusion('caarii23'),removeConclusion('caarii24'),removeConclusion('caarii25'),removeConclusion('caarii26'),removeConclusion('caarii27'),removeConclusion('caarii28'),removeConclusion('caarii29'),removeConclusion('caarii30')
+              removeConclusion('caarii31'),removeConclusion('caarii32'),removeConclusion('caarii33'),removeConclusion('caarii34'),removeConclusion('caarii35'),removeConclusion('caarii36'),removeConclusion('caarii37'),removeConclusion('caarii38'),removeConclusion('caarii39'),removeConclusion('caarii40')
+              removeConclusion('caarii41'),removeConclusion('caarii42'),removeConclusion('caarii43'),removeConclusion('caarii44'),removeConclusion('caarii45'),removeConclusion('caarii46'),removeConclusion('caarii47'),removeConclusion('caarii48'),removeConclusion('caarii49'),removeConclusion('caarii50')
+              removeConclusion('caarii51'),removeConclusion('caarii52'),removeConclusion('caarii53'),removeConclusion('caarii54'),removeConclusion('caarii55'),removeConclusion('caarii56'),removeConclusion('caarii57'),removeConclusion('caarii58'),removeConclusion('caarii59'),removeConclusion('caarii60')
+              removeConclusion('caarii61'),removeConclusion('caarii62'),removeConclusion('caarii63'),removeConclusion('caarii64'), removeConclusion('caarii65'),removeConclusion('caarii66'),removeConclusion('caarii67'),removeConclusion('caarii68'),removeConclusion('caarii69'),removeConclusion('caarii70')
+              removeConclusion('caarii71'),removeConclusion('caarii72'),removeConclusion('caarii73'),removeConclusion('caarii74'),removeConclusion('caarii75'),removeConclusion('caarii76'),removeConclusion('caarii77'),removeConclusion('caarii78'),removeConclusion('caarii79'),removeConclusion('caarii80')
+              removeConclusion('caarii81'),removeConclusion('caarii82'),removeConclusion('caarii83'),removeConclusion('caarii84'),removeConclusion('caarii85'),removeConclusion('caarii86'),removeConclusion('caarii87'),removeConclusion('caarii88'),removeConclusion('caarii89'),removeConclusion('caarii90')
+              removeConclusion('caarii91'),removeConclusion('caarii92'),removeConclusion('caarii93'),removeConclusion('caarii94'),removeConclusion('caarii95'),removeConclusion('caarii96'),removeConclusion('caarii97'),removeConclusion('caarii98'),removeConclusion('caarii99'),removeConclusion('caarii100')
 
               // 2) Regresamos 
               setStep('CG2')
@@ -1807,6 +2016,52 @@ const StepCDI2 = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion('focalizada2')
               removeConclusion('segmentaria2')
               removeConclusion('seguir2')
+              removeConclusion('car'), removeConclusion('car1'),removeConclusion('car2'),removeConclusion('car3'), removeConclusion('car4'), removeConclusion('car5'), removeConclusion('car6'), removeConclusion('car7'),removeConclusion('car8'),removeConclusion('car9'),removeConclusion('car10')
+              removeConclusion('car11'),removeConclusion('car12'),removeConclusion('car13'),removeConclusion('car14'),removeConclusion('car15'),removeConclusion('car16'),removeConclusion('car17'),removeConclusion('car18'),removeConclusion('car19'),removeConclusion('car20')
+              removeConclusion('car21'),removeConclusion('car22'),removeConclusion('car23'),removeConclusion('car24'),removeConclusion('car25'),removeConclusion('car26'),removeConclusion('car27'),removeConclusion('car28'),removeConclusion('car29'),removeConclusion('car30')
+              removeConclusion('car31'),removeConclusion('car32'),removeConclusion('car33'),removeConclusion('car34'),removeConclusion('car35'),removeConclusion('car36'),removeConclusion('car37'),removeConclusion('car38'),removeConclusion('car39'),removeConclusion('car40')
+              removeConclusion('car41'),removeConclusion('car42'),removeConclusion('car43'),removeConclusion('car44'),removeConclusion('car45'),removeConclusion('car46'),removeConclusion('car47'),removeConclusion('car48'),removeConclusion('car49'),removeConclusion('car50')
+              removeConclusion('car51'),removeConclusion('car52'),removeConclusion('car53'),removeConclusion('car54'),removeConclusion('car55'),removeConclusion('car56'),removeConclusion('car57'),removeConclusion('car58'),removeConclusion('car59'),removeConclusion('car60')
+              removeConclusion('car61'),removeConclusion('car62'),removeConclusion('car63'),removeConclusion('car64'), removeConclusion('car65'),removeConclusion('car66'),removeConclusion('car67'),removeConclusion('car68'),removeConclusion('car69'),removeConclusion('car70')
+              removeConclusion('car71'),removeConclusion('car72'),removeConclusion('car73'),removeConclusion('car74'),removeConclusion('car75'),removeConclusion('car76'),removeConclusion('car77'),removeConclusion('car78'),removeConclusion('car79'),removeConclusion('car80')
+              removeConclusion('car81'),removeConclusion('car82'),removeConclusion('car83'),removeConclusion('car84'),removeConclusion('car85'),removeConclusion('car86'),removeConclusion('car87'),removeConclusion('car88'),removeConclusion('car89'),removeConclusion('car90')
+              removeConclusion('car91'),removeConclusion('car92'),removeConclusion('car93'),removeConclusion('car94'),removeConclusion('car95'),removeConclusion('car96'),removeConclusion('car97'),removeConclusion('car98'),removeConclusion('car99'),removeConclusion('car100')
+              removeConclusion('car101'),removeConclusion('car102'),removeConclusion('car103'),removeConclusion('car104'),removeConclusion('car105'),removeConclusion('car106'),removeConclusion('car107'),removeConclusion('car108')
+              
+              removeConclusion('cari'),removeConclusion('cari1'),removeConclusion('cari2'),removeConclusion('cari3'),removeConclusion('cari4'),removeConclusion('cari5'),removeConclusion('cari6'),removeConclusion('cari7'),removeConclusion('cari8'),removeConclusion('cari9'),removeConclusion('cari10')
+              removeConclusion('cari11'),removeConclusion('cari12'),removeConclusion('cari13'),removeConclusion('cari14'),removeConclusion('cari15'),removeConclusion('cari16'),removeConclusion('cari17'),removeConclusion('cari18'),removeConclusion('cari19'),removeConclusion('cari20')
+              removeConclusion('cari21'),removeConclusion('cari22'),removeConclusion('cari23'),removeConclusion('cari24'),removeConclusion('cari25'),removeConclusion('cari26'),removeConclusion('cari27'),removeConclusion('cari28'),removeConclusion('cari29'),removeConclusion('cari30')
+              removeConclusion('cari31'),removeConclusion('cari32'),removeConclusion('cari33'),removeConclusion('cari34'),removeConclusion('cari35'),removeConclusion('cari36'),removeConclusion('cari37'),removeConclusion('cari38'),removeConclusion('cari39'),removeConclusion('cari40')
+              removeConclusion('cari41'),removeConclusion('cari42'),removeConclusion('cari43'),removeConclusion('cari44'),removeConclusion('cari45'),removeConclusion('cari46'),removeConclusion('cari47'),removeConclusion('cari48'),removeConclusion('cari49'),removeConclusion('cari50')
+              removeConclusion('cari51'),removeConclusion('cari52'),removeConclusion('cari53'),removeConclusion('cari54'),removeConclusion('cari55'),removeConclusion('cari56'),removeConclusion('cari57'),removeConclusion('cari58'),removeConclusion('cari59'),removeConclusion('cari60')
+              removeConclusion('cari61'),removeConclusion('cari62'),removeConclusion('cari63'),removeConclusion('cari64'), removeConclusion('cari65'),removeConclusion('cari66'),removeConclusion('cari67'),removeConclusion('cari68'),removeConclusion('cari69'),removeConclusion('cari70')
+              removeConclusion('cari71'),removeConclusion('cari72'),removeConclusion('cari73'),removeConclusion('cari74'),removeConclusion('cari75'),removeConclusion('cari76'),removeConclusion('cari77'),removeConclusion('cari78'),removeConclusion('cari79'),removeConclusion('cari80')
+              removeConclusion('cari81'),removeConclusion('cari82'),removeConclusion('cari83'),removeConclusion('cari84'),removeConclusion('cari85'),removeConclusion('cari86'),removeConclusion('cari87'),removeConclusion('cari88'),removeConclusion('cari89'),removeConclusion('cari90')
+              removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
+
+              removeConclusion('caar'), removeConclusion('caar1'),removeConclusion('caar2'),removeConclusion('caar3'), removeConclusion('caar4'), removeConclusion('caar5'), removeConclusion('caar6'), removeConclusion('caar7'),removeConclusion('caar8'),removeConclusion('caar9'),removeConclusion('caar10')
+              removeConclusion('caar11'),removeConclusion('caar12'),removeConclusion('caar13'),removeConclusion('caar14'),removeConclusion('caar15'),removeConclusion('caar16'),removeConclusion('caar17'),removeConclusion('caar18'),removeConclusion('caar19'),removeConclusion('caar20')
+              removeConclusion('caar21'),removeConclusion('caar22'),removeConclusion('caar23'),removeConclusion('caar24'),removeConclusion('caar25'),removeConclusion('caar26'),removeConclusion('caar27'),removeConclusion('caar28'),removeConclusion('caar29'),removeConclusion('caar30')
+              removeConclusion('caar31'),removeConclusion('caar32'),removeConclusion('caar33'),removeConclusion('caar34'),removeConclusion('caar35'),removeConclusion('caar36'),removeConclusion('caar37'),removeConclusion('caar38'),removeConclusion('caar39'),removeConclusion('caar40')
+              removeConclusion('caar41'),removeConclusion('caar42'),removeConclusion('caar43'),removeConclusion('caar44'),removeConclusion('caar45'),removeConclusion('caar46'),removeConclusion('caar47'),removeConclusion('caar48'),removeConclusion('caar49'),removeConclusion('caar50')
+              removeConclusion('caar51'),removeConclusion('caar52'),removeConclusion('caar53'),removeConclusion('caar54'),removeConclusion('caar55'),removeConclusion('caar56'),removeConclusion('caar57'),removeConclusion('caar58'),removeConclusion('caar59'),removeConclusion('caar60')
+              removeConclusion('caar61'),removeConclusion('caar62'),removeConclusion('caar63'),removeConclusion('caar64'), removeConclusion('caar65'),removeConclusion('caar66'),removeConclusion('caar67'),removeConclusion('caar68'),removeConclusion('caar69'),removeConclusion('caar70')
+              removeConclusion('caar71'),removeConclusion('caar72'),removeConclusion('caar73'),removeConclusion('caar74'),removeConclusion('caar75'),removeConclusion('caar76'),removeConclusion('caar77'),removeConclusion('caar78'),removeConclusion('caar79'),removeConclusion('caar80')
+              removeConclusion('caar81'),removeConclusion('caar82'),removeConclusion('caar83'),removeConclusion('caar84'),removeConclusion('caar85'),removeConclusion('caar86'),removeConclusion('caar87'),removeConclusion('caar88'),removeConclusion('caar89'),removeConclusion('caar90')
+              removeConclusion('caar91'),removeConclusion('caar92'),removeConclusion('caar93'),removeConclusion('caar94'),removeConclusion('caar95'),removeConclusion('caar96'),removeConclusion('caar97'),removeConclusion('caar98'),removeConclusion('caar99'),removeConclusion('caar100')
+              removeConclusion('caar101'),removeConclusion('caar102'),removeConclusion('caar103'),removeConclusion('caar104'),removeConclusion('caar105'),removeConclusion('caar106'),removeConclusion('caar107'),removeConclusion('caar108')
+              
+              removeConclusion('caarii'),removeConclusion('caarii1'),removeConclusion('caarii2'),removeConclusion('caarii3'),removeConclusion('caarii4'),removeConclusion('caarii5'),removeConclusion('caarii6'),removeConclusion('caarii7'),removeConclusion('caarii8'),removeConclusion('caarii9'),removeConclusion('caarii10')
+              removeConclusion('caarii11'),removeConclusion('caarii12'),removeConclusion('caarii13'),removeConclusion('caarii14'),removeConclusion('caarii15'),removeConclusion('caarii16'),removeConclusion('caarii17'),removeConclusion('caarii18'),removeConclusion('caarii19'),removeConclusion('caarii20')
+              removeConclusion('caarii21'),removeConclusion('caarii22'),removeConclusion('caarii23'),removeConclusion('caarii24'),removeConclusion('caarii25'),removeConclusion('caarii26'),removeConclusion('caarii27'),removeConclusion('caarii28'),removeConclusion('caarii29'),removeConclusion('caarii30')
+              removeConclusion('caarii31'),removeConclusion('caarii32'),removeConclusion('caarii33'),removeConclusion('caarii34'),removeConclusion('caarii35'),removeConclusion('caarii36'),removeConclusion('caarii37'),removeConclusion('caarii38'),removeConclusion('caarii39'),removeConclusion('caarii40')
+              removeConclusion('caarii41'),removeConclusion('caarii42'),removeConclusion('caarii43'),removeConclusion('caarii44'),removeConclusion('caarii45'),removeConclusion('caarii46'),removeConclusion('caarii47'),removeConclusion('caarii48'),removeConclusion('caarii49'),removeConclusion('caarii50')
+              removeConclusion('caarii51'),removeConclusion('caarii52'),removeConclusion('caarii53'),removeConclusion('caarii54'),removeConclusion('caarii55'),removeConclusion('caarii56'),removeConclusion('caarii57'),removeConclusion('caarii58'),removeConclusion('caarii59'),removeConclusion('caarii60')
+              removeConclusion('caarii61'),removeConclusion('caarii62'),removeConclusion('caarii63'),removeConclusion('caarii64'), removeConclusion('caarii65'),removeConclusion('caarii66'),removeConclusion('caarii67'),removeConclusion('caarii68'),removeConclusion('caarii69'),removeConclusion('caarii70')
+              removeConclusion('caarii71'),removeConclusion('caarii72'),removeConclusion('caarii73'),removeConclusion('caarii74'),removeConclusion('caarii75'),removeConclusion('caarii76'),removeConclusion('caarii77'),removeConclusion('caarii78'),removeConclusion('caarii79'),removeConclusion('caarii80')
+              removeConclusion('caarii81'),removeConclusion('caarii82'),removeConclusion('caarii83'),removeConclusion('caarii84'),removeConclusion('caarii85'),removeConclusion('caarii86'),removeConclusion('caarii87'),removeConclusion('caarii88'),removeConclusion('caarii89'),removeConclusion('caarii90')
+              removeConclusion('caarii91'),removeConclusion('caarii92'),removeConclusion('caarii93'),removeConclusion('caarii94'),removeConclusion('caarii95'),removeConclusion('caarii96'),removeConclusion('caarii97'),removeConclusion('caarii98'),removeConclusion('caarii99'),removeConclusion('caarii100')
+
 
               // 2) Regresamos 
               setStep('CGI2')
@@ -1942,6 +2197,22 @@ const StepE2 = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion(' MOTORAS2 ');
               removeConclusion(' SENSITIVAS2 ');
               removeConclusion(' MIXTAS (SENSITIVO-MOTORA)2');
+              removeConclusion('CON DENERVACIÓN DIFUSA (++++)2');
+              removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)2');
+              removeConclusion('CON DENERVACIÓN PROGRESIVA (++)2');
+              removeConclusion('CON DENERVACIÓN DISCRETA (+/+)2');
+              removeConclusion('SIN DENERVACIÓN ACTIVA2');
+              removeConclusion('CON DENERVACIÓN DIFUSA (++++)2');
+              removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)2');
+              removeConclusion('CON DENERVACIÓN PROGRESIVA (++)2');
+              removeConclusion('CON DENERVACIÓN DISCRETA (+/+)2');
+              removeConclusion('SIN DENERVACIÓN ACTIVA2');
+              removeConclusion('RETARDO EN LA CONDUCCIÓN2');
+              removeConclusion('BLOQUEO PARCIAL EN LA CONDUCCIÓN2');
+              removeConclusion('POR BLOQUEO COMPLETO EN LA CONDUCCIÓN2');
+              removeConclusion('TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA2');
+              removeConclusion('TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA2');
+
 
               // 2) Regresamos 
               setStep('D2')
@@ -1980,6 +2251,22 @@ const StepE12 = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion(' MOTORAS2 ');
               removeConclusion(' SENSITIVAS2 ');
               removeConclusion(' MIXTAS (SENSITIVO-MOTORA)2');
+              removeConclusion('CON DENERVACIÓN DIFUSA (++++)2');
+              removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)2');
+              removeConclusion('CON DENERVACIÓN PROGRESIVA (++)2');
+              removeConclusion('CON DENERVACIÓN DISCRETA (+/+)2');
+              removeConclusion('SIN DENERVACIÓN ACTIVA2');
+              removeConclusion('CON DENERVACIÓN DIFUSA (++++)2');
+              removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)2');
+              removeConclusion('CON DENERVACIÓN PROGRESIVA (++)2');
+              removeConclusion('CON DENERVACIÓN DISCRETA (+/+)2');
+              removeConclusion('SIN DENERVACIÓN ACTIVA2');
+              removeConclusion('RETARDO EN LA CONDUCCIÓN2');
+              removeConclusion('BLOQUEO PARCIAL EN LA CONDUCCIÓN2');
+              removeConclusion('POR BLOQUEO COMPLETO EN LA CONDUCCIÓN2');
+              removeConclusion('TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA2');
+              removeConclusion('TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA2');
+
 
               // 2) Regresamos 
               setStep('D')
@@ -2019,6 +2306,9 @@ const StepF2 = ({ handlePrevStep, handleNextStep, setStep }) => {
               removeConclusion(' MODERADA (AXONOTMESIS INCOMPLETA)2');
               removeConclusion(' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2');
 
+              removeConclusion(' MOTORAS2 ');
+              removeConclusion(' SENSITIVAS2 ');
+              removeConclusion(' MIXTAS (SENSITIVO-MOTORA)2');
               // 2) Regresamos 
               setStep('E2')
             }} className="print-button dont-print">
@@ -2058,6 +2348,9 @@ const StepF12 = ({ handlePrevStep, handleNextStep, setStep }) => {
               removeConclusion(' MODERADA (AXONOTMESIS INCOMPLETA)2');
               removeConclusion(' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2');
 
+              removeConclusion(' MOTORAS2 ');
+              removeConclusion(' SENSITIVAS2 ');
+              removeConclusion(' MIXTAS (SENSITIVO-MOTORA)2');
               // 2) Regresamos 
               setStep('E12')
             }} className="print-button dont-print">
@@ -2096,6 +2389,9 @@ const StepG2 = ({ handleNextStep, handlePrevStep, setStep }) => {
               removeConclusion(' CON REINERVACIÓN ACTIVA2 ');
               removeConclusion('  REINERVACIÓN ACTIVA2 ');
 
+              removeConclusion(' LEVE (NEUROAPRAXIA)2');
+              removeConclusion(' MODERADA (AXONOTMESIS INCOMPLETA)2');
+              removeConclusion(' SEVERA (AXONOTMESIS COMPLETA/NEUROTMESIS)2');
               // 2) Regresamos 
               setStep('F')
             }} className="print-button dont-print">
@@ -2132,6 +2428,9 @@ const StepH2 = ({ handlePrevStep, handleNextStep, setStep }) => {
               removeConclusion('parcial_funcional2');
               removeConclusion('pobre2');
               removeConclusion('nulo2');
+
+              removeConclusion(' CON REINERVACIÓN ACTIVA2 ');
+              removeConclusion('  REINERVACIÓN ACTIVA2 ');
 
               // 2) Regresamos 
               setStep('G')
@@ -2279,7 +2578,7 @@ const StepI = ({ handlePrevStep, setStep,topLeftText,setTopLeftText, copyConclus
         </button>
       </div>
 
-       <MenuImagenes  expandedDivs={expandedDivs}
+      <MenuImagenes  expandedDivs={expandedDivs}
               setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
               setTopLeftText={setTopLeftText}   />
     </div>

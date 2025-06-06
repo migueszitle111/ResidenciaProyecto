@@ -33,7 +33,7 @@ export default function LandingPage() {
   const handlePaymentClick = (e, url) => {
     e.preventDefault();
     alert(
-      "Para temas de facturación, escríbenos a soporte@medxproapp.com\n\n" +
+      "Para temas de facturación, escríbenos a contacto@medxproapp.com\n\n" +
       "Ahora te redirigiremos al pago…"
     );
     window.location.href = url;

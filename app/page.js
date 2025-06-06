@@ -26,6 +26,11 @@ const Home = () => {
   // -------------------------
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
 
+  // Clave de localStorage que incluye el email del usuario
+  const userKey = session?.user?.email
+    ? `hidePrivacyModal_${session.user.email}`
+    : null;
+
   // Inicializar AOS
   useEffect(() => {
     AOS.init({ duration: 600, once: true });
@@ -43,29 +48,26 @@ const Home = () => {
     }
   }, [session]);
 
-  // Mostrar el modal cuando haya sesión y no se haya marcado “no volver a mostrar”
+  // Mostrar el modal sólo si el usuario inició sesión y no tiene la bandera en localStorage
   useEffect(() => {
-    if (session) {
-      const hideFlag = localStorage.getItem("hidePrivacyModal");
+    if (session && userKey) {
+      const hideFlag = localStorage.getItem(userKey);
       if (hideFlag !== "true") {
         setShowPrivacyModal(true);
       }
     }
-  }, [session]);
+  }, [session, userKey]);
 
   // Refrescar AOS cuando aparece el modal
   useEffect(() => {
     if (showPrivacyModal) AOS.refresh();
   }, [showPrivacyModal]);
 
-  // Cierra solo esta vez
-  const handleCloseModal = () => {
-    setShowPrivacyModal(false);
-  };
-
-  // “No volver a mostrar”
-  const handleDontShowAgain = () => {
-    localStorage.setItem("hidePrivacyModal", "true");
+  // Función que guarda en localStorage y cierra modal
+  const handleAcceptPrivacy = () => {
+    if (userKey) {
+      localStorage.setItem(userKey, "true");
+    }
     setShowPrivacyModal(false);
   };
 
@@ -100,51 +102,30 @@ const Home = () => {
          ============================== */}
       {session && showPrivacyModal && (
         <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black bg-opacity-80">
-          <div
-            className="relative max-w-3xl w-[90%] mx-4"
-            data-aos="zoom-in"
-          >
-            {/* GIF de aviso de privacidad */}
+          <div className="flex flex-col items-center" data-aos="zoom-in">
+            {/* GIF de aviso de privacidad (centrado y grande) */}
             <img
               src="/assets/Gifs/AVISO DE PRIVACIDAD2.gif"
               alt="Aviso de Privacidad"
-              className="w-full h-auto object-contain"
+              className="w-[700px] h-auto object-contain"
             />
 
-             {/* Botón “✕” con diseño sobre la imagen */}
+            {/* Botón “Aceptar” justo debajo del GIF */}
             <button
-              onClick={handleCloseModal}
+              onClick={handleAcceptPrivacy}
               className="
-                absolute top-1 right-2 
-                bg-red-600 bg-opacity-80 
-                hover:bg-red-700 
-                text-white 
-                rounded-full 
-                w-10 h-5 
-                flex items-center justify-center 
-                shadow-lg 
-                transition-colors
-              "
-              aria-label="Cerrar"
-            >
-              <span className="text-2xl leading-none">&times;</span>
-            </button>
-
-            {/* Botón “No volver a mostrar” con diseño sobre la imagen */}
-            <button
-              onClick={handleDontShowAgain}
-              className="
-                absolute bottom-2 right-12
-                bg-red-600 bg-opacity-70
-                hover:bg-red-700 
-                text-white 
-                px-3 py-0
-                rounded-md 
-                shadow-md 
+                mt-4
+                bg-orange-600
+                hover:bg-orange-700
+                text-white
+                px-8
+                py-1
+                rounded-md
+                shadow-md
                 transition-colors
               "
             >
-              No volver a mostrar
+              Aceptar
             </button>
           </div>
         </div>

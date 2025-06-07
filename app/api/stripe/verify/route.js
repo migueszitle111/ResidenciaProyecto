@@ -1,3 +1,4 @@
+// app/api/stripe/verify/route.js
 import { NextResponse } from "next/server";
 import Stripe          from "stripe";
 import crypto          from "crypto";
@@ -20,7 +21,7 @@ export async function GET(req) {
       return NextResponse.json({ ok: false, error: "Falta session_id" }, { status: 400 });
     }
 
-    // 1) Recuperar sesión de Stripe
+    // 1) Recuperar la sesión de Stripe
     const session = await stripe.checkout.sessions.retrieve(session_id, {
       expand: ["subscription", "subscription.customer"],
     });
@@ -29,36 +30,58 @@ export async function GET(req) {
     const subscriptionObj = session.subscription;
     const isTrial         = subscriptionObj.status === "trialing";
 
-    // 2) Guardar o actualizar usuario
+    // Determinar provider real
+    // metadata.provider existe cuando viene del flow “credentials”
+    // en caso contrario, es un Google user
+    const provider = session.metadata?.provider || "google";
+
+    // Extraer nombre: metadata.name o bien customer_details.name
+    const fullName = session.metadata?.name
+      || session.customer_details?.name
+      || "";
+
+    // 2) Guardar o actualizar usuario en MongoDB
     await connectMongoDB();
     let user = await User.findOne({ email: customerEmail });
+
     if (!user) {
-      user = new User({
+      // Sólo incluimos lastname/cedula/especialidad para credentials
+      const newUserData = {
         email:                customerEmail,
-        provider:             session.metadata?.provider || "credentials",
-        name:                 session.metadata?.name || "",
-        lastname:             session.metadata?.lastname || "",
-        cedula:               session.metadata?.cedula || "",
-        especialidad:         session.metadata?.especialidad || "",
-        imageUrl:             session.metadata?.imageUrl || "",
-        roles:                session.metadata?.roles || "user",
+        provider,
+        name:                 fullName,
         subscriptionActive:   true,
         stripeSubscriptionId: subscriptionObj.id,
-      });
+        roles:                session.metadata?.roles || "user",
+        imageUrl:             session.metadata?.imageUrl || "",
+      };
+
+      if (provider === "credentials") {
+        Object.assign(newUserData, {
+          lastname:     session.metadata?.lastname || "",
+          cedula:       session.metadata?.cedula || "",
+          especialidad: session.metadata?.especialidad || "",
+        });
+      }
+
+      user = new User(newUserData);
     } else {
-      user.subscriptionActive   = true;
-      user.stripeSubscriptionId = subscriptionObj.id;
+      user.provider               = provider;
+      user.subscriptionActive     = true;
+      user.stripeSubscriptionId   = subscriptionObj.id;
+      // No tocamos los campos de perfil
     }
+
     await user.save();
 
-    // 3) Enviar correos
-    if (user.provider === "credentials") {
-      // Generar token de reset
+    // 3) Enviar correos según el tipo de usuario y si está en trial
+    if (provider === "credentials") {
+      // Generar token de restablecimiento con expiración dinámica
       const resetToken = crypto.randomBytes(32).toString("hex");
       user.passwordResetToken   = resetToken;
       user.passwordResetExpires = isTrial
-        ? Date.now() + 24 * 60 * 60 * 1000
-        : Date.now() +  1 * 60 * 60 * 1000;
+        ? Date.now() + 24 * 60 * 60 * 1000   // 24 h
+        : Date.now() +  1 * 60 * 60 * 1000;  // 1 h
       await user.save();
 
       const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`;
@@ -72,7 +95,7 @@ export async function GET(req) {
         await sendWelcomeEmail(user.email);
       }
     } else {
-      // Google user
+      // Usuario Google
       if (isTrial) {
         await sendTrialInfoEmail(user.email, {
           trialEndsAt: new Date(subscriptionObj.trial_end * 1000).toISOString(),
@@ -82,7 +105,7 @@ export async function GET(req) {
       }
     }
 
-    return NextResponse.json({ ok: true, provider: user.provider });
+    return NextResponse.json({ ok: true, provider });
   } catch (err) {
     console.error("🔴 [stripe/verify] error:", err);
     return NextResponse.json(

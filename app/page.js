@@ -105,9 +105,9 @@ const Home = () => {
           <div className="flex flex-col items-center" data-aos="zoom-in">
             {/* GIF de aviso de privacidad (centrado y grande) */}
             <img
-              src="/assets/Gifs/AVISO DE PRIVACIDAD2.gif"
+              src="/assets/Gifs/LP-02.png"
               alt="Aviso de Privacidad"
-              className="w-[700px] h-auto object-contain"
+              className="w-[1000px] h-auto object-contain"
             />
 
             {/* Botón “Aceptar” justo debajo del GIF */}

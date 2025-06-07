@@ -1,5 +1,5 @@
 import { ReportContext,DropContext } from '@/src/context';
-import { useContext, useState } from 'react';
+import { useContext, useState,useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
 import  MenuImagenes  from '../../../components/ReportTemplate/DinamicImagesMenu';
@@ -11,12 +11,6 @@ const SimpleMultiStepForm = ({showStepNumber,conclusionDivRef, elementRef, handl
   const [step, setStep] = useState('A');
   const { data: session } = useSession();
 
-  const {
-    selectedImages,
-    history,
-    handleUndo,
-    handlePrint
-  } = useImageState();
 
   // Siguiente paso, se ponen los pasos de arriba hacia abajo
   const handleNextStep = () => {
@@ -69,6 +63,7 @@ const SimpleMultiStepForm = ({showStepNumber,conclusionDivRef, elementRef, handl
 
   return (
     <div>
+      
       {/* Metodos que toman cada paso*/}
       {step === 'A' ? (
         <StepA

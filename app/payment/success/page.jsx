@@ -1,4 +1,3 @@
-// app/payment/success/page.jsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -22,11 +21,8 @@ export default function SuccessPage() {
     fetch(`/api/stripe/verify?session_id=${sid}`)
       .then(res => res.json())
       .then(data => {
-        if (data.ok) {
-          setProvider(data.provider);
-        } else {
-          setError(data.error || "Verificación fallida");
-        }
+        if (!data.ok) throw new Error(data.error || "Verificación fallida");
+        setProvider(data.provider);
       })
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
@@ -40,6 +36,21 @@ export default function SuccessPage() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black text-white">
+        <h1 className="text-3xl text-red-500 mb-4">¡Ups!</h1>
+        <p className="mb-6">{error}</p>
+        <button
+          onClick={() => window.close()}
+          className="bg-orange-500 hover:bg-orange-700 text-white px-6 py-3 rounded"
+        >
+          Cerrar
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black to-gray-900 p-4">
       <motion.div
@@ -48,7 +59,6 @@ export default function SuccessPage() {
         transition={{ duration: 0.6 }}
         className="relative flex flex-col items-center bg-white bg-opacity-10 backdrop-blur-lg p-10 rounded-2xl shadow-2xl text-center max-w-md w-full"
       >
-        {/* Botón cerrar ahora cierra la pestaña */}
         <button
           onClick={() => window.close()}
           className="absolute top-3 right-3 text-white text-2xl hover:text-gray-300"
@@ -57,18 +67,7 @@ export default function SuccessPage() {
           ✕
         </button>
 
-        {error ? (
-          <>
-            <h1 className="text-3xl text-red-500 mb-4">¡Ups!</h1>
-            <p className="text-white mb-6">{error}</p>
-            <button
-              onClick={() => window.close()}
-              className="bg-orange-500 hover:bg-orange-700 text-white px-6 py-3 rounded"
-            >
-              Cerrar
-            </button>
-          </>
-        ) : provider === "google" ? (
+        {provider === "google" ? (
           <>
             <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600 mb-4">
               ¡Listo!
@@ -89,17 +88,15 @@ export default function SuccessPage() {
               ¡Bienvenido a mEDXproapp!
             </h1>
             <p className="text-white mb-6">
-              Acabamos de enviarte un correo para crear tu contraseña.  
+              Acabamos de enviarte un correo para crear tu contraseña.
               Una vez la asignes, vuelve aquí y pulsa ✕ para cerrar.
             </p>
-
-            {/* Recomendaciones */}
             <div className="mx-auto mt-4 text-left text-sm text-white bg-white bg-opacity-5 p-4 rounded max-w-xs">
               <p className="font-semibold mb-2">¿No ves el correo?</p>
               <ul className="list-disc list-inside space-y-1">
                 <li>Revisa tu carpeta de Spam/Basura.</li>
-                <li>Si usas móvil, abre tu app de Gmail, Outlook, Yahoo…</li>
-                <li>Busca “MedxProapp” en el buscador interno de tu correo.</li>
+                <li>Si usas móvil, abre tu app de correo.</li>
+                <li>Busca “MedxProapp” en el buscador de tu correo.</li>
               </ul>
               <p className="mt-4">
                 Cualquier problema, escríbenos a{" "}

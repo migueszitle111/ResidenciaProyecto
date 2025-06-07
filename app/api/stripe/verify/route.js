@@ -1,4 +1,3 @@
-// app/api/stripe/verify/route.js
 import { NextResponse } from "next/server";
 import Stripe          from "stripe";
 import crypto          from "crypto";
@@ -15,77 +14,84 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 export async function GET(req) {
-  const session_id = req.nextUrl.searchParams.get("session_id");
-  if (!session_id) {
-    return NextResponse.json({ ok: false, error: "Falta session_id" }, { status: 400 });
-  }
+  try {
+    const session_id = req.nextUrl.searchParams.get("session_id");
+    if (!session_id) {
+      return NextResponse.json(
+        { ok: false, error: "Falta session_id" },
+        { status: 400 }
+      );
+    }
 
-  // 1) Recuperar la sesión de Stripe y expandir suscripción + cliente
-  const session = await stripe.checkout.sessions.retrieve(session_id, {
-    expand: ["subscription", "subscription.customer"],
-  });
-
-  const customerEmail   = session.customer_email;
-  const subscriptionObj = session.subscription;
-  const isTrial         = subscriptionObj.status === "trialing";
-
-  // 2) Guardar o actualizar usuario en MongoDB
-  await connectMongoDB();
-  let user = await User.findOne({ email: customerEmail });
-
-  if (!user) {
-    user = new User({
-      email:                customerEmail,
-      provider:             session.metadata?.provider || "credentials",
-      name:                 session.metadata?.name || "",
-      lastname:             session.metadata?.lastname || "",
-      cedula:               session.metadata?.cedula || "",
-      especialidad:         session.metadata?.especialidad || "",
-      imageUrl:             session.metadata?.imageUrl || "",
-      roles:                session.metadata?.roles || "user",
-      subscriptionActive:   true,
-      stripeSubscriptionId: subscriptionObj.id,
+    // 1) Recuperar la sesión de Stripe y expandir suscripción + cliente
+    const session = await stripe.checkout.sessions.retrieve(session_id, {
+      expand: ["subscription", "subscription.customer"],
     });
-  } else {
-    user.subscriptionActive     = true;
-    user.stripeSubscriptionId   = subscriptionObj.id;
-  }
-  await user.save();
 
-  // 3) Enviar correos de acuerdo al tipo de usuario y si está en trial
-  if (user.provider === "credentials") {
-    // 3A) Usuario “credentials”
+    const customerEmail   = session.customer_email;
+    const subscriptionObj = session.subscription;
+    const isTrial         = subscriptionObj.status === "trialing";
 
-    // Generar token de restablecimiento con expiración dinámica:
-    const resetToken = crypto.randomBytes(32).toString("hex");
-    user.passwordResetToken = resetToken;
-    user.passwordResetExpires = isTrial
-      ? Date.now() + 24 * 60 * 60 * 1000   // 24 horas en ms
-      : Date.now() +  1 * 60 * 60 * 1000;  //  1 hora en ms
+    // 2) Guardar o actualizar usuario en MongoDB
+    await connectMongoDB();
+    let user = await User.findOne({ email: customerEmail });
+
+    if (!user) {
+      user = new User({
+        email:                customerEmail,
+        provider:             session.metadata?.provider || "credentials",
+        name:                 session.metadata?.name || "",
+        lastname:             session.metadata?.lastname || "",
+        cedula:               session.metadata?.cedula || "",
+        especialidad:         session.metadata?.especialidad || "",
+        imageUrl:             session.metadata?.imageUrl || "",
+        roles:                session.metadata?.roles || "user",
+        subscriptionActive:   true,
+        stripeSubscriptionId: subscriptionObj.id,
+      });
+    } else {
+      user.subscriptionActive     = true;
+      user.stripeSubscriptionId   = subscriptionObj.id;
+    }
     await user.save();
 
-    // Enviar correo para crear contraseña (el texto interno usará 24h si isTrial===true)
-    const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`;
-    await sendPasswordReset(user.email, resetUrl, isTrial ? 24 : 1);
+    // 3) Enviar correos según tipo de usuario y si está en trial
+    if (user.provider === "credentials") {
+      const resetToken = crypto.randomBytes(32).toString("hex");
+      user.passwordResetToken   = resetToken;
+      user.passwordResetExpires = isTrial
+        ? Date.now() + 24 * 60 * 60 * 1000   // 24 h
+        : Date.now() +  1 * 60 * 60 * 1000;  // 1 h
+      await user.save();
 
-    // Enviar correo adicional: info de trial o bienvenida
-    if (isTrial) {
-      await sendTrialInfoEmail(user.email, {
-        trialEndsAt: new Date(subscriptionObj.trial_end * 1000).toISOString(),
-      });
+      const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`;
+      await sendPasswordReset(user.email, resetUrl, isTrial ? 24 : 1);
+
+      if (isTrial) {
+        await sendTrialInfoEmail(user.email, {
+          trialEndsAt: new Date(subscriptionObj.trial_end * 1000).toISOString(),
+        });
+      } else {
+        await sendWelcomeEmail(user.email);
+      }
+
     } else {
-      await sendWelcomeEmail(user.email);
+      if (isTrial) {
+        await sendTrialInfoEmail(user.email, {
+          trialEndsAt: new Date(subscriptionObj.trial_end * 1000).toISOString(),
+        });
+      } else {
+        await sendWelcomeEmail(user.email);
+      }
     }
-  } else {
-    // 3B) Usuario “google”
-    if (isTrial) {
-      await sendTrialInfoEmail(user.email, {
-        trialEndsAt: new Date(subscriptionObj.trial_end * 1000).toISOString(),
-      });
-    } else {
-      await sendWelcomeEmail(user.email);
-    }
+
+    return NextResponse.json({ ok: true, provider: user.provider });
+
+  } catch (err) {
+    console.error("🔴 Error en /api/stripe/verify:", err);
+    return NextResponse.json(
+      { ok: false, error: err.message || "Error interno del servidor" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({ ok: true, provider: user.provider });
 }

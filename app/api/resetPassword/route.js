@@ -79,15 +79,15 @@ export async function POST(request) {
       port: 465, // Puerto para SMTP
       secure: false,  // true para usar TLS, false para usar STARTTLS
       auth: {
-        user: 'soporte@medxproapp.com',
-        pass: 'Medxpro2025%', 
+        user: 'support@medxproapp.com',
+        pass: 'Medxpro2025$', 
       },
       authMethod: 'PLAIN', // Método de autenticación
     });
     
     // Configura el contenido del correo electrónico
     const mailOptions = {
-      from: 'soporte@medxproapp.com',
+      from: 'support@medxproapp.com',
       to: email,
       subject: 'Solicitud de restablecimiento de contraseña',
       text: `Utiliza este token para restablecer tu contraseña: ${token} Nota: Solo es válido por 1 hora.`,

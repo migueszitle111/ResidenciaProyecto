@@ -2,6 +2,7 @@
 import { ReportContext ,DropContext} from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+
 import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
@@ -125,15 +126,11 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
 
 const Reporte = () => {
 
-    // ——— Estado y lógica del modal flotante ———
-  const [showHelpModal, setShowHelpModal] = useState(() => {
-    return localStorage.getItem('hideHelpGif') !== 'true';
-  });
-
+  // arrancamos false para que no intente leer localStorage en servidor
+const [showHelpModal, setShowHelpModal] = useState(false);
   useEffect(() => {
-    if (localStorage.getItem('hideHelpGif') === 'true') {
-      setShowHelpModal(false);
-    }
+   const hide = localStorage.getItem('hideHelpGif') === 'true';
+   setShowHelpModal(!hide);
   }, []);
 
   // Carga datos de usuario

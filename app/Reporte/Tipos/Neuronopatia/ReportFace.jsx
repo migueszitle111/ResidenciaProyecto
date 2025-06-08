@@ -303,7 +303,7 @@ useEffect(() => {
               ×
             </button>
             <img
-              src="/assets/Gifs/Ayudaboton.gif"
+              src="https://media.githubusercontent.com/media/migueszitle111/ResidenciaProyecto/refs/heads/main/public/assets/Gifs/Ayudaboton.gif"
               alt="Ayuda menú"
               className="help-modal-gif"
             />

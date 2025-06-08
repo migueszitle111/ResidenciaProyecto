@@ -123,41 +123,17 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
 };
 
 const Reporte = () => {
-  const OVERLAY_START_POS = { x: 260, y: 500 };   // ← cámbialo a tu gusto
 
-   /* ── Estados nuevos para el overlay flotante ────────────────────────────── */
-  const [showOverlay, setShowOverlay]   = useState(false);
-  const [dontShowAgain, setDontShowAgain] = useState(false);
-const [isDraggingOverlay, setIsDraggingOverlay] = useState(false);      // para cursor “mano”
-
-/* posición controlada del overlay */
-const [overlayPos, setOverlayPos] = useState(OVERLAY_START_POS);
-
-// ───── al cargar la página ─────
-useEffect(() => {
-  /* 1) recuperar si la habías guardado antes ------------- */
-  const stored = localStorage.getItem('menuGifPos');
-  if (stored) {
-    try {
-      const { x, y } = JSON.parse(stored);
-      setOverlayPos({ x, y });
-    } catch { /* si falla, usa la posición por defecto */ }
-  }
-
-  /* 2) decidir si se muestra o no el overlay ------------- */
-  const hide = localStorage.getItem('hideMenuGifOverlay') === 'true';
-  setShowOverlay(!hide);
-}, []);
+    // ——— Estado y lógica del modal flotante ———
+  const [showHelpModal, setShowHelpModal] = useState(() => {
+    return localStorage.getItem('hideHelpGif') !== 'true';
+  });
 
   useEffect(() => {
-    const hide = localStorage.getItem('hideMenuGifOverlay') === 'true';
-    setShowOverlay(!hide);
+    if (localStorage.getItem('hideHelpGif') === 'true') {
+      setShowHelpModal(false);
+    }
   }, []);
-
-  const handleCloseOverlay = () => {
-    if (dontShowAgain) localStorage.setItem('hideMenuGifOverlay', 'true');
-    setShowOverlay(false);
-  };
 
   // Carga datos de usuario
   const { data: session, status } = useSession();
@@ -312,6 +288,42 @@ useEffect(() => {
 
   return (
     <div >
+
+  {showHelpModal && (
+        <div
+          className="help-modal-overlay"
+          onClick={() => setShowHelpModal(false)}
+        >
+          <div
+            className="help-modal-content"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              className="help-modal-close"
+              onClick={() => setShowHelpModal(false)}
+            >
+              ×
+            </button>
+            <img
+              src="/assets/Gifs/Ayudaboton.gif"
+              alt="Ayuda menú"
+              className="help-modal-gif"
+            />
+            <button
+              className="help-modal-hide"
+              onClick={() => {
+                localStorage.setItem('hideHelpGif', 'true');
+                setShowHelpModal(false);
+              }}
+            >
+              No volver a mostrar
+            </button>
+          </div>
+        </div>
+      )}
+
+
+
       {/* Clase que encapzula la información y el titulo de la pagina */}
       <div className='head'>
            {/* Titulo de la pagina */}
@@ -323,12 +335,6 @@ useEffect(() => {
         {/* Componente de la caja de conclusión junto con la caja de notas */}
           {/* Se especifica dont-print para no ser incluidos en la vista de impresión */}
           <div className='vertical-orientation dont-print'>
-
-    
-
-
-
-
           {/* Lista de botones */}
           <div className='button-bar'>
           <button 
@@ -352,11 +358,6 @@ useEffect(() => {
           </label>
             <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} style={{display: 'none'}}/>          </div>
           <div className={'vertical-container dont-print'}>
-
-
-
-
-
           <div className={`dont-print ${isPageVisible ? 'visible' : 'hidden'}`}>
           
             {/*

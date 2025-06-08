@@ -88,20 +88,35 @@ export default function Registro() {
 
   return (
     <div>
-      <Overhead /><OverheadMenu />
-      <hr className="bg-white h-0.5"/>
+      <Overhead />
+      <OverheadMenu />
+      <hr className="bg-white h-0.5 mb-6"/>
 
-      <div className="ContEducacion bg-black bg-opacity-90 p-6">
+      {/* Contenedor centrado */}
+      <div className="
+        ContEducacion
+        min-h-screen
+        flex flex-col items-center justify-center text-center
+        bg-black bg-opacity-90 p-6
+      ">
+        {/* Logo de la app */}
         <div className="mb-4">
           <Image src="/L_B_Blanco.svg" width={75} height={75} alt="Logo"/>
         </div>
-        <h2 className="text-3xl text-white">Crea una nueva cuenta.</h2>
-        <p className="text-white">
+
+        <h2 className="text-3xl text-white mb-2">Crea una nueva cuenta.</h2>
+        <p className="text-white mb-6">
           ¿Ya tienes cuenta?{" "}
-          <a href="/Login" className="text-orange-300">Inicia sesión</a>
+          <a href="/Login" className="text-orange-300 hover:underline">
+            Inicia sesión
+          </a>
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4 w-full sm:w-2/3">
+        {/* Formulario */}
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md space-y-4"
+        >
           <div className="flex gap-4">
             <input
               onChange={e => setName(e.target.value)}
@@ -144,43 +159,45 @@ export default function Registro() {
             className="w-full p-2 rounded text-xs"
           />
 
+          {/* Logo de empresa */}
           <div>
             <p className="text-xs text-white mb-1">
               Logo de tu empresa (opcional):
             </p>
-            <input type="file" onChange={handleImageChange}/>
+            <input type="file" onChange={handleImageChange} className="text-xs"/>
+
             {imagePreview && (
-              <div className="w-full h-40 mt-2">
+              <div className="relative w-32 h-32 mt-2 overflow-hidden rounded border border-white">
                 <img
                   src={imagePreview}
                   alt="Vista previa"
-                  className="object-cover w-full h-full rounded"
+                  className="object-contain w-full h-full"
                 />
               </div>
             )}
           </div>
 
+          {/* Mensaje de error */}
           {error && (
-            <div className="bg-red-500 text-white p-2 rounded">
+            <div className="bg-red-500 text-white p-2 rounded text-xs">
               {error}
             </div>
           )}
 
-          {/* → FLOW “credentials” */}
+          {/* Botones */}
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-3 rounded hover:bg-orange-700 transition"
+            className="w-full bg-orange-500 text-white py-3 rounded hover:bg-orange-700 transition text-sm"
           >
             Continuar al pago
           </button>
 
-          {/* → FLOW “google” */}
           <button
             type="button"
             onClick={() => signIn("google", {
-              callbackUrl: "/payment/success"  // o "/" si ya pagó antes
+              callbackUrl: "/payment/success"
             })}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded text-white bg-red-600 hover:bg-red-800 transition"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded text-white bg-red-600 hover:bg-red-800 transition text-sm"
           >
             <svg className="w-5 h-5" viewBox="0 0 48 48">
               <path fill="#FFC107" d="M43.6 20.5h-2.2v-.1H24v7.1h11.3c-1.5…"/>

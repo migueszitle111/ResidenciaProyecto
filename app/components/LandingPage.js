@@ -33,8 +33,9 @@ export default function LandingPage() {
   const handlePaymentClick = (e, url) => {
     e.preventDefault();
     alert(
-      "Para temas de facturación, escríbenos a contacto@medxproapp.com\n\n" +
-      "Ahora te redirigiremos al pago…"
+      "Para facturas y dirección de envió a México, escríbanos a contacto@medxproapp.com\n\n" +
+      "En caso de envíos a centro y sudamerica se cotizara por separado" 
+      
     );
     window.location.href = url;
   };

@@ -101,10 +101,10 @@ export default function SuccessPage() {
               <p className="mt-4">
                 Cualquier problema, escríbenos a{" "}
                 <a
-                  href="mailto:soporte@medxproapp.com"
+                  href="mailto:support@medxproapp.com"
                   className="text-orange-300 underline"
                 >
-                  soporte@medxproapp.com
+                  support@medxproapp.com
                 </a>.
               </p>
             </div>

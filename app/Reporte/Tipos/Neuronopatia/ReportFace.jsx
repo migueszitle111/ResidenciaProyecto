@@ -1,3 +1,4 @@
+'use client';
 import { ReportContext ,DropContext} from '@/src/context';
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';

@@ -2,11 +2,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image            from "next/image";
-import { useRouter }    from "next/navigation";
-import { signIn }       from "next-auth/react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
-import Overhead     from "../components/Overhead";
+import Overhead from "../components/Overhead";
 import OverheadMenu from "../components/OverheadMenu";
 
 export default function Registro() {
@@ -90,15 +90,18 @@ export default function Registro() {
     <div>
       <Overhead />
       <OverheadMenu />
-      <hr className="bg-white h-0.5 mb-6"/>
+      <hr className="bg-white h-0.5 mb-1" />
 
-      {/* Contenedor centrado */}
-      <div className="
-        ContEducacion
-        min-h-screen
-        flex flex-col items-center justify-center text-center
-        bg-black bg-opacity-90 p-6
-      ">
+      {/* Contenedor centrado con padding lateral responsivo */}
+      <div
+        className="
+          ContEducacion
+          min-h-screen
+          flex flex-col items-center justify-center text-center
+          bg-black bg-opacity-90
+          px-4 sm:px-6 lg:px-8 py-6
+        "
+      >
         {/* Logo de la app */}
         <div className="mb-4">
           <Image src="/L_B_Blanco.svg" width={75} height={75} alt="Logo"/>
@@ -112,10 +115,10 @@ export default function Registro() {
           </a>
         </p>
 
-        {/* Formulario */}
+        {/* Formulario con ancho máximo mayor */}
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md space-y-4"
+          className="w-3/4 max-w-4xl space-y-4"
         >
           <div className="flex gap-4">
             <input
@@ -160,7 +163,7 @@ export default function Registro() {
           />
 
           {/* Logo de empresa */}
-          <div>
+          <div className="flex flex-col items-center">
             <p className="text-xs text-white mb-1">
               Logo de tu empresa (opcional):
             </p>

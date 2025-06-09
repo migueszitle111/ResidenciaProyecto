@@ -274,6 +274,12 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
  * cada una con su propia zona de arrastre (DropArea).
  */
 const Reporte = () => {
+    // arrancamos false para que no intente leer localStorage en servidor
+const [showHelpModal, setShowHelpModal] = useState(false);
+  useEffect(() => {
+   const hide = localStorage.getItem('hideHelpGif') === 'true';
+   setShowHelpModal(!hide);
+  }, []);
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
     setHasMounted(true);
@@ -574,6 +580,39 @@ const Reporte = () => {
 
   return (
     <div>
+      
+  {showHelpModal && (
+        <div
+          className="help-modal-overlay"
+          onClick={() => setShowHelpModal(false)}
+        >
+          <div
+            className="help-modal-content"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              className="help-modal-close"
+              onClick={() => setShowHelpModal(false)}
+            >
+              ×
+            </button>
+            <img
+              src="https://media.githubusercontent.com/media/migueszitle111/ResidenciaProyecto/refs/heads/main/public/assets/Gifs/Ayudaboton.gif"
+              alt="Ayuda menú"
+              className="help-modal-gif"
+            />
+            <button
+              className="help-modal-hide"
+              onClick={() => {
+                localStorage.setItem('hideHelpGif', 'true');
+                setShowHelpModal(false);
+              }}
+            >
+              No volver a mostrar
+            </button>
+          </div>
+        </div>
+      )}
       <div className="wrapper">
 
         {/* Panel lateral con botones y MenuImagenes */}

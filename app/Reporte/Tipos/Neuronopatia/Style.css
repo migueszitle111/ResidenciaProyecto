@@ -35,19 +35,19 @@
   right: 10px;
   width: 32px;
   height: 32px;
-  background: rgba(255,255,255,0.2);
-  border: 2px solid rgba(255,255,255,0.6);
+   background: #000;              /* fondo negro */
+  border: 2px solid #fff;        /* borde blanco */
   border-radius: 50%;
-  color: white;
+  color: #fff;                   /* cruz blanca */
   font-size: 1.2rem;
-  line-height: 28px;       /* para centrar el “×” */
+  line-height: 1px;       /* para centrar el “×” */
   text-align: center;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 .help-modal-close:hover {
-  background: rgba(255,255,255,0.4);
+  background: rgb(255, 0, 0);
   transform: scale(1.1);
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }

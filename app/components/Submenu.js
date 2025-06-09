@@ -20,38 +20,38 @@ const Submenu = () => {
     {
       name: "Videos",
       imagen: "/assets/SubmenuSvg/Videos.svg",
-      path: "/NoDisponible",
+      path: "/AppDisponible",
     },
     {
       name: "Podcast",
       imagen: "/assets/SubmenuSvg/Podcast.svg",
-      path: "/NoDisponible",
+      path: "/AppDisponible",
     },
     {
       name: "Perlas",
       imagen: "/assets/SubmenuSvg/Perlas.svg",
-      path: "/NoDisponible",
+      path: "/AppDisponible",
       // path: "/Perlas",
 
     },
     {
-      name: "Ultrasonidos",
+      name: "Ultrasonido",
       imagen: "/assets/SubmenuSvg/Ultrasonido.svg",
-      path: "/NoDisponible",
+      path: "/AppDisponible",
       // path: "/Ultrasonido",
 
     },
     {
       name: "Monitoreo",
       imagen: "/assets/SubmenuSvg/Monitoreo.svg",
-      path: "/NoDisponible",
+      path: "/AppDisponible",
       // path: "/Monitoreo",
 
     },
     {
       name: "Patrocinio",
       imagen: "/assets/SubmenuSvg/Patrocinio.svg",
-      path: "/NoDisponible",
+      path: "/AppDisponible",
       // path: "/Patrocinio",
 
     },

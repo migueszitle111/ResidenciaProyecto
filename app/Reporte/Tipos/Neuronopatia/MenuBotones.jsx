@@ -146,9 +146,7 @@ const SimpleMultiStepForm = ({showStepNumber,conclusionDivRef, elementRef, handl
       {step === 'H' ? (
         <StepH
         handlePrevStep={handlePrevStep}
-        handleUndo={handleUndo}
         handleImageChange={handleImageChange}
-        handlePrint={handlePrint}
         conclusionDivRef={conclusionDivRef}
         elementRef={elementRef}
         droppedItems={droppedItems}
@@ -163,9 +161,7 @@ const SimpleMultiStepForm = ({showStepNumber,conclusionDivRef, elementRef, handl
       {step === 'G1' ? (
         <StepG1
         handlePrevStep={handlePrevStep}
-        handleUndo={handleUndo}
         handleImageChange={handleImageChange}
-        handlePrint={handlePrint}
         conclusionDivRef={conclusionDivRef}
         elementRef={elementRef}
         droppedItems={droppedItems}

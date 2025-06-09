@@ -126,6 +126,12 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
 
 
 const Reporte = () => {
+    // arrancamos false para que no intente leer localStorage en servidor
+const [showHelpModal, setShowHelpModal] = useState(false);
+  useEffect(() => {
+   const hide = localStorage.getItem('hideHelpGif') === 'true';
+   setShowHelpModal(!hide);
+  }, []);
   
   // Carga datos de usuario
   const { data: session, status } = useSession();
@@ -204,6 +210,39 @@ const Reporte = () => {
 
     return (
       <div >
+        
+  {showHelpModal && (
+        <div
+          className="help-modal-overlay"
+          onClick={() => setShowHelpModal(false)}
+        >
+          <div
+            className="help-modal-content"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              className="help-modal-close"
+              onClick={() => setShowHelpModal(false)}
+            >
+              ×
+            </button>
+            <img
+              src="https://media.githubusercontent.com/media/migueszitle111/ResidenciaProyecto/refs/heads/main/public/assets/Gifs/Ayudaboton.gif"
+              alt="Ayuda menú"
+              className="help-modal-gif"
+            />
+            <button
+              className="help-modal-hide"
+              onClick={() => {
+                localStorage.setItem('hideHelpGif', 'true');
+                setShowHelpModal(false);
+              }}
+            >
+              No volver a mostrar
+            </button>
+          </div>
+        </div>
+      )}
         {/* Clase que encapzula la información y el titulo de la pagina */}
         <div className='head'>
              {/* Titulo de la pagina */}

@@ -65,7 +65,7 @@ const CardsList = () => {
     <>
       <div style={{
               maxWidth: "800px",
-              margin: "0 auto",
+              margin: "50px auto",
               marginBottom: "20px",
             }}>
       <Slider

@@ -868,13 +868,16 @@ const StepG1 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL:</h1>
       {/* Renderizamos cada botón en base al array */}
-      {levels.map((item) => (
+      {levels.map(item => (
         <ConclusionButton
           key={item.value}
           value={item.value}
           title={item.title}
           displayText={item.displayText}
-          onClick={() => handleConclusionClick(item.title, item.value)}
+          onClick={() => {
+            handleConclusionClick(item.title, item.value);
+            setStep('H1'); // Cambia 'SiguientePaso' por el identificador del siguiente paso
+          }}
         />
       ))}
     </div>
@@ -946,13 +949,16 @@ const StepG2 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL:</h1>
       {/* Renderizamos cada botón en base al array */}
-      {levels.map((item) => (
+      {levels.map(item => (
         <ConclusionButton
           key={item.value}
           value={item.value}
           title={item.title}
           displayText={item.displayText}
-          onClick={() => handleConclusionClick(item.title, item.value)}
+          onClick={() => {
+            handleConclusionClick(item.title, item.value);
+            setStep('H2'); // Cambia 'SiguientePaso' por el identificador del siguiente paso
+          }}
         />
       ))}
     </div>
@@ -1024,13 +1030,16 @@ const StepG3 = ({ setStep, selectedSide /*, otras props si quieres*/ }) => {
       </div>
       <h1 className='text-xl font-bold text-white'>NIVEL:</h1>
       {/* Renderizamos cada botón en base al array */}
-      {levels.map((item) => (
+      {levels.map(item => (
         <ConclusionButton
           key={item.value}
           value={item.value}
           title={item.title}
           displayText={item.displayText}
-          onClick={() => handleConclusionClick(item.title, item.value)}
+          onClick={() => {
+            handleConclusionClick(item.title, item.value);
+            setStep('H3'); // Cambia 'SiguientePaso' por el identificador del siguiente paso
+          }}
         />
       ))}
     </div>
@@ -1270,15 +1279,15 @@ const StepH3 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,s
       document.body.style.cursor = 'default';
       setIsLoading(false); // ✅ Ocultar overlay
     }
-    if (isLoading) {
-      return (
-        <div className="loading-overlay">
-          <div className="hourglass">
-          <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
-          </div>
+  };
+  if (isLoading) {
+    return (
+      <div className="loading-overlay">
+        <div className="hourglass">
+        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
         </div>
-      );
-    }
+      </div>
+    );
   };
   return (
     <div>
@@ -1980,7 +1989,10 @@ const StepG1_i = ({setStep,selectedSide,// otras props que necesites (por ejempl
           value={item.value}
           title={item.title}
           displayText={item.displayText}
-          onClick={() => handleConclusionClick(item.title, item.value)}
+          onClick={() => {
+            handleConclusionClick(item.title, item.value);
+            setStep('H1_i'); // Cambia 'SiguientePaso' por el identificador del siguiente paso
+          }}
         />
       ))}
     </div>
@@ -2077,7 +2089,10 @@ const StepG2_i = ({
           value={item.value}
           title={item.title}
           displayText={item.displayText}
-          onClick={() => handleConclusionClick(item.title, item.value)}
+          onClick={() => {
+            handleConclusionClick(item.title, item.value);
+            setStep('H2_i'); // Cambia 'SiguientePaso' por el identificador del siguiente paso
+          }}
         />
       ))}
     </div>
@@ -2171,7 +2186,10 @@ const StepG3_i = ({
           value={item.value}
           title={item.title}
           displayText={item.displayText}
-          onClick={() => handleConclusionClick(item.title, item.value)}
+          onClick={() => {
+            handleConclusionClick(item.title, item.value);
+            setStep('H3_i'); // Cambia 'SiguientePaso' por el identificador del siguiente paso
+          }}
         />
       ))}
     </div>

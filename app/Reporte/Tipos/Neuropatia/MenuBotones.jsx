@@ -1244,13 +1244,13 @@ const StepH = ({ handlePrevStep, handleNextStep, setStep }) => {
       <h1 className=' text-xl font-bold text-white'>
         PRONÓSTICO
       </h1>
-      <div onClick={() => setStep('R')}>
+      <div onClick={() => setStep('I')}>
         <ConclusionButton value='completo' title='PRONÓSTICO DE RECUPERACIÓN COMPLETA.' displayText={'RECUPERACIÓN COMPLETA'} /></div>
-      <div onClick={() => setStep('R')}>
+      <div onClick={() => setStep('I')}>
         <ConclusionButton value='parcial_funcional' title='PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.' displayText={'RECUPERACIÓN PARCIAL FUNCIONAL'} /></div>
-      <div onClick={() => setStep('R')}>
+      <div onClick={() => setStep('I')}>
         <ConclusionButton value='pobre' title='PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.' displayText={'RECUPERACIÓN POBRE NO FUNCIONAL'} /></div>
-      <div onClick={() => setStep('R')}>
+      <div onClick={() => setStep('I')}>
         <ConclusionButton value='nulo' title='PRONÓSTICO DE RECUPERACIÓN NULA.' displayText={'RECUPERACIÓN NULA'} /></div> 
       
 

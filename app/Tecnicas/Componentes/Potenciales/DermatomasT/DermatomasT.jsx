@@ -236,12 +236,12 @@ const DermatomasT = () => {
                         {currentImageIndex === 0 && (
                             <button className="btnOndasDerT" onClick={() => {
                                         handleMultiImageBoxClick([
-                                            "/assets/ImgTecnicas/Potenciales/Somt/DerLumL1.png",
-                                            "/assets/ImgTecnicas/Potenciales/Somt/DerLumL2.png",
-                                            "/assets/ImgTecnicas/Potenciales/Somt/DerLumL3.png",
-                                            "/assets/ImgTecnicas/Potenciales/Somt/DerLumL4.png",
-                                            "/assets/ImgTecnicas/Potenciales/Somt/DerLumL5.png",
-                                            "/assets/ImgTecnicas/Potenciales/Somt/DerLumS1.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/DerTorT2.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/DerTorT4.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/DerTorT6.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/DerTorT8.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/DerTorT10.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/DerTorT12.png",
 
                                         ], { top: "50%", left: "50%" });   }}
                             >

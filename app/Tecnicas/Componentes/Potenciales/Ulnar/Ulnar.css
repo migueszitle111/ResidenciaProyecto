@@ -1,9 +1,14 @@
-.gallery-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* Espacio entre la galería y la imagen extra */
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
     width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+
 }
 
 .modal-overlay {
@@ -19,36 +24,74 @@
     z-index: 1000;
 }
 
+/* Contenedor del modal */
 .modal-content {
     position: relative;
     background: white;
-    padding: 20px;
+    padding: 5px;
     border-radius: 8px;
-    max-width: 90%;
-    max-height: 90%;
+    width: 50vw; /* Un poco más pequeño que la galería */
+    max-width: 30vw; /* Se mantiene menor que 60vw */
+    max-height: 70vh; /* Evita que sea más alto que la pantalla */
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 
+
+/* Imagen dentro del modal */
 .modal-image {
-    max-width: 100%;
-    max-height: 80vh;
-    border-radius: 5px;
+    
+    width: 60%;  /* La imagen ocupará el 90% del modal */
+    max-width: 40vw; /* Más pequeña que la galería (60vw) */
+    max-height: 60vh; /* Evita que imágenes altas ocupen demasiado espacio */
+    object-fit: contain; /* Mantiene la proporción sin recortar */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 250px;
+    
 }
 
+/* Botón de cierre */
 .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
+    width: 40px;
     background: red;
     color: white;
     border: none;
-    font-size: 18px;
-    width: 30px;
-    height: 30px;
+    font-size: 25px;
     cursor: pointer;
     border-radius: 50%;
+}
+
+.print-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    background-color: #1C1C1C;
+    padding: 8px;
+    text-align: left;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #c44900;
+}
+
+
+.print-button:hover {
+background-color: #c44900;
+color: white;
+}
+
+.print-button.active {
+background-color: #c44900;
+color: white;
 }
 
 .close-btn:hover {
@@ -56,32 +99,31 @@
 }
 
 
+
 .extra-image-container {
     flex: 1; /* La imagen lateral ocupa menos espacio */
     display: flex;
-    justify-content: center;
-    align-items: center;
     /*border: 2px solid #4a4a4a;  Borde para destacar */
-    padding: 2px;
+    padding: 5px;
     background-color: transparent;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    max-width: 25vw; /* Ajusta el tamaño máximo */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 30vw; /* Ajusta el tamaño máximo */
     height: auto;
-    margin-bottom: 15vw;
+    
 }
 
 
-/* Contenedor principal de la galería */
-.gallery-containerUl {
-    position: relative;
+.modal-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 65vw;
-    height: auto;
-    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
-    overflow: hidden;
-    margin: auto;
-    margin-top: 2px;
-    flex: 2;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
 }
 
 /* Contenedor interno de la galería */
@@ -117,7 +159,7 @@
         max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
     }
 
-    .btnUl1, .btnUl2, .btnUl3 {
+    .btnUlnrs1, .btnUlnrs2, .btnUlnrs3 {
         height: 10vw;
         width: 10vw;
         top: 35%;
@@ -130,7 +172,7 @@
         max-width: 60vw;
     }
 
-    .btnUl1, .btnUl2 {
+    .btnUlnrs1, .btnUlnrs2 {
         height: 10vw;
         width: 10vw;
         top: 40%; /* Posición ajustada para pantallas muy pequeñas */
@@ -143,7 +185,9 @@
 
 /* ################################# Botones de la primera imagen #########################*/
 
-.btnIUl1 {
+
+
+.btnOndasUl {
     position: absolute ;
     background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
     background-size: cover;
@@ -151,9 +195,9 @@
     border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
     height: 3.5vw; /* Tamaño reducido */
     width: 3.5vw;
-    top: 23%;
-    left: 35%;
-    transform: translate(820%, -365%);
+    top: 32%;
+    left: 45%;
+    transform: translate(820%, -420%);
     background-color: transparent;
     border-radius: 20%;
     z-index: 1;
@@ -162,7 +206,26 @@
     transition:all .2s ease-in-out;
 }
 
-.btnIUl2 {
+/* .btnUln1 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a; 
+    height: 3.5vw; 
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(820%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(1, 1, 1);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+} */
+
+.btnUln2 {
     position: absolute ;
     background-image: url('/assets/ValoresImg/I_Tabla_Gris.png');
     background-size: cover;
@@ -170,9 +233,47 @@
     border: 2px solid #4a4a4a;
     height: 3.5vw; /* Tamaño reducido */
     width: 3.5vw;
-    top: 23%;
-    left: 35%;
-    transform: translate(700%, -365%);
+    top: 32%;
+    left: 45%;
+    transform: translate(700%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnUln3 {
+    position: absolute ;
+    background-image: url('/assets/ImgTecnicas/Potenciales/Estimulo.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(580%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnUln4 {
+    position: absolute ;
+    background-image: url('/assets/ImgTecnicas/Potenciales/Sistema.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(460%, -420%);
     background-color: transparent;
     border-radius: 20%;
     z-index: 1;
@@ -184,11 +285,11 @@
 
 
 /* Botón 1 */
-.btnUl1 {
+.btnUlnrs1 {
     position: absolute;
     height: 3vw; /* Tamaño reducido */
     width: 14vw;
-    top: 8%;
+    top: 2%;
     left: 2%;
     transform: translate(0%, 0%);
     background-color: rgba(66, 66, 66, 0.842);
@@ -201,11 +302,11 @@
     padding: 1%;
 }
 /* Botón 2 */
-.btnUl2 {
+.btnUlnrs2 {
     position: absolute;
     height: 3vw; /* Tamaño reducido */
     width: 14vw;
-    top: 12%;
+    top: 10%;
     left: 2%;
     transform: translate(0%, 0%);
     background-color: rgba(66, 66, 66, 0.842);
@@ -218,12 +319,62 @@
     padding: 1%;
 }
 /* Botón 3 */
-.btnUl3 {
+.btnUlnrs3 {
     position: absolute;
     height: 3vw; /* Tamaño reducido */
     width: 14vw;
-    top: 16%;
+    top: 18%;
     left: 2%;
+    transform: translate(0%, 0%);
+    background-color: rgba(66, 66, 66, 0.842);
+    border: none;
+    border-radius: 10px;
+    z-index: 1;
+    color: white;
+    font-size: 0.8vw;
+    transition:all .2s ease-in-out;
+    padding: 1%;
+}
+
+
+.btnUlnr {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 11vw;
+    top: 18%;
+    left: 1%;
+    transform: translate(0%, 0%);
+    background-color: rgba(66, 66, 66, 0.842);
+    border: none;
+    border-radius: 10px;
+    z-index: 1;
+    color: white;
+    font-size: 0.8vw;
+    transition:all .2s ease-in-out;
+    padding: 1%;
+}
+.btnUlnr2 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 11vw;
+    top: 31%;
+    left: 1%;
+    transform: translate(0%, 0%);
+    background-color: rgba(66, 66, 66, 0.842);
+    border: none;
+    border-radius: 10px;
+    z-index: 1;
+    color: white;
+    font-size: 0.8vw;
+    transition:all .2s ease-in-out;
+    padding: 1%;
+}
+.btnUlnr3 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 11vw;
+    top: 44%;
+    left: 1%;
     transform: translate(0%, 0%);
     background-color: rgba(66, 66, 66, 0.842);
     border: none;
@@ -240,7 +391,7 @@
 .text-boxUl {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 40vw;
+    width: 27vw;
     height: auto;
     display: flex;
     align-items: center;
@@ -251,7 +402,7 @@
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 0.7em;
+    font-size: 1em;
     border: 1px solid #ddd;
     white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }
@@ -262,3 +413,30 @@
     position: center;
 }
 
+.image-boxUl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;   /* Ocupa todo el ancho de la galería */
+    height: 100%;  /* Ocupa todo el alto de la galería */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Opcional: para que no bloquee clics */
+    z-index: 10;
+}
+.image-boxUl .zoomable-image {
+    max-width: 100%;
+    max-height: 100%;
+    top: -15%;
+    width: auto;
+    height: auto;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.image-boxUl .zoomable-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

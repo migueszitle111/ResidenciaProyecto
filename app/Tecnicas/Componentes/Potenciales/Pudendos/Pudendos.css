@@ -1,0 +1,464 @@
+/* Contenedor principal de la galería */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    max-width: 60vw;
+    height: auto;
+    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 2px;
+
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Contenedor del modal */
+.modal-content {
+    position: relative;
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+    width: 50vw; /* Un poco más pequeño que la galería */
+    max-width: 30vw; /* Se mantiene menor que 60vw */
+    max-height: 70vh; /* Evita que sea más alto que la pantalla */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+/* Imagen dentro del modal */
+.modal-image {
+    
+    width: 60%;  /* La imagen ocupará el 90% del modal */
+    max-width: 40vw; /* Más pequeña que la galería (60vw) */
+    max-height: 60vh; /* Evita que imágenes altas ocupen demasiado espacio */
+    object-fit: contain; /* Mantiene la proporción sin recortar */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 250px;
+    
+}
+
+/* Botón de cierre */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    background: red;
+    color: white;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.print-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    background-color: #1C1C1C;
+    padding: 8px;
+    text-align: left;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #c44900;
+}
+
+
+.print-button:hover {
+background-color: #c44900;
+color: white;
+}
+
+.print-button.active {
+background-color: #c44900;
+color: white;
+}
+
+.close-btn:hover {
+    background: darkred;
+}
+
+
+
+.extra-image-container {
+    flex: 1; /* La imagen lateral ocupa menos espacio */
+    display: flex;
+    /*border: 2px solid #4a4a4a;  Borde para destacar */
+    padding: 5px;
+    background-color: transparent;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 30vw; /* Ajusta el tamaño máximo */
+    height: auto;
+    
+}
+
+
+.modal-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+/* Contenedor interno de la galería */
+.gallery-container .image-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container .image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llenado sin distorsión */
+}
+
+/* Posición de los bullets de navegación */
+.gallery-container .image-gallery-bullets {
+    position: absolute;
+    bottom: 10px; /* Reducido para adaptabilidad en móviles */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .gallery-container {
+        max-width: 60vw; /* Aumenta el ancho en pantallas pequeñas */
+    }
+
+    .btnPudes1, .btnPudes2, .btnPudes3 {
+        height: 10vw;
+        width: 10vw;
+        top: 35%;
+        padding: 3%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        max-width: 60vw;
+    }
+
+    .btnPudes1, .btnPudes2 {
+        height: 10vw;
+        width: 10vw;
+        top: 40%; /* Posición ajustada para pantallas muy pequeñas */
+    }
+
+    .gallery-container .image-gallery-bullets {
+        bottom: 2px; /* Más cerca del borde en móviles */
+    }
+}
+
+/* ################################# Botones de la primera imagen #########################*/
+
+.btnOndasPud1 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(820%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(1, 1, 1);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnOndasPud2 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(820%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(1, 1, 1);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnPud2 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/I_Tabla_Gris.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(700%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnPud3 {
+    position: absolute ;
+    background-image: url('/assets/ImgTecnicas/Potenciales/Estimulo.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(580%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnPud4 {
+    position: absolute ;
+    background-image: url('/assets/ImgTecnicas/Potenciales/Sistema.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(460%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnPud5 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a; /* Borde de color gris oscuro */
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(820%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(1, 1, 1);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnPud6 {
+    position: absolute ;
+    background-image: url('/assets/ValoresImg/I_Tabla_Gris.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(700%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnPud7 {
+    position: absolute ;
+    background-image: url('/assets/ImgTecnicas/Potenciales/Estimulo.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(580%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+.btnPud8 {
+    position: absolute ;
+    background-image: url('/assets/ImgTecnicas/Potenciales/Sistema.png');
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #4a4a4a;
+    height: 3.5vw; /* Tamaño reducido */
+    width: 3.5vw;
+    top: 32%;
+    left: 45%;
+    transform: translate(460%, -420%);
+    background-color: transparent;
+    border-radius: 20%;
+    z-index: 1;
+    color: rgb(10, 10, 10);
+    font-size: 1.5vw;
+    transition:all .2s ease-in-out;
+}
+
+
+
+
+.btnPude {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 11vw;
+    top: 25%;
+    left: 1%;
+    transform: translate(0%, 0%);
+    background-color: rgba(66, 66, 66, 0.842);
+    border: none;
+    border-radius: 10px;
+    z-index: 1;
+    color: white;
+    font-size: 0.8vw;
+    transition:all .2s ease-in-out;
+    padding: 1%;
+}
+.btnPude2 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 7vw;
+    top: 26%;
+    left: 1%;
+    transform: translate(0%, 0%);
+    background-color: rgba(66, 66, 66, 0.842);
+    border: none;
+    border-radius: 10px;
+    z-index: 1;
+    color: white;
+    font-size: 0.8vw;
+    transition:all .2s ease-in-out;
+    padding: 1%;
+}
+.btnPude3 {
+    position: absolute;
+    height: 3vw; /* Tamaño reducido */
+    width: 7vw;
+    top: 43%;
+    left: 1%;
+    transform: translate(0%, 0%);
+    background-color: rgba(66, 66, 66, 0.842);
+    border: none;
+    border-radius: 10px;
+    z-index: 1;
+    color: white;
+    font-size: 0.8vw;
+    transition:all .2s ease-in-out;
+    padding: 1%;
+}
+
+
+
+.text-boxPud {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 27vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(66, 66, 66, 0.842);
+    color: white;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
+}
+
+.zoomable-imageMt:hover {
+    transform: scale(3.0); /* Ajusta el valor de escala según sea necesario */
+    transform-origin: top left; /* Expande hacia la derecha y hacia abajo */
+    position: center;
+}
+
+.image-boxPud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;   /* Ocupa todo el ancho de la galería */
+    height: 100%;  /* Ocupa todo el alto de la galería */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Opcional: para que no bloquee clics */
+    z-index: 10;
+}
+.image-boxPud .zoomable-image {
+    max-width: 100%;
+    max-height: 100%;
+    top: -15%;
+    width: auto;
+    height: auto;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.image-boxPud .zoomable-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

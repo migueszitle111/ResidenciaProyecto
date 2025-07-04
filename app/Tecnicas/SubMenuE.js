@@ -26,7 +26,7 @@ export default function SubMenuE() {
                     </button>
                 </a>
                 {/* <a href="./Tecnicas/Componentes/Potenciales"> */}
-                <a>
+                <a href="./Tecnicas/Componentes/Potenciales">
 
                     <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-base overflow-hidden">
                     Potenciales Evocados

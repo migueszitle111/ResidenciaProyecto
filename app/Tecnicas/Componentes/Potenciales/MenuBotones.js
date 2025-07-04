@@ -1,52 +1,99 @@
 import Image from "next/image";
 import { useState } from "react";
+import mostrarMenuIcon from "/public/assets/IconSVG/I_Crop.svg"; // Reemplaza con la ruta real
+import ocultarMenuIcon from "/public/assets/IconSVG/I_Expand.svg"; // Reemplaza con la ruta real
+
 import Medianos from "./Medianos/Medianos";
 import Ulnar from "./Ulnar/Ulnar";
+import UlnarSt from "./UlnarSt/UlnarSt";
+import RadialSp from "./RadialSp/RadialSp";
+import Antebraquial from "./Antebraquial/Antebraquial";
+import MiembrosInf from "./MiembrosInf/MiembrosInf";
+import Femorocutaneo from "./Femorocutaneo/Femorocutaneo";
+import Segmentarios from "./Segmentarios/Segmentarios";
+import DermatomasC from "./DermatomasC/DermatomasC";
+import DermatomasL from "./DermatomasL/DermatomasL";
+import DermatomasT from "./DermatomasT/DermatomasT";
+import Trigemino from "./Trigemino/Trigemino";
+import Pudendos from "./Pudendos/Pudendos";
+import MedianoFmx from "./MedianoFmx/MedianoFmx";
+import TripleRespuesta from "./TripleRespuesta/TripleRespuesta";
+import MiembrosSup from "./MiembrosSup/MiembrosSup";
+import Tibial from "./Tibial/Tibial";
+import TibialPx from "./TibialPx/TibialPx";
+import Peroneo from "./Peroneo/Peroneo";
+import Plantares from "./Plantares/Plantares";
+import CapoTotal from "./CapoTotal/CapoTotal";
+import Hemicampos from "./Hemicampos/Hemicampos";
+import Cuadrantes from "./Cuadrantes/Cuadrantes";
+import Goggles from "./Goggles/Goggles";
+import TalloC from "./TalloC/TalloC";
+import Latencia from "./Latencia/Latencia";
 
-import mostrarMenuIcon from "/public/I_In.svg"; // Reemplaza con la ruta real
-import ocultarMenuIcon from "/public/I_Out.svg"; // Reemplaza con la ruta real
+
+import "/app/Tecnicas/Componentes/Potenciales/StyleMp.css"
+
 
 const MenuBotonesPt = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [visibleSubMenu, setVisibleSubMenu] = useState(null);
     const [menuVisible, setMenuVisible] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const Potenciales = [
         {
             Menu: "Somatosensoriales",
             Submenu: [
-                "Nervios Medianos",
-                "Nervios Ulnar",
-                "Tibial",
-                "Peroneo",
-                "Nervios Trigéminos",
-                "Pudendo",
+                "Nervio Mediano (fibras mixtas)",
+                "Nervio Mediano (fibras sensitivas)",
+                "Nervios Ulnar (fibras mixtas)",
+                "Nervios Ulnar (fibras sensitivas)",
                 "Radial Superficial",
-                "Nervios Musculocutáneo",
-                "Femorocutáneo o lateral",
-                "Safeno",
-                "Peroneo superficial",
-                "Sural",
-                "Plantar",
-                "Calcáneo",
-                "Segmentarios Dermatomales",
+                "Antebraquial cutáneo lateral",
+                "Nervio Tibial",
+                "Nervio Tibial proximal",
+                "Nervio Peroneo",
+                "Femorocutáneo lateral",
+                "Segmentarios",
+                "Plantares",
+                "Dermatomas cervicales",
+                "Dermatomas torácicos",
+                "Dermatomas lumbosacros",
+                "Nervios Trigéminos",
+                "Pudendos",
+
             ],
         },
         {
-            Menu: "Auditivos",
+            Menu: "Evocados motores ",
             Submenu: [
-                "Latencia Corta Tallo Cerebral",
-                "Latencia Mediana",
-                "Latencia Larga",
+                "Miembros superiores",
+                "Miembros inferiores",
+                "Triple respuesta", 
+
             ],
         },
-        { Menu: "Visuales", Submenu: ["Damero", "Leds"] },
-        { Menu: "Motores", Submenu: ["Superiores", "Inferiores", "Faciales"] },
-        {
-            Menu: "Cognitivos Relacionados a Eventos",
-            Submenu: ["P300 Visual", "P300 Auditivo"],
-        },
+        { Menu: "Evocados visuales", 
+            Submenu: [
+                "Campo total",
+                "Hemicampos",
+                "Cuadrantes",
+                "Goggles Led",
+
+        ] },
+
+
+        { Menu: "Evocados motores", 
+            Submenu: [
+                "Tallo cerebral", 
+                "Latencia media",
+        ] },
+        // {
+        //     Menu: "Cognitivos Relacionados a Eventos",
+        //     Submenu: ["P300 Visual", "P300 Auditivo"],
+        // },
     ];
+
 
     const handleClick = (option) => {
         setSelectedOption(option);
@@ -63,15 +110,28 @@ const MenuBotonesPt = () => {
         setMenuVisible(!menuVisible);
     };
 
+    // Combinar todos los submenús en un solo arreglo
+    const allOptions = [
+      ...Potenciales.flatMap((item) => item.Submenu),
+      // ...Miografia.flatMap((item) => item.Submenu),
+      // ...PotencialesProvocados.flatMap((item) => item.Submenu),
+      // ...PruebasEspeciales.flatMap((item) => item.Submenu),
+    ];
+
+    const filteredOptions = allOptions.filter((option) =>
+        option.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div>
             <div className="BannerTitlepage">
-                <div>Potenciales Evocados</div>
+                <div>Neurografía</div>
             </div>
 
-            {/* Botón para ocultar/mostrar menú con imagen */}
+            {/* Botón para ocultar/mostrar menú */}
             <button
-                className="bg-orange-500 text-white px-4 py-2 m-2 rounded-full flex items-center gap-2 "
+                className="bg-black px-4 py-2 m-2 flex items-center  border border-orange-500 round-button"
+                style={{ borderRadius: '100%' }}
                 onClick={toggleMenuVisibility}
             >
                 <Image
@@ -85,10 +145,36 @@ const MenuBotonesPt = () => {
             </button>
 
             <div className="flex">
-                {/* Menú desplegable */}
                 {menuVisible && (
                     <div className="w-1/5 max-h-full bg-[#3f3c3c] text-white p-4 rounded-2xl">
-                        <h2 className="text-lg mb-4">Potenciales Evocados</h2>
+                        <h2 className="text-lg mb-4">Neurografía</h2>
+
+                        {/* Buscador con autocompletado */}
+                        <input
+                            type="text"
+                            placeholder="Buscar..."
+                            className="w-full mb-4 p-2 text-black rounded"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        {searchTerm && (
+                            <ul className="bg-white text-black rounded shadow max-h-48 overflow-y-auto">
+                                {filteredOptions.map((option, index) => (
+                                    <li
+                                        key={index}
+                                        className="p-2 hover:bg-orange-200 cursor-pointer"
+                                        onClick={() => handleClick(option)}
+                                    >
+                                        {option}
+                                    </li>
+                                ))}
+                                {filteredOptions.length === 0 && (
+                                    <li className="p-2 text-gray-500">Sin resultados</li>
+                                )}
+                            </ul>
+                        )}
+
+                        {/* Menú original */}
                         {Potenciales.map((menuOption, menuIndex) => (
                             <div key={menuIndex} className="ml-2">
                                 <button
@@ -128,17 +214,42 @@ const MenuBotonesPt = () => {
                                 height={120}
                                 className="w-52 h-52"
                             />
-                            <h1 className="text-white text-4xl">Valores</h1>
+                            <h1 className="text-white text-4xl">Técnicas</h1>
                             <p className="pt-16 text-white text-center text-xl italic">
-                                Bienvenido a la sección de Técnicas en donde podrá contar a
-                                disposición de la información que se encuentran disponibles en
-                                nuestra plataforma.
+                              Bienvenido a la sección de Técnicas en donde podrá contar a
+                              disposición de la información que se encuentran disponibles en
+                              nuestra plataforma.
                             </p>
                         </div>
                     ) : (
                         <div className="flex min-h-screen flex-col items-center rounded p-2 m-4">
-                            {selectedOption === "Nervios Medianos" && <Medianos />}
-                            {selectedOption === "Nervios Ulnar" && <Ulnar />}
+                            {selectedOption === "Nervio Mediano (fibras mixtas)" && <MedianoFmx />}
+                            {selectedOption === "Nervio Mediano (fibras sensitivas)" && <Medianos />}
+                            {selectedOption === "Nervios Ulnar (fibras mixtas)" && <Ulnar />}
+                            {selectedOption === "Nervios Ulnar (fibras sensitivas)" && <UlnarSt />}
+                            {selectedOption === "Radial Superficial" && <RadialSp />}
+                            {selectedOption === "Antebraquial cutáneo lateral" && <Antebraquial />}
+                            {selectedOption === "Miembros inferiores" && <MiembrosInf />}
+                            {selectedOption === "Miembros superiores" && <MiembrosSup />}
+                            {selectedOption === "Femorocutáneo lateral" && <Femorocutaneo />}
+                            {selectedOption === "Segmentarios" && <Segmentarios />}
+                            {selectedOption === "Dermatomas cervicales" && <DermatomasC />}
+                            {selectedOption === "Dermatomas lumbosacros" && <DermatomasL />}
+                            {selectedOption === "Dermatomas torácicos" && <DermatomasT />}
+                            {selectedOption === "Nervios Trigéminos" && <Trigemino />}
+                            {selectedOption === "Pudendos" && <Pudendos />}
+                            {selectedOption === "Triple respuesta" && <TripleRespuesta />}
+                            {selectedOption === "Nervio Tibial" && <Tibial />}
+                            {selectedOption === "Nervio Tibial proximal" && <TibialPx />}
+                            {selectedOption === "Nervio Peroneo" && <Peroneo />}
+                            {selectedOption === "Plantares" && <Plantares />}
+                            {selectedOption === "Campo total" && <CapoTotal />}
+                            {selectedOption === "Hemicampos" && <Hemicampos />}
+                            {selectedOption === "Cuadrantes" && <Cuadrantes />}
+                            {selectedOption === "Goggles Led" && <Goggles />}
+                            {selectedOption === "Tallo cerebral" && <TalloC />}
+                            {selectedOption === "Latencia media" && <Latencia />}
+
                         </div>
                     )}
                 </div>

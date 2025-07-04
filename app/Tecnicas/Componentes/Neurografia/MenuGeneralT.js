@@ -352,9 +352,9 @@ const MenuBotonesPt = () => {
                                 height={120}
                                 className="w-52 h-52"
                             />
-                            <h1 className="text-white text-4xl">Valores</h1>
+                            <h1 className="text-white text-4xl">Técnicas</h1>
                             <p className="pt-16 text-white text-center text-xl italic">
-                              Bienvenido a la sección de Valores en donde podrá contar a
+                              Bienvenido a la sección de Técnicas en donde podrá contar a
                               disposición de la información que se encuentran disponibles en
                               nuestra plataforma.
                             </p>

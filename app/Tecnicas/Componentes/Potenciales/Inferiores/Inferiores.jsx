@@ -1,19 +1,25 @@
 import { useState, useEffect } from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-import "../Plantares/Plantares.css";
+import "../Inferiores/Inferiores.css";
 
-const Plantares = () => {
+
+
+const Inferiores = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxPla');
-
-    // Estado existente para un solo imageBox
     const [imageBoxVisible, setImageBoxVisible] = useState(false);
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
+    const [textBoxClass, setTextBoxClass] = useState('text-boxInf');
+    
+    
+    const [modalText, setModalText] = useState(''); // NUEVO
+    const [modalTextPosition, setModalTextPosition] = useState({ top: '80%', left: '50%' }); // posición inicial
+    const [modalTextColor, setModalTextColor] = useState('#fff');
+    const [modalTextSize, setModalTextSize] = useState('1.2rem');
 
     // NUEVOS ESTADOS para el segundo imageBox que acepta múltiples imágenes
     const [multiImageBoxVisible, setMultiImageBoxVisible] = useState(false);
@@ -21,20 +27,15 @@ const Plantares = () => {
     const [multiImageBoxPosition, setMultiImageBoxPosition] = useState({ top: '50%', left: '50%' });
 
 
-    const [modalText, setModalText] = useState('');
-    const [modalTextPosition, setModalTextPosition] = useState({ top: '80%', left: '50%' });
-    const [modalTextColor, setModalTextColor] = useState('#fff');
-    const [modalTextSize, setModalTextSize] = useState('1.2rem');
-
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
 
-    const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
+    const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
     const images = [
         {
-            original: "/assets/ImgTecnicas/Potenciales/Somt/PlantarBs.png",
-            thumbnail: "/assets/ImgTecnicas/Potenciales/Somt/PlantarBs.png",
+            original: "/assets/ImgTecnicas/Potenciales/Somt/InferiorBs.png",
+            thumbnail: "/assets/ImgTecnicas/Potenciales/Somt/InferiorBs.png",
         },
     ];
 
@@ -50,6 +51,7 @@ const Plantares = () => {
 
         window.addEventListener('resize', handleOrientationChange);
         
+        // Limpiar el evento al desmontar el componente
         return () => {
             window.removeEventListener('resize', handleOrientationChange);
         };
@@ -62,7 +64,7 @@ const Plantares = () => {
         setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxPla') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxInf') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -104,6 +106,7 @@ const Plantares = () => {
     };
 
 
+    // Funciones para abrir y cerrar el modal
     const openModal = (
         image,
         text = '',
@@ -142,8 +145,9 @@ const Plantares = () => {
     );
 
     return (
-        <div className=" py-20 gallery-container">
+        <div  className=" py-20 gallery-container">
 
+             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
             {!isLandscape && (
                 <div className="orientation-message">
                     <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
@@ -164,79 +168,92 @@ const Plantares = () => {
                 {/* Botones que abren imágenes en el modal */}
                 {currentImageIndex === 0 && (
                     <>
-                        {/* <button className="btnPla1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnPla2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Plant-T01.png")}></button>
+                        {/* <button className="btnInf1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
+                        <button className="btnInf2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Inferior-T01.png")}></button>
                         <button
-                            className="btnPla3"
+                            className="btnInf3"
                             onClick={() =>
                                 openModal(
-                                    "/assets/ImgTecnicas/Potenciales/Somt/PeroEstimuo.png",
-                                    "Intensidad. 2.5-3 veces al umbral percibido por el paciente en caso del nervio Calcáneo y presencia de contracción visible en sus respectivos dedos para el nervio Plantar.", 
-                                    // "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en los dorsiflexores o extensores de los dedos. \n\n Tierra. M1 o C4’/C3’.",
+                                    "/assets/ImgTecnicas/Potenciales/Somt/InfEstimulo.png",
+                                    "Nervio Tibial derecho, fibras mixtas a nivel del tobillo. \n El nervio Tibial representa el estándar de estimulación en miembros inferiores por la alta tasa de registros exitosos en todos los relevos. " + 
+                                    "\n Intensidad, incremento progresivo hasta obtener una leve contracción visible en el primer y/o quinto ortejos.  \n Frecuencia a 2 a 5 Hz. \n Duración 0.2-0.3 ms.",
                                     
-                                    { position: { top: '27%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '60%', left: '50%' }, size: '0.8rem', }
                                 )
                             }
                         ></button>
-
-                        {/* <button
-                            className="btnRegistroInf"
-                            onClick={() =>
-                                openModal(
-                                    "/assets/ImgTecnicas/Potenciales/Motores/RegidtroMiSup.png",
-                                    "Abductor corto del pulgar  \n\n Activo. Vientre muscular en eminencia tenar lateral. \n Referencia. Primera articulación metacarpofalángica. \n Tierra. dorso de la mano o antebrazo." ,
-                                    { position: { top: '62%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
-                        ></button>*/}
-                        <button className="btnPla4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-10-20.png")}></button> 
+                        <button className="btnInf4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png")}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnPlan" onClick={() => {
-                                        handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '28%' });
-                                        handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PlaCanal1.png", { top: "50%", left: "50%" });   }}
+                            <button className="btnInfe" onClick={() => {
+                                    handleButtonClick('Sobre región media del cráneo, 2 cm detrás del vértice Cz (Cz’) con referencia frontal a Fpz’.', { top: '7%', left: '24%' });
+                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal1.png", { top: "50%", left: "50%" });  }}
                             >
-                                Cz’-Fpz’     
+                                Cz’-Fpz’    
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnPlan3" onClick={() => {
-                                        handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’. ', { top: '7%', left: '28%' });
-                                        handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PlaCanal2.png", { top: "50%", left: "50%" });   }}
+                            <button className="btnInfe2" onClick={() => {
+                                    handleButtonClick('Registro bipolar C1’ activo con su referencia longitudinal contralateral C2’. Puede mejorar la amplitud y morfología de las respuestas corticales con relación al montaje referencial, pero más susceptible a contaminación por ruido de fondo muscular. Es común en miembros pélvicos la lateralización paradójica.', { top: '8%', left: '24%' });
+                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal2.png", { top: "50%", left: "50%" });  }}
                             >
-                                Cz’-Fpz’
+                                C1’-C2’    
+                            </button>
+                        )}
+                        {currentImageIndex === 0 && (
+                            <button className="btnInfe3" onClick={() => {
+                                    handleButtonClick('Registro de campo lejano colocando el electrodo activo en la apófisis espinosa de la quinta vertebra cervical (5Cs) y referenciado a Fpz’. Se puede optar por la colocación en M1 como en la monitorización intraoperatoria.', { top: '8%', left: '24%' });
+                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal3.png", { top: "50%", left: "50%" });  }}
+                            >
+                                C5s-Fpz’     
+                            </button>
+                        )}
+                                                {currentImageIndex === 0 && (
+                            <button className="btnInfe4" onClick={() => {
+                                    handleButtonClick('Apófisis espinosa L1 referenciada a espina iliaca anterosuperior para ampliar el campo de registro. Se puede modificar el montaje hacia niveles torácicos (T12s, T6s, etc).', { top: '7%', left: '24%' });
+                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal4.png", { top: "50%", left: "50%" });  }}
+                            >
+                                L1s-EIAS    
+                            </button>
+                        )}
+                        {currentImageIndex === 0 && (
+                            <button className="btnInfe5" onClick={() => {
+                                    handleButtonClick('Electrodo activo sobre apófisis espinosa L4 (L4s) localizada un nivel por arriba de la línea que une las crestas iliacas (división L4-L5). Referenciado a L1s, 5 cm en dirección ascendente.', { top: '6%', left: '24%' });
+                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal5.png", { top: "50%", left: "50%" });  }}
+                            >
+                                L4s-L1s      
+                            </button>
+                        )}
+                        {currentImageIndex === 0 && (
+                            <button className="btnInfe6" onClick={() => {
+                                    handleButtonClick('Hueco poplíteo, electrodo activo discretamente lateral a la línea media 2 cm proximal al pliegue cutáneo, referenciado a cara medial línea interarticular de la rodilla ipsilateral.', { top: '6%', left: '24%' });
+                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal6.png", { top: "50%", left: "50%" });  }}
+                            >
+                                Hpi-Hpc      
                             </button>
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnPlan4" onClick={() => {
-                                        handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.  ', { top: '7%', left: '28%' });
-                                        handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PlaCanal3.png", { top: "50%", left: "50%" });   }}
-                            >
-                                Cz’-Fpz’
-                            </button>
-                        )}
-
-                        {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
-                        {currentImageIndex === 0 && (
-                            <button className="btnOndasTb" onClick={() => {
+                            <button className="btnOndasSup" onClick={() => {
                                         handleMultiImageBoxClick([
-                                            "/assets/ImgTecnicas/Potenciales/Somt/PlaCanal1.png",
-                                            "/assets/ImgTecnicas/Potenciales/Somt/PlaCanal2.png",
-                                            "/assets/ImgTecnicas/Potenciales/Somt/PlaCanal3.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/InfeCanal1.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/InfeCanal2.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/InfeCanal3.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/InfeCanal4.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/InfeCanal5.png",
+                                            "/assets/ImgTecnicas/Potenciales/Somt/InfeCanal6.png",
 
                                         ], { top: "50%", left: "50%" });   }}
                             >
                             </button>
                         )}
-
                     </>
                 )}
 
 
             {textBoxVisible && (
                 <div
-                    className={`text-boxPla ${textBoxClass}`}
+                    className={`text-boxInf ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
                     {textBoxContent}
@@ -244,7 +261,7 @@ const Plantares = () => {
             )}
             {imageBoxVisible && (
             <div
-                className="image-boxPla"
+                className="image-boxInf"
                 style={{
                 top: 0,
                 left: 0,
@@ -271,10 +288,9 @@ const Plantares = () => {
             </div>
             )}
 
-            {/* NUEVO: Contenedor para múltiples imágenes que se enciman */}
             {multiImageBoxVisible && (
                 <div
-                    className="image-boxPla" // Reutilizamos la misma clase para los estilos
+                    className="image-boxInf" // Reutilizamos la misma clase para los estilos
                     style={{
                         top: 0,
                         left: 0,
@@ -309,7 +325,6 @@ const Plantares = () => {
 
                 </div>
             )}
-
 
             {modalVisible && (
                 <div className="modal-gallery">
@@ -348,12 +363,13 @@ const Plantares = () => {
                             zIndex: 20,
                         }}
                     >
+                        {/* {modalText} */}
                         {modalText.split('\n').map((line, idx) => (
                         <span key={idx}>
                             {line}
                             <br />
                         </span>
-                        ))}
+                    ))}
                     </div>
                 </div>
             )}
@@ -361,4 +377,4 @@ const Plantares = () => {
     );
 };
 
-export default Plantares;
+export default Inferiores;

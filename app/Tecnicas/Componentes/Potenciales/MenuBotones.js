@@ -32,6 +32,8 @@ import Latencia from "./Latencia/Latencia";
 
 
 import "/app/Tecnicas/Componentes/Potenciales/StyleMp.css"
+import Superior from "./Superior/Superior";
+import Inferiores from "./Inferiores/Inferiores";
 
 
 const MenuBotonesPt = () => {
@@ -44,12 +46,14 @@ const MenuBotonesPt = () => {
         {
             Menu: "Somatosensoriales",
             Submenu: [
+                "Miembros Superiores",
                 "Nervio Mediano (fibras mixtas)",
                 "Nervio Mediano (fibras sensitivas)",
                 "Nervios Ulnar (fibras mixtas)",
                 "Nervios Ulnar (fibras sensitivas)",
                 "Radial Superficial",
                 "Antebraquial cutáneo lateral",
+                "Miembros Inferiores",
                 "Nervio Tibial",
                 "Nervio Tibial proximal",
                 "Nervio Peroneo",
@@ -65,7 +69,7 @@ const MenuBotonesPt = () => {
             ],
         },
         {
-            Menu: "Evocados motores ",
+            Menu: "Motores ",
             Submenu: [
                 "Miembros superiores",
                 "Miembros inferiores",
@@ -73,7 +77,7 @@ const MenuBotonesPt = () => {
 
             ],
         },
-        { Menu: "Evocados visuales", 
+        { Menu: "Visuales", 
             Submenu: [
                 "Campo total",
                 "Hemicampos",
@@ -83,7 +87,7 @@ const MenuBotonesPt = () => {
         ] },
 
 
-        { Menu: "Evocados motores", 
+        { Menu: "Auditivos", 
             Submenu: [
                 "Tallo cerebral", 
                 "Latencia media",
@@ -125,7 +129,7 @@ const MenuBotonesPt = () => {
     return (
         <div>
             <div className="BannerTitlepage">
-                <div>Neurografía</div>
+                <div>Potenciales evocados </div>
             </div>
 
             {/* Botón para ocultar/mostrar menú */}
@@ -147,7 +151,7 @@ const MenuBotonesPt = () => {
             <div className="flex">
                 {menuVisible && (
                     <div className="w-1/5 max-h-full bg-[#3f3c3c] text-white p-4 rounded-2xl">
-                        <h2 className="text-lg mb-4">Neurografía</h2>
+                        <h2 className="text-lg mb-4">Potenciales evocados</h2>
 
                         {/* Buscador con autocompletado */}
                         <input
@@ -249,6 +253,8 @@ const MenuBotonesPt = () => {
                             {selectedOption === "Goggles Led" && <Goggles />}
                             {selectedOption === "Tallo cerebral" && <TalloC />}
                             {selectedOption === "Latencia media" && <Latencia />}
+                            {selectedOption === "Miembros Superiores" && <Superior />}
+                            {selectedOption === "Miembros Inferiores" && <Inferiores />}
 
                         </div>
                     )}

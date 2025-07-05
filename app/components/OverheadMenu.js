@@ -40,7 +40,7 @@ const OverheadMenu = () => {
           </li>
           <li>
             <button
-              onClick={() => handleProtectedRoute("/NoDisponible")}
+              onClick={() => handleProtectedRoute("/Educacion")}
               className="buttommenu inline-block hover:border-b hover:border-gray-500"
             >
               Educación

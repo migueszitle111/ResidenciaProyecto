@@ -61,7 +61,7 @@ const Overhead = () => {
 
     switch (query.toLowerCase()) {
       case "educacion":
-        router.push("/NoDisponible");
+        router.push("/Educacion");
         break;
       case "evento":
         router.push("/Evento");

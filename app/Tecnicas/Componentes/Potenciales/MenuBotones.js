@@ -90,7 +90,7 @@ const MenuBotonesPt = () => {
         { Menu: "Auditivos", 
             Submenu: [
                 "Tallo cerebral", 
-                "Latencia media",
+                "Curva latencia intensidad",
         ] },
         // {
         //     Menu: "Cognitivos Relacionados a Eventos",
@@ -252,7 +252,7 @@ const MenuBotonesPt = () => {
                             {selectedOption === "Cuadrantes" && <Cuadrantes />}
                             {selectedOption === "Goggles Led" && <Goggles />}
                             {selectedOption === "Tallo cerebral" && <TalloC />}
-                            {selectedOption === "Latencia media" && <Latencia />}
+                            {selectedOption === "Curva latencia intensidad" && <Latencia />}
                             {selectedOption === "Miembros Superiores" && <Superior />}
                             {selectedOption === "Miembros Inferiores" && <Inferiores />}
 

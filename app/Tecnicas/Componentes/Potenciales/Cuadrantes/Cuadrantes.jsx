@@ -178,20 +178,26 @@ const Cuadrantes = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnEst2" onClick={() => {
+                            <button className="btnEst3" onClick={() => {
+                                        handleButtonClick('Patrón Reverso de Dameros por CUADRANTES  \n (área retroquiasmática: quiasma y tracto óptico). \n Previo a realizar la valoración por hemicampos es necesario tener certeza de la integridad funcional a nivel prequiasmático, para ello se requiere la respuesta indemne por campo completo en cada ojo. ' + 
+                                            "\n A 100 cm de distancia, estimular de forma monocular con oclusión contralateral. \n Tamaño de pantalla de 10 a 16° del arco visual. \n Elementos de 50’-90’ arco visual.   ", { top: '55%', left: '79%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/VEP-CUAD_0002_CSD.png", { top: "50%", left: "50%" });   }}
                             >
                             </button>
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnEst3" onClick={() => {
+                            <button className="btnEst4" onClick={() => {
+                                        handleButtonClick('Patrón Reverso de Dameros por CUADRANTES  \n (área retroquiasmática: quiasma y tracto óptico). \n Previo a realizar la valoración por hemicampos es necesario tener certeza de la integridad funcional a nivel prequiasmático, para ello se requiere la respuesta indemne por campo completo en cada ojo. ' + 
+                                            "\n A 100 cm de distancia, estimular de forma monocular con oclusión contralateral. \n Tamaño de pantalla de 10 a 16° del arco visual. \n Elementos de 50’-90’ arco visual.  ", { top: '24%', left: '79%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/VEP-CUAD_0000_CID.png", { top: "50%", left: "50%" });   }}
                             >
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnEst4" onClick={() => {
+                            <button className="btnEst2" onClick={() => {
+                                        handleButtonClick('Patrón Reverso de Dameros por CUADRANTES  \n (área retroquiasmática: quiasma y tracto óptico). \n Previo a realizar la valoración por hemicampos es necesario tener certeza de la integridad funcional a nivel prequiasmático, para ello se requiere la respuesta indemne por campo completo en cada ojo. ' + 
+                                            "\n A 100 cm de distancia, estimular de forma monocular con oclusión contralateral. \n Tamaño de pantalla de 10 a 16° del arco visual. \n Elementos de 50’-90’ arco visual. ", { top: '24%', left: '20%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/VEP-CUAD_0001_CII.png", { top: "50%", left: "50%" });   }}
                             >
                             </button>

@@ -173,11 +173,11 @@ const Segmentarios = () => {
                             className="btnSeg3"
                             onClick={() =>
                                 openModal(
-                                    "/assets/ImgTecnicas/Potenciales/Somt/RadEstimulo.png",
+                                    "/assets/ImgTecnicas/Potenciales/Somt/RadEstimul.png",
                                     "Estimulo. Nervio Radial superficial mediante electrodos de barra sobre el borde dorsolateral de la muñeca, 2 cm proximal a la apófisis estiloides radial; ánodo 3 cm distalmente." + 
                                     "\n\n Intensidad.  El triple o 2.5 veces por arriba del umbral sensitivo percibido por el paciente.  \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
                                     
-                                    { position: { top: '53%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '25%', left: '50%' }, size: '0.8rem', }
                                 )
                             }
                         ></button>
@@ -323,14 +323,14 @@ const Segmentarios = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(8, 8, 8, 0.377)',
+                            background: 'rgba(69, 69, 69)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',
                             borderRadius: '10px',
                             minWidth: '180px',
                             maxWidth: '100%',
-                            width: '690px',
+                            width: '560px',
                             textAlign: 'justify',
                             zIndex: 20,
                         }}

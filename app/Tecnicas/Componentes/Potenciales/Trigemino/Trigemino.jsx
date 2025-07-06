@@ -101,7 +101,7 @@ const Trigemino = () => {
             setMultiImageBoxVisible(true);
         }
         // Asegurarse de ocultar otros elementos cuando se muestra este multiImageBox
-        setTextBoxVisible(false);
+        // setTextBoxVisible(false);
         setImageBoxVisible(false);
     };
 
@@ -170,7 +170,7 @@ const Trigemino = () => {
                     <>
                         <button className="btnTri1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
                         <button className="btnTri2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem-T01.png")}></button>
-                        <button
+                        {/* <button
                             className="btnTri3"
                             onClick={() =>
                                 openModal(
@@ -181,12 +181,12 @@ const Trigemino = () => {
                                     { position: { top: '53%', left: '50%' }, size: '0.8rem', }
                                 )
                             }
-                        ></button>
+                        ></button> */}
                         <button className="btnTri4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem10-20.png")}></button>
 
                         {currentImageIndex === 0 && (
                             <button className="btnTrig" onClick={() => {
-                                    handleButtonClick('Sobre cráneo, electrodo activo en C5’ al estimular lado derecho (2cm posterior a C5), referenciado a Fpz (línea media frontal). Invertir registro activo a C6’ al estimular lado izquierdo.', { top: '8%', left: '23%' });
+                                    handleButtonClick('Sobre cráneo, electrodo activo en C5’ al estimular lado derecho (2cm posterior a C5), referenciado a Fpz (línea media frontal). Invertir registro activo a C6’ al estimular lado izquierdo.', { top: '7%', left: '29%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TrigeCanal1.png", { top: "50%", left: "50%" });  }}
                             >
                                 C5’-Fpz    
@@ -194,7 +194,7 @@ const Trigemino = () => {
                         )}
                         {currentImageIndex === 0 && (
                             <button className="btnTrig2" onClick={() => {
-                                    handleButtonClick('Registro bipolar C6’ activo con su referencia longitudinal contralateral C5’, invertir registro para el siguiente lado.', { top: '8%', left: '23%' });
+                                    handleButtonClick('Registro bipolar C6’ activo con su referencia longitudinal contralateral C5’, invertir registro para el siguiente lado.', { top: '7%', left: '29%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TrigeCanal2.png", { top: "50%", left: "50%" });  }}
                             >
                                 C5’-C4’    
@@ -202,10 +202,10 @@ const Trigemino = () => {
                         )}
                         {currentImageIndex === 0 && (
                             <button className="btnTrig3" onClick={() => {
-                                    handleButtonClick('...', { top: '8 %', left: '23%' });
+                                    handleButtonClick('Nervio Trigémino (contralateral a registro cortical), colocar el cátodo en la comisura labial y el ánodo paramedial entre ambos labios, esto estimula las divisiones maxilar y mandibular al unísono. Se puede optar por estimular cada labio de forma independiente colocando el cátodo 1 cm arriba o 1 cm debajo de la comisura en cada caso, ánodo paramedial.' +
+                                        "\n\n Intensidad. 2 a 3 veces el umbral sensitivo, es posible la poca tolerancia a la estimulación y un artefacto de estímulo por arriba de los 10 mA.", { top: '12%', left: '29%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TrigeEs1.png", { top: "50%", left: "50%" });  }}
                             >
-                                    
                             </button>
                         )}
 
@@ -214,6 +214,18 @@ const Trigemino = () => {
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/TrigeCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/TrigeCanal2.png",
+
+                                        ], { top: "50%", left: "50%" });   }}
+                            >
+                            </button>
+                        )}
+
+                        {currentImageIndex === 0 && (
+                            <button className="btnTri3" onClick={() => {
+                                        handleButtonClick('Nervio Trigémino (contralateral a registro cortical), colocar el cátodo en la comisura labial y el ánodo paramedial entre ambos labios, esto estimula las divisiones maxilar y mandibular al unísono. Se puede optar por estimular cada labio de forma independiente colocando el cátodo 1 cm arriba o 1 cm debajo de la comisura en cada caso, ánodo paramedial.' +
+                                        "\n\n Intensidad. 2 a 3 veces el umbral sensitivo, es posible la poca tolerancia a la estimulación y un artefacto de estímulo por arriba de los 10 mA.", { top: '12%', left: '29%' });
+                                        handleMultiImageBoxClick([
+                                            "/assets/ImgTecnicas/Potenciales/Somt/TriEst3.png",
 
                                         ], { top: "50%", left: "50%" });   }}
                             >

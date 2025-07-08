@@ -16,6 +16,7 @@ export default function Educacion() {
   const isAdmin = session?.user?.roles === 'admin';
 
   const [pdfUrl, setPdfUrl] = useState(null);
+  const [pdfReady, setPdfReady] = useState(false);
 
   return (
     <div className="Conteiner">
@@ -30,8 +31,7 @@ export default function Educacion() {
         <h1 className="BannerTitlepage">Educación</h1>
 
         {/* Menú con estilo SubMenuE */}
-        <PdfMenu onSelect={setPdfUrl} />
-      </section>
+<PdfMenu onSelect={(url) => { setPdfReady(false); setPdfUrl(url); }} />      </section>
 
       <hr className="bg-white h-0.5" />
       <Footer />
@@ -40,16 +40,21 @@ export default function Educacion() {
       {pdfUrl && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-10">
           <div className="relative">
-            <button
-              onClick={() => setPdfUrl(null)}
-              className="absolute -top-1 -right-1 bg-white rounded-full px-2 shadow"
-              aria-label="Cerrar visor"
-            >
-              ✕
-            </button>
+            {/* “✕” solo cuando el PDF ya está listo */}
+            {pdfReady && (
+              <button
+               onClick={() => {
+  setPdfUrl(null);
+  setPdfReady(false);
+}}
+                className="absolute -top-1 -right-1 bg-white rounded-full px-2 shadow"
+                aria-label="Cerrar visor"
+              >
+                ✕
+              </button>
+            )}
 
-            <PdfFlipbook url={pdfUrl} />
-          </div>
+<PdfFlipbook url={pdfUrl} onReady={() => setPdfReady(true)} />          </div>
         </div>
       )}
     </div>

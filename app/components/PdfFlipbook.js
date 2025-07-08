@@ -48,22 +48,28 @@ export default function PdfFlipbook({ url }) {
 
   /* ------------ visor ------------- */
   return (
-    <div className="w-[90vw] h-[90vh] flex items-center justify-center">
-      <HTMLFlipBook
-        width={600}
-        height={600}
-        size="stretch"
+  <div className="
+   w-[90vw]                 /* mismo ancho máximo */
+   max-h-[85vh]             /* deja 15 % libre arriba/abajo            */
+   flex items-center justify-center
+   my-8                     /* margen externo (8 × 4 = 32 px)          */
+              */
+ ">
+        <HTMLFlipBook
+        width={550}     // ← ancho de UNA página
+        height={740}    // ← alto de UNA página
+        size="fixed"    // ← NO se escalará
         showCover
-        className="shadow-xl"
+        className="flip-book"
         mobileScrollSupport
       >
         {pages.map((src, i) => (
           <div
             key={i}
-            className="flex items-center justify-center bg-white"
-            style={{ width: 900, height: 600 }}   // 👈  tamaño real de página
+            className="flex items-center justify-center"
+   style={{ width: '100%', height: '100%' }}
           >
-            <img src={src} alt={`página ${i + 1}`} className="w-full h-full object-contain" />
+            <img src={src} alt={`página ${i + 1}`} className="w-full h-full object-cover" />
           </div>
         ))}
       </HTMLFlipBook>

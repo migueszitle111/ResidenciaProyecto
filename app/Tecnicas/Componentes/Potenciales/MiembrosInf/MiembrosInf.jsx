@@ -170,21 +170,33 @@ const MiembrosInf = () => {
                             className="btnMiem3"
                             onClick={() =>
                                 openModal(
-                                    "/assets/ImgTecnicas/Potenciales/Motores/RegistroI.png",
-                                    "ESTIMULO \n\n CORTICAL. Bobina en forma de 8 (mariposa) de estimulación magnética transcraneal. Colocar el centro de la unión de ambos circuitos en el vertex (Cz), orientándolo de forma horizontal en dirección a Fpz; se puede lateralizar discretamente a C1 para el registro periférico izquierdo o a C2 para el derecho (lateralización paradójica)." + 
-                                    "\n\n CERVICAL. Bobina circular o en forma de 8 de estimulación magnética transcraneal. Colocar el centro de la bobina en orientación tangencial u horizontal sobre los procesos espinosos de las vértebras lumbosacras dependiendo de los niveles a explorar; se observa una respuesta idónea en L1-L2 para Vasto Medial, la unión L4-L5 para Tibial anterior y S1 para Abductor de hallux. La posición del paciente puede variar desde decúbito prono o en sedestación con máxima flexión del tronco.",
-                                    
-                                    { position: { top: '25%', left: '50%' }, size: '0.8rem', }
+                                    "/assets/ImgTecnicas/Potenciales/Motores/Registr.png",
+                                    "ESTIMULO CORTICAL \n\n Bobina circular de estimulación magnética transcraneal. Colocar el centro de la bobina tangencialmente 3 cm por delante del Vertex (Cz) siguiendo la línea media." + 
+                                    "\n\n Bobina en forma de 8 (mariposa) de estimulación magnética transcraneal. Colocar el centro de la unión de ambos circuitos en el vertex (Cz), orientándolo de forma horizontal en dirección a Fpz; se puede lateralizar discretamente a C1 para el registro periférico izquierdo o a C2 para el derecho (lateralización paradójica)"+
+                                    "\n\n Bobina en doble cono. Ideal para la estimulación en miembros inferiores por la profundidad que se genera a nivel cortical y subcortical." +
+                                    "\n\n Intensidad. Se recomienda iniciar en 60% con incrementos progresivos de 10% hasta obtener una contracción mínima al reposo.",
+                                    { position: { top: '20%', left: '50%' }, size: '0.8rem', }
                                 )
                             }
                         ></button>
 
                         <button
-                            className="btnRegistroInf"
+                            className="btnMiem5"
+                            onClick={() =>
+                                openModal(
+                                    "/assets/ImgTecnicas/Potenciales/Motores/Registr.png",
+                                    "ESTIMULO LUMBAR \n\nBobina circular o en forma de 8 de estimulación magnética transcraneal. Colocar el centro de la bobina en orientación tangencial u horizontal sobre los procesos espinosos de las vértebras lumbosacras dependiendo de los niveles a explorar; se observa una respuesta idónea en L1-L2 para Vasto Medial, la unión L4-L5 para Tibial anterior y S1 para Abductor de hallux. La posición del paciente puede variar desde decúbito prono o en sedestación con máxima flexión del tronco." ,
+                                    { position: { top: '20%', left: '50%' }, size: '0.8rem', }
+                                )
+                            }
+                        ></button>
+
+                        <button
+                            className="btnRegistroInf22"
                             onClick={() =>
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Motores/RegistroInf.png",
-                                    "Tibial anterior  \n\nActivo. Cara lateral de la tibia, el electrodo de superficie se coloca en la unión del tercio proximal y medio de la pierna, al interceptar una línea trazada entre la tuberosidad tibial y el maléolo lateral. Referencia. 4 cm distal al electrodo activo sobre el tendón del tibial anterior. Tierra. Tibia medial o rodilla." ,
+                                    "Tibial anterior  \n\nActivo. Cara lateral de la tibia, el electrodo de superficie se coloca en la unión del tercio proximal y medio de la pierna, al interceptar una línea trazada entre la tuberosidad tibial y el maléolo lateral. \nReferencia: 4 cm distal al electrodo activo sobre el tendón del tibial anterior. \n Tierra: Tibia medial o rodilla." ,
                                     { position: { top: '62%', left: '50%' }, size: '0.8rem', }
                                 )
                             }

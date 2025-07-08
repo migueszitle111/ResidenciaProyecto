@@ -171,10 +171,13 @@ const Plantares = () => {
                             onClick={() =>
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/PeroEstimuo.png",
-                                    "Intensidad. 2.5-3 veces al umbral percibido por el paciente en caso del nervio Calcáneo y presencia de contracción visible en sus respectivos dedos para el nervio Plantar.", 
+                                    "ESTIMULO \n\n Nervio Plantar medial: planta del pie, colocar electrodo activo en el centro de una línea trazada desde el talón hasta el espacio interdigital de dedos I-II. Electrodo de referencia a 3 cm distal. "+
+                                    "\n\n Nervio Plantar lateral: planta del pie, colocar electrodo activo en el centro de una línea trazada desde el talón hasta el espacio interdigital de dedos IV-V. Electrodo de referencia a 3 cm distal."+
+                                    "\n\n Nervio Calcáneo: margen posterior del talón, electrodo activo a pocos centímetros de la zona plantar, referencia a 3 cm distal."+
+                                    "\n\n Intensidad. 2.5-3 veces al umbral percibido por el paciente en caso del nervio Calcáneo y presencia de contracción visible en sus respectivos dedos para el nervio Plantar.", 
                                     // "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en los dorsiflexores o extensores de los dedos. \n\n Tierra. M1 o C4’/C3’.",
                                     
-                                    { position: { top: '27%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '20%', left: '50%' }, size: '0.8rem', }
                                 )
                             }
                         ></button>
@@ -343,7 +346,7 @@ const Plantares = () => {
                             borderRadius: '10px',
                             minWidth: '180px',
                             maxWidth: '100%',
-                            width: '690px',
+                            width: '600px',
                             textAlign: 'justify',
                             zIndex: 20,
                         }}

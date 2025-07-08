@@ -167,20 +167,31 @@ const MiembrosSup = () => {
                         <button className="btnMie1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
                         <button className="btnMie2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Motores/MieSup1-T01.png")}></button>
                         <button
-                            className="btnMie3"
+                            className="btnMiem3"
                             onClick={() =>
                                 openModal(
-                                    "/assets/ImgTecnicas/Potenciales/Motores/RegistroI.png",
-                                    "ESTIMULO \n\n CORTICAL. Bobina en forma de 8 (mariposa) de estimulación magnética transcraneal. Colocar el centro de la unión de ambos circuitos en C3 o C4, orientándolo de forma tangencial en dirección a Fpz; C3 para el registro contralateral derecho y C4 para el registro contralateral izquierdo. También se obtienen buenas respuestas en C1-C2." + 
-                                    "\n\n CERVICAL. Bobina circular o en forma de 8 de estimulación magnética transcraneal. Colocar el centro de la bobina en orientación tangencial u horizontal sobre C7 con flexión de cuello de 45% y descender 1-2 cm hasta la unión C8-T1 con el 120% de intensidad prefijado en la estimulación cortical y únicamente en fase de reposo muscular.",
-                                    
-                                    { position: { top: '25%', left: '50%' }, size: '0.8rem', }
+                                    "/assets/ImgTecnicas/Potenciales/Motores/Registr.png",
+                                    "ESTIMULO CORTICAL \n\n Bobina circular o en doble cono de estimulación magnética transcraneal. Colocar el centro de la bobina tangencialmente sobre el Vertex (Cz) o 1 cm por delante siguiendo la línea media. Solo para bobina circular, dirigir la corriente en orientación de las manecillas del reloj para lado derecho, en invertir para lado izquierdo en contra de las manecillas del reloj." + 
+                                    "\n\n Bobina en forma de 8 (mariposa) de estimulación magnética transcraneal. Colocar el centro de la unión de ambos circuitos en C1 o C2, orientándolo de forma tangencial en dirección a Fpz; C1 para el registro contralateral derecho y C2 para el registro contralateral izquierdo. En mEDXprolab obtenemos nuestras respuestas al estimulo de C3-C4."+
+                                    "\n\n Intensidad. Se recomienda iniciar en 30-50% con incrementos progresivos de 10% hasta obtener una contracción mínima en el dominio muscular distal.",
+                                    { position: { top: '20%', left: '50%' }, size: '0.8rem', }
                                 )
                             }
                         ></button>
 
                         <button
-                            className="btnRegistroInf"
+                            className="btnMiem5"
+                            onClick={() =>
+                                openModal(
+                                    "/assets/ImgTecnicas/Potenciales/Motores/Registr.png",
+                                    "ESTIMULO CERVICAL \n\n Bobina circular o en forma de 8 de estimulación magnética transcraneal. Colocar el centro de la bobina en orientación tangencial u horizontal sobre C7 con flexión de cuello de 45% y descender 1-2 cm hasta la unión C8-T1 con el 120% de intensidad prefijado en la estimulación cortical y únicamente en fase de reposo muscular." ,
+                                    { position: { top: '20%', left: '50%' }, size: '0.8rem', }
+                                )
+                            }
+                        ></button>
+
+                        <button
+                            className="btnRegistroInf33"
                             onClick={() =>
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Motores/RegidtroMiSup.png",

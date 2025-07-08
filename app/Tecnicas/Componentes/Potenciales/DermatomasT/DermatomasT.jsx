@@ -168,21 +168,22 @@ const DermatomasT = () => {
                 {/* Botones que abren imágenes en el modal */}
                 {currentImageIndex === 0 && (
                     <>
-                        <button className="btnDerT1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
+                        {/* <button className="btnDerT1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className="btnDerT2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/DermaT-T01.png")}></button>
                         <button
                             className="btnDerT3"
                             onClick={() =>
                                 openModal(
-                                    "/assets/ImgTecnicas/Potenciales/Somt/RadEstimuloa.png",
-                                    "Estimulo: Dos a tres veces el umbral sensitivo percibido por el paciente sobre la superficie cutánea definida por dermatomas; se utilizan electrodos de anillo en los dedos y de superficie en el resto de cuerpo, es de gran utilidad la colocación de una barra de estimulación para orientar el ánodo distal al cátodo en extremidades y lateral a línea media en el tronco." + 
+                                    "/assets/ImgTecnicas/Potenciales/Somt/RadEstimu.png",
+                                    "Cortical: \n Miembros superiores C4’ (C3’)-Fpz’ o Fpz. \n Miembros inferiores Cz’-Fpz’"+
+                                    "\n\n Estimulo:  \n Dos a tres veces el umbral sensitivo percibido por el paciente sobre la superficie cutánea definida por dermatomas; se utilizan electrodos de anillo en los dedos y de superficie en el resto de cuerpo, es de gran utilidad la colocación de una barra de estimulación para orientar el ánodo distal al cátodo en extremidades y lateral a línea media en el tronco. " + 
                                     "\n\n Tierra: Ligeramente proximal al sitio de estimulación.",
                                     
                                     { position: { top: '25%', left: '50%' }, size: '0.8rem', }
                                 )
                             }
                         ></button>
-                        <button className="btnDerT4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png")}></button>
+                        <button className="btnDerT4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png")}></button>
 
                         {currentImageIndex === 0 && (
                             <button className="btnDermT" onClick={() => {
@@ -351,7 +352,7 @@ const DermatomasT = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(28, 28, 28, 0.842)',
+                            background: 'rgba(69, 69, 69)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

@@ -194,7 +194,7 @@ const TripleRespuesta = () => {
                         {currentImageIndex === 0 && (
                             <button className="btnTrpR" onClick={() => {
                                     handleButtonClick('Electrodo activo colocado sobre el vientre muscular punto medio ventral del brazo; referencia sobre el tendón a nivel de pliegue del codo.', { top: '60%', left: '81%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/BicepsBq.png", { top: "50%", left: "50%" });  }}
+                                    handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/BicepsBq.png","/assets/ImgTecnicas/Potenciales/Motores/Registro1-0.png"], { top: "50%", left: "50%" });  }}
                             >
                                 Bíceps braquial    
                             </button>
@@ -202,7 +202,7 @@ const TripleRespuesta = () => {
                         {currentImageIndex === 0 && (
                             <button className="btnTrpR2" onClick={() => {
                                     handleButtonClick('Electrodo activo en tercio medio del antebrazo sobre la intersección de la línea trazada desde el pliegue del codo al centro de los huesos del carpo; referencia distal al recorrido del tendón 2 cm proximales a muñeca.', { top: '58%', left: '81%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/FloxorCar.png", { top: "50%", left: "50%" });  }}
+                                    handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/FloxorCar.png","/assets/ImgTecnicas/Potenciales/Motores/Registro1-0.png"], { top: "50%", left: "50%" });  }}
                             >
                                 Flexor radial del carpo     
                             </button>
@@ -210,7 +210,7 @@ const TripleRespuesta = () => {
                         {currentImageIndex === 0 && (
                             <button className="btnTrpR3" onClick={() => {
                                     handleButtonClick('Electrodo activo en espacio dorsal, línea media de membrana cutánea entre dedos pulgar e índice; referencia en articulación metacarpofalángica del pulgar.', { top: '60%', left: '81%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/PrimerInDr.png", { top: "50%", left: "50%" });  }}
+                                    handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/PrimerInDr.png","/assets/ImgTecnicas/Potenciales/Motores/Registro1-0.png"], { top: "50%", left: "50%" });  }}
                             >
                                 Primer interóseo dorsal     
                             </button>
@@ -262,7 +262,7 @@ const TripleRespuesta = () => {
                         {currentImageIndex === 1 && (
                             <button className="btnTrpR4" onClick={() => {
                                     handleButtonClick('Electrodo activo colocado sobre el vientre muscular punto medio ventral del brazo; referencia sobre el tendón a nivel de pliegue del codo.', { top: '60%', left: '81%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/BicepBq2.png", { top: "50%", left: "50%" });  }}
+                                    handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/BicepBq2.png","/assets/ImgTecnicas/Potenciales/Motores/Registro2.png"], { top: "50%", left: "50%" });  }}
                             >
                                 Bíceps braquial    
                             </button>
@@ -270,7 +270,7 @@ const TripleRespuesta = () => {
                         {currentImageIndex === 1 && (
                             <button className="btnTrpR5" onClick={() => {
                                     handleButtonClick('Electrodo activo en la eminencia hipotenar medial; referencia sobre la articulación metacarpofalángica del quinto dedo.', { top: '60%', left: '81%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/AbductorQut.png", { top: "50%", left: "50%" });  }}
+                                    handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/AbductorQut.png","/assets/ImgTecnicas/Potenciales/Motores/Registro2.png"], { top: "50%", left: "50%" });  }}
                             >
                                 Abductor del dedo meñique    
                             </button>
@@ -278,7 +278,7 @@ const TripleRespuesta = () => {
                         {currentImageIndex === 1 && (
                             <button className="btnTrpR6" onClick={() => {
                                     handleButtonClick('Electrodo activo en eminencia tenar lateral; referencia sobre la primera articulación metacarpofalángica.', { top: '60%', left: '81%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/abductorCt.png", { top: "50%", left: "50%" });  }}
+                                    handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/abductorCt.png","/assets/ImgTecnicas/Potenciales/Motores/Registro2.png"], { top: "50%", left: "50%" });  }}
                             >
                                 Abductor corto del pulgar     
                             </button>
@@ -331,7 +331,7 @@ const TripleRespuesta = () => {
                         {currentImageIndex === 2 && (
                             <button className="btnTrpR7" onClick={() => {
                                     handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '60%', left: '19%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/VastoMd.png", { top: "50%", left: "50%" });  }}
+                                    handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/VastoMd.png","/assets/ImgTecnicas/Potenciales/Motores/Registro3.png"], { top: "50%", left: "50%" });  }}
                             >
                                 Vasto medial    
                             </button>
@@ -339,7 +339,7 @@ const TripleRespuesta = () => {
                         {currentImageIndex === 2 && (
                             <button className="btnTrpR8" onClick={() => {
                                     handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '60%', left: '19%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/TibialAnt.png", { top: "50%", left: "50%" });  }}
+                                    handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/TibialAnt.png","/assets/ImgTecnicas/Potenciales/Motores/Registro3.png"], { top: "50%", left: "50%" });  }}
                             >
                                 Tibial anterior    
                             </button>
@@ -347,7 +347,7 @@ const TripleRespuesta = () => {
                         {currentImageIndex === 2 && (
                             <button className="btnTrpR9" onClick={() => {
                                     handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '60%', left: '19%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/AbdutorHallux.png", { top: "50%", left: "50%" });  }}
+                                    handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/AbdutorHallux.png","/assets/ImgTecnicas/Potenciales/Motores/Registro3.png"], { top: "50%", left: "50%" });  }}
                             >
                                 Abductor del hallux     
                             </button>

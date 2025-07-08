@@ -173,15 +173,16 @@ const DermatomasC = () => {
                             className="btnDer3"
                             onClick={() =>
                                 openModal(
-                                    "/assets/ImgTecnicas/Potenciales/Somt/RadEstimulo.png",
-                                    "Estimulo. Nervio Radial superficial mediante electrodos de barra sobre el borde dorsolateral de la muñeca, 2 cm proximal a la apófisis estiloides radial; ánodo 3 cm distalmente." + 
-                                    "\n\n Intensidad.  El triple o 2.5 veces por arriba del umbral sensitivo percibido por el paciente.  \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
+                                    "/assets/ImgTecnicas/Potenciales/Somt/RadEstimu.png",
+                                    "Cortical: \n Miembros superiores C4’ (C3’)-Fpz’ o Fpz. \n Miembros inferiores Cz’-Fpz’"+
+                                    "\n\n Estimulo:  \n Dos a tres veces el umbral sensitivo percibido por el paciente sobre la superficie cutánea definida por dermatomas; se utilizan electrodos de anillo en los dedos y de superficie en el resto de cuerpo, es de gran utilidad la colocación de una barra de estimulación para orientar el ánodo distal al cátodo en extremidades y lateral a línea media en el tronco. " + 
+                                    "\n\n Tierra: Ligeramente proximal al sitio de estimulación.",
                                     
-                                    { position: { top: '53%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '25%', left: '50%' }, size: '0.8rem', }
                                 )
                             }
                         ></button>
-                        <button className="btnDer4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png")}></button>
+                        <button className="btnDer4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png")}></button>
 
                         {currentImageIndex === 0 && (
                             <button className="btnDerm" onClick={() => {
@@ -351,14 +352,14 @@ const DermatomasC = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(8, 8, 8, 0.377)',
+                            background: 'rgba(69, 69, 69)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',
                             borderRadius: '10px',
                             minWidth: '180px',
                             maxWidth: '100%',
-                            width: '690px',
+                            width: '600px',
                             textAlign: 'justify',
                             zIndex: 20,
                         }}

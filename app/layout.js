@@ -1,9 +1,6 @@
-
-//import Overhead from './components/Overhead'
-//import OverheadMenu from './components/OverheadMenu'
-//import SubMenu from './components/Submenu'
-import { Inter } from 'next/font/google'
-import './globals.css'
+// app/layout.js
+import { Inter } from 'next/font/google';
+import './globals.css';
 import { AuthProvider } from './Providers';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -16,11 +13,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* ─── DearFlip core stylesheet ─── */}
+        <link
+          rel="stylesheet"
+          href="/dflip/css/dflip.min.css"
+        />
+        {/* ─── Iconos Themify para los botones de zoom, fullscreen, etc. ─── */}
+        <link
+          rel="stylesheet"
+          href="/dflip/css/themify-icons.css"
+        />
+      </head>
+
       <body className={inter.className}>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
-        </body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
-  )
+  );
 }

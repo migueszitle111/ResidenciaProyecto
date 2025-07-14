@@ -1,8 +1,41 @@
-// Importa el middleware por defecto de next-auth
-export { default } from "next-auth/middleware";
+import { NextResponse } from 'next/server';
+import { withAuth } from 'next-auth/middleware';
 
-// Configuración específica para el middleware
+const authMiddleware = withAuth({
+  pages: {
+    signIn: '/Login', // o tu ruta de login personalizada
+  },
+});
+
+const protectedRoutes = [
+  '/Perfil',
+  '/Perfil/Perfil_Actualizar',
+  '/Perfil/Perfil_Contra',
+];
+
+export function middleware(request) {
+  const pathname = request.nextUrl.pathname;
+
+  // Redirige /blank a /api/blank
+  if (pathname === '/blank') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/api/blank';
+    return NextResponse.rewrite(url);
+  }
+
+  // Aplica autenticación solo a rutas protegidas
+  if (protectedRoutes.some(route => pathname.startsWith(route))) {
+    return authMiddleware(request);
+  }
+
+  return NextResponse.next();
+}
+
 export const config = {
-  // El matcher es una propiedad que define las rutas para las cuales se aplicará el middleware
-  matcher: ["/Perfil", "/Perfil/Perfil_Actualizar", "/Perfil/Perfil_Contra"]
+  matcher: [
+    '/blank', // necesario para interceptar esta ruta
+    '/Perfil',
+    '/Perfil/Perfil_Actualizar',
+    '/Perfil/Perfil_Contra',
+  ],
 };

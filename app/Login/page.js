@@ -1,51 +1,88 @@
-//app/login/page.js
+// app/login/page.js
+'use client';
 
-"use client";
-
-import React, { useState, useEffect } from "react";
-import { signIn }    from "next-auth/react";
-import { useRouter } from "next/navigation";
-import Overhead      from "../components/Overhead";
-import OverheadMenu  from "../components/OverheadMenu";
-import "./Style.css";
+import React, { useState, useEffect } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import Overhead from '../components/Overhead';
+import OverheadMenu from '../components/OverheadMenu';
+import './Style.css';
 
 export default function Login() {
-  const [email, setEmail]     = useState("");
-  const [password, setPassword]= useState("");
-  const [error, setError]     = useState("");
-  const router = useRouter();
+  const [email, setEmail]       = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError]       = useState('');
+  const router                  = useRouter();
 
-  useEffect(()=>{
-    if(error){
-      const t=setTimeout(()=>setError(""),3000);
-      return()=>clearTimeout(t);
+  useEffect(() => {
+    if (error) {
+      const t = setTimeout(() => setError(''), 3000);
+      return () => clearTimeout(t);
     }
-  },[error]);
+  }, [error]);
 
-  const handleSubmit=async e=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await signIn("credentials",{ email, password, redirect:false });
-    if(res.error) return setError("Credenciales inválidas");
-    router.replace("/");
+    const res = await signIn('credentials', { email, password, redirect: false });
+    if (res.error) return setError('Credenciales inválidas');
+    router.replace('/');
   };
 
   return (
     <div className="Conteiner">
-      <Overhead /><OverheadMenu /><hr className="bg-white h-0.5"/>
-      <div className="p-6">
-        <h1 className="text-4xl text-white">Iniciar Sesión</h1>
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          <input type="email" placeholder="Correo" onChange={e=>setEmail(e.target.value)} required className="w-full p-2 rounded"/>
-          <input type="password" placeholder="Contraseña" onChange={e=>setPassword(e.target.value)} required className="w-full p-2 rounded"/>
-          {error && <p className="text-red-500">{error}</p>}
-          <button className="w-full bg-orange-500 text-white py-2 rounded">Entrar</button>
-        </form>
+      <Overhead />
+      <OverheadMenu />
+      <hr className="bg-white h-0.5" />
 
-        <p className="mt-4 text-white">
-          ¿No tienes cuenta? <a href="/Registro" className="text-orange-300">Regístrate</a>
-        </p>
-             
-      </div>
+      {/* — Tarjeta centrada y un poco más abajo — */}
+      <main className="flex justify-center mt-12 px-4">
+        <div className="mx-auto w-full max-w-3xl rounded-xl bg-black p-14 shadow-lg backdrop-blur">
+          <h1 className="mb-8 text-center text-3xl font-semibold text-white">
+            Iniciar Sesión
+          </h1>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <input
+              type="email"
+              placeholder="Correo"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="block w-full rounded-md border border-slate-600 bg-slate-700/70 p-3 text-white placeholder-slate-400 focus:border-orange-400 focus:outline-none"
+            />
+
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="block w-full rounded-md border border-slate-600 bg-slate-700/70 p-3 text-white placeholder-slate-400 focus:border-orange-400 focus:outline-none"
+            />
+
+            {error && (
+              <p className="text-center text-sm text-red-400">{error}</p>
+            )}
+
+            <button
+              type="submit"
+              className="block w-full rounded-md bg-orange-500 py-3 font-medium text-white hover:bg-orange-600 focus:outline-none"
+            >
+              Entrar
+            </button>
+          </form>
+
+          <p className="mt-8 text-center text-sm text-slate-300">
+            ¿No tienes cuenta?{' '}
+            <a
+              href="/Registro"
+              className="font-medium text-orange-400 hover:underline"
+            >
+              Regístrate
+            </a>
+          </p>
+        </div>
+      </main>
     </div>
   );
 }

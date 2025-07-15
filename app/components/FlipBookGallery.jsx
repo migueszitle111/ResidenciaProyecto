@@ -1,11 +1,15 @@
 'use client';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Script  from 'next/script';
+import { useRouter } from 'next/navigation';   // 👈 nuevo
+
 
 function FlipBookGallery() {
   /* ───── estado: null = galería, string = PDF embebido ───── */
   const [activePdf, setActivePdf] = useState(null);
+  const router = useRouter();                  // 👈 instancia del router
+
 
   /* Config global ANTES de cargar dflip.min.js */
   const preConfig = `
@@ -23,51 +27,58 @@ function FlipBookGallery() {
   const onDearFlipLoaded = () => {
   };
 
-  /* Scripts (compartidos) */
-  const scripts = (
+   const scripts = (
     <>
       <Script id="df-preconfig" strategy="beforeInteractive">
         {preConfig}
       </Script>
       <Script src="/dflip/js/libs/jquery.min.js" strategy="afterInteractive" />
-      <Script
-        src="/dflip/js/dflip.min.js"
-        strategy="afterInteractive"
-        onLoad={onDearFlipLoaded}
-      />
+      <Script src="/dflip/js/dflip.min.js" strategy="afterInteractive" />
     </>
   );
 
-  /* ───── 1. VISOR EMBEBIDO ───── */
+  /* ─── Historial: “Atrás/Adelante” cierra el visor ─── */
+  useEffect(() => {
+    if (activePdf) {
+      const urlWithFlag = `${window.location.pathname}?pdf=${encodeURIComponent(
+        activePdf,
+      )}`;
+      window.history.pushState({ pdf: activePdf }, '', urlWithFlag);
+    }
+
+    const onPop = () => {
+      if (activePdf) {
+        setActivePdf(null);      // desmonta visor
+        window.location.reload(); // recarga limpia
+        // o router.refresh();   // si prefieres un soft‑reload
+      }
+    };
+
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, [activePdf]);
+
+  /* ─── Render ─── */
   if (activePdf) {
     return (
       <>
         {scripts}
-
-        <button
-          onClick={() => setActivePdf(null)}
-          className="mb-4 rounded bg-slate-800 px-4 py-2 text-white"
-        >
-          ← Regresar
-        </button>
-
+        {/* sin botón: usa la barra del navegador */}
         <div
+          id="df-viewer"
           className="_df_book"
           source={activePdf}
           height="600"
-          backgroundcolor="teal"
-          webgl="true"
-          style={{ width: '100%', maxWidth: '900px', margin: '0 auto' }}
+          style={{ width: '100%', maxWidth: 900, margin: '0 auto' }}
         />
       </>
     );
   }
 
-  /* ───── 2. GALERÍA DE MINIATURAS ───── */
+  /* Galería de miniaturas */
   return (
     <>
       {scripts}
-
       <div className="mt-8 flex flex-wrap justify-center gap-8">
         <div
           className="_df_thumb cursor-pointer"
@@ -77,7 +88,7 @@ function FlipBookGallery() {
           source="/pdfs/POTENCIALESEVOCADOSmEDXpro.pdf"
           thumb="/dflip/images/book-template.png"
         >
-          Potenciales Evocados
+          Potenciales Evocados
         </div>
 
         <div
@@ -88,12 +99,11 @@ function FlipBookGallery() {
           source="/pdfs/ESTUDIOSDECONDUCCIONNERVIOSAmEDXpro.pdf"
           thumb="/dflip/images/book-template.png"
         >
-          Conducción Nerviosa
+          Conducción Nerviosa
         </div>
       </div>
     </>
   );
 }
 
-/* sin SSR para que haya window */
 export default dynamic(() => Promise.resolve(FlipBookGallery), { ssr: false });

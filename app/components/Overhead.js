@@ -191,10 +191,10 @@ const Overhead = () => {
           {/* Acomodar a la derecha en pantallas grandes y en el centro en pantallas pequeñas */}
           <a href="/" className="flex-shrink-0">
             <Image
-              src="/L_H_Blanco.svg"
+              src="/L_B_Blanco.svg"
               alt="Logo de la empresa"
-              width={100}
-              height={100}
+              width={50}
+              height={50}
             />
           </a>
         </div>

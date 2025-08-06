@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from 'next/link';
+
 import {
   Autoplay,
   Pagination,
@@ -24,7 +26,9 @@ import Image from "next/image";
 
 export default function LandingPage() {
   const router = useRouter();
-
+  const [showVideoModal, setShowVideoModal] = React.useState(false);
+  const [videoUrl, setVideoUrl] = React.useState("");
+  
   useEffect(() => {
     AOS.init({ once: false, mirror: false, duration: 1000 });
   }, []);
@@ -33,8 +37,7 @@ export default function LandingPage() {
   const handlePaymentClick = (e, url) => {
     e.preventDefault();
     alert(
-      "Para facturas y dirección de envió a México, escríbanos a contacto@medxproapp.com\n\n" +
-      "En caso de envíos a centro y sudamerica se cotizara por separado" 
+      "Los envíos a otros países se cotizaron por separado proporcionando un link de envío internacional\n\n" 
       
     );
     window.location.href = url;
@@ -68,11 +71,29 @@ export default function LandingPage() {
   ];
 
   // Otras imágenes y cards…
-  const infoCards = [
-    { img: "/assets/LandingPage/Page/LP-11.png", label: "Podcasts", title: "Información Médica" },
-    { img: "/assets/LandingPage/Page/LP-12.png", label: "Videos", title: "Información Médica" },
-    { img: "/assets/LandingPage/Page/LP-13.png", label: "Reportes", title: "Información Médica" },
-  ];
+const infoCards = [
+  {
+    img: "/assets/LandingPage/Page/LP-11.png",
+    label: "Videos",
+    title: "Información Médica",
+    href: "https://f.io/S6WK6rOL", // o tu .mp4
+    action: "video"               // <- clave para mostrar modal
+  },
+  {
+    img: "/assets/LandingPage/Page/LP-12.png",
+    label: "Manuales",
+    title: "Información Médica",
+    href: "/pdfs/MANUALECNmEDXprocopia.pdf",
+    download: "Manuales-MEDX.pdf"
+  },
+  {
+    img: "/assets/LandingPage/Page/LP-13.png",
+    label: "Podcast",
+    title: "Información Médica"
+  }
+];
+
+
 
   return (
     <>
@@ -126,6 +147,11 @@ export default function LandingPage() {
               data-aos-duration="600"
               data-aos-delay="400"
             >
+              <a
+                  href="https://buy.stripe.com/6oU4gzg9ugvufgO5uYafS0c"
+                  onClick={e => handlePaymentClick(e, "https://buy.stripe.com/6oU4gzg9ugvufgO5uYafS0c")}
+                >
+
               <Image
                 src="/assets/LandingPage/Page/LP-04.png"
                 alt="Diagnóstico neuromuscular B"
@@ -133,6 +159,7 @@ export default function LandingPage() {
                 height={400}
                 className="w-full h-auto object-cover"
               />
+              </a>
             </div>
             <div
               className="bg-black col-span-2 overflow-hidden rounded-3xl shadow-lg"
@@ -178,8 +205,8 @@ export default function LandingPage() {
                 data-aos-duration="800"
               >
                 <a
-                  href="https://buy.stripe.com/fZu3cv1eAa766Kif5yafS02"
-                  onClick={e => handlePaymentClick(e, "https://buy.stripe.com/fZu3cv1eAa766Kif5yafS02")}
+                  href="https://buy.stripe.com/00w3cv9L63II8SqbTmafS0b"
+                  onClick={e => handlePaymentClick(e, "https://buy.stripe.com/00w3cv9L63II8SqbTmafS0b")}
                 >
                   <Image
                     src="/assets/LandingPage/Page/LP-09.png"
@@ -199,8 +226,8 @@ export default function LandingPage() {
                 data-aos-duration="800"
               >
                 <a
-                  href="https://buy.stripe.com/6oUfZhcXi932ecKaPiafS03"
-                  onClick={e => handlePaymentClick(e, "https://buy.stripe.com/6oUfZhcXi932ecKaPiafS03")}
+                  href="https://buy.stripe.com/28EdR95uQbbad8G8HaafS0a"
+                  onClick={e => handlePaymentClick(e, "https://buy.stripe.com/28EdR95uQbbad8G8HaafS0a")}
                 >
                   <Image
                     src="/assets/LandingPage/Page/LP-08.png"
@@ -301,28 +328,85 @@ export default function LandingPage() {
           </Swiper>
         </div>
 
-        {/* Info cards */}
-        <section className="max-w-screen-xl mx-auto px-4 pt-8 pb-4" data-aos="fade-up">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {infoCards.map((card, i) => (
-              <div
-                key={i}
-                className="overflow-hidden rounded-3xl shadow-lg transform hover:scale-105 transition-all duration-700"
-                data-aos="zoom-in"
-                data-aos-delay={i * 200}
-                data-aos-duration="1000"
-              >
-                <Image
-                  src={card.img}
-                  alt={card.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
+{/* Info cards */}
+<section className="max-w-screen-xl mx-auto px-4 pt-8 pb-4" data-aos="fade-up">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+    {infoCards.map((card, i) => {
+      const content = (
+        <div
+          className="overflow-hidden rounded-3xl shadow-lg transform hover:scale-105 transition-all duration-700 cursor-pointer"
+          data-aos="zoom-in"
+          data-aos-delay={i * 200}
+          data-aos-duration="1000"
+        >
+          <Image
+            src={card.img}
+            alt={card.title}
+            width={600}
+            height={400}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      );
+
+      if (card.action === "video") {
+        return (
+          <div
+            key={i}
+            onClick={() => {
+              setVideoUrl(card.href);
+              setShowVideoModal(true);
+            }}
+          >
+            {content}
           </div>
-        </section>
+        );
+      }
+
+      if (card.href) {
+        const isExternal = card.href.startsWith("http");
+        const downloadAttr = card.download ? { download: card.download } : {};
+
+        return isExternal ? (
+          <a
+            key={i}
+            href={card.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            {content}
+          </a>
+        ) : (
+          <a key={i} href={card.href} className="block" {...downloadAttr}>
+            {content}
+          </a>
+        );
+      }
+
+      return <div key={i}>{content}</div>;
+    })}
+  </div>
+</section>
+{showVideoModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center">
+    <div className="relative w-full max-w-3xl p-4">
+      <button
+        onClick={() => setShowVideoModal(false)}
+        className="absolute top-2 right-4 text-white text-3xl font-bold z-10"
+      >
+        &times;
+      </button>
+
+      <div className="aspect-w-16 aspect-h-9">
+        <video src={"assets/LandingPage/Videos/VideoSeccion.mp4"} controls autoPlay className="w-full h-[70vh] rounded-xl" />
+
+      </div>
+    </div>
+  </div>
+)}
+
+
       </div>
 
       {/* Global overrides for Swiper, marquee, etc. */}

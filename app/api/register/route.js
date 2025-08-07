@@ -22,7 +22,7 @@ export async function POST(req) {
     customer_email: email,
    subscription_data: {
      // Si el usuario está en la lista de trial, le asignamos 90 días gratis
-     ...(giveTrial ? { trial_period_days: 90 } : {}),
+     ...(giveTrial ? { trial_period_days: 30 } : {}),
    },
     metadata: {
       name,

@@ -63,7 +63,7 @@ export const authOptions = {
            line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
            customer_email: user.email,
            subscription_data: {
-             ...(giveTrial ? { trial_period_days: 90 } : {}),
+             ...(giveTrial ? { trial_period_days: 30 } : {}),
            },
            success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
            cancel_url: process.env.NEXTAUTH_URL,

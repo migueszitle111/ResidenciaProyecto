@@ -1,29 +1,38 @@
-// app/api/register/route.js
 import { NextResponse } from "next/server";
-import Stripe          from "stripe";
+import Stripe from "stripe";
 import { isAllowedForTrial } from "@/lib/allowedTrials";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-10-16",
 });
 
+const TRIAL_DAYS = Number(process.env.TRIAL_DAYS || 30);
+
+async function getOrCreateCustomerByEmail(email, metadata = {}) {
+  const list = await stripe.customers.list({ email, limit: 1 });
+  if (list.data.length > 0) return list.data[0];
+  return await stripe.customers.create({ email, metadata });
+}
+
 export async function POST(req) {
   const { name, lastname, cedula, especialidad, email, roles, imageUrl } =
     await req.json();
 
- // 1) Determinamos si el correo tiene derecho a trial de 90 días
- const giveTrial = isAllowedForTrial(email);
+  const giveTrial = isAllowedForTrial(email);
+  const trialDays = giveTrial ? TRIAL_DAYS : 0;
 
-  // 2) Creamos la sesión de Checkout en modo “subscription”
+  const customer = await getOrCreateCustomerByEmail(email, {
+    name, lastname, cedula, especialidad,
+  });
+
   const session = await stripe.checkout.sessions.create({
     mode: "subscription",
+    customer: customer.id,
     payment_method_types: ["card"],
     line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-    customer_email: email,
-   subscription_data: {
-     // Si el usuario está en la lista de trial, le asignamos 90 días gratis
-     ...(giveTrial ? { trial_period_days: 30 } : {}),
-   },
+    subscription_data: {
+      ...(trialDays > 0 ? { trial_period_days: trialDays } : {}),
+    },
     metadata: {
       name,
       lastname,

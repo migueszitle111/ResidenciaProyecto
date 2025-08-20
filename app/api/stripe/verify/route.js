@@ -1,12 +1,11 @@
-// app/api/stripe/verify/route.js
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 import { NextResponse } from "next/server";
-import Stripe          from "stripe";
-import crypto          from "crypto";
+import Stripe from "stripe";
+import crypto from "crypto";
 import { connectMongoDB } from "@/lib/mongodb";
-import User              from "@/models/user";
+import User from "@/models/user";
 import {
   sendPasswordReset,
   sendWelcomeEmail,
@@ -29,83 +28,84 @@ export async function GET(req) {
       expand: ["subscription", "subscription.customer"],
     });
 
-    const customerEmail   = session.customer_email;
-    const subscriptionObj = session.subscription;
-    const isTrial         = subscriptionObj.status === "trialing";
+    const subscription = session.subscription;
+    const status       = subscription?.status;
+    const isTrial      = status === "trialing";
+    const isActive     = status === "active";
+    const isOk         = isTrial || isActive;
 
-    // Determinar provider real
-    // metadata.provider existe cuando viene del flow “credentials”
-    // en caso contrario, es un Google user
-    const provider = session.metadata?.provider || "google";
+    // Email del cliente
+    let customerEmail =
+      session.customer_email ||
+      session.customer_details?.email ||
+      session.metadata?.email ||
+      null;
 
-    // Extraer nombre: metadata.name o bien customer_details.name
-    const fullName = session.metadata?.name
-      || session.customer_details?.name
-      || "";
+    if (!customerEmail && subscription?.customer) {
+      const cust =
+        typeof subscription.customer === "string"
+          ? await stripe.customers.retrieve(subscription.customer)
+          : subscription.customer;
+      customerEmail = cust?.email || null;
+    }
 
-    // 2) Guardar o actualizar usuario en MongoDB
+    if (!customerEmail) {
+      return NextResponse.json({ ok: false, error: "No se pudo resolver email del cliente" }, { status: 400 });
+    }
+
+    const customerId =
+      typeof subscription?.customer === "string"
+        ? subscription.customer
+        : subscription?.customer?.id;
+
     await connectMongoDB();
     let user = await User.findOne({ email: customerEmail });
 
+    const provider = session.metadata?.provider || "google";
+    const fullName = session.metadata?.name || session.customer_details?.name || "";
+
     if (!user) {
-      // Sólo incluimos lastname/cedula/especialidad para credentials
-      const newUserData = {
-        email:                customerEmail,
+      user = new User({
+        email: customerEmail,
         provider,
-        name:                 fullName,
-        subscriptionActive:   true,
-        stripeSubscriptionId: subscriptionObj.id,
-        roles:                session.metadata?.roles || "user",
-        imageUrl:             session.metadata?.imageUrl || "",
-      };
+        name: fullName,
+        roles: session.metadata?.roles || "user",
+        imageUrl: session.metadata?.imageUrl || "",
+      });
+    }
 
-      if (provider === "credentials") {
-        Object.assign(newUserData, {
-          lastname:     session.metadata?.lastname || "",
-          cedula:       session.metadata?.cedula || "",
-          especialidad: session.metadata?.especialidad || "",
-        });
-      }
+    user.stripeCustomerId     = customerId || user.stripeCustomerId;
+    user.stripeSubscriptionId = subscription?.id || user.stripeSubscriptionId;
+    user.subscriptionActive   = Boolean(isOk);
+    user.trialEndsAt          = subscription?.trial_end ? new Date(subscription.trial_end * 1000) : null;
 
-      user = new User(newUserData);
-    } else {
-      user.provider               = provider;
-      user.subscriptionActive     = true;
-      user.stripeSubscriptionId   = subscriptionObj.id;
-      // No tocamos los campos de perfil
+    if (provider === "credentials") {
+      user.lastname     = session.metadata?.lastname     ?? user.lastname     ?? "";
+      user.cedula       = session.metadata?.cedula       ?? user.cedula       ?? "";
+      user.especialidad = session.metadata?.especialidad ?? user.especialidad ?? "";
     }
 
     await user.save();
 
-    // 3) Enviar correos según el tipo de usuario y si está en trial
+    // 3) Emails
     if (provider === "credentials") {
-      // Generar token de restablecimiento con expiración dinámica
       const resetToken = crypto.randomBytes(32).toString("hex");
       user.passwordResetToken   = resetToken;
       user.passwordResetExpires = isTrial
-        ? Date.now() + 24 * 60 * 60 * 1000   // 24 h
-        : Date.now() +  1 * 60 * 60 * 1000;  // 1 h
+        ? Date.now() + 24*60*60*1000   // 24 h durante trial
+        : Date.now() +  1*60*60*1000;  // 1 h si ya activo
       await user.save();
 
       const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`;
       await sendPasswordReset(user.email, resetUrl, isTrial ? 24 : 1);
+    }
 
-      if (isTrial) {
-        await sendTrialInfoEmail(user.email, {
-          trialEndsAt: new Date(subscriptionObj.trial_end * 1000).toISOString(),
-        });
-      } else {
-        await sendWelcomeEmail(user.email);
-      }
-    } else {
-      // Usuario Google
-      if (isTrial) {
-        await sendTrialInfoEmail(user.email, {
-          trialEndsAt: new Date(subscriptionObj.trial_end * 1000).toISOString(),
-        });
-      } else {
-        await sendWelcomeEmail(user.email);
-      }
+    if (isTrial) {
+      await sendTrialInfoEmail(user.email, {
+        trialEndsAt: new Date(subscription.trial_end * 1000).toISOString(),
+      });
+    } else if (isActive) {
+      await sendWelcomeEmail(user.email);
     }
 
     return NextResponse.json({ ok: true, provider });

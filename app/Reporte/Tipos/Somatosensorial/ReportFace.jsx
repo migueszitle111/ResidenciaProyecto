@@ -290,12 +290,8 @@ if (finalTxt.toUpperCase().includes(TRIG_PATH.toUpperCase())) {
 }
 
 setCopyConclusions(finalTxt);
-
   }, [conclusions]);
   
-
-
-
     // Para mantener constante la conclusione
     const handleTextareaChange = (event) => {
       setCopyConclusions(event.target.value)
@@ -1157,7 +1153,7 @@ setCopyConclusions(finalTxt);
   expectedValue: 'derechol2di', 
  
     image: 
-      {
+      { 
         src: 'SomatosensorialImg/INFERIORIZQUIERDA.png',
         alt: 'Modelo',
       },

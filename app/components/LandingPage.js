@@ -119,6 +119,10 @@ const infoCards = [
               data-aos="fade-down"
               data-aos-duration="800"
             >
+             <a
+                  href="pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf"
+                  onClick={e => handlePaymentClick(e, "pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf")}
+                >
               <Image
                 src="/assets/LandingPage/Page/LP-02.png"
                 alt="Banner top"
@@ -126,6 +130,7 @@ const infoCards = [
                 height={400}
                 className="w-full h-auto object-cover"
               />
+              </a>
             </div>
             <div
               className="bg-black overflow-hidden rounded-3xl shadow-lg"

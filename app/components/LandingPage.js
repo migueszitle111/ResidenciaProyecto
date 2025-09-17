@@ -37,7 +37,7 @@ export default function LandingPage() {
   const handlePaymentClick = (e, url) => {
     e.preventDefault();
     alert(
-      "Los envíos a otros países se cotizaron por separado proporcionando un link de envío internacional\n\n" 
+      "Descarga politicas de privacidad\n\n" 
       
     );
     window.location.href = url;

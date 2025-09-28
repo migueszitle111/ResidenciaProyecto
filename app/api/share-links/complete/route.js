@@ -2,9 +2,10 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabaseadmin';
+import { supabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
 
 const ORIGIN = process.env.SHARE_CLIENT_ORIGIN || '*';
+const BASE = (process.env.SHARE_BASE_URL || '').replace(/\/$/, ''); // sin slash final
 
 function withCors(res) {
   res.headers.set('Access-Control-Allow-Origin', ORIGIN);
@@ -24,15 +25,52 @@ export async function POST(req) {
       return withCors(NextResponse.json({ error: 'linkId es requerido' }, { status: 400 }));
     }
 
-    // existe el link?
-    const { data: link, error: getErr } = await supabaseAdmin
+    // 1) Traer link
+    const { data: link, error: linkErr } = await supabaseAdmin
       .from('share_links')
-      .select('id, slug, is_active')
+      .select('id, slug, is_active, expiry_at')
       .eq('id', linkId)
       .maybeSingle();
-    if (getErr || !link) throw getErr || new Error('Link no existe');
 
-    // activar (idempotente)
+    if (linkErr || !link) {
+      throw linkErr || new Error('Link no existe');
+    }
+
+    // 2) Debe tener archivos en la tabla
+    const { data: files, error: filesErr } = await supabaseAdmin
+      .from('share_link_files')
+      .select('id, storage_path')
+      .eq('link_id', linkId);
+
+    if (filesErr) throw filesErr;
+    if (!files || !files.length) {
+      return withCors(NextResponse.json(
+        { error: 'El paquete no contiene archivos.' },
+        { status: 400 }
+      ));
+    }
+
+    // 3) Best-effort: verificar que al menos 1 objeto ya está en Storage
+    try {
+      const folder = link.slug; // tus paths son `${slug}/...`
+      let { data: objs } = await supabaseAdmin.storage.from(SHARE_BUCKET).list(folder, { limit: 1 });
+      if (!objs || !objs.length) {
+        await new Promise(r => setTimeout(r, 350)); // pequeño reintento
+        const again = await supabaseAdmin.storage.from(SHARE_BUCKET).list(folder, { limit: 1 });
+        objs = again.data;
+      }
+      if (!objs || !objs.length) {
+        return withCors(NextResponse.json(
+          { error: 'Los archivos aún no aparecen en el bucket. Intenta nuevamente en unos segundos.' },
+          { status: 425 } // Too Early
+        ));
+      }
+    } catch (e) {
+      // si falla el check de lista, no bloqueamos; seguimos (no crítico)
+      // console.warn('Check bucket falló:', e);
+    }
+
+    // 4) Activar el link (idempotente)
     if (!link.is_active) {
       const { error: upErr } = await supabaseAdmin
         .from('share_links')
@@ -41,8 +79,10 @@ export async function POST(req) {
       if (upErr) throw upErr;
     }
 
-    const shareUrl = `${process.env.SHARE_BASE_URL}/s/${link.slug}`;
+    // 5) URL pública final
+    const shareUrl = `${BASE}/s/${link.slug}`;
     return withCors(NextResponse.json({ ok: true, shareUrl }, { status: 200 }));
+
   } catch (e) {
     console.error('[share-links/complete]', e);
     return withCors(NextResponse.json({ error: e?.message || 'Error' }, { status: 400 }));

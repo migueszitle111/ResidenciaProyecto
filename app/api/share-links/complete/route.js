@@ -18,6 +18,33 @@ export async function OPTIONS() {
   return withCors(new NextResponse(null, { status: 204 }));
 }
 
+// Espera a que al menos 1 objeto exista en Storage (best-effort; no falla si no aparece)
+async function waitForAnyObject(paths, maxMs = 7000, stepMs = 350) {
+  const deadline = Date.now() + maxMs;
+
+  async function exists(path) {
+    try {
+      // Si el objeto NO existe, esto suele devolver error.
+      const { data, error } = await supabaseAdmin
+        .storage
+        .from(SHARE_BUCKET)
+        .createSignedUrl(path, 60);
+      if (error) return false;
+      return !!data?.signedUrl;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  while (Date.now() < deadline) {
+    for (const p of paths) {
+      if (await exists(p)) return true;
+    }
+    await new Promise(r => setTimeout(r, stepMs));
+  }
+  return false;
+}
+
 export async function POST(req) {
   try {
     const { linkId } = await req.json();
@@ -25,52 +52,28 @@ export async function POST(req) {
       return withCors(NextResponse.json({ error: 'linkId es requerido' }, { status: 400 }));
     }
 
-    // 1) Traer link
+    // 1) Link
     const { data: link, error: linkErr } = await supabaseAdmin
       .from('share_links')
-      .select('id, slug, is_active, expiry_at')
+      .select('id, slug, is_active')
       .eq('id', linkId)
       .maybeSingle();
+    if (linkErr || !link) throw linkErr || new Error('Link no existe');
 
-    if (linkErr || !link) {
-      throw linkErr || new Error('Link no existe');
-    }
-
-    // 2) Debe tener archivos en la tabla
+    // 2) Archivos del paquete
     const { data: files, error: filesErr } = await supabaseAdmin
       .from('share_link_files')
-      .select('id, storage_path')
+      .select('storage_path')
       .eq('link_id', linkId);
-
     if (filesErr) throw filesErr;
-    if (!files || !files.length) {
-      return withCors(NextResponse.json(
-        { error: 'El paquete no contiene archivos.' },
-        { status: 400 }
-      ));
+
+    // 3) Best-effort: esperar a que al menos 1 objeto ya esté visible
+    const paths = (files || []).map(f => f.storage_path).filter(Boolean);
+    if (paths.length) {
+      await waitForAnyObject(paths); // no lanza error si no aparece a tiempo
     }
 
-    // 3) Best-effort: verificar que al menos 1 objeto ya está en Storage
-    try {
-      const folder = link.slug; // tus paths son `${slug}/...`
-      let { data: objs } = await supabaseAdmin.storage.from(SHARE_BUCKET).list(folder, { limit: 1 });
-      if (!objs || !objs.length) {
-        await new Promise(r => setTimeout(r, 350)); // pequeño reintento
-        const again = await supabaseAdmin.storage.from(SHARE_BUCKET).list(folder, { limit: 1 });
-        objs = again.data;
-      }
-      if (!objs || !objs.length) {
-        return withCors(NextResponse.json(
-          { error: 'Los archivos aún no aparecen en el bucket. Intenta nuevamente en unos segundos.' },
-          { status: 425 } // Too Early
-        ));
-      }
-    } catch (e) {
-      // si falla el check de lista, no bloqueamos; seguimos (no crítico)
-      // console.warn('Check bucket falló:', e);
-    }
-
-    // 4) Activar el link (idempotente)
+    // 4) Activar (idempotente)
     if (!link.is_active) {
       const { error: upErr } = await supabaseAdmin
         .from('share_links')
@@ -82,7 +85,6 @@ export async function POST(req) {
     // 5) URL pública final
     const shareUrl = `${BASE}/s/${link.slug}`;
     return withCors(NextResponse.json({ ok: true, shareUrl }, { status: 200 }));
-
   } catch (e) {
     console.error('[share-links/complete]', e);
     return withCors(NextResponse.json({ error: e?.message || 'Error' }, { status: 400 }));

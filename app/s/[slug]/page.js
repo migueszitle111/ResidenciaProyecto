@@ -1,10 +1,11 @@
+// app/s/[slug]/page.js
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
 import { supabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
 
-const TTL_SECONDS = 60 * 10; // 10 minutos: más holgado que 60s
+const TTL_SECONDS = 60 * 10; // URLs firmadas válidas 10 minutos
 
 function bytes(n) {
   if (!n) return '—';
@@ -26,7 +27,8 @@ async function fetchData(slug) {
     .maybeSingle();
 
   const now = new Date();
-  const expired = !link || !link.is_active || (link.expiry_at && new Date(link.expiry_at) <= now);
+  const expired =
+    !link || !link.is_active || (link.expiry_at && new Date(link.expiry_at) <= now);
   if (expired) return { expired: true };
 
   const { data: files } = await supabaseAdmin
@@ -72,18 +74,9 @@ export default async function Page({ params }) {
       <div style={styles.card}>
         <header style={styles.header}>
           <h1 style={styles.title}>{link.title}</h1>
-
-          <a
-            href={`/api/share/${link.slug}/zip`}
-            style={styles.zipBtn}
-          >
-            Descargar todo (.zip)
-          </a>
         </header>
 
-        {link.message ? (
-          <p style={styles.message}>{link.message}</p>
-        ) : null}
+        {link.message ? <p style={styles.message}>{link.message}</p> : null}
 
         <ul style={styles.list}>
           {items.map((it) => (
@@ -126,7 +119,11 @@ export default async function Page({ params }) {
         </ul>
 
         <footer style={styles.footer}>
-          Este enlace expira {link.expiry_at ? new Date(link.expiry_at).toLocaleString() : 'cuando el autor lo desactive'}.
+          Este enlace expira{' '}
+          {link.expiry_at
+            ? new Date(link.expiry_at).toLocaleString()
+            : 'cuando el autor lo desactive'}
+          .
         </footer>
       </div>
     </main>
@@ -159,15 +156,6 @@ const styles = {
     marginBottom: 12,
   },
   title: { margin: 0, fontSize: 22, lineHeight: 1.25, color: '#111827' },
-  zipBtn: {
-    display: 'inline-block',
-    background: '#111827',
-    color: '#fff',
-    padding: '10px 14px',
-    borderRadius: 10,
-    textDecoration: 'none',
-    fontSize: 14,
-  },
   message: {
     whiteSpace: 'pre-wrap',
     color: '#374151',
@@ -208,9 +196,7 @@ const styles = {
     borderRadius: 8,
     fontSize: 13,
   },
-  secondaryBtn: {
-    background: '#6b7280',
-  },
+  secondaryBtn: { background: '#6b7280' },
   footer: {
     fontSize: 12,
     color: '#6b7280',

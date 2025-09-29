@@ -3,7 +3,7 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
-import { supabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
+import { getSupabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
 
 const TTL_SECONDS = 60 * 10; // URLs firmadas válidas 10 minutos
 
@@ -20,6 +20,8 @@ function isPreviewable(mime) {
 }
 
 async function fetchData(slug) {
+  const supabaseAdmin = getSupabaseAdmin();
+
   const { data: link } = await supabaseAdmin
     .from('share_links')
     .select('id, title, message, expiry_at, is_active')

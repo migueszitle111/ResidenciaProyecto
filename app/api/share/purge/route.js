@@ -1,23 +1,25 @@
+// app/api/share/purge/route.js
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 import { NextResponse } from 'next/server';
-import { supabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
+import { getSupabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
 
 export async function POST(req) {
   try {
+    const supabaseAdmin = getSupabaseAdmin();
+
     const { slug } = await req.json();
     if (!slug) return NextResponse.json({ error: 'slug requerido' }, { status: 400 });
 
-    // buscar link
     const { data: link } = await supabaseAdmin
       .from('share_links')
       .select('id')
       .eq('slug', slug)
       .maybeSingle();
+
     if (!link) return NextResponse.json({ ok: true });
 
-    // paths
     const { data: files } = await supabaseAdmin
       .from('share_link_files')
       .select('storage_path')

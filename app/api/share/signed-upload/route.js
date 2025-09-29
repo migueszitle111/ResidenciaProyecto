@@ -1,11 +1,14 @@
 // app/api/share/signed-upload/route.js
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 import { NextResponse } from 'next/server';
-import { supabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
+import { getSupabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
 
 export async function POST(req) {
   try {
+    const supabaseAdmin = getSupabaseAdmin();
+
     const { path, upsert } = await req.json();
     if (!path) return NextResponse.json({ ok: false, error: 'path requerido' }, { status: 400 });
 

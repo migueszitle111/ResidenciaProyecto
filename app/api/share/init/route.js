@@ -1,13 +1,17 @@
+// app/api/share/init/route.js
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabaseadmin';
+import { getSupabaseAdmin } from '@/lib/supabaseadmin';
 import { customAlphabet } from 'nanoid';
 
 const nanoid = customAlphabet('abcdefghijkmnpqrstuvwxyz23456789', 10);
 
 export async function POST(req) {
   try {
+    const supabaseAdmin = getSupabaseAdmin();
+
     const { title, message, expiresInSeconds } = await req.json();
 
     const slug = nanoid();

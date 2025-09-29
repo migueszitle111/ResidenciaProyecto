@@ -1,13 +1,15 @@
 // app/api/share/complete/route.js
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabaseadmin';
+import { getSupabaseAdmin } from '@/lib/supabaseadmin';
 
 export async function POST(req) {
   try {
-    const { linkId, files } = await req.json();
+    const supabaseAdmin = getSupabaseAdmin();
 
+    const { linkId, files } = await req.json();
     if (!linkId || !Array.isArray(files) || !files.length) {
       return NextResponse.json({ ok: false, error: 'payload inválido' }, { status: 400 });
     }
@@ -27,21 +29,19 @@ export async function POST(req) {
       name: f.name,
       mime_type: f.mime_type,
       size_bytes: f.size_bytes ?? null,
-      storage_path: f.storage_path
+      storage_path: f.storage_path,
     }));
 
     const { error: insErr } = await supabaseAdmin.from('share_link_files').insert(toInsert);
     if (insErr) throw insErr;
 
-    // Construye base confiable
-    const envBase = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '');
+    const envBase =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '');
     const origin = req.headers.get('origin') || envBase || '';
     const base = origin.replace(/\/$/, '');
-
-    // 👇 tu página es /s/[slug]
     const url = `${base}/s/${link.slug}`;
 
-    // Incluye también slug por si el cliente prefiere construir
     return NextResponse.json({ ok: true, url, slug: link.slug });
   } catch (e) {
     return NextResponse.json({ ok: false, error: String(e) }, { status: 400 });

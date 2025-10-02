@@ -35,6 +35,10 @@ export async function POST(req) {
     const { error: insErr } = await supabaseAdmin.from('share_link_files').insert(toInsert);
     if (insErr) throw insErr;
 
+   await supabaseAdmin.from('share_links')
+     .update({ is_active: true })
+     .eq('id', linkId);
+
     const envBase =
       process.env.NEXT_PUBLIC_SITE_URL ||
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '');

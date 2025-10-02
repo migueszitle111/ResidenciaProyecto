@@ -24,7 +24,7 @@ async function fetchData(slug) {
 
   const { data: link } = await supabaseAdmin
     .from('share_links')
-    .select('id, title, message, expiry_at, is_active')
+    .select('id, title, message, expiry_at, is_active, patient, doctor, study_type, meta')
     .eq('slug', slug)
     .maybeSingle();
 
@@ -59,6 +59,14 @@ async function fetchData(slug) {
       message: link.message || '',
       expiry_at: link.expiry_at,
       slug,
+         meta: {
+     // columnas planas:
+     patient: link?.patient ?? null,
+     doctor:  link?.doctor ?? null,
+     study:   link?.study_type ?? null,
+     // si usas JSONB meta, esto las sobreescribe si existen:
+     ...(link?.meta || {})
+   }
     },
     items,
   };
@@ -77,6 +85,14 @@ export default async function Page({ params }) {
         <header style={styles.header}>
           <h1 style={styles.title}>{link.title}</h1>
         </header>
+         <div style={{
+   border:'1px solid #e5e7eb', borderRadius:10, padding:'10px 12px',
+   background:'#f9fafb', color:'#111827', marginBottom:12
+ }}>
+   <div><strong>Estudio:</strong> {link.meta?.study || '—'}</div>
+   <div><strong>Paciente:</strong> {link.meta?.patient || '—'}</div>
+   <div><strong>Médico:</strong> {link.meta?.doctor || '—'}</div>
+ </div>
 
         {link.message ? <p style={styles.message}>{link.message}</p> : null}
 

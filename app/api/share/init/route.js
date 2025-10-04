@@ -33,6 +33,7 @@ export async function POST(req) {
        patient: p,
        doctor: d,
        study_type: st,
+       is_active: false, 
        // si en vez de columnas usas JSONB, comenta lo anterior y usa:
        // meta: { patient: p, doctor: d, studyType: st }
      })

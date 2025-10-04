@@ -19,6 +19,47 @@ function isPreviewable(mime) {
   return /^image\//.test(mime) || mime === 'application/pdf';
 }
 
+function iconFor(mime = '', name = '') {
+  const isPdf = mime === 'application/pdf' || name.toLowerCase().endsWith('.pdf');
+  const isImg = /^image\//.test(mime);
+  const common = 'w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-inner';
+
+  if (isPdf) {
+    return (
+      <div className={common} aria-hidden>
+        {/* PDF icon */}
+        <svg viewBox="0 0 24 24" className="w-5 h-5">
+          <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z" className="text-white/60"/>
+          <path fill="currentColor" d="M14 2v6h6" className="text-white/30"/>
+          <text x="7.5" y="16.5" fontSize="7" fontWeight="700" className="fill-[#B54B00]">PDF</text>
+        </svg>
+      </div>
+    );
+  }
+
+  if (isImg) {
+    return (
+      <div className={common} aria-hidden>
+        {/* Image icon */}
+        <svg viewBox="0 0 24 24" className="w-6 h-6 text-white/70">
+          <path fill="currentColor" d="M21 19V5a2 2 0 0 0-2-2H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2zM5 5h14v9l-3.5-3.5-4.5 4.5-2-2L5 16z"/>
+          <circle cx="8" cy="8" r="1.5" className="fill-white/70"/>
+        </svg>
+      </div>
+    );
+  }
+
+  return (
+    <div className={common} aria-hidden>
+      {/* File icon */}
+      <svg viewBox="0 0 24 24" className="w-6 h-6 text-white/70">
+        <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <path fill="currentColor" d="M14 2v6h6" className="opacity-40"/>
+      </svg>
+    </div>
+  );
+}
+
 async function fetchData(slug) {
   const supabaseAdmin = getSupabaseAdmin();
 
@@ -40,12 +81,10 @@ async function fetchData(slug) {
     error = r2.error;
   }
 
-  // 3) si aún hay error, loguéalo (para no confundir con "expirado")
   if (error) {
     console.error('share_links select failed', { slug, error: error.message });
   }
 
-  // si no hay link, no digas "expirado": marca explícitamente notFound
   if (!link) return { expired: true, _reason: 'not-found-or-error' };
 
   const now = new Date();
@@ -88,7 +127,6 @@ async function fetchData(slug) {
   };
 }
 
-
 export default async function Page({ params }) {
   const { slug } = params;
   const data = await fetchData(slug);
@@ -97,145 +135,124 @@ export default async function Page({ params }) {
   const { link, items } = data;
 
   return (
-    <main style={styles.page}>
-      <div style={styles.card}>
-        <header style={styles.header}>
-          <h1 style={styles.title}>{link.title}</h1>
-        </header>
-         <div style={{
-   border:'1px solid #e5e7eb', borderRadius:10, padding:'10px 12px',
-   background:'#f9fafb', color:'#111827', marginBottom:12
- }}>
-   <div><strong>Estudio:</strong> {link.meta?.study || '—'}</div>
-   <div><strong>Paciente:</strong> {link.meta?.patient || '—'}</div>
-   <div><strong>Médico:</strong> {link.meta?.doctor || '—'}</div>
- </div>
+    <main className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-neutral-900 text-white">
+      {/* Contenedor */}
+      <div className="max-w-4xl mx-auto px-4 py-8 md:py-12">
+        {/* Card principal */}
+        <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_10px_30px_rgba(0,0,0,0.35)] p-5 md:p-8">
+          {/* Encabezado */}
+          <header className="flex items-center justify-between gap-4 mb-6">
+            <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
+              {link.title}
+            </h1>
 
-        {link.message ? <p style={styles.message}>{link.message}</p> : null}
+            {/* Badge marca */}
+            <div className="rounded-full px-3 py-1 text-xs font-semibold bg-[#B54B00] text-white shadow">
+              MEDXpro
+            </div>
+          </header>
 
-        <ul style={styles.list}>
-          {items.map((it) => (
-            <li key={it.id} style={styles.item}>
-              <div style={styles.itemInfo}>
-                <div style={styles.itemName}>{it.name}</div>
-                <div style={styles.itemMeta}>
-                  {it.mime_type} · {bytes(it.size_bytes)}
+          {/* Meta del paquete */}
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
+            <MetaBadge label="Estudio" value={link.meta?.study} />
+            <MetaBadge label="Paciente" value={link.meta?.patient} />
+            <MetaBadge label="Médico" value={link.meta?.doctor} />
+          </section>
+
+          {/* Mensaje opcional */}
+          {link.message ? (
+            <div className="mb-6">
+              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/90 leading-relaxed">
+                {link.message}
+              </div>
+            </div>
+          ) : null}
+
+          {/* Lista de archivos */}
+          <ul className="space-y-3">
+            {items.map((it) => (
+              <li
+                key={it.id}
+                className="group rounded-2xl border border-white/10 bg-white/5 hover:bg-white/[0.08] transition-colors"
+              >
+                <div className="p-4 md:p-5 flex items-center gap-4 md:gap-5">
+                  {iconFor(it.mime_type, it.name)}
+
+                  <div className="min-w-0 flex-1">
+                    <div className="font-semibold truncate">{it.name}</div>
+                    <div className="text-xs text-white/60 mt-1">
+                      {it.mime_type} · {bytes(it.size_bytes)}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={it.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-semibold bg-[#B54B00] hover:brightness-110 transition"
+                    >
+                      Descargar
+                    </a>
+
+                    {it.previewable && (
+                      <a
+                        href={it.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-semibold border border-white/15 bg-white/0 hover:bg-white/[0.06] transition"
+                      >
+                        Ver
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </li>
+            ))}
 
-              <div style={styles.itemActions}>
-                <a
-                  href={it.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={styles.actionBtn}
-                >
-                  Descargar
-                </a>
-                {it.previewable && (
-                  <a
-                    href={it.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ ...styles.actionBtn, ...styles.secondaryBtn }}
-                  >
-                    Ver
-                  </a>
-                )}
-              </div>
-            </li>
-          ))}
+            {!items.length && (
+              <li className="rounded-2xl border border-white/10 bg-white/5 p-8 text-center">
+                <div className="mx-auto mb-3 w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" className="w-6 h-6 text-white/60">
+                    <path fill="currentColor" d="M19 3H5C3.9 3 3 3.9 3 5v14a2 2 0 0 0 2 2h7v-2H5V5h14v6h2V5a2 2 0 0 0-2-2z"/>
+                    <path fill="currentColor" d="M21.5 15.5L17 20l-2.5-2.5L13 19l4 4l6-6z" className="opacity-40"/>
+                  </svg>
+                </div>
+                <p className="text-white/70">No hay archivos en este paquete.</p>
+              </li>
+            )}
+          </ul>
 
-          {!items.length && (
-            <li style={{ padding: 16, color: '#6b7280' }}>
-              No hay archivos en este paquete.
-            </li>
-          )}
-        </ul>
+          {/* Pie / Expiración */}
+          <footer className="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div className="text-sm text-white/60">
+              Este enlace expira{' '}
+              <span className="font-medium text-white/80">
+                {link.expiry_at
+                  ? new Date(link.expiry_at).toLocaleString()
+                  : 'cuando el autor lo desactive'}
+              </span>
+              .
+            </div>
 
-        <footer style={styles.footer}>
-          Este enlace expira{' '}
-          {link.expiry_at
-            ? new Date(link.expiry_at).toLocaleString()
-            : 'cuando el autor lo desactive'}
-          .
-        </footer>
+            {/* “Chip” con el slug para referencia */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/70">
+              <span className="w-2 h-2 rounded-full bg-[#B54B00]" />
+              Código: {link.slug}
+            </div>
+          </footer>
+        </div>
       </div>
     </main>
   );
 }
 
-/* ====== estilos inline (tema claro) ====== */
-const styles = {
-  page: {
-    minHeight: '100vh',
-    background: '#f6f8fb',
-    padding: 24,
-    colorScheme: 'light',
-  },
-  card: {
-    maxWidth: 820,
-    margin: '0 auto',
-    background: '#fff',
-    border: '1px solid #e5e7eb',
-    borderRadius: 14,
-    padding: 20,
-    boxShadow:
-      '0 10px 15px -3px rgba(0,0,0,.08), 0 4px 6px -2px rgba(0,0,0,.04)',
-  },
-  header: {
-    display: 'flex',
-    gap: 12,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 12,
-  },
-  title: { margin: 0, fontSize: 22, lineHeight: 1.25, color: '#111827' },
-  message: {
-    whiteSpace: 'pre-wrap',
-    color: '#374151',
-    marginTop: 6,
-    marginBottom: 12,
-    lineHeight: 1.5,
-  },
-  list: {
-    listStyle: 'none',
-    padding: 0,
-    margin: '8px 0 0',
-  },
-  item: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 12,
-    justifyContent: 'space-between',
-    padding: '12px 14px',
-    border: '1px solid #e5e7eb',
-    borderRadius: 10,
-    marginBottom: 10,
-    background: '#fafafa',
-  },
-  itemInfo: { minWidth: 0 },
-  itemName: {
-    fontWeight: 600,
-    color: '#111827',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  itemMeta: { fontSize: 12, color: '#6b7280', marginTop: 2 },
-  itemActions: { display: 'flex', gap: 8, flexShrink: 0 },
-  actionBtn: {
-    textDecoration: 'none',
-    background: '#2563eb',
-    color: '#fff',
-    padding: '8px 12px',
-    borderRadius: 8,
-    fontSize: 13,
-  },
-  secondaryBtn: { background: '#6b7280' },
-  footer: {
-    fontSize: 12,
-    color: '#6b7280',
-    marginTop: 14,
-    textAlign: 'right',
-  },
-};
+/** Sub-componentes server-safe */
+function MetaBadge({ label, value }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+      <div className="text-[11px] uppercase tracking-wide text-white/50">{label}</div>
+      <div className="mt-0.5 text-sm font-semibold text-white/90">{value || '—'}</div>
+    </div>
+  );
+}

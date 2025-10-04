@@ -1,4 +1,13 @@
 // app/api/share/init/route.js
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+import { NextResponse } from 'next/server';
+import { getSupabaseAdmin } from '@/lib/supabaseadmin';
+import { nanoid } from 'nanoid';
+
+
 export async function POST(req) {
   try {
     const supabaseAdmin = getSupabaseAdmin();

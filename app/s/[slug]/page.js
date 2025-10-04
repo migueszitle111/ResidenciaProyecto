@@ -5,72 +5,80 @@ export const dynamic = 'force-dynamic';
 import { notFound } from 'next/navigation';
 import { getSupabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
 
-const TTL_SECONDS = 60 * 10; // URLs firmadas válidas 10 minutos
+/* ========= Config ========= */
+const BRAND = '#B54B00';          // naranja MEDXpro
+const TTL_SECONDS = 60 * 10;      // URLs firmadas válidas 10 minutos
 
+/* ========= Utils UI ========= */
 function bytes(n) {
   if (!n) return '—';
   const k = 1024;
-  const units = ['B', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(n) / Math.log(k));
-  return `${(n / Math.pow(k, i)).toFixed(i ? 1 : 0)} ${units[i]}`;
+  const u = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.min(Math.floor(Math.log(n) / Math.log(k)), u.length - 1);
+  return `${(n / Math.pow(k, i)).toFixed(i ? 1 : 0)} ${u[i]}`;
 }
+const isPreviewable = (m) => /^image\//.test(m) || m === 'application/pdf';
 
-function isPreviewable(mime) {
-  return /^image\//.test(mime) || mime === 'application/pdf';
-}
-
+/* Íconos minimal (PDF / IMG / genérico) */
 function iconFor(mime = '', name = '') {
   const isPdf = mime === 'application/pdf' || name.toLowerCase().endsWith('.pdf');
   const isImg = /^image\//.test(mime);
-  const common = 'w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-inner';
+  const common =
+    'w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-xl ' +
+    'border border-slate-200 bg-white shadow-sm ring-1 ring-black/5 ' +
+    'transition-transform duration-300 group-hover:scale-[1.03]';
 
   if (isPdf) {
     return (
       <div className={common} aria-hidden>
-        {/* PDF icon */}
-        <svg viewBox="0 0 24 24" className="w-5 h-5">
-          <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z" className="text-white/60"/>
-          <path fill="currentColor" d="M14 2v6h6" className="text-white/30"/>
-          <text x="7.5" y="16.5" fontSize="7" fontWeight="700" className="fill-[#B54B00]">PDF</text>
+        <svg viewBox="0 0 24 24" className="w-6 h-6 text-slate-600">
+          <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z" />
+          <path fill="currentColor" d="M14 2v6h6" className="opacity-40" />
         </svg>
+        <span
+          className="ml-1 text-[10px] font-black tracking-wide"
+          style={{ color: BRAND }}
+        >
+          PDF
+        </span>
       </div>
     );
   }
-
   if (isImg) {
     return (
       <div className={common} aria-hidden>
-        {/* Image icon */}
-        <svg viewBox="0 0 24 24" className="w-6 h-6 text-white/70">
-          <path fill="currentColor" d="M21 19V5a2 2 0 0 0-2-2H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2zM5 5h14v9l-3.5-3.5-4.5 4.5-2-2L5 16z"/>
-          <circle cx="8" cy="8" r="1.5" className="fill-white/70"/>
+        <svg viewBox="0 0 24 24" className="w-6 h-6 text-slate-600">
+          <path
+            fill="currentColor"
+            d="M21 19V5a2 2 0 0 0-2-2H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2zM5 5h14v9l-3.5-3.5-4.5 4.5-2-2L5 16z"
+          />
+          <circle cx="8" cy="8" r="1.5" className="fill-slate-600" />
         </svg>
       </div>
     );
   }
-
   return (
     <div className={common} aria-hidden>
-      {/* File icon */}
-      <svg viewBox="0 0 24 24" className="w-6 h-6 text-white/70">
-        <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <path fill="currentColor" d="M14 2v6h6" className="opacity-40"/>
+      <svg viewBox="0 0 24 24" className="w-6 h-6 text-slate-600">
+        <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z" />
+        <path fill="currentColor" d="M14 2v6h6" className="opacity-40" />
       </svg>
     </div>
   );
 }
 
+/* ========= Data ========= */
 async function fetchData(slug) {
   const supabaseAdmin = getSupabaseAdmin();
 
-  // 1) intentar con meta
+  // 1) link + meta si existe
   let { data: link, error } = await supabaseAdmin
     .from('share_links')
     .select('id, title, message, expiry_at, is_active, patient, doctor, study_type, meta')
     .eq('slug', slug)
     .maybeSingle();
 
-  // 2) si falla por columna meta inexistente, reintenta sin meta
+  // 2) fallback sin columna meta
   if (error && /column .*meta/i.test(error.message || '')) {
     const r2 = await supabaseAdmin
       .from('share_links')
@@ -80,11 +88,9 @@ async function fetchData(slug) {
     link = r2.data;
     error = r2.error;
   }
-
   if (error) {
     console.error('share_links select failed', { slug, error: error.message });
   }
-
   if (!link) return { expired: true, _reason: 'not-found-or-error' };
 
   const now = new Date();
@@ -97,17 +103,20 @@ async function fetchData(slug) {
     .eq('link_id', link.id)
     .order('created_at', { ascending: true });
 
-  const items = [];
-  for (const f of files || []) {
-    const { data: signed } = await supabaseAdmin
-      .storage.from(SHARE_BUCKET)
-      .createSignedUrl(f.storage_path, TTL_SECONDS, { download: f.name });
-    items.push({
-      ...f,
-      url: signed?.signedUrl || '#',
-      previewable: isPreviewable(f.mime_type),
-    });
-  }
+  // Firmar URLs en paralelo
+  const items = await Promise.all(
+    (files || []).map(async (f) => {
+      const { data: signed } = await supabaseAdmin
+        .storage.from(SHARE_BUCKET)
+        .createSignedUrl(f.storage_path, TTL_SECONDS, { download: f.name });
+
+      return {
+        ...f,
+        url: signed?.signedUrl || '#',
+        previewable: isPreviewable(f.mime_type),
+      };
+    })
+  );
 
   return {
     expired: false,
@@ -127,6 +136,7 @@ async function fetchData(slug) {
   };
 }
 
+/* ========= Página ========= */
 export default async function Page({ params }) {
   const { slug } = params;
   const data = await fetchData(slug);
@@ -135,19 +145,28 @@ export default async function Page({ params }) {
   const { link, items } = data;
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-neutral-900 text-white">
+    <main className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100 text-slate-900 selection:bg-[rgba(181,75,0,0.18)] selection:text-slate-900">
       {/* Contenedor */}
       <div className="max-w-4xl mx-auto px-4 py-8 md:py-12">
         {/* Card principal */}
-        <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_10px_30px_rgba(0,0,0,0.35)] p-5 md:p-8">
+        <div
+          className="
+            rounded-3xl border border-slate-200 bg-white/80 backdrop-blur
+            shadow-[0_20px_50px_-20px_rgba(2,6,23,0.12)] p-5 md:p-8
+            supports-[backdrop-filter]:bg-white/60
+          "
+        >
           {/* Encabezado */}
           <header className="flex items-center justify-between gap-4 mb-6">
             <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
               {link.title}
             </h1>
 
-            {/* Badge marca */}
-            <div className="rounded-full px-3 py-1 text-xs font-semibold bg-[#B54B00] text-white shadow">
+            {/* Marca */}
+            <div
+              className="rounded-full px-3 py-1 text-xs font-semibold text-white shadow-sm animate-[fadeIn_300ms_ease]"
+              style={{ backgroundColor: BRAND }}
+            >
               MEDXpro
             </div>
           </header>
@@ -162,7 +181,7 @@ export default async function Page({ params }) {
           {/* Mensaje opcional */}
           {link.message ? (
             <div className="mb-6">
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/90 leading-relaxed">
+              <div className="rounded-2xl border border-slate-200 bg-white/70 px-4 py-3 leading-relaxed text-slate-800 shadow-sm">
                 {link.message}
               </div>
             </div>
@@ -173,25 +192,60 @@ export default async function Page({ params }) {
             {items.map((it) => (
               <li
                 key={it.id}
-                className="group rounded-2xl border border-white/10 bg-white/5 hover:bg-white/[0.08] transition-colors"
+                className="
+                  group rounded-2xl border border-slate-200 bg-white/70
+                  transition-all duration-300 hover:bg-white
+                  hover:shadow-lg hover:shadow-slate-200/70
+                "
               >
                 <div className="p-4 md:p-5 flex items-center gap-4 md:gap-5">
                   {iconFor(it.mime_type, it.name)}
 
+                  {/* Nombre + meta */}
                   <div className="min-w-0 flex-1">
-                    <div className="font-semibold truncate">{it.name}</div>
-                    <div className="text-xs text-white/60 mt-1">
-                      {it.mime_type} · {bytes(it.size_bytes)}
+                    <div className="font-semibold truncate text-slate-900">
+                      {it.name}
+                    </div>
+                    <div className="mt-1 flex items-center gap-2 text-xs text-slate-600">
+                      <span className="truncate">{it.mime_type}</span>
+                      <span className="inline-block w-1 h-1 rounded-full bg-slate-300" />
+                      <span>{bytes(it.size_bytes)}</span>
                     </div>
                   </div>
 
+                  {/* Acciones */}
                   <div className="flex items-center gap-2">
+                    {/* Botón Descargar (con micro-animaciones CSS) */}
                     <a
                       href={it.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-semibold bg-[#B54B00] hover:brightness-110 transition"
+                      className="
+                        relative inline-flex items-center justify-center rounded-xl
+                        px-3.5 py-2 text-sm font-semibold text-white
+                        transition-all duration-300
+                        focus:outline-none focus:ring-2 focus:ring-offset-2
+                        active:scale-[0.98]
+                        overflow-hidden
+                      "
+                      style={{ backgroundColor: BRAND, boxShadow: '0 6px 20px -6px rgba(181,75,0,.45)' }}
                     >
+                      {/* Ripple sutil */}
+                      <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="absolute inset-0 bg-white/15 animate-[pulse_1.6s_ease-in-out_infinite]" />
+                      </span>
+
+                      {/* Icono flecha con leve vibración al hover */}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="mr-2 h-[18px] w-[18px] text-white/95 group-hover:animate-[bounce_600ms_ease]"
+                        aria-hidden
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M12 3v12.17l4.59-4.58L18 12l-6 6-6-6 1.41-1.41L11 15.17V3z"
+                        />
+                      </svg>
                       Descargar
                     </a>
 
@@ -200,7 +254,14 @@ export default async function Page({ params }) {
                         href={it.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-semibold border border-white/15 bg-white/0 hover:bg-white/[0.06] transition"
+                        className="
+                          inline-flex items-center justify-center rounded-xl
+                          px-3.5 py-2 text-sm font-semibold
+                          border border-slate-200 text-slate-800
+                          bg-white hover:bg-slate-50
+                          transition-all duration-300 active:scale-[0.98]
+                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200
+                        "
                       >
                         Ver
                       </a>
@@ -211,23 +272,28 @@ export default async function Page({ params }) {
             ))}
 
             {!items.length && (
-              <li className="rounded-2xl border border-white/10 bg-white/5 p-8 text-center">
-                <div className="mx-auto mb-3 w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" className="w-6 h-6 text-white/60">
-                    <path fill="currentColor" d="M19 3H5C3.9 3 3 3.9 3 5v14a2 2 0 0 0 2 2h7v-2H5V5h14v6h2V5a2 2 0 0 0-2-2z"/>
-                    <path fill="currentColor" d="M21.5 15.5L17 20l-2.5-2.5L13 19l4 4l6-6z" className="opacity-40"/>
+              <li
+                className="
+                  rounded-2xl border border-slate-200 bg-white/70 p-8 text-center
+                  animate-[fadeIn_240ms_ease]
+                "
+              >
+                <div className="mx-auto mb-3 w-12 h-12 rounded-2xl border border-slate-200 bg-white flex items-center justify-center shadow-sm">
+                  <svg viewBox="0 0 24 24" className="w-6 h-6 text-slate-500">
+                    <path fill="currentColor" d="M19 3H5C3.9 3 3 3.9 3 5v14a2 2 0 0 0 2 2h7v-2H5V5h14v6h2V5a2 2 0 0 0-2-2z" />
+                    <path fill="currentColor" d="M21.5 15.5L17 20l-2.5-2.5L13 19l4 4l6-6z" className="opacity-40" />
                   </svg>
                 </div>
-                <p className="text-white/70">No hay archivos en este paquete.</p>
+                <p className="text-slate-600">No hay archivos en este paquete.</p>
               </li>
             )}
           </ul>
 
           {/* Pie / Expiración */}
           <footer className="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div className="text-sm text-white/60">
+            <div className="text-sm text-slate-600">
               Este enlace expira{' '}
-              <span className="font-medium text-white/80">
+              <span className="font-medium text-slate-800">
                 {link.expiry_at
                   ? new Date(link.expiry_at).toLocaleString()
                   : 'cuando el autor lo desactive'}
@@ -235,9 +301,12 @@ export default async function Page({ params }) {
               .
             </div>
 
-            {/* “Chip” con el slug para referencia */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/70">
-              <span className="w-2 h-2 rounded-full bg-[#B54B00]" />
+            {/* Chip con el slug */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 shadow-sm">
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: BRAND }}
+              />
               Código: {link.slug}
             </div>
           </footer>
@@ -247,12 +316,12 @@ export default async function Page({ params }) {
   );
 }
 
-/** Sub-componentes server-safe */
+/* ========= Sub-componentes server-safe ========= */
 function MetaBadge({ label, value }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-      <div className="text-[11px] uppercase tracking-wide text-white/50">{label}</div>
-      <div className="mt-0.5 text-sm font-semibold text-white/90">{value || '—'}</div>
+    <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+      <div className="text-[11px] uppercase tracking-wide text-slate-500">{label}</div>
+      <div className="mt-0.5 text-sm font-semibold text-slate-900">{value || '—'}</div>
     </div>
   );
 }

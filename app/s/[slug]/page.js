@@ -25,7 +25,7 @@ function iconFor(mime = '', name = '') {
   const isImg = /^image\//.test(mime);
   const common =
     'w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-xl ' +
-    'border border-slate-200 bg-white shadow-sm ring-1 ring-black/5 ' +
+    'border border-slate-300 bg-white shadow-sm ring-1 ring-black/5 ' +
     'transition-transform duration-300 group-hover:scale-[1.03]';
 
   if (isPdf) {
@@ -35,10 +35,7 @@ function iconFor(mime = '', name = '') {
           <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z" />
           <path fill="currentColor" d="M14 2v6h6" className="opacity-40" />
         </svg>
-        <span
-          className="ml-1 text-[10px] font-black tracking-wide"
-          style={{ color: BRAND }}
-        >
+        <span className="ml-1 text-[10px] font-black tracking-wide" style={{ color: BRAND }}>
           PDF
         </span>
       </div>
@@ -103,16 +100,22 @@ async function fetchData(slug) {
     .eq('link_id', link.id)
     .order('created_at', { ascending: true });
 
-  // Firmar URLs en paralelo
+  // Dos URLs por archivo: preview (inline) y download (forzada)
   const items = await Promise.all(
     (files || []).map(async (f) => {
-      const { data: signed } = await supabaseAdmin
-        .storage.from(SHARE_BUCKET)
-        .createSignedUrl(f.storage_path, TTL_SECONDS, { download: f.name });
+      const [{ data: preview }, { data: download }] = await Promise.all([
+        supabaseAdmin.storage.from(SHARE_BUCKET).createSignedUrl(f.storage_path, TTL_SECONDS),
+        supabaseAdmin.storage.from(SHARE_BUCKET).createSignedUrl(
+          f.storage_path,
+          TTL_SECONDS,
+          { download: f.name } // fuerza descarga
+        ),
+      ]);
 
       return {
         ...f,
-        url: signed?.signedUrl || '#',
+        previewUrl: preview?.signedUrl || '#',
+        downloadUrl: download?.signedUrl || '#',
         previewable: isPreviewable(f.mime_type),
       };
     })
@@ -151,7 +154,7 @@ export default async function Page({ params }) {
         {/* Card principal */}
         <div
           className="
-            rounded-3xl border border-slate-200 bg-white/80 backdrop-blur
+            rounded-3xl border border-slate-300 bg-white/80 backdrop-blur
             shadow-[0_20px_50px_-20px_rgba(2,6,23,0.12)] p-5 md:p-8
             supports-[backdrop-filter]:bg-white/60
           "
@@ -164,7 +167,7 @@ export default async function Page({ params }) {
 
             {/* Marca */}
             <div
-              className="rounded-full px-3 py-1 text-xs font-semibold text-white shadow-sm animate-[fadeIn_300ms_ease]"
+              className="rounded-full px-3 py-1 text-xs font-semibold text-white shadow-sm"
               style={{ backgroundColor: BRAND }}
             >
               MEDXpro
@@ -181,7 +184,7 @@ export default async function Page({ params }) {
           {/* Mensaje opcional */}
           {link.message ? (
             <div className="mb-6">
-              <div className="rounded-2xl border border-slate-200 bg-white/70 px-4 py-3 leading-relaxed text-slate-800 shadow-sm">
+              <div className="rounded-2xl border border-slate-300 bg-white/70 px-4 py-3 leading-relaxed text-slate-800 shadow-sm">
                 {link.message}
               </div>
             </div>
@@ -193,9 +196,9 @@ export default async function Page({ params }) {
               <li
                 key={it.id}
                 className="
-                  group rounded-2xl border border-slate-200 bg-white/70
-                  transition-all duration-300 hover:bg-white
-                  hover:shadow-lg hover:shadow-slate-200/70
+                  group rounded-2xl border border-slate-300 bg-white/70
+                  transition-all duration-300 hover:bg-white hover:-translate-y-[1px]
+                  hover:shadow-xl hover:shadow-slate-200/80 hover:border-slate-400
                 "
               >
                 <div className="p-4 md:p-5 flex items-center gap-4 md:gap-5">
@@ -215,54 +218,57 @@ export default async function Page({ params }) {
 
                   {/* Acciones */}
                   <div className="flex items-center gap-2">
-                    {/* Botón Descargar (con micro-animaciones CSS) */}
+                    {/* Descargar */}
                     <a
-                      href={it.url}
+                      href={it.downloadUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`Descargar ${it.name}`}
                       className="
                         relative inline-flex items-center justify-center rounded-xl
                         px-3.5 py-2 text-sm font-semibold text-white
-                        transition-all duration-300
+                        transition-[transform,box-shadow,padding] duration-300
+                        hover:px-4 hover:shadow-[0_10px_24px_-10px_rgba(181,75,0,.6)]
+                        hover:scale-[1.02] active:scale-[0.98]
                         focus:outline-none focus:ring-2 focus:ring-offset-2
-                        active:scale-[0.98]
                         overflow-hidden
                       "
                       style={{ backgroundColor: BRAND, boxShadow: '0 6px 20px -6px rgba(181,75,0,.45)' }}
                     >
-                      {/* Ripple sutil */}
+                      {/* Pulso sutil */}
                       <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span className="absolute inset-0 bg-white/15 animate-[pulse_1.6s_ease-in-out_infinite]" />
+                        <span className="absolute inset-0 bg-white/10" />
                       </span>
-
-                      {/* Icono flecha con leve vibración al hover */}
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="mr-2 h-[18px] w-[18px] text-white/95 group-hover:animate-[bounce_600ms_ease]"
-                        aria-hidden
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 3v12.17l4.59-4.58L18 12l-6 6-6-6 1.41-1.41L11 15.17V3z"
-                        />
+                      <svg viewBox="0 0 24 24" className="mr-2 h-[18px] w-[18px] text-white/95" aria-hidden>
+                        <path fill="currentColor" d="M12 3v12.17l4.59-4.58L18 12l-6 6-6-6 1.41-1.41L11 15.17V3z" />
                       </svg>
                       Descargar
                     </a>
 
+                    {/* Ver (inline en navegador, NO descarga) */}
                     {it.previewable && (
                       <a
-                        href={it.url}
+                        href={it.previewUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Ver ${it.name}`}
                         className="
                           inline-flex items-center justify-center rounded-xl
                           px-3.5 py-2 text-sm font-semibold
-                          border border-slate-200 text-slate-800
+                          border border-slate-300 text-slate-800
                           bg-white hover:bg-slate-50
-                          transition-all duration-300 active:scale-[0.98]
+                          transition-[transform,box-shadow,padding] duration-300
+                          hover:px-4 hover:shadow-[0_10px_24px_-12px_rgba(2,6,23,0.25)]
+                          hover:scale-[1.02] active:scale-[0.98]
                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200
                         "
                       >
+                        <svg viewBox="0 0 24 24" className="mr-2 h-[18px] w-[18px] text-slate-700" aria-hidden>
+                          <path
+                            fill="currentColor"
+                            d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
+                          />
+                        </svg>
                         Ver
                       </a>
                     )}
@@ -274,11 +280,10 @@ export default async function Page({ params }) {
             {!items.length && (
               <li
                 className="
-                  rounded-2xl border border-slate-200 bg-white/70 p-8 text-center
-                  animate-[fadeIn_240ms_ease]
+                  rounded-2xl border border-slate-300 bg-white/70 p-8 text-center
                 "
               >
-                <div className="mx-auto mb-3 w-12 h-12 rounded-2xl border border-slate-200 bg-white flex items-center justify-center shadow-sm">
+                <div className="mx-auto mb-3 w-12 h-12 rounded-2xl border border-slate-300 bg-white flex items-center justify-center shadow-sm">
                   <svg viewBox="0 0 24 24" className="w-6 h-6 text-slate-500">
                     <path fill="currentColor" d="M19 3H5C3.9 3 3 3.9 3 5v14a2 2 0 0 0 2 2h7v-2H5V5h14v6h2V5a2 2 0 0 0-2-2z" />
                     <path fill="currentColor" d="M21.5 15.5L17 20l-2.5-2.5L13 19l4 4l6-6z" className="opacity-40" />
@@ -291,9 +296,9 @@ export default async function Page({ params }) {
 
           {/* Pie / Expiración */}
           <footer className="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div className="text-sm text-slate-600">
+            <div className="text-sm text-slate-700">
               Este enlace expira{' '}
-              <span className="font-medium text-slate-800">
+              <span className="font-medium text-slate-900">
                 {link.expiry_at
                   ? new Date(link.expiry_at).toLocaleString()
                   : 'cuando el autor lo desactive'}
@@ -302,11 +307,8 @@ export default async function Page({ params }) {
             </div>
 
             {/* Chip con el slug */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 shadow-sm">
-              <span
-                className="w-2 h-2 rounded-full"
-                style={{ backgroundColor: BRAND }}
-              />
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs text-slate-800 shadow-sm">
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: BRAND }} />
               Código: {link.slug}
             </div>
           </footer>
@@ -319,7 +321,7 @@ export default async function Page({ params }) {
 /* ========= Sub-componentes server-safe ========= */
 function MetaBadge({ label, value }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+    <div className="rounded-2xl border border-slate-300 bg-white px-4 py-3 shadow-sm">
       <div className="text-[11px] uppercase tracking-wide text-slate-500">{label}</div>
       <div className="mt-0.5 text-sm font-semibold text-slate-900">{value || '—'}</div>
     </div>

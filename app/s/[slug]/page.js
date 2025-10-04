@@ -22,16 +22,35 @@ function isPreviewable(mime) {
 async function fetchData(slug) {
   const supabaseAdmin = getSupabaseAdmin();
 
-  const { data: link } = await supabaseAdmin
+  // 1) intentar con meta
+  let { data: link, error } = await supabaseAdmin
     .from('share_links')
     .select('id, title, message, expiry_at, is_active, patient, doctor, study_type, meta')
     .eq('slug', slug)
     .maybeSingle();
 
+  // 2) si falla por columna meta inexistente, reintenta sin meta
+  if (error && /column .*meta/i.test(error.message || '')) {
+    const r2 = await supabaseAdmin
+      .from('share_links')
+      .select('id, title, message, expiry_at, is_active, patient, doctor, study_type')
+      .eq('slug', slug)
+      .maybeSingle();
+    link = r2.data;
+    error = r2.error;
+  }
+
+  // 3) si aún hay error, loguéalo (para no confundir con "expirado")
+  if (error) {
+    console.error('share_links select failed', { slug, error: error.message });
+  }
+
+  // si no hay link, no digas "expirado": marca explícitamente notFound
+  if (!link) return { expired: true, _reason: 'not-found-or-error' };
+
   const now = new Date();
-  const expired =
-    !link || !link.is_active || (link.expiry_at && new Date(link.expiry_at) <= now);
-  if (expired) return { expired: true };
+  const expired = !link.is_active || (link.expiry_at && new Date(link.expiry_at) <= now);
+  if (expired) return { expired: true, _reason: 'expired-or-inactive' };
 
   const { data: files } = await supabaseAdmin
     .from('share_link_files')
@@ -44,7 +63,6 @@ async function fetchData(slug) {
     const { data: signed } = await supabaseAdmin
       .storage.from(SHARE_BUCKET)
       .createSignedUrl(f.storage_path, TTL_SECONDS, { download: f.name });
-
     items.push({
       ...f,
       url: signed?.signedUrl || '#',
@@ -59,18 +77,17 @@ async function fetchData(slug) {
       message: link.message || '',
       expiry_at: link.expiry_at,
       slug,
-         meta: {
-     // columnas planas:
-     patient: link?.patient ?? null,
-     doctor:  link?.doctor ?? null,
-     study:   link?.study_type ?? null,
-     // si usas JSONB meta, esto las sobreescribe si existen:
-     ...(link?.meta || {})
-   }
+      meta: {
+        patient: link?.patient ?? null,
+        doctor:  link?.doctor ?? null,
+        study:   link?.study_type ?? null,
+        ...(link?.meta || {}),
+      },
     },
     items,
   };
 }
+
 
 export default async function Page({ params }) {
   const { slug } = params;

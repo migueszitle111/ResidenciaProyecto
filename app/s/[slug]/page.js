@@ -259,12 +259,21 @@ export default async function Page({ params }) {
                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200
                         "
                       >
-                        <svg viewBox="0 0 24 24" className="mr-2 h-[18px] w-[18px] text-slate-700" aria-hidden>
-                          <path
-                            fill="currentColor"
-                            d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
-                          />
-                        </svg>
+                       <svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+  className="mr-2 h-[18px] w-[18px] text-slate-700"
+  aria-hidden
+>
+  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+
                         Ver
                       </a>
                     )}

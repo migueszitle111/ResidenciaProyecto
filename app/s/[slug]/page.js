@@ -24,7 +24,7 @@ function iconFor(mime = '', name = '') {
   const isPdf = mime === 'application/pdf' || name.toLowerCase().endsWith('.pdf');
   const isImg = /^image\//.test(mime);
   const common =
-    'w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-xl ' +
+    'shrink-0 w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-xl ' +
     'border border-slate-300 bg-white shadow-sm ring-1 ring-black/5 ' +
     'transition-transform duration-300 group-hover:scale-[1.03]';
 
@@ -88,24 +88,25 @@ async function fetchData(slug) {
 
   const now = new Date();
   const expired = !link.is_active || (link.expiry_at && new Date(link.expiry_at) <= now);
- if (expired) {
-   // 🔥 Purga best-effort para expiración “dura”
-   try {
-     const { data: files } = await supabaseAdmin
-       .from('share_link_files')
-       .select('storage_path')
-       .eq('link_id', link.id);
-     if (files?.length) {
-       await supabaseAdmin.storage.from(SHARE_BUCKET)
-         .remove(files.map(f => f.storage_path));
-     }
-     await supabaseAdmin.from('share_link_files').delete().eq('link_id', link.id);
-     await supabaseAdmin.from('share_links').delete().eq('id', link.id);
-   } catch (e) {
-     console.warn('purge-on-read failed', e);
-   }
+  if (expired) {
+    // 🔥 Purga best-effort para expiración “dura”
+    try {
+      const { data: files } = await supabaseAdmin
+        .from('share_link_files')
+        .select('storage_path')
+        .eq('link_id', link.id);
+      if (files?.length) {
+        await supabaseAdmin.storage.from(SHARE_BUCKET)
+          .remove(files.map(f => f.storage_path));
+      }
+      await supabaseAdmin.from('share_link_files').delete().eq('link_id', link.id);
+      await supabaseAdmin.from('share_links').delete().eq('id', link.id);
+    } catch (e) {
+      console.warn('purge-on-read failed', e);
+    }
     return { expired: true, _reason: 'expired-or-inactive' };
   }
+
   const { data: files } = await supabaseAdmin
     .from('share_link_files')
     .select('id, name, mime_type, size_bytes, storage_path')
@@ -115,7 +116,7 @@ async function fetchData(slug) {
   // Dos URLs por archivo: preview (inline) y download (forzada)
   const items = (files || []).map((f) => ({
     ...f,
-    previewUrl:  `/api/share/signed/${slug}/${f.id}?mode=inline`,
+    previewUrl: `/api/share/signed/${slug}/${f.id}?mode=inline`,
     downloadUrl: `/api/share/signed/${slug}/${f.id}?mode=download`,
     previewable: isPreviewable(f.mime_type),
   }));
@@ -129,8 +130,8 @@ async function fetchData(slug) {
       slug,
       meta: {
         patient: link?.patient ?? null,
-        doctor:  link?.doctor ?? null,
-        study:   link?.study_type ?? null,
+        doctor: link?.doctor ?? null,
+        study: link?.study_type ?? null,
         ...(link?.meta || {}),
       },
     },
@@ -200,11 +201,11 @@ export default async function Page({ params }) {
                   hover:shadow-xl hover:shadow-slate-200/80 hover:border-slate-400
                 "
               >
-                <div className="p-4 md:p-5 flex items-center gap-4 md:gap-5">
+                <div className="p-4 md:p-5 grid grid-cols-[auto,1fr] sm:grid-cols-[auto,1fr,auto] gap-3 md:gap-5 items-start sm:items-center">
                   {iconFor(it.mime_type, it.name)}
 
                   {/* Nombre + meta */}
-                  <div className="min-w-0 flex-1">
+                  <div className="min-w-0">
                     <div className="font-semibold truncate text-slate-900">
                       {it.name}
                     </div>
@@ -216,7 +217,7 @@ export default async function Page({ params }) {
                   </div>
 
                   {/* Acciones */}
-                  <div className="flex items-center gap-2">
+                  <div className="col-span-2 sm:col-span-1 flex flex-col sm:flex-row gap-2 sm:justify-end">
                     {/* Descargar */}
                     <a
                       href={it.downloadUrl}
@@ -224,10 +225,10 @@ export default async function Page({ params }) {
                       rel="noopener noreferrer"
                       aria-label={`Descargar ${it.name}`}
                       className="
-                        relative inline-flex items-center justify-center rounded-xl
-                        px-3.5 py-2 text-sm font-semibold text-white
+                        relative inline-flex w-full sm:w-auto shrink-0 items-center justify-center rounded-xl
+                        px-3.5 py-2 text-sm font-semibold text-white text-center
                         transition-[transform,box-shadow,padding] duration-300
-                        hover:px-4 hover:shadow-[0_10px_24px_-10px_rgba(181,75,0,.6)]
+                        md:hover:px-4 hover:shadow-[0_10px_24px_-10px_rgba(181,75,0,.6)]
                         hover:scale-[1.02] active:scale-[0.98]
                         focus:outline-none focus:ring-2 focus:ring-offset-2
                         overflow-hidden
@@ -252,31 +253,30 @@ export default async function Page({ params }) {
                         rel="noopener noreferrer"
                         aria-label={`Ver ${it.name}`}
                         className="
-                          inline-flex items-center justify-center rounded-xl
-                          px-3.5 py-2 text-sm font-semibold
+                          inline-flex w-full sm:w-auto shrink-0 items-center justify-center rounded-xl
+                          px-3.5 py-2 text-sm font-semibold text-center
                           border border-slate-300 text-slate-800
                           bg-white hover:bg-slate-50
                           transition-[transform,box-shadow,padding] duration-300
-                          hover:px-4 hover:shadow-[0_10px_24px_-12px_rgba(2,6,23,0.25)]
+                          md:hover:px-4 hover:shadow-[0_10px_24px_-12px_rgba(2,6,23,0.25)]
                           hover:scale-[1.02] active:scale-[0.98]
                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200
                         "
                       >
-                       <svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  strokeWidth="2"
-  strokeLinecap="round"
-  strokeLinejoin="round"
-  className="mr-2 h-[18px] w-[18px] text-slate-700"
-  aria-hidden
->
-  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
-  <circle cx="12" cy="12" r="3" />
-</svg>
-
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="mr-2 h-[18px] w-[18px] text-slate-700"
+                          aria-hidden
+                        >
+                          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                          <circle cx="12" cy="12" r="3" />
+                        </svg>
                         Ver
                       </a>
                     )}

@@ -88,8 +88,24 @@ async function fetchData(slug) {
 
   const now = new Date();
   const expired = !link.is_active || (link.expiry_at && new Date(link.expiry_at) <= now);
-  if (expired) return { expired: true, _reason: 'expired-or-inactive' };
-
+ if (expired) {
+   // 🔥 Purga best-effort para expiración “dura”
+   try {
+     const { data: files } = await supabaseAdmin
+       .from('share_link_files')
+       .select('storage_path')
+       .eq('link_id', link.id);
+     if (files?.length) {
+       await supabaseAdmin.storage.from(SHARE_BUCKET)
+         .remove(files.map(f => f.storage_path));
+     }
+     await supabaseAdmin.from('share_link_files').delete().eq('link_id', link.id);
+     await supabaseAdmin.from('share_links').delete().eq('id', link.id);
+   } catch (e) {
+     console.warn('purge-on-read failed', e);
+   }
+    return { expired: true, _reason: 'expired-or-inactive' };
+  }
   const { data: files } = await supabaseAdmin
     .from('share_link_files')
     .select('id, name, mime_type, size_bytes, storage_path')
@@ -97,25 +113,12 @@ async function fetchData(slug) {
     .order('created_at', { ascending: true });
 
   // Dos URLs por archivo: preview (inline) y download (forzada)
-  const items = await Promise.all(
-    (files || []).map(async (f) => {
-      const [{ data: preview }, { data: download }] = await Promise.all([
-        supabaseAdmin.storage.from(SHARE_BUCKET).createSignedUrl(f.storage_path, TTL_SECONDS),
-        supabaseAdmin.storage.from(SHARE_BUCKET).createSignedUrl(
-          f.storage_path,
-          TTL_SECONDS,
-          { download: f.name } // fuerza descarga
-        ),
-      ]);
-
-      return {
-        ...f,
-        previewUrl: preview?.signedUrl || '#',
-        downloadUrl: download?.signedUrl || '#',
-        previewable: isPreviewable(f.mime_type),
-      };
-    })
-  );
+  const items = (files || []).map((f) => ({
+    ...f,
+    previewUrl:  `/api/share/signed/${slug}/${f.id}?mode=preview`,
+    downloadUrl: `/api/share/signed/${slug}/${f.id}?mode=download`,
+    previewable: isPreviewable(f.mime_type),
+  }));
 
   return {
     expired: false,

@@ -46,9 +46,9 @@ export async function POST(req) {
       .update({ is_active: true })
       .eq('id', linkId);
 
-  const envBase =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '');
+ const envBase =
+   process.env.NEXT_PUBLIC_SITE_URL ||
+   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '');
 
 const base = (envBase || '').replace(/\/$/, '');
 const url = `${base}/s/${link.slug}`;

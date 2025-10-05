@@ -115,7 +115,7 @@ async function fetchData(slug) {
   // Dos URLs por archivo: preview (inline) y download (forzada)
   const items = (files || []).map((f) => ({
     ...f,
-    previewUrl:  `/api/share/signed/${slug}/${f.id}?mode=preview`,
+    previewUrl:  `/api/share/signed/${slug}/${f.id}?mode=inline`,
     downloadUrl: `/api/share/signed/${slug}/${f.id}?mode=download`,
     previewable: isPreviewable(f.mime_type),
   }));

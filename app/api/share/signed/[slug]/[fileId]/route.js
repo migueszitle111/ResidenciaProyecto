@@ -19,7 +19,9 @@ export async function GET(req, { params }) {
     const supabase = getSupabaseAdmin()
     const { slug, fileId } = params || {}
     const url  = new URL(req.url)
-    const mode = url.searchParams.get('mode') === 'inline' ? 'inline' : 'download'
+    const modeParam = (url.searchParams.get('mode') || '').toLowerCase();
+    const inlineModes = new Set(['inline', 'preview', 'view']);
+    const mode = inlineModes.has(modeParam) ? 'inline' : 'download';
 
     if (!slug || !fileId) {
       return NextResponse.json({ ok:false, error:'Parámetros faltantes' }, { status:400 })

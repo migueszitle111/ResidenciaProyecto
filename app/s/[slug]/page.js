@@ -60,6 +60,29 @@ function iconFor(mime = '', name = '') {
   );
 }
 
+/* ========= Helpers para etiqueta de Estudio ========= */
+const _clean = (s = '') =>
+  s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+function deriveStudyLabel(input = {}) {
+  const { study, studyType, title } = input;
+  const haystack = [_clean(study || ''), _clean(studyType || ''), _clean(title || '')]
+    .filter(Boolean)
+    .join(' ');
+
+  // Palabras clave que clasifican como Potenciales Evocados
+  const isPE =
+    /\bevocado(s)?\b/.test(haystack) ||
+    /\bpotencial(e|es)\b/.test(haystack) ||
+    /\bvisual(es)?\b/.test(haystack) ||
+    /\bauditiv(a|o|as|os)\b/.test(haystack) ||
+    /\bsomatosensor(i|ia|iales)?\b/.test(haystack) ||
+    /\bvia(s)?\s+(visual|auditiv|somatosensor)/.test(haystack);
+
+  // Si no es PE, mostramos Electroneuromiografía (ej. Neuronopatía, Miopatía, etc.)
+  return isPE ? 'Potenciales Evocados' : 'Electroneuromiografía';
+}
+
 /* ========= Data ========= */
 async function fetchData(slug) {
   const supabaseAdmin = getSupabaseAdmin();
@@ -121,7 +144,7 @@ async function fetchData(slug) {
     previewable: isPreviewable(f.mime_type),
   }));
 
-  return {
+  const result = {
     expired: false,
     link: {
       title: link.title,
@@ -137,6 +160,15 @@ async function fetchData(slug) {
     },
     items,
   };
+
+  // Etiqueta de Estudio derivada para la UI
+  result.link.meta.studyLabel = deriveStudyLabel({
+    study: result.link.meta.study ?? result.link.meta?.studyType,
+    studyType: result.link.meta?.studyType,
+    title: result.link.title,
+  });
+
+  return result;
 }
 
 /* ========= Página ========= */
@@ -176,7 +208,7 @@ export default async function Page({ params }) {
 
           {/* Meta del paquete */}
           <section className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
-            <MetaBadge label="Estudio" value={link.meta?.study} />
+            <MetaBadge label="Estudio" value={link.meta?.studyLabel || link.meta?.study} />
             <MetaBadge label="Paciente" value={link.meta?.patient} />
             <MetaBadge label="Médico" value={link.meta?.doctor} />
           </section>

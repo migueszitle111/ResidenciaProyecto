@@ -294,7 +294,7 @@ const Overhead = () => {
 
         {/*Menú cuando la pantalla es chica */}
         <div className="md:hidden absolute top-0 right-0 z-10 flex justify-center items-center">
-          {/* Posiciona el menú en la parte superior y asegúrate de que tenga un z-index superior */}
+          {/* Posiciona el menú en la parte superior y asegúrate de que tenga un z-index superior
           <button onClick={toggleMenu} className="text-white">
             <img
               src={session?.user?.imageUrl}
@@ -329,9 +329,9 @@ const Overhead = () => {
                   </button>
                 </li>
                 {/* Agregar más opciones de menú según sea necesario */}
-              </ul>
+              {/* </ul> 
             </div>
-          )}
+          )} */}
        </div>
       </header>
     </div>

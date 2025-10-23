@@ -140,7 +140,7 @@ const Overhead = () => {
                   top: "15%",
                 }}
               >
-                <Image
+                {/* <Image
                   src="./I_Search.svg"
                   width={25}
                   height={25}
@@ -149,16 +149,16 @@ const Overhead = () => {
                     filter:
                       "brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(200deg)",
                   }}
-                />
+                /> */}
               </div>
-              <input
+              {/* <input
                 type="text"
                 placeholder="    Buscar"
                 className="px-4 py-1 bg-[#000000] text-white text-sm rounded-full placeholder-white border border-white focus:outline-none focus:border-[#D06D33] transition-all pr-8 "
                 value={searchQuery}
                 onChange={handleSearchChange}
                 onKeyPress={handleSearchKeyPress}
-              />
+              /> */}
             </div>
 
             {/* Muestra los resultados de autocompletado debajo del buscador */}
@@ -263,7 +263,7 @@ const Overhead = () => {
               ) : (
                 // Si no hay sesión, muestra botones para registrarse e iniciar sesión
                 <>
-                  <button className="px-4 py-0.5 bg-[#D06D33] hover:bg-[#8F3400] text-white rounded">
+                  {/* <button className="px-4 py-0.5 bg-[#D06D33] hover:bg-[#8F3400] text-white rounded">
                     <a href="/Registro">Regístrate</a>
                   </button>
                   <a href="/Login">
@@ -285,7 +285,7 @@ const Overhead = () => {
                         />
                       </div>
                     </button>
-                  </a>
+                  </a> */}
                 </>
               )}
             </>

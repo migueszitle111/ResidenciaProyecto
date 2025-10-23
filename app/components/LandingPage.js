@@ -2,22 +2,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import Link from 'next/link';
-
-import {
-  Autoplay,
-  Pagination,
-  Navigation,
-  Parallax,
-  EffectCoverflow,
-} from "swiper/modules";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/effect-coverflow";
-import "swiper/css/parallax";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -46,7 +31,7 @@ export default function LandingPage() {
   // Slides para el slider principal
   const bannerSlides = [
     {
-      img: "/assets/LandingPage/laptop.png",
+      img: "/assets/LandingPage/Page/LP-20.png",
       title: "Versión",
       highlight: "Web",
       highlightBg: "bg-[#B54B00]",
@@ -58,7 +43,7 @@ export default function LandingPage() {
       ]
     },
     {
-      img: "/assets/LandingPage/movil.png",
+      img: "/assets/LandingPage/Page/LP-21.png",
       title: "Versión",
       highlight: "App",
       highlightBg: "bg-[#B54B00]",
@@ -67,7 +52,20 @@ export default function LandingPage() {
         { text: "Disponible en México", bold: true, block: true },
         { text: "con todo el contenido.", bold: false, block: true }
       ]
-    }
+    },
+
+    {
+      img: "/assets/LandingPage/Page/LP-16.png",
+      title: "Versión",
+      highlight: "Web",
+      highlightBg: "bg-[#B54B00]",
+      caption: "Ya disponible",
+      descriptionParts: [
+        "Elabora tus reportes anatómicos sobre patologías del ",
+        { text: "Sistema Nervioso Periférico", bold: true },
+        " gracias a la selección de opciones y añade los registros neurofisiológicos de tus casos clínicos."
+      ]
+    },
   ];
 
   // Otras imágenes y cards…
@@ -121,7 +119,7 @@ const infoCards = [
             >
              <a
                   href="pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf"
-                  onClick={e => handlePaymentClick(e, "pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf")}
+                  // onClick={e => handlePaymentClick(e, "pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf")}
                 >
               <Image
                 src="/assets/LandingPage/Page/LP-02.png"
@@ -153,8 +151,8 @@ const infoCards = [
               data-aos-delay="400"
             >
               <a
-                  href="https://buy.stripe.com/6oU4gzg9ugvufgO5uYafS0c"
-                  onClick={e => handlePaymentClick(e, "https://buy.stripe.com/6oU4gzg9ugvufgO5uYafS0c")}
+                  // href="https://buy.stripe.com/6oU4gzg9ugvufgO5uYafS0c"
+                  // onClick={e => handlePaymentClick(e, "https://buy.stripe.com/6oU4gzg9ugvufgO5uYafS0c")}
                 >
 
               <Image
@@ -172,7 +170,7 @@ const infoCards = [
               data-aos-duration="800"
               data-aos-delay="200"
             >
-              <a href="/Registro">
+              <a href="">
                 <Image
                   src="/assets/LandingPage/Page/LP-05.png"
                   alt="Banner bottom"
@@ -210,8 +208,8 @@ const infoCards = [
                 data-aos-duration="800"
               >
                 <a
-                  href="https://buy.stripe.com/00w3cv9L63II8SqbTmafS0b"
-                  onClick={e => handlePaymentClick(e, "https://buy.stripe.com/00w3cv9L63II8SqbTmafS0b")}
+                   href="pdfs/mEDXproMANUALPOTENCIALESEVOCADOSPREVIEW.pdf"
+                  // onClick={e => handlePaymentClick(e, "https://buy.stripe.com/00w3cv9L63II8SqbTmafS0b")}
                 >
                   <Image
                     src="/assets/LandingPage/Page/LP-09.png"
@@ -231,8 +229,8 @@ const infoCards = [
                 data-aos-duration="800"
               >
                 <a
-                  href="https://buy.stripe.com/28EdR95uQbbad8G8HaafS0a"
-                  onClick={e => handlePaymentClick(e, "https://buy.stripe.com/28EdR95uQbbad8G8HaafS0a")}
+                  href="pdfs/mEDXproMANUALESTUDIODECONDUCCIÓNNERVIOSAPREVIEW.pdf"
+                  // onClick={e => handlePaymentClick(e, "https://buy.stripe.com/28EdR95uQbbad8G8HaafS0a")}
                 >
                   <Image
                     src="/assets/LandingPage/Page/LP-08.png"
@@ -249,6 +247,9 @@ const infoCards = [
                 data-aos="flip-up"
                 data-aos-duration="800"
               >
+                <a
+                  href="pdfs/mEDXproMANUALMONITOREOINTRAOPERATORIOPREVIEW.pdf"
+                >
                 <Image
                   src="/assets/LandingPage/Page/LP-07.png"
                   alt="Monitoreo Trasquirúrgico"
@@ -256,85 +257,141 @@ const infoCards = [
                   height={250}
                   className="w-full h-auto object-cover rounded-3xl"
                 />
+                </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Slider principal */}
-        <div className="max-w-screen-xl mx-auto px-4 -mt-5">
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            spaceBetween={30}
-            centeredSlides
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-            className="h-screen"
-          >
-            {bannerSlides.map((slide, idx) => (
-              <SwiperSlide key={idx} className="cursor-pointer">
-                <div className="h-full flex items-center">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-0">
-                    <div className="flex flex-col justify-center space-y-4">
-                      <h2
-                        className="text-5xl md:text-7xl font-bold text-white"
-                        data-aos="fade-right"
-                      >
-                        {slide.title}{" "}
-                        <span
-                          className={`inline-block px-4 py-2 text-5xl md:text-7xl text-white rounded ${slide.highlightBg}`}
-                        >
-                          {slide.highlight}
-                        </span>
-                      </h2>
-                      <p
-                        className="text-xl md:text-2xl font-semibold text-[#B54B00]"
-                        data-aos="fade-right"
-                        data-aos-delay="200"
-                      >
-                        {slide.caption}
-                      </p>
-                      <p
-                        className="max-w-lg text-base md:text-lg text-white leading-relaxed"
-                        data-aos="fade-right"
-                        data-aos-delay="400"
-                      >
-                        {slide.descriptionParts.map((part, i) => {
-                          if (typeof part === "string") {
-                            return <span key={i}>{part}</span>;
-                          }
-                          const classes = [
-                            part.bold ? "font-bold" : "",
-                            part.block ? "block" : ""
-                          ]
-                            .filter(Boolean)
-                            .join(" ");
-                          return (
-                            <span key={i} className={classes}>
-                              {part.text}
-                            </span>
-                          );
-                        })}
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-center" data-aos="fade-left">
-                      <Image
-                        src={slide.img}
-                        width={600}
-                        height={400}
-                        alt={`${slide.title} view`}
-                        className="object-contain"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+        {/* Banner Slides - Imagen grande arriba y 2 columnas */}
+        <section className="max-w-screen-xl mx-auto px-4 pt-12 pb-6" data-aos="fade-up">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Primera imagen - Ocupa todo el ancho */}
+            <div
+              className="md:col-span-2 relative overflow-hidden rounded-3xl shadow-2xl group"
+              data-aos="zoom-in"
+              data-aos-duration="1000"
+            >
+              <div className="relative w-full transform transition-transform duration-700 group-hover:scale-105">
+                <Image
+                  src={bannerSlides[2].img}
+                  width={1600}
+                  height={800}
+                  alt="Banner 1"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Segunda imagen - Columna izquierda */}
+            <div
+              className="relative overflow-hidden rounded-3xl shadow-2xl group"
+              data-aos="fade-right"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              <div className="relative w-full transform transition-transform duration-700 group-hover:scale-105">
+                <Image
+                  src={bannerSlides[1].img}
+                  width={1200}
+                  height={700}
+                  alt="Banner 2"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Tercera imagen - Columna derecha */}
+            <div
+              className="relative overflow-hidden rounded-3xl shadow-2xl group"
+              data-aos="fade-left"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              <div className="relative w-full transform transition-transform duration-700 group-hover:scale-105">
+                <Image
+                  src={bannerSlides[0].img}
+                  width={1200}
+                  height={700}
+                  alt="Banner 3"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección con imágenes adicionales - Grid Responsivo */}
+        <section className="max-w-screen-xl mx-auto px-4 pt-6 pb-6" data-aos="fade-up">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
+              data-aos="zoom-in"
+              data-aos-duration="1000"
+            >
+              <div className="relative w-full" style={{ aspectRatio: 'auto' }}>
+                <Image
+                  src="/assets/LandingPage/Page/LP-18.png"
+                  alt="Imagen 18"
+                  width={1000}
+                  height={800}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+            <div
+              className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
+              data-aos="flip-left"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              <div className="relative w-full" style={{ aspectRatio: 'auto' }}>
+                <Image
+                  src="/assets/LandingPage/Page/LP-17.png"
+                  alt="Imagen 17"
+                  width={1000}
+                  height={800}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+            <div
+              className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
+              data-aos="fade-up-right"
+              data-aos-duration="1000"
+              data-aos-delay="400"
+            >
+              <div className="relative w-full" style={{ aspectRatio: 'auto' }}>
+                <Image
+                  src="/assets/LandingPage/Page/LP-22.png"
+                  alt="Imagen 22"
+                  width={1000}
+                  height={800}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+            <div
+              className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
+              data-aos="fade-down-left"
+              data-aos-duration="1000"
+              data-aos-delay="600"
+            >
+              <div className="relative w-full" style={{ aspectRatio: 'auto' }}>
+                <Image
+                  src="/assets/LandingPage/Page/LP-19.png"
+                  alt="Imagen 19"
+                  width={1000}
+                  height={800}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
 
 {/* Info cards */}
-<section className="max-w-screen-xl mx-auto px-4 pt-8 pb-4" data-aos="fade-up">
+<section className="max-w-screen-xl mx-auto px-4 pt-4 pb-4" data-aos="fade-up">
   <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
     {infoCards.map((card, i) => {
       const content = (

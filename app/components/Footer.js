@@ -8,16 +8,7 @@ const Footer = () => {
   const router = useRouter();
 
   const handleProtectedClick = (route) => {
-    if (!session) {
-      const confirmLogin = window.confirm(
-        "Debes iniciar sesión para acceder. ¿Quieres iniciar sesión ahora?"
-      );
-      if (confirmLogin) {
-        router.push("/Login");
-      }
-    } else {
-      router.push(route);
-    }
+  
   };
 
   return (
@@ -39,19 +30,19 @@ const Footer = () => {
             Inicio
           </a>
           <button
-            onClick={() => handleProtectedClick("/Educacion")}
+            onClick={() => handleProtectedClick("")}
             className="text-gray-700 inline-block ml-4 hover:border-b hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"
           >
             Educación
           </button>
           <button
-            onClick={() => handleProtectedClick("/Reporte")}
+            onClick={() => handleProtectedClick("")}
             className="text-gray-700 inline-block ml-4 hover:border-b hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"
           >
             Reporte
           </button>
           <button
-            onClick={() => handleProtectedClick("/Evento")}
+            onClick={() => handleProtectedClick("")}
             className="text-gray-700 inline-block ml-4 hover:border-b hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"
           >
             Eventos
@@ -126,7 +117,8 @@ const Footer = () => {
           2025 mEDXpro.
         </a>
         <a
-          href="#"
+       
+           href="pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf"
           className="text-gray-700 hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"
         >
           Aviso de privacidad

@@ -118,7 +118,8 @@ const infoCards = [
               data-aos-duration="800"
             >
              <a
-                  href="pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf"
+                  href="/AvisoPrivacidad"
+                  //href="pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf"
                   // onClick={e => handlePaymentClick(e, "pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf")}
                 >
               <Image

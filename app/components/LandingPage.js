@@ -15,7 +15,24 @@ export default function LandingPage() {
   const [videoUrl, setVideoUrl] = React.useState("");
   
   useEffect(() => {
-    AOS.init({ once: false, mirror: false, duration: 1000 });
+    AOS.init({
+      once: false,
+      mirror: true,
+      duration: 1000,
+      offset: 100,
+      easing: 'ease-in-out'
+    });
+
+    // Refrescar AOS cuando se hace scroll
+    window.addEventListener('scroll', () => {
+      AOS.refresh();
+    });
+
+    return () => {
+      window.removeEventListener('scroll', () => {
+        AOS.refresh();
+      });
+    };
   }, []);
 
   // Intercepta clics a Stripe y muestra aviso de facturación
@@ -109,6 +126,50 @@ const infoCards = [
           />
         </div>
 
+        {/* Sección App Móvil */}
+        <section className="max-w-screen-xl mx-auto px-4 pt-12 pb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            {/* Imagen móvil - Lado izquierdo */}
+            <div className="flex justify-center" data-aos="fade-right" data-aos-duration="1000">
+              <Image
+                src="/assets/LandingPage/movil.png"
+                alt="App Móvil"
+                width={400}
+                height={300}
+                className="h-auto object-contain"
+              />
+            </div>
+
+            {/* Texto - Lado derecho */}
+            <div className="text-center space-y-6" data-aos="fade-left" data-aos-duration="1000">
+              <h2 className="text-4xl md:text-5xl font-bold text-white">
+                Versión <span className="bg-[#B54B00] px-3 py-1 rounded-lg">App</span>
+              </h2>
+              <p className="text-[#B54B00] text-xl md:text-2xl font-semibold">
+                 Disponible en México
+              </p>
+              {/* QR Code Section */}
+              <div className="mt-8 space-y-4 flex flex-col items-center">
+                <div className="flex items-center gap-3">
+                  <img width="48" height="48" src="https://img.icons8.com/fluency/48/google-play-store-new.png" alt="google-play-store-new"/>
+                  <p className="text-white text-lg md:text-xl font-semibold">
+                    Escanea el QR para descargar desde Play Store para Android
+                  </p>
+                </div>
+                <div className="flex justify-center">
+                  <Image
+                    src="/assets/LandingPage/Page/QR.jpeg"
+                    alt="QR Code Play Store"
+                    width={180}
+                    height={180}
+                    className="rounded-lg shadow-lg bg-white p-2"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Herramientas de diagnóstico */}
         <section className="max-w-screen-xl mx-auto px-4 py-12" data-aos="fade-up">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -119,8 +180,6 @@ const infoCards = [
             >
              <a
                   href="/AvisoPrivacidad"
-                  //href="pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf"
-                  // onClick={e => handlePaymentClick(e, "pdfs/POLÍTICASDEPRIVACIDADmEDXpro.pdf")}
                 >
               <Image
                 src="/assets/LandingPage/Page/LP-02.png"

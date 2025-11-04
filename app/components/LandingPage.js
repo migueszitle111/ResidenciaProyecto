@@ -66,7 +66,7 @@ export default function LandingPage() {
       highlightBg: "bg-[#B54B00]",
       caption: "A partir del 16 Septiembre 2025",
       descriptionParts: [
-        { text: "Disponible en México", bold: true, block: true },
+        { text: "Disponible en Latinoamérica", bold: true, block: true },
         { text: "con todo el contenido.", bold: false, block: true }
       ]
     },
@@ -146,7 +146,7 @@ const infoCards = [
                 Versión <span className="bg-[#B54B00] px-3 py-1 rounded-lg">App</span>
               </h2>
               <p className="text-[#B54B00] text-xl md:text-2xl font-semibold">
-                 Disponible en México
+                 Disponible en Latinoamérica
               </p>
               {/* QR Code Section */}
               <div className="mt-8 space-y-4 flex flex-col items-center">

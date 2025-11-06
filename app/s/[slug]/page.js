@@ -9,6 +9,64 @@ import { getSupabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
 const BRAND = '#B54B00';          // naranja MEDXpro
 const TTL_SECONDS = 60 * 10;      // URLs firmadas válidas 10 minutos
 
+/* ========= Metadata para Open Graph (WhatsApp, Facebook, etc.) ========= */
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const data = await fetchData(slug);
+
+  if (data.expired) {
+    return {
+      title: 'Enlace expirado - mEDXpro',
+      description: 'Este enlace ha expirado o no es válido',
+    };
+  }
+
+  const { link } = data;
+  const title = link.title || 'Compartir Diagnóstico - mEDXpro';
+  const description = link.message || 'Reporte médico compartido de forma segura';
+
+  // 🔥 IMPORTANTE: Cambia esta URL por la de tu logo en producción
+  // Debe ser una URL pública absoluta (https://...)
+  const logoUrl = process.env.NEXT_PUBLIC_OG_IMAGE ||
+                  'https://[TU-PROYECTO].supabase.co/storage/v1/object/public/assets/logo-medxpro-og.png';
+
+  // URL completa del link (ajusta el dominio según tu deploy)
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tu-dominio.com';
+  const shareUrl = `${baseUrl}/s/${slug}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: shareUrl,
+      siteName: 'mEDXpro',
+      images: [
+        {
+          url: logoUrl,
+          width: 1200,
+          height: 630,
+          alt: 'mEDXpro - Sistema de Diagnóstico Médico',
+        }
+      ],
+      type: 'website',
+      locale: 'es_MX',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [logoUrl],
+    },
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/apple-touch-icon.png',
+    },
+    metadataBase: new URL(baseUrl),
+  };
+}
+
 /* ========= Utils UI ========= */
 function bytes(n) {
   if (!n) return '—';

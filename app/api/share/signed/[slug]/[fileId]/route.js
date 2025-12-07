@@ -3,7 +3,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 import { NextResponse } from 'next/server'
-import { getSupabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin'
+import { getSupabaseAdmin, SHARE_BUCKET, getBucketFromPath, getPathWithoutBucket } from '@/lib/supabaseadmin'
 
 const MAX_TTL = 60 * 60 * 24 * 7 - 60; // 7d - 60s
 const MIN_TTL = 60;                    // nunca 0s
@@ -54,10 +54,15 @@ export async function GET(req, { params }) {
     const ttl = ttlForLink(link)
     if (ttl <= 0) return NextResponse.json({ ok:false, error:'Link expirado' }, { status:410 })
 
+    // Detectar el bucket correcto desde la ruta del archivo
+    const bucket = getBucketFromPath(file.storage_path)
+    // Obtener la ruta sin el nombre del bucket
+    const pathInBucket = getPathWithoutBucket(file.storage_path)
+
     const { data: signed, error: signErr } = await supabase
-      .storage.from(SHARE_BUCKET)
+      .storage.from(bucket)
       .createSignedUrl(
-        file.storage_path,
+        pathInBucket,
         ttl,
         mode === 'download' ? { download: file.name || 'file' } : undefined
       )

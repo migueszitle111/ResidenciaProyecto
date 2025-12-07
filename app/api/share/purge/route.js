@@ -3,7 +3,7 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 import { NextResponse } from 'next/server';
-import { getSupabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
+import { getSupabaseAdmin, SHARE_BUCKET, getBucketFromPath, getPathWithoutBucket } from '@/lib/supabaseadmin';
 
 export async function POST(req) {
   try {
@@ -26,7 +26,19 @@ export async function POST(req) {
       .eq('link_id', link.id);
 
     if (files?.length) {
-      await supabaseAdmin.storage.from(SHARE_BUCKET).remove(files.map(f => f.storage_path));
+      // Agrupar archivos por bucket para eliminarlos correctamente
+      const filesByBucket = files.reduce((acc, file) => {
+        const bucket = getBucketFromPath(file.storage_path);
+        const pathInBucket = getPathWithoutBucket(file.storage_path);
+        if (!acc[bucket]) acc[bucket] = [];
+        acc[bucket].push(pathInBucket);
+        return acc;
+      }, {});
+
+      // Eliminar archivos de cada bucket
+      for (const [bucket, paths] of Object.entries(filesByBucket)) {
+        await supabaseAdmin.storage.from(bucket).remove(paths);
+      }
     }
 
     await supabaseAdmin.from('share_link_files').delete().eq('link_id', link.id);

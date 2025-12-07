@@ -3,7 +3,7 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
-import { getSupabaseAdmin, SHARE_BUCKET } from '@/lib/supabaseadmin';
+import { getSupabaseAdmin, SHARE_BUCKET, getBucketFromPath, getPathWithoutBucket } from '@/lib/supabaseadmin';
 
 /* ========= Config ========= */
 const BRAND = '#B54B00';          // naranja MEDXpro
@@ -128,6 +128,12 @@ function deriveStudyLabel(input = {}) {
     .filter(Boolean)
     .join(' ');
 
+  // Palabras clave para Neuromonitoreo Intraoperatorio
+  const isMonitoreo =
+    /\bmonitoreo\b/.test(haystack) ||
+    /\bintraoperatori(o|a)\b/.test(haystack) ||
+    /\bneuromonitoreo\b/.test(haystack);
+
   // Palabras clave que clasifican como Potenciales Evocados
   const isPE =
     /\bevocado(s)?\b/.test(haystack) ||
@@ -137,8 +143,10 @@ function deriveStudyLabel(input = {}) {
     /\bsomatosensor(i|ia|iales)?\b/.test(haystack) ||
     /\bvia(s)?\s+(visual|auditiv|somatosensor)/.test(haystack);
 
-  // Si no es PE, mostramos Electroneuromiografía (ej. Neuronopatía, Miopatía, etc.)
-  return isPE ? 'Potenciales Evocados' : 'Electroneuromiografía';
+  // Retorna el tipo de estudio según las palabras clave
+  if (isMonitoreo) return 'Neuromonitoreo Intraoperatorio';
+  if (isPE) return 'Potenciales Evocados';
+  return 'Electroneuromiografía';
 }
 
 /* ========= Data ========= */
@@ -170,15 +178,26 @@ async function fetchData(slug) {
   const now = new Date();
   const expired = !link.is_active || (link.expiry_at && new Date(link.expiry_at) <= now);
   if (expired) {
-    // 🔥 Purga best-effort para expiración “dura”
+    // 🔥 Purga best-effort para expiración "dura"
     try {
       const { data: files } = await supabaseAdmin
         .from('share_link_files')
         .select('storage_path')
         .eq('link_id', link.id);
       if (files?.length) {
-        await supabaseAdmin.storage.from(SHARE_BUCKET)
-          .remove(files.map(f => f.storage_path));
+        // Agrupar archivos por bucket para eliminarlos correctamente
+        const filesByBucket = files.reduce((acc, file) => {
+          const bucket = getBucketFromPath(file.storage_path);
+          const pathInBucket = getPathWithoutBucket(file.storage_path);
+          if (!acc[bucket]) acc[bucket] = [];
+          acc[bucket].push(pathInBucket);
+          return acc;
+        }, {});
+
+        // Eliminar archivos de cada bucket
+        for (const [bucket, paths] of Object.entries(filesByBucket)) {
+          await supabaseAdmin.storage.from(bucket).remove(paths);
+        }
       }
       await supabaseAdmin.from('share_link_files').delete().eq('link_id', link.id);
       await supabaseAdmin.from('share_links').delete().eq('id', link.id);

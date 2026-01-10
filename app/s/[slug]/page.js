@@ -14,25 +14,52 @@ export async function generateMetadata({ params }) {
   const { slug } = params;
   const data = await fetchData(slug);
 
+  // 🔥 URL de la imagen Open Graph (logo MEDXpro) - SIEMPRE se incluye
+  const logoUrl = process.env.NEXT_PUBLIC_OG_IMAGE ||
+                  'https://awkrlvbmwfqzqlfyuiby.supabase.co/storage/v1/object/public/assets/logo-medxpro-og.png';
+
+  // URL completa del link (ajusta el dominio según tu deploy)
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.medxproapp.com';
+  const shareUrl = `${baseUrl}/s/${slug}`;
+
+  // Si el link expiró o no existe, devolver metadatos con imagen
   if (data.expired) {
     return {
       title: 'Enlace expirado - mEDXpro',
       description: 'Este enlace ha expirado o no es válido',
+      openGraph: {
+        title: 'Enlace expirado - mEDXpro',
+        description: 'Este enlace ha expirado o no es válido',
+        url: shareUrl,
+        siteName: 'mEDXpro',
+        images: [
+          {
+            url: logoUrl,
+            width: 1200,
+            height: 630,
+            alt: 'mEDXpro - Sistema de Diagnóstico Médico',
+          }
+        ],
+        type: 'website',
+        locale: 'es_MX',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Enlace expirado - mEDXpro',
+        description: 'Este enlace ha expirado o no es válido',
+        images: [logoUrl],
+      },
+      icons: {
+        icon: '/favicon.ico',
+        apple: '/apple-touch-icon.png',
+      },
+      metadataBase: new URL(baseUrl),
     };
   }
 
   const { link } = data;
   const title = link.title || 'Compartir Diagnóstico - mEDXpro';
   const description = link.message || 'Reporte médico compartido de forma segura';
-
-  // 🔥 URL de la imagen Open Graph (logo MEDXpro)
-  // Debe ser una URL pública absoluta (https://...)
-  const logoUrl = process.env.NEXT_PUBLIC_OG_IMAGE ||
-                  'https://awkrlvbmwfqzqlfyuiby.supabase.co/storage/v1/object/public/assets/logo-medxpro-og.png';
-
-  // URL completa del link (ajusta el dominio según tu deploy)
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tu-dominio.com';
-  const shareUrl = `${baseUrl}/s/${slug}`;
 
   return {
     title,

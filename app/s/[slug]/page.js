@@ -25,10 +25,10 @@ export async function generateMetadata({ params }) {
   const title = link.title || 'Compartir Diagnóstico - mEDXpro';
   const description = link.message || 'Reporte médico compartido de forma segura';
 
-  // 🔥 IMPORTANTE: Cambia esta URL por la de tu logo en producción
+  // 🔥 URL de la imagen Open Graph (logo MEDXpro)
   // Debe ser una URL pública absoluta (https://...)
   const logoUrl = process.env.NEXT_PUBLIC_OG_IMAGE ||
-                  'https://[TU-PROYECTO].supabase.co/storage/v1/object/public/assets/logo-medxpro-og.png';
+                  'https://awkrlvbmwfqzqlfyuiby.supabase.co/storage/v1/object/public/assets/logo-medxpro-og.png';
 
   // URL completa del link (ajusta el dominio según tu deploy)
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tu-dominio.com';

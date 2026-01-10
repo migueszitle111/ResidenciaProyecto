@@ -35,8 +35,8 @@ export async function generateMetadata({ params }) {
         images: [
           {
             url: logoUrl,
-            width: 1200,
-            height: 630,
+            width: 1067,
+            height: 1067,
             alt: 'mEDXpro - Sistema de Diagnóstico Médico',
           }
         ],
@@ -72,8 +72,8 @@ export async function generateMetadata({ params }) {
       images: [
         {
           url: logoUrl,
-          width: 1200,
-          height: 630,
+          width: 1067,
+          height: 1067,
           alt: 'mEDXpro - Sistema de Diagnóstico Médico',
         }
       ],

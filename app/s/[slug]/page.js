@@ -155,6 +155,12 @@ function deriveStudyLabel(input = {}) {
     .filter(Boolean)
     .join(' ');
 
+  // Palabras clave para Reportes Normales / General
+  const isGeneral =
+    /\bgeneral\b/.test(haystack) ||
+    /\bnormal(es)?\b/.test(haystack) ||
+    /\breporte(s)?\s+normal(es)?\b/.test(haystack);
+
   // Palabras clave para Neuromonitoreo Intraoperatorio
   const isMonitoreo =
     /\bmonitoreo\b/.test(haystack) ||
@@ -171,6 +177,7 @@ function deriveStudyLabel(input = {}) {
     /\bvia(s)?\s+(visual|auditiv|somatosensor)/.test(haystack);
 
   // Retorna el tipo de estudio según las palabras clave
+  if (isGeneral) return 'General';
   if (isMonitoreo) return 'Neuromonitoreo Intraoperatorio';
   if (isPE) return 'Potenciales Evocados';
   return 'Electroneuromiografía';

@@ -128,45 +128,44 @@ const infoCards = [
 
         {/* Sección App Móvil */}
         <section className="max-w-screen-xl mx-auto px-4 pt-12 pb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            {/* Imagen móvil - Lado izquierdo */}
-            <div className="flex justify-center" data-aos="fade-right" data-aos-duration="1000">
-              <Image
-                src="/assets/LandingPage/movil.png"
-                alt="App Móvil"
-                width={400}
-                height={300}
-                className="h-auto object-contain"
-              />
-            </div>
-
-            {/* Texto - Lado derecho */}
-            <div className="text-center space-y-6" data-aos="fade-left" data-aos-duration="1000">
-              <h2 className="text-4xl md:text-5xl font-bold text-white">
-                Versión <span className="bg-[#B54B00] px-3 py-1 rounded-lg">App</span>
-              </h2>
-              <p className="text-[#B54B00] text-xl md:text-2xl font-semibold">
-                 Disponible en Latinoamérica
-              </p>
-              {/* QR Code Section */}
-              <div className="mt-8 space-y-4 flex flex-col items-center">
-                <div className="flex items-center gap-3">
-                  <img width="48" height="48" src="https://img.icons8.com/fluency/48/google-play-store-new.png" alt="google-play-store-new"/>
-                  <p className="text-white text-lg md:text-xl font-semibold">
-                    Escanea el QR para descargar desde Play Store para Android
-                  </p>
-                </div>
-                <div className="flex justify-center">
-                  <Image
-                    src="/assets/LandingPage/Page/QR.jpeg"
-                    alt="QR Code Play Store"
-                    width={180}
-                    height={180}
-                    className="rounded-lg shadow-lg bg-white p-2"
-                  />
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.medxproapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-shadow duration-300 block"
+              data-aos="fade-right"
+              data-aos-duration="1000"
+            >
+              <div className="relative w-full transform transition-transform duration-700 hover:scale-105">
+                <Image
+                  src="/assets/LandingPage/Page/App_Android.png"
+                  alt="Disponible en Play Store"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto object-contain"
+                />
               </div>
-            </div>
+            </a>
+            <a
+              href="https://apps.apple.com/mx/app/medxpro/id6754785855"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-shadow duration-300 block"
+              data-aos="fade-left"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              <div className="relative w-full transform transition-transform duration-700 hover:scale-105">
+                <Image
+                  src="/assets/LandingPage/Page/App_Apple.png"
+                  alt="Disponible en App Store"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </a>
           </div>
         </section>
 

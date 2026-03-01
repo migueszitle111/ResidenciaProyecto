@@ -6,7 +6,7 @@
 export const POLITICA_PRIVACIDAD_MEDXPRO = {
     titulo: "Política de Privacidad de MEDXPRO",
     // Se recomienda actualizar esta fecha:
-    version: "Vigente al 29 de octubre de 2025", 
+    version: "Vigente al 28 de febrero de 2026", 
     secciones: [
         {
             numero: 1,

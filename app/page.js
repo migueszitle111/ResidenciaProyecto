@@ -1,6 +1,6 @@
 // page.js
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -20,6 +20,7 @@ const Home = () => {
   // -------------------------
   const [isClient, setIsClient] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
+  const loaderVideoRef = useRef(null);
 
   // -------------------------
   // Estado para el modal
@@ -34,6 +35,14 @@ const Home = () => {
   // Inicializar AOS
   useEffect(() => {
     AOS.init({ duration: 600, once: true });
+  }, []);
+
+  // Safari requiere muted vía JS para que autoPlay funcione
+  useEffect(() => {
+    if (loaderVideoRef.current) {
+      loaderVideoRef.current.muted = true;
+      loaderVideoRef.current.play().catch(() => {});
+    }
   }, []);
 
   useEffect(() => {
@@ -80,10 +89,12 @@ const Home = () => {
         <HeadComponents />
         <div className="fixed top-0 left-0 w-full h-full z-[9999]">
           <video
+            ref={loaderVideoRef}
             src="/assets/LandingPage/Videos/cierrevoz.mp4"
             autoPlay
             muted
             loop
+            playsInline
             className="w-full h-full object-cover"
           />
         </div>

@@ -13,7 +13,16 @@ export default function LandingPage() {
   const router = useRouter();
   const [showVideoModal, setShowVideoModal] = React.useState(false);
   const [videoUrl, setVideoUrl] = React.useState("");
+  const videoRef = useRef(null);
   
+  useEffect(() => {
+    // Safari requiere que muted se aplique via JS para que autoPlay funcione
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
+
   useEffect(() => {
     AOS.init({
       once: false,
@@ -116,6 +125,7 @@ const infoCards = [
         {/* Vídeo introductorio */}
         <div className="max-w-screen-xl mx-auto px-4 pt-12" data-aos="fade-up">
           <video
+            ref={videoRef}
             src="/assets/LandingPage/Videos/medx-texto_cambios.mp4"
             controls
             autoPlay

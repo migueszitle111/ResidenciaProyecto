@@ -114,7 +114,7 @@ const Footer = () => {
           href="#"
           className="text-gray-700 hover:text-orange-600 dark:text-gray-500 hover:dark:text-c44900"
         >
-          2025 mEDXpro.
+          2026 mEDXpro.
         </a>
         <a
        

@@ -14,9 +14,10 @@ export async function generateMetadata({ params }) {
   const { slug } = params;
   const data = await fetchData(slug);
 
-  // 🔥 URL de la imagen Open Graph (logo MEDXpro) - SIEMPRE se incluye
-  const logoUrl = process.env.NEXT_PUBLIC_OG_IMAGE ||
-                  'https://awkrlvbmwfqzqlfyuiby.supabase.co/storage/v1/object/public/assets/logo-medxpro-og.png';
+  // 🔥 URL de la imagen Open Graph: logo del doctor si tiene, sino el logo MEDXpro default
+  const DEFAULT_LOGO = process.env.NEXT_PUBLIC_OG_IMAGE ||
+                       'https://awkrlvbmwfqzqlfyuiby.supabase.co/storage/v1/object/public/assets/logo-medxpro-og.png';
+  const logoUrl = data?.link?.meta?.doctorLogo || DEFAULT_LOGO;
 
   // URL completa del link (ajusta el dominio según tu deploy)
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.medxproapp.com';

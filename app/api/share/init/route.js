@@ -10,15 +10,16 @@ const SLUG_LEN = 12;            // slug corto tipo "pc8r4muia7..."
 const MAX_RETRIES = 3;          // por si choca el unique(slug)
 
 const asStr = (v) => (v ?? '').toString();
-const safeMeta = (m, patient, doctor, studyType) => {
+const safeMeta = (m, patient, doctor, studyType, doctorLogo) => {
   const meta = (m && typeof m === 'object') ? m : {};
   return {
     ...meta,
     // la página /s/[slug] usa meta.study
-    ...(patient   != null ? { patient }   : {}),
-    ...(doctor    != null ? { doctor }    : {}),
-    ...(studyType ? { study: studyType }  : {}),
-    ...(studyType ? { studyType }         : {}),
+    ...(patient    != null ? { patient }    : {}),
+    ...(doctor     != null ? { doctor }     : {}),
+    ...(studyType  ? { study: studyType }   : {}),
+    ...(studyType  ? { studyType }          : {}),
+    ...(doctorLogo ? { doctorLogo }         : {}),
   };
 };
 
@@ -32,16 +33,17 @@ export async function POST(req) {
     const metaIn  = body.meta;
 
     // permiten venir en raíz o dentro de meta
-    const patient   = body.patient   ?? metaIn?.patient   ?? null;
-    const doctor    = body.doctor    ?? metaIn?.doctor    ?? null;
-    const studyType = body.studyType ?? metaIn?.studyType ?? metaIn?.study ?? null;
+    const patient    = body.patient    ?? metaIn?.patient    ?? null;
+    const doctor     = body.doctor     ?? metaIn?.doctor     ?? null;
+    const studyType  = body.studyType  ?? metaIn?.studyType  ?? metaIn?.study ?? null;
+    const doctorLogo = body.doctorLogo ?? metaIn?.doctorLogo ?? null;
 
     const expiresInSeconds = Number(body.expiresInSeconds) || 0;
     const expiry_at = expiresInSeconds > 0
       ? new Date(Date.now() + expiresInSeconds * 1000).toISOString()
       : null;
 
-    const meta = safeMeta(metaIn, patient, doctor, studyType);
+    const meta = safeMeta(metaIn, patient, doctor, studyType, doctorLogo);
 
     // intentos por si hay colisión de slug (unique)
     for (let i = 0; i < MAX_RETRIES; i++) {

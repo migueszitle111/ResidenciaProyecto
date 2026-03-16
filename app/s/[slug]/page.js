@@ -273,14 +273,17 @@ async function fetchData(slug) {
     items,
   };
 
-  // Etiqueta de Estudio derivada para la UI
-  const hasExplicitStudy = !!(result.link.meta.study || result.link.meta?.studyType);
-  result.link.meta.studyLabel = hasExplicitStudy
-    ? deriveStudyLabel({
+  // Etiqueta de Estudio para la UI
+  // Si el link viene de MenuReporte, el usuario escribió el tipo libremente → usar tal cual
+  // En otros casos (Monitoreo, etc.) derivar desde palabras clave
+  const explicitStudy = result.link.meta.study || result.link.meta?.studyType || null;
+  const isUserFreeText = result.link.meta?.source === 'MenuReporte';
+  result.link.meta.studyLabel = explicitStudy
+    ? (isUserFreeText ? explicitStudy : deriveStudyLabel({
         study: result.link.meta.study ?? result.link.meta?.studyType,
         studyType: result.link.meta?.studyType,
         title: result.link.title,
-      })
+      }))
     : null;
 
   return result;

@@ -274,11 +274,14 @@ async function fetchData(slug) {
   };
 
   // Etiqueta de Estudio derivada para la UI
-  result.link.meta.studyLabel = deriveStudyLabel({
-    study: result.link.meta.study ?? result.link.meta?.studyType,
-    studyType: result.link.meta?.studyType,
-    title: result.link.title,
-  });
+  const hasExplicitStudy = !!(result.link.meta.study || result.link.meta?.studyType);
+  result.link.meta.studyLabel = hasExplicitStudy
+    ? deriveStudyLabel({
+        study: result.link.meta.study ?? result.link.meta?.studyType,
+        studyType: result.link.meta?.studyType,
+        title: result.link.title,
+      })
+    : null;
 
   return result;
 }

@@ -1,6 +1,6 @@
 // page.js
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
@@ -12,7 +12,7 @@ import BannerPublicitarios from "./components/BannerPublicitario";
 import FooterComponents from "./components/FooterComponents";
 import LandingPage from "./components/LandingPage";
 
-const Home = () => {
+const HomeContent = () => {
   const { data: session } = useSession();
   const searchParams = useSearchParams();
   const skipLoader = searchParams.get("logout") === "1";
@@ -136,5 +136,11 @@ const Home = () => {
     </>
   );
 };
+
+const Home = () => (
+  <Suspense fallback={null}>
+    <HomeContent />
+  </Suspense>
+);
 
 export default Home;

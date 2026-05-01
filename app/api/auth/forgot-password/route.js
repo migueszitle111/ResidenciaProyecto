@@ -1,4 +1,6 @@
 // app/api/auth/forgot-password/route.js
+export const dynamic = "force-dynamic";
+
 import crypto from "crypto";
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "@/lib/mongodb";

@@ -48,21 +48,18 @@ function buildHtml({
   topLeftText = "",
   checkedLeft = {},
   checkedRight = {},
+  externalOverlayHtml     = null,     // legado: un solo bloque para ambos paneles
+  externalOverlayHtmlPost = null,     // nuevo wizard: solo para panel POSTERIOR
+  externalOverlayHtmlAnt  = null,     // nuevo wizard: solo para panel ANTERIOR
+  resolvedPostBase = null,            // Base posterior resuelta (wizard nuevo)
+  resolvedAntBase  = null,            // Base anterior resuelta (wizard nuevo)
 }) {
-  // ——— 1) Definir rutas de base por defecto y para “sensitiva” ———
-  const defaultBaseFront     = '/assets/RadiculopatiaImg/Columna/RA_Columna_1_FondoB.png';
-  const defaultBaseBack      = '/assets/RadiculopatiaImg/Columna/RA_Columna_2_FondoB.png';
-  const sensitivaBaseFront   = '/assets/RadiculopatiaImg/Columna/BASE ANTERIOR.png';
-  const sensitivaBaseBack    = '/assets/RadiculopatiaImg/Columna/BASE POSTERIOR.png';
+  // ——— 1) Elegir la imagen base: prioriza la resuelta desde el payload ———
+  const defaultPostBase = '/RadiculopatiaImg/Multinivel/RA_Columna_1_FondoB.png';
+  const defaultAntBase  = '/RadiculopatiaImg/Multinivel/RA_Columna_2_FondoB.png';
 
-  // ——— 2) Detectar “radiculopatia_sensitiva” en la cadena de valores ———
-  const isSensitiva = finalString
-    .toLowerCase()
-    .includes('radiculopatia_sensitiva');
-
-  // ——— 3) Elegir la imagen base según corresponda ———
-  const baseFront = isSensitiva ? sensitivaBaseFront : defaultBaseFront;
-  const baseBack  = isSensitiva ? sensitivaBaseBack  : defaultBaseBack;
+  const baseFront = resolvedPostBase || defaultPostBase;   // panel POSTERIOR (izq en el PDF)
+  const baseBack  = resolvedAntBase  || defaultAntBase;    // panel ANTERIOR  (der en el PDF)
 
   // EJEMPLO de info del usuario
   const { name, lastname, cedula, email, especialidad, imageUrl } = userData;
@@ -878,43 +875,6 @@ const droppedFrontHtml = frontItems.map((item) => {
       })
       .join("");
   
-    // E) Overlays según las conclusiones
-    function getOverlayHtml(rules) {
-      const matched = [];
-      const textLower = finalString.toLowerCase();
-      for (const rule of rules) {
-        if (textLower.includes(rule.expectedValue.toLowerCase())) {
-          // Agregar la(s) imagen(es)
-          if (Array.isArray(rule.image)) {
-            matched.push(...rule.image);
-          } else {
-            matched.push(rule.image);
-          }
-        }
-      }
-      // Retorna <img> con posición absoluta
-      return matched
-        .map((img) => {
-          return `
-            <img
-              src="${img.src}"
-              alt=""
-              style="
-                position: absolute;
-                top: 0; left: 0;
-                width: 450px;
-                height: 600px;
-                object-fit: fill;
-                z-index: 2;
-              "
-            />
-          `;
-        })
-        .join("\n");
-    }
-
-
-
   function getOverlayHtml(rules) {
     const matched = [];
     const textLower = finalString.toLowerCase();
@@ -946,10 +906,18 @@ const droppedFrontHtml = frontItems.map((item) => {
       `;
     }).join('\n');
   }
-  const overlayHtmlFront = getOverlayHtml(frontRules);
-  const overlayHtmlBack  = getOverlayHtml(backRules);
-  /**********************************************
-  }
+  // Prioridad: nuevo wizard (post/ant separados) > legado (html único) > reglas viejas
+  const overlayHtmlFront = externalOverlayHtmlPost !== null
+    ? externalOverlayHtmlPost
+    : externalOverlayHtml !== null
+      ? externalOverlayHtml
+      : getOverlayHtml(frontRules);
+  const overlayHtmlBack  = externalOverlayHtmlAnt !== null
+    ? externalOverlayHtmlAnt
+    : externalOverlayHtml !== null
+      ? externalOverlayHtml
+      : getOverlayHtml(backRules);
+
   /**********************************************
    * D) CSS embebido (estilos de tu PDF)
    **********************************************/
@@ -1789,15 +1757,42 @@ export async function POST(req) {
     const body = await req.json();
     const {
       finalConclusion = "",
-      conclusiones = [],        // array {value, title}
-      userData = {},
-      droppedItems = [],
-      topLeftText = "",
-      checkedLeft = {},
-      checkedRight = {},
+      activeOv        = [],
+      postOv          = [],        // overlays panel POSTERIOR (nuevo wizard)
+      antOv           = [],        // overlays panel ANTERIOR  (nuevo wizard)
+      conclusiones    = [],        // array {value, title} (legado)
+      userData        = {},
+      droppedItems    = [],
+      topLeftText     = "",
+      checkedLeft     = {},
+      checkedRight    = {},
+      // nuevo flujo wizard
+      isSensitiva     = false,
+      postBase        = null,
+      antBase         = null,
     } = body;
     // Construir la cadena de "values" => c5_i, c5_d, lumbrosaca_multinivel, etc.
     const finalString = conclusiones.map((c) => c.value).join(" ");
+
+    // Helper para construir HTML de overlays por panel
+    const buildOvHtml = (list) =>
+      list.filter(Boolean).map(src =>
+        `<img src="${src}" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;z-index:2;" />`
+      ).join('');
+
+    // Para el nuevo wizard usamos postOv/antOv separados; si no hay, usamos activeOv para ambos (legado)
+    const hasNewFlow = postOv.length > 0 || antOv.length > 0;
+    const overlayHtmlFromOvPost = hasNewFlow ? buildOvHtml(postOv) : (activeOv.length > 0 ? buildOvHtml(activeOv) : null);
+    const overlayHtmlFromOvAnt  = hasNewFlow ? buildOvHtml(antOv)  : (activeOv.length > 0 ? buildOvHtml(activeOv) : null);
+
+    // Bases: preferir las que vienen del payload (wizard nuevo) sobre las calculadas en buildHtml
+    const resolvedPostBase = postBase || (isSensitiva
+      ? '/RadiculopatiaImg/Columna/BASE_POSTERIOR.png'
+      : '/RadiculopatiaImg/Multinivel/RA_Columna_1_FondoB.png');
+    const resolvedAntBase = antBase || (isSensitiva
+      ? '/RadiculopatiaImg/Columna/BASE_ANTERIOR.png'
+      : '/RadiculopatiaImg/Multinivel/RA_Columna_2_FondoB.png');
+
     // Llamamos a buildHtml
     const html = buildHtml({
       finalConclusion,
@@ -1807,6 +1802,10 @@ export async function POST(req) {
       topLeftText,
       checkedLeft,
       checkedRight,
+      externalOverlayHtmlPost: overlayHtmlFromOvPost,
+      externalOverlayHtmlAnt:  overlayHtmlFromOvAnt,
+      resolvedPostBase,
+      resolvedAntBase,
     });
     // Generar PDF con puppeteer
     const browser = await launchBrowser();

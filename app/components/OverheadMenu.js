@@ -1,36 +1,32 @@
 "use client";
+
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const OverheadMenu = () => {
-  const { data: session, status } = useSession();
-  const [loading, setLoading] = useState(true);
+  const { data: session } = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    if (status === "authenticated" || status === "unauthenticated") {
-      setLoading(false);
-    }
-  }, [status]);
 
   const handleProtectedRoute = (route) => {
     if (!session) {
       const confirmResult = window.confirm(
-        "Debes iniciar sesión para acceder. ¿Quieres iniciar sesión ahora?"
+        "Debes iniciar sesion para acceder. Quieres iniciar sesion ahora?"
       );
+
       if (confirmResult) {
         router.push("/Login");
       }
-    } else {
-      router.push(route);
+
+      return;
     }
+
+    router.push(route);
   };
 
   return (
     <div>
       <nav className="bg-[#000000] text-white">
-        <ul className="flex space-x-4 md:space-x-20 justify-center items-center py-2">
+        <ul className="flex flex-wrap justify-center items-center gap-4 md:gap-12 py-2">
           <li>
             <a href="/">
               <button className="buttommenu inline-block hover:border-b hover:border-gray-500">
@@ -43,7 +39,15 @@ const OverheadMenu = () => {
               onClick={() => handleProtectedRoute("/Educacion")}
               className="buttommenu inline-block hover:border-b hover:border-gray-500"
             >
-              Educación
+              Educacion
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => handleProtectedRoute("/Tecnicas")}
+              className="buttommenu inline-block hover:border-b hover:border-gray-500"
+            >
+              Tecnicas
             </button>
           </li>
           <li>
@@ -56,10 +60,10 @@ const OverheadMenu = () => {
           </li>
           <li>
             <button
-              onClick={() => handleProtectedRoute("/Evento")}
+              onClick={() => handleProtectedRoute("/Monitoreo")}
               className="buttommenu inline-block hover:border-b hover:border-gray-500"
             >
-              Eventos
+              Monitoreo
             </button>
           </li>
         </ul>

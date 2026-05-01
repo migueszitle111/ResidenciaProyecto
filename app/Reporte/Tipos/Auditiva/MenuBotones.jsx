@@ -1,794 +1,568 @@
-import { ReportContext,DropContext } from '@/src/context';
-import { useContext, useState } from 'react';
-import { useSession } from "next-auth/react";
-import { ConclusionButton } from '../../../components/ReportTemplate/Conclusions';
-import { useImageState } from '../../MetodosBotones';
-import  MenuImagenes  from '../../../components/ReportTemplate/DinamicImagesMenu';
+'use client';
+import { useState, useRef } from 'react';
+import { useSession } from 'next-auth/react';
 import './Style.css';
 
-// Numero de pasos
-const stepsArray = ['A', 'B', 'C1','C2','D1','D2', 'E','E2', 'F','F2','G','H','I','J'];
+// ─── Constantes ───────────────────────────────────────────────────────────────
+const STUDY_KEY    = 'Auditiva';
+const STUDY_PREFIX = 'mEDXproAuditiva';
+const BUCKET       = 'report-packages';
+const SHARE_BASE   = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.medxproapp.com';
 
-// Metodos de movimiento entre menus
-const SimpleMultiStepForm = ({ showStepNumber, conclusionDivRef, elementRef, handleImageChange,droppedItems,topLeftText,setTopLeftText,copyConclusions,expandedDivs,setExpandedDivs}) => {
+const PLANTILLAS = [
+  { id: 'A',    label: 'Plantilla A',  ring: '#ffffff', dot: '#111111' },
+  { id: 'B',    label: 'Plantilla B',  ring: '#f97316', dot: '#f97316' },
+  { id: 'C',    label: 'Plantilla C',  ring: '#888888', dot: '#888888' },
+  { id: 'none', label: 'Sin plantilla',ring: '#cccccc', dot: '#cccccc' },
+];
 
-  // Se da el valor en donde se inicie el primer paso
-  const [step, setStep] = useState('A');
-  const [selectedSide, setSelectedSide] = useState('');
+// Contador global para pacientes sin nombre → mEDXproAuditiva_1, _2, …
+let _unnamedCounter = 0;
 
-  // Metodos del ultimo paso
-  const {
-    selectedImages,
-    history,
-    handleUndo,
-    handlePrint
-  } = useImageState();
+const toSafeToken = (s) =>
+  (s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^\w.\-]/g, '_').replace(/_+/g, '_').replace(/^_+|_+$/g, '')
+    || `archivo_${Date.now()}`;
 
-  // Siguiente paso, se ponen los pasos de arriba hacia abajo
-  const handleNextStep = () => {
-    const currentIndex = stepsArray.indexOf(step);
-    if (currentIndex < stepsArray.length - 1) {
-      setStep(stepsArray[currentIndex + 1]);
-    }
-  };
-
-  // Paso anterior, se ponen los pasos de abajo hacia arriba
-  const handlePrevStep = () => {
-    const currentIndex = stepsArray.indexOf(step);
-    if (currentIndex > 0) {
-      setStep(stepsArray[currentIndex - 1]);
-    }
-  };
-
-  return (
-    <div>
-      {/* Se crean los objetos paso y se le dan los métodos que necesitan */}
-      {step === 'A' && <StepA handleNextStep={handleNextStep} setStep={setStep}/>}
-      {step === 'B' && <StepB handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
-      {step === 'C1' && <StepC1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
-      {step === 'C2' && <StepC2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
-      {step === 'D1' && <StepD1 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
-      {step === 'D2' && <StepD2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} />}
-      {step === 'E' && <StepE handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} setSelectedSide={setSelectedSide}/>}
-      {step === 'E2' && <StepE2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}setSelectedSide={setSelectedSide} />}
-      {step === 'F' && <StepF handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide} />}
-      {step === 'G' && <StepG handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
-      {step === 'H' && <StepH handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
-      {step === 'I' && <StepI handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep} selectedSide={selectedSide} setSelectedSide={setSelectedSide}/>}
-      {step === 'J' && <StepJ handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}    handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}/>}
-      {step === 'J2' && <StepJ2 handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} setStep={setStep}  handlePrint={handlePrint} conclusionDivRef={conclusionDivRef} elementRef={elementRef} droppedItems={droppedItems} topLeftText={topLeftText} setTopLeftText={setTopLeftText} copyConclusions={copyConclusions} expandedDivs={expandedDivs} setExpandedDivs={setExpandedDivs}/>}
-    </div>
-  );
-};
-///////////////// Menu de cada paso /////////////////
-const StepA = ({ handleNextStep ,setStep}) => (
-  <div>
-    <div className='button-bar'>
-      <button className="print-button dont-print">
-        <img src="/I_X.webp" style={{ filter: 'invert(0.5)' }} />
-      </button>
-    </div>
-    <h1 className="text-xl font-bold text-white">VÍA AUDITIVA</h1>
-    <div onClick={handleNextStep}> 
-    </div>
-    <div onClick={() => setStep('E2')}>
-      <ConclusionButton value="indemne" title="VÍA AUDITIVA CON INTEGRIDAD FUNCIONAL " displayText="INDEMNE" />    </div>
-    <div onClick={() => setStep('B')}>
-      <ConclusionButton value="alterada" title="VÍA AUDITIVA CON DEFECTO " displayText="ALTERADA " />
-    </div>
-  </div>
-);
-
-const StepB = ({ handlePrevStep, handleNextStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
-  return (
-  <div>
-    <div className='button-bar'>
-      <button onClick={() => {
-        removeConclusion('indenme')
-        removeConclusion('alterada')
-        removeConclusion('retardo_en_la_conduccion')
-        removeConclusion('bloqueo_en_la_conduccion')
-        removeConclusion('deficit_neuronal')
-        removeConclusion('sin_respuesta')
-        setStep('A')}} className="print-button dont-print">
-        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button className="print-button dont-print">
-        <img src="" style={{ filter: 'invert(1)' }} />
-      </button>
-    </div>
-    <h1 className="text-xl font-bold text-white">FISIOPATOLOGÍA</h1>
-    <div onClick={() => setStep('C1')}>
-      <ConclusionButton value="retardo_en_la_conduccion" title="POR RETARDO EN LA CONDUCCIÓN " displayText="RETARDO EN LA CONDUCCIÓN" />
-    </div>
-    <div onClick={() => setStep('E')}>
-      <ConclusionButton value="bloqueo_en_la_conduccion" title="POR BLOQUEO EN LA CONDUCCIÓN " displayText="BLOQUEO EN LA CONDUCCIÓN" />
-    </div>
-    <div onClick={() => setStep('C2')}>
-      <ConclusionButton value="deficit_neuronal" title="AXONAL " displayText="DEFICIT AXONAL" />
-    </div>
-    <div onClick={() => setStep('E')}>
-      <ConclusionButton value="sin_respuesta" title="POR AUSENCIA DE RESPUESTA EVOCABLE " displayText="SIN RESPUETA" />
-    </div>
-  </div>
-);
+const buildBaseName = (paciente) => {
+  if (paciente && paciente.trim()) return `${STUDY_PREFIX}_${toSafeToken(paciente.trim())}`;
+  _unnamedCounter += 1;
+  return `${STUDY_PREFIX}_${_unnamedCounter}`;
 };
 
-const StepC1 = ({ handlePrevStep, handleNextStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
+/* ─── Modales ─────────────────────────────────────────────────────────────── */
+function PlantillaModal({ onSelect, onClose }) {
   return (
-  <div>
-    <div className='button-bar'>
-      <button onClick={() => {
-        removeConclusion('leve')
-        removeConclusion('moderado')
-        removeConclusion('severo')
-        setStep('B')}} className="print-button dont-print">
-        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-      </button>
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button className="print-button dont-print">
-        <img src="" style={{ filter: 'invert(1)' }} />
-      </button>
-    </div>
-    <h1 className="text-xl font-bold text-white">GRADO:</h1>
-    <div onClick={() => setStep('D1')}>
-      <ConclusionButton value="leve" title="LEVE " displayText="LEVE " />
-      <ConclusionButton value="moderado" title="MODERADO " displayText=" MODERADO " />
-      <ConclusionButton value="severo" title="SEVERO " displayText="SEVERO " />
-
-    </div>
-  </div>
-);
-};
-
-const StepC2 = ({ handlePrevStep, handleNextStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
-  return (
-  <div>
-    <div className='button-bar'>
-      <button onClick={() =>{ 
-        removeConclusion('leve')
-        removeConclusion('moderado')
-        removeConclusion('severo')
-        setStep('B')}} className="print-button dont-print">
-        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-      </button>
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button className="print-button dont-print">
-        <img src="" style={{ filter: 'invert(1)' }} />
-      </button>
-    </div>
-    <h1 className="text-xl font-bold text-white">GRADO:</h1>
-    <div onClick={() => setStep('D2')}>
-      <ConclusionButton value="leve" title="LEVE " displayText="LEVE" />
-      <ConclusionButton value="moderado" title="MODERADO " displayText="MODERADO" />
-      <ConclusionButton value="severo" title="SEVERO " displayText=" SEVERO" />
-
-    </div>
-  </div>
-);
-};
-
-const StepD1 = ({ handlePrevStep, handleNextStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
-  return(
-  <div>
-    <div className='button-bar'>
-      <button onClick={() =>{ 
-        removeConclusion('perdida_axonal_secundaria')
-        setStep('C1')}} className="print-button dont-print">
-        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button onClick={() => setStep('E')} id='prev' className={`print-button dont-print `}>
-          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
+    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+      <div className="bg-[#1a1a1a] border-2 border-orange-500 rounded-2xl w-full max-w-sm p-6 shadow-2xl">
+        <div className="flex items-center justify-between mb-5">
+          <h3 className="text-white font-bold text-xl">Elige una plantilla</h3>
+          <button onClick={onClose} className="text-white text-2xl font-bold leading-none">✕</button>
+        </div>
+        <div className="grid grid-cols-2 gap-3 mb-5">
+          {PLANTILLAS.map(p => (
+            <button key={p.id} onClick={() => onSelect(p.id)}
+              className="flex flex-col items-center justify-between gap-4 bg-[#0d0d0d] rounded-2xl py-5 px-3 hover:bg-[#1a1a1a] transition-all border border-white/5">
+              <span className="text-white font-bold text-sm">{p.label}</span>
+              <span style={{
+                width: 64, height: 64, borderRadius: '50%',
+                border: `5px solid ${p.ring}`,
+                background: p.ring === '#ccc' ? '#b0b0b0' : 'transparent',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <span style={{
+                  width: 36, height: 36, borderRadius: '50%',
+                  background: p.dot,
+                }} />
+              </span>
+            </button>
+          ))}
+        </div>
+        <button onClick={onClose}
+          className="w-full border-2 border-orange-500 text-orange-500 font-bold py-3 rounded-full text-sm hover:bg-orange-500/10 transition-colors tracking-widest">
+          CANCELAR
         </button>
-    </div>
-    <h1 className="text-xl font-bold text-white">RETARDO EN CONDUCCION: </h1>
-    <div onClick={() => setStep('E')}>
-      <ConclusionButton value="perdida_axonal_secundaria" title=" Y PÉRDIDA AXONAL SECUNDARIA " displayText="+ PÉRDIDA AXONAL" />
-      </div>
-  </div>
-);
-};
-
-const StepD2 = ({ handlePrevStep, handleNextStep, setStep }) => {
-  const { removeConclusion } = useContext(ReportContext)
-  return (
-  <div>
-    <div className='button-bar'>
-      <button onClick={() =>{ 
-        removeConclusion('retardo_secundario_en_la_conduccion')
-        setStep('C2')}} className="print-button dont-print">
-        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-      
-      <button onClick={() => setStep('E')} id='prev' className={`print-button dont-print `}>
-          <img src="/I_In.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button>
-    </div>
-    <h1 className="text-xl font-bold text-white">AXONAL:</h1>
-    <div onClick={() => setStep('E')}>
-      <ConclusionButton value="retardo_secundario_en_la_conduccion" title="Y RETARDO SECUNDARIO EN LA CONDUCCIÓN " displayText="+ RETARDO EN LA CONDUCCIÓN" />
-      </div>
-  </div>
-);
-};
-
-const StepE = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide }) => {
-  const { removeConclusion } = useContext(ReportContext)
-  return (
-      <div>
-        <div className='button-bar'>
-          <button onClick={() =>{ 
-            removeConclusion('izquierdo')
-            removeConclusion('derecho')
-            removeConclusion('bilateral')
-            setStep('D1')}} className="print-button dont-print">
-            <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-          </button>
-
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button className="print-button dont-print">
-        <img src="" style={{ filter: 'invert(1)' }} />
-      </button>
-        </div>
-        <h1 className="text-xl font-bold text-white">LADO:</h1>
-        <div  onClick={() => {
-              setSelectedSide('izquierdo');
-              setStep('F');
-            }}>
-          <ConclusionButton
-            value="izquierdo"
-            title="PARA LADO IZQUIERDO "
-            displayText="IZQUIERDO"
-          
-          />
-        </div>
-        <div  onClick={() => {
-              setSelectedSide('derecho');
-              setStep('F');
-            }}>
-          <ConclusionButton
-            value="derecho"
-            title="PARA LADO DERECHO "
-            displayText="DERECHO"
-          
-          />
-        </div>
-        <div onClick={() => {
-              setSelectedSide('bilateral');
-              setStep('F');
-            }}>
-          <ConclusionButton
-            value="bilateral"
-            title="DE FORMA BILATERAL,"
-            displayText="BILATERAL "
-            
-          />
-        </div>
-      </div>
-  );
-};
-
-
-const StepE2 = ({ handlePrevStep, handleNextStep, setStep,setSelectedSide}) => {
-  const { removeConclusion } = useContext(ReportContext)
-  return (
-  <div>
-    <div className='button-bar'>
-      <button onClick={() =>{ 
-          removeConclusion('izquierdo')
-          removeConclusion('derecho')
-          removeConclusion('bilateral')
-          removeConclusion('indemne')
-          removeConclusion('izquierdoindemne')
-          removeConclusion('derechoindemne')
-          removeConclusion('bilateralindemne')
-
-          setStep('D2')}} className="print-button dont-print">
-          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button className="print-button dont-print">
-        <img src="" style={{ filter: 'invert(1)' }} />
-      </button>
-    </div>
-    <h1 className="text-xl font-bold text-white">LADO:</h1>
-        <div  onClick={() => {
-              setSelectedSide('izquierdo');
-              setStep('J2');
-            }}>
-          <ConclusionButton
-            value="izquierdoindemne"
-            title="PARA LADO IZQUIERDO A TRAVÉS DEL TALLO CEREBRAL."
-            displayText="IZQUIERDO"
-          
-          />
-        </div>
-        <div  onClick={() => {
-              setSelectedSide('derecho');
-              setStep('J2');
-            }}>
-          <ConclusionButton
-            value="derechoindemne"
-            title="PARA LADO DERECHO A TRAVÉS DEL TALLO CEREBRAL."
-            displayText="DERECHO"
-          
-          />
-        </div>
-        <div onClick={() => {
-              setSelectedSide('bilateral');
-              setStep('J2');
-            }}>
-          <ConclusionButton
-            value="bilateralindemne"
-            title="DE FORMA BILATERAL A TRAVÉS DEL TALLO CEREBRAL."
-            displayText="BILATERAL "
-            
-          />
-        </div>
-      </div>
-);
-};
-
-
-
-const StepF = ({ handleNextStep, handlePrevStep, setStep,selectedSide }) => {
-  const { removeConclusion } = useContext(ReportContext)
-  return (
-    <div>
-      <div className='button-bar'>
-        <button onClick={() =>{ 
-          removeConclusion('rostral')
-          removeConclusion('caudal')
-          removeConclusion('tallo_cerebral')
-          setStep('E')}} className="print-button dont-print">
-          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-        </button>
-
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button className="print-button dont-print">
-        <img src="" style={{ filter: 'invert(1)' }} />
-      </button>
-      </div>
-      <h1 className='text-xl font-bold text-white'>REGIÓN: </h1>
-    
-      <div onClick={() => setStep('G')}>
-        <ConclusionButton value='rostral' title=' A TRAVÉS DE REGIÓN ROSTRAL DEL TALLO CEREBRAL' displayText='ROSTRAL (III-V)' />
-        <ConclusionButton value='caudal' title=' A TRAVÉS DE REGIÓN CAUDAL DEL TALLO CEREBRAL' displayText='CAUDAL (I-III)' />
-        <ConclusionButton value='tallo_cerebral' title=' A TRAVÉS DEL TALLO CEREBRAL' displayText='TOTAL (I-V)' />
       </div>
     </div>
   );
-};
-
-// ...
-const StepG = ({
-  setStep,
-  selectedSide,
-  // otras props que necesites
-}) => {
-  const { updateConclusions } = useContext(ReportContext)
-  const { removeConclusion } = useContext(ReportContext)
-
-  // Array de los 5 niveles, EN ORDEN.
-  // Nota que "value" incluye "selectedSide".
-  const levels = [
-    {
-      title: '; TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO.',
-      value: `${selectedSide}nervio_auditivo`,
-      displayText: 'NERVIO AUDITIVO (I)'
-    },
-    {
-      title: '; TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO COCLEAR.',
-      value: `${selectedSide}nucleo_coclear`,
-      displayText: 'NUCLEO COCLEAR (II)'
-    },
-    {
-      title: '; TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE.',
-      value: `${selectedSide}completo_olivar_trapezoide`,
-      displayText: 'COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)'
-    },
-    {
-      title: '; TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL.',
-      value: `${selectedSide}lemnisco_lateral`,
-      displayText: 'LEMNISCO LATERAL (IV)'
-    },
-    {
-      title: '; TOPOGRÁFICAMENTE A NIVEL DE COLÍCULO INFERIOR.',
-      value: `${selectedSide}coliculo_inferior`,
-      displayText: 'COLÍCULO INFERIOR (V)'
-    },
-  ]
-
-  // Cuando clican cualquiera de los 5, seleccionamos
-  // a partir de ÉL hasta el final (incluyéndolo).
- const handleConclusionClick = (title, value) => {
-  setStep('H')
-  const index = levels.findIndex(item => item.value === value);
-  if (index === -1) {
-    updateConclusions({ title, value });
-    return;
-  }
-
-  // Limpia los niveles previos (si tu contexto lo permite),
-  // o de lo contrario sobrescribe la conclusión anterior.
-  // Luego agregas desde 'index' hasta el final:
-  for (let i = index; i < levels.length; i++) {
-    updateConclusions({
-      title: i === index ? levels[i].title : '', // Solo el clicado conserva su título
-      value: levels[i].value,
-    });
-  }
-};
-
-
-  return (
-    <div>
-      <div className='button-bar'>
-        <button onClick={() =>{ 
-          removeConclusion(`${selectedSide}nervio_auditivo`)
-          removeConclusion(`${selectedSide}nucleo_coclear`)
-          removeConclusion(`${selectedSide}completo_olivar_trapezoide`)
-          removeConclusion(`${selectedSide}lemnisco_lateral`)
-          removeConclusion(`${selectedSide}coliculo_inferior`)
-
-          setStep('F')}} className="print-button dont-print">
-          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-        </button>
-
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button className="print-button dont-print">
-        <img src="" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      </div>
-
-      <h1 className='text-xl font-bold text-white'>NIVEL: </h1>
-      
-      {/* Botón 1 (especial) */}
-      <ConclusionButton
-        value={`${selectedSide}nervio_auditivo`}
-        title="; TOPOGRÁFICAMENTE A NIVEL DE NERVIO AUDITIVO."
-        displayText="NERVIO AUDITIVO (I)"
-        onClick={handleConclusionClick}   // <--- Pasamos la función
-      />
-
-      {/* Botón 2 (normal) */}
-      <ConclusionButton
-        value={`${selectedSide}nucleo_coclear`}
-        title="; TOPOGRÁFICAMENTE A NIVEL DE NÚCLEO COCLEAR."
-        displayText="NUCLEO COCLEAR (II)"
-        onClick={handleConclusionClick}   // <--- misma función
-      />
-
-      {/* Botón 3 (normal) */}
-      <ConclusionButton
-        value={`${selectedSide}completo_olivar_trapezoide`}
-        title="; TOPOGRÁFICAMENTE A NIVEL DE COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE."
-        displayText="COMPLEJO OLIVAR SUPERIOR Y CUERPO TRAPEZOIDE (III)"
-        onClick={handleConclusionClick}
-      />
-
-      {/* Botón 4 (normal) */}
-      <ConclusionButton
-        value={`${selectedSide}lemnisco_lateral`}
-        title="; TOPOGRÁFICAMENTE A NIVEL DE LEMNISCO LATERAL."
-        displayText="LEMNISCO LATERAL (IV)"
-        onClick={handleConclusionClick}
-      />
-
-      {/* Botón 5 (normal) */}
-      <ConclusionButton
-        value={`${selectedSide}coliculo_inferior`}
-        title="; TOPOGRÁFICAMENTE A NIVEL DE COLÍCULO INFERIOR."
-        displayText="COLÍCULO INFERIOR (V)"
-        onClick={handleConclusionClick}
-      />
-    </div>
-  )
 }
 
-
-
-
-const StepH = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
-  const { removeConclusion } = useContext(ReportContext)
+/* Modal procesando */
+function ProgressModal({ progress, onClose }) {
   return (
-    <div>
-      <div className='button-bar'>
-        <button onClick={() =>{ 
-          removeConclusion('normoacusia')
-          removeConclusion('hipoacusia_leve')
-          removeConclusion('hipoacusia_moderada')
-          removeConclusion('hipoacusia_severa')
-          removeConclusion('hipocusia_profunda')
-
-          setStep('G')}} className="print-button dont-print">
-          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-        </button>
-
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button className="print-button dont-print">
-        <img src="" style={{ filter: 'invert(1)' }} />
-      </button>
-      </div>
-      <h1 className='text-xl font-bold text-white'>UMBRAL AUDITIVO: </h1>
-      <div onClick={() => setStep('I')}>
-      <ConclusionButton value='normoacusia' title='  UMBRAL PARA TONOS ALTOS COMPATIBLE CON NORMOACUSIA' displayText='NORMOACUSIA '/> 
-      <ConclusionButton value='hipoacusia_leve' title=' UMBRAL PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA LEVE' displayText='HIPOACUSIA LEVE'/> 
-      <ConclusionButton value='hipoacusia_moderada' title=' UMBRAL PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA MODERADA' displayText='HIPOACUSIA MODERADA'/> 
-      <ConclusionButton value='hipoacusia_severa' title=' UMBRAL PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA SEVERA' displayText='HIPOACUSIA SEVERA'/> 
-      <ConclusionButton value='hipocusia_profunda' title=' UMBRAL PARA TONOS ALTOS COMPATIBLE CON HIPOACUSIA PROFUNDA' displayText='HIPOACUSIA PROFUNDA'/> 
+    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+      <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl w-full max-w-xs p-6 shadow-2xl text-center">
+        <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-white font-semibold mb-2">Procesando…</p>
+        <div className="w-full bg-white/10 rounded-full h-2 mb-1">
+          <div className="bg-orange-500 h-2 rounded-full transition-all" style={{ width: `${progress}%` }} />
+        </div>
+        <p className="text-slate-400 text-xs">{progress}%</p>
       </div>
     </div>
   );
-};
+}
 
-const StepI = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint }) => {
-  const { removeConclusion } = useContext(ReportContext)
-  return(
-    <div>
-      <div className='button-bar'>
-        <button onClick={() =>{ 
-          removeConclusion('neurosensorial')
-          removeConclusion('conductiva')
-
-          setStep('H')}} className="print-button dont-print">
-          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-        </button>
-
-      <button onClick={() => window.location.reload()} className="print-button">
-        <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-      </button>
-
-      <button className="print-button dont-print">
-        <img src="" style={{ filter: 'invert(1)' }} />
-      </button>
-      </div>
-      <h1 className='text-xl font-bold text-white'>TIPO: </h1>
-      <div onClick={() => setStep('J')}>
-      <ConclusionButton value='neurosensorial' title=' DE TIPO NEUROSENSORIAL.' displayText='NEUROSENSORIAL'/> 
-      <ConclusionButton value='conductiva' title=' DE TIPO CONDUCTIVA.' displayText='CONDUCTIVA'/> 
-      </div>
-    </div>
-  );
-};
-
-
-
-const StepJ = ({ setStep, selectedImages, handleUndo, handleImageChange, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
-  const { removeConclusion } = useContext(ReportContext)
-  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
-  const { conclusions } = useContext(ReportContext)
-  const { droppedItems } = useContext(DropContext);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleExportPdf = async () => {
-    try {
-      setIsLoading(true); // ⌛ Mostrar overlay
-
-       // 1) conclusiones (array con {value, title})
-    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-
-
-    const conclusiones = conclusions;
-
-
-      const response = await fetch('/api/pdf/generate-pdf/auditiva?route', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          finalConclusion: conclusionFinal, // Envías la cadena final
-          conclusiones, // <--- envías el array de conclusiones
-          userData: {
-            name: session?.user?.name,
-            lastname: session?.user?.lastname,
-            email: session?.user?.email,
-            cedula: session?.user?.cedula,
-            especialidad: session?.user?.especialidad,
-            imageUrl: session?.user?.imageUrl,
-          },
-          droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
-
-        }),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Error al generar PDF");
-      }
-  
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'reporte-completo.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-  
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error al generar PDF: ' + error.message);
-    }finally {
-      document.body.style.cursor = 'default';
-      setIsLoading(false); // ✅ Ocultar overlay
-    }
-  };
-
-  if (isLoading) {
-    return (
-      <div className="loading-overlay">
-        <div className="hourglass">
-        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+/* Modal éxito — ¡Reporte listo! con Abrir y Link */
+function SuccessModal({ filename, pdfUrl, onAbrir, onLink, onClose }) {
+  return (
+    <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+      <div className="bg-[#111] border-2 border-orange-500 rounded-2xl w-full max-w-xs p-6 shadow-2xl text-center relative">
+        <button onClick={onClose}
+          className="absolute top-3 right-4 text-white text-xl font-bold leading-none">✕</button>
+        <p className="text-orange-400 font-bold text-xl mb-1">¡Reporte listo!</p>
+        <p className="text-white font-semibold text-sm mb-1">{filename}</p>
+        <p className="text-slate-400 text-xs mb-2">Guardado en Descargas</p>
+        <div className="flex gap-3 mt-4">
+          {pdfUrl && (
+            <button onClick={onAbrir}
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-full text-sm transition-colors">
+              ABRIR
+            </button>
+          )}
+          <button onClick={onLink}
+            className="flex-1 border-2 border-white/30 text-white font-bold py-3 rounded-full text-sm hover:bg-white/10 transition-colors">
+            LINK
+          </button>
         </div>
       </div>
-    );
-  }
-
-  return (
-    <div>
-      <div className='button-bar'>
-        <button onClick={() =>{ 
-          removeConclusion('neurosensorial')
-          removeConclusion('conductiva')
-
-          setStep('I')}} className="print-button dont-print">
-          <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-        </button>
-        
-        <button onClick={() => window.location.reload()} className="print-button">
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-        </button>
-
-
-        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
-          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button> */}
-
-        <button onClick={handleExportPdf} className={`print-button dont-print`}>
-          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
-        </button>
-
-        <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} /> 
-      </div>
-      <MenuImagenes  expandedDivs={expandedDivs}
-        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
-        setTopLeftText={setTopLeftText}   />
-
     </div>
   );
-};
+}
 
-const StepJ2 = ({ setStep, selectedImages, handleUndo, handlePrint,topLeftText,setTopLeftText, copyConclusions,expandedDivs,setExpandedDivs  }) => {
-  const { removeConclusion } = useContext(ReportContext)
+/* ─── LinkUploaderModal ──────────────────────────────────────────────────────── */
+const EXPIRY_OPTIONS = [
+  { value: '24h', label: '24 h' },
+  { value: '5d',  label: '5 días' },
+  { value: '15d', label: '15 días' },
+];
 
-  const { data: session } = useSession(); // o sube esto a nivel del componente si prefieres
-  const { conclusions } = useContext(ReportContext)
-  const { droppedItems } = useContext(DropContext);
-  const [isLoading, setIsLoading] = useState(false);
+function FileRowUI({ file, onRemove }) {
+  const pct = Math.round((file.progress ?? 0) * 100);
+  const isDone = file.status === 'done';
+  const isError = file.status === 'error';
+  const isUploading = file.status === 'uploading';
+  const isImg = file.type?.startsWith('image/');
 
-  const handleExportPdf = async () => {
+  return (
+    <div className="flex items-center gap-3 bg-[#141414] border border-[#2a2a2a] rounded-xl p-2 mb-2">
+      <div className="w-14 h-10 rounded-lg overflow-hidden bg-[#222] border border-[#333] flex items-center justify-center shrink-0">
+        {isImg && file.thumbUrl
+          ? <img src={file.thumbUrl} alt="" className="w-full h-full object-cover" />
+          : <span className="text-[10px] text-[#999]">FILE</span>
+        }
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-white text-sm font-bold truncate">{file.name}</p>
+        <p className="text-[#aaa] text-xs mt-0.5">
+          {file.size ? (file.size > 1048576 ? `${(file.size/1048576).toFixed(1)} MB` : `${Math.round(file.size/1024)} KB`) : '—'}
+          {' · '}
+          {isDone ? 'Completado' : isError ? 'Error' : isUploading ? `Subiendo ${pct}%` : 'Pendiente'}
+        </p>
+        <div className="w-full bg-white/10 rounded-full h-1.5 mt-1">
+          <div className="bg-orange-500 h-1.5 rounded-full transition-all" style={{ width: `${pct}%` }} />
+        </div>
+      </div>
+      {onRemove && (
+        <button onClick={onRemove} className="text-xs text-white border border-[#333] bg-[#1a1a1a] px-2.5 py-1.5 rounded-lg shrink-0">
+          Quitar
+        </button>
+      )}
+    </div>
+  );
+}
+
+function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onClose }) {
+  const [files, setFiles]       = useState([]);
+  const [title, setTitle]       = useState(`Vías Auditivas – ${[session?.user?.name, session?.user?.lastname].filter(Boolean).join(' ')}`.trim());
+  const [message, setMessage]   = useState('');
+  const [expiry, setExpiry]     = useState('24h');
+  const [justReport, setJustReport] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [uploadPct, setUploadPct]   = useState(0);
+  const [link, setLink]             = useState(null);
+  const fileInputRef = useRef(null);
+  const MAX_FILES = 4;
+
+  const atLimit = files.length >= MAX_FILES;
+
+  const pickFiles = () => fileInputRef.current?.click();
+
+  const onFileInputChange = (e) => {
+    const selected = Array.from(e.target.files || []);
+    e.target.value = '';
+    const toAdd = selected.slice(0, MAX_FILES - files.length).map(f => ({
+      id: `${Date.now()}_${Math.random()}`,
+      name: f.name,
+      file: f,
+      type: f.type || 'application/octet-stream',
+      size: f.size,
+      thumbUrl: f.type?.startsWith('image/') ? URL.createObjectURL(f) : null,
+      progress: 0,
+      status: 'pending',
+    }));
+    setFiles(prev => [...prev, ...toAdd].slice(0, MAX_FILES));
+  };
+
+  const removeFile = (id) => setFiles(prev => prev.filter(f => f.id !== id));
+
+  const updateProgress = (id, pct) => {
+    setFiles(prev => {
+      const updated = prev.map(f => f.id === id ? { ...f, progress: pct, status: pct >= 1 ? 'done' : 'uploading' } : f);
+      const avg = updated.reduce((s, f) => s + (f.progress || 0), 0) / (updated.length || 1);
+      setUploadPct(Math.round(avg * 100));
+      return updated;
+    });
+  };
+
+  const copyLink = () => link && navigator.clipboard.writeText(link).catch(() => {});
+
+  const handleGenerate = async () => {
+    setGenerating(true); setLink(null); setUploadPct(5);
     try {
-    setIsLoading(true); // ⌛ Mostrar overlay
-    // 1) conclusiones (array con {value, title})
-    const conclusionFinal = copyConclusions; // Este es tu string formateado en el frontend
-    const conclusiones = conclusions;
-      const response = await fetch('/api/pdf/generate-pdf/auditiva?route', {
+      const doctor = [session?.user?.name, session?.user?.lastname].filter(Boolean).join(' ');
+      const expirySeconds = expiry === '24h' ? 86400 : expiry === '5d' ? 432000 : 1296000;
+      const finalTitle = (title.trim() || `Vías Auditivas – ${nombrePaciente || 'Paciente'}`).slice(0, 140);
+      const finalMessage = message.trim() || '';
+      const folder = toSafeToken(nombrePaciente || 'paciente');
+
+      // 1) Init link
+      const initRes = await fetch('/api/share/init', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          finalConclusion: conclusionFinal, // Envías la cadena final
-          conclusiones, // <--- envías el array de conclusiones
-          userData: {
-            name: session?.user?.name,
-            lastname: session?.user?.lastname,
-            email: session?.user?.email,
-            cedula: session?.user?.cedula,
-            especialidad: session?.user?.especialidad,
-            imageUrl: session?.user?.imageUrl,
-          },
-          droppedItems, // <--- envía también el array de items arrastrados
-          topLeftText, 
-
+          title: finalTitle,
+          message: finalMessage || undefined,
+          expiresInSeconds: expirySeconds,
+          studyType: STUDY_KEY,
+          patient: nombrePaciente || null,
+          doctor: doctor || null,
+          doctorLogo: session?.user?.imageUrl || null,
         }),
       });
-  
-      if (!response.ok) {
-        throw new Error("Error al generar PDF");
+      if (!initRes.ok) throw new Error('Error al inicializar link');
+      const { linkId } = await initRes.json();
+      setUploadPct(15);
+
+      const uploadedFiles = [];
+
+      // 2) Subir PDF auto
+      setFiles(prev => {
+        const auto = { id: '__auto_report__', name: pdfFilename, type: 'application/pdf', size: pdfBlob?.size, progress: 0.1, status: 'uploading', thumbUrl: null };
+        return justReport ? [auto] : [auto, ...prev.map(f => ({ ...f, status: 'pending', progress: 0.1 }))];
+      });
+      setUploadPct(20);
+
+      const pdfForm = new FormData();
+      pdfForm.append('file', pdfBlob, pdfFilename);
+      pdfForm.append('folder', folder);
+      pdfForm.append('bucket', BUCKET);
+      const pdfUp = await fetch('/api/share/upload', { method: 'POST', body: pdfForm });
+      if (!pdfUp.ok) throw new Error('Error al subir PDF');
+      const pdfData = await pdfUp.json();
+      if (!pdfData.ok) throw new Error(pdfData.error || 'Error subiendo PDF');
+      updateProgress('__auto_report__', 1);
+      uploadedFiles.push({ name: pdfData.name, mime_type: pdfData.mime_type, size_bytes: pdfData.size_bytes, storage_path: pdfData.path });
+      setUploadPct(50);
+
+      // 3) Subir archivos del usuario (si no es justReport)
+      if (!justReport) {
+        const userFiles = files.filter(f => f.id !== '__auto_report__');
+        for (let i = 0; i < userFiles.length; i++) {
+          const f = userFiles[i];
+          const form = new FormData();
+          form.append('file', f.file, f.name);
+          form.append('folder', folder);
+          form.append('bucket', BUCKET);
+          updateProgress(f.id, 0.3);
+          const up = await fetch('/api/share/upload', { method: 'POST', body: form });
+          if (!up.ok) throw new Error(`Error subiendo ${f.name}`);
+          const upData = await up.json();
+          if (!upData.ok) throw new Error(upData.error || `Error subiendo ${f.name}`);
+          updateProgress(f.id, 1);
+          uploadedFiles.push({ name: upData.name, mime_type: upData.mime_type, size_bytes: upData.size_bytes, storage_path: upData.path });
+          setUploadPct(50 + Math.round(((i + 1) / userFiles.length) * 40));
+        }
       }
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'reporte-completo.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error al generar PDF: ' + error.message);
+
+      // 4) Completar link
+      const completeRes = await fetch('/api/share/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ linkId, files: uploadedFiles }),
+      });
+      if (!completeRes.ok) throw new Error('Error al completar link');
+      const completeData = await completeRes.json();
+      setUploadPct(100);
+      setLink(completeData.url || `${SHARE_BASE}/s/${linkId}`);
+    } catch (e) {
+      alert('Error al generar link: ' + e.message);
     } finally {
-      document.body.style.cursor = 'default';
-      setIsLoading(false); // ✅ Ocultar overlay
+      setGenerating(false);
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="loading-overlay">
-        <div className="hourglass">
-        <img src="/assets/Extras/I_Time2.svg" alt="Cargando..." />
+  const canGenerate = !generating && (justReport || files.length > 0);
+
+  return (
+    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto">
+      <div className="bg-[#111] border border-[#333] rounded-2xl w-full max-w-sm shadow-2xl relative my-auto">
+
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-[#222]">
+          <div>
+            <p className="text-orange-400 font-bold text-lg">Generar link</p>
+            <p className="text-[#bbb] text-xs mt-0.5">Comparte el diagnóstico y adjuntos de forma segura</p>
+          </div>
+          <button onClick={onClose} className="text-white text-2xl font-bold leading-none ml-3">✕</button>
         </div>
+
+        <div className="px-5 py-4 space-y-4">
+
+          {/* Toggle solo PDF */}
+          <button onClick={() => setJustReport(v => !v)}
+            className="w-full flex items-center gap-3 bg-[#141414] border border-[#2a2a2a] px-4 py-2.5 rounded-full">
+            <span className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 text-xs font-bold transition-colors ${justReport ? 'bg-orange-500 border-orange-500 text-white' : 'border-[#666]'}`}>
+              {justReport ? '✓' : ''}
+            </span>
+            <span className="text-white text-sm font-semibold">Enviar sólo el PDF del diagnóstico</span>
+          </button>
+
+          {/* Selección archivos */}
+          <div className="border-t border-[#222] pt-4">
+            <p className="text-white font-bold text-sm mb-3 text-center">Selecciona archivos</p>
+            <div style={{ opacity: justReport ? 0.4 : 1, pointerEvents: justReport ? 'none' : 'auto' }}>
+              <input ref={fileInputRef} type="file" multiple accept="image/*,.pdf,.doc,.docx,.txt,.csv" className="hidden" onChange={onFileInputChange} />
+              <button onClick={pickFiles} disabled={atLimit}
+                className={`w-full border border-dashed border-[#444] rounded-2xl py-5 flex flex-col items-center gap-2 bg-[#151515] hover:bg-[#1a1a1a] transition-colors ${atLimit ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                <div className="w-12 h-12 rounded-full bg-[#222] border border-[#333] flex items-center justify-center">
+                  <span className="text-white text-2xl font-bold leading-none">+</span>
+                </div>
+                <span className="text-white text-sm font-bold">Toca para elegir</span>
+                <span className="text-[#999] text-xs">Imágenes · Archivos {atLimit ? '(límite alcanzado)' : ''}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Lista archivos */}
+          <div className="border-t border-[#222] pt-4">
+            <p className="text-white font-bold text-sm mb-3 text-center">Archivos a subir</p>
+            {/* PDF auto */}
+            <div className="flex items-center gap-3 bg-[#141414] border border-[#2a2a2a] rounded-xl p-2 mb-2 opacity-70">
+              <div className="w-14 h-10 rounded-lg bg-[#222] border border-[#333] flex items-center justify-center shrink-0">
+                <span className="text-[10px] text-orange-400 font-bold">PDF</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-white text-sm font-bold truncate">{pdfFilename}</p>
+                <p className="text-[#aaa] text-xs mt-0.5">PDF del diagnóstico · Auto</p>
+              </div>
+            </div>
+            {files.length > 0
+              ? files.map(f => <FileRowUI key={f.id} file={f} onRemove={!generating ? () => removeFile(f.id) : null} />)
+              : <p className="text-[#bbb] text-xs text-center py-1">
+                  {justReport ? 'Se enviará únicamente el PDF del diagnóstico.' : 'Sin archivos adicionales (también puedes enviar sólo el PDF)'}
+                </p>
+            }
+          </div>
+
+          {/* Opciones del link */}
+          <div className="border-t border-[#222] pt-4 space-y-3">
+            <p className="text-white font-bold text-sm text-center">Opciones del link</p>
+            <div>
+              <p className="text-[#bbb] text-xs mb-1.5">Título</p>
+              <input value={title} onChange={e => setTitle(e.target.value)}
+                className="w-full bg-[#222] border border-[#444] text-white text-sm rounded-xl px-3 py-2.5 outline-none focus:border-orange-500" />
+            </div>
+            <div>
+              <p className="text-[#bbb] text-xs mb-1.5">Mensaje (opcional)</p>
+              <textarea value={message} onChange={e => setMessage(e.target.value)} rows={3}
+                placeholder="Saludos..."
+                className="w-full bg-[#222] border border-[#444] text-white text-sm rounded-xl px-3 py-2.5 outline-none focus:border-orange-500 resize-none placeholder:text-[#666]" />
+            </div>
+            <div>
+              <p className="text-[#bbb] text-xs mb-2">Caducidad</p>
+              <div className="flex gap-2">
+                {EXPIRY_OPTIONS.map(o => (
+                  <button key={o.value} onClick={() => setExpiry(o.value)}
+                    className={`flex-1 py-2 rounded-full text-xs font-bold border transition-colors ${expiry === o.value ? 'bg-[#272015] border-orange-400 text-orange-300' : 'bg-[#1b1b1b] border-[#333] text-[#ddd]'}`}>
+                    {o.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="border-t border-[#222] pt-4 flex flex-col items-center gap-4">
+            <button onClick={handleGenerate} disabled={!canGenerate}
+              className={`w-full py-3 rounded-xl font-bold text-white text-sm bg-orange-500 hover:bg-orange-600 transition-colors ${!canGenerate ? 'opacity-50 cursor-not-allowed' : ''}`}>
+              {generating ? 'Generando…' : 'Generar link'}
+            </button>
+
+            {link && (
+              <div className="w-full bg-[#141414] border border-[#333] rounded-xl p-3 space-y-2">
+                <p className="text-[#bbb] text-xs">Link generado</p>
+                <div className="bg-[#1b1b1b] border border-[#333] rounded-lg px-3 py-2">
+                  <p className="text-white text-xs break-all">{link}</p>
+                </div>
+                <button onClick={copyLink}
+                  className="w-full py-2 border border-[#333] bg-[#161616] text-white text-xs font-bold rounded-lg hover:bg-[#222] transition-colors">
+                  Copiar link
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Overlay generando */}
+        {generating && (
+          <div className="absolute inset-0 bg-black/60 rounded-2xl flex items-center justify-center">
+            <div className="bg-[#111] border border-[#333] rounded-xl px-6 py-5 flex flex-col items-center gap-3 w-52">
+              <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
+              <p className="text-white font-bold text-sm">Generando link…</p>
+              <p className="text-[#bbb] text-xs">No cierres esta pantalla</p>
+              <div className="w-full bg-white/10 rounded-full h-2">
+                <div className="bg-orange-500 h-2 rounded-full transition-all" style={{ width: `${uploadPct}%` }} />
+              </div>
+              <p className="text-white text-xs font-bold">{uploadPct}%</p>
+            </div>
+          </div>
+        )}
       </div>
-    );
+    </div>
+  );
+}
+
+/* ─── Barra de exportación (paso H) ─────────────────────────────────────────── */
+// Convierte cualquier URL (blob:, http, data:) a base64 data URL
+async function toBase64DataUrl(src) {
+  if (!src) return null;
+  if (src.startsWith('data:')) return src;
+  try {
+    const res = await fetch(src);
+    const blob = await res.blob();
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch { return null; }
+}
+
+// Tamaño del stack PDF (debe coincidir con LAM_W/LAM_H en route.js)
+const PDF_LAM_W = 690;
+const PDF_LAM_H = 620;
+
+export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [], figuras = [], laminaSize = { w: 690, h: 620 }, listaVisual = [], imgLista = null, comentarioLista = '', onBack: _onBack, onReset: _onReset, isOpen = false, onClose: notifyClose }) {
+  const { data: session } = useSession();
+
+  const [showPlantillaModal, setShowPlantillaModal] = useState(false);
+  const [progress, setProgress]         = useState(0);
+  const [processing, setProcessing]     = useState(false);
+  const [pdfUrl, setPdfUrl]             = useState('');
+  const [pdfBlob, setPdfBlob]           = useState(null);
+  const [showSuccess, setShowSuccess]   = useState(false);
+  const [showLinkUploader, setShowLinkUploader] = useState(false);
+  const [filename, setFilename]         = useState('');
+
+  // isOpen=true → abrir PlantillaModal directamente
+  if (isOpen && !showPlantillaModal && !processing && !showSuccess && !showLinkUploader) {
+    setShowPlantillaModal(true);
+    notifyClose?.();
   }
 
-return (
-  <div>
-    <div className='button-bar'>
-      <button onClick={() => setStep('E2')} className="print-button dont-print">
-        <img src="/I_Out.svg" alt="Anterior" style={{ filter: 'invert(1)' }} />
-      </button>
-      
-      <button onClick={() => window.location.reload()} className={`print-button`}>
-          <img src="/I_Repeat.svg" style={{ filter: 'invert(1)' }} />
-        </button>
+  const buildPayload = async (plantillaId) => {
+    const scaleX = PDF_LAM_W / (laminaSize.w || PDF_LAM_W);
+    const scaleY = PDF_LAM_H / (laminaSize.h || PDF_LAM_H);
 
-        {/* <button id='prev' onClick={() => window.print()} className={`print-button dont-print `}>
-          <img src="/I_Print.svg " alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button> */}
+    const figurasB64 = await Promise.all(
+      figuras.map(async (f) => {
+        const src = f.src?.startsWith('blob:') ? await toBase64DataUrl(f.src) : f.src;
+        return { ...f, src, x: Math.round(f.x * scaleX), y: Math.round(f.y * scaleY) };
+      })
+    );
 
-        <button onClick={handleExportPdf} className={`print-button dont-print`}>
-          <img src="/I_Document.svg" alt="Exportar PDF" style={{ filter: 'invert(1)' }} />
-        </button>
+    return {
+      finalConclusion: textoReporte,
+      activeOv,
+      figuras: figurasB64,
+      listaVisual,
+      imgListaUrl: imgLista?.src || null,
+      comentarioLista,
+      plantillaId,
+      userData: {
+        name:         session?.user?.name,
+        lastname:     session?.user?.lastname,
+        email:        session?.user?.email,
+        cedula:       session?.user?.idprofessional,
+        especialidad: session?.user?.specialty,
+        imageUrl:     session?.user?.imageUrl,
+      },
+      topLeftText: nombrePaciente || '',
+    };
+  };
 
-    </div>
-    <MenuImagenes  expandedDivs={expandedDivs}
-        setExpandedDivs={setExpandedDivs}  topLeftText={topLeftText}
-        setTopLeftText={setTopLeftText}   />
-    </div>
-);
-};
-export default SimpleMultiStepForm;
+  const handlePlantillaSelect = async (id) => {
+    setShowPlantillaModal(false);
+    setProcessing(true); setProgress(10);
+    try {
+      const nombre = buildBaseName(nombrePaciente);
+      const payload = await buildPayload(id);
+      setProgress(40);
+      const res = await fetch('/api/pdf/generate-pdf/auditiva', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      setProgress(80);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const blob = await res.blob();
+
+      // Auto-descarga
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `${nombre}.pdf`;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+      setProgress(100);
+      setProcessing(false);
+      setPdfBlob(blob);
+      setPdfUrl(url);
+      setFilename(`${nombre}.pdf`);
+      setShowSuccess(true);
+    } catch (e) {
+      alert('Error al exportar PDF: ' + e.message);
+      setProcessing(false);
+    }
+  };
+
+  const handleAbrirPdf = () => {
+    if (pdfUrl) window.open(pdfUrl, '_blank');
+  };
+
+  const handleOpenLinkUploader = () => {
+    setShowSuccess(false);
+    setShowLinkUploader(true);
+  };
+
+  const closeSuccess = () => {
+    setShowSuccess(false);
+    if (pdfUrl) { window.URL.revokeObjectURL(pdfUrl); setPdfUrl(''); }
+    setPdfBlob(null);
+  };
+
+  const closeLinkUploader = () => {
+    setShowLinkUploader(false);
+  };
+
+  return (
+    <>
+      {showPlantillaModal && (
+        <PlantillaModal
+          onSelect={handlePlantillaSelect}
+          onClose={() => setShowPlantillaModal(false)}
+        />
+      )}
+      {processing && <ProgressModal progress={progress} />}
+      {showSuccess && (
+        <SuccessModal
+          filename={filename}
+          pdfUrl={pdfUrl}
+          onAbrir={handleAbrirPdf}
+          onLink={handleOpenLinkUploader}
+          onClose={closeSuccess}
+        />
+      )}
+      {showLinkUploader && (
+        <LinkUploaderModal
+          pdfBlob={pdfBlob}
+          pdfFilename={filename}
+          nombrePaciente={nombrePaciente}
+          session={session}
+          onClose={closeLinkUploader}
+        />
+      )}
+    </>
+  );
+}

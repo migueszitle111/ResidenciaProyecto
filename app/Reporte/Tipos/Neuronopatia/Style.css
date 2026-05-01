@@ -76,10 +76,6 @@
   box-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 
-
-
-
-
 /* Seccion de Datos de perfil y Titulo de reporte*/
 .head {
   display: flex;
@@ -201,6 +197,9 @@
   padding: 5px;
 }
 
+
+
+
 .print-button {
   background-color: #1C1C1C;
   padding: 8px;
@@ -308,7 +307,7 @@
 
 .delete-button {
   position: absolute;
-  top: -4px;
+  top: -10px;
   right: 5px;
   width: 30px;
   background-color: #1C1C1C;
@@ -341,6 +340,7 @@ color: white;
 background-color: #c44900;
 color: white;
 }
+
 
 
 .loading-overlay {
@@ -430,4 +430,3 @@ color: white;
     width: 24rem;  /* Mismo tamaño que la imagen base */
   }
 }
-

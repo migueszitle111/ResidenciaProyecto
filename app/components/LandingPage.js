@@ -8,6 +8,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -121,7 +122,12 @@ const infoCards = [
 
   return (
     <>
-      <div className="w-full bg-black bg-center bg-fixed text-white">
+      <motion.div
+        className="w-full bg-black bg-center bg-fixed text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         {/* Vídeo introductorio */}
         <div className="max-w-screen-xl mx-auto px-4 pt-12" data-aos="fade-up">
           <video
@@ -538,7 +544,7 @@ const infoCards = [
 )}
 
 
-      </div>
+      </motion.div>
 
       {/* Global overrides for Swiper, marquee, etc. */}
      <style jsx global>{`

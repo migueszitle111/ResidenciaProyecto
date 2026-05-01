@@ -1,61 +1,85 @@
-// app/api/share/complete/route.js
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-import { NextResponse } from 'next/server';
-import { getSupabaseAdmin } from '@/lib/supabaseadmin';
+import { NextResponse } from "next/server";
+import { getSupabaseAdmin } from "@/lib/supabaseadmin";
+import { shareCompleteSchema } from "@/lib/api/schemas";
+import {
+  handleApiError,
+  parseJsonBody,
+  requireAuthenticatedUser,
+} from "@/lib/api/security";
+import { isValidStoragePath } from "@/lib/api/storage";
 
+function canManageLink(user, link) {
+  return user?.roles === "admin" || link?.meta?.createdByEmail === user?.email;
+}
 
 export async function POST(req) {
   try {
+    const auth = await requireAuthenticatedUser(req);
+    if (auth.error) {
+      return auth.error;
+    }
+
     const supabaseAdmin = getSupabaseAdmin();
-    const { linkId, files } = await req.json();
-    if (!linkId || !Array.isArray(files) || !files.length) {
-      return NextResponse.json({ ok: false, error: 'payload inválido' }, { status: 400 });
+    const { linkId, files } = await parseJsonBody(req, shareCompleteSchema);
+
+    if (!files.every((file) => isValidStoragePath(file.storage_path))) {
+      return NextResponse.json(
+        { ok: false, error: "Alguna ruta de archivo es inválida" },
+        { status: 400 }
+      );
     }
 
     const { data: link, error: linkErr } = await supabaseAdmin
-      .from('share_links')
-      .select('id, slug, is_active, expiry_at')
-      .eq('id', linkId)
+      .from("share_links")
+      .select("id, slug, is_active, expiry_at, meta")
+      .eq("id", linkId)
       .single();
 
     if (linkErr || !link) {
-      return NextResponse.json({ ok: false, error: 'link inexistente' }, { status: 400 });
+      return NextResponse.json({ ok: false, error: "link inexistente" }, { status: 400 });
     }
+
+    if (!canManageLink(auth.user, link)) {
+      return NextResponse.json({ ok: false, error: "No autorizado" }, { status: 403 });
+    }
+
     if (link.expiry_at && new Date(link.expiry_at) <= new Date()) {
-      return NextResponse.json({ ok: false, error: 'link expirado' }, { status: 400 });
+      return NextResponse.json({ ok: false, error: "link expirado" }, { status: 400 });
     }
 
-    // (opcional) idempotencia: si ya estaba activo, devuelve la URL y listo
-    // const envBase = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '');
-    // const base = (envBase || '').replace(/\/$/, '');
-    // if (link.is_active) return NextResponse.json({ ok: true, url: `${base}/s/${link.slug}`, slug: link.slug });
-
-    const toInsert = files.map(f => ({
+    const toInsert = files.map((file) => ({
       link_id: linkId,
-      name: f.name,
-      mime_type: f.mime_type,
-      size_bytes: f.size_bytes ?? null,
-      storage_path: f.storage_path,
+      name: file.name,
+      mime_type: file.mime_type,
+      size_bytes: file.size_bytes ?? null,
+      storage_path: file.storage_path,
     }));
-    const { error: insErr } = await supabaseAdmin.from('share_link_files').insert(toInsert);
-    if (insErr) throw insErr;
 
-    await supabaseAdmin.from('share_links')
+    const { error: insertError } = await supabaseAdmin
+      .from("share_link_files")
+      .insert(toInsert);
+
+    if (insertError) {
+      throw insertError;
+    }
+
+    await supabaseAdmin
+      .from("share_links")
       .update({ is_active: true })
-      .eq('id', linkId);
+      .eq("id", linkId);
 
- const envBase =
-   process.env.NEXT_PUBLIC_SITE_URL ||
-   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '');
+    const envBase =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
 
-const base = (envBase || '').replace(/\/$/, '');
-const url = `${base}/s/${link.slug}`;
-
+    const base = (envBase || "").replace(/\/$/, "");
+    const url = `${base}/s/${link.slug}`;
 
     return NextResponse.json({ ok: true, url, slug: link.slug });
-  } catch (e) {
-    return NextResponse.json({ ok: false, error: String(e) }, { status: 400 });
+  } catch (error) {
+    return handleApiError(error, "No se pudo completar el link compartido");
   }
 }

@@ -1,51 +1,36 @@
+// app/api/register/route.js
+// Redirige el registro al backend Express de la app móvil
 import { NextResponse } from "next/server";
-import Stripe from "stripe";
-import { isAllowedForTrial } from "@/lib/allowedTrials";
+import { handleApiError, parseJsonBody } from "@/lib/api/security";
+import { registerSchema } from "@/lib/api/schemas";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2023-10-16",
-});
-
-const TRIAL_DAYS = Number(process.env.TRIAL_DAYS || 30);
-
-async function getOrCreateCustomerByEmail(email, metadata = {}) {
-  const list = await stripe.customers.list({ email, limit: 1 });
-  if (list.data.length > 0) return list.data[0];
-  return await stripe.customers.create({ email, metadata });
-}
+const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:5001";
 
 export async function POST(req) {
-  const { name, lastname, cedula, especialidad, email, roles, imageUrl } =
-    await req.json();
+  try {
+    const body = await parseJsonBody(req, registerSchema);
 
-  const giveTrial = isAllowedForTrial(email);
-  const trialDays = giveTrial ? TRIAL_DAYS : 0;
+    const res = await fetch(`${BACKEND_URL}/registrar`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    });
 
-  const customer = await getOrCreateCustomerByEmail(email, {
-    name, lastname, cedula, especialidad,
-  });
+    const data = await res.json().catch(() => ({}));
 
-  const session = await stripe.checkout.sessions.create({
-    mode: "subscription",
-    customer: customer.id,
-    payment_method_types: ["card"],
-    line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
-    subscription_data: {
-      ...(trialDays > 0 ? { trial_period_days: trialDays } : {}),
-    },
-    metadata: {
-      name,
-      lastname,
-      cedula,
-      especialidad,
-      email,
-      roles: roles || "user",
-      imageUrl: imageUrl || "",
-      provider: "credentials",
-    },
-    success_url: `${process.env.NEXTAUTH_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXTAUTH_URL}/Registro?canceled=true`,
-  });
+    if (!res.ok) {
+      return NextResponse.json(
+        { message: data.message || "Error al registrar usuario" },
+        { status: res.status }
+      );
+    }
 
-  return NextResponse.json({ url: session.url });
+    return NextResponse.json(
+      { message: "Usuario registrado correctamente" },
+      { status: 201 }
+    );
+  } catch (error) {
+    return handleApiError(error, "Error al registrar usuario");
+  }
 }

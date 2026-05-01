@@ -76,10 +76,8 @@
   box-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 
-
-
 /* Seccion de Datos de perfil y Titulo de reporte*/
-.head{
+.head {
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -89,28 +87,12 @@
   padding-top: 2vh;
 }
 
-.containerdiv {
-  position: relative;
-} 
-
-.dont-print-Nervius{
-  background-color: cyan;
-  visibility: visible;
-}
-
-.cornerimage {
-  border: 0;
-  position: absolute;
-  top: 0;
-  right: 0;
-  }
-
-.head h1{
+.head h1 {
   font-size: 25px;
 }
 
 /* Titulo del reporte */
-.report-container{
+.report-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,7 +111,7 @@
 .box-container {
   display: flex;
   background-color: #1c1c1c;
-  border: 2px solid ;
+  border: 2px solid;
   border-radius: 8px;
   overflow: hidden;
   width: 50vh;
@@ -145,24 +127,6 @@
   width: 100%;
 }
 
-/* Estilo para las filas de checkbox */
-.checkbox-row {
-  display: flex;
-  gap: 40px; /* Espaciado horizontal entre columnas */
-  align-items: center;
-}
-/* Ajustar los checkboxes y las etiquetas */
-.checkbox-row input[type="checkbox"] {
-  width: 12px; /* Tamaño del checkbox */
-  height: 12px;
-  margin: 5px; /* Espaciado entre checkbox */
-  cursor: pointer; /* Cambia el cursor al pasar */
-  margin-left: 27px; 
-}
-input[type="checkbox"] {
-  cursor: pointer; /* Cambia el cursor al pasar */
-  margin-left: 6px; 
-}
 .title {
   font-size: 15px;
   font-weight: bold;
@@ -193,75 +157,21 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   min-height: 117.2vh; /* Tamaño inicial mínimo en altura */
-  min-width: 40vh;    /* Tamaño inicial mínimo en ancho */
+  width: 55vh;    /* Tamaño inicial mínimo en ancho */
   height: auto;       /* Permite que la altura se ajuste al contenido */
-  width: auto;        /* Permite que el ancho se ajuste al contenido */
-  background-color: #1C1C1C;
+  background-color:#1C1C1C;
   background-image: url('/assets/04_01_ Vector _ SVG/G_14.svg'); /* Ruta relativa a la carpeta public */
-  background-size: cover;  /* Ajustar tamaño de la imagen al contenedor */
-  background-position: center; /* Centrar la imagen */
+  background-size: cover;  
+  background-position: center; 
   border-radius: 10px;
 }
 
-.image-container {
-  display: flex;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  flex-grow: 1; /* Permite que el contenedor crezca dinámicamente */
-}
-
-.overlay-image {
-  position: absolute;
-  width: 100%;
-  height: auto; /* Permitir que la altura sea dinámica */
-  object-fit: contain; /* Asegura que la imagen se ajuste dentro del contenedor sin deformarse */
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.info-box{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 20vh;
-  background-color: #1C1C1C;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.selected-words-box {
-  background-color: #eee;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  width: 100%; 
-  height: 100%; 
-  font-size: 14px;
-}
-
-.selected-words-box h2 {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.selected-words-box ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.selected-words-box li {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.con-img{
+/* Ejemplo contenedor de imagen base */
+.con-img {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  background-color: #000000;
 }
 
 .info-container {
@@ -270,15 +180,14 @@ input[type="checkbox"] {
   align-items: left;
   border-radius: 4px;
   overflow: hidden;
-  width: 98.5%;  
+  width: 100%;  
   margin: 10px;
   height: 20vh;
-  
-
+  margin-bottom: 0px;
   z-index: 1; 
 }
 
-.info-container textarea {
+.info-container p {
   width: 100%;
   height: 100%;
   font-size: 14px;
@@ -287,6 +196,9 @@ input[type="checkbox"] {
   resize: none; 
   padding: 5px;
 }
+
+
+
 
 .print-button {
   background-color: #1C1C1C;
@@ -317,24 +229,19 @@ input[type="checkbox"] {
   justify-content: space-between;
   width: 100%;
   padding-bottom: 1vh;
+  z-index: 10;
 }
 
-.button-bar button, .button-bar input[type="file"], .button-bar label {
+.button-bar button, 
+.button-bar input[type="file"], 
+.button-bar label {
   border-radius: 50%;
   width: 55px; 
   height: 55px; 
   text-align: center;
   margin : 10px;
   border: 2px solid #c44900; 
-
 }
-
-.adjustable-content {
-  flex-grow: 1; /* Permite que este contenido se ajuste al tamaño disponible */
-  padding: 20px;
- 
-}
-
 
 .vertical-orinetation {
   display: flex;
@@ -345,21 +252,23 @@ input[type="checkbox"] {
 }
 
 .conclusion-container {
+  display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 10px;
+  padding:10px;
   border-radius: 10px;
   background-color: #1C1C1C;
-  margin: 10px;
+  margin-top: 10px;
 }
 
 .dont-print {
   display: visible;
 }
 
+/* Estilos para Rnd (drag resize) - no siempre necesarios */
 .handle {
   width: 10px;
   height: 10px;
@@ -368,160 +277,26 @@ input[type="checkbox"] {
   position: absolute;
 }
 
-.handle-n {
-  cursor: n-resize;
-  top: -5px;
-  left: 50%;
-  margin-left: -5px;
-}
-
-.handle-e {
-  cursor: e-resize;
-  top: 50%;
-  right: -5px;
-  margin-top: -5px;
-}
-
-.handle-s {
-  cursor: s-resize;
-  bottom: -5px;
-  left: 50%;
-  margin-left: -5px;
-}
-
-.handle-w {
-  cursor: w-resize;
-  top: 50%;
-  left: -5px;
-  margin-top: -5px;
-}
-
-.handle-ne {
-  cursor: ne-resize;
-  top: -5px;
-  right: -5px;
-}
-
-.handle-se {
-  cursor: se-resize;
-  bottom: -5px;
-  right: -5px;
-}
-
-.handle-sw {
-  cursor: sw-resize;
-  bottom: -5px;
-  left: -5px;
-}
-
-.handle-nw {
-  cursor: nw-resize;
-  top: -5px;
-  left: -5px;
-}
-
+/* DropArea */
 .dropArea {
-  top: 1px;
-  left: 1px;
-  right: 1px;
-  bottom: 1px;
-  width: 200%;
-  height: 100%;
-  position: absolute;
-  overflow: hidden;
-  background-color: transparent;
-  z-index: 999;   
+  position: absolute; /* Importante para superponer sobre la imagen */
+  top: 0;
+  left: 0;
+  width: 600px;  /* Mismo tamaño que la imagen base */
+  height: 776px;
+  z-index: 10;   
+  /* background-color: rgba(0,255,0,0.2);  */
 }
 
-.btnInsert{
-  height: 50px;
-  width: 90px;
-  margin-left: 70px;
-  margin-top: 10px;
-  background-color: rgba(48, 80, 121, 0.39);
-  color: white;
-  position: center;
-  border-radius: 5%;
+/* Ajustes para dispositivos pequeños (móviles) */
+@media (max-width: 768px) {
+  /* Ajusta según tu preferencia */
 }
 
-.dropArea img {
-  object-fit: contain; /* Ajusta la imagen para que se ajuste dentro del área de drop sin distorsionarse */
+/* Ajustes para pantallas muy grandes */
+@media (min-width: 1200px) {
+  /* Ajusta según tu preferencia */
 }
-.container-grid {
-  width: 22vw;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* Asegura espacio entre columnas */
-}
-
-.container-grid > * {
-  flex-basis: 48%; /* Cada elemento hijo ocupará aproximadamente la mitad del contenedor */
-  box-sizing: border-box; /* Asegura que el padding y border se incluyan en el ancho total */
-}
-
-/* Detalles referentes a la impresion */
-@media print {
-  .print {
-    display: none;
-  }
-  .dont-print {
-    display: none;
-  }
-  .image-container {
-    position: relative;
-    width: 600px;
-    height: 100%;
-  }
-  .handle {
-    position: relative;
-  }
-  .box-container {
-    position: absolute;
-    top: 0;
-    width: 40vh;
-    background: transparent;
-    background-color: white;
-    border: 2px solid white;
-    z-index: 1;
-  }
-  .info-container textarea {
-    position: bottom;
-    width: 980px;
-    height: 50%;
-    font-size: 14px;;
-    background-color: lightgreen;
-    text-align: justify; 
-    resize: none; 
-    top: 4vh;
-    margin-left: 100px;
-    /* Para ajustar el texto */
-   word-wrap: break-word;  /* Rompe las palabras largas */
-   word-break: break-all;   /* Rompe las palabras si es necesario */
-   overflow-wrap: break-word; /* Ajuste de palabras al borde del contenedor */
-   /*/* Para asegurar que el padding esté controlado */
-   padding: 10px;
-   /* Controla la altura de la línea del texto */
-   line-height: 1.5;  
-   /* Controla los bordes */   
-   box-sizing: border-box; /* Incluye el padding y borde en el tamaño total */
-  }
-
-.head{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap : 10vh;
-  }
-  
-  .rnd-image {
-    left: -725px !important;
-    top: -205px !important; 
-  }
-
-}
-
 
 .item-container {
   position: relative; /* para posicionar el botón dentro */
@@ -532,18 +307,20 @@ input[type="checkbox"] {
 
 .delete-button {
   position: absolute;
-  top: 1px;
+  top: -10px;
   right: 5px;
-  width: 25px;
+  width: 30px;
   background-color: #1C1C1C;
-  padding: 8px;
-  text-align: left;
+  padding: 9px;
+  text-align: center;
   font-size: 10px;
   cursor: pointer;
   border-radius: 100%;
   transition: all 0.3s ease;
   cursor: pointer;
   border: 1px solid #c44900;
+  color:aliceblue;
+  z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
 }
 /* 1) Oculto por defecto */
 .delete-button {
@@ -564,6 +341,8 @@ background-color: #c44900;
 color: white;
 }
 
+
+
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -579,7 +358,7 @@ color: white;
 
 .hourglass {
   position: absolute;
-  right: 38%;
+  right: 35%;
   font-size: 60px;
   color: rgba(255, 0, 0, 0.986);
   animation: pulse 1s infinite ease-in-out;
@@ -639,13 +418,15 @@ color: white;
     margin: 0.7vh;
     display: flex;
     flex-direction: column;
-    min-height: 30.2vh; /* Tamaño inicial mínimo en altura */
+    min-height: 20.2vh; /* Tamaño inicial mínimo en altura */
     height: auto;       /* Permite que la altura se ajuste al contenido */
   }
   
   .info-container {
-    width: 100%;
     justify-content: center;
-    margin-left: -1px;
+  }
+
+  .dropArea {
+    width: 24rem;  /* Mismo tamaño que la imagen base */
   }
 }

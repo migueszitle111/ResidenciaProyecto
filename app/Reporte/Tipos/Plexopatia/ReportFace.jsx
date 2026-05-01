@@ -1,1546 +1,1002 @@
-import { ReportContext,DropContext} from '@/src/context';
-import { useSession } from "next-auth/react";
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
-import { ConclusionCanvasV } from '../../../components/ReportTemplate/Conclusions/CanvasViasVisual';
-import SimpleMultiStepForm from './MenuBotones';
+'use client';
+import { useSession } from 'next-auth/react';
+import { useCallback, useMemo, useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import ExportBar from './MenuBotones';
 import './Style.css';
 
+/* ─── Galería de tablas ─────────────────────────────────────────────────── */
+const TABLAS_URL = 'https://backendmedxpro-tef2.onrender.com/pdfEducacion/Tablas';
+const TABLAS = [
+  { id: 'COORRELACIÓN DE TIEMPO DE EVOLUCIÓN EN PLEXOPATÍAS', file: 'EVOLUCION_PLEXO.png' },
+  { id: 'CLASIFICACIÓN DE SEDDON Y SUNDERLAND',               file: 'Tabla38.png' },
+  { id: 'CRITERIOS DE LAMBERT PARA DESMIELINIZACIÓN',         file: 'LAMBERT_DESMIELINIZACION.png' },
+  { id: 'CRITERIOS CIDP AANEM',                               file: 'CRITERIOS_CIDP_AANEM.png' },
+  { id: 'PATRONES ELECTROFISIOLÓGICOS EN NEUROPATÍA',         file: 'PATRONES_NEURO.png' },
+  { id: 'CRITERIOS ELECTROFISIOLÓGICOS DE DESMIELINIZACIÓN',  file: 'ELECTROFISIOLOGICOS_DES.png' },
+  { id: 'AANEM CRITERIOS PARA NEUROPATÍAS POR ATRAPAMIENTO',  file: 'ATRAPAMIENTO.png' },
+];
 
-const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
-  const { droppedItems, setDroppedItems } = useContext(DropContext);
-  const dropAreaRef = useRef(null);
-
-  useEffect(() => {
-    if (dropAreaRef.current) {
-      const rect = dropAreaRef.current.getBoundingClientRect();
-      console.log('DropArea dimensions:', rect.width, rect.height);
-    }
-  }, []);
-
-  const handleDragStop = (e, d, item) => {
-    const dropAreaRect = dropAreaRef.current.getBoundingClientRect();
-    const itemRect = e.target.getBoundingClientRect();
-    const itemCenterX = itemRect.left + itemRect.width / 2;
-    const itemCenterY = itemRect.top + itemRect.height / 2;
-
-    if (
-      itemCenterX < dropAreaRect.left ||
-      itemCenterX > dropAreaRect.right ||
-      itemCenterY < dropAreaRect.top ||
-      itemCenterY > dropAreaRect.bottom
-    ) {
-      setDroppedItems((prev) => prev.filter((i) => i.id !== item.id));
-    } else {
-      updatePosition(item.id, d.x, d.y);
-    }
-  };
-
-  // EJEMPLO COMPLETO
-const handleDrop = (e) => {
-  e.preventDefault();
-
-  // 1) Recuperamos ID como string
-  const draggedId = e.dataTransfer.getData('app-id');
-  // 2) Convertimos a número
-  const numericId = parseInt(draggedId, 10);
-
-  if (!isNaN(numericId)) {
-    // 3) Colapsar sólo el ítem arrastrado
-    setExpandedDivs(prev => ({
-      ...prev,
-      [numericId]: false
-    }));
-  }
-
-  // 3) Leer el HTML del ítem y añadirlo a droppedItems
-  const data = e.dataTransfer.getData('text/html');
-  if (data) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(data, 'text/html');
-    const element = doc.body.firstChild;
-    if (element) {
-      setDroppedItems((prev) => [
-        ...prev,
-        { id: Date.now(), content: element.outerHTML, x: 0, y: 0 },
-      ]);
-    }
-  }
-};
-
- 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const updatePosition = (id, x, y) => {
-    setDroppedItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, x, y } : item
-      )
-    );
-  };
-
-  const removeItem = (id) => {
-    setDroppedItems((prev) => prev.filter((item) => item.id !== id));
-  };
-
+function GaleriaTablas({ onSelect, onClose }) {
+  const [busqueda, setBusqueda] = useState('');
+  const filtradas = TABLAS.filter(t => t.id.toLowerCase().includes(busqueda.toLowerCase()));
   return (
-    <div
-      className="dropArea"
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      ref={dropAreaRef}
-    >
-      {topLeftText && (
-        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'10px' }}>
-          {topLeftText}
-        </p>
-      )}
-      {droppedItems.length === 0 ? (
-        <p></p>
-      ) : (
-        droppedItems.map((item) => (
-          <Rnd
-            key={item.id}
-            default={{
-              x: item.x,
-              y: item.y,
-              width: 200,
-              height: 200
-            }}
-            onDragStop={(e, d) => handleDragStop(e, d, item)}
-            style={{ position: 'absolute' }}
-          >
-            <div className="item-container" style={{ width: '100%', height: '100%' }}>
-              <button
-                className="delete-button"
-                onClick={() => removeItem(item.id)}
-              >
-                X
-              </button>
-              <div dangerouslySetInnerHTML={{ __html: item.content }} />
-            </div>
-          </Rnd>
-        ))
-      )}
-    </div>
-  );
-};
-const Reporte = () => {
-    // arrancamos false para que no intente leer localStorage en servidor
-const [showHelpModal, setShowHelpModal] = useState(false);
-  useEffect(() => {
-   const hide = localStorage.getItem('hideHelpGif') === 'true';
-   setShowHelpModal(!hide);
-  }, []);
-     const { data: session, status } = useSession();
-     const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)
-     const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
-     const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
-     const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
-     // Estados para el historial de imagenes
-     const [history, setHistory] = useState([]); 
-     const [Future,setFuture] = useState([]); 
-      // Aquí manejamos la expansión/colapso de símbolos en MenuImagenes
-     const [expandedDivs, setExpandedDivs] = useState({});
-     
-     const { droppedItems } = useContext(DropContext);
-     const [topLeftText, setTopLeftText] = useState('');
-     const imgRef = useRef(null);
-
-    // Actualizar las conclusiones
-    useEffect(() => {
-      setCopyConclusions(conclusions.map(cl => cl.title).join(''))
-    }, [conclusions])
-    
-
-    //funcion que agreaga comas y conjunciones a las conclusiones
-    function formatConclusions(copyConclusions) {
-      const keywords2 = ["POSTGANGLIONAR PARCIAL A NIVEL DE TROCO"];
-      const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
-      const keywords4 = ["INTENSIDAD LEVE.", "INTENSIDAD MODERADA.", "INTENSIDAD SEVERA."];
-      const keywords = ["C5", "C6", "C7", "C8", "T1", "SUPERIOR", "MEDIO", "INFERIOR", "LATERAL", "POSTERIOR", "MEDIAL", "L2", "L3", "L4", "L5", "S1", "S2"];
-      const specificKeywords = ["C5", "C6", "C7", "C8", "T1"]; // Nueva condición específica
-      let words = copyConclusions.split(' ');
-  
-      // Verificar la palabra clave específica en keywords2 (TROCO)
-      for (let i = 0; i < words.length; i++) {
-          if (keywords2.includes(words.slice(i, i + 6).join(' '))) {
-              let countAfterKeyword = 0;
-              for (let j = i + 6; j < words.length; j++) {
-                  if (keywords.includes(words[j])) {
-                      countAfterKeyword++;
-                  }
-              }
-  
-              if (countAfterKeyword > 1) {
-                  words[i + 5] += 'S'; // Agregar 'S' al final de 'TROCO' si hay más de dos palabras
-              }
-              break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
-          }
-      }
-  
-      // Verificar la palabra clave específica en keywords3 (CORDON)
-      for (let i = 0; i < words.length; i++) {
-          if (keywords3.includes(words.slice(i, i + 6).join(' '))) {
-              let countAfterKeyword = 0;
-              for (let j = i + 6; j < words.length; j++) {
-                  if (keywords.includes(words[j])) {
-                      countAfterKeyword++;
-                  }
-              }
-  
-              if (countAfterKeyword > 1) {
-                  words[i + 5] += 'ES'; // Agregar 'ES' al final de 'CORDON' si hay más de dos palabras
-              }
-  
-              break; // Salir del bucle una vez que se ha encontrado y procesado la palabra clave
-          }
-      }
-  
-      // Verificar las palabras clave específicas en keywords4 (INTENSIDAD) y agregar doble salto de línea
-      for (let i = 0; i < words.length; i++) {
-          if (keywords4.includes(words.slice(i, i + 2).join(' '))) { // Comparar con las palabras clave de 2 palabras
-              words[i + 1] += '\n\n'; // Agregar doble salto de línea después de la palabra clave
-          }
-      }
-  
-      // Nueva condición para "PREGANGLIONAR PARCIAL"
-      let firstKeywordIndex = words.findIndex(word => specificKeywords.includes(word));
-      if (firstKeywordIndex !== -1) {
-          words.splice(firstKeywordIndex, 0, "PREGANGLIONAR PARCIAL A NIVEL DE");
-      }
-  
-      // Verificar y formatear las palabras clave generales (C5, C6, T1, etc.)
-      let keywordPositions = [];
-      for (let i = 0; i < words.length; i++) {
-          if (keywords.includes(words[i])) {
-              keywordPositions.push(i);
-          }
-      }
-  
-      if (keywordPositions.length > 1) {
-          // Formatear las palabras clave con comas, excepto antes de la conjunción
-          for (let i = 0; i < keywordPositions.length - 2; i++) {
-              words[keywordPositions[i]] += ',';
-          }
-  
-          // Verificar si la última palabra clave empieza con "I"
-          let lastKeywordIndex = keywordPositions[keywordPositions.length - 1];
-          let conjunction = 'Y';
-  
-          if (words[lastKeywordIndex][0].toUpperCase() === 'I') {
-              conjunction = 'E';
-          }
-  
-          // Insertar la conjunción antes de la última palabra clave
-          words.splice(lastKeywordIndex, 0, conjunction);
-      }
-  
-      // Unir las palabras con espacios
-      let formattedConclusions = words.join(' ');
-  
-      // Eliminar espacio en blanco antes de la palabra 'REINERVACIÓN'
-      formattedConclusions = formattedConclusions.replace(/\sREINERVACIÓN/g, 'REINERVACIÓN');
-  
-      return formattedConclusions;
-  }
-  
-  
-  const formattedConclusions = formatConclusions(copyConclusions);
-
-    
-    // Actualizar las conclusiones
-    useEffect(() => {
-      const newConclusions = conclusions.map(cl => cl.title).join('');
-      const formattedConclusions = formatConclusions(newConclusions);
-      setCopyConclusions(formattedConclusions );
-  }, [conclusions]);
-  
-  useEffect(() => {
-    const node = conclusionDivRef.current;
-    if (node && node.innerText !== copyConclusions) {
-      // Guardar posición del cursor
-      const selection = window.getSelection();
-      const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-      const { startOffset, startContainer } = range || {};
-      
-      // Actualizar contenido
-      node.innerText = copyConclusions;
-      
-      // Restaurar posición del cursor
-      if (range && startContainer) {
-        const newRange = document.createRange();
-        const childNodes = node.childNodes;
-        const textNode = childNodes.length > 0 ? childNodes[0] : document.createTextNode("");
-        if (!childNodes.length) node.appendChild(textNode);
-        
-        newRange.setStart(textNode, Math.min(startOffset, textNode.length));
-        newRange.collapse(true);
-        selection.removeAllRanges();
-        selection.addRange(newRange);
-      }
-    }
-  }, [copyConclusions]);
-    // Para mantener constante la conclusione
-    const handleTextareaChange = (event) => {
-      setCopyConclusions(event.target.value)
-    }
-    // Funciones para el historial de imagenes, en caso de usar Undo te regresa a la imagen anterior
-    const handleImageChange = useCallback((event) => {
-      if (event.target.files && event.target.files[0]) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const base64 = e.target.result; // Keep the full data URL
-          setSelectedImages((prevImages) => [
-            ...prevImages,
-            {
-              src: base64, // Full data URL
-              position: { x: Math.random() * 200, y: Math.random() * 200 },
-              size: { width: 200, height: 200 },
-            },
-          ]);
-          setHistory((prevHistory) => [...prevHistory, selectedImages]);
-          setFuture([]);
-        };
-        reader.readAsDataURL(file);
-      }
-    }, [selectedImages]);
-    
-    const handleUndo = useCallback(() => {
-      if (history.length > 0) {
-        setFuture((prevFuture) => [selectedImages, ...prevFuture]);
-        setSelectedImages(history[history.length - 1]);
-        setHistory((prevHistory) => prevHistory.slice(0, prevHistory.length - 1));
-      }
-    }, [history, selectedImages]);
-    
-    // Funciones para el arrastre y redimension de las imagenes
-    const handleDragStop = useCallback((index, e, d) => {
-      setSelectedImages((prevImages) => {
-        const newImages = [...prevImages];
-        newImages[index].position = { x: d.x, y: d.y };
-        return newImages;
-      });
-    }, []);
-    
-    const handleResizeStop = useCallback((index, e, direction, ref, delta, position) => {
-      setSelectedImages((prevImages) => {
-        const newImages = [...prevImages];
-        newImages[index].size = { width: ref.style.width, height: ref.style.height };
-        return newImages;
-      });
-    }, []);
-
-    const conclusionDivRef = useRef(null);
-    const elementRef = useRef(null);
-
-  const moveCaretToEnd = (element) => {
-    if (!element) return;
-    element.focus();
-    if (typeof window.getSelection !== "undefined" && typeof document.createRange !== "undefined") {
-      const range = document.createRange();
-      range.selectNodeContents(element);
-      range.collapse(false); // Colapsa el rango al final del contenido
-      const sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-    }
-  };
-
-
-  return (
-    <div >
-      
-  {showHelpModal && (
-        <div
-          className="help-modal-overlay"
-          onClick={() => setShowHelpModal(false)}
-        >
-          <div
-            className="help-modal-content"
-            onClick={e => e.stopPropagation()}
-          >
-            <button
-              className="help-modal-close"
-              onClick={() => setShowHelpModal(false)}
-            >
-              ×
-            </button>
-            <img
-              src="https://media.githubusercontent.com/media/migueszitle111/ResidenciaProyecto/refs/heads/main/public/assets/Gifs/Ayudaboton.gif"
-              alt="Ayuda menú"
-              className="help-modal-gif"
-            />
-            <button
-              className="help-modal-hide"
-              onClick={() => {
-                localStorage.setItem('hideHelpGif', 'true');
-                setShowHelpModal(false);
-              }}
-            >
-              No volver a mostrar
-            </button>
-          </div>
+    <div style={{ position:'fixed', inset:0, zIndex:10100, background:'rgba(0,0,0,0.75)', display:'flex', alignItems:'center', justifyContent:'center', padding:20 }}>
+      <div style={{ background:'#2a2a2a', borderRadius:14, width:'100%', maxWidth:480, maxHeight:'85vh', display:'flex', flexDirection:'column', border:'1px solid rgba(255,255,255,0.1)', overflow:'hidden' }}>
+        <div style={{ padding:'18px 20px 12px', borderBottom:'1px solid rgba(255,255,255,0.08)' }}>
+          <h3 style={{ color:'#fff', fontSize:17, fontWeight:700, margin:'0 0 12px', textAlign:'center' }}>Selecciona una imagen:</h3>
+          <input type="text" value={busqueda} onChange={e=>setBusqueda(e.target.value)} placeholder="Buscar imagen..." autoFocus
+            style={{ width:'100%', boxSizing:'border-box', background:'#444', border:'none', borderRadius:8, padding:'10px 14px', color:'#fff', fontSize:14, outline:'none' }} />
         </div>
-      )}
-
-      {/* Clase que encapzula la información y el titulo de la pagina */}
-      {/* Wrapper que encapsula la image, conclusión y lista de botones */}
-      <div className="wrapper">
-        {/* Componente de la caja de conclusión junto con la caja de notas */}
-          {/* Se especifica dont-print para no ser incluidos en la vista de impresión */}
-          <div className='vertical-orientation dont-print'>
-          {/* Lista de botones */}
-          <div className='button-bar'>
-          <button 
-            id='unhide' 
-            className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`} 
-            onClick={() => {
-              setPageVisibility(true);
-              setSelectedImages([]);
-            }}
-          >
-          <img src="/I_Out.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
-          </button>
-          <button id='print' className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
-          <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
-          </button>
-          
-          <button onClick={handleUndo} className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
-          <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
-          </button>
-          <label htmlFor="file-upload" className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
-          <img src="/I_Folder.svg" alt="Subir" style={{filter: 'invert(1)'}} />
-          </label>
-            <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} style={{display: 'none'}}/>          </div>
-
-        <div className={'vertical-container dont-print'}>
-          <div className={`dont-print ${isPageVisible ? 'visible' : 'hidden'}`}>
-            {/*
-          <ConclusionBox />
-            */}
-          </div>
-
-{/* Menu de opciones */}
-
-<div className={`mx-4 z-10  `}>
-            <SimpleMultiStepForm 
-              showStepNumber={true}
-              conclusionDivRef={conclusionDivRef}
-              elementRef={elementRef}
-              handleImageChange={handleImageChange}
-              topLeftText={topLeftText}
-              setTopLeftText={setTopLeftText}
-              copyConclusions={copyConclusions}  
-              ref={imgRef.current}
-              expandedDivs={expandedDivs}
-              setExpandedDivs={setExpandedDivs}
-            />
-          </div>
-        
-          </div>
-        </div>
-        {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
-               <div>
-                 <div className='con-img'> 
-               
-               {/* Codigo para desplegar las imagenes dentro de un array */}
-               {selectedImages.map((image, index) => (
-                 <Rnd
-                   className="rnd-image"
-                   key={index}
-                   size={image.size}
-                   position={image.position}
-                   onDragStop={(e, d) => handleDragStop(index, e, d)}
-                   onResizeStop={(e, direction, ref, delta, position) => handleResizeStop(index, e, direction, ref, delta, position)}
-                   lockAspectRatio={true}
-                   style={{ zIndex: 2 }} 
-       
-                 >
-                   <img src={image.src} draggable="false" />
-                 </Rnd>
-               ))}
-       
-               {/* Despliego de las imagenes dentro del array */}
-               <div ref={elementRef} className='conclusion-container '>
-       
-               <div id="dropArea"><DropArea topLeftText={topLeftText}  expandedDivs={expandedDivs}
-                       setExpandedDivs={setExpandedDivs}  />
-       
-               </div>
-        <ConclusionCanvasV 
-        
-          img={{
-            src: '/assets/PlexoImg/BP_Plexopatia.png',
-            alt: 'Modelo',
-            useMap: '#image-map',
-            width: '600', 
-            height: '776'
-          }}
-          
-          rules={[
-            {
-              expectedValue: 'pre_total', 
-              image: {
-                src: 'PlexoImg/PLE_T superior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c5s', 
-              image: {
-                src: 'PlexoImg/PLE_T superior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c6s', 
-              image: {
-                src: 'PlexoImg/PLE_T superior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c7m',
-              image: {
-                src: 'PlexoImg/PLE_T. Medio.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c8f',
-              image: {
-                src: 'PlexoImg/PLE_T. inferior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 't1f',
-              image: {
-                src: 'PlexoImg/PLE_T. inferior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'post_total',
-              image: {
-                src: 'PlexoImg/PLE_T superior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'sup',
-              image: {
-                src: 'PlexoImg/PLE_T superior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'medio',
-              image: {
-                src: 'PlexoImg/PLE_T. Medio.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'inf',
-              image: {
-                src: 'PlexoImg/PLE_T. inferior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'divi',
-              image: {
-                src: 'PlexoImg/PLE_Cordon Posterior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'lateral',
-              image: {
-                src: 'PlexoImg/PLE_Lateral.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'posterior',
-              image: {
-                src: 'PlexoImg/PLE_Cordon Posterior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'medial',
-              image: {
-                src: 'PlexoImg/PLE_Cordon Medial.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'salida',
-              image: {
-                src: 'PlexoImg/PLE_T. Inferior.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'preganglionar_total',
-              image: {
-                src: 'PlexoImg/PLE_P. Lumbosacro.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L2',
-              image: {
-                src: 'PlexoImg/PLE_P. Lumbar.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L3',
-              image: {
-                src: 'PlexoImg/PLE_P. Lumbar.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L4',
-              image: {
-                src: 'PlexoImg/PLE_T. Lumbosacro.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L5',
-              image: {
-                src: 'PlexoImg/PLE_T. Lumbosacro.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'S1',
-              image: {
-                src: 'PlexoImg/PLE_P. Sacro.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'S2',
-              image: {
-                src: 'PlexoImg/PLE_P. Sacro.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'postganglionar_total',
-              image: {
-                src: 'PlexoImg/PLE_P. Lumbosacro.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'ilihipogastrico_e_ilinguinal',
-              image: {
-                src: 'PlexoImg/NO_Ilioinguinal-genitofemoral.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'genitocrural_y_femorocutáneo_lateral',
-              image: {
-                src: 'PlexoImg/NO_Femorocutáneo femoral.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_lumbar',
-              image: {
-                src: 'PlexoImg/PLE_P. Lumbar.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_lumbosacro',
-              image: {
-                src: 'PlexoImg/PLE_T. Lumbosacro.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_sacro',
-              image: {
-                src: 'PlexoImg/PLE_P. Sacro.png',
-                alt: 'Modelo',
-              }
-            },
-
-            {
-              expectedValue: 'plexo_pudendo',
-              image: [
-              {
-                src: 'PlexoImg/Plexo pudendo derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Plexo pudendo izquierdo.png',
-                alt: 'Modelo',
-              },
-            ],
-            },
-
-
-            {
-              expectedValue: 'pre_totald', 
-              image: {
-                src: 'PlexoImg/Tronco superior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c5sd', 
-              image: {
-                src: 'PlexoImg/Tronco superior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c6sd', 
-              image: {
-                src: 'PlexoImg/Tronco superior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c7md',
-              image: {
-                src: 'PlexoImg/Tronco medio derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c8fd',
-              image: {
-                src: 'PlexoImg/Tronco inferior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 't1fd',
-              image: {
-                src: 'PlexoImg/Tronco inferior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'post_totald',
-              image: {
-                src: 'PlexoImg/Tronco superior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'supd',
-              image: {
-                src: 'PlexoImg/Tronco superior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'mediod',
-              image: {
-                src: 'PlexoImg/Tronco medio derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'infd',
-              image: {
-                src: 'PlexoImg/Tronco inferior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'divid',
-              image: {
-                src: 'PlexoImg/Cordon lateral derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'laterald',
-              image: {
-                src: 'PlexoImg/Cordon lateral derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'posteriord',
-              image: {
-                src: 'PlexoImg/Cordon posterior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'mediald',
-              image: {
-                src: 'PlexoImg/Cordon medial derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'salidad',
-              image: {
-                src: 'PlexoImg/Tronco inferior derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'preganglionar_totald',
-              image: {
-                src: 'PlexoImg/Plexo lumbosacro derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L2d',
-              image: {
-                src: 'PlexoImg/Plexo lumbar derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L3d',
-              image: {
-                src: 'PlexoImg/Plexo lumbar derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L4d',
-              image: {
-                src: 'PlexoImg/Tronco lumbosacro derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L5d',
-              image: {
-                src: 'PlexoImg/Tronco lumbosacro derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'S1d',
-              image: {
-                src: 'PlexoImg/Plexo sacro derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'S2d',
-              image: {
-                src: 'PlexoImg/Plexo sacro derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'postganglionar_totald',
-              image: {
-                src: 'PlexoImg/Plexo lumbosacro derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'ilihipogastrico_e_ilinguinald',
-              image: {
-                src: 'PlexoImg/ILIOHIPOGASTRICO DERECHO.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'genitocrural_y_femorocutáneo_laterald',
-              image: {
-                src: 'PlexoImg/FEMOROCUTANEO DERECHO.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_lumbard',
-              image: {
-                src: 'PlexoImg/Plexo lumbar derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_lumbosacrod',
-              image: {
-                src: 'PlexoImg/Tronco lumbosacro derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_sacrod',
-              image: {
-                src: 'PlexoImg/Plexo sacro derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_pudendod',
-              image: {
-                src: 'PlexoImg/Plexo pudendo derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'pre_totali', 
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c5si', 
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c6si', 
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c7mi',
-              image: {
-                src: 'PlexoImg/Tronco medio izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'c8fi',
-              image: {
-                src: 'PlexoImg/Tronco inferior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 't1fi',
-              image: {
-                src: 'PlexoImg/Tronco inferior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'post_totali',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'supi',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'medioi',
-              image: {
-                src: 'PlexoImg/Tronco medio izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'infi',
-              image: {
-                src: 'PlexoImg/Tronco inferior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'divii',
-              image: {
-                src: 'PlexoImg/Cordon lateral izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'laterali',
-              image: {
-                src: 'PlexoImg/Cordon lateral izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'posteriori',
-              image: {
-                src: 'PlexoImg/Cordon posterior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'mediali',
-              image: {
-                src: 'PlexoImg/Cordon medial izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'salidai',
-              image: {
-                src: 'PlexoImg/Tronco inferior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'preganglionar_totali',
-              image: {
-                src: 'PlexoImg/Plexo lumbosacro izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L2i',
-              image: {
-                src: 'PlexoImg/Plexo lumbar izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L3i',
-              image: {
-                src: 'PlexoImg/Plexo lumbar izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L4i',
-              image: {
-                src: 'PlexoImg/Tronco lumbosacro izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'L5i',
-              image: {
-                src: 'PlexoImg/Tronco lumbosacro izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'S1i',
-              image: {
-                src: 'PlexoImg/Plexo sacro izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'S2i',
-              image: {
-                src: 'PlexoImg/Plexo sacro izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'postganglionar_totali',
-              image: {
-                src: 'PlexoImg/Plexo lumbosacro izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'ilihipogastrico_e_ilinguinali',
-              image: {
-                src: 'PlexoImg/ILIOHIPOGASTRICO IZQUIERDO.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'genitocrural_y_femorocutáneo_laterali',
-              image: {
-                src: 'PlexoImg/FEMOROCUTANEO IZQUIERDO.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_lumbari',
-              image: {
-                src: 'PlexoImg/Plexo lumbar izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_lumbosacroi',
-              image: {
-                src: 'PlexoImg/Tronco lumbosacro izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_sacroi',
-              image: {
-                src: 'PlexoImg/Plexo sacro izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'plexo_pudendoi',
-              image: {
-                src: 'PlexoImg/Plexo pudendo izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'uid',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'mid',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'umd',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'umid',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'uii',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'mii',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'umi',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'umii',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'ui',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'mi',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'um',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'umi',
-              image: {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'izquierda_C',
-              image: {
-                src: 'PlexoImg/Plexo cervical izquierdo.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'derecha_C',
-              image: {
-                src: 'PlexoImg/Plexo cervical derecho.png',
-                alt: 'Modelo',
-              }
-            },
-            {
-              expectedValue: 'bilateral_C',
-              image: {
-                src: 'PlexoImg/PLEXO CERVICAL BILATERAL.png',
-                alt: 'Modelo',
-              }
-            },
-
-            {
-              expectedValue: 'troncosD',
-              image: [
-              {
-                src: 'PlexoImg/Tronco superior derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco medio derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco inferior derecho.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            {
-              expectedValue: 'troncosI',
-              image: [
-              {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco medio izquierdo.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco inferior izquierdo.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            {
-              expectedValue: 'troncosB',
-              image: [
-              {
-                src: 'PlexoImg/Tronco superior derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco medio derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco inferior derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco medio izquierdo.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco inferior izquierdo.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-
-            {
-              expectedValue: 'CordonI',
-              image: [
-              {
-                src: 'PlexoImg/Cordon lateral izquierdo.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Cordon posterior izquierdo.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Cordon medial izquierdo.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-            
-            {
-              expectedValue: 'CordonD',
-              image: [
-              {
-                src: 'PlexoImg/Cordon lateral derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Cordon posterior derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Cordon medial derecho.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            {
-              expectedValue: 'CordonB',
-              image: [
-              {
-                src: 'PlexoImg/Cordon lateral derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Cordon posterior derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Cordon medial derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Cordon lateral izquierdo.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Cordon posterior izquierdo.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Cordon medial izquierdo.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            
-            {
-              expectedValue: 'pre_totalN',
-              image: [
-              {
-                src: 'PlexoImg/PLE_T superior.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco superior derecho.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Tronco superior izquierdo.png',
-                alt: 'Modelo',
-              }
-            ],
-            },
-
-            {
-              expectedValue: 'pre_Sacroi',
-              image: [
-              {
-                src: 'PlexoImg/Tronco lumbosacro izquierdo.png',
-                alt: 'Modelo',
-              },
-              {
-                src: 'PlexoImg/Plexo pudendo izquierdo.png',
-                alt: 'Modelo',
-              },
-            ],
-            },
-
-
-
-          ]}
-
-          const footertext = {
-            <>
-            {session && (
-            <>
-              {/* Bloque Nombre */}
-              <div id="footerName"style={{ display: 'inline-flex' , alignItems: 'center' ,paddingLeft: '65px' }}>
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="8"
-                  height="8"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  style={{ marginRight: '4px' }}
-                  aria-label="Usuario"
-                >
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 
-                           0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                </svg>
-                <span>{name} {lastname}</span>
-              </div>
-              {/* Bloque Email */}
-              <div id="footerEmail" style={{ display: 'inline-flex', alignItems: 'center' }}>
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="8"
-                  height="8"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  style={{ marginRight: '4px' }}
-                  aria-label="Email"
-                >
-                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 
-                           2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                </svg>
-                <span>{email}</span>
-              </div>
-              {/* Bloque Especialidad */}
-              <div  id="footerEspecialidad" style={{ display: 'inline-flex', alignItems: 'center' }}>
-              <svg
-                  version="1.1"
-                  id="ICONOS"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 90 90"
-                  style={{ enableBackground: 'new 0 0 90 90', marginRight: '4px' }}
-                  xmlSpace="preserve"
-                  width="8"
-                  height="8"
-                  aria-label="Especialidad"
-                >
-                  <style type="text/css">
-                    {`
-                      .st0 { fill: none; stroke: #000000; stroke-width: 2; stroke-miterlimit: 10; }
-                      .st1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: square; stroke-miterlimit: 10; }
-                      .st2 { fill: #FFFFFF; }
-                    `}
-                  </style>
-                  <g id="brain">
-                    <g>
-                      <path className="st0" d="M45.12,61.02c0,0,0,7.32-4.79,7.32h-8.68c-1.82,0-3.29-1.47-3.29-3.29c0,0-2.39-8.68-2.65-8.68l-2.88-1.21
-                        c-1.57-0.66-2.31-2.46-1.66-4.03l4.8-9.65v-0.67c0-11.9,9.65-21.55,21.55-21.55s21.55,9.65,21.55,21.55
-                        c0,5.12-1.8,9.84-4.79,13.54v16.39"/>
-                      <path className="st0" d="M39.05,43.72c-0.14,0.42-0.11,0.49-0.11,0.96c0,2.25,1.83,4.08,4.09,4.08c1.2,0,2.11-0.7,2.91-1.49"/>
-                      <path className="st0" d="M53.85,30.98c0.14-0.01,0.29-0.02,0.43-0.02c2.25,0,4.08,1.83,4.08,4.09c0,1.17-0.63,2.49-1.42,3.22"/>
-                      <path className="st0" d="M53.85,30.98c-0.99-2.77-3.64-4.73-6.74-4.73c-3.78,0-6.59,3.01-7.48,6.5"/>
-                      <path className="st1" d="M45.94,47.17l1.2,1.01c1.92,1.34,3.08,3.52,3.09,5.87c0.01,2.61,0.02,5.66,0.02,5.66"/>
-                      <path className="st1" d="M43.93,39.98c-3.68,0-4.76,3.36-4.76,3.36l-1.19,0.13c-3.03,0-5.48-2.45-5.48-5.48
-                        c0-3.03,2.45-5.48,5.48-5.48c0.71,0,1.05,0.04,1.67,0.22"/>
-                      <path className="st0" d="M57.6,37.99c2.26,0,4.09,1.83,4.09,4.09c0,2.25-1.83,4.08-4.09,4.08c-2.25,0-4.08-1.83-4.08-4.08
-                        c0,0-3.2,1.39-4.54-1.53"/>
-                      <path className="st0" d="M47.56,33.37c2.89,3.66,8.31-1.32,4.69-4.94"/>
-                    </g>
-                  </g>
-                </svg>
-                <span>{especialidad}</span>
-              </div>
-              {/* Bloque Cédula */}
-              <div  id="footerCedula" style={{ display: 'inline-flex', alignItems: 'center' }}>
-              <svg
-                  version="1.1"
-                  id="ICONOS"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 90 90"
-                  style={{ enableBackground: 'new 0 0 90 90', marginRight: '4px' }}
-                  xmlSpace="preserve"
-                  width="8"
-                  height="8"
-                  aria-label="Cédula"
-                >
-                  <style type="text/css">
-                    {`
-                      .st0 { fill: none; stroke: #000000; stroke-width: 2; stroke-miterlimit: 10; }
-                      .st1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: square; stroke-miterlimit: 10; }
-                      .st2 { fill: #FFFFFF; }
-                    `}
-                  </style>
-                  <g id="test">
-                    <g>
-                      <rect x="20.72" y="16.5" className="st0" width="48.56" height="57" />
-                      <g>
-                        <path d="M38.39,28.69c0-0.87,0.7-1.57,1.57-1.57h2.68c0.87,0,1.57,0.7,1.57,1.57v3.71c0,0.34-0.11,0.68-0.32,0.95l-2.8,3.67
-                          c-0.3,0.39-0.76,0.62-1.25,0.62h-1.06l2.33-4.71h-1.15c-0.87,0-1.57-0.7-1.57-1.57V28.69z M47.37,27.12h2.67
-                          c0.87,0,1.57,0.7,1.57,1.57v3.71c0,0.34-0.11,0.68-0.32,0.95l-2.8,3.67c-0.3,0.39-0.76,0.62-1.25,0.62h-1.06l2.33-4.71h-1.15
-                          c-0.87,0-1.57-0.7-1.57-1.57v-2.68C45.8,27.83,46.51,27.12,47.37,27.12z" />
-                      </g>
-                      <line className="st0" x1="35.23" y1="47.02" x2="54.77" y2="47.02" />
-                      <line className="st0" x1="35.23" y1="55.73" x2="54.77" y2="55.73" />
-                      <line className="st0" x1="35.23" y1="64.45" x2="54.77" y2="64.45" />
-                    </g>
-                  </g>
-                </svg>
-                <span>Cédula: {cedula}</span>
-              </div>
-            </>
-          )}
-          </>
+        <div style={{ flex:1, overflowY:'auto' }}>
+          {filtradas.length === 0
+            ? <p style={{ color:'rgba(255,255,255,0.4)', fontStyle:'italic', padding:20, textAlign:'center', margin:0 }}>Sin resultados.</p>
+            : filtradas.map((t,i) => (
+                <button key={i} onClick={() => onSelect(`${TABLAS_URL}/${t.file}`)}
+                  style={{ width:'100%', textAlign:'left', padding:'14px 20px', background:'transparent', border:'none', borderBottom:'1px solid rgba(255,255,255,0.07)', color:'#fff', fontSize:14, cursor:'pointer' }}
+                  onMouseEnter={e=>e.currentTarget.style.background='rgba(249,115,22,0.12)'}
+                  onMouseLeave={e=>e.currentTarget.style.background='transparent'}
+                >{t.id}</button>
+              ))
           }
-          userImageUrl={imageUrl}  // Aquí se pasa la URL de la imagen del usuario
-          
-
-        />
-        
-<div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
-<div
-  id="conclusionDiv"
-  ref={conclusionDivRef}
-  contentEditable
-  style={{
-    position: 'absolute',
-    width: '95%',
-    height: 'auto',
-    outline: 'none',
-    resize: 'none',
-    fontSize: '12px',
-    paddingTop: '8px',
-    marginLeft: '10px',
-    backgroundColor: 'rgb(255, 255, 255)',
-    zIndex: '1',
-  }}
-  onInput={(e) => {
-    setCopyConclusions(e.currentTarget.innerText);
-  }}
-  onFocus={(e) => {
-    // Mover el cursor al final del contenido
-    const range = document.createRange();
-    const selection = window.getSelection();
-    range.selectNodeContents(e.target);
-    range.collapse(false); // Colapsar al final
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }}
-  suppressContentEditableWarning={true}
-  /></div>
         </div>
-        </div>
-        <div> </div>
+        <div style={{ padding:'12px 20px', borderTop:'1px solid rgba(255,255,255,0.08)' }}>
+          <button onClick={onClose} style={{ width:'100%', padding:'11px 0', borderRadius:10, border:'none', background:'#f97316', color:'#fff', fontWeight:700, fontSize:15, cursor:'pointer' }}>Cerrar</button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Reporte
+/* ─── Crop modal ─────────────────────────────────────────────────────────── */
+function CropModal({ src, onConfirm, onClose }) {
+  const imgRef = useRef(null);
+  const canvasRef = useRef(null);
+  const overlayRef = useRef(null);
+  const [sel, setSel] = useState(null);
+  const [drawing, setDrawing] = useState(false);
+  const startRef = useRef({ x:0, y:0 });
+  const getRelPos = (e, el) => { const r = el.getBoundingClientRect(); return { x: e.clientX-r.left, y: e.clientY-r.top }; };
+  const onMouseDown = (e) => { const pos = getRelPos(e, overlayRef.current); startRef.current=pos; setSel({ x:pos.x, y:pos.y, w:0, h:0 }); setDrawing(true); };
+  const onMouseMove = (e) => { if (!drawing) return; const pos = getRelPos(e, overlayRef.current); setSel({ x:Math.min(startRef.current.x,pos.x), y:Math.min(startRef.current.y,pos.y), w:Math.abs(pos.x-startRef.current.x), h:Math.abs(pos.y-startRef.current.y) }); };
+  const onMouseUp = () => setDrawing(false);
+  const applyCrop = () => {
+    if (!sel || sel.w < 5 || sel.h < 5) { onClose(); return; }
+    const img = imgRef.current; const overlay = overlayRef.current;
+    const scaleX = img.naturalWidth/overlay.clientWidth; const scaleY = img.naturalHeight/overlay.clientHeight;
+    const canvas = canvasRef.current;
+    canvas.width = sel.w*scaleX; canvas.height = sel.h*scaleY;
+    canvas.getContext('2d').drawImage(img, sel.x*scaleX, sel.y*scaleY, sel.w*scaleX, sel.h*scaleY, 0, 0, canvas.width, canvas.height);
+    onConfirm(canvas.toDataURL('image/png'));
+  };
+  return (
+    <div style={{ position:'fixed', inset:0, zIndex:10200, background:'rgba(0,0,0,0.9)', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:16 }}>
+      <p style={{ color:'#fff', fontSize:13, marginBottom:10 }}>Arrastra para seleccionar el área a recortar</p>
+      <div ref={overlayRef} onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onMouseUp}
+        style={{ position:'relative', cursor:'crosshair', maxWidth:'90vw', maxHeight:'70vh', userSelect:'none' }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img ref={imgRef} src={src} alt="crop" draggable={false} style={{ display:'block', maxWidth:'90vw', maxHeight:'70vh', objectFit:'contain' }} />
+        {sel && sel.w > 2 && sel.h > 2 && (
+          <div style={{ position:'absolute', left:sel.x, top:sel.y, width:sel.w, height:sel.h, border:'2px dashed #f97316', background:'rgba(249,115,22,0.15)', pointerEvents:'none' }} />
+        )}
+      </div>
+      <canvas ref={canvasRef} style={{ display:'none' }} />
+      <div style={{ display:'flex', gap:12, marginTop:16 }}>
+        <button onClick={applyCrop} style={{ padding:'9px 28px', borderRadius:10, border:'none', background:'#f97316', color:'#fff', fontWeight:700, fontSize:14, cursor:'pointer' }}>Aplicar recorte</button>
+        <button onClick={onClose} style={{ padding:'9px 28px', borderRadius:10, border:'1px solid rgba(255,255,255,0.2)', background:'transparent', color:'#fff', fontSize:14, cursor:'pointer' }}>Cancelar</button>
+      </div>
+    </div>
+  );
+}
+
+/* ─── limpiarTextoReporte ────────────────────────────────────────────────── */
+function limpiarTextoReporte(s) {
+  if (!s) return '';
+  return s.split('\n\n').map(parrafo => {
+    let t = parrafo.replace(/[ \t]+/g, ' ').trim();
+    t = t.replace(/\s+([.,;:])/g, '$1');
+    if (!t) return '';
+    t = t[0].toUpperCase() + t.slice(1);
+    // Capitalize first letter after a sentence-ending period + space
+    t = t.replace(/([.!?])\s+([a-záéíóúüñ])/g, (_, p, c) => `${p} ${c.toUpperCase()}`);
+    if (!/[.!?]$/.test(t)) t += '.';
+    return t;
+  }).filter(Boolean).join('\n\n');
+}
+
+/* ─── Overlay keys (public folder: /PlexopatiaImg/) ─────────────────────── */
+const OVERLAYS_PLEXO = {
+  'IzquierdoIMG':   '/PlexopatiaImg/PlcervicalIZQ.png',
+  'DerechoIMG':     '/PlexopatiaImg/PlCervicalDec.png',
+  'ImgTroncosDrc':  '/PlexopatiaImg/TroncoSpD.png',
+  'ImgTroncosIzq':  '/PlexopatiaImg/TroncoSpIzq.png',
+  'ImgTroncoMdDrc': '/PlexopatiaImg/TroncoMdD.png',
+  'ImgTroncoMdIzq': '/PlexopatiaImg/TroncoMdIzq.png',
+  'ImgTroncoInDrc': '/PlexopatiaImg/TroncoInD.png',
+  'ImgTroncoInIzq': '/PlexopatiaImg/TroncoInIzq.png',
+  'ImgTroncoSpBlt': '/PlexopatiaImg/TroncoSpBl.png',
+  'ImgTroncoMdBlt': '/PlexopatiaImg/TroncoMdBl.png',
+  'ImgTroncoInBlt': '/PlexopatiaImg/TroncoInBl.png',
+  'CordonLtD':      '/PlexopatiaImg/CordonLtD.png',
+  'CordonMdD':      '/PlexopatiaImg/CordonMdD.png',
+  'CordonPsD':      '/PlexopatiaImg/CordonPsD.png',
+  'CordonLtIzq':    '/PlexopatiaImg/CordonLtIzq.png',
+  'CordonMdIzq':    '/PlexopatiaImg/CordonMdIzq.png',
+  'CordonPsIzq':    '/PlexopatiaImg/CordonPsIzq.png',
+  'CordonLtBlt':    '/PlexopatiaImg/CordonLtBlt.png',
+  'CordonMdBlt':    '/PlexopatiaImg/CordonMdBlt.png',
+  'CordonPsBlt':    '/PlexopatiaImg/CordonPsBlt.png',
+  'LumbosacroDrc':  '/PlexopatiaImg/LumbosacroD.png',
+  'LumbosacroIzq':  '/PlexopatiaImg/LumbosacroIzq.png',
+  'LumbosacroBlt':  '/PlexopatiaImg/LumbosacroBlt.png',
+  'LumbarDrc':      '/PlexopatiaImg/PxLumbarD.png',
+  'LumbarIzq':      '/PlexopatiaImg/PxLumbarIzq.png',
+  'LumbarBlt':      '/PlexopatiaImg/LumbarBlt.png',
+  'TcLumbosDrc':    '/PlexopatiaImg/TcLumbosacroD.png',
+  'TcLumbosIzq':    '/PlexopatiaImg/TcLumbosacroIzq.png',
+  'TcLumbosBlt':    '/PlexopatiaImg/TcLumbosacroBlt.png',
+  'SacroDrc':       '/PlexopatiaImg/SacroD.png',
+  'SacroIzq':       '/PlexopatiaImg/SacroIzq.png',
+  'SacroBlt':       '/PlexopatiaImg/SacroBlt.png',
+  'IliohipoDrc':    '/PlexopatiaImg/IliohipoD.png',
+  'IliohipoIzq':    '/PlexopatiaImg/IliohipoIzq.png',
+  'IliohipoBlt':    '/PlexopatiaImg/IliohipoBlt.png',
+  'FemoroDrc':      '/PlexopatiaImg/FemoroD.png',
+  'FemoroIzq':      '/PlexopatiaImg/FemoroIzq.png',
+  'FemoroBlt':      '/PlexopatiaImg/FemoroBlt.png',
+  'PudendoDrc':     '/PlexopatiaImg/PudendoD.png',
+  'PudendoIzq':     '/PlexopatiaImg/PudendoIzq.png',
+};
+
+/* ─── Step UI helpers ────────────────────────────────────────────────────── */
+function StepTitle({ children }) {
+  return <p className="text-orange-400 text-xs font-bold tracking-widest mb-3 mt-1 uppercase">{children}</p>;
+}
+
+function CBtn({ label, onClick }) {
+  return (
+    <button onClick={onClick}
+      className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all">
+      {label}
+    </button>
+  );
+}
+
+function MultiBtn({ label, selected, onClick }) {
+  return (
+    <button onClick={onClick}
+      className={`w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border text-sm font-medium transition-all
+        ${selected ? 'bg-orange-500/30 border-orange-500 text-white' : 'border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white'}`}>
+      {label}
+    </button>
+  );
+}
+
+function NavRow({ onBack, onReset, onPdf }) {
+  return (
+    <div className="flex gap-2 mb-3">
+      <button onClick={onBack} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        Regresar
+      </button>
+      <button onClick={onReset} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-red-500/20 text-white text-xs transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Reset
+      </button>
+      {onPdf && (
+        <button onClick={onPdf} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold transition-colors shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          PDF
+        </button>
+      )}
+    </div>
+  );
+}
+
+function SiguienteBtn({ disabled, onClick }) {
+  return (
+    <button onClick={onClick} disabled={disabled}
+      className={`w-full mt-2 px-4 py-2.5 rounded-lg text-sm font-bold transition-all
+        ${disabled ? 'bg-white/10 text-white/30 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600 text-white'}`}>
+      Siguiente →
+    </button>
+  );
+}
+
+/* ─── MAIN COMPONENT ────────────────────────────────────────────────────── */
+export default function ReportFace() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  /* ── State ── */
+  const [step, setStep]           = useState('Plexo');
+  const [conclusions, setConclusions] = useState([]);
+  const [multiSel, setMultiSel]   = useState([]);
+  const [activeOv, setActiveOv]   = useState([]);
+  const [ovHist, setOvHist]       = useState([]);
+  const [plexoTipo, setPlexoTipo] = useState('');
+  const [ladoKey, setLadoKey]     = useState('');
+  const [activeTab, setActiveTab] = useState('reporte');
+  const [nombrePaciente, setNombrePaciente] = useState('');
+  const [figuras, setFiguras]     = useState([]);
+  const [imgLista, setImgLista]   = useState(null);
+  const [comentarioLista, setComentarioLista] = useState('');
+  const [showGaleria, setShowGaleria] = useState(false);
+  const [showComentarioModal, setShowComentarioModal] = useState(false);
+  const [comentarioTemp, setComentarioTemp] = useState('');
+  const [pdfOpen, setPdfOpen]     = useState(false);
+  const [cropState, setCropState] = useState(null);
+  const [textoEditado, setTextoEditado] = useState('');
+  const [editadoManual, setEditadoManual] = useState(false);
+  const laminaRef = useRef(null);
+
+  /* ── Overlay helpers ── */
+  const addOverlays = useCallback((ids) => {
+    setActiveOv(p => [...p, ...ids.filter(i => !p.includes(i))]);
+    setOvHist(h => [...h, ids]);
+  }, []);
+
+  const removeLastOverlayGroup = useCallback(() => {
+    setOvHist(h => {
+      if (!h.length) return h;
+      const last = h[h.length - 1];
+      setActiveOv(p => p.filter(k => !last.includes(k)));
+      return h.slice(0, -1);
+    });
+  }, []);
+
+  /* ── Conclusion helpers ── */
+  const pushConclusion = useCallback((value, title, lista) =>
+    setConclusions(prev => [...prev, { value, title, lista: lista ?? title }]), []);
+
+  const popConclusion = useCallback((n = 1) =>
+    setConclusions(prev => prev.slice(0, -n)), []);
+
+  /* ── Back helper: pops 1 conclusion + 1 overlay group ── */
+  const goBack1 = useCallback((toStep) => {
+    popConclusion(1);
+    removeLastOverlayGroup();
+    setStep(toStep);
+  }, [popConclusion, removeLastOverlayGroup]);
+
+  /* ── Reset ── */
+  const resetAll = useCallback(() => {
+    setStep('Plexo'); setConclusions([]); setMultiSel([]);
+    setActiveOv([]); setOvHist([]); setPlexoTipo(''); setLadoKey('');
+    setActiveTab('reporte'); setFiguras([]);
+    setImgLista(null); setComentarioLista('');
+    setTextoEditado(''); setEditadoManual(false);
+  }, []);
+
+  /* ── Texto reporte ── */
+  const textoReporte = useMemo(() =>
+    limpiarTextoReporte(conclusions.map(c => c.title).join('')),
+    [conclusions]
+  );
+
+  // Sync editable text unless manually edited
+  const prevTextoRef = useRef('');
+  if (!editadoManual && textoReporte !== prevTextoRef.current) {
+    prevTextoRef.current = textoReporte;
+    if (textoEditado !== textoReporte) setTextoEditado(textoReporte);
+  }
+  const textoFinal = editadoManual ? textoEditado : textoReporte;
+
+  /* ── Lista visual ── */
+  const STEP_LABELS = {
+    Plexo:'Plexo', Lado:'Lado', 'Evolución':'Evolución', 'Ubicación':'Ubicación',
+    Preganglionar_parcial:'Ubicación', Postganglionar_total:'Ubicación',
+    Postganglionar_parcial:'Ubicación', Divisiones:'Divisiones',
+    Tronco:'Tronco', Cordones:'Cordones',
+    Tipo:'Tipo', Axonal:'Tipo', Mixta:'Tipo', Desmielinizante:'Tipo',
+    Intensidad:'Intensidad', 'Reinervación':'Reinervación', 'Pronóstico':'Pronóstico',
+  };
+  const listaVisual = useMemo(() => {
+    const map = {};
+    const order = [];
+    for (const c of conclusions) {
+      if (!c.value) continue;
+      const label = STEP_LABELS[c.value] || c.value;
+      const v = (c.lista ?? c.title).trim().replace(/^[,;. ]+/, '');
+      if (!v) continue;
+      if (map[label] !== undefined) {
+        map[label] += ' ' + v;
+      } else {
+        map[label] = v;
+        order.push(label);
+      }
+    }
+    return order.map(k => ({ k, v: map[k] }));
+  }, [conclusions]);
+
+  /* ── Figura drag ── */
+  const dragRef = useState(() => ({ active:null, startX:0, startY:0, origX:0, origY:0 }))[0];
+  const agregarFigura = useCallback((tipo, src) => {
+    const SIZE = 80;
+    const rect = laminaRef.current?.getBoundingClientRect();
+    const cx = rect ? (rect.width/2 - SIZE/2) : 60;
+    const cy = rect ? (rect.height/2 - SIZE/2) : 60;
+    setFiguras(p => [...p, { id: Date.now()+Math.random(), src, tipo, x:cx, y:cy }]);
+  }, []);
+  const eliminarFigura = useCallback((id) => setFiguras(p => p.filter(f => f.id !== id)), []);
+  const moverFigura = useCallback((id, x, y) => setFiguras(p => p.map(f => f.id===id ? {...f,x,y} : f)), []);
+  const onFiguraMouseDown = useCallback((e, figura) => {
+    e.preventDefault();
+    dragRef.active=figura.id; dragRef.startX=e.clientX; dragRef.startY=e.clientY;
+    dragRef.origX=figura.x; dragRef.origY=figura.y;
+    const onMove = (ev) => {
+      if (!dragRef.active) return;
+      moverFigura(dragRef.active, dragRef.origX+(ev.clientX-dragRef.startX), dragRef.origY+(ev.clientY-dragRef.startY));
+    };
+    const onUp = () => { dragRef.active=null; window.removeEventListener('mousemove',onMove); window.removeEventListener('mouseup',onUp); };
+    window.addEventListener('mousemove',onMove); window.addEventListener('mouseup',onUp);
+  }, [dragRef, moverFigura]);
+
+  /* ── STEP RENDERERS ── */
+
+  const renderStep = () => {
+    // ── Plexo
+    if (step === 'Plexo') return (
+      <div>
+        <StepTitle>Plexo</StepTitle>
+        {[
+          { n:'Cervical',   t:'Plexopatía cervical',   l:'Cervical'   },
+          { n:'Braquial',   t:'Plexopatía braquial',   l:'Braquial'   },
+          { n:'Lumbosacro', t:'Plexopatía lumbosacra', l:'Lumbosacro' },
+        ].map(op => (
+          <CBtn key={op.n} label={op.n} onClick={() => {
+            setPlexoTipo(op.n); pushConclusion('Plexo', op.t, op.l); addOverlays([]);
+            setStep('Lado');
+          }} />
+        ))}
+      </div>
+    );
+
+    // ── Lado
+    if (step === 'Lado') {
+      const isCervical = plexoTipo === 'Cervical';
+      const opts = [
+        { n:'Izquierdo', t:' izquierda,', k:'Izq', img: isCervical ? 'IzquierdoIMG' : null },
+        { n:'Derecho',   t:' derecha,',   k:'Drc', img: isCervical ? 'DerechoIMG'   : null },
+        { n:'Bilateral', t:' bilateral,', k:'Blt', img: isCervical ? 'BilateralIMG' : null },
+      ];
+      // BilateralIMG expands to both
+      const expandBilateral = (img) => img === 'BilateralIMG' ? ['IzquierdoIMG','DerechoIMG'] : img ? [img] : [];
+      return (
+        <div>
+          <NavRow onBack={() => { goBack1('Plexo'); setPlexoTipo(''); }} onReset={resetAll} />
+          <StepTitle>Lado</StepTitle>
+          {opts.map(op => (
+            <CBtn key={op.n} label={op.n} onClick={() => {
+              setLadoKey(op.k); pushConclusion('Lado', op.t, op.n);
+              addOverlays(expandBilateral(op.img));
+              setStep(plexoTipo==='Cervical' ? 'Evolucion_C' : plexoTipo==='Braquial' ? 'Evolucion_B' : 'Evolucion_L');
+            }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Evolución Cervical
+    if (step === 'Evolucion_C') return (
+      <div>
+        <NavRow onBack={() => { goBack1('Lado'); setLadoKey(''); }} onReset={resetAll} />
+        <StepTitle>Evolución</StepTitle>
+        {['Aguda','Subaguda','Crónica'].map(n => (
+          <CBtn key={n} label={n} onClick={() => { pushConclusion('Evolución', ` ${n.toLowerCase()}`, n); addOverlays([]); setStep('Tipos'); }} />
+        ))}
+      </div>
+    );
+
+    // ── Evolución Braquial
+    if (step === 'Evolucion_B') return (
+      <div>
+        <NavRow onBack={() => { goBack1('Lado'); setLadoKey(''); }} onReset={resetAll} />
+        <StepTitle>Evolución</StepTitle>
+        {['Aguda','Subaguda','Crónica'].map(n => (
+          <CBtn key={n} label={n} onClick={() => { pushConclusion('Evolución', ` ${n.toLowerCase()}`, n); addOverlays([]); setStep('Ubicacion_B'); }} />
+        ))}
+      </div>
+    );
+
+    // ── Evolución Lumbosacro
+    if (step === 'Evolucion_L') return (
+      <div>
+        <NavRow onBack={() => { goBack1('Lado'); setLadoKey(''); }} onReset={resetAll} />
+        <StepTitle>Evolución</StepTitle>
+        {['Aguda','Subaguda','Crónica'].map(n => (
+          <CBtn key={n} label={n} onClick={() => { pushConclusion('Evolución', ` ${n.toLowerCase()}`, n); addOverlays([]); setStep('Ubicacion_L'); }} />
+        ))}
+      </div>
+    );
+
+    // ── Ubicación Braquial
+    if (step === 'Ubicacion_B') {
+      const d = ladoKey;
+      const troncoImg = d==='Drc'?'TroncosDrc': d==='Izq'?'TroncosIzq':'TroncosBlt';
+      const salidaImg = d==='Drc'?'ImgTroncoInDrc': d==='Izq'?'ImgTroncoInIzq':'ImgTroncoInBlt';
+      const expandGroup = (k) => {
+        const G = { TroncosDrc:['ImgTroncosDrc','ImgTroncoMdDrc','ImgTroncoInDrc'], TroncosIzq:['ImgTroncosIzq','ImgTroncoMdIzq','ImgTroncoInIzq'], TroncosBlt:['ImgTroncoSpBlt','ImgTroncoMdBlt','ImgTroncoInBlt'] };
+        return G[k] ? G[k] : k ? [k] : [];
+      };
+      const opts = [
+        { n:'Preganglionar total',    t:' preganglionar total',               l:'Preganglionar total a nivel',         img:troncoImg, next:'Tipos' },
+        { n:'Preganglionar parcial',  t:' preganglionar parcial a nivel de',  l:'Preganglionar parcial a nivel de',    img:null,      next:'Pregang_parcial_B' },
+        { n:'Postganglionar total',   t:' postganglionar total a nivel de',   l:'Postganglionar total a nivel de',     img:null,      next:'Postgang_total_B' },
+        { n:'Postganglionar parcial', t:' postganglionar parcial a nivel de', l:'Postganglionar parcial a nivel de',   img:null,      next:'Postgang_parcial_B' },
+        { n:'Salida torácica',        t:'  a nivel de salida torácica',       l:'Salida torácica',                    img:salidaImg, next:'Tipos' },
+      ];
+      return (
+        <div>
+          <NavRow onBack={() => goBack1('Evolucion_B')} onReset={resetAll} />
+          <StepTitle>Ubicación</StepTitle>
+          {opts.map(op => (
+            <CBtn key={op.n} label={op.n} onClick={() => {
+              pushConclusion('Ubicación', op.t, op.l); addOverlays(op.img ? expandGroup(op.img) : []); setStep(op.next);
+            }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Preganglionar parcial Braquial (multi C5-T1)
+    if (step === 'Pregang_parcial_B') {
+      const d = ladoKey;
+      const roots = [
+        { n:'C5', img: d==='Drc'?'ImgTroncosDrc':  d==='Izq'?'ImgTroncosIzq':'ImgTroncoSpBlt' },
+        { n:'C6', img: d==='Drc'?'ImgTroncosDrc':  d==='Izq'?'ImgTroncosIzq':'ImgTroncoSpBlt' },
+        { n:'C7', img: d==='Drc'?'ImgTroncoMdDrc': d==='Izq'?'ImgTroncoMdIzq':'ImgTroncoMdBlt' },
+        { n:'C8', img: d==='Drc'?'ImgTroncoInDrc': d==='Izq'?'ImgTroncoInIzq':'ImgTroncoInBlt' },
+        { n:'T1', img: d==='Drc'?'ImgTroncoInDrc': d==='Izq'?'ImgTroncoInIzq':'ImgTroncoInBlt' },
+      ];
+      const toggle = (n) => setMultiSel(p => p.includes(n) ? p.filter(x=>x!==n) : [...p,n]);
+      const confirm = () => {
+        if (!multiSel.length) return;
+        const imgs = [...new Set(multiSel.map(n=>roots.find(r=>r.n===n)?.img).filter(Boolean))];
+        const sel = multiSel.join(', ');
+        pushConclusion('Preganglionar_parcial', ' '+sel, sel); addOverlays(imgs); setMultiSel([]); setStep('Tipos');
+      };
+      return (
+        <div>
+          <NavRow onBack={() => { goBack1('Ubicacion_B'); setMultiSel([]); }} onReset={resetAll} />
+          <StepTitle>Preganglionar parcial</StepTitle>
+          <p className="text-white/40 text-xs mb-2">Selecciona uno o más</p>
+          {roots.map(r => <MultiBtn key={r.n} label={r.n} selected={multiSel.includes(r.n)} onClick={() => toggle(r.n)} />)}
+          <SiguienteBtn disabled={!multiSel.length} onClick={confirm} />
+        </div>
+      );
+    }
+
+    // ── Postganglionar total Braquial
+    if (step === 'Postgang_total_B') {
+      const d = ladoKey;
+      const opts = [
+        { n:'Troncos (Supraclavicular)',  t:' troncos',    l:' troncos',    img: d==='Drc'?'TroncosDrc': d==='Izq'?'TroncosIzq':'TroncosBlt' },
+        { n:'Divisiones (Clavicular)',    t:' divisiones', l:' divisiones', img: d==='Drc'?'CordonesDrc':d==='Izq'?'CordonesIzq':'CordonesBlt' },
+        { n:'Cordones (Infraclavicular)', t:' cordones',   l:' cordones',   img: d==='Drc'?'CordonesDrc':d==='Izq'?'CordonesIzq':'CordonesBlt' },
+      ];
+      const GC = { CordonesDrc:['CordonLtD','CordonMdD','CordonPsD'], CordonesIzq:['CordonLtIzq','CordonMdIzq','CordonPsIzq'], CordonesBlt:['CordonLtBlt','CordonMdBlt','CordonPsBlt'],
+        TroncosDrc:['ImgTroncosDrc','ImgTroncoMdDrc','ImgTroncoInDrc'], TroncosIzq:['ImgTroncosIzq','ImgTroncoMdIzq','ImgTroncoInIzq'], TroncosBlt:['ImgTroncoSpBlt','ImgTroncoMdBlt','ImgTroncoInBlt'] };
+      return (
+        <div>
+          <NavRow onBack={() => goBack1('Ubicacion_B')} onReset={resetAll} />
+          <StepTitle>Postganglionar total</StepTitle>
+          {opts.map(op => (
+            <CBtn key={op.n} label={op.n} onClick={() => {
+              pushConclusion('Postganglionar_total', op.t, op.l); addOverlays(GC[op.img]||[op.img]); setStep('Tipos');
+            }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Postganglionar parcial Braquial
+    if (step === 'Postgang_parcial_B') {
+      const d = ladoKey;
+      const GC = { CordonesDrc:['CordonLtD','CordonMdD','CordonPsD'], CordonesIzq:['CordonLtIzq','CordonMdIzq','CordonPsIzq'], CordonesBlt:['CordonLtBlt','CordonMdBlt','CordonPsBlt'] };
+      const opts = [
+        { n:'Troncos (Supraclavicular)',  t:'', img:null, next:'Troncos_B' },
+        { n:'Divisiones (Clavicular)',    t:' divisiones', img:d==='Drc'?'CordonesDrc':d==='Izq'?'CordonesIzq':'CordonesBlt', next:'Tipos' },
+        { n:'Cordones (Infraclavicular)', t:'', img:null, next:'Cordones_B' },
+      ];
+      return (
+        <div>
+          <NavRow onBack={() => goBack1('Ubicacion_B')} onReset={resetAll} />
+          <StepTitle>Postganglionar parcial</StepTitle>
+          {opts.map(op => (
+            <CBtn key={op.n} label={op.n} onClick={() => {
+              pushConclusion('Postganglionar_parcial', op.t); addOverlays(op.img?(GC[op.img]||[op.img]):[]); setStep(op.next);
+            }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Troncos Braquial (multi)
+    if (step === 'Troncos_B') {
+      const d = ladoKey;
+      const troncos = [
+        { n:'Superior', img: d==='Drc'?'ImgTroncosDrc': d==='Izq'?'ImgTroncosIzq':'ImgTroncoSpBlt' },
+        { n:'Medio',    img: d==='Drc'?'ImgTroncoMdDrc':d==='Izq'?'ImgTroncoMdIzq':'ImgTroncoMdBlt' },
+        { n:'Inferior', img: d==='Drc'?'ImgTroncoInDrc':d==='Izq'?'ImgTroncoInIzq':'ImgTroncoInBlt' },
+      ];
+      const toggle = (n) => setMultiSel(p => p.includes(n)?p.filter(x=>x!==n):[...p,n]);
+      const confirm = () => {
+        if (!multiSel.length) return;
+        const imgs = [...new Set(multiSel.map(n=>troncos.find(t=>t.n===n)?.img).filter(Boolean))];
+        const sel = multiSel.map(n=>n.toLowerCase()).join(', ');
+        pushConclusion('Tronco', ' '+sel, sel); addOverlays(imgs); setMultiSel([]); setStep('Tipos');
+      };
+      return (
+        <div>
+          <NavRow onBack={() => { goBack1('Postgang_parcial_B'); setMultiSel([]); }} onReset={resetAll} />
+          <StepTitle>Tronco</StepTitle>
+          <p className="text-white/40 text-xs mb-2">Selecciona uno o más</p>
+          {troncos.map(t => <MultiBtn key={t.n} label={t.n} selected={multiSel.includes(t.n)} onClick={() => toggle(t.n)} />)}
+          <SiguienteBtn disabled={!multiSel.length} onClick={confirm} />
+        </div>
+      );
+    }
+
+    // ── Cordones Braquial (multi)
+    if (step === 'Cordones_B') {
+      const d = ladoKey;
+      const cordones = [
+        { n:'Lateral',   img: d==='Drc'?'CordonLtD':  d==='Izq'?'CordonLtIzq':'CordonLtBlt' },
+        { n:'Medio',     img: d==='Drc'?'CordonMdD':  d==='Izq'?'CordonMdIzq':'CordonMdBlt' },
+        { n:'Posterior', img: d==='Drc'?'CordonPsD':  d==='Izq'?'CordonPsIzq':'CordonPsBlt' },
+      ];
+      const toggle = (n) => setMultiSel(p => p.includes(n)?p.filter(x=>x!==n):[...p,n]);
+      const confirm = () => {
+        if (!multiSel.length) return;
+        const imgs = [...new Set(multiSel.map(n=>cordones.find(c=>c.n===n)?.img).filter(Boolean))];
+        const sel = multiSel.map(n=>n.toLowerCase()).join(', ');
+        pushConclusion('Cordones', ' '+sel, sel); addOverlays(imgs); setMultiSel([]); setStep('Tipos');
+      };
+      return (
+        <div>
+          <NavRow onBack={() => { goBack1('Postgang_parcial_B'); setMultiSel([]); }} onReset={resetAll} />
+          <StepTitle>Cordones</StepTitle>
+          <p className="text-white/40 text-xs mb-2">Selecciona uno o más</p>
+          {cordones.map(c => <MultiBtn key={c.n} label={c.n} selected={multiSel.includes(c.n)} onClick={() => toggle(c.n)} />)}
+          <SiguienteBtn disabled={!multiSel.length} onClick={confirm} />
+        </div>
+      );
+    }
+
+    // ── Ubicación Lumbosacro
+    if (step === 'Ubicacion_L') {
+      const d = ladoKey;
+      const lsImg = d==='Drc'?'LumbosacroDrc':d==='Izq'?'LumbosacroIzq':'LumbosacroBlt';
+      const opts = [
+        { n:'Preganglionar total',    t:' preganglionar total',               l:'Preganglionar total',              img:lsImg, next:'Tipos' },
+        { n:'Preganglionar parcial',  t:' preganglionar parcial a nivel de',  l:'Preganglionar parcial a nivel de', img:null,  next:'Divisiones_L' },
+        { n:'Postganglionar total',   t:' postganglionar total',              l:'Postganglionar total',             img:lsImg, next:'Tipos' },
+        { n:'Postganglionar parcial', t:' postganglionar parcial a nivel de', l:'Postganglionar parcial a nivel de',img:null,  next:'Postgang_parcial_L' },
+      ];
+      return (
+        <div>
+          <NavRow onBack={() => goBack1('Evolucion_L')} onReset={resetAll} />
+          <StepTitle>Ubicación</StepTitle>
+          {opts.map(op => (
+            <CBtn key={op.n} label={op.n} onClick={() => {
+              pushConclusion('Ubicación', op.t, op.l); addOverlays(op.img?[op.img]:[]); setStep(op.next);
+            }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Divisiones Lumbosacro (multi L2-S2)
+    if (step === 'Divisiones_L') {
+      const d = ladoKey;
+      const divs = [
+        { n:'L2', img: d==='Drc'?'LumbarDrc':  d==='Izq'?'LumbarIzq':'LumbarBlt' },
+        { n:'L3', img: d==='Drc'?'LumbarDrc':  d==='Izq'?'LumbarIzq':'LumbarBlt' },
+        { n:'L4', img: d==='Drc'?'TcLumbosDrc':d==='Izq'?'TcLumbosIzq':'TcLumbosBlt' },
+        { n:'L5', img: d==='Drc'?'TcLumbosDrc':d==='Izq'?'TcLumbosIzq':'TcLumbosBlt' },
+        { n:'S1', img: d==='Drc'?'SacroDrc':   d==='Izq'?'SacroIzq':'SacroBlt' },
+        { n:'S2', img: d==='Drc'?'SacroDrc':   d==='Izq'?'SacroIzq':'SacroBlt' },
+      ];
+      const toggle = (n) => setMultiSel(p => p.includes(n)?p.filter(x=>x!==n):[...p,n]);
+      const confirm = () => {
+        if (!multiSel.length) return;
+        const imgs = [...new Set(multiSel.map(n=>divs.find(x=>x.n===n)?.img).filter(Boolean))];
+        const sel = multiSel.join(', ');
+        pushConclusion('Divisiones', ' '+sel, sel); addOverlays(imgs); setMultiSel([]); setStep('Tipos');
+      };
+      return (
+        <div>
+          <NavRow onBack={() => { goBack1('Ubicacion_L'); setMultiSel([]); }} onReset={resetAll} />
+          <StepTitle>Divisiones</StepTitle>
+          <p className="text-white/40 text-xs mb-2">Selecciona uno o más</p>
+          {divs.map(d2 => <MultiBtn key={d2.n} label={d2.n} selected={multiSel.includes(d2.n)} onClick={() => toggle(d2.n)} />)}
+          <SiguienteBtn disabled={!multiSel.length} onClick={confirm} />
+        </div>
+      );
+    }
+
+    // ── Postganglionar parcial Lumbosacro
+    if (step === 'Postgang_parcial_L') {
+      const d = ladoKey;
+      const opts = [
+        { n:'Plexo lumbar (Iliohipogástrico e Ilioinginal)',      t:' plexo lumbar (Iliohipogástrico e Ilioinginal)',      l:'a nivel de plexo lumbar (Iliohipogástrico e Ilioinginal)',      img: d==='Drc'?'IliohipoDrc':d==='Izq'?'IliohipoIzq':'IliohipoBlt' },
+        { n:'Plexo lumbar (Genitocrural y Femorocutáneo lateral)',t:' plexo lumbar (Genitocrural y Femorocutáneo lateral)',l:'a nivel de plexo lumbar (Genitocrural y Femorocutáneo lateral)',img: d==='Drc'?'FemoroDrc':  d==='Izq'?'FemoroIzq':'FemoroBlt' },
+        { n:'Plexo lumbar (Femoral y Obturador)',                 t:' plexo lumbar (Femoral y Obturador)',                 l:'a nivel de plexo lumbar (Femoral y Obturador)',                 img: d==='Drc'?'LumbarDrc':  d==='Izq'?'LumbarIzq':'LumbarBlt' },
+        { n:'Tronco lumbosacro (Ciático menor y mayor)',          t:' tronco lumbosacro (Ciático menor y mayor)',          l:'a nivel de tronco lumbosacro (Ciático menor y mayor)',          img: d==='Drc'?'TcLumbosDrc':d==='Izq'?'TcLumbosIzq':'TcLumbosBlt' },
+        { n:'Plexo sacro',                                        t:' plexo sacro',                                        l:'a nivel de plexo sacro',                                        img: d==='Drc'?'SacroDrc':   d==='Izq'?'SacroIzq':'SacroBlt' },
+        { n:'Plexo pudendo',                                      t:' plexo pudendo',                                      l:'a nivel de plexo pudendo',                                      img: d==='Drc'?'PudendoDrc': d==='Izq'?'PudendoIzq':'PudendoBlt' },
+      ];
+      const expand = (k) => k==='PudendoBlt'?['PudendoDrc','PudendoIzq']:k?[k]:[];
+      return (
+        <div>
+          <NavRow onBack={() => goBack1('Ubicacion_L')} onReset={resetAll} />
+          <StepTitle>Postganglionar parcial</StepTitle>
+          {opts.map(op => (
+            <CBtn key={op.n} label={op.n} onClick={() => {
+              pushConclusion('Postganglionar_parcial', op.t, op.l); addOverlays(expand(op.img)); setStep('Tipos');
+            }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Tipos
+    if (step === 'Tipos') {
+      // determine back step
+      const lastV = conclusions[conclusions.length-1]?.value;
+      const backStep = () => {
+        if (plexoTipo==='Cervical') return 'Evolucion_C';
+        if (lastV==='Ubicación') return plexoTipo==='Braquial'?'Ubicacion_B':'Ubicacion_L';
+        if (lastV==='Postganglionar_total') return 'Postgang_total_B';
+        if (lastV==='Postganglionar_parcial') return plexoTipo==='Braquial'?'Postgang_parcial_B':'Postgang_parcial_L';
+        if (lastV==='Preganglionar_parcial') return 'Pregang_parcial_B';
+        if (lastV==='Tronco') return 'Troncos_B';
+        if (lastV==='Cordones') return 'Cordones_B';
+        if (lastV==='Divisiones') return 'Divisiones_L';
+        return plexoTipo==='Braquial'?'Ubicacion_B':'Ubicacion_L';
+      };
+      const opts = [
+        { n:'Axonal completa',   t:' de tipo axonal completa',   l:'Axonal completa',   next:'Axonal_completa' },
+        { n:'Axonal incompleta', t:' de tipo axonal incompleta', l:'Axonal incompleta', next:'Axonal_incompleta' },
+        { n:'Desmielinizante',   t:' de tipo desmielinizante',   l:'Desmielinizante',   next:'Desmielinizante' },
+        { n:'Mixta',             t:'',                           l:'',                  next:'Mixta' },
+      ];
+      return (
+        <div>
+          <NavRow onBack={() => goBack1(backStep())} onReset={resetAll} />
+          <StepTitle>Tipo</StepTitle>
+          {opts.map(op => (
+            <CBtn key={op.n} label={op.n} onClick={() => { pushConclusion('Tipo', op.t, op.l); addOverlays([]); setStep(op.next); }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Axonal completa / incompleta (denervación)
+    if (step === 'Axonal_completa' || step === 'Axonal_incompleta') {
+      const titulo = step==='Axonal_completa' ? 'Axonal completa' : 'Axonal incompleta';
+      const opts = [
+        { n:'Difusa (++++)',    t:' con denervación difusa (++++),',    l:'con denervación difusa (++++)'   },
+        { n:'Abundante (+++)', t:' con denervación abundante (+++),',  l:'con denervación abundante (+++)'  },
+        { n:'Progresiva (++)', t:' con denervación progresiva (++),',  l:'con denervación progresiva (++)'  },
+        { n:'Discreta (+/+)',  t:' con denervación discreta (+/+),',   l:'con denervación discreta (+/+)'   },
+        { n:'Ausente',         t:' sin denervación',                   l:'sin denervación,'                 },
+      ];
+      return (
+        <div>
+          <NavRow onBack={() => goBack1('Tipos')} onReset={resetAll} />
+          <StepTitle>{titulo}</StepTitle>
+          {opts.map(op => (
+            <CBtn key={op.n} label={op.n} onClick={() => { pushConclusion('Axonal', op.t, op.l); addOverlays([]); setStep('Intensidad_axonal'); }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Intensidad axonal
+    if (step === 'Intensidad_axonal') {
+      const tipoAnt = conclusions.find(c=>c.value==='Tipo')?.title?.includes('incompleta') ? 'Axonal_incompleta' : 'Axonal_completa';
+      return (
+        <div>
+          <NavRow onBack={() => goBack1(tipoAnt)} onReset={resetAll} />
+          <StepTitle>Intensidad</StepTitle>
+          {['Leve','Moderada','Severa'].map(n => (
+            <CBtn key={n} label={n} onClick={() => { pushConclusion('Intensidad', ` intensidad ${n.toLowerCase()}.`, n); addOverlays([]); setStep('Reinervacion'); }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Reinervación
+    if (step === 'Reinervacion') return (
+      <div>
+        <NavRow onBack={() => goBack1('Intensidad_axonal')} onReset={resetAll} />
+        <StepTitle>Reinervación</StepTitle>
+        {['Activa','Inactiva'].map(n => (
+          <CBtn key={n} label={n} onClick={() => { pushConclusion('Reinervación', `Reinervación ${n.toLowerCase()};`, n); addOverlays([]); setStep('Pronostico'); }} />
+        ))}
+      </div>
+    );
+
+    // ── Desmielinizante
+    if (step === 'Desmielinizante') return (
+      <div>
+        <NavRow onBack={() => goBack1('Tipos')} onReset={resetAll} />
+        <StepTitle>Desmielinizante</StepTitle>
+        {[
+          { n:'Retardo en la conducción',          t:' por retardo en la conducción.',          l:' por retardo en la conducción'          },
+          { n:'Bloqueo parcial en la conducción',  t:' por bloqueo parcial en la conducción.',  l:'por bloqueo parcial en la conducción'   },
+          { n:'Bloqueo completo en la conducción', t:' por bloqueo completo en la conducción.', l:'por bloqueo completo en la conducción'  },
+        ].map(op => (
+          <CBtn key={op.n} label={op.n} onClick={() => { pushConclusion('Desmielinizante', op.t, op.l); addOverlays([]); setStep('Pronostico'); }} />
+        ))}
+      </div>
+    );
+
+    // ── Mixta
+    if (step === 'Mixta') return (
+      <div>
+        <NavRow onBack={() => goBack1('Tipos')} onReset={resetAll} />
+        <StepTitle>Mixta</StepTitle>
+        {[
+          { n:'Desmielinizante-Axonal', t:'de tipo mixta primariamente desmielinizante con perdida axonal secundaria,', l:'Desmielinizante con pérdida axonal secundaria' },
+          { n:'Axonal-Desmielinizante', t:'de tipo mixta primariamente axonal con desmielinizacón secundaria,',         l:'Axonal con desmielinización secundaria'        },
+        ].map(op => (
+          <CBtn key={op.n} label={op.n} onClick={() => { pushConclusion('Mixta', op.t, op.l); addOverlays([]); setStep('Intensidad_desm'); }} />
+        ))}
+      </div>
+    );
+
+    // ── Intensidad desmielinizante/mixta
+    if (step === 'Intensidad_desm') {
+      const backD = conclusions.find(c=>c.value==='Mixta') ? 'Mixta' : 'Desmielinizante';
+      return (
+        <div>
+          <NavRow onBack={() => goBack1(backD)} onReset={resetAll} />
+          <StepTitle>Intensidad</StepTitle>
+          {['Leve','Moderada','Severa'].map(n => (
+            <CBtn key={n} label={n} onClick={() => { pushConclusion('Intensidad', ` intensidad ${n.toLowerCase()}.`, n); addOverlays([]); setStep('Pronostico'); }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Pronóstico
+    if (step === 'Pronostico') {
+      const lastV = conclusions[conclusions.length-1]?.value;
+      const backPron = lastV==='Reinervación'?'Reinervacion': lastV==='Desmielinizante'?'Desmielinizante':'Intensidad_desm';
+      return (
+        <div>
+          <NavRow onBack={() => goBack1(backPron)} onReset={resetAll} />
+          <StepTitle>Pronóstico</StepTitle>
+          {[
+            { n:'Recuperación completa',  t:' pronóstico de recuperación completa.',          l:'Recuperación completa'   },
+            { n:'Recuperación parcial',   t:' pronóstico de recuperación parcial.',           l:'Recuperación parcial'    },
+            { n:'Pobre no funcional',     t:' pronóstico de recuperación pobre no funcional.',l:'Pobre no funcional'      },
+            { n:'Recuperación nulo',      t:' pronóstico de recuperación nulo.',              l:'Recuperación nulo'       },
+          ].map(op => (
+            <CBtn key={op.n} label={op.n} onClick={() => { pushConclusion('Pronóstico', op.t, op.l); addOverlays([]); setStep('Final'); }} />
+          ))}
+        </div>
+      );
+    }
+
+    // ── Final — muestra botones de figura + PDF
+    if (step === 'Final') return (
+      <div>
+        <NavRow onBack={() => goBack1('Pronostico')} onReset={resetAll} onPdf={() => setPdfOpen(true)} />
+
+        <ExportBar
+          nombrePaciente={nombrePaciente}
+          textoReporte={textoFinal}
+          activeOv={activeOv}
+          figuras={figuras}
+          laminaSize={{ w: laminaRef.current?.clientWidth||690, h: laminaRef.current?.clientHeight||620 }}
+          listaVisual={listaVisual}
+          imgLista={imgLista}
+          comentarioLista={comentarioLista}
+          onBack={() => goBack1('Pronostico')}
+          onReset={resetAll}
+          isOpen={pdfOpen}
+          onClose={() => setPdfOpen(false)}
+        />
+
+        {activeTab === 'reporte' && (
+          <>
+            <StepTitle>Agrega figuras al reporte (imagen)</StepTitle>
+            <div style={{ display:'flex', gap:10, marginBottom:16 }}>
+              <label style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:6, padding:'12px 8px', borderRadius:10, cursor:'pointer', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', color:'rgba(255,255,255,0.6)', fontSize:11, textAlign:'center' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}><circle cx="12" cy="12" r="9"/><path strokeLinecap="round" strokeLinejoin="round" d="M3 9a9 9 0 0118 0"/></svg>
+                Forma circular
+                <input type="file" accept="image/*" multiple style={{ display:'none' }} onChange={e => { Array.from(e.target.files||[]).forEach(f=>agregarFigura('circle',URL.createObjectURL(f))); e.target.value=''; }} />
+              </label>
+              <label style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:6, padding:'12px 8px', borderRadius:10, cursor:'pointer', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', color:'rgba(255,255,255,0.6)', fontSize:11, textAlign:'center' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                Forma cuadrada
+                <input type="file" accept="image/*" multiple style={{ display:'none' }} onChange={e => { Array.from(e.target.files||[]).forEach(f=>agregarFigura('square',URL.createObjectURL(f))); e.target.value=''; }} />
+              </label>
+            </div>
+            {figuras.length > 0 && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, margin:'4px 0 12px', fontStyle:'italic' }}>{figuras.length} figura{figuras.length>1?'s':''} en la lámina</p>}
+          </>
+        )}
+
+        {activeTab === 'lista' && (
+          <>
+            <StepTitle>Imagen de tabla</StepTitle>
+            <button onClick={() => setShowGaleria(true)} style={{ width:'100%', display:'flex', flexDirection:'column', alignItems:'center', gap:8, padding:'18px 12px', borderRadius:10, cursor:'pointer', marginBottom:12, background:'rgba(255,255,255,0.05)', border:'1px dashed rgba(255,255,255,0.15)' }}>
+              {imgLista
+                ? <img src={imgLista.src} alt="tabla" style={{ width:'100%', maxHeight:100, objectFit:'contain', borderRadius:6 }} />
+                : <>
+                    <svg xmlns="http://www.w3.org/2000/svg" width={36} height={36} fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18M7 3v18"/></svg>
+                    <span style={{ color:'rgba(255,255,255,0.35)', fontSize:12 }}>Sin imagen seleccionada</span>
+                  </>
+              }
+            </button>
+            {imgLista && <button onClick={() => setImgLista(null)} style={{ width:'100%', padding:'5px 0', borderRadius:8, marginBottom:10, background:'transparent', border:'1px solid rgba(239,68,68,0.4)', color:'#ef4444', fontSize:12, cursor:'pointer' }}>Quitar imagen</button>}
+            <button onClick={() => { setComentarioTemp(comentarioLista); setShowComentarioModal(true); }} style={{ width:'100%', padding:'10px 0', borderRadius:10, background:'#f97316', border:'none', cursor:'pointer', color:'#fff', fontWeight:700, fontSize:14 }}>
+              {comentarioLista ? 'Editar Comentario' : 'Agregar Comentario'}
+            </button>
+            {comentarioLista && <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, fontStyle:'italic', marginTop:8 }}>{comentarioLista.length>100?comentarioLista.slice(0,100)+'…':comentarioLista}</p>}
+          </>
+        )}
+      </div>
+    );
+
+    return null;
+  };
+
+  /* ── RENDER ── */
+  return (
+    <>
+      <div style={{ position:'fixed', inset:0, zIndex:9999, background:'#0a0a0a', display:'flex', flexDirection:'column', alignItems:'center', overflowY:'auto' }}>
+
+        {/* ── Top bar ── */}
+        <div style={{ flexShrink:0, width:'100%', height:52, background:'#111', borderBottom:'1px solid rgba(255,255,255,0.08)', display:'grid', gridTemplateColumns:'1fr auto 1fr', alignItems:'center', padding:'0 20px', boxSizing:'border-box' }}>
+          <div>
+            <button onClick={() => router.push('/Reporte')}
+              style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 14px', borderRadius:8, background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.12)', cursor:'pointer', color:'#fff', fontSize:13, fontWeight:500 }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width={15} height={15} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              Regresar
+            </button>
+          </div>
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'center' }}>
+            <input type="text" value={nombrePaciente} onChange={e=>setNombrePaciente(e.target.value)} placeholder="Nombre del paciente"
+              style={{ width:580, background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:7, padding:'6px 14px', color:'#fff', fontSize:13, outline:'none', boxSizing:'border-box', textAlign:'center' }} />
+          </div>
+          <div style={{ display:'flex', justifyContent:'flex-end', alignItems:'center' }}>
+            {session?.user?.imageUrl && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={session.user.imageUrl} alt="" style={{ width:32, height:32, borderRadius:8, objectFit:'contain', opacity:0.85 }} />
+            )}
+          </div>
+        </div>
+
+        {/* ── Centered area ── */}
+        <div style={{ flex:'0 0 auto', width:'100%', maxWidth:850, display:'flex', flexDirection:'column', padding:'12px 8px 0', boxSizing:'border-box' }}>
+
+          {/* Menu + Lamina row */}
+          <div style={{ flex:'0 0 auto', display:'flex', alignItems:'stretch', minHeight:520 }}>
+
+            {/* LEFT MENU */}
+            <div style={{ width:300, flexShrink:0, display:'flex', flexDirection:'column', background:'#111', borderRadius:'10px 0 0 10px', border:'1px solid rgba(255,255,255,0.08)', borderRight:'none', overflowY:'auto' }}>
+              <div style={{ flex:1, padding:'12px 14px 14px', overflowY:'auto' }}>
+                {renderStep()}
+              </div>
+            </div>
+
+            {/* LAMINA */}
+            <div ref={laminaRef} style={{ flex:1, position:'relative', background:'#fff', borderRadius:'0 10px 10px 0', boxShadow:'0 8px 48px rgba(0,0,0,0.6)', overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center' }}>
+              {nombrePaciente && (
+                <div style={{ position:'absolute', top:10, left:12, zIndex:10, background:'rgba(0,0,0,0.45)', color:'#fff', fontSize:11, fontWeight:500, padding:'3px 9px', borderRadius:6 }}>
+                  {nombrePaciente}
+                </div>
+              )}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/PlexopatiaImg/BP_Plexopatia.png" alt="Plexopatía" draggable={false}
+                style={{ display:'block', width:'100%', height:'auto', objectFit:'contain' }} />
+              {activeOv.map(k => {
+                const src = OVERLAYS_PLEXO[k];
+                if (!src) return null;
+                return (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={k} src={src} alt="" draggable={false}
+                    style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', pointerEvents:'none' }} />
+                );
+              })}
+              {figuras.map(f => (
+                <div key={f.id} onMouseDown={e=>onFiguraMouseDown(e,f)}
+                  style={{ position:'absolute', left:f.x, top:f.y, zIndex:20, width:80, height:80, cursor:'grab', userSelect:'none' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={f.src} alt="" draggable={false} style={{ width:80, height:80, objectFit:'cover', borderRadius:f.tipo==='circle'?'50%':0, border:'1.5px solid gray', display:'block', pointerEvents:'none' }} />
+                  <button onMouseDown={e=>e.stopPropagation()} onClick={()=>eliminarFigura(f.id)}
+                    style={{ position:'absolute', top:-10, right:-10, width:24, height:24, borderRadius:'50%', background:'red', border:'none', cursor:'pointer', color:'#fff', fontSize:11, fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>✕</button>
+                  <button onMouseDown={e=>e.stopPropagation()} onClick={()=>setCropState({id:f.id,src:f.src})}
+                    style={{ position:'absolute', bottom:-10, left:-10, width:26, height:26, borderRadius:'50%', background:'rgba(0,0,0,0.75)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.364-6.364a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H8v-2.414a2 2 0 01.586-1.414z"/></svg>
+                  </button>
+                </div>
+              ))}
+            </div>
+
+          </div>{/* end row */}
+
+          {/* FOOTER */}
+          <div style={{ background:'#111', borderRadius:'0 0 10px 10px', border:'1px solid rgba(255,255,255,0.08)', borderTop:'none', padding:'10px 16px 14px', marginBottom:16 }}>
+            <div style={{ display:'flex', gap:4, marginBottom:8 }}>
+              {[['reporte','Reporte'],['lista','Lista']].map(([id,label]) => (
+                <button key={id} onClick={() => setActiveTab(id)} style={{ padding:'4px 16px', borderRadius:7, fontSize:12, fontWeight:600, border:'none', cursor:'pointer', transition:'all 0.15s', background: activeTab===id?'#f97316':'rgba(255,255,255,0.07)', color: activeTab===id?'#fff':'rgba(255,255,255,0.4)' }}>
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {activeTab === 'reporte' && (
+              textoFinal
+                ? <textarea value={textoFinal} onChange={e=>{ setTextoEditado(e.target.value); setEditadoManual(true); }} rows={4}
+                    style={{ width:'100%', boxSizing:'border-box', resize:'vertical', background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:8, padding:'7px 10px', color:'rgba(255,255,255,0.85)', fontSize:13, lineHeight:1.55, outline:'none', fontFamily:'inherit', marginTop:4 }} />
+                : <p style={{ color:'rgba(255,255,255,0.2)', fontSize:13, fontStyle:'italic', margin:'4px 0 0' }}>Sin conclusiones aún.</p>
+            )}
+
+            {activeTab === 'lista' && (
+              <div style={{ marginTop:4 }}>
+                {listaVisual.length === 0
+                  ? <p style={{ color:'rgba(255,255,255,0.25)', fontSize:12, fontStyle:'italic', margin:0 }}>Sin conclusiones aún.</p>
+                  : <div style={{ display:'flex', flexWrap:'wrap', gap:'2px 24px' }}>
+                      {listaVisual.map(({k,v}) => (
+                        <p key={k} style={{ color:'rgba(255,255,255,0.75)', fontSize:12, margin:0 }}>
+                          <span style={{ color:'#f97316', fontWeight:600 }}>{k}:</span> {v}
+                        </p>
+                      ))}
+                    </div>
+                }
+                {comentarioLista && <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, fontStyle:'italic', marginTop:6 }}>💬 {comentarioLista.length>100?comentarioLista.slice(0,100)+'…':comentarioLista}</p>}
+              </div>
+            )}
+
+            {(session?.user?.name || session?.user?.email) && (
+              <div style={{ marginTop:8, paddingTop:7, borderTop:'1px solid rgba(255,255,255,0.06)', display:'flex', gap:16, flexWrap:'wrap' }}>
+                {session.user.name && <span style={{ color:'rgba(255,255,255,0.3)', fontSize:11 }}>👤 {session.user.name} {session.user.lastname||''}</span>}
+                {session.user.email && <span style={{ color:'rgba(255,255,255,0.3)', fontSize:11 }}>✉ {session.user.email}</span>}
+                {session.user.cedula && <span style={{ color:'rgba(255,255,255,0.3)', fontSize:11 }}>№ {session.user.cedula}</span>}
+              </div>
+            )}
+          </div>
+
+        </div>
+      </div>
+
+      {/* Crop modal */}
+      {cropState && (
+        <CropModal src={cropState.src}
+          onConfirm={url => { setFiguras(p=>p.map(f=>f.id===cropState.id?{...f,src:url}:f)); setCropState(null); }}
+          onClose={() => setCropState(null)} />
+      )}
+
+      {/* Galería tablas */}
+      {showGaleria && (
+        <GaleriaTablas
+          onSelect={url => { setImgLista({ src:url, file:null }); setShowGaleria(false); }}
+          onClose={() => setShowGaleria(false)} />
+      )}
+
+      {/* Comentario modal */}
+      {showComentarioModal && (
+        <div style={{ position:'fixed', inset:0, zIndex:10000, background:'rgba(0,0,0,0.75)', display:'flex', alignItems:'center', justifyContent:'center', padding:20 }}>
+          <div style={{ background:'#1a1a1a', border:'1px solid rgba(255,255,255,0.1)', borderRadius:16, padding:24, width:'100%', maxWidth:480 }}>
+            <h3 style={{ color:'#fff', fontSize:16, fontWeight:700, margin:'0 0 4px' }}>Comentario</h3>
+            <p style={{ color:'rgba(255,255,255,0.4)', fontSize:12, margin:'0 0 14px' }}>Se agregará al informe como nota adicional</p>
+            <textarea value={comentarioTemp} onChange={e=>setComentarioTemp(e.target.value)} rows={5} placeholder="Escribe aquí tu comentario..."
+              style={{ width:'100%', boxSizing:'border-box', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:10, padding:'10px 12px', color:'#fff', fontSize:13, resize:'vertical', outline:'none', fontFamily:'inherit' }} />
+            <div style={{ display:'flex', gap:10, marginTop:14 }}>
+              <button onClick={() => { setComentarioLista(comentarioTemp); setShowComentarioModal(false); }}
+                style={{ flex:1, padding:'9px 0', borderRadius:10, border:'none', background:'#f97316', color:'#fff', fontWeight:600, fontSize:14, cursor:'pointer' }}>Guardar</button>
+              <button onClick={() => setShowComentarioModal(false)}
+                style={{ flex:1, padding:'9px 0', borderRadius:10, border:'1px solid rgba(255,255,255,0.12)', background:'transparent', color:'rgba(255,255,255,0.5)', fontSize:14, cursor:'pointer' }}>Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

@@ -28,7 +28,7 @@
   margin: 0;      /* elimina cualquier margen */
 }
 
-/* Close “×” más grande, redondo y con sombra */
+/* Close "×" más grande, redondo y con sombra */
 .help-modal-close {
   position: absolute;
   top: 10px;
@@ -40,7 +40,7 @@
   border-radius: 50%;
   color: #fff;                   /* cruz blanca */
   font-size: 1.2rem;
-  line-height: 1px;       /* para centrar el “×” */
+  line-height: 1px;       /* para centrar el "×" */
   text-align: center;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
@@ -52,7 +52,7 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
-/* Botón “No volver a mostrar” estilo botón de sistema */
+/* Botón "No volver a mostrar" estilo botón de sistema */
 .help-modal-hide {
   margin-top: 16px;
   padding: 10px 20px;
@@ -75,8 +75,6 @@
   transform: translateY(0);
   box-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
-
-
 
 /* Seccion de Datos de perfil y Titulo de reporte*/
 .head {
@@ -163,8 +161,8 @@
   height: auto;       /* Permite que la altura se ajuste al contenido */
   background-color:#1C1C1C;
   background-image: url('/assets/04_01_ Vector _ SVG/G_14.svg'); /* Ruta relativa a la carpeta public */
-  background-size: cover;  
-  background-position: center; 
+  background-size: cover;
+  background-position: center;
   border-radius: 10px;
 }
 
@@ -182,11 +180,11 @@
   align-items: left;
   border-radius: 4px;
   overflow: hidden;
-  width: 100%;  
+  width: 100%;
   margin: 10px;
   height: 20vh;
   margin-bottom: 0px;
-  z-index: 1; 
+  z-index: 1;
 }
 
 .info-container p {
@@ -194,8 +192,8 @@
   height: 100%;
   font-size: 14px;
   text-align: justify;
-  background-color: transparent; 
-  resize: none; 
+  background-color: transparent;
+  resize: none;
   padding: 5px;
 }
 
@@ -234,15 +232,15 @@
   z-index: 10;
 }
 
-.button-bar button, 
-.button-bar input[type="file"], 
+.button-bar button,
+.button-bar input[type="file"],
 .button-bar label {
   border-radius: 50%;
-  width: 55px; 
-  height: 55px; 
+  width: 55px;
+  height: 55px;
   text-align: center;
   margin : 10px;
-  border: 2px solid #c44900; 
+  border: 2px solid #c44900;
 }
 
 .vertical-orinetation {
@@ -250,7 +248,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;  
+  width: 100%;
 }
 
 .conclusion-container {
@@ -286,7 +284,7 @@
   left: 0;
   width: 600px;  /* Mismo tamaño que la imagen base */
   height: 776px;
-  z-index: 10;   
+  z-index: 10;
   /* background-color: rgba(0,255,0,0.2);  */
 }
 
@@ -342,6 +340,7 @@ color: white;
 background-color: #c44900;
 color: white;
 }
+
 
 
 .loading-overlay {
@@ -422,7 +421,7 @@ color: white;
     min-height: 20.2vh; /* Tamaño inicial mínimo en altura */
     height: auto;       /* Permite que la altura se ajuste al contenido */
   }
-  
+
   .info-container {
     justify-content: center;
   }

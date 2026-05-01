@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: [
+      'res.cloudinary.com',
+      'awkrlvbmwfqzqlfyuiby.supabase.co',
+    ],
   },
   webpack: (config) => {
     // Añade esta regla para ignorar cualquier .map

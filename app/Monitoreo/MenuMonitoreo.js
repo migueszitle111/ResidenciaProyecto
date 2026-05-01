@@ -1,4 +1,4 @@
-import React, { use, useState, useRef } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import EditorReseccionTumorCerebral from "./MonitoreoEditores/EditorReseccionTumorCerebral";
 import EditorDisectomiaLumbar from "./MonitoreoEditores/EditorDisectomiaLumbar";
@@ -51,6 +51,46 @@ const MenuMonitoreo = () => {
 
   return (
     <div className="">
+
+      {/* Tarjeta principal — estilo Reporte */}
+      {!selectedOption && (
+        <div className="lg:w-2/3 bg-orange-500 md:p-10 flex flex-col mx-auto m-5 rounded-tr-3xl rounded-bl-3xl p-5">
+          <div className="flex flex-wrap">
+            <div className="w-full md:w-1/2">
+              <h2 className="text-3xl font-semibold text-white mb-4">
+                Tipos de Monitoreo
+              </h2>
+              <hr className="bg-white h-0.5 mb-6" />
+              <div className="grid grid-cols-2 gap-4">
+                {["Craneal", "Cervical", "Lumbar", "Otros"].map((tipo) => (
+                  <button
+                    key={tipo}
+                    onClick={() => handleClick(
+                      tipo === "Craneal" ? "Resección de tumor cerebral" :
+                      tipo === "Cervical" ? "Fusión cervical anterior" :
+                      tipo === "Lumbar" ? "Discectomía lumbar" :
+                      "Toracotomía"
+                    )}
+                    className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-sm transition-colors"
+                  >
+                    {tipo}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="w-full md:w-1/2 flex items-center justify-center mt-6 md:mt-0">
+              <Image
+                src="/L_B_Blanco.svg"
+                alt="Monitoreo"
+                width={200}
+                height={200}
+                className="grayscale opacity-80"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="flex ">
         {/* Contenido del div izquierdo */}
         <div className=" w-1/3">

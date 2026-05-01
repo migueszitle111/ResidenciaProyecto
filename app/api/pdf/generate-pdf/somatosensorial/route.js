@@ -1,2955 +1,511 @@
-// --------------------------- IMPORTS ---------------------------
-import { NextResponse }        from 'next/server';           // sin “type”
-import puppeteer               from 'puppeteer';             // Dev
-import puppeteerCore           from 'puppeteer-core';        // Prod (λ)
-import chromium                from '@sparticuz/chromium-min';
+import { NextResponse }  from 'next/server';
+import puppeteer         from 'puppeteer';
+import puppeteerCore     from 'puppeteer-core';
+import chromium          from '@sparticuz/chromium-min';
+import { PDFDocument }   from 'pdf-lib';
 
-export const runtime = 'nodejs';          // ⚠️ va después de los imports
-export const dynamic = 'force-dynamic';   // (opcional) evita caché de Vercel
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-// ---------------------------------------------------------------
-const isDev  = process.env.NODE_ENV !== 'production';
+const isDev   = process.env.NODE_ENV !== 'production';
 const baseUrl = isDev
   ? 'http://localhost:3000'
-  : process.env.NEXT_PUBLIC_SITE_URL;
+  : (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.medxproapp.com');
 
+const BACKEND_URL = 'https://backendmedxpro-tef2.onrender.com';
 
-// ───────────────────────── helpers ────────────────────────────
+const PAGE_W = 794;
+const PAGE_H = 1123;
+
+// ── Mapa de overlays (igual que web client) ───────────────────────────────────
+const OVERLAYS_SOMATO = {
+  superiores_indemne_izq:   '/SomatosensorialImg/SUPERIORDERECHA.png',
+  superiores_indemne_der:   '/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+  inferiores_indemne_izq:   '/SomatosensorialImg/INFERIORDERECHA.png',
+  inferiores_indemne_der:   '/SomatosensorialImg/Izquierda/inferior_izquierda.png',
+
+  // Alias cortos (nervios / dermatomas indemne)
+  superior_izq: '/SomatosensorialImg/SUPERIORDERECHA.png',
+  superior_der: '/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+  inferior_izq: '/SomatosensorialImg/INFERIORDERECHA.png',
+  inferior_der: '/SomatosensorialImg/Izquierda/inferior_izquierda.png',
+
+  // Nervios superiores
+  izquierdo_mediano: '/SomatosensorialImg/SUPERIORDERECHA.png',
+  derecho_mediano:   '/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+  izquierdo_ulnar: '/SomatosensorialImg/SUPERIORDERECHA.png',
+  derecho_ulnar:   '/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+  izquierdo_radial_superficial: '/SomatosensorialImg/SUPERIORDERECHA.png',
+  derecho_radial_superficial:   '/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+  izquierdo_antebraqueal_cutaneo_lateral: '/SomatosensorialImg/SUPERIORDERECHA.png',
+  derecho_antebraqueal_cutaneo_lateral:   '/SomatosensorialImg/SUPERIORIZQUIERDA.png',
+
+  // Nervios inferiores
+  izquierdo_tibial: '/SomatosensorialImg/INFERIORDERECHA.png',
+  derecho_tibial:   '/SomatosensorialImg/Izquierda/inferior_izquierda.png',
+  izquierdo_peroneo: '/SomatosensorialImg/INFERIORDERECHA.png',
+  derecho_peroneo:   '/SomatosensorialImg/Izquierda/inferior_izquierda.png',
+  izquierdo_peroneo_superficial: '/SomatosensorialImg/INFERIORDERECHA.png',
+  derecho_peroneo_superficial:   '/SomatosensorialImg/Izquierda/inferior_izquierda.png',
+  izquierdo_sural: '/SomatosensorialImg/INFERIORDERECHA.png',
+  derecho_sural:   '/SomatosensorialImg/Izquierda/inferior_izquierda.png',
+  izquierdo_safeno: '/SomatosensorialImg/INFERIORDERECHA.png',
+  derecho_safeno:   '/SomatosensorialImg/Izquierda/inferior_izquierda.png',
+  izquierdo_femorocutaneo_lateral: '/SomatosensorialImg/INFERIORDERECHA.png',
+  derecho_femorocutaneo_lateral:   '/SomatosensorialImg/Izquierda/inferior_izquierda.png',
+  izquierdo_pudendo: '/SomatosensorialImg/INFERIORDERECHA.png',
+  derecho_pudendo:   '/SomatosensorialImg/Izquierda/inferior_izquierda.png',
+
+  superiores_alterada_izq:  '/SomatosensorialImg/ViaAfectada/ViaDerecha/alteradaderechasuperior.png',
+  superiores_alterada_der:  '/SomatosensorialImg/ViaAfectada/alteradaizquierdasuperior.png',
+  inferiores_alterada_izq:  '/SomatosensorialImg/ViaAfectada/ViaDerecha/alteradaderechainferior.png',
+  inferiores_alterada_der:  '/SomatosensorialImg/ViaAfectada/alteradaizquierdainferior.png',
+
+  // Alias dermatomas alterada
+  ALT_SUP_IZQ_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_9-D.png',
+  ALT_SUP_DER_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_9.png',
+  ALT_SUP_IZQ_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_9-D.png',
+  ALT_SUP_DER_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_9.png',
+  ALT_SUP_IZQ_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_9-D.png',
+  ALT_SUP_DER_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_9.png',
+  ALT_INF_IZQ_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_5-D.png',
+  ALT_INF_DER_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_5.png',
+  ALT_INF_IZQ_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_5-D.png',
+  ALT_INF_DER_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_5.png',
+  ALT_INF_IZQ_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_5-D.png',
+  ALT_INF_DER_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_5.png',
+
+  trigemino_izquierdo_indemne: '/SomatosensorialImg/TRI_2.png',
+  trigemino_derecho_indemne:   '/SomatosensorialImg/TRI_1.png',
+
+  izquierdotrigeminoAlterada_leve:     '/SomatosensorialImg/ViaAfectada/SomatosensorialTrigemino/Naranja/TRI_Naranja_2.png',
+  derechotrigeminoAlterada_leve:       '/SomatosensorialImg/ViaAfectada/SomatosensorialTrigemino/Naranja/TRI_Naranja_1.png',
+  izquierdotrigeminoAlterada_moderado: '/SomatosensorialImg/ViaAfectada/SomatosensorialTrigemino/TR_2.png',
+  derechotrigeminoAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/SomatosensorialTrigemino/TR_1.png',
+  izquierdotrigeminoAlterada_severo:   '/SomatosensorialImg/ViaAfectada/SomatosensorialTrigemino/Marron/TRI_Marron_2.png',
+  derechotrigeminoAlterada_severo:     '/SomatosensorialImg/ViaAfectada/SomatosensorialTrigemino/Marron/TRI_Marron_1.png',
+
+  izquierdocorticalsAlterada_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_9-D.png',
+  derechocorticalsAlterada_leve:       '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_9.png',
+  izquierdocorticalsAlterada_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_9-D.png',
+  derechocorticalsAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/Rojo/SO_9.png',
+  izquierdocorticalsAlterada_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_9-D.png',
+  derechocorticalsAlterada_severo:     '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_9.png',
+
+  izquierdosubcorticalsAlterada_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_8-D.png',
+  derechosubcorticalsAlterada_leve:       '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_8.png',
+  izquierdosubcorticalsAlterada_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_8-D.png',
+  derechosubcorticalsAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/Rojo/SO_8.png',
+  izquierdosubcorticalsAlterada_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_8-D.png',
+  derechosubcorticalsAlterada_severo:     '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_8.png',
+
+  izquierdocervicalsAlterada_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_7-D.png',
+  derechocervicalsAlterada_leve:       '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_7.png',
+  izquierdocervicalsAlterada_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_7-D.png',
+  derechocervicalsAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/Rojo/SO_7.png',
+  izquierdocervicalsAlterada_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_7-D.png',
+  derechocervicalsAlterada_severo:     '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_7.png',
+
+  izquierdoperifericosAlterada_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_6-D.png',
+  derechoperifericosAlterada_leve:       '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_6.png',
+  izquierdoperifericosAlterada_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_R_6-D.png',
+  derechoperifericosAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/Rojo/SO_R_6.png',
+  izquierdoperifericosAlterada_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_6-D.png',
+  derechoperifericosAlterada_severo:     '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_6.png',
+
+  izquierdocorticaliAlterada_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_5-D.png',
+  derechocorticaliAlterada_leve:       '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_5.png',
+  izquierdocorticaliAlterada_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_5-D.png',
+  derechocorticaliAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/Rojo/SO_5.png',
+  izquierdocorticaliAlterada_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_5-D.png',
+  derechocorticaliAlterada_severo:     '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_5.png',
+
+  izquierdosubcorticaliAlterada_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_4-D.png',
+  derechosubcorticaliAlterada_leve:       '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_4.png',
+  izquierdosubcorticaliAlterada_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_4-D.png',
+  derechosubcorticaliAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/Rojo/SO_4.png',
+  izquierdosubcorticaliAlterada_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_4-D.png',
+  derechosubcorticaliAlterada_severo:     '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_4.png',
+
+  izquierdotoracicoiAlterada_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_3-D.png',
+  derechotoracicoiAlterada_leve:       '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_3.png',
+  izquierdotoracicoiAlterada_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_3-D.png',
+  derechotoracicoiAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/Rojo/SO_3.png',
+  izquierdotoracicoiAlterada_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_3-D.png',
+  derechotoracicoiAlterada_severo:     '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_3.png',
+
+  izquierdolumbosacroiAlterada_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_2-D.png',
+  derecholumbosacroiAlterada_leve:       '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_2.png',
+  izquierdolumbosacroiAlterada_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_2-D.png',
+  derecholumbosacroiAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/Rojo/SO_2.png',
+  izquierdolumbosacroiAlterada_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_2-D.png',
+  derecholumbosacroiAlterada_severo:     '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_2.png',
+
+  izquierdoperifericoiAlterada_leve:     '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_1-D.png',
+  derechoperifericoiAlterada_leve:       '/SomatosensorialImg/ViaAfectada/Naranja/SO_Naranja_1.png',
+  izquierdoperifericoiAlterada_moderado: '/SomatosensorialImg/ViaAfectada/Rojo/SO_Rojo_1-D.png',
+  derechoperifericoiAlterada_moderado:   '/SomatosensorialImg/ViaAfectada/Rojo/SO_Rojo_1.png',
+  izquierdoperifericoiAlterada_severo:   '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_1-D.png',
+  derechoperifericoiAlterada_severo:     '/SomatosensorialImg/ViaAfectada/Marron/SO_Marron_1.png',
+};
+
+const PLANTILLAS_PDF = {
+  A: { p1: 'PLANTILLA_A_VERTICAL-1.pdf', p2: 'PLANTILLA_A_VERTICAL-2.pdf' },
+  B: { p1: 'PLANTILLA_B_VERTICAL-1.pdf', p2: 'PLANTILLA_B_VERTICAL-2.pdf' },
+  C: { p1: 'PLANTILLA_C_VERTICAL-1.pdf', p2: 'PLANTILLA_C_VERTICAL-2.pdf' },
+};
+
+// ── helpers ───────────────────────────────────────────────────────────────────
 async function launchBrowser() {
   if (isDev) {
-    // Puppeteer normal en local
-    return puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    return puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   }
-  // Puppeteer‑core + Chromium empaquetado en Vercel
   const executablePath = await chromium.executablePath(
     'https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar'
   );
-
   return puppeteerCore.launch({
-    executablePath,
-    args: chromium.args,
-    headless: chromium.headless,
-    defaultViewport: chromium.defaultViewport,
+    executablePath, args: chromium.args,
+    headless: chromium.headless, defaultViewport: chromium.defaultViewport,
   });
 }
 
-
-function buildHtml({
-  finalConclusion, // texto visible (títulos, etc.)
-  finalString = "", // <-- valor por defecto para que no sea undefined
-  userData,
-  droppedItems,
-  topLeftText,
-}) 
-
-{
-  
-// Chequeo de trigémino (usando finalString)
-const defaultImage1 = "/assets/MioImg/MO_BASE_BLANCO_MOTORES.png";
-const newImage1     = "/assets/MioImg/Base_Cerebro.png";
-
-// Si finalString contiene la palabra "trigemino", ponemos newImage1
-const isTrigeminoSelected = finalString.includes("trigemino");
-const imageSrc1 = isTrigeminoSelected ? newImage1 : defaultImage1;
-
-  // 1) Tus reglas de superposición con /assets/... en lugar de baseUrl
-  const overlayRules = [
-    {
-      expectedValue: 'superior_derecho', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          },
-    },
-    {
-      expectedValue: 'superior_izquierdo', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-    },
-
-    {
-      expectedValue: 'superior_bilateral', 
-     
-        image: [
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-   
-
-
-    {
-      expectedValue: 'superior_bilateralindemne', 
-     
-        image: [
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-
-    {
-      expectedValue: 'superior_derechoindemne', 
-     
-        image: [
-         
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-    {
-      expectedValue: 'superior_izquierdoindemne', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-         
-        
-    },
-
-               /*indemne*/
-///////////////////////////c4di
-{
-expectedValue: 'bilateralc4di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc4di',  
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc4di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-
-},
-////////////////////////////////c5di
-{
-expectedValue: 'bilateralc5di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc5di',  
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc5di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-
-},
-///////////////////////////////////c6di
-{
-expectedValue: 'bilateralc6di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc6di',  
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc6di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-
-},
-////////////////////////////////////////////////////////////
-{
-expectedValue: 'bilateralc7di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc7di',  
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc7di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-
-},
-///////////////////////////////////////////c8di
-
-{
-expectedValue: 'bilateralc8di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc8di',  
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc8di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t1di
-{
-expectedValue: 'bilateralt1di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot1di',  
-image: [
-{
-src: '/assets/SomatosensorialImg/SUPERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot1di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/SUPERIORDERECHA.png',
-alt: 'Modelo',
-}, 
-},
-//////////////////////////////////////////////t2di
-{
-expectedValue: 'derechot2di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot2di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt2di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////t3di
-{
-expectedValue: 'derechot3di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot3di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt3di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////t4di
-{
-expectedValue: 'derechot4di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot4di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt4di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////t5di
-{
-expectedValue: 'derechot5di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot5di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt5di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////t6di
-{
-expectedValue: 'derechot6di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot6di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt6di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////t7di
-{
-expectedValue: 'derechot7di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot7di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt7di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-
-//////////////////////////////////////////////t8di
-{
-expectedValue: 'derechot8di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot8di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt8di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-
-//////////////////////////////////////////////t9di
-{
-expectedValue: 'derechot9di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot9di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt9di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////t10di
-{
-expectedValue: 'derechot10di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot10di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt10di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////t11di
-{
-expectedValue: 'derechot11di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot11di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt11di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////t12di
-{
-expectedValue: 'derechot12di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdot12di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateralt12di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////l1di
-{
-expectedValue: 'derechotl1di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdol1di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilaterall1di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////l2di
-{
-expectedValue: 'derechol2di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdol2di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilaterall2di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////l3di
-{
-expectedValue: 'derechol3di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdol3di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilaterall3di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-////////////////////////////////////////////////l4di
-{
-expectedValue: 'derechol4di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdol4di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilaterall4di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-}, 
-//////////////////////////////////////////////l5di
-{
-expectedValue: 'derechol5di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdol5di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilaterall5di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-//////////////////////////////////////////////s1di
-{
-expectedValue: 'derechos1di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdos1di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilaterals1di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-/////////////////////////////////////////////////////////s2di
-{
-expectedValue: 'derechos2di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdos2di', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilaterals2di', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-
-
-//alteradasdermatomas
-/////////////////////////////////////////////////////////////////////////////c4da
-
-
-{
-expectedValue: 'derecho_der', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'izquierdo_der', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-},
-{
-expectedValue: 'bilateral_der', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-alt: 'Modelo',
-}
-]
-},
-
-
-
-
-
-
-{
-expectedValue: 'bilateralc4da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc4da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc4da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-},
-
-},
-////////////////////////////////c5da
-{
-expectedValue: 'bilateralc5da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc5da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc5da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-},
-
-},
-///////////////////////////////////c6da
-
-{
-expectedValue: 'bilateralc6da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc6da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc6da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-},
-
-},
-///////////////////////////////////////////////c7da
-{
-expectedValue: 'bilateralc7da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc7da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc7da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-},
-
-},
-
-////////////////////////////////////////////c8da
-{
-expectedValue: 'bilateralc8da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechoc8da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdoc8da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t1da
-{
-expectedValue: 'bilateralt1da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot1da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdasuperior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot1da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechasuperior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t2da
-{
-expectedValue: 'bilateralt2da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot2da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot2da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-///////////////////////////////////////////////t3da
-{
-expectedValue: 'bilateralt3da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot3da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot3da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t4da
-{
-expectedValue: 'bilateralt4da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot4da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot4da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t5da
-{
-expectedValue: 'bilateralt5da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot5da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot5da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t6da
-{
-expectedValue: 'bilateralt6da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot6da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot6da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t7da
-{
-expectedValue: 'bilateralt7da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot7da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot7da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t8da
-{
-expectedValue: 'bilateralt8da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot8da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot8da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-///////////////////////////////////////////////t9da
-{
-expectedValue: 'bilateralt9da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot9da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot9da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t10da
-{
-expectedValue: 'bilateralt10da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot10da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot10da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t11da
-{
-expectedValue: 'bilateralt11da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot11da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot11da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////t12da
-{
-expectedValue: 'bilateralt12da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechot12da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdot12da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////l1da
-{
-expectedValue: 'bilaterall1da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechol1da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdol1da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-///////////////////////////////////////////////l2da
-{
-expectedValue: 'bilaterall2da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechol2da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdol2da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////l3da
-{
-expectedValue: 'bilaterall3da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechol3da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdol3da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////l4da
-{
-expectedValue: 'bilaterall4da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechol4da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdol4da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-},
-//////////////////////////////////////////////l5da
-{
-expectedValue: 'bilaterall5da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechol5da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdol5da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}, 
-},
-//////////////////////////////////////////////s1da
-{
-expectedValue: 'bilaterals1da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechos1da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdos1da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-
-},
-//////////////////////////////////////////////s2da
-{
-expectedValue: 'bilaterals2da', 
-
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'derechos2da',  
-image: [
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/alteradaizquierdainferior.png',
-alt: 'Modelo',
-}
-]
-},
-{
-expectedValue: 'izquierdos2da', 
-
-image: 
-{
-src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/alteradaderechainferior.png',
-alt: 'Modelo',
-},
-},
-    //inferiores
-    {
-      expectedValue: 'inferior_derecho', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          },
-    },
-    {
-      expectedValue: 'inferior_izquierdo', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-    },
-
-    {
-      expectedValue: 'inferior_bilateral', 
-     
-        image: [
-          {
-            src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-    {
-      expectedValue: 'inferior_bilateralindemne', 
-     
-        image: [
-          {
-            src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        ]
-    },
-
-    {
-      expectedValue: 'inferior_derechoindemne', 
-     
-        image: 
-          
-          {
-            src: '/assets/SomatosensorialImg/INFERIORIZQUIERDA.png',
-            alt: 'Modelo',
-          }
-        
-    },
-    {
-      expectedValue: 'inferior_izquierdoindemne', 
-     
-        image: 
-          {
-            src: '/assets/SomatosensorialImg/INFERIORDERECHA.png',
-            alt: 'Modelo',
-          }
-        
-        
-    },
-//trigemino
-{
-expectedValue: 'derecho_trigeminoindemne',  
-
-image: 
-[
-
-{
-
-src: '/assets/MioImg/Base_Cerebro.png',
-alt: 'Modelo',
-},
-{
-
-src: '/assets/SomatosensorialImg/TRI_1.png',
-alt: 'Modelo',
-},
-
-]
-},
-
-{
-expectedValue: "izquierdo_trigeminoindemne",  
-
-image: 
-[
-{
-src: '/assets/MioImg/Base_Cerebro.png',
-alt: 'Modelo',
-
-},
-{
-src: '/assets/SomatosensorialImg/TRI_2.png',
-alt: 'Modelo',
-}
-
-]
-},
-
-{
-expectedValue: 'bilateral_trigeminoindemne', 
-image: [
-{
-src: '/assets/MioImg/Base_Cerebro.png',
-alt: 'Modelo',
-},
-{
-src: '/assets/SomatosensorialImg/imagen_combinadaTRI.png',
-alt: 'Modelo',
-}
-],
-},
-    {
-      expectedValue: 'derecho_trigemino',  
-     
-        image: 
-        [
-    
-          {
-            
-            src: '/assets/MioImg/Base_Cerebro.png',
-            alt: 'Modelo',
-          },
-          {
-            
-            src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/TR_1.png',
-            alt: 'Modelo',
-          },
-        
-        ]
-    },
-
-    {
-      expectedValue: "izquierdo_trigemino",  
-     
-        image: 
-        [
-           {
-          src: '/assets/MioImg/Base_Cerebro.png',
-          alt: 'Modelo',
-
-           },
-          {
-            src: '/assets/SomatosensorialImg/Vía Afectada/TR_2.png',
-            alt: 'Modelo',
-          }
-        
-       ]
-    },
-
-    {
-      expectedValue: 'bilateral_trigemino', 
-      image: [
-      {
-        src: '/assets/MioImg/Base_Cerebro.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/imagen_combinadaTRI.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-
-    {
-      expectedValue: 'trigemino',  
-     
-        image: 
-          {
-            src: '/assets/MioImg/Base_Cerebro.png',
-            alt: 'Modelo',
-          },
-
-        
-        
-       
-    },
-
-    /*cortical superior*/
-    {
-      expectedValue: 'izquierdocorticals', 
-      image: 
-        {
-          src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CORTICAL D.png',
-          alt: 'Modelo',
-        },
-    },
-
-    {
-      expectedValue: 'derechocorticals', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CORTICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralcorticals', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CORTICAL D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CORTICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-     /*subcortical superior*/
-     {
-      expectedValue: 'izquierdosubcorticals', 
-      image: 
-        {
-          src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR SUBCORTICAL D.png',
-          alt: 'Modelo',
-        },
-    },
-
-    {
-      expectedValue: 'derechosubcorticals', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR SUBCORTICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralsubcorticals', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR SUBCORTICAL D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR SUBCORTICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-     /*cervical superior*/
-     {
-      expectedValue: 'izquierdocervicals', 
-      image: 
-        {
-          src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CERVICAL D.png',
-          alt: 'Modelo',
-        },
-    },
-
-    {
-      expectedValue: 'derechocervicals', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CERVICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralcervicals', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SUPERIOR CERVICAL D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SUPERIOR CERVICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-     /*periferico superior*/
-     {
-      expectedValue: 'izquierdoperifericos', 
-      image: 
-        {
-          src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_6-D.png',
-          alt: 'Modelo',
-        },
-    },
-
-    {
-      expectedValue: 'derechoperifericos', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_6.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralperifericos', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_6-D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_6.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-
-    /*cortical inferior*/
-    {
-      expectedValue: 'izquierdocorticali', 
-      image: 
-        {
-          src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR CORTICAL D.png',
-          alt: 'Modelo',
-        },
-    },
-
-    {
-      expectedValue: 'derechocorticali', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR CORTICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralcorticali', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR CORTICAL D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR CORTICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-    /*subcortical inferior*/
-    {
-      expectedValue: 'izquierdosubcorticali', 
-      image: 
-        {
-          src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR SUBCORTICAL D.png',
-          alt: 'Modelo',
-        },
-    },
-
-    {
-      expectedValue: 'derechosubcorticali', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR SUBCORTICAL I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralsubcorticali', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR SUBCORTICAL D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR SUBCORTICAL I.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-
-    /*cervical inferior*/
-
-
-    /*toracico inferior*/
-    {
-      expectedValue: 'izquierdotoracicoi', 
-      image: 
-        {
-          src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR TORACICO D.png',
-          alt: 'Modelo',
-        },
-    },
-
-    {
-      expectedValue: 'derechotoracicoi', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR TORACICO I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateraltoracicoi', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR TORACICO D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR TORACICO I.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-
-    /*lumbosacro inferior*/
-    {
-      expectedValue: 'izquierdolumbosacroi', 
-      image: 
-        {
-          src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR LUMBAR D.png',
-          alt: 'Modelo',
-        },
-    },
-
-    {
-      expectedValue: 'derecholumbosacroi', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR LUMBAR I.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilaterallumbosacroi', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/INFERIOR LUMBAR D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/INFERIOR LUMBAR I.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-
-    /*periferico inferior*/
-
-    {
-      expectedValue: 'izquierdoperifericoi', 
-      image: 
-        {
-          src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_1-D.png',
-          alt: 'Modelo',
-        },
-    },
-
-    {
-      expectedValue: 'derechoperifericoi', 
-      image: 
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_1.png',
-        alt: 'Modelo',
-      }
-      
-    },
-    {
-      expectedValue: 'bilateralperifericoi', 
-      image: [
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/Vía Derecha/SO_R_1-D.png',
-        alt: 'Modelo',
-      },
-      {
-        src: '/assets/SomatosensorialImg/Vía Afectada/SO_R_1.png',
-        alt: 'Modelo',
-      }
-    ],
-    },
-  ];
-  
-  // 2) Buscamos coincidencias con finalString
-  const matchedImages = [];
-  const conclusionLower = finalString.toLowerCase();
-
-  for (const rule of overlayRules) {
-    if (conclusionLower.includes(rule.expectedValue.toLowerCase())) {
-      if (Array.isArray(rule.image)) {
-        matchedImages.push(...rule.image);
-      } else {
-        matchedImages.push(rule.image);
-      }
-    }
+async function fetchBytes(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return new Uint8Array(await res.arrayBuffer());
+  } catch { return null; }
+}
+
+async function localImgToB64(publicPath) {
+  if (!publicPath) return null;
+  try {
+    const res = await fetch(`${baseUrl}${publicPath}`);
+    if (!res.ok) return null;
+    const buf  = await res.arrayBuffer();
+    const mime = res.headers.get('content-type') || 'image/png';
+    return `data:${mime};base64,${Buffer.from(buf).toString('base64')}`;
+  } catch { return null; }
+}
+
+async function remoteImgToB64(url) {
+  if (!url) return null;
+  if (url.startsWith('data:')) return url;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const buf  = await res.arrayBuffer();
+    const mime = res.headers.get('content-type') || 'image/png';
+    return `data:${mime};base64,${Buffer.from(buf).toString('base64')}`;
+  } catch (e) {
+    console.warn('remoteImgToB64 falló:', url, e.message);
+    return null;
   }
+}
 
-  // 3) Generar HTML de las imágenes superpuestas
-  const overlayHtml = matchedImages
-    .map(
-      (img) => `
-      <img
-        src="${img.src}"
-        alt="${img.alt}"
-        style="
-          position:absolute;
-          top:0;
-          left:0;
-          width:600px;
-          height:776px;
-          object-fit:contain;"
-      />
-    `
-    )
-    .join("");
+function esc(t) {
+  return String(t || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
-  // CSS embebido
-   // CSS embebido (tu DinamicImagesMenu, etc.)
-   const menuCss = `
-   .DivPanel2 {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    margin: 2px;
-    border-radius: 5px;
-    transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
-    position: relative;
-  
-  }
-  
-  .DivPanel2-expanded {
-    width: 230px;
-    z-index: 10; /* Asegura que el div expandido esté en la parte superior */
-    position: relative;
-    background-color: rgba(250, 250, 250, 0.678);
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-  }
-  
-  
-  .DivPanel3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    margin: 2px;
-    border-radius: 5px;
-    transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
-    position: relative;
-  
-  }
-  
-  .DivPanel3-expanded {
-    width: 95px;
-    z-index: 10; /* Asegura que el div expandido esté en la parte superior */
-    position: relative;
-    background-color: rgba(250, 250, 250, 0.678);
-  }
-  
-  .DivPanel4{
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    flex-basis: 200;
-    margin: 2px;
-    border-radius: 5px;
-  }
-  
-  .DivPanel4-expanded{
-    width: 230px;
-    
-  }
-  
-  .cuadroIMG {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    position: relative;
-    margin-left: 30px;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadroIMG-expanded {
-    width: 50px;
-    height: 50px;
-    margin-left: 90px;
-  }
-  
-  .cuadroIMG2 {
-    width: 90px;
-    height: 30px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    position: relative;
-    margin-left: 10px;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadroIMG2-expanded {
-    width: 90px;
-    height: 30px;
-    margin-left: 10px;
-  }
-  
-  /*CSS del componete que se utiliza para arastrar imagnes*/
-  .draggableDiv {
-    transition: all 0.2s ease;
-    position: absolute;
-    z-index: 9999; /* Prueba */
-  }
-  
-  .draggableDiv.expanded {
-    transform: scale(1.1); /* Expande el tamaño del div mientras el clic está sostenido */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Añade sombra */
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
-    
-  }
+function buildPage1Html({ finalConclusion, userData, baseImgB64, overlayB64s, figuras, topLeftText }) {
+  const PAD      = 30;
+  const HDR_H    = 68;
+  const HDR_PADT = 42;
+  const HDR_PADH = 70;
+  const LOGO_SZ  = 72;
+  const LAM_W    = 690;
+  const LAM_H    = 620;
+  const DIAG_PH  = 64;
+  const FTR_H    = 54;
+  const FTR_BG   = 20;
 
-  
-.cuadro {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    margin: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-    display: flex;
-    z-index: 1;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadro-expanded {
-    width: 240px;
-    height: 120px;
-    margin-left: -10px;
-    background-color: transparent;
-    z-index: 1;
-  }
-  
-  .cuadro2 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    margin-left: 40px;
-    z-index: 2;
-  }
-  
-  .cuadro2-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 135px;
-    z-index: 1;
-  }
-  
-  
-  .cuadro3 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  }
-  
-  .cuadro3-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  } 
-  
-  /*Circulos donde se insertan las imagenes*/
-  .circulo {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    margin: 10px;
-    margin-left: -5px;
-    margin-top: 10px;
-    display: flex;
-    z-index: 1;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .circulo-expanded {
-    width: 240px;
-    height: 120px;
-    z-index: 1;
-    
-  }
-  
-  .circulo2 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 40px;
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  .circulo2-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 135px;
-    z-index: 1;
-  }
-  
-  .circulo2 > .dropArea2{
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  
-  .circulo3 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  .circulo3-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  }
-  
-  .circulo3 > .dropArea2{
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  
-  .lineaImg{
-    width: 130px; /* Ajusta el ancho para que sea responsivo */
-    height: 40px; /* Mantiene la proporción de la imagen */
-    transition: transform 0.3s ease; /* Añade una transición suave para efectos */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    margin-top: 5px;
-    z-index: 1;
-    
-  }
-  
-  .lineaImg-expanded {
-    width: 130px;
-    height: auto;
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 55px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-  }
-  
-  .lineaImg2{
-    width: 130px; /* Ajusta el ancho para que sea responsivo */
-    height: 40px; /* Mantiene la proporción de la imagen */
-    transition: transform 0.3s ease; /* Añade una transición suave para efectos */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    margin-top: 5px;
-    margin-left: 35px;
-    z-index: 1;
-    
-  }
-  
-  .lineaImg2-expanded {
-    width: 130px;
-    height: auto;
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 60px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-  }
-  
-  
-  .cruzImg{
-    width: 90px; /* Ajusta el ancho para que sea responsivo */
-    height: 25px; /* Mantiene la proporción de la imagen */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    align-items: center;
-  }
-  
-  .PuntoRojo{
-    width: 45px; /* Ajusta el ancho para que sea responsivo */
-    height: 45px; /* Mantiene la proporción de la imagen */
-    position: relative;
-    background-color: transparent;
-    pointer-events: none;
-    margin: auto;
-    padding-bottom: 10px;
-  
-  }
-  
-  .lineaImg4{
-    width: 84px;
-    height: 84px;
-  }
-  
-  .dropArea2 {
-    width: 40px; /* Tamaño inicial */
-    height: 40px;
-    background-color: transparent;
-    transition: width 0.3s ease, height 0.3s ease; /* Transición suave */
-  }
-  
-  .dropArea2-expanded {
-    width: 88px; /* Mismo tamaño que cuadro2-expanded */
-    height: 92px;
-    transition: width 0.3s ease, height 0.3s ease;
-  }
-  
-  .lineaDv{
-    background-color: black;
-    border: solid 0.5px black;
-    width:120px;
-    height: 1px;
-  }
+  const overlayTags = overlayB64s.filter(Boolean)
+    .map(b64 => `<img src="${b64}" class="si"/>`)
+    .join('');
 
-  .containerImg {
-    position: relative; /* Permite que Draggable funcione correctamente */
-    width: 100%; /* O cualquier tamaño que necesites */
-    height: 100%; /* O cualquier tamaño que necesites */
-  }
-  `;
+  const figuraTags = figuras.map(f => {
+    if (!f.src) return '';
+    const r = f.tipo === 'circle' ? '50%' : '0';
+    return `<img src="${f.src}" style="position:absolute;left:${f.x}px;top:${f.y}px;width:80px;height:80px;object-fit:cover;border-radius:${r};border:1.5px solid #808080;z-index:10;pointer-events:none;"/>`;
+  }).join('');
 
+  const svgUser  = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+  const svgEmail = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
+  const svgSpec  = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 90 90" fill="#000"><path d="M45.12,61.02c0,0,0,7.32-4.79,7.32h-8.68c-1.82,0-3.29-1.47-3.29-3.29c0,0-2.39-8.68-2.65-8.68l-2.88-1.21c-1.57-0.66-2.31-2.46-1.66-4.03l4.8-9.65v-0.67c0-11.9,9.65-21.55,21.55-21.55s21.55,9.65,21.55,21.55c0,5.12-1.8,9.84-4.79,13.54v16.39"/></svg>`;
+  const svgId    = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 2l-6 3.99L6 4h12z"/></svg>`;
 
-  return `
+  const footerItems = [
+    userData.name
+      ? `<span class="fi">${svgUser}<span>Dr. ${esc(userData.name)} ${esc(userData.lastname||'')}</span></span>`
+      : '',
+    userData.email
+      ? `<span class="fi">${svgEmail}<span>${esc(userData.email)}</span></span>`
+      : '',
+    userData.especialidad
+      ? `<span class="fi">${svgSpec}<span>${esc(userData.especialidad)}</span></span>`
+      : '',
+    userData.cedula
+      ? `<span class="fi">${svgId}<span>${esc(userData.cedula)}</span></span>`
+      : '',
+  ].filter(Boolean).join(`<span class="fsep">|</span>`);
+
+  // Support two-paragraph conclusion (split on \n\n)
+  const diagHtml = (finalConclusion || '').split('\n\n').map(p => p.trim()).filter(Boolean)
+    .map(p => `<p class="diag-text">${esc(p)}</p>`).join('');
+
+  return `<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Reporte</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        background-color: transparent;
-      }
-      .container {
-        width: 700px;
-        height: 800px;
-        margin: 10px auto;
-        position: relative;
-        align-items: center;
-      }
-      .user-logo {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        opacity: 50%;
-        border-radius: 0%;
-        object-fit: cover;
-      }
-      .paciente-name {
-        margin-top: 54px;
-        margin-left: 100px;
-      }
-      .image-container {
-        position: relative;
-      }
-      .image-stack {
-        position: relative;
-        width: 600px;
-        height: 776px;
-        margin: 0 auto;
-      }
-      .image-stack img {
-        position: absolute;
-        left: 0; 
-        top: 0;
-        width: 600px;
-        height: 776px;
-        object-fit: contain;
-      }
-      #conclusionDiv {
-        margin-top: 2px;
-        padding: 12px;
-        font-size: 14px;
-        line-height: 1.4;
-        text-align: justify;
-
-      }
-      .user-data {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        font-size: 10px;
-        opacity: 50%;
-        margin-top: 90px;
-        align-items: center;
-        justify-content: center;
-      }
-      .user-data svg {
-        margin-right: 4px;
-      }
-      .user-data > div {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-      }
-      /* Inyectamos el CSS extra */
-      ${menuCss}
-    </style>
-  </head>
-  <body>
-    ${
-      userData.imageUrl
-        ? `<img class="user-logo" src="${userData.imageUrl}" alt="Logo Usuario" />`
-        : ""
-    }
-    <div class="paciente-name">
-      ${topLeftText ?? ""}
+<head>
+<meta charset="UTF-8"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  img{border:none;outline:none;box-shadow:none}
+  html,body{
+    width:${PAGE_W}px;height:${PAGE_H}px;
+    background:transparent;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    overflow:hidden;
+  }
+  .page{
+    width:${PAGE_W}px;height:${PAGE_H}px;
+    padding:${PAD}px;
+    display:flex;flex-direction:column;
+    background:transparent;
+  }
+  .shift{height:10px;flex-shrink:0}
+  .hdr{
+    height:${HDR_H}px;flex-shrink:0;
+    padding-left:${HDR_PADH + 30}px;padding-right:${HDR_PADH}px;
+    padding-top:${HDR_PADT}px;padding-bottom:6px;
+    display:flex;flex-direction:row;
+    align-items:center;justify-content:space-between;
+  }
+  .patient{font-size:12px;font-weight:700;color:#111;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:24px}
+  .logo-wrap{width:${LOGO_SZ+12}px;height:${LOGO_SZ+12}px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:26px}
+  .logo{width:${LOGO_SZ}px;height:${LOGO_SZ}px;object-fit:contain;border-radius:0;border:none;outline:none;box-shadow:none;background:transparent}
+  .lamina-wrap{flex-shrink:0;display:flex;justify-content:center;margin-top:10px;}
+  .stack{position:relative;width:${LAM_W}px;height:${LAM_H}px;overflow:hidden;background:transparent;flex-shrink:0;}
+  .si{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
+  .diag{flex-shrink:0;padding:0 ${DIAG_PH}px;margin-top:110px;}
+  .diag-title{font-size:11px;font-weight:700;color:#111;margin-bottom:5px}
+  .diag-text{font-size:10.5px;line-height:17px;color:#1a1a1a;text-align:justify;margin-bottom:8px}
+  .spacer{flex:1;min-height:0}
+  .footer{
+    flex-shrink:0;height:${FTR_H}px;margin-top:${FTR_BG}px;
+    display:flex;flex-direction:row;align-items:center;justify-content:center;
+    gap:10px;flex-wrap:wrap;padding:0 ${HDR_PADH}px;
+  }
+  .fi{display:inline-flex;align-items:center;gap:5px;font-size:9px;color:#444;white-space:nowrap}
+  .fsep{font-size:10px;color:#ccc;margin:0 2px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="shift"></div>
+  <div class="hdr">
+    <div class="patient">${esc(topLeftText)}</div>
+    ${userData.imageUrl ? `<div class="logo-wrap"><img src="${esc(userData.imageUrl)}" class="logo"/></div>` : ''}
+  </div>
+  <div class="lamina-wrap">
+    <div class="stack">
+      ${baseImgB64 ? `<img src="${baseImgB64}" class="si"/>` : ''}
+      ${overlayTags}
+      ${figuraTags}
     </div>
-    <div class="container">
-      <!-- droppedItems con posicion:absolute -->
-      <div class="image-container">
-        ${droppedItems
-          .map(
-            (item) => `
-              <div
-                style="
-                  position: absolute;
-                  left: ${item.x + 43}px;
-                  top: ${item.y - 10}px;
-                "
-              >
-                ${item.content}
-              </div>
-            `
-          )
-          .join("")}
-      </div>
-      <!-- Bloque "image-stack" con la imagen base y overlays -->
-      <div class="image-stack">
-         <!-- Aquí se muestra la imagen base según trigemino o no: -->
-        <img src="${imageSrc1}" alt="Imagen Base" />
-        ${overlayHtml}
-      </div>
-      <div id="conclusionDiv">
-        ${finalConclusion}
-      </div>
-      <div class="user-data">
-        ${
-          userData.name
-            ? `
-              <div id="footerName">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-label="Usuario"
-                >
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 
-                           1.79-4 4 1.79 4 4 4zm0 2c-2.67 
-                           0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                </svg>
-                <span>Dr. ${userData.name} ${userData.lastname ?? ""}</span>
-              </div>
-            `
-            : ""
-        }
-        ${
-          userData.email
-            ? `
-              <div id="footerEmail">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-label="Email"
-                >
-                  <path d="M20 4H4c-1.1 0-2 .9-2 
-                           2v12c0 1.1.9 2 2 2h16c1.1 0 
-                           2-.9 2-2V6c0-1.1-.9-2-2-2zm0 
-                           4l-8 5-8-5V6l8 5 8-5v2z" />
-                </svg>
-                <span>${userData.email}</span>
-              </div>
-            `
-            : ""
-        }
-        ${
-          userData.especialidad
-            ? `
-              <div id="footerEspecialidad">
-                <svg
-                  version="1.1"
-                  id="ICONOS"
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 90 90"
-                  width="14"
-                  height="14"
-                  fill="currentColor"
-                  aria-label="Especialidad"
-                >
-                  <path d="M45.12,61.02c0,0,0,
-                           7.32-4.79,7.32h-8.68c-1.82,
-                           0-3.29-1.47-3.29-3.29
-                           c0,0-2.39-8.68-2.65-8.68l-2.88-1.21
-                           c-1.57-0.66-2.31-2.46-1.66-4.03l4.8-9.65v-0.67
-                           c0-11.9,9.65-21.55,21.55-21.55s21.55,9.65,21.55,21.55
-                           c0,5.12-1.8,9.84-4.79,13.54v16.39"/>
-                </svg>
-                <span>${userData.especialidad}</span>
-              </div>
-            `
-            : ""
-        }
-        ${
-          userData.cedula
-            ? `
-              <div id="footerCedula">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-label="Cédula"
-                >
-                  <path d="M20 2H4c-1.1 0-2 
-                           .9-2 2v16c0 1.1.9 2 2 2h16c1.1 
-                           0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 
-                           2l-6 3.99L6 4h12z"/>
-                </svg>
-                <span>Cédula: ${userData.cedula}</span>
-              </div>
-            `
-            : ""
-        }
-      </div>
-    </div>
-  </body>
-</html>
-`;
+  </div>
+  <div class="diag">
+    <div class="diag-title">Diagnóstico</div>
+    ${diagHtml}
+  </div>
+  <div class="spacer"></div>
+  <div class="footer">${footerItems}</div>
+</div>
+</body>
+</html>`;
 }
 
-// Aquí el endpoint que genera el PDF
+function buildPage2Html({ listaVisual, comentarioLista, imgListaB64, hasPlantilla }) {
+  const listaHtml = listaVisual.length
+    ? listaVisual.map(({ k, v }) =>
+        `<div class="li"><span class="lk">${esc(k)}:</span><span class="lv"> ${esc(v)}</span></div>`
+      ).join('')
+    : `<div class="li-empty">Sin datos.</div>`;
+
+  const imgSection = imgListaB64
+    ? `<div class="img-wrap"><img src="${imgListaB64}" class="tabla-img"/></div>`
+    : '';
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    width:${PAGE_W}px;height:${PAGE_H}px;
+    background:transparent;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    overflow:hidden;
+  }
+  .page{
+    width:${PAGE_W}px;height:${PAGE_H}px;
+    padding:${hasPlantilla ? 170 : 40}px 70px 30px 70px;
+    display:flex;flex-direction:column;
+    background:transparent;
+  }
+  .two-col{display:flex;flex-direction:row;flex-shrink:0;gap:40px;margin-bottom:36px;}
+  .col-left{flex:1;padding:0 20px;}
+  .col-right{flex:1;padding:0 20px;}
+  .col-title{font-size:11px;font-weight:700;color:#111;margin-bottom:10px;}
+  .li{font-size:10px;color:#111;line-height:18px;margin-bottom:5px}
+  .lk{font-weight:700}
+  .lv{font-weight:400}
+  .li-empty{font-size:10px;color:#999;font-style:italic}
+  .comment{font-size:10px;color:#111;line-height:18px;text-align:justify}
+  .img-wrap{flex:1;margin-top:190px;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;}
+  .tabla-img{width:100%;max-height:560px;object-fit:contain;display:block;}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="two-col">
+    <div class="col-left">
+      <div class="col-title">Estudio</div>
+      ${listaHtml}
+    </div>
+    <div class="col-right">
+      <div class="col-title">Comentario</div>
+      <p class="comment">${esc(comentarioLista)}</p>
+    </div>
+  </div>
+  ${imgSection}
+</div>
+</body>
+</html>`;
+}
+
+async function captureHtmlAsPng(browser, html) {
+  const page = await browser.newPage();
+  await page.setViewport({ width: PAGE_W, height: PAGE_H, deviceScaleFactor: 2 });
+  await page.setContent(html, { waitUntil: 'networkidle0' });
+  const buf = await page.screenshot({ type: 'png', omitBackground: true, clip: { x: 0, y: 0, width: PAGE_W, height: PAGE_H } });
+  await page.close();
+  return buf;
+}
+
+async function assemblePdf({ jpgPage1, jpgPage2, plantillaId }) {
+  const pdfDoc = await PDFDocument.create();
+  const W = 595.28, H = 841.89;
+
+  const page1 = pdfDoc.addPage([W, H]);
+  if (plantillaId && plantillaId !== 'none' && PLANTILLAS_PDF[plantillaId]) {
+    const bytes = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p1}`);
+    if (bytes) {
+      try {
+        const tpl = await PDFDocument.load(bytes);
+        const [tplPg] = await pdfDoc.embedPdf(tpl, [0]);
+        page1.drawPage(tplPg, { x: 0, y: 0, width: W, height: H });
+      } catch (e) { console.warn('plantilla p1:', e.message); }
+    }
+  }
+  const img1 = await pdfDoc.embedPng(jpgPage1);
+  page1.drawImage(img1, { x: 0, y: 0, width: W, height: H });
+
+  if (jpgPage2) {
+    const page2 = pdfDoc.addPage([W, H]);
+    if (plantillaId && plantillaId !== 'none' && PLANTILLAS_PDF[plantillaId]) {
+      const bytes2 = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p2}`);
+      if (bytes2) {
+        try {
+          const tpl2 = await PDFDocument.load(bytes2);
+          const [tplPg2] = await pdfDoc.embedPdf(tpl2, [0]);
+          page2.drawPage(tplPg2, { x: 0, y: 0, width: W, height: H });
+        } catch (e) { console.warn('plantilla p2:', e.message); }
+      }
+    }
+    const img2 = await pdfDoc.embedPng(jpgPage2);
+    page2.drawImage(img2, { x: 0, y: 0, width: W, height: H });
+  }
+
+  return await pdfDoc.save();
+}
+
+// ── POST handler ──────────────────────────────────────────────────────────────
 export async function POST(req) {
+  let browser;
   try {
     const body = await req.json();
     const {
-      finalConclusion = "", // texto visible
-      conclusiones = [],    // array con { title, value }
-      userData = {},
-      droppedItems = [],
-      topLeftText = "",
+      finalConclusion  = '',
+      activeOv         = [],
+      figuras          = [],
+      listaVisual      = [],
+      imgListaUrl      = null,
+      comentarioLista  = '',
+      userData         = {},
+      topLeftText      = '',
+      plantillaId      = 'none',
     } = body;
 
-    const browser = await launchBrowser();
-    const page = await browser.newPage();
+    // Detect trigémino to use cerebro base image
+    const isTrigémino = activeOv.some(k =>
+      k.includes('trigemino') || k.includes('trigémino')
+    );
+    const baseImagePath = isTrigémino
+      ? '/assets/MioImg/Base_Cerebro_TR.png'
+      : '/SomatosensorialImg/SO_BASE_TR.png';
 
-    // 1) Carga tus assets públicos (para fuentes / imágenes externas)
-    await page.goto(baseUrl, { waitUntil: 'networkidle2' });
-    
-    // Armamos la cadena final con value
-    const finalString = conclusiones.map((cl) => cl.value).join(" ");
+    const ovPaths = activeOv.map(k => OVERLAYS_SOMATO[k]).filter(Boolean);
+    const [baseImgB64, imgListaB64, doctorLogoB64, ...overlayB64s] = await Promise.all([
+      localImgToB64(baseImagePath),
+      remoteImgToB64(imgListaUrl),
+      remoteImgToB64(userData.imageUrl || null),
+      ...ovPaths.map(p => localImgToB64(p)),
+    ]);
 
-    // Función para sanitizar (opcional)
-    const sanitizeText = (text) => {
-      return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    };
+    const userDataB64 = { ...userData, imageUrl: doctorLogoB64 || null };
 
-    const sanitizedFinalConclusion = sanitizeText(finalConclusion);
-    const sanitizedFinalString = sanitizeText(finalString);
+    browser = await launchBrowser();
 
-    // Construimos el HTML
-    const html = buildHtml({
-      finalConclusion: sanitizedFinalConclusion,
-      finalString: sanitizedFinalString,
-      userData,
-      droppedItems,
-      topLeftText,
+    const html1 = buildPage1Html({
+      finalConclusion,
+      userData: userDataB64,
+      baseImgB64,
+      overlayB64s,
+      figuras,
+      topLeftText: topLeftText || '',
     });
+    const jpgPage1 = await captureHtmlAsPng(browser, html1);
 
-    await page.setContent(html, { waitUntil: 'networkidle0' });
-
-    // 3) Genera el PDF
-    const pdf = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-      scale: 1,
-    });
+    const hayPag2 = comentarioLista.trim().length > 0 || imgListaB64 !== null;
+    let jpgPage2 = null;
+    if (hayPag2) {
+      const html2 = buildPage2Html({
+        listaVisual,
+        comentarioLista,
+        imgListaB64,
+        hasPlantilla: plantillaId && plantillaId !== 'none',
+      });
+      jpgPage2 = await captureHtmlAsPng(browser, html2);
+    }
 
     await browser.close();
+    browser = null;
 
-    return new NextResponse(pdf, {
+    const pdfBytes = await assemblePdf({ jpgPage1, jpgPage2, plantillaId });
+
+    return new NextResponse(pdfBytes, {
       status: 200,
       headers: {
-        'Content-Type': 'application/pdf',
+        'Content-Type':        'application/pdf',
         'Content-Disposition': 'attachment; filename=reporte.pdf',
       },
     });
   } catch (err) {
-    console.error('Error generando PDF:', err);
-    return NextResponse.json(
-      { message: 'Error generando PDF' },
-      { status: 500 },
-    );
+    if (browser) { try { await browser.close(); } catch {} }
+    console.error('Error PDF somatosensorial:', err);
+    return NextResponse.json({ message: err.message }, { status: 500 });
   }
 }

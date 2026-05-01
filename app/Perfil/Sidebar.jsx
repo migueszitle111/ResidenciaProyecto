@@ -7,9 +7,19 @@ import "./Style.css";
 
 // Componente funcional Sidebar
 const Sidebar = () => {
-  // Manejador para cerrar sesión
-  const logoutHandler = () => {
-    signOut();
+  // Manejador para cerrar Sesión
+  const logoutHandler = async () => {
+    try {
+      const response = await signOut({
+        redirect: false,
+        callbackUrl: "/?logout=1",
+      });
+
+      window.location.replace(response?.url || "/");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      window.location.replace("/");
+    }
   };
 
   return (
@@ -17,32 +27,33 @@ const Sidebar = () => {
       {/* Lista de enlaces en la barra lateral */}
       <ul className="sidebar">
         <li>
-          {/* Enlace a la página de perfil */}
+          {/* Enlace a la pÃ¡gina de perfil */}
           <Link href="/Perfil" passHref scroll={false} className="block px-3 py-2 text-white hover:bg-orange-900 hover:text-white rounded-md">
             Tu Perfil
           </Link>
         </li>
         <li>
-          {/* Enlace a la página de modificación de perfil */}
+          {/* Enlace a la pÃ¡gina de modificaciÃ³n de perfil */}
           <Link href="/Perfil/Perfil_Actualizar" passHref scroll={false} className="block px-3 py-2 text-white hover:bg-orange-900 hover:text-white rounded-md">
             Modificar Perfil
           </Link>
         </li>
         <li>
-          {/* Enlace a la página de cambio de contraseña */}
+          {/* Enlace a la pÃ¡gina de cambio de contraseÃ±a */}
           <Link href="/Perfil/Perfil_Contra" passHref scroll={false} className="block px-3 py-2 text-white hover:bg-orange-900 hover:text-white rounded-md">
-            Cambiar Contraseña
+            Cambiar ContraseÃ±a
           </Link>
         </li>
         <hr />
         <li>
-          {/* Enlace para cerrar sesión */}
-          <a
-            className="block px-3 py-2 text-white hover:bg-orange-900 hover:text-white rounded-md"
+          {/* Enlace para cerrar Sesión */}
+          <button
+            type="button"
+            className="block w-full px-3 py-2 text-left text-white hover:bg-orange-900 hover:text-white rounded-md"
             onClick={logoutHandler}
           >
             Cerrar Sesión
-          </a>
+          </button>
         </li>
       </ul>
     </aside>

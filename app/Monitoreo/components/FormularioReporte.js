@@ -1,0 +1,1295 @@
+"use client";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useSession } from "next-auth/react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CRANEALES, OTROS } from "../utils/cirugiaUtils";
+import { buildMonitoreoPdf, buildReportFileName, toSafeToken } from "../utils/pdfGenerator";
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backendmedxpro-tef2.onrender.com';
+
+const STORAGE_KEY = (tipo, paciente) =>
+  `@formulario_monitoreo_${tipo}_${(paciente||'').replace(/\s+/g,'_')}`;
+
+const emptyReg = () => ({ texto: '', imagenes: [] });
+
+function emptyBasales(esCraneal) {
+  return {
+    peSomatosensoriales: emptyReg(),
+    peMotores:           emptyReg(),
+    emgLibre:            emptyReg(),
+    emgEvocada:          emptyReg(),
+    tof:                 emptyReg(),
+    ondaD:               emptyReg(),
+    pNeuromotores:       emptyReg(),
+    ...(esCraneal ? {
+      peMotoresCorticobulbares: emptyReg(),
+      peVisuales:               emptyReg(),
+      peAuditivosTallo:         emptyReg(),
+      electroencefalograma:     emptyReg(),
+      electrocorticografia:     emptyReg(),
+    } : {}),
+  };
+}
+
+function emptyFinales(esCraneal) {
+  return {
+    peSomatosensorialesFinales: emptyReg(),
+    peMotoresFinales:           emptyReg(),
+    emgLibreFinales:            emptyReg(),
+    emgEvocadaFinales:          emptyReg(),
+    tofFinales:                 emptyReg(),
+    ondaDFinales:               emptyReg(),
+    pNeuromotoresFinales:       emptyReg(),
+    ...(esCraneal ? {
+      peMotoresCorticobulbaresFinales: emptyReg(),
+      peVisualesFinales:               emptyReg(),
+      peAuditivosTalloFinales:         emptyReg(),
+      electroencefalogramaFinales:     emptyReg(),
+      electrocorticografiaFinales:     emptyReg(),
+    } : {}),
+  };
+}
+
+// ─── Sub-componentes ──────────────────────────────────────────────────────────
+
+function Campo({ label, value, onChange, placeholder, type = 'text', required }) {
+  return (
+    <div>
+      <label className="text-slate-400 text-xs mb-1 block">
+        {label}{required && <span className="text-orange-400 ml-1">*</span>}
+      </label>
+      <input
+        type={type}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        placeholder={placeholder || label}
+        className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none placeholder-slate-600"
+      />
+    </div>
+  );
+}
+
+function SubRegistroField({ label, value, onChange }) {
+  const fileRef = useRef();
+
+  const handleImages = e => {
+    const files = Array.from(e.target.files);
+    Promise.all(files.map(f => new Promise(res => {
+      const r = new FileReader();
+      r.onload = () => res(r.result);
+      r.readAsDataURL(f);
+    }))).then(uris => onChange({ ...value, imagenes: [...value.imagenes, ...uris] }));
+  };
+
+  return (
+    <div className="bg-[#111] rounded-xl p-4 border border-white/10">
+      <p className="text-orange-400 text-xs font-semibold mb-2">{label}</p>
+      <textarea
+        value={value.texto}
+        onChange={e => onChange({ ...value, texto: e.target.value })}
+        placeholder="Observaciones..."
+        rows={3}
+        className="w-full bg-[#1c1c1c] text-white text-sm rounded-md p-2 border border-white/10 resize-none focus:border-orange-500 focus:outline-none placeholder-slate-500"
+      />
+      <div className="mt-2 flex flex-wrap gap-2">
+        {value.imagenes.map((src, i) => (
+          <div key={i} className="relative w-16 h-16">
+            <img src={src} alt="" className="w-full h-full object-cover rounded-md" />
+            <button
+              onClick={() => onChange({ ...value, imagenes: value.imagenes.filter((_, j) => j !== i) })}
+              className="absolute -top-1 -right-1 bg-black text-white rounded-full w-4 h-4 text-xs flex items-center justify-center"
+            >×</button>
+          </div>
+        ))}
+        <button
+          onClick={() => fileRef.current.click()}
+          className="w-16 h-16 border border-dashed border-orange-500/50 rounded-md flex items-center justify-center text-orange-400 hover:border-orange-500 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </button>
+        <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleImages} />
+      </div>
+    </div>
+  );
+}
+
+function CamposRegistros({ data, onChange, esCraneal }) {
+  const set = campo => val => onChange({ ...data, [campo]: val });
+  const campos = [
+    ['peSomatosensoriales',      'PE Somatosensoriales'],
+    ['peMotores',                'PE Motores'],
+    ['emgLibre',                 'EMG Libre'],
+    ['emgEvocada',               'EMG Evocada'],
+    ['tof',                      'TOF'],
+    ['ondaD',                    'Onda D'],
+    ['pNeuromotores',            'P. Neuromotores'],
+    ...(esCraneal ? [
+      ['peMotoresCorticobulbares','PE Motores Corticobulbares'],
+      ['peVisuales',             'PE Visuales'],
+      ['peAuditivosTallo',       'PE Auditivos de Tallo'],
+      ['electroencefalograma',   'Electroencefalograma'],
+      ['electrocorticografia',   'Electrocorticografía'],
+    ] : []),
+  ];
+  return (
+    <div className="flex flex-col gap-3">
+      {campos.map(([key, label]) => (
+        <SubRegistroField key={key} label={label} value={data[key] || emptyReg()} onChange={set(key)} />
+      ))}
+    </div>
+  );
+}
+
+function CamposFinales({ data, onChange, esCraneal }) {
+  const set = campo => val => onChange({ ...data, [campo]: val });
+  const campos = [
+    ['peSomatosensorialesFinales', 'PE Somatosensoriales'],
+    ['peMotoresFinales',           'PE Motores'],
+    ['emgLibreFinales',            'EMG Libre'],
+    ['emgEvocadaFinales',          'EMG Evocada'],
+    ['tofFinales',                 'TOF'],
+    ['ondaDFinales',               'Onda D'],
+    ['pNeuromotoresFinales',       'P. Neuromotores'],
+    ...(esCraneal ? [
+      ['peMotoresCorticobulbaresFinales','PE Motores Corticobulbares'],
+      ['peVisualesFinales',             'PE Visuales'],
+      ['peAuditivosTalloFinales',       'PE Auditivos de Tallo'],
+      ['electroencefalogramaFinales',   'Electroencefalograma'],
+      ['electrocorticografiaFinales',   'Electrocorticografía'],
+    ] : []),
+  ];
+  return (
+    <div className="flex flex-col gap-3">
+      {campos.map(([key, label]) => (
+        <SubRegistroField key={key} label={label} value={data[key] || emptyReg()} onChange={set(key)} />
+      ))}
+    </div>
+  );
+}
+
+// ─── Barra de progreso de pasos (6 pasos ahora) ───────────────────────────────
+const PASOS = ['Datos', 'Basales', 'Procedimiento', 'Finales', 'Conclusión', 'Agregar'];
+
+function PasoIndicador({ pasoActual }) {
+  return (
+    <div className="flex items-center justify-between mb-8 px-1">
+      {PASOS.map((nombre, idx) => {
+        const completado = idx < pasoActual;
+        const activo     = idx === pasoActual;
+        return (
+          <div key={idx} className="flex items-center flex-1">
+            <div className="flex flex-col items-center">
+              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                completado ? 'bg-orange-500 text-white' :
+                activo     ? 'bg-orange-500/20 border-2 border-orange-500 text-orange-400' :
+                             'bg-[#1a1a1a] border border-white/10 text-slate-500'
+              }`}>
+                {completado ? '✓' : idx + 1}
+              </div>
+              <span className={`text-[9px] mt-1 text-center hidden sm:block ${activo ? 'text-orange-400 font-semibold' : completado ? 'text-slate-300' : 'text-slate-600'}`}>
+                {nombre}
+              </span>
+            </div>
+            {idx < PASOS.length - 1 && (
+              <div className={`flex-1 h-0.5 mx-1 transition-all ${completado ? 'bg-orange-500' : 'bg-white/10'}`} />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─── Canvas de firma digital ─────────────────────────────────────────────────
+const CSS_W = 400;
+const CSS_H = 180;
+
+function FirmaCanvas({ onConfirmar, onCancelar }) {
+  const canvasRef = useRef(null);
+  const drawing = useRef(false);
+  const lastPos = useRef(null);
+  const dprRef = useRef(1);
+
+  // Inicializar canvas con DPR al montar
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const dpr = window.devicePixelRatio || 1;
+    dprRef.current = dpr;
+    canvas.width = CSS_W * dpr;
+    canvas.height = CSS_H * dpr;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, CSS_W, CSS_H);
+  }, []);
+
+  const getPos = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    // Las coordenadas del evento ya están en CSS pixels — no dividir por DPR
+    if (e.touches && e.touches.length > 0) {
+      return {
+        x: (e.touches[0].clientX - rect.left) * (CSS_W / rect.width),
+        y: (e.touches[0].clientY - rect.top) * (CSS_H / rect.height),
+      };
+    }
+    return {
+      x: (e.clientX - rect.left) * (CSS_W / rect.width),
+      y: (e.clientY - rect.top) * (CSS_H / rect.height),
+    };
+  };
+
+  const startDraw = (e) => {
+    e.preventDefault();
+    drawing.current = true;
+    const pos = getPos(e);
+    lastPos.current = pos;
+    // Punto inicial
+    const ctx = canvasRef.current.getContext('2d');
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, 0.8, 0, Math.PI * 2);
+    ctx.fillStyle = '#000';
+    ctx.fill();
+  };
+
+  const draw = (e) => {
+    e.preventDefault();
+    if (!drawing.current) return;
+    const ctx = canvasRef.current.getContext('2d');
+    const pos = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(lastPos.current.x, lastPos.current.y);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 1.8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.stroke();
+    lastPos.current = pos;
+  };
+
+  const endDraw = (e) => {
+    e?.preventDefault();
+    drawing.current = false;
+    lastPos.current = null;
+  };
+
+  const limpiar = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    // Resetear la transformación para limpiar correctamente
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, CSS_W, CSS_H);
+  };
+
+  const confirmar = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    // Verificar que se haya dibujado algo (píxeles negros)
+    let hasContent = false;
+    for (let i = 0; i < imgData.length; i += 4) {
+      if (imgData[i] < 100 && imgData[i + 3] > 100) { hasContent = true; break; }
+    }
+    if (!hasContent) return;
+    // Exportar con fondo blanco garantizado
+    const exportCanvas = document.createElement('canvas');
+    exportCanvas.width = CSS_W;
+    exportCanvas.height = CSS_H;
+    const ectx = exportCanvas.getContext('2d');
+    ectx.fillStyle = 'white';
+    ectx.fillRect(0, 0, CSS_W, CSS_H);
+    ectx.drawImage(canvas, 0, 0, CSS_W, CSS_H);
+    const dataUrl = exportCanvas.toDataURL('image/png');
+    onConfirmar(dataUrl);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl">
+        <h3 className="text-gray-800 font-bold text-lg mb-4 text-center">Dibuje su firma</h3>
+        <div className="border-2 border-gray-300 rounded-xl overflow-hidden mb-4" style={{ touchAction: 'none' }}>
+          <canvas
+            ref={canvasRef}
+            style={{ width: CSS_W, height: CSS_H, display: 'block', cursor: 'crosshair', maxWidth: '100%' }}
+            onMouseDown={startDraw}
+            onMouseMove={draw}
+            onMouseUp={endDraw}
+            onMouseLeave={endDraw}
+            onTouchStart={startDraw}
+            onTouchMove={draw}
+            onTouchEnd={endDraw}
+          />
+        </div>
+        <div className="flex gap-3">
+          <button onClick={onCancelar}
+            className="flex-1 border border-gray-300 text-gray-600 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors">
+            Cancelar
+          </button>
+          <button onClick={limpiar}
+            className="flex-1 border border-gray-300 text-gray-600 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors">
+            Borrar
+          </button>
+          <button onClick={confirmar}
+            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2.5 rounded-xl text-sm font-semibold transition-colors">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Modal selector de plantilla ─────────────────────────────────────────────
+function PlantillaModal({ titulo, onConPlantilla, onSinPlantilla, onCancelar }) {
+  return (
+    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+      <div className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-sm p-6 shadow-2xl">
+        <h3 className="text-white font-bold text-lg text-center mb-2">{titulo}</h3>
+        <p className="text-slate-400 text-sm text-center mb-6">Selecciona el estilo del PDF</p>
+        <div className="flex gap-3 mb-3">
+          <button
+            onClick={onConPlantilla}
+            className="flex-1 flex flex-col items-center gap-2 bg-[#1c1c1c] border border-orange-500/50 hover:border-orange-500 rounded-xl py-4 px-3 transition-colors group"
+          >
+            {/* Ícono plantilla con diseño */}
+            <div className="w-10 h-10 rounded-full border-2 border-orange-400 group-hover:border-orange-500 flex items-center justify-center overflow-hidden">
+              <div className="w-5 h-5 rounded-full border-2 border-orange-400" style={{ background: 'conic-gradient(#f97316 50%, transparent 50%)' }} />
+            </div>
+            <span className="text-white text-xs font-semibold">Con Plantilla IOM</span>
+          </button>
+          <button
+            onClick={onSinPlantilla}
+            className="flex-1 flex flex-col items-center gap-2 bg-[#1c1c1c] border border-white/20 hover:border-white/40 rounded-xl py-4 px-3 transition-colors"
+          >
+            <div className="w-10 h-10 rounded-full border-2 border-slate-400 flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full border-2 border-slate-400" />
+            </div>
+            <span className="text-slate-300 text-xs font-semibold">Sin Plantilla</span>
+          </button>
+        </div>
+        <button onClick={onCancelar}
+          className="w-full border border-white/10 text-slate-400 hover:text-white py-2.5 rounded-xl text-sm transition-colors">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Modal principal "Generar Informe" ────────────────────────────────────────
+function GenerarInformeModal({ onLink, onPdf, onCancelar }) {
+  return (
+    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+      <div className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-xs p-6 shadow-2xl">
+        <h3 className="text-white font-bold text-lg text-center mb-6">Generar Informe</h3>
+        <div className="flex flex-col gap-3">
+          <button onClick={onLink}
+            className="w-full border border-orange-500 text-orange-400 hover:bg-orange-500/10 font-semibold py-3 rounded-xl text-sm transition-colors">
+            🔗 Link
+          </button>
+          <button onClick={onPdf}
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl text-sm transition-colors">
+            ⬇ PDF
+          </button>
+          <button onClick={onCancelar}
+            className="w-full border border-white/10 text-slate-400 hover:text-white py-2.5 rounded-xl text-sm transition-colors">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── LinkModal ────────────────────────────────────────────────────────────────
+function LinkModal({ onClose, onGenerate, generating, link, progress }) {
+  const [title, setTitle]     = useState('');
+  const [message, setMessage] = useState('');
+  const [expiry, setExpiry]   = useState('24h');
+  const [files, setFiles]     = useState([]);
+  const fileRef = useRef();
+
+  const handleFiles = e => {
+    const newFiles = Array.from(e.target.files).map(f => ({
+      id: `${Date.now()}_${f.name}`, name: f.name, file: f,
+      size: f.size, type: f.type, status: 'pending',
+    }));
+    setFiles(prev => [...prev, ...newFiles]);
+  };
+
+  const expiryOpts = [
+    { v: '24h', l: '24 horas' },
+    { v: '5d',  l: '5 días' },
+    { v: '15d', l: '15 días' },
+  ];
+
+  return (
+    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+      <div className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-lg p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-white font-bold text-lg">Generar Link Compartible</h3>
+          <button onClick={onClose} className="text-slate-400 hover:text-white text-xl">×</button>
+        </div>
+        {link ? (
+          <div className="flex flex-col gap-3">
+            <p className="text-green-400 text-sm font-semibold">✓ Link generado exitosamente</p>
+            <div className="bg-[#1c1c1c] rounded-lg px-3 py-2 text-orange-400 text-xs break-all">{link}</div>
+            <div className="flex gap-2">
+              <button onClick={() => navigator.clipboard.writeText(link)}
+                className="flex-1 bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 rounded-lg transition-colors">Copiar</button>
+              <button onClick={onClose} className="flex-1 border border-white/20 text-slate-300 text-sm py-2 rounded-lg hover:border-white/40 transition-colors">Cerrar</button>
+            </div>
+          </div>
+        ) : generating ? (
+          <div className="flex flex-col items-center gap-4 py-6">
+            <div className="w-full bg-[#1c1c1c] rounded-full h-2">
+              <div className="bg-orange-500 h-2 rounded-full transition-all" style={{ width: `${progress}%` }} />
+            </div>
+            <p className="text-slate-300 text-sm">Generando... {progress}%</p>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-4">
+            <div>
+              <label className="text-slate-400 text-xs mb-1 block">Título del link</label>
+              <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Reporte de Monitoreo"
+                className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none" />
+            </div>
+            <div>
+              <label className="text-slate-400 text-xs mb-1 block">Mensaje (opcional)</label>
+              <textarea value={message} onChange={e => setMessage(e.target.value)} rows={2}
+                className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none" />
+            </div>
+            <div>
+              <label className="text-slate-400 text-xs mb-2 block">Vigencia del link</label>
+              <div className="flex gap-2">
+                {expiryOpts.map(o => (
+                  <button key={o.v} onClick={() => setExpiry(o.v)}
+                    className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-colors ${expiry === o.v ? 'bg-orange-500 text-white' : 'bg-[#1c1c1c] text-slate-400 border border-white/10 hover:border-orange-500/50'}`}>
+                    {o.l}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="text-slate-400 text-xs mb-2 block">Archivos adicionales (opcional)</label>
+              <div className="flex flex-wrap gap-2 mb-2">
+                {files.map(f => (
+                  <div key={f.id} className="bg-[#1c1c1c] rounded-lg px-3 py-1 text-xs text-slate-300 flex items-center gap-2">
+                    {f.name}
+                    <button onClick={() => setFiles(prev => prev.filter(x => x.id !== f.id))} className="text-red-400">×</button>
+                  </div>
+                ))}
+              </div>
+              <button onClick={() => fileRef.current.click()}
+                className="w-full border border-dashed border-white/20 text-slate-400 hover:border-orange-500/50 hover:text-orange-400 text-xs py-3 rounded-lg transition-colors">
+                + Agregar archivos
+              </button>
+              <input ref={fileRef} type="file" multiple className="hidden" onChange={handleFiles} />
+            </div>
+            <button onClick={() => onGenerate({ title, message, expiry, files })}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl text-sm transition-colors">
+              Generar Link
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Botones de navegación ────────────────────────────────────────────────────
+function NavButtons({ onAnterior, onSiguiente, labelSiguiente = 'Siguiente →', disabledSiguiente = false, hideSiguiente = false }) {
+  return (
+    <div className="flex justify-between mt-8 pt-4 border-t border-white/10">
+      {onAnterior ? (
+        <button onClick={onAnterior}
+          className="px-5 py-2.5 border border-white/20 text-slate-400 hover:text-white hover:border-white/40 rounded-xl text-sm transition-colors">
+          ← Anterior
+        </button>
+      ) : <div />}
+      {!hideSiguiente && (
+        <motion.button
+          whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+          onClick={onSiguiente}
+          disabled={disabledSiguiente}
+          className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl text-sm transition-colors"
+        >
+          {labelSiguiente}
+        </motion.button>
+      )}
+    </div>
+  );
+}
+
+// ─── Componente Principal ─────────────────────────────────────────────────────
+export default function FormularioReporte({ nombreCirugia }) {
+  const { data: session } = useSession();
+  const esCraneal = CRANEALES.includes(nombreCirugia);
+  const esOtros   = OTROS ? OTROS.includes(nombreCirugia) : false;
+
+  // Paso actual: 0=Datos, 1=Basales, 2=Procedimiento, 3=Finales, 4=Conclusión, 5=Agregar
+  const [paso, setPaso] = useState(0);
+
+  // Datos usuario
+  const [userData, setUserData] = useState(null);
+  const [doctorLogoUrl, setDoctorLogoUrl] = useState(null);
+
+  // Formulario
+  const [form, setForm] = useState({
+    nombrePaciente: '', edad: '',
+    fecha: (() => { const n = new Date(); const d = String(n.getDate()).padStart(2,'0'); const m = String(n.getMonth()+1).padStart(2,'0'); return `${d}/${m}/${n.getFullYear()}`; })(),
+    diagnostico: '', cirujano: '', tipoCirugia: nombreCirugia,
+    hospital: '', aseguranza: '', neurofisiologo: '', equipo: '', insumos: '',
+    registrosBasales:   emptyBasales(esCraneal),
+    fasesProcedimiento: [],
+    faseActual: null,
+    registrosFinales:   emptyFinales(esCraneal),
+    conclusion: '', notaAgregada: '',
+    tendenciasFotos: [],
+  });
+
+  // Firma digital
+  const [firmaBase64, setFirmaBase64]     = useState('');
+  const [firmaModalVisible, setFirmaModalVisible] = useState(false);
+
+  // Opciones de adjuntos
+  const [incluirProtocolo,    setIncluirProtocolo]    = useState(false);
+  const [incluirProcedimiento,setIncluirProcedimiento]= useState(false);
+  const [incluirModalidades,  setIncluirModalidades]  = useState(false);
+
+  // UI states
+  const [mensaje,        setMensaje]        = useState(null);
+  const [generandoPdf,   setGenerandoPdf]   = useState(false);
+  const [pdfProgress,    setPdfProgress]    = useState(0);
+  const [showLink,       setShowLink]       = useState(false);
+  const [linkUrl,        setLinkUrl]        = useState(null);
+  const [linkGenerating, setLinkGenerating] = useState(false);
+  const [linkProgress,   setLinkProgress]  = useState(0);
+
+  // Modales de flujo de generación
+  const [showGenerarModal,   setShowGenerarModal]   = useState(false);  // Generar Informe (Link/PDF)
+  const [plantillaCallback,  setPlantillaCallback]  = useState(null);   // función a ejecutar tras elegir plantilla
+  const [showPlantillaModal, setShowPlantillaModal] = useState(false);  // Selector Con/Sin plantilla
+
+  // ── Cargar datos del usuario ──
+  useEffect(() => {
+    if (!session?.user?.email) return;
+    const token = session.user.backendToken || session.accessToken;
+    if (!token) return;
+    fetch(`${BACKEND_URL}/userdata`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token }),
+    })
+      .then(r => r.json())
+      .then(res => {
+        if (res?.data) {
+          setUserData(res.data);
+          if (res.data.imageUrl) setDoctorLogoUrl(res.data.imageUrl);
+        }
+      })
+      .catch(() => {});
+  }, [session]);
+
+  // ── Auto-guardar borrador ──
+  useEffect(() => {
+    if (!form.nombrePaciente) return;
+    localStorage.setItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente), JSON.stringify({ form, paso }));
+  }, [form, paso]);
+
+  // ── Recuperar borrador ──
+  const restaurarBorrador = () => {
+    if (!form.nombrePaciente) return;
+    const saved = localStorage.getItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setForm(parsed.form || parsed);
+        if (parsed.paso !== undefined) setPaso(parsed.paso);
+        showMsg('info', 'Borrador restaurado.');
+      } catch {}
+    } else {
+      showMsg('info', 'No hay borrador guardado para este paciente.');
+    }
+  };
+
+  const showMsg = (tipo, texto) => {
+    setMensaje({ tipo, texto });
+    setTimeout(() => setMensaje(null), 4000);
+  };
+
+  const setField = field => val => setForm(f => ({ ...f, [field]: val }));
+
+  // ── Fases del procedimiento ──
+  const iniciarNuevaFase = () => {
+    setForm(f => ({ ...f, faseActual: { nombre: '', ...emptyBasales(esCraneal) } }));
+  };
+
+  const guardarFaseActual = () => {
+    if (!form.faseActual) return;
+    if (!form.faseActual.nombre.trim()) { showMsg('error', 'Ingrese el nombre de la fase.'); return; }
+    setForm(f => ({ ...f, fasesProcedimiento: [...f.fasesProcedimiento, f.faseActual], faseActual: null }));
+  };
+
+  const agregarOtraFase = () => {
+    if (!form.faseActual) return;
+    if (!form.faseActual.nombre.trim()) { showMsg('error', 'Ingrese el nombre de la fase.'); return; }
+    setForm(f => ({
+      ...f,
+      fasesProcedimiento: [...f.fasesProcedimiento, f.faseActual],
+      faseActual: { nombre: '', ...emptyBasales(esCraneal) },
+    }));
+  };
+
+  const removeFase = idx => setForm(f => ({ ...f, fasesProcedimiento: f.fasesProcedimiento.filter((_, i) => i !== idx) }));
+  const updateFaseActual = data => setForm(f => ({ ...f, faseActual: data }));
+
+  // ── Tendencias ──
+  const addTendencia = () => setForm(f => ({ ...f, tendenciasFotos: [...f.tendenciasFotos, emptyReg()] }));
+  const updateTendencia = (idx, val) => setForm(f => { const arr = [...f.tendenciasFotos]; arr[idx] = val; return { ...f, tendenciasFotos: arr }; });
+  const removeTendencia = idx => setForm(f => ({ ...f, tendenciasFotos: f.tendenciasFotos.filter((_, i) => i !== idx) }));
+
+  // ── Construir datos del reporte ──
+  const buildReporteData = useCallback(() => ({
+    ...form,
+    usuarioNombre:       userData?.name      || session?.user?.name?.split(' ')[0] || '',
+    usuarioApellido:     userData?.lastname  || session?.user?.name?.split(' ').slice(1).join(' ') || '',
+    usuarioCorreo:       userData?.email     || session?.user?.email || '',
+    usuarioTelefono:     userData?.phone     || '',
+    usuarioCedula:       userData?.idprofessional || '',
+    usuarioEspecialidad: userData?.specialty || '',
+    usuarioLogo:         doctorLogoUrl       || userData?.imageUrl || '',
+    firmaBase64:         firmaBase64 || '',
+    incluirProtocolo,
+    incluirProcedimiento,
+    incluirModalidades,
+  }), [form, userData, session, doctorLogoUrl, firmaBase64, incluirProtocolo, incluirProcedimiento, incluirModalidades]);
+
+  // ── Descarga PDF ──
+  const handleDescargarPdf = async (usarPlantilla) => {
+    setShowPlantillaModal(false);
+    setShowGenerarModal(false);
+    if (!form.conclusion) { showMsg('error', 'La conclusión es requerida.'); return; }
+    setGenerandoPdf(true);
+    setPdfProgress(0);
+    try {
+      const datos = buildReporteData();
+      const arrayBuffer = await buildMonitoreoPdf(datos, usarPlantilla, p => setPdfProgress(p));
+      const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = buildReportFileName(form.tipoCirugia, form.nombrePaciente);
+      a.click();
+      URL.revokeObjectURL(url);
+      showMsg('ok', 'PDF descargado exitosamente.');
+      localStorage.removeItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
+    } catch (e) {
+      showMsg('error', `Error generando PDF: ${e.message}`);
+    } finally {
+      setGenerandoPdf(false);
+    }
+  };
+
+  // ── Generar Link ──
+  const handleGenerarLink = async (usarPlantilla) => {
+    setShowPlantillaModal(false);
+    setShowGenerarModal(false);
+    if (!form.conclusion) { showMsg('error', 'La conclusión es requerida.'); return; }
+    setShowLink(true);
+    setLinkUrl(null);
+    // La generación real la dispara el LinkModal al confirmar
+    // Guardamos usarPlantilla para usarlo en el callback real
+    setLinkUsarPlantilla(usarPlantilla);
+  };
+
+  const [linkUsarPlantilla, setLinkUsarPlantilla] = useState(true);
+
+  const handleGenerarLinkConfirmar = async ({ title, message, expiry, files }) => {
+    if (!form.conclusion) { showMsg('error', 'La conclusión es requerida.'); return; }
+    setLinkGenerating(true);
+    setLinkProgress(5);
+    setLinkUrl(null);
+
+    try {
+      const datos = buildReporteData();
+      const doctorName = [datos.usuarioNombre, datos.usuarioApellido].filter(Boolean).join(' ');
+      const studyType  = 'Neuromonitoreo Intraoperatorio';
+      const expSeconds = expiry === '24h' ? 86400 : expiry === '5d' ? 432000 : 1296000;
+
+      const finalTitle = (title?.trim() || `${studyType} – ${form.nombrePaciente || 'Paciente'}${doctorName ? ` – ${doctorName}` : ''}`).slice(0, 140);
+      const finalMsg   = message?.trim() || [
+        `Estudio: ${studyType}`,
+        `Paciente: ${form.nombrePaciente || '—'}`,
+        `Médico: ${doctorName || '—'}`,
+        `Tipo de cirugía: ${form.tipoCirugia}`,
+        '',
+        `Conclusión: ${form.conclusion}`,
+      ].join('\n');
+
+      // Rutas relativas → funciona en local y en producción sin CORS
+      const initRes = await fetch(`/api/share/init`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: finalTitle, message: finalMsg, expiresInSeconds: expSeconds,
+          patient: form.nombrePaciente || null, doctor: doctorName || null,
+          studyType, doctorLogo: doctorLogoUrl || null,
+          meta: { patient: form.nombrePaciente, doctor: doctorName, study: studyType, studyType },
+        }),
+      });
+      const initData = await initRes.json();
+      if (!initData.ok) throw new Error(initData.error || 'Error iniciando link');
+      const { linkId } = initData;
+
+      setLinkProgress(15);
+
+      const arrayBuffer = await buildMonitoreoPdf(datos, linkUsarPlantilla, p => setLinkProgress(15 + Math.round(p * 0.5)));
+      const reportName  = buildReportFileName(form.tipoCirugia, form.nombrePaciente);
+
+      setLinkProgress(65);
+
+      // Bucket de monitoreo — igual que la app móvil
+      const MONITOREO_BUCKET = 'monitoreo-packages';
+      const folder = toSafeToken(form.nombrePaciente || 'Paciente');
+
+      // — Subir PDF del reporte —
+      const formData = new FormData();
+      formData.append('file', new Blob([arrayBuffer], { type: 'application/pdf' }), reportName);
+      formData.append('folder', folder);
+      formData.append('bucket', MONITOREO_BUCKET);
+
+      const uploadRes = await fetch(`/api/share/upload`, { method: 'POST', body: formData });
+      const uploadData = await uploadRes.json();
+      if (!uploadData.ok) throw new Error(uploadData.error || 'Error subiendo PDF');
+
+      setLinkProgress(85);
+
+      // — Archivos adicionales del usuario —
+      // uploadData.path ya viene con prefijo "monitoreo-packages/..." igual que la app móvil
+      const uploadedFiles = [
+        {
+          name:         uploadData.name,
+          mime_type:    uploadData.mime_type,
+          size_bytes:   uploadData.size_bytes,
+          storage_path: uploadData.path,
+        },
+      ];
+
+      for (const f of (files || [])) {
+        const fd = new FormData();
+        fd.append('file', f.file);
+        fd.append('folder', folder);
+        fd.append('bucket', MONITOREO_BUCKET);
+        const r = await fetch(`/api/share/upload`, { method: 'POST', body: fd }).catch(() => null);
+        if (r?.ok) {
+          const d = await r.json().catch(() => null);
+          if (d?.ok) {
+            uploadedFiles.push({
+              name:         d.name,
+              mime_type:    d.mime_type,
+              size_bytes:   d.size_bytes,
+              storage_path: d.path,
+            });
+          }
+        }
+      }
+
+      const doneRes = await fetch(`/api/share/complete`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ linkId, files: uploadedFiles }),
+      });
+      const doneData = await doneRes.json();
+      if (!doneData.ok) throw new Error(doneData.error || 'Error completando link');
+
+      setLinkProgress(100);
+      setLinkUrl(doneData.url);
+      localStorage.removeItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
+    } catch (e) {
+      showMsg('error', `Error: ${e.message}`);
+      setShowLink(false);
+    } finally {
+      setLinkGenerating(false);
+    }
+  };
+
+  // ── Flujo de selección: Generar Informe → Link/PDF → Con/Sin plantilla ──
+  const abrirGenerarInforme = () => {
+    if (!form.conclusion?.trim()) { showMsg('error', 'Por favor ingrese una conclusión antes de generar el reporte.'); return; }
+    setShowGenerarModal(true);
+  };
+
+  const onElegirLink = () => {
+    setShowGenerarModal(false);
+    setPlantillaCallback(() => (usarPlantilla) => handleGenerarLink(usarPlantilla));
+    setShowPlantillaModal(true);
+  };
+
+  const onElegirPdf = () => {
+    setShowGenerarModal(false);
+    setPlantillaCallback(() => (usarPlantilla) => handleDescargarPdf(usarPlantilla));
+    setShowPlantillaModal(true);
+  };
+
+  const limpiar = () => {
+    if (form.nombrePaciente) localStorage.removeItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
+    setForm({
+      nombrePaciente: '', edad: '',
+      fecha: (() => { const n = new Date(); const d = String(n.getDate()).padStart(2,'0'); const m = String(n.getMonth()+1).padStart(2,'0'); return `${d}/${m}/${n.getFullYear()}`; })(),
+      diagnostico: '', cirujano: '', tipoCirugia: nombreCirugia,
+      hospital: '', aseguranza: '', neurofisiologo: '', equipo: '', insumos: '',
+      registrosBasales: emptyBasales(esCraneal), fasesProcedimiento: [],
+      faseActual: null,
+      registrosFinales: emptyFinales(esCraneal), conclusion: '', notaAgregada: '',
+      tendenciasFotos: [],
+    });
+    setFirmaBase64('');
+    setIncluirProtocolo(false);
+    setIncluirProcedimiento(false);
+    setIncluirModalidades(false);
+    setPaso(0);
+    showMsg('info', 'Formulario limpiado.');
+  };
+
+  // ── Validación por paso ──
+  const validarPaso0 = () => {
+    const { nombrePaciente, edad, fecha, diagnostico, cirujano, tipoCirugia, hospital, aseguranza, neurofisiologo, equipo, insumos } = form;
+    if (!nombrePaciente || !edad || !fecha || !diagnostico || !cirujano || !tipoCirugia || !hospital || !aseguranza || !neurofisiologo || !equipo || !insumos) {
+      showMsg('error', 'Por favor complete todos los campos antes de continuar.');
+      return false;
+    }
+    return true;
+  };
+
+  const validarPaso1 = () => {
+    const b = form.registrosBasales;
+    const tieneAlgo = Object.values(b).some(v => v?.texto?.trim());
+    if (!tieneAlgo) { showMsg('error', 'Complete al menos un registro basal antes de continuar.'); return false; }
+    return true;
+  };
+
+  const avanzar = () => {
+    if (paso === 0 && !validarPaso0()) return;
+    if (paso === 1 && !validarPaso1()) return;
+    if (paso === 2 && form.faseActual?.nombre?.trim()) { guardarFaseActual(); return; }
+    if (paso === 4 && !form.conclusion?.trim()) { showMsg('error', 'La conclusión es requerida.'); return; }
+    setPaso(p => Math.min(p + 1, 5));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const retroceder = () => {
+    setPaso(p => Math.max(p - 1, 0));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  return (
+    <div>
+      {/* Encabezado */}
+      <div className="mb-6 flex items-start justify-between">
+        <div>
+          <span className="text-orange-400 text-xs font-semibold uppercase tracking-widest">Reporte de Monitoreo</span>
+          <h1 className="text-2xl font-bold text-white mt-1 leading-tight">{nombreCirugia}</h1>
+        </div>
+        <div className="flex gap-2 mt-1">
+          <button onClick={restaurarBorrador} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">
+            Restaurar borrador
+          </button>
+          <button onClick={limpiar} className="text-xs text-slate-600 hover:text-red-400 transition-colors">
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      {/* Mensaje */}
+      <AnimatePresence>
+        {mensaje && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+            className={`mb-4 px-4 py-3 rounded-xl text-sm ${
+              mensaje.tipo === 'error' ? 'bg-red-900/50 text-red-300 border border-red-700' :
+              mensaje.tipo === 'ok'    ? 'bg-green-900/50 text-green-300 border border-green-700' :
+              'bg-blue-900/50 text-blue-300 border border-blue-700'
+            }`}
+          >{mensaje.texto}</motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Indicador de pasos */}
+      <PasoIndicador pasoActual={paso} />
+
+      {/* Overlay generando PDF */}
+      {generandoPdf && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center">
+          <div className="bg-[#111] border border-white/10 rounded-2xl p-8 w-80 flex flex-col items-center gap-4">
+            <p className="text-white font-semibold">Generando PDF...</p>
+            <div className="w-full bg-[#1c1c1c] rounded-full h-2">
+              <div className="bg-orange-500 h-2 rounded-full transition-all" style={{ width: `${pdfProgress}%` }} />
+            </div>
+            <p className="text-orange-400 text-sm font-bold">{Math.round(pdfProgress)}%</p>
+          </div>
+        </div>
+      )}
+
+      {/* Contenido animado por paso */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={paso}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.2 }}
+        >
+
+          {/* ── PASO 0: Datos del Paciente ── */}
+          {paso === 0 && (
+            <div>
+              <h2 className="text-white font-semibold text-base mb-4 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>
+                Datos del Paciente y Cirugía
+              </h2>
+              <div className="bg-[#0d0d0d] rounded-xl p-5 border border-white/10 flex flex-col gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Campo label="Nombre del Paciente" value={form.nombrePaciente} onChange={setField('nombrePaciente')} required />
+                  <Campo label="Edad"                value={form.edad}           onChange={setField('edad')} required />
+                  <Campo label="Fecha (DD/MM/AAAA)"  value={form.fecha}          onChange={setField('fecha')} placeholder="DD/MM/AAAA" required />
+                  <Campo label="Diagnóstico"         value={form.diagnostico}    onChange={setField('diagnostico')} required />
+                  <Campo label="Cirujano"            value={form.cirujano}       onChange={setField('cirujano')} required />
+                  <Campo label="Tipo de Cirugía"     value={form.tipoCirugia}    onChange={setField('tipoCirugia')} required />
+                  <Campo label="Hospital"            value={form.hospital}       onChange={setField('hospital')} required />
+                  <Campo label="Aseguranza"          value={form.aseguranza}     onChange={setField('aseguranza')} required />
+                  <Campo label="Neurofisiólogo"      value={form.neurofisiologo} onChange={setField('neurofisiologo')} required />
+                  <Campo label="Equipo"              value={form.equipo}         onChange={setField('equipo')} required />
+                </div>
+                <div>
+                  <label className="text-slate-400 text-xs mb-1 block">Insumos <span className="text-orange-400">*</span></label>
+                  <textarea value={form.insumos} onChange={e => setField('insumos')(e.target.value)} rows={2}
+                    placeholder="Insumos utilizados..."
+                    className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600" />
+                </div>
+              </div>
+              <NavButtons onSiguiente={avanzar} labelSiguiente="Iniciar Cirugía →" />
+            </div>
+          )}
+
+          {/* ── PASO 1: Registros Basales ── */}
+          {paso === 1 && (
+            <div>
+              <h2 className="text-white font-semibold text-base mb-1 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
+                Registros Basales
+              </h2>
+              <p className="text-slate-500 text-xs mb-4 ml-8">Complete al menos un registro antes de continuar</p>
+              <CamposRegistros data={form.registrosBasales} onChange={setField('registrosBasales')} esCraneal={esCraneal} />
+              <NavButtons onAnterior={retroceder} onSiguiente={avanzar} labelSiguiente="Continuar a Procedimiento →" />
+            </div>
+          )}
+
+          {/* ── PASO 2: Fases del Procedimiento ── */}
+          {paso === 2 && (
+            <div>
+              <h2 className="text-white font-semibold text-base mb-1 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">3</span>
+                Fases del Procedimiento
+              </h2>
+              <p className="text-slate-500 text-xs mb-4 ml-8">Agregue las fases del procedimiento quirúrgico</p>
+
+              {form.fasesProcedimiento.map((fase, idx) => (
+                <div key={idx} className="border border-orange-500/20 rounded-xl p-4 mb-3 bg-[#0d0d0d]">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-orange-400 text-sm font-semibold">Fase {idx + 1}: {fase.nombre}</span>
+                    <button onClick={() => removeFase(idx)} className="text-red-400 hover:text-red-300 text-xs px-2 py-1 border border-red-800/40 rounded-lg transition-colors">
+                      Eliminar
+                    </button>
+                  </div>
+                  <p className="text-slate-500 text-xs">Fase guardada — {Object.values(fase).filter(v => v?.texto?.trim()).length} campos con datos</p>
+                </div>
+              ))}
+
+              {form.faseActual ? (
+                <div className="border border-orange-500/40 rounded-xl p-4 mb-3 bg-[#0d0d0d]">
+                  <div className="mb-3">
+                    <label className="text-slate-400 text-xs mb-1 block">Nombre de la fase <span className="text-orange-400">*</span></label>
+                    <input
+                      value={form.faseActual.nombre}
+                      onChange={e => updateFaseActual({ ...form.faseActual, nombre: e.target.value })}
+                      placeholder="Ej: Apertura, Resección, Cierre..."
+                      className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-orange-500/40 focus:border-orange-500 focus:outline-none"
+                    />
+                  </div>
+                  <CamposRegistros
+                    data={form.faseActual}
+                    onChange={data => updateFaseActual({ ...form.faseActual, ...data })}
+                    esCraneal={esCraneal}
+                  />
+                  <div className="flex gap-3 mt-4">
+                    <button onClick={guardarFaseActual}
+                      className="flex-1 bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">
+                      ✓ Guardar Fase
+                    </button>
+                    <button onClick={agregarOtraFase}
+                      className="flex-1 border border-orange-500/40 text-orange-400 hover:bg-orange-500/10 text-sm py-2.5 rounded-xl transition-colors">
+                      + Guardar y Agregar Otra
+                    </button>
+                    <button onClick={() => setForm(f => ({ ...f, faseActual: null }))}
+                      className="px-4 border border-white/10 text-slate-500 hover:text-slate-300 text-sm py-2.5 rounded-xl transition-colors">
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button onClick={iniciarNuevaFase}
+                  className="w-full border border-dashed border-orange-500/40 text-orange-400 hover:border-orange-500 rounded-xl py-4 text-sm transition-colors mb-3">
+                  + Agregar Fase del Procedimiento
+                </button>
+              )}
+
+              <NavButtons
+                onAnterior={retroceder}
+                onSiguiente={() => { setPaso(3); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                labelSiguiente="Continuar a Registros Finales →"
+              />
+            </div>
+          )}
+
+          {/* ── PASO 3: Registros Finales ── */}
+          {paso === 3 && (
+            <div>
+              <h2 className="text-white font-semibold text-base mb-1 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">4</span>
+                Registros Finales
+              </h2>
+              <p className="text-slate-500 text-xs mb-4 ml-8">Registros al finalizar el procedimiento</p>
+              <CamposFinales data={form.registrosFinales} onChange={setField('registrosFinales')} esCraneal={esCraneal} />
+              <NavButtons onAnterior={retroceder} onSiguiente={avanzar} labelSiguiente="Continuar a Conclusión →" />
+            </div>
+          )}
+
+          {/* ── PASO 4: Conclusión ── */}
+          {paso === 4 && (
+            <div>
+              <h2 className="text-white font-semibold text-base mb-4 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">5</span>
+                Conclusión
+              </h2>
+
+              {/* Conclusión */}
+              <div className="bg-[#0d0d0d] rounded-xl p-5 border border-white/10 mb-4">
+                <div className="mb-4">
+                  <label className="text-slate-400 text-xs mb-1 block">
+                    Conclusión <span className="text-orange-400">*requerida</span>
+                  </label>
+                  <textarea value={form.conclusion} onChange={e => setField('conclusion')(e.target.value)} rows={5}
+                    placeholder="Escriba la conclusión del monitoreo..."
+                    className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600" />
+                </div>
+                <div>
+                  <label className="text-slate-400 text-xs mb-1 block">Nota Agregada</label>
+                  <textarea value={form.notaAgregada} onChange={e => setField('notaAgregada')(e.target.value)} rows={3}
+                    placeholder="Agregue notas adicionales si es necesario..."
+                    className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600" />
+                </div>
+              </div>
+
+              {/* Información del Médico y Firma */}
+              <div className="bg-[#0d0d0d] rounded-xl p-5 border border-white/10 mb-4">
+                <div className="flex items-start justify-between gap-4">
+                  {/* Info médico */}
+                  <div className="flex-1">
+                    <p className="text-white text-sm font-semibold">
+                      Dr. {userData?.name || session?.user?.name?.split(' ')[0] || ''} {userData?.lastname || session?.user?.name?.split(' ').slice(1).join(' ') || ''}
+                    </p>
+                    {userData?.specialty && (
+                      <p className="text-slate-400 text-xs mt-0.5">{userData.specialty}</p>
+                    )}
+                    {userData?.idprofessional && (
+                      <p className="text-slate-500 text-xs mt-0.5">Céd. {userData.idprofessional}</p>
+                    )}
+                  </div>
+                  {/* Firma */}
+                  <div className="flex flex-col items-center gap-2">
+                    <p className="text-slate-400 text-xs">Firma</p>
+                    {firmaBase64 ? (
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="bg-white rounded-lg p-1">
+                          <img src={firmaBase64} alt="Firma" className="h-12 object-contain" style={{ maxWidth: 120 }} />
+                        </div>
+                        <button onClick={() => setFirmaBase64('')}
+                          className="text-xs text-orange-400 hover:text-orange-300 border border-orange-500/40 px-2 py-1 rounded-lg transition-colors">
+                          Rehacer
+                        </button>
+                      </div>
+                    ) : (
+                      <button onClick={() => setFirmaModalVisible(true)}
+                        className="border border-dashed border-orange-500/50 text-orange-400 hover:border-orange-500 text-xs px-4 py-3 rounded-xl transition-colors min-w-[120px] text-center">
+                        Toque para firmar
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <NavButtons onAnterior={retroceder} onSiguiente={avanzar} labelSiguiente="Continuar a Agregar →" />
+            </div>
+          )}
+
+          {/* ── PASO 5: AGREGAR ── */}
+          {paso === 5 && (
+            <div>
+              <h2 className="text-white font-semibold text-base mb-1 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">6</span>
+                AGREGAR
+              </h2>
+              <p className="text-slate-500 text-xs mb-4 ml-8">Adjunte documentos adicionales para el informe final</p>
+
+              <div className="bg-[#0d0d0d] rounded-xl p-5 border border-white/10 mb-4 flex flex-col gap-5">
+
+                {/* Protocolo, Procedimiento, Modalidades — solo si no es "otros" */}
+                {!esOtros && (
+                  <>
+                    {/* Protocolo */}
+                    <div>
+                      <p className="text-white text-sm font-semibold">Protocolo</p>
+                      <p className="text-slate-500 text-xs mb-2">Se agregará al reporte final — Hoja 2</p>
+                      <label className="flex items-center gap-3 cursor-pointer">
+                        <div
+                          onClick={() => setIncluirProtocolo(v => !v)}
+                          className={`w-5 h-5 rounded flex items-center justify-center border transition-colors ${incluirProtocolo ? 'bg-orange-500 border-orange-500' : 'bg-[#1c1c1c] border-white/20'}`}
+                        >
+                          {incluirProtocolo && <span className="text-white text-xs font-bold">✓</span>}
+                        </div>
+                        <span className="text-slate-300 text-sm">Incluir en reporte final</span>
+                      </label>
+                    </div>
+
+                    {/* Procedimiento */}
+                    <div>
+                      <p className="text-white text-sm font-semibold">Procedimiento</p>
+                      <p className="text-slate-500 text-xs mb-2">Se agregará al reporte final — Hoja 3</p>
+                      <label className="flex items-center gap-3 cursor-pointer">
+                        <div
+                          onClick={() => setIncluirProcedimiento(v => !v)}
+                          className={`w-5 h-5 rounded flex items-center justify-center border transition-colors ${incluirProcedimiento ? 'bg-orange-500 border-orange-500' : 'bg-[#1c1c1c] border-white/20'}`}
+                        >
+                          {incluirProcedimiento && <span className="text-white text-xs font-bold">✓</span>}
+                        </div>
+                        <span className="text-slate-300 text-sm">Incluir en reporte final</span>
+                      </label>
+                    </div>
+
+                    {/* Modalidades Neurofisiológicas */}
+                    <div>
+                      <p className="text-white text-sm font-semibold">Modalidades Neurofisiológicas</p>
+                      <p className="text-slate-500 text-xs mb-2">Se agregará al reporte final — Hoja 4</p>
+                      <label className="flex items-center gap-3 cursor-pointer">
+                        <div
+                          onClick={() => setIncluirModalidades(v => !v)}
+                          className={`w-5 h-5 rounded flex items-center justify-center border transition-colors ${incluirModalidades ? 'bg-orange-500 border-orange-500' : 'bg-[#1c1c1c] border-white/20'}`}
+                        >
+                          {incluirModalidades && <span className="text-white text-xs font-bold">✓</span>}
+                        </div>
+                        <span className="text-slate-300 text-sm">Incluir en reporte final</span>
+                      </label>
+                    </div>
+
+                    <div className="border-t border-white/10" />
+                  </>
+                )}
+
+                {/* Tendencias y Cascada de Eventos */}
+                <div>
+                  <p className="text-white text-sm font-semibold">Tendencias y Cascada de Eventos</p>
+                  <p className="text-slate-500 text-xs mb-3">Fotos tamaño grande con descripción — Última hoja</p>
+
+                  {form.tendenciasFotos.map((t, idx) => (
+                    <div key={idx} className="border border-white/10 rounded-xl p-3 mb-3">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-white text-xs font-semibold">Tendencia {idx + 1}</span>
+                        <button onClick={() => removeTendencia(idx)} className="text-red-400 text-xs hover:text-red-300">✕ Eliminar</button>
+                      </div>
+                      <SubRegistroField label="Descripción" value={t} onChange={val => updateTendencia(idx, val)} />
+                    </div>
+                  ))}
+
+                  <button onClick={addTendencia}
+                    className="w-full border border-dashed border-white/20 text-slate-400 hover:border-orange-500/50 hover:text-orange-400 rounded-xl py-3 text-sm transition-colors">
+                    + Agregar Foto
+                  </button>
+                </div>
+              </div>
+
+              {/* Botón único "Generar Informe PDF" */}
+              <div className="flex flex-col gap-3 mt-4">
+                <button onClick={retroceder}
+                  className="px-5 py-2.5 border border-white/20 text-slate-400 hover:text-white hover:border-white/40 rounded-xl text-sm transition-colors self-start">
+                  ← Anterior
+                </button>
+                <motion.button
+                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                  onClick={abrirGenerarInforme}
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl text-base transition-colors shadow-lg shadow-orange-900/30"
+                >
+                  Generar Informe PDF
+                </motion.button>
+                <p className="text-slate-600 text-xs text-center">
+                  El borrador se guarda automáticamente en tu navegador
+                </p>
+              </div>
+            </div>
+          )}
+
+        </motion.div>
+      </AnimatePresence>
+
+      {/* ── Modal canvas de firma ── */}
+      {firmaModalVisible && (
+        <FirmaCanvas
+          onConfirmar={(dataUrl) => { setFirmaBase64(dataUrl); setFirmaModalVisible(false); }}
+          onCancelar={() => setFirmaModalVisible(false)}
+        />
+      )}
+
+      {/* ── Modal Generar Informe (Link / PDF / Cancelar) ── */}
+      {showGenerarModal && (
+        <GenerarInformeModal
+          onLink={onElegirLink}
+          onPdf={onElegirPdf}
+          onCancelar={() => setShowGenerarModal(false)}
+        />
+      )}
+
+      {/* ── Modal selector de plantilla ── */}
+      {showPlantillaModal && plantillaCallback && (
+        <PlantillaModal
+          titulo="Plantilla"
+          onConPlantilla={() => { setShowPlantillaModal(false); plantillaCallback(true); }}
+          onSinPlantilla={() => { setShowPlantillaModal(false); plantillaCallback(false); }}
+          onCancelar={() => { setShowPlantillaModal(false); setPlantillaCallback(null); }}
+        />
+      )}
+
+      {/* ── Modal de link ── */}
+      {showLink && (
+        <LinkModal
+          onClose={() => { setShowLink(false); setLinkUrl(null); setLinkGenerating(false); }}
+          onGenerate={handleGenerarLinkConfirmar}
+          generating={linkGenerating}
+          link={linkUrl}
+          progress={linkProgress}
+        />
+      )}
+    </div>
+  );
+}

@@ -1,680 +1,1298 @@
-import { ReportContext,DropContext } from '@/src/context';
-import { useSession } from "next-auth/react";
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Rnd } from 'react-rnd'; // Libreria para el arrastre y redimension de las imagenes
-import { ConclusionCanvasV } from '../../../components/ReportTemplate/Conclusions/CanvasViasVisual';
-import SimpleMultiStepForm from './MenuBotones';
+'use client';
+/*
+ * MotoresNew/ReportFace.jsx
+ * Versión web del reporte de Vía Corticoespinal (Motores) basado en MotoraCorticoespinal.tsx (app móvil).
+ * Layout: panel izquierdo oscuro (menú pasos) + panel derecho blanco (imagen + overlays).
+ */
+
+import { useSession } from 'next-auth/react';
+import { useCallback, createContext, useContext, useMemo, useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import ExportBar from './MenuBotones';
 import './Style.css';
 
-const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
-  const { droppedItems, setDroppedItems } = useContext(DropContext);
-  const dropAreaRef = useRef(null);
+/* ─── Galería de tablas ──────────────────────────────────────────────────────── */
+const TABLAS_URL = 'https://backendmedxpro-tef2.onrender.com/pdfEducacion/Tablas';
+const TABLAS = [
+  { id: 'CRITERIOS DE LAMBERT PARA DESMIELINIZACIÓN',                       file: 'LAMBERT_DESMIELINIZACION.png' },
+  { id: 'CRITERIOS CIDP AANEM',                                              file: 'CRITERIOS_CIDP_AANEM.png' },
+  { id: 'CRITERIOS DE LAMBERT ESCLEROSIS LATERAL AMIOTRÓFICA',               file: 'LAMBERT_ESCLEROSIS_LT.png' },
+  { id: 'CRITERIOS DE AWAJI 2008 (DOMINIO)',                                 file: 'CRITERIOS _AWAJI_2008_1.png' },
+  { id: 'CRITERIOS DE AWAJI 2008 (CATEGORÍA)',                               file: 'CRITERIOS _AWAJI_2008_2.png' },
+  { id: 'COMPARACIÓN EL ESCORIAL / AWAJI 2008',                              file: 'COMPARACION_ESCORIAL.png' },
+  { id: 'CRITERIOS POLINEUROPATÍA DESMIELINIZANTE/AXONAL',                   file: 'POLINEUROPATIA_DESMIELINIZANTE.png' },
+  { id: 'PATRONES DE DISTRIBUCIÓN EN POLINEUROPATÍA',                        file: 'DISTRIBUCION_POLI.png' },
+  { id: 'CUANTIFICACIÓN DE POLINEUROPATÍAS',                                 file: 'CUANTIFICACION_POLI.png' },
+  { id: 'HALLAZGOS ELECTROFISIOLÓGICOS EN RADICULOPATÍA',                    file: 'ELECTROFISIOLOGICOS_RADI.png' },
+  { id: 'HALLAZGOS ELECTROFISIÓLOGICOS EVOLUTIVOS EN RADICULOPATÍA',         file: 'EVOLUTIVOS_RADI.png' },
+  { id: 'HALLAZGOS NEUROGRÁFICOS EN MIOPATÍAS',                              file: 'NEUROGRAFICO_MIO.png' },
+  { id: 'HALLAZGOS MIOGRÁFICOS EN MIOPATÍAS',                                file: 'MIOGRAFICOS_MIO.png' },
+  { id: 'HALLAZGOS DIFERENCIALES POR TIPOS DE MIOPATÍAS',                   file: 'TIPOS_MIOPATIAS.png' },
+  { id: 'COMPARACIÓN MIOPATÍA/RADICULOPATÍA/UNIÓN NEUROMUSCULAR',            file: 'COMPARACION.png' },
+  { id: 'SEVERIDAD EN MIOPATÍA',                                             file: 'SEVERIDAD_MIO.png' },
+  { id: 'GRAVEDAD POR DECREMENTO ELECTROFISIOLÓGICO EN MIASTENIA GRAVIS',    file: 'DECREMENTO_ELEC.png' },
+  { id: 'GRAVEDAD POR SFEMG ELECTROFISIOLÓGICO EN MIASTENIA GRAVIS',         file: 'SFEMG_ELEC.png' },
+  { id: 'COORRELACIÓN PRUEBAS ELECTROFISIOLOGICAS/DATOS CLÍNICOS MG',        file: 'PRUEBAS_ELEC.png' },
+  { id: 'CLASIFICACIÓN DE GRAVEDAD EN POTENCIALES EVOCADOS SOMATOSENSORIALES Y MOTORES', file: 'POTENCIALES_EVO.png' },
+  { id: 'CLASIFICACIÓN DE GRAVEDAD EN POTENCIALES EVOCADOS VISUALES',        file: 'POTENCIALES_VISUALES.png' },
+  { id: 'CLASIFICACIÓN DE GRAVEDAD EN POTENCIALES EVOCADOS AUDITIVOS',       file: 'POTENCIALES_AUD.png' },
+  { id: 'PRONÓSTICO ASOCIADO A POTENCIALES EVOCADOS',                        file: 'PRONOSTICO_ASOCIADO.png' },
+  { id: 'SEVERIDAD POTENCIALES EVOCADOS MULTIMODALES',                       file: 'EVO_MULTIMODALES.png' },
+  { id: 'INTERPRETACIÓN POTENCIALES EVOCADOS SOMATOSENSORIALES MS',          file: 'SOMATOSENSORIALES_MS.png' },
+  { id: 'INTERPRETACIÓN POTENCIALES EVOCADOS SOMATOSENSORIALES MI',          file: 'SOMATOS_MI.png' },
+  { id: 'MIOPATÍAS DISTALES',                                                file: 'MIOPATIAS_DISTAL.png' },
+  { id: 'SÍNDROMES DE LESIÓN COMBINADA A PARES CRANEALES',                   file: 'PARES_CRANEALES.png' },
+  { id: 'PRONÓSTICO EN NERVIO FACIAL DE ACUERDO CON EL DÉFICIT AXONAL',      file: 'DEFICIT_AXONAL.png' },
+  { id: 'EVOLUCION EN NERVIO FACIAL DE ACUERDO CON EL DÉFICIT AXONAL',       file: 'DEFICIT_AXONAL2.png' },
+  { id: 'COORRELACIÓN DE TIEMPO DE EVOLUCIÓN EN PLEXOPATÍAS',                file: 'EVOLUCION_PLEXO.png' },
+  { id: 'PATRONES ELECTROFISIOLÓGICOS EN NEUROPATÍA',                        file: 'PATRONES_NEURO.png' },
+  { id: 'CRITERIOS ELECTROFISIOLÓGICOS DE DESMIELINIZACIÓN',                 file: 'ELECTROFISIOLOGICOS_DES.png' },
+  { id: 'CRITERIOS DIAGNÓSTICOS ELECTROFISIOLÓGICOS PARA AIDP',              file: 'CRITERIOS_AIDP.png' },
+  { id: 'DIFERENCIAS ELECTROFISIOLÓGICAS EN POLINEUROPATÍAS',                file: 'DIFERENCIAS_POLI.png' },
+  { id: 'AANEM CRITERIOS PARA NEUROPATÍAS POR ATRAPAMIENTO',                 file: 'ATRAPAMIENTO.png' },
+  { id: 'CLASIFICACIÓN DE SEDDON Y SUNDERLAND',                              file: 'Tabla38.png' },
+  { id: 'POLINEUROPATÍAS DESMIELINIZANTES',                                  file: 'Tabla39.png' },
+  { id: 'SÍNDROME DEL TÚNEL DEL CARPO – PADUA',                              file: 'Tabla40.png' },
+  { id: 'SÍNDROME DEL TÚNEL DEL CARPO – CANTERBURY',                         file: 'Tabla41.png' },
+  { id: 'SÍNDROME DEL TÚNEL DEL CARPO – HIRANI',                             file: 'Tabla42.png' },
+];
 
-  useEffect(() => {
-    if (dropAreaRef.current) {
-      const rect = dropAreaRef.current.getBoundingClientRect();
-      console.log('DropArea dimensions:', rect.width, rect.height);
-    }
-  }, []);
+/* ─── Modal de recorte (Crop) ────────────────────────────────────────────────── */
+function CropModal({ src, onConfirm, onClose }) {
+  const imgRef    = useRef(null);
+  const canvasRef = useRef(null);
+  const overlayRef = useRef(null);
+  const [sel, setSel]   = useState(null);
+  const [drawing, setDrawing] = useState(false);
+  const startRef = useRef({ x: 0, y: 0 });
 
-  const handleDragStop = (e, d, item) => {
-    const dropAreaRect = dropAreaRef.current.getBoundingClientRect();
-    const itemRect = e.target.getBoundingClientRect();
-    const itemCenterX = itemRect.left + itemRect.width / 2;
-    const itemCenterY = itemRect.top + itemRect.height / 2;
-
-    if (
-      itemCenterX < dropAreaRect.left ||
-      itemCenterX > dropAreaRect.right ||
-      itemCenterY < dropAreaRect.top ||
-      itemCenterY > dropAreaRect.bottom
-    ) {
-      setDroppedItems((prev) => prev.filter((i) => i.id !== item.id));
-    } else {
-      updatePosition(item.id, d.x, d.y);
-    }
+  const getRelPos = (e, el) => {
+    const r = el.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-
-    // Leer el ID que guardamos en dataTransfer
-    const draggedId = e.dataTransfer.getData('app-id');
-    if (draggedId) {
-      // Colapsar ese ID en el estado global
-      setExpandedDivs(prev => ({
-        ...prev,
-        [draggedId]: false
-      }));
-    }
-
-    // Leer la parte text/html (nodo)
-    const data = e.dataTransfer.getData('text/html');
-    if (data) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(data, 'text/html');
-      const element = doc.body.firstChild;
-      if (element) {
-        setDroppedItems([
-          ...droppedItems,
-          { id: Date.now(), content: element.outerHTML, x: 0, y: 0 }
-        ]);
-      }
-    }
+  const onMouseDown = (e) => {
+    const pos = getRelPos(e, overlayRef.current);
+    startRef.current = pos;
+    setSel({ x: pos.x, y: pos.y, w: 0, h: 0 });
+    setDrawing(true);
   };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
+  const onMouseMove = (e) => {
+    if (!drawing) return;
+    const pos = getRelPos(e, overlayRef.current);
+    setSel({
+      x: Math.min(startRef.current.x, pos.x),
+      y: Math.min(startRef.current.y, pos.y),
+      w: Math.abs(pos.x - startRef.current.x),
+      h: Math.abs(pos.y - startRef.current.y),
+    });
   };
+  const onMouseUp = () => setDrawing(false);
 
-  const updatePosition = (id, x, y) => {
-    setDroppedItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, x, y } : item
-      )
+  const applyCrop = () => {
+    if (!sel || sel.w < 5 || sel.h < 5) { onClose(); return; }
+    const img = imgRef.current;
+    const overlay = overlayRef.current;
+    const scaleX = img.naturalWidth  / overlay.clientWidth;
+    const scaleY = img.naturalHeight / overlay.clientHeight;
+    const canvas = canvasRef.current;
+    canvas.width  = sel.w * scaleX;
+    canvas.height = sel.h * scaleY;
+    canvas.getContext('2d').drawImage(
+      img,
+      sel.x * scaleX, sel.y * scaleY,
+      sel.w * scaleX, sel.h * scaleY,
+      0, 0, canvas.width, canvas.height,
     );
-  };
-
-  const removeItem = (id) => {
-    setDroppedItems((prev) => prev.filter((item) => item.id !== id));
+    onConfirm(canvas.toDataURL('image/png'));
   };
 
   return (
-    <div
-      className="dropArea"
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      ref={dropAreaRef}
-    >
-      {topLeftText && (
-        <p style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: '15px', fontSize: '19px', paddingTop:'10px' }}>
-          {topLeftText}
-        </p>
-      )}
-      {droppedItems.length === 0 ? (
-        <p></p>
-      ) : (
-        droppedItems.map((item) => (
-          <Rnd
-            key={item.id}
-            default={{
-              x: item.x,
-              y: item.y,
-              width: 200,
-              height: 200
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 10200,
+      background: 'rgba(0,0,0,0.9)',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 16,
+    }}>
+      <p style={{ color: '#fff', fontSize: 13, marginBottom: 10 }}>
+        Arrastra para seleccionar el área a recortar
+      </p>
+      <div ref={overlayRef}
+        onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onMouseUp}
+        style={{ position: 'relative', cursor: 'crosshair', maxWidth: '90vw', maxHeight: '70vh', userSelect: 'none' }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img ref={imgRef} src={src} alt="crop"
+          draggable={false}
+          style={{ display: 'block', maxWidth: '90vw', maxHeight: '70vh', objectFit: 'contain' }}
+        />
+        {sel && sel.w > 2 && sel.h > 2 && (
+          <div style={{
+            position: 'absolute',
+            left: sel.x, top: sel.y, width: sel.w, height: sel.h,
+            border: '2px dashed #f97316',
+            background: 'rgba(249,115,22,0.15)',
+            pointerEvents: 'none',
+          }} />
+        )}
+      </div>
+      <canvas ref={canvasRef} style={{ display: 'none' }} />
+      <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
+        <button onClick={applyCrop} style={{
+          padding: '9px 28px', borderRadius: 10, border: 'none',
+          background: '#f97316', color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer',
+        }}>Aplicar recorte</button>
+        <button onClick={onClose} style={{
+          padding: '9px 28px', borderRadius: 10,
+          border: '1px solid rgba(255,255,255,0.2)', background: 'transparent',
+          color: '#fff', fontSize: 14, cursor: 'pointer',
+        }}>Cancelar</button>
+      </div>
+    </div>
+  );
+}
+
+function GaleriaTablas({ onSelect, onClose }) {
+  const [busqueda, setBusqueda] = useState('');
+  const filtradas = TABLAS.filter(t => t.id.toLowerCase().includes(busqueda.toLowerCase()));
+  return (
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 10100,
+      background: 'rgba(0,0,0,0.75)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+    }}>
+      <div style={{
+        background: '#2a2a2a', borderRadius: 14, width: '100%', maxWidth: 480,
+        maxHeight: '85vh', display: 'flex', flexDirection: 'column',
+        border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden',
+      }}>
+        <div style={{ padding: '18px 20px 12px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+          <h3 style={{ color: '#fff', fontSize: 17, fontWeight: 700, margin: '0 0 12px', textAlign: 'center' }}>
+            Selecciona una imagen:
+          </h3>
+          <input
+            type="text"
+            value={busqueda}
+            onChange={e => setBusqueda(e.target.value)}
+            placeholder="Buscar imagen..."
+            autoFocus
+            style={{
+              width: '100%', boxSizing: 'border-box',
+              background: '#444', border: 'none', borderRadius: 8,
+              padding: '10px 14px', color: '#fff', fontSize: 14, outline: 'none',
             }}
-            onDragStop={(e, d) => handleDragStop(e, d, item)}
-            style={{ position: 'absolute' }}
-          >
-            <div className="item-container" style={{ width: '100%', height: '100%' }}>
-              <button
-                className="delete-button"
-                onClick={() => removeItem(item.id)}
-              >
-                X
-              </button>
-              <div dangerouslySetInnerHTML={{ __html: item.content }} />
-            </div>
-          </Rnd>
-        ))
+          />
+        </div>
+        <div style={{ flex: 1, overflowY: 'auto' }}>
+          {filtradas.length === 0
+            ? <p style={{ color: 'rgba(255,255,255,0.4)', fontStyle: 'italic', padding: 20, textAlign: 'center', margin: 0 }}>Sin resultados.</p>
+            : filtradas.map((t, i) => (
+                <button key={i} onClick={() => onSelect(`${TABLAS_URL}/${t.file}`)}
+                  style={{
+                    width: '100%', textAlign: 'left', padding: '14px 20px',
+                    background: 'transparent', border: 'none',
+                    borderBottom: '1px solid rgba(255,255,255,0.07)',
+                    color: '#fff', fontSize: 14, cursor: 'pointer',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(249,115,22,0.12)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                >
+                  {t.id}
+                </button>
+              ))
+          }
+        </div>
+        <div style={{ padding: '12px 20px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <button onClick={onClose} style={{
+            width: '100%', padding: '11px 0', borderRadius: 10, border: 'none',
+            background: '#f97316', color: '#fff', fontWeight: 700, fontSize: 15, cursor: 'pointer',
+          }}>Cerrar</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Contexto ──────────────────────────────────────────────────────────────── */
+const ReportContext = createContext({
+  conclusions: [],
+  addConclusion: () => {},
+  removeConclusion: () => {},
+});
+
+/* ─── Mapa de overlays → rutas públicas (/MotoresImg/...) ───────────────────── */
+const OVERLAYS_MOTORES = {
+  /* ===== INDEMNE ===== */
+  izquierdo_indemne:  '/MotoresImg/INFERIORD.png',
+  derecho_indemne:    '/MotoresImg/INFERIORI.png',
+  bilateral_indemne:  '/MotoresImg/INFERIORD.png',   // se expande a array en expandOverlay
+
+  /* ===== BASE ALTERADA (sin severidad) ===== */
+  izquierdo_cortical:    '/MotoresImg/ViasAfectadas/SUPERIORD.png',
+  derecho_cortical:      '/MotoresImg/ViasAfectadas/SUPERIORI.png',
+  bilateral_cortical:    '/MotoresImg/ViasAfectadas/SUPERIORD.png',
+
+  izquierdo_cervical:    '/MotoresImg/ViasAfectadas/SUPERIORD.png',
+  derecho_cervical:      '/MotoresImg/ViasAfectadas/SUPERIORI.png',
+  bilateral_cervical:    '/MotoresImg/ViasAfectadas/SUPERIORD.png',
+
+  izquierdo_lumbasacro:  '/MotoresImg/ViasAfectadas/INFERIORD.png',
+  derecho_lumbasacro:    '/MotoresImg/ViasAfectadas/INFERIORI.png',
+  bilateral_lumbasacro:  '/MotoresImg/ViasAfectadas/INFERIORD.png',
+
+  /* ===== ALTERADA base sin severidad (Alterada sin grado) ===== */
+  izquierdo_corticalAlterada:    '/MotoresImg/ViasAfectadas/SUPERIORD.png',
+  derecho_corticalAlterada:      '/MotoresImg/ViasAfectadas/SUPERIORI.png',
+  izquierdo_cervicalAlterada:    '/MotoresImg/ViasAfectadas/SUPERIORD.png',
+  derecho_cervicalAlterada:      '/MotoresImg/ViasAfectadas/SUPERIORI.png',
+  izquierdo_lumbasacroAlterada:  '/MotoresImg/ViasAfectadas/INFERIORD.png',
+  derecho_lumbasacroAlterada:    '/MotoresImg/ViasAfectadas/INFERIORI.png',
+
+  /* ===== ALTERADA — CORTICAL ===== */
+  izquierdo_corticalAlterada_leve:     '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_1-D.png',
+  derecho_corticalAlterada_leve:       '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_1.png',
+  izquierdo_corticalAlterada_moderado: '/MotoresImg/ViaAfectada/Rojo/VersionDerecha/MO_1-D.png',
+  derecho_corticalAlterada_moderado:   '/MotoresImg/ViaAfectada/Rojo/MO_1.png',
+  izquierdo_corticalAlterada_severo:   '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_1-D.png',
+  derecho_corticalAlterada_severo:     '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_1.png',
+
+  /* ===== ALTERADA — CERVICAL (mismas imágenes que cortical _1) ===== */
+  izquierdo_cervicalAlterada_leve:     '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_1-D.png',
+  derecho_cervicalAlterada_leve:       '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_1.png',
+  izquierdo_cervicalAlterada_moderado: '/MotoresImg/ViaAfectada/Rojo/VersionDerecha/MO_1-D.png',
+  derecho_cervicalAlterada_moderado:   '/MotoresImg/ViaAfectada/Rojo/MO_1.png',
+  izquierdo_cervicalAlterada_severo:   '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_1-D.png',
+  derecho_cervicalAlterada_severo:     '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_1.png',
+
+  /* ===== ALTERADA — LUMBOSACRO ===== */
+  izquierdo_lumbasacroAlterada_leve:     '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_2-D.png',
+  derecho_lumbasacroAlterada_leve:       '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_2.png',
+  izquierdo_lumbasacroAlterada_moderado: '/MotoresImg/ViaAfectada/Rojo/VersionDerecha/MO_2-D.png',
+  derecho_lumbasacroAlterada_moderado:   '/MotoresImg/ViaAfectada/Rojo/MO_2.png',
+  izquierdo_lumbasacroAlterada_severo:   '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_2-D.png',
+  derecho_lumbasacroAlterada_severo:     '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_2.png',
+};
+
+/* ─── Helpers ───────────────────────────────────────────────────────────────── */
+const limpiarTextoReporte = (s) => {
+  if (!s) return '';
+  let t = s.replace(/\s+/g, ' ').trim();
+  t = t.replace(/\s*([,;:.])\s*/g, '$1 ');
+  t = t.toLowerCase();
+  t = t.replace(/(^\s*[a-záéíóúñ])|([.!?]\s+[a-záéíóúñ])/g, m => m.toUpperCase());
+  t = t.replace(/\s+([,.:;])/g, ' $1').replace(/\s+([,.])$/g, '$1').replace(/\s+$/, '');
+  t = t.replace(/([.!?])\s*([.!?])+$/, '$1');
+  if (!/[.!?]$/.test(t)) t += '.';
+  return t;
+};
+
+/* ─── Componentes de UI de los pasos ───────────────────────────────────────── */
+function ConclusionBtn({ value, title, label, onPress }) {
+  const { addConclusion } = useContext(ReportContext);
+  return (
+    <button
+      className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all"
+      onClick={() => { addConclusion({ value, title }); onPress?.(); }}
+    >
+      {label}
+    </button>
+  );
+}
+
+function NavRow({ onBack, onReset, onPdf }) {
+  return (
+    <div className="flex gap-2 mb-3">
+      <button onClick={onBack}
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        Regresar
+      </button>
+      <button onClick={onReset}
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-red-500/20 hover:border-red-500/40 text-white text-xs transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        Reset
+      </button>
+      {onPdf && (
+        <button onClick={onPdf}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold transition-colors shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          PDF
+        </button>
       )}
     </div>
   );
-};
+}
 
-const Reporte = () => {  
-    // arrancamos false para que no intente leer localStorage en servidor
-const [showHelpModal, setShowHelpModal] = useState(false);
-  useEffect(() => {
-   const hide = localStorage.getItem('hideHelpGif') === 'true';
-   setShowHelpModal(!hide);
+function SkipButton({ onPress, label = 'Saltar →' }) {
+  return (
+    <button onClick={onPress}
+      className="w-full mt-2 px-4 py-2 rounded-lg border border-dashed border-white/20 text-slate-400 text-xs hover:border-white/40 hover:text-white transition-colors">
+      {label}
+    </button>
+  );
+}
+
+function StepTitle({ children }) {
+  return (
+    <p className="text-orange-400 text-xs font-bold tracking-widest mb-3 mt-1 uppercase">
+      {children}
+    </p>
+  );
+}
+
+/* ─── PASOS ─────────────────────────────────────────────────────────────────── */
+function StepA({ goTo, setRootFlow, setSeverity }) {
+  return (
+    <div>
+      <StepTitle>Vía Corticoespinal</StepTitle>
+      <ConclusionBtn
+        value="indemne"
+        title="Vía corticoespinal con integridad funcional "
+        label="INDEMNE"
+        onPress={() => {
+          setRootFlow('indemne'); setSeverity(null);
+          goTo('E2');
+        }}
+      />
+      <ConclusionBtn
+        value="alterada"
+        title="Vía corticoespinal con defecto "
+        label="ALTERADA"
+        onPress={() => {
+          setRootFlow('alterada'); setSeverity(null);
+          goTo('B');
+        }}
+      />
+    </div>
+  );
+}
+
+function StepB({ goTo, removeConclusion, setSeverity, setRootFlow, removeLastOverlayGroup, setStep, resetAll, addConclusion }) {
+  return (
+    <div>
+      <NavRow
+        onBack={() => {
+          ['indemne','alterada','retardo_en_la_conduccion','bloqueo_en_la_conduccion','deficit_neuronal','sin_respuesta']
+            .forEach(removeConclusion);
+          setSeverity(null); setRootFlow(null);
+          removeLastOverlayGroup();
+          setStep('A');
+        }}
+        onReset={resetAll}
+      />
+      <StepTitle>Fisiopatología</StepTitle>
+      <ConclusionBtn value="retardo_en_la_conduccion" title="Por retardo en la conducción " label="RETARDO EN LA CONDUCCIÓN" onPress={() => goTo('C1')} />
+      <ConclusionBtn value="bloqueo_en_la_conduccion" title="Por bloqueo en la conducción " label="BLOQUEO EN LA CONDUCCIÓN" onPress={() => goTo('E')} />
+      <ConclusionBtn value="deficit_neuronal" title="Axonal " label="DÉFICIT AXONAL" onPress={() => goTo('C2')} />
+      <ConclusionBtn value="sin_respuesta" title="Por ausencia de respuesta evocable " label="SIN RESPUESTA"
+        onPress={() => { setSeverity('severo'); addConclusion({ value: 'severo', title: 'Severo ' }); goTo('E'); }} />
+    </div>
+  );
+}
+
+function StepC1({ goTo, removeConclusion, setSeverity, setStep, resetAll }) {
+  return (
+    <div>
+      <NavRow onBack={() => { ['leve','moderado','severo'].forEach(removeConclusion); setSeverity(null); setStep('B'); }} onReset={resetAll} />
+      <StepTitle>Grado</StepTitle>
+      <ConclusionBtn value="leve"     title="Leve "     label="LEVE"     onPress={() => { setSeverity('leve');     goTo('D1'); }} />
+      <ConclusionBtn value="moderado" title="Moderado " label="MODERADO" onPress={() => { setSeverity('moderado'); goTo('D1'); }} />
+      <ConclusionBtn value="severo"   title="Severo "   label="SEVERO"   onPress={() => { setSeverity('severo');   goTo('D1'); }} />
+    </div>
+  );
+}
+
+function StepC2({ goTo, removeConclusion, setSeverity, setStep, resetAll }) {
+  return (
+    <div>
+      <NavRow onBack={() => { ['leve','moderado','severo'].forEach(removeConclusion); setSeverity(null); setStep('B'); }} onReset={resetAll} />
+      <StepTitle>Grado</StepTitle>
+      <ConclusionBtn value="leve"     title="Leve "     label="LEVE"     onPress={() => { setSeverity('leve');     goTo('D2'); }} />
+      <ConclusionBtn value="moderado" title="Moderado " label="MODERADO" onPress={() => { setSeverity('moderado'); goTo('D2'); }} />
+      <ConclusionBtn value="severo"   title="Severo "   label="SEVERO"   onPress={() => { setSeverity('severo');   goTo('D2'); }} />
+    </div>
+  );
+}
+
+function StepD1({ goTo, removeConclusion, setSeverity, setStep, resetAll }) {
+  return (
+    <div>
+      <NavRow
+        onBack={() => {
+          ['indemne','alterada','retardo_en_la_conduccion','bloqueo_en_la_conduccion','deficit_neuronal','sin_respuesta','perdida_axonal_secundaria']
+            .forEach(removeConclusion);
+          setSeverity(null); setStep('C1');
+        }}
+        onReset={resetAll}
+      />
+      <StepTitle>Retardo en conducción</StepTitle>
+      <ConclusionBtn value="perdida_axonal_secundaria" title=" y pérdida axonal secundaria " label="+ PÉRDIDA AXONAL" onPress={() => goTo('E')} />
+      <SkipButton onPress={() => goTo('E')} />
+    </div>
+  );
+}
+
+function StepD2({ goTo, removeConclusion, setSeverity, setStep, resetAll }) {
+  return (
+    <div>
+      <NavRow
+        onBack={() => {
+          ['indemne','alterada','retardo_en_la_conduccion','bloqueo_en_la_conduccion','deficit_neuronal','sin_respuesta','retardo_secundario_en_la_conduccion']
+            .forEach(removeConclusion);
+          setSeverity(null); setStep('C2');
+        }}
+        onReset={resetAll}
+      />
+      <StepTitle>Axonal</StepTitle>
+      <ConclusionBtn value="retardo_secundario_en_la_conduccion" title="y retardo secundario en la conducción " label="+ RETARDO EN LA CONDUCCIÓN" onPress={() => goTo('E')} />
+      <SkipButton onPress={() => goTo('E')} />
+    </div>
+  );
+}
+
+function StepE({ goTo, removeConclusion, setSeverity, setStep, resetAll, rootFlow, severity, setSide, addOverlay, addOverlays, removeLastOverlayGroup }) {
+  return (
+    <div>
+      <NavRow
+        onBack={() => {
+          ['perdida_axonal_secundaria','retardo_secundario_en_la_conduccion','leve','moderado','severo',
+           'izquierdo','derecho','bilateral','izquierdo_alterada','derecho_alterada','bilateral_alterada']
+            .forEach(removeConclusion);
+          setSeverity(null); removeLastOverlayGroup(); setStep('B');
+        }}
+        onReset={resetAll}
+      />
+      <StepTitle>Lado</StepTitle>
+      <ConclusionBtn value="izquierdo_alterada" title="Para lado izquierdo," label="IZQUIERDO"
+        onPress={() => { setSide('izquierdo'); removeLastOverlayGroup(); addOverlay('izquierdo_indemne'); goTo('F'); }} />
+      <ConclusionBtn value="derecho_alterada" title="Para lado derecho," label="DERECHO"
+        onPress={() => { setSide('derecho'); removeLastOverlayGroup(); addOverlay('derecho_indemne'); goTo('F'); }} />
+      <ConclusionBtn value="bilateral_alterada" title="De forma bilateral," label="BILATERAL"
+        onPress={() => { setSide('bilateral'); removeLastOverlayGroup(); addOverlays(['izquierdo_indemne','derecho_indemne']); goTo('F'); }} />
+      {rootFlow === 'alterada' && severity && (
+        <p className="text-white/50 text-center text-xs mt-2">Grado: {severity.toUpperCase()}</p>
+      )}
+    </div>
+  );
+}
+
+function StepE2({ removeConclusion, setStep, resetAll, side, setSide, goTo, addOverlay, addOverlays, removeLastOverlayGroup, conclusions }) {
+  return (
+    <div>
+      <NavRow
+        onBack={() => {
+          // remove any region conclusions (new key format) and side conclusions
+          conclusions.forEach(c => {
+            if (/_cortical|_cervical|_lumbasacro|_indemne/.test(c.value)) removeConclusion(c.value);
+          });
+          removeConclusion('indemne');
+          removeLastOverlayGroup();
+          setStep('A');
+        }}
+        onReset={resetAll}
+      />
+      <StepTitle>Lado</StepTitle>
+      <ConclusionBtn value="izquierdo_indemne" title=" para lado izquierdo" label="IZQUIERDO"
+        onPress={() => { setSide('izquierdo'); addOverlay('izquierdo_indemne'); goTo('F2'); }} />
+      <ConclusionBtn value="derecho_indemne" title=" para lado derecho" label="DERECHO"
+        onPress={() => { setSide('derecho'); addOverlay('derecho_indemne'); goTo('F2'); }} />
+      <ConclusionBtn value="bilateral_indemne" title=" de forma bilateral" label="BILATERAL"
+        onPress={() => { setSide('bilateral'); addOverlays(['izquierdo_indemne','derecho_indemne']); goTo('F2'); }} />
+    </div>
+  );
+}
+
+function StepF({ goTo, removeConclusion, setStep, resetAll, side, rootFlow, severity, addOverlays, expandOverlay }) {
+  return (
+    <div>
+      <NavRow
+        onBack={() => {
+          [`${side}_cortical`,`${side}_cervical`,`${side}_lumbasacro`].forEach(v => v && removeConclusion(v));
+          setStep('E');
+        }}
+        onReset={resetAll}
+      />
+      <StepTitle>Región Alterada</StepTitle>
+      <ConclusionBtn
+        value={`${side}_cortical`}
+        title=" a través de región medular anterolateral al estímulo en corteza motora primaria."
+        label="CORTICAL"
+        onPress={() => { addOverlays(expandOverlay(`${side}_cortical`)); goTo('H'); }}
+      />
+      <ConclusionBtn
+        value={`${side}_cervical`}
+        title=" a través de región medular anterolateral al estímulo en astas y raíces cervicales."
+        label="CERVICAL"
+        onPress={() => { addOverlays(expandOverlay(`${side}_cervical`)); goTo('H'); }}
+      />
+      <ConclusionBtn
+        value={`${side}_lumbasacro`}
+        title=" a través de región medular anterolateral al estímulo en astas y raíces lumbosacras."
+        label="LUMBOSACRO"
+        onPress={() => { addOverlays(expandOverlay(`${side}_lumbasacro`)); goTo('H'); }}
+      />
+      {rootFlow === 'alterada' && severity && (
+        <p className="text-white/50 text-center text-xs mt-2">Grado: {severity.toUpperCase()}</p>
+      )}
+    </div>
+  );
+}
+
+function StepF2({ goTo, removeConclusion, setStep, resetAll, side, addOverlays, expandOverlay, removeLastOverlayGroup }) {
+  const pickRegion = (region) => {
+    // Remove the plain indemne overlay added at E2 before adding region overlay
+    removeLastOverlayGroup();
+    addOverlays(expandOverlay(`${side}_${region}`));
+    goTo('H');
+  };
+  return (
+    <div>
+      <NavRow
+        onBack={() => {
+          [`${side}_cortical`,`${side}_cervical`,`${side}_lumbasacro`].forEach(v => v && removeConclusion(v));
+          setStep('E2');
+        }}
+        onReset={resetAll}
+      />
+      <StepTitle>Región Indemne</StepTitle>
+      <ConclusionBtn
+        value={`${side}_cortical`}
+        title=" a través de región medular anterolateral al estímulo en corteza motora primaria."
+        label="CORTICAL"
+        onPress={() => pickRegion('cortical')}
+      />
+      <ConclusionBtn
+        value={`${side}_cervical`}
+        title=" a través de región medular anterolateral al estímulo en astas y raíces cervicales."
+        label="CERVICAL"
+        onPress={() => pickRegion('cervical')}
+      />
+      <ConclusionBtn
+        value={`${side}_lumbasacro`}
+        title=" a través de región medular anterolateral al estímulo en astas y raíces lumbosacras."
+        label="LUMBOSACRO"
+        onPress={() => pickRegion('lumbasacro')}
+      />
+    </div>
+  );
+}
+
+/* ─── Componente principal ─────────────────────────────────────────────────── */
+export default function ReportFace() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  /* ── Conclusiones ── */
+  const [conclusions, setConclusions] = useState([]);
+  const addConclusion    = useCallback((c) =>
+    setConclusions(p => p.some(x => x.value === c.value) ? p : [...p, c]), []);
+  const removeConclusion = useCallback((value) =>
+    setConclusions(p => p.filter(x => x.value !== value)), []);
+
+  /* ── Navegación ── */
+  const [step, setStep]   = useState('A');
+  const [history, setHist] = useState(['A']);
+
+  const goTo = useCallback((n) => { setHist(p => [...p, n]); setStep(n); }, []);
+
+  const goBack = useCallback(() => {
+    if (history.length <= 1) return;
+    const nh = history.slice(0, -1);
+    setHist(nh); setStep(nh[nh.length - 1]);
+    const last = conclusions[conclusions.length - 1];
+    if (last) removeConclusion(last.value);
+    removeLastOverlayGroup();
+  }, [history, conclusions, removeConclusion]); // eslint-disable-line
+
+  /* ── Overlays ── */
+  const [rootFlow, setRootFlow] = useState(null);
+  const [activeOv, setActiveOv] = useState([]);
+  const [, setOvHist]           = useState([]);
+
+  const addOverlays = useCallback((ids) => {
+    setActiveOv(p => [...p, ...ids.filter(i => !p.includes(i))]);
+    setOvHist(h => [...h, ids]);
   }, []);
- // Carga datos de usuario
- const { data: session, status } = useSession();
- const { name, lastname, cedula,email, especialidad, imageUrl } = session?.user || {};  const { conclusions } = useContext(ReportContext)
- const [copyConclusions, setCopyConclusions] = useState('')  // Estado para la caja de conclusiones
- const [isPageVisible, setPageVisibility] = useState(true) // Estado para la visibilidad de la pagina
- const [selectedImages, setSelectedImages] = useState([]); // Estado para las imagenes seleccionadas
- // Estados para el historial de imagenes
- const [history, setHistory] = useState([]); 
- const [Future,setFuture] = useState([]); 
-  // Aquí manejamos la expansión/colapso de símbolos en MenuImagenes
- const [expandedDivs, setExpandedDivs] = useState({});
- const { droppedItems } = useContext(DropContext);
- const [topLeftText, setTopLeftText] = useState('');
- const imgRef = useRef(null);
+  const addOverlay = useCallback((id) => addOverlays([id]), [addOverlays]);
 
- useEffect(() => {
-  if (imgRef.current) {
-    console.log('Imagen offsetWidth:',  imgRef.current.offsetWidth);
-    console.log('Imagen offsetHeight:', imgRef.current.offsetHeight);
-  }
-}, []);
+  const removeLastOverlayGroup = useCallback(() =>
+    setOvHist(h => {
+      if (!h.length) return h;
+      const last = h[h.length - 1];
+      setActiveOv(p => p.filter(k => !last.includes(k)));
+      return h.slice(0, -1);
+    }), []);
 
+  const resetOverlays = useCallback(() => { setActiveOv([]); setOvHist([]); }, []);
 
-    // Actualizar las conclusiones
-    useEffect(() => {
-      setCopyConclusions(conclusions.map(cl => cl.title).join(''))
-    }, [conclusions])
+  /* ── Severidad / lado ── */
+  const [severity, setSeverity] = useState(null);
+  const [side, setSide]         = useState('');
 
-    // Para mantener constante la conclusione
-    const handleTextareaChange = (event) => {
-      setCopyConclusions(event.target.value)
+  /* ── Tab footer ── */
+  const [activeTab, setActiveTab] = useState('reporte');
+
+  /* ── Nombre paciente ── */
+  const [nombrePaciente, setNombrePaciente] = useState('');
+
+  /* ── Lista: imagen galería + comentario ── */
+  const [imgLista, setImgLista]               = useState(null);
+  const [comentarioLista, setComentarioLista] = useState('');
+  const [showComentarioModal, setShowComentarioModal] = useState(false);
+  const [showGaleria, setShowGaleria] = useState(false);
+  const [comentarioTemp, setComentarioTemp]   = useState('');
+
+  /* ── Figuras sobre la lámina ── */
+  const [figuras, setFiguras] = useState([]);
+  const [pdfOpen, setPdfOpen] = useState(false);
+  const laminaRef = useRef(null);
+
+  /* Crop modal */
+  const [cropState, setCropState] = useState(null);
+
+  const agregarFigura = useCallback((tipo, src) => {
+    const SIZE = 80;
+    const rect = laminaRef.current?.getBoundingClientRect();
+    const cx = rect ? (rect.width  / 2 - SIZE / 2) : 60;
+    const cy = rect ? (rect.height / 2 - SIZE / 2) : 60;
+    setFiguras(p => [...p, { id: Date.now() + Math.random(), src, tipo, x: cx, y: cy }]);
+  }, []);
+  const eliminarFigura = useCallback((id) => setFiguras(p => p.filter(f => f.id !== id)), []);
+  const moverFigura    = useCallback((id, x, y) =>
+    setFiguras(p => p.map(f => f.id === id ? { ...f, x, y } : f)), []);
+
+  /* Drag handlers */
+  const dragRef = useState(() => ({ active: null, startX: 0, startY: 0, origX: 0, origY: 0 }))[0];
+
+  const onFiguraMouseDown = useCallback((e, figura) => {
+    e.preventDefault();
+    dragRef.active = figura.id;
+    dragRef.startX = e.clientX;
+    dragRef.startY = e.clientY;
+    dragRef.origX  = figura.x;
+    dragRef.origY  = figura.y;
+
+    const onMove = (ev) => {
+      if (!dragRef.active) return;
+      const dx = ev.clientX - dragRef.startX;
+      const dy = ev.clientY - dragRef.startY;
+      moverFigura(dragRef.active, dragRef.origX + dx, dragRef.origY + dy);
+    };
+    const onUp = () => {
+      dragRef.active = null;
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }, [dragRef, moverFigura]);
+
+  /* ── expandOverlay para Motores ── */
+  const expandOverlay = useCallback((raw) => {
+    const exists = (key) => Boolean(OVERLAYS_MOTORES[key]);
+
+    if (rootFlow === 'indemne') {
+      // Para INDEMNE: el overlay de región usa las claves base (sin Alterada)
+      // e.g. izquierdo_cortical, derecho_cervical, bilateral_lumbasacro
+      if (raw.startsWith('bilateral_')) {
+        const base = raw.replace('bilateral_', '');
+        return [`izquierdo_${base}`, `derecho_${base}`].filter(exists);
+      }
+      return exists(raw) ? [raw] : [];
     }
 
-    // Funciones para el historial de imagenes, en caso de usar Undo te regresa a la imagen anterior
-    const handleImageChange = useCallback((event) => {
-      if (event.target.files && event.target.files[0]) {
-        setHistory((prevHistory) => [...prevHistory, selectedImages]);
-        setSelectedImages((prevImages) => [...prevImages, { 
-          src: URL.createObjectURL(event.target.files[0]), 
-          position: { x: Math.random() * 200, y: Math.random() * 200 }, 
-          size: { width: 200, height: 200 } 
-        }]);
-        setFuture([]);
+    // Para ALTERADA: elegir overlay con severidad
+    if (raw.startsWith('bilateral_')) {
+      const base = raw.replace('bilateral_', '');
+      const perSide = [`izquierdo_${base}`, `derecho_${base}`];
+      if (severity) {
+        return perSide.map(sr => `${sr}Alterada_${severity}`).filter(exists);
       }
-    }, [selectedImages]);
-    
-    const handleUndo = useCallback(() => {
-      if (history.length > 0) {
-        setFuture((prevFuture) => [selectedImages, ...prevFuture]);
-        setSelectedImages(history[history.length - 1]);
-        setHistory((prevHistory) => prevHistory.slice(0, prevHistory.length - 1));
-      }
-    }, [history, selectedImages]);
-    
-    // Funciones para el arrastre y redimension de las imagenes
-    const handleDragStop = useCallback((index, e, d) => {
-      setSelectedImages((prevImages) => {
-        const newImages = [...prevImages];
-        newImages[index].position = { x: d.x, y: d.y };
-        return newImages;
-      });
-    }, []);
-    
-    const handleResizeStop = useCallback((index, e, direction, ref, delta, position) => {
-      setSelectedImages((prevImages) => {
-        const newImages = [...prevImages];
-        newImages[index].size = { width: ref.style.width, height: ref.style.height };
-        return newImages;
-      });
-    }, []);
+      return perSide.map(sr => `${sr}Alterada`).filter(exists);
+    }
 
+    if (severity) {
+      const key = `${raw}Alterada_${severity}`;
+      return exists(key) ? [key] : [];
+    }
+    const key = `${raw}Alterada`;
+    return exists(key) ? [key] : [];
+  }, [rootFlow, severity]);
 
-  // Codigo para imprimir en click
+  /* ── Reset total ── */
+  const resetAll = useCallback(() => {
+    setConclusions([]); setHist(['A']); setStep('A');
+    setRootFlow(null); setSide(''); resetOverlays();
+    setNombrePaciente(''); setSeverity(null); setActiveTab('reporte');
+    setFiguras([]); setImgLista(null); setComentarioLista('');
+    setTextoEditado(''); setEditadoManual(false);
+  }, [resetOverlays]);
+
+  /* ── Texto reporte editable ── */
+  const [textoEditado, setTextoEditado] = useState('');
+  const [editadoManual, setEditadoManual] = useState(false);
+
+  /* ── Texto reporte ── */
+  const textoReporte = useMemo(() => {
+    if (!rootFlow || conclusions.length === 0) return '';
+
+    const hasVal = (v) => conclusions.some(c => c.value === v);
+    const pick   = (vals) => conclusions.find(c => vals.includes(c.value));
+
+    const via = `Vía corticoespinal${rootFlow === 'indemne' ? ' con integridad funcional' : rootFlow === 'alterada' ? ' con defecto' : ''}`;
+
+    let fisio = '';
+    if (hasVal('retardo_en_la_conduccion'))    fisio = ' por retardo en la conducción';
+    else if (hasVal('bloqueo_en_la_conduccion')) fisio = ' por bloqueo en la conducción';
+    else if (hasVal('deficit_neuronal'))          fisio = ' axonal';
+    else if (hasVal('sin_respuesta'))             fisio = ' por ausencia de respuesta evocable';
+
+    const gradoVal = pick(['leve', 'moderado', 'severo'])?.value;
+    const grado = gradoVal ? ` ${gradoVal}` : '';
+
+    let secund = '';
+    if (hasVal('perdida_axonal_secundaria'))             secund = ' y pérdida axonal secundaria';
+    if (hasVal('retardo_secundario_en_la_conduccion'))  secund = ' y retardo secundario en la conducción';
+
+    let ladoTxt = '';
+    if (side === 'izquierdo')  ladoTxt = ' para lado izquierdo';
+    else if (side === 'derecho')   ladoTxt = ' para lado derecho';
+    else if (side === 'bilateral') ladoTxt = ' de forma bilateral';
+
+    // Región topográfica
+    let regionTxt = '';
+    const allVals = conclusions.map(c => c.value);
+    const regionHit = allVals.find(v => /cortical|cervical|lumbasacro/.test(v));
+    if (regionHit) {
+      if (/cortical/.test(regionHit))        regionTxt = ' a través de región medular anterolateral al estímulo en corteza motora primaria.';
+      else if (/cervical/.test(regionHit))   regionTxt = ' a través de región medular anterolateral al estímulo en astas y raíces cervicales.';
+      else if (/lumbasacro/.test(regionHit)) regionTxt = ' a través de región medular anterolateral al estímulo en astas y raíces lumbosacras.';
+    }
+
+    // Para sin_respuesta el grado va antes de fisio
+    const ordenPartes = hasVal('sin_respuesta')
+      ? `${via}${grado}${fisio}${secund}${ladoTxt}${regionTxt}`
+      : `${via}${fisio}${grado}${secund}${ladoTxt}${regionTxt}`;
+
+    let s = ordenPartes.replace(/\s+/g, ' ').trim();
+    s = s ? s[0].toUpperCase() + s.slice(1) : s;
+    if (!/[.!?]$/.test(s)) s += '.';
+    return s;
+  }, [conclusions, rootFlow, side]);
+
+  /* Sincroniza el texto editable cuando cambian las conclusiones (salvo edición manual) */
   useEffect(() => {
-    const printButton = document.getElementById('print');
-    const handlePrint = () => {
-      window.print();
-    };
+    if (!editadoManual) setTextoEditado(textoReporte);
+  }, [textoReporte, editadoManual]);
 
-    printButton.addEventListener('click', handlePrint);
+  /* Texto final que se usa para el PDF y el ExportBar */
+  const textoFinal = editadoManual ? textoEditado : textoReporte;
 
-    return () => {
-      printButton.removeEventListener('click', handlePrint);
-    };
-  }, []); 
-  const conclusionDivRef = useRef(null);
-  const elementRef = useRef(null);
+  /* ── Lista motores ── */
+  const listaMotores = useMemo(() => {
+    const vals = new Set(conclusions.map(c => c.value));
+    const has  = (n) => Array.from(vals).some(v => v === n || v.includes(n));
+    const lines = [];
+
+    const via = vals.has('alterada') ? 'Afectada' : vals.has('indemne') ? 'Indemne' : '';
+    if (via) lines.push({ k: 'Vía Corticoespinal', v: via });
+
+    let fisio = '';
+    if (vals.has('retardo_en_la_conduccion')) {
+      fisio = 'Retardo en la conducción';
+      if (vals.has('perdida_axonal_secundaria')) fisio += ' con pérdida axonal secundaria';
+    } else if (vals.has('deficit_neuronal')) {
+      fisio = 'Déficit axonal';
+      if (vals.has('retardo_secundario_en_la_conduccion')) fisio += ' con retardo secundario en la conducción';
+    } else if (vals.has('bloqueo_en_la_conduccion')) {
+      fisio = 'Bloqueo en la conducción';
+    } else if (vals.has('sin_respuesta')) {
+      fisio = 'Sin respuesta evocable';
+    }
+    if (fisio) lines.push({ k: 'Fisiopatología', v: fisio });
+
+    const grado = vals.has('severo') ? 'Severo' : vals.has('moderado') ? 'Moderado' : vals.has('leve') ? 'Leve' : '';
+    if (grado) lines.push({ k: 'Grado', v: grado });
+
+    const sideMap = { izquierdo: 'Izquierdo', derecho: 'Derecho', bilateral: 'Bilateral' };
+    const lado = side ? sideMap[side] :
+      vals.has('izquierdo_alterada') || vals.has('izquierdo_indemne') ? 'Izquierdo' :
+      vals.has('derecho_alterada')   || vals.has('derecho_indemne')   ? 'Derecho'   :
+      vals.has('bilateral_alterada') || vals.has('bilateral_indemne') ? 'Bilateral' : '';
+    if (lado) lines.push({ k: 'Lado', v: lado });
+
+    let region = '';
+    if (conclusions.some(c => c.value.includes('_cortical')))   region = 'Corteza motora primaria';
+    else if (conclusions.some(c => c.value.includes('_cervical')))   region = 'Astas anteriores y raíces cervicales';
+    else if (conclusions.some(c => c.value.includes('_lumbasacro'))) region = 'Astas anteriores y raíces lumbosacras';
+    if (region) lines.push({ k: 'Región', v: region });
+
+    return lines;
+  }, [conclusions, side]);
+
+  /* ── Props comunes a todos los pasos ── */
+  const sp = {
+    goTo, setStep, removeConclusion, setSeverity, setSide, setRootFlow,
+    removeLastOverlayGroup, resetAll, addOverlay, addOverlays, expandOverlay,
+    rootFlow, severity, side, conclusions, addConclusion,
+  };
+
+  /* ── Dispatcher ── */
+  const renderStep = () => {
+    switch (step) {
+      case 'A':   return <StepA  {...sp} />;
+      case 'B':   return <StepB  {...sp} />;
+      case 'C1':  return <StepC1 {...sp} />;
+      case 'C2':  return <StepC2 {...sp} />;
+      case 'D1':  return <StepD1 {...sp} />;
+      case 'D2':  return <StepD2 {...sp} />;
+      case 'E':   return <StepE  {...sp} />;
+      case 'E2':  return <StepE2 {...sp} />;
+      case 'F':   return <StepF  {...sp} />;
+      case 'F2':  return <StepF2 {...sp} />;
+      case 'G':
+      case 'H':   return (
+        <div>
+          <NavRow onBack={goBack} onReset={resetAll} onPdf={() => setPdfOpen(true)} />
+
+          {/* ExportBar always rendered so PDF opens from any tab */}
+          <ExportBar
+            nombrePaciente={nombrePaciente}
+            textoReporte={textoFinal}
+            activeOv={activeOv}
+            figuras={figuras}
+            laminaSize={{
+              w: laminaRef.current?.clientWidth  || 690,
+              h: laminaRef.current?.clientHeight || 620,
+            }}
+            listaVisual={listaMotores}
+            imgLista={imgLista}
+            comentarioLista={comentarioLista}
+            onBack={goBack}
+            onReset={resetAll}
+            isOpen={pdfOpen}
+            onClose={() => setPdfOpen(false)}
+          />
+
+          {/* Tab Reporte: cargar figuras sobre la lámina */}
+          {activeTab === 'reporte' && (
+            <>
+              <StepTitle>Agrega figuras al reporte (imagen)</StepTitle>
+              <div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
+                {/* Círculo */}
+                <label style={{
+                  flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+                  padding: '12px 8px', borderRadius: 10, cursor: 'pointer',
+                  background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+                  color: 'rgba(255,255,255,0.6)', fontSize: 11, textAlign: 'center',
+                }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}>
+                    <circle cx="12" cy="12" r="9" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a9 9 0 0118 0" />
+                  </svg>
+                  Forma circular
+                  <input type="file" accept="image/*" multiple style={{ display: 'none' }} onChange={e => {
+                    Array.from(e.target.files || []).forEach(f => agregarFigura('circle', URL.createObjectURL(f)));
+                    e.target.value = '';
+                  }} />
+                </label>
+                {/* Cuadrado */}
+                <label style={{
+                  flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+                  padding: '12px 8px', borderRadius: 10, cursor: 'pointer',
+                  background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+                  color: 'rgba(255,255,255,0.6)', fontSize: 11, textAlign: 'center',
+                }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}>
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                  </svg>
+                  Forma cuadrada
+                  <input type="file" accept="image/*" multiple style={{ display: 'none' }} onChange={e => {
+                    Array.from(e.target.files || []).forEach(f => agregarFigura('square', URL.createObjectURL(f)));
+                    e.target.value = '';
+                  }} />
+                </label>
+              </div>
+              {figuras.length > 0 && (
+                <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 11, margin: '4px 0 12px', fontStyle: 'italic' }}>
+                  {figuras.length} figura{figuras.length > 1 ? 's' : ''} en la lámina
+                </p>
+              )}
+            </>
+          )}
+
+          {/* Tab Lista: imagen de tabla + comentario */}
+          {activeTab === 'lista' && (
+            <>
+              <StepTitle>Imagen de tabla</StepTitle>
+              <button onClick={() => setShowGaleria(true)} style={{
+                width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+                padding: '18px 12px', borderRadius: 10, cursor: 'pointer', marginBottom: 12,
+                background: 'rgba(255,255,255,0.05)', border: '1px dashed rgba(255,255,255,0.15)',
+              }}>
+                {imgLista ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={imgLista.src} alt="tabla" style={{ width: '100%', maxHeight: 100, objectFit: 'contain', borderRadius: 6 }} />
+                ) : (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" width={36} height={36} fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18M7 3v18" />
+                    </svg>
+                    <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12 }}>Sin imagen seleccionada</span>
+                  </>
+                )}
+              </button>
+              {imgLista && (
+                <button onClick={() => setImgLista(null)} style={{
+                  width: '100%', padding: '5px 0', borderRadius: 8, marginBottom: 10,
+                  background: 'transparent', border: '1px solid rgba(239,68,68,0.4)',
+                  color: '#ef4444', fontSize: 12, cursor: 'pointer',
+                }}>Quitar imagen</button>
+              )}
+              <button onClick={() => { setComentarioTemp(comentarioLista); setShowComentarioModal(true); }} style={{
+                width: '100%', padding: '10px 0', borderRadius: 10,
+                background: '#f97316', border: 'none', cursor: 'pointer',
+                color: '#fff', fontWeight: 700, fontSize: 14,
+              }}>
+                {comentarioLista ? 'Editar Comentario' : 'Agregar Comentario'}
+              </button>
+              {comentarioLista && (
+                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, fontStyle: 'italic', marginTop: 8 }}>
+                  {comentarioLista.length > 100 ? comentarioLista.slice(0, 100) + '…' : comentarioLista}
+                </p>
+              )}
+            </>
+          )}
+        </div>
+      );
+      default: return null;
+    }
+  };
+
+  /* ── Indicador de paso ── */
+  const STEP_LABELS = {
+    A: 'Vía Corticoespinal', B: 'Fisiopatología', C1: 'Grado', C2: 'Grado',
+    D1: 'Retardo', D2: 'Axonal', E: 'Lado', E2: 'Lado',
+    F: 'Región', F2: 'Región', G: 'Informe', H: 'Informe',
+  };
 
   return (
-    <div >
-      
-  {showHelpModal && (
-        <div
-          className="help-modal-overlay"
-          onClick={() => setShowHelpModal(false)}
-        >
-          <div
-            className="help-modal-content"
-            onClick={e => e.stopPropagation()}
-          >
+    <ReportContext.Provider value={{ conclusions, addConclusion, removeConclusion }}>
+
+      {/* ══ MODAL FULLSCREEN ══ */}
+      <div style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        background: '#0a0a0a',
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        overflowY: 'auto',
+      }}>
+
+        {/* ── Barra superior ── */}
+        <div style={{
+          flexShrink: 0, width: '100%', height: 52,
+          background: '#111',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          display: 'grid', gridTemplateColumns: '1fr auto 1fr',
+          alignItems: 'center',
+          padding: '0 20px', boxSizing: 'border-box',
+        }}>
+          {/* Izquierda: botón Regresar */}
+          <div>
             <button
-              className="help-modal-close"
-              onClick={() => setShowHelpModal(false)}
-            >
-              ×
-            </button>
-            <img
-              src="https://media.githubusercontent.com/media/migueszitle111/ResidenciaProyecto/refs/heads/main/public/assets/Gifs/Ayudaboton.gif"
-              alt="Ayuda menú"
-              className="help-modal-gif"
-            />
-            <button
-              className="help-modal-hide"
-              onClick={() => {
-                localStorage.setItem('hideHelpGif', 'true');
-                setShowHelpModal(false);
+              onClick={() => router.push('/Reporte')}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 6,
+                padding: '6px 14px', borderRadius: 8,
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                cursor: 'pointer', color: '#fff', fontSize: 13, fontWeight: 500,
               }}
             >
-              No volver a mostrar
+              <svg xmlns="http://www.w3.org/2000/svg" width={15} height={15} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+              Regresar
             </button>
+          </div>
+
+          {/* Centro: input paciente */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <input
+              type="text"
+              value={nombrePaciente}
+              onChange={e => setNombrePaciente(e.target.value)}
+              placeholder="Nombre del paciente"
+              style={{
+                width: 580, background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.1)', borderRadius: 7,
+                padding: '6px 14px', color: '#fff', fontSize: 13,
+                outline: 'none', boxSizing: 'border-box', textAlign: 'center',
+              }}
+            />
+          </div>
+
+          {/* Derecha: avatar usuario */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            {session?.user?.imageUrl && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img src={session.user.imageUrl} alt="" style={{ width: 32, height: 32, borderRadius: 8, objectFit: 'contain', opacity: 0.85 }} />
+            )}
+          </div>
+        </div>
+
+        {/* ── Zona centrada: menú + lámina + footer ── */}
+        <div style={{
+          flex: '0 0 auto', width: '100%', maxWidth: 850,
+          display: 'flex', flexDirection: 'column',
+          padding: '12px 8px 0',
+          boxSizing: 'border-box',
+        }}>
+
+          {/* Fila: menú + lámina */}
+          <div style={{ flex: '0 0 auto', display: 'flex', alignItems: 'stretch', minHeight: 520 }}>
+
+            {/* ══ MENÚ IZQUIERDO ══ */}
+            <div style={{
+              width: 300, flexShrink: 0, display: 'flex', flexDirection: 'column',
+              background: '#111',
+              borderRadius: '10px 0 0 10px',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRight: 'none',
+              overflowY: 'auto',
+            }}>
+              <div style={{ flex: 1, padding: '12px 14px 14px', overflowY: 'auto' }}>
+                {renderStep()}
+              </div>
+            </div>
+
+            {/* ══ LÁMINA ══ */}
+            <div ref={laminaRef} style={{
+              flex: 1, position: 'relative',
+              background: '#fff',
+              borderRadius: '0 10px 10px 0',
+              boxShadow: '0 8px 48px rgba(0,0,0,0.6)',
+              overflow: 'hidden',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              {nombrePaciente && (
+                <div style={{
+                  position: 'absolute', top: 10, left: 12, zIndex: 10,
+                  background: 'rgba(0,0,0,0.45)', color: '#fff',
+                  fontSize: 11, fontWeight: 500, padding: '3px 9px', borderRadius: 6,
+                }}>
+                  {nombrePaciente}
+                </div>
+              )}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/MotoresImg/BP_Motores_page-0001.jpg"
+                alt="Vía Corticoespinal"
+                draggable={false}
+                style={{ display: 'block', width: '100%', height: 'auto', objectFit: 'contain' }}
+              />
+              {activeOv.map(k => {
+                const src = OVERLAYS_MOTORES[k];
+                if (!src) return null;
+                return (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={k} src={src} alt="" draggable={false}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none' }}
+                  />
+                );
+              })}
+              {/* Figuras superpuestas — arrastrables */}
+              {figuras.map(f => (
+                <div key={f.id}
+                  onMouseDown={(e) => onFiguraMouseDown(e, f)}
+                  style={{
+                    position: 'absolute', left: f.x, top: f.y, zIndex: 20,
+                    width: 80, height: 80,
+                    cursor: 'grab', userSelect: 'none',
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={f.src} alt="" draggable={false} style={{
+                    width: 80, height: 80, objectFit: 'cover',
+                    borderRadius: f.tipo === 'circle' ? '50%' : 0,
+                    border: '1.5px solid gray',
+                    display: 'block',
+                    pointerEvents: 'none',
+                  }} />
+                  {/* Botón ✕ */}
+                  <button
+                    onMouseDown={e => e.stopPropagation()}
+                    onClick={() => eliminarFigura(f.id)}
+                    style={{
+                      position: 'absolute', top: -10, right: -10,
+                      width: 24, height: 24, borderRadius: '50%',
+                      background: 'red', border: 'none', cursor: 'pointer',
+                      color: '#fff', fontSize: 11, fontWeight: 700,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 22,
+                    }}>✕</button>
+                  {/* Botón editar (lápiz) */}
+                  <button
+                    onMouseDown={e => e.stopPropagation()}
+                    onClick={() => setCropState({ id: f.id, src: f.src })}
+                    style={{
+                      position: 'absolute', bottom: -10, left: -10,
+                      width: 26, height: 26, borderRadius: '50%',
+                      background: 'rgba(0,0,0,0.75)', border: 'none', cursor: 'pointer',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 22,
+                    }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.364-6.364a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H8v-2.414a2 2 0 01.586-1.414z" />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+            </div>
+
+          </div>{/* fin fila menú+lámina */}
+
+          {/* ── FOOTER: tabs + conclusión ── */}
+          <div style={{
+            background: '#111',
+            borderRadius: '0 0 10px 10px',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderTop: 'none',
+            padding: '10px 16px 14px',
+            marginBottom: 16,
+          }}>
+            <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
+              {[['reporte','Reporte'],['lista','Lista']].map(([id, label]) => (
+                <button key={id} onClick={() => setActiveTab(id)} style={{
+                  padding: '4px 16px', borderRadius: 7, fontSize: 12, fontWeight: 600,
+                  border: 'none', cursor: 'pointer', transition: 'all 0.15s',
+                  background: activeTab === id ? '#f97316' : 'rgba(255,255,255,0.07)',
+                  color: activeTab === id ? '#fff' : 'rgba(255,255,255,0.4)',
+                }}>
+                  {label}
+                </button>
+              ))}
+            </div>
+            {/* ── Contenido según tab ── */}
+            {activeTab === 'reporte' && (
+              textoFinal
+                ? <textarea
+                    value={textoFinal}
+                    onChange={e => { setTextoEditado(e.target.value); setEditadoManual(true); }}
+                    rows={4}
+                    style={{
+                      width: '100%', boxSizing: 'border-box', resize: 'vertical',
+                      background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: 8, padding: '7px 10px',
+                      color: 'rgba(255,255,255,0.85)', fontSize: 13, lineHeight: 1.55,
+                      outline: 'none', fontFamily: 'inherit', marginTop: 4,
+                    }}
+                  />
+                : <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: 13, fontStyle: 'italic', margin: '4px 0 0' }}>
+                    Sin conclusiones aún.
+                  </p>
+            )}
+            {activeTab === 'lista' && (
+              <div style={{ marginTop: 4 }}>
+                {listaMotores.length === 0
+                  ? <p style={{ color: 'rgba(255,255,255,0.25)', fontSize: 12, fontStyle: 'italic', margin: 0 }}>Sin conclusiones aún.</p>
+                  : <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2px 24px' }}>
+                      {listaMotores.map(({ k, v }) => (
+                        <p key={k} style={{ color: 'rgba(255,255,255,0.75)', fontSize: 12, margin: 0 }}>
+                          <span style={{ color: '#f97316', fontWeight: 600 }}>{k}:</span> {v}
+                        </p>
+                      ))}
+                    </div>
+                }
+                {comentarioLista && (
+                  <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, fontStyle: 'italic', marginTop: 6 }}>
+                    {comentarioLista.length > 100 ? comentarioLista.slice(0, 100) + '…' : comentarioLista}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {(session?.user?.name || session?.user?.email) && (
+              <div style={{ marginTop: 8, paddingTop: 7, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                {session.user.name && <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11 }}>👤 {session.user.name} {session.user.lastname || ''}</span>}
+                {session.user.email && <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11 }}>✉ {session.user.email}</span>}
+                {session.user.cedula && <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11 }}>№ {session.user.cedula}</span>}
+              </div>
+            )}
+          </div>
+
+        </div>{/* fin zona centrada */}
+
+      </div>
+
+      {/* ══ MODAL CROP ══ */}
+      {cropState && (
+        <CropModal
+          src={cropState.src}
+          onConfirm={(croppedUrl) => {
+            setFiguras(p => p.map(f => f.id === cropState.id ? { ...f, src: croppedUrl } : f));
+            setCropState(null);
+          }}
+          onClose={() => setCropState(null)}
+        />
+      )}
+
+      {/* ══ GALERÍA DE TABLAS ══ */}
+      {showGaleria && (
+        <GaleriaTablas
+          onSelect={(url) => { setImgLista({ src: url, file: null }); setShowGaleria(false); }}
+          onClose={() => setShowGaleria(false)}
+        />
+      )}
+
+      {/* ══ MODAL COMENTARIO ══ */}
+      {showComentarioModal && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 10000,
+          background: 'rgba(0,0,0,0.75)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+        }}>
+          <div style={{
+            background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: 16, padding: 24, width: '100%', maxWidth: 480,
+          }}>
+            <h3 style={{ color: '#fff', fontSize: 16, fontWeight: 700, margin: '0 0 4px' }}>Comentario</h3>
+            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, margin: '0 0 14px' }}>Se agregará al informe como nota adicional</p>
+            <textarea
+              value={comentarioTemp}
+              onChange={e => setComentarioTemp(e.target.value)}
+              rows={5}
+              placeholder="Escribe aquí tu comentario..."
+              style={{
+                width: '100%', boxSizing: 'border-box',
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
+                borderRadius: 10, padding: '10px 12px', color: '#fff', fontSize: 13,
+                resize: 'vertical', outline: 'none', fontFamily: 'inherit',
+              }}
+            />
+            <div style={{ display: 'flex', gap: 10, marginTop: 14 }}>
+              <button
+                onClick={() => { setComentarioLista(comentarioTemp); setShowComentarioModal(false); }}
+                style={{
+                  flex: 1, padding: '9px 0', borderRadius: 10, border: 'none',
+                  background: '#f97316', color: '#fff', fontWeight: 600, fontSize: 14, cursor: 'pointer',
+                }}
+              >Guardar</button>
+              <button
+                onClick={() => setShowComentarioModal(false)}
+                style={{
+                  flex: 1, padding: '9px 0', borderRadius: 10,
+                  border: '1px solid rgba(255,255,255,0.12)', background: 'transparent',
+                  color: 'rgba(255,255,255,0.5)', fontSize: 14, cursor: 'pointer',
+                }}
+              >Cancelar</button>
+            </div>
           </div>
         </div>
       )}
-    {/* Clase que encapzula la información y el titulo de la pagina */}
-    <div className='head'>
-         {/* Titulo de la pagina */}
-        <div className='report-container dont-print'>
-        </div>
-      </div>       
-    {/* Wrapper que encapsula la image, conclusión y lista de botones */}
-    <div className="wrapper">
-      {/* Componente de la caja de conclusión junto con la caja de notas */}
-        {/* Se especifica dont-print para no ser incluidos en la vista de impresión */}
-        <div className='vertical-orientation dont-print'>
-        {/* Lista de botones */}
-        <div className='button-bar'>
-        <button 
-          id='unhide' 
-          className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`} 
-          onClick={() => {
-            setPageVisibility(true);
-            setSelectedImages([]);
-          }}
-        >
-        <img src="/I_Out.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
-        </button>
-        <button id='print' className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
-        <img src="/I_Print.svg" alt="Imprimir" style={{filter: 'invert(1)'}} />
-        </button>
-        <button onClick={handleUndo} className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
-        <img src="/I_Repeat.svg" alt="Deshacer" style={{filter: 'invert(1)'}} />
-        </button>
-        <label htmlFor="file-upload" className={`print-button dont-print ${isPageVisible ? 'hidden' : 'visible'}`}>
-        <img src="/I_Folder.svg" alt="Subir" style={{filter: 'invert(1)'}} />
-        </label>
-          <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} className={`dont-print ${isPageVisible ? 'hidden' : 'visible'}`} style={{display: 'none'}}/>          </div>
-        <div className={'vertical-container dont-print'}>
-        <div className={`dont-print ${isPageVisible ? 'visible' : 'hidden'}`}>
-        
-          {/*
-        <ConclusionBox />
-          */}
-        </div>
 
-      {/* Menu de opciones */}
-        <div className={`mx-4 z-10 `}>
-          <SimpleMultiStepForm 
-            showStepNumber={true}
-            conclusionDivRef={conclusionDivRef}
-            elementRef={elementRef}
-            handleImageChange={handleImageChange}
-            topLeftText={topLeftText}
-            setTopLeftText={setTopLeftText}
-            copyConclusions={copyConclusions}  
-            ref={imgRef.current}
-            expandedDivs={expandedDivs}
-            setExpandedDivs={setExpandedDivs}
-            />
-            </div>    
-            </div>
-          </div>
-         {/* Componente que contiene las imagenes y sus valores que se utilizaran */}
-              <div>
-                <div className='con-img '> 
-              
-              {/* Codigo para desplegar las imagenes dentro de un array */}
-              {selectedImages.map((image, index) => (
-                <Rnd
-                  className="rnd-image"
-                  key={index}
-                  size={image.size}
-                  position={image.position}
-                  onDragStop={(e, d) => handleDragStop(index, e, d)}
-                  onResizeStop={(e, direction, ref, delta, position) => handleResizeStop(index, e, direction, ref, delta, position)}
-                  lockAspectRatio={true}
-                  style={{ zIndex: 2 }} 
-      
-                >
-                  <img src={image.src} draggable="false" />
-                </Rnd>
-              ))}
-      
-              {/* Despliego de las imagenes dentro del array */}
-              <div ref={elementRef} className='conclusion-container '>
-      
-              <div id="dropArea"><DropArea topLeftText={topLeftText}  expandedDivs={expandedDivs}
-                      setExpandedDivs={setExpandedDivs}  />
-      
-              </div>
-        <ConclusionCanvasV 
-        
-          img={{
-            src: '/assets/MioImg/MO_BASE_BLANCO_MOTORES.png',
-            alt: 'Modelo',
-            useMap: '#image-map',
-            width: isPageVisible ? '600' : '800',
-            height: isPageVisible ? '600' : '800'
-          }}
-          
-          rules={[
-          
-            {
-              expectedValue: 'izquierdo_indemne', 
-              image: 
-                {
-                  src:'CorticoespinalImg/INFERIOR D.png',
-                  alt: 'Modelo',
-                },
-            },
-
-            {
-              expectedValue: 'derecho_indemne', 
-              image: 
-                {
-                  src:'CorticoespinalImg/INFERIOR I.png',
-                  alt: 'Modelo',
-                },
-            },
-
-            {
-              expectedValue: 'bilateral_indemne', 
-              image: 
-                [
-                {
-                  src: 'CorticoespinalImg/INFERIOR D.png',
-                  alt: 'Modelo',
-                },
-                {
-                  src: 'CorticoespinalImg/INFERIOR I.png',
-                  alt: 'Modelo',
-                }]
-            },
-
-            {
-              expectedValue: 'izquierdo_alterada', 
-              image: 
-                {
-                  src:'CorticoespinalImg/INFERIOR D.png',
-                  alt: 'Modelo',
-                },
-            },
-
-            {
-              expectedValue: 'derecho_alterada', 
-              image: 
-                {
-                  src:'CorticoespinalImg/INFERIOR I.png',
-                  alt: 'Modelo',
-                },
-            },
-
-            {
-              expectedValue: 'bilateral_alterada', 
-              image: 
-                [
-                {
-                  src: 'CorticoespinalImg/INFERIOR D.png',
-                  alt: 'Modelo',
-                },
-                {
-                  src: 'CorticoespinalImg/INFERIOR I.png',
-                  alt: 'Modelo',
-                }]
-            },
-            {
-              expectedValue: 'bilateralcervical', 
-             
-                image: [
-                  {
-                    src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
-                    alt: 'Modelo',
-                  },
-                  {
-                    src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
-                    alt: 'Modelo',
-                  }]
-            },
-
-            {
-              expectedValue: 'izquierdocervical', 
-              image: 
-                {
-                  src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
-                  alt: 'Modelo',
-                },
-            },
-            {
-              expectedValue: 'derechocervical', 
-              image: 
-                {
-                  src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
-                  alt: 'Modelo',
-                },
-            },
-
-            {
-              expectedValue: 'bilateralcortical', 
-             
-                image: [
-                  {
-                    src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
-                    alt: 'Modelo',
-                  },
-                  {
-                    src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
-                    alt: 'Modelo',
-                  }]
-            },
-
-            {
-              expectedValue: 'izquierdocortical', 
-              image: 
-                {
-                  src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR D.png',
-                  alt: 'Modelo',
-                },
-            },
-            {
-              expectedValue: 'derechocortical', 
-              image: 
-                {
-                  src: 'CorticoespinalImg/ViasAfectadas/SUPERIOR I.png',
-                  alt: 'Modelo',
-                },
-            },
-
-
-
-
-
-            {
-              expectedValue: 'bilaterallumbasacro', 
-             
-                image: [
-                  {
-                    src: 'CorticoespinalImg/ViasAfectadas/INFERIOR D.png',
-                    alt: 'Modelo',
-                  },
-                  {
-                    src: 'CorticoespinalImg/ViasAfectadas/INFERIOR I.png',
-                    alt: 'Modelo',
-                  }]
-            },
-
-            {
-              expectedValue: 'izquierdolumbasacro', 
-              image: 
-                {
-                  src: 'CorticoespinalImg/ViasAfectadas/INFERIOR D.png',
-                  alt: 'Modelo',
-                },
-            },
-            {
-              expectedValue: 'derecholumbasacro', 
-              image: 
-                {
-                  src: 'CorticoespinalImg/ViasAfectadas/INFERIOR I.png',
-                  alt: 'Modelo',
-                },
-            },
-
-          ]}
-          const footertext = {
-            <>
-            {session && (
-            <>
-              {/* Bloque Nombre */}
-              <div id="footerName"style={{ display: 'inline-flex' , alignItems: 'center' ,paddingLeft: '65px' }}>
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="8"
-                  height="8"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  style={{ marginRight: '4px' }}
-                  aria-label="Usuario"
-                >
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 
-                           0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                </svg>
-                <span>{name} {lastname}</span>
-              </div>
-              {/* Bloque Email */}
-              <div id="footerEmail" style={{ display: 'inline-flex', alignItems: 'center' }}>
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="8"
-                  height="8"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  style={{ marginRight: '4px' }}
-                  aria-label="Email"
-                >
-                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 
-                           2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                </svg>
-                <span>{email}</span>
-              </div>
-              {/* Bloque Especialidad */}
-              <div  id="footerEspecialidad" style={{ display: 'inline-flex', alignItems: 'center' }}>
-              <svg
-                  version="1.1"
-                  id="ICONOS"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 90 90"
-                  style={{ enableBackground: 'new 0 0 90 90', marginRight: '4px' }}
-                  xmlSpace="preserve"
-                  width="8"
-                  height="8"
-                  aria-label="Especialidad"
-                >
-                  <style type="text/css">
-                    {`
-                      .st0 { fill: none; stroke: #000000; stroke-width: 2; stroke-miterlimit: 10; }
-                      .st1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: square; stroke-miterlimit: 10; }
-                      .st2 { fill: #FFFFFF; }
-                    `}
-                  </style>
-                  <g id="brain">
-                    <g>
-                      <path className="st0" d="M45.12,61.02c0,0,0,7.32-4.79,7.32h-8.68c-1.82,0-3.29-1.47-3.29-3.29c0,0-2.39-8.68-2.65-8.68l-2.88-1.21
-                        c-1.57-0.66-2.31-2.46-1.66-4.03l4.8-9.65v-0.67c0-11.9,9.65-21.55,21.55-21.55s21.55,9.65,21.55,21.55
-                        c0,5.12-1.8,9.84-4.79,13.54v16.39"/>
-                      <path className="st0" d="M39.05,43.72c-0.14,0.42-0.11,0.49-0.11,0.96c0,2.25,1.83,4.08,4.09,4.08c1.2,0,2.11-0.7,2.91-1.49"/>
-                      <path className="st0" d="M53.85,30.98c0.14-0.01,0.29-0.02,0.43-0.02c2.25,0,4.08,1.83,4.08,4.09c0,1.17-0.63,2.49-1.42,3.22"/>
-                      <path className="st0" d="M53.85,30.98c-0.99-2.77-3.64-4.73-6.74-4.73c-3.78,0-6.59,3.01-7.48,6.5"/>
-                      <path className="st1" d="M45.94,47.17l1.2,1.01c1.92,1.34,3.08,3.52,3.09,5.87c0.01,2.61,0.02,5.66,0.02,5.66"/>
-                      <path className="st1" d="M43.93,39.98c-3.68,0-4.76,3.36-4.76,3.36l-1.19,0.13c-3.03,0-5.48-2.45-5.48-5.48
-                        c0-3.03,2.45-5.48,5.48-5.48c0.71,0,1.05,0.04,1.67,0.22"/>
-                      <path className="st0" d="M57.6,37.99c2.26,0,4.09,1.83,4.09,4.09c0,2.25-1.83,4.08-4.09,4.08c-2.25,0-4.08-1.83-4.08-4.08
-                        c0,0-3.2,1.39-4.54-1.53"/>
-                      <path className="st0" d="M47.56,33.37c2.89,3.66,8.31-1.32,4.69-4.94"/>
-                    </g>
-                  </g>
-                </svg>
-                <span>{especialidad}</span>
-              </div>
-              {/* Bloque Cédula */}
-              <div  id="footerCedula" style={{ display: 'inline-flex', alignItems: 'center' }}>
-              <svg
-                  version="1.1"
-                  id="ICONOS"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 90 90"
-                  style={{ enableBackground: 'new 0 0 90 90', marginRight: '4px' }}
-                  xmlSpace="preserve"
-                  width="8"
-                  height="8"
-                  aria-label="Cédula"
-                >
-                  <style type="text/css">
-                    {`
-                      .st0 { fill: none; stroke: #000000; stroke-width: 2; stroke-miterlimit: 10; }
-                      .st1 { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: square; stroke-miterlimit: 10; }
-                      .st2 { fill: #FFFFFF; }
-                    `}
-                  </style>
-                  <g id="test">
-                    <g>
-                      <rect x="20.72" y="16.5" className="st0" width="48.56" height="57" />
-                      <g>
-                        <path d="M38.39,28.69c0-0.87,0.7-1.57,1.57-1.57h2.68c0.87,0,1.57,0.7,1.57,1.57v3.71c0,0.34-0.11,0.68-0.32,0.95l-2.8,3.67
-                          c-0.3,0.39-0.76,0.62-1.25,0.62h-1.06l2.33-4.71h-1.15c-0.87,0-1.57-0.7-1.57-1.57V28.69z M47.37,27.12h2.67
-                          c0.87,0,1.57,0.7,1.57,1.57v3.71c0,0.34-0.11,0.68-0.32,0.95l-2.8,3.67c-0.3,0.39-0.76,0.62-1.25,0.62h-1.06l2.33-4.71h-1.15
-                          c-0.87,0-1.57-0.7-1.57-1.57v-2.68C45.8,27.83,46.51,27.12,47.37,27.12z" />
-                      </g>
-                      <line className="st0" x1="35.23" y1="47.02" x2="54.77" y2="47.02" />
-                      <line className="st0" x1="35.23" y1="55.73" x2="54.77" y2="55.73" />
-                      <line className="st0" x1="35.23" y1="64.45" x2="54.77" y2="64.45" />
-                    </g>
-                  </g>
-                </svg>
-                <span>Cédula: {cedula}</span>
-              </div>
-            </>
-          )}
-          </>
-          }
-          userImageUrl={imageUrl}  // Aquí se pasa la URL de la imagen del usuario
-        />
-          <div className={`info-container ${isPageVisible ? 'hidden' : 'visible'}`}>
-   <div
-    id="conclusionDiv"
-    ref={conclusionDivRef}
-    contentEditable
-    style={{
-    position: 'absolute',
-    width: '95%',
-    height: 'auto',
-    outline: 'none',
-    resize: 'none',
-    fontSize: '12px',
-    paddingTop: '8px',
-    marginLeft: '10px',
-    zIndex: '1',
-     }}
-     dangerouslySetInnerHTML={{ __html: copyConclusions }}
-     onBlur={(e) => {
-       // Cuando terminas de editar, puedes setear copyConclusions
-       setCopyConclusions(e.currentTarget.innerText);
-     }}
-     onFocus={(e) => {
-       // Mover el cursor al final del contenido
-       const range = document.createRange();
-       const selection = window.getSelection();
-       range.selectNodeContents(e.target);
-       range.collapse(false); // Colapsar al final
-       selection.removeAllRanges();
-       selection.addRange(range);
-     }}
-     suppressContentEditableWarning={true}
-     />
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-  )
+    </ReportContext.Provider>
+  );
 }
-
-
-export default Reporte

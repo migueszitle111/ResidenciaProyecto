@@ -1,43 +1,35 @@
 // page.js
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import HeadComponents from "./components/HeadComponents";
 import SubMenu from "./components/Submenu";
-import Navbar from "./components/Navbar";
-import CardsList from "./components/CardsList";
 import BannerPublicitarios from "./components/BannerPublicitario";
 import FooterComponents from "./components/FooterComponents";
 import LandingPage from "./components/LandingPage";
 
 const Home = () => {
   const { data: session } = useSession();
+  const searchParams = useSearchParams();
+  const skipLoader = searchParams.get("logout") === "1";
 
-  // -------------------------
-  // Estado para el loader
-  // -------------------------
   const [isClient, setIsClient] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
   const loaderVideoRef = useRef(null);
-
-  // -------------------------
-  // Estado para el modal
-  // -------------------------
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
 
-  // Clave de localStorage que incluye el email del usuario
   const userKey = session?.user?.email
     ? `hidePrivacyModal_${session.user.email}`
     : null;
 
-  // Inicializar AOS
   useEffect(() => {
     AOS.init({ duration: 600, once: true });
   }, []);
 
-  // Safari requiere muted vía JS para que autoPlay funcione
   useEffect(() => {
     if (loaderVideoRef.current) {
       loaderVideoRef.current.muted = true;
@@ -47,17 +39,23 @@ const Home = () => {
 
   useEffect(() => {
     setIsClient(true);
+
+    if (skipLoader) {
+      setShowLoader(false);
+      return;
+    }
+
     if (!session) {
-      const t = setTimeout(() => {
+      const timer = setTimeout(() => {
         setShowLoader(false);
       }, 3000);
-      return () => clearTimeout(t);
-    } else {
-      setShowLoader(false);
-    }
-  }, [session]);
 
-  // Mostrar el modal sólo si el usuario inició sesión y no tiene la bandera en localStorage
+      return () => clearTimeout(timer);
+    }
+
+    setShowLoader(false);
+  }, [session, skipLoader]);
+
   useEffect(() => {
     if (session && userKey) {
       const hideFlag = localStorage.getItem(userKey);
@@ -67,12 +65,10 @@ const Home = () => {
     }
   }, [session, userKey]);
 
-  // Refrescar AOS cuando aparece el modal
   useEffect(() => {
     if (showPrivacyModal) AOS.refresh();
   }, [showPrivacyModal]);
 
-  // Función que guarda en localStorage y cierra modal
   const handleAcceptPrivacy = () => {
     if (userKey) {
       localStorage.setItem(userKey, "true");
@@ -82,8 +78,7 @@ const Home = () => {
 
   if (!isClient) return null;
 
-  // 🚀 Mostrar video inicial si no hay sesión
-  if (showLoader && !session) {
+  if (showLoader && !session && !skipLoader) {
     return (
       <>
         <HeadComponents />
@@ -102,46 +97,30 @@ const Home = () => {
     );
   }
 
-  const isAdmin = session?.user?.roles === "admin";
-
   return (
     <>
       <HeadComponents />
 
-      {/* ==============================
-          Modal de aviso de privacidad (solo si hay sesión)
-         ============================== */}
       {session && showPrivacyModal && (
         <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black bg-opacity-80">
           <div className="flex flex-col items-center" data-aos="zoom-in">
-            {/* GIF de aviso de privacidad (centrado y grande) */}
-            <img
+            <Image
               src="/assets/Gifs/LP-02.png"
               alt="Aviso de Privacidad"
+              width={1000}
+              height={1414}
               className="w-[1000px] h-auto object-contain"
             />
 
-            {/* Botón “Aceptar” justo debajo del GIF */}
             <button
               onClick={handleAcceptPrivacy}
-              className="
-                mt-4
-                bg-orange-600
-                hover:bg-orange-700
-                text-white
-                px-8
-                py-1
-                rounded-md
-                shadow-md
-                transition-colors
-              "
+              className="mt-4 bg-orange-600 hover:bg-orange-700 text-white px-8 py-1 rounded-md shadow-md transition-colors"
             >
               Aceptar
             </button>
           </div>
         </div>
       )}
-      {/* ============================== */}
 
       <div className="Conteiner">
         {!session ? (
@@ -149,12 +128,6 @@ const Home = () => {
         ) : (
           <>
             <SubMenu />
-            {isAdmin && (
-              <div className="max-w-3xl mx-auto p-4">
-                <Navbar />
-              </div>
-            )}
-            {/* <CardsList /> */}
             <BannerPublicitarios />
           </>
         )}

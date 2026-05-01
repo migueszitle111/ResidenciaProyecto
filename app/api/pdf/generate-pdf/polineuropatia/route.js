@@ -1,793 +1,366 @@
-// --------------------------- IMPORTS ---------------------------
-import { NextResponse }        from 'next/server';           // sin “type”
-import puppeteer               from 'puppeteer';             // Dev
-import puppeteerCore           from 'puppeteer-core';        // Prod (λ)
-import chromium                from '@sparticuz/chromium-min';
+import { NextResponse }  from 'next/server';
+import puppeteer         from 'puppeteer';
+import puppeteerCore     from 'puppeteer-core';
+import chromium          from '@sparticuz/chromium-min';
+import { PDFDocument }   from 'pdf-lib';
 
-export const runtime = 'nodejs';          // ⚠️ va después de los imports
-export const dynamic = 'force-dynamic';   // (opcional) evita caché de Vercel
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-// ---------------------------------------------------------------
-const isDev  = process.env.NODE_ENV !== 'production';
+const isDev   = process.env.NODE_ENV !== 'production';
 const baseUrl = isDev
   ? 'http://localhost:3000'
-  : process.env.NEXT_PUBLIC_SITE_URL;
+  : (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.medxproapp.com');
 
+const BACKEND_URL = 'https://backendmedxpro-tef2.onrender.com';
 
-// ───────────────────────── helpers ────────────────────────────
+const PAGE_W = 794;
+const PAGE_H = 1123;
+
+const OVERLAYS_POLI = {
+  'AsAxonal':                '/PolineuropatiaImg/PO_Aximal.png',
+  'Axonal':                  '/PolineuropatiaImg/Asimetrica_Aximal.png',
+  'AsDesmielinizante':       '/PolineuropatiaImg/PO_Desmielinizante.png',
+  'Desmielinizante':         '/PolineuropatiaImg/Asimetrica_Desmielinizante.png',
+  'Axonal > Desmielinizante':'/PolineuropatiaImg/PO2_Aximal.png',
+  'Desmielinizante > Axonal':'/PolineuropatiaImg/PO_Desmielinizante.png',
+  'Motora':                  '/PolineuropatiaImg/PO_Motor.png',
+  'Sensitiva':               '/PolineuropatiaImg/PO_Sensitivo.png',
+  'Mixta':                   '/PolineuropatiaImg/PO_Sensitivo-Motor.png',
+  'ProximalImg':             '/PolineuropatiaImg/PO_Proximal2.png',
+  'ProximalAim':             '/PolineuropatiaImg/Asimetrica_Proximal.png',
+  'DistalImg':               '/PolineuropatiaImg/PO_Distal2.png',
+  'DistalAsim':              '/PolineuropatiaImg/Asimetrica_Distal.png',
+  'Segmentaria':             '/PolineuropatiaImg/PO_Proximal.png',
+  'GenePx':                  '/PolineuropatiaImg/PO_Proximal2.png',
+  'GeneDs':                  '/PolineuropatiaImg/PO_Distal2.png',
+};
+
+const OVERLAY_GROUPS = { 'Generalizada': ['GenePx', 'GeneDs'] };
+
+const PLANTILLAS_PDF = {
+  A: { p1: 'PLANTILLA_A_VERTICAL-1.pdf', p2: 'PLANTILLA_A_VERTICAL-2.pdf' },
+  B: { p1: 'PLANTILLA_B_VERTICAL-1.pdf', p2: 'PLANTILLA_B_VERTICAL-2.pdf' },
+  C: { p1: 'PLANTILLA_C_VERTICAL-1.pdf', p2: 'PLANTILLA_C_VERTICAL-2.pdf' },
+};
+
 async function launchBrowser() {
   if (isDev) {
-    // Puppeteer normal en local
-    return puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    return puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   }
-  // Puppeteer‑core + Chromium empaquetado en Vercel
   const executablePath = await chromium.executablePath(
     'https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar'
   );
-
   return puppeteerCore.launch({
-    executablePath,
-    args: chromium.args,
-    headless: chromium.headless,
-    defaultViewport: chromium.defaultViewport,
+    executablePath, args: chromium.args,
+    headless: chromium.headless, defaultViewport: chromium.defaultViewport,
   });
 }
 
-
-function buildHtml({
-  finalConclusion, // texto visible (títulos, etc.)
-  finalString,     // texto para detectar overlays
-  userData,
-  droppedItems,
-  topLeftText,
-}) {
-  // 1) Tus reglas de superposición con /assets/... en lugar de baseUrl
-  const overlayRules = [
-    {
-      expectedValue: 'proximal',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Proximal.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'aximal2',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO2_Aximal.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'desmielinizante2',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO2_Desmielinizante.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'aximal',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Aximal.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'desmielinizante',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Desmielinizante.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'distal',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Distal.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'sensitiva',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Sensitivo.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'motora',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Motor.png',
-          alt: 'Modelo',
-      }
-      },
-      {
-      expectedValue: 'mixta',
-      image: {
-          src: '/assets/PolineuropatiaIMG/PO_Sensitivo-Motor.png',
-          alt: 'Modelo',
-      }
-      },
-  ];
-
-  // 2) Buscamos coincidencias con finalString
-  const matchedImages = [];
-  const conclusionLower = finalString.toLowerCase();
-
-  for (const rule of overlayRules) {
-    if (conclusionLower.includes(rule.expectedValue.toLowerCase())) {
-      if (Array.isArray(rule.image)) {
-        matchedImages.push(...rule.image);
-      } else {
-        matchedImages.push(rule.image);
-      }
-    }
-  }
-
-  // 3) Generar HTML de las imágenes superpuestas
-  const overlayHtml = matchedImages
-    .map(
-      (img) => `
-      <img
-        src="${img.src}"
-        alt="${img.alt}"
-        style="
-          position:absolute;
-          top:0;
-          left:0;
-          width:600px;
-          height:776px;
-          object-fit:contain;"
-      />
-    `
-    )
-    .join("");
-
-  // CSS embebido
-   // CSS embebido (tu DinamicImagesMenu, etc.)
-   const menuCss = `
-   .DivPanel2 {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    margin: 2px;
-    border-radius: 5px;
-    transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
-    position: relative;
-  
-  }
-  
-  .DivPanel2-expanded {
-    width: 230px;
-    z-index: 10; /* Asegura que el div expandido esté en la parte superior */
-    position: relative;
-    background-color: rgba(250, 250, 250, 0.678);
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-  }
-  
-  
-  .DivPanel3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    margin: 2px;
-    border-radius: 5px;
-    transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
-    position: relative;
-  
-  }
-  
-  .DivPanel3-expanded {
-    width: 95px;
-    z-index: 10; /* Asegura que el div expandido esté en la parte superior */
-    position: relative;
-    background-color: rgba(250, 250, 250, 0.678);
-  }
-  
-  .DivPanel4{
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    flex-basis: 200;
-    margin: 2px;
-    border-radius: 5px;
-  }
-  
-  .DivPanel4-expanded{
-    width: 230px;
-    
-  }
-  
-  
-  .cuadroIMG {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    position: relative;
-    margin-left: 30px;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadroIMG-expanded {
-    width: 50px;
-    height: 50px;
-    margin-left: 90px;
-    
-  }
-  
-  .cuadroIMG2 {
-    width: 90px;
-    height: 30px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    position: relative;
-    margin-left: 10px;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadroIMG2-expanded {
-    width: 90px;
-    height: 30px;
-    margin-left: 10px;
-    
-  }
-  
-  
-  /*CSS del componete que se utiliza para arastrar imagnes*/
-  .draggableDiv {
-    transition: all 0.2s ease;
-    position: absolute;
-    z-index: 9999; /* Prueba */
-
-  }
-  
-  .draggableDiv.expanded {
-    transform: scale(1.1); /* Expande el tamaño del div mientras el clic está sostenido */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Añade sombra */
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
-    
-  }
-
-  
-.cuadro {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    margin: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-    display: flex;
-    z-index: 1;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadro-expanded {
-    width: 240px;
-    height: 120px;
-    margin-left: -10px;
-    background-color: transparent;
-    z-index: 1;
-  }
-  
-  .cuadro2 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    margin-left: 40px;
-    z-index: 2;
-  }
-  
-  .cuadro2-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 135px;
-    z-index: 1;
-  }
-  
-  
-  .cuadro3 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  }
-  
-  .cuadro3-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  } 
-  
-  /*Circulos donde se insertan las imagenes*/
-  .circulo {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    margin: 10px;
-    margin-left: -5px;
-    margin-top: 10px;
-    display: flex;
-    z-index: 1;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .circulo-expanded {
-    width: 240px;
-    height: 120px;
-    z-index: 1;
-    
-  }
-  
-  .circulo2 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 40px;
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  .circulo2-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 135px;
-    z-index: 1;
-  }
-  
-  .circulo2 > .dropArea2{
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  
-  .circulo3 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  .circulo3-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  }
-  
-  .circulo3 > .dropArea2{
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  
-  .lineaImg{
-    width: 130px; /* Ajusta el ancho para que sea responsivo */
-    height: 40px; /* Mantiene la proporción de la imagen */
-    transition: transform 0.3s ease; /* Añade una transición suave para efectos */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    margin-top: 5px;
-    z-index: 1;
-    
-  }
-  
-  .lineaImg-expanded {
-    width: 130px;
-    height: auto;
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 55px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-  }
-  
-  .lineaImg2{
-    width: 130px; /* Ajusta el ancho para que sea responsivo */
-    height: 40px; /* Mantiene la proporción de la imagen */
-    transition: transform 0.3s ease; /* Añade una transición suave para efectos */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    margin-top: 5px;
-    margin-left: 35px;
-    z-index: 1;
-    
-  }
-  
-  .lineaImg2-expanded {
-    width: 130px;
-    height: auto;
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 60px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-  }
-  
-  
-  .cruzImg{
-    width: 90px; /* Ajusta el ancho para que sea responsivo */
-    height: 25px; /* Mantiene la proporción de la imagen */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    align-items: center;
-  }
-  
-  .PuntoRojo{
-    width: 45px; /* Ajusta el ancho para que sea responsivo */
-    height: 45px; /* Mantiene la proporción de la imagen */
-    position: relative;
-    background-color: transparent;
-    pointer-events: none;
-    margin: auto;
-    padding-bottom: 10px;
-  
-  }
-  
-  .lineaImg4{
-    width: 84px;
-    height: 84px;
-  }
-  
-  .dropArea2 {
-    width: 40px; /* Tamaño inicial */
-    height: 40px;
-    background-color: transparent;
-    transition: width 0.3s ease, height 0.3s ease; /* Transición suave */
-  }
-  
-  .dropArea2-expanded {
-    width: 88px; /* Mismo tamaño que cuadro2-expanded */
-    height: 92px;
-    transition: width 0.3s ease, height 0.3s ease;
-  }
-  
-  .lineaDv{
-    background-color: black;
-    border: solid 0.5px black;
-    width:120px;
-    height: 1px;
-  }
-
-  .containerImg {
-    position: relative; /* Permite que Draggable funcione correctamente */
-    width: 100%; /* O cualquier tamaño que necesites */
-    height: 100%; /* O cualquier tamaño que necesites */
-  }
-  `;
-
-
-  return `
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Reporte</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        background-color: transparent;
-      }
-      .container {
-        width: 700px;
-        height: 800px;
-        margin: 10px auto;
-        position: relative;
-        align-items: center;
-      }
-      .user-logo {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        opacity: 50%;
-        border-radius: 0%;
-        object-fit: cover;
-      }
-      .paciente-name {
-        margin-top: 54px;
-        margin-left: 100px;
-      }
-      .image-container {
-        position: relative;
-      }
-      .image-stack {
-        position: relative;
-        width: 600px;
-        height: 776px;
-        margin: 0 auto;
-      }
-      .image-stack img {
-        position: absolute;
-        left: 0; 
-        top: 0;
-        width: 600px;
-        height: 776px;
-        object-fit: contain;
-      }
-      #conclusionDiv {
-        margin-top: 2px;
-        padding: 12px;
-        font-size: 14px;
-        line-height: 1.4;
-        text-align: justify;
-        white-space: pre-line;
-
-      }
-      .user-data {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        font-size: 10px;
-        opacity: 50%;
-        margin-top: 90px;
-        align-items: center;
-        justify-content: center;
-      }
-      .user-data svg {
-        margin-right: 4px;
-      }
-      .user-data > div {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-      }
-      /* Inyectamos el CSS extra */
-      ${menuCss}
-    </style>
-  </head>
-  <body>
-    ${
-      userData.imageUrl
-        ? `<img class="user-logo" src="${userData.imageUrl}" alt="Logo Usuario" />`
-        : ""
-    }
-    <div class="paciente-name">
-      ${topLeftText ?? ""}
-    </div>
-    <div class="container">
-      <!-- droppedItems con posicion:absolute -->
-      <div class="image-container">
-        ${droppedItems
-          .map(
-            (item) => `
-              <div
-                style="
-                  position: absolute;
-                  left: ${item.x + 43}px;
-                  top: ${item.y - 10}px;
-                "
-              >
-                ${item.content}
-              </div>
-            `
-          )
-          .join("")}
-      </div>
-      <!-- Bloque "image-stack" con la imagen base y overlays -->
-      <div class="image-stack">
-        <img src="/assets/PolineuropatiaIMG/BP_Polineuropatia.png" alt="Imagen Base" />
-        ${overlayHtml}
-      </div>
-      <div id="conclusionDiv">
-        ${finalConclusion}
-      </div>
-      <div class="user-data">
-        ${
-          userData.name
-            ? `
-              <div id="footerName">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-label="Usuario"
-                >
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 
-                           1.79-4 4 1.79 4 4 4zm0 2c-2.67 
-                           0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                </svg>
-                <span>Dr. ${userData.name} ${userData.lastname ?? ""}</span>
-              </div>
-            `
-            : ""
-        }
-        ${
-          userData.email
-            ? `
-              <div id="footerEmail">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-label="Email"
-                >
-                  <path d="M20 4H4c-1.1 0-2 .9-2 
-                           2v12c0 1.1.9 2 2 2h16c1.1 0 
-                           2-.9 2-2V6c0-1.1-.9-2-2-2zm0 
-                           4l-8 5-8-5V6l8 5 8-5v2z" />
-                </svg>
-                <span>${userData.email}</span>
-              </div>
-            `
-            : ""
-        }
-        ${
-          userData.especialidad
-            ? `
-              <div id="footerEspecialidad">
-                <svg
-                  version="1.1"
-                  id="ICONOS"
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 90 90"
-                  width="14"
-                  height="14"
-                  fill="currentColor"
-                  aria-label="Especialidad"
-                >
-                  <path d="M45.12,61.02c0,0,0,
-                           7.32-4.79,7.32h-8.68c-1.82,
-                           0-3.29-1.47-3.29-3.29
-                           c0,0-2.39-8.68-2.65-8.68l-2.88-1.21
-                           c-1.57-0.66-2.31-2.46-1.66-4.03l4.8-9.65v-0.67
-                           c0-11.9,9.65-21.55,21.55-21.55s21.55,9.65,21.55,21.55
-                           c0,5.12-1.8,9.84-4.79,13.54v16.39"/>
-                </svg>
-                <span>${userData.especialidad}</span>
-              </div>
-            `
-            : ""
-        }
-        ${
-          userData.cedula
-            ? `
-              <div id="footerCedula">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-label="Cédula"
-                >
-                  <path d="M20 2H4c-1.1 0-2 
-                           .9-2 2v16c0 1.1.9 2 2 2h16c1.1 
-                           0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 
-                           2l-6 3.99L6 4h12z"/>
-                </svg>
-                <span>Cédula: ${userData.cedula}</span>
-              </div>
-            `
-            : ""
-        }
-      </div>
-    </div>
-  </body>
-</html>
-`;
+async function fetchBytes(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return new Uint8Array(await res.arrayBuffer());
+  } catch { return null; }
 }
 
-// Aquí el endpoint que genera el PDF
+async function localImgToB64(publicPath) {
+  if (!publicPath) return null;
+  try {
+    const res = await fetch(`${baseUrl}${publicPath}`);
+    if (!res.ok) return null;
+    const buf  = await res.arrayBuffer();
+    const mime = res.headers.get('content-type') || 'image/png';
+    return `data:${mime};base64,${Buffer.from(buf).toString('base64')}`;
+  } catch { return null; }
+}
+
+async function remoteImgToB64(url) {
+  if (!url) return null;
+  if (url.startsWith('data:')) return url;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const buf  = await res.arrayBuffer();
+    const mime = res.headers.get('content-type') || 'image/png';
+    return `data:${mime};base64,${Buffer.from(buf).toString('base64')}`;
+  } catch (e) {
+    console.warn('remoteImgToB64 failed:', url, e.message);
+    return null;
+  }
+}
+
+function esc(t) {
+  return String(t || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function buildPage1Html({ finalConclusion, userData, baseImgB64, overlayB64s, figuras, topLeftText }) {
+  const PAD      = 30;
+  const HDR_H    = 68;
+  const HDR_PADT = 42;
+  const HDR_PADH = 70;
+  const LOGO_SZ  = 72;
+  const LAM_W    = 690;
+  const LAM_H    = 620;
+  const DIAG_PH  = 64;
+  const FTR_H    = 54;
+  const FTR_BG   = 20;
+
+  const overlayTags = overlayB64s.filter(Boolean)
+    .map(b64 => `<img src="${b64}" class="si"/>`)
+    .join('');
+
+  const figuraTags = figuras.map(f => {
+    if (!f.src) return '';
+    const r = f.tipo === 'circle' ? '50%' : '0';
+    return `<img src="${f.src}" style="position:absolute;left:${f.x}px;top:${f.y}px;width:80px;height:80px;object-fit:cover;border-radius:${r};border:1.5px solid #808080;z-index:10;pointer-events:none;"/>`;
+  }).join('');
+
+  const svgUser  = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+  const svgEmail = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
+  const svgSpec  = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 90 90" fill="#000"><path d="M45.12,61.02c0,0,0,7.32-4.79,7.32h-8.68c-1.82,0-3.29-1.47-3.29-3.29c0,0-2.39-8.68-2.65-8.68l-2.88-1.21c-1.57-0.66-2.31-2.46-1.66-4.03l4.8-9.65v-0.67c0-11.9,9.65-21.55,21.55-21.55s21.55,9.65,21.55,21.55c0,5.12-1.8,9.84-4.79,13.54v16.39"/></svg>`;
+  const svgId    = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 2l-6 3.99L6 4h12z"/></svg>`;
+
+  const footerItems = [
+    userData.name ? `<span class="fi">${svgUser}<span>Dr. ${esc(userData.name)} ${esc(userData.lastname||'')}</span></span>` : '',
+    userData.email ? `<span class="fi">${svgEmail}<span>${esc(userData.email)}</span></span>` : '',
+    userData.especialidad ? `<span class="fi">${svgSpec}<span>${esc(userData.especialidad)}</span></span>` : '',
+    userData.cedula ? `<span class="fi">${svgId}<span>${esc(userData.cedula)}</span></span>` : '',
+  ].filter(Boolean).join(`<span class="fsep">|</span>`);
+
+  const diagHtml = (finalConclusion || '').split('\n\n')
+    .map(p => `<div class="diag-para">${esc(p.trim())}</div>`)
+    .join('');
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  img{border:none;outline:none;box-shadow:none}
+  html,body{width:${PAGE_W}px;height:${PAGE_H}px;background:transparent;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overflow:hidden;}
+  .page{width:${PAGE_W}px;height:${PAGE_H}px;padding:${PAD}px;display:flex;flex-direction:column;background:transparent;}
+  .shift{height:10px;flex-shrink:0}
+  .hdr{height:${HDR_H}px;flex-shrink:0;padding-left:${HDR_PADH+30}px;padding-right:${HDR_PADH}px;padding-top:${HDR_PADT}px;padding-bottom:6px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;}
+  .patient{font-size:12px;font-weight:700;color:#111;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:24px}
+  .logo-wrap{width:${LOGO_SZ+12}px;height:${LOGO_SZ+12}px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:26px}
+  .logo{width:${LOGO_SZ}px;height:${LOGO_SZ}px;object-fit:contain;border-radius:0;border:none;outline:none;box-shadow:none;background:transparent}
+  .lamina-wrap{flex-shrink:0;display:flex;justify-content:center;margin-top:10px;}
+  .stack{position:relative;width:${LAM_W}px;height:${LAM_H}px;overflow:hidden;background:transparent;flex-shrink:0;}
+  .si{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
+  .diag{flex-shrink:0;padding:0 ${DIAG_PH}px;margin-top:110px;}
+  .diag-title{font-size:11px;font-weight:700;color:#111;margin-bottom:5px}
+  .diag-para{font-size:10.5px;line-height:17px;color:#1a1a1a;text-align:justify;margin-bottom:6px;}
+  .spacer{flex:1;min-height:0}
+  .footer{flex-shrink:0;height:${FTR_H}px;margin-top:${FTR_BG}px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:0 ${HDR_PADH}px;}
+  .fi{display:inline-flex;align-items:center;gap:5px;font-size:9px;color:#444;white-space:nowrap}
+  .fsep{font-size:10px;color:#ccc;margin:0 2px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="shift"></div>
+  <div class="hdr">
+    <div class="patient">${esc(topLeftText)}</div>
+    ${userData.imageUrl ? `<div class="logo-wrap"><img src="${esc(userData.imageUrl)}" class="logo"/></div>` : ''}
+  </div>
+  <div class="lamina-wrap">
+    <div class="stack">
+      ${baseImgB64 ? `<img src="${baseImgB64}" class="si"/>` : ''}
+      ${overlayTags}
+      ${figuraTags}
+    </div>
+  </div>
+  <div class="diag">
+    <div class="diag-title">Diagnóstico</div>
+    ${diagHtml}
+  </div>
+  <div class="spacer"></div>
+  <div class="footer">${footerItems}</div>
+</div>
+</body>
+</html>`;
+}
+
+function buildPage2Html({ listaVisual, comentarioLista, imgListaB64, hasPlantilla }) {
+  const listaHtml = listaVisual.length
+    ? listaVisual.map(({ k, v }) =>
+        `<div class="li"><span class="lk">${esc(k)}:</span><span class="lv"> ${esc(v)}</span></div>`
+      ).join('')
+    : `<div class="li-empty">Sin datos.</div>`;
+
+  const imgSection = imgListaB64
+    ? `<div class="img-wrap"><img src="${imgListaB64}" class="tabla-img"/></div>`
+    : '';
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:${PAGE_W}px;height:${PAGE_H}px;background:transparent;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overflow:hidden;}
+  .page{width:${PAGE_W}px;height:${PAGE_H}px;padding:${hasPlantilla ? 170 : 40}px 70px 30px 70px;display:flex;flex-direction:column;background:transparent;}
+  .two-col{display:flex;flex-direction:row;flex-shrink:0;gap:40px;margin-bottom:36px;}
+  .col-left{flex:1;padding:0 20px;}
+  .col-right{flex:1;padding:0 20px;}
+  .col-title{font-size:11px;font-weight:700;color:#111;margin-bottom:10px;}
+  .li{font-size:10px;color:#111;line-height:18px;margin-bottom:5px}
+  .lk{font-weight:700}
+  .lv{font-weight:400}
+  .li-empty{font-size:10px;color:#999;font-style:italic}
+  .comment{font-size:10px;color:#111;line-height:18px;text-align:justify}
+  .img-wrap{flex:1;margin-top:190px;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;}
+  .tabla-img{width:100%;max-height:560px;object-fit:contain;display:block;}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="two-col">
+    <div class="col-left">
+      <div class="col-title">Estudio</div>
+      ${listaHtml}
+    </div>
+    <div class="col-right">
+      <div class="col-title">Comentario</div>
+      <p class="comment">${esc(comentarioLista)}</p>
+    </div>
+  </div>
+  ${imgSection}
+</div>
+</body>
+</html>`;
+}
+
+async function captureHtmlAsPng(browser, html) {
+  const page = await browser.newPage();
+  await page.setViewport({ width: PAGE_W, height: PAGE_H, deviceScaleFactor: 2 });
+  await page.setContent(html, { waitUntil: 'networkidle0' });
+  const buf = await page.screenshot({ type: 'png', omitBackground: true, clip: { x: 0, y: 0, width: PAGE_W, height: PAGE_H } });
+  await page.close();
+  return buf;
+}
+
+async function assemblePdf({ pngPage1, pngPage2, plantillaId }) {
+  const pdfDoc = await PDFDocument.create();
+  const W = 595.28, H = 841.89;
+
+  const page1 = pdfDoc.addPage([W, H]);
+  if (plantillaId && plantillaId !== 'none' && PLANTILLAS_PDF[plantillaId]) {
+    const bytes = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p1}`);
+    if (bytes) {
+      try {
+        const tpl = await PDFDocument.load(bytes);
+        const [tplPg] = await pdfDoc.embedPdf(tpl, [0]);
+        page1.drawPage(tplPg, { x: 0, y: 0, width: W, height: H });
+      } catch (e) { console.warn('plantilla p1:', e.message); }
+    }
+  }
+  const img1 = await pdfDoc.embedPng(pngPage1);
+  page1.drawImage(img1, { x: 0, y: 0, width: W, height: H });
+
+  if (pngPage2) {
+    const page2 = pdfDoc.addPage([W, H]);
+    if (plantillaId && plantillaId !== 'none' && PLANTILLAS_PDF[plantillaId]) {
+      const bytes2 = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p2}`);
+      if (bytes2) {
+        try {
+          const tpl2 = await PDFDocument.load(bytes2);
+          const [tplPg2] = await pdfDoc.embedPdf(tpl2, [0]);
+          page2.drawPage(tplPg2, { x: 0, y: 0, width: W, height: H });
+        } catch (e) { console.warn('plantilla p2:', e.message); }
+      }
+    }
+    const img2 = await pdfDoc.embedPng(pngPage2);
+    page2.drawImage(img2, { x: 0, y: 0, width: W, height: H });
+  }
+
+  return await pdfDoc.save();
+}
+
+function resolveOverlayPaths(activeOv) {
+  const paths = [];
+  for (const key of activeOv) {
+    const group = OVERLAY_GROUPS[key];
+    if (group) {
+      for (const gk of group) { const p = OVERLAYS_POLI[gk]; if (p && !paths.includes(p)) paths.push(p); }
+    } else {
+      const p = OVERLAYS_POLI[key];
+      if (p && !paths.includes(p)) paths.push(p);
+    }
+  }
+  return paths;
+}
+
 export async function POST(req) {
+  let browser;
   try {
     const body = await req.json();
     const {
-      finalConclusion = "", // texto visible
-      conclusiones = [],    // array con { title, value }
-      userData = {},
-      droppedItems = [],
-      topLeftText = "",
+      finalConclusion = '',
+      activeOv        = [],
+      figuras         = [],
+      listaVisual     = [],
+      imgListaUrl     = null,
+      comentarioLista = '',
+      userData        = {},
+      topLeftText     = '',
+      plantillaId     = 'none',
     } = body;
-    const browser = await launchBrowser();
-    const page = await browser.newPage();
-    await page.goto(baseUrl, { waitUntil: 'networkidle2' });
-    
-    
-    // Armamos la cadena final con value
-    const finalString = conclusiones.map((cl) => cl.value).join(" ");
 
-    // Función para sanitizar (opcional)
-    const sanitizeText = (text) => {
-      return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    };
+    const ovPaths = resolveOverlayPaths(activeOv);
+    const [baseImgB64, imgListaB64, doctorLogoB64, ...overlayB64s] = await Promise.all([
+      localImgToB64('/PolineuropatiaImg/BP_TR.png'),
+      remoteImgToB64(imgListaUrl),
+      remoteImgToB64(userData.imageUrl || null),
+      ...ovPaths.map(p => localImgToB64(p)),
+    ]);
 
-    const sanitizedFinalConclusion = sanitizeText(finalConclusion);
-    const sanitizedFinalString = sanitizeText(finalString);
+    const userDataB64 = { ...userData, imageUrl: doctorLogoB64 || null };
 
-    // Construimos el HTML
-    const html = buildHtml({
-      finalConclusion: sanitizedFinalConclusion,
-      finalString: sanitizedFinalString,
-      userData,
-      droppedItems,
-      topLeftText,
+    browser = await launchBrowser();
+
+    const html1 = buildPage1Html({
+      finalConclusion,
+      userData: userDataB64,
+      baseImgB64,
+      overlayB64s,
+      figuras,
+      topLeftText: topLeftText || '',
     });
+    const pngPage1 = await captureHtmlAsPng(browser, html1);
 
-    
-    await page.setContent(html, { waitUntil: 'networkidle0' });
-
-    // 3) Genera el PDF
-    const pdf = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-      scale: 1,
-    });
+    const hayPag2 = comentarioLista.trim().length > 0 || imgListaB64 !== null;
+    let pngPage2 = null;
+    if (hayPag2) {
+      const html2 = buildPage2Html({
+        listaVisual,
+        comentarioLista,
+        imgListaB64,
+        hasPlantilla: plantillaId && plantillaId !== 'none',
+      });
+      pngPage2 = await captureHtmlAsPng(browser, html2);
+    }
 
     await browser.close();
+    browser = null;
 
-    return new NextResponse(pdf, {
+    const pdfBytes = await assemblePdf({ pngPage1, pngPage2, plantillaId });
+
+    return new NextResponse(pdfBytes, {
       status: 200,
       headers: {
-        'Content-Type': 'application/pdf',
+        'Content-Type':        'application/pdf',
         'Content-Disposition': 'attachment; filename=reporte.pdf',
       },
     });
   } catch (err) {
-    console.error('Error generando PDF:', err);
-    return NextResponse.json(
-      { message: 'Error generando PDF' },
-      { status: 500 },
-    );
+    if (browser) { try { await browser.close(); } catch {} }
+    console.error('Error PDF polineuropatia:', err);
+    return NextResponse.json({ message: err.message }, { status: 500 });
   }
 }

@@ -1,76 +1,74 @@
-// Importa la función connectMongoDB desde el módulo de MongoDB
-import { connectMongoDB } from "@/lib/mongodb";
-// Importa el modelo User para interactuar con la base de datos
-import User from "@/models/user";
-// Importa la clase NextResponse para manejar las respuestas HTTP en Next.js
-import { NextResponse } from "next/server";
-// Importa la biblioteca bcryptjs para el hash y la comparación de contraseñas
+// app/api/updateProfile/route.js
 import bcrypt from "bcryptjs";
+import { NextResponse } from "next/server";
+import { connectMongoDB } from "@/lib/mongodb";
+import User from "@/models/user";
+import {
+  handleApiError,
+  parseJsonBody,
+  requireAuthenticatedUser,
+  validateObjectId,
+} from "@/lib/api/security";
+import { updateProfileSchema } from "@/lib/api/schemas";
 
-// Función que maneja la solicitud PUT para actualizar un usuario
 export async function PUT(req) {
   try {
-    // Extrae los datos necesarios de la solicitud JSON
-    const { userId, name, lastname, cedula, especialidad, email, password, newPassword, imageUrl} = await req.json();
+    const auth = await requireAuthenticatedUser(req);
+    if (auth.error) {
+      return auth.error;
+    }
 
-    // Conecta a la base de datos MongoDB
+    const payload = await parseJsonBody(req, updateProfileSchema);
+    const userId = validateObjectId(payload.userId, "userId");
+    const requesterId = auth.user?._id?.toString();
+    const isAdmin = auth.user?.roles === "admin";
+
+    if (!isAdmin && requesterId !== userId) {
+      return NextResponse.json({ message: "No autorizado" }, { status: 403 });
+    }
+
     await connectMongoDB();
 
-    // Busca al usuario que se va a actualizar usando el ID
     const userToUpdate = await User.findById(userId);
-
-    // Verifica si el usuario existe
     if (!userToUpdate) {
-      // Si no existe, devuelve un mensaje de error y un código de estado 404
       return NextResponse.json({ message: "Usuario no encontrado" }, { status: 404 });
     }
 
-    // Actualiza los campos del usuario solo si se proporcionan en la solicitud
-    if (name) {
-      userToUpdate.name = name;
+    if (payload.email && payload.email !== userToUpdate.email) {
+      const existingUser = await User.findOne({ email: payload.email }).lean();
+      if (existingUser && existingUser._id.toString() !== userId) {
+        return NextResponse.json(
+          { message: "El correo ya está en uso por otro usuario" },
+          { status: 409 }
+        );
+      }
     }
 
-    if (lastname) {
-      userToUpdate.lastname = lastname;
-    }
+    if (payload.name !== undefined) userToUpdate.name = payload.name;
+    if (payload.lastname !== undefined) userToUpdate.lastname = payload.lastname;
+    if (payload.idprofessional !== undefined) userToUpdate.idprofessional = payload.idprofessional;
+    if (payload.specialty !== undefined) userToUpdate.specialty = payload.specialty;
+    if (payload.email !== undefined) userToUpdate.email = payload.email;
+    if (payload.imageUrl !== undefined) userToUpdate.imageUrl = payload.imageUrl;
 
-    if (cedula) {
-      userToUpdate.cedula = cedula;
-    }
-
-    if (especialidad) {
-      userToUpdate.especialidad = especialidad;
-    }
-    
-    if (email) {
-      userToUpdate.email = email;
-    }
-    if (imageUrl) {
-      userToUpdate.imageUrl = imageUrl;
-    }
-
-    // Verifica la contraseña actual y actualiza la contraseña si es válida
-    if (password && newPassword) {
-      const isPasswordValid = await bcrypt.compare(password, userToUpdate.password);
-
+    if (payload.password && payload.newPassword) {
+      const isPasswordValid = await bcrypt.compare(payload.password, userToUpdate.password);
       if (!isPasswordValid) {
-        // Si la contraseña actual no es válida, devuelve un mensaje de error y un código de estado 400
-        return NextResponse.json({ message: "La contraseña actual no es correcta" }, { status: 400 });
+        return NextResponse.json(
+          { message: "La contraseña actual no es correcta" },
+          { status: 400 }
+        );
       }
 
-      // Genera el hash de la nueva contraseña y la actualiza en el usuario
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-      userToUpdate.password = hashedPassword;
+      userToUpdate.password = await bcrypt.hash(payload.newPassword, 10);
     }
 
-    // Guarda los cambios en la base de datos
     await userToUpdate.save();
-
-    // Devuelve un mensaje de éxito y un código de estado 200
-    return NextResponse.json({ message: "Usuario actualizado correctamente" }, { status: 200 });
+    return NextResponse.json(
+      { message: "Usuario actualizado correctamente" },
+      { status: 200 }
+    );
   } catch (error) {
-    // Maneja errores y devuelve un mensaje de error con un código de estado 500
-    console.error("Error al actualizar el usuario:", error);
-    return NextResponse.json({ message: `Error al actualizar el usuario: ${error.message}` }, { status: 500 });
+    return handleApiError(error, "Error al actualizar el usuario");
   }
 }

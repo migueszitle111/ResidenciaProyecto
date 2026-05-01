@@ -1,9 +1,7 @@
 // app/layout.js
-import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from './Providers';
-
-const inter = Inter({ subsets: ['latin'] });
+import PageTransition from './components/PageTransition';
 
 export const metadata = {
   title: 'MEDXpro',
@@ -26,8 +24,10 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      <body className={inter.className}>
-        <AuthProvider>{children}</AuthProvider>
+      <body>
+        <AuthProvider>
+          <PageTransition>{children}</PageTransition>
+        </AuthProvider>
       </body>
     </html>
   );

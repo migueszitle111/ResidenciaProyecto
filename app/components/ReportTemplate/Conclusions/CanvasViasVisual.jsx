@@ -3,10 +3,11 @@ import Image from 'next/image'
 import { useContext ,useEffect,useRef} from 'react'
 
 // Se recibe el objeto de la imagen y las reglas
-export function ConclusionCanvasV ({ img: {src, alt, useMap, width, height}, rules,footertext='', userImageUrl = ''}) {
+export function ConclusionCanvasV ({ img: {src, alt, useMap, width, height}, rules, footertext = '', userImageUrl = '', patientName = '' }) {
   // Utiliza el contexto para obtener las conclusiones
   const { conclusions } = useContext(ReportContext)
   const imgRef = useRef(null);
+  const hasFooter = footertext !== '' && footertext !== null && footertext !== undefined;
 
   useEffect(() => {
     if (imgRef.current) {
@@ -16,7 +17,27 @@ export function ConclusionCanvasV ({ img: {src, alt, useMap, width, height}, rul
   }, []);
 
   return (
-    <div className='image-container relative'>
+    <div className='image-container relative' style={{ backgroundColor: 'rgb(255, 255, 255)', display: 'inline-block' }}>
+
+      {/* Nombre del paciente en el header del canvas */}
+      {patientName && (
+        <div style={{
+          position: 'absolute',
+          top: 6,
+          left: 0,
+          width: '100%',
+          textAlign: 'center',
+          fontSize: '11px',
+          fontWeight: '600',
+          color: '#333',
+          zIndex: 15,
+          pointerEvents: 'none',
+          letterSpacing: '0.3px',
+        }}>
+          {patientName}
+        </div>
+      )}
+
       <Image
         className='image-container__image'
         src={src}
@@ -88,24 +109,23 @@ export function ConclusionCanvasV ({ img: {src, alt, useMap, width, height}, rul
               </div>
             )}
             {/* Se agrega el footer sobre la imagen */}
-            {footertext && (
-              <div
-              style={{
+            {hasFooter && (
+              <div style={{
                 position: 'absolute',
                 bottom: 0,
                 left: 0,
-                display: 'flex',       // O "inline-flex"
-                flexWrap: 'wrap',      // Si quieres que ocupe varias líneas si no cabe
-                gap: '8px',            // Espacio entre cada bloque (opcional)
-                marginBottom: '10px',
-                alignItems: 'center',  // Alinear verticalmente los iconos y texto
-                fontSize: '10px',       // Ajusta según necesites
-                lineHeight: '1.2',     // Para evitar que al escalar salga cortado
-                color: '#9C9C9C',
-                width: '100%',         // O el ancho que te convenga
-                backgroundColor: 'rgb(255, 255, 255)',
-              }}
-              >
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '8px',
+                padding: '6px 10px',
+                alignItems: 'center',
+                fontSize: '9.5px',
+                lineHeight: '1.3',
+                color: '#6b7280',
+                width: '100%',
+                backgroundColor: 'rgba(255,255,255,0.95)',
+                borderTop: '1px solid #f3f4f6',
+              }}>
                 {footertext}
               </div>
             )}

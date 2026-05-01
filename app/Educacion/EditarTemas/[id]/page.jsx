@@ -38,7 +38,7 @@ const EditarTemas = ({ params }) => {
     if (id) {
       const fetchTemasDetails = async () => {
         try {
-          const res = await fetch(`https://www.medxproapp.com/api/temarios/${id}`, {
+          const res = await fetch(`/api/temarios/${id}`, {
             cache: "no-store",
           });
 
@@ -105,7 +105,7 @@ const EditarTemas = ({ params }) => {
 
       // Actualizar el tema con la nueva información, incluida la URL de la imagen
       setUpdating(true); // Establecer updating en true al iniciar la actualización
-      const res = await fetch(`https://www.medxproapp.com/api/temarios/${id}`, {
+      const res = await fetch(`/api/temarios/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

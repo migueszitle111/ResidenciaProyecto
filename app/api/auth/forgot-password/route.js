@@ -3,7 +3,6 @@ import crypto from "crypto";
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
-import { sendPasswordReset } from "@/lib/mail";
 import { forgotPasswordSchema } from "@/lib/api/schemas";
 import { handleApiError, parseJsonBody } from "@/lib/api/security";
 
@@ -21,9 +20,6 @@ export async function POST(req) {
     user.passwordResetToken = token;
     user.passwordResetExpires = Date.now() + 3600_000;
     await user.save();
-
-    const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${token}`;
-    await sendPasswordReset(user.email, resetUrl);
 
     return NextResponse.json({ ok: true });
   } catch (error) {

@@ -7,12 +7,6 @@ import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
-import {
-  sendPasswordReset,
-  sendWelcomeEmail,
-  sendTrialInfoEmail,
-} from "@/lib/mail";
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-10-16",
 });
@@ -100,26 +94,6 @@ export async function GET(req) {
       : null;
 
     await user.save();
-
-    if (provider === "credentials") {
-      const resetToken = crypto.randomBytes(32).toString("hex");
-      user.passwordResetToken = resetToken;
-      user.passwordResetExpires = isTrial
-        ? Date.now() + 24 * 60 * 60 * 1000
-        : Date.now() + 1 * 60 * 60 * 1000;
-      await user.save();
-
-      const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`;
-      await sendPasswordReset(user.email, resetUrl, isTrial ? 24 : 1);
-    }
-
-    if (isTrial) {
-      await sendTrialInfoEmail(user.email, {
-        trialEndsAt: new Date(subscription.trial_end * 1000).toISOString(),
-      });
-    } else if (isActive) {
-      await sendWelcomeEmail(user.email);
-    }
 
     return NextResponse.json({ ok: true, provider });
   } catch (error) {

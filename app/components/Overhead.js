@@ -52,10 +52,10 @@ const Overhead = () => {
             className="flex-shrink-0"
           >
             <Image
-              src="/L_B_Blanco.svg"
+              src="/L_H_Blanco.svg"
               alt="Logo de la empresa"
-              width={50}
-              height={50}
+              width={160}
+              height={160}
             />
           </motion.a>
         </div>
@@ -127,11 +127,14 @@ const Overhead = () => {
               transition={{ type: "spring", stiffness: 350 }}
             >
               <motion.button
-                className="px-4 py-1.5 text-sm font-semibold tracking-wide text-white border border-[#D06D33] rounded-full"
-                whileHover={{ backgroundColor: "#D06D33", borderColor: "#D06D33" }}
+                className="px-4 py-1.5 text-white bg-[#D06D33] border border-[#D06D33] rounded-full inline-flex items-center gap-2"
+                style={{ fontFamily: 'Quando', fontWeight: 400, fontSize: '0.875rem', letterSpacing: '0.02em' }}
+                whileHover={{ backgroundColor: "#b85c2a", borderColor: "#b85c2a" }}
                 transition={{ duration: 0.2 }}
               >
-                Iniciar Sesión
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/assets/Extras/qr-code-svgrepo-com.svg" alt="QR" width={15} height={15} style={{ filter: 'invert(1)' }} />
+                QR
               </motion.button>
             </motion.a>
           )}

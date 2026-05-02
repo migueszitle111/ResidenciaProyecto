@@ -240,20 +240,37 @@ const infoCards = [
               </a>
             </div>
             <div
-              className="bg-black col-span-2 overflow-hidden rounded-3xl shadow-lg"
+              className="bg-black col-span-2 overflow-hidden rounded-3xl shadow-lg relative"
               data-aos="zoom-in"
               data-aos-duration="800"
               data-aos-delay="200"
             >
-              <a href="">
-                <Image
-                  src="/assets/LandingPage/Page/LP-05.png"
-                  alt="Banner bottom"
-                  width={1200}
-                  height={400}
-                  className="w-full h-auto object-cover"
-                />
-              </a>
+              <Image
+                src="/assets/LandingPage/Page/LP-05.png"
+                alt="Banner bottom"
+                width={1200}
+                height={400}
+                className="w-full h-auto object-cover"
+              />
+              {/* Tapa el botón "Regístrate" de la imagen */}
+              <div
+                className="absolute bg-[#141414]"
+                style={{ bottom: '22%', right: '15%', width: '24%', height: '28%' }}
+              />
+              <Link
+                href="/Login"
+                className="absolute flex items-center justify-center"
+                style={{ bottom: '15%', right: '18%', width: '18%' }}
+              >
+                <span
+                  className="inline-flex flex-col items-center justify-center gap-2 rounded-lg bg-[#B54B00] hover:bg-[#9a3f00] transition-colors w-full py-3"
+                  style={{ fontFamily: 'Quando', fontWeight: 400, fontSize: '0.95rem', letterSpacing: '0.02em' }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/assets/Extras/qr-code-svgrepo-com.svg" alt="QR" width={36} height={36} style={{ filter: 'invert(1)' }} />
+                  Ingresa usando QR
+                </span>
+              </Link>
             </div>
           </div>
         </section>

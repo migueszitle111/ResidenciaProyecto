@@ -16,27 +16,17 @@ function formatCountdown(secondsLeft) {
 
 function getQrStatusLabel(status) {
   switch (status) {
-    case 'loading':
-      return 'Generando QR...';
-    case 'pending':
-      return 'Esperando escaneo';
-    case 'signing-in':
-      return 'Abriendo sesion...';
-    case 'expired':
-      return 'QR expirado';
-    case 'consumed':
-      return 'QR usado';
-    case 'error':
-      return 'Error al generar QR';
-    default:
-      return 'Listo';
+    case 'loading':   return 'Generando QR...';
+    case 'pending':   return 'Esperando escaneo';
+    case 'signing-in':return 'Abriendo sesion...';
+    case 'expired':   return 'QR expirado';
+    case 'consumed':  return 'QR usado';
+    case 'error':     return 'Error al generar QR';
+    default:          return 'Listo';
   }
 }
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [qrSession, setQrSession] = useState(null);
   const [qrStatus, setQrStatus] = useState('idle');
   const [qrError, setQrError] = useState('');
@@ -44,15 +34,6 @@ export default function Login() {
   const [isQrVisible, setIsQrVisible] = useState(false);
   const { status } = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    if (!error) {
-      return undefined;
-    }
-
-    const timer = setTimeout(() => setError(''), 3000);
-    return () => clearTimeout(timer);
-  }, [error]);
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -66,20 +47,14 @@ export default function Login() {
       setSecondsLeft(0);
       return undefined;
     }
-
     const updateCountdown = () => {
       const diffMs = new Date(qrSession.expiresAt).getTime() - Date.now();
       const nextSeconds = Math.max(0, Math.ceil(diffMs / 1000));
       setSecondsLeft(nextSeconds);
-
-      if (nextSeconds === 0 && qrStatus === 'pending') {
-        setQrStatus('expired');
-      }
+      if (nextSeconds === 0 && qrStatus === 'pending') setQrStatus('expired');
     };
-
     updateCountdown();
     const intervalId = setInterval(updateCountdown, 1000);
-
     return () => clearInterval(intervalId);
   }, [qrSession, qrStatus]);
 
@@ -87,19 +62,10 @@ export default function Login() {
     setQrError('');
     setQrStatus('loading');
     setQrSession(null);
-
     try {
-      const response = await fetch('/api/auth/qr/init', {
-        method: 'POST',
-        cache: 'no-store',
-      });
-
+      const response = await fetch('/api/auth/qr/init', { method: 'POST', cache: 'no-store' });
       const payload = await response.json();
-
-      if (!response.ok) {
-        throw new Error(payload?.message || 'No se pudo generar el QR');
-      }
-
+      if (!response.ok) throw new Error(payload?.message || 'No se pudo generar el QR');
       setQrSession(payload);
       setQrStatus('pending');
     } catch (qrInitError) {
@@ -110,290 +76,242 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (!qrSession || qrStatus !== 'pending') {
-      return undefined;
-    }
-
+    if (!qrSession || qrStatus !== 'pending') return undefined;
     let active = true;
     let timeoutId;
-
     const pollStatus = async () => {
       try {
-        const params = new URLSearchParams({
-          challengeId: qrSession.challengeId,
-          browserCode: qrSession.browserCode,
-        });
-
-        const response = await fetch(`/api/auth/qr/status?${params.toString()}`, {
-          cache: 'no-store',
-        });
-
+        const params = new URLSearchParams({ challengeId: qrSession.challengeId, browserCode: qrSession.browserCode });
+        const response = await fetch(`/api/auth/qr/status?${params.toString()}`, { cache: 'no-store' });
         const payload = await response.json();
-
-        if (!active) {
-          return;
-        }
-
-        if (!response.ok && response.status !== 410) {
-          setQrStatus('error');
-          setQrError('El QR ya no es valido. Genera otro.');
-          return;
-        }
-
+        if (!active) return;
+        if (!response.ok && response.status !== 410) { setQrStatus('error'); setQrError('El QR ya no es valido. Genera otro.'); return; }
         setQrError('');
-
-        if (response.status === 410 || payload?.status === 'expired') {
-          setQrStatus('expired');
-          return;
-        }
-
+        if (response.status === 410 || payload?.status === 'expired') { setQrStatus('expired'); return; }
         if (payload?.status === 'approved') {
           setQrStatus('signing-in');
-
-          const signInResult = await signIn('qr-web', {
-            challengeId: qrSession.challengeId,
-            browserCode: qrSession.browserCode,
-            redirect: false,
-            callbackUrl: '/',
-          });
-
-          if (!active) {
-            return;
-          }
-
-          if (signInResult?.error) {
-            setQrStatus('error');
-            setQrError('No se pudo abrir la sesion.');
-            return;
-          }
-
+          const signInResult = await signIn('qr-web', { challengeId: qrSession.challengeId, browserCode: qrSession.browserCode, redirect: false, callbackUrl: '/' });
+          if (!active) return;
+          if (signInResult?.error) { setQrStatus('error'); setQrError('No se pudo abrir la sesion.'); return; }
           router.replace('/');
           router.refresh();
           return;
         }
-
-        if (payload?.status === 'consumed') {
-          setQrStatus('consumed');
-          return;
-        }
-
-        timeoutId = setTimeout(
-          pollStatus,
-          qrSession.pollAfterMs || DEFAULT_QR_POLL_MS
-        );
+        if (payload?.status === 'consumed') { setQrStatus('consumed'); return; }
+        timeoutId = setTimeout(pollStatus, qrSession.pollAfterMs || DEFAULT_QR_POLL_MS);
       } catch (pollError) {
         console.error('Error consultando QR login:', pollError);
-
-        if (!active) {
-          return;
-        }
-
+        if (!active) return;
         setQrError('Error de conexion.');
-        timeoutId = setTimeout(
-          pollStatus,
-          (qrSession.pollAfterMs || DEFAULT_QR_POLL_MS) * 2
-        );
+        timeoutId = setTimeout(pollStatus, (qrSession.pollAfterMs || DEFAULT_QR_POLL_MS) * 2);
       }
     };
-
     pollStatus();
-
-    return () => {
-      active = false;
-      clearTimeout(timeoutId);
-    };
+    return () => { active = false; clearTimeout(timeoutId); };
   }, [qrSession, qrStatus, router]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const response = await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-      callbackUrl: '/',
-    });
-
-    if (response?.error) {
-      setError('Credenciales invalidas');
-      return;
-    }
-
-    router.replace('/');
-    router.refresh();
-  };
-
   const handleQrToggle = async () => {
-    if (isQrVisible) {
-      setIsQrVisible(false);
-      return;
-    }
-
+    if (isQrVisible) { setIsQrVisible(false); return; }
     setIsQrVisible(true);
-
-    const mustCreateNewQr =
-      !qrSession ||
-      qrStatus === 'expired' ||
-      qrStatus === 'error' ||
-      qrStatus === 'consumed' ||
-      secondsLeft <= 0;
-
-    if (mustCreateNewQr) {
-      await startQrLogin();
-    }
+    const mustCreateNewQr = !qrSession || qrStatus === 'expired' || qrStatus === 'error' || qrStatus === 'consumed' || secondsLeft <= 0;
+    if (mustCreateNewQr) await startQrLogin();
   };
 
-  if (status === 'authenticated') {
-    return null;
-  }
+  if (status === 'authenticated') return null;
 
   const qrImageUrl = qrSession?.qrValue
     ? `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(qrSession.qrValue)}`
     : '';
 
+  const isActive = qrStatus === 'pending' || qrStatus === 'loading';
+
   return (
-    <div className="min-h-screen bg-black px-4 py-8 text-white">
-      <button
-        onClick={() => router.back()}
-        className="mb-10 flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-white"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={18}
-          height={18}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
+    <div className="min-h-screen bg-black text-white flex flex-col">
+      {/* Botón regresar */}
+      <div className="px-6 pt-6">
+        <button
+          onClick={() => router.back()}
+          className="flex items-center gap-2 text-sm text-slate-500 hover:text-white transition-colors"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-        Regresar
-      </button>
+          <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Regresar
+        </button>
+      </div>
 
-      <div className="mx-auto max-w-md">
-        <div className="mb-8 flex items-center justify-center">
-          <Image src="/L_B_Blanco.svg" width={72} height={72} alt="Logo" />
-        </div>
+      {/* Contenido centrado */}
+      <div className="flex flex-1 items-center justify-center px-4 py-10">
+        <div className="w-full max-w-sm">
 
-        <div className="rounded-[2rem] border border-slate-800 bg-[#111] p-8 shadow-[0_24px_80px_rgba(0,0,0,0.65)]">
-          <h1 className="text-center text-4xl font-semibold text-white">
-            Iniciar Sesion
-          </h1>
-
-          <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-300">
-                Correo electronico
-              </label>
-              <input
-                type="email"
-                placeholder="tucorreo@ejemplo.com"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-                className="block w-full rounded-2xl border border-slate-700 bg-white px-4 py-3 text-black placeholder-slate-500 focus:border-orange-400 focus:outline-none"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-300">
-                Contrasena
-              </label>
-              <input
-                type="password"
-                placeholder="Ingresa tu contrasena"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                required
-                className="block w-full rounded-2xl border border-slate-700 bg-white px-4 py-3 text-black placeholder-slate-500 focus:border-orange-400 focus:outline-none"
-              />
-            </div>
-
-            {error ? (
-              <p className="rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-                {error}
-              </p>
-            ) : null}
-
-            <button
-              type="submit"
-              className="block w-full rounded-2xl bg-orange-500 py-3.5 text-base font-semibold text-white transition-colors hover:bg-orange-600 focus:outline-none"
-            >
-              Entrar
-            </button>
-          </form>
-
-          <div className="my-6 flex items-center gap-4">
-            <div className="h-px flex-1 bg-slate-800" />
-            <span className="text-xs uppercase tracking-[0.3em] text-slate-500">
-              o
-            </span>
-            <div className="h-px flex-1 bg-slate-800" />
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <Image src="/L_B_Blanco.svg" width={64} height={64} alt="Logo" />
           </div>
 
-          <button
-            type="button"
-            onClick={handleQrToggle}
-            className="block w-full rounded-2xl border border-orange-500 py-3.5 text-base font-semibold text-orange-300 transition-colors hover:bg-orange-500/10"
-          >
-            {isQrVisible ? 'Ocultar QR' : 'Accesar por medio de QR'}
-          </button>
+          {/* Título */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-semibold tracking-tight" style={{ fontFamily: 'Quando' }}>
+              Iniciar Sesion
+            </h1>
+            <p className="mt-2 text-sm text-slate-500" style={{ fontFamily: 'LuxoraGrotesk' }}>
+              Escanea el codigo QR con tu app movil
+            </p>
+          </div>
 
-          {isQrVisible ? (
-            <div className="mt-6 rounded-3xl border border-slate-800 bg-black/25 p-5">
-              <p className="text-center text-sm text-slate-400">
-                Escanea con tu app movil
-              </p>
+          {/* Tarjeta principal */}
+          <div className="rounded-3xl border border-white/8 bg-white/4 backdrop-blur-sm overflow-hidden"
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
 
-              <div className="mt-4 flex min-h-[280px] items-center justify-center rounded-[1.5rem] bg-white p-4">
-                {qrStatus === 'loading' ? (
-                  <div className="text-center">
-                    <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-slate-300 border-t-orange-500" />
-                    <p className="text-sm font-medium text-slate-700">
-                      Generando QR...
-                    </p>
-                  </div>
-                ) : qrImageUrl ? (
-                  <>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={qrImageUrl}
-                      alt="QR para iniciar sesion web"
-                      className="h-[220px] w-[220px] rounded-2xl"
-                    />
-                  </>
-                ) : (
-                  <p className="text-sm text-slate-500">
-                    No hay QR disponible.
-                  </p>
+            {/* Header de la tarjeta */}
+            <div className="px-6 pt-6 pb-4 border-b border-white/8" style={{ borderBottomColor: 'rgba(255,255,255,0.08)' }}>
+              <div className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/Extras/qr-code-svgrepo-com.svg"
+                  alt="QR"
+                  width={22}
+                  height={22}
+                  style={{ filter: 'invert(1)', opacity: 0.7 }}
+                />
+                <span className="text-sm text-slate-400" style={{ fontFamily: 'LuxoraGrotesk' }}>
+                  Acceso por codigo QR
+                </span>
+                {isActive && (
+                  <span className="ml-auto flex items-center gap-1.5 text-xs text-orange-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+                    Activo
+                  </span>
                 )}
               </div>
+            </div>
 
-              <div className="mt-4 text-center">
-                <p className="text-sm font-medium text-white">
-                  {getQrStatusLabel(qrStatus)}
-                </p>
-                <p className="mt-1 text-sm text-slate-400">
-                  Caduca en {formatCountdown(secondsLeft)}
-                </p>
-              </div>
+            {/* Área del QR */}
+            <div className="p-6">
+              {!isQrVisible ? (
+                /* Estado inicial — invita a generar */
+                <div className="flex flex-col items-center gap-6 py-4">
+                  <div className="w-24 h-24 rounded-2xl bg-white/6 flex items-center justify-center"
+                    style={{ background: 'rgba(255,255,255,0.06)' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/assets/Extras/qr-code-svgrepo-com.svg"
+                      alt="QR"
+                      width={48}
+                      height={48}
+                      style={{ filter: 'invert(1)', opacity: 0.3 }}
+                    />
+                  </div>
+                  <p className="text-xs text-slate-600 text-center" style={{ fontFamily: 'LuxoraGrotesk' }}>
+                    Genera un codigo QR para iniciar sesion desde la app
+                  </p>
+                </div>
+              ) : (
+                /* Estado con QR generado */
+                <div className="flex flex-col items-center gap-4">
+                  {/* Imagen QR */}
+                  <div className="relative rounded-2xl overflow-hidden bg-white p-3 shadow-lg shadow-black/40"
+                    style={{ width: 200, height: 200 }}>
+                    {qrStatus === 'loading' ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center gap-3">
+                        <div className="w-8 h-8 rounded-full border-2 border-slate-200 border-t-orange-500 animate-spin" />
+                        <p className="text-xs text-slate-400">Generando...</p>
+                      </div>
+                    ) : qrImageUrl ? (
+                      <>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={qrImageUrl}
+                          alt="QR para iniciar sesion"
+                          className="w-full h-full object-contain rounded-xl"
+                          style={{ opacity: qrStatus === 'expired' ? 0.3 : 1, transition: 'opacity 0.3s' }}
+                        />
+                        {qrStatus === 'expired' && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-xs font-semibold text-slate-600 bg-white/90 px-2 py-1 rounded-lg">
+                              Expirado
+                            </span>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <p className="text-xs text-slate-400">Sin QR</p>
+                      </div>
+                    )}
+                  </div>
 
-              {qrError ? (
-                <p className="mt-4 rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-center text-red-300">
-                  {qrError}
-                </p>
-              ) : null}
+                  {/* Estado y countdown */}
+                  <div className="text-center">
+                    <p className="text-sm font-medium text-white" style={{ fontFamily: 'LuxoraGrotesk' }}>
+                      {getQrStatusLabel(qrStatus)}
+                    </p>
+                    {(qrStatus === 'pending' || qrStatus === 'expired') && (
+                      <p className="mt-0.5 text-xs text-slate-500">
+                        Caduca en{' '}
+                        <span className={secondsLeft < 30 ? 'text-red-400' : 'text-slate-400'}>
+                          {formatCountdown(secondsLeft)}
+                        </span>
+                      </p>
+                    )}
+                  </div>
 
+                  {/* Error */}
+                  {qrError && (
+                    <p className="w-full rounded-xl border border-red-500/20 bg-red-500/8 px-3 py-2 text-xs text-center text-red-400"
+                      style={{ background: 'rgba(239,68,68,0.08)' }}>
+                      {qrError}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* Botón principal */}
               <button
                 type="button"
-                onClick={startQrLogin}
-                className="mt-4 block w-full rounded-2xl border border-slate-700 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-orange-500 hover:text-orange-300"
+                onClick={handleQrToggle}
+                className="mt-5 w-full rounded-2xl py-3 text-sm font-semibold transition-all duration-200"
+                style={{
+                  fontFamily: 'Quando',
+                  background: isQrVisible ? 'rgba(255,255,255,0.06)' : '#B54B00',
+                  color: isQrVisible ? '#94a3b8' : '#fff',
+                  border: isQrVisible ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                }}
               >
-                Generar otro QR
+                {isQrVisible ? 'Ocultar QR' : 'Generar codigo QR'}
               </button>
+
+              {/* Botón regenerar */}
+              {isQrVisible && (
+                <button
+                  type="button"
+                  onClick={startQrLogin}
+                  className="mt-2 w-full rounded-2xl py-2.5 text-xs transition-colors"
+                  style={{ fontFamily: 'LuxoraGrotesk', color: '#64748b' }}
+                >
+                  Generar nuevo QR
+                </button>
+              )}
             </div>
-          ) : null}
+          </div>
+
+          {/* Instrucciones */}
+          <div className="mt-6 flex flex-col gap-3">
+            {[
+              { n: '1', text: 'Abre la app MEDXpro en tu celular' },
+              { n: '2', text: 'Ve a Ajustes → Iniciar sesion en web' },
+              { n: '3', text: 'Escanea el codigo QR' },
+            ].map(({ n, text }) => (
+              <div key={n} className="flex items-center gap-3">
+                <span className="w-5 h-5 rounded-full bg-white/8 flex items-center justify-center text-xs text-slate-500 flex-shrink-0"
+                  style={{ background: 'rgba(255,255,255,0.08)', fontFamily: 'LuxoraGrotesk' }}>
+                  {n}
+                </span>
+                <p className="text-xs text-slate-500" style={{ fontFamily: 'LuxoraGrotesk' }}>{text}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </div>

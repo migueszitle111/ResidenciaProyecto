@@ -1,6 +1,39 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
-import jwt from "jsonwebtoken";
+
+// Verifica un JWT HS256 usando Web Crypto API (compatible con Edge Runtime)
+async function verifyMobileJwt(token, secret) {
+  try {
+    const parts = token.split(".");
+    if (parts.length !== 3) return null;
+
+    const key = await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(secret),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["verify"]
+    );
+
+    const data = new TextEncoder().encode(`${parts[0]}.${parts[1]}`);
+    const sigBytes = Uint8Array.from(
+      atob(parts[2].replace(/-/g, "+").replace(/_/g, "/")),
+      (c) => c.charCodeAt(0)
+    );
+
+    const valid = await crypto.subtle.verify("HMAC", key, sigBytes, data);
+    if (!valid) return null;
+
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
+
+    // Verificar expiración si existe
+    if (payload.exp && Date.now() / 1000 > payload.exp) return null;
+
+    return payload;
+  } catch {
+    return null;
+  }
+}
 
 const protectedPageRoutes = [
   "/Perfil",
@@ -220,20 +253,13 @@ export async function middleware(request) {
   let mobileTokenValid = false;
   let mobileEmail = null;
   const authHeader = request.headers.get("authorization") || "";
-  console.log(`[MW] ${method} ${pathname} | authHeader: "${authHeader.slice(0, 30)}" | needsToken: ${needsToken}`);
   if (needsToken && authHeader.startsWith("Bearer ")) {
     const mobileSecret = process.env.MOBILE_JWT_SECRET;
-    console.log(`[MW] mobileSecret present: ${!!mobileSecret}`);
     if (mobileSecret) {
-      try {
-        const decoded = jwt.verify(authHeader.slice(7).trim(), mobileSecret);
-        if (decoded?.email) {
-          mobileTokenValid = true;
-          mobileEmail = decoded.email;
-          console.log(`[MW] Bearer válido para: ${mobileEmail}`);
-        }
-      } catch (e) {
-        console.log(`[MW] Bearer verify failed: ${e.message}`);
+      const decoded = await verifyMobileJwt(authHeader.slice(7).trim(), mobileSecret);
+      if (decoded?.email) {
+        mobileTokenValid = true;
+        mobileEmail = decoded.email;
       }
     }
   }

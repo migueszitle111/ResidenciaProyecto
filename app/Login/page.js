@@ -26,7 +26,12 @@ function getQrStatusLabel(status) {
   }
 }
 
+const isDev = process.env.NODE_ENV === 'development';
+
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
   const [qrSession, setQrSession] = useState(null);
   const [qrStatus, setQrStatus] = useState('idle');
   const [qrError, setQrError] = useState('');
@@ -110,6 +115,18 @@ export default function Login() {
     return () => { active = false; clearTimeout(timeoutId); };
   }, [qrSession, qrStatus, router]);
 
+  const handleDevLogin = async (e) => {
+    e.preventDefault();
+    setLoginError('');
+    const result = await signIn('credentials', { email, password, redirect: false, callbackUrl: '/' });
+    if (result?.error) {
+      setLoginError('Credenciales invalidas');
+    } else {
+      router.replace('/');
+      router.refresh();
+    }
+  };
+
   const handleQrToggle = async () => {
     if (isQrVisible) { setIsQrVisible(false); return; }
     setIsQrVisible(true);
@@ -147,6 +164,38 @@ export default function Login() {
               Escanea el codigo QR con tu app movil
             </p>
           </div>
+
+          {/* Formulario solo en desarrollo */}
+          {isDev && (
+            <form onSubmit={handleDevLogin} className="mb-5 flex flex-col gap-3">
+              <input
+                type="email"
+                placeholder="Correo"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full rounded-2xl border border-slate-700 bg-white px-4 py-3 text-black text-sm placeholder-slate-400 focus:border-orange-400 focus:outline-none"
+              />
+              <input
+                type="password"
+                placeholder="Contrasena"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full rounded-2xl border border-slate-700 bg-white px-4 py-3 text-black text-sm placeholder-slate-400 focus:border-orange-400 focus:outline-none"
+              />
+              {loginError && (
+                <p className="text-xs text-red-400 text-center">{loginError}</p>
+              )}
+              <button
+                type="submit"
+                className="w-full rounded-2xl bg-orange-500 py-3 text-sm font-semibold text-white hover:bg-orange-600 transition-colors"
+                style={{ fontFamily: 'Quando' }}
+              >
+                Entrar (Dev)
+              </button>
+            </form>
+          )}
 
           {/* Tarjeta principal */}
           <div className="rounded-3xl border border-white/8 bg-white/4 backdrop-blur-sm overflow-hidden"

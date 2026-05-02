@@ -127,26 +127,15 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      {/* Botón regresar */}
-      <div className="px-6 pt-6">
-        <button
-          onClick={() => router.back()}
-          className="flex items-center gap-2 text-sm text-slate-500 hover:text-white transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Regresar
-        </button>
-      </div>
-
       {/* Contenido centrado */}
       <div className="flex flex-1 items-center justify-center px-4 py-10">
         <div className="w-full max-w-sm">
 
-          {/* Logo */}
+          {/* Logo con función regresar */}
           <div className="flex justify-center mb-8">
-            <Image src="/L_B_Blanco.svg" width={64} height={64} alt="Logo" />
+            <button onClick={() => router.back()} className="opacity-70 hover:opacity-100 transition-opacity">
+              <Image src="/L_B_Blanco.svg" width={64} height={64} alt="Logo" />
+            </button>
           </div>
 
           {/* Título */}

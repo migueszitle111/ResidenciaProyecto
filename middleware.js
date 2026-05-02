@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import jwt from "jsonwebtoken";
 
 const protectedPageRoutes = [
   "/Perfil",
@@ -215,17 +216,39 @@ export async function middleware(request) {
     matchesPrefix(pathname, "/api/pdf/generate-pdf") ||
     getRateLimitRule(pathname, method)?.by === "user";
 
-  const token = needsToken
+  // Verificar Bearer token de la app móvil
+  let mobileTokenValid = false;
+  let mobileEmail = null;
+  const authHeader = request.headers.get("authorization") || "";
+  if (needsToken && authHeader.startsWith("Bearer ")) {
+    const mobileSecret = process.env.MOBILE_JWT_SECRET;
+    if (mobileSecret) {
+      try {
+        const decoded = jwt.verify(authHeader.slice(7).trim(), mobileSecret);
+        if (decoded?.email) {
+          mobileTokenValid = true;
+          mobileEmail = decoded.email;
+        }
+      } catch {
+        // token inválido — seguir con NextAuth
+      }
+    }
+  }
+
+  const token = needsToken && !mobileTokenValid
     ? await getToken({
         req: request,
         secret: process.env.NEXTAUTH_SECRET,
       })
     : null;
 
+  // Para rate limiting por usuario, sintetizar token mínimo desde Bearer móvil
+  const effectiveToken = token ?? (mobileEmail ? { user: { email: mobileEmail } } : null);
+
   const rateLimitResponse = enforceRateLimit(
     request,
     getRateLimitRule(pathname, method),
-    token
+    effectiveToken
   );
   if (rateLimitResponse) {
     return rateLimitResponse;
@@ -248,7 +271,7 @@ export async function middleware(request) {
   if (
     isApiRoute &&
     authenticatedApiPrefixes.some((prefix) => matchesPrefix(pathname, prefix)) &&
-    !token
+    !token && !mobileTokenValid
   ) {
     return jsonError("No autenticado", 401);
   }
@@ -258,11 +281,11 @@ export async function middleware(request) {
     adminApiPrefixes.some((prefix) => matchesPrefix(pathname, prefix)) &&
     (pathname === "/api/share/_debug" || method !== "GET")
   ) {
-    if (!token) {
+    if (!token && !mobileTokenValid) {
       return jsonError("No autenticado", 401);
     }
 
-    if (token?.user?.roles !== "admin") {
+    if (!mobileTokenValid && token?.user?.roles !== "admin") {
       return jsonError("No autorizado", 403);
     }
   }

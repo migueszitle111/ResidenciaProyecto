@@ -217,7 +217,7 @@ const renderGalleryItem = (item) => (
                             <strong>Tipo de fibras: </strong>~45–55% I; 35–45% IIa; ≤10% IIx<strong></strong>
                         </div>
                         <div className="info-box info-box-8">
-                            <strong>Cantidad de fibras: </strong>~1.8–2.2 millones'<strong></strong>
+                            <strong>Cantidad de fibras: </strong>~1.8–2.2 millones<strong></strong>
                         </div>
                         <div className="info-box info-box-13">
                             <strong>Unidades motoras: </strong>Sin dato normativo<strong></strong>

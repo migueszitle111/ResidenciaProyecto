@@ -16,7 +16,7 @@ export default function SubMenuE() {
                 </button>
               </a>
 
-              <a>
+              <a href="./Tecnicas/Componentes/Miografia">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-base overflow-hidden">
                   Miografia
                 </button>

@@ -282,9 +282,8 @@ const MenuBotonesPt = () => {
                 {menuVisible ? " " : " "}
             </button>
 
-            <div className="flex">
-                {menuVisible && (
-                    <div className="w-1/5 max-h-full bg-[#3f3c3c] text-white p-4 rounded-2xl">
+            <div className="flex justify-center">
+                <div className={`max-h-full bg-[#3f3c3c] text-white rounded-2xl flex-shrink-0 overflow-hidden transition-all ${menuVisible ? 'w-1/5 p-4' : 'w-0 p-0'}`}>
                         <h2 className="text-lg mb-4">Neurografía</h2>
 
                         {/* Buscador con autocompletado */}
@@ -339,7 +338,6 @@ const MenuBotonesPt = () => {
                             </div>
                         ))}
                     </div>
-                )}
 
                 {/* Contenido Principal */}
                 <div className="w-4/5 max-h-full">

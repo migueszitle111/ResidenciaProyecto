@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '/app/components/ReportTemplate/DinamicImagesMenu.css';
+import GaleriaEmergente from '../Tablas';
 
 // ----------------------------------------------------
 // Componente para arrastrar (igual que antes):
@@ -140,10 +141,11 @@ const DropArea2 = ({ isExpanded, setExpandedDivs }) => {
 // ----------------------------------------------------
 // Componente principal con todos los símbolos
 // ----------------------------------------------------
-const MenuImagenes = ({ expandedDivs, setExpandedDivs, topLeftText, setTopLeftText }) => {
+const MenuImagenes = ({ expandedDivs, setExpandedDivs, topLeftText, setTopLeftText, onTablaSeleccionada }) => {
   // 1. Manejo del textarea (acordeón)
   const [showInput, setShowInput] = useState(false);
   const [inputVisible, setInputVisible] = useState(false);
+  const [showTablas, setShowTablas] = useState(false);
 
   useEffect(() => {
     if (showInput) {
@@ -470,7 +472,20 @@ const MenuImagenes = ({ expandedDivs, setExpandedDivs, topLeftText, setTopLeftTe
             </div>
           )}
         </div>
+
+        <div className="accordion-button" onClick={() => setShowTablas(true)}>
+          Ver Tablas
+        </div>
       </div>
+
+      <GaleriaEmergente
+        visible={showTablas}
+        onImagenSeleccionada={(src) => {
+          onTablaSeleccionada?.(src);
+          setShowTablas(false);
+        }}
+        onClose={() => setShowTablas(false)}
+      />
     </>
   );
 }

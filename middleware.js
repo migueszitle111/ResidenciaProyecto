@@ -220,17 +220,20 @@ export async function middleware(request) {
   let mobileTokenValid = false;
   let mobileEmail = null;
   const authHeader = request.headers.get("authorization") || "";
+  console.log(`[MW] ${method} ${pathname} | authHeader: "${authHeader.slice(0, 30)}" | needsToken: ${needsToken}`);
   if (needsToken && authHeader.startsWith("Bearer ")) {
     const mobileSecret = process.env.MOBILE_JWT_SECRET;
+    console.log(`[MW] mobileSecret present: ${!!mobileSecret}`);
     if (mobileSecret) {
       try {
         const decoded = jwt.verify(authHeader.slice(7).trim(), mobileSecret);
         if (decoded?.email) {
           mobileTokenValid = true;
           mobileEmail = decoded.email;
+          console.log(`[MW] Bearer válido para: ${mobileEmail}`);
         }
-      } catch {
-        // token inválido — seguir con NextAuth
+      } catch (e) {
+        console.log(`[MW] Bearer verify failed: ${e.message}`);
       }
     }
   }

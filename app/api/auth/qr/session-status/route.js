@@ -46,7 +46,7 @@ async function fetchMobileUser(mobileToken) {
 
 // GET /api/auth/qr/session-status
 // Authorization: Bearer <mobileToken>
-// Devuelve si el usuario tiene una sesión web activa y sus detalles.
+// Devuelve si el usuario tiene una sesión web activa y los datos del navegador.
 export async function GET(request) {
   try {
     const rateLimitResponse = enforceRateLimit(request, {
@@ -75,14 +75,11 @@ export async function GET(request) {
 
     await connectMongoDB();
 
-    const now = new Date();
-
     const activeChallenge = await WebQrLoginChallenge.findOne({
       approvedEmail: email,
       status: { $in: ["approved", "consumed"] },
-      sessionExpiresAt: { $gt: now },
     })
-      .sort({ sessionExpiresAt: -1 })
+      .sort({ approvedAt: -1 })
       .lean();
 
     if (!activeChallenge) {
@@ -93,7 +90,6 @@ export async function GET(request) {
       hasActiveSession: true,
       session: {
         challengeId: activeChallenge.challengeId,
-        sessionExpiresAt: activeChallenge.sessionExpiresAt.toISOString(),
         requestIp: activeChallenge.requestIp || "",
         requestUserAgent: activeChallenge.requestUserAgent || "",
         mobileDeviceName: activeChallenge.mobileDeviceName || "",

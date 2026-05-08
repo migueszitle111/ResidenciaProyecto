@@ -12,7 +12,6 @@ const webQrLoginChallengeSchema = new Schema(
       index: true,
     },
     expiresAt: { type: Date, required: true, expires: 0, index: true },
-    sessionExpiresAt: { type: Date, default: null, index: true },
     approvedAt: { type: Date, default: null },
     consumedAt: { type: Date, default: null },
     revokedAt: { type: Date, default: null },

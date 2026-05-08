@@ -8,7 +8,7 @@ import WebQrLoginChallenge from "@/models/webQrLoginChallenge";
 
 // GET /api/auth/qr/check-revocation
 // Requiere sesión NextAuth (cookie). Devuelve si la sesión QR del navegador
-// fue revocada o expiró, para que el cliente haga signOut automáticamente.
+// fue revocada desde la app móvil, para que el cliente haga signOut automáticamente.
 export async function GET(request) {
   try {
     const rateLimitResponse = enforceRateLimit(request, {
@@ -40,13 +40,6 @@ export async function GET(request) {
 
     if (challenge.status === "revoked") {
       return NextResponse.json({ revoked: true, reason: "revoked" });
-    }
-
-    if (
-      challenge.sessionExpiresAt &&
-      new Date(challenge.sessionExpiresAt) < new Date()
-    ) {
-      return NextResponse.json({ revoked: true, reason: "expired" });
     }
 
     return NextResponse.json({ revoked: false, isQrSession: true });

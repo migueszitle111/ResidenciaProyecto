@@ -8,7 +8,7 @@ import {
   handleApiError,
   parseJsonBody,
 } from "@/lib/api/security";
-import { isQrLoginExpired, safeCompareQrHash, WEB_SESSION_TTL_MS } from "@/lib/api/qr-login";
+import { isQrLoginExpired, safeCompareQrHash } from "@/lib/api/qr-login";
 import { qrLoginApproveSchema } from "@/lib/api/schemas";
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
@@ -105,6 +105,13 @@ export async function POST(request) {
       );
     }
 
+    if (challenge.status !== "pending") {
+      return NextResponse.json(
+        { ok: false, message: "QR invalido o ya no disponible" },
+        { status: 404 }
+      );
+    }
+
     const mobileUser = await fetchMobileUser(mobileToken);
     const email = String(mobileUser.email || "").trim().toLowerCase();
 
@@ -123,12 +130,13 @@ export async function POST(request) {
 
     challenge.status = "approved";
     challenge.approvedAt = new Date();
+    // Extend TTL so MongoDB doesn't auto-delete the document while the session is active
+    challenge.expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
     challenge.approvedUserId = user._id;
     challenge.approvedEmail = user.email;
     challenge.approvalIp = getClientIp(request);
     challenge.approvalUserAgent = request.headers.get("user-agent") || "";
     challenge.mobileDeviceName = deviceName || "";
-    challenge.sessionExpiresAt = new Date(Date.now() + WEB_SESSION_TTL_MS);
     await challenge.save();
 
     return NextResponse.json({

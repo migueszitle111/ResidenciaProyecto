@@ -48,7 +48,7 @@ async function fetchMobileUser(mobileToken) {
 
 // POST /api/auth/qr/revoke
 // Body: { mobileToken }
-// Invalida inmediatamente la sesión web activa del usuario desde la app móvil.
+// Invalida la sesión web activa del usuario desde la app móvil.
 export async function POST(request) {
   try {
     const rateLimitResponse = enforceRateLimit(request, {
@@ -70,15 +70,12 @@ export async function POST(request) {
 
     await connectMongoDB();
 
-    const now = new Date();
-
     const result = await WebQrLoginChallenge.updateOne(
       {
         approvedEmail: email,
         status: { $in: ["approved", "consumed"] },
-        sessionExpiresAt: { $gt: now },
       },
-      { $set: { status: "revoked", revokedAt: now } }
+      { $set: { status: "revoked", revokedAt: new Date() } }
     );
 
     return NextResponse.json({

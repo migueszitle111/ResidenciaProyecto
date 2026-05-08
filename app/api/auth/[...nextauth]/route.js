@@ -33,12 +33,10 @@ export const authOptions = {
           const rawPassword =
             typeof credentials?.password === "string" ? credentials.password : "";
 
-          const parsedCredentials = credentialsSchema.safeParse(
-            {
-              email: rawEmail,
-              password: rawPassword,
-            }
-          );
+          const parsedCredentials = credentialsSchema.safeParse({
+            email: rawEmail,
+            password: rawPassword,
+          });
 
           if (!parsedCredentials.success) {
             return null;
@@ -131,21 +129,20 @@ export const authOptions = {
 
   session: {
     strategy: "jwt",
-    maxAge: 20 * 60, // 20 minutos máximo absoluto
   },
 
   // Sin maxAge en el cookie → session cookie que el navegador elimina al cerrar
   cookies: {
     sessionToken: {
-      name: process.env.NODE_ENV === "production"
-        ? "__Secure-next-auth.session-token"
-        : "next-auth.session-token",
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-next-auth.session-token"
+          : "next-auth.session-token",
       options: {
         httpOnly: true,
         sameSite: "lax",
         path: "/",
         secure: process.env.NODE_ENV === "production",
-        // maxAge ausente = session cookie (se borra al cerrar el navegador)
       },
     },
   },

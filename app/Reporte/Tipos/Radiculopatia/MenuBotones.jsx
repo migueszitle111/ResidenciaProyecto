@@ -339,7 +339,7 @@ async function toBase64DataUrl(src) {
 const PDF_LAM_W = 690;
 const PDF_LAM_H = 620;
 
-export default function ExportBar({ nombrePaciente, textoReporte, flowType = '', activeOv = [], postOv = [], antOv = [], figuras = [], laminaSize = { w: 690, h: 620 }, listaVisual = [], imgLista = null, comentarioLista = '', onBack: _onBack, onReset: _onReset, isOpen = false, onClose: notifyClose }) {
+export default function ExportBar({ nombrePaciente, textoReporte, flowType = '', activeOv = [], postOv = [], antOv = [], crosses = [], figuras = [], laminaSize = { w: 690, h: 620 }, listaVisual = [], imgLista = null, comentarioLista = '', onBack: _onBack, onReset: _onReset, isOpen = false, onClose: notifyClose }) {
   const { data: session } = useSession();
 
   const [showPlantillaModal, setShowPlantillaModal] = useState(false);
@@ -371,6 +371,7 @@ export default function ExportBar({ nombrePaciente, textoReporte, flowType = '',
       activeOv,
       postOv,
       antOv,
+      crosses,
       figuras: figurasB64,
       listaVisual,
       imgListaUrl: imgLista?.src || null,
@@ -379,11 +380,11 @@ export default function ExportBar({ nombrePaciente, textoReporte, flowType = '',
       flowType,
       isSensitiva,
       postBase: isSensitiva
-        ? '/RadiculopatiaImg/Columna/BASE_POSTERIOR.png'
-        : '/RadiculopatiaImg/Multinivel/RA_Columna_1_FondoB.png',
+        ? (plantillaId !== 'none' ? '/RadiculopatiaImg/Columna/BASE_POSTERIOR_TR.png'          : '/RadiculopatiaImg/Columna/BASE_POSTERIOR.png')
+        : (plantillaId !== 'none' ? '/RadiculopatiaImg/Multinivel/RA_Columna_1_FondoB_TR.png'  : '/RadiculopatiaImg/Multinivel/RA_Columna_1_FondoB.png'),
       antBase: isSensitiva
-        ? '/RadiculopatiaImg/Columna/BASE_ANTERIOR.png'
-        : '/RadiculopatiaImg/Multinivel/RA_Columna_2_FondoB.png',
+        ? (plantillaId !== 'none' ? '/RadiculopatiaImg/Columna/BASE_ANTERIOR_TR.png'           : '/RadiculopatiaImg/Columna/BASE_ANTERIOR.png')
+        : (plantillaId !== 'none' ? '/RadiculopatiaImg/Multinivel/RA_Columna_2_FondoB_TR.png'  : '/RadiculopatiaImg/Multinivel/RA_Columna_2_FondoB.png'),
       userData: {
         name:         session?.user?.name,
         lastname:     session?.user?.lastname,

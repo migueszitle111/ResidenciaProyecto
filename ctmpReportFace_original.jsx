@@ -166,25 +166,25 @@ const CROSS_RED_IMG = {
 
 /* posición vertical base por nivel (fracción de altura del panel) */
 const LEVEL_TOP = {
-  C4:0.055, C5:0.075, C6:0.095, C7:0.105, C8:0.135, T1:0.165,
-  L1:0.498, L2:0.525, L3:0.557, L4:0.588, L5:0.624, S1:0.663, S2:0.690,
+  C4:0.045, C5:0.065, C6:0.085, C7:0.095, C8:0.120, T1:0.135,
+  L1:0.478, L2:0.510, L3:0.545, L4:0.578, L5:0.610, S1:0.649, S2:0.680,
 };
 
 /* desplazamiento horizontal por [nivel][índice 1-4] (fracción de ancho del panel) */
 const OFFSET = {
-  C4:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438 },
-  C5:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  C6:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  C7:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  C8:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  T1:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  L1:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  L2:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  L3:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  L4:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  L5:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  S1:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
-  S2:{ 1:0.400+0.44, 2:0.390+0.44, 3:0.380+0.44, 4:0.370+0.438  },
+  C4:{ 1:0.400+0.44, 2:0.385+0.44, 3:0.372+0.44, 4:0.360+0.438 },
+  C5:{ 1:0.400+0.44, 2:0.385+0.44, 3:0.372+0.44, 4:0.360+0.438 },
+  C6:{ 1:0.400+0.44, 2:0.385+0.44, 3:0.372+0.44, 4:0.360+0.438 },
+  C7:{ 1:0.400+0.44, 2:0.385+0.44, 3:0.372+0.44, 4:0.360+0.438 },
+  C8:{ 1:0.400+0.44, 2:0.385+0.44, 3:0.372+0.44, 4:0.360+0.438 },
+  T1:{ 1:0.400+0.44, 2:0.385+0.44, 3:0.372+0.44, 4:0.360+0.438 },
+  L1:{ 1:0.385+0.44, 2:0.385+0.426, 3:0.384+0.413, 4:0.385+0.398 },
+  L2:{ 1:0.385+0.44, 2:0.385+0.426, 3:0.384+0.413, 4:0.385+0.398 },
+  L3:{ 1:0.385+0.44, 2:0.385+0.426, 3:0.384+0.413, 4:0.385+0.398 },
+  L4:{ 1:0.385+0.44, 2:0.385+0.426, 3:0.384+0.413, 4:0.385+0.398 },
+  L5:{ 1:0.385+0.44, 2:0.385+0.426, 3:0.384+0.413, 4:0.385+0.398 },
+  S1:{ 1:0.385+0.44, 2:0.385+0.426, 3:0.384+0.413, 4:0.385+0.398 },
+  S2:{ 1:0.385+0.44, 2:0.385+0.426, 3:0.384+0.413, 4:0.385+0.398 },
 };
 
 /* ajuste vertical adicional por [nivel][índice] */
@@ -587,25 +587,20 @@ function StepBNivel({
     goTo('E_INTENSIDAD');
   };
 
-  /* Checkbox row – igual que la app móvil: cuadro + número al lado */
+  /* Checkbox row */
   const ChkRow = ({ lvl, side, checked, setList }) => (
-    <div style={{ marginBottom:6 }}>
-      <span style={{ color:'rgba(255,255,255,0.55)', fontSize:10, display:'block', marginBottom:3 }}>{side}</span>
-      <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
-        {[1,2,3,4].map(i => {
-          const id = `${lvl}_${side[0] === 'I' ? 'L' : 'R'}${i}`;
-          const on = checked.includes(id);
-          return (
-            <button key={id} onClick={() => toggleOne(setList, id)}
-              style={{ display:'flex', alignItems:'center', gap:5, background:'transparent', border:'none', cursor:'pointer', padding:0 }}>
-              <span style={{ width:18, height:18, borderRadius:3, border:`1.5px solid ${on ? '#f97316' : 'rgba(255,255,255,0.5)'}`, background: on ? '#f97316' : 'transparent', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-                {on && <svg width={10} height={10} viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round"/></svg>}
-              </span>
-              <span style={{ color:'#fff', fontSize:13 }}>{i}</span>
-            </button>
-          );
-        })}
-      </div>
+    <div style={{ display:'flex', gap:6, marginBottom:4 }}>
+      <span style={{ color:'rgba(255,255,255,0.45)', fontSize:10, width:52, paddingTop:4 }}>{side}</span>
+      {[1,2,3,4].map(i => {
+        const id = `${lvl}_${side[0] === 'I' ? 'L' : 'R'}${i}`;
+        const on = checked.includes(id);
+        return (
+          <button key={id} onClick={() => toggleOne(setList, id)}
+            style={{ width:28, height:28, borderRadius:6, border:`1.5px solid ${on ? '#f97316' : 'rgba(255,255,255,0.2)'}`, background: on ? '#f97316' : 'transparent', color:'#fff', fontSize:11, fontWeight:700, cursor:'pointer' }}>
+            {i}
+          </button>
+        );
+      })}
     </div>
   );
 
@@ -809,84 +804,26 @@ function StepSLado({ goTo, sensNivel, addText, applySensOverlays, resetAll }) {
 }
 
 /* ──────────── Panel FINAL ──────────────────────────────────────── */
-function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, postOverlays, antOverlays, crosses, laminaRef, nombrePaciente, textoFinal, imgLista, setImgLista, comentarioLista, setShowGaleria, setShowComentarioModal, resetAll, pdfOpen, activeOv, activeTab, setActiveTab, textos, setTextos }) {
-  const backStep = flowType === 'Sensitiva' ? 'S_LADO' : 'G_PRONOSTICO';
-
+function StepFinal({ goTo, evo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, postOverlays, antOverlays, laminaRef, nombrePaciente, textoFinal, imgLista, comentarioLista, resetAll, pdfOpen, activeOv }) {
+  const backStep = flowType === 'Sensitiva' ? 'S_LADO' : (evo === 'Subaguda' || evo === 'Crónica') ? 'G_PRONOSTICO' : 'G_PRONOSTICO';
   return (
-    <div style={{ display:'flex', flexDirection:'column', height:'100%' }}>
+    <div>
       <NavRow onBack={() => goTo(backStep)} onReset={resetAll} onPdf={() => setPdfOpen(true)} />
-
-      {/* Tabs Reporte / Lista */}
-      <div style={{ display:'flex', gap:4, margin:'8px 0' }}>
-        {[['reporte','Reporte'],['lista','Lista']].map(([id, label]) => (
-          <button key={id} onClick={() => setActiveTab(id)} style={{ padding:'4px 16px', borderRadius:7, fontSize:12, fontWeight:600, border:'none', cursor:'pointer', background:activeTab === id ? '#f97316' : 'rgba(255,255,255,0.07)', color:activeTab === id ? '#fff' : 'rgba(255,255,255,0.4)' }}>{label}</button>
-        ))}
+      <StepTitle>Agrega figuras al reporte</StepTitle>
+      <div style={{ display:'flex', gap:10, marginBottom:16 }}>
+        <label style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:6, padding:'12px 8px', borderRadius:10, cursor:'pointer', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', color:'rgba(255,255,255,0.6)', fontSize:11, textAlign:'center' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}><circle cx="12" cy="12" r="9" /></svg>
+          Forma circular
+          <input type="file" accept="image/*" multiple style={{ display:'none' }} onChange={e => { Array.from(e.target.files || []).forEach(f => agregarFigura('circle', URL.createObjectURL(f))); e.target.value = ''; }} />
+        </label>
+        <label style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:6, padding:'12px 8px', borderRadius:10, cursor:'pointer', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', color:'rgba(255,255,255,0.6)', fontSize:11, textAlign:'center' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}><rect x="3" y="3" width="18" height="18" rx="2" /></svg>
+          Forma cuadrada
+          <input type="file" accept="image/*" multiple style={{ display:'none' }} onChange={e => { Array.from(e.target.files || []).forEach(f => agregarFigura('square', URL.createObjectURL(f))); e.target.value = ''; }} />
+        </label>
       </div>
-
-      {/* Tab REPORTE: figuras arrastrables */}
-      {activeTab === 'reporte' && (
-        <div>
-          <StepTitle>Agrega figuras al reporte</StepTitle>
-          <div style={{ display:'flex', gap:10, marginBottom:12 }}>
-            <label style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:6, padding:'12px 8px', borderRadius:10, cursor:'pointer', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', color:'rgba(255,255,255,0.6)', fontSize:11, textAlign:'center' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}><circle cx="12" cy="12" r="9" /></svg>
-              Forma circular
-              <input type="file" accept="image/*" multiple style={{ display:'none' }} onChange={e => { Array.from(e.target.files || []).forEach(f => agregarFigura('circle', URL.createObjectURL(f))); e.target.value = ''; }} />
-            </label>
-            <label style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:6, padding:'12px 8px', borderRadius:10, cursor:'pointer', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', color:'rgba(255,255,255,0.6)', fontSize:11, textAlign:'center' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}><rect x="3" y="3" width="18" height="18" rx="2" /></svg>
-              Forma cuadrada
-              <input type="file" accept="image/*" multiple style={{ display:'none' }} onChange={e => { Array.from(e.target.files || []).forEach(f => agregarFigura('square', URL.createObjectURL(f))); e.target.value = ''; }} />
-            </label>
-          </div>
-          {figuras.length > 0 && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, margin:'0 0 10px', fontStyle:'italic' }}>{figuras.length} figura{figuras.length > 1 ? 's' : ''} en la lámina</p>}
-        </div>
-      )}
-
-      {/* Tab LISTA: items del flujo + galería + comentario */}
-      {activeTab === 'lista' && (
-        <div style={{ flex:1, overflowY:'auto' }}>
-          {/* Items del flujo */}
-          {textos.length > 0 && (
-            <div style={{ marginBottom:10 }}>
-              {textos.map((t, i) => (
-                <div key={i} style={{ display:'flex', alignItems:'center', gap:8, padding:'5px 8px', marginBottom:4, borderRadius:7, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)' }}>
-                  <span style={{ width:6, height:6, borderRadius:'50%', background:'#f97316', flexShrink:0 }} />
-                  <span style={{ color:'rgba(255,255,255,0.75)', fontSize:12, flex:1 }}>{t}</span>
-                  <button onClick={() => setTextos(prev => prev.filter((_, j) => j !== i))} style={{ background:'transparent', border:'none', color:'rgba(255,255,255,0.3)', cursor:'pointer', fontSize:13, padding:'0 2px', lineHeight:1 }}>✕</button>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Galería de tablas */}
-          <button onClick={() => setShowGaleria(true)} style={{ width:'100%', display:'flex', flexDirection:'column', alignItems:'center', gap:8, padding:'16px 12px', borderRadius:10, cursor:'pointer', marginBottom:10, background:'rgba(255,255,255,0.05)', border:'1px dashed rgba(255,255,255,0.15)' }}>
-            {imgLista ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={imgLista.src} alt="tabla" style={{ width:'100%', maxHeight:90, objectFit:'contain', borderRadius:6 }} />
-            ) : (
-              <>
-                <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18M7 3v18" /></svg>
-                <span style={{ color:'rgba(255,255,255,0.35)', fontSize:12 }}>Sin imagen seleccionada</span>
-              </>
-            )}
-          </button>
-          {imgLista && (
-            <button onClick={() => setImgLista(null)} style={{ width:'100%', padding:'5px 0', borderRadius:8, marginBottom:10, background:'transparent', border:'1px solid rgba(239,68,68,0.4)', color:'#ef4444', fontSize:12, cursor:'pointer' }}>
-              Quitar imagen
-            </button>
-          )}
-
-          {/* Botón comentario */}
-          <button onClick={() => { setComentarioTemp(comentarioLista); setShowComentarioModal(true); }} style={{ width:'100%', padding:'10px 0', borderRadius:10, background:'#f97316', border:'none', cursor:'pointer', color:'#fff', fontWeight:700, fontSize:14 }}>
-            {comentarioLista ? 'Editar Comentario' : 'Agregar Comentario'}
-          </button>
-          {comentarioLista && <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, fontStyle:'italic', marginTop:8 }}>{comentarioLista.length > 100 ? comentarioLista.slice(0, 100) + '…' : comentarioLista}</p>}
-        </div>
-      )}
-
-      {/* ExportBar siempre presente (gestiona el modal de plantilla) */}
-      <div style={{ marginTop:'auto', paddingTop:8 }}>
+      {figuras.length > 0 && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, margin:'4px 0 12px', fontStyle:'italic' }}>{figuras.length} figura{figuras.length > 1 ? 's' : ''} en la lámina</p>}
+      <div style={{ marginTop:8 }}>
         <ExportBar
           nombrePaciente={nombrePaciente}
           textoReporte={textoFinal}
@@ -894,7 +831,6 @@ function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVi
           activeOv={activeOv}
           postOv={postOverlays}
           antOv={antOverlays}
-          crosses={crosses}
           figuras={figuras}
           laminaSize={{ w: laminaRef.current?.clientWidth || 690, h: laminaRef.current?.clientHeight || 620 }}
           listaVisual={listaVisual}
@@ -939,37 +875,20 @@ export default function ReportFaceRadiculopatia() {
     return cPost;
   }, [checkedL_C, checkedR_C, checkedL_L, checkedR_L]);
 
-  /* columna roja en tiempo real – igual que showCervOverlay / showLumboOverlay en móvil */
-  const liveRegionPairs = useMemo(() => {
-    const post = [];
-    const ant  = [];
-    const hasC = [...checkedL_C, ...checkedR_C].length > 0;
-    const hasL = [...checkedL_L, ...checkedR_L].length > 0;
-    if (hasC) {
-      post.push(REGION_OVERLAYS.Cervical.post);
-      ant.push(REGION_OVERLAYS.Cervical.ant);
-    }
-    if (hasL) {
-      post.push(REGION_OVERLAYS.Lumbosacro.post);
-      ant.push(REGION_OVERLAYS.Lumbosacro.ant);
-    }
-    return { post, ant };
-  }, [checkedL_C, checkedR_C, checkedL_L, checkedR_L]);
-
   /* cruces derivadas en tiempo real */
   const crosses = useMemo(() =>
     computeCrossesFromChecks([...checkedL_C, ...checkedL_L], [...checkedR_C, ...checkedR_L]),
     [checkedL_C, checkedR_C, checkedL_L, checkedR_L]
   );
 
-  /* overlays finales = comprometidos + región en vivo + músculos en vivo (sin duplicados) */
+  /* overlays finales = comprometidos + músculos en vivo */
   const postOverlays = useMemo(() =>
-    [...new Set([...committedPost, ...liveRegionPairs.post, ...liveMusclePairs.post])],
-    [committedPost, liveRegionPairs, liveMusclePairs]
+    [...committedPost, ...liveMusclePairs.post],
+    [committedPost, liveMusclePairs]
   );
   const antOverlays = useMemo(() =>
-    [...new Set([...committedAnt, ...liveRegionPairs.ant, ...liveMusclePairs.ant])],
-    [committedAnt, liveRegionPairs, liveMusclePairs]
+    [...committedAnt, ...liveMusclePairs.ant],
+    [committedAnt, liveMusclePairs]
   );
 
   /* ── VisualNew shell state ── */
@@ -1089,6 +1008,7 @@ export default function ReportFaceRadiculopatia() {
         return (
           <StepFinal
             goTo={goTo}
+            evo={evo}
             flowType={flowType}
             figuras={figuras}
             agregarFigura={agregarFigura}
@@ -1097,21 +1017,13 @@ export default function ReportFaceRadiculopatia() {
             postOverlays={postOverlays}
             antOverlays={antOverlays}
             activeOv={[...new Set([...postOverlays, ...antOverlays])]}
-            crosses={crosses}
             laminaRef={laminaRef}
             nombrePaciente={nombrePaciente}
             textoFinal={textoFinal}
             imgLista={imgLista}
-            setImgLista={setImgLista}
             comentarioLista={comentarioLista}
-            setShowGaleria={setShowGaleria}
-            setShowComentarioModal={setShowComentarioModal}
             resetAll={resetAll}
             pdfOpen={pdfOpen}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            textos={textos}
-            setTextos={setTextos}
           />
         );
       default: return null;
@@ -1171,36 +1083,44 @@ export default function ReportFaceRadiculopatia() {
               )}
 
               {/* Panel POSTERIOR (side L) */}
-              <div style={{ position:'relative', aspectRatio:'2550/3300', height:'100%', minHeight:560 }}>
+              <div style={{ flex:1, position:'relative', minHeight:560, overflow:'hidden' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img key={basePost} src={basePost} alt="" draggable={false}
-                  style={{ display:'block', width:'100%', height:'100%' }} />
+                <img
+                  key={basePost}
+                  src={basePost}
+                  alt=""
+                  draggable={false}
+                  style={{ display:'block', width:'100%', height:'100%', objectFit:'contain' }}
+                />
                 {postOverlays.map((src, i) => (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img key={`post_ov_${i}_${src}`} src={src} alt="" draggable={false}
-                    style={{ position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none' }} />
+                  <img key={`post_ov_${i}_${src}`} src={src} alt="" draggable={false} style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', pointerEvents:'none' }} />
                 ))}
+                {/* Cruces lado L */}
                 {crosses.filter(c => c.side === 'L').map(({ key, src, topPct, offPct }) => (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img key={`cx_L_${key}`} src={src} alt="" draggable={false}
-                    style={{ position:'absolute', top:`${topPct*100}%`, left:`${offPct*100}%`, width:64, height:64, objectFit:'contain', pointerEvents:'none', zIndex:5 }} />
+                  <img key={`cx_L_${key}`} src={src} alt="" draggable={false} style={{ position:'absolute', top:`${topPct*100}%`, left:`${offPct*100}%`, width:40, height:40, objectFit:'contain', pointerEvents:'none', zIndex:5 }} />
                 ))}
               </div>
 
               {/* Panel ANTERIOR (side R) */}
-              <div style={{ position:'relative', aspectRatio:'2550/3300', height:'100%', minHeight:560 }}>
+              <div style={{ flex:1, position:'relative', minHeight:560, overflow:'hidden' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img key={baseAnt} src={baseAnt} alt="" draggable={false}
-                  style={{ display:'block', width:'100%', height:'100%' }} />
+                <img
+                  key={baseAnt}
+                  src={baseAnt}
+                  alt=""
+                  draggable={false}
+                  style={{ display:'block', width:'100%', height:'100%', objectFit:'contain' }}
+                />
                 {antOverlays.map((src, i) => (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img key={`ant_ov_${i}_${src}`} src={src} alt="" draggable={false}
-                    style={{ position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none' }} />
+                  <img key={`ant_ov_${i}_${src}`} src={src} alt="" draggable={false} style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', pointerEvents:'none' }} />
                 ))}
+                {/* Cruces lado R */}
                 {crosses.filter(c => c.side === 'R').map(({ key, src, topPct, offPct }) => (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img key={`cx_R_${key}`} src={src} alt="" draggable={false}
-                    style={{ position:'absolute', top:`${topPct*100}%`, right:`${offPct*100}%`, width:64, height:64, objectFit:'contain', pointerEvents:'none', zIndex:5 }} />
+                  <img key={`cx_R_${key}`} src={src} alt="" draggable={false} style={{ position:'absolute', top:`${topPct*100}%`, right:`${offPct*100}%`, width:40, height:40, objectFit:'contain', pointerEvents:'none', zIndex:5 }} />
                 ))}
               </div>
 
@@ -1219,14 +1139,56 @@ export default function ReportFaceRadiculopatia() {
 
           </div>{/* fin fila */}
 
-          {/* ── FOOTER: texto del diagnóstico + datos usuario ── */}
+          {/* ── FOOTER ── */}
           <div style={{ background:'#111', borderRadius:'0 0 10px 10px', border:'1px solid rgba(255,255,255,0.08)', borderTop:'none', padding:'10px 16px 14px', marginBottom:16 }}>
-            {textoFinal
-              ? <textarea value={textoFinal} onChange={e => { setTextoEditado(e.target.value); setEditadoManual(true); }} rows={3} style={{ width:'100%', boxSizing:'border-box', resize:'vertical', background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:8, padding:'7px 10px', color:'rgba(255,255,255,0.85)', fontSize:13, lineHeight:1.55, outline:'none', fontFamily:'inherit' }} />
-              : <p style={{ color:'rgba(255,255,255,0.2)', fontSize:13, fontStyle:'italic', margin:'2px 0' }}>Sin conclusiones aún.</p>
-            }
+            <div style={{ display:'flex', gap:4, marginBottom:8 }}>
+              {[['reporte','Reporte'],['lista','Lista']].map(([id, label]) => (
+                <button key={id} onClick={() => setActiveTab(id)} style={{ padding:'4px 16px', borderRadius:7, fontSize:12, fontWeight:600, border:'none', cursor:'pointer', background:activeTab === id ? '#f97316' : 'rgba(255,255,255,0.07)', color:activeTab === id ? '#fff' : 'rgba(255,255,255,0.4)' }}>{label}</button>
+              ))}
+            </div>
+
+            {/* Modo Reporte: texto editable del diagnóstico */}
+            {activeTab === 'reporte' && (textoFinal
+              ? <textarea value={textoFinal} onChange={e => { setTextoEditado(e.target.value); setEditadoManual(true); }} rows={4} style={{ width:'100%', boxSizing:'border-box', resize:'vertical', background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:8, padding:'7px 10px', color:'rgba(255,255,255,0.85)', fontSize:13, lineHeight:1.55, outline:'none', fontFamily:'inherit', marginTop:4 }} />
+              : <p style={{ color:'rgba(255,255,255,0.2)', fontSize:13, fontStyle:'italic', margin:'4px 0 0' }}>Sin conclusiones aún.</p>
+            )}
+
+            {/* Modo Lista: items individuales del flujo + galería + comentario */}
+            {activeTab === 'lista' && (
+              <div style={{ marginTop:4 }}>
+                {/* Lista de items del flujo */}
+                {textos.length > 0 && (
+                  <div style={{ marginBottom:10 }}>
+                    {textos.map((t, i) => (
+                      <div key={i} style={{ display:'flex', alignItems:'center', gap:8, padding:'5px 8px', marginBottom:4, borderRadius:7, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)' }}>
+                        <span style={{ width:6, height:6, borderRadius:'50%', background:'#f97316', flexShrink:0 }} />
+                        <span style={{ color:'rgba(255,255,255,0.75)', fontSize:12, flex:1 }}>{t}</span>
+                        <button onClick={() => setTextos(prev => prev.filter((_, j) => j !== i))} style={{ background:'transparent', border:'none', color:'rgba(255,255,255,0.3)', cursor:'pointer', fontSize:13, padding:'0 2px', lineHeight:1 }}>✕</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Galería de imágenes */}
+                <button onClick={() => setShowGaleria(true)} style={{ width:'100%', display:'flex', flexDirection:'column', alignItems:'center', gap:8, padding:'18px 12px', borderRadius:10, cursor:'pointer', marginBottom:12, background:'rgba(255,255,255,0.05)', border:'1px dashed rgba(255,255,255,0.15)' }}>
+                  {imgLista ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={imgLista.src} alt="tabla" style={{ width:'100%', maxHeight:100, objectFit:'contain', borderRadius:6 }} />
+                  ) : (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={36} height={36} fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18M7 3v18" /></svg>
+                      <span style={{ color:'rgba(255,255,255,0.35)', fontSize:12 }}>Sin imagen seleccionada</span>
+                    </>
+                  )}
+                </button>
+                {imgLista && <button onClick={() => setImgLista(null)} style={{ width:'100%', padding:'5px 0', borderRadius:8, marginBottom:10, background:'transparent', border:'1px solid rgba(239,68,68,0.4)', color:'#ef4444', fontSize:12, cursor:'pointer' }}>Quitar imagen</button>}
+                <button onClick={() => { setComentarioTemp(comentarioLista); setShowComentarioModal(true); }} style={{ width:'100%', padding:'10px 0', borderRadius:10, background:'#f97316', border:'none', cursor:'pointer', color:'#fff', fontWeight:700, fontSize:14 }}>{comentarioLista ? 'Editar Comentario' : 'Agregar Comentario'}</button>
+                {comentarioLista && <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, fontStyle:'italic', marginTop:8 }}>{comentarioLista.length > 100 ? comentarioLista.slice(0, 100) + '…' : comentarioLista}</p>}
+              </div>
+            )}
+
             {(session?.user?.name || session?.user?.email) && (
-              <div style={{ marginTop:7, paddingTop:6, borderTop:'1px solid rgba(255,255,255,0.06)', display:'flex', gap:16, flexWrap:'wrap' }}>
+              <div style={{ marginTop:8, paddingTop:7, borderTop:'1px solid rgba(255,255,255,0.06)', display:'flex', gap:16, flexWrap:'wrap' }}>
                 {session.user.name && <span style={{ color:'rgba(255,255,255,0.3)', fontSize:11 }}>👤 {session.user.name} {session.user.lastname || ''}</span>}
                 {session.user.email && <span style={{ color:'rgba(255,255,255,0.3)', fontSize:11 }}>✉ {session.user.email}</span>}
               </div>

@@ -20,11 +20,11 @@ export default function Perfil() {
                   Neuronopatía
                 </button>
               </a>
-              {/* <a href="./Reporte/Tipos/Radiculopatia">
+            <a href="./Reporte/Tipos/Radiculopatia">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">
                   Radiculopatía
                 </button>
-              </a> */}
+              </a> 
             
               <a href="./Reporte/Tipos/Plexopatia">
                 <button className="bg-black text-white text-center py-3 rounded-md hover:bg-gray-900 w-full text-xs overflow-hidden">

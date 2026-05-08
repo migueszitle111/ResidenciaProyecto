@@ -120,7 +120,7 @@ export const authOptions = {
           challenge.consumedAt = new Date();
           await challenge.save();
 
-          return serializeAuthUser(user);
+          return { ...serializeAuthUser(user), qrChallengeId: challengeId };
         } catch (err) {
           console.error("Error en authorize qr-web:", err);
           return null;
@@ -129,15 +129,42 @@ export const authOptions = {
     }),
   ],
 
-  session: { strategy: "jwt" },
+  session: {
+    strategy: "jwt",
+    maxAge: 20 * 60, // 20 minutos máximo absoluto
+  },
+
+  // Sin maxAge en el cookie → session cookie que el navegador elimina al cerrar
+  cookies: {
+    sessionToken: {
+      name: process.env.NODE_ENV === "production"
+        ? "__Secure-next-auth.session-token"
+        : "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        // maxAge ausente = session cookie (se borra al cerrar el navegador)
+      },
+    },
+  },
 
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.user = user;
+      if (user) {
+        token.user = user;
+        if (user.qrChallengeId) {
+          token.qrChallengeId = user.qrChallengeId;
+        }
+      }
       return token;
     },
 
     async session({ session, token }) {
+      if (token.qrChallengeId) {
+        session.qrChallengeId = token.qrChallengeId;
+      }
       try {
         if (!token.user?.email) {
           return session;

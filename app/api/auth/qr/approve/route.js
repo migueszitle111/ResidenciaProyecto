@@ -8,7 +8,7 @@ import {
   handleApiError,
   parseJsonBody,
 } from "@/lib/api/security";
-import { isQrLoginExpired, safeCompareQrHash } from "@/lib/api/qr-login";
+import { isQrLoginExpired, safeCompareQrHash, WEB_SESSION_TTL_MS } from "@/lib/api/qr-login";
 import { qrLoginApproveSchema } from "@/lib/api/schemas";
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
@@ -128,6 +128,7 @@ export async function POST(request) {
     challenge.approvalIp = getClientIp(request);
     challenge.approvalUserAgent = request.headers.get("user-agent") || "";
     challenge.mobileDeviceName = deviceName || "";
+    challenge.sessionExpiresAt = new Date(Date.now() + WEB_SESSION_TTL_MS);
     await challenge.save();
 
     return NextResponse.json({

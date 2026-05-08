@@ -149,6 +149,18 @@ function getRateLimitRule(pathname, method) {
     return { key: "qr-login-approve", limit: 30, windowMs: 10 * 60_000, by: "ip" };
   }
 
+  if (pathname === "/api/auth/qr/session-status" && method === "GET") {
+    return { key: "qr-session-status", limit: 120, windowMs: 10 * 60_000, by: "ip" };
+  }
+
+  if (pathname === "/api/auth/qr/revoke" && method === "POST") {
+    return { key: "qr-revoke", limit: 20, windowMs: 10 * 60_000, by: "ip" };
+  }
+
+  if (pathname === "/api/auth/qr/check-revocation" && method === "GET") {
+    return { key: "qr-check-revocation", limit: 240, windowMs: 10 * 60_000, by: "ip" };
+  }
+
   if (matchesPrefix(pathname, "/api/pdf/generate-pdf") && method === "POST") {
     return { key: "generate-pdf", limit: 40, windowMs: 10 * 60_000, by: "user" };
   }

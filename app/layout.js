@@ -2,6 +2,7 @@
 import './globals.css';
 import { AuthProvider } from './Providers';
 import PageTransition from './components/PageTransition';
+import QrSessionGuard from './components/QrSessionGuard';
 
 export const metadata = {
   title: 'MEDXpro',
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
 
       <body>
         <AuthProvider>
+          <QrSessionGuard />
           <PageTransition>{children}</PageTransition>
         </AuthProvider>
       </body>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import './Style.css';
@@ -112,9 +112,9 @@ function SuccessModal({ filename, pdfUrl, onAbrir, onLink, onClose }) {
 
 /* ─── LinkUploaderModal ──────────────────────────────────────────────────────── */
 const EXPIRY_OPTIONS = [
-  { value: '24h', label: '24 h' },
-  { value: '5d',  label: '5 días' },
-  { value: '15d', label: '15 días' },
+  { value: '3m',  label: '3 meses' },
+  { value: '30d', label: '30 días' },
+  { value: '3m',  label: '3 meses' },
 ];
 
 function FileRowUI({ file, onRemove }) {
@@ -156,7 +156,7 @@ function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onCl
   const [files, setFiles]       = useState([]);
   const [title, setTitle]       = useState(`Vías Somatosensoriales – ${[session?.user?.name, session?.user?.lastname].filter(Boolean).join(' ')}`.trim());
   const [message, setMessage]   = useState('');
-  const [expiry, setExpiry]     = useState('24h');
+  const [expiry, setExpiry]     = useState('15d');
   const [justReport, setJustReport] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [uploadPct, setUploadPct]   = useState(0);
@@ -201,7 +201,7 @@ function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onCl
     setGenerating(true); setLink(null); setUploadPct(5);
     try {
       const doctor = [session?.user?.name, session?.user?.lastname].filter(Boolean).join(' ');
-      const expirySeconds = expiry === '24h' ? 86400 : expiry === '5d' ? 432000 : 1296000;
+      const expirySeconds = expiry === '30d' ? 2592000 : expiry === '3m' ? 7776000 : 1296000;
       const finalTitle = (title.trim() || `Vías Somatosensoriales – ${nombrePaciente || 'Paciente'}`).slice(0, 140);
       const finalMessage = message.trim() || '';
       const folder = toSafeToken(nombrePaciente || 'paciente');

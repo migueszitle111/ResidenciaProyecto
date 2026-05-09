@@ -388,17 +388,145 @@ const CERVICAL_LEVELS    = ['C5','C6','C7','C8','T1'];
 const LUMBOSACRAL_LEVELS = ['L1-L2','L3-L4','L5','S1'];
 const SENSITIVA_LEVELS   = ['C6-C7','S1'];
 
-/* ─── Texto del reporte ───────────────────────────────────────────────────── */
-const limpiarTextoReporte = (s) => {
+/* ─── Diagnóstico estructurado (port del móvil) ───────────────────────────── */
+
+const INTENSITY_SIGNS = { leve: '(+/+)', moderada: '(++)', severa: '(+++)', difusa: '(++++)' };
+
+const capWord = (w) => w ? w.charAt(0).toUpperCase() + w.slice(1) : w;
+
+const parseIntensidadConParentesis = (txt) => {
+  const s = (txt || '').trim();
+  const low = s.toLowerCase();
+  const key = low.includes('leve') ? 'leve' : low.includes('moderada') ? 'moderada' : low.includes('severa') ? 'severa' : low.includes('difusa') ? 'difusa' : '';
+  if (!key) return s;
+  const yaTraeParens = /\(.+?\)/.test(low);
+  const signos = yaTraeParens ? (s.match(/\(.+?\)/)?.[0] || INTENSITY_SIGNS[key]) : INTENSITY_SIGNS[key];
+  const tail = s.replace(new RegExp(`^\\s*(${key})\\s*(\\(.+?\\))?\\s*`, 'i'), '').trim();
+  const base = `${key} ${signos}`;
+  return tail ? `${base} ${tail}` : base;
+};
+
+const canonicalizePrognosis = (raw) => {
+  const s = raw.toLowerCase();
+  if (s.includes('complet')) return 'Recuperación completa';
+  if (s.includes('parcial')) return 'Recuperación parcial funcional';
+  if (s.includes('pobre'))   return 'Recuperación pobre no funcional';
+  if (s.includes('nula') || s.includes('nulo')) return 'Recuperación nula (en fase de secuela)';
+  return 'Recuperación completa';
+};
+
+function getPair(t) {
+  const low = t.toLowerCase();
+  if (low.startsWith('con progresión') || low.startsWith('con progresion') ||
+      low.startsWith('sin progresión') || low.startsWith('sin progresion')) return ['Progresión', t];
+  if (low.startsWith('progresión') || low.startsWith('progresion')) return ['Progresión', t.replace(/^progres(ión|ion)\s+/i, '')];
+  if (/^tor[aá]cica:\s*/i.test(t)) return ['Nivel', t.replace(/^tor[aá]cica:\s*/i, '')];
+  if (low.startsWith('polisegmentario')) return ['Ubicación', t.replace(/^polisegmentario\s*/i, '')];
+  if (/^niveles\s+tor[aá]cicas:\s*/i.test(t)) return ['Nivel', t.replace(/^niveles\s+tor[aá]cicas:\s*/i, '')];
+  if (/^con\s+agudizaci[oó]n\s+nivel\s+tor[aá]cica:\s*/i.test(t)) return ['Nivel de agudización', t.replace(/^con\s+agudizaci[oó]n\s+nivel\s+tor[aá]cica:\s*/i, '')];
+  if (low.startsWith('radiculopatía')) return ['Evolución', t];
+  if (low.startsWith('fase')) return ['Fase', t.replace(/^fase\s+/i, '')];
+  if (low.startsWith('nivel') || low.includes('multinivel')) return ['Nivel', t.replace(/^nivel\s+/i, '')];
+  if (low.includes('agudización nivel')) return ['Nivel de agudización', t.replace(/^con agudización nivel\s+/i, '')];
+  if (low.startsWith('intensidad')) return ['Intensidad', t.replace(/^intensidad\s+/i, '')];
+  if (low.includes('reinervación')) return ['Reinervación', t.replace(/^con\s+/i, '')];
+  if (low.startsWith('pronóstico') || low.startsWith('pronostico')) return ['Pronóstico', canonicalizePrognosis(t)];
+  return null;
+}
+
+const ORDER = ['Evolución', 'Fase', 'Patología', 'Nivel', 'Ubicación', 'Nivel de agudización', 'Intensidad', 'Progresión', 'Reinervación', 'Pronóstico'];
+
+const ubicacionAplanadaParaReporte = (s) => {
   if (!s) return '';
-  let t = s.replace(/\s+/g, ' ').trim();
-  t = t.replace(/\s*([,;:.])\s*/g, '$1 ');
-  t = t.toLowerCase();
-  t = t.replace(/(^\s*[a-záéíóúñ])|([.!?]\s+[a-záéíóúñ])/g, m => m.toUpperCase());
-  t = t.replace(/\s+([,.:;])/g, ' $1').replace(/\s+([,.])$/g, '$1').replace(/\s+$/, '');
-  t = t.replace(/([.!?])\s*([.!?])+$/, '$1');
-  if (!/[.!?]$/.test(t)) t += '.';
-  return t;
+  let norm = s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
+  norm = norm.replace(/\s+y\s+/g, ', ');
+  const mapPretty = { cervical: 'cervical', toracica: 'torácica', toracico: 'torácica', lumbosacro: 'lumbosacra', lumbosacra: 'lumbosacra' };
+  const seen = new Set();
+  const partes = norm.split(',').map(p => p.trim()).filter(Boolean).map(p => mapPretty[p] || p).filter(p => { if (seen.has(p)) return false; seen.add(p); return true; });
+  if (!partes.length) return '';
+  let txt = partes.join(', ');
+  if (partes.length > 1) txt = txt.replace(/, ([^,]+)$/, ' y $1');
+  return txt;
+};
+
+const formatLista = (label, rawTxt) => {
+  const txt = rawTxt.trim();
+  if (label === 'Evolución') {
+    const t = txt.replace(/^Radiculopatía\s*/i, '').trim();
+    return { label: 'Evolución', txt: t ? t.charAt(0).toUpperCase() + t.slice(1) : t };
+  }
+  if (label === 'Reinervación') {
+    const t = txt.toLowerCase();
+    if (t.includes('sin')) return { label: 'Reinervación', txt: 'Ausente' };
+    if (t.includes('mínima') || t.includes('minima')) return { label: 'Reinervación', txt: 'Mínima' };
+    if (t.includes('abundante')) return { label: 'Reinervación', txt: 'Abundante' };
+    return { label: 'Reinervación', txt: 'Mínima' };
+  }
+  if (label === 'Progresión') {
+    const t = txt.toLowerCase();
+    if (t.startsWith('con progresión') || t.startsWith('con progresion')) return { label: 'Progresión', txt: 'Progresión distal a miotomas' };
+    if (t.startsWith('sin progresión') || t.startsWith('sin progresion')) return { label: 'Progresión', txt: 'Sin progresión distal a miotomas' };
+  }
+  if (label === 'Intensidad') {
+    const withParen = parseIntensidadConParentesis(txt);
+    const m = withParen.match(/^(leve|moderada|severa|difusa)\s*(\(.+?\))?/i);
+    if (m) {
+      const palabra = capWord(m[1].toLowerCase());
+      const signos  = m[2] || INTENSITY_SIGNS[m[1].toLowerCase()];
+      const suffix  = withParen.slice(m[0].length).trim();
+      return { label: 'Intensidad', txt: `${palabra} ${signos}${suffix ? ` ${suffix}` : ''}` };
+    }
+    return { label: 'Intensidad', txt: withParen };
+  }
+  if (label === 'Fase') return { label: 'Fase', txt: capWord(txt) };
+  if (label === 'Ubicación') {
+    const u = ubicacionAplanadaParaReporte(txt);
+    return { label: 'Ubicación', txt: `Polisegmentaria a nivel ${u}` };
+  }
+  if (label === 'Nivel') return { label: 'Nivel', txt };
+  return { label, txt };
+};
+
+const buildDiagnostico = (items) => {
+  const dict = {};
+  items.forEach(t => { const p = getPair(t); if (p) dict[p[0]] = p[1]; });
+  const evolucion = (dict['Evolución'] || 'Radiculopatía').replace(/^Radiculopatía/i, 'Radiculopatía');
+  const fase      = (dict['Fase'] || '').trim();
+  const nivel     = (dict['Nivel'] || '').trim();
+  const nivelAgu  = (dict['Nivel de agudización'] || '').trim();
+  const intenRaw  = (dict['Intensidad'] || '').replace(/^Intensidad\s+/i, '').trim();
+  const prog      = (dict['Progresión'] || '').trim();
+  const reinRaw   = (dict['Reinervación'] || '').trim();
+  const pronRaw   = (dict['Pronóstico'] || '').trim();
+  const ubic      = (dict['Ubicación'] || '').trim();
+  const faseMin = fase ? fase.toLowerCase() : '';
+  const nivelCompuesto = nivelAgu ? `${nivel} con agudización ${nivelAgu}` : nivel;
+  let head = `${evolucion} ${faseMin}`.replace(/\s+/g, ' ').trim();
+  if (ubic) {
+    const uRep = ubicacionAplanadaParaReporte(ubic);
+    head += `${head ? ' ' : ''}polisegmentaria a nivel ${uRep}`;
+  } else if (nivelCompuesto) {
+    head += `${head ? ' ' : ''}${nivelCompuesto}`;
+  }
+  if (intenRaw) {
+    const inten = parseIntensidadConParentesis(intenRaw);
+    head += `${head ? ', ' : ''}intensidad ${inten}`;
+  }
+  if (prog) head += ` ${prog}`;
+  head = head.replace(/\s+/g, ' ').trim() + '.';
+  let rein = '';
+  if (reinRaw) {
+    let r = reinRaw.replace(/^con\s+/i, '').replace(/^sin\s+/i, 'Sin ');
+    r = r.replace(/^reinervación/i, 'Reinervación');
+    rein = r;
+  }
+  let pron = '';
+  if (pronRaw) pron = `pronóstico de ${pronRaw.toLowerCase()}.`;
+  let tail = '';
+  if (rein && pron) tail = `${rein}; ${pron}`;
+  else if (rein)    tail = `${rein}.`;
+  else if (pron)    tail = pron.charAt(0).toUpperCase() + pron.slice(1);
+  return tail ? `${head}\n${tail}` : head;
 };
 
 /* ─── UI helpers ──────────────────────────────────────────────────────────── */
@@ -498,7 +626,7 @@ function StepEFase({ goTo, addText, resetAll }) {
       <NavRow onBack={() => goTo('A')} onReset={resetAll} />
       <StepTitle>Fase</StepTitle>
       {['Activa', 'Inactiva', 'Antigua'].map(f => (
-        <ChoiceBtn key={f} label={f.toUpperCase()} onPress={() => { addText(f); goTo('B_NIVEL'); }} />
+        <ChoiceBtn key={f} label={f.toUpperCase()} onPress={() => { addText(' ' + f); goTo('B_NIVEL'); }} />
       ))}
     </div>
   );
@@ -693,7 +821,7 @@ function StepBNivel({
 function StepEIntensidad({ goTo, addText, evo, resetAll }) {
   const opciones = [
     { nombre: 'Leve (+/+)',    texto: 'Intensidad leve (+/+)' },
-    { nombre: 'Moderada (++)', texto: 'Intensidad moderada (+++)' },
+    { nombre: 'Moderada (++)', texto: 'Intensidad moderada (++)' },
     { nombre: 'Severa (+++)',  texto: 'Intensidad severa (+++)' },
     { nombre: 'Difusa (++++)', texto: 'Intensidad difusa (++++)'  },
   ];
@@ -718,7 +846,7 @@ function StepFReinervacion({ goTo, addText, evo, resetAll }) {
       <NavRow onBack={() => goTo('E_INTENSIDAD')} onReset={resetAll} />
       <StepTitle>Reinervación</StepTitle>
       {['Abundante', 'Mínima', 'Ausente'].map(r => (
-        <ChoiceBtn key={r} label={r.toUpperCase()} onPress={() => { addText(`con reinervación colateral ${r.toLowerCase()}`); goTo(goNext); }} />
+        <ChoiceBtn key={r} label={r.toUpperCase()} onPress={() => { addText(r === 'Ausente' ? 'sin reinervación colateral' : `con reinervación colateral ${r.toLowerCase()}`); goTo(goNext); }} />
       ))}
       <SkipButton onPress={() => goTo(goNext)} />
     </div>
@@ -809,7 +937,7 @@ function StepSLado({ goTo, sensNivel, addText, applySensOverlays, resetAll }) {
 }
 
 /* ──────────── Panel FINAL ──────────────────────────────────────── */
-function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, postOverlays, antOverlays, crosses, laminaRef, nombrePaciente, textoFinal, imgLista, setImgLista, comentarioLista, setShowGaleria, setShowComentarioModal, resetAll, pdfOpen, activeOv, activeTab, setActiveTab, textos, setTextos }) {
+function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, listaRender, postOverlays, antOverlays, crosses, laminaRef, nombrePaciente, textoFinal, imgLista, setImgLista, comentarioLista, setShowGaleria, setShowComentarioModal, resetAll, pdfOpen, activeOv, activeTab, setActiveTab }) {
   const backStep = flowType === 'Sensitiva' ? 'S_LADO' : 'G_PRONOSTICO';
 
   return (
@@ -846,14 +974,14 @@ function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVi
       {/* Tab LISTA: items del flujo + galería + comentario */}
       {activeTab === 'lista' && (
         <div style={{ flex:1, overflowY:'auto' }}>
-          {/* Items del flujo */}
-          {textos.length > 0 && (
+          {/* Items estructurados */}
+          {listaRender.length > 0 && (
             <div style={{ marginBottom:10 }}>
-              {textos.map((t, i) => (
-                <div key={i} style={{ display:'flex', alignItems:'center', gap:8, padding:'5px 8px', marginBottom:4, borderRadius:7, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)' }}>
-                  <span style={{ width:6, height:6, borderRadius:'50%', background:'#f97316', flexShrink:0 }} />
-                  <span style={{ color:'rgba(255,255,255,0.75)', fontSize:12, flex:1 }}>{t}</span>
-                  <button onClick={() => setTextos(prev => prev.filter((_, j) => j !== i))} style={{ background:'transparent', border:'none', color:'rgba(255,255,255,0.3)', cursor:'pointer', fontSize:13, padding:'0 2px', lineHeight:1 }}>✕</button>
+              {listaRender.map(({ label, txt }) => (
+                <div key={label} style={{ display:'flex', alignItems:'flex-start', gap:8, padding:'5px 8px', marginBottom:4, borderRadius:7, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)' }}>
+                  <span style={{ width:6, height:6, borderRadius:'50%', background:'#f97316', flexShrink:0, marginTop:4 }} />
+                  <span style={{ color:'rgba(255,255,255,0.45)', fontSize:11, fontWeight:600, minWidth:80, flexShrink:0 }}>{label}</span>
+                  <span style={{ color:'rgba(255,255,255,0.85)', fontSize:12, flex:1 }}>{txt}</span>
                 </div>
               ))}
             </div>
@@ -1036,12 +1164,24 @@ export default function ReportFaceRadiculopatia() {
   const baseAnt  = isSensitiva ? BASE_ANT_SENS  : BASE_ANT_MOTOR;
 
   /* --- texto del reporte --- */
-  const textoReporte = useMemo(() => limpiarTextoReporte(textos.join(' ')), [textos]);
+  const textoReporte = useMemo(() => textos.length ? buildDiagnostico(textos) : '', [textos]);
   const textoFinal = editadoManual ? textoEditado : textoReporte;
   useEffect(() => { if (!editadoManual) setTextoEditado(textoReporte); }, [textoReporte, editadoManual]);
 
-  /* lista visual: cada texto como item separado */
-  const listaVisual = useMemo(() => textos.map((t, i) => ({ k: `${i}_${t}`, v: t })), [textos]);
+  /* lista estructurada: pares ordenados label/valor como en móvil */
+  const listaRender = useMemo(() => {
+    const dict = {};
+    textos.forEach(t => { const p = getPair(t); if (p) dict[p[0]] = p[1]; });
+    if (dict['Intensidad'] && dict['Progresión']) {
+      const intenTxt = formatLista('Intensidad', dict['Intensidad']).txt;
+      const esSin = (dict['Progresión'] || '').toLowerCase().trim().startsWith('sin');
+      dict['Intensidad'] = `${intenTxt} ${esSin ? 'sin progresión distal a miotomas' : 'con progresión distal a miotomas'}`;
+      delete dict['Progresión'];
+    }
+    return ORDER.filter(lbl => dict[lbl]).map(lbl => formatLista(lbl, dict[lbl]));
+  }, [textos]);
+
+  const listaVisual = useMemo(() => listaRender.map(({ label, txt }) => ({ k: `${label}_${txt}`, v: `${label}: ${txt}` })), [listaRender]);
 
   /* --- reset --- */
   const resetAll = useCallback(() => {
@@ -1094,6 +1234,7 @@ export default function ReportFaceRadiculopatia() {
             agregarFigura={agregarFigura}
             setPdfOpen={setPdfOpen}
             listaVisual={listaVisual}
+            listaRender={listaRender}
             postOverlays={postOverlays}
             antOverlays={antOverlays}
             activeOv={[...new Set([...postOverlays, ...antOverlays])]}
@@ -1110,8 +1251,6 @@ export default function ReportFaceRadiculopatia() {
             pdfOpen={pdfOpen}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
-            textos={textos}
-            setTextos={setTextos}
           />
         );
       default: return null;

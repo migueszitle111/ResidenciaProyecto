@@ -16,18 +16,18 @@ function emptyBasales(esCraneal) {
   return {
     peSomatosensoriales: emptyReg(),
     peMotores:           emptyReg(),
+    ...(esCraneal ? { peMotoresCorticobulbares: emptyReg() } : {}),
     emgLibre:            emptyReg(),
     emgEvocada:          emptyReg(),
-    tof:                 emptyReg(),
-    ondaD:               emptyReg(),
-    pNeuromotores:       emptyReg(),
     ...(esCraneal ? {
-      peMotoresCorticobulbares: emptyReg(),
-      peVisuales:               emptyReg(),
-      peAuditivosTallo:         emptyReg(),
-      electroencefalograma:     emptyReg(),
-      electrocorticografia:     emptyReg(),
+      peVisuales:       emptyReg(),
+      peAuditivosTallo: emptyReg(),
     } : {}),
+    ondaD:               emptyReg(),
+    tof:                 emptyReg(),
+    electroencefalograma: emptyReg(),
+    ...(esCraneal ? { electrocorticografia: emptyReg() } : {}),
+    pNeuromotores:       emptyReg(),
   };
 }
 
@@ -35,18 +35,18 @@ function emptyFinales(esCraneal) {
   return {
     peSomatosensorialesFinales: emptyReg(),
     peMotoresFinales:           emptyReg(),
+    ...(esCraneal ? { peMotoresCorticobulbaresFinales: emptyReg() } : {}),
     emgLibreFinales:            emptyReg(),
     emgEvocadaFinales:          emptyReg(),
-    tofFinales:                 emptyReg(),
-    ondaDFinales:               emptyReg(),
-    pNeuromotoresFinales:       emptyReg(),
     ...(esCraneal ? {
-      peMotoresCorticobulbaresFinales: emptyReg(),
-      peVisualesFinales:               emptyReg(),
-      peAuditivosTalloFinales:         emptyReg(),
-      electroencefalogramaFinales:     emptyReg(),
-      electrocorticografiaFinales:     emptyReg(),
+      peVisualesFinales:       emptyReg(),
+      peAuditivosTalloFinales: emptyReg(),
     } : {}),
+    ondaDFinales:               emptyReg(),
+    tofFinales:                 emptyReg(),
+    electroencefalogramaFinales: emptyReg(),
+    ...(esCraneal ? { electrocorticografiaFinales: emptyReg() } : {}),
+    pNeuromotoresFinales:       emptyReg(),
   };
 }
 
@@ -120,18 +120,18 @@ function CamposRegistros({ data, onChange, esCraneal }) {
   const campos = [
     ['peSomatosensoriales',      'PE Somatosensoriales'],
     ['peMotores',                'PE Motores'],
+    ...(esCraneal ? [['peMotoresCorticobulbares', 'PE Motores Corticobulbares']] : []),
     ['emgLibre',                 'EMG Libre'],
     ['emgEvocada',               'EMG Evocada'],
-    ['tof',                      'TOF'],
-    ['ondaD',                    'Onda D'],
-    ['pNeuromotores',            'P. Neuromotores'],
     ...(esCraneal ? [
-      ['peMotoresCorticobulbares','PE Motores Corticobulbares'],
-      ['peVisuales',             'PE Visuales'],
-      ['peAuditivosTallo',       'PE Auditivos de Tallo'],
-      ['electroencefalograma',   'Electroencefalograma'],
-      ['electrocorticografia',   'Electrocorticografía'],
+      ['peVisuales',    'PE Visuales'],
+      ['peAuditivosTallo', 'PE Auditivos de Tallo Cerebral'],
     ] : []),
+    ['ondaD',                    'Onda D'],
+    ['tof',                      'TOF'],
+    ['electroencefalograma',     'Electroencefalograma'],
+    ...(esCraneal ? [['electrocorticografia', 'Electrocorticografía']] : []),
+    ['pNeuromotores',            'Comentario'],
   ];
   return (
     <div className="flex flex-col gap-3">
@@ -147,18 +147,18 @@ function CamposFinales({ data, onChange, esCraneal }) {
   const campos = [
     ['peSomatosensorialesFinales', 'PE Somatosensoriales'],
     ['peMotoresFinales',           'PE Motores'],
+    ...(esCraneal ? [['peMotoresCorticobulbaresFinales', 'PE Motores Corticobulbares']] : []),
     ['emgLibreFinales',            'EMG Libre'],
     ['emgEvocadaFinales',          'EMG Evocada'],
-    ['tofFinales',                 'TOF'],
-    ['ondaDFinales',               'Onda D'],
-    ['pNeuromotoresFinales',       'P. Neuromotores'],
     ...(esCraneal ? [
-      ['peMotoresCorticobulbaresFinales','PE Motores Corticobulbares'],
-      ['peVisualesFinales',             'PE Visuales'],
-      ['peAuditivosTalloFinales',       'PE Auditivos de Tallo'],
-      ['electroencefalogramaFinales',   'Electroencefalograma'],
-      ['electrocorticografiaFinales',   'Electrocorticografía'],
+      ['peVisualesFinales',       'PE Visuales'],
+      ['peAuditivosTalloFinales', 'PE Auditivos de Tallo Cerebral'],
     ] : []),
+    ['ondaDFinales',               'Onda D'],
+    ['tofFinales',                 'TOF'],
+    ['electroencefalogramaFinales', 'Electroencefalograma'],
+    ...(esCraneal ? [['electrocorticografiaFinales', 'Electrocorticografía']] : []),
+    ['pNeuromotoresFinales',       'Comentario'],
   ];
   return (
     <div className="flex flex-col gap-3">
@@ -415,7 +415,7 @@ function GenerarInformeModal({ onLink, onPdf, onCancelar }) {
 function LinkModal({ onClose, onGenerate, generating, link, progress }) {
   const [title, setTitle]     = useState('');
   const [message, setMessage] = useState('');
-  const [expiry, setExpiry]   = useState('24h');
+  const [expiry, setExpiry]   = useState('15d');
   const [files, setFiles]     = useState([]);
   const fileRef = useRef();
 
@@ -428,9 +428,9 @@ function LinkModal({ onClose, onGenerate, generating, link, progress }) {
   };
 
   const expiryOpts = [
-    { v: '24h', l: '24 horas' },
-    { v: '5d',  l: '5 días' },
     { v: '15d', l: '15 días' },
+    { v: '30d', l: '30 días' },
+    { v: '3m',  l: '3 meses' },
   ];
 
   return (
@@ -725,7 +725,7 @@ export default function FormularioReporte({ nombreCirugia }) {
       const datos = buildReporteData();
       const doctorName = [datos.usuarioNombre, datos.usuarioApellido].filter(Boolean).join(' ');
       const studyType  = 'Neuromonitoreo Intraoperatorio';
-      const expSeconds = expiry === '24h' ? 86400 : expiry === '5d' ? 432000 : 1296000;
+      const expSeconds = expiry === '30d' ? 2592000 : expiry === '3m' ? 7776000 : 1296000;
 
       const finalTitle = (title?.trim() || `${studyType} – ${form.nombrePaciente || 'Paciente'}${doctorName ? ` – ${doctorName}` : ''}`).slice(0, 140);
       const finalMsg   = message?.trim() || [

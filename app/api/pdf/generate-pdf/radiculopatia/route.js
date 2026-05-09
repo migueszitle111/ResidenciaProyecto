@@ -90,26 +90,45 @@ function buildPageHtml({
   postOverlayB64s,
   antOverlayB64s,
   crosses,
+  plantillaId,
 }) {
-  // Footer y header son absolutos, no compiten con los paneles
-  const HDR_H   = 44;   // px — espacio reservado arriba para nombre + logo
-  const FTR_H   = 32;   // px — espacio reservado abajo para datos del médico
-  const DIAG_H  = (finalConclusion || '').trim() ? 28 : 0;
-  // Paneles: mitad del ancho, altura restante entre header, diag y footer
-  const panelW  = Math.floor(PAGE_W / 2);
-  const panelsH = PAGE_H - HDR_H - DIAG_H - FTR_H;
+  const hasDiag   = (finalConclusion || '').trim().length > 0;
+  const isPlantC  = plantillaId === 'C';
 
+  // Layout vertical fijo
+  const HDR_H  = 40;
+  const DIAG_H = hasDiag ? 56 : 0;
+  const FTR_H  = 28;
+  const GAP    = 8;
+
+  // Plantilla C: todo el contenido sube 20px (excepto footer)
+  const CONTENT_OFFSET = isPlantC ? -20 : 0;
+
+  // Láminas fijas en 530px de alto — deja espacio visible para conclusión y footer
+  const panelsH = 530;
+
+  // Imágenes son portrait 2550×3300 → ratio ancho/alto = 0.7727
+  // Cada panel tiene exactamente el ancho de la imagen escalada → sin márgenes laterales
+  const IMG_RATIO = 2550 / 3300;
+  const panelW    = Math.round(panelsH * IMG_RATIO);        // ancho exacto de cada lámina
+  const totalW    = panelW * 2;
+  const panelsLeft = Math.round((PAGE_W - totalW) / 2);    // centrado horizontal
+
+  const panelsTop = HDR_H + 30 + CONTENT_OFFSET;
+
+  // Overlays comparten exactamente el mismo tamaño → alineación perfecta
   const mkOverlays = (b64s) =>
     (b64s || []).filter(Boolean)
       .map(b64 => `<img src="${b64}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:2;pointer-events:none;"/>`)
       .join('');
 
+  // Cruces: posición relativa al panel (que ya tiene el tamaño exacto de la imagen)
   const mkCrosses = (list, side) =>
     (list || []).filter(c => c.side === side).map(({ src, topPct, offPct }) => {
-      const posAttr = side === 'L'
-        ? `left:${offPct * 100}%`
-        : `right:${offPct * 100}%`;
-      return `<img src="${src}" style="position:absolute;top:${topPct * 100}%;${posAttr};width:64px;height:64px;object-fit:contain;z-index:5;pointer-events:none;"/>`;
+      const top  = Math.round(topPct * panelsH);
+      const xImg = Math.round(offPct * panelW);
+      const left = side === 'L' ? xImg : (panelW - xImg - 56);
+      return `<img src="${src}" style="position:absolute;top:${top}px;left:${left}px;width:56px;height:56px;object-fit:contain;z-index:5;pointer-events:none;"/>`;
     }).join('');
 
   const svgUser  = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
@@ -124,9 +143,14 @@ function buildPageHtml({
     userData.cedula ? `<span class="fi">${svgId}<span>${esc(userData.cedula)}</span></span>` : '',
   ].filter(Boolean).join('<span class="fsep">|</span>');
 
-  const diagHtml = (finalConclusion || '').split('\n\n')
-    .map(p => `<div class="diag-para">${esc(p.trim())}</div>`)
-    .join('');
+  // Cada \n en la conclusión se convierte en <br>; cada \n\n en párrafo separado
+  const diagHtml = (finalConclusion || '')
+    .split('\n')
+    .map(line => `<span>${esc(line.trim())}</span>`)
+    .join('<br/>');
+
+  const diagTop = panelsTop + panelsH + GAP;
+  const ftrTop  = PAGE_H - FTR_H;
 
   return `<!DOCTYPE html>
 <html>
@@ -137,26 +161,35 @@ function buildPageHtml({
   img{border:none;outline:none;box-shadow:none;display:block}
   html,body{width:${PAGE_W}px;height:${PAGE_H}px;background:transparent;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overflow:hidden;}
   .page{position:relative;width:${PAGE_W}px;height:${PAGE_H}px;background:transparent;}
-  .hdr{position:absolute;top:0;left:0;right:0;height:${HDR_H}px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:10;}
-  .patient{font-size:12px;font-weight:700;color:#111;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .logo{width:40px;height:40px;object-fit:contain;flex-shrink:0;}
-  .panels{position:absolute;top:${HDR_H}px;left:0;display:flex;flex-direction:row;width:${PAGE_W}px;height:${panelsH}px;}
+
+  /* ── Header ── */
+  .hdr{position:absolute;top:0;left:0;right:0;height:${HDR_H}px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:10;}
+  .patient{font-size:13px;font-weight:700;color:#111;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .logo{width:42px;height:42px;object-fit:contain;flex-shrink:0;}
+
+  /* ── Paneles de láminas ── */
+  .panels{position:absolute;top:${panelsTop}px;left:${panelsLeft}px;display:flex;flex-direction:row;width:${totalW}px;height:${panelsH}px;}
   .panel{position:relative;width:${panelW}px;height:${panelsH}px;flex-shrink:0;overflow:hidden;}
-  .panel img.base{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;}
-  ${DIAG_H > 0 ? `.diag{position:absolute;top:${HDR_H + panelsH}px;left:0;right:0;height:${DIAG_H}px;padding:2px 24px;overflow:hidden;}
-  .diag-para{font-size:8.5px;line-height:13px;color:#1a1a1a;text-align:justify;}` : ''}
-  .footer{position:absolute;bottom:4px;left:0;right:0;height:${FTR_H}px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 20px;}
-  .fi{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:#222;white-space:nowrap}
-  .fsep{font-size:10px;color:#999;margin:0 2px}
+  .panel img.base{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:fill;z-index:1;}
+
+  /* ── Conclusión ── */
+  .diag{position:absolute;top:${diagTop}px;left:${panelsLeft}px;width:${totalW}px;height:${DIAG_H}px;display:flex;align-items:flex-start;padding:6px 0 0 0;}
+  .diag-text{font-size:11.5px;line-height:18px;color:#111;font-weight:400;}
+
+  /* ── Footer ── */
+  .footer{position:absolute;top:${ftrTop}px;left:0;right:0;height:${FTR_H}px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 20px;}
+  .fi{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:#333;white-space:nowrap}
+  .fsep{font-size:10px;color:#bbb;margin:0 2px}
 </style>
 </head>
 <body>
 <div class="page">
-  <!-- Header: nombre paciente + logo médico -->
+  <!-- Header -->
   <div class="hdr">
     <div class="patient">${esc(topLeftText)}</div>
     ${userData.imageUrl ? `<img src="${esc(userData.imageUrl)}" class="logo"/>` : ''}
   </div>
+
   <!-- Dos paneles de láminas -->
   <div class="panels">
     <div class="panel">
@@ -170,9 +203,11 @@ function buildPageHtml({
       ${mkCrosses(crosses, 'R')}
     </div>
   </div>
-  <!-- Diagnóstico (solo si hay texto) -->
-  ${DIAG_H > 0 ? `<div class="diag">${diagHtml}</div>` : ''}
-  <!-- Footer absoluto: datos del médico -->
+
+  <!-- Conclusión -->
+  ${hasDiag ? `<div class="diag"><div class="diag-text">${diagHtml}</div></div>` : ''}
+
+  <!-- Footer -->
   <div class="footer">${footerItems}</div>
 </div>
 </body>
@@ -307,6 +342,7 @@ export async function POST(req) {
       postOverlayB64s,
       antOverlayB64s,
       crosses: crossesResolved,
+      plantillaId,
     });
 
     // ── Capture PNG ───────────────────────────────────────────────

@@ -633,23 +633,29 @@ function StepEFase({ goTo, addText, resetAll }) {
 }
 
 /* ─── Constantes internas del nivel ─────────────────────────────────────── */
-const CERVICAL_LVL  = ['C4','C5','C6','C7','C8','T1'];
+const CERVICAL_LVL  = ['C5','C6','C7','C8','T1'];
 const LUMBO_LVL     = ['L1','L2','L3','L4','L5','S1','S2'];
 
 /* B – Nivel (accordion igual que móvil) */
 /* checkedL_C, checkedR_C, checkedL_L, checkedR_L viven en el padre para que  */
 /* los overlays y cruces se actualicen en tiempo real al marcar/desmarcar.      */
 function StepBNivel({
-  goTo, evo, addText, addRegionOverlay, resetAll,
+  goTo, evo, flowType, addText, addRegionOverlay, resetAll,
   checkedL_C, setCheckedL_C, checkedR_C, setCheckedR_C,
   checkedL_L, setCheckedL_L, checkedR_L, setCheckedR_L,
+  agudiPhase, setAgudiPhase,
 }) {
   const [expandedNivel, setExpandedNivel] = useState(null);
   const [expandedVertC, setExpandedVertC] = useState(null);
   const [expandedVertL, setExpandedVertL] = useState(null);
   const [toracicoTxt,   setToracicoTxt]   = useState('');
 
+  const isCroAgu = flowType === 'Crónica agudizada';
   const backStep = evo === 'Crónica' ? 'E_FASE' : 'A';
+  const handleBack = () => {
+    if (isCroAgu && agudiPhase) { setAgudiPhase(false); setCheckedL_C([]); setCheckedR_C([]); setCheckedL_L([]); setCheckedR_L([]); }
+    else goTo(backStep);
+  };
 
   /* "solo uno por lado por nivel" – igual que toggleOnePerSide móvil */
   const toggleOne = (setList, id) => {
@@ -679,9 +685,11 @@ function StepBNivel({
     let res = segs.join(', ');
     if (segs.length > 1) res = res.replace(/, ([^,]+)$/, ' Y $1');
     const total = left.length + right.length + bilateral.length;
-    addText(total >= 3 ? `nivel ${res} (multinivel)` : `nivel ${res}`);
+    const prefix = agudiPhase ? 'con agudización nivel' : 'nivel';
+    addText(total >= 3 ? `${prefix} ${res} (multinivel)` : `${prefix} ${res}`);
     addRegionOverlay('Cervical');
-    goTo('E_INTENSIDAD');
+    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); setCheckedL_C([]); setCheckedR_C([]); setCheckedL_L([]); setCheckedR_L([]); }
+    else goTo('E_INTENSIDAD');
   };
 
   /* Texto final Lumbosacro → avanza */
@@ -702,17 +710,21 @@ function StepBNivel({
     let res = segs.join(', ');
     if (segs.length > 1) res = res.replace(/, ([^,]+)$/, ' Y $1');
     const total = left.length + right.length + bilateral.length;
-    addText(total >= 3 ? `nivel ${res} (multinivel)` : `nivel ${res}`);
+    const prefix = agudiPhase ? 'con agudización nivel' : 'nivel';
+    addText(total >= 3 ? `${prefix} ${res} (multinivel)` : `${prefix} ${res}`);
     addRegionOverlay('Lumbosacro');
-    goTo('E_INTENSIDAD');
+    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); setCheckedL_C([]); setCheckedR_C([]); setCheckedL_L([]); setCheckedR_L([]); }
+    else goTo('E_INTENSIDAD');
   };
 
   /* Torácica */
   const finalizarToracica = () => {
     if (!toracicoTxt.trim()) return;
-    addText(`niveles Torácicas: ${toracicoTxt.trim()}`);
+    const prefix = agudiPhase ? 'con agudización nivel torácica:' : 'niveles Torácicas:';
+    addText(`${prefix} ${toracicoTxt.trim()}`);
     addRegionOverlay('Torácica');
-    goTo('E_INTENSIDAD');
+    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); setCheckedL_C([]); setCheckedR_C([]); setCheckedL_L([]); setCheckedR_L([]); setToracicoTxt(''); }
+    else goTo('E_INTENSIDAD');
   };
 
   /* Checkbox row – igual que la app móvil: cuadro + número al lado */
@@ -751,8 +763,8 @@ function StepBNivel({
 
   return (
     <div>
-      <NavRow onBack={() => goTo(backStep)} onReset={resetAll} />
-      <StepTitle>Nivel</StepTitle>
+      <NavRow onBack={handleBack} onReset={resetAll} />
+      <StepTitle>{(isCroAgu && agudiPhase) ? 'Agudización' : 'Nivel'}</StepTitle>
 
       {/* ── Cervical ── */}
       <AccHeader label="CERVICAL" open={expandedNivel === 'Cervical'} onToggle={() => setExpandedNivel(p => p === 'Cervical' ? null : 'Cervical')} />
@@ -825,7 +837,7 @@ function StepEIntensidad({ goTo, addText, evo, resetAll }) {
     { nombre: 'Severa (+++)',  texto: 'Intensidad severa (+++)' },
     { nombre: 'Difusa (++++)', texto: 'Intensidad difusa (++++)'  },
   ];
-  const goNext = (evo === 'Subaguda' || evo === 'Crónica') ? 'F_REINERVACION' : 'G_PRONOSTICO';
+  const goNext = (evo === 'Aguda' || evo === 'Subaguda' || evo === 'Crónica') ? 'F_REINERVACION' : 'G_PRONOSTICO';
   return (
     <div>
       <NavRow onBack={() => goTo('B_NIVEL')} onReset={resetAll} />
@@ -868,7 +880,7 @@ function StepF2Progresion({ goTo, addText, resetAll }) {
 
 /* G – Pronóstico */
 function StepGPronostico({ goTo, addText, evo, resetAll }) {
-  const backStep = (evo === 'Subaguda' || evo === 'Crónica') ? 'F_REINERVACION' : 'E_INTENSIDAD';
+  const backStep = (evo === 'Aguda' || evo === 'Subaguda' || evo === 'Crónica') ? 'F_REINERVACION' : 'E_INTENSIDAD';
   const opciones = [
     { nombre: 'Completa',           texto: 'Pronóstico Recuperación completa' },
     { nombre: 'Parcial funcional',  texto: 'Pronóstico Recuperación parcial funcional' },
@@ -888,73 +900,81 @@ function StepGPronostico({ goTo, addText, evo, resetAll }) {
 }
 
 /* S_PATOLOGIA – Sensitiva: patología */
-function StepSPatologia({ goTo, addText, resetAll }) {
+function StepSPatologia({ goTo, setSensPatologia, addText, resetAll }) {
   return (
     <div>
       <NavRow onBack={() => goTo('A')} onReset={resetAll} />
       <StepTitle>Patología sensitiva</StepTitle>
-      <ChoiceBtn label="BLOQUEO"  onPress={() => { addText('Patología Bloqueo');  goTo('S_NIVEL'); }} />
-      <ChoiceBtn label="RETARDO"  onPress={() => { addText('Patología Retardo'); goTo('S_NIVEL'); }} />
+      <ChoiceBtn label="BLOQUEO" onPress={() => { setSensPatologia('Bloqueo'); addText('Patología Bloqueo'); goTo('S_NIVEL'); }} />
+      <ChoiceBtn label="RETARDO" onPress={() => { setSensPatologia('Retardo'); addText('Patología Retardo'); goTo('S_NIVEL'); }} />
     </div>
   );
 }
 
-/* S_NIVEL – Sensitiva: nivel */
-function StepSNivel({ goTo, setSensNivel, addText, resetAll }) {
+/* S_NIVEL – Sensitiva: selección simultánea de nivel y lado (igual que en móvil) */
+function StepSNivel({ goTo, selectedSensitiva, setSelectedSensitiva, applySensOverlays, resetAll, onFinalizar }) {
+  const lados = ['Izquierda', 'Derecha', 'Bilateral'];
+  const tieneSelecc = Object.values(selectedSensitiva).some(v => v !== null);
+
+  const handleSelect = (lvl, lado) => {
+    const prev = selectedSensitiva[lvl];
+    const postPrev = prev ? SENS_OVERLAYS[lvl]?.post[prev] : null;
+    const antPrev  = prev ? SENS_OVERLAYS[lvl]?.ant[prev]  : null;
+
+    if (prev === lado) {
+      setSelectedSensitiva(s => ({ ...s, [lvl]: null }));
+      return;
+    }
+    const postSrc = SENS_OVERLAYS[lvl]?.post[lado];
+    const antSrc  = SENS_OVERLAYS[lvl]?.ant[lado];
+    if (!postSrc && !antSrc) return;
+    setSelectedSensitiva(s => ({ ...s, [lvl]: lado }));
+    applySensOverlays(lvl, lado, postPrev, antPrev);
+  };
+
   return (
     <div>
       <NavRow onBack={() => goTo('S_PATOLOGIA')} onReset={resetAll} />
       <StepTitle>Nivel sensitivo</StepTitle>
-      {SENSITIVA_LEVELS.map(n => (
-        <ChoiceBtn key={n} label={n} onPress={() => { setSensNivel(n); addText(n); goTo('S_LADO'); }} />
+      {SENSITIVA_LEVELS.map(lvl => (
+        <div key={lvl} style={{ marginBottom: 10 }}>
+          <p style={{ color: '#f97316', fontSize: 11, fontWeight: 700, margin: '0 0 5px', textTransform: 'uppercase', letterSpacing: 1 }}>{lvl}</p>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {lados.map(l => {
+              const available = SENS_OVERLAYS[lvl]?.post[l] || SENS_OVERLAYS[lvl]?.ant[l];
+              if (!available) return null;
+              const active = selectedSensitiva[lvl] === l;
+              return (
+                <button key={l} onClick={() => handleSelect(lvl, l)}
+                  style={{ padding: '5px 12px', borderRadius: 7, border: `1.5px solid ${active ? '#f97316' : 'rgba(255,255,255,0.2)'}`, background: active ? '#f97316' : 'rgba(255,255,255,0.05)', color: '#fff', fontSize: 12, fontWeight: active ? 700 : 400, cursor: 'pointer' }}>
+                  {l}
+                </button>
+              );
+            })}
+          </div>
+        </div>
       ))}
-    </div>
-  );
-}
-
-/* S_LADO – Sensitiva: lado */
-function StepSLado({ goTo, sensNivel, addText, applySensOverlays, resetAll }) {
-  const lados = ['Izquierda', 'Derecha', 'Bilateral'];
-  return (
-    <div>
-      <NavRow onBack={() => goTo('S_NIVEL')} onReset={resetAll} />
-      <StepTitle>Lado sensitivo</StepTitle>
-      {lados.map(l => {
-        const postSrc = SENS_OVERLAYS[sensNivel]?.post[l];
-        const antSrc  = SENS_OVERLAYS[sensNivel]?.ant[l];
-        const available = postSrc || antSrc;
-        if (!available) return null;
-        return (
-          <ChoiceBtn key={l} label={l.toUpperCase()} onPress={() => {
-            addText(l);
-            applySensOverlays(sensNivel, l);
-            goTo('FINAL');
-          }} />
-        );
-      })}
+      {tieneSelecc && (
+        <button onClick={onFinalizar} style={{ width: '100%', marginTop: 8, padding: '9px 0', borderRadius: 8, background: '#f97316', border: 'none', color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
+          Finalizar →
+        </button>
+      )}
     </div>
   );
 }
 
 /* ──────────── Panel FINAL ──────────────────────────────────────── */
-function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, listaRender, postOverlays, antOverlays, crosses, laminaRef, nombrePaciente, textoFinal, imgLista, setImgLista, comentarioLista, setShowGaleria, setShowComentarioModal, resetAll, pdfOpen, activeOv, activeTab, setActiveTab }) {
-  const backStep = flowType === 'Sensitiva' ? 'S_LADO' : 'G_PRONOSTICO';
+function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, postOverlays, antOverlays, crosses, laminaRef, nombrePaciente, textoFinal, imgLista, setImgLista, comentarioLista, setShowGaleria, onOpenComentario, resetAll, pdfOpen, activeOv, activeTab }) {
+  const backStep = flowType === 'Sensitiva' ? 'S_NIVEL' : 'G_PRONOSTICO';
 
   return (
     <div style={{ display:'flex', flexDirection:'column', height:'100%' }}>
       <NavRow onBack={() => goTo(backStep)} onReset={resetAll} onPdf={() => setPdfOpen(true)} />
 
-      {/* Tabs Reporte / Lista */}
-      <div style={{ display:'flex', gap:4, margin:'8px 0' }}>
-        {[['reporte','Reporte'],['lista','Lista']].map(([id, label]) => (
-          <button key={id} onClick={() => setActiveTab(id)} style={{ padding:'4px 16px', borderRadius:7, fontSize:12, fontWeight:600, border:'none', cursor:'pointer', background:activeTab === id ? '#f97316' : 'rgba(255,255,255,0.07)', color:activeTab === id ? '#fff' : 'rgba(255,255,255,0.4)' }}>{label}</button>
-        ))}
-      </div>
-
       {/* Tab REPORTE: figuras arrastrables */}
       {activeTab === 'reporte' && (
         <div>
-          <StepTitle>Agrega figuras al reporte</StepTitle>
+          <StepTitle>Agrega figuras al reporte (imagen)</StepTitle>
           <div style={{ display:'flex', gap:10, marginBottom:12 }}>
             <label style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:6, padding:'12px 8px', borderRadius:10, cursor:'pointer', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', color:'rgba(255,255,255,0.6)', fontSize:11, textAlign:'center' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}><circle cx="12" cy="12" r="9" /></svg>
@@ -967,53 +987,38 @@ function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVi
               <input type="file" accept="image/*" multiple style={{ display:'none' }} onChange={e => { Array.from(e.target.files || []).forEach(f => agregarFigura('square', URL.createObjectURL(f))); e.target.value = ''; }} />
             </label>
           </div>
-          {figuras.length > 0 && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, margin:'0 0 10px', fontStyle:'italic' }}>{figuras.length} figura{figuras.length > 1 ? 's' : ''} en la lámina</p>}
+          {figuras.length > 0 && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, margin:'0 0 6px', fontStyle:'italic' }}>{figuras.length} figura{figuras.length > 1 ? 's' : ''} en la lámina</p>}
         </div>
       )}
 
-      {/* Tab LISTA: items del flujo + galería + comentario */}
+      {/* Tab LISTA: galería de tabla + comentario */}
       {activeTab === 'lista' && (
-        <div style={{ flex:1, overflowY:'auto' }}>
-          {/* Items estructurados */}
-          {listaRender.length > 0 && (
-            <div style={{ marginBottom:10 }}>
-              {listaRender.map(({ label, txt }) => (
-                <div key={label} style={{ display:'flex', alignItems:'flex-start', gap:8, padding:'5px 8px', marginBottom:4, borderRadius:7, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)' }}>
-                  <span style={{ width:6, height:6, borderRadius:'50%', background:'#f97316', flexShrink:0, marginTop:4 }} />
-                  <span style={{ color:'rgba(255,255,255,0.45)', fontSize:11, fontWeight:600, minWidth:80, flexShrink:0 }}>{label}</span>
-                  <span style={{ color:'rgba(255,255,255,0.85)', fontSize:12, flex:1 }}>{txt}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Galería de tablas */}
-          <button onClick={() => setShowGaleria(true)} style={{ width:'100%', display:'flex', flexDirection:'column', alignItems:'center', gap:8, padding:'16px 12px', borderRadius:10, cursor:'pointer', marginBottom:10, background:'rgba(255,255,255,0.05)', border:'1px dashed rgba(255,255,255,0.15)' }}>
+        <div>
+          <StepTitle>Imagen de tabla</StepTitle>
+          <button onClick={() => setShowGaleria(true)} style={{ width:'100%', display:'flex', flexDirection:'column', alignItems:'center', gap:8, padding:'14px 10px', borderRadius:10, cursor:'pointer', marginBottom:8, background:'rgba(255,255,255,0.04)', border:'1px dashed rgba(255,255,255,0.15)' }}>
             {imgLista ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={imgLista.src} alt="tabla" style={{ width:'100%', maxHeight:90, objectFit:'contain', borderRadius:6 }} />
+              <img src={imgLista.src} alt="tabla" style={{ width:'100%', maxHeight:80, objectFit:'contain', borderRadius:6 }} />
             ) : (
               <>
-                <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18M7 3v18" /></svg>
-                <span style={{ color:'rgba(255,255,255,0.35)', fontSize:12 }}>Sin imagen seleccionada</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.25)" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18M7 3v18" /></svg>
+                <span style={{ color:'rgba(255,255,255,0.3)', fontSize:12 }}>Sin imagen seleccionada</span>
               </>
             )}
           </button>
           {imgLista && (
-            <button onClick={() => setImgLista(null)} style={{ width:'100%', padding:'5px 0', borderRadius:8, marginBottom:10, background:'transparent', border:'1px solid rgba(239,68,68,0.4)', color:'#ef4444', fontSize:12, cursor:'pointer' }}>
+            <button onClick={() => setImgLista(null)} style={{ width:'100%', padding:'5px 0', borderRadius:8, marginBottom:8, background:'transparent', border:'1px solid rgba(239,68,68,0.4)', color:'#ef4444', fontSize:12, cursor:'pointer' }}>
               Quitar imagen
             </button>
           )}
-
-          {/* Botón comentario */}
-          <button onClick={() => { setComentarioTemp(comentarioLista); setShowComentarioModal(true); }} style={{ width:'100%', padding:'10px 0', borderRadius:10, background:'#f97316', border:'none', cursor:'pointer', color:'#fff', fontWeight:700, fontSize:14 }}>
+          <button onClick={onOpenComentario} style={{ width:'100%', padding:'10px 0', borderRadius:10, background:'#f97316', border:'none', cursor:'pointer', color:'#fff', fontWeight:700, fontSize:13, marginBottom:6 }}>
             {comentarioLista ? 'Editar Comentario' : 'Agregar Comentario'}
           </button>
-          {comentarioLista && <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, fontStyle:'italic', marginTop:8 }}>{comentarioLista.length > 100 ? comentarioLista.slice(0, 100) + '…' : comentarioLista}</p>}
+          {comentarioLista && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, fontStyle:'italic', marginBottom:8 }}>{comentarioLista.length > 80 ? comentarioLista.slice(0,80)+'…' : comentarioLista}</p>}
         </div>
       )}
 
-      {/* ExportBar siempre presente (gestiona el modal de plantilla) */}
+      {/* ExportBar */}
       <div style={{ marginTop:'auto', paddingTop:8 }}>
         <ExportBar
           nombrePaciente={nombrePaciente}
@@ -1048,7 +1053,9 @@ export default function ReportFaceRadiculopatia() {
   const [step, setStep]               = useState('A');
   const [evo, setEvo]                 = useState(null);
   const [flowType, setFlowType]       = useState(''); // 'Aguda'|'Subaguda'|'Crónica'|'Crónica agudizada'|'Sensitiva'
-  const [sensNivel, setSensNivel]     = useState(null);
+  const [sensPatologia, setSensPatologia] = useState(null); // 'Bloqueo' | 'Retardo'
+  const [selectedSensitiva, setSelectedSensitiva] = useState({ 'C6-C7': null, 'S1': null });
+  const [agudiPhase, setAgudiPhase]   = useState(false); // Crónica agudizada: segunda pasada
   const [textos, setTextos]           = useState([]);
 
   /* checkboxes del paso Nivel – viven aquí para derivar overlays en tiempo real */
@@ -1148,23 +1155,49 @@ export default function ReportFaceRadiculopatia() {
     if (r.ant)  setCommittedAnt(prev  => [...prev, r.ant]);
   }, []);
 
-  /* --- overlays sensitivos --- */
-  const applySensOverlays = useCallback((sNivel, lado) => {
-    const ov = SENS_OVERLAYS[sNivel];
-    if (!ov) return;
-    const postSrc = ov.post[lado];
-    const antSrc  = ov.ant[lado];
-    if (postSrc) setCommittedPost(prev => [...prev, postSrc]);
-    if (antSrc)  setCommittedAnt(prev  => [...prev, antSrc]);
-  }, []);
-
   /* --- bases de imagen según flowType (como en móvil) --- */
   const isSensitiva = flowType === 'Sensitiva';
   const basePost = isSensitiva ? BASE_POST_SENS : BASE_POST_MOTOR;
   const baseAnt  = isSensitiva ? BASE_ANT_SENS  : BASE_ANT_MOTOR;
 
+  /* --- applySensOverlays reemplazando el overlay anterior del mismo nivel --- */
+  const applySensOverlays = useCallback((sNivel, lado, prevPost, prevAnt) => {
+    const ov = SENS_OVERLAYS[sNivel];
+    if (!ov) return;
+    const postSrc = ov.post[lado];
+    const antSrc  = ov.ant[lado];
+    setCommittedPost(prev => {
+      const base = prevPost ? prev.filter(x => x !== prevPost) : prev;
+      return postSrc ? [...base, postSrc] : base;
+    });
+    setCommittedAnt(prev => {
+      const base = prevAnt ? prev.filter(x => x !== prevAnt) : prev;
+      return antSrc ? [...base, antSrc] : base;
+    });
+  }, []);
+
+  /* --- buildSensitivaFrases (igual que en móvil) --- */
+  const buildSensitivaFrases = useCallback(() => {
+    if (!sensPatologia) return [];
+    const mapSide = { Izquierda: 'izquierdo', Derecha: 'derecho', Bilateral: 'bilateral' };
+    const base = sensPatologia === 'Retardo' ? 'Retardo aferente' : 'Bloqueo aferente';
+    const out = [];
+    ['C6-C7', 'S1'].forEach(lvl => {
+      const side = selectedSensitiva[lvl];
+      if (!side) return;
+      out.push(`${base} ${lvl} ${mapSide[side]}.`);
+    });
+    return out;
+  }, [sensPatologia, selectedSensitiva]);
+
   /* --- texto del reporte --- */
-  const textoReporte = useMemo(() => textos.length ? buildDiagnostico(textos) : '', [textos]);
+  const textoReporte = useMemo(() => {
+    if (flowType === 'Sensitiva') {
+      const frases = buildSensitivaFrases();
+      return frases.length ? frases.join(' ') : '';
+    }
+    return textos.length ? buildDiagnostico(textos) : '';
+  }, [flowType, textos, buildSensitivaFrases]);
   const textoFinal = editadoManual ? textoEditado : textoReporte;
   useEffect(() => { if (!editadoManual) setTextoEditado(textoReporte); }, [textoReporte, editadoManual]);
 
@@ -1186,7 +1219,9 @@ export default function ReportFaceRadiculopatia() {
   /* --- reset --- */
   const resetAll = useCallback(() => {
     setStep('A'); setEvo(null); setFlowType('');
-    setSensNivel(null); setTextos([]);
+    setSensPatologia(null); setSelectedSensitiva({ 'C6-C7': null, 'S1': null });
+    setAgudiPhase(false);
+    setTextos([]);
     setCheckedL_C([]); setCheckedR_C([]);
     setCheckedL_L([]); setCheckedR_L([]);
     setCommittedPost([]); setCommittedAnt([]);
@@ -1205,11 +1240,12 @@ export default function ReportFaceRadiculopatia() {
         return <StepEFase goTo={goTo} addText={addText} resetAll={resetAll} />;
       case 'B_NIVEL':
         return <StepBNivel
-          goTo={goTo} evo={evo} addText={addText} addRegionOverlay={addRegionOverlay} resetAll={resetAll}
+          goTo={goTo} evo={evo} flowType={flowType} addText={addText} addRegionOverlay={addRegionOverlay} resetAll={resetAll}
           checkedL_C={checkedL_C} setCheckedL_C={setCheckedL_C}
           checkedR_C={checkedR_C} setCheckedR_C={setCheckedR_C}
           checkedL_L={checkedL_L} setCheckedL_L={setCheckedL_L}
           checkedR_L={checkedR_L} setCheckedR_L={setCheckedR_L}
+          agudiPhase={agudiPhase} setAgudiPhase={setAgudiPhase}
         />;
       case 'E_INTENSIDAD':
         return <StepEIntensidad goTo={goTo} addText={addText} evo={evo} resetAll={resetAll} />;
@@ -1220,11 +1256,16 @@ export default function ReportFaceRadiculopatia() {
       case 'G_PRONOSTICO':
         return <StepGPronostico goTo={goTo} addText={addText} evo={evo} resetAll={resetAll} />;
       case 'S_PATOLOGIA':
-        return <StepSPatologia goTo={goTo} addText={addText} resetAll={resetAll} />;
+        return <StepSPatologia goTo={goTo} setSensPatologia={setSensPatologia} addText={addText} resetAll={resetAll} />;
       case 'S_NIVEL':
-        return <StepSNivel goTo={goTo} setSensNivel={setSensNivel} addText={addText} resetAll={resetAll} />;
-      case 'S_LADO':
-        return <StepSLado goTo={goTo} sensNivel={sensNivel} addText={addText} applySensOverlays={applySensOverlays} resetAll={resetAll} />;
+        return <StepSNivel
+          goTo={goTo}
+          selectedSensitiva={selectedSensitiva}
+          setSelectedSensitiva={setSelectedSensitiva}
+          applySensOverlays={applySensOverlays}
+          resetAll={resetAll}
+          onFinalizar={() => goTo('FINAL')}
+        />;
       case 'FINAL':
         return (
           <StepFinal
@@ -1234,7 +1275,6 @@ export default function ReportFaceRadiculopatia() {
             agregarFigura={agregarFigura}
             setPdfOpen={setPdfOpen}
             listaVisual={listaVisual}
-            listaRender={listaRender}
             postOverlays={postOverlays}
             antOverlays={antOverlays}
             activeOv={[...new Set([...postOverlays, ...antOverlays])]}
@@ -1246,11 +1286,10 @@ export default function ReportFaceRadiculopatia() {
             setImgLista={setImgLista}
             comentarioLista={comentarioLista}
             setShowGaleria={setShowGaleria}
-            setShowComentarioModal={setShowComentarioModal}
+            onOpenComentario={() => { setComentarioTemp(comentarioLista); setShowComentarioModal(true); }}
+            activeTab={activeTab}
             resetAll={resetAll}
             pdfOpen={pdfOpen}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
           />
         );
       default: return null;
@@ -1358,16 +1397,75 @@ export default function ReportFaceRadiculopatia() {
 
           </div>{/* fin fila */}
 
-          {/* ── FOOTER: texto del diagnóstico + datos usuario ── */}
-          <div style={{ background:'#111', borderRadius:'0 0 10px 10px', border:'1px solid rgba(255,255,255,0.08)', borderTop:'none', padding:'10px 16px 14px', marginBottom:16 }}>
-            {textoFinal
-              ? <textarea value={textoFinal} onChange={e => { setTextoEditado(e.target.value); setEditadoManual(true); }} rows={3} style={{ width:'100%', boxSizing:'border-box', resize:'vertical', background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:8, padding:'7px 10px', color:'rgba(255,255,255,0.85)', fontSize:13, lineHeight:1.55, outline:'none', fontFamily:'inherit' }} />
-              : <p style={{ color:'rgba(255,255,255,0.2)', fontSize:13, fontStyle:'italic', margin:'2px 0' }}>Sin conclusiones aún.</p>
-            }
-            {(session?.user?.name || session?.user?.email) && (
-              <div style={{ marginTop:7, paddingTop:6, borderTop:'1px solid rgba(255,255,255,0.06)', display:'flex', gap:16, flexWrap:'wrap' }}>
-                {session.user.name && <span style={{ color:'rgba(255,255,255,0.3)', fontSize:11 }}>👤 {session.user.name} {session.user.lastname || ''}</span>}
-                {session.user.email && <span style={{ color:'rgba(255,255,255,0.3)', fontSize:11 }}>✉ {session.user.email}</span>}
+          {/* ── FOOTER: pestañas Reporte/Lista + contenido ── */}
+          <div style={{ background:'#111', borderRadius:'0 0 10px 10px', border:'1px solid rgba(255,255,255,0.08)', borderTop:'none', marginBottom:16 }}>
+
+            {/* Selector de pestaña */}
+            <div style={{ display:'flex', borderBottom:'1px solid rgba(255,255,255,0.07)', padding:'8px 16px 0' }}>
+              {[['reporte','Reporte'],['lista','Lista']].map(([id, label]) => (
+                <button key={id} onClick={() => setActiveTab(id)} style={{ padding:'6px 20px', marginRight:4, borderRadius:'7px 7px 0 0', fontSize:12, fontWeight:600, border:'none', cursor:'pointer', background: activeTab === id ? '#f97316' : 'rgba(255,255,255,0.06)', color: activeTab === id ? '#fff' : 'rgba(255,255,255,0.4)', borderBottom: activeTab === id ? '2px solid #f97316' : '2px solid transparent' }}>{label}</button>
+              ))}
+            </div>
+
+            {/* Tab REPORTE: conclusión editable */}
+            {activeTab === 'reporte' && (
+              <div style={{ padding:'10px 16px 14px' }}>
+                {textoFinal
+                  ? <textarea value={textoFinal} onChange={e => { setTextoEditado(e.target.value); setEditadoManual(true); }} rows={3} style={{ width:'100%', boxSizing:'border-box', resize:'vertical', background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:8, padding:'7px 10px', color:'rgba(255,255,255,0.85)', fontSize:13, lineHeight:1.55, outline:'none', fontFamily:'inherit' }} />
+                  : <p style={{ color:'rgba(255,255,255,0.2)', fontSize:13, fontStyle:'italic', margin:'2px 0' }}>Sin conclusiones aún.</p>
+                }
+                {(session?.user?.name || session?.user?.email) && (
+                  <div style={{ marginTop:7, paddingTop:6, borderTop:'1px solid rgba(255,255,255,0.06)', display:'flex', gap:16, flexWrap:'wrap' }}>
+                    {session.user.name && <span style={{ color:'rgba(255,255,255,0.3)', fontSize:11 }}>👤 {session.user.name} {session.user.lastname || ''}</span>}
+                    {session.user.email && <span style={{ color:'rgba(255,255,255,0.3)', fontSize:11 }}>✉ {session.user.email}</span>}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Tab LISTA */}
+            {activeTab === 'lista' && (
+              <div style={{ padding:'10px 16px 14px' }}>
+                {/* Sensitiva: muestra Fibras / Patología / Nivel igual que el móvil */}
+                {flowType === 'Sensitiva' ? (
+                  <div>
+                    <div style={{ display:'flex', alignItems:'center', gap:8, padding:'5px 8px', marginBottom:4, borderRadius:7, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)' }}>
+                      <span style={{ width:6, height:6, borderRadius:'50%', background:'#f97316', flexShrink:0 }} />
+                      <span style={{ color:'rgba(255,255,255,0.45)', fontSize:11, fontWeight:600, minWidth:80 }}>Fibras</span>
+                      <span style={{ color:'rgba(255,255,255,0.85)', fontSize:12 }}>Sensitiva</span>
+                    </div>
+                    {sensPatologia && (
+                      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'5px 8px', marginBottom:4, borderRadius:7, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)' }}>
+                        <span style={{ width:6, height:6, borderRadius:'50%', background:'#f97316', flexShrink:0 }} />
+                        <span style={{ color:'rgba(255,255,255,0.45)', fontSize:11, fontWeight:600, minWidth:80 }}>Patología</span>
+                        <span style={{ color:'rgba(255,255,255,0.85)', fontSize:12 }}>{sensPatologia}</span>
+                      </div>
+                    )}
+                    {['C6-C7','S1'].map(lvl => {
+                      const side = selectedSensitiva[lvl];
+                      if (!side) return null;
+                      const sideTxt = side === 'Izquierda' ? 'izquierdo' : side === 'Derecha' ? 'derecho' : 'bilateral';
+                      return (
+                        <div key={lvl} style={{ display:'flex', alignItems:'center', gap:8, padding:'5px 8px', marginBottom:4, borderRadius:7, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)' }}>
+                          <span style={{ width:6, height:6, borderRadius:'50%', background:'#f97316', flexShrink:0 }} />
+                          <span style={{ color:'rgba(255,255,255,0.45)', fontSize:11, fontWeight:600, minWidth:80 }}>Nivel</span>
+                          <span style={{ color:'rgba(255,255,255,0.85)', fontSize:12 }}>{lvl} {sideTxt}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  /* Flujos normales */
+                  <div>
+                    {listaRender.length > 0 ? listaRender.map(({ label, txt }) => (
+                      <div key={label} style={{ display:'flex', alignItems:'flex-start', gap:8, padding:'5px 8px', marginBottom:4, borderRadius:7, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)' }}>
+                        <span style={{ width:6, height:6, borderRadius:'50%', background:'#f97316', flexShrink:0, marginTop:4 }} />
+                        <span style={{ color:'rgba(255,255,255,0.45)', fontSize:11, fontWeight:600, minWidth:80, flexShrink:0 }}>{label}</span>
+                        <span style={{ color:'rgba(255,255,255,0.85)', fontSize:12, flex:1 }}>{txt}</span>
+                      </div>
+                    )) : <p style={{ color:'rgba(255,255,255,0.2)', fontSize:13, fontStyle:'italic', margin:'2px 0' }}>Sin datos aún.</p>}
+                  </div>
+                )}
               </div>
             )}
           </div>

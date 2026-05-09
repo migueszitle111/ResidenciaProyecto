@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 
-const POLL_INTERVAL_MS = 15_000;
+const POLL_INTERVAL_MS = 3_000;
 
 // Componente invisible que se monta en el layout cuando el usuario tiene
 // sesión iniciada via QR. Cada 15 s consulta si la sesión fue revocada
@@ -40,7 +40,7 @@ export default function QrSessionGuard() {
       }
     };
 
-    timeoutId = setTimeout(check, POLL_INTERVAL_MS);
+    check();
 
     return () => {
       active = false;

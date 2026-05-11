@@ -7,10 +7,17 @@ const nextConfig = {
     ],
   },
 
+  // Prevent these packages from ever being bundled into serverless functions
+  serverExternalPackages: [
+    'puppeteer',
+    'puppeteer-core',
+    '@sparticuz/chromium',
+    '@sparticuz/chromium-min',
+  ],
+
   async headers() {
     return [
       {
-        /* PDFs estáticos: caché agresiva en CDN + browser */
         source: '/pdfs/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
@@ -18,7 +25,6 @@ const nextConfig = {
         ],
       },
       {
-        /* Librería dflip: también cacheable */
         source: '/dflip/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
@@ -27,20 +33,11 @@ const nextConfig = {
     ];
   },
 
-  webpack: (config, { isServer }) => {
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.map$/,
       use: ['ignore-loader'],
     });
-    if (isServer) {
-      config.externals = [
-        ...(Array.isArray(config.externals) ? config.externals : [config.externals].filter(Boolean)),
-        'puppeteer',
-        'puppeteer-core',
-        '@sparticuz/chromium',
-        '@sparticuz/chromium-min',
-      ];
-    }
     return config;
   },
 };

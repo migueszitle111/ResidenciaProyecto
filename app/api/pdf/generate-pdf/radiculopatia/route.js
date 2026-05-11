@@ -1,4 +1,4 @@
-// app/api/pdf/generate-pdf/radiculopatia/route.js
+﻿// app/api/pdf/generate-pdf/radiculopatia/route.js
 
 import { NextResponse } from 'next/server';
 import puppeteer        from 'puppeteer';
@@ -17,7 +17,7 @@ const baseUrl = isDev
 const BACKEND_URL = 'https://backendmedxpro-tef2.onrender.com';
 
 // A4 landscape: 841.89 x 595.28 pt
-// HTML capture at 2x scale → 1122 x 794 px viewport
+// HTML capture at 2x scale â†’ 1122 x 794 px viewport
 const PAGE_W = 1122;
 const PAGE_H = 794;
 
@@ -104,25 +104,25 @@ function buildPageHtml({
   // Plantilla C: todo el contenido sube 20px (excepto footer)
   const CONTENT_OFFSET = isPlantC ? -20 : 0;
 
-  // Láminas fijas en 530px de alto — deja espacio visible para conclusión y footer
+  // LÃ¡minas fijas en 530px de alto â€” deja espacio visible para conclusiÃ³n y footer
   const panelsH = 530;
 
-  // Imágenes son portrait 2550×3300 → ratio ancho/alto = 0.7727
-  // Cada panel tiene exactamente el ancho de la imagen escalada → sin márgenes laterales
+  // ImÃ¡genes son portrait 2550Ã—3300 â†’ ratio ancho/alto = 0.7727
+  // Cada panel tiene exactamente el ancho de la imagen escalada â†’ sin mÃ¡rgenes laterales
   const IMG_RATIO = 2550 / 3300;
-  const panelW    = Math.round(panelsH * IMG_RATIO);        // ancho exacto de cada lámina
+  const panelW    = Math.round(panelsH * IMG_RATIO);        // ancho exacto de cada lÃ¡mina
   const totalW    = panelW * 2;
   const panelsLeft = Math.round((PAGE_W - totalW) / 2);    // centrado horizontal
 
   const panelsTop = HDR_H + 30 + CONTENT_OFFSET;
 
-  // Overlays comparten exactamente el mismo tamaño → alineación perfecta
+  // Overlays comparten exactamente el mismo tamaÃ±o â†’ alineaciÃ³n perfecta
   const mkOverlays = (b64s) =>
     (b64s || []).filter(Boolean)
       .map(b64 => `<img src="${b64}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:2;pointer-events:none;"/>`)
       .join('');
 
-  // Cruces: posición relativa al panel (que ya tiene el tamaño exacto de la imagen)
+  // Cruces: posiciÃ³n relativa al panel (que ya tiene el tamaÃ±o exacto de la imagen)
   const mkCrosses = (list, side) =>
     (list || []).filter(c => c.side === side).map(({ src, topPct, offPct }) => {
       const top  = Math.round(topPct * panelsH);
@@ -143,7 +143,7 @@ function buildPageHtml({
     userData.cedula ? `<span class="fi">${svgId}<span>${esc(userData.cedula)}</span></span>` : '',
   ].filter(Boolean).join('<span class="fsep">|</span>');
 
-  // Cada \n en la conclusión se convierte en <br>; cada \n\n en párrafo separado
+  // Cada \n en la conclusiÃ³n se convierte en <br>; cada \n\n en pÃ¡rrafo separado
   const diagHtml = (finalConclusion || '')
     .split('\n')
     .map(line => `<span>${esc(line.trim())}</span>`)
@@ -162,21 +162,21 @@ function buildPageHtml({
   html,body{width:${PAGE_W}px;height:${PAGE_H}px;background:transparent;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overflow:hidden;}
   .page{position:relative;width:${PAGE_W}px;height:${PAGE_H}px;background:transparent;}
 
-  /* ── Header ── */
+  /* â”€â”€ Header â”€â”€ */
   .hdr{position:absolute;top:0;left:0;right:0;height:${HDR_H}px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:10;}
   .patient{font-size:13px;font-weight:700;color:#111;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .logo{width:42px;height:42px;object-fit:contain;flex-shrink:0;}
 
-  /* ── Paneles de láminas ── */
+  /* â”€â”€ Paneles de lÃ¡minas â”€â”€ */
   .panels{position:absolute;top:${panelsTop}px;left:${panelsLeft}px;display:flex;flex-direction:row;width:${totalW}px;height:${panelsH}px;}
   .panel{position:relative;width:${panelW}px;height:${panelsH}px;flex-shrink:0;overflow:hidden;}
   .panel img.base{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:fill;z-index:1;}
 
-  /* ── Conclusión ── */
+  /* â”€â”€ ConclusiÃ³n â”€â”€ */
   .diag{position:absolute;top:${diagTop}px;left:${panelsLeft}px;width:${totalW}px;height:${DIAG_H}px;display:flex;align-items:flex-start;padding:6px 0 0 0;}
   .diag-text{font-size:11.5px;line-height:18px;color:#111;font-weight:400;}
 
-  /* ── Footer ── */
+  /* â”€â”€ Footer â”€â”€ */
   .footer{position:absolute;top:${ftrTop}px;left:0;right:0;height:${FTR_H}px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 20px;}
   .fi{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:#333;white-space:nowrap}
   .fsep{font-size:10px;color:#bbb;margin:0 2px}
@@ -190,7 +190,7 @@ function buildPageHtml({
     ${userData.imageUrl ? `<img src="${esc(userData.imageUrl)}" class="logo"/>` : ''}
   </div>
 
-  <!-- Dos paneles de láminas -->
+  <!-- Dos paneles de lÃ¡minas -->
   <div class="panels">
     <div class="panel">
       ${postBaseB64 ? `<img src="${postBaseB64}" class="base"/>` : ''}
@@ -204,7 +204,7 @@ function buildPageHtml({
     </div>
   </div>
 
-  <!-- Conclusión -->
+  <!-- ConclusiÃ³n -->
   ${hasDiag ? `<div class="diag"><div class="diag-text">${diagHtml}</div></div>` : ''}
 
   <!-- Footer -->
@@ -216,7 +216,7 @@ function buildPageHtml({
 
 async function captureHtmlAsPng(browser, html) {
   const page = await browser.newPage();
-  await page.setViewport({ width: PAGE_W, height: PAGE_H, deviceScaleFactor: 2 });
+  await page.setViewport({ width: PAGE_W, height: PAGE_H, deviceScaleFactor: 3 });
   await page.setContent(html, { waitUntil: 'networkidle0' });
   const buf = await page.screenshot({
     type: 'png',
@@ -247,9 +247,9 @@ async function assemblePdf({ pngPage1, plantillaId }) {
   const usePlantilla = plantillaId && plantillaId !== 'none' && PLANTILLAS_PDF[plantillaId];
 
   if (usePlantilla) {
-    // Patrón idéntico al móvil:
+    // PatrÃ³n idÃ©ntico al mÃ³vil:
     // 1) Carga el PDF de plantilla como documento base
-    // 2) Obtiene su página 1 y dibuja el PNG encima
+    // 2) Obtiene su pÃ¡gina 1 y dibuja el PNG encima
     const bytes = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p1}`);
     if (bytes) {
       try {
@@ -264,7 +264,7 @@ async function assemblePdf({ pngPage1, plantillaId }) {
     }
   }
 
-  // Sin plantilla (o fallback si falló la carga)
+  // Sin plantilla (o fallback si fallÃ³ la carga)
   const pdfDoc = await PDFDocument.create();
   const page1  = pdfDoc.addPage([W, H]);
   const img1   = await pdfDoc.embedPng(pngPage1);
@@ -290,7 +290,7 @@ export async function POST(req) {
       antBase         = null,
     } = body;
 
-    // ── Resolve base images to base64 ──────────────────────────────
+    // â”€â”€ Resolve base images to base64 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // When a plantilla is active use transparent-background versions (same as mobile app)
     const useTransparent = plantillaId && plantillaId !== 'none';
 
@@ -306,7 +306,7 @@ export async function POST(req) {
       localImgToB64(antBasePath),
     ]);
 
-    // ── Resolve overlay images to base64 ───────────────────────────
+    // â”€â”€ Resolve overlay images to base64 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const hasNewFlow = postOv.length > 0 || antOv.length > 0;
     const postOvList = hasNewFlow ? postOv : activeOv;
     const antOvList  = hasNewFlow ? antOv  : activeOv;
@@ -316,7 +316,7 @@ export async function POST(req) {
       Promise.all(antOvList.filter(Boolean).map(localImgToB64)),
     ]);
 
-    // ── Resolve cross src images to base64 ────────────────────────
+    // â”€â”€ Resolve cross src images to base64 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const crossesResolved = await Promise.all(
       crosses.map(async (c) => {
         const src = c.src?.startsWith('data:') ? c.src
@@ -326,13 +326,13 @@ export async function POST(req) {
       })
     );
 
-    // ── Resolve user logo ─────────────────────────────────────────
+    // â”€â”€ Resolve user logo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const userImageB64 = userData.imageUrl
       ? await remoteImgToB64(userData.imageUrl)
       : null;
     const userDataResolved = { ...userData, imageUrl: userImageB64 };
 
-    // ── Build HTML ────────────────────────────────────────────────
+    // â”€â”€ Build HTML â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const html = buildPageHtml({
       finalConclusion,
       topLeftText,
@@ -345,13 +345,13 @@ export async function POST(req) {
       plantillaId,
     });
 
-    // ── Capture PNG ───────────────────────────────────────────────
+    // â”€â”€ Capture PNG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     browser = await launchBrowser();
     const pngBuf = await captureHtmlAsPng(browser, html);
     await browser.close();
     browser = null;
 
-    // ── Assemble PDF with template ────────────────────────────────
+    // â”€â”€ Assemble PDF with template â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const pdfBytes = await assemblePdf({ pngPage1: pngBuf, plantillaId });
 
     return new NextResponse(pdfBytes, {
@@ -367,3 +367,4 @@ export async function POST(req) {
     return NextResponse.json({ message: 'Error generando PDF' }, { status: 500 });
   }
 }
+

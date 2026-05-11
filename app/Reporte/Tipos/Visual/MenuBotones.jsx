@@ -430,6 +430,30 @@ async function toBase64DataUrl(src) {
   } catch { return null; }
 }
 
+// Pre-clips image to a circle using canvas (transparent corners) for clean PDF rendering
+function toCircleDataUrl(src) {
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const size = Math.min(img.naturalWidth, img.naturalHeight);
+      const canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, size, size);
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+      ctx.closePath(); ctx.clip();
+      const ox = (img.naturalWidth - size) / 2;
+      const oy = (img.naturalHeight - size) / 2;
+      ctx.drawImage(img, ox, oy, size, size, 0, 0, size, size);
+      resolve(canvas.toDataURL('image/png'));
+    };
+    img.onerror = () => resolve(src);
+    img.src = src;
+  });
+}
+
 // Tamaño del stack PDF (debe coincidir con LAM_W/LAM_H en route.js)
 const PDF_LAM_W = 690;
 const PDF_LAM_H = 620;
@@ -458,7 +482,8 @@ export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [],
 
     const figurasB64 = await Promise.all(
       figuras.map(async (f) => {
-        const src = f.src?.startsWith('blob:') ? await toBase64DataUrl(f.src) : f.src;
+        let src = f.src?.startsWith('blob:') ? await toBase64DataUrl(f.src) : f.src;
+        if (f.tipo === 'circle' && src) src = await toCircleDataUrl(src);
         return { ...f, src, x: Math.round(f.x * scaleX), y: Math.round(f.y * scaleY) };
       })
     );

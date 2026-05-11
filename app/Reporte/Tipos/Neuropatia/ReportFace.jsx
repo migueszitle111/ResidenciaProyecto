@@ -73,15 +73,15 @@ const PRONOSTICO_DESM = [
 ];
 // Pronóstico sin \n\n (para Axonal con Reinervación)
 const PRONOSTICO = [
-  { n:'Recuperación completa',            t:'Pronóstico de recuperación completa.',           l:'Recuperación completa' },
-  { n:'Recuperación parcial funcional',   t:'Pronóstico de recuperación parcial funcional.',  l:'Recuperación parcial funcional' },
-  { n:'Recuperación Pobre no funcional',  t:'Pronóstico de recuperación pobre no funcional.', l:'Recuperación Pobre no funcional' },
-  { n:'Recuperación nula',                t:'Pronóstico de recuperación nulo.',               l:'Recuperación nula' },
+  { n:'Recuperación completa',            t:' pronóstico de recuperación completa.',           l:'Recuperación completa' },
+  { n:'Recuperación parcial funcional',   t:' pronóstico de recuperación parcial funcional.',  l:'Recuperación parcial funcional' },
+  { n:'Recuperación Pobre no funcional',  t:' pronóstico de recuperación pobre no funcional.', l:'Recuperación Pobre no funcional' },
+  { n:'Recuperación nula',                t:' pronóstico de recuperación nulo.',               l:'Recuperación nula' },
 ];
 
 const REINERVACION = [
-  { n:'Reinervación activa',   t:'Reinervación activa;',   l:'Activa',   next:'Pronóstico' },
-  { n:'Reinervación inactiva', t:'Reinervación inactiva;', l:'Inactiva', next:'Pronóstico' },
+  { n:'Reinervación activa',   t:'\n\nReinervación activa;',   l:'Activa',   next:'Pronóstico' },
+  { n:'Reinervación inactiva', t:'\n\nReinervación inactiva;', l:'Inactiva', next:'Pronóstico' },
 ];
 
 const INTENSIDAD_DESM = [

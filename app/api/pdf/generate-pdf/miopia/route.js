@@ -1,8 +1,8 @@
 import { NextResponse }  from 'next/server';
-import puppeteer         from 'puppeteer';
-import puppeteerCore     from 'puppeteer-core';
-import chromium          from '@sparticuz/chromium-min';
-import { PDFDocument }   from 'pdf-lib';
+import { PDFDocument, rgb } from 'pdf-lib';
+import fontkit from '@pdf-lib/fontkit';
+import fs from 'fs';
+import path from 'path';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -14,8 +14,17 @@ const baseUrl = isDev
 
 const BACKEND_URL = 'https://backendmedxpro-tef2.onrender.com';
 
-const PAGE_W = 794;
-const PAGE_H = 1123;
+const PW = 595.28;
+const PH = 841.89;
+
+const ZONE_CONTENT_TOP = 728;
+const ZONE_CONTENT_BOT = 185;
+const MARGIN_L = 42;
+const MARGIN_R = 42;
+const CONTENT_W = PW - MARGIN_L - MARGIN_R;
+
+// MI_Base_TR.png: 1582×2048
+const LAM_IMG_RATIO = 2048 / 1582;
 
 const OVERLAYS_MIO = {
   'Proximal':             '/MiopatiaImg/MI_Proximal.png',
@@ -37,18 +46,7 @@ const PLANTILLAS_PDF = {
   C: { p1: 'PLANTILLA_C_VERTICAL-1.pdf', p2: 'PLANTILLA_C_VERTICAL-2.pdf' },
 };
 
-async function launchBrowser() {
-  if (isDev) {
-    return puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-  }
-  const executablePath = await chromium.executablePath(
-    'https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar'
-  );
-  return puppeteerCore.launch({
-    executablePath, args: chromium.args,
-    headless: chromium.headless, defaultViewport: chromium.defaultViewport,
-  });
-}
+// ── helpers ──────────────────────────────────────────────────────────────────
 
 async function fetchBytes(url) {
   try {
@@ -58,221 +56,359 @@ async function fetchBytes(url) {
   } catch { return null; }
 }
 
-async function localImgToB64(publicPath) {
+async function fetchLocalBytes(publicPath) {
   if (!publicPath) return null;
   try {
-    const res = await fetch(`${baseUrl}${publicPath}`);
-    if (!res.ok) return null;
-    const buf  = await res.arrayBuffer();
-    const mime = res.headers.get('content-type') || 'image/png';
-    return `data:${mime};base64,${Buffer.from(buf).toString('base64')}`;
-  } catch { return null; }
+    const fsPath = path.join(process.cwd(), 'public', publicPath);
+    if (fs.existsSync(fsPath)) return new Uint8Array(fs.readFileSync(fsPath));
+  } catch {}
+  return fetchBytes(`${baseUrl}${publicPath}`);
 }
 
-async function remoteImgToB64(url) {
+async function fetchRemoteBytes(url) {
   if (!url) return null;
-  if (url.startsWith('data:')) return url;
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const buf  = await res.arrayBuffer();
-    const mime = res.headers.get('content-type') || 'image/png';
-    return `data:${mime};base64,${Buffer.from(buf).toString('base64')}`;
-  } catch (e) {
-    console.warn('remoteImgToB64 failed:', url, e.message);
-    return null;
+  if (url.startsWith('data:')) {
+    const comma = url.indexOf(',');
+    if (comma === -1) return null;
+    return new Uint8Array(Buffer.from(url.slice(comma + 1), 'base64'));
   }
+  return fetchBytes(url);
 }
 
-function esc(t) {
-  return String(t || '')
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+function loadFontBytes(filename) {
+  const p = path.join(process.cwd(), 'public', 'fonts', filename);
+  try { return fs.readFileSync(p); } catch { return null; }
 }
 
-function buildPage1Html({ finalConclusion, userData, baseImgB64, overlayB64s, figuras, topLeftText }) {
-  const PAD      = 30;
-  const HDR_H    = 68;
-  const HDR_PADT = 42;
-  const HDR_PADH = 70;
-  const LOGO_SZ  = 72;
-  const LAM_W    = 690;
-  const LAM_H    = 620;
-  const DIAG_PH  = 64;
-  const FTR_H    = 54;
-  const FTR_BG   = 20;
-
-  const overlayTags = overlayB64s.filter(Boolean)
-    .map(b64 => `<img src="${b64}" class="si"/>`)
-    .join('');
-
-  const figuraTags = figuras.map(f => {
-    if (!f.src) return '';
-    const r = f.tipo === 'circle' ? '50%' : '0';
-    return `<img src="${f.src}" style="position:absolute;left:${f.x}px;top:${f.y}px;width:80px;height:80px;object-fit:cover;border-radius:${r};border:1.5px solid #808080;z-index:10;pointer-events:none;"/>`;
-  }).join('');
-
-  const svgUser  = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
-  const svgEmail = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
-  const svgSpec  = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 90 90" fill="#000"><path d="M45.12,61.02c0,0,0,7.32-4.79,7.32h-8.68c-1.82,0-3.29-1.47-3.29-3.29c0,0-2.39-8.68-2.65-8.68l-2.88-1.21c-1.57-0.66-2.31-2.46-1.66-4.03l4.8-9.65v-0.67c0-11.9,9.65-21.55,21.55-21.55s21.55,9.65,21.55,21.55c0,5.12-1.8,9.84-4.79,13.54v16.39"/></svg>`;
-  const svgId    = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 2l-6 3.99L6 4h12z"/></svg>`;
-
-  const footerItems = [
-    userData.name ? `<span class="fi">${svgUser}<span>Dr. ${esc(userData.name)} ${esc(userData.lastname||'')}</span></span>` : '',
-    userData.email ? `<span class="fi">${svgEmail}<span>${esc(userData.email)}</span></span>` : '',
-    userData.especialidad ? `<span class="fi">${svgSpec}<span>${esc(userData.especialidad)}</span></span>` : '',
-    userData.cedula ? `<span class="fi">${svgId}<span>${esc(userData.cedula)}</span></span>` : '',
-  ].filter(Boolean).join(`<span class="fsep">|</span>`);
-
-  return `<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"/>
-<style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  img{border:none;outline:none;box-shadow:none}
-  html,body{width:${PAGE_W}px;height:${PAGE_H}px;background:transparent;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overflow:hidden;}
-  .page{width:${PAGE_W}px;height:${PAGE_H}px;padding:${PAD}px;display:flex;flex-direction:column;background:transparent;}
-  .shift{height:10px;flex-shrink:0}
-  .hdr{height:${HDR_H}px;flex-shrink:0;padding-left:${HDR_PADH+30}px;padding-right:${HDR_PADH}px;padding-top:${HDR_PADT}px;padding-bottom:6px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;}
-  .patient{font-size:12px;font-weight:700;color:#111;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:24px}
-  .logo-wrap{width:${LOGO_SZ+12}px;height:${LOGO_SZ+12}px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:26px}
-  .logo{width:${LOGO_SZ}px;height:${LOGO_SZ}px;object-fit:contain;border-radius:0;border:none;outline:none;box-shadow:none;background:transparent}
-  .lamina-wrap{flex-shrink:0;display:flex;justify-content:center;margin-top:10px;}
-  .stack{position:relative;width:${LAM_W}px;height:${LAM_H}px;overflow:hidden;background:transparent;flex-shrink:0;}
-  .si{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
-  .diag{flex-shrink:0;padding:0 ${DIAG_PH}px;margin-top:110px;}
-  .diag-title{font-size:11px;font-weight:700;color:#111;margin-bottom:5px}
-  .diag-text{font-size:10.5px;line-height:17px;color:#1a1a1a;text-align:justify}
-  .spacer{flex:1;min-height:0}
-  .footer{flex-shrink:0;height:${FTR_H}px;margin-top:${FTR_BG}px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:0 ${HDR_PADH}px;}
-  .fi{display:inline-flex;align-items:center;gap:5px;font-size:9px;color:#444;white-space:nowrap}
-  .fsep{font-size:10px;color:#ccc;margin:0 2px}
-</style>
-</head>
-<body>
-<div class="page">
-  <div class="shift"></div>
-  <div class="hdr">
-    <div class="patient">${esc(topLeftText)}</div>
-    ${userData.imageUrl ? `<div class="logo-wrap"><img src="${esc(userData.imageUrl)}" class="logo"/></div>` : ''}
-  </div>
-  <div class="lamina-wrap">
-    <div class="stack">
-      ${baseImgB64 ? `<img src="${baseImgB64}" class="si"/>` : ''}
-      ${overlayTags}
-      ${figuraTags}
-    </div>
-  </div>
-  <div class="diag">
-    <div class="diag-title">Diagnóstico</div>
-    <div class="diag-text">${esc(finalConclusion)}</div>
-  </div>
-  <div class="spacer"></div>
-  <div class="footer">${footerItems}</div>
-</div>
-</body>
-</html>`;
+async function embedPng(pdfDoc, bytes) {
+  if (!bytes) return null;
+  try { return await pdfDoc.embedPng(bytes); } catch { return null; }
+}
+async function embedJpg(pdfDoc, bytes) {
+  if (!bytes) return null;
+  try { return await pdfDoc.embedJpg(bytes); } catch { return null; }
 }
 
-function buildPage2Html({ listaVisual, comentarioLista, imgListaB64, hasPlantilla }) {
-  const listaHtml = listaVisual.length
-    ? listaVisual.map(({ k, v }) =>
-        `<div class="li"><span class="lk">${esc(k)}:</span><span class="lv"> ${esc(v)}</span></div>`
-      ).join('')
-    : `<div class="li-empty">Sin datos.</div>`;
-
-  const imgSection = imgListaB64
-    ? `<div class="img-wrap"><img src="${imgListaB64}" class="tabla-img"/></div>`
-    : '';
-
-  return `<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"/>
-<style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:${PAGE_W}px;height:${PAGE_H}px;background:transparent;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;overflow:hidden;}
-  .page{width:${PAGE_W}px;height:${PAGE_H}px;padding:${hasPlantilla ? 170 : 40}px 70px 30px 70px;display:flex;flex-direction:column;background:transparent;}
-  .two-col{display:flex;flex-direction:row;flex-shrink:0;gap:40px;margin-bottom:36px;}
-  .col-left{flex:1;padding:0 20px;}
-  .col-right{flex:1;padding:0 20px;}
-  .col-title{font-size:11px;font-weight:700;color:#111;margin-bottom:10px;}
-  .li{font-size:10px;color:#111;line-height:18px;margin-bottom:5px}
-  .lk{font-weight:700}
-  .lv{font-weight:400}
-  .li-empty{font-size:10px;color:#999;font-style:italic}
-  .comment{font-size:10px;color:#111;line-height:18px;text-align:justify}
-  .img-wrap{flex:1;margin-top:190px;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;}
-  .tabla-img{width:100%;max-height:560px;object-fit:contain;display:block;}
-</style>
-</head>
-<body>
-<div class="page">
-  <div class="two-col">
-    <div class="col-left">
-      <div class="col-title">Estudio</div>
-      ${listaHtml}
-    </div>
-    <div class="col-right">
-      <div class="col-title">Comentario</div>
-      <p class="comment">${esc(comentarioLista)}</p>
-    </div>
-  </div>
-  ${imgSection}
-</div>
-</body>
-</html>`;
+function dataUrlMime(url) {
+  if (!url || !url.startsWith('data:')) return null;
+  const semi = url.indexOf(';');
+  return semi > 5 ? url.slice(5, semi) : null;
 }
 
-async function captureHtmlAsPng(browser, html) {
-  const page = await browser.newPage();
-  await page.setViewport({ width: PAGE_W, height: PAGE_H, deviceScaleFactor: 2 });
-  await page.setContent(html, { waitUntil: 'networkidle0' });
-  const buf = await page.screenshot({ type: 'png', omitBackground: true, clip: { x: 0, y: 0, width: PAGE_W, height: PAGE_H } });
-  await page.close();
-  return buf;
+async function embedImg(pdfDoc, bytes, mimeHint) {
+  if (!bytes) return null;
+  if (mimeHint === 'image/jpeg' || mimeHint === 'image/jpg') {
+    const img = await embedJpg(pdfDoc, bytes);
+    if (img) return img;
+  }
+  const img = await embedPng(pdfDoc, bytes);
+  if (img) return img;
+  return embedJpg(pdfDoc, bytes);
 }
 
-async function assemblePdf({ pngPage1, pngPage2, plantillaId }) {
-  const pdfDoc = await PDFDocument.create();
-  const W = 595.28, H = 841.89;
+function wrapText(text, font, fontSize, maxWidth) {
+  if (!text) return [];
+  const words = text.split(' ');
+  const lines = [];
+  let current = '';
+  for (const word of words) {
+    const test = current ? current + ' ' + word : word;
+    if (font.widthOfTextAtSize(test, fontSize) > maxWidth && current) {
+      lines.push(current);
+      current = word;
+    } else {
+      current = test;
+    }
+  }
+  if (current) lines.push(current);
+  return lines;
+}
 
-  const page1 = pdfDoc.addPage([W, H]);
+// ── Page 1 ───────────────────────────────────────────────────────────────────
+
+async function buildPage1(pdfDoc, {
+  finalConclusion, userData, baseImgBytes, overlayBytesArr, figurasData,
+  topLeftText, plantillaId, fontRegular, fontBold, fontLight,
+}) {
+  const page = pdfDoc.addPage([PW, PH]);
+
   if (plantillaId && plantillaId !== 'none' && PLANTILLAS_PDF[plantillaId]) {
-    const bytes = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p1}`);
-    if (bytes) {
+    const tplBytes = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p1}`);
+    if (tplBytes) {
       try {
-        const tpl = await PDFDocument.load(bytes);
-        const [tplPg] = await pdfDoc.embedPdf(tpl, [0]);
-        page1.drawPage(tplPg, { x: 0, y: 0, width: W, height: H });
+        const tplDoc = await PDFDocument.load(tplBytes);
+        const [tplPg] = await pdfDoc.embedPdf(tplDoc, [0]);
+        page.drawPage(tplPg, { x: 0, y: 0, width: PW, height: PH });
       } catch (e) { console.warn('plantilla p1:', e.message); }
     }
   }
-  const img1 = await pdfDoc.embedPng(pngPage1);
-  page1.drawImage(img1, { x: 0, y: 0, width: W, height: H });
 
-  if (pngPage2) {
-    const page2 = pdfDoc.addPage([W, H]);
-    if (plantillaId && plantillaId !== 'none' && PLANTILLAS_PDF[plantillaId]) {
-      const bytes2 = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p2}`);
-      if (bytes2) {
-        try {
-          const tpl2 = await PDFDocument.load(bytes2);
-          const [tplPg2] = await pdfDoc.embedPdf(tpl2, [0]);
-          page2.drawPage(tplPg2, { x: 0, y: 0, width: W, height: H });
-        } catch (e) { console.warn('plantilla p2:', e.message); }
-      }
-    }
-    const img2 = await pdfDoc.embedPng(pngPage2);
-    page2.drawImage(img2, { x: 0, y: 0, width: W, height: H });
+  const SUBHDR_TEXT_Y = 742;
+
+  if (topLeftText) {
+    page.drawText(topLeftText, {
+      x: MARGIN_L + 20, y: SUBHDR_TEXT_Y,
+      font: fontBold, size: 9.5,
+      color: rgb(0.08, 0.08, 0.08),
+    });
   }
 
-  return await pdfDoc.save();
+  const LOGO_BOX_SZ = 52;
+  const LOGO_BOX_X  = PW - MARGIN_R - LOGO_BOX_SZ;
+  const LOGO_BOX_Y  = SUBHDR_TEXT_Y - 20;
+
+  if (userData.imageUrl) {
+    const logoBytes = await fetchRemoteBytes(userData.imageUrl);
+    const logoImg   = await embedImg(pdfDoc, logoBytes, dataUrlMime(userData.imageUrl));
+    if (logoImg) {
+      page.drawImage(logoImg, {
+        x: LOGO_BOX_X, y: LOGO_BOX_Y,
+        width: LOGO_BOX_SZ, height: LOGO_BOX_SZ,
+      });
+    }
+  }
+
+  const DIAG_RESERVE = 70;
+  const LAM_H_MAX    = ZONE_CONTENT_TOP - ZONE_CONTENT_BOT - DIAG_RESERVE;
+  const LAM_W_FROM_H = Math.round(LAM_H_MAX / LAM_IMG_RATIO);
+  const LAM_W_MAX    = CONTENT_W;
+  let LAM_H = LAM_H_MAX;
+  let LAM_W = LAM_W_FROM_H;
+  if (LAM_W > LAM_W_MAX) {
+    LAM_W = LAM_W_MAX;
+    LAM_H = Math.round(LAM_W * LAM_IMG_RATIO);
+  }
+  const LAM_X = MARGIN_L + Math.round((CONTENT_W - LAM_W) / 2);
+  const LAM_Y = ZONE_CONTENT_TOP - LAM_H;
+
+  const baseImg = await embedImg(pdfDoc, baseImgBytes);
+  if (baseImg) {
+    page.drawImage(baseImg, { x: LAM_X, y: LAM_Y, width: LAM_W, height: LAM_H });
+  }
+  for (const ovBytes of overlayBytesArr) {
+    const ovImg = await embedImg(pdfDoc, ovBytes);
+    if (ovImg) {
+      page.drawImage(ovImg, { x: LAM_X, y: LAM_Y, width: LAM_W, height: LAM_H });
+    }
+  }
+
+  const FIG_SIZE = 56;
+  const scaleX   = LAM_W / 690;
+  const scaleY   = LAM_H / 620;
+
+  for (const f of (figurasData || [])) {
+    if (!f.src) continue;
+    const figBytes = await fetchRemoteBytes(f.src);
+    const figImg   = await embedImg(pdfDoc, figBytes, dataUrlMime(f.src));
+    if (!figImg) continue;
+
+    const fx = LAM_X + f.x * scaleX;
+    const fy = LAM_Y + LAM_H - f.y * scaleY - FIG_SIZE;
+
+    page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE });
+
+    if (f.tipo === 'circle') {
+      page.drawEllipse({
+        x: fx + FIG_SIZE / 2, y: fy + FIG_SIZE / 2,
+        xScale: FIG_SIZE / 2, yScale: FIG_SIZE / 2,
+        borderColor: rgb(0.35, 0.35, 0.35), borderWidth: 1.2,
+      });
+    } else {
+      page.drawRectangle({
+        x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE,
+        borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.0,
+      });
+    }
+  }
+
+  const FTR_Y        = 48;
+  const FTR_SZ       = 7.5;
+
+  const DIAG_X     = MARGIN_L + 14;
+  const DIAG_W     = CONTENT_W - 14;
+  const TITLE_Y    = LAM_Y - 62;
+  const FONT_SZ    = 9;
+  const LINE_H     = 13;
+  const BLACK      = rgb(0.07, 0.07, 0.07);
+  const TEXT_FLOOR = FTR_Y + FTR_SZ + 10;
+
+  page.drawText('Diagnóstico', {
+    x: DIAG_X, y: TITLE_Y,
+    font: fontBold, size: 9,
+    color: BLACK,
+  });
+
+  const paragraphs = (finalConclusion || '')
+    .split('\n\n').map(p => p.trim()).filter(Boolean);
+  let textY = TITLE_Y - 14;
+
+  for (const para of paragraphs) {
+    const lines = wrapText(para, fontRegular, FONT_SZ, DIAG_W);
+    for (const line of lines) {
+      if (textY < TEXT_FLOOR) break;
+      page.drawText(line, { x: DIAG_X, y: textY, font: fontRegular, size: FONT_SZ, color: BLACK });
+      textY -= LINE_H;
+    }
+    textY -= 4;
+  }
+
+  const ICON_R       = 3.2;
+  const ICON_GAP     = 4;
+  const SEP          = '   |   ';
+  const DARK         = rgb(0.22, 0.22, 0.22);
+  const ICON_FILL    = rgb(0.3, 0.3, 0.3);
+
+  const ftrSegments = [
+    userData.name        ? { icon: 'person', text: `Dr. ${userData.name}${userData.lastname ? ' ' + userData.lastname : ''}` } : null,
+    userData.email       ? { icon: 'email',  text: userData.email } : null,
+    userData.especialidad ? { icon: 'dot',   text: userData.especialidad } : null,
+    userData.cedula      ? { icon: 'id',     text: `Céd. ${userData.cedula}` } : null,
+  ].filter(Boolean);
+
+  if (ftrSegments.length) {
+    const SEP_W  = fontLight.widthOfTextAtSize(SEP, FTR_SZ);
+    const iconSlot = ICON_R * 2 + ICON_GAP;
+    let totalW = 0;
+    for (let i = 0; i < ftrSegments.length; i++) {
+      if (i > 0) totalW += SEP_W;
+      totalW += iconSlot + fontLight.widthOfTextAtSize(ftrSegments[i].text, FTR_SZ);
+    }
+    let cx = (PW - totalW) / 2;
+    const iconBaseline = FTR_Y + FTR_SZ * 0.3;
+
+    for (let i = 0; i < ftrSegments.length; i++) {
+      if (i > 0) {
+        page.drawText(SEP, { x: cx, y: FTR_Y, font: fontLight, size: FTR_SZ, color: DARK });
+        cx += SEP_W;
+      }
+
+      const ic = ftrSegments[i].icon;
+      const ix = cx + ICON_R;
+      const iy = iconBaseline;
+
+      if (ic === 'person') {
+        page.drawEllipse({ x: ix, y: iy + 2.5, xScale: 1.8, yScale: 1.8, color: ICON_FILL });
+        page.drawEllipse({ x: ix, y: iy - 1.2, xScale: 3.0, yScale: 1.8, color: ICON_FILL });
+      } else if (ic === 'email') {
+        page.drawRectangle({ x: ix - 3.5, y: iy - 2, width: 7, height: 4.5,
+          borderColor: ICON_FILL, borderWidth: 0.8, color: rgb(1,1,1) });
+        page.drawLine({ start: { x: ix - 3.5, y: iy + 2.5 }, end: { x: ix, y: iy + 0.2 },
+          thickness: 0.8, color: ICON_FILL });
+        page.drawLine({ start: { x: ix, y: iy + 0.2 }, end: { x: ix + 3.5, y: iy + 2.5 },
+          thickness: 0.8, color: ICON_FILL });
+      } else if (ic === 'dot') {
+        page.drawEllipse({ x: ix, y: iy, xScale: ICON_R - 0.5, yScale: ICON_R - 0.5, color: ICON_FILL });
+      } else if (ic === 'id') {
+        page.drawRectangle({ x: ix - 4, y: iy - 2.5, width: 8, height: 5,
+          borderColor: ICON_FILL, borderWidth: 0.8, color: rgb(1,1,1) });
+        page.drawLine({ start: { x: ix - 2, y: iy + 0.5 }, end: { x: ix + 2, y: iy + 0.5 },
+          thickness: 0.7, color: ICON_FILL });
+        page.drawLine({ start: { x: ix - 2, y: iy - 0.8 }, end: { x: ix + 1, y: iy - 0.8 },
+          thickness: 0.7, color: ICON_FILL });
+      }
+
+      cx += iconSlot;
+
+      page.drawText(ftrSegments[i].text, { x: cx, y: FTR_Y, font: fontLight, size: FTR_SZ, color: DARK });
+      cx += fontLight.widthOfTextAtSize(ftrSegments[i].text, FTR_SZ);
+    }
+  }
 }
 
+// ── Page 2 ───────────────────────────────────────────────────────────────────
+
+async function buildPage2(pdfDoc, {
+  listaVisual, comentarioLista, imgListaBytes, plantillaId,
+  fontRegular, fontBold,
+}) {
+  const page = pdfDoc.addPage([PW, PH]);
+
+  if (plantillaId && plantillaId !== 'none' && PLANTILLAS_PDF[plantillaId]) {
+    const tplBytes = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p2}`);
+    if (tplBytes) {
+      try {
+        const tplDoc = await PDFDocument.load(tplBytes);
+        const [tplPg] = await pdfDoc.embedPdf(tplDoc, [0]);
+        page.drawPage(tplPg, { x: 0, y: 0, width: PW, height: PH });
+      } catch (e) { console.warn('plantilla p2:', e.message); }
+    }
+  }
+
+  const hasPlantilla = plantillaId && plantillaId !== 'none';
+  const TOP_Y   = hasPlantilla ? ZONE_CONTENT_TOP : PH - 50;
+  const BOT_Y   = hasPlantilla ? ZONE_CONTENT_BOT : 40;
+  const COL_OFFSET = 20;
+  const COL_GAP    = 28;
+  const COL_W      = (CONTENT_W - COL_GAP) / 2;
+  const FONT_SZ    = 8.5;
+  const LINE_H     = 13;
+  const LX         = MARGIN_L + COL_OFFSET;
+  const RX         = LX + COL_W + COL_GAP;
+
+  let ly = TOP_Y - 30;
+  page.drawText('Estudio', {
+    x: LX, y: ly,
+    font: fontBold, size: 9, color: rgb(0.07, 0.07, 0.07),
+  });
+  ly -= 16;
+
+  for (const { k, v } of (listaVisual || [])) {
+    if (ly < BOT_Y) break;
+    const keyStr = `${k}: `;
+    const keyW   = fontBold.widthOfTextAtSize(keyStr, FONT_SZ);
+    page.drawText(keyStr, { x: LX, y: ly, font: fontBold, size: FONT_SZ, color: rgb(0.08,0.08,0.08) });
+    const valLines = wrapText(v, fontRegular, FONT_SZ, COL_W - keyW);
+    if (valLines.length === 0) { ly -= LINE_H; continue; }
+    page.drawText(valLines[0], { x: LX + keyW, y: ly, font: fontRegular, size: FONT_SZ, color: rgb(0.08,0.08,0.08) });
+    ly -= LINE_H;
+    for (let i = 1; i < valLines.length; i++) {
+      if (ly < BOT_Y) break;
+      page.drawText(valLines[i], { x: LX + keyW, y: ly, font: fontRegular, size: FONT_SZ, color: rgb(0.08,0.08,0.08) });
+      ly -= LINE_H;
+    }
+  }
+
+  let ry = TOP_Y - 30;
+  page.drawText('Comentario', {
+    x: RX, y: ry,
+    font: fontBold, size: 9, color: rgb(0.07, 0.07, 0.07),
+  });
+  ry -= 16;
+
+  if (comentarioLista) {
+    const cLines = comentarioLista.split('\n').flatMap(l => wrapText(l || ' ', fontRegular, FONT_SZ, COL_W));
+    for (const cl of cLines) {
+      if (ry < BOT_Y) break;
+      page.drawText(cl, { x: RX, y: ry, font: fontRegular, size: FONT_SZ, color: rgb(0.08,0.08,0.08) });
+      ry -= LINE_H;
+    }
+  }
+
+  if (imgListaBytes) {
+    const tablaImg = await embedImg(pdfDoc, imgListaBytes);
+    if (tablaImg) {
+      const { width: iw, height: ih } = tablaImg;
+      const maxW  = CONTENT_W;
+      const lowestCol = Math.min(ly, ry);
+      const tablaTopY = lowestCol - 200;
+      const maxH  = Math.min(tablaTopY - BOT_Y - 10, 320);
+      if (maxH > 30) {
+        const scale = Math.min(maxW / iw, maxH / ih, 1);
+        const dw = iw * scale;
+        const dh = ih * scale;
+        page.drawImage(tablaImg, {
+          x: MARGIN_L + (CONTENT_W - dw) / 2,
+          y: tablaTopY - dh,
+          width: dw, height: dh,
+        });
+      }
+    }
+  }
+}
+
+// ── Main handler ──────────────────────────────────────────────────────────────
+
 export async function POST(req) {
-  let browser;
   try {
     const body = await req.json();
     const {
@@ -287,55 +423,58 @@ export async function POST(req) {
       plantillaId     = 'none',
     } = body;
 
-    const ovPaths = activeOv.map(k => OVERLAYS_MIO[k]).filter(Boolean);
-    const [baseImgB64, imgListaB64, doctorLogoB64, ...overlayB64s] = await Promise.all([
-      localImgToB64('/MiopatiaImg/MI_Base_TR.png'),
-      remoteImgToB64(imgListaUrl),
-      remoteImgToB64(userData.imageUrl || null),
-      ...ovPaths.map(p => localImgToB64(p)),
+    const pdfDoc = await PDFDocument.create();
+    pdfDoc.registerFontkit(fontkit);
+
+    const fontRegular = await (async () => {
+      const b = loadFontBytes('LuxoraGrotesk-Regular.ttf');
+      return b ? pdfDoc.embedFont(b) : pdfDoc.embedFont('Helvetica');
+    })();
+    const fontBold = await (async () => {
+      const b = loadFontBytes('LuxoraGrotesk-Bold.ttf');
+      return b ? pdfDoc.embedFont(b) : pdfDoc.embedFont('Helvetica-Bold');
+    })();
+    const fontLight = await (async () => {
+      const b = loadFontBytes('LuxoraGrotesk-Light.ttf');
+      return b ? pdfDoc.embedFont(b) : fontRegular;
+    })();
+
+    const ovPaths = activeOv
+      .map(key => OVERLAYS_MIO[key])
+      .filter(Boolean)
+      .filter((p, i, arr) => arr.indexOf(p) === i);
+
+    const [baseImgBytes, imgListaBytes, ...overlayBytesArr] = await Promise.all([
+      fetchLocalBytes('/MiopatiaImg/MI_Base_TR.png'),
+      fetchRemoteBytes(imgListaUrl),
+      ...ovPaths.map(p => fetchLocalBytes(p)),
     ]);
 
-    const userDataB64 = { ...userData, imageUrl: doctorLogoB64 || null };
-
-    browser = await launchBrowser();
-
-    const html1 = buildPage1Html({
-      finalConclusion,
-      userData: userDataB64,
-      baseImgB64,
-      overlayB64s,
-      figuras,
-      topLeftText: topLeftText || '',
+    await buildPage1(pdfDoc, {
+      finalConclusion, userData, baseImgBytes, overlayBytesArr,
+      figurasData: figuras, topLeftText, plantillaId,
+      fontRegular, fontBold, fontLight,
     });
-    const pngPage1 = await captureHtmlAsPng(browser, html1);
 
-    const hayPag2 = comentarioLista.trim().length > 0 || imgListaB64 !== null;
-    let pngPage2 = null;
+    const hayPag2 = (comentarioLista && comentarioLista.trim().length > 0) || !!imgListaBytes;
     if (hayPag2) {
-      const html2 = buildPage2Html({
-        listaVisual,
-        comentarioLista,
-        imgListaB64,
-        hasPlantilla: plantillaId && plantillaId !== 'none',
+      await buildPage2(pdfDoc, {
+        listaVisual, comentarioLista, imgListaBytes, plantillaId,
+        fontRegular, fontBold,
       });
-      pngPage2 = await captureHtmlAsPng(browser, html2);
     }
 
-    await browser.close();
-    browser = null;
-
-    const pdfBytes = await assemblePdf({ pngPage1, pngPage2, plantillaId });
+    const pdfBytes = await pdfDoc.save({ useObjectStreams: false, addDefaultPage: false });
 
     return new NextResponse(pdfBytes, {
       status: 200,
       headers: {
-        'Content-Type':        'application/pdf',
-        'Content-Disposition': 'attachment; filename=reporte.pdf',
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename=reporte_miopatia.pdf',
       },
     });
   } catch (err) {
-    if (browser) { try { await browser.close(); } catch {} }
-    console.error('Error PDF miopatia:', err);
-    return NextResponse.json({ message: err.message }, { status: 500 });
+    console.error('Error generando PDF miopatia:', err);
+    return NextResponse.json({ message: 'Error generando PDF: ' + err.message }, { status: 500 });
   }
 }

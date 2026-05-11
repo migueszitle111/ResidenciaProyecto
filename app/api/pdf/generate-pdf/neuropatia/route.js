@@ -1,4 +1,4 @@
-// app/api/pdf/generate-pdf/neuropatia/route.js
+﻿// app/api/pdf/generate-pdf/neuropatia/route.js
 
 import { NextResponse } from 'next/server';
 import puppeteer        from 'puppeteer';
@@ -19,7 +19,7 @@ const BACKEND_URL = 'https://backendmedxpro-tef2.onrender.com';
 const PAGE_W = 794;
 const PAGE_H = 1123;
 
-// Keys match OVERLAYS constant in ReportFace.jsx → public/NeuropatiaImg paths
+// Keys match OVERLAYS constant in ReportFace.jsx â†’ public/NeuropatiaImg paths
 const OVERLAYS_NEURO_P = {
   'MedianoImg':           '/NeuropatiaImg/NOMediano.png',
   'MedianoFlz':           '/NeuropatiaImg/MedianoFlz.png',
@@ -27,15 +27,15 @@ const OVERLAYS_NEURO_P = {
   'FocalIzq':             '/NeuropatiaImg/AxilFcIzq.png',
   'Axilar':               '/NeuropatiaImg/Axilar.png',
   'InteroseoA':           '/NeuropatiaImg/InteroseoAnterior.png',
-  'Musculocutáneo':       '/NeuropatiaImg/Musculocutaneo.png',
+  'MusculocutÃ¡neo':       '/NeuropatiaImg/Musculocutaneo.png',
   'Radial':               '/NeuropatiaImg/Radial.png',
   'Radial superficial':   '/NeuropatiaImg/RadialSuperficial.png',
-  'Interóseo posterior':  '/NeuropatiaImg/InteroseoP.png',
+  'InterÃ³seo posterior':  '/NeuropatiaImg/InteroseoP.png',
   'Supraescapular':       '/NeuropatiaImg/Supraescapular.png',
   'Ulnar':                '/NeuropatiaImg/Ulnar.png',
-  'Dorsal cutáneo':       '/NeuropatiaImg/DorsalCutaneo.png',
+  'Dorsal cutÃ¡neo':       '/NeuropatiaImg/DorsalCutaneo.png',
   'Toracodorsal':         '/NeuropatiaImg/Toracodorsal.png',
-  'Torácico largo':       '/NeuropatiaImg/ToracicoLargo.png',
+  'TorÃ¡cico largo':       '/NeuropatiaImg/ToracicoLargo.png',
   'Antebraquial medial':  '/NeuropatiaImg/Antebraquial.png',
   'Antebraquial lateral': '/NeuropatiaImg/Musculocutaneo.png',
   'Frenico':              '/NeuropatiaImg/Frenico.png',
@@ -44,7 +44,7 @@ const OVERLAYS_NEURO_P = {
   'GluteoInf':            '/NeuropatiaImg/GluteoSupIn.png',
   'GluteoSup':            '/NeuropatiaImg/GluteoMedio.png',
   'Femoral':              '/NeuropatiaImg/Femoral.png',
-  'FemoralCtn':           '/NeuropatiaImg/Femorocutáneo.png',
+  'FemoralCtn':           '/NeuropatiaImg/FemorocutÃ¡neo.png',
   'Safeno':               '/NeuropatiaImg/Safeno.png',
   'Obturador':            '/NeuropatiaImg/Obturador.png',
   'Peroneo':              '/NeuropatiaImg/Peroneo.png',
@@ -197,7 +197,7 @@ function buildPage1Html({ finalConclusion, userData, baseImgB64, overlayB64s, fi
     </div>
   </div>
   <div class="diag">
-    <div class="diag-title">Diagnóstico</div>
+    <div class="diag-title">DiagnÃ³stico</div>
     ${diagHtml}
   </div>
   <div class="spacer"></div>
@@ -259,7 +259,7 @@ function buildPage2Html({ listaVisual, comentarioLista, imgListaB64, hasPlantill
 
 async function captureHtmlAsPng(browser, html) {
   const page = await browser.newPage();
-  await page.setViewport({ width: PAGE_W, height: PAGE_H, deviceScaleFactor: 2 });
+  await page.setViewport({ width: PAGE_W, height: PAGE_H, deviceScaleFactor: 3 });
   await page.setContent(html, { waitUntil: 'networkidle0' });
   const buf = await page.screenshot({
     type: 'png',
@@ -323,13 +323,13 @@ export async function POST(req) {
       plantillaId     = 'none',
     } = body;
 
-    // Resolve overlay paths — deduplicate while preserving order
+    // Resolve overlay paths â€” deduplicate while preserving order
     const ovPaths = activeOv
       .map(key => OVERLAYS_NEURO_P[key])
       .filter(Boolean)
       .filter((p, i, arr) => arr.indexOf(p) === i);
 
-    // Transparent base — BP_TR.png from mobile (RGBA, 1582×2048)
+    // Transparent base â€” BP_TR.png from mobile (RGBA, 1582Ã—2048)
     const [baseImgB64, imgListaB64, doctorLogoB64, ...overlayB64s] = await Promise.all([
       localImgToB64('/NeuropatiaImg/BP_Neuropatia_TR.png'),
       remoteImgToB64(imgListaUrl),
@@ -381,3 +381,4 @@ export async function POST(req) {
     return NextResponse.json({ message: 'Error generando PDF' }, { status: 500 });
   }
 }
+

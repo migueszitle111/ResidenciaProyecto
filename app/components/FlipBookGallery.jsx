@@ -1,106 +1,121 @@
 'use client';
-import { useState,useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import Script  from 'next/script';
-import { useRouter } from 'next/navigation';   // 👈 nuevo
+import Script from 'next/script';
 
+const BOOKS = [
+  { pdf: '/pdfs/POTENCIALESEVOCADOSmEDXpro.pdf',          label: 'Potenciales Evocados' },
+  { pdf: '/pdfs/ESTUDIOSDECONDUCCIONNERVIOSAmEDXpro.pdf', label: 'Conduccion Nerviosa'  },
+];
+
+const preConfig = `
+  window.DFLIP = window.DFLIP || {};
+  window.DFLIP.defaults = {
+    autoCreate       : true,
+    skin             : 'light',
+    webgl            : false,
+    pdfRenderQuality : 3,
+    zoomRatio        : 4,
+    backgroundColor  : '#bdbdbd',
+    controlsPosition : 'bottom',
+    enableDownload   : false,
+  };
+`;
+
+function parseThumbs() {
+  if (!window.jQuery || !window.DFLIP?.parseBooks) return false;
+  document.querySelectorAll('._df_thumb').forEach(el => {
+    el.removeAttribute('df-parsed');
+    el.removeAttribute('parsed');
+  });
+  window.DFLIP.parseBooks();
+  return true;
+}
 
 function FlipBookGallery() {
-  /* ───── estado: null = galería, string = PDF embebido ───── */
-  const [activePdf, setActivePdf] = useState(null);
-  const router = useRouter();                  // 👈 instancia del router
+  const parsed = useRef(false);
 
-
-  /* Config global ANTES de cargar dflip.min.js */
-  const preConfig = `
-    window.DFLIP = window.DFLIP || {};
-    window.DFLIP.defaults = {
-      autoCreate: false,
-      skin: 'light',
-      maxTextureSize: 4096,
-      pdfRenderQuality: 2,
-      zoomRatio: 3,
-      webgl: true
-    };
-  `;
-
-  const onDearFlipLoaded = () => {
-  };
-
-   const scripts = (
-    <>
-      <Script id="df-preconfig" strategy="beforeInteractive">
-        {preConfig}
-      </Script>
-      <Script src="/dflip/js/libs/jquery.min.js" strategy="afterInteractive" />
-      <Script src="/dflip/js/dflip.min.js" strategy="afterInteractive" />
-    </>
-  );
-
-  /* ─── Historial: “Atrás/Adelante” cierra el visor ─── */
+  /* Inyectar CSS dflip */
   useEffect(() => {
-    if (activePdf) {
-      const urlWithFlag = `${window.location.pathname}?pdf=${encodeURIComponent(
-        activePdf,
-      )}`;
-      window.history.pushState({ pdf: activePdf }, '', urlWithFlag);
-    }
+    const addLink = (href, id) => {
+      if (id && document.getElementById(id)) return;
+      const link = document.createElement('link');
+      if (id) link.id = id;
+      link.rel  = 'stylesheet';
+      link.href = href;
+      document.head.appendChild(link);
+    };
+    addLink('/dflip/css/themify-icons.min.css', 'dflip-icons-css');
+    addLink('/dflip/css/dflip.min.css', 'dflip-css');
+  }, []);
 
-    const onPop = () => {
-      if (activePdf) {
-        setActivePdf(null);      // desmonta visor
-        window.location.reload(); // recarga limpia
-        // o router.refresh();   // si prefieres un soft‑reload
+  /* Re-parsear thumbs cada vez que la pestaña vuelve a ser visible
+     (el usuario cierra/minimiza la pestaña del visor y regresa aquí) */
+  useEffect(() => {
+    const reParse = () => {
+      if (document.visibilityState === 'visible') {
+        parsed.current = false;   // forzar re-parseo
+        tryParse();
       }
     };
 
-    window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
-  }, [activePdf]);
+    const tryParse = () => {
+      if (parsed.current) return;
+      const ok = parseThumbs();
+      if (!ok) {
+        /* dflip aún no ha cargado — reintentar */
+        setTimeout(tryParse, 200);
+      } else {
+        parsed.current = true;
+      }
+    };
 
-  /* ─── Render ─── */
-  if (activePdf) {
-    return (
-      <>
-        {scripts}
-        {/* sin botón: usa la barra del navegador */}
-        <div
-          id="df-viewer"
-          className="_df_book"
-          source={activePdf}
-          height="600"
-          style={{ width: '100%', maxWidth: 900, margin: '0 auto' }}
-        />
-      </>
-    );
-  }
+    /* Primera carga */
+    tryParse();
 
-  /* Galería de miniaturas */
+    /* Al volver de otra pestaña */
+    document.addEventListener('visibilitychange', reParse);
+    window.addEventListener('focus', reParse);
+
+    return () => {
+      document.removeEventListener('visibilitychange', reParse);
+      window.removeEventListener('focus', reParse);
+    };
+  }, []);
+
+  /* Interceptar click en capture antes de que dflip abra el visor inline */
+  useEffect(() => {
+    const handler = (e) => {
+      const thumb = e.target.closest('[data-pdf]');
+      if (!thumb) return;
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      const pdf = thumb.getAttribute('data-pdf');
+      window.open(`/Educacion/Visor?pdf=${encodeURIComponent(pdf)}`, '_blank');
+    };
+    document.addEventListener('click', handler, true);
+    return () => document.removeEventListener('click', handler, true);
+  }, []);
+
   return (
     <>
-      {scripts}
-      <div className="mt-8 flex flex-wrap justify-center gap-8">
-        <div
-          className="_df_thumb cursor-pointer"
-          onClick={() =>
-            setActivePdf('/pdfs/POTENCIALESEVOCADOSmEDXpro.pdf')
-          }
-          source="/pdfs/POTENCIALESEVOCADOSmEDXpro.pdf"
-          thumb="/dflip/images/book-template.png"
-        >
-          Potenciales Evocados
-        </div>
+      <Script id="df-preconfig" strategy="beforeInteractive">{preConfig}</Script>
+      <Script src="/dflip/js/libs/jquery.min.js" strategy="afterInteractive" />
+      <Script src="/dflip/js/dflip.min.js" strategy="afterInteractive" />
 
-        <div
-          className="_df_thumb cursor-pointer"
-          onClick={() =>
-            setActivePdf('/pdfs/ESTUDIOSDECONDUCCIONNERVIOSAmEDXpro.pdf')
-          }
-          source="/pdfs/ESTUDIOSDECONDUCCIONNERVIOSAmEDXpro.pdf"
-          thumb="/dflip/images/book-template.png"
-        >
-          Conducción Nerviosa
-        </div>
+      <div className="mt-8 flex flex-wrap justify-center gap-8">
+        {BOOKS.map(({ pdf, label }) => (
+          <div
+            key={pdf}
+            data-pdf={pdf}
+            className="_df_thumb cursor-pointer"
+            source={pdf}
+            thumb="/dflip/images/book-template.png"
+            style={{ textAlign: 'center' }}
+          >
+            {label}
+          </div>
+        ))}
       </div>
     </>
   );

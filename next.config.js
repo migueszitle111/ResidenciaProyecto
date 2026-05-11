@@ -27,11 +27,20 @@ const nextConfig = {
     ];
   },
 
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.map$/,
       use: ['ignore-loader'],
     });
+    if (isServer) {
+      config.externals = [
+        ...(Array.isArray(config.externals) ? config.externals : [config.externals].filter(Boolean)),
+        'puppeteer',
+        'puppeteer-core',
+        '@sparticuz/chromium',
+        '@sparticuz/chromium-min',
+      ];
+    }
     return config;
   },
 };

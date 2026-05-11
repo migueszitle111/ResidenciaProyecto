@@ -1,5 +1,3 @@
-const path = require('path');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -9,8 +7,8 @@ const nextConfig = {
     ],
   },
 
-  // Tell Next.js bundler to never include these packages in server bundles.
-  // They are either browser-only or not used in any API route.
+  // Packages that must never be bundled into serverless functions —
+  // they are browser-only, dev-only, or unused in API routes.
   serverExternalPackages: [
     'canvas',
     'googleapis',
@@ -41,9 +39,21 @@ const nextConfig = {
     'puppeteer-core',
     '@sparticuz/chromium',
     '@sparticuz/chromium-min',
+    // Additional heavy packages found in node_modules
+    'react-icons',
+    'lucide-react',
+    'react-pdf',
+    'three',
+    'page-flip',
+    'typescript',
+    'webpack',
+    '@foliojs-fork',
+    'es-abstract',
+    'core-js',
+    'babel-runtime',
+    '@types',
   ],
 
-  // Belt-and-suspenders: also exclude via file tracing
   outputFileTracingExcludes: {
     'app/**': [
       './node_modules/canvas/**',
@@ -75,6 +85,18 @@ const nextConfig = {
       './node_modules/puppeteer/**',
       './node_modules/puppeteer-core/**',
       './node_modules/@sparticuz/**',
+      './node_modules/react-icons/**',
+      './node_modules/lucide-react/**',
+      './node_modules/react-pdf/**',
+      './node_modules/three/**',
+      './node_modules/page-flip/**',
+      './node_modules/typescript/**',
+      './node_modules/webpack/**',
+      './node_modules/@foliojs-fork/**',
+      './node_modules/es-abstract/**',
+      './node_modules/core-js/**',
+      './node_modules/babel-runtime/**',
+      './node_modules/@types/**',
     ],
   },
 

@@ -6,6 +6,20 @@ import Script from 'next/script';
 
 const BG = '#dfdfdf';
 
+/* Detecta el máximo de textura que soporta la GPU via WebGL.
+   Devuelve 4961 (420 DPI) si el hardware lo aguanta, 3508 (300 DPI) si no. */
+function getTextureSize() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return 3508;
+    const max = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+    return max >= 4961 ? 4961 : 3508;
+  } catch {
+    return 3508;
+  }
+}
+
 function VisorContent() {
   const params  = useSearchParams();
   const router  = useRouter();
@@ -74,11 +88,12 @@ function VisorContent() {
         clearInterval(id);
         const el = document.getElementById('df-viewer');
         if (!el) return;
+        const texSize = getTextureSize();
         window.jQuery(el).flipBook(blobUrl, {
           pdfRenderQuality : 1,
-          maxTextureSize   : 3508,  /* A4 a 300 DPI exacto — máxima nitidez tipográfica */
-          minTextureSize   : 3508,  /* igual al max: siempre renderiza a 300 DPI */
-          pixelRatio       : 1,     /* pixelRatio=1 porque el tamaño ya es el real */
+          maxTextureSize   : texSize,
+          minTextureSize   : texSize,
+          pixelRatio       : 1,
           zoomRatio        : 1.5,
           webgl            : false,
           backgroundColor  : BG,

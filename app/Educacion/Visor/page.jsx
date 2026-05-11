@@ -37,7 +37,9 @@ function VisorContent() {
         const el = document.getElementById('df-viewer');
         if (!el) return;
         window.jQuery(el).flipBook(pdfSrc, {
-          pdfRenderQuality : 3,
+          pdfRenderQuality : 1,
+          maxTextureSize   : 4096,
+          pixelRatio       : Math.min(window.devicePixelRatio || 1, 2),
           zoomRatio        : 4,
           webgl            : false,
           backgroundColor  : BG,
@@ -82,7 +84,9 @@ function VisorContent() {
           autoCreate       : false,
           skin             : 'light',
           webgl            : false,
-          pdfRenderQuality : 3,
+          pdfRenderQuality : 1,
+          maxTextureSize   : 4096,
+          pixelRatio       : Math.min(window.devicePixelRatio || 1, 2),
           zoomRatio        : 4,
           backgroundColor  : '${BG}',
           controlsPosition : 'bottom',

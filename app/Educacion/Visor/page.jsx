@@ -7,12 +7,15 @@ import Script from 'next/script';
 const BG = '#dfdfdf';
 
 function VisorContent() {
-  const params          = useSearchParams();
-  const router          = useRouter();
-  const pdfSrc          = params.get('pdf');
-  const [ready, setReady] = useState(false);
+  const params  = useSearchParams();
+  const router  = useRouter();
+  const pdfSrc  = params.get('pdf');
 
-  /* Inyectar CSS dflip una sola vez */
+  const [scriptReady, setScriptReady] = useState(false);
+  const [blobUrl,     setBlobUrl]     = useState(null);   // PDF completo en memoria
+  const [loadPct,     setLoadPct]     = useState(0);      // progreso de descarga
+
+  /* Inyectar CSS dflip */
   useEffect(() => {
     const addLink = (href, id) => {
       if (id && document.getElementById(id)) return;
@@ -26,17 +29,52 @@ function VisorContent() {
     addLink('/dflip/css/dflip.min.css', 'dflip-css');
   }, []);
 
-  /* Inicializar flipBook cuando dflip.min.js haya cargado (onLoad) */
+  /* Descargar el PDF COMPLETO antes de pasárselo a dflip.
+     Así dflip recibe un blob:// local — sin streaming parcial. */
   useEffect(() => {
-    if (!pdfSrc || !ready) return;
+    if (!pdfSrc) return;
+    let cancelled = false;
 
-    /* API real de dflip: jQuery(el).flipBook(source, options) */
+    (async () => {
+      try {
+        const res = await fetch(pdfSrc);
+        const total = Number(res.headers.get('content-length')) || 0;
+        const reader = res.body.getReader();
+        const chunks = [];
+        let received = 0;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done || cancelled) break;
+          chunks.push(value);
+          received += value.length;
+          if (total > 0) setLoadPct(Math.round((received / total) * 100));
+        }
+
+        if (!cancelled) {
+          const blob = new Blob(chunks, { type: 'application/pdf' });
+          setBlobUrl(URL.createObjectURL(blob));
+          setLoadPct(100);
+        }
+      } catch (e) {
+        /* fallback: usar URL directa si la descarga falla */
+        if (!cancelled) setBlobUrl(pdfSrc);
+      }
+    })();
+
+    return () => { cancelled = true; };
+  }, [pdfSrc]);
+
+  /* Inicializar dflip cuando el script Y el blob estén listos */
+  useEffect(() => {
+    if (!blobUrl || !scriptReady) return;
+
     const id = setInterval(() => {
       if (window.jQuery && typeof window.jQuery.fn?.flipBook === 'function') {
         clearInterval(id);
         const el = document.getElementById('df-viewer');
         if (!el) return;
-        window.jQuery(el).flipBook(pdfSrc, {
+        window.jQuery(el).flipBook(blobUrl, {
           pdfRenderQuality : 1,
           maxTextureSize   : 4096,
           minTextureSize   : 1024,
@@ -50,25 +88,20 @@ function VisorContent() {
           paddingLeft      : 20,
           paddingRight     : 20,
           enableDownload   : false,
-          waitPeriod       : 500,   /* ms entre reintentos de carga de textura (default 50) */
+          waitPeriod       : 100,
         });
       }
     }, 100);
 
     return () => clearInterval(id);
-  }, [pdfSrc, ready]);
+  }, [blobUrl, scriptReady]);
 
   if (!pdfSrc) {
     return (
       <div style={{ background: BG, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#fff', textAlign: 'center' }}>
+        <div style={{ color: '#333', textAlign: 'center' }}>
           <p style={{ marginBottom: 16 }}>PDF no especificado.</p>
-          <button
-            onClick={() => router.push('/Educacion')}
-            style={btnStyle}
-            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#b85c2a'}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#D06D33'}
-          >
+          <button onClick={() => router.push('/Educacion')} style={btnStyle}>
             Ir a Educacion
           </button>
         </div>
@@ -79,7 +112,6 @@ function VisorContent() {
   return (
     <div style={{ background: BG, height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
-      {/* Config ANTES de jquery/dflip */}
       <Script id="df-preconfig" strategy="beforeInteractive">{`
         window.DFLIP = window.DFLIP || {};
         window.DFLIP.defaults = {
@@ -100,7 +132,7 @@ function VisorContent() {
       <Script
         src="/dflip/js/dflip.min.js"
         strategy="afterInteractive"
-        onLoad={() => setReady(true)}
+        onLoad={() => setScriptReady(true)}
       />
 
       {/* Boton X flotante */}
@@ -108,21 +140,21 @@ function VisorContent() {
         onClick={() => router.push('/Educacion')}
         title="Regresar a Educacion"
         style={{
-          position  : 'fixed',
-          top       : 16,
-          right     : 20,
-          zIndex    : 9999,
-          width     : 36,
-          height    : 36,
-          borderRadius : '50%',
-          border    : '1px solid rgba(255,255,255,0.4)',
-          background: 'rgba(0,0,0,0.55)',
-          color     : '#fff',
-          fontSize  : 18,
-          lineHeight: '1',
-          cursor    : 'pointer',
-          display   : 'flex',
-          alignItems: 'center',
+          position      : 'fixed',
+          top           : 16,
+          right         : 20,
+          zIndex        : 9999,
+          width         : 36,
+          height        : 36,
+          borderRadius  : '50%',
+          border        : '1px solid rgba(255,255,255,0.4)',
+          background    : 'rgba(0,0,0,0.55)',
+          color         : '#fff',
+          fontSize      : 18,
+          lineHeight    : '1',
+          cursor        : 'pointer',
+          display       : 'flex',
+          alignItems    : 'center',
           justifyContent: 'center',
           backdropFilter: 'blur(4px)',
         }}
@@ -132,33 +164,57 @@ function VisorContent() {
         ✕
       </button>
 
-      {/* Visor — ocupa todo el espacio disponible para maximizar cacheIndex */}
+      {/* Barra de progreso mientras descarga */}
+      {!blobUrl && (
+        <div style={{
+          position      : 'absolute',
+          inset         : 0,
+          display       : 'flex',
+          flexDirection : 'column',
+          alignItems    : 'center',
+          justifyContent: 'center',
+          zIndex        : 10,
+          background    : BG,
+        }}>
+          <p style={{ color: '#333', marginBottom: 16, fontWeight: 500 }}>
+            Cargando PDF… {loadPct > 0 ? `${loadPct}%` : ''}
+          </p>
+          <div style={{ width: 260, height: 6, background: '#ccc', borderRadius: 4, overflow: 'hidden' }}>
+            <div style={{
+              height     : '100%',
+              width      : `${loadPct}%`,
+              background : '#D06D33',
+              borderRadius: 4,
+              transition : 'width 0.2s',
+            }} />
+          </div>
+        </div>
+      )}
+
+      {/* Visor */}
       <div style={{ flex: 1, position: 'relative' }}>
-        <div
-          id="df-viewer"
-          style={{ position: 'absolute', inset: 0 }}
-        />
+        <div id="df-viewer" style={{ position: 'absolute', inset: 0 }} />
       </div>
     </div>
   );
 }
 
 const btnStyle = {
-  padding         : '6px 20px',
-  borderRadius    : '9999px',
-  border          : '1px solid #D06D33',
-  cursor          : 'pointer',
-  background      : '#D06D33',
-  color           : '#fff',
-  fontWeight      : 400,
-  fontSize        : '0.875rem',
-  letterSpacing   : '0.02em',
-  transition      : 'background-color 0.2s',
+  padding      : '6px 20px',
+  borderRadius : '9999px',
+  border       : '1px solid #D06D33',
+  cursor       : 'pointer',
+  background   : '#D06D33',
+  color        : '#fff',
+  fontWeight   : 400,
+  fontSize     : '0.875rem',
+  letterSpacing: '0.02em',
+  transition   : 'background-color 0.2s',
 };
 
 function VisorPage() {
   return (
-    <Suspense fallback={<div style={{ background: '#6b7280', minHeight: '100vh' }} />}>
+    <Suspense fallback={<div style={{ background: BG, minHeight: '100vh' }} />}>
       <VisorContent />
     </Suspense>
   );

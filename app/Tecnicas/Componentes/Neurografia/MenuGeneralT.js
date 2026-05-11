@@ -359,6 +359,12 @@ const MenuBotonesPt = () => {
                         </div>
                     ) : (
                         <div className="flex min-h-screen flex-col items-center rounded p-2 m-4">
+                            <div className="w-full mb-8">
+                                <h1 className="text-white text-4xl font-bold">
+                                    {selectedOption}
+                                </h1>
+                                <div className="mt-2 h-[2px] w-16 bg-orange-500 rounded-full" />
+                            </div>
                             {selectedOption === "Mediano (motor)" && <MedianoMt />}
                             {selectedOption === "Mediano (sensitivo)" && <MedianoSt />}
                             {selectedOption === "Ulnar (motor)" && <UlnarMt />}

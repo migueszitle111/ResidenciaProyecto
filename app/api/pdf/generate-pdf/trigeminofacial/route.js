@@ -1,800 +1,390 @@
+import { NextResponse }  from 'next/server';
+import { PDFDocument, rgb } from 'pdf-lib';
+import fontkit from '@pdf-lib/fontkit';
+import fs from 'fs';
+import path from 'path';
 
-import puppeteer from "puppeteer-core";
-import chromium  from "@sparticuz/chromium";
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-const isDev = process.env.NODE_ENV !== "production";
-
-// URL base: localhost en dev, tu dominio en prod
+const isDev   = process.env.NODE_ENV !== 'production';
 const baseUrl = isDev
-  ? "http://localhost:3000"
-  : process.env.NEXT_PUBLIC_SITE_URL || "https://medxproapp.com";
-function buildHtml({
-  finalConclusion, // texto visible (títulos, etc.)
-  finalString,     // texto para detectar overlays
-  userData,
-  droppedItems,
-  topLeftText,
-}) {
-  // 1) Tus reglas de superposición con /assets/... en lugar de baseUrl
-  const overlayRules = [
-    {
-      expectedValue: 'indenme', 
-      image: [
-        {
-          src: '/assets/TrigeminoFacialImg/BP_Via Trigemino-Facial_page-0002.jpg',
-          alt: 'Modelo',
-        },
-        {
-          src: '/assets/TrigeminoFacialImg/Idemne/FA_5.png',
-          alt: 'Modelo',
-        }
-        
-      ]
-      },
+  ? 'http://localhost:3000'
+  : (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.medxproapp.com');
 
-      {
-        expectedValue: 'alterada', 
-        image: [
-          {
-            src: '/assets/TrigeminoFacialImg/BP_Via Trigemino-Facial_page-0002.jpg',
-            alt: 'Modelo',
-          },
-          {
-            src: '/assets/TrigeminoFacialImg/Idemne/FA_5.png',
-            alt: 'Modelo',
-          }
-          
-        ]
-        },
+const BACKEND_URL = 'https://backendmedxpro-tef2.onrender.com';
 
-        {
-          expectedValue: 'izquierdoaferente_ipsilateral', 
-          image: 
-            {
-              src: '/assets/TrigeminoFacialImg/Vía Afectada/AFERENTE I.png',
-              
-              alt: 'Modelo',
-            },
-        },
-        {
-          expectedValue: 'derechoaferente_ipsilateral', 
-          image: 
-            {
-              src: '/assets/TrigeminoFacialImg/Vía Afectada/AFERENTE D.png',
-              alt: 'Modelo',
-            },
-        },
+const PW = 595.28;
+const PH = 841.89;
 
-        {
-          expectedValue: 'bilateralaferente_ipsilateral', 
-          image: [
-            {
-              src: '/assets/TrigeminoFacialImg/Vía Afectada/AFERENTE I.png',
-              alt: 'Modelo',
-            },
-            {
-              src: '/assets/TrigeminoFacialImg/Vía Afectada/AFERENTE D.png',
-              alt: 'Modelo',
-            }
-            
-          ]
-          },
+const ZONE_CONTENT_TOP = 728;
+const ZONE_CONTENT_BOT = 185;
+const MARGIN_L = 42;
+const MARGIN_R = 42;
+const CONTENT_W = PW - MARGIN_L - MARGIN_R;
 
-          {
-            expectedValue: 'integracion_pontina', 
-            image: 
-              {
-                src: '/assets/TrigeminoFacialImg/Vía Afectada/INTEGRACION.png',
-                alt: 'Modelo',
-              },
-          },
+// Base_Cerebro.png is 600×776 → ratio H/W
+const LAM_IMG_RATIO = 776 / 600;
 
-          {
-            expectedValue: 'nucleo_y_formacion_reticular', 
-            image: 
-              {
-                src: '/assets/TrigeminoFacialImg/Vía Afectada/INTEGRACION.png',
-                alt: 'Modelo',
-              },
-          },
+// Overlay rules mapped from finalString (conclusiones values)
+// Each entry: { match: string (lowercase), paths: string[] }
+const OVERLAY_RULES = [
+  {
+    match: 'indenme',
+    paths: [
+      '/assets/TrigeminoFacialImg/BP_Via Trigemino-Facial_page-0002.jpg',
+      '/assets/TrigeminoFacialImg/Idemne/FA_5.png',
+    ],
+  },
+  {
+    match: 'alterada',
+    paths: [
+      '/assets/TrigeminoFacialImg/BP_Via Trigemino-Facial_page-0002.jpg',
+      '/assets/TrigeminoFacialImg/Idemne/FA_5.png',
+    ],
+  },
+  {
+    match: 'izquierdoaferente_ipsilateral',
+    paths: ['/assets/TrigeminoFacialImg/Vía Afectada/AFERENTE I.png'],
+  },
+  {
+    match: 'derechoaferente_ipsilateral',
+    paths: ['/assets/TrigeminoFacialImg/Vía Afectada/AFERENTE D.png'],
+  },
+  {
+    match: 'bilateralaferente_ipsilateral',
+    paths: [
+      '/assets/TrigeminoFacialImg/Vía Afectada/AFERENTE I.png',
+      '/assets/TrigeminoFacialImg/Vía Afectada/AFERENTE D.png',
+    ],
+  },
+  {
+    match: 'integracion_pontina',
+    paths: ['/assets/TrigeminoFacialImg/Vía Afectada/INTEGRACION.png'],
+  },
+  {
+    match: 'nucleo_y_formacion_reticular',
+    paths: ['/assets/TrigeminoFacialImg/Vía Afectada/INTEGRACION.png'],
+  },
+  {
+    match: 'eferente',
+    paths: ['/assets/TrigeminoFacialImg/Vía Afectada/EFERENCIA.png'],
+  },
+];
 
-          {
-            expectedValue: 'eferente', 
-            image: 
-              {
-                src: '/assets/TrigeminoFacialImg/Vía Afectada/EFERENCIA.png',
-                alt: 'Modelo',
-              },
-          }, 
-  ];
+const PLANTILLAS_PDF = {
+  A: { p1: 'PLANTILLA_A_VERTICAL-1.pdf', p2: 'PLANTILLA_A_VERTICAL-2.pdf' },
+  B: { p1: 'PLANTILLA_B_VERTICAL-1.pdf', p2: 'PLANTILLA_B_VERTICAL-2.pdf' },
+  C: { p1: 'PLANTILLA_C_VERTICAL-1.pdf', p2: 'PLANTILLA_C_VERTICAL-2.pdf' },
+};
 
-  // 2) Buscamos coincidencias con finalString
-  const matchedImages = [];
-  const conclusionLower = finalString.toLowerCase();
+// ── helpers ──────────────────────────────────────────────────────────────────
 
-  for (const rule of overlayRules) {
-    if (conclusionLower.includes(rule.expectedValue.toLowerCase())) {
-      if (Array.isArray(rule.image)) {
-        matchedImages.push(...rule.image);
-      } else {
-        matchedImages.push(rule.image);
-      }
-    }
-  }
-
-  // 3) Generar HTML de las imágenes superpuestas
-  const overlayHtml = matchedImages
-    .map(
-      (img) => `
-      <img
-        src="${img.src}"
-        alt="${img.alt}"
-        style="
-          position:absolute;
-          top:0;
-          left:0;
-          width:600px;
-          height:776px;
-          object-fit:contain;"
-      />
-    `
-    )
-    .join("");
-
-  // CSS embebido
-   // CSS embebido (tu DinamicImagesMenu, etc.)
-   const menuCss = `
-   .DivPanel2 {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    margin: 2px;
-    border-radius: 5px;
-    transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
-    position: relative;
-  
-  }
-  
-  .DivPanel2-expanded {
-    width: 230px;
-    z-index: 10; /* Asegura que el div expandido esté en la parte superior */
-    position: relative;
-    background-color: rgba(250, 250, 250, 0.678);
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-  }
-  
-  
-  .DivPanel3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    margin: 2px;
-    border-radius: 5px;
-    transition: width 0.3s ease, z-index 0.3s ease; /* Transición suave también para z-index */
-    position: relative;
-  
-  }
-  
-  .DivPanel3-expanded {
-    width: 95px;
-    z-index: 10; /* Asegura que el div expandido esté en la parte superior */
-    position: relative;
-    background-color: rgba(250, 250, 250, 0.678);
-  }
-  
-  .DivPanel4{
-    background-color: rgba(255, 255, 255, 0.253);
-    width: 90px;
-    flex-grow: 1;
-    flex-basis: 200;
-    margin: 2px;
-    border-radius: 5px;
-  }
-  
-  .DivPanel4-expanded{
-    width: 230px;
-    
-  }
-  
-  
-  .cuadroIMG {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    position: relative;
-    margin-left: 30px;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadroIMG-expanded {
-    width: 50px;
-    height: 50px;
-    margin-left: 90px;
-    
-  }
-  
-  .cuadroIMG2 {
-    width: 90px;
-    height: 30px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    position: relative;
-    margin-left: 10px;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadroIMG2-expanded {
-    width: 90px;
-    height: 30px;
-    margin-left: 10px;
-    
-  }
-  
-  
-  /*CSS del componete que se utiliza para arastrar imagnes*/
-  .draggableDiv {
-    transition: all 0.2s ease;
-    position: absolute;
-    z-index: 9999; /* Prueba */
-
-  }
-  
-  .draggableDiv.expanded {
-    transform: scale(1.1); /* Expande el tamaño del div mientras el clic está sostenido */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Añade sombra */
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo ligeramente oscuro */
-    
-  }
-
-  
-.cuadro {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    margin: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-    display: flex;
-    z-index: 1;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .cuadro-expanded {
-    width: 240px;
-    height: 120px;
-    margin-left: -10px;
-    background-color: transparent;
-    z-index: 1;
-  }
-  
-  .cuadro2 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    margin-left: 40px;
-    z-index: 2;
-  }
-  
-  .cuadro2-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 135px;
-    z-index: 1;
-  }
-  
-  
-  .cuadro3 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  }
-  
-  .cuadro3-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  } 
-  
-  /*Circulos donde se insertan las imagenes*/
-  .circulo {
-    width: 50px;
-    height: 50px;
-    transition: width 0.3s ease, height 0.3s ease;
-    background-color: transparent;
-    margin: 10px;
-    margin-left: -5px;
-    margin-top: 10px;
-    display: flex;
-    z-index: 1;
-  }
-  
-  /* Cuando el elemento está siendo arrastrado (tamaño original) */
-  .circulo-expanded {
-    width: 240px;
-    height: 120px;
-    z-index: 1;
-    
-  }
-  
-  .circulo2 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 40px;
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  .circulo2-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 135px;
-    z-index: 1;
-  }
-  
-  .circulo2 > .dropArea2{
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  
-  .circulo3 {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    transition: width 0.3s ease, height 0.3s ease;
-    border: 1px solid black; /* Borde opcional */
-    position: absolute;
-    margin-top:  5px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  .circulo3-expanded {
-    width: 98px;
-    height: 92px;
-    margin-top:  15px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    z-index: 1;
-  }
-  
-  .circulo3 > .dropArea2{
-    border-radius: 100%;
-    z-index: 1;
-  }
-  
-  
-  .lineaImg{
-    width: 130px; /* Ajusta el ancho para que sea responsivo */
-    height: 40px; /* Mantiene la proporción de la imagen */
-    transition: transform 0.3s ease; /* Añade una transición suave para efectos */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    margin-top: 5px;
-    z-index: 1;
-    
-  }
-  
-  .lineaImg-expanded {
-    width: 130px;
-    height: auto;
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 55px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-  }
-  
-  .lineaImg2{
-    width: 130px; /* Ajusta el ancho para que sea responsivo */
-    height: 40px; /* Mantiene la proporción de la imagen */
-    transition: transform 0.3s ease; /* Añade una transición suave para efectos */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    margin-top: 5px;
-    margin-left: 35px;
-    z-index: 1;
-    
-  }
-  
-  .lineaImg2-expanded {
-    width: 130px;
-    height: auto;
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 60px;
-    transform: scale(1.1); /* Escala la imagen un poco al expandir */
-    z-index: 1;
-  }
-  
-  
-  .cruzImg{
-    width: 90px; /* Ajusta el ancho para que sea responsivo */
-    height: 25px; /* Mantiene la proporción de la imagen */
-    position: static;
-    background-color: transparent;
-    pointer-events: none;
-    align-items: center;
-  }
-  
-  .PuntoRojo{
-    width: 45px; /* Ajusta el ancho para que sea responsivo */
-    height: 45px; /* Mantiene la proporción de la imagen */
-    position: relative;
-    background-color: transparent;
-    pointer-events: none;
-    margin: auto;
-    padding-bottom: 10px;
-  
-  }
-  
-  .lineaImg4{
-    width: 84px;
-    height: 84px;
-  }
-  
-  .dropArea2 {
-    width: 40px; /* Tamaño inicial */
-    height: 40px;
-    background-color: transparent;
-    transition: width 0.3s ease, height 0.3s ease; /* Transición suave */
-  }
-  
-  .dropArea2-expanded {
-    width: 88px; /* Mismo tamaño que cuadro2-expanded */
-    height: 92px;
-    transition: width 0.3s ease, height 0.3s ease;
-  }
-  
-  .lineaDv{
-    background-color: black;
-    border: solid 0.5px black;
-    width:120px;
-    height: 1px;
-  }
-
-  .containerImg {
-    position: relative; /* Permite que Draggable funcione correctamente */
-    width: 100%; /* O cualquier tamaño que necesites */
-    height: 100%; /* O cualquier tamaño que necesites */
-  }
-  `;
-
-
-  return `
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Reporte</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        background-color: transparent;
-      }
-      .container {
-        width: 700px;
-        height: 800px;
-        margin: 10px auto;
-        position: relative;
-        align-items: center;
-      }
-      .user-logo {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        opacity: 50%;
-        border-radius: 0%;
-        object-fit: cover;
-      }
-      .paciente-name {
-        margin-top: 54px;
-        margin-left: 100px;
-      }
-      .image-container {
-        position: relative;
-      }
-      .image-stack {
-        position: relative;
-        width: 600px;
-        height: 776px;
-        margin: 0 auto;
-      }
-      .image-stack img {
-        position: absolute;
-        left: 0; 
-        top: 0;
-        width: 600px;
-        height: 776px;
-        object-fit: contain;
-      }
-      #conclusionDiv {
-        margin-top: 2px;
-        padding: 12px;
-        font-size: 14px;
-        line-height: 1.4;
-        text-align: justify;
-
-      }
-      .user-data {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        font-size: 10px;
-        opacity: 50%;
-        margin-top: 110px;
-        align-items: center;
-        justify-content: center;
-      }
-      .user-data svg {
-        margin-right: 4px;
-      }
-      .user-data > div {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-      }
-      /* Inyectamos el CSS extra */
-      ${menuCss}
-    </style>
-  </head>
-  <body>
-    ${
-      userData.imageUrl
-        ? `<img class="user-logo" src="${userData.imageUrl}" alt="Logo Usuario" />`
-        : ""
-    }
-    <div class="paciente-name">
-      ${topLeftText ?? ""}
-    </div>
-    <div class="container">
-      <!-- droppedItems con posicion:absolute -->
-      <div class="image-container">
-        ${droppedItems
-          .map(
-            (item) => `
-              <div
-                style="
-                  position: absolute;
-                  left: ${item.x + 43}px;
-                  top: ${item.y - 10}px;
-                "
-              >
-                ${item.content}
-              </div>
-            `
-          )
-          .join("")}
-      </div>
-      <!-- Bloque "image-stack" con la imagen base y overlays -->
-      <div class="image-stack">
-        <img src="/assets/MioImg/Base_Cerebro.png" alt="Imagen Base" />
-        ${overlayHtml}
-      </div>
-      <div id="conclusionDiv">
-        ${finalConclusion}
-      </div>
-      <div class="user-data">
-        ${
-          userData.name
-            ? `
-              <div id="footerName">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-label="Usuario"
-                >
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 
-                           1.79-4 4 1.79 4 4 4zm0 2c-2.67 
-                           0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                </svg>
-                <span>Dr. ${userData.name} ${userData.lastname ?? ""}</span>
-              </div>
-            `
-            : ""
-        }
-        ${
-          userData.email
-            ? `
-              <div id="footerEmail">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-label="Email"
-                >
-                  <path d="M20 4H4c-1.1 0-2 .9-2 
-                           2v12c0 1.1.9 2 2 2h16c1.1 0 
-                           2-.9 2-2V6c0-1.1-.9-2-2-2zm0 
-                           4l-8 5-8-5V6l8 5 8-5v2z" />
-                </svg>
-                <span>${userData.email}</span>
-              </div>
-            `
-            : ""
-        }
-        ${
-          userData.especialidad
-            ? `
-              <div id="footerEspecialidad">
-                <svg
-                  version="1.1"
-                  id="ICONOS"
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 90 90"
-                  width="14"
-                  height="14"
-                  fill="currentColor"
-                  aria-label="Especialidad"
-                >
-                  <path d="M45.12,61.02c0,0,0,
-                           7.32-4.79,7.32h-8.68c-1.82,
-                           0-3.29-1.47-3.29-3.29
-                           c0,0-2.39-8.68-2.65-8.68l-2.88-1.21
-                           c-1.57-0.66-2.31-2.46-1.66-4.03l4.8-9.65v-0.67
-                           c0-11.9,9.65-21.55,21.55-21.55s21.55,9.65,21.55,21.55
-                           c0,5.12-1.8,9.84-4.79,13.54v16.39"/>
-                </svg>
-                <span>${userData.especialidad}</span>
-              </div>
-            `
-            : ""
-        }
-        ${
-          userData.cedula
-            ? `
-              <div id="footerCedula">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-label="Cédula"
-                >
-                  <path d="M20 2H4c-1.1 0-2 
-                           .9-2 2v16c0 1.1.9 2 2 2h16c1.1 
-                           0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 
-                           2l-6 3.99L6 4h12z"/>
-                </svg>
-                <span>Cédula: ${userData.cedula}</span>
-              </div>
-            `
-            : ""
-        }
-      </div>
-    </div>
-  </body>
-</html>
-`;
+async function fetchBytes(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return new Uint8Array(await res.arrayBuffer());
+  } catch { return null; }
 }
 
-// Aquí el endpoint que genera el PDF
+async function fetchLocalBytes(publicPath) {
+  if (!publicPath) return null;
+  try {
+    const fsPath = path.join(process.cwd(), 'public', publicPath);
+    if (fs.existsSync(fsPath)) return new Uint8Array(fs.readFileSync(fsPath));
+  } catch {}
+  return fetchBytes(`${baseUrl}${publicPath}`);
+}
+
+async function fetchRemoteBytes(url) {
+  if (!url) return null;
+  if (url.startsWith('data:')) {
+    const comma = url.indexOf(',');
+    if (comma === -1) return null;
+    return new Uint8Array(Buffer.from(url.slice(comma + 1), 'base64'));
+  }
+  return fetchBytes(url);
+}
+
+function loadFontBytes(filename) {
+  const p = path.join(process.cwd(), 'public', 'fonts', filename);
+  try { return fs.readFileSync(p); } catch { return null; }
+}
+
+async function embedPng(pdfDoc, bytes) {
+  if (!bytes) return null;
+  try { return await pdfDoc.embedPng(bytes); } catch { return null; }
+}
+async function embedJpg(pdfDoc, bytes) {
+  if (!bytes) return null;
+  try { return await pdfDoc.embedJpg(bytes); } catch { return null; }
+}
+
+function dataUrlMime(url) {
+  if (!url || !url.startsWith('data:')) return null;
+  const semi = url.indexOf(';');
+  return semi > 5 ? url.slice(5, semi) : null;
+}
+
+async function embedImg(pdfDoc, bytes, mimeHint) {
+  if (!bytes) return null;
+  if (mimeHint === 'image/jpeg' || mimeHint === 'image/jpg') {
+    const img = await embedJpg(pdfDoc, bytes);
+    if (img) return img;
+  }
+  const img = await embedPng(pdfDoc, bytes);
+  if (img) return img;
+  return embedJpg(pdfDoc, bytes);
+}
+
+function wrapText(text, font, fontSize, maxWidth) {
+  if (!text) return [];
+  const words = text.split(' ');
+  const lines = [];
+  let current = '';
+  for (const word of words) {
+    const test = current ? current + ' ' + word : word;
+    if (font.widthOfTextAtSize(test, fontSize) > maxWidth && current) {
+      lines.push(current);
+      current = word;
+    } else {
+      current = test;
+    }
+  }
+  if (current) lines.push(current);
+  return lines;
+}
+
+// ── Page 1 ───────────────────────────────────────────────────────────────────
+
+async function buildPage1(pdfDoc, {
+  finalConclusion, userData, baseImgBytes, overlayBytesArr,
+  topLeftText, plantillaId, fontRegular, fontBold, fontLight,
+}) {
+  const page = pdfDoc.addPage([PW, PH]);
+
+  if (plantillaId && plantillaId !== 'none' && PLANTILLAS_PDF[plantillaId]) {
+    const tplBytes = await fetchBytes(`${BACKEND_URL}/plantillas/${PLANTILLAS_PDF[plantillaId].p1}`);
+    if (tplBytes) {
+      try {
+        const tplDoc = await PDFDocument.load(tplBytes);
+        const [tplPg] = await pdfDoc.embedPdf(tplDoc, [0]);
+        page.drawPage(tplPg, { x: 0, y: 0, width: PW, height: PH });
+      } catch (e) { console.warn('plantilla p1:', e.message); }
+    }
+  }
+
+  const SUBHDR_TEXT_Y = 742;
+
+  if (topLeftText) {
+    page.drawText(topLeftText, {
+      x: MARGIN_L + 20, y: SUBHDR_TEXT_Y,
+      font: fontBold, size: 9.5,
+      color: rgb(0.08, 0.08, 0.08),
+    });
+  }
+
+  const LOGO_BOX_SZ = 52;
+  const LOGO_BOX_X  = PW - MARGIN_R - LOGO_BOX_SZ;
+  const LOGO_BOX_Y  = SUBHDR_TEXT_Y - 20;
+
+  if (userData.imageUrl) {
+    const logoBytes = await fetchRemoteBytes(userData.imageUrl);
+    const logoImg   = await embedImg(pdfDoc, logoBytes, dataUrlMime(userData.imageUrl));
+    if (logoImg) {
+      page.drawImage(logoImg, {
+        x: LOGO_BOX_X, y: LOGO_BOX_Y,
+        width: LOGO_BOX_SZ, height: LOGO_BOX_SZ,
+      });
+    }
+  }
+
+  const DIAG_RESERVE = 70;
+  const LAM_H_MAX    = ZONE_CONTENT_TOP - ZONE_CONTENT_BOT - DIAG_RESERVE;
+  const LAM_W_FROM_H = Math.round(LAM_H_MAX / LAM_IMG_RATIO);
+  const LAM_W_MAX    = CONTENT_W;
+  let LAM_H = LAM_H_MAX;
+  let LAM_W = LAM_W_FROM_H;
+  if (LAM_W > LAM_W_MAX) {
+    LAM_W = LAM_W_MAX;
+    LAM_H = Math.round(LAM_W * LAM_IMG_RATIO);
+  }
+  const LAM_X = MARGIN_L + Math.round((CONTENT_W - LAM_W) / 2);
+  const LAM_Y = ZONE_CONTENT_TOP - LAM_H;
+
+  // Draw base + overlays
+  const baseImg = await embedImg(pdfDoc, baseImgBytes, 'image/jpeg');
+  if (baseImg) {
+    page.drawImage(baseImg, { x: LAM_X, y: LAM_Y, width: LAM_W, height: LAM_H });
+  }
+  for (const ovBytes of overlayBytesArr) {
+    const ovImg = await embedImg(pdfDoc, ovBytes);
+    if (ovImg) {
+      page.drawImage(ovImg, { x: LAM_X, y: LAM_Y, width: LAM_W, height: LAM_H });
+    }
+  }
+
+  const FTR_Y        = 48;
+  const FTR_SZ       = 7.5;
+
+  const DIAG_X     = MARGIN_L + 14;
+  const DIAG_W     = CONTENT_W - 14;
+  const TITLE_Y    = LAM_Y - 62;
+  const FONT_SZ    = 9;
+  const LINE_H     = 13;
+  const BLACK      = rgb(0.07, 0.07, 0.07);
+  const TEXT_FLOOR = FTR_Y + FTR_SZ + 10;
+
+  page.drawText('Diagnóstico', {
+    x: DIAG_X, y: TITLE_Y,
+    font: fontBold, size: 9,
+    color: BLACK,
+  });
+
+  const paragraphs = (finalConclusion || '')
+    .split('\n\n').map(p => p.trim()).filter(Boolean);
+  let textY = TITLE_Y - 14;
+
+  for (const para of paragraphs) {
+    const lines = wrapText(para, fontRegular, FONT_SZ, DIAG_W);
+    for (const line of lines) {
+      if (textY < TEXT_FLOOR) break;
+      page.drawText(line, { x: DIAG_X, y: textY, font: fontRegular, size: FONT_SZ, color: BLACK });
+      textY -= LINE_H;
+    }
+    textY -= 4;
+  }
+
+  const ICON_R       = 3.2;
+  const ICON_GAP     = 4;
+  const SEP          = '   |   ';
+  const DARK         = rgb(0.22, 0.22, 0.22);
+  const ICON_FILL    = rgb(0.3, 0.3, 0.3);
+
+  const ftrSegments = [
+    userData.name         ? { icon: 'person', text: `Dr. ${userData.name}${userData.lastname ? ' ' + userData.lastname : ''}` } : null,
+    userData.email        ? { icon: 'email',  text: userData.email } : null,
+    userData.especialidad ? { icon: 'dot',    text: userData.especialidad } : null,
+    userData.cedula       ? { icon: 'id',     text: `Céd. ${userData.cedula}` } : null,
+  ].filter(Boolean);
+
+  if (ftrSegments.length) {
+    const SEP_W    = fontLight.widthOfTextAtSize(SEP, FTR_SZ);
+    const iconSlot = ICON_R * 2 + ICON_GAP;
+    let totalW = 0;
+    for (let i = 0; i < ftrSegments.length; i++) {
+      if (i > 0) totalW += SEP_W;
+      totalW += iconSlot + fontLight.widthOfTextAtSize(ftrSegments[i].text, FTR_SZ);
+    }
+    let cx = (PW - totalW) / 2;
+    const iconBaseline = FTR_Y + FTR_SZ * 0.3;
+
+    for (let i = 0; i < ftrSegments.length; i++) {
+      if (i > 0) {
+        page.drawText(SEP, { x: cx, y: FTR_Y, font: fontLight, size: FTR_SZ, color: DARK });
+        cx += SEP_W;
+      }
+
+      const ic = ftrSegments[i].icon;
+      const ix = cx + ICON_R;
+      const iy = iconBaseline;
+
+      if (ic === 'person') {
+        page.drawEllipse({ x: ix, y: iy + 2.5, xScale: 1.8, yScale: 1.8, color: ICON_FILL });
+        page.drawEllipse({ x: ix, y: iy - 1.2, xScale: 3.0, yScale: 1.8, color: ICON_FILL });
+      } else if (ic === 'email') {
+        page.drawRectangle({ x: ix - 3.5, y: iy - 2, width: 7, height: 4.5,
+          borderColor: ICON_FILL, borderWidth: 0.8, color: rgb(1,1,1) });
+        page.drawLine({ start: { x: ix - 3.5, y: iy + 2.5 }, end: { x: ix, y: iy + 0.2 },
+          thickness: 0.8, color: ICON_FILL });
+        page.drawLine({ start: { x: ix, y: iy + 0.2 }, end: { x: ix + 3.5, y: iy + 2.5 },
+          thickness: 0.8, color: ICON_FILL });
+      } else if (ic === 'dot') {
+        page.drawEllipse({ x: ix, y: iy, xScale: ICON_R - 0.5, yScale: ICON_R - 0.5, color: ICON_FILL });
+      } else if (ic === 'id') {
+        page.drawRectangle({ x: ix - 4, y: iy - 2.5, width: 8, height: 5,
+          borderColor: ICON_FILL, borderWidth: 0.8, color: rgb(1,1,1) });
+        page.drawLine({ start: { x: ix - 2, y: iy + 0.5 }, end: { x: ix + 2, y: iy + 0.5 },
+          thickness: 0.7, color: ICON_FILL });
+        page.drawLine({ start: { x: ix - 2, y: iy - 0.8 }, end: { x: ix + 1, y: iy - 0.8 },
+          thickness: 0.7, color: ICON_FILL });
+      }
+
+      cx += iconSlot;
+      page.drawText(ftrSegments[i].text, { x: cx, y: FTR_Y, font: fontLight, size: FTR_SZ, color: DARK });
+      cx += fontLight.widthOfTextAtSize(ftrSegments[i].text, FTR_SZ);
+    }
+  }
+}
+
+// ── Main handler ──────────────────────────────────────────────────────────────
+
 export async function POST(req) {
   try {
     const body = await req.json();
     const {
-      finalConclusion = "", // texto visible
-      conclusiones = [],    // array con { title, value }
-      userData = {},
-      droppedItems = [],
-      topLeftText = "",
+      finalConclusion = '',
+      conclusiones    = [],
+      userData        = {},
+      topLeftText     = '',
+      plantillaId     = 'none',
     } = body;
 
-    const isDev = process.env.NODE_ENV !== "production";
-    const puppeteer = isDev ? puppeteerLib : require("puppeteer-core");
-    const executablePath = isDev ? undefined : await chromium.executablePath;
+    const pdfDoc = await PDFDocument.create();
+    pdfDoc.registerFontkit(fontkit);
 
-    const browser = await puppeteer.launch({
-      args:      isDev ? [] : chromium.args,
-      defaultViewport: isDev ? undefined : chromium.defaultViewport,
-      executablePath: isDev ? undefined : await chromium.executablePath,
-      headless:  true,
+    const fontRegular = await (async () => {
+      const b = loadFontBytes('LuxoraGrotesk-Regular.ttf');
+      return b ? pdfDoc.embedFont(b) : pdfDoc.embedFont('Helvetica');
+    })();
+    const fontBold = await (async () => {
+      const b = loadFontBytes('LuxoraGrotesk-Bold.ttf');
+      return b ? pdfDoc.embedFont(b) : pdfDoc.embedFont('Helvetica-Bold');
+    })();
+    const fontLight = await (async () => {
+      const b = loadFontBytes('LuxoraGrotesk-Light.ttf');
+      return b ? pdfDoc.embedFont(b) : fontRegular;
+    })();
+
+    // Resolve overlays from conclusiones values (same logic as original)
+    const finalString = conclusiones.map(cl => cl.value || '').join(' ').toLowerCase();
+
+    const overlayPaths = [];
+    const seen = new Set();
+    for (const rule of OVERLAY_RULES) {
+      if (finalString.includes(rule.match)) {
+        for (const p of rule.paths) {
+          if (!seen.has(p)) {
+            seen.add(p);
+            overlayPaths.push(p);
+          }
+        }
+      }
+    }
+
+    // Always load base image; overlays derived from conclusions
+    const [baseImgBytes, ...overlayBytesArr] = await Promise.all([
+      fetchLocalBytes('/assets/MioImg/Base_Cerebro.png'),
+      ...overlayPaths.map(p => fetchLocalBytes(p)),
+    ]);
+
+    await buildPage1(pdfDoc, {
+      finalConclusion, userData, baseImgBytes, overlayBytesArr,
+      topLeftText, plantillaId, fontRegular, fontBold, fontLight,
     });
 
-    // Armamos la cadena final con value
-    const finalString = conclusiones.map((cl) => cl.value).join(" ");
-    const page = await browser.newPage();
+    const pdfBytes = await pdfDoc.save({ useObjectStreams: false, addDefaultPage: false });
 
-    // Función para sanitizar (opcional)
-    const sanitizeText = (text) => {
-      return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    };
-
-    const sanitizedFinalConclusion = sanitizeText(finalConclusion);
-    const sanitizedFinalString = sanitizeText(finalString);
-
-    // Construimos el HTML
-    const html = buildHtml({
-      finalConclusion: sanitizedFinalConclusion,
-      finalString: sanitizedFinalString,
-      userData,
-      droppedItems,
-      topLeftText,
-    });
-
-    // 1) Entramos a tu sitio para que /assets/... se sirva
-    await page.goto(baseUrl, { waitUntil: "networkidle2" });
-
-    // 2) Luego inyectamos el HTML
-    await page.setContent(html, { waitUntil: "networkidle2" });
-
-    // 3) Generamos PDF
-    const pdfBuffer = await page.pdf({
-      format: "A4",
-      printBackground: true,
-      scale: 1,
-    });
-
-    await browser.close();
-
-    // Respondemos con el PDF
-    return new Response(pdfBuffer, {
+    return new NextResponse(pdfBytes, {
+      status: 200,
       headers: {
-        "Content-Type": "application/pdf",
-        "Content-Disposition": 'attachment; filename="reporte.pdf"',
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename=reporte_trigeminofacial.pdf',
       },
     });
-  } catch (error) {
-    console.error("Error generando PDF:", error);
-    return new Response("Error generando PDF: " + error.message, {
-      status: 500,
-    });
+  } catch (err) {
+    console.error('Error generando PDF trigeminofacial:', err);
+    return NextResponse.json({ message: 'Error generando PDF: ' + err.message }, { status: 500 });
   }
 }

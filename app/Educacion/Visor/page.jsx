@@ -37,10 +37,11 @@ function VisorContent() {
         const el = document.getElementById('df-viewer');
         if (!el) return;
         window.jQuery(el).flipBook(pdfSrc, {
-          pdfRenderQuality : 1,
-          maxTextureSize   : 4096,
-          pixelRatio       : 2,
-          zoomRatio        : 4,
+          pdfRenderQuality : 1,      /* JPEG quality 0-1, máximo */
+          maxTextureSize   : 4096,   /* resolución máxima de textura */
+          minTextureSize   : 1024,   /* resolución mínima alta para vista normal */
+          pixelRatio       : 2,      /* fuerza doble resolución en cualquier pantalla */
+          zoomRatio        : 1.5,
           webgl            : false,
           backgroundColor  : BG,
           controlsPosition : 'bottom',
@@ -86,8 +87,9 @@ function VisorContent() {
           webgl            : false,
           pdfRenderQuality : 1,
           maxTextureSize   : 4096,
+          minTextureSize   : 1024,
           pixelRatio       : 2,
-          zoomRatio        : 4,
+          zoomRatio        : 1.5,
           backgroundColor  : '${BG}',
           controlsPosition : 'bottom',
           enableDownload   : false,

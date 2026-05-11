@@ -76,9 +76,9 @@ function VisorContent() {
         if (!el) return;
         window.jQuery(el).flipBook(blobUrl, {
           pdfRenderQuality : 1,
-          maxTextureSize   : 4096,
-          minTextureSize   : 1024,
-          pixelRatio       : 2,
+          maxTextureSize   : 3508,  /* A4 a 300 DPI exacto — máxima nitidez tipográfica */
+          minTextureSize   : 3508,  /* igual al max: siempre renderiza a 300 DPI */
+          pixelRatio       : 1,     /* pixelRatio=1 porque el tamaño ya es el real */
           zoomRatio        : 1.5,
           webgl            : false,
           backgroundColor  : BG,
@@ -119,9 +119,9 @@ function VisorContent() {
           skin             : 'light',
           webgl            : false,
           pdfRenderQuality : 1,
-          maxTextureSize   : 4096,
-          minTextureSize   : 1024,
-          pixelRatio       : 2,
+          maxTextureSize   : 3508,
+          minTextureSize   : 3508,
+          pixelRatio       : 1,
           zoomRatio        : 1.5,
           backgroundColor  : '${BG}',
           controlsPosition : 'bottom',

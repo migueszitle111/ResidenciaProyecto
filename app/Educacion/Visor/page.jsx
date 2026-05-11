@@ -39,7 +39,7 @@ function VisorContent() {
         window.jQuery(el).flipBook(pdfSrc, {
           pdfRenderQuality : 1,
           maxTextureSize   : 4096,
-          pixelRatio       : Math.min(window.devicePixelRatio || 1, 2),
+          pixelRatio       : 2,
           zoomRatio        : 4,
           webgl            : false,
           backgroundColor  : BG,
@@ -75,7 +75,7 @@ function VisorContent() {
   }
 
   return (
-    <div style={{ background: BG, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ background: BG, height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
       {/* Config ANTES de jquery/dflip */}
       <Script id="df-preconfig" strategy="beforeInteractive">{`
@@ -86,7 +86,7 @@ function VisorContent() {
           webgl            : false,
           pdfRenderQuality : 1,
           maxTextureSize   : 4096,
-          pixelRatio       : Math.min(window.devicePixelRatio || 1, 2),
+          pixelRatio       : 2,
           zoomRatio        : 4,
           backgroundColor  : '${BG}',
           controlsPosition : 'bottom',
@@ -129,11 +129,11 @@ function VisorContent() {
         ✕
       </button>
 
-      {/* Visor */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '24px 0' }}>
+      {/* Visor — ocupa todo el espacio disponible para maximizar cacheIndex */}
+      <div style={{ flex: 1, position: 'relative' }}>
         <div
           id="df-viewer"
-          style={{ width: '100%', maxWidth: 1100, height: 720 }}
+          style={{ position: 'absolute', inset: 0 }}
         />
       </div>
     </div>

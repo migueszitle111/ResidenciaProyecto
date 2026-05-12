@@ -8,7 +8,9 @@ const nextConfig = {
   },
 
   experimental: {
-    // Next.js 14 key (renamed to serverExternalPackages in v15)
+    // Only server-side / Node.js packages go here — NOT client-side UI packages.
+    // Listing a client package here prevents Next.js from bundling it for SSR,
+    // which causes "Element type is invalid: got undefined" prerender errors.
     serverComponentsExternalPackages: [
       'canvas',
       'pdfmake',
@@ -21,14 +23,6 @@ const nextConfig = {
       'cloudinary',
       'cloudinary-core',
       'jspdf',
-      'swiper',
-      'react-image-gallery',
-      'react-pdf-flipbook-viewer',
-      'react-quill',
-      'react-slick',
-      'slick-carousel',
-      'framer-motion',
-      'react-icons',
       'puppeteer',
       'puppeteer-core',
     ],

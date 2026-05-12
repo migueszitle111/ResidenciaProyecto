@@ -69,7 +69,10 @@ async function fetchLocalBytes(publicPath) {
     const fsPath = path.join(process.cwd(), 'public', publicPath);
     if (fs.existsSync(fsPath)) return new Uint8Array(fs.readFileSync(fsPath));
   } catch {}
-  return fetchBytes(`${baseUrl}${publicPath}`);
+  // In production, images live in the backend under /laminasImg/
+  // Strip leading /assets/ prefix if present (trigeminofacial uses /assets/TrigeminoFacialImg/...)
+  const imgPath = publicPath.startsWith('/assets/') ? publicPath.slice(7) : publicPath;
+  return fetchBytes(`${BACKEND_URL}/laminasImg${imgPath}`);
 }
 
 async function fetchRemoteBytes(url) {

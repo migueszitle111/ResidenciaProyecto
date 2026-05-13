@@ -1237,11 +1237,7 @@ export default function ReportFace() {
     const vals = new Set(conclusions.map(c => c.value));
     const lines = [];
 
-    const viaMap = { superiores: 'Miembros superiores', inferiores: 'Miembros inferiores', dermatomas: 'Dermatomas', trigemino: 'Trigémino' };
-    const via = viaType ? viaMap[viaType] : '';
-    if (via) lines.push({ k: 'Vía somatosensorial', v: via });
-
-    // Estado indemne / alterada
+    // Estado indemne / alterada (una sola entrada para Vía somatosensorial)
     const isIndemne = vals.has('superiores_indemne') || vals.has('inferior_indemne') ||
                       vals.has('trigemino_indemne')  || vals.has('dermatomas_indemne');
     const isAlterada = vals.has('superiores_alterada') || vals.has('inferior_alterada') ||

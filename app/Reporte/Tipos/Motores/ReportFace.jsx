@@ -346,7 +346,7 @@ function StepTitle({ children }) {
 }
 
 /* ─── PASOS ─────────────────────────────────────────────────────────────────── */
-function StepA({ goTo, setRootFlow, setSeverity }) {
+function StepA({ goTo, setRootFlow, setSeverity, addOverlays }) {
   return (
     <div>
       <StepTitle>Vía Corticoespinal</StepTitle>
@@ -356,6 +356,7 @@ function StepA({ goTo, setRootFlow, setSeverity }) {
         label="INDEMNE"
         onPress={() => {
           setRootFlow('indemne'); setSeverity(null);
+          addOverlays(['izquierdo_indemne', 'derecho_indemne']);
           goTo('E2');
         }}
       />

@@ -847,7 +847,7 @@ export default function ReportFace() {
       fisio = 'Retardo en la conducción';
       if (vals.has('perdida_axonal_secundaria')) fisio += ' con pérdida axonal secundaria';
     } else if (vals.has('deficit_neuronal')) {
-      fisio = 'Déficit axonal';
+      fisio = 'Axonal';
       if (vals.has('retardo_secundario_en_la_conduccion')) fisio += ' con retardo secundario en la conducción';
     } else if (vals.has('bloqueo_en_la_conduccion')) {
       fisio = 'Bloqueo en la conducción';

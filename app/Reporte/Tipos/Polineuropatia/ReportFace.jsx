@@ -202,10 +202,10 @@ function StepB({ goTo, setStep, removeConclusion, resetAll }) {
 function StepC({ goTo, setStep, removeConclusion, resetAll, addOverlays, setEsDesmielinizante }) {
   const { addConclusion } = useContext(ReportContext);
   const opts = [
-    ['tipo_axonal',    'AsAxonal',           false, ' tipo axonal',                                                    'AXONAL'],
-    ['tipo_desm',      'AsDesmielinizante',   true,  ' tipo desmielinizante',                                          'DESMIELINIZANTE'],
-    ['tipo_ax_desm',   'Axonal > Desmielinizante', false, ' primariamente axonal con desmielinización secundaria',     'AXONAL > DESMIELINIZANTE'],
-    ['tipo_desm_ax',   'Desmielinizante > Axonal', true,  ' primariamente desmielinizante con pérdida axonal secundaria', 'DESMIELINIZANTE > AXONAL'],
+    ['tipo_axonal',    'AsAxonal',          false, ' tipo axonal',                                                    'AXONAL'],
+    ['tipo_desm',      'AsDesmielinizante', true,  ' tipo desmielinizante',                                          'DESMIELINIZANTE'],
+    ['tipo_ax_desm',   'AsAxonal',          false, ' primariamente axonal con desmielinización secundaria',           'AXONAL > DESMIELINIZANTE'],
+    ['tipo_desm_ax',   'AsDesmielinizante', true,  ' primariamente desmielinizante con pérdida axonal secundaria',   'DESMIELINIZANTE > AXONAL'],
   ];
   return (
     <div>

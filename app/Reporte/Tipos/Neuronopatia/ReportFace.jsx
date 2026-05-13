@@ -178,6 +178,7 @@ export default function ReportFace() {
   const [step, setStep]               = useState('Fibras');
   const [conclusions, setConclusions] = useState([]);
   const [multiSel, setMultiSel]       = useState([]);
+  const [lastDistribSel, setLastDistribSel] = useState([]);
   const [activeOv, setActiveOv]       = useState([]);
   const [ovHist, setOvHist]           = useState([]);
   const [fibrasTipo, setFibrasTipo]   = useState('');   // 'Motora' | 'Sensitiva'
@@ -226,7 +227,7 @@ export default function ReportFace() {
 
   /* ── Reset ── */
   const resetAll = useCallback(() => {
-    setStep('Fibras'); setConclusions([]); setMultiSel([]);
+    setStep('Fibras'); setConclusions([]); setMultiSel([]); setLastDistribSel([]);
     setActiveOv([]); setOvHist([]); setFibrasTipo(''); setSimetria('');
     setActiveTab('reporte'); setFiguras([]);
     setImgLista(null); setComentarioLista('');
@@ -305,7 +306,7 @@ export default function ReportFace() {
           <CBtn key={op.n} label={op.n} onClick={() => {
             setFibrasTipo(op.n === 'Motora-Asta anterior medular' ? 'Motora' : 'Sensitiva');
             pushConclusion('Fibras', op.t, op.l);
-            if (op.n === 'Sensitiva-Ganglio de la Raíz Dorsal') addOverlays(['Sensitiva-Ganglio de la Raíz Dorsal']);
+            if (op.n === 'Sensitiva-Ganglio de la Raíz Dorsal') addOverlays(['AsSensitiva-Ganglio de la Raíz Dorsal']);
             else addOverlays([]);
             setStep('Clasificación');
           }} />
@@ -356,14 +357,36 @@ export default function ReportFace() {
     // ── Distribución Motora (multi: Bulbar/Cervical/Torácica/Lumbar)
     if (step === 'Distribución_M') {
       const DISTRIB = ['Bulbar','Cervical','Torácica','Lumbar'];
-      const toggle = (n) => setMultiSel(p => p.includes(n) ? p.filter(x=>x!==n) : [...p,n]);
-      const joinConY = (arr) => arr.length <= 1 ? arr[0] || '' : arr.slice(0,-1).join(', ') + ' y ' + arr[arr.length-1];
+      const toggle = (n) => {
+        setMultiSel(p => {
+          const ya = p.includes(n);
+          // Usa el nombre directo (simétrico) igual que la móvil; Topografía lo convertirá si es Asimétrica
+          if (ya) {
+            setActiveOv(ov => ov.filter(k => k !== n));
+          } else {
+            setActiveOv(ov => ov.includes(n) ? ov : [...ov, n]);
+          }
+          return ya ? p.filter(x => x !== n) : [...p, n];
+        });
+      };
+      const joinConY = (arr) => {
+        if (arr.length === 0) return '';
+        if (arr.length === 1) return arr[0];
+        if (arr.length === 2) {
+          const conj = arr[1].trim().toLowerCase().startsWith('i') ? ' e ' : ' y ';
+          return arr[0] + conj + arr[1];
+        }
+        const last = arr[arr.length - 1];
+        const conj = last.trim().toLowerCase().startsWith('i') ? ' e ' : ' y ';
+        return arr.slice(0, -1).join(', ') + conj + last;
+      };
       const confirm = () => {
         if (!multiSel.length) return;
-        const sel = multiSel.join(', ');
         const selY = joinConY(multiSel);
-        pushConclusion('Distribución', ` ${sel.toLowerCase()}`, selY);
-        // overlays applied after Topografía selection
+        setLastDistribSel([...multiSel]);
+        pushConclusion('Distribución', ` ${selY}`, selY);
+        // Quitar los overlays temporales (simétricos); Topografía aplicará los definitivos
+        setActiveOv(ov => ov.filter(k => !['Bulbar','Cervical','Torácica','Lumbar'].includes(k)));
         setMultiSel([]);
         setStep('Topografía_M');
       };
@@ -380,9 +403,6 @@ export default function ReportFace() {
 
     // ── Topografía Motora
     if (step === 'Topografía_M') {
-      // We need the previously-selected distribuciones to apply the right overlay keys
-      const distribConc = conclusions[conclusions.length - 1];
-      const distribSel = distribConc?.lista?.split(', ') || [];
       return (
         <div>
           <NavRow onBack={() => { goBack1('Distribución_M'); }} onReset={resetAll} />
@@ -396,7 +416,7 @@ export default function ReportFace() {
               pushConclusion('Topografía', op.t, op.l);
               // Apply overlay keys based on symmetry + selected distributions
               const ovMap = SIMETRIA_OV[op.n] || {};
-              const keys = distribSel.map(d => ovMap[d]).filter(Boolean);
+              const keys = lastDistribSel.map(d => ovMap[d]).filter(Boolean);
               addOverlays(keys);
               setStep('Reinervación');
             }} />
@@ -411,9 +431,9 @@ export default function ReportFace() {
         <NavRow onBack={() => goBack1('Topografía_M')} onReset={resetAll} />
         <StepTitle>Reinervación</StepTitle>
         {[
-          { n:'Abundante', t:'\n\nReinervación abundante;', l:'Abundante' },
-          { n:'Discreta',  t:'\n\nReinervación discreta;',  l:'Discreta'  },
-          { n:'Ausente',   t:'\n\nSin reinervación;',       l:'Ausente'   },
+          { n:'Abundante', t:'\n\nReinervación abundante; ', l:'Abundante' },
+          { n:'Discreta',  t:'\n\nReinervación discreta; ',  l:'Discreta'  },
+          { n:'Ausente',   t:'\n\nSin reinervación; ',       l:'Ausente'   },
         ].map(op => (
           <CBtn key={op.n} label={op.n} onClick={() => {
             pushConclusion('Reinervación', op.t, op.l);
@@ -450,8 +470,8 @@ export default function ReportFace() {
         <NavRow onBack={() => goBack1('Clasificación')} onReset={resetAll} />
         <StepTitle>Distribución</StepTitle>
         {[
-          { n:'Generalizada', t:'distribución generalizada', l:'Generalizada' },
-          { n:'Parcial',      t:'distribución parcial',      l:'Parcial'      },
+          { n:'Generalizada', t:' distribución generalizada', l:'Generalizada' },
+          { n:'Parcial',      t:' distribución parcial',      l:'Parcial'      },
         ].map(op => (
           <CBtn key={op.n} label={op.n} onClick={() => {
             pushConclusion('Distribución', op.t, op.l);
@@ -475,7 +495,12 @@ export default function ReportFace() {
             const ovKey = op.n === 'Asimétrica' ? 'AsSensitiva-Ganglio de la Raíz Dorsal' : 'Sensitiva-Ganglio de la Raíz Dorsal';
             setSimetria(op.n);
             pushConclusion('Topografía', op.t, op.l);
-            addOverlays([ovKey]);
+            // Reemplaza cualquier overlay sensitiva previo (el de Fibras) por el correcto según simetría
+            setActiveOv(ov => {
+              const sinSensitiva = ov.filter(k => !k.includes('Sensitiva'));
+              return [...sinSensitiva, ovKey];
+            });
+            setOvHist(h => [...h, [ovKey]]);
             setStep('Pronóstico_B');
           }} />
         ))}

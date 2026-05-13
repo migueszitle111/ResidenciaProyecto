@@ -148,6 +148,16 @@ const OVERLAYS_PLEXO = {
   'PudendoIzq':     '/PlexopatiaImg/PudendoIzq.png',
 };
 
+/* ─── joinConY ───────────────────────────────────────────────────────────── */
+function joinConY(arr) {
+  if (arr.length === 0) return '';
+  if (arr.length === 1) return arr[0];
+  const last = arr[arr.length - 1];
+  const conj = last.trim().toLowerCase().startsWith('i') ? ' e ' : ' y ';
+  if (arr.length === 2) return arr[0] + conj + arr[1];
+  return arr.slice(0, -1).join(', ') + conj + last;
+}
+
 /* ─── Step UI helpers ────────────────────────────────────────────────────── */
 function StepTitle({ children }) {
   return <p className="text-orange-400 text-xs font-bold tracking-widest mb-3 mt-1 uppercase">{children}</p>;
@@ -252,6 +262,19 @@ export default function ReportFace() {
   const popConclusion = useCallback((n = 1) =>
     setConclusions(prev => prev.slice(0, -n)), []);
 
+  // Reemplaza o agrega una conclusión con el value dado (para actualizar en tiempo real durante multi-select)
+  const upsertConclusion = useCallback((value, title, lista) =>
+    setConclusions(prev => {
+      const idx = prev.findIndex(c => c.value === value);
+      const entry = { value, title, lista: lista ?? title };
+      if (idx === -1) return [...prev, entry];
+      const next = [...prev]; next[idx] = entry; return next;
+    }), []);
+
+  // Elimina la conclusión con el value dado
+  const removeConclusion = useCallback((value) =>
+    setConclusions(prev => prev.filter(c => c.value !== value)), []);
+
   /* ── Back helper: pops 1 conclusion + 1 overlay group ── */
   const goBack1 = useCallback((toStep) => {
     popConclusion(1);
@@ -283,28 +306,44 @@ export default function ReportFace() {
   const textoFinal = editadoManual ? textoEditado : textoReporte;
 
   /* ── Lista visual ── */
-  const STEP_LABELS = {
-    Plexo:'Plexo', Lado:'Lado', 'Evolución':'Evolución', 'Ubicación':'Ubicación',
-    Preganglionar_parcial:'Ubicación', Postganglionar_total:'Ubicación',
-    Postganglionar_parcial:'Ubicación', Divisiones:'Divisiones',
-    Tronco:'Tronco', Cordones:'Cordones',
-    Tipo:'Tipo', Axonal:'Tipo', Mixta:'Tipo', Desmielinizante:'Tipo',
-    Intensidad:'Intensidad', 'Reinervación':'Reinervación', 'Pronóstico':'Pronóstico',
-  };
   const listaVisual = useMemo(() => {
+    // Construye la lista igual que la app móvil: cada step es una fila, con labels legibles
+    const LABELS = {
+      Plexo:'Plexo', Lado:'Lado', 'Evolución':'Evolución',
+      'Ubicación':'Ubicación',
+      Preganglionar_parcial:'Ubicación', Postganglionar_total:'Ubicación', Postganglionar_parcial:'Ubicación',
+      Tronco:'Tronco', Cordones:'Cordones', Divisiones:'Divisiones',
+      Tipo:'Tipo', Axonal:'Tipo', Mixta:'Tipo', Desmielinizante:'Tipo',
+      Intensidad:'Intensidad', 'Reinervación':'Reinervación', 'Pronóstico':'Pronóstico',
+    };
+    // Pasos sub-ubicación que se fusionan a la entrada Ubicación
+    const SUB_UBIC = new Set(['Preganglionar_parcial','Postganglionar_total','Postganglionar_parcial']);
     const map = {};
     const order = [];
     for (const c of conclusions) {
       if (!c.value) continue;
-      const label = STEP_LABELS[c.value] || c.value;
-      const v = (c.lista ?? c.title).trim().replace(/^[,;. ]+/, '');
+      const label = LABELS[c.value] || c.value;
+      let v = (c.lista ?? c.title).trim().replace(/^[,;. ]+/, '');
       if (!v) continue;
-      if (map[label] !== undefined) {
+      if (SUB_UBIC.has(c.value)) {
+        // Fusiona con la entrada Ubicación base
+        if (map['Ubicación'] !== undefined) {
+          map['Ubicación'] += ' ' + v;
+        } else {
+          map['Ubicación'] = v;
+          order.push('Ubicación');
+        }
+      } else if (map[label] !== undefined) {
         map[label] += ' ' + v;
       } else {
         map[label] = v;
         order.push(label);
       }
+    }
+    // Mirror mobile: append Divisiones/Tronco/Cordones value to Ubicación row
+    if (map['Ubicación'] && /a nivel de\s*$/i.test(map['Ubicación'])) {
+      const sub = map['Divisiones'] ?? map['Tronco'] ?? map['Cordones'];
+      if (sub) map['Ubicación'] = map['Ubicación'].trimEnd() + ' ' + sub;
     }
     return order.map(k => ({ k, v: map[k] }));
   }, [conclusions]);
@@ -456,16 +495,26 @@ export default function ReportFace() {
         { n:'C8', img: d==='Drc'?'ImgTroncoInDrc': d==='Izq'?'ImgTroncoInIzq':'ImgTroncoInBlt' },
         { n:'T1', img: d==='Drc'?'ImgTroncoInDrc': d==='Izq'?'ImgTroncoInIzq':'ImgTroncoInBlt' },
       ];
-      const toggle = (n) => setMultiSel(p => p.includes(n) ? p.filter(x=>x!==n) : [...p,n]);
+      const toggle = (n) => {
+        setMultiSel(p => {
+          const nuevo = p.includes(n) ? p.filter(x=>x!==n) : [...p,n];
+          if (nuevo.length === 0) { removeConclusion('Preganglionar_parcial'); }
+          else { const sel = joinConY(nuevo); upsertConclusion('Preganglionar_parcial', ' '+sel, sel); }
+          // overlays en tiempo real
+          const imgs = [...new Set(nuevo.map(x=>roots.find(r=>r.n===x)?.img).filter(Boolean))];
+          setActiveOv(ov => { const sin = ov.filter(k => !roots.map(r=>r.img).includes(k)); return [...sin, ...imgs]; });
+          return nuevo;
+        });
+      };
       const confirm = () => {
         if (!multiSel.length) return;
         const imgs = [...new Set(multiSel.map(n=>roots.find(r=>r.n===n)?.img).filter(Boolean))];
-        const sel = multiSel.join(', ');
-        pushConclusion('Preganglionar_parcial', ' '+sel, sel); addOverlays(imgs); setMultiSel([]); setStep('Tipos');
+        setOvHist(h => [...h, imgs]);
+        setMultiSel([]); setStep('Tipos');
       };
       return (
         <div>
-          <NavRow onBack={() => { goBack1('Ubicacion_B'); setMultiSel([]); }} onReset={resetAll} />
+          <NavRow onBack={() => { removeConclusion('Preganglionar_parcial'); setActiveOv(ov => ov.filter(k => !roots.map(r=>r.img).includes(k))); goBack1('Ubicacion_B'); setMultiSel([]); }} onReset={resetAll} />
           <StepTitle>Preganglionar parcial</StepTitle>
           <p className="text-white/40 text-xs mb-2">Selecciona uno o más</p>
           {roots.map(r => <MultiBtn key={r.n} label={r.n} selected={multiSel.includes(r.n)} onClick={() => toggle(r.n)} />)}
@@ -527,16 +576,25 @@ export default function ReportFace() {
         { n:'Medio',    img: d==='Drc'?'ImgTroncoMdDrc':d==='Izq'?'ImgTroncoMdIzq':'ImgTroncoMdBlt' },
         { n:'Inferior', img: d==='Drc'?'ImgTroncoInDrc':d==='Izq'?'ImgTroncoInIzq':'ImgTroncoInBlt' },
       ];
-      const toggle = (n) => setMultiSel(p => p.includes(n)?p.filter(x=>x!==n):[...p,n]);
+      const toggle = (n) => {
+        setMultiSel(p => {
+          const nuevo = p.includes(n) ? p.filter(x=>x!==n) : [...p,n];
+          if (nuevo.length === 0) { removeConclusion('Tronco'); }
+          else { const sel = joinConY(nuevo.map(x=>x.toLowerCase())); upsertConclusion('Tronco', ' '+sel, sel); }
+          const imgs = [...new Set(nuevo.map(x=>troncos.find(t=>t.n===x)?.img).filter(Boolean))];
+          setActiveOv(ov => { const sin = ov.filter(k => !troncos.map(t=>t.img).includes(k)); return [...sin, ...imgs]; });
+          return nuevo;
+        });
+      };
       const confirm = () => {
         if (!multiSel.length) return;
         const imgs = [...new Set(multiSel.map(n=>troncos.find(t=>t.n===n)?.img).filter(Boolean))];
-        const sel = multiSel.map(n=>n.toLowerCase()).join(', ');
-        pushConclusion('Tronco', ' '+sel, sel); addOverlays(imgs); setMultiSel([]); setStep('Tipos');
+        setOvHist(h => [...h, imgs]);
+        setMultiSel([]); setStep('Tipos');
       };
       return (
         <div>
-          <NavRow onBack={() => { goBack1('Postgang_parcial_B'); setMultiSel([]); }} onReset={resetAll} />
+          <NavRow onBack={() => { removeConclusion('Tronco'); setActiveOv(ov => ov.filter(k => !troncos.map(t=>t.img).includes(k))); goBack1('Postgang_parcial_B'); setMultiSel([]); }} onReset={resetAll} />
           <StepTitle>Tronco</StepTitle>
           <p className="text-white/40 text-xs mb-2">Selecciona uno o más</p>
           {troncos.map(t => <MultiBtn key={t.n} label={t.n} selected={multiSel.includes(t.n)} onClick={() => toggle(t.n)} />)}
@@ -553,16 +611,25 @@ export default function ReportFace() {
         { n:'Medio',     img: d==='Drc'?'CordonMdD':  d==='Izq'?'CordonMdIzq':'CordonMdBlt' },
         { n:'Posterior', img: d==='Drc'?'CordonPsD':  d==='Izq'?'CordonPsIzq':'CordonPsBlt' },
       ];
-      const toggle = (n) => setMultiSel(p => p.includes(n)?p.filter(x=>x!==n):[...p,n]);
+      const toggle = (n) => {
+        setMultiSel(p => {
+          const nuevo = p.includes(n) ? p.filter(x=>x!==n) : [...p,n];
+          if (nuevo.length === 0) { removeConclusion('Cordones'); }
+          else { const sel = joinConY(nuevo.map(x=>x.toLowerCase())); upsertConclusion('Cordones', ' '+sel, sel); }
+          const imgs = [...new Set(nuevo.map(x=>cordones.find(c=>c.n===x)?.img).filter(Boolean))];
+          setActiveOv(ov => { const sin = ov.filter(k => !cordones.map(c=>c.img).includes(k)); return [...sin, ...imgs]; });
+          return nuevo;
+        });
+      };
       const confirm = () => {
         if (!multiSel.length) return;
         const imgs = [...new Set(multiSel.map(n=>cordones.find(c=>c.n===n)?.img).filter(Boolean))];
-        const sel = multiSel.map(n=>n.toLowerCase()).join(', ');
-        pushConclusion('Cordones', ' '+sel, sel); addOverlays(imgs); setMultiSel([]); setStep('Tipos');
+        setOvHist(h => [...h, imgs]);
+        setMultiSel([]); setStep('Tipos');
       };
       return (
         <div>
-          <NavRow onBack={() => { goBack1('Postgang_parcial_B'); setMultiSel([]); }} onReset={resetAll} />
+          <NavRow onBack={() => { removeConclusion('Cordones'); setActiveOv(ov => ov.filter(k => !cordones.map(c=>c.img).includes(k))); goBack1('Postgang_parcial_B'); setMultiSel([]); }} onReset={resetAll} />
           <StepTitle>Cordones</StepTitle>
           <p className="text-white/40 text-xs mb-2">Selecciona uno o más</p>
           {cordones.map(c => <MultiBtn key={c.n} label={c.n} selected={multiSel.includes(c.n)} onClick={() => toggle(c.n)} />)}
@@ -605,16 +672,25 @@ export default function ReportFace() {
         { n:'S1', img: d==='Drc'?'SacroDrc':   d==='Izq'?'SacroIzq':'SacroBlt' },
         { n:'S2', img: d==='Drc'?'SacroDrc':   d==='Izq'?'SacroIzq':'SacroBlt' },
       ];
-      const toggle = (n) => setMultiSel(p => p.includes(n)?p.filter(x=>x!==n):[...p,n]);
+      const toggle = (n) => {
+        setMultiSel(p => {
+          const nuevo = p.includes(n) ? p.filter(x=>x!==n) : [...p,n];
+          if (nuevo.length === 0) { removeConclusion('Divisiones'); }
+          else { const sel = joinConY(nuevo); upsertConclusion('Divisiones', ' '+sel, sel); }
+          const imgs = [...new Set(nuevo.map(x=>divs.find(d=>d.n===x)?.img).filter(Boolean))];
+          setActiveOv(ov => { const sin = ov.filter(k => !divs.map(d=>d.img).includes(k)); return [...sin, ...imgs]; });
+          return nuevo;
+        });
+      };
       const confirm = () => {
         if (!multiSel.length) return;
         const imgs = [...new Set(multiSel.map(n=>divs.find(x=>x.n===n)?.img).filter(Boolean))];
-        const sel = multiSel.join(', ');
-        pushConclusion('Divisiones', ' '+sel, sel); addOverlays(imgs); setMultiSel([]); setStep('Tipos');
+        setOvHist(h => [...h, imgs]);
+        setMultiSel([]); setStep('Tipos');
       };
       return (
         <div>
-          <NavRow onBack={() => { goBack1('Ubicacion_L'); setMultiSel([]); }} onReset={resetAll} />
+          <NavRow onBack={() => { removeConclusion('Divisiones'); setActiveOv(ov => ov.filter(k => !divs.map(d=>d.img).includes(k))); goBack1('Ubicacion_L'); setMultiSel([]); }} onReset={resetAll} />
           <StepTitle>Divisiones</StepTitle>
           <p className="text-white/40 text-xs mb-2">Selecciona uno o más</p>
           {divs.map(d2 => <MultiBtn key={d2.n} label={d2.n} selected={multiSel.includes(d2.n)} onClick={() => toggle(d2.n)} />)}
@@ -721,7 +797,7 @@ export default function ReportFace() {
         <NavRow onBack={() => goBack1('Intensidad_axonal')} onReset={resetAll} />
         <StepTitle>Reinervación</StepTitle>
         {['Activa','Inactiva'].map(n => (
-          <CBtn key={n} label={n} onClick={() => { pushConclusion('Reinervación', `\n\nReinervación ${n.toLowerCase()};`, n); addOverlays([]); setStep('Pronostico'); }} />
+          <CBtn key={n} label={n} onClick={() => { pushConclusion('Reinervación', `\n\nReinervación ${n.toLowerCase()}; `, n); addOverlays([]); setStep('Pronostico'); }} />
         ))}
       </div>
     );
@@ -747,8 +823,8 @@ export default function ReportFace() {
         <NavRow onBack={() => goBack1('Tipos')} onReset={resetAll} />
         <StepTitle>Mixta</StepTitle>
         {[
-          { n:'Desmielinizante-Axonal', t:'de tipo mixta primariamente desmielinizante con perdida axonal secundaria,', l:'Desmielinizante con pérdida axonal secundaria' },
-          { n:'Axonal-Desmielinizante', t:'de tipo mixta primariamente axonal con desmielinizacón secundaria,',         l:'Axonal con desmielinización secundaria'        },
+          { n:'Desmielinizante-Axonal', t:' de tipo mixta primariamente desmielinizante con perdida axonal secundaria,', l:'Desmielinizante con pérdida axonal secundaria' },
+          { n:'Axonal-Desmielinizante', t:' de tipo mixta primariamente axonal con desmielinizacón secundaria,',         l:'Axonal con desmielinización secundaria'        },
         ].map(op => (
           <CBtn key={op.n} label={op.n} onClick={() => { pushConclusion('Mixta', op.t, op.l); addOverlays([]); setStep('Intensidad_desm'); }} />
         ))}

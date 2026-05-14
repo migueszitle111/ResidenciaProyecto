@@ -112,7 +112,7 @@ function SuccessModal({ filename, pdfUrl, onAbrir, onLink, onClose }) {
 
 /* ─── LinkUploaderModal ──────────────────────────────────────────────────────── */
 const EXPIRY_OPTIONS = [
-  { value: '3m',  label: '3 meses' },
+  { value: '15d', label: '15 días' },
   { value: '30d', label: '30 días' },
   { value: '3m',  label: '3 meses' },
 ];

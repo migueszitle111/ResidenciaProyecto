@@ -262,13 +262,13 @@ async function buildPage1(pdfDoc, {
 
   if (finalConclusion && finalConclusion.trim()) {
     const diagLines = finalConclusion.split('\n').flatMap(l =>
-      wrapText(l || ' ', fontRegular, 8, DIAG_W)
+      wrapText(l || ' ', fontRegular, 10.5, DIAG_W)
     );
     let ty = DIAG_Y;
     for (const dl of diagLines) {
       if (ty < 36) break;
-      page.drawText(dl, { x: DIAG_X, y: ty, font: fontRegular, size: 8, color: rgb(0.1, 0.1, 0.1) });
-      ty -= 11;
+      page.drawText(dl, { x: DIAG_X, y: ty, font: fontRegular, size: 10.5, color: rgb(0.1, 0.1, 0.1) });
+      ty -= 14;
     }
   }
 
@@ -358,9 +358,9 @@ async function buildPage2(pdfDoc, {
   }
 
   const hasPlantilla = plantillaId && plantillaId !== 'none';
-  const TOP_Y    = hasPlantilla ? PH - 46 : PH - 30;
+  const TOP_Y    = hasPlantilla ? PH - 90 : PH - 75;
   const BOT_Y    = hasPlantilla ? 40 : 20;
-  const MARGIN_L = 42;
+  const MARGIN_L = 95;
   const MARGIN_R = 42;
   const CONTENT_W = PW - MARGIN_L - MARGIN_R;
   const COL_GAP    = 40;
@@ -371,7 +371,7 @@ async function buildPage2(pdfDoc, {
   const RX         = LX + COL_W + COL_GAP;
 
   // Left col: Estudio
-  let ly = TOP_Y - 30;
+  let ly = TOP_Y - 16;
   page.drawText('Estudio', {
     x: LX, y: ly,
     font: fontBold, size: 9, color: rgb(0.07, 0.07, 0.07),
@@ -395,7 +395,7 @@ async function buildPage2(pdfDoc, {
   }
 
   // Right col: Comentario
-  let ry = TOP_Y - 30;
+  let ry = TOP_Y - 16;
   page.drawText('Comentario', {
     x: RX, y: ry,
     font: fontBold, size: 9, color: rgb(0.07, 0.07, 0.07),
@@ -417,14 +417,14 @@ async function buildPage2(pdfDoc, {
     if (tablaImg) {
       const { width: iw, height: ih } = tablaImg;
       const lowestCol  = Math.min(ly, ry);
-      const tablaTopY  = lowestCol - 20;
-      const maxH = Math.min(tablaTopY - BOT_Y - 10, 320);
+      const tablaTopY  = lowestCol - 55;
+      const maxH = Math.min(tablaTopY - BOT_Y - 10, 200);
       if (maxH > 30) {
-        const scale = Math.min(CONTENT_W / iw, maxH / ih, 1);
+        const scale = Math.min(CONTENT_W / iw, maxH / ih, 0.55);
         const dw = iw * scale;
         const dh = ih * scale;
         page.drawImage(tablaImg, {
-          x: MARGIN_L + (CONTENT_W - dw) / 2,
+          x: (PW - dw) / 2,
           y: tablaTopY - dh,
           width: dw, height: dh,
         });

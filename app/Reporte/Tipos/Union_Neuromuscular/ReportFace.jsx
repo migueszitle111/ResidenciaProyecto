@@ -191,7 +191,6 @@ function StepC({ goTo, setStep, removeConclusion, resetAll, addOverlays, removeO
     <div>
       <NavRow onBack={() => { OPCIONES.forEach(o => { removeConclusion(o.value); removeOverlay(o.key); }); removeConclusion(null, 1); setStep('B'); }} onReset={resetAll} />
       <StepTitle>Distribución</StepTitle>
-      <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, marginBottom:8 }}>Selecciona una o más y luego continúa</p>
       {OPCIONES.map(op => {
         const activo = seleccionados.includes(op.key);
         return (
@@ -320,12 +319,18 @@ export default function ReportFace() {
     dragRef.origX = figura.x;   dragRef.origY = figura.y;
     const onMove = (ev) => {
       if (!dragRef.active) return;
-      moverFigura(dragRef.active, dragRef.origX + ev.clientX - dragRef.startX, dragRef.origY + ev.clientY - dragRef.startY);
+      const canvas = laminaRef.current;
+      const maxX = canvas ? canvas.clientWidth  - 80 : 9999;
+      const maxY = canvas ? canvas.clientHeight - 80 : 9999;
+      moverFigura(dragRef.active,
+        Math.max(0, Math.min(dragRef.origX + ev.clientX - dragRef.startX, maxX)),
+        Math.max(0, Math.min(dragRef.origY + ev.clientY - dragRef.startY, maxY)),
+      );
     };
     const onUp = () => { dragRef.active = null; window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-  }, [dragRef, moverFigura]);
+  }, [dragRef, moverFigura, laminaRef]);
 
   /* Modales */
   const [cropState, setCropState]             = useState(null);

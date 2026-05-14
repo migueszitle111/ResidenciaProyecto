@@ -352,7 +352,7 @@ function StepA({ goTo, setRootFlow, setSeverity, addOverlay, addOverlays }) {
     <div>
       <StepTitle>Vía Auditiva</StepTitle>
       <ConclusionBtn value="indemne" title="Vía auditiva con integridad funcional " label="INDEMNE"
-        onPress={() => { setRootFlow('indemne'); setSeverity(null); addOverlay('indemne'); goTo('E2'); }} />
+        onPress={() => { setRootFlow('indemne'); setSeverity(null); goTo('E2'); }} />
       <ConclusionBtn value="alterada" title="Vía auditiva con defecto " label="ALTERADA"
         onPress={() => {
           setRootFlow('alterada'); setSeverity(null);
@@ -726,7 +726,13 @@ export default function ReportFace() {
       if (!dragRef.active) return;
       const dx = ev.clientX - dragRef.startX;
       const dy = ev.clientY - dragRef.startY;
-      moverFigura(dragRef.active, dragRef.origX + dx, dragRef.origY + dy);
+      const canvas = laminaRef.current;
+      const maxX = canvas ? canvas.clientWidth  - 80 : 9999;
+      const maxY = canvas ? canvas.clientHeight - 80 : 9999;
+      moverFigura(dragRef.active,
+        Math.max(0, Math.min(dragRef.origX + dx, maxX)),
+        Math.max(0, Math.min(dragRef.origY + dy, maxY)),
+      );
     };
     const onUp = () => {
       dragRef.active = null;
@@ -735,7 +741,7 @@ export default function ReportFace() {
     };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-  }, [dragRef, moverFigura]);
+  }, [dragRef, moverFigura, laminaRef]);
 
   /* ── expandOverlay para Auditiva ── */
   const expandOverlay = useCallback((raw) => {
@@ -840,7 +846,7 @@ export default function ReportFace() {
     const lines = [];
 
     const via = vals.has('alterada') ? 'Afectada' : vals.has('indemne') ? 'Indemne' : '';
-    if (via) lines.push({ k: 'Vía auditiva', v: via });
+    if (via) lines.push({ k: 'Vía Auditiva', v: via });
 
     let fisio = '';
     if (vals.has('retardo_en_la_conduccion')) {

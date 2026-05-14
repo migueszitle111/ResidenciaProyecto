@@ -555,11 +555,7 @@ function StepB_sup({ goTo, removeConclusion, setRootFlow, setSeverity, removeLas
       <ConclusionBtn value="superiores_indemne" title="Vía somatosensorial con integridad funcional " label="INDEMNE"
         onPress={() => { setRootFlow('indemne'); goTo('E'); }} />
       <ConclusionBtn value="superiores_alterada" title="Vía somatosensorial con defecto " label="ALTERADA"
-        onPress={() => {
-          setRootFlow('alterada'); setSeverity(null);
-          addOverlays(['superiores_alterada_izq', 'superiores_alterada_der']);
-          goTo('C');
-        }} />
+        onPress={() => { setRootFlow('alterada'); setSeverity(null); goTo('C'); }} />
     </div>
   );
 }
@@ -580,11 +576,7 @@ function StepB_inf({ goTo, removeConclusion, setRootFlow, setSeverity, removeLas
       <ConclusionBtn value="inferior_indemne" title="Vía somatosensorial con integridad funcional " label="INDEMNE"
         onPress={() => { setRootFlow('indemne'); goTo('E'); }} />
       <ConclusionBtn value="inferior_alterada" title="Vía somatosensorial con defecto " label="ALTERADA"
-        onPress={() => {
-          setRootFlow('alterada'); setSeverity(null);
-          addOverlays(['inferiores_alterada_izq', 'inferiores_alterada_der']);
-          goTo('C');
-        }} />
+        onPress={() => { setRootFlow('alterada'); setSeverity(null); goTo('C'); }} />
     </div>
   );
 }
@@ -730,11 +722,23 @@ function StepD2b({ goTo, removeConclusion, setSeverity, setStep, resetAll, viaTy
   );
 }
 
-/* StepE: Lado para superiores / inferiores / dermatomas — aplica overlays en indemne */
+/* StepE: Lado para superiores / inferiores / dermatomas — aplica overlays igual que mobile StepLADO */
 function StepE({ goTo, removeConclusion, setSide, setStep, resetAll, rootFlow, severity, viaType, selectedNerve, addOverlays, conclusions }) {
   const nextAfterLado = (selectedSide) => {
     setSide(selectedSide);
-    // Para INDEMNE: agrega overlay del nervio específico
+
+    // Siempre agrega el overlay base por lado (igual que mobile addBaseOverlayOnSide)
+    if (viaType === 'superiores') {
+      if (selectedSide === 'bilateral') addOverlays(['superior_izq', 'superior_der']);
+      else addOverlays([selectedSide === 'izquierdo' ? 'superior_izq' : 'superior_der']);
+    } else if (viaType === 'inferiores') {
+      if (selectedSide === 'bilateral') addOverlays(['inferior_izq', 'inferior_der']);
+      else addOverlays([selectedSide === 'izquierdo' ? 'inferior_izq' : 'inferior_der']);
+    } else if (viaType === 'dermatomas') {
+      // dermatomas: el overlay base se agrega al seleccionar cada dermatoma
+    }
+
+    // Para INDEMNE + nervio: también agrega nervio-específico (misma imagen, mobile nextAfterLado)
     if (rootFlow === 'indemne' && selectedNerve) {
       if (selectedSide === 'bilateral') {
         addOverlays([`izquierdo_${selectedNerve}`, `derecho_${selectedNerve}`]);
@@ -742,15 +746,8 @@ function StepE({ goTo, removeConclusion, setSide, setStep, resetAll, rootFlow, s
         addOverlays([`${selectedSide}_${selectedNerve}`]);
       }
     }
-    // Para INDEMNE sin nervio (dermatomas): agrega overlay base
-    if (rootFlow === 'indemne' && !selectedNerve && viaType === 'dermatomas') {
-      if (selectedSide === 'bilateral') {
-        addOverlays(['superior_izq', 'superior_der']);
-      } else {
-        addOverlays([selectedSide === 'izquierdo' ? 'superior_izq' : 'superior_der']);
-      }
-    }
-    // Routing después del lado
+
+    // Routing
     if (viaType === 'dermatomas') { goTo('DERMATOMAS_LIST'); return; }
     if (rootFlow === 'indemne') { goTo('H'); return; }
     if (viaType === 'superiores') { goTo('F_sup'); return; }
@@ -845,15 +842,15 @@ function StepDERMATOMAS({ goTo, removeConclusion, addConclusion, setStep, resetA
              : sideSel === 'izquierdo' ? ['inferior_izq'] : ['inferior_der'];
       }
     } else {
-      const suf = severity ? `_${severity}` : '_leve';
+      // ALTERADA: igual que mobile DERM_SUP/INF arrays — devuelve todos los niveles topográficos
+      const sev = severity || 'leve';
+      const sides = sideSel === 'bilateral' ? ['izquierdo', 'derecho'] : [sideSel];
       if (isUpper) {
-        return sideSel === 'bilateral'
-          ? [`ALT_SUP_IZQ${suf}`, `ALT_SUP_DER${suf}`]
-          : sideSel === 'izquierdo' ? [`ALT_SUP_IZQ${suf}`] : [`ALT_SUP_DER${suf}`];
+        const SUP_TOPOS = ['corticals', 'subcorticals', 'cervicals', 'perifericos'];
+        return sides.flatMap(s => SUP_TOPOS.map(t => `${s}${t}Alterada_${sev}`));
       } else {
-        return sideSel === 'bilateral'
-          ? [`ALT_INF_IZQ${suf}`, `ALT_INF_DER${suf}`]
-          : sideSel === 'izquierdo' ? [`ALT_INF_IZQ${suf}`] : [`ALT_INF_DER${suf}`];
+        const INF_TOPOS = ['corticali', 'subcorticali', 'toracicoi', 'lumbosacroi', 'perifericoi'];
+        return sides.flatMap(s => INF_TOPOS.map(t => `${s}${t}Alterada_${sev}`));
       }
     }
   };
@@ -934,8 +931,10 @@ function StepDERMATOMAS({ goTo, removeConclusion, addConclusion, setStep, resetA
 }
 
 /* StepF_sup: Topografía Superiores */
-function StepF_sup({ goTo, removeConclusion, setStep, resetAll, side, severity, addOverlays }) {
-  const applyTopSup = (topoKey) => {
+function StepF_sup({ goTo, removeConclusion, addConclusion, setStep, resetAll, side, severity, addOverlays }) {
+  const topoValueKey = (suffix) => side === 'bilateral' ? `bilateral_${suffix}` : `${side}${suffix}`;
+
+  const applyTopSup = (topoKey, title) => {
     const suf = severity ? `_${severity}` : '_leve';
     if (side === 'bilateral') {
       addOverlays([`izquierdo${topoKey}Alterada${suf}`, `derecho${topoKey}Alterada${suf}`]);
@@ -944,31 +943,37 @@ function StepF_sup({ goTo, removeConclusion, setStep, resetAll, side, severity, 
     } else {
       addOverlays([`derecho${topoKey}Alterada${suf}`]);
     }
+    addConclusion({ value: topoValueKey(topoKey), title });
     goTo('H');
   };
+
+  const SUP_KEYS = ['corticals','subcorticals','cervicals','perifericos'];
 
   return (
     <div>
       <NavRow
         onBack={() => {
-          ['corticals','subcorticals','cervicals','perifericos'].forEach(removeConclusion);
+          SUP_KEYS.flatMap(k => ['izquierdo','derecho','bilateral_'].map(p => `${p}${k}`)).forEach(removeConclusion);
+          SUP_KEYS.forEach(removeConclusion);
           setStep('E');
         }}
         onReset={resetAll}
       />
       <StepTitle>NIVEL SUPERIOR:</StepTitle>
-      <ConclusionBtn value="corticals"    title="\n\nTopográficamente a nivel cortical (N20-P25: Núcleo talámico - área somestésica primaria)."   label="CORTICAL"    onPress={() => applyTopSup('corticals')} />
-      <ConclusionBtn value="subcorticals" title="\n\nTopográficamente a nivel subcortical (P14-N18: Lemnisco medial - núcleo tectal)."            label="SUBCORTICAL" onPress={() => applyTopSup('subcorticals')} />
-      <ConclusionBtn value="cervicals"    title="\n\nTopográficamente a nivel cervical (N11-N13: Raíces y astas dorsales - tracto cuneatus)."     label="CERVICAL"    onPress={() => applyTopSup('cervicals')} />
-      <ConclusionBtn value="perifericos"  title="\n\nTopográficamente a nivel periférico (N4-N9: Fibras nerviosas mielínicas - plexo braquial)."  label="PERIFÉRICO"  onPress={() => applyTopSup('perifericos')} />
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('corticals',    '\n\nTopográficamente a nivel cortical (N20-P25: Núcleo talámico - área somestésica primaria).')}>CORTICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('subcorticals', '\n\nTopográficamente a nivel subcortical (P14-N18: Lemnisco medial - núcleo tectal).')}>SUBCORTICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('cervicals',    '\n\nTopográficamente a nivel cervical (N11-N13: Raíces y astas dorsales - tracto cuneatus).')}>CERVICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('perifericos',  '\n\nTopográficamente a nivel periférico (N4-N9: Fibras nerviosas mielínicas - plexo braquial).')}>PERIFÉRICO</button>
       <SkipButton onPress={() => goTo('H')} label="Sin topografía →" />
     </div>
   );
 }
 
 /* StepF_inf: Topografía Inferiores */
-function StepF_inf({ goTo, removeConclusion, setStep, resetAll, side, severity, addOverlays }) {
-  const applyTopInf = (topoKey) => {
+function StepF_inf({ goTo, removeConclusion, addConclusion, setStep, resetAll, side, severity, addOverlays }) {
+  const topoValueKey = (suffix) => side === 'bilateral' ? `bilateral_${suffix}` : `${side}${suffix}`;
+
+  const applyTopInf = (topoKey, title) => {
     const suf = severity ? `_${severity}` : '_leve';
     if (side === 'bilateral') {
       addOverlays([`izquierdo${topoKey}Alterada${suf}`, `derecho${topoKey}Alterada${suf}`]);
@@ -977,24 +982,28 @@ function StepF_inf({ goTo, removeConclusion, setStep, resetAll, side, severity, 
     } else {
       addOverlays([`derecho${topoKey}Alterada${suf}`]);
     }
+    addConclusion({ value: topoValueKey(topoKey), title });
     goTo('H');
   };
+
+  const INF_KEYS = ['corticali','subcorticali','toracicoi','lumbosacroi','perifericoi'];
 
   return (
     <div>
       <NavRow
         onBack={() => {
-          ['corticali','subcorticali','toracicoi','lumbosacroi','perifericoi'].forEach(removeConclusion);
+          INF_KEYS.flatMap(k => ['izquierdo','derecho','bilateral_'].map(p => `${p}${k}`)).forEach(removeConclusion);
+          INF_KEYS.forEach(removeConclusion);
           setStep('E');
         }}
         onReset={resetAll}
       />
       <StepTitle>NIVEL INFERIOR:</StepTitle>
-      <ConclusionBtn value="corticali"    title="\n\nTopográficamente a nivel cortical (P37-N45: Núcleo talámico - área somestésica primaria)."    label="CORTICAL"    onPress={() => applyTopInf('corticali')} />
-      <ConclusionBtn value="subcorticali" title="\n\nTopográficamente a nivel subcortical (P31-N34: Núcleo gracilis - lemnisco medial)."           label="SUBCORTICAL" onPress={() => applyTopInf('subcorticali')} />
-      <ConclusionBtn value="toracicoi"    title="\n\nTopográficamente a nivel torácico (N24: Astas dorsales - tracto gracilis)."                   label="TORÁCICO"    onPress={() => applyTopInf('toracicoi')} />
-      <ConclusionBtn value="lumbosacroi"  title="\n\nTopográficamente a nivel lumbosacro (N20: Cono medular - raíces dorsales)."                   label="LUMBOSACRO"  onPress={() => applyTopInf('lumbosacroi')} />
-      <ConclusionBtn value="perifericoi"  title="\n\nTopográficamente a nivel periférico (P9-N18: Fibras nerviosas mielínicas - plexo sacro)."     label="PERIFÉRICO"  onPress={() => applyTopInf('perifericoi')} />
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('corticali',    '\n\nTopográficamente a nivel cortical (P37-N45: Núcleo talámico - área somestésica primaria).')}>CORTICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('subcorticali', '\n\nTopográficamente a nivel subcortical (P31-N34: Núcleo gracilis - lemnisco medial).')}>SUBCORTICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('toracicoi',    '\n\nTopográficamente a nivel torácico (N24: Astas dorsales - tracto gracilis).')}>TORÁCICO</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('lumbosacroi',  '\n\nTopográficamente a nivel lumbosacro (N20: Cono medular - raíces dorsales).')}>LUMBOSACRO</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('perifericoi',  '\n\nTopográficamente a nivel periférico (P9-N18: Fibras nerviosas mielínicas - plexo sacro).')}>PERIFÉRICO</button>
       <SkipButton onPress={() => goTo('H')} label="Sin topografía →" />
     </div>
   );
@@ -1106,7 +1115,13 @@ export default function ReportFace() {
       if (!dragRef.active) return;
       const dx = ev.clientX - dragRef.startX;
       const dy = ev.clientY - dragRef.startY;
-      moverFigura(dragRef.active, dragRef.origX + dx, dragRef.origY + dy);
+      const canvas = laminaRef.current;
+      const maxX = canvas ? canvas.clientWidth  - 80 : 9999;
+      const maxY = canvas ? canvas.clientHeight - 80 : 9999;
+      moverFigura(dragRef.active,
+        Math.max(0, Math.min(dragRef.origX + dx, maxX)),
+        Math.max(0, Math.min(dragRef.origY + dy, maxY)),
+      );
     };
     const onUp = () => {
       dragRef.active = null;
@@ -1115,7 +1130,7 @@ export default function ReportFace() {
     };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-  }, [dragRef, moverFigura]);
+  }, [dragRef, moverFigura, laminaRef]);
 
   /* ── Reset total ── */
   const resetAll = useCallback(() => {
@@ -1268,8 +1283,9 @@ export default function ReportFace() {
       vals.has('bilateral') ? 'Bilateral' : '';
     if (lado) lines.push({ k: 'Lado', v: lado });
 
-    // Estímulo (nervio)
-    if (selectedNerve && viaType !== 'trigemino') {
+    // Estímulo (nervio) — igual que mobile buildListaSomato
+    const isTrigemino = vals.has('trigemino_indemne') || vals.has('trigemino_alterada');
+    if (!isTrigemino && selectedNerve) {
       const nervLabels = {
         mediano: 'Nervio mediano', ulnar: 'Nervio ulnar',
         radial_superficial: 'Nervio radial superficial',
@@ -1279,19 +1295,29 @@ export default function ReportFace() {
         safeno: 'Nervio safeno', femorocutaneo_lateral: 'Nervio femorocutáneo lateral',
         pudendo: 'Nervio pudendo',
       };
-      const lbl = nervLabels[selectedNerve] || selectedNerve.replace(/_/g, ' ');
-      lines.push({ k: 'Estímulo', v: lbl });
+      lines.push({ k: 'Estímulo', v: nervLabels[selectedNerve] || selectedNerve.replace(/_/g, ' ') });
     }
-    if (viaType === 'trigemino') lines.push({ k: 'Estímulo', v: 'Nervio trigémino' });
 
-    const topSup = vals.has('corticals') ? 'Cortical' : vals.has('subcorticals') ? 'Subcortical' :
-                   vals.has('cervicals') ? 'Cervical' : vals.has('perifericos') ? 'Periférico' : '';
-    if (topSup) lines.push({ k: 'Topografía', v: topSup });
-
-    const topInf = vals.has('corticali') ? 'Cortical' : vals.has('subcorticali') ? 'Subcortical' :
-                   vals.has('toracicoi') ? 'Torácico' : vals.has('lumbosacroi') ? 'Lumbosacro' :
-                   vals.has('perifericoi') ? 'Periférico' : '';
-    if (topInf) lines.push({ k: 'Topografía', v: topInf });
+    // Topografía — muestra el título completo igual que mobile topoSentenceInlineFromValue
+    const TOPO_TITLES = {
+      corticals:    'Topográficamente a nivel cortical (N20-P25: Núcleo talámico - área somestésica primaria)',
+      subcorticals: 'Topográficamente a nivel subcortical (P14-N18: Lemnisco medial - núcleo tectal)',
+      cervicals:    'Topográficamente a nivel cervical (N11-N13: Raíces y astas dorsales - tracto cuneatus)',
+      perifericos:  'Topográficamente a nivel periférico (N4-N9: Fibras nerviosas mielínicas - plexo braquial)',
+      corticali:    'Topográficamente a nivel cortical (P37-N45: Núcleo talámico - área somestésica primaria)',
+      subcorticali: 'Topográficamente a nivel subcortical (P31-N34: Núcleo gracilis - lemnisco medial)',
+      toracicoi:    'Topográficamente a nivel torácico (N24: Astas dorsales - tracto gracilis)',
+      lumbosacroi:  'Topográficamente a nivel lumbosacro (N20: Cono medular - raíces dorsales)',
+      perifericoi:  'Topográficamente a nivel periférico (P9-N18: Fibras nerviosas mielínicas - plexo sacro)',
+    };
+    const topoConc = [...conclusions].reverse().find(c =>
+      /(corticals|subcorticals|cervicals|perifericos|corticali|subcorticali|toracicoi|lumbosacroi|perifericoi)$/.test(c.value)
+    );
+    if (topoConc) {
+      const suf = topoConc.value.replace(/^(?:izquierdo|derecho|bilateral)_?/, '');
+      const topoTitle = TOPO_TITLES[suf] || '';
+      if (topoTitle) lines.push({ k: 'Topografía', v: topoTitle });
+    }
 
     // Dermatomas
     const dermCodes = conclusions
@@ -1301,6 +1327,9 @@ export default function ReportFace() {
       const uniq = [...new Set(dermCodes)];
       lines.push({ k: 'Dermatomas', v: uniq.join('-') });
     }
+
+    // Trigémino estímulo al final (igual que mobile)
+    if (isTrigemino) lines.push({ k: 'Estímulo', v: 'Nervio trigémino' });
 
     return lines;
   }, [conclusions, side, viaType, selectedNerve]);

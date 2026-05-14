@@ -736,7 +736,13 @@ export default function ReportFace() {
       if (!dragRef.active) return;
       const dx = ev.clientX - dragRef.startX;
       const dy = ev.clientY - dragRef.startY;
-      moverFigura(dragRef.active, dragRef.origX + dx, dragRef.origY + dy);
+      const canvas = laminaRef.current;
+      const maxX = canvas ? canvas.clientWidth  - 80 : 9999;
+      const maxY = canvas ? canvas.clientHeight - 80 : 9999;
+      moverFigura(dragRef.active,
+        Math.max(0, Math.min(dragRef.origX + dx, maxX)),
+        Math.max(0, Math.min(dragRef.origY + dy, maxY)),
+      );
     };
     const onUp = () => {
       dragRef.active = null;
@@ -745,7 +751,7 @@ export default function ReportFace() {
     };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-  }, [dragRef, moverFigura]);
+  }, [dragRef, moverFigura, laminaRef]);
 
   /* ── expandOverlay ── */
   const expandOverlay = useCallback((raw) => {

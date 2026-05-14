@@ -466,10 +466,19 @@ export default function ReportFace() {
     e.preventDefault();
     dragRef.active=figura.id; dragRef.startX=e.clientX; dragRef.startY=e.clientY;
     dragRef.origX=figura.x; dragRef.origY=figura.y;
-    const onMove=(ev)=>{ if(!dragRef.active)return; moverFigura(dragRef.active,dragRef.origX+(ev.clientX-dragRef.startX),dragRef.origY+(ev.clientY-dragRef.startY)); };
+    const onMove=(ev)=>{
+      if(!dragRef.active)return;
+      const canvas=laminaRef.current;
+      const maxX=canvas?canvas.clientWidth-80:9999;
+      const maxY=canvas?canvas.clientHeight-80:9999;
+      moverFigura(dragRef.active,
+        Math.max(0,Math.min(dragRef.origX+(ev.clientX-dragRef.startX),maxX)),
+        Math.max(0,Math.min(dragRef.origY+(ev.clientY-dragRef.startY),maxY)),
+      );
+    };
     const onUp=()=>{ dragRef.active=null; window.removeEventListener('mousemove',onMove); window.removeEventListener('mouseup',onUp); };
     window.addEventListener('mousemove',onMove); window.addEventListener('mouseup',onUp);
-  }, [dragRef, moverFigura]);
+  }, [dragRef, moverFigura, laminaRef]);
 
   /* ── Helpers de navegación para Lado → Ubicación ── */
   // Al seleccionar Lado, el contexto determina qué Tipo usar después de Ubicación

@@ -482,16 +482,13 @@ function StepE({ goTo, removeConclusion, setSeverity, setStep, resetAll, rootFlo
   );
 }
 
-function StepE2({ removeConclusion, setStep, resetAll, side, setSide, goTo, addOverlay, addOverlays, removeLastOverlayGroup, conclusions }) {
+function StepE2({ removeConclusion, setStep, resetAll, side, setSide, goTo, addOverlay, addOverlays, removeLastOverlayGroup }) {
   return (
     <div>
       <NavRow
         onBack={() => {
-          // remove any region conclusions (new key format) and side conclusions
-          conclusions.forEach(c => {
-            if (/_cortical|_cervical|_lumbasacro|_indemne/.test(c.value)) removeConclusion(c.value);
-          });
-          removeConclusion('indemne');
+          ['cortical','cervical','lumbasacro','indemne','izquierdo_indemne','derecho_indemne','bilateral_indemne']
+            .forEach(v => v && removeConclusion(v));
           removeLastOverlayGroup();
           setStep('A');
         }}
@@ -544,40 +541,34 @@ function StepF({ goTo, removeConclusion, setStep, resetAll, side, rootFlow, seve
   );
 }
 
-function StepF2({ goTo, removeConclusion, setStep, resetAll, side, addOverlays, expandOverlay, removeLastOverlayGroup }) {
-  const pickRegion = (region) => {
-    // Remove the plain indemne overlay added at E2 before adding region overlay
-    removeLastOverlayGroup();
-    addOverlays(expandOverlay(`${side}_${region}`));
-    goTo('H');
-  };
+function StepF2({ goTo, removeConclusion, setStep, resetAll }) {
   return (
     <div>
       <NavRow
         onBack={() => {
-          [`${side}_cortical`,`${side}_cervical`,`${side}_lumbasacro`].forEach(v => v && removeConclusion(v));
+          ['cortical','cervical','lumbasacro'].forEach(v => v && removeConclusion(v));
           setStep('E2');
         }}
         onReset={resetAll}
       />
       <StepTitle>Región Indemne</StepTitle>
       <ConclusionBtn
-        value={`${side}_cortical`}
+        value="cortical"
         title=" a través de región medular anterolateral al estímulo en corteza motora primaria."
         label="CORTICAL"
-        onPress={() => pickRegion('cortical')}
+        onPress={() => goTo('H')}
       />
       <ConclusionBtn
-        value={`${side}_cervical`}
+        value="cervical"
         title=" a través de región medular anterolateral al estímulo en astas y raíces cervicales."
         label="CERVICAL"
-        onPress={() => pickRegion('cervical')}
+        onPress={() => goTo('H')}
       />
       <ConclusionBtn
-        value={`${side}_lumbasacro`}
+        value="lumbasacro"
         title=" a través de región medular anterolateral al estímulo en astas y raíces lumbosacras."
         label="LUMBOSACRO"
-        onPress={() => pickRegion('lumbasacro')}
+        onPress={() => goTo('H')}
       />
     </div>
   );
@@ -682,7 +673,13 @@ export default function ReportFace() {
       if (!dragRef.active) return;
       const dx = ev.clientX - dragRef.startX;
       const dy = ev.clientY - dragRef.startY;
-      moverFigura(dragRef.active, dragRef.origX + dx, dragRef.origY + dy);
+      const canvas = laminaRef.current;
+      const maxX = canvas ? canvas.clientWidth  - 80 : 9999;
+      const maxY = canvas ? canvas.clientHeight - 80 : 9999;
+      moverFigura(dragRef.active,
+        Math.max(0, Math.min(dragRef.origX + dx, maxX)),
+        Math.max(0, Math.min(dragRef.origY + dy, maxY)),
+      );
     };
     const onUp = () => {
       dragRef.active = null;
@@ -691,21 +688,13 @@ export default function ReportFace() {
     };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-  }, [dragRef, moverFigura]);
+  }, [dragRef, moverFigura, laminaRef]);
 
   /* ── expandOverlay para Motores ── */
   const expandOverlay = useCallback((raw) => {
     const exists = (key) => Boolean(OVERLAYS_MOTORES[key]);
 
-    if (rootFlow === 'indemne') {
-      // Para INDEMNE: el overlay de región usa las claves base (sin Alterada)
-      // e.g. izquierdo_cortical, derecho_cervical, bilateral_lumbasacro
-      if (raw.startsWith('bilateral_')) {
-        const base = raw.replace('bilateral_', '');
-        return [`izquierdo_${base}`, `derecho_${base}`].filter(exists);
-      }
-      return exists(raw) ? [raw] : [];
-    }
+    if (rootFlow !== 'alterada') return []; // INDEMNE: no se pintan capas de severidad
 
     // Para ALTERADA: elegir overlay con severidad
     if (raw.startsWith('bilateral_')) {
@@ -828,9 +817,9 @@ export default function ReportFace() {
     if (lado) lines.push({ k: 'Lado', v: lado });
 
     let region = '';
-    if (conclusions.some(c => c.value.includes('_cortical')))   region = 'Corteza motora primaria';
-    else if (conclusions.some(c => c.value.includes('_cervical')))   region = 'Astas anteriores y raíces cervicales';
-    else if (conclusions.some(c => c.value.includes('_lumbasacro'))) region = 'Astas anteriores y raíces lumbosacras';
+    if (conclusions.some(c => c.value.includes('cortical')))    region = 'Corteza motora primaria';
+    else if (conclusions.some(c => c.value.includes('cervical')))    region = 'Astas anteriores y raíces cervicales';
+    else if (conclusions.some(c => c.value.includes('lumbasacro'))) region = 'Astas anteriores y raíces lumbosacras';
     if (region) lines.push({ k: 'Región', v: region });
 
     return lines;

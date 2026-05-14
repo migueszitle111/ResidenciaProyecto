@@ -20,7 +20,7 @@ const pages = [
   },
    {
      name: "Educacion",
-     imagen: "/assets/IconSVG/I_Education.svg",
+     imagen: "/assets/IconSVG/Educacion.png",
      path: "/Educacion",
    },
 ];
@@ -38,7 +38,6 @@ const Submenu = () => {
                   alt={page.name}
                   width={50}
                   height={50}
-                  style={page.name === "Educacion" ? { filter: "invert(1) brightness(0.65)", transform: "scaleY(1.5)" } : {}}
                 />
                 {page.name}
               </div>

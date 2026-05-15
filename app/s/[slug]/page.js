@@ -60,7 +60,9 @@ export async function generateMetadata({ params }) {
 
   const { link } = data;
   const title = link.title || 'Compartir Diagnóstico - mEDXpro';
-  const description = link.message || 'Reporte médico compartido de forma segura';
+  const patientName = link.meta?.patient;
+  const description = link.message ||
+    (patientName ? `Paciente: ${patientName}` : 'Reporte médico compartido de forma segura');
 
   return {
     title,

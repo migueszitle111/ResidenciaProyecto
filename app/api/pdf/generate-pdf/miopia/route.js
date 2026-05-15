@@ -126,6 +126,14 @@ function wrapText(text, font, fontSize, maxWidth) {
   if (current) lines.push(current);
   return lines;
 }
+function justifyLine(page, line, isLast, x, y, font, fontSize, colWidth, color) {
+  const words = line.split(' ');
+  if (words.length <= 1 || isLast) { page.drawText(line, { x, y, font, size: fontSize, color }); return; }
+  const totalWordW = words.reduce((s, w) => s + font.widthOfTextAtSize(w, fontSize), 0);
+  const gap = (colWidth - totalWordW) / (words.length - 1);
+  let cx = x;
+  for (const w of words) { page.drawText(w, { x: cx, y, font, size: fontSize, color }); cx += font.widthOfTextAtSize(w, fontSize) + gap; }
+}
 
 // ── Page 1 ───────────────────────────────────────────────────────────────────
 
@@ -380,9 +388,9 @@ async function buildPage2(pdfDoc, {
 
   if (comentarioLista) {
     const cLines = comentarioLista.split('\n').flatMap(l => wrapText(l || ' ', fontRegular, FONT_SZ, COL_W));
-    for (const cl of cLines) {
+    for (let ci = 0; ci < cLines.length; ci++) {
       if (ry < BOT_Y) break;
-      page.drawText(cl, { x: RX, y: ry, font: fontRegular, size: FONT_SZ, color: rgb(0.08,0.08,0.08) });
+      justifyLine(page, cLines[ci], ci === cLines.length - 1, RX, ry, fontRegular, FONT_SZ, COL_W, rgb(0.08,0.08,0.08));
       ry -= LINE_H;
     }
   }

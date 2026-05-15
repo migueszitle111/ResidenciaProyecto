@@ -55,6 +55,8 @@ const TABLAS = [
   { id: 'SÍNDROME DEL TÚNEL DEL CARPO – PADUA',                              file: 'Tabla40.png' },
   { id: 'SÍNDROME DEL TÚNEL DEL CARPO – CANTERBURY',                         file: 'Tabla41.png' },
   { id: 'SÍNDROME DEL TÚNEL DEL CARPO – HIRANI',                             file: 'Tabla42.png' },
+  { id: 'CRITERIOS DE LAMBERT PARA DESMIELINIZACIÓN',                        file: 'Tabla43.png' },
+  { id: 'CRITERIOS CIDP AANEM',                                               file: 'Tabla44.png' },
 ];
 
 /* ─── Modal de recorte (Crop) ────────────────────────────────────────────────── */

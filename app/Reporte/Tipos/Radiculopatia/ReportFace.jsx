@@ -56,6 +56,8 @@ const TABLAS = [
   { id: 'SÍNDROME DEL TÚNEL DEL CARPO – PADUA',                              file: 'Tabla40.png' },
   { id: 'SÍNDROME DEL TÚNEL DEL CARPO – CANTERBURY',                         file: 'Tabla41.png' },
   { id: 'SÍNDROME DEL TÚNEL DEL CARPO – HIRANI',                             file: 'Tabla42.png' },
+  { id: 'CRITERIOS DE LAMBERT PARA DESMIELINIZACIÓN',                        file: 'Tabla43.png' },
+  { id: 'CRITERIOS CIDP AANEM',                                               file: 'Tabla44.png' },
 ];
 
 /* ─── Crop Modal ──────────────────────────────────────────────────────────── */
@@ -330,7 +332,7 @@ function computeOverlaysFromChecks(checkedL, checkedR) {
 }
 
 /* Dado un array de IDs de checkbox, genera los metadatos de cruces */
-function computeCrossesFromChecks(checkedL, checkedR) {
+function computeCrossesFromChecks(checkedL, checkedR, red = false) {
   const out = [];
   const seen = new Set();
   [...checkedL, ...checkedR].forEach(id => {
@@ -344,7 +346,7 @@ function computeCrossesFromChecks(checkedL, checkedR) {
     if (!LEVEL_TOP[lvl] || !OFFSET[lvl]?.[n]) return;
     const topPct = LEVEL_TOP[lvl] + (V_DELTAS[lvl]?.[n] ?? 0);
     const offPct = OFFSET[lvl][n];
-    out.push({ key: id, src: CROSS_IMG[n], topPct, offPct, side });
+    out.push({ key: red ? `${id}_red` : id, src: red ? CROSS_RED_IMG[n] : CROSS_IMG[n], topPct, offPct, side });
   });
   return out;
 }
@@ -643,6 +645,8 @@ function StepBNivel({
   goTo, evo, flowType, addText, addRegionOverlay, resetAll,
   checkedL_C, setCheckedL_C, checkedR_C, setCheckedR_C,
   checkedL_L, setCheckedL_L, checkedR_L, setCheckedR_L,
+  checkedL_C_A, setCheckedL_C_A, checkedR_C_A, setCheckedR_C_A,
+  checkedL_L_A, setCheckedL_L_A, checkedR_L_A, setCheckedR_L_A,
   agudiPhase, setAgudiPhase,
 }) {
   const [expandedNivel, setExpandedNivel] = useState(null);
@@ -653,8 +657,11 @@ function StepBNivel({
   const isCroAgu = flowType === 'Crónica agudizada';
   const backStep = evo === 'Crónica' ? 'E_FASE' : 'A';
   const handleBack = () => {
-    if (isCroAgu && agudiPhase) { setAgudiPhase(false); setCheckedL_C([]); setCheckedR_C([]); setCheckedL_L([]); setCheckedR_L([]); }
-    else goTo(backStep);
+    if (isCroAgu && agudiPhase) {
+      setAgudiPhase(false);
+      setCheckedL_C_A([]); setCheckedR_C_A([]);
+      setCheckedL_L_A([]); setCheckedR_L_A([]);
+    } else goTo(backStep);
   };
 
   /* "solo uno por lado por nivel" – igual que toggleOnePerSide móvil */
@@ -670,8 +677,10 @@ function StepBNivel({
   /* Texto final Cervical → avanza (visuales ya están en tiempo real) */
   const finalizarCervical = () => {
     const lvlOf = id => id.split('_')[0];
-    const setL = new Set(checkedL_C.map(lvlOf));
-    const setR = new Set(checkedR_C.map(lvlOf));
+    const srcL = agudiPhase ? checkedL_C_A : checkedL_C;
+    const srcR = agudiPhase ? checkedR_C_A : checkedR_C;
+    const setL = new Set(srcL.map(lvlOf));
+    const setR = new Set(srcR.map(lvlOf));
     const left = [], right = [], bilateral = [];
     CERVICAL_LVL.forEach(v => {
       const l = setL.has(v), r = setR.has(v);
@@ -688,15 +697,17 @@ function StepBNivel({
     const prefix = agudiPhase ? 'con agudización nivel' : 'nivel';
     addText(total >= 3 ? `${prefix} ${res} (multinivel)` : `${prefix} ${res}`);
     addRegionOverlay('Cervical');
-    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); setCheckedL_C([]); setCheckedR_C([]); setCheckedL_L([]); setCheckedR_L([]); }
+    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); }
     else goTo('E_INTENSIDAD');
   };
 
   /* Texto final Lumbosacro → avanza */
   const finalizarLumbo = () => {
     const lvlOf = id => id.split('_')[0];
-    const setL = new Set(checkedL_L.map(lvlOf));
-    const setR = new Set(checkedR_L.map(lvlOf));
+    const srcL = agudiPhase ? checkedL_L_A : checkedL_L;
+    const srcR = agudiPhase ? checkedR_L_A : checkedR_L;
+    const setL = new Set(srcL.map(lvlOf));
+    const setR = new Set(srcR.map(lvlOf));
     const left = [], right = [], bilateral = [];
     LUMBO_LVL.forEach(v => {
       const l = setL.has(v), r = setR.has(v);
@@ -713,7 +724,7 @@ function StepBNivel({
     const prefix = agudiPhase ? 'con agudización nivel' : 'nivel';
     addText(total >= 3 ? `${prefix} ${res} (multinivel)` : `${prefix} ${res}`);
     addRegionOverlay('Lumbosacro');
-    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); setCheckedL_C([]); setCheckedR_C([]); setCheckedL_L([]); setCheckedR_L([]); }
+    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); }
     else goTo('E_INTENSIDAD');
   };
 
@@ -723,7 +734,7 @@ function StepBNivel({
     const prefix = agudiPhase ? 'con agudización nivel torácica:' : 'niveles Torácicas:';
     addText(`${prefix} ${toracicoTxt.trim()}`);
     addRegionOverlay('Torácica');
-    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); setCheckedL_C([]); setCheckedR_C([]); setCheckedL_L([]); setCheckedR_L([]); setToracicoTxt(''); }
+    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); }
     else goTo('E_INTENSIDAD');
   };
 
@@ -775,13 +786,13 @@ function StepBNivel({
               <VertHeader label={v} open={expandedVertC === v} onToggle={() => setExpandedVertC(p => p === v ? null : v)} />
               {expandedVertC === v && (
                 <div style={{ padding:'6px 8px 8px', background:'rgba(255,255,255,0.02)', borderRadius:6, marginBottom:4 }}>
-                  <ChkRow lvl={v} side="Izquierdo" checked={checkedL_C} setList={setCheckedL_C} />
-                  <ChkRow lvl={v} side="Derecho"   checked={checkedR_C} setList={setCheckedR_C} />
+                  <ChkRow lvl={v} side="Izquierdo" checked={agudiPhase ? checkedL_C_A : checkedL_C} setList={agudiPhase ? setCheckedL_C_A : setCheckedL_C} />
+                  <ChkRow lvl={v} side="Derecho"   checked={agudiPhase ? checkedR_C_A : checkedR_C} setList={agudiPhase ? setCheckedR_C_A : setCheckedR_C} />
                 </div>
               )}
             </div>
           ))}
-          {(checkedL_C.length > 0 || checkedR_C.length > 0) && (
+          {((agudiPhase ? checkedL_C_A : checkedL_C).length > 0 || (agudiPhase ? checkedR_C_A : checkedR_C).length > 0) && (
             <button onClick={finalizarCervical} style={{ width:'100%', marginTop:6, padding:'8px 0', borderRadius:8, background:'#f97316', border:'none', color:'#fff', fontWeight:700, fontSize:13, cursor:'pointer' }}>
               Siguiente →
             </button>
@@ -812,13 +823,13 @@ function StepBNivel({
               <VertHeader label={v} open={expandedVertL === v} onToggle={() => setExpandedVertL(p => p === v ? null : v)} />
               {expandedVertL === v && (
                 <div style={{ padding:'6px 8px 8px', background:'rgba(255,255,255,0.02)', borderRadius:6, marginBottom:4 }}>
-                  <ChkRow lvl={v} side="Izquierdo" checked={checkedL_L} setList={setCheckedL_L} />
-                  <ChkRow lvl={v} side="Derecho"   checked={checkedR_L} setList={setCheckedR_L} />
+                  <ChkRow lvl={v} side="Izquierdo" checked={agudiPhase ? checkedL_L_A : checkedL_L} setList={agudiPhase ? setCheckedL_L_A : setCheckedL_L} />
+                  <ChkRow lvl={v} side="Derecho"   checked={agudiPhase ? checkedR_L_A : checkedR_L} setList={agudiPhase ? setCheckedR_L_A : setCheckedR_L} />
                 </div>
               )}
             </div>
           ))}
-          {(checkedL_L.length > 0 || checkedR_L.length > 0) && (
+          {((agudiPhase ? checkedL_L_A : checkedL_L).length > 0 || (agudiPhase ? checkedR_L_A : checkedR_L).length > 0) && (
             <button onClick={finalizarLumbo} style={{ width:'100%', marginTop:6, padding:'8px 0', borderRadius:8, background:'#f97316', border:'none', color:'#fff', fontWeight:700, fontSize:13, cursor:'pointer' }}>
               Siguiente →
             </button>
@@ -1072,6 +1083,12 @@ export default function ReportFaceRadiculopatia() {
   const [checkedL_L, setCheckedL_L] = useState([]);
   const [checkedR_L, setCheckedR_L] = useState([]);
 
+  /* segunda pasada (agudización) – cruces rojas */
+  const [checkedL_C_A, setCheckedL_C_A] = useState([]);
+  const [checkedR_C_A, setCheckedR_C_A] = useState([]);
+  const [checkedL_L_A, setCheckedL_L_A] = useState([]);
+  const [checkedR_L_A, setCheckedR_L_A] = useState([]);
+
   /* overlays comprometidos (región + sensitiva) – se acumulan al avanzar pasos */
   const [committedPost, setCommittedPost] = useState([]);
   const [committedAnt,  setCommittedAnt]  = useState([]);
@@ -1099,11 +1116,20 @@ export default function ReportFaceRadiculopatia() {
     return { post, ant };
   }, [checkedL_C, checkedR_C, checkedL_L, checkedR_L]);
 
-  /* cruces derivadas en tiempo real */
+  /* cruces negras (primera pasada) */
   const crosses = useMemo(() =>
     computeCrossesFromChecks([...checkedL_C, ...checkedL_L], [...checkedR_C, ...checkedR_L]),
     [checkedL_C, checkedR_C, checkedL_L, checkedR_L]
   );
+
+  /* cruces rojas (segunda pasada – Crónica agudizada) */
+  const crossesRed = useMemo(() =>
+    computeCrossesFromChecks([...checkedL_C_A, ...checkedL_L_A], [...checkedR_C_A, ...checkedR_L_A], true),
+    [checkedL_C_A, checkedR_C_A, checkedL_L_A, checkedR_L_A]
+  );
+
+  /* combinadas para renderizar y enviar al PDF */
+  const allCrosses = useMemo(() => [...crosses, ...crossesRed], [crosses, crossesRed]);
 
   /* overlays finales = comprometidos + región en vivo + músculos en vivo (sin duplicados) */
   const postOverlays = useMemo(() =>
@@ -1248,6 +1274,8 @@ export default function ReportFaceRadiculopatia() {
     setTextos([]);
     setCheckedL_C([]); setCheckedR_C([]);
     setCheckedL_L([]); setCheckedR_L([]);
+    setCheckedL_C_A([]); setCheckedR_C_A([]);
+    setCheckedL_L_A([]); setCheckedR_L_A([]);
     setCommittedPost([]); setCommittedAnt([]);
     setFiguras([]); setImgLista(null); setComentarioLista('');
     setTextoEditado(''); setEditadoManual(false);
@@ -1269,6 +1297,10 @@ export default function ReportFaceRadiculopatia() {
           checkedR_C={checkedR_C} setCheckedR_C={setCheckedR_C}
           checkedL_L={checkedL_L} setCheckedL_L={setCheckedL_L}
           checkedR_L={checkedR_L} setCheckedR_L={setCheckedR_L}
+          checkedL_C_A={checkedL_C_A} setCheckedL_C_A={setCheckedL_C_A}
+          checkedR_C_A={checkedR_C_A} setCheckedR_C_A={setCheckedR_C_A}
+          checkedL_L_A={checkedL_L_A} setCheckedL_L_A={setCheckedL_L_A}
+          checkedR_L_A={checkedR_L_A} setCheckedR_L_A={setCheckedR_L_A}
           agudiPhase={agudiPhase} setAgudiPhase={setAgudiPhase}
         />;
       case 'E_INTENSIDAD':
@@ -1302,7 +1334,7 @@ export default function ReportFaceRadiculopatia() {
             postOverlays={postOverlays}
             antOverlays={antOverlays}
             activeOv={[...new Set([...postOverlays, ...antOverlays])]}
-            crosses={crosses}
+            crosses={allCrosses}
             laminaRef={laminaRef}
             nombrePaciente={nombrePaciente}
             textoFinal={textoFinal}
@@ -1382,7 +1414,7 @@ export default function ReportFaceRadiculopatia() {
                   <img key={`post_ov_${i}_${src}`} src={src} alt="" draggable={false}
                     style={{ position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none' }} />
                 ))}
-                {crosses.filter(c => c.side === 'L').map(({ key, src, topPct, offPct }) => (
+                {allCrosses.filter(c => c.side === 'L').map(({ key, src, topPct, offPct }) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img key={`cx_L_${key}`} src={src} alt="" draggable={false}
                     style={{ position:'absolute', top:`${topPct*100}%`, left:`${offPct*100}%`, width:64, height:64, objectFit:'contain', pointerEvents:'none', zIndex:5 }} />
@@ -1399,7 +1431,7 @@ export default function ReportFaceRadiculopatia() {
                   <img key={`ant_ov_${i}_${src}`} src={src} alt="" draggable={false}
                     style={{ position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none' }} />
                 ))}
-                {crosses.filter(c => c.side === 'R').map(({ key, src, topPct, offPct }) => (
+                {allCrosses.filter(c => c.side === 'R').map(({ key, src, topPct, offPct }) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img key={`cx_R_${key}`} src={src} alt="" draggable={false}
                     style={{ position:'absolute', top:`${topPct*100}%`, right:`${offPct*100}%`, width:64, height:64, objectFit:'contain', pointerEvents:'none', zIndex:5 }} />

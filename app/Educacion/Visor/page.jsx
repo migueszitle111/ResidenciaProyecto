@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState, useRef, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
@@ -8,7 +8,6 @@ const BG = '#dfdfdf';
 
 function VisorContent() {
   const params  = useSearchParams();
-  const router  = useRouter();
   const pdfSrc  = params.get('pdf');
 
   const [scriptReady, setScriptReady] = useState(false);
@@ -202,7 +201,7 @@ function VisorContent() {
       <div style={{ background: BG, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ color: '#333', textAlign: 'center' }}>
           <p style={{ marginBottom: 16 }}>PDF no especificado.</p>
-          <button onClick={() => router.push('/Educacion')} style={btnStyle}>
+          <button onClick={() => window.close()} style={btnStyle}>
             Ir a Educacion
           </button>
         </div>
@@ -261,7 +260,7 @@ function VisorContent() {
 
       {/* Boton X flotante */}
       <button
-        onClick={() => router.push('/Educacion')}
+        onClick={() => window.close()}
         title="Regresar a Educacion"
         style={{
           position      : 'fixed',

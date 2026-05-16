@@ -11,7 +11,7 @@ const BOOKS = [
 const preConfig = `
   window.DFLIP = window.DFLIP || {};
   window.DFLIP.defaults = {
-    autoCreate       : true,
+    autoCreate       : false,
     skin             : 'light',
     webgl            : false,
     pdfRenderQuality : 3,
@@ -22,80 +22,68 @@ const preConfig = `
   };
 `;
 
-function parseThumbs() {
-  if (!window.jQuery || !window.DFLIP?.parseBooks) return false;
-  document.querySelectorAll('._df_thumb').forEach(el => {
-    el.removeAttribute('df-parsed');
-    el.removeAttribute('parsed');
-  });
-  window.DFLIP.parseBooks();
-  return true;
-}
-
 function FlipBookGallery() {
-  const parsed  = useRef(false);
-  const timerRef = useRef(null);
-  /* mountKey fuerza re-montaje de los thumbs al volver a la página */
   const [mountKey, setMountKey] = useState(0);
+  const timerRef  = useRef(null);
 
-  /* Inyectar CSS dflip */
+  /* Inyectar CSS dflip una sola vez */
   useEffect(() => {
     const addLink = (href, id) => {
-      if (id && document.getElementById(id)) return;
+      if (document.getElementById(id)) return;
       const link = document.createElement('link');
-      if (id) link.id = id;
-      link.rel  = 'stylesheet';
-      link.href = href;
+      link.id = id; link.rel = 'stylesheet'; link.href = href;
       document.head.appendChild(link);
     };
     addLink('/dflip/css/themify-icons.min.css', 'dflip-icons-css');
-    addLink('/dflip/css/dflip.min.css', 'dflip-css');
+    addLink('/dflip/css/dflip.min.css',         'dflip-css');
   }, []);
 
-  /* Re-montar + re-parsear cuando el usuario vuelve a esta pestaña */
+  /* Parsear thumbs después de cada re-montaje */
   useEffect(() => {
     const tryParse = () => {
-      if (parsed.current) return;
-      const ok = parseThumbs();
-      if (!ok) {
+      if (!window.jQuery || !window.DFLIP?.parseBooks) {
         timerRef.current = setTimeout(tryParse, 200);
-      } else {
-        parsed.current = true;
+        return;
       }
+      /* Limpiar cualquier elemento que dflip haya inyectado dentro
+         de los wrappers _df_book-cover que genera al parsear thumbs */
+      document.querySelectorAll('._df_thumb').forEach(el => {
+        /* Eliminar hijos generados por dflip, dejar solo el div vacío */
+        while (el.firstChild) el.removeChild(el.firstChild);
+        el.removeAttribute('df-parsed');
+        el.removeAttribute('parsed');
+        el.style.cssText = '';
+      });
+      window.DFLIP.parseBooks();
     };
 
-    const reParse = () => {
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(tryParse, 100);
+    return () => clearTimeout(timerRef.current);
+  }, [mountKey]);
+
+  /* Recuperar foco → re-montar thumbs desde cero */
+  useEffect(() => {
+    const onFocus = () => {
       if (document.visibilityState !== 'visible') return;
-      clearTimeout(timerRef.current);
-      parsed.current = false;
-      /* Incrementar key obliga a React a desmontar y remontar los thumbs,
-         limpiando cualquier mutación que dflip haya hecho al DOM */
       setMountKey(k => k + 1);
-      tryParse();
     };
-
-    /* Primera carga */
-    tryParse();
-
-    document.addEventListener('visibilitychange', reParse);
-    window.addEventListener('focus', reParse);
-
+    document.addEventListener('visibilitychange', onFocus);
+    window.addEventListener('focus', onFocus);
     return () => {
-      clearTimeout(timerRef.current);
-      document.removeEventListener('visibilitychange', reParse);
-      window.removeEventListener('focus', reParse);
+      document.removeEventListener('visibilitychange', onFocus);
+      window.removeEventListener('focus', onFocus);
     };
   }, []);
 
-  /* Interceptar click antes de que dflip abra el visor inline */
+  /* Interceptar click para abrir Visor en nueva pestaña */
   useEffect(() => {
     const handler = (e) => {
       const thumb = e.target.closest('[data-pdf]');
       if (!thumb) return;
       e.stopImmediatePropagation();
       e.preventDefault();
-      const pdf = thumb.getAttribute('data-pdf');
-      window.open(`/Educacion/Visor?pdf=${encodeURIComponent(pdf)}`, '_blank');
+      window.open(`/Educacion/Visor?pdf=${encodeURIComponent(thumb.getAttribute('data-pdf'))}`, '_blank');
     };
     document.addEventListener('click', handler, true);
     return () => document.removeEventListener('click', handler, true);
@@ -105,11 +93,11 @@ function FlipBookGallery() {
     <>
       <Script id="df-preconfig" strategy="beforeInteractive">{preConfig}</Script>
       <Script src="/dflip/js/libs/jquery.min.js" strategy="afterInteractive" />
-      <Script src="/dflip/js/dflip.min.js" strategy="afterInteractive" />
+      <Script src="/dflip/js/dflip.min.js" strategy="afterInteractive"
+        onLoad={() => setMountKey(k => k + 1)} />
 
       <div key={mountKey} className="mt-8 flex flex-wrap justify-center gap-8">
         {BOOKS.map(({ pdf, label }) => (
-          /* El wrapper captura el click y muestra el label debajo del thumb */
           <div key={pdf} data-pdf={pdf} className="cursor-pointer flex flex-col items-center gap-2">
             <div
               className="_df_thumb"

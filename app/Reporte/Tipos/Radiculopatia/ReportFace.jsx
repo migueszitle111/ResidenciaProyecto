@@ -573,14 +573,6 @@ function ChoiceBtn({ label, onPress }) {
   );
 }
 
-function SkipButton({ onPress, label = 'Saltar →' }) {
-  return (
-    <button onClick={onPress}
-      className="w-full mt-2 px-4 py-2 rounded-lg border border-dashed border-white/20 text-slate-400 text-xs hover:border-white/40 hover:text-white transition-colors">
-      {label}
-    </button>
-  );
-}
 
 function ToggleBtn({ label, active, onPress }) {
   return (
@@ -648,6 +640,7 @@ function StepBNivel({
   checkedL_C_A, setCheckedL_C_A, checkedR_C_A, setCheckedR_C_A,
   checkedL_L_A, setCheckedL_L_A, checkedR_L_A, setCheckedR_L_A,
   agudiPhase, setAgudiPhase,
+  agudiTargetNivel, setAgudiTargetNivel,
 }) {
   const [expandedNivel, setExpandedNivel] = useState(null);
   const [expandedVertC, setExpandedVertC] = useState(null);
@@ -658,7 +651,7 @@ function StepBNivel({
   const backStep = evo === 'Crónica' ? 'E_FASE' : 'A';
   const handleBack = () => {
     if (isCroAgu && agudiPhase) {
-      setAgudiPhase(false);
+      setAgudiPhase(false); setAgudiTargetNivel(null);
       setCheckedL_C_A([]); setCheckedR_C_A([]);
       setCheckedL_L_A([]); setCheckedR_L_A([]);
     } else goTo(backStep);
@@ -697,7 +690,7 @@ function StepBNivel({
     const prefix = agudiPhase ? 'con agudización nivel' : 'nivel';
     addText(total >= 3 ? `${prefix} ${res} (multinivel)` : `${prefix} ${res}`);
     addRegionOverlay('Cervical');
-    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); }
+    if (isCroAgu && !agudiPhase) { setAgudiTargetNivel('Cervical'); setAgudiPhase(true); }
     else goTo('E_INTENSIDAD');
   };
 
@@ -724,7 +717,7 @@ function StepBNivel({
     const prefix = agudiPhase ? 'con agudización nivel' : 'nivel';
     addText(total >= 3 ? `${prefix} ${res} (multinivel)` : `${prefix} ${res}`);
     addRegionOverlay('Lumbosacro');
-    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); }
+    if (isCroAgu && !agudiPhase) { setAgudiTargetNivel('Lumbosacro'); setAgudiPhase(true); }
     else goTo('E_INTENSIDAD');
   };
 
@@ -734,7 +727,7 @@ function StepBNivel({
     const prefix = agudiPhase ? 'con agudización nivel torácica:' : 'niveles Torácicas:';
     addText(`${prefix} ${toracicoTxt.trim()}`);
     addRegionOverlay('Torácica');
-    if (isCroAgu && !agudiPhase) { setAgudiPhase(true); }
+    if (isCroAgu && !agudiPhase) { setAgudiTargetNivel('Torácica'); setAgudiPhase(true); }
     else goTo('E_INTENSIDAD');
   };
 
@@ -760,8 +753,29 @@ function StepBNivel({
     </div>
   );
 
-  const AccHeader = ({ label, open, onToggle }) => (
-    <button onClick={onToggle} style={{ width:'100%', textAlign:'left', padding:'8px 10px', marginBottom:2, borderRadius:8, background: open ? 'rgba(249,115,22,0.15)' : 'rgba(255,255,255,0.05)', border:`1px solid ${open ? 'rgba(249,115,22,0.4)' : 'rgba(255,255,255,0.1)'}`, color:'#fff', fontSize:12, fontWeight:600, cursor:'pointer', display:'flex', justifyContent:'space-between' }}>
+  /* Segmento activo: cuál de los tres tiene checkboxes marcados en esta pasada */
+  const activeSegment = (() => {
+    const lC = agudiPhase ? checkedL_C_A : checkedL_C;
+    const rC = agudiPhase ? checkedR_C_A : checkedR_C;
+    const lL = agudiPhase ? checkedL_L_A : checkedL_L;
+    const rL = agudiPhase ? checkedR_L_A : checkedR_L;
+    if (lC.length > 0 || rC.length > 0) return 'Cervical';
+    if (toracicoTxt.trim().length > 0)   return 'Torácica';
+    if (lL.length > 0 || rL.length > 0)  return 'Lumbosacro';
+    return null;
+  })();
+
+  const AccHeader = ({ label, open, onToggle, blocked }) => (
+    <button
+      onClick={blocked ? undefined : onToggle}
+      style={{
+        width:'100%', textAlign:'left', padding:'8px 10px', marginBottom:2, borderRadius:8,
+        background: open ? 'rgba(249,115,22,0.15)' : blocked ? 'rgba(255,255,255,0.02)' : 'rgba(255,255,255,0.05)',
+        border:`1px solid ${open ? 'rgba(249,115,22,0.4)' : blocked ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.1)'}`,
+        color: blocked ? 'rgba(255,255,255,0.2)' : '#fff',
+        fontSize:12, fontWeight:600, cursor: blocked ? 'not-allowed' : 'pointer',
+        display:'flex', justifyContent:'space-between', opacity: blocked ? 0.45 : 1,
+      }}>
       {label}<span>{open ? '−' : '+'}</span>
     </button>
   );
@@ -778,8 +792,15 @@ function StepBNivel({
       <StepTitle>{(isCroAgu && agudiPhase) ? 'Agudización' : 'Nivel'}</StepTitle>
 
       {/* ── Cervical ── */}
-      <AccHeader label="CERVICAL" open={expandedNivel === 'Cervical'} onToggle={() => setExpandedNivel(p => p === 'Cervical' ? null : 'Cervical')} />
-      {expandedNivel === 'Cervical' && (
+      {(!agudiPhase || agudiTargetNivel === 'Cervical') && (
+      <AccHeader
+        label="CERVICAL"
+        open={expandedNivel === 'Cervical'}
+        onToggle={() => setExpandedNivel(p => p === 'Cervical' ? null : 'Cervical')}
+        blocked={activeSegment !== null && activeSegment !== 'Cervical'}
+      />
+      )}
+      {expandedNivel === 'Cervical' && (!agudiPhase || agudiTargetNivel === 'Cervical') && (
         <div style={{ padding:'6px 4px 8px', marginBottom:4 }}>
           {CERVICAL_LVL.map(v => (
             <div key={v}>
@@ -801,8 +822,15 @@ function StepBNivel({
       )}
 
       {/* ── Torácica ── */}
-      <AccHeader label="TORÁCICA" open={expandedNivel === 'Torácica'} onToggle={() => setExpandedNivel(p => p === 'Torácica' ? null : 'Torácica')} />
-      {expandedNivel === 'Torácica' && (
+      {(!agudiPhase || agudiTargetNivel === 'Torácica') && (
+      <AccHeader
+        label="TORÁCICA"
+        open={expandedNivel === 'Torácica'}
+        onToggle={() => setExpandedNivel(p => p === 'Torácica' ? null : 'Torácica')}
+        blocked={activeSegment !== null && activeSegment !== 'Torácica'}
+      />
+      )}
+      {expandedNivel === 'Torácica' && (!agudiPhase || agudiTargetNivel === 'Torácica') && (
         <div style={{ padding:'6px 4px 8px', marginBottom:4 }}>
           <textarea value={toracicoTxt} onChange={e => setToracicoTxt(e.target.value)} placeholder="Describe nivel Torácica..." rows={3}
             style={{ width:'100%', boxSizing:'border-box', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:8, padding:'6px 10px', color:'#fff', fontSize:12, resize:'none', outline:'none', fontFamily:'inherit' }} />
@@ -815,8 +843,15 @@ function StepBNivel({
       )}
 
       {/* ── Lumbosacro ── */}
-      <AccHeader label="LUMBOSACRO" open={expandedNivel === 'Lumbosacro'} onToggle={() => setExpandedNivel(p => p === 'Lumbosacro' ? null : 'Lumbosacro')} />
-      {expandedNivel === 'Lumbosacro' && (
+      {(!agudiPhase || agudiTargetNivel === 'Lumbosacro') && (
+      <AccHeader
+        label="LUMBOSACRO"
+        open={expandedNivel === 'Lumbosacro'}
+        onToggle={() => setExpandedNivel(p => p === 'Lumbosacro' ? null : 'Lumbosacro')}
+        blocked={activeSegment !== null && activeSegment !== 'Lumbosacro'}
+      />
+      )}
+      {expandedNivel === 'Lumbosacro' && (!agudiPhase || agudiTargetNivel === 'Lumbosacro') && (
         <div style={{ padding:'6px 4px 8px', marginBottom:4 }}>
           {LUMBO_LVL.map(v => (
             <div key={v}>
@@ -856,7 +891,6 @@ function StepEIntensidad({ goTo, addText, evo, resetAll }) {
       {opciones.map(op => (
         <ChoiceBtn key={op.nombre} label={op.nombre} onPress={() => { addText(op.texto); goTo(goNext); }} />
       ))}
-      <SkipButton onPress={() => goTo(goNext)} />
     </div>
   );
 }
@@ -871,7 +905,6 @@ function StepFReinervacion({ goTo, addText, evo, resetAll }) {
       {['Abundante', 'Mínima', 'Ausente'].map(r => (
         <ChoiceBtn key={r} label={r.toUpperCase()} onPress={() => { addText(r === 'Ausente' ? 'sin reinervación colateral' : `con reinervación colateral ${r.toLowerCase()}`); goTo(goNext); }} />
       ))}
-      <SkipButton onPress={() => goTo(goNext)} />
     </div>
   );
 }
@@ -884,7 +917,6 @@ function StepF2Progresion({ goTo, addText, resetAll }) {
       <StepTitle>Progresión</StepTitle>
       <ChoiceBtn label="CON PROGRESIÓN DISTAL A MIOTOMAS" onPress={() => { addText('con progresión distal a miotomas'); goTo('G_PRONOSTICO'); }} />
       <ChoiceBtn label="SIN PROGRESIÓN DISTAL A MIOTOMAS" onPress={() => { addText('sin progresión distal a miotomas'); goTo('G_PRONOSTICO'); }} />
-      <SkipButton onPress={() => goTo('G_PRONOSTICO')} />
     </div>
   );
 }
@@ -905,7 +937,6 @@ function StepGPronostico({ goTo, addText, evo, resetAll }) {
       {opciones.map(op => (
         <ChoiceBtn key={op.nombre} label={op.nombre.toUpperCase()} onPress={() => { addText(op.texto); goTo('FINAL'); }} />
       ))}
-      <SkipButton onPress={() => goTo('FINAL')} />
     </div>
   );
 }
@@ -1075,6 +1106,7 @@ export default function ReportFaceRadiculopatia() {
   const [sensPatologia, setSensPatologia] = useState(null); // 'Bloqueo' | 'Retardo'
   const [selectedSensitiva, setSelectedSensitiva] = useState({ 'C6-C7': null, 'S1': null });
   const [agudiPhase, setAgudiPhase]   = useState(false); // Crónica agudizada: segunda pasada
+  const [agudiTargetNivel, setAgudiTargetNivel] = useState(null); // 'Cervical'|'Torácica'|'Lumbosacro'
   const [textos, setTextos]           = useState([]);
 
   /* checkboxes del paso Nivel – viven aquí para derivar overlays en tiempo real */
@@ -1093,11 +1125,15 @@ export default function ReportFaceRadiculopatia() {
   const [committedPost, setCommittedPost] = useState([]);
   const [committedAnt,  setCommittedAnt]  = useState([]);
 
-  /* overlays de músculos derivados en tiempo real de los checkboxes */
+  /* overlays de músculos derivados en tiempo real de los checkboxes
+     Aguda pura: solo cruces, sin músculos.
+     Crónica agudizada: combina pasada 1 + pasada 2 (agudización) */
   const liveMusclePairs = useMemo(() => {
-    const cPost = computeOverlaysFromChecks([...checkedL_C, ...checkedL_L], [...checkedR_C, ...checkedR_L]);
-    return cPost;
-  }, [checkedL_C, checkedR_C, checkedL_L, checkedR_L]);
+    if (flowType === 'Aguda') return { post: [], ant: [] };
+    const allL = [...checkedL_C, ...checkedL_L, ...checkedL_C_A, ...checkedL_L_A];
+    const allR = [...checkedR_C, ...checkedR_L, ...checkedR_C_A, ...checkedR_L_A];
+    return computeOverlaysFromChecks(allL, allR);
+  }, [flowType, checkedL_C, checkedR_C, checkedL_L, checkedR_L, checkedL_C_A, checkedR_C_A, checkedL_L_A, checkedR_L_A]);
 
   /* columna roja en tiempo real – igual que showCervOverlay / showLumboOverlay en móvil */
   const liveRegionPairs = useMemo(() => {
@@ -1270,7 +1306,7 @@ export default function ReportFaceRadiculopatia() {
   const resetAll = useCallback(() => {
     setStep('A'); setEvo(null); setFlowType('');
     setSensPatologia(null); setSelectedSensitiva({ 'C6-C7': null, 'S1': null });
-    setAgudiPhase(false);
+    setAgudiPhase(false); setAgudiTargetNivel(null);
     setTextos([]);
     setCheckedL_C([]); setCheckedR_C([]);
     setCheckedL_L([]); setCheckedR_L([]);
@@ -1302,6 +1338,7 @@ export default function ReportFaceRadiculopatia() {
           checkedL_L_A={checkedL_L_A} setCheckedL_L_A={setCheckedL_L_A}
           checkedR_L_A={checkedR_L_A} setCheckedR_L_A={setCheckedR_L_A}
           agudiPhase={agudiPhase} setAgudiPhase={setAgudiPhase}
+          agudiTargetNivel={agudiTargetNivel} setAgudiTargetNivel={setAgudiTargetNivel}
         />;
       case 'E_INTENSIDAD':
         return <StepEIntensidad goTo={goTo} addText={addText} evo={evo} resetAll={resetAll} />;

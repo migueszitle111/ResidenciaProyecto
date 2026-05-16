@@ -377,11 +377,16 @@ export default function ReportFace() {
       }
     }
     // Mirror mobile: append Divisiones/Tronco/Cordones value to Ubicación row
+    // and remove them as standalone rows so they don't appear twice
+    const fusionados = new Set();
     if (map['Ubicación'] && /a nivel de\s*$/i.test(map['Ubicación'])) {
-      const sub = map['Divisiones'] ?? map['Tronco'] ?? map['Cordones'];
-      if (sub) map['Ubicación'] = map['Ubicación'].trimEnd() + ' ' + sub;
+      const subKey = ['Tronco','Cordones','Divisiones'].find(k => map[k]);
+      if (subKey) {
+        map['Ubicación'] = map['Ubicación'].trimEnd() + ' ' + map[subKey];
+        fusionados.add(subKey);
+      }
     }
-    return order.map(k => ({ k, v: map[k] }));
+    return order.filter(k => !fusionados.has(k)).map(k => ({ k, v: map[k] }));
   }, [conclusions]);
 
   /* ── Figura drag ── */
@@ -622,7 +627,11 @@ export default function ReportFace() {
         setMultiSel(p => {
           const nuevo = p.includes(n) ? p.filter(x=>x!==n) : [...p,n];
           if (nuevo.length === 0) { removeConclusion('Tronco'); }
-          else { const sel = joinConY(nuevo.map(x=>x.toLowerCase())); upsertConclusion('Tronco', ' '+sel, sel); }
+          else {
+            const base = nuevo.length === 1 ? 'tronco' : 'troncos';
+            const sel = joinConY(nuevo.map(x=>x.toLowerCase()));
+            upsertConclusion('Tronco', ` ${base} ${sel}`, `${base} ${sel}`);
+          }
           const imgs = [...new Set(nuevo.map(x=>troncos.find(t=>t.n===x)?.img).filter(Boolean))];
           setActiveOv(ov => { const sin = ov.filter(k => !troncos.map(t=>t.img).includes(k)); return [...sin, ...imgs]; });
           return nuevo;
@@ -657,7 +666,11 @@ export default function ReportFace() {
         setMultiSel(p => {
           const nuevo = p.includes(n) ? p.filter(x=>x!==n) : [...p,n];
           if (nuevo.length === 0) { removeConclusion('Cordones'); }
-          else { const sel = joinConY(nuevo.map(x=>x.toLowerCase())); upsertConclusion('Cordones', ' '+sel, sel); }
+          else {
+            const base = nuevo.length === 1 ? 'cordón' : 'cordones';
+            const sel = joinConY(nuevo.map(x=>x.toLowerCase()));
+            upsertConclusion('Cordones', ` ${base} ${sel}`, `${base} ${sel}`);
+          }
           const imgs = [...new Set(nuevo.map(x=>cordones.find(c=>c.n===x)?.img).filter(Boolean))];
           setActiveOv(ov => { const sin = ov.filter(k => !cordones.map(c=>c.img).includes(k)); return [...sin, ...imgs]; });
           return nuevo;

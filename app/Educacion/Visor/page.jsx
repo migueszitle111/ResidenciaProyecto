@@ -1,24 +1,10 @@
 'use client';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
 const BG = '#dfdfdf';
-
-/* Detecta el máximo de textura que soporta la GPU via WebGL.
-   Devuelve 4961 (420 DPI) si el hardware lo aguanta, 3508 (300 DPI) si no. */
-function getTextureSize() {
-  try {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    if (!gl) return 3508;
-    const max = gl.getParameter(gl.MAX_TEXTURE_SIZE);
-    return max >= 4961 ? 4961 : 3508;
-  } catch {
-    return 3508;
-  }
-}
 
 function VisorContent() {
   const params  = useSearchParams();
@@ -26,8 +12,11 @@ function VisorContent() {
   const pdfSrc  = params.get('pdf');
 
   const [scriptReady, setScriptReady] = useState(false);
-  const [blobUrl,     setBlobUrl]     = useState(null);   // PDF completo en memoria
-  const [loadPct,     setLoadPct]     = useState(0);      // progreso de descarga
+  const [blobUrl,     setBlobUrl]     = useState(null);
+  const [loadPct,     setLoadPct]     = useState(0);
+  const [zoomLabel,   setZoomLabel]   = useState(null);
+  const zoomTimer  = useRef(null);
+  const lastScale  = useRef(null);
 
   /* Inyectar CSS dflip */
   useEffect(() => {
@@ -43,8 +32,7 @@ function VisorContent() {
     addLink('/dflip/css/dflip.min.css', 'dflip-css');
   }, []);
 
-  /* Descargar el PDF COMPLETO antes de pasárselo a dflip.
-     Así dflip recibe un blob:// local — sin streaming parcial. */
+  /* Descargar el PDF COMPLETO antes de pasárselo a dflip */
   useEffect(() => {
     if (!pdfSrc) return;
     let cancelled = false;
@@ -70,8 +58,7 @@ function VisorContent() {
           setBlobUrl(URL.createObjectURL(blob));
           setLoadPct(100);
         }
-      } catch (e) {
-        /* fallback: usar URL directa si la descarga falla */
+      } catch {
         if (!cancelled) setBlobUrl(pdfSrc);
       }
     })();
@@ -79,20 +66,49 @@ function VisorContent() {
     return () => { cancelled = true; };
   }, [pdfSrc]);
 
-  /* Inicializar dflip cuando el script Y el blob estén listos */
+  /* Inicializar dflip + watcher de zoom */
   useEffect(() => {
     if (!blobUrl || !scriptReady) return;
+
+    /* DPI por nivel de zoom:
+       100% → minDimension=1240 maxDimension=1240  (~106 DPI, legible en página completa)
+       150% → minDimension=2480 maxDimension=2480  (~212 DPI, texto claro)
+       225% → minDimension=4961 maxDimension=4961  (~420 DPI, máxima nitidez)           */
+    const MAX_ZOOM = 2.25;
+    const LEVELS = [
+      { maxScale: 1.1,      min: 1400, max: 1400, q: 0.55 },
+      { maxScale: 1.7,      min: 2200, max: 2200, q: 0.70 },
+      { maxScale: Infinity, min: 4200, max: 4200, q: 0.85 },
+    ];
+
+    const showZoom = (scale) => {
+      const pct = Math.round(scale * 100);
+      setZoomLabel(`${pct}%`);
+      clearTimeout(zoomTimer.current);
+      zoomTimer.current = setTimeout(() => setZoomLabel(null), 1500);
+    };
+
+    const applyQuality = (cp, scale) => {
+      const lvl = LEVELS.find(l => scale <= l.maxScale);
+      if (!lvl) return;
+      if (cp.minDimension === lvl.min) return;
+      cp.minDimension     = lvl.min;
+      cp.maxDimension     = lvl.max;
+      cp.pdfRenderQuality = lvl.q;
+      cp.cache            = [];
+    };
 
     const id = setInterval(() => {
       if (window.jQuery && typeof window.jQuery.fn?.flipBook === 'function') {
         clearInterval(id);
         const el = document.getElementById('df-viewer');
         if (!el) return;
-        const texSize = getTextureSize();
-        window.jQuery(el).flipBook(blobUrl, {
-          pdfRenderQuality : 1,
-          maxTextureSize   : texSize,
-          minTextureSize   : texSize,
+
+        const $ = window.jQuery;
+        const book = $(el).flipBook(blobUrl, {
+          pdfRenderQuality : 0.55,
+          maxTextureSize   : 1400,
+          minTextureSize   : 1400,
           pixelRatio       : 1,
           zoomRatio        : 1.5,
           webgl            : false,
@@ -105,10 +121,80 @@ function VisorContent() {
           enableDownload   : false,
           waitPeriod       : 100,
         });
+
+        /* Parchear book.resize para que MAX_ZOOM se restaure después de
+           cada recalculo interno — dflip sobreescribe maxZoom en cada resize */
+        const origResize = book.resize.bind(book);
+        book.resize = function () {
+          origResize();
+          const cp = book.contentProvider;
+          if (cp) cp.maxZoom = MAX_ZOOM;
+        };
+
+        /* Esperar a que dflip cree los botones de zoom en el DOM */
+        const uiWaitId = setInterval(() => {
+          const zoomInBtn  = el.querySelector('[class*="zoomin"]');
+          const zoomOutBtn = el.querySelector('[class*="zoomout"]');
+          if (!zoomInBtn || !zoomOutBtn) return;
+          clearInterval(uiWaitId);
+
+          /* Interceptar clicks de zoom ANTES de que dflip procese el evento.
+             En el handler calculamos el scale futuro y aplicamos la calidad
+             correspondiente — así dflip renderiza ya con la textura correcta. */
+          const onZoomClick = (e, delta) => {
+            const cp = book?.contentProvider;
+            if (!cp) return;
+            cp.maxZoom = MAX_ZOOM;
+            const current = cp.zoomScale ?? 1;
+            /* Bloquear zoomIn si ya estamos en el máximo */
+            if (delta > 0 && current >= MAX_ZOOM - 0.01) {
+              e.stopImmediatePropagation();
+              e.preventDefault();
+              return;
+            }
+            const next = delta > 0
+              ? Math.min(current * 1.5, MAX_ZOOM)
+              : Math.max(current / 1.5, 1);
+            applyQuality(cp, next);
+            showZoom(next);
+            lastScale.current = next;
+          };
+
+          zoomInBtn .addEventListener('click', (e) => onZoomClick(e, +1), true);
+          zoomOutBtn.addEventListener('click', (e) => onZoomClick(e, -1), true);
+
+          el._zoomInBtn  = zoomInBtn;
+          el._zoomOutBtn = zoomOutBtn;
+
+          /* Watcher liviano: solo fija maxZoom y actualiza indicador si
+             el zoom cambia por rueda de ratón o pellizco táctil */
+          const watchId = setInterval(() => {
+            const cp = book?.contentProvider;
+            if (!cp) return;
+            cp.maxZoom = MAX_ZOOM;
+            const scale = cp.zoomScale ?? 1;
+            if (scale !== lastScale.current) {
+              lastScale.current = scale;
+              showZoom(scale);
+              applyQuality(cp, scale);
+              cp.review('wheel-quality');
+            }
+          }, 100);
+
+          el._zoomWatchId = watchId;
+        }, 100);
+
+        el._uiWaitId = uiWaitId;
       }
     }, 100);
 
-    return () => clearInterval(id);
+    return () => {
+      clearInterval(id);
+      const el = document.getElementById('df-viewer');
+      if (el?._uiWaitId)   clearInterval(el._uiWaitId);
+      if (el?._zoomWatchId) clearInterval(el._zoomWatchId);
+      clearTimeout(zoomTimer.current);
+    };
   }, [blobUrl, scriptReady]);
 
   if (!pdfSrc) {
@@ -133,9 +219,9 @@ function VisorContent() {
           autoCreate       : false,
           skin             : 'light',
           webgl            : false,
-          pdfRenderQuality : 1,
-          maxTextureSize   : 3508,
-          minTextureSize   : 3508,
+          pdfRenderQuality : 0.55,
+          maxTextureSize   : 1400,
+          minTextureSize   : 1400,
           pixelRatio       : 1,
           zoomRatio        : 1.5,
           backgroundColor  : '${BG}',
@@ -149,6 +235,29 @@ function VisorContent() {
         strategy="afterInteractive"
         onLoad={() => setScriptReady(true)}
       />
+
+      {/* Indicador flotante de zoom */}
+      {zoomLabel && (
+        <div style={{
+          position      : 'fixed',
+          bottom        : 72,
+          left          : '50%',
+          transform     : 'translateX(-50%)',
+          zIndex        : 9999,
+          background    : 'rgba(0,0,0,0.65)',
+          color         : '#fff',
+          fontSize      : 13,
+          fontWeight    : 600,
+          letterSpacing : '0.04em',
+          padding       : '5px 14px',
+          borderRadius  : 20,
+          backdropFilter: 'blur(6px)',
+          pointerEvents : 'none',
+          transition    : 'opacity 0.3s',
+        }}>
+          {zoomLabel}
+        </div>
+      )}
 
       {/* Boton X flotante */}
       <button

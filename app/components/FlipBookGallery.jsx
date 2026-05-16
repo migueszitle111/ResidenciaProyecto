@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
@@ -33,7 +33,10 @@ function parseThumbs() {
 }
 
 function FlipBookGallery() {
-  const parsed = useRef(false);
+  const parsed  = useRef(false);
+  const timerRef = useRef(null);
+  /* mountKey fuerza re-montaje de los thumbs al volver a la página */
+  const [mountKey, setMountKey] = useState(0);
 
   /* Inyectar CSS dflip */
   useEffect(() => {
@@ -49,41 +52,42 @@ function FlipBookGallery() {
     addLink('/dflip/css/dflip.min.css', 'dflip-css');
   }, []);
 
-  /* Re-parsear thumbs cada vez que la pestaña vuelve a ser visible
-     (el usuario cierra/minimiza la pestaña del visor y regresa aquí) */
+  /* Re-montar + re-parsear cuando el usuario vuelve a esta pestaña */
   useEffect(() => {
-    const reParse = () => {
-      if (document.visibilityState === 'visible') {
-        parsed.current = false;   // forzar re-parseo
-        tryParse();
-      }
-    };
-
     const tryParse = () => {
       if (parsed.current) return;
       const ok = parseThumbs();
       if (!ok) {
-        /* dflip aún no ha cargado — reintentar */
-        setTimeout(tryParse, 200);
+        timerRef.current = setTimeout(tryParse, 200);
       } else {
         parsed.current = true;
       }
     };
 
+    const reParse = () => {
+      if (document.visibilityState !== 'visible') return;
+      clearTimeout(timerRef.current);
+      parsed.current = false;
+      /* Incrementar key obliga a React a desmontar y remontar los thumbs,
+         limpiando cualquier mutación que dflip haya hecho al DOM */
+      setMountKey(k => k + 1);
+      tryParse();
+    };
+
     /* Primera carga */
     tryParse();
 
-    /* Al volver de otra pestaña */
     document.addEventListener('visibilitychange', reParse);
     window.addEventListener('focus', reParse);
 
     return () => {
+      clearTimeout(timerRef.current);
       document.removeEventListener('visibilitychange', reParse);
       window.removeEventListener('focus', reParse);
     };
   }, []);
 
-  /* Interceptar click en capture antes de que dflip abra el visor inline */
+  /* Interceptar click antes de que dflip abra el visor inline */
   useEffect(() => {
     const handler = (e) => {
       const thumb = e.target.closest('[data-pdf]');
@@ -103,17 +107,18 @@ function FlipBookGallery() {
       <Script src="/dflip/js/libs/jquery.min.js" strategy="afterInteractive" />
       <Script src="/dflip/js/dflip.min.js" strategy="afterInteractive" />
 
-      <div className="mt-8 flex flex-wrap justify-center gap-8">
+      <div key={mountKey} className="mt-8 flex flex-wrap justify-center gap-8">
         {BOOKS.map(({ pdf, label }) => (
-          <div
-            key={pdf}
-            data-pdf={pdf}
-            className="_df_thumb cursor-pointer"
-            source={pdf}
-            thumb="/dflip/images/book-template.png"
-            style={{ textAlign: 'center' }}
-          >
-            {label}
+          /* El wrapper captura el click y muestra el label debajo del thumb */
+          <div key={pdf} data-pdf={pdf} className="cursor-pointer flex flex-col items-center gap-2">
+            <div
+              className="_df_thumb"
+              source={pdf}
+              thumb="/dflip/images/book-template.png"
+            />
+            <span style={{ color: '#fff', fontSize: '0.9rem', fontWeight: 500 }}>
+              {label}
+            </span>
           </div>
         ))}
       </div>

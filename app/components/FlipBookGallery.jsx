@@ -5,7 +5,7 @@ import Script from 'next/script';
 
 const BOOKS = [
   { pdf: '/pdfs/POTENCIALESEVOCADOSmEDXpro.pdf',          label: 'Potenciales Evocados' },
-  { pdf: '/pdfs/ESTUDIOSDECONDUCCIONNERVIOSAmEDXpro.pdf', label: 'Conduccion Nerviosa'  },
+  { pdf: '/pdfs/ESTUDIOSDECONDUCCIONNERVIOSAmEDXpro.pdf', label: 'Conducción Nerviosa'  },
 ];
 
 const preConfig = `

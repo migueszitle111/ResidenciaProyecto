@@ -330,7 +330,7 @@ export default async function Page({ params }) {
           <section className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
             <MetaBadge label="Estudio" value={link.meta?.studyLabel || link.meta?.study} />
             <MetaBadge label="Paciente" value={link.meta?.patient} />
-            <MetaBadge label="Médico" value={link.meta?.doctor} />
+            <MetaBadgeDoctor label="Médico" value={link.meta?.doctor} logoUrl={link.meta?.doctorLogo} />
           </section>
 
           {/* Mensaje opcional */}
@@ -484,6 +484,27 @@ function MetaBadge({ label, value }) {
     <div className="rounded-2xl border border-slate-300 bg-white px-4 py-3 shadow-sm">
       <div className="text-[11px] uppercase tracking-wide text-slate-500">{label}</div>
       <div className="mt-0.5 text-sm font-semibold text-slate-900">{value || '—'}</div>
+    </div>
+  );
+}
+
+function MetaBadgeDoctor({ label, value, logoUrl }) {
+  return (
+    <div className="rounded-2xl border border-slate-300 bg-white px-4 py-3 shadow-sm">
+      <div className="text-[11px] uppercase tracking-wide text-slate-500">{label}</div>
+      <div className="mt-1 flex items-center gap-2">
+        {logoUrl ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={logoUrl}
+            alt="Logo médico"
+            width={32}
+            height={32}
+            className="w-8 h-8 rounded-full object-cover border border-slate-200 shrink-0"
+          />
+        ) : null}
+        <span className="text-sm font-semibold text-slate-900 leading-tight">{value || '—'}</span>
+      </div>
     </div>
   );
 }

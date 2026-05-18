@@ -365,7 +365,7 @@ function toCircleDataUrl(src) {
 const PDF_LAM_W = 690;
 const PDF_LAM_H = 620;
 
-export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [], figuras = [], laminaSize = { w: 690, h: 620 }, listaVisual = [], imgLista = null, comentarioLista = '', onBack: _onBack, onReset: _onReset, isOpen = false, onClose: notifyClose }) {
+export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [], figuras = [], laminaSize = { w: 690, h: 620 }, listaVisual = [], imgLista = null, comentarioLista = '', onBack: _onBack, onReset, isOpen = false, onClose: notifyClose }) {
   const { data: session } = useSession();
 
   const [showPlantillaModal, setShowPlantillaModal] = useState(false);
@@ -445,8 +445,8 @@ export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [],
 
   const handleAbrirPdf = () => { if (pdfUrl) window.open(pdfUrl, '_blank'); };
   const handleOpenLinkUploader = () => { setShowSuccess(false); setShowLinkUploader(true); };
-  const closeSuccess = () => { setShowSuccess(false); if (pdfUrl) { window.URL.revokeObjectURL(pdfUrl); setPdfUrl(''); } setPdfBlob(null); };
-  const closeLinkUploader = () => setShowLinkUploader(false);
+  const closeSuccess = () => { setShowSuccess(false); if (pdfUrl) { window.URL.revokeObjectURL(pdfUrl); setPdfUrl(''); } setPdfBlob(null); onReset?.(); };
+  const closeLinkUploader = () => { setShowLinkUploader(false); onReset?.(); };
 
   return (
     <>

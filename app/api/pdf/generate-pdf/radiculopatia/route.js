@@ -149,8 +149,9 @@ async function buildPage1(pdfDoc, {
     const logoImg   = await embedImg(pdfDoc, logoBytes, dataUrlMime(userData.imageUrl));
     if (logoImg) {
       page.drawImage(logoImg, {
-        x: PW - MARGIN - LOGO_SZ, y: HDR_Y - 10,
+        x: PW - MARGIN - LOGO_SZ - 20, y: HDR_Y - 30,
         width: LOGO_SZ, height: LOGO_SZ,
+        opacity: 0.55,
       });
     }
   }
@@ -368,7 +369,7 @@ async function buildPage2(pdfDoc, {
   const hasPlantilla = plantillaId && plantillaId !== 'none';
   const TOP_Y    = hasPlantilla ? PH - 90 : PH - 75;
   const BOT_Y    = hasPlantilla ? 40 : 20;
-  const MARGIN_L = 95;
+  const MARGIN_L = 184;
   const MARGIN_R = 108;
   const CONTENT_W = PW - MARGIN_L - MARGIN_R;
   const COL_GAP    = 40;
@@ -378,9 +379,9 @@ async function buildPage2(pdfDoc, {
   const LX         = MARGIN_L;
   const RX         = LX + COL_W + COL_GAP;
 
-  // Left col: Estudio
+  // Left col: Radiculopatia
   let ly = TOP_Y - 16;
-  page.drawText('Estudio', {
+  page.drawText('Radiculopatía', {
     x: LX, y: ly,
     font: fontBold, size: 9, color: rgb(0.07, 0.07, 0.07),
   });
@@ -532,7 +533,7 @@ export async function POST(req) {
       fontRegular, fontBold, fontLight,
     });
 
-    const hayPag2 = (comentarioLista && comentarioLista.trim().length > 0) || !!imgListaBytes;
+    const hayPag2 = (listaVisual && listaVisual.length > 0) || (comentarioLista && comentarioLista.trim().length > 0) || !!imgListaBytes;
     if (hayPag2) {
       await buildPage2(pdfDoc, {
         listaVisual, comentarioLista, imgListaBytes, plantillaId,

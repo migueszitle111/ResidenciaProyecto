@@ -5,8 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CRANEALES, OTROS } from "../utils/cirugiaUtils";
 import { buildMonitoreoPdf, buildReportFileName, toSafeToken } from "../utils/pdfGenerator";
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://backendmedxpro-tef2.onrender.com';
-
 const STORAGE_KEY = (tipo, paciente) =>
   `@formulario_monitoreo_${tipo}_${(paciente||'').replace(/\s+/g,'_')}`;
 
@@ -52,6 +50,74 @@ function emptyFinales(esCraneal) {
 
 // ─── Sub-componentes ──────────────────────────────────────────────────────────
 
+/* ── Modal de recorte (igual que en Plexopatia) ── */
+function CropModal({ src, onConfirm, onClose }) {
+  const imgRef = useRef(null);
+  const canvasRef = useRef(null);
+  const [sel, setSel] = useState(null);
+  const [drawing, setDrawing] = useState(false);
+  const startRef = useRef({ x: 0, y: 0 });
+
+  // Coordenadas relativas al elemento <img> renderizado (no al div contenedor)
+  const getImgPos = (e) => {
+    const r = imgRef.current.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  };
+
+  const onMouseDown = (e) => {
+    const pos = getImgPos(e);
+    startRef.current = pos;
+    setSel({ x: pos.x, y: pos.y, w: 0, h: 0 });
+    setDrawing(true);
+  };
+  const onMouseMove = (e) => {
+    if (!drawing) return;
+    const pos = getImgPos(e);
+    setSel({ x: Math.min(startRef.current.x, pos.x), y: Math.min(startRef.current.y, pos.y), w: Math.abs(pos.x - startRef.current.x), h: Math.abs(pos.y - startRef.current.y) });
+  };
+  const onMouseUp = () => setDrawing(false);
+
+  const applyCrop = () => {
+    if (!sel || sel.w < 5 || sel.h < 5) { onClose(); return; }
+    const img = imgRef.current;
+    // Escalar de píxeles de pantalla a píxeles naturales de la imagen
+    const renderedW = img.getBoundingClientRect().width;
+    const renderedH = img.getBoundingClientRect().height;
+    const scaleX = img.naturalWidth / renderedW;
+    const scaleY = img.naturalHeight / renderedH;
+    const canvas = canvasRef.current;
+    canvas.width  = Math.round(sel.w * scaleX);
+    canvas.height = Math.round(sel.h * scaleY);
+    canvas.getContext('2d').drawImage(
+      img,
+      sel.x * scaleX, sel.y * scaleY, sel.w * scaleX, sel.h * scaleY,
+      0, 0, canvas.width, canvas.height
+    );
+    onConfirm(canvas.toDataURL('image/png'));
+  };
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 10200, background: 'rgba(0,0,0,0.9)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+      <p style={{ color: '#fff', fontSize: 13, marginBottom: 10 }}>Arrastra para seleccionar el área a recortar</p>
+      {/* La posición del sel se calcula relativa al img, así que ponemos el overlay sobre el img */}
+      <div style={{ position: 'relative', display: 'inline-block', cursor: 'crosshair', userSelect: 'none' }}
+        onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onMouseUp}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img ref={imgRef} src={src} alt="crop" draggable={false}
+          style={{ display: 'block', maxWidth: '85vw', maxHeight: '65vh', objectFit: 'contain' }} />
+        {sel && sel.w > 2 && sel.h > 2 && (
+          <div style={{ position: 'absolute', left: sel.x, top: sel.y, width: sel.w, height: sel.h, border: '2px dashed #f97316', background: 'rgba(249,115,22,0.15)', pointerEvents: 'none' }} />
+        )}
+      </div>
+      <canvas ref={canvasRef} style={{ display: 'none' }} />
+      <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
+        <button onClick={applyCrop} style={{ padding: '9px 28px', borderRadius: 10, border: 'none', background: '#f97316', color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>Aplicar recorte</button>
+        <button onClick={onClose} style={{ padding: '9px 28px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.2)', background: 'transparent', color: '#fff', fontSize: 14, cursor: 'pointer' }}>Cancelar</button>
+      </div>
+    </div>
+  );
+}
+
 function Campo({ label, value, onChange, placeholder, type = 'text', required }) {
   return (
     <div>
@@ -69,16 +135,30 @@ function Campo({ label, value, onChange, placeholder, type = 'text', required })
   );
 }
 
+const MAX_IMAGENES = 5;
+
 function SubRegistroField({ label, value, onChange }) {
   const fileRef = useRef();
+  const [cropSrc, setCropSrc] = useState(null);
+  const [cropIdx, setCropIdx] = useState(null);
 
   const handleImages = e => {
-    const files = Array.from(e.target.files);
+    const disponibles = MAX_IMAGENES - value.imagenes.length;
+    if (disponibles <= 0) return;
+    const files = Array.from(e.target.files).slice(0, disponibles);
     Promise.all(files.map(f => new Promise(res => {
       const r = new FileReader();
       r.onload = () => res(r.result);
       r.readAsDataURL(f);
     }))).then(uris => onChange({ ...value, imagenes: [...value.imagenes, ...uris] }));
+  };
+
+  const abrirCrop = (src, i) => { setCropSrc(src); setCropIdx(i); };
+  const aplicarCrop = (croppedDataUrl) => {
+    const nuevas = [...value.imagenes];
+    if (cropIdx !== null) nuevas[cropIdx] = croppedDataUrl;
+    onChange({ ...value, imagenes: nuevas });
+    setCropSrc(null); setCropIdx(null);
   };
 
   return (
@@ -93,24 +173,39 @@ function SubRegistroField({ label, value, onChange }) {
       />
       <div className="mt-2 flex flex-wrap gap-2">
         {value.imagenes.map((src, i) => (
-          <div key={i} className="relative w-16 h-16">
+          <div key={i} className="relative w-16 h-16 group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={src} alt="" className="w-full h-full object-cover rounded-md" />
+            {/* Botón recortar */}
+            <button
+              onClick={() => abrirCrop(src, i)}
+              title="Recortar"
+              className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-[9px] py-0.5 rounded-b-md opacity-0 group-hover:opacity-100 transition-opacity text-center"
+            >✂ Editar</button>
             <button
               onClick={() => onChange({ ...value, imagenes: value.imagenes.filter((_, j) => j !== i) })}
               className="absolute -top-1 -right-1 bg-black text-white rounded-full w-4 h-4 text-xs flex items-center justify-center"
             >×</button>
           </div>
         ))}
-        <button
-          onClick={() => fileRef.current.click()}
-          className="w-16 h-16 border border-dashed border-orange-500/50 rounded-md flex items-center justify-center text-orange-400 hover:border-orange-500 transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-          </svg>
-        </button>
+        {value.imagenes.length < MAX_IMAGENES && (
+          <button
+            onClick={() => fileRef.current.click()}
+            className="w-16 h-16 border border-dashed border-orange-500/50 rounded-md flex items-center justify-center text-orange-400 hover:border-orange-500 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+          </button>
+        )}
+        {value.imagenes.length >= MAX_IMAGENES && (
+          <p className="text-slate-600 text-[10px] self-center">Máx. {MAX_IMAGENES} imágenes</p>
+        )}
         <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleImages} />
       </div>
+      {cropSrc && (
+        <CropModal src={cropSrc} onConfirm={aplicarCrop} onClose={() => { setCropSrc(null); setCropIdx(null); }} />
+      )}
     </div>
   );
 }
@@ -198,153 +293,6 @@ function PasoIndicador({ pasoActual }) {
           </div>
         );
       })}
-    </div>
-  );
-}
-
-// ─── Canvas de firma digital ─────────────────────────────────────────────────
-const CSS_W = 400;
-const CSS_H = 180;
-
-function FirmaCanvas({ onConfirmar, onCancelar }) {
-  const canvasRef = useRef(null);
-  const drawing = useRef(false);
-  const lastPos = useRef(null);
-  const dprRef = useRef(1);
-
-  // Inicializar canvas con DPR al montar
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const dpr = window.devicePixelRatio || 1;
-    dprRef.current = dpr;
-    canvas.width = CSS_W * dpr;
-    canvas.height = CSS_H * dpr;
-    const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, CSS_W, CSS_H);
-  }, []);
-
-  const getPos = (e) => {
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    // Las coordenadas del evento ya están en CSS pixels — no dividir por DPR
-    if (e.touches && e.touches.length > 0) {
-      return {
-        x: (e.touches[0].clientX - rect.left) * (CSS_W / rect.width),
-        y: (e.touches[0].clientY - rect.top) * (CSS_H / rect.height),
-      };
-    }
-    return {
-      x: (e.clientX - rect.left) * (CSS_W / rect.width),
-      y: (e.clientY - rect.top) * (CSS_H / rect.height),
-    };
-  };
-
-  const startDraw = (e) => {
-    e.preventDefault();
-    drawing.current = true;
-    const pos = getPos(e);
-    lastPos.current = pos;
-    // Punto inicial
-    const ctx = canvasRef.current.getContext('2d');
-    ctx.beginPath();
-    ctx.arc(pos.x, pos.y, 0.8, 0, Math.PI * 2);
-    ctx.fillStyle = '#000';
-    ctx.fill();
-  };
-
-  const draw = (e) => {
-    e.preventDefault();
-    if (!drawing.current) return;
-    const ctx = canvasRef.current.getContext('2d');
-    const pos = getPos(e);
-    ctx.beginPath();
-    ctx.moveTo(lastPos.current.x, lastPos.current.y);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.strokeStyle = '#000';
-    ctx.lineWidth = 1.8;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
-    ctx.stroke();
-    lastPos.current = pos;
-  };
-
-  const endDraw = (e) => {
-    e?.preventDefault();
-    drawing.current = false;
-    lastPos.current = null;
-  };
-
-  const limpiar = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    // Resetear la transformación para limpiar correctamente
-    ctx.save();
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.restore();
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, CSS_W, CSS_H);
-  };
-
-  const confirmar = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    // Verificar que se haya dibujado algo (píxeles negros)
-    let hasContent = false;
-    for (let i = 0; i < imgData.length; i += 4) {
-      if (imgData[i] < 100 && imgData[i + 3] > 100) { hasContent = true; break; }
-    }
-    if (!hasContent) return;
-    // Exportar con fondo blanco garantizado
-    const exportCanvas = document.createElement('canvas');
-    exportCanvas.width = CSS_W;
-    exportCanvas.height = CSS_H;
-    const ectx = exportCanvas.getContext('2d');
-    ectx.fillStyle = 'white';
-    ectx.fillRect(0, 0, CSS_W, CSS_H);
-    ectx.drawImage(canvas, 0, 0, CSS_W, CSS_H);
-    const dataUrl = exportCanvas.toDataURL('image/png');
-    onConfirmar(dataUrl);
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl">
-        <h3 className="text-gray-800 font-bold text-lg mb-4 text-center">Dibuje su firma</h3>
-        <div className="border-2 border-gray-300 rounded-xl overflow-hidden mb-4" style={{ touchAction: 'none' }}>
-          <canvas
-            ref={canvasRef}
-            style={{ width: CSS_W, height: CSS_H, display: 'block', cursor: 'crosshair', maxWidth: '100%' }}
-            onMouseDown={startDraw}
-            onMouseMove={draw}
-            onMouseUp={endDraw}
-            onMouseLeave={endDraw}
-            onTouchStart={startDraw}
-            onTouchMove={draw}
-            onTouchEnd={endDraw}
-          />
-        </div>
-        <div className="flex gap-3">
-          <button onClick={onCancelar}
-            className="flex-1 border border-gray-300 text-gray-600 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors">
-            Cancelar
-          </button>
-          <button onClick={limpiar}
-            className="flex-1 border border-gray-300 text-gray-600 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors">
-            Borrar
-          </button>
-          <button onClick={confirmar}
-            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2.5 rounded-xl text-sm font-semibold transition-colors">
-            Confirmar
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
@@ -540,10 +488,6 @@ export default function FormularioReporte({ nombreCirugia }) {
   // Paso actual: 0=Datos, 1=Basales, 2=Procedimiento, 3=Finales, 4=Conclusión, 5=Agregar
   const [paso, setPaso] = useState(0);
 
-  // Datos usuario
-  const [userData, setUserData] = useState(null);
-  const [doctorLogoUrl, setDoctorLogoUrl] = useState(null);
-
   // Formulario
   const [form, setForm] = useState({
     nombrePaciente: '', edad: '',
@@ -558,9 +502,9 @@ export default function FormularioReporte({ nombreCirugia }) {
     tendenciasFotos: [],
   });
 
-  // Firma digital
-  const [firmaBase64, setFirmaBase64]     = useState('');
-  const [firmaModalVisible, setFirmaModalVisible] = useState(false);
+  // Firma (imagen cargada)
+  const [firmaBase64, setFirmaBase64] = useState('');
+  const firmaInputRef = useRef(null);
 
   // Opciones de adjuntos
   const [incluirProtocolo,    setIncluirProtocolo]    = useState(false);
@@ -580,26 +524,6 @@ export default function FormularioReporte({ nombreCirugia }) {
   const [showGenerarModal,   setShowGenerarModal]   = useState(false);  // Generar Informe (Link/PDF)
   const [plantillaCallback,  setPlantillaCallback]  = useState(null);   // función a ejecutar tras elegir plantilla
   const [showPlantillaModal, setShowPlantillaModal] = useState(false);  // Selector Con/Sin plantilla
-
-  // ── Cargar datos del usuario ──
-  useEffect(() => {
-    if (!session?.user?.email) return;
-    const token = session.user.backendToken || session.accessToken;
-    if (!token) return;
-    fetch(`${BACKEND_URL}/userdata`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token }),
-    })
-      .then(r => r.json())
-      .then(res => {
-        if (res?.data) {
-          setUserData(res.data);
-          if (res.data.imageUrl) setDoctorLogoUrl(res.data.imageUrl);
-        }
-      })
-      .catch(() => {});
-  }, [session]);
 
   // ── Auto-guardar borrador ──
   useEffect(() => {
@@ -662,18 +586,18 @@ export default function FormularioReporte({ nombreCirugia }) {
   // ── Construir datos del reporte ──
   const buildReporteData = useCallback(() => ({
     ...form,
-    usuarioNombre:       userData?.name      || session?.user?.name?.split(' ')[0] || '',
-    usuarioApellido:     userData?.lastname  || session?.user?.name?.split(' ').slice(1).join(' ') || '',
-    usuarioCorreo:       userData?.email     || session?.user?.email || '',
-    usuarioTelefono:     userData?.phone     || '',
-    usuarioCedula:       userData?.idprofessional || '',
-    usuarioEspecialidad: userData?.specialty || '',
-    usuarioLogo:         doctorLogoUrl       || userData?.imageUrl || '',
+    usuarioNombre:       session?.user?.name      || '',
+    usuarioApellido:     session?.user?.lastname  || '',
+    usuarioCorreo:       session?.user?.email     || '',
+    usuarioTelefono:     '',
+    usuarioCedula:       session?.user?.idprofessional || '',
+    usuarioEspecialidad: session?.user?.specialty || '',
+    usuarioLogo:         session?.user?.imageUrl  || '',
     firmaBase64:         firmaBase64 || '',
     incluirProtocolo,
     incluirProcedimiento,
     incluirModalidades,
-  }), [form, userData, session, doctorLogoUrl, firmaBase64, incluirProtocolo, incluirProcedimiento, incluirModalidades]);
+  }), [form, session, firmaBase64, incluirProtocolo, incluirProcedimiento, incluirModalidades]);
 
   // ── Descarga PDF ──
   const handleDescargarPdf = async (usarPlantilla) => {
@@ -733,8 +657,6 @@ export default function FormularioReporte({ nombreCirugia }) {
         `Paciente: ${form.nombrePaciente || '—'}`,
         `Médico: ${doctorName || '—'}`,
         `Tipo de cirugía: ${form.tipoCirugia}`,
-        '',
-        `Conclusión: ${form.conclusion}`,
       ].join('\n');
 
       // Rutas relativas → funciona en local y en producción sin CORS
@@ -744,7 +666,7 @@ export default function FormularioReporte({ nombreCirugia }) {
         body: JSON.stringify({
           title: finalTitle, message: finalMsg, expiresInSeconds: expSeconds,
           patient: form.nombrePaciente || null, doctor: doctorName || null,
-          studyType, doctorLogo: doctorLogoUrl || null,
+          studyType, doctorLogo: session?.user?.imageUrl || null,
           meta: { patient: form.nombrePaciente, doctor: doctorName, study: studyType, studyType },
         }),
       });
@@ -1106,37 +1028,55 @@ export default function FormularioReporte({ nombreCirugia }) {
               {/* Información del Médico y Firma */}
               <div className="bg-[#0d0d0d] rounded-xl p-5 border border-white/10 mb-4">
                 <div className="flex items-start justify-between gap-4">
-                  {/* Info médico */}
-                  <div className="flex-1">
+                  {/* Info médico completa */}
+                  <div className="flex-1 flex flex-col gap-0.5">
                     <p className="text-white text-sm font-semibold">
-                      Dr. {userData?.name || session?.user?.name?.split(' ')[0] || ''} {userData?.lastname || session?.user?.name?.split(' ').slice(1).join(' ') || ''}
+                      Dr. {session?.user?.name || ''} {session?.user?.lastname || ''}
                     </p>
-                    {userData?.specialty && (
-                      <p className="text-slate-400 text-xs mt-0.5">{userData.specialty}</p>
+                    {session?.user?.specialty && (
+                      <p className="text-slate-400 text-xs">{session.user.specialty}</p>
                     )}
-                    {userData?.idprofessional && (
-                      <p className="text-slate-500 text-xs mt-0.5">Céd. {userData.idprofessional}</p>
+                    {session?.user?.idprofessional && (
+                      <p className="text-slate-500 text-xs">Céd. {session.user.idprofessional}</p>
+                    )}
+                    {session?.user?.email && (
+                      <p className="text-slate-500 text-xs">{session.user.email}</p>
                     )}
                   </div>
-                  {/* Firma */}
+                  {/* Imagen de firma */}
                   <div className="flex flex-col items-center gap-2">
                     <p className="text-slate-400 text-xs">Firma</p>
                     {firmaBase64 ? (
                       <div className="flex flex-col items-center gap-1">
                         <div className="bg-white rounded-lg p-1">
-                          <img src={firmaBase64} alt="Firma" className="h-12 object-contain" style={{ maxWidth: 120 }} />
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={firmaBase64} alt="Firma" className="h-12 object-contain" style={{ maxWidth: 140 }} />
                         </div>
                         <button onClick={() => setFirmaBase64('')}
                           className="text-xs text-orange-400 hover:text-orange-300 border border-orange-500/40 px-2 py-1 rounded-lg transition-colors">
-                          Rehacer
+                          Cambiar
                         </button>
                       </div>
                     ) : (
-                      <button onClick={() => setFirmaModalVisible(true)}
+                      <button onClick={() => firmaInputRef.current?.click()}
                         className="border border-dashed border-orange-500/50 text-orange-400 hover:border-orange-500 text-xs px-4 py-3 rounded-xl transition-colors min-w-[120px] text-center">
-                        Toque para firmar
+                        Cargar firma
                       </button>
                     )}
+                    <input
+                      ref={firmaInputRef}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={e => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        const r = new FileReader();
+                        r.onload = () => setFirmaBase64(r.result);
+                        r.readAsDataURL(file);
+                        e.target.value = '';
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -1252,14 +1192,6 @@ export default function FormularioReporte({ nombreCirugia }) {
 
         </motion.div>
       </AnimatePresence>
-
-      {/* ── Modal canvas de firma ── */}
-      {firmaModalVisible && (
-        <FirmaCanvas
-          onConfirmar={(dataUrl) => { setFirmaBase64(dataUrl); setFirmaModalVisible(false); }}
-          onCancelar={() => setFirmaModalVisible(false)}
-        />
-      )}
 
       {/* ── Modal Generar Informe (Link / PDF / Cancelar) ── */}
       {showGenerarModal && (

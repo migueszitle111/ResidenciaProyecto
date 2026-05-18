@@ -936,15 +936,23 @@ function StepDERMATOMAS({ goTo, removeConclusion, addConclusion, setStep, resetA
 function StepF_sup({ goTo, removeConclusion, addConclusion, setStep, resetAll, side, severity, addOverlays }) {
   const topoValueKey = (suffix) => side === 'bilateral' ? `bilateral_${suffix}` : `${side}${suffix}`;
 
-  const applyTopSup = (topoKey, title) => {
+  const ORDER_SUP = ['corticals', 'subcorticals', 'cervicals', 'perifericos'];
+
+  const buildCascadeKeys = (topoKey) => {
     const suf = severity ? `_${severity}` : '_leve';
+    const idx = ORDER_SUP.indexOf(topoKey);
+    const levels = ORDER_SUP.slice(0, idx + 1);
     if (side === 'bilateral') {
-      addOverlays([`izquierdo${topoKey}Alterada${suf}`, `derecho${topoKey}Alterada${suf}`]);
+      return levels.flatMap(k => [`izquierdo${k}Alterada${suf}`, `derecho${k}Alterada${suf}`]);
     } else if (side === 'izquierdo') {
-      addOverlays([`izquierdo${topoKey}Alterada${suf}`]);
+      return levels.map(k => `izquierdo${k}Alterada${suf}`);
     } else {
-      addOverlays([`derecho${topoKey}Alterada${suf}`]);
+      return levels.map(k => `derecho${k}Alterada${suf}`);
     }
+  };
+
+  const applyTopSup = (topoKey, title) => {
+    addOverlays(buildCascadeKeys(topoKey));
     addConclusion({ value: topoValueKey(topoKey), title });
     goTo('H');
   };
@@ -975,15 +983,23 @@ function StepF_sup({ goTo, removeConclusion, addConclusion, setStep, resetAll, s
 function StepF_inf({ goTo, removeConclusion, addConclusion, setStep, resetAll, side, severity, addOverlays }) {
   const topoValueKey = (suffix) => side === 'bilateral' ? `bilateral_${suffix}` : `${side}${suffix}`;
 
-  const applyTopInf = (topoKey, title) => {
+  const ORDER_INF = ['corticali', 'subcorticali', 'toracicoi', 'lumbosacroi', 'perifericoi'];
+
+  const buildCascadeKeys = (topoKey) => {
     const suf = severity ? `_${severity}` : '_leve';
+    const idx = ORDER_INF.indexOf(topoKey);
+    const levels = ORDER_INF.slice(0, idx + 1);
     if (side === 'bilateral') {
-      addOverlays([`izquierdo${topoKey}Alterada${suf}`, `derecho${topoKey}Alterada${suf}`]);
+      return levels.flatMap(k => [`izquierdo${k}Alterada${suf}`, `derecho${k}Alterada${suf}`]);
     } else if (side === 'izquierdo') {
-      addOverlays([`izquierdo${topoKey}Alterada${suf}`]);
+      return levels.map(k => `izquierdo${k}Alterada${suf}`);
     } else {
-      addOverlays([`derecho${topoKey}Alterada${suf}`]);
+      return levels.map(k => `derecho${k}Alterada${suf}`);
     }
+  };
+
+  const applyTopInf = (topoKey, title) => {
+    addOverlays(buildCascadeKeys(topoKey));
     addConclusion({ value: topoValueKey(topoKey), title });
     goTo('H');
   };

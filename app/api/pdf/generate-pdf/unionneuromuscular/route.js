@@ -169,6 +169,7 @@ async function buildPage1(pdfDoc, {
       page.drawImage(logoImg, {
         x: LOGO_BOX_X, y: LOGO_BOX_Y,
         width: LOGO_BOX_SZ, height: LOGO_BOX_SZ,
+        opacity: 0.55,
       });
     }
   }

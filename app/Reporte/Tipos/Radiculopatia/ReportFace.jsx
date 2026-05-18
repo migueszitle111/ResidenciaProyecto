@@ -1300,7 +1300,7 @@ export default function ReportFaceRadiculopatia() {
     return ORDER.filter(lbl => dict[lbl]).map(lbl => formatLista(lbl, dict[lbl]));
   }, [textos]);
 
-  const listaVisual = useMemo(() => listaRender.map(({ label, txt }) => ({ k: `${label}_${txt}`, v: `${label}: ${txt}` })), [listaRender]);
+  const listaVisual = useMemo(() => listaRender.map(({ label, txt }) => ({ k: label, v: txt })), [listaRender]);
 
   /* --- reset --- */
   const resetAll = useCallback(() => {

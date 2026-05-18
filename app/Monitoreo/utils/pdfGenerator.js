@@ -52,7 +52,11 @@ function toSingleLine(text) {
 }
 
 function sanitizeData(value) {
-  if (typeof value === 'string') return sanitizeText(value);
+  // No tocar data URLs (imágenes base64) ni URLs normales — solo sanitizar texto humano
+  if (typeof value === 'string') {
+    if (value.startsWith('data:') || value.startsWith('http://') || value.startsWith('https://') || value.startsWith('/')) return value;
+    return sanitizeText(value);
+  }
   if (Array.isArray(value)) return value.map(sanitizeData);
   if (value !== null && typeof value === 'object') {
     const result = {};
@@ -604,7 +608,7 @@ async function crearPaginaRegistrosBasales(pdfDoc, registros, usarPlantilla, fon
     { titulo: 'ELECTROCORTICOGRAFÍA.', key: 'electrocorticografia' },
     { titulo: 'TOF.', key: 'tof' },
     { titulo: 'ONDA D.', key: 'ondaD' },
-    { titulo: 'P NEUROMOTORES.', key: 'pNeuromotores' },
+    { titulo: 'COMENTARIO.', key: 'pNeuromotores' },
   ];
 
   for (const s of secciones) {
@@ -662,7 +666,7 @@ async function crearPaginasProcedimiento(pdfDoc, fases, usarPlantilla, fonts) {
       { titulo: 'ELECTROCORTICOGRAFÍA.', key: 'electrocorticografia' },
       { titulo: 'TOF.', key: 'tof' },
       { titulo: 'ONDA D.', key: 'ondaD' },
-      { titulo: 'P NEUROMOTORES.', key: 'pNeuromotores' },
+      { titulo: 'COMENTARIO.', key: 'pNeuromotores' },
     ];
 
     for (const s of secciones) {
@@ -708,7 +712,7 @@ async function crearPaginaRegistrosFinales(pdfDoc, registros, usarPlantilla, fon
     { titulo: 'ELECTROCORTICOGRAFÍA.', key: 'electrocorticografiaFinales' },
     { titulo: 'TOF.', key: 'tofFinales' },
     { titulo: 'ONDA D.', key: 'ondaDFinales' },
-    { titulo: 'P NEUROMOTORES.', key: 'pNeuromotoresFinales' },
+    { titulo: 'COMENTARIO.', key: 'pNeuromotoresFinales' },
   ];
 
   for (const s of secciones) {
@@ -795,21 +799,20 @@ async function crearPaginaConclusion(pdfDoc, data, usarPlantilla, fonts) {
   let imageDrawWidth = logoSize;
   let imageDrawHeight = logoSize;
 
-  // Intentar firma digital primero
+  // Intentar imagen de firma primero (PNG o JPG)
   if (data.firmaBase64) {
     try {
-      let firmaBytes;
-      if (String(data.firmaBase64).startsWith('data:')) {
-        firmaBytes = (await loadImageBytes(data.firmaBase64));
-      } else {
-        const binary = atob(data.firmaBase64);
-        firmaBytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) firmaBytes[i] = binary.charCodeAt(i);
-      }
+      const firmaBytes = await loadImageBytes(data.firmaBase64);
       if (firmaBytes) {
-        logoImage = await pdfDoc.embedPng(firmaBytes);
-        imageDrawWidth = 140;
-        imageDrawHeight = 60;
+        const firmaImg = await embedImage(pdfDoc, firmaBytes);
+        if (firmaImg) {
+          logoImage = firmaImg;
+          // Escalar proporcionalmente con máximo 80x35
+          const maxW = 80; const maxH = 35;
+          const scale = Math.min(maxW / firmaImg.width, maxH / firmaImg.height);
+          imageDrawWidth  = firmaImg.width  * scale;
+          imageDrawHeight = firmaImg.height * scale;
+        }
       }
     } catch { logoImage = null; }
   }
@@ -836,6 +839,8 @@ async function crearPaginaConclusion(pdfDoc, data, usarPlantilla, fonts) {
   if (nombreCompleto !== 'Dr.') maxTxtWidth = Math.max(maxTxtWidth, quando.widthOfTextAtSize(nombreCompleto, 11));
   if (data.usuarioCedula) maxTxtWidth = Math.max(maxTxtWidth, workSansLight.widthOfTextAtSize(`Céd. ${data.usuarioCedula}`, 9));
   if (data.usuarioEspecialidad) maxTxtWidth = Math.max(maxTxtWidth, workSansLight.widthOfTextAtSize(data.usuarioEspecialidad, 9));
+  if (data.usuarioCorreo) maxTxtWidth = Math.max(maxTxtWidth, workSansLight.widthOfTextAtSize(data.usuarioCorreo, 9));
+  if (data.usuarioTelefono) maxTxtWidth = Math.max(maxTxtWidth, workSansLight.widthOfTextAtSize(data.usuarioTelefono, 9));
 
   const totalFirmaWidth = (logoImage ? imageDrawWidth + espacioEntreLogoYTexto : 0) + maxTxtWidth;
   const firmaX = (width - totalFirmaWidth) / 2;
@@ -860,6 +865,14 @@ async function crearPaginaConclusion(pdfDoc, data, usarPlantilla, fonts) {
   }
   if (data.usuarioEspecialidad) {
     firmaPage.drawText(toSingleLine(data.usuarioEspecialidad), { x: textoX, y: textoY, size: 9, font: workSansLight, color: rgb(0, 0, 0) });
+    textoY -= 13;
+  }
+  if (data.usuarioCorreo) {
+    firmaPage.drawText(toSingleLine(data.usuarioCorreo), { x: textoX, y: textoY, size: 9, font: workSansLight, color: rgb(0, 0, 0) });
+    textoY -= 13;
+  }
+  if (data.usuarioTelefono) {
+    firmaPage.drawText(toSingleLine(data.usuarioTelefono), { x: textoX, y: textoY, size: 9, font: workSansLight, color: rgb(0, 0, 0) });
   }
 }
 
@@ -881,23 +894,29 @@ async function crearPaginasTendencias(pdfDoc, tendencias, usarPlantilla, fonts) 
     });
     yPos -= 35;
 
-    // Imagen de tendencia
-    if (tendencia.uri) {
+    // Imágenes de tendencia (array de base64 o URIs)
+    const imgs = tendencia.imagenes || (tendencia.uri ? [tendencia.uri] : []);
+    for (const imgSrc of imgs) {
+      if (!imgSrc) continue;
       try {
-        const bytes = await loadImageBytes(tendencia.uri);
+        const bytes = await loadImageBytes(imgSrc);
         if (bytes) {
           const img = await embedImage(pdfDoc, bytes);
           if (img) {
             const imgWidth = width - 80;
-            const maxImgHeight = height - 350;
+            const maxImgHeight = Math.min(height - 200, 500);
             let imgHeight = (imgWidth * img.height) / img.width;
+            let drawWidth = imgWidth;
             if (imgHeight > maxImgHeight) {
               imgHeight = maxImgHeight;
-              const newImgWidth = (imgHeight * img.width) / img.height;
-              page.drawImage(img, { x: (width - newImgWidth) / 2, y: yPos - imgHeight, width: newImgWidth, height: imgHeight });
-            } else {
-              page.drawImage(img, { x: 40, y: yPos - imgHeight, width: imgWidth, height: imgHeight });
+              drawWidth = (imgHeight * img.width) / img.height;
             }
+            // Nueva página si no cabe
+            if (yPos - imgHeight < 80) {
+              page = await aplicarPlantillaFondo(pdfDoc, usarPlantilla);
+              yPos = height - 80;
+            }
+            page.drawImage(img, { x: (width - drawWidth) / 2, y: yPos - imgHeight, width: drawWidth, height: imgHeight });
             yPos -= imgHeight + 20;
           }
         }

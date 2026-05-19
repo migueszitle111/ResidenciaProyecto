@@ -356,7 +356,7 @@ async function crearPaginaInformacionGeneral(pdfDoc, data, usarPlantilla, fonts)
     { left: { label: 'Edad:', value: `${data.edad || ''} años` },         right: { label: 'Diagnóstico:', value: data.diagnostico || '' } },
     { left: { label: 'Cirujano:', value: data.cirujano || '' },           right: { label: 'Tipo de cirugía:', value: data.tipoCirugia || '' } },
     { left: { label: 'Hospital:', value: data.hospital || '' },           right: { label: 'Aseguranza:', value: data.aseguranza || '' } },
-    { left: { label: 'Neurofisiólogo:', value: `Dr. ${data.neurofisiologo || ''}` }, right: { label: 'Equipo:', value: data.equipo || '' } },
+    { left: { label: 'Neurofisiólogo:', value: data.neurofisiologo || '' }, right: { label: 'Equipo:', value: data.equipo || '' } },
   ];
 
   let currentY = PDF_CONFIG.body.startY;

@@ -136,7 +136,7 @@ async function buildPage1(pdfDoc, {
 
   if (topLeftText) {
     page.drawText(topLeftText, {
-      x: MARGIN + 10, y: HDR_Y,
+      x: MARGIN + 110, y: HDR_Y,
       font: fontBold, size: 9,
       color: rgb(0.08, 0.08, 0.08),
     });
@@ -215,18 +215,14 @@ async function buildPage1(pdfDoc, {
     const offPct = c.offPct || 0;
 
     // Y: top of HTML box → bottom-left in pdf-lib
-    // Add 0.06 vertical offset to match GUI visual — the HTML panel container
-    // includes whitespace above the body (~4.7%) plus rendering differences
     const cy = PANEL_FLOOR_Y + PANELS_H - (topPct + 0.02) * PANELS_H - CROSS_H;
 
+    const CROSS_SHIFT = -10;
     if (c.side === 'L') {
-      // HTML: left:offPct*100% — x from left edge of posterior panel
-      const cx = PANELS_X + offPct * PANEL_W;
+      const cx = PANELS_X + offPct * PANEL_W + CROSS_SHIFT;
       page.drawImage(crossImg, { x: cx, y: cy, width: CROSS_W, height: CROSS_H });
     } else {
-      // HTML: right:offPct*100% — distance from right edge of anterior panel
-      // → x from left = antPanelX + (1-offPct)*PANEL_W - CROSS_W
-      const cx = antPanelX + (1 - offPct) * PANEL_W - CROSS_W;
+      const cx = antPanelX + (1 - offPct) * PANEL_W - CROSS_W + 20 + CROSS_SHIFT;
       page.drawImage(crossImg, { x: cx, y: cy, width: CROSS_W, height: CROSS_H });
     }
   }
@@ -266,7 +262,7 @@ async function buildPage1(pdfDoc, {
 
   // ── Diagnosis text ────────────────────────────────────────────────────────
   const DIAG_Y  = PANEL_FLOOR_Y - 32;  // below panel with more space
-  const DIAG_X  = PANELS_X + 60;       // shifted right
+  const DIAG_X  = PANELS_X;
   const DIAG_W  = TOTAL_W;
 
   if (finalConclusion && finalConclusion.trim()) {
@@ -533,7 +529,7 @@ export async function POST(req) {
       fontRegular, fontBold, fontLight,
     });
 
-    const hayPag2 = (listaVisual && listaVisual.length > 0) || (comentarioLista && comentarioLista.trim().length > 0) || !!imgListaBytes;
+    const hayPag2 = (comentarioLista && comentarioLista.trim().length > 0) || !!imgListaBytes;
     if (hayPag2) {
       await buildPage2(pdfDoc, {
         listaVisual, comentarioLista, imgListaBytes, plantillaId,

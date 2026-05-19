@@ -1,6 +1,9 @@
 // app/s/[slug]/page.js
 export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+// revalidate=60: la página se re-genera como máximo cada 60s.
+// Esto permite que los scrapers OG (WhatsApp, Telegram, Facebook) lean los meta tags
+// en una respuesta cacheable. force-dynamic + no-store bloquea los scrapers.
+export const revalidate = 60;
 
 import { notFound } from 'next/navigation';
 import { getSupabaseAdmin, SHARE_BUCKET, getBucketFromPath, getPathWithoutBucket } from '@/lib/supabaseadmin';
@@ -14,86 +17,70 @@ export async function generateMetadata({ params }) {
   const { slug } = params;
   const data = await fetchData(slug);
 
-  // 🔥 URL de la imagen Open Graph: logo del doctor si tiene, sino el logo MEDXpro default
-  const DEFAULT_LOGO = process.env.NEXT_PUBLIC_OG_IMAGE ||
-                       'https://awkrlvbmwfqzqlfyuiby.supabase.co/storage/v1/object/public/assets/logo-medxpro-og.png';
-  const logoUrl = data?.link?.meta?.doctorLogo || DEFAULT_LOGO;
-
-  // URL completa del link (ajusta el dominio según tu deploy)
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.medxproapp.com';
   const shareUrl = `${baseUrl}/s/${slug}`;
 
-  // Si el link expiró o no existe, devolver metadatos con imagen
+  // Fallback: imagen estática del dominio (siempre accesible, 1200x630, <300KB)
+  const ogFallback = `${baseUrl}/og-medxpro.png`;
+
   if (data.expired) {
     return {
-      title: 'Enlace expirado - mEDXpro',
-      description: 'Este enlace ha expirado o no es válido',
+      metadataBase: new URL(baseUrl),
+      title: 'Enlace expirado - MEDXpro',
+      description: 'Este enlace ha expirado o no es válido.',
       openGraph: {
-        title: 'Enlace expirado - mEDXpro',
-        description: 'Este enlace ha expirado o no es válido',
+        title: 'Enlace expirado - MEDXpro',
+        description: 'Este enlace ha expirado o no es válido.',
         url: shareUrl,
-        siteName: 'mEDXpro',
-        images: [
-          {
-            url: logoUrl,
-            width: 1067,
-            height: 1067,
-            alt: 'mEDXpro - Sistema de Diagnóstico Médico',
-          }
-        ],
+        siteName: 'MEDXpro',
+        images: [{ url: ogFallback, width: 1200, height: 630, alt: 'MEDXpro' }],
         type: 'website',
         locale: 'es_MX',
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Enlace expirado - mEDXpro',
-        description: 'Este enlace ha expirado o no es válido',
-        images: [logoUrl],
+        title: 'Enlace expirado - MEDXpro',
+        description: 'Este enlace ha expirado o no es válido.',
+        images: [ogFallback],
       },
-      icons: {
-        icon: '/favicon.ico',
-        apple: '/apple-touch-icon.png',
-      },
-      metadataBase: new URL(baseUrl),
     };
   }
 
   const { link } = data;
-  const title = link.title || 'Compartir Diagnóstico - mEDXpro';
+  const title = link.title || 'Reporte Médico - MEDXpro';
   const patientName = link.meta?.patient;
-  const description = link.message ||
-    (patientName ? `Paciente: ${patientName}` : 'Reporte médico compartido de forma segura');
+  const doctorName  = link.meta?.doctor;
+  const studyLabel  = link.meta?.studyLabel || link.meta?.study || 'Diagnóstico Neurológico';
+
+  const descParts = [
+    studyLabel,
+    patientName ? `Paciente: ${patientName}` : null,
+    doctorName  ? `Dr. ${doctorName}`        : null,
+  ].filter(Boolean);
+  const description = link.message || descParts.join(' · ') || 'Reporte médico compartido de forma segura.';
+
+  // Logo del doctor del bucket assets (PUBLIC en Supabase — accesible sin auth por scrapers)
+  const ogImage = link.meta?.doctorLogo || ogFallback;
 
   return {
+    metadataBase: new URL(baseUrl),
     title,
     description,
     openGraph: {
       title,
       description,
       url: shareUrl,
-      siteName: 'mEDXpro',
-      images: [
-        {
-          url: logoUrl,
-          width: 1067,
-          height: 1067,
-          alt: 'mEDXpro - Sistema de Diagnóstico Médico',
-        }
-      ],
+      siteName: 'MEDXpro',
+      images: [{ url: ogImage, width: 300, height: 300, alt: doctorName ? `Dr. ${doctorName}` : 'MEDXpro' }],
       type: 'website',
       locale: 'es_MX',
     },
     twitter: {
-      card: 'summary_large_image',
+      card: 'summary',
       title,
       description,
-      images: [logoUrl],
+      images: [ogImage],
     },
-    icons: {
-      icon: '/favicon.ico',
-      apple: '/apple-touch-icon.png',
-    },
-    metadataBase: new URL(baseUrl),
   };
 }
 

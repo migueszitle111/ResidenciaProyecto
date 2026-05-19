@@ -64,6 +64,22 @@ const nextConfig = {
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
+      // Imagen OG: cacheable 1 hora, accesible sin auth para scrapers de WhatsApp/Facebook
+      {
+        source: '/og-medxpro.png',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=3600, stale-while-revalidate=86400' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+        ],
+      },
+      // Páginas de links compartidos: sin restricción de cache para scrapers OG
+      {
+        source: '/s/:slug*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, s-maxage=60, stale-while-revalidate=300' },
+          { key: 'X-Robots-Tag', value: 'noindex' },
+        ],
+      },
     ];
   },
 

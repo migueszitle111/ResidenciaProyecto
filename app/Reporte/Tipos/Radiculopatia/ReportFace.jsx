@@ -466,7 +466,7 @@ const formatLista = (label, rawTxt) => {
   }
   if (label === 'Progresión') {
     const t = txt.toLowerCase();
-    if (t.startsWith('con progresión') || t.startsWith('con progresion')) return { label: 'Progresión', txt: 'Progresión distal a miotomas' };
+    if (t.startsWith('con progresión') || t.startsWith('con progresion')) return { label: 'Progresión', txt: 'Con progresión distal a miotomas' };
     if (t.startsWith('sin progresión') || t.startsWith('sin progresion')) return { label: 'Progresión', txt: 'Sin progresión distal a miotomas' };
   }
   if (label === 'Intensidad') {
@@ -481,6 +481,10 @@ const formatLista = (label, rawTxt) => {
     return { label: 'Intensidad', txt: withParen };
   }
   if (label === 'Fase') return { label: 'Fase', txt: capWord(txt) };
+  if (label === 'Pronóstico') {
+    const canon = canonicalizePrognosis(txt);
+    return { label: 'Pronóstico', txt: canon };
+  }
   if (label === 'Ubicación') {
     const u = ubicacionAplanadaParaReporte(txt);
     return { label: 'Ubicación', txt: `Polisegmentaria a nivel ${u}` };
@@ -518,16 +522,28 @@ const buildDiagnostico = (items) => {
   head = head.replace(/\s+/g, ' ').trim() + '.';
   let rein = '';
   if (reinRaw) {
-    let r = reinRaw.replace(/^con\s+/i, '').replace(/^sin\s+/i, 'Sin ');
-    r = r.replace(/^reinervación/i, 'Reinervación');
-    rein = r;
+    const rLow = reinRaw.toLowerCase();
+    if (rLow.includes('sin') || rLow.startsWith('ausente')) {
+      rein = 'Sin reinervación colateral';
+    } else if (rLow.includes('mínima') || rLow.includes('minima')) {
+      rein = 'Reinervación colateral mínima';
+    } else if (rLow.includes('abundante')) {
+      rein = 'Reinervación colateral abundante';
+    } else {
+      let r = reinRaw.replace(/^con\s+/i, '').replace(/^sin\s+/i, 'Sin ');
+      r = r.charAt(0).toUpperCase() + r.slice(1);
+      rein = r;
+    }
   }
   let pron = '';
-  if (pronRaw) pron = `pronóstico de ${pronRaw.toLowerCase()}.`;
+  if (pronRaw) {
+    const pronClean = canonicalizePrognosis(pronRaw);
+    pron = `Pronóstico de ${pronClean.charAt(0).toLowerCase() + pronClean.slice(1)}.`;
+  }
   let tail = '';
   if (rein && pron) tail = `${rein}; ${pron}`;
   else if (rein)    tail = `${rein}.`;
-  else if (pron)    tail = pron.charAt(0).toUpperCase() + pron.slice(1);
+  else if (pron)    tail = pron;
   return tail ? `${head}\n${tail}` : head;
 };
 
@@ -593,7 +609,7 @@ function StepA({ goTo, setEvo, addText, setFlowType, resetAll }) {
     { nombre: 'Aguda',             texto: 'Radiculopatía aguda',     flow: 'Aguda'    },
     { nombre: 'Subaguda',          texto: 'Radiculopatía subaguda',  flow: 'Subaguda' },
     { nombre: 'Crónica',           texto: 'Radiculopatía crónica',   flow: 'Crónica'  },
-    { nombre: 'Crónica agudizada', texto: 'RADICULOPATÍA CRÓNICA',   flow: 'Crónica agudizada' },
+    { nombre: 'Crónica agudizada', texto: 'Radiculopatía crónica', flow: 'Crónica agudizada' },
     { nombre: 'Sensitiva',         texto: 'Radiculopatía sensitiva', flow: 'Sensitiva' },
   ];
   return (
@@ -620,7 +636,7 @@ function StepEFase({ goTo, addText, resetAll }) {
       <NavRow onBack={() => goTo('A')} onReset={resetAll} />
       <StepTitle>Fase</StepTitle>
       {['Activa', 'Inactiva', 'Antigua'].map(f => (
-        <ChoiceBtn key={f} label={f.toUpperCase()} onPress={() => { addText(' ' + f); goTo('B_NIVEL'); }} />
+        <ChoiceBtn key={f} label={f.toUpperCase()} onPress={() => { addText('Fase ' + f); goTo('B_NIVEL'); }} />
       ))}
     </div>
   );
@@ -685,7 +701,7 @@ function StepBNivel({
     if (right.length)     segs.push(`${right.join(', ')} derecha`);
     if (bilateral.length) segs.push(`${bilateral.join(', ')} bilateral`);
     let res = segs.join(', ');
-    if (segs.length > 1) res = res.replace(/, ([^,]+)$/, ' Y $1');
+    if (segs.length > 1) res = res.replace(/, ([^,]+)$/, ' y $1');
     const total = left.length + right.length + bilateral.length;
     const prefix = agudiPhase ? 'con agudización nivel' : 'nivel';
     addText(total >= 3 ? `${prefix} ${res} (multinivel)` : `${prefix} ${res}`);
@@ -712,7 +728,7 @@ function StepBNivel({
     if (right.length)     segs.push(`${right.join(', ')} derecha`);
     if (bilateral.length) segs.push(`${bilateral.join(', ')} bilateral`);
     let res = segs.join(', ');
-    if (segs.length > 1) res = res.replace(/, ([^,]+)$/, ' Y $1');
+    if (segs.length > 1) res = res.replace(/, ([^,]+)$/, ' y $1');
     const total = left.length + right.length + bilateral.length;
     const prefix = agudiPhase ? 'con agudización nivel' : 'nivel';
     addText(total >= 3 ? `${prefix} ${res} (multinivel)` : `${prefix} ${res}`);
@@ -883,7 +899,10 @@ function StepEIntensidad({ goTo, addText, evo, resetAll }) {
     { nombre: 'Severa (+++)',  texto: 'Intensidad severa (+++)' },
     { nombre: 'Difusa (++++)', texto: 'Intensidad difusa (++++)'  },
   ];
-  const goNext = (evo === 'Aguda' || evo === 'Subaguda' || evo === 'Crónica') ? 'F_REINERVACION' : 'G_PRONOSTICO';
+  // Crónica y Crónica agudizada → Reinervación → Progresión → Pronóstico
+  // Subaguda → Reinervación → Pronóstico (sin progresión)
+  // Aguda → directo a Pronóstico
+  const goNext = (evo === 'Crónica' || evo === 'Crónica agudizada' || evo === 'Subaguda') ? 'F_REINERVACION' : 'G_PRONOSTICO';
   return (
     <div>
       <NavRow onBack={() => goTo('B_NIVEL')} onReset={resetAll} />
@@ -897,7 +916,7 @@ function StepEIntensidad({ goTo, addText, evo, resetAll }) {
 
 /* F – Reinervación */
 function StepFReinervacion({ goTo, addText, evo, resetAll }) {
-  const goNext = evo === 'Crónica' ? 'F2_PROGRESION' : 'G_PRONOSTICO';
+  const goNext = (evo === 'Crónica' || evo === 'Crónica agudizada') ? 'F2_PROGRESION' : 'G_PRONOSTICO'; // Subaguda va directo a Pronóstico
   return (
     <div>
       <NavRow onBack={() => goTo('E_INTENSIDAD')} onReset={resetAll} />
@@ -909,7 +928,7 @@ function StepFReinervacion({ goTo, addText, evo, resetAll }) {
   );
 }
 
-/* F2 – Progresión (solo Crónica) */
+/* F2 – Progresión (Crónica y Crónica agudizada) */
 function StepF2Progresion({ goTo, addText, resetAll }) {
   return (
     <div>
@@ -923,7 +942,8 @@ function StepF2Progresion({ goTo, addText, resetAll }) {
 
 /* G – Pronóstico */
 function StepGPronostico({ goTo, addText, evo, resetAll }) {
-  const backStep = (evo === 'Aguda' || evo === 'Subaguda' || evo === 'Crónica') ? 'F_REINERVACION' : 'E_INTENSIDAD';
+  // Aguda → back a Intensidad; Subaguda → back a Reinervación; Crónica/CroAgu → back a Progresión
+  const backStep = (evo === 'Crónica' || evo === 'Crónica agudizada') ? 'F2_PROGRESION' : (evo === 'Subaguda' ? 'F_REINERVACION' : 'E_INTENSIDAD');
   const opciones = [
     { nombre: 'Completa',           texto: 'Pronóstico Recuperación completa' },
     { nombre: 'Parcial funcional',  texto: 'Pronóstico Recuperación parcial funcional' },
@@ -1315,6 +1335,7 @@ export default function ReportFaceRadiculopatia() {
     setCommittedPost([]); setCommittedAnt([]);
     setFiguras([]); setImgLista(null); setComentarioLista('');
     setTextoEditado(''); setEditadoManual(false);
+    setNombrePaciente('');
   }, []);
 
   const goTo = useCallback((s) => setStep(s), []);

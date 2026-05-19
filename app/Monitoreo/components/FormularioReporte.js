@@ -786,9 +786,9 @@ export default function FormularioReporte({ nombreCirugia }) {
 
   // ── Validación por paso ──
   const validarPaso0 = () => {
-    const { nombrePaciente, edad, fecha, diagnostico, cirujano, tipoCirugia, hospital, aseguranza, neurofisiologo, equipo, insumos } = form;
-    if (!nombrePaciente || !edad || !fecha || !diagnostico || !cirujano || !tipoCirugia || !hospital || !aseguranza || !neurofisiologo || !equipo || !insumos) {
-      showMsg('error', 'Por favor complete todos los campos antes de continuar.');
+    const { nombrePaciente, edad, fecha, diagnostico, cirujano, tipoCirugia, hospital, neurofisiologo } = form;
+    if (!nombrePaciente || !edad || !fecha || !diagnostico || !cirujano || !tipoCirugia || !hospital || !neurofisiologo) {
+      showMsg('error', 'Por favor complete los campos requeridos antes de continuar.');
       return false;
     }
     return true;
@@ -891,12 +891,12 @@ export default function FormularioReporte({ nombreCirugia }) {
                   <Campo label="Cirujano"            value={form.cirujano}       onChange={setField('cirujano')} required />
                   <Campo label="Tipo de Cirugía"     value={form.tipoCirugia}    onChange={setField('tipoCirugia')} required />
                   <Campo label="Hospital"            value={form.hospital}       onChange={setField('hospital')} required />
-                  <Campo label="Aseguranza"          value={form.aseguranza}     onChange={setField('aseguranza')} required />
+                  <Campo label="Aseguranza"          value={form.aseguranza}     onChange={setField('aseguranza')} />
                   <Campo label="Neurofisiólogo"      value={form.neurofisiologo} onChange={setField('neurofisiologo')} required />
-                  <Campo label="Equipo"              value={form.equipo}         onChange={setField('equipo')} required />
+                  <Campo label="Equipo"              value={form.equipo}         onChange={setField('equipo')} />
                 </div>
                 <div>
-                  <label className="text-slate-400 text-xs mb-1 block">Insumos <span className="text-orange-400">*</span></label>
+                  <label className="text-slate-400 text-xs mb-1 block">Insumos</label>
                   <textarea value={form.insumos} onChange={e => setField('insumos')(e.target.value)} rows={2}
                     placeholder="Insumos utilizados..."
                     className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600" />

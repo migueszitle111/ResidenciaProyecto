@@ -133,7 +133,7 @@ function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onCl
   const [title, setTitle]       = useState(`Radiculopatía – ${nombrePaciente || [session?.user?.name, session?.user?.lastname].filter(Boolean).join(' ')}`.trim());
   const [message, setMessage]   = useState('');
   const [expiry, setExpiry]     = useState('15d');
-  const [justReport, setJustReport] = useState(false);
+  const [justReport, setJustReport] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [uploadPct, setUploadPct]   = useState(0);
   const [link, setLink]             = useState(null);
@@ -177,7 +177,7 @@ function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onCl
         body: JSON.stringify({ title: finalTitle, message: finalMessage || undefined, expiresInSeconds: expirySeconds, studyType: STUDY_KEY, patient: nombrePaciente || null, doctor: doctor || null, doctorLogo: session?.user?.imageUrl || null }),
       });
       if (!initRes.ok) throw new Error('Error al inicializar link');
-      const { linkId } = await initRes.json();
+      const { linkId, slug } = await initRes.json();
       setUploadPct(15);
       const uploadedFiles = [];
       setFiles(prev => {
@@ -219,7 +219,7 @@ function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onCl
       if (!completeRes.ok) throw new Error('Error al completar link');
       const completeData = await completeRes.json();
       setUploadPct(100);
-      setLink(completeData.url || `${SHARE_BASE}/s/${linkId}`);
+      setLink(completeData.url || `${SHARE_BASE}/s/${slug || linkId}`);
     } catch (e) {
       alert('Error al generar link: ' + e.message);
     } finally {
@@ -227,7 +227,7 @@ function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onCl
     }
   };
 
-  const canGenerate = !generating && (justReport || files.length > 0);
+  const canGenerate = !generating;
 
   return (
     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto">

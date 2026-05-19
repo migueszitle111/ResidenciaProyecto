@@ -599,8 +599,8 @@ async function crearPaginaRegistrosBasales(pdfDoc, registros, usarPlantilla, fon
   const secciones = [
     { titulo: 'POTENCIALES EVOCADOS SOMATOSENSORIALES.', key: 'peSomatosensoriales' },
     { titulo: 'POTENCIALES EVOCADOS MOTORES.', key: 'peMotores' },
-    { titulo: 'ELECTROMIOGRAFÍA LIBRE', key: 'emgLibre' },
-    { titulo: 'ELECTROMIOGRAFÍA EVOCADA', key: 'emgEvocada' },
+    { titulo: 'ELECTROMIOGRAFÍA LIBRE.', key: 'emgLibre' },
+    { titulo: 'ELECTROMIOGRAFÍA EVOCADA.', key: 'emgEvocada' },
     { titulo: 'POTENCIALES EVOCADOS MOTORES CORTICOBULBARES.', key: 'peMotoresCorticobulbares' },
     { titulo: 'POTENCIALES EVOCADOS VISUALES.', key: 'peVisuales' },
     { titulo: 'POTENCIALES EVOCADOS AUDITIVOS DE TALLO CEREBRAL.', key: 'peAuditivosTallo' },
@@ -657,8 +657,8 @@ async function crearPaginasProcedimiento(pdfDoc, fases, usarPlantilla, fonts) {
     const secciones = [
       { titulo: 'POTENCIALES EVOCADOS SOMATOSENSORIALES.', key: 'peSomatosensoriales' },
       { titulo: 'POTENCIALES EVOCADOS MOTORES.', key: 'peMotores' },
-      { titulo: 'ELECTROMIOGRAFÍA LIBRE', key: 'emgLibre' },
-      { titulo: 'ELECTROMIOGRAFÍA EVOCADA', key: 'emgEvocada' },
+      { titulo: 'ELECTROMIOGRAFÍA LIBRE.', key: 'emgLibre' },
+      { titulo: 'ELECTROMIOGRAFÍA EVOCADA.', key: 'emgEvocada' },
       { titulo: 'POTENCIALES EVOCADOS MOTORES CORTICOBULBARES.', key: 'peMotoresCorticobulbares' },
       { titulo: 'POTENCIALES EVOCADOS VISUALES.', key: 'peVisuales' },
       { titulo: 'POTENCIALES EVOCADOS AUDITIVOS DE TALLO CEREBRAL.', key: 'peAuditivosTallo' },
@@ -703,8 +703,8 @@ async function crearPaginaRegistrosFinales(pdfDoc, registros, usarPlantilla, fon
   const secciones = [
     { titulo: 'POTENCIALES EVOCADOS SOMATOSENSORIALES.', key: 'peSomatosensorialesFinales' },
     { titulo: 'POTENCIALES EVOCADOS MOTORES.', key: 'peMotoresFinales' },
-    { titulo: 'ELECTROMIOGRAFÍA LIBRE', key: 'emgLibreFinales' },
-    { titulo: 'ELECTROMIOGRAFÍA EVOCADA', key: 'emgEvocadaFinales' },
+    { titulo: 'ELECTROMIOGRAFÍA LIBRE.', key: 'emgLibreFinales' },
+    { titulo: 'ELECTROMIOGRAFÍA EVOCADA.', key: 'emgEvocadaFinales' },
     { titulo: 'POTENCIALES EVOCADOS MOTORES CORTICOBULBARES.', key: 'peMotoresCorticobulbaresFinales' },
     { titulo: 'POTENCIALES EVOCADOS VISUALES.', key: 'peVisualesFinales' },
     { titulo: 'POTENCIALES EVOCADOS AUDITIVOS DE TALLO CEREBRAL.', key: 'peAuditivosTalloFinales' },

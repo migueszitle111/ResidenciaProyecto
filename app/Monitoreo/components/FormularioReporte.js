@@ -618,6 +618,7 @@ export default function FormularioReporte({ nombreCirugia }) {
       URL.revokeObjectURL(url);
       showMsg('ok', 'PDF descargado exitosamente.');
       localStorage.removeItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
+      limpiar();
     } catch (e) {
       showMsg('error', `Error generando PDF: ${e.message}`);
     } finally {
@@ -651,13 +652,8 @@ export default function FormularioReporte({ nombreCirugia }) {
       const studyType  = 'Neuromonitoreo Intraoperatorio';
       const expSeconds = expiry === '30d' ? 2592000 : expiry === '3m' ? 7776000 : 1296000;
 
-      const finalTitle = (title?.trim() || `${studyType} – ${form.nombrePaciente || 'Paciente'}${doctorName ? ` – ${doctorName}` : ''}`).slice(0, 140);
-      const finalMsg   = message?.trim() || [
-        `Estudio: ${studyType}`,
-        `Paciente: ${form.nombrePaciente || '—'}`,
-        `Médico: ${doctorName || '—'}`,
-        `Tipo de cirugía: ${form.tipoCirugia}`,
-      ].join('\n');
+      const finalTitle = (title?.trim() || `${studyType} – ${form.nombrePaciente || 'Paciente'}`).slice(0, 140);
+      const finalMsg   = message?.trim() || '';
 
       // Rutas relativas → funciona en local y en producción sin CORS
       const initRes = await fetch(`/api/share/init`, {
@@ -738,6 +734,7 @@ export default function FormularioReporte({ nombreCirugia }) {
       setLinkProgress(100);
       setLinkUrl(doneData.url);
       localStorage.removeItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
+      limpiar();
     } catch (e) {
       showMsg('error', `Error: ${e.message}`);
       setShowLink(false);

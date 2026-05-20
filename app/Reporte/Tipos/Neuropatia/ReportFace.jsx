@@ -299,20 +299,41 @@ function CBtn({ label, onClick }) {
   );
 }
 function NavRow({ onBack, onReset, onPdf }) {
+  const circleBase = {
+    width: 44, height: 44, borderRadius: '50%',
+    border: '1.5px solid #ff4500', background: '#000',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    cursor: 'pointer', flexShrink: 0, transition: 'background 0.15s', padding: 0, position: 'relative',
+  };
+  const tooltipStyle = {
+    position: 'absolute', top: 'calc(100% + 6px)', left: '50%', transform: 'translateX(-50%)',
+    background: 'rgba(30,30,30,0.95)', color: '#fff', fontSize: 11, whiteSpace: 'nowrap',
+    padding: '3px 8px', borderRadius: 4, pointerEvents: 'none', opacity: 0, transition: 'opacity 0.15s',
+    zIndex: 99999, border: '1px solid rgba(255,69,0,0.4)',
+  };
+  const showTip = e => { const t = e.currentTarget.querySelector('.nav-tip'); if (t) t.style.opacity = '1'; };
+  const hideTip = e => { const t = e.currentTarget.querySelector('.nav-tip'); if (t) t.style.opacity = '0'; };
   return (
-    <div style={{ display:'flex', gap:6, marginBottom:10 }}>
-      <button onClick={onBack} style={{ display:'flex', alignItems:'center', gap:5, padding:'5px 10px', borderRadius:7, background:'rgba(255,255,255,0.1)', border:'none', color:'#fff', fontSize:11, cursor:'pointer' }}>
-        <svg xmlns="http://www.w3.org/2000/svg" width={11} height={11} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
-        Regresar
+    <div style={{ display: 'flex', gap: 14, alignItems: 'center', justifyContent: 'center', marginBottom: 12, flexWrap: 'wrap' }}>
+      <button onClick={onBack} style={circleBase}
+        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,69,0,0.15)'; showTip(e); }}
+        onMouseLeave={e => { e.currentTarget.style.background = '#000'; hideTip(e); }}>
+        <img src="/I_Out_white.svg" alt="Regresar" style={{ width: '75%', height: '75%', objectFit: 'contain' }} />
+        <span className="nav-tip" style={tooltipStyle}>Regresar</span>
       </button>
-      <button onClick={onReset} style={{ display:'flex', alignItems:'center', gap:5, padding:'5px 10px', borderRadius:7, background:'rgba(255,255,255,0.1)', border:'none', color:'#fff', fontSize:11, cursor:'pointer' }}>
-        <svg xmlns="http://www.w3.org/2000/svg" width={11} height={11} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-        Reset
+      <button onClick={onReset} style={circleBase}
+        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,69,0,0.15)'; showTip(e); }}
+        onMouseLeave={e => { e.currentTarget.style.background = '#000'; hideTip(e); }}>
+        <img src="/I_Repeat_white.svg" alt="Refrescar" style={{ width: '75%', height: '75%', objectFit: 'contain' }} />
+        <span className="nav-tip" style={tooltipStyle}>Refrescar</span>
       </button>
       {onPdf && (
-        <button onClick={onPdf} style={{ display:'flex', alignItems:'center', gap:5, padding:'5px 10px', borderRadius:7, background:'rgba(249,115,22,0.85)', border:'none', color:'#fff', fontSize:11, fontWeight:700, cursor:'pointer', marginLeft:'auto' }}>
-          <svg xmlns="http://www.w3.org/2000/svg" width={11} height={11} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 16v-8m0 8l-3-3m3 3l3-3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
-          PDF
+        <button onClick={onPdf}
+          style={{ ...circleBase, background: '#FF6B00', border: '1.5px solid #FF6B00', boxShadow: '0 2px 8px rgba(0,0,0,0.35)' }}
+          onMouseEnter={e => { e.currentTarget.style.background = '#e05e00'; showTip(e); }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#FF6B00'; hideTip(e); }}>
+          <span style={{ color: '#fff', fontSize: 13, fontWeight: 'bold', letterSpacing: 0.5 }}>PDF</span>
+          <span className="nav-tip" style={tooltipStyle}>Exportar PDF</span>
         </button>
       )}
     </div>

@@ -483,7 +483,7 @@ function NavButtons({ onAnterior, onSiguiente, labelSiguiente = 'Siguiente →',
 export default function FormularioReporte({ nombreCirugia }) {
   const { data: session } = useSession();
   const esCraneal = CRANEALES.includes(nombreCirugia);
-  const esOtros   = OTROS ? OTROS.includes(nombreCirugia) : false;
+  const esOtros   = nombreCirugia === 'REPORTE_GENERICO' || (OTROS ? OTROS.includes(nombreCirugia) : false);
 
   // Paso actual: 0=Datos, 1=Basales, 2=Procedimiento, 3=Finales, 4=Conclusión, 5=Agregar
   const [paso, setPaso] = useState(0);

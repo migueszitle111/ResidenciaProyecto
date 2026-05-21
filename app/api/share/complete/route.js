@@ -76,7 +76,8 @@ export async function POST(req) {
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
 
     const base = (envBase || "").replace(/\/$/, "");
-    const url = `${base}/s/${link.slug}`;
+    const v = Date.now();
+    const url = `${base}/s/${link.slug}?v=${v}`;
 
     return NextResponse.json({ ok: true, url, slug: link.slug });
   } catch (error) {

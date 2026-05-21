@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Overhead from "../components/Overhead";
 import OverheadMenu from "../components/OverheadMenu";
 import SubMenu from "../components/Submenu";
@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import FormularioReporte from "./components/FormularioReporte";
 
 const tipos = [
   { label: "Craneal",  href: "/Monitoreo/Tipos/Craneal" },
@@ -17,6 +18,7 @@ const tipos = [
 
 export default function Monitoreo() {
   const router = useRouter();
+  const [showReporteGeneral, setShowReporteGeneral] = useState(false);
 
   return (
     <div className="Conteiner bg-black min-h-screen">
@@ -61,8 +63,38 @@ export default function Monitoreo() {
         </div>
       </div>
 
+      {/* Botón "..." — Reporte de Monitoreo General */}
+      <div className="flex justify-end max-w-3xl mx-auto px-4 mb-10">
+        <button
+          onClick={() => setShowReporteGeneral(true)}
+          className="bg-black text-white px-4 py-3 rounded-lg border border-white/20 hover:border-orange-500/60 hover:bg-[#111] transition-colors text-sm font-semibold tracking-widest"
+        >
+          •••
+        </button>
+      </div>
+
       <hr className="bg-white h-0.5" />
       <Footer />
+
+      {/* Modal — Reporte de Monitoreo General */}
+      {showReporteGeneral && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl">
+            <div className="flex justify-between items-center px-5 py-4 border-b border-white/10 shrink-0">
+              <h2 className="text-orange-400 font-bold text-lg">Reporte de Monitoreo General</h2>
+              <button
+                onClick={() => setShowReporteGeneral(false)}
+                className="w-8 h-8 rounded-full bg-[#1a1a1a] border border-white/10 text-white flex items-center justify-center hover:bg-[#2a2a2a] transition-colors text-lg leading-none"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="overflow-y-auto flex-1 px-5 py-4">
+              <FormularioReporte nombreCirugia="REPORTE_GENERICO" />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

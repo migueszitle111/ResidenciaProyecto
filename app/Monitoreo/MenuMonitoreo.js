@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import FormularioReporte from "./components/FormularioReporte";
 import EditorReseccionTumorCerebral from "./MonitoreoEditores/EditorReseccionTumorCerebral";
 import EditorDisectomiaLumbar from "./MonitoreoEditores/EditorDisectomiaLumbar";
 import EditorDisectomiayForaminotomiaCervical from "./MonitoreoEditores/EditorDisectomiayForaminotomiaCervical";
@@ -14,6 +15,7 @@ import EditorTumorFosaPosterior from "./MonitoreoEditores/EditorTumorFosaPosteri
 
 const MenuMonitoreo = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [showReporteGeneral, setShowReporteGeneral] = useState(false);
   // const contentRef = useRef(null);
 
   const handleClick = (option) => {
@@ -88,6 +90,18 @@ const MenuMonitoreo = () => {
               />
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Botón "..." — Reporte de Monitoreo General */}
+      {!selectedOption && (
+        <div className="lg:w-2/3 mx-auto flex justify-end px-5 mb-2">
+          <button
+            onClick={() => setShowReporteGeneral(true)}
+            className="bg-black text-white px-4 py-3 rounded-lg border border-white/20 hover:border-orange-500/60 hover:bg-[#111] transition-colors text-sm font-semibold tracking-widest"
+          >
+            •••
+          </button>
         </div>
       )}
 
@@ -224,6 +238,25 @@ const MenuMonitoreo = () => {
           </div>
         </div>
       </div>
+      {/* Modal — Reporte de Monitoreo General */}
+      {showReporteGeneral && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl">
+            <div className="flex justify-between items-center px-5 py-4 border-b border-white/10 shrink-0">
+              <h2 className="text-orange-400 font-bold text-lg">Reporte de Monitoreo General</h2>
+              <button
+                onClick={() => setShowReporteGeneral(false)}
+                className="w-8 h-8 rounded-full bg-[#1a1a1a] border border-white/10 text-white flex items-center justify-center hover:bg-[#2a2a2a] transition-colors text-lg leading-none"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="overflow-y-auto flex-1 px-5 py-4">
+              <FormularioReporte nombreCirugia="REPORTE_GENERICO" />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

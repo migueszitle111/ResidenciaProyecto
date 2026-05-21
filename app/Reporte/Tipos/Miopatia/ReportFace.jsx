@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 /*
  * MiopatiaNew/ReportFace.jsx
  * Versión web del reporte de Miopatía — shell VisualNew.
@@ -278,7 +278,7 @@ function StepE({ goTo, setStep, removeConclusion, resetAll }) {
       <StepTitle>Agregado (Opcional)</StepTitle>
       <ConclusionBtn value="descargas_mioton" title=" y descargas miotónicas" label="DESCARGAS MIOTÓNICAS" onPress={() => goTo('F')} />
       <ConclusionBtn value="descargas_rep" title=" y descargas repetitivas complejas" label="DESCARGAS REPETITIVAS COMPLEJAS" onPress={() => goTo('F')} />
-      <button className="w-full mt-1 px-4 py-2 rounded-lg border border-dashed border-white/20 text-slate-400 text-xs hover:border-white/40 hover:text-white transition-colors" onClick={() => goTo('F')}>Saltar →</button>
+      <button className="w-full mt-2 px-4 py-3 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm transition-colors" onClick={() => goTo('F')}>Saltar →</button>
     </div>
   );
 }
@@ -666,9 +666,8 @@ export default function ReportFace() {
         {/* ── Barra superior ── */}
         <div style={{ flexShrink:0, width:'100%', height:52, background:'#111', borderBottom:'1px solid rgba(255,255,255,0.08)', display:'grid', gridTemplateColumns:'1fr auto 1fr', alignItems:'center', padding:'0 20px', boxSizing:'border-box' }}>
           <div>
-            <button onClick={() => router.push('/Reporte')} style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 14px', borderRadius:8, background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.12)', cursor:'pointer', color:'#fff', fontSize:13, fontWeight:500 }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width={15} height={15} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-              Regresar
+            <button onClick={() => router.push('/Reporte')} style={{ display:'flex', alignItems:'center', justifyContent:'center', width:34, height:34, borderRadius:'50%', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.12)', cursor:'pointer', padding:0 }}>
+              <img src="/assets/IconSVG/I_Crop.svg" alt="Regresar" style={{ width:18, height:18, filter:'invert(1)' }} />
             </button>
           </div>
           <div style={{ display:'flex', alignItems:'center', justifyContent:'center' }}>

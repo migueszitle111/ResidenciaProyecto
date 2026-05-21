@@ -360,8 +360,8 @@ function GenerarInformeModal({ onLink, onPdf, onCancelar }) {
 }
 
 // ─── LinkModal ────────────────────────────────────────────────────────────────
-function LinkModal({ onClose, onGenerate, generating, link, progress }) {
-  const [title, setTitle]     = useState('');
+function LinkModal({ onClose, onGenerate, generating, link, progress, nombrePaciente }) {
+  const [title, setTitle]     = useState(nombrePaciente ? `Neuromonitoreo Intraoperatorio – ${nombrePaciente}` : 'Neuromonitoreo Intraoperatorio');
   const [message, setMessage] = useState('');
   const [expiry, setExpiry]   = useState('15d');
   const [files, setFiles]     = useState([]);
@@ -663,7 +663,7 @@ export default function FormularioReporte({ nombreCirugia }) {
           title: finalTitle, message: finalMsg, expiresInSeconds: expSeconds,
           patient: form.nombrePaciente || null, doctor: doctorName || null,
           studyType, doctorLogo: session?.user?.imageUrl || null,
-          meta: { patient: form.nombrePaciente, doctor: doctorName, study: studyType, studyType },
+          meta: { patient: form.nombrePaciente, doctor: doctorName, study: studyType, studyType, doctorLogo: session?.user?.imageUrl || null },
         }),
       });
       const initData = await initRes.json();
@@ -1217,6 +1217,7 @@ export default function FormularioReporte({ nombreCirugia }) {
           generating={linkGenerating}
           link={linkUrl}
           progress={linkProgress}
+          nombrePaciente={form.nombrePaciente}
         />
       )}
     </div>

@@ -154,7 +154,7 @@ function FileRowUI({ file, onRemove }) {
 
 function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onClose }) {
   const [files, setFiles]       = useState([]);
-  const [title, setTitle]       = useState(`Vías Auditivas – ${nombrePaciente || [session?.user?.name, session?.user?.lastname].filter(Boolean).join(' ')}`.trim());
+  const [title, setTitle]       = useState(nombrePaciente ? `Vías Auditivas – ${nombrePaciente}` : 'Vías Auditivas');
   const [message, setMessage]   = useState('');
   const [expiry, setExpiry]     = useState('15d');
   const [justReport, setJustReport] = useState(false);

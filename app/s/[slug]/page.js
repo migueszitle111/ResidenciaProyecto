@@ -305,12 +305,14 @@ export default async function Page({ params }) {
             </h1>
 
             {/* Marca */}
-            <div
-              className="rounded-full px-3 py-1 text-xs font-semibold text-white shadow-sm"
-              style={{ backgroundColor: BRAND }}
-            >
-              MEDXpro
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/Logo/L_V_P_Naranja.png"
+              alt="MEDXpro"
+              width={48}
+              height={48}
+              className="shrink-0 object-contain"
+            />
           </header>
 
           {/* Meta del paquete */}

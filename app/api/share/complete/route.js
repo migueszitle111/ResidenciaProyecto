@@ -79,15 +79,14 @@ export async function POST(req) {
     const base = (envBase || "").replace(/\/$/, "");
     const url = `${base}/s/${link.slug}`;
 
-    // Warm-up: invalidar cache e inmediatamente pre-generar la página
-    // para que WhatsApp encuentre los meta OG listos al pegar el link.
+    // Warm-up: invalidar cache y esperar que la página quede pre-generada
+    // para que WhatsApp encuentre los meta OG listos al instante.
     try {
       revalidatePath(`/s/${link.slug}`);
-      // Fire-and-forget: no esperamos la respuesta para no bloquear al usuario
-      fetch(`${base}/s/${link.slug}`, {
+      await fetch(`${base}/s/${link.slug}`, {
         headers: { "User-Agent": "MEDXpro-warmup/1.0" },
         cache: "no-store",
-      }).catch(() => {});
+      });
     } catch (_) {}
 
     return NextResponse.json({ ok: true, url, slug: link.slug });

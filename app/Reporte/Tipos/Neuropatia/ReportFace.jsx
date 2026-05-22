@@ -1089,10 +1089,10 @@ export default function ReportFace() {
   /* ── RENDER ── */
   return (
     <div style={{
-      position: 'fixed', inset: 0, zIndex: 9999,
+      position: 'relative', zIndex: 1,
       background: '#0a0a0a',
       display: 'flex', flexDirection: 'column', alignItems: 'center',
-      overflowY: 'auto',
+      minHeight: '100vh',
     }}>
 
       {/* ── Barra superior ── */}
@@ -1108,7 +1108,9 @@ export default function ReportFace() {
         <div>
           <button
             onClick={() => router.push('/Reporte')}
-            style={{ display:'flex', alignItems:'center', justifyContent:'center', width:34, height:34, borderRadius:'50%', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.12)', cursor:'pointer', padding:0 }}
+            style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:'50%', background:'#1C1C1C', border:'2px solid #c44900', cursor:'pointer', padding:8, transition:'background 0.15s' }}
+            onMouseEnter={e => { e.currentTarget.style.background='#c44900'; }}
+            onMouseLeave={e => { e.currentTarget.style.background='#1C1C1C'; }}
           >
             <img src="/assets/IconSVG/I_Crop.svg" alt="Regresar" style={{ width:18, height:18, filter:'invert(1)' }} />
           </button>
@@ -1130,13 +1132,7 @@ export default function ReportFace() {
           />
         </div>
 
-        {/* Derecha: avatar */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-          {session?.user?.imageUrl && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={session.user.imageUrl} alt="" style={{ width: 32, height: 32, borderRadius: 8, objectFit: 'contain', opacity: 0.85 }} />
-          )}
-        </div>
+        <div />
       </div>
 
       {/* ── Zona centrada ── */}

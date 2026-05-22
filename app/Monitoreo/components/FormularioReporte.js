@@ -617,8 +617,6 @@ export default function FormularioReporte({ nombreCirugia }) {
       a.click();
       URL.revokeObjectURL(url);
       showMsg('ok', 'PDF descargado exitosamente.');
-      localStorage.removeItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
-      limpiar();
     } catch (e) {
       showMsg('error', `Error generando PDF: ${e.message}`);
     } finally {

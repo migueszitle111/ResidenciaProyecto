@@ -202,7 +202,7 @@ function StepTitle({ children }) {
 function CBtn({ label, onClick }) {
   return (
     <button onClick={onClick}
-      className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all">
+      className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all">
       {label}
     </button>
   );
@@ -212,7 +212,7 @@ function MultiBtn({ label, selected, onClick }) {
   return (
     <button onClick={onClick}
       className={`w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border text-sm font-medium transition-all
-        ${selected ? 'bg-orange-500/30 border-orange-500 text-white' : 'border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white'}`}>
+        ${selected ? 'bg-orange-500/30 border-orange-500 text-white' : 'border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white'}`}>
       {label}
     </button>
   );
@@ -1017,13 +1017,15 @@ export default function ReportFace() {
   /* ── RENDER ── */
   return (
     <>
-      <div style={{ position:'fixed', inset:0, zIndex:9999, background:'#0a0a0a', display:'flex', flexDirection:'column', alignItems:'center', overflowY:'auto' }}>
+      <div style={{ position:'relative', zIndex:1, background:'#0a0a0a', display:'flex', flexDirection:'column', alignItems:'center', minHeight:'100vh' }}>
 
         {/* ── Top bar ── */}
         <div style={{ flexShrink:0, width:'100%', height:52, background:'#111', borderBottom:'1px solid rgba(255,255,255,0.08)', display:'grid', gridTemplateColumns:'1fr auto 1fr', alignItems:'center', padding:'0 20px', boxSizing:'border-box' }}>
           <div>
             <button onClick={() => router.push('/Reporte')}
-              style={{ display:'flex', alignItems:'center', justifyContent:'center', width:34, height:34, borderRadius:'50%', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.12)', cursor:'pointer', padding:0 }}>
+              style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:'50%', background:'#1C1C1C', border:'2px solid #c44900', cursor:'pointer', padding:8, transition:'background 0.15s' }}
+              onMouseEnter={e => { e.currentTarget.style.background='#c44900'; }}
+              onMouseLeave={e => { e.currentTarget.style.background='#1C1C1C'; }}>
               <img src="/assets/IconSVG/I_Crop.svg" alt="Regresar" style={{ width:18, height:18, filter:'invert(1)' }} />
             </button>
           </div>
@@ -1031,12 +1033,7 @@ export default function ReportFace() {
             <input type="text" value={nombrePaciente} onChange={e=>setNombrePaciente(e.target.value)} placeholder="Nombre del paciente"
               style={{ width:580, background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:7, padding:'6px 14px', color:'#fff', fontSize:13, outline:'none', boxSizing:'border-box', textAlign:'center' }} />
           </div>
-          <div style={{ display:'flex', justifyContent:'flex-end', alignItems:'center' }}>
-            {session?.user?.imageUrl && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={session.user.imageUrl} alt="" style={{ width:32, height:32, borderRadius:8, objectFit:'contain', opacity:0.85 }} />
-            )}
-          </div>
+          <div />
         </div>
 
         {/* ── Centered area ── */}

@@ -240,11 +240,11 @@ async function renderImagenesEnGrid(imagenes, currentPage, pdfDoc, usarPlantilla
   const imgWidth = 191;
   const imgHeight = 142;
   const espacioHorizontal = 20;
-  const espacioVertical = 15;
+  const espacioVertical = 8;
   const margenInferior = 100;
 
   let page = currentPage;
-  let currentY = yPos - 15;
+  let currentY = yPos - 10;
 
   function calcDims(naturalW, naturalH, maxW, maxH) {
     const scale = Math.min(maxW / naturalW, maxH / naturalH);
@@ -533,7 +533,7 @@ async function renderSeccion(titulo, registro, pdfDoc, usarPlantilla, fonts, pag
 
   // Título de la sección
   page.drawText(titulo, { x: 70, y: yPos, size: 9, font: workSans, color: rgb(0, 0, 0) });
-  yPos -= 25;
+  yPos -= 22;
 
   // Texto
   if (registro.texto) {
@@ -565,7 +565,7 @@ async function renderSeccion(titulo, registro, pdfDoc, usarPlantilla, fonts, pag
     yPos = result.yPos;
   }
 
-  yPos -= 15;
+  yPos -= 8;
   pageRef.page = page;
   pageRef.yPos = yPos;
 }
@@ -734,14 +734,14 @@ async function crearPaginaConclusion(pdfDoc, data, usarPlantilla, fonts) {
     x: width / 2 - quando.widthOfTextAtSize(tituloConclusion, 14) / 2,
     y: yPos, size: 14, font: quando, color: rgb(0, 0, 0),
   });
-  yPos -= 40;
+  yPos -= 28;
 
   const leftMargin = 90;
   const rightMargin = 90;
   const maxTextWidth = width - leftMargin - rightMargin;
   const margenInferiorConclusion = 80;
-  const fontSize = 9;     // igual que la app móvil
-  const lineHeight = 11;  // igual que la app móvil
+  const fontSize = 12;
+  const lineHeight = 15;
 
   let currentPage = page;
 
@@ -771,18 +771,20 @@ async function crearPaginaConclusion(pdfDoc, data, usarPlantilla, fonts) {
       x: width / 2 - quando.widthOfTextAtSize(tituloNota, 14) / 2,
       y: yPos, size: 14, font: quando, color: rgb(0, 0, 0),
     });
-    yPos -= 30;
+    yPos -= 20;
 
+    const notaFontSize = 9;
+    const notaLineHeight = 11;
     const notaParagraphs = data.notaAgregada.split(/\n\s*\n/);
     for (let p = 0; p < notaParagraphs.length; p++) {
       const paragraph = notaParagraphs[p].trim();
       if (!paragraph) continue;
-      const wrappedLines = wrapText(paragraph, maxTextWidth, workSansLight, fontSize);
-      if (yPos - wrappedLines.length * lineHeight < margenInferiorConclusion) {
+      const wrappedLines = wrapText(paragraph, maxTextWidth, workSansLight, notaFontSize);
+      if (yPos - wrappedLines.length * notaLineHeight < margenInferiorConclusion) {
         currentPage = await aplicarPlantillaFondo(pdfDoc, usarPlantilla);
         yPos = height - 80;
       }
-      yPos = drawJustifiedText(currentPage, wrappedLines, leftMargin, yPos, maxTextWidth, workSansLight, fontSize, lineHeight);
+      yPos = drawJustifiedText(currentPage, wrappedLines, leftMargin, yPos, maxTextWidth, workSansLight, notaFontSize, notaLineHeight);
       if (p < notaParagraphs.length - 1) yPos -= 5;
     }
   }

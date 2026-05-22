@@ -1,9 +1,6 @@
 // app/s/[slug]/page.js
 export const runtime = 'nodejs';
-// revalidate=60: la página se re-genera como máximo cada 60s.
-// Esto permite que los scrapers OG (WhatsApp, Telegram, Facebook) lean los meta tags
-// en una respuesta cacheable. force-dynamic + no-store bloquea los scrapers.
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
 import { getSupabaseAdmin, SHARE_BUCKET, getBucketFromPath, getPathWithoutBucket } from '@/lib/supabaseadmin';

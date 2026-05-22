@@ -381,7 +381,7 @@ function ConclusionBtn({ value, title, label, onPress }) {
   const { addConclusion } = useContext(ReportContext);
   return (
     <button
-      className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all"
+      className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all"
       onClick={() => { addConclusion({ value, title }); onPress?.(); }}
     >
       {label}
@@ -982,10 +982,10 @@ function StepF_sup({ goTo, removeConclusion, addConclusion, setStep, resetAll, s
         onReset={resetAll}
       />
       <StepTitle>NIVEL SUPERIOR:</StepTitle>
-      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('corticals',    '\n\nTopográficamente a nivel cortical (N20-P25: Núcleo talámico - área somestésica primaria).')}>CORTICAL</button>
-      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('subcorticals', '\n\nTopográficamente a nivel subcortical (P14-N18: Lemnisco medial - núcleo tectal).')}>SUBCORTICAL</button>
-      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('cervicals',    '\n\nTopográficamente a nivel cervical (N11-N13: Raíces y astas dorsales - tracto cuneatus).')}>CERVICAL</button>
-      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('perifericos',  '\n\nTopográficamente a nivel periférico (N4-N9: Fibras nerviosas mielínicas - plexo braquial).')}>PERIFÉRICO</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('corticals',    '\n\nTopográficamente a nivel cortical (N20-P25: Núcleo talámico - área somestésica primaria).')}>CORTICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('subcorticals', '\n\nTopográficamente a nivel subcortical (P14-N18: Lemnisco medial - núcleo tectal).')}>SUBCORTICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('cervicals',    '\n\nTopográficamente a nivel cervical (N11-N13: Raíces y astas dorsales - tracto cuneatus).')}>CERVICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all" onClick={() => applyTopSup('perifericos',  '\n\nTopográficamente a nivel periférico (N4-N9: Fibras nerviosas mielínicas - plexo braquial).')}>PERIFÉRICO</button>
       <SkipButton onPress={() => goTo('H')} label="Sin topografía →" />
     </div>
   );
@@ -1029,11 +1029,11 @@ function StepF_inf({ goTo, removeConclusion, addConclusion, setStep, resetAll, s
         onReset={resetAll}
       />
       <StepTitle>NIVEL INFERIOR:</StepTitle>
-      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('corticali',    '\n\nTopográficamente a nivel cortical (P37-N45: Núcleo talámico - área somestésica primaria).')}>CORTICAL</button>
-      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('subcorticali', '\n\nTopográficamente a nivel subcortical (P31-N34: Núcleo gracilis - lemnisco medial).')}>SUBCORTICAL</button>
-      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('toracicoi',    '\n\nTopográficamente a nivel torácico (N24: Astas dorsales - tracto gracilis).')}>TORÁCICO</button>
-      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('lumbosacroi',  '\n\nTopográficamente a nivel lumbosacro (N20: Cono medular - raíces dorsales).')}>LUMBOSACRO</button>
-      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500/20 hover:border-orange-500/40 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('perifericoi',  '\n\nTopográficamente a nivel periférico (P9-N18: Fibras nerviosas mielínicas - plexo sacro).')}>PERIFÉRICO</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('corticali',    '\n\nTopográficamente a nivel cortical (P37-N45: Núcleo talámico - área somestésica primaria).')}>CORTICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('subcorticali', '\n\nTopográficamente a nivel subcortical (P31-N34: Núcleo gracilis - lemnisco medial).')}>SUBCORTICAL</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('toracicoi',    '\n\nTopográficamente a nivel torácico (N24: Astas dorsales - tracto gracilis).')}>TORÁCICO</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('lumbosacroi',  '\n\nTopográficamente a nivel lumbosacro (N20: Cono medular - raíces dorsales).')}>LUMBOSACRO</button>
+      <button className="w-full text-left px-4 py-2.5 mb-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-orange-500 hover:border-orange-500 text-white text-sm font-medium transition-all" onClick={() => applyTopInf('perifericoi',  '\n\nTopográficamente a nivel periférico (P9-N18: Fibras nerviosas mielínicas - plexo sacro).')}>PERIFÉRICO</button>
       <SkipButton onPress={() => goTo('H')} label="Sin topografía →" />
     </div>
   );
@@ -1512,10 +1512,10 @@ export default function ReportFace() {
 
       {/* ══ MODAL FULLSCREEN ══ */}
       <div style={{
-        position: 'fixed', inset: 0, zIndex: 9999,
+        position: 'relative', zIndex: 1,
         background: '#0a0a0a',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
-        overflowY: 'auto',
+        minHeight: '100vh',
       }}>
 
         {/* ── Barra superior ── */}
@@ -1530,7 +1530,9 @@ export default function ReportFace() {
           <div>
             <button
               onClick={() => router.push('/Reporte')}
-              style={{ display:'flex', alignItems:'center', justifyContent:'center', width:34, height:34, borderRadius:'50%', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.12)', cursor:'pointer', padding:0 }}
+              style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:'50%', background:'#1C1C1C', border:'2px solid #c44900', cursor:'pointer', padding:8, transition:'background 0.15s' }}
+              onMouseEnter={e => { e.currentTarget.style.background='#c44900'; }}
+              onMouseLeave={e => { e.currentTarget.style.background='#1C1C1C'; }}
             >
               <img src="/assets/IconSVG/I_Crop.svg" alt="Regresar" style={{ width:18, height:18, filter:'invert(1)' }} />
             </button>
@@ -1551,12 +1553,7 @@ export default function ReportFace() {
             />
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-            {session?.user?.imageUrl && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={session.user.imageUrl} alt="" style={{ width: 32, height: 32, borderRadius: 8, objectFit: 'contain', opacity: 0.85 }} />
-            )}
-          </div>
+          <div />
         </div>
 
         {/* ── Zona centrada ── */}

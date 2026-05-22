@@ -33,7 +33,7 @@ const buildBaseName = (paciente) => {
 /* ─── Modales ─────────────────────────────────────────────────────────────── */
 function PlantillaModal({ onSelect, onClose }) {
   return (
-    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/60 z-[99999] flex items-center justify-center p-4">
       <div className="bg-[#1a1a1a] border-2 border-orange-500 rounded-2xl w-full max-w-sm p-6 shadow-2xl">
         <div className="flex items-center justify-between mb-5">
           <h3 className="text-white font-bold text-xl">Elige una plantilla</h3>
@@ -70,7 +70,7 @@ function PlantillaModal({ onSelect, onClose }) {
 /* Modal procesando */
 function ProgressModal({ progress, onClose }) {
   return (
-    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/80 z-[99999] flex items-center justify-center p-4">
       <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl w-full max-w-xs p-6 shadow-2xl text-center">
         <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
         <p className="text-white font-semibold mb-2">Procesando…</p>
@@ -86,7 +86,7 @@ function ProgressModal({ progress, onClose }) {
 /* Modal éxito — ¡Reporte listo! con Abrir y Link */
 function SuccessModal({ filename, pdfUrl, onAbrir, onLink, onClose }) {
   return (
-    <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/70 z-[99999] flex items-center justify-center p-4">
       <div className="bg-[#111] border-2 border-orange-500 rounded-2xl w-full max-w-sm p-6 shadow-2xl text-center relative">
         <button onClick={onClose}
           className="absolute top-3 right-4 text-white text-xl font-bold leading-none">✕</button>
@@ -285,7 +285,7 @@ function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onCl
   const canGenerate = !generating && (justReport || files.length > 0);
 
   return (
-    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/80 z-[99999] flex items-center justify-center p-4 overflow-y-auto">
       <div className="bg-[#111] border border-[#333] rounded-2xl w-full max-w-sm shadow-2xl relative my-auto">
 
         {/* Header */}
@@ -593,3 +593,4 @@ export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [],
     </>
   );
 }
+

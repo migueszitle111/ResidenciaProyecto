@@ -1,13 +1,12 @@
 // app/s/[slug]/page.js
 export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 import { notFound } from 'next/navigation';
-import { getSupabaseAdmin, SHARE_BUCKET, getBucketFromPath, getPathWithoutBucket } from '@/lib/supabaseadmin';
+import { getSupabaseAdmin, getBucketFromPath, getPathWithoutBucket } from '@/lib/supabaseadmin';
 
 /* ========= Config ========= */
-const BRAND = '#B54B00';          // naranja MEDXpro
-const TTL_SECONDS = 60 * 10;      // URLs firmadas válidas 10 minutos
+const BRAND = '#B54B00';
 
 /* ========= Metadata para Open Graph (WhatsApp, Facebook, etc.) ========= */
 export async function generateMetadata({ params }) {

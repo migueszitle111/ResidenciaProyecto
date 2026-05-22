@@ -2,6 +2,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getSupabaseAdmin } from "@/lib/supabaseadmin";
 import { shareCompleteSchema } from "@/lib/api/schemas";
 import {
@@ -76,8 +77,18 @@ export async function POST(req) {
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
 
     const base = (envBase || "").replace(/\/$/, "");
-    const v = Date.now();
-    const url = `${base}/s/${link.slug}?v=${v}`;
+    const url = `${base}/s/${link.slug}`;
+
+    // Warm-up: invalidar cache e inmediatamente pre-generar la página
+    // para que WhatsApp encuentre los meta OG listos al pegar el link.
+    try {
+      revalidatePath(`/s/${link.slug}`);
+      // Fire-and-forget: no esperamos la respuesta para no bloquear al usuario
+      fetch(`${base}/s/${link.slug}`, {
+        headers: { "User-Agent": "MEDXpro-warmup/1.0" },
+        cache: "no-store",
+      }).catch(() => {});
+    } catch (_) {}
 
     return NextResponse.json({ ok: true, url, slug: link.slug });
   } catch (error) {

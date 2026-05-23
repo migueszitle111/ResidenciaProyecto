@@ -262,6 +262,11 @@ const MenuBotonesPt = () => {
 
     return (
         <div>
+            {/* Backdrop: clic fuera del menú lo cierra */}
+            {menuVisible && (
+                <div className="fixed inset-0 bg-black/40 z-10" onClick={toggleMenuVisibility} />
+            )}
+
             <div className="BannerTitlepage">
                 <div>Neurografía</div>
             </div>
@@ -283,7 +288,7 @@ const MenuBotonesPt = () => {
             </button>
 
             <div className="flex justify-center">
-                <div className={`max-h-full bg-[#3f3c3c] text-white rounded-2xl flex-shrink-0 overflow-hidden transition-all ${menuVisible ? 'w-1/5 p-4' : 'w-0 p-0'}`}>
+                <div className={`max-h-full bg-[#3f3c3c] text-white rounded-2xl flex-shrink-0 overflow-hidden transition-all relative z-20 ${menuVisible ? 'w-1/5 p-4 border border-orange-500' : 'w-0 p-0'}`}>
                         <h2 className="text-lg mb-4">Neurografía</h2>
 
                         {/* Buscador con autocompletado */}
@@ -313,24 +318,28 @@ const MenuBotonesPt = () => {
 
                         {/* Menú original */}
                         {Neurolografia.map((menuOption, menuIndex) => (
-                            <div key={menuIndex} className="ml-2">
+                            <div key={menuIndex} className="mb-1">
                                 <button
-                                    className="w-full text-left py-2 hover:text-orange-600"
+                                    className={`w-full text-left py-2 px-2 rounded-lg transition-colors ${
+                                        visibleSubMenu === menuOption.Menu
+                                            ? 'bg-orange-500 text-white'
+                                            : 'hover:text-orange-400'
+                                    }`}
                                     onClick={() => toggleSubMenuVisibility(menuOption.Menu)}
                                 >
-                                    › {menuOption.Menu}
+                                    {visibleSubMenu === menuOption.Menu ? '▽' : '▷'} {menuOption.Menu}
                                 </button>
                                 {visibleSubMenu === menuOption.Menu && (
-                                    <div className="ml-4">
+                                    <div className="ml-4 mt-1">
                                         {menuOption.Submenu.map((submenuOption, submenuIndex) => (
                                             <button
                                                 key={submenuIndex}
-                                                className={`w-full text-sm text-left py-1 hover:text-orange-600 ${
-                                                    selectedOption === submenuOption ? "text-orange-600" : ""
+                                                className={`w-full text-sm text-left py-1 px-1 hover:text-orange-400 transition-colors ${
+                                                    selectedOption === submenuOption ? "text-orange-400" : "text-gray-300"
                                                 }`}
                                                 onClick={() => handleClick(submenuOption)}
                                             >
-                                                {submenuOption}
+                                                ● {submenuOption}
                                             </button>
                                         ))}
                                     </div>
@@ -413,3 +422,4 @@ const MenuBotonesPt = () => {
 };
 
 export default MenuBotonesPt;
+

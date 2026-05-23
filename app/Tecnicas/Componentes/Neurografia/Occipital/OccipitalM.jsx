@@ -9,10 +9,7 @@ const OccipitalM = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [imageBoxVisible, setImageBoxVisible] = useState(false);
-    const [imageBoxContent, setImageBoxContent] = useState('');
-    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -46,16 +43,17 @@ const OccipitalM = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
-        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setTooltipIcon(null);
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
+    const handleButtonClick = (content, position, iconType = null) => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
+            setTooltipIcon(null);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
-            setTextBoxClass(customClass);
+            setTooltipIcon(iconType);
             setTextBoxVisible(true);
         }
     };
@@ -117,20 +115,29 @@ const OccipitalM = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnOc1" onClick={() => handleButtonClick('2 cm en direccion cefálica tomando como referencia el electrodo activo.', {  top: '60%', left: '23%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnOc2" onClick={() => handleButtonClick('ÁREA OCCIPITAL - Electrodo de aguja subdérmico, colocado en el trayecto del ápex, 1 cm lateral a la protuberancia occipital externa ipsilateral al lado a estimular (insertar de forma oblicua en dirección cefálica).', { top: '60%', left: '23%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnOc3" onClick={() => handleButtonClick('ESPACIO INTERVERTEBRAL C1-C2. Con electrodo de aguja monopolar (cátodo), 6-8 cm en dirección caudal de electrodo activo, 1 cm lateral a la línea media con referencia al borde inferior de la apófisis mastoides, emulando las técnicas de estimulación de raíz (colocar ánodo 3-4 cm caudal).', {  top: '58%', left: '23%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnOc4" onClick={() => handleButtonClick('Apófisis espinosa C7.', { top: '60%', left: '23%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnOc1" onClick={() => handleButtonClick('2 cm en direccion cefálica tomando como referencia el electrodo activo.', {  top: '60%', left: '23%' }, 'R')}></button>}
+                {currentImageIndex === 0 && <button className="btnOc2" onClick={() => handleButtonClick('ÁREA OCCIPITAL - Electrodo de aguja subdérmico, colocado en el trayecto del ápex, 1 cm lateral a la protuberancia occipital externa ipsilateral al lado a estimular (insertar de forma oblicua en dirección cefálica).', { top: '60%', left: '23%'}, 'A')}></button>}
+                {currentImageIndex === 0 && <button className="btnOc3" onClick={() => handleButtonClick('ESPACIO INTERVERTEBRAL C1-C2. Con electrodo de aguja monopolar (cátodo), 6-8 cm en dirección caudal de electrodo activo, 1 cm lateral a la línea media con referencia al borde inferior de la apófisis mastoides, emulando las técnicas de estimulación de raíz (colocar ánodo 3-4 cm caudal).', {  top: '58%', left: '23%' }, 'E')}></button>}
+                {currentImageIndex === 0 && <button className="btnOc4" onClick={() => handleButtonClick('Apófisis espinosa C7.', { top: '60%', left: '23%'}, 'T')}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-OccipitalM-G.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-OccipitalM-T.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
-                <div
-                    className={`text-boxMs ${textBoxClass}`}
-                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
-                >
-                    {textBoxContent}
+                <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                    {/* Icono circular según el tipo de botón */}
+                    {tooltipIcon && (
+                        <img
+                            src={`/assets/tecnicas/Info/S_${tooltipIcon}.png`}
+                            alt={tooltipIcon}
+                            className="tooltip-icon"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    )}
+                    <div className={`tooltip-text-box${tooltipIcon ? ' with-icon' : ''}`}>
+                        {textBoxContent}
+                    </div>
                 </div>
             )}
             {modalVisible && (

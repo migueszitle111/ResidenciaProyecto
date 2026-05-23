@@ -688,7 +688,50 @@ color: white;
     font-family: 'Arial', sans-serif;
     font-size: 1em;
     border: 1px solid #ddd;
-    white-space: pre-line; /* Asegura que los saltos de línea se respeten */
+    white-space: pre-line; /* Asegura que los saltos de línea se respeten */ 
+}
+
+/* ── Tooltip: ícono circular + caja de texto (estilo App) ── */
+.tooltip-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 100;
+    /* El ícono (44 px) sobresale 22 px a la izquierda del wrapper */
+    padding-left: 22px;
+    transform: translateY(-50%);
+}
+
+.tooltip-icon {
+    position: absolute;
+    left: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: contain;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.tooltip-text-box {
+    background-color: rgba(45, 45, 45, 0.90);
+    border-radius: 10px;
+    padding: 8px 14px;
+    color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85em;
+    line-height: 1.5;
+    max-width: 28vw;
+    word-wrap: break-word;
+    white-space: pre-line;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Cuando hay ícono, deja espacio para que no se superponga al texto */
+.tooltip-text-box.with-icon {
+    padding-left: 30px;
 }
 
 .zoomable-imageMt:hover {

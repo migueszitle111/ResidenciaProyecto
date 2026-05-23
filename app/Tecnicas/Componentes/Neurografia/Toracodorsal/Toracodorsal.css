@@ -219,3 +219,44 @@
     width: 160px; /* Ajusta el tamaño del GIF */
     margin-bottom: 15px; /* Espacio entre el GIF y el texto */
 }
+
+/* Tooltip: icono circular + caja de texto */
+.tooltip-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 100;
+    padding-left: 22px;
+    transform: translateY(-50%);
+}
+
+.tooltip-icon {
+    position: absolute;
+    left: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: contain;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.tooltip-text-box {
+    background-color: rgba(45, 45, 45, 0.90);
+    border-radius: 10px;
+    padding: 8px 14px;
+    color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85em;
+    line-height: 1.5;
+    max-width: 28vw;
+    word-wrap: break-word;
+    white-space: pre-line;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.tooltip-text-box.with-icon {
+    padding-left: 30px;
+}

@@ -9,10 +9,7 @@ const Pudendo = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [imageBoxVisible, setImageBoxVisible] = useState(false);
-    const [imageBoxContent, setImageBoxContent] = useState('');
-    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxPd');
+    const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -46,16 +43,17 @@ const Pudendo = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
-        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setTooltipIcon(null);
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxPd') => {
+    const handleButtonClick = (content, position, iconType = null) => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
+            setTooltipIcon(null);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
-            setTextBoxClass(customClass);
+            setTooltipIcon(iconType);
             setTextBoxVisible(true);
         }
     };
@@ -117,19 +115,28 @@ const Pudendo = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnPd1" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de referencia.', { top: '60%', left: '50%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPd2" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de captación.', { top: '60%', left: '50%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPd3" onClick={() => handleButtonClick('ELECTRODO “ST. MARK”. Con la punta del dedo índice y direccionando con una leve rotación hacia izquierda o derecha (30 a 45°) dependiendo del lado a evaluar, con una palpación delicada se buscará una protuberancia de consistencia firme que corresponde a la espina isquiática.', { top: '60%', left: '50%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPd1" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de referencia.', { top: '60%', left: '50%' }, 'R')}></button>}
+            {currentImageIndex === 0 && <button className="btnPd2" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de captación.', { top: '60%', left: '50%' }, 'A')}></button>}
+            {currentImageIndex === 0 && <button className="btnPd3" onClick={() => handleButtonClick('ELECTRODO “ST. MARK”. Con la punta del dedo índice y direccionando con una leve rotación hacia izquierda o derecha (30 a 45°) dependiendo del lado a evaluar, con una palpación delicada se buscará una protuberancia de consistencia firme que corresponde a la espina isquiática.', { top: '60%', left: '50%' }, 'E')}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/Pudendo-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Sacro/Pudendo-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
-                <div
-                    className={`text-boxPd ${textBoxClass}`}
-                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
-                >
-                    {textBoxContent}
+                <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                    {/* Icono circular según el tipo de botón */}
+                    {tooltipIcon && (
+                        <img
+                            src={`/assets/tecnicas/Info/S_${tooltipIcon}.png`}
+                            alt={tooltipIcon}
+                            className="tooltip-icon"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    )}
+                    <div className={`tooltip-text-box${tooltipIcon ? ' with-icon' : ''}`}>
+                        {textBoxContent}
+                    </div>
                 </div>
             )}
             {modalVisible && (

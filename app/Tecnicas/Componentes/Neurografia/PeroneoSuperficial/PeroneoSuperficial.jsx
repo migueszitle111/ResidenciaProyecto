@@ -9,10 +9,7 @@ const PeroneoSuperficial = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [imageBoxVisible, setImageBoxVisible] = useState(false);
-    const [imageBoxContent, setImageBoxContent] = useState('');
-    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -50,16 +47,17 @@ const PeroneoSuperficial = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
-        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setTooltipIcon(null);
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
+    const handleButtonClick = (content, position, iconType = null) => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
+            setTooltipIcon(null);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
-            setTextBoxClass(customClass);
+            setTooltipIcon(iconType);
             setTextBoxVisible(true);
         }
     };
@@ -121,33 +119,42 @@ const PeroneoSuperficial = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnPs1" onClick={() => handleButtonClick('Dorso del pie.', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs2" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo.', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs3" onClick={() => handleButtonClick('2 cm distal: registro de la rama cutánea dorsal medial y 1 cm lateral rama cutánea dorsal intermedia.', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs4" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo.', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs5" onClick={() => handleButtonClick('INTERMALEOLAR - Electrodo de superficie, colocar preferetemente barra en la línea media, entre el maléolo lateral y el tendón del tibial anterior, transversal a la intersección de ambos maléolos.', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnPs6" onClick={() => handleButtonClick('PIERNA LATERAL. (Antidrómico) 12-14 cm proximal del electrodo activo, anterior al musculo peroneo largo y adyacente al musculo tibial anterior.', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnPs1" onClick={() => handleButtonClick('Dorso del pie.', { top: '10%', left: '23%' }, 'T')}></button>}
+            {currentImageIndex === 0 && <button className="btnPs2" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo.', { top: '10%', left: '23%' }, 'R')}></button>}
+            {currentImageIndex === 0 && <button className="btnPs3" onClick={() => handleButtonClick('2 cm distal: registro de la rama cutánea dorsal medial y 1 cm lateral rama cutánea dorsal intermedia.', { top: '10%', left: '23%' }, 'A')}></button>}
+            {currentImageIndex === 0 && <button className="btnPs4" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo.', { top: '10%', left: '23%' }, 'R')}></button>}
+            {currentImageIndex === 0 && <button className="btnPs5" onClick={() => handleButtonClick('INTERMALEOLAR - Electrodo de superficie, colocar preferetemente barra en la línea media, entre el maléolo lateral y el tendón del tibial anterior, transversal a la intersección de ambos maléolos.', { top: '10%', left: '23%' }, 'A')}></button>}
+            {currentImageIndex === 0 && <button className="btnPs6" onClick={() => handleButtonClick('PIERNA LATERAL. (Antidrómico) 12-14 cm proximal del electrodo activo, anterior al musculo peroneo largo y adyacente al musculo tibial anterior.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoSp-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoSp-T-01.png",{ top: '5%', left: '2%' })}></button>}
             
 
-            {currentImageIndex === 1 && <button className="btnPs7" onClick={() => handleButtonClick('Dorso del pie.', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnPs8" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo.', { top: '10%', left: '23%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnPs9" onClick={() => handleButtonClick('INTERMALEOLAR - Electrodo de superficie, colocar preferetemente barra en la línea media, entre el maléolo lateral y el tendón del tibial anterior, transversal a la intersección de ambos maléolos.', { top: '10%', left: '23%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPs7" onClick={() => handleButtonClick('Dorso del pie.', { top: '10%', left: '23%' }, 'T')}></button>}
+            {currentImageIndex === 1 && <button className="btnPs8" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo.', { top: '10%', left: '23%' }, 'R')}></button>}
+            {currentImageIndex === 1 && <button className="btnPs9" onClick={() => handleButtonClick('INTERMALEOLAR - Electrodo de superficie, colocar preferetemente barra en la línea media, entre el maléolo lateral y el tendón del tibial anterior, transversal a la intersección de ambos maléolos.', { top: '10%', left: '23%' }, 'A')}></button>}
             {/* {currentImageIndex === 1 && <button className="btnPs10" onClick={() => handleButtonClick('8', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPs11" onClick={() => handleButtonClick('9', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPs12" onClick={() => handleButtonClick('10', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPs13" onClick={() => handleButtonClick('11', { top: '10%', left: '23%' })}></button>} */}
-            {currentImageIndex === 1 && <button className="btnPs14" onClick={() => handleButtonClick('PIERNA LATERAL. La estimulación se aplica de forma antidrómica como primer punto a 12 cm en dirección proximal del electrodo activo justo lateral al tendón extensor largo del primer ortejo en la región lateral de la pierna. Los siguientes puntos de estímulo de aplicaran cada centímetro en dirección distal hasta llegar al electrodo de registro.', { top: '15%', left: '23%' })}></button>}
+            {currentImageIndex === 1 && <button className="btnPs14" onClick={() => handleButtonClick('PIERNA LATERAL. La estimulación se aplica de forma antidrómica como primer punto a 12 cm en dirección proximal del electrodo activo justo lateral al tendón extensor largo del primer ortejo en la región lateral de la pierna. Los siguientes puntos de estímulo de aplicaran cada centímetro en dirección distal hasta llegar al electrodo de registro.', { top: '15%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoPf-G-02.png",{ top: '2%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
-                <div
-                    className={`text-boxMs ${textBoxClass}`}
-                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
-                >
-                    {textBoxContent}
+                <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                    {/* Icono circular según el tipo de botón */}
+                    {tooltipIcon && (
+                        <img
+                            src={`/assets/tecnicas/Info/S_${tooltipIcon}.png`}
+                            alt={tooltipIcon}
+                            className="tooltip-icon"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    )}
+                    <div className={`tooltip-text-box${tooltipIcon ? ' with-icon' : ''}`}>
+                        {textBoxContent}
+                    </div>
                 </div>
             )}
             {modalVisible && (

@@ -43,13 +43,11 @@ function VisorContent() {
       {/* Navegación */}
       <button
         onClick={() => router.back()}
-        className="text-slate-400 hover:text-white text-sm flex items-center gap-1 mb-4 transition-colors"
+        style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:'50%', background:'#1C1C1C', border:'2px solid #c44900', cursor:'pointer', padding:8, transition:'background 0.15s', marginBottom:16 }}
+        onMouseEnter={e => { e.currentTarget.style.background = '#c44900'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = '#1C1C1C'; }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="none"
-          viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-        Regresar
+        <img src="/assets/IconSVG/I_Crop.svg" alt="Regresar" style={{ width:18, height:18, filter:'invert(1)' }} />
       </button>
 
       <h1 className="text-xl font-bold text-white mb-1 leading-tight">{nombreCirugia}</h1>

@@ -227,6 +227,11 @@ const OVERLAYS_MOTORES = {
   izquierdo_indemne:  '/MotoresImg/INFERIORD.png',
   derecho_indemne:    '/MotoresImg/INFERIORI.png',
   bilateral_indemne:  '/MotoresImg/INFERIORD.png',   // se expande a array en expandOverlay
+  /* ===== INDEMNE por región ===== */
+  indemne_superiorD:  '/MotoresImg/SUPERIORD.png',
+  indemne_superiorI:  '/MotoresImg/SUPERIORI.png',
+  indemne_inferiorD:  '/MotoresImg/INFERIORD.png',
+  indemne_inferiorI:  '/MotoresImg/INFERIORI.png',
 
   /* ===== BASE ALTERADA (sin severidad) ===== */
   izquierdo_cortical:    '/MotoresImg/ViasAfectadas/SUPERIORD.png',
@@ -249,26 +254,40 @@ const OVERLAYS_MOTORES = {
   izquierdo_lumbasacroAlterada:  '/MotoresImg/ViasAfectadas/INFERIORD.png',
   derecho_lumbasacroAlterada:    '/MotoresImg/ViasAfectadas/INFERIORI.png',
 
-  /* ===== ALTERADA — CORTICAL ===== */
+  /* ===== ALTERADA — CORTICAL superior (_1) ===== */
   izquierdo_corticalAlterada_leve:     '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_1-D.png',
   derecho_corticalAlterada_leve:       '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_1.png',
-  izquierdo_corticalAlterada_moderado: '/MotoresImg/ViaAfectada/Rojo/VersionDerecha/MO_1-D.png',
+  izquierdo_corticalAlterada_moderado: '/MotoresImg/ViaAfectada/Rojo/MO_1-D.png',
   derecho_corticalAlterada_moderado:   '/MotoresImg/ViaAfectada/Rojo/MO_1.png',
   izquierdo_corticalAlterada_severo:   '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_1-D.png',
   derecho_corticalAlterada_severo:     '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_1.png',
+  /* ===== ALTERADA — CORTICAL inferior (_2) ===== */
+  izquierdo_corticalAlteradaInf_leve:     '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_2-D.png',
+  derecho_corticalAlteradaInf_leve:       '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_2.png',
+  izquierdo_corticalAlteradaInf_moderado: '/MotoresImg/ViaAfectada/Rojo/MO_2-D.png',
+  derecho_corticalAlteradaInf_moderado:   '/MotoresImg/ViaAfectada/Rojo/MO_2.png',
+  izquierdo_corticalAlteradaInf_severo:   '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_2-D.png',
+  derecho_corticalAlteradaInf_severo:     '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_2.png',
 
-  /* ===== ALTERADA — CERVICAL (mismas imágenes que cortical _1) ===== */
+  /* ===== ALTERADA — CERVICAL superior (_1) ===== */
   izquierdo_cervicalAlterada_leve:     '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_1-D.png',
   derecho_cervicalAlterada_leve:       '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_1.png',
-  izquierdo_cervicalAlterada_moderado: '/MotoresImg/ViaAfectada/Rojo/VersionDerecha/MO_1-D.png',
+  izquierdo_cervicalAlterada_moderado: '/MotoresImg/ViaAfectada/Rojo/MO_1-D.png',
   derecho_cervicalAlterada_moderado:   '/MotoresImg/ViaAfectada/Rojo/MO_1.png',
   izquierdo_cervicalAlterada_severo:   '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_1-D.png',
   derecho_cervicalAlterada_severo:     '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_1.png',
+  /* ===== ALTERADA — CERVICAL inferior (_2) ===== */
+  izquierdo_cervicalAlteradaInf_leve:     '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_2-D.png',
+  derecho_cervicalAlteradaInf_leve:       '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_2.png',
+  izquierdo_cervicalAlteradaInf_moderado: '/MotoresImg/ViaAfectada/Rojo/MO_2-D.png',
+  derecho_cervicalAlteradaInf_moderado:   '/MotoresImg/ViaAfectada/Rojo/MO_2.png',
+  izquierdo_cervicalAlteradaInf_severo:   '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_2-D.png',
+  derecho_cervicalAlteradaInf_severo:     '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_2.png',
 
   /* ===== ALTERADA — LUMBOSACRO ===== */
   izquierdo_lumbasacroAlterada_leve:     '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_2-D.png',
   derecho_lumbasacroAlterada_leve:       '/MotoresImg/ViaAfectada/Naranja/BP_Motores_Naranja_2.png',
-  izquierdo_lumbasacroAlterada_moderado: '/MotoresImg/ViaAfectada/Rojo/VersionDerecha/MO_2-D.png',
+  izquierdo_lumbasacroAlterada_moderado: '/MotoresImg/ViaAfectada/Rojo/MO_2-D.png',
   derecho_lumbasacroAlterada_moderado:   '/MotoresImg/ViaAfectada/Rojo/MO_2.png',
   izquierdo_lumbasacroAlterada_severo:   '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_2-D.png',
   derecho_lumbasacroAlterada_severo:     '/MotoresImg/ViaAfectada/Marron/BP_Motores_Marron_2.png',
@@ -370,7 +389,6 @@ function StepA({ goTo, setRootFlow, setSeverity, addOverlays }) {
         label="INDEMNE"
         onPress={() => {
           setRootFlow('indemne'); setSeverity(null);
-          addOverlays(['izquierdo_indemne', 'derecho_indemne']);
           goTo('E2');
         }}
       />
@@ -510,21 +528,22 @@ function StepE2({ removeConclusion, setStep, resetAll, side, setSide, goTo, addO
       />
       <StepTitle>Lado</StepTitle>
       <ConclusionBtn value="izquierdo_indemne" title=" para lado izquierdo" label="IZQUIERDO"
-        onPress={() => { setSide('izquierdo'); addOverlay('izquierdo_indemne'); goTo('F2'); }} />
+        onPress={() => { setSide('izquierdo'); goTo('F2'); }} />
       <ConclusionBtn value="derecho_indemne" title=" para lado derecho" label="DERECHO"
-        onPress={() => { setSide('derecho'); addOverlay('derecho_indemne'); goTo('F2'); }} />
+        onPress={() => { setSide('derecho'); goTo('F2'); }} />
       <ConclusionBtn value="bilateral_indemne" title=" de forma bilateral" label="BILATERAL"
-        onPress={() => { setSide('bilateral'); addOverlays(['izquierdo_indemne','derecho_indemne']); goTo('F2'); }} />
+        onPress={() => { setSide('bilateral'); goTo('F2'); }} />
     </div>
   );
 }
 
-function StepF({ goTo, removeConclusion, setStep, resetAll, side, rootFlow, severity, addOverlays, expandOverlay }) {
+function StepF({ goTo, removeConclusion, setStep, resetAll, side, rootFlow, severity, addOverlays, expandOverlay, removeLastOverlayGroup }) {
   return (
     <div>
       <NavRow
         onBack={() => {
           [`${side}_cortical`,`${side}_cervical`,`${side}_lumbasacro`].forEach(v => v && removeConclusion(v));
+          removeLastOverlayGroup();
           setStep('E');
         }}
         onReset={resetAll}
@@ -555,12 +574,26 @@ function StepF({ goTo, removeConclusion, setStep, resetAll, side, rootFlow, seve
   );
 }
 
-function StepF2({ goTo, removeConclusion, setStep, resetAll }) {
+function StepF2({ goTo, removeConclusion, setStep, resetAll, side, addOverlays, removeLastOverlayGroup }) {
+  const overlaysFor = (region) => {
+    // cortical → SUPERIOR e INFERIOR; cervical → solo SUPERIOR; lumbasacro → solo INFERIOR
+    const usaSuperior = region === 'cortical' || region === 'cervical';
+    const usaInferior = region === 'cortical' || region === 'lumbasacro';
+    const keys = [];
+    const lados = side === 'bilateral' ? ['izquierdo', 'derecho'] : [side];
+    lados.forEach(l => {
+      if (usaSuperior) keys.push(l === 'izquierdo' ? 'indemne_superiorD' : 'indemne_superiorI');
+      if (usaInferior) keys.push(l === 'izquierdo' ? 'indemne_inferiorD' : 'indemne_inferiorI');
+    });
+    return keys;
+  };
+
   return (
     <div>
       <NavRow
         onBack={() => {
           ['cortical','cervical','lumbasacro'].forEach(v => v && removeConclusion(v));
+          removeLastOverlayGroup();
           setStep('E2');
         }}
         onReset={resetAll}
@@ -570,19 +603,19 @@ function StepF2({ goTo, removeConclusion, setStep, resetAll }) {
         value="cortical"
         title=" a través de región medular anterolateral al estímulo en corteza motora primaria."
         label="CORTICAL"
-        onPress={() => goTo('H')}
+        onPress={() => { addOverlays(overlaysFor('cortical')); goTo('H'); }}
       />
       <ConclusionBtn
         value="cervical"
         title=" a través de región medular anterolateral al estímulo en astas y raíces cervicales."
         label="CERVICAL"
-        onPress={() => goTo('H')}
+        onPress={() => { addOverlays(overlaysFor('cervical')); goTo('H'); }}
       />
       <ConclusionBtn
         value="lumbasacro"
         title=" a través de región medular anterolateral al estímulo en astas y raíces lumbosacras."
         label="LUMBOSACRO"
-        onPress={() => goTo('H')}
+        onPress={() => { addOverlays(overlaysFor('lumbasacro')); goTo('H'); }}
       />
     </div>
   );
@@ -708,24 +741,44 @@ export default function ReportFace() {
   const expandOverlay = useCallback((raw) => {
     const exists = (key) => Boolean(OVERLAYS_MOTORES[key]);
 
-    if (rootFlow !== 'alterada') return []; // INDEMNE: no se pintan capas de severidad
+    if (rootFlow !== 'alterada') return [];
 
-    // Para ALTERADA: elegir overlay con severidad
+    // Capas indemne de fondo según región y lado
+    const regionKey = raw.replace(/^(izquierdo|derecho|bilateral)_/, '');
+    const usaSuperior = regionKey === 'cortical' || regionKey === 'cervical';
+    const usaInferior = regionKey === 'cortical' || regionKey === 'lumbasacro';
+    const lados = raw.startsWith('bilateral_') ? ['izquierdo', 'derecho'] : [raw.split('_')[0]];
+
+    const fondoKeys = [];
+    lados.forEach(l => {
+      if (usaSuperior) fondoKeys.push(l === 'izquierdo' ? 'indemne_superiorD' : 'indemne_superiorI');
+      if (usaInferior) fondoKeys.push(l === 'izquierdo' ? 'indemne_inferiorD' : 'indemne_inferiorI');
+    });
+
+    // cortical emite dos capas: superior (_1) + inferior (_2 via AlteradaInf)
+    // cervical y lumbosacro solo una capa cada uno
+    const buildAlteradaKeys = (ladoPrefix) => {
+      const sup = severity ? `${ladoPrefix}Alterada_${severity}` : `${ladoPrefix}Alterada`;
+      const keys = exists(sup) ? [sup] : [];
+      if (regionKey === 'cortical') {
+        const inf = severity ? `${ladoPrefix}AlteradaInf_${severity}` : `${ladoPrefix}AlteradaInf`;
+        if (exists(inf)) keys.push(inf);
+      }
+      return keys;
+    };
+
+    let alteradaKeys = [];
     if (raw.startsWith('bilateral_')) {
       const base = raw.replace('bilateral_', '');
-      const perSide = [`izquierdo_${base}`, `derecho_${base}`];
-      if (severity) {
-        return perSide.map(sr => `${sr}Alterada_${severity}`).filter(exists);
-      }
-      return perSide.map(sr => `${sr}Alterada`).filter(exists);
+      alteradaKeys = [
+        ...buildAlteradaKeys(`izquierdo_${base}`),
+        ...buildAlteradaKeys(`derecho_${base}`),
+      ];
+    } else {
+      alteradaKeys = buildAlteradaKeys(raw);
     }
 
-    if (severity) {
-      const key = `${raw}Alterada_${severity}`;
-      return exists(key) ? [key] : [];
-    }
-    const key = `${raw}Alterada`;
-    return exists(key) ? [key] : [];
+    return [...fondoKeys.filter(exists), ...alteradaKeys];
   }, [rootFlow, severity]);
 
   /* ── Reset total ── */

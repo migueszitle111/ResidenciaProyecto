@@ -9,10 +9,7 @@ const Toracodorsal = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [imageBoxVisible, setImageBoxVisible] = useState(false);
-    const [imageBoxContent, setImageBoxContent] = useState('');
-    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -48,16 +45,17 @@ const Toracodorsal = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
-        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setTooltipIcon(null);
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
+    const handleButtonClick = (content, position, iconType = null) => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
+            setTooltipIcon(null);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
-            setTextBoxClass(customClass);
+            setTooltipIcon(iconType);
             setTextBoxVisible(true);
         }
     };
@@ -120,17 +118,29 @@ const Toracodorsal = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnTd1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', {  top: '35%', left: '25%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTd2" onClick={() => handleButtonClick('Articulación acromoclavicular.', { top: '35%', left: '25%'})}></button>}
-            {currentImageIndex === 0 && <button className="btnTd3" onClick={() => handleButtonClick('LATISSIMUS DORSI C6, C7, C8 - Electrodo de aguja concéntrico insertado en el vientre muscular, pared posterior de la axila.', {  top: '35%', left: '25%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTd4" onClick={() => handleButtonClick('No se requiere.', { top: '35%', left: '25%'})}></button>}
+            {currentImageIndex === 0 && <button className="btnTd1" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', {  top: '35%', left: '25%' }, 'E')}></button>}
+            {currentImageIndex === 0 && <button className="btnTd2" onClick={() => handleButtonClick('Articulación acromoclavicular.', { top: '35%', left: '25%'}, 'T')}></button>}
+            {currentImageIndex === 0 && <button className="btnTd3" onClick={() => handleButtonClick('LATISSIMUS DORSI C6, C7, C8 - Electrodo de aguja concéntrico insertado en el vientre muscular, pared posterior de la axila.', {  top: '35%', left: '25%' }, 'A')}></button>}
+            {currentImageIndex === 0 && <button className="btnTd4" onClick={() => handleButtonClick('No se requiere.', { top: '35%', left: '25%'}, 'R')}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-G-01.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-T-01.png",{ top: '2%', left: '2%' })}></button>}
                 
             </div>
             {textBoxVisible && (
-                <div className="text-boxTd" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
-                    {textBoxContent}
+                <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                    {/* Icono circular según el tipo de botón */}
+                    {tooltipIcon && (
+                        <img
+                            src={`/assets/tecnicas/Info/S_${tooltipIcon}.png`}
+                            alt={tooltipIcon}
+                            className="tooltip-icon"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    )}
+                    <div className={`tooltip-text-box${tooltipIcon ? ' with-icon' : ''}`}>
+                        {textBoxContent}
+                    </div>
                 </div>
             )}
             {modalVisible && (

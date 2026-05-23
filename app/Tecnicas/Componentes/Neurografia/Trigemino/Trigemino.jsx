@@ -9,10 +9,7 @@ const Trigemino = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [imageBoxVisible, setImageBoxVisible] = useState(false);
-    const [imageBoxContent, setImageBoxContent] = useState('');
-    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -46,16 +43,17 @@ const Trigemino = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
-        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setTooltipIcon(null);
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
+    const handleButtonClick = (content, position, iconType = null) => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
+            setTooltipIcon(null);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
-            setTextBoxClass(customClass);
+            setTooltipIcon(iconType);
             setTextBoxVisible(true);
         }
     };
@@ -117,20 +115,29 @@ const Trigemino = () => {
         />
         <div>
             {/* Primera Imagen */}
-            {currentImageIndex === 0 && <button className="btnTg1" onClick={() => handleButtonClick('ÁREA FRONTAL. El cátodo del estimulador se coloca en la esquina lateral superior del hueso frontal.', { top: '62%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTg2" onClick={() => handleButtonClick('RAMA OFTÁLIMICA - El electrodo activo de superficie se coloca en el foramen supraorbitario.', { top: '62%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTg3" onClick={() => handleButtonClick('Medial al elétrodo activo, 2-3 cm de distancia.', { top: '62%', left: '23%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnTg4" onClick={() => handleButtonClick('Región frontal contralateral.', { top: '62%', left: '23%' })}></button>}
+            {currentImageIndex === 0 && <button className="btnTg1" onClick={() => handleButtonClick('ÁREA FRONTAL. El cátodo del estimulador se coloca en la esquina lateral superior del hueso frontal.', { top: '62%', left: '23%' }, 'E')}></button>}
+            {currentImageIndex === 0 && <button className="btnTg2" onClick={() => handleButtonClick('RAMA OFTÁLIMICA - El electrodo activo de superficie se coloca en el foramen supraorbitario.', { top: '62%', left: '23%' }, 'A')}></button>}
+            {currentImageIndex === 0 && <button className="btnTg3" onClick={() => handleButtonClick('Medial al elétrodo activo, 2-3 cm de distancia.', { top: '62%', left: '23%' }, 'R')}></button>}
+            {currentImageIndex === 0 && <button className="btnTg4" onClick={() => handleButtonClick('Región frontal contralateral.', { top: '62%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Trigemino-G.png",{ top: '2%', left: '2%' })}></button>}
             {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Trigemino-T.png",{ top: '5%', left: '2%' })}></button>}
             
             </div>
             {textBoxVisible && (
-                <div
-                    className={`text-boxMs ${textBoxClass}`}
-                    style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
-                >
-                    {textBoxContent}
+                <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                    {/* Icono circular según el tipo de botón */}
+                    {tooltipIcon && (
+                        <img
+                            src={`/assets/tecnicas/Info/S_${tooltipIcon}.png`}
+                            alt={tooltipIcon}
+                            className="tooltip-icon"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    )}
+                    <div className={`tooltip-text-box${tooltipIcon ? ' with-icon' : ''}`}>
+                        {textBoxContent}
+                    </div>
                 </div>
             )}
             {modalVisible && (

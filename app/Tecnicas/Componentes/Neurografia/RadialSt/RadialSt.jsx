@@ -8,10 +8,7 @@ const RadialSt = () => {
     const [textBoxVisible, setTextBoxVisible] = useState(false);
     const [textBoxContent, setTextBoxContent] = useState('');
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [imageBoxVisible, setImageBoxVisible] = useState(false);
-    const [imageBoxContent, setImageBoxContent] = useState('');
-    const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
-    const [textBoxClass, setTextBoxClass] = useState('text-boxMs');
+    const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -51,16 +48,17 @@ const RadialSt = () => {
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
-        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setTooltipIcon(null);
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxMs') => {
+    const handleButtonClick = (content, position, iconType = null) => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
+            setTooltipIcon(null);
         } else {
             setTextBoxContent(content);
             setTextBoxPosition(position);
-            setTextBoxClass(customClass);
+            setTooltipIcon(iconType);
             setTextBoxVisible(true);
         }
     };
@@ -123,24 +121,36 @@ const RadialSt = () => {
         />
         <div>
             {/* Primera Imagen */}
-                {currentImageIndex === 0 && <button className="btnRSt1" onClick={() => handleButtonClick('MUÑECA. En la parte media distal del radio 10/12/14 cm proximal al electrodo activo cara volar del antebrazo.', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnRSt2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 0 && <button className="btnRSt3" onClick={() => handleButtonClick('BASE DE PULGAR - Dorso de la mano entre los tendones del extensor largo y corto del pulgar, 1 cm distal al borde el radio.', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnRSt4" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo, borde lateral del segundo metacarpiano.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 0 && <button className="btnRSt1" onClick={() => handleButtonClick('MUÑECA. En la parte media distal del radio 10/12/14 cm proximal al electrodo activo cara volar del antebrazo.', {  top: '12%', left: '32%' }, 'E')}></button>}
+                {currentImageIndex === 0 && <button className="btnRSt2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'}, 'T')}></button>}
+                {currentImageIndex === 0 && <button className="btnRSt3" onClick={() => handleButtonClick('BASE DE PULGAR - Dorso de la mano entre los tendones del extensor largo y corto del pulgar, 1 cm distal al borde el radio.', {  top: '12%', left: '32%' }, 'A')}></button>}
+                {currentImageIndex === 0 && <button className="btnRSt4" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo, borde lateral del segundo metacarpiano.', { top: '12%', left: '32%'}, 'R')}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-G-01.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 
-                {currentImageIndex === 1 && <button className="btnRSt5" onClick={() => handleButtonClick('3 distal a elétrodo activo sobre articulación interfalángica.', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnRSt6" onClick={() => handleButtonClick('DORSO DEL PULGAR - Discretamente distal a la primera articulación metacarpofalángica.', { top: '12%', left: '32%'})}></button>}
-                {currentImageIndex === 1 && <button className="btnRSt7" onClick={() => handleButtonClick('Dorso de la mano.', {  top: '12%', left: '32%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnRSt8" onClick={() => handleButtonClick('MUÑECA. En la parte media distal del radio 10/12/14 cm proximal al electrodo activo cara volar del antebrazo.', { top: '12%', left: '32%'})}></button>}
+                {currentImageIndex === 1 && <button className="btnRSt5" onClick={() => handleButtonClick('3 distal a elétrodo activo sobre articulación interfalángica.', {  top: '12%', left: '32%' }, 'R')}></button>}
+                {currentImageIndex === 1 && <button className="btnRSt6" onClick={() => handleButtonClick('DORSO DEL PULGAR - Discretamente distal a la primera articulación metacarpofalángica.', { top: '12%', left: '32%'}, 'A')}></button>}
+                {currentImageIndex === 1 && <button className="btnRSt7" onClick={() => handleButtonClick('Dorso de la mano.', {  top: '12%', left: '32%' }, 'T')}></button>}
+                {currentImageIndex === 1 && <button className="btnRSt8" onClick={() => handleButtonClick('MUÑECA. En la parte media distal del radio 10/12/14 cm proximal al electrodo activo cara volar del antebrazo.', { top: '12%', left: '32%'}, 'E')}></button>}
                 {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-G-01.png",{ top: '2%', left: '2%' })}></button>}
                 {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-T-01.png",{ top: '5%', left: '2%' })}></button>}
                 
             </div>
             {textBoxVisible && (
-                <div className="text-boxUSt" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
-                    {textBoxContent}
+                <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>
+                    {/* Icono circular según el tipo de botón */}
+                    {tooltipIcon && (
+                        <img
+                            src={`/assets/tecnicas/Info/S_${tooltipIcon}.png`}
+                            alt={tooltipIcon}
+                            className="tooltip-icon"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    )}
+                    <div className={`tooltip-text-box${tooltipIcon ? ' with-icon' : ''}`}>
+                        {textBoxContent}
+                    </div>
                 </div>
             )}
             {modalVisible && (

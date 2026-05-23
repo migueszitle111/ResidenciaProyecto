@@ -1274,7 +1274,7 @@ export default function ReportFace() {
               <div style={{ marginTop: 4 }}>
                 {listaVisual.length === 0
                   ? <p style={{ color: 'rgba(255,255,255,0.25)', fontSize: 12, fontStyle: 'italic', margin: 0 }}>Sin conclusiones aún.</p>
-                  : <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2px 24px' }}>
+                  : <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                       {listaVisual.map(({ k, v }) => (
                         <p key={k} style={{ color: 'rgba(255,255,255,0.75)', fontSize: 12, margin: 0 }}>
                           <span style={{ color: '#f97316', fontWeight: 600 }}>{k}:</span> {v}

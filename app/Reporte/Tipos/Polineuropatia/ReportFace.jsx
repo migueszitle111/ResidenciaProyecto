@@ -90,6 +90,7 @@ const OVERLAYS_POLI = {
   'Segmentaria':             '/PolineuropatiaImg/PO_Proximal.png',
   'GenePx':                  '/PolineuropatiaImg/PO_Proximal2.png',
   'GeneDs':                  '/PolineuropatiaImg/PO_Distal2.png',
+  'LongitudDep':             '/PolineuropatiaImg/PO_LongitudDependiente.png',
 };
 const OVERLAY_GROUPS = { 'Generalizada': ['GenePx', 'GeneDs'] };
 
@@ -436,12 +437,13 @@ function StepI({ goTo, setStep, removeConclusion, resetAll, addOverlays, esDesmi
 function StepJ({ goTo, setStep, removeConclusion, resetAll, addOverlays, esDesmielinizante, esSensitiva }) {
   const { addConclusion } = useContext(ReportContext);
   const opts = [
-    ['ext_proximal',     'ProximalImg', ' proximal.'],
-    ['ext_distal',       'DistalImg',   ' distal.'],
-    ['ext_segmentaria',  'ProximalAim', ' segmentaria.'],
-    ['ext_generalizada', null,          ' generalizada.'],
+    ['ext_proximal',            'ProximalImg',  ' proximal.'],
+    ['ext_distal',              'DistalImg',    ' distal.'],
+    ['ext_segmentaria',         'ProximalAim',  ' segmentaria.'],
+    ['ext_generalizada',        null,           ' generalizada.'],
+    ['ext_longitud_dependiente','LongitudDep',  ' longitud dependiente.'],
   ];
-  const labels = ['PROXIMAL','DISTAL','SEGMENTARIA','GENERALIZADA'];
+  const labels = ['PROXIMAL','DISTAL','SEGMENTARIA','GENERALIZADA','LONGITUD DEPENDIENTE'];
 
   /* Siguiente paso:
      - desmielinizante (cualquier fibra) → L_des (RecuperacionDes, con \n\n)

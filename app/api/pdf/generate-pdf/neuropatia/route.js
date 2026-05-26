@@ -1,3 +1,5 @@
+// app/api/pdf/generate-pdf/neuropatia/route.js
+
 import { NextResponse }  from 'next/server';
 import { PDFDocument, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
@@ -6,11 +8,6 @@ import path from 'path';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-const isDev   = process.env.NODE_ENV !== 'production';
-const baseUrl = isDev
-  ? 'http://localhost:3000'
-  : (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.medxproapp.com');
 
 const BACKEND_URL = 'https://backendmedxpro-tef2.onrender.com';
 
@@ -27,6 +24,7 @@ const CONTENT_W = PW - MARGIN_L - MARGIN_R;
 const LAM_IMG_RATIO = 2048 / 1582;
 
 const OVERLAYS_NEURO_P = {
+  // ── Nervios base ────────────────────────────────────────────────────────────
   'MedianoImg':           '/NeuropatiaImg/NOMediano.png',
   'MedianoFlz':           '/NeuropatiaImg/MedianoFlz.png',
   'MedianoFIqz':          '/NeuropatiaImg/FocalMIzq.png',
@@ -63,6 +61,119 @@ const OVERLAYS_NEURO_P = {
   'Ilioiguinal':          '/NeuropatiaImg/Ilioinguinal.png',
   'Ciatico':              '/NeuropatiaImg/Ciatico.png',
   'Pudendo':              '/NeuropatiaImg/Pudendo.png',
+  // ── Overlays adicionales (base) ─────────────────────────────────────────────
+  'Mediano':              '/assets/NeuropatiaImg/NO_1_Mediano.png',
+  'InteroseoAnterior':    '/assets/NeuropatiaImg/NO_Interoseo Anterior.png',
+  'AccesorioBase':        '/assets/NeuropatiaImg/NO_Accesorio.png',
+  'AntebraquialCutaneo':  '/assets/NeuropatiaImg/NO_Antebraquial.png',
+  'AxilarBase':           '/assets/NeuropatiaImg/NO_Axilar.png',
+  'MusculocutaneoBase':   '/assets/NeuropatiaImg/NO_Musculocutaneo.png',
+  'RadialSuperficial':    '/assets/NeuropatiaImg/NO_Radial Superficial.png',
+  'InteroseoPosterior':   '/assets/NeuropatiaImg/NO_Interoseo Posterior.png',
+  'RadialBase':           '/assets/NeuropatiaImg/NO_Radial.png',
+  'SupraescapularBase':   '/assets/NeuropatiaImg/NO_Supraescapular - Subescapular.png',
+  'UlnarBase':            '/assets/NeuropatiaImg/NO_Ulnar.png',
+  'DorsalCutaneo':        '/assets/NeuropatiaImg/NO_Dorsal Cutaneo.png',
+  'FacialBase':           '/assets/NeuropatiaImg/NO_Facial.png',
+  'FrenicoBase':          '/assets/NeuropatiaImg/NO_Frenico.png',
+  'ToracicoLargo':        '/assets/NeuropatiaImg/NO_Toracico_largo.png',
+  'ToracodorsalBase':     '/assets/NeuropatiaImg/NO_Toracodorsal.png',
+  'CiaticoBase':          '/assets/NeuropatiaImg/NO_Ciatico.png',
+  'GluteoMedio':          '/assets/NeuropatiaImg/NO_Gluteo Medio.png',
+  'GluteoInferior':       '/assets/NeuropatiaImg/NO_Gluteo Sup.Inf FC.png',
+  'FemoralBase':          '/assets/NeuropatiaImg/NO_Femoral.png',
+  'SafenoBase':           '/assets/NeuropatiaImg/NO_Safeno.png',
+  'FemorocutaneoLateral': '/assets/NeuropatiaImg/NO_Femorocutáneo femoral.png',
+  'Iilioinguinal':        '/assets/NeuropatiaImg/NO_Ilioinguinal-genitofemoral.png',
+  'ObturadorBase':        '/assets/NeuropatiaImg/NO_Obturador.png',
+  'NervioPeroneo':        '/assets/NeuropatiaImg/NO_Peroneo.png',
+  'PeroneoSuperficial':   '/assets/NeuropatiaImg/NO_Peroneo Superficial.png',
+  'PeroneoProfundo':      '/assets/NeuropatiaImg/NO_Peroneo Profundo.png',
+  'TibialBase':           '/assets/NeuropatiaImg/NO_Tibial.png',
+  'SuralBase':            '/assets/NeuropatiaImg/NO_Sural.png',
+  'PlantarMedial':        '/assets/NeuropatiaImg/NO_Plantar Medial.png',
+  'PlantarLateral':       '/assets/NeuropatiaImg/NO_Plantar Lateral.png',
+  'PudendoBase':          '/assets/NeuropatiaImg/NO_Pudendo.png',
+  // ── Lado izquierdo / derecho ─────────────────────────────────────────────
+  'MedIzquierda':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Mediano.png',
+  'MedDerecha':           '/assets/NeuropatiaImg/NervioRojo/DERECHA/Mediano.png',
+  'IntAntDegene':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Mediano.png',
+  'IntPostDegene':        '/assets/NeuropatiaImg/NervioRojo/DERECHA/Mediano.png',
+  // DERECHA
+  'AccesorioDerge':       '/assets/NeuropatiaImg/NervioRojo/DERECHA/Accesorio.png',
+  'AnteLateDerge':        '/assets/NeuropatiaImg/NervioRojo/DERECHA/Antebraquial medial.png',
+  'AnteBraqDerge':        '/assets/NeuropatiaImg/NervioRojo/DERECHA/Antebraquial medial.png',
+  'AxilaDerge':           '/assets/NeuropatiaImg/NervioRojo/DERECHA/Axilar.png',
+  'CiaticoDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Ciatico.png',
+  'FacialDerge':          '/assets/NeuropatiaImg/NervioRojo/DERECHA/Facial.png',
+  'FemoralDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Femoral.png',
+  'FemorocutaneoDerge':   '/assets/NeuropatiaImg/NervioRojo/DERECHA/Femorocutáneo lateral.png',
+  'FrenicoDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Frenico.png',
+  'IlioinguinalDerge':    '/assets/NeuropatiaImg/NervioRojo/DERECHA/GF-ILIO.png',
+  'MedianoDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Mediano.png',
+  'MusculocutaneoDerge':  '/assets/NeuropatiaImg/NervioRojo/DERECHA/Musculocutaneo.png',
+  'ObturadorDerge':       '/assets/NeuropatiaImg/NervioRojo/DERECHA/Obturador.png',
+  'PeroneoDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Peroneo.png',
+  'PudendoDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Pudendo.png',
+  'RadialDerge':          '/assets/NeuropatiaImg/NervioRojo/DERECHA/Radial.png',
+  'SupraescapularDerge':  '/assets/NeuropatiaImg/NervioRojo/DERECHA/Supraescapular.png',
+  'TibialDerge':          '/assets/NeuropatiaImg/NervioRojo/DERECHA/Tibial.png',
+  'ToracicoDerge':        '/assets/NeuropatiaImg/NervioRojo/DERECHA/Toracico largo.png',
+  'ToracodorsalDerge':    '/assets/NeuropatiaImg/NervioRojo/DERECHA/Toracodorsal.png',
+  'UlnarDerge':           '/assets/NeuropatiaImg/NervioRojo/DERECHA/Ulnar.png',
+  // IZQUIERDA
+  'MedianoIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Mediano.png',
+  'AccesorioIzqge':       '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Accesorio.png',
+  'AnteLateIzqge':        '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Antebraquial medial.png',
+  'AnteMedIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Antebraquial medial.png',
+  'AxilaIzqge':           '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Axilar.png',
+  'CiaticoIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Ciatico.png',
+  'FacialIzqge':          '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Facial.png',
+  'FemoralIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Femoral.png',
+  'FemorocutaneoIzqge':   '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Femorocutáneo lateral.png',
+  'FrenicoIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Frenico.png',
+  'IlioinguinalIzqge':    '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/GF-ILIO.png',
+  'MusculocutaneoIzqge':  '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Musculocutaneo.png',
+  'ObturadorIzqge':       '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Obturador.png',
+  'PeroneoIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Peroneo.png',
+  'PudendoIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Pudendo.png',
+  'RadialIzqge':          '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Radial.png',
+  'SupraescapularIzqge':  '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Supraescapular.png',
+  'TibialIzqge':          '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Tibial.png',
+  'ToracicoIzqge':        '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Toracico largo.png',
+  'ToracodorsalIzqge':    '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Toracodorsal.png',
+  'UlnarIzqge':           '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Ulnar.png',
+  // BILATERAL COMPLETO
+  'MedianoCompgen':            '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Interoseo-Anterior(1).png',
+  'AccesorioCompgen':          '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Accesorio.png',
+  'AnteLatelCompgen':          '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Antebraquial medial.png',
+  'AnteMedCompgen':            '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Antebraquial medial.png',
+  'AxilaCompgen':              '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Axilar.png',
+  'CiaticoCompgen':            '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Ciatico.png',
+  'FacialCompgen':             '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Facial.png',
+  'FemoralCompgen':            '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Femoral.png',
+  'FemorocutaneoCompgen':      '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Femorocutáneo lateral.png',
+  'FrenicoCompgen':            '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Frenico.png',
+  'IlioinguinalCompgen':       '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_GF-ILIO.png',
+  'MusculocutaneoCompgen':     '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Musculocutaneo.png',
+  'ObturadorCompgen':          '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Obturador.png',
+  'PeroneoCompgen':            '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Peroneo.png',
+  'PudendoCompgen':            '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Pudendo.png',
+  'RadialCompgen':             '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Radial.png',
+  'RadialSupCompgen':          '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Radial-Superficial(1).png',
+  'InteroseoPosteriorCompgen': '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Interoseo-Posterior (1).png',
+  'SafenoCompgen':             '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Safeno(1).png',
+  'SupraescapularCompgen':     '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Supraescapular.png',
+  'TibialCompgen':             '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Tibial.png',
+  'SuralCompgen':              '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Sural-(1).png',
+  'PlantarMedCompgen':         '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Plantar-Medial(1).png',
+  'PlantarLatCompgen':         '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Plantar-Lateral(1).png',
+  'PeroneoSupCompgen':         '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Peroneo-Superficial (1).png',
+  'PeroneoProfCompgen':        '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Peroneo-Profundo (1).png',
+  'GluteoInfCompgen':          '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Gluteo Sup.Inf (1).png',
+  'GluteoMedCompgen':          '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Gluteo Medio (1).png',
+  'ToracodorsalCompgen':       '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Toracodorsal.png',
+  'UlnarCompgen':              '/assets/NeuropatiaImg/NervioRojo/COMPLETO/NO_Ulnar.png',
 };
 
 const PLANTILLAS_PDF = {
@@ -87,8 +198,6 @@ async function fetchLocalBytes(publicPath) {
     const fsPath = path.join(process.cwd(), 'public', publicPath);
     if (fs.existsSync(fsPath)) return new Uint8Array(fs.readFileSync(fsPath));
   } catch {}
-  // In production, images live in the backend under /laminasImg/
-  // Strip leading /assets/ prefix if present (trigeminofacial uses /assets/TrigeminoFacialImg/...)
   const imgPath = publicPath.startsWith('/assets/') ? publicPath.slice(7) : publicPath;
   return fetchBytes(`${BACKEND_URL}/laminasImg${imgPath}`);
 }
@@ -151,20 +260,24 @@ function wrapText(text, font, fontSize, maxWidth) {
   if (current) lines.push(current);
   return lines;
 }
+
 function justifyLine(page, line, isLast, x, y, font, fontSize, colWidth, color) {
   const words = line.split(' ');
   if (words.length <= 1 || isLast) { page.drawText(line, { x, y, font, size: fontSize, color }); return; }
   const totalWordW = words.reduce((s, w) => s + font.widthOfTextAtSize(w, fontSize), 0);
   const gap = (colWidth - totalWordW) / (words.length - 1);
   let cx = x;
-  for (const w of words) { page.drawText(w, { x: cx, y, font, size: fontSize, color }); cx += font.widthOfTextAtSize(w, fontSize) + gap; }
+  for (const w of words) {
+    page.drawText(w, { x: cx, y, font, size: fontSize, color });
+    cx += font.widthOfTextAtSize(w, fontSize) + gap;
+  }
 }
 
 // ── Page 1 ───────────────────────────────────────────────────────────────────
 
 async function buildPage1(pdfDoc, {
   finalConclusion, userData, baseImgBytes, overlayBytesArr, figurasData,
-  topLeftText, plantillaId, fontRegular, fontBold, fontLight,
+  topLeftText, plantillaId, fontRegular, fontBold, fontLight, dotOverlays,
 }) {
   const page = pdfDoc.addPage([PW, PH]);
 
@@ -200,7 +313,6 @@ async function buildPage1(pdfDoc, {
       page.drawImage(logoImg, {
         x: LOGO_BOX_X, y: LOGO_BOX_Y,
         width: LOGO_BOX_SZ, height: LOGO_BOX_SZ,
-        opacity: 0.55,
       });
     }
   }
@@ -229,6 +341,7 @@ async function buildPage1(pdfDoc, {
     }
   }
 
+  // ── figuras ─────────────────────────────────────────────────────────────────
   const FIG_SIZE = 56;
   const scaleX   = LAM_W / 690;
   const scaleY   = LAM_H / 620;
@@ -248,7 +361,7 @@ async function buildPage1(pdfDoc, {
       page.drawEllipse({
         x: fx + FIG_SIZE / 2, y: fy + FIG_SIZE / 2,
         xScale: FIG_SIZE / 2, yScale: FIG_SIZE / 2,
-        borderColor: rgb(0.35, 0.35, 0.35), borderWidth: 1.2,
+        borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.2,
       });
     } else {
       page.drawRectangle({
@@ -258,9 +371,27 @@ async function buildPage1(pdfDoc, {
     }
   }
 
-  const FTR_Y        = 48;
-  const FTR_SZ       = 7.5;
+  // ── dot overlays ─────────────────────────────────────────────────────────────
+  for (const d of (dotOverlays || [])) {
+    const px = LAM_X + d.xPct * LAM_W;
+    const py = LAM_Y + (1 - d.yPct) * LAM_H;
+    if (d.shape === 'bar') {
+      const deg     = ((d.rotation !== undefined ? d.rotation : 80) * Math.PI) / 180;
+      const halfLen = 7;
+      page.drawLine({
+        start: { x: px - Math.sin(deg) * halfLen, y: py - Math.cos(deg) * halfLen },
+        end:   { x: px + Math.sin(deg) * halfLen, y: py + Math.cos(deg) * halfLen },
+        thickness: 2.5,
+        color: rgb(1, 0, 0),
+      });
+    } else {
+      page.drawEllipse({ x: px, y: py, xScale: 3.5, yScale: 3.5, color: rgb(1.0, 0.35, 0.05) });
+    }
+  }
 
+  // ── diagnóstico ──────────────────────────────────────────────────────────────
+  const FTR_Y      = 48;
+  const FTR_SZ     = 7.5;
   const DIAG_X     = MARGIN_L + 14;
   const DIAG_W     = CONTENT_W - 14;
   const TITLE_Y    = LAM_Y - 62;
@@ -289,21 +420,22 @@ async function buildPage1(pdfDoc, {
     textY -= 4;
   }
 
-  const ICON_R       = 3.2;
-  const ICON_GAP     = 4;
-  const SEP          = '   |   ';
-  const DARK         = rgb(0.22, 0.22, 0.22);
-  const ICON_FILL    = rgb(0.3, 0.3, 0.3);
+  // ── footer ───────────────────────────────────────────────────────────────────
+  const ICON_R    = 3.2;
+  const ICON_GAP  = 4;
+  const SEP       = '   |   ';
+  const DARK      = rgb(0.22, 0.22, 0.22);
+  const ICON_FILL = rgb(0.3, 0.3, 0.3);
 
   const ftrSegments = [
-    userData.name        ? { icon: 'person', text: `Dr. ${userData.name}${userData.lastname ? ' ' + userData.lastname : ''}` } : null,
-    userData.email       ? { icon: 'email',  text: userData.email } : null,
-    userData.especialidad ? { icon: 'dot',   text: userData.especialidad } : null,
-    userData.cedula      ? { icon: 'id',     text: `Céd. ${userData.cedula}` } : null,
+    userData.name         ? { icon: 'person', text: `Dr. ${userData.name}${userData.lastname ? ' ' + userData.lastname : ''}` } : null,
+    userData.email        ? { icon: 'email',  text: userData.email } : null,
+    userData.especialidad ? { icon: 'dot',    text: userData.especialidad } : null,
+    userData.cedula       ? { icon: 'id',     text: `Céd. ${userData.cedula}` } : null,
   ].filter(Boolean);
 
   if (ftrSegments.length) {
-    const SEP_W  = fontLight.widthOfTextAtSize(SEP, FTR_SZ);
+    const SEP_W    = fontLight.widthOfTextAtSize(SEP, FTR_SZ);
     const iconSlot = ICON_R * 2 + ICON_GAP;
     let totalW = 0;
     for (let i = 0; i < ftrSegments.length; i++) {
@@ -345,7 +477,6 @@ async function buildPage1(pdfDoc, {
       }
 
       cx += iconSlot;
-
       page.drawText(ftrSegments[i].text, { x: cx, y: FTR_Y, font: fontLight, size: FTR_SZ, color: DARK });
       cx += fontLight.widthOfTextAtSize(ftrSegments[i].text, FTR_SZ);
     }
@@ -372,8 +503,8 @@ async function buildPage2(pdfDoc, {
   }
 
   const hasPlantilla = plantillaId && plantillaId !== 'none';
-  const TOP_Y   = hasPlantilla ? ZONE_CONTENT_TOP : PH - 50;
-  const BOT_Y   = hasPlantilla ? ZONE_CONTENT_BOT : 40;
+  const TOP_Y      = hasPlantilla ? ZONE_CONTENT_TOP : PH - 50;
+  const BOT_Y      = hasPlantilla ? ZONE_CONTENT_BOT : 40;
   const COL_OFFSET = 20;
   const COL_GAP    = 28;
   const COL_W      = (CONTENT_W - COL_GAP) / 2;
@@ -425,10 +556,10 @@ async function buildPage2(pdfDoc, {
     const tablaImg = await embedImg(pdfDoc, imgListaBytes);
     if (tablaImg) {
       const { width: iw, height: ih } = tablaImg;
-      const maxW  = CONTENT_W;
+      const maxW      = CONTENT_W;
       const lowestCol = Math.min(ly, ry);
       const tablaTopY = lowestCol - 200;
-      const maxH  = Math.min(tablaTopY - BOT_Y - 10, 320);
+      const maxH      = Math.min(tablaTopY - BOT_Y - 10, 320);
       if (maxH > 30) {
         const scale = Math.min(maxW / iw, maxH / ih, 1);
         const dw = iw * scale;
@@ -458,6 +589,7 @@ export async function POST(req) {
       userData        = {},
       topLeftText     = '',
       plantillaId     = 'none',
+      dotOverlays     = [],
     } = body;
 
     const pdfDoc = await PDFDocument.create();
@@ -490,7 +622,7 @@ export async function POST(req) {
     await buildPage1(pdfDoc, {
       finalConclusion, userData, baseImgBytes, overlayBytesArr,
       figurasData: figuras, topLeftText, plantillaId,
-      fontRegular, fontBold, fontLight,
+      fontRegular, fontBold, fontLight, dotOverlays,
     });
 
     const hayPag2 = (comentarioLista && comentarioLista.trim().length > 0) || !!imgListaBytes;
@@ -515,3 +647,4 @@ export async function POST(req) {
     return NextResponse.json({ message: 'Error generando PDF: ' + err.message }, { status: 500 });
   }
 }
+

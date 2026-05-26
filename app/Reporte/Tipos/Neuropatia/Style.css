@@ -119,7 +119,7 @@
 
 .box {
   padding: 5px;
-  padding-left: 15px;
+  padding-left: 90px;
   color: white;
   text-align: center;
   display: flex;
@@ -159,7 +159,7 @@
   min-height: 117.2vh; /* Tamaño inicial mínimo en altura */
   width: 55vh;    /* Tamaño inicial mínimo en ancho */
   height: auto;       /* Permite que la altura se ajuste al contenido */
-  background-color:#1C1C1C;
+  background-color:#ff0606;
   background-image: url('/assets/04_01_ Vector _ SVG/G_14.svg'); /* Ruta relativa a la carpeta public */
   background-size: cover;  
   background-position: center; 
@@ -180,11 +180,11 @@
   align-items: left;
   border-radius: 4px;
   overflow: hidden;
-  width: 100%;  
+  width: 100%;
   margin: 10px;
-  height: 20vh;
+  height: 120px;
   margin-bottom: 0px;
-  z-index: 1; 
+  z-index: 1;
 }
 
 .info-container p {
@@ -203,7 +203,7 @@
 .print-button {
   background-color: #1C1C1C;
   padding: 8px;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 18px;
   text-align: left;
   border-radius: 8px;
@@ -213,12 +213,12 @@
 }
 
 .print-button:hover {
-  background-color: #c44900;
-  color: white;
+  background-color: #fb6c1a;
+  color: rgb(255, 255, 255);
 }
 
 .print-button.active {
-  background-color: #c44900;
+  background-color: #eb5c09;
   color: white;
 }
 
@@ -260,12 +260,20 @@
   width: 100%;
   padding:10px;
   border-radius: 10px;
-  background-color: #1C1C1C;
+  background-color: #1c1c1c;
   margin-top: 10px;
 }
 
 .dont-print {
-  display: visible;
+  display: block;
+}
+
+/* Los wrappers de SegmentariaButton tienen transform:rotate que crea un
+   nuevo stacking context, dejando z-index efectivo en 0 (bajo el dropArea
+   que tiene z-index:10). Forzar z-index aquí eleva todo el wrapper. */
+.dont-print-Nervius,
+.dont-print-Nerviusgrande {
+  z-index: 20;
 }
 
 /* Estilos para Rnd (drag resize) - no siempre necesarios */

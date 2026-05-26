@@ -20,7 +20,7 @@ export function ConclusionButton({ title, value, displayText, onClick }) {
 
     // Se crea una clase condicional para cambiar el color del botón
     const classnames = 
-    'cursor-pointer p-2 text-white transition-colors transition-300 ease-in hover:bg-[#8F3400] ' +
+    'cursor-pointer p-2 text-white bg-white/5 transition-colors transition-300 ease-in hover:bg-orange-500 border border-white/10 rounded-lg mb-1.5' +
     (conclusions.find(cl => cl.value === value) ? 'bg-[#c44900]' : '')
   
   return (

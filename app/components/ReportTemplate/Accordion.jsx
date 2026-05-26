@@ -92,8 +92,8 @@ export function Accordion({ children, value, title, type = 'external',  onToggle
   return (
     <div className="p-2">
       <h2
-        className={`text-white cursor-pointer p-2 rounded-md 
-                    hover:bg-[#8F3400] transition-colors transition-300 ease-in 
+        className={`text-white cursor-pointer p-2 bg-white/5 hover:bg-orange-500 border border-white/10 rounded-lg 
+                    transition-colors transition-300 ease-in 
                     ${isActive ? 'bg-[#c44900]' : ''}`}
         onClick={handleClick}
       >

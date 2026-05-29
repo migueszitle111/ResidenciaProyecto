@@ -870,7 +870,7 @@ const StepCD = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledSegm(true); setStep('D'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión con el puntero 1
+        Seleccionar el nivel de lesión con el puntero
       </p>
       <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledSegm(true); setStep('D'); }} />
     </div>
@@ -915,7 +915,7 @@ const StepCDD = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión del lado derecho con el puntero 2
+        Seleccionar el nivel de lesión del lado derecho con el puntero
       </p>
       <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }} />
     </div>
@@ -960,7 +960,7 @@ const StepCDI = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión del lado izquierdo con el puntero 3
+        Seleccionar el nivel de lesión del lado izquierdo con el puntero
       </p>
       <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }} />
     </div>
@@ -1914,7 +1914,7 @@ const StepCD2 = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled2(true); setbuttonsDisabledSegm2(true); setStep('D2'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión con el puntero 4
+        Seleccionar el nivel de lesión con el puntero
       </p>
       <SiguienteBtn onClick={() => { setButtonsDisabled2(true); setbuttonsDisabledSegm2(true); setStep('D2'); }} />
     </div>
@@ -1982,7 +1982,7 @@ const StepCDD2 = ({ setStep }) => {
         onConfirm={() => { setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión del lado derecho con el puntero 5
+        Seleccionar el nivel de lesión del lado derecho con el puntero
       </p>
       <SiguienteBtn onClick={() => { setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }} />
     </div>
@@ -2050,7 +2050,7 @@ const StepCDI2 = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión del lado izquierdo con el puntero 6
+        Seleccionar el nivel de lesión del lado izquierdo con el puntero
       </p>
       <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }} />
     </div>

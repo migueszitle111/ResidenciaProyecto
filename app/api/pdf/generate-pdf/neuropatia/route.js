@@ -1,7 +1,11 @@
 // app/api/pdf/generate-pdf/neuropatia/route.js
 
 import { NextResponse }  from 'next/server';
-import { PDFDocument, rgb } from 'pdf-lib';
+import {
+  PDFDocument, rgb,
+  pushGraphicsState, popGraphicsState,
+  moveTo, appendBezierCurve, closePath, clip, endPath,
+} from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import fs from 'fs';
 import path from 'path';
@@ -86,7 +90,7 @@ const OVERLAYS_NEURO_P = {
   'FemorocutaneoLateral': '/assets/NeuropatiaImg/NO_Femorocutáneo femoral.png',
   'Iilioinguinal':        '/assets/NeuropatiaImg/NO_Ilioinguinal-genitofemoral.png',
   'ObturadorBase':        '/assets/NeuropatiaImg/NO_Obturador.png',
-  'NervioPeroneo':        '/assets/NeuropatiaImg/NO_Peroneo.png',
+  'NervioPer':        '/assets/NeuropatiaImg/NO_Peroneo.png',
   'PeroneoSuperficial':   '/assets/NeuropatiaImg/NO_Peroneo Superficial.png',
   'PeroneoProfundo':      '/assets/NeuropatiaImg/NO_Peroneo Profundo.png',
   'TibialBase':           '/assets/NeuropatiaImg/NO_Tibial.png',
@@ -355,15 +359,33 @@ async function buildPage1(pdfDoc, {
     const fx = LAM_X + f.x * scaleX;
     const fy = LAM_Y + LAM_H - f.y * scaleY - FIG_SIZE;
 
-    page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE });
-
     if (f.tipo === 'circle') {
+      // Clip image to a circle using Bezier-curve path
+      const cx  = fx + FIG_SIZE / 2;
+      const cy  = fy + FIG_SIZE / 2;
+      const r   = FIG_SIZE / 2;
+      const k   = 0.5522847498; // cubic Bezier constant for a circle
+      page.pushOperators(
+        pushGraphicsState(),
+        moveTo(cx + r, cy),
+        appendBezierCurve(cx + r, cy + k * r,  cx + k * r, cy + r,  cx,       cy + r),
+        appendBezierCurve(cx - k * r, cy + r,  cx - r, cy + k * r,  cx - r,   cy),
+        appendBezierCurve(cx - r, cy - k * r,  cx - k * r, cy - r,  cx,       cy - r),
+        appendBezierCurve(cx + k * r, cy - r,  cx + r, cy - k * r,  cx + r,   cy),
+        closePath(),
+        clip(),
+        endPath(),
+      );
+      page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE });
+      page.pushOperators(popGraphicsState());
+      // Draw ellipse border on top of the clipped image
       page.drawEllipse({
-        x: fx + FIG_SIZE / 2, y: fy + FIG_SIZE / 2,
-        xScale: FIG_SIZE / 2, yScale: FIG_SIZE / 2,
+        x: cx, y: cy,
+        xScale: r, yScale: r,
         borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.2,
       });
     } else {
+      page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE });
       page.drawRectangle({
         x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE,
         borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.0,

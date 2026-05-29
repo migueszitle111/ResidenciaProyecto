@@ -4,11 +4,11 @@ import { NerviusButtonBILATERALIZQ } from '@/app/components/ReportTemplate/Concl
 export function checkDivsBILATERALIZQ(copyConclusions) {
 
   if (
-    copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'DEL ESPACIO CUADRANGULAR', 'SUPRACLAVICULAR,',
-      'DE AXILA,', 'DEL TERCIO MEDIAL DE BRAZO,', 'DEL TERCIO PROXIMAL DE ANTEBRAZO,', 'DEL TERCIO DISTAL DE BRAZO,', 'PRONADOR REDONDO,', 'DEL CARPO,',
-      'LIGAMENTO STRUTHERS,', 'DEL CODO,', 'DE PALMA,', 'DE DEDOS II-III,']
+    copyConclusions.includes('mediano bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'del espacio cuadrangular', 'supraclavicular,',
+      'de axila,', 'del tercio medial de brazo,', 'del tercio proximal de antebrazo,', 'del tercio distal de brazo,', 'pronador redondo,', 'del carpo,',
+      'ligamento struthers,', 'del codo,', 'de palma,', 'de dedos ii-iii,']
       .some(term => copyConclusions.includes(term))) {
     return (
       <>
@@ -168,11 +168,11 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`dont-print-Nervius`}> <NerviusButtonBILATERALIZQ value='cari63' title='/DE DEDOS II-III,' displayText=' ' /> </div>
   */
   if (
-    copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'DEL ESPACIO CUADRANGULAR', 'SUPRACLAVICULAR,',
-      'DE AXILA,', 'DEL TERCIO MEDIAL DE BRAZO,', 'DEL TERCIO PROXIMAL DE ANTEBRAZO,', 'DEL TERCIO PROXIMAL DE BRAZO,', 'DEL TERCIO DISTAL DE BRAZO,', 'PRONADOR REDONDO,', 'DEL CARPO,',
-      'LIGAMENTO STRUTHERS,', 'DEL CODO,', 'DE PALMA,', 'DE DEDOS II-III,'].some(term => copyConclusions.includes(term))) {
+    copyConclusions.includes('mediano bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'del espacio cuadrangular', 'supraclavicular,',
+      'de axila,', 'del tercio medial de brazo,', 'del tercio proximal de antebrazo,', 'del tercio proximal de brazo,', 'del tercio distal de brazo,', 'pronador redondo,', 'del carpo,',
+      'ligamento struthers,', 'del codo,', 'de palma,', 'de dedos ii-iii,'].some(term => copyConclusions.includes(term))) {
     return (
       <>
         <div style={{ position: 'absolute', top: '17.6%', left: '48.0%', borderRadius: '50%' }}
@@ -327,9 +327,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('INTEROSEO ANTERIOR BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO MEDIO DEL ANTEBRAZO,', , 'DEL TERCIO DISTAL DEL ANTEBRAZO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('interoseo anterior bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio medio del antebrazo,', , 'del tercio distal del antebrazo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '32.4%', left: '32.5%', borderRadius: 100, }}
@@ -351,9 +351,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTEROSEO ANTERIOR BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO MEDIO DEL ANTEBRAZO,', 'DEL TERCIO DISTAL DEL ANTEBRAZO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('interoseo anterior bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio medio del antebrazo,', 'del tercio distal del antebrazo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '32.4%', left: '66.5%', borderRadius: 100, }}
@@ -379,9 +379,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('ACCESORIO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TRIANGULO POSTERIOR DEL CUELLO,', 'DEL FORAMEN YUGULAR,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('accesorio bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del triangulo posterior del cuello,', 'del foramen yugular,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '14.5%', left: '47.4%', borderRadius: 100, }}
@@ -394,9 +394,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
       </>);
   }
-  if (copyConclusions.includes('ACCESORIO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TRIANGULO POSTERIOR DEL CUELLO,', 'DEL FORAMEN YUGULAR,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('accesorio bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del triangulo posterior del cuello,', 'del foramen yugular,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '14.5%', left: '51.4%', borderRadius: 100, }}
@@ -406,9 +406,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
       </>);
   }
 
-  if (copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'DEL ESPACIO CUANDRANGULAR,', 'MEDIAL AL CUELLO QUIRURGICO DEL HUMERO,', 'DE SU DIVICION TERMINAL,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('axilar bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'del espacio cuandrangular,', 'medial al cuello quirurgico del humero,', 'de su divicion terminal,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '18.9%', left: '39.8%', borderRadius: 100, }}
@@ -427,9 +427,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari7' title='/DE SU DIVICION TERMINAL,' displayText=' ' /></div>
       </>);
   }
-  if (copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'DEL ESPACIO CUANDRANGULAR,', 'MEDIAL AL CUELLO QUIRURGICO DEL HUMERO,', 'DE SU DIVICION TERMINAL,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('axilar bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'del espacio cuandrangular,', 'medial al cuello quirurgico del humero,', 'de su divicion terminal,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '18.9%', left: '58.8%', borderRadius: 100, }}
@@ -449,9 +449,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
       </>);
   }
 
-  if (copyConclusions.includes('MUSCULOCUTÁNEO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['SUPRACLAVICULAR,', 'INFRACLAVICULAR,', 'DE AXILA,', 'DEL TERCIO PROXIMAL DE BRAZO,', 'DEL TERCIO DISTAL DEL BRAZO,', 'DEL CODO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('musculocutáneo bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['supraclavicular,', 'infraclavicular,', 'de axila,', 'del tercio proximal de brazo,', 'del tercio distal del brazo,', 'del codo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '15.9%', left: '48.2%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari1' title='/SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -522,9 +522,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('MUSCULOCUTÁNEO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['SUPRACLAVICULAR,', 'INFRACLAVICULAR,', 'DE AXILA,', 'DEL TERCIO PROXIMAL DE BRAZO,', 'DEL TERCIO DISTAL DEL BRAZO,', 'DEL CODO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('musculocutáneo bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['supraclavicular,', 'infraclavicular,', 'de axila,', 'del tercio proximal de brazo,', 'del tercio distal del brazo,', 'del codo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '15.9%', left: '50.6%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButtonBILATERALIZQ value='cari1' title='/SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -597,11 +597,11 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('RADIAL BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['SUPRACLAVICULAR,', 'INMEDIATO A SU EMERGENCIA,', 'DE AXILA,', 'DEL TERCIO PROXIMAL DE BRAZO,', 'CANAL DE TORSION,',
-      'DEL TERCIO DISTAL DEL BRAZO,', 'DEL CODO,', 'DEL TERCIO PROXIMAL DEL ANTEBRAZO,', 'DEL TERCIO MEDIO DEL ANTEBRAZO,',
-      'DEL TERCIO DISTAL DEL ANTEBRAZO,', 'DEL TERCIO MEDIO DEL ANTEBRAZO,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('radial bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['supraclavicular,', 'inmediato a su emergencia,', 'de axila,', 'del tercio proximal de brazo,', 'canal de torsion,',
+      'del tercio distal del brazo,', 'del codo,', 'del tercio proximal del antebrazo,', 'del tercio medio del antebrazo,',
+      'del tercio distal del antebrazo,', 'del tercio medio del antebrazo,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '14.5%', left: '50.4%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButtonBILATERALIZQ value='cari1' title='/SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -701,11 +701,11 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('RADIAL BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['SUPRACLAVICULAR,', 'INMEDIATO A SU EMERGENCIA,', 'DE AXILA,', 'DEL TERCIO PROXIMAL DE BRAZO,', 'CANAL DE TORSION,',
-      'DEL TERCIO DISTAL DEL BRAZO,', 'DEL CODO,', 'DEL TERCIO PROXIMAL DEL ANTEBRAZO,', 'DEL TERCIO MEDIO DEL ANTEBRAZO,',
-      'DEL TERCIO DISTAL DEL ANTEBRAZO,', 'DEL TERCIO MEDIO DEL ANTEBRAZO,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('radial bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['supraclavicular,', 'inmediato a su emergencia,', 'de axila,', 'del tercio proximal de brazo,', 'canal de torsion,',
+      'del tercio distal del brazo,', 'del codo,', 'del tercio proximal del antebrazo,', 'del tercio medio del antebrazo,',
+      'del tercio distal del antebrazo,', 'del tercio medio del antebrazo,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '14.5%', left: '48.0%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButtonBILATERALIZQ value='cari1' title='/SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -810,9 +810,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('RADIAL SUPERFICIAL BILATERAL CON PREDOMINIO DERECHO, FOCALIZADA A NIVEL') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO DISTAL DEL ANTEBRAZO,', 'DEL CARPO,', 'DEL DORSO DE LA MANO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('radial superficial bilateral con predominio derecho, focalizada a nivel') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio distal del antebrazo,', 'del carpo,', 'del dorso de la mano,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.9%', left: '69.5%', borderRadius: 100, }}
@@ -840,9 +840,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('RADIAL SUPERFICIAL BILATERAL CON PREDOMINIO IZQUIERDO, FOCALIZADA A NIVEL') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO DISTAL DEL ANTEBRAZO,', 'DEL CARPO,', 'DEL DORSO DE LA MANO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('radial superficial bilateral con predominio izquierdo, focalizada a nivel') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio distal del antebrazo,', 'del carpo,', 'del dorso de la mano,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.9%', left: '29.1%', borderRadius: 100, }}
@@ -871,9 +871,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('INTEROSEO POSTERIOR BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO PROXIMAL DEL ANTEBRAZO,', 'DEL TERCIO DISTAL DEL ANTEBRAZO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('interoseo posterior bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio proximal del antebrazo,', 'del tercio distal del antebrazo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '30.2%', left: '67.2%', borderRadius: 100, }}
@@ -901,9 +901,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTEROSEO POSTERIOR BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO PROXIMAL DEL ANTEBRAZO,', 'DEL TERCIO DISTAL DEL ANTEBRAZO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('interoseo posterior bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio proximal del antebrazo,', 'del tercio distal del antebrazo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '30.2%', left: '31.6%', borderRadius: 100, }}
@@ -931,9 +931,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('DORSAL CUTANEO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO MEDIO DEL ANTEBRAZO,', 'DEL TERCIO DISTAL DEL ANTEBRAZO,', 'DEL CARPO,', 'DE PALMA,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('dorsal cutaneo bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio medio del antebrazo,', 'del tercio distal del antebrazo,', 'del carpo,', 'de palma,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.2%', left: '64.7%', borderRadius: 100, }}
@@ -962,9 +962,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('DORSAL CUTANEO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO MEDIO DEL ANTEBRAZO,', 'DEL TERCIO DISTAL DEL ANTEBRAZO,', 'DEL CARPO,', 'DE PALMA,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('dorsal cutaneo bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio medio del antebrazo,', 'del tercio distal del antebrazo,', 'del carpo,', 'de palma,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.2%', left: '33.8%', borderRadius: 100, }}
@@ -996,10 +996,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('SUPRAESCAPULAR BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA', 'INMEDIATO A SU EMERGENCIA,', 'DE LA ESCOTADURA ESCAPULAR/LTS,', 'DE LA ESCOTADURA ESPINOGLENOIDEA/LTS,',
-      'DE LA FOSA INFRAESCAPULAR,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('supraescapular bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia', 'inmediato a su emergencia,', 'de la escotadura escapular/lts,', 'de la escotadura espinoglenoidea/lts,',
+      'de la fosa infraescapular,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '15.2%', left: '48.0%', borderRadius: 100, }}
         className={`dont-print-Nervius`}><NerviusButtonBILATERALIZQ value='cari1' title='/INMEDIATO A SU EMERGENCIA' displayText=' ' /></div>
@@ -1033,10 +1033,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA', 'INMEDIATO A SU EMERGENCIA,', 'DE LA ESCOTADURA ESCAPULAR/LTS,', 'DE LA ESCOTADURA ESPINOGLENOIDEA/LTS,',
-      'DE LA FOSA INFRAESCAPULAR,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('supraescapular bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia', 'inmediato a su emergencia,', 'de la escotadura escapular/lts,', 'de la escotadura espinoglenoidea/lts,',
+      'de la fosa infraescapular,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '15.2%', left: '50.2%', borderRadius: 100, }}
         className={`dont-print-Nervius`}><NerviusButtonBILATERALIZQ value='cari1' title='/INMEDIATO A SU EMERGENCIA' displayText=' ' /></div>
@@ -1071,11 +1071,11 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('ULNAR BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INFRACLAVICULAR,', 'DE AXILA,', 'DEL TERCIO PROXIMAL DEL BARZO,', 'DEL TERCIO MEDIAL DEL BRAZO,',
-      'DEL TERCIO DISTAL DEL BRAZO,', 'DEL CODO/CANAL CUBITAL,', 'DEL TERCIO PROXIMAL DE ANTEBRAZO,', 'DEL TERCIO MEDIO DEL ANTEBRAZO,',
-      'DEL TERCIO DISTAL DEL ANTEBRAZO,', 'DEL CARPO/CANAL DE GUYON,', 'DE PALMA,', 'DE DEDOS IV-V,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('ulnar bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['infraclavicular,', 'de axila,', 'del tercio proximal del barzo,', 'del tercio medial del brazo,',
+      'del tercio distal del brazo,', 'del codo/canal cubital,', 'del tercio proximal de antebrazo,', 'del tercio medio del antebrazo,',
+      'del tercio distal del antebrazo,', 'del carpo/canal de guyon,', 'de palma,', 'de dedos iv-v,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '17.5%', left: '50.8%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/INFRACLAVICULAR,' displayText=' ' /></div>
@@ -1181,11 +1181,11 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ULNAR BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INFRACLAVICULAR,', 'DE AXILA,', 'DEL TERCIO PROXIMAL DE BRAZO,', 'DEL TERCIO MEDIAL DEL BRAZO,',
-      'DEL TERCIO DISTAL DEL BRAZO,', 'DEL CODO/CANAL CUBITAL,', 'DEL TERCIO PROXIMAL DE ANTEBRAZO,', 'DEL TERCIO MEDIO DEL ANTEBRAZO,',
-      'DEL TERCIO DISTAL DEL ANTEBRAZO,', 'DEL CARPO/CANAL DE GUYON,', 'DE PALMA,', 'DE DEDOS IV-V,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('ulnar bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['infraclavicular,', 'de axila,', 'del tercio proximal de brazo,', 'del tercio medial del brazo,',
+      'del tercio distal del brazo,', 'del codo/canal cubital,', 'del tercio proximal de antebrazo,', 'del tercio medio del antebrazo,',
+      'del tercio distal del antebrazo,', 'del carpo/canal de guyon,', 'de palma,', 'de dedos iv-v,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '17.5%', left: '47.6%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/INFRACLAVICULAR,' displayText=' ' /></div>
@@ -1292,9 +1292,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('FRÉNICO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL PLEXO CERVICAL,', 'SUPRACLAVICULAR,', 'DEL TORAX,', 'DEL DIAFRAGMA,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('frénico bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del plexo cervical,', 'supraclavicular,', 'del torax,', 'del diafragma,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '14.8%', left: '48.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/DEL PLEXO CERVICAL,' displayText=' ' /> </div>
@@ -1326,9 +1326,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
       
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL PLEXO CERVICAL,', 'SUPRACLAVICULAR,', 'DEL TORAX,', 'DEL DIAFRAGMA,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('frénico bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del plexo cervical,', 'supraclavicular,', 'del torax,', 'del diafragma,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '14.8%', left: '50.6%', }}
@@ -1362,9 +1362,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORACODORSAL BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA DE AXILA,', 'TORACICO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('toracodorsal bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia de axila,', 'toracico,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '18.0%', left: '55.1%', borderRadius: 100, }}
@@ -1387,9 +1387,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('TORACODORSAL BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA DE AXILA,', 'TORACICO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('toracodorsal bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia de axila,', 'toracico,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '18.0%', left: '43.7%', borderRadius: 100, }}
@@ -1411,9 +1411,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('TORÁCICO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA DE AXILA,', 'TORACICO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('torácico bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia de axila,', 'toracico,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '17.9%', left: '43.3%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/INMEDIATO A SU EMERGENCIA DE AXILA,' displayText=' ' /> </div>
@@ -1446,9 +1446,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('TORÁCICO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA DE AXILA,', 'TORACICO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('torácico bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia de axila,', 'toracico,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '17.9%', left: '55.3%', }}
@@ -1480,10 +1480,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('CIATICO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DE LA ESCOTADURA MAYOR DE LA PELVIS,', 'EMERGENCIA PIRAMIDAL,', 'DEL PLIEGUE GLUTEO,', 'DEL MUSLO TERCIO PROXIMAL,',
-      'DEL MUSLO TERCIO PROXIMAL', 'DEL MUSLO TERCIO DISTAL,', 'DEL HUECO POPLIEO,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('ciático bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['de la escotadura mayor de la pelvis,', 'emergencia piramidal,', 'del pliegue gluteo,', 'del muslo tercio proximal,',
+      'del muslo tercio proximal', 'del muslo tercio distal,', 'del hueco poplieo,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
 
@@ -1582,10 +1582,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('CIATICO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DE LA ESCOTADURA MAYOR DE LA PELVIS,', 'EMERGENCIA PIRAMIDAL,', 'DEL PLIEGUE GLUTEO,', 'DEL MUSLO TERCIO PROXIMAL,',
-      'DEL MUSLO TERCIO PROXIMAL', 'DEL MUSLO TERCIO DISTAL,', 'DEL HUECO POPLIEO,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('ciatico bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['de la escotadura mayor de la pelvis,', 'emergencia piramidal,', 'del pliegue gluteo,', 'del muslo tercio proximal,',
+      'del muslo tercio proximal', 'del muslo tercio distal,', 'del hueco poplieo,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
 
@@ -1686,9 +1686,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('GLUTEO INFERIOR BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'DEL FORAMEN MAYOR,', 'DEL PIRIFORME,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('gluteo inferior bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'del foramen mayor,', 'del piriforme,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.0%', left: '52.7%', borderRadius: 100, }}
@@ -1713,9 +1713,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
       </>);
   }
-  if (copyConclusions.includes('GLUTEO INFERIOR BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'DEL FORAMEN MAYOR,', 'DEL PIRIFORME,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('gluteo inferior bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'del foramen mayor,', 'del piriforme,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.0%', left: '45.7%', borderRadius: 100, }}
@@ -1741,9 +1741,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('GLUTEO SUPERIOR BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'DEL FORAMEN MAYOR,', 'ATRAVES DEL PIRIFORME,', 'SU RAMA TERMINAL,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('gluteo superior bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'del foramen mayor,', 'atraves del piriforme,', 'su rama terminal,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.0%', left: '45.7%', borderRadius: 100, }}
@@ -1764,9 +1764,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLUTEO SUPERIOR BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'DEL FORAMEN MAYOR,', 'ATRAVES DEL PIRIFORME,', 'SU RAMA TERMINAL,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('gluteo superior bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'del foramen mayor,', 'atraves del piriforme,', 'su rama terminal,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '34.0%', left: '53.9%', borderRadius: 100, }}
@@ -1788,10 +1788,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('FEMORAL BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'ARRIBA DEL LIGAMENTO INGUINAL,', 'DEL LIGAMENTO INGUINAL,', 'DEBAJO DEL LIGAMENTO INGUINAL,',
-      'DEL MUSLO TERCIO PROXIMAL,', 'DEL MUSLO TERCIO PROXIMAL', 'DEL MUSLO TERCIO DISTAL,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('femoral bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'arriba del ligamento inguinal,', 'del ligamento inguinal,', 'debajo del ligamento inguinal,',
+      'del muslo tercio proximal,', 'del muslo tercio proximal', 'del muslo tercio distal,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '33.0%', left: '54.5%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
@@ -1874,10 +1874,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FEMORAL BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['INMEDIATO A SU EMERGENCIA,', 'ARRIBA DEL LIGAMENTO INGUINAL,', 'DEL LIGAMENTO INGUINAL,', 'DEBAJO DEL LIGAMENTO INGUINAL,',
-      'DEL MUSLO TERCIO PROXIMAL,', 'DEL MUSLO TERCIO PROXIMAL', 'DEL MUSLO TERCIO DISTAL,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('femoral bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['inmediato a su emergencia,', 'arriba del ligamento inguinal,', 'del ligamento inguinal,', 'debajo del ligamento inguinal,',
+      'del muslo tercio proximal,', 'del muslo tercio proximal', 'del muslo tercio distal,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '33.0%', left: '44.1%', }}
@@ -1951,10 +1951,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('SAFENO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO DISTAL DEL MUSLO,', 'DE RODILLA,', 'DEL TERCIO PROXIMAL DE LA PIERNA,', 'DEL TERCIO MEDIO DE LA PIERNA,', 'DEL TERCIO DISTAL DE LA PIERNA,',
-      'DEL TOBILLO,', 'DEL DORSO DEL PIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('safeno bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio distal del muslo,', 'de rodilla,', 'del tercio proximal de la pierna,', 'del tercio medio de la pierna,', 'del tercio distal de la pierna,',
+      'del tobillo,', 'del dorso del pie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '53.4%', left: '53.4%', borderRadius: 100, }}
@@ -2028,10 +2028,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
       </>);
   }
-  if (copyConclusions.includes('SAFENO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO DISTAL DEL MUSLO,', 'DE RODILLA,', 'DEL TERCIO PROXIMAL DE LA PIERNA,', 'DEL TERCIO MEDIO DE LA PIERNA,', 'DEL TERCIO DISTAL DE LA PIERNA,',
-      'DEL TOBILLO,', 'DEL DORSO DEL PIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('safeno bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio distal del muslo,', 'de rodilla,', 'del tercio proximal de la pierna,', 'del tercio medio de la pierna,', 'del tercio distal de la pierna,',
+      'del tobillo,', 'del dorso del pie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '53.4%', left: '45.1%', borderRadius: 100, }}
@@ -2107,9 +2107,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('OBTURADOR2 BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['PROXIMAL A CANAL OBTURADOR,', 'CANAL OBTURADOR,', 'MUSLO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('obturador2 bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['proximo a canal obturador,', 'canal obturador,', 'muslo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '31.6%', left: '43.5%', }}
@@ -2150,9 +2150,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('OBTURADOR2 BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['PROXIMAL A CANAL OBTURADOR,', 'CANAL OBTURADOR,', 'MUSLO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('obturador2 bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['proximal a canal obturador,', 'canal obturador,', 'muslo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '31.6%', left: '55.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/PROXIMAL A CANAL OBTURADOR,' displayText=' ' /> </div>
@@ -2192,257 +2192,257 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('PERONEO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL HUECO POPLITEO,', 'DE CABEZA DE PERONE,', 'DEL TERCIO PROXIMAL DE PIERNA,', , 'DEL TERCIO MEDIO DE PIERNA,',
-      'DEL TERCIO DISTAL DE PIERNA,', 'DEL TOBILLO,', 'PIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('peroneo bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del hueco popliteo,', 'de cabeza de perone,', 'del tercio proximal de pierna,', , 'del tercio medio de pierna,',
+      'del tercio distal de pierna,', 'del tobillo,', 'pie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '50.0%', left: '56.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='del hueco popliteo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '50.8%', left: '56.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari2' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari2' title='del hueco popliteo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '51.6%', left: '56.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari3' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari3' title='del hueco popliteo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '52.4%', left: '56.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari4' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari4' title='del hueco popliteo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.2%', left: '57.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari5' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari5' title='del hueco popliteo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '54.0%', left: '57.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari6' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari6' title='del hueco popliteo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '54.8%', left: '57.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari7' title='DE CABEZA DE PERONE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari7' title='de cabeza de perone,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '55.6%', left: '58.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari8' title='DE CABEZA DE PERONE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari8' title='de cabeza de perone,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '56.4%', left: '58.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari9' title='DE CABEZA DE PERONE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari9' title='de cabeza de perone,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '57.2%', left: '59.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari10' title='DE CABEZA DE PERONE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari10' title='de cabeza de perone,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '58.0%', left: '59.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari11' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari11' title='del tercio proximal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.8%', left: '59.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari12' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari12' title='del tercio proximal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.6%', left: '60.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari13' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari13' title='del tercio proximal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.6%', left: '58.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari14' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari14' title='del tercio proximal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '60.4%', left: '60.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari15' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari15' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '60.4%', left: '58.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari16' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari16' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '61.2%', left: '60.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari17' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari17' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.2%', left: '58.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari18' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari18' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '62.0%', left: '60.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari19' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari19' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.0%', left: '58.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari20' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari20' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '62.8%', left: '60.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari21' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari21' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.8%', left: '58.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari22' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari22' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '63.6%', left: '60.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari23' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari23' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.6%', left: '58.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari24' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari24' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '64.4%', left: '59.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari25' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari25' title='del tercio distal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '64.4%', left: '58.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari26' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari26' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '65.2%', left: '59.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari27' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari27' title='del tercio distal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.2%', left: '58.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari28' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari28' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '66.0%', left: '58.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari29' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari29' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '66.8%', left: '58.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari30' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari30' title='del tercio distal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.8%', left: '57.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari31' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari31' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '67.6%', left: '58.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari32' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari32' title='del tercio distal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '67.6%', left: '57.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari33' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari33' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '68.4%', left: '58.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari34' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari34' title='del tobillo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '68.4%', left: '57.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari35' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari35' title='del tobillo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '69.2%', left: '58.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari36' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari36' title='del tobillo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.2%', left: '57.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari37' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari37' title='del tobillo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '70.0%', left: '58.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari38' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari38' title='del tobillo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '70.8%', left: '58.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari39' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari39' title='del tobillo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '70.8%', left: '59.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari40' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari40' title='del tobillo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '71.6%', left: '58.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari41' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari41' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '71.6%', left: '58.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari42' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari42' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '71.6%', left: '59.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari43' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari43' title='pie,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '72.4%', left: '58.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari44' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari44' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '72.4%', left: '59.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari45' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari45' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '72.4%', left: '60.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari46' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari46' title='pie,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '73.2%', left: '58.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari47' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari47' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '73.2%', left: '59.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari48' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari48' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '73.0%', left: '61.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari49' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari49' title='pie,' displayText=' ' /> </div>
     </>);
   }
 
-  if (copyConclusions.includes('PERONEO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL HUECO POPLITEO,', 'DE CABEZA DE PERONE,', 'DEL TERCIO PROXIMAL DE PIERNA,', , 'DEL TERCIO MEDIO DE PIERNA,',
-      'DEL TERCIO DISTAL DE PIERNA,', 'DEL TOBILLO,', 'PIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('peroneo bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del hueco popliteo,', 'de cabeza de perone,', 'del tercio proximal de pierna,', , 'del tercio medio de pierna,',
+      'del tercio distal de pierna,', 'del tobillo,', 'pie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '52.4%', left: '41.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='del hueco popliteo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '53.2%', left: '41.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari2' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari2' title='del hueco popliteo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '54.0%', left: '41.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari3' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari3' title='del hueco popliteo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '54.8%', left: '40.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari4' title='DEL HUECO POPLITEO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari4' title='del hueco popliteo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '55.6%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari5' title='DE CABEZA DE PERONE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari5' title='de cabeza de perone,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '56.4%', left: '40.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari6' title='DE CABEZA DE PERONE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari6' title='de cabeza de perone,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '57.2%', left: '39.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari7' title='DE CUELLO DE PERONE,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '58.0%', left: '39.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari8' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari8' title='del tercio proximal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '58.8%', left: '39.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari9' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari9' title='del tercio proximal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.6%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari10' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari10' title='del tercio proximal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '59.6%', left: '38.7%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari11' title='DEL TERCIO PROXIMAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari11' title='del tercio proximal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '60.4%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari12' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari12' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '60.4%', left: '38.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari13' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari13' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '61.2%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari14' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari14' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '61.2%', left: '38.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari15' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari15' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '62.0%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari16' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari16' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.0%', left: '38.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari17' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari17' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '62.8%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari18' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari18' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '62.8%', left: '38.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari19' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari19' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '63.6%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari20' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari20' title='del tercio medio de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '63.6%', left: '38.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari21' title='DEL TERCIO MEDIO DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari21' title='del tercio medio de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '64.4%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari22' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari22' title='del tercio distal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '64.4%', left: '38.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari23' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari23' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '65.2%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari24' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari24' title='del tercio distal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '65.2%', left: '38.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari25' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari25' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '66.0%', left: '39.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari26' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari26' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '66.8%', left: '40.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari27' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari27' title='del tercio distal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '66.8%', left: '40.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari28' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari28' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '67.6%', left: '40.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari29' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari29' title='del tercio distal de pierna,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '67.6%', left: '40.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari30' title='DEL TERCIO DISTAL DE PIERNA,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari30' title='del tercio distal de pierna,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '68.4%', left: '40.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari31' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari31' title='del tobillo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '68.4%', left: '40.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari32' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari32' title='del tobillo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '69.2%', left: '40.9%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari33' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari33' title='del tobillo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '69.2%', left: '40.0%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari34' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari34' title='del tobillo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '70.0%', left: '40.2%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari35' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari35' title='del tobillo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '70.8%', left: '40.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari36' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari36' title='del tobillo,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '70.8%', left: '39.4%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari37' title='DEL TOBILLO,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari37' title='del tobillo,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '71.6%', left: '40.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari38' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari38' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '71.6%', left: '39.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari39' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari39' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '71.6%', left: '38.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari40' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari40' title='pie,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '72.4%', left: '40.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari41' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari41' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '72.4%', left: '38.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari42' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari42' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '72.4%', left: '37.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari43' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari43' title='pie,' displayText=' ' /> </div>
 
       <div style={{ position: 'absolute', top: '73.2%', left: '40.6%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari44' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari44' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '73.2%', left: '38.8%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari45' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari45' title='pie,' displayText=' ' /> </div>
       <div style={{ position: 'absolute', top: '73.0%', left: '36.5%', }}
-        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari46' title='PIE,' displayText=' ' /> </div>
+        className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari46' title='pie,' displayText=' ' /> </div>
 
 
     </>);
   }
 
-  if (copyConclusions.includes('PERONEO SUPERFICIAL BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO PROXIMAL DE LA PIERNA,', 'DEL TERCIO MEDIO DE LA PIERNA,', 'DEL TERCIO DISTAL DE LA PIERNA,', 'DEL TOBILLO,',
-      'DEL DORSO DEL PIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('peroneo superficial bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio proximal de la pierna,', 'del tercio medio de la pierna,', 'del tercio distal de la pierna,', 'del tobillo,',
+      'del dorso del pie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '59.0%', left: '59.9%', borderRadius: 100, }}
@@ -2487,10 +2487,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
       </>);
   }
-  if (copyConclusions.includes('PERONEO SUPERFICIAL BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO PROXIMAL DE LA PIERNA,', 'DEL TERCIO MEDIO DE LA PIERNA,', 'DEL TERCIO DISTAL DE LA PIERNA,', 'DEL TOBILLO,',
-      'DEL DORSO DEL PIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('peroneo superficial bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio proximal de la pierna,', 'del tercio medio de la pierna,', 'del tercio distal de la pierna,', 'del tobillo,',
+      'del dorso del pie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '59.0%', left: '38.9%', borderRadius: 100, }}
@@ -2537,10 +2537,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('TIBIAL BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO DISTAL DEL MUSLO,', 'DEL HUECO POPLITEO,', 'DEL TERCIO PROXIMAL DE LA PIERNA,', 'DEL TERCIO MEDIO DE LA PIERNA,',
-      'DEL TERCIO DISTAL DE LA PIERNA,', 'DEL TOBILLO,', 'DEL TARSO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('tibial bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio distal del muslo,', 'del hueco popliteo,', 'del tercio proximal de la pierna,', 'del tercio medio de la pierna,',
+      'del tercio distal de la pierna,', 'del tobillo,', 'del tarso,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '50.1%', left: '55.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
@@ -2640,10 +2640,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TIBIAL BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO DISTAL DEL MUSLO,', 'DEL HUECO POPLITEO,', 'DEL TERCIO PROXIMAL DE LA PIERNA,', 'DEL TERCIO MEDIO DE LA PIERNA,',
-      'DEL TERCIO DISTAL DE LA PIERNA,', 'DEL TOBILLO,', 'DEL TARSO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('tibial bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio distal del muslo,', 'del hueco popliteo,', 'del tercio proximal de la pierna,', 'del tercio medio de la pierna,',
+      'del tercio distal de la pierna,', 'del tobillo,', 'del tarso,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '50.1%', left: '42.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
@@ -2744,10 +2744,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('SURAL BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO PROXIMAL DE LA PIERNA,', 'DEL TERCIO MEDIO DE LA PIERNA,', 'DEL TERCIO DISTAL DE LA PIERNA,', 'DEL TOBILLO,',
-      'DEL RETROPIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('sural bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio proximal de la pierna,', 'del tercio medio de la pierna,', 'del tercio distal de la pierna,', 'del tobillo,',
+      'del retropie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '59.7%', left: '57.7%', }}
@@ -2793,10 +2793,10 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SURAL BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TERCIO PROXIMAL DE LA PIERNA,', 'DEL TERCIO MEDIO DE LA PIERNA,', 'DEL TERCIO DISTAL DE LA PIERNA,', 'DEL TOBILLO,',
-      'DEL RETROPIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('sural bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tercio proximal de la pierna,', 'del tercio medio de la pierna,', 'del tercio distal de la pierna,', 'del tobillo,',
+      'del retropie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '59.7%', left: '40.9%', }}
@@ -2844,9 +2844,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('PLANTAR LATERAL BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TOBILLO,', 'DEL RETROPIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('plantar lateral bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tobillo,', 'del retropie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '70.6%', left: '55.8%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/DEL TOBILLO,' displayText=' ' /> </div>
@@ -2872,9 +2872,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PLANTAR LATERAL BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TOBILLO,', 'DEL RETROPIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('plantar lateral bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tobillo,', 'del retropie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '70.6%', left: '42.8%', }}
@@ -2903,9 +2903,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('PLANTAR MEDIAL BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TOBILLO,', 'DEL RETROPIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('plantar medial bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tobillo,', 'del retropie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '70.6%', left: '55.5%', }}
@@ -2926,9 +2926,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari9' title='/DEL ANTEPIE,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('PLANTAR MEDIAL BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL TOBILLO,', 'DEL RETROPIE,', 'DEL ANTEPIE,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('plantar medial bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del tobillo,', 'del retropie,', 'del antepie,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '70.6%', left: '42.5%', }}
@@ -2951,9 +2951,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL FORAMEN CIATICO,', 'DEL CANAL PUDENDO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('pudendo bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del foramen ciatico,', 'del canal pudendo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '36.1%', left: '49.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari5' title='/DEL FORAMEN CIATICO,' displayText=' ' /> </div>
@@ -2967,9 +2967,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['DEL FORAMEN CIATICO,', 'DEL CANAL PUDENDO,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('pudendo bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['del foramen ciatico,', 'del canal pudendo,'].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '36.1%', left: '48.7%', }}
@@ -2985,9 +2985,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO IZQUIERDO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['RAMA TEMPOROFACIAL,', 'INTRAPETROSO,', 'DEL FORAMEN ESTILOMASTOIDEO,', 'RAMA CERVICOFACIAL,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('facial bilateral con predominio izquierdo') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['rama temporofacial,', 'intrapetroso,', 'del foramen estilomastoideo,', 'rama cervicofacial,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '5.2%', left: '46.5%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
@@ -3034,9 +3034,9 @@ export function checkDivsBILATERALIZQ(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO DERECHO') &&
-    copyConclusions.includes('FOCALIZADA A NIVEL') &&
-    ['RAMA TEMPOROFACIAL,', 'INTRAPETROSO,', 'DEL FORAMEN ESTILOMASTOIDEO,', 'RAMA CERVICOFACIAL,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
+  if (copyConclusions.includes('facial bilateral con predominio derecho') &&
+    copyConclusions.includes('focalizada a nivel') &&
+    ['rama temporofacial,', 'intrapetroso,', 'del foramen estilomastoideo,', 'rama cervicofacial,',].some(term => copyConclusions.includes(term))) {// FALTA VERIFICAR
     return (<>
       <div style={{ position: 'absolute', top: '5.2%', left: '52.2%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButtonBILATERALIZQ value='cari1' title='/RAMA TEMPOROFACIAL,' displayText=' ' /> </div>

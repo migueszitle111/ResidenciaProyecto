@@ -84,7 +84,7 @@ function SuccessModal({ filename, pdfUrl, onAbrir, onLink, onClose }) {
       <div className="bg-[#111] border-2 border-orange-500 rounded-2xl w-full max-w-xs p-6 shadow-2xl text-center relative">
         <button onClick={onClose} className="absolute top-3 right-4 text-white text-xl font-bold leading-none">✕</button>
         <p className="text-orange-400 font-bold text-xl mb-1">¡Reporte listo!</p>
-        <p className="text-white font-semibold text-sm mb-1">{filename}</p>
+        <p className="text-white font-semibold text-sm mb-1 w-full break-all">{filename}</p>
         <p className="text-slate-400 text-xs mb-2">Guardado en Descargas</p>
         <div className="flex gap-3 mt-4">
           {pdfUrl && (

@@ -3,7 +3,7 @@ import { NerviusButton } from '@/app/components/ReportTemplate/Conclusions/Botto
 export function checkDivs(copyConclusions) {
 
 
-  if (copyConclusions.includes('MEDIANO IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('mediano izquierdo, focalizada a nivel') ) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.2%', left: '50.5%', borderRadius: '50%' }}
@@ -147,7 +147,7 @@ export function checkDivs(copyConclusions) {
       </>
     );
   }
-  if (copyConclusions.includes('MEDIANO DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('mediano derecho, focalizada a nivel') ) {
     return (
       <>
         <div style={{ position: 'absolute', top: '18.2%', left: '48.0%', borderRadius: '50%' }}
@@ -302,7 +302,7 @@ export function checkDivs(copyConclusions) {
     );
 
   }
-  if (copyConclusions.includes('INTERÓSEO ANTERIOR DERECHO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('interóseo anterior derecho, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '33.4%', left: '32.5%', borderRadius: 100, }}
@@ -324,7 +324,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTERÓSEO ANTERIOR IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('interóseo anterior izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '33.4%', left: '66.5%', borderRadius: 100, }}
@@ -346,7 +346,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('ACCESORIO IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('accesorio izquierdo, focalizada a nivel') ) {
     return (
       <>
         <div style={{ position: 'absolute', top: '14.9%', left: '51.4%', borderRadius: 100, }}
@@ -357,7 +357,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('ACCESORIO DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('accesorio derecho, focalizada a nivel') ) {
     return (
       <>
         <div style={{ position: 'absolute', top: '14.9%', left: '47.4%', borderRadius: 100, }}
@@ -368,7 +368,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILAR IZQUIERDO, FOCALIZADA A NIVEL')) {// FALTA VERIFICAR
+  if (copyConclusions.includes('axilar izquierdo, focalizada a nivel')) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '19.5%', left: '58.8%', borderRadius: 100, }}
@@ -388,7 +388,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILAR DERECHO, FOCALIZADA A NIVEL') ) {// FALTA 
+  if (copyConclusions.includes('axilar derecho, focalizada a nivel') ) {// FALTA 
     return (
       <>
         <div style={{ position: 'absolute', top: '19.5%', left: '39.8%', borderRadius: 100, }}
@@ -407,7 +407,7 @@ export function checkDivs(copyConclusions) {
           className={`.dont-print-Nerviusgrande`}><NerviusButton value='car7' title='DE SU DIVISIÓN TERMINAL,' displayText=' ' /></div>
       </>);
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('musculocutáneo izquierdo, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '16.3%', left: '50.6%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButton value='cari1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -479,7 +479,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('musculocutáneo derecho, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '16.3%', left: '48.2%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButton value='car1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -551,7 +551,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('radial derecho, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '14.9%', left: '48.0%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButton value='car1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -654,7 +654,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL IZQUIERDO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('radial izquierdo, focalizada a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '14.9%', left: '50.4%', borderRadius: '50%', }}
         className={`dont-print-Nervius`}><NerviusButton value='cari1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -754,7 +754,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('RADIAL SUPERFICIAL DERECHO, FOCALIZADA A NIVEL') ) {// #####################################
+  if (copyConclusions.includes('radial superficial derecho, focalizada a nivel') ) {// #####################################
     return (
       <>
         <div style={{ position: 'absolute', top: '36.9%', left: '29.1%', borderRadius: 100, }}
@@ -782,7 +782,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('RADIAL SUPERFICIAL IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('radial superficial izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '36.9%', left: '69.5%', borderRadius: 100, }}
@@ -810,7 +810,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTERÓSEO POSTERIOR DERECHO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('interóseo posterior derecho, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '31.2%', left: '31.6%', borderRadius: 100, }}
@@ -838,7 +838,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTERÓSEO POSTERIOR IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('interóseo posterior izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '31.2%', left: '67.2%', borderRadius: 100, }}
@@ -866,7 +866,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('DORSAL CUTÁNEO DERECHO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('dorsal cutáneo derecho, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.2%', left: '33.8%', borderRadius: 100, }}
@@ -894,7 +894,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('DORSAL CUTÁNEO IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('dorsal cutáneo izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.2%', left: '64.7%', borderRadius: 100, }}
@@ -922,7 +922,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('supraescapular izquierdo, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '15.9%', left: '50.2%', borderRadius: 100, }}
         className={`dont-print-Nervius`}><NerviusButton value='cari1' title='INMEDIATO A SU EMERGENCIA' displayText=' ' /></div>
@@ -954,7 +954,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SUPRAESCAPULAR DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('supraescapular derecho, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '15.9%', left: '48.0%', borderRadius: 100, }}
         className={`dont-print-Nervius`}><NerviusButton value='car1' title='INMEDIATO A SU EMERGENCIA' displayText=' ' /></div>
@@ -984,7 +984,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ULNAR DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('ulnar derecho, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '18.0%', left: '47.6%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car1' title='INFRACLAVICULAR,' displayText=' ' /></div>
@@ -1089,7 +1089,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ULNAR IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('ulnar izquierdo, focalizada a nivel') ) {
     return (<>
     <div style={{ position: 'absolute', top: '18%', left: '50.8%', borderRadius: '50%' }} className={`dont-print-Nerviusgrande`}>
       <NerviusButton value='cari1' title='INFRACLAVICULAR,' displayText=' ' />
@@ -1227,7 +1227,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('frénico izquierdo, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '15.6%', left: '50.6%' }}
@@ -1254,7 +1254,7 @@ export function checkDivs(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari11' title='DEL DIAFRAGMA,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('frénico derecho, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '15.6%', left: '48.0%' }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car1' title='DEL PLEXO CERVICAL,' displayText=' ' /> </div>
@@ -1281,7 +1281,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORACODORSAL DERECHO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('toracodorsal derecho, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '18.6%', left: '43.7%', borderRadius: 100, }}
@@ -1302,7 +1302,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('TORACODORSAL IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('toracodorsal izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '18.6%', left: '55.1%', borderRadius: 100, }}
@@ -1323,7 +1323,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('TORÁCICO LARGO IZQUIERDO, FOCALIZADA A NIVEL') ) { //FALTA VERIFICAR
+  if (copyConclusions.includes('torácico largo izquierdo, focalizada a nivel') ) { //FALTA VERIFICAR
     return (<>
 
       <div style={{ position: 'absolute', top: '18.9%', left: '55.3%', }}
@@ -1354,7 +1354,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORÁCICO LARGO DERECHO, FOCALIZADA A NIVEL') ) { //FALTA
+  if (copyConclusions.includes('torácico largo derecho, focalizada a nivel') ) { //FALTA
     return (<>
       <div style={{ position: 'absolute', top: '18.9%', left: '43.3%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car1' title='INMEDIATO A SU EMERGENCIA DE AXILA,' displayText=' ' /> </div>
@@ -1385,7 +1385,7 @@ export function checkDivs(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('ANTEBRAQUIAL MEDIAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('antebraquial medial izquierdo, focalizada a nivel') ) {
     return (<>
 <div style={{ position: 'absolute', top: '20.2%', left: '58.0%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButton value='car1' title=' DE AXILA,' displayText=' ' /></div>
@@ -1439,7 +1439,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('ANTEBRAQUIAL MEDIAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('antebraquial medial derecho, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '20.2%', left: '40.7%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButton value='cari1' title=' DE AXILA,' displayText=' ' /></div>
@@ -1495,7 +1495,7 @@ export function checkDivs(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('ANTEBRAQUIAL LATERAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('antebraquial lateral izquierdo, focalizada a nivel') ) {
     return (<>
       {/* <div style={{ position: 'absolute', top: '16.3%', left: '50.6%', borderRadius: '50%', }}
         className={`.dont-print-Nervius`}><NerviusButton value='car1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -1562,7 +1562,7 @@ export function checkDivs(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('ANTEBRAQUIAL LATERAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('antebraquial lateral derecho, focalizada a nivel') ) {
     return (<>
       {/* <div style={{ position: 'absolute', top: '16.3%', left: '48.2%', borderRadius: '50%', }}
         className={`.dont-print-Nerviusgrande`}><NerviusButton value='car1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -1631,7 +1631,7 @@ export function checkDivs(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('CIÁTICO DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('ciático derecho, focalizada a nivel') ) {
     return (<>
 
 
@@ -1731,7 +1731,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('CIÁTICO IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('ciático izquierdo, focalizada a nivel') ) {
     return (<>
       
       
@@ -1830,7 +1830,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('GLÚTEO INFERIOR DERECHO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('glúteo inferior derecho, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '45.7%', borderRadius: 100, }}
@@ -1855,7 +1855,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLÚTEO INFERIOR IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('glúteo inferior izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '52.7%', borderRadius: 100, }}
@@ -1877,7 +1877,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLÚTEO SUPERIOR IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('glúteo superior izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '53.9%', borderRadius: 100, }}
@@ -1898,7 +1898,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLÚTEO SUPERIOR DERECHO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('glúteo superior derecho, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '45.7%', borderRadius: 100, }}
@@ -1919,7 +1919,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('FEMORAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('femoral derecho, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '34.0%', left: '44.1%', }}
@@ -2034,7 +2034,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FEMORAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('femoral izquierdo, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '34.0%', left: '54.5%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
@@ -2151,7 +2151,7 @@ export function checkDivs(copyConclusions) {
 
 
 
-  if (copyConclusions.includes('FEMOROCUTÁNEO LATERAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('femorocutáneo lateral derecho, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '34.0%', left: '43.7%', }}
@@ -2190,7 +2190,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FEMOROCUTÁNEO LATERAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('femorocutáneo lateral izquierdo, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '34.0%', left: '55.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title=' INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
@@ -2230,7 +2230,7 @@ export function checkDivs(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('SAFENO DERECHO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('safeno derecho, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '55.4%', left: '45.1%', borderRadius: 100, }}
@@ -2305,7 +2305,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('SAFENO IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('safeno izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '55.4%', left: '53.4%', borderRadius: 100, }}
@@ -2380,7 +2380,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('OBTURADOR IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('obturador izquierdo, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '32.6%', left: '55.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title='PROXIMAL A CANAL OBTURADOR,' displayText=' ' /> </div>
@@ -2419,7 +2419,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('OBTURADOR DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('obturador derecho, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '32.6%', left: '43.5%', }}
@@ -2459,7 +2459,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PERONEO COMÚN DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('peroneo comÚn derecho, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '53.4%', left: '41.8%', }}
@@ -2577,7 +2577,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PERONEO COMÚNS IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('peroneo común izquierdo, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '51.0%', left: '56.0%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title='DEL HUECO POPLÍTEO,' displayText=' ' /> </div>
@@ -2698,7 +2698,7 @@ export function checkDivs(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari49' title='DEL PIE,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('PERONEO SUPERFICIAL DERECHO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('peroneo superficial derecho, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '61.0%', left: '38.9%', borderRadius: 100, }}
@@ -2744,7 +2744,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('PERONEO SUPERFICIAL IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('peroneo superficial izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '61.0%', left: '59.9%', borderRadius: 100, }}
@@ -2792,7 +2792,7 @@ export function checkDivs(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('PERONEO PROFUNDO DERECHO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('peroneo profundo derecho, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '70.4%', left: '41.1%', borderRadius: 100, }}
@@ -2819,7 +2819,7 @@ export function checkDivs(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('PERONEO PROFUNDO IZQUIERDO, FOCALIZADA A NIVEL') ) {// FALTA VERIFICAR
+  if (copyConclusions.includes('peroneo profundo izquierdo, focalizada a nivel') ) {// FALTA VERIFICAR
     return (
       <>
         <div style={{ position: 'absolute', top: '70.4%', left: '57.6%', borderRadius: 100, }}
@@ -2848,7 +2848,7 @@ export function checkDivs(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('TIBIAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('tibial derecho, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '52.1%', left: '42.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car1' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
@@ -2948,7 +2948,7 @@ export function checkDivs(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car40' title='DEL TARSO,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('TIBIAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('tibial izquierdo, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '52.1%', left: '55.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
@@ -3048,7 +3048,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SURAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('sural derecho, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '61.7%', left: '40.9%', }}
@@ -3095,7 +3095,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('SURAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('sural izquierdo, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '61.7%', left: '57.7%', }}
@@ -3142,7 +3142,7 @@ export function checkDivs(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('PLANTAR LATERAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('plantar lateral derecho, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '72.6%', left: '42.8%', }}
@@ -3168,7 +3168,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PLANTAR LATERAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('plantar lateral izquierdo, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '72.6%', left: '55.8%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title='DEL TOBILLO,' displayText=' ' /> </div>
@@ -3195,7 +3195,7 @@ export function checkDivs(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('ILIOINGUINAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('ilioinguinal derecho, focalizada a nivel') ) {
     return (<>
 
 <div style={{ position: 'absolute', top: '29.7%', left: '48.5%', }}
@@ -3235,7 +3235,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('ILIOINGUINAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('ilioinguinal izquierdo, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '29.7%', left: '50.2%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title='ABDOMINAL,' displayText=' ' /> </div>
@@ -3276,7 +3276,7 @@ export function checkDivs(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('PLANTAR MEDIAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('plantar medial derecho, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '72.6%', left: '42.5%', }}
@@ -3298,7 +3298,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PLANTAR MEDIAL IZQUIERDO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('plantar medial izquierdo, focalizada a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '72.6%', left: '55.5%', }}
@@ -3319,7 +3319,7 @@ export function checkDivs(copyConclusions) {
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari7' title='DEL ANTEPIE,' displayText=' ' /> </div>
     </>);
   }
-  if (copyConclusions.includes('PUDENDO DERECHO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('pudendo derecho, focalizada a nivel')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '37.1%', left: '48.7%', }}
@@ -3334,7 +3334,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO IZQUIERDO, FOCALIZADA A NIVEL')) {
+  if (copyConclusions.includes('pudendo izquierdo, focalizada a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '37.1%', left: '49.6%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
@@ -3348,7 +3348,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL IZQUIERDO, FOCALIZADA A NIVEL'))  {
+  if (copyConclusions.includes('facial izquierdo, focalizada a nivel'))  {
     return (<>
       <div style={{ position: 'absolute', top: '5.6%', left: '52.2%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='cari1' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
@@ -3393,7 +3393,7 @@ export function checkDivs(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL DERECHO, FOCALIZADA A NIVEL') ) {
+  if (copyConclusions.includes('facial derecho, focalizada a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '5.6%', left: '46.5%', }}
         className={`.dont-print-Nerviusgrande`} > <NerviusButton value='car1' title='DE DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>

@@ -16,7 +16,7 @@ import { checkDivs } from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
 import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
 import './Style.css';
 
-// ── DropArea ──────────────────────────────────────────────────────────────────
+// ── DropArea ───────────────────────────────────────────────────────
 const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
   const { droppedItems, setDroppedItems } = useContext(DropContext);
   const dropAreaRef = useRef(null);
@@ -71,7 +71,7 @@ const DropArea = ({ topLeftText, expandedDivs, setExpandedDivs }) => {
   return (
     <div className="dropArea" onDrop={handleDrop} onDragOver={handleDragOver} ref={dropAreaRef}>
       {topLeftText && (
-        <p className="top-left-text" style={{ marginLeft: 'auto', textAlign: 'left', paddingLeft: 15, fontSize: 19, paddingTop: 10 }}>
+        <p className="top-left-text" style={{ position:'absolute', top:20, left:18, zIndex:10, background:'rgba(0,0,0,0.45)', color:'#fff', fontSize:11, fontWeight:500, padding:'3px 9px', borderRadius:6 }}>
           {topLeftText}
         </p>
       )}
@@ -125,6 +125,39 @@ function getListItem(c) {
   if (/^car/i.test(val))
     return { k: 'UBICACIÓN', v: clean(title) };
   return null;
+}
+
+/* ─── conclusionToSentenceCase ───────────────────────────────────────────────
+   Convierte el texto de conclusión a minúsculas respetando reglas gramaticales:
+   • Primera letra de cada oración (después de . ! ? o salto de línea) → Mayúscula
+   • Niveles vertebrales/espinales (C5, L4, T1, S1…)     → se restauran en Mayúscula
+   • Todo lo demás                                         → minúscula
+   ──────────────────────────────────────────────────────────────────────────── */
+function conclusionToSentenceCase(text) {
+  if (!text) return '';
+
+  // 1. Todo a minúsculas
+  let result = text.toLowerCase();
+
+  // 2. Primera letra del texto completo
+  result = result.replace(/^([a-záéíóúüñ])/i, ch => ch.toUpperCase());
+
+  // 3. Primera letra después de . ! ? seguido de espacios/salto
+  result = result.replace(
+    /([.!?]['"»]?\s+)([a-záéíóúüñ])/gi,
+    (_, punct, letter) => punct + letter.toUpperCase(),
+  );
+
+  // 4. Primera letra después de salto de línea
+  result = result.replace(
+    /(\n\s*)([a-záéíóúüñ])/gi,
+    (_, nl, letter) => nl + letter.toUpperCase(),
+  );
+
+  // 5. Restaurar niveles vertebrales: c5→C5, l4→L4, t1→T1, s1→S1, etc.
+  result = result.replace(/\b([ctls])(\d+)\b/g, (_, letter, num) => letter.toUpperCase() + num);
+
+  return result;
 }
 
 /* ─── CropModal ─────────────────────────────────────────────────────────────── */
@@ -201,18 +234,18 @@ const Reporte = () => {
 
   // ── formateo de conclusiones ──────────────────────────────────────────────
   function formatConclusions(copyConclusions) {
-    const keywords2 = ["POSTGANGLIONAR PACIAL A NIVEL DE TROCO"];
-    const keywords3 = ["POSTGANGLIONAR PARCIAL A NIVEL DE CORDON"];
-    const keywords4 = ["INTENSIDAD LEVE.", "INTENSIDAD MODERADA.", "INTENSIDAD SEVERA."];
-    const keywords  = ["C5","C6","C7","C8","T1","SUPERIOR","MEDIO","INFERIOR","LATERAL","POSTERIOR","MEDIAL","L2","L3","L4","L5","S1","S2"];
+    const keywords2 = ["postganglionar pacial a nivel de troco"];
+    const keywords3 = ["postganglionar parcial a nivel de cordon"];
+    const keywords4 = ["intensidad leve.", "intensidad moderada.", "intensidad severa."];
+    const keywords  = ["C5","C6","C7","C8","T1","superior","medio","inferior","lateral","posterior","medial","L2","L3","L4","L5","S1","S2"];
     const specificKeywords  = ["C5","C6","C7","C8","T1"];
     const prognosisKeywords = [
-      "PRONÓSTICO DE RECUPERACIÓN COMPLETA.",
-      "PRONÓSTICO DE RECUPERACIÓN PARCIAL FUNCIONAL.",
-      "PRONÓSTICO DE RECUPERACIÓN POBRE NO FUNCIONAL.",
-      "PRONÓSTICO DE RECUPERACIÓN NULA.",
+      "pronóstico de recuperación completa.",
+      "pronóstico de recuperación parcial funcional.",
+      "pronóstico de recuperación poxa no funcional.",
+      "pronóstico de recuperación nula.",
     ];
-    const keywords5 = ["FOCALIZADA A NIVEL", "FOCAL A NIVEL"];
+    const keywords5 = ["focalizada a nivel", "focal a nivel"];
 
     if (copyConclusions.includes(keywords5[0])) {
       copyConclusions = 'MONO ' + copyConclusions;
@@ -265,7 +298,7 @@ const Reporte = () => {
     }
 
     let formattedConclusions = words.join(' ');
-    formattedConclusions = formattedConclusions.replace(/ \bREINERVACIÓN\b/g, '\nREINERVACIÓN');
+    formattedConclusions = formattedConclusions.replace(/ \bREINERVACIÓN\b/g, '\n\nREINERVACIÓN');
     formattedConclusions = formattedConclusions.replace(
       /(PRONÓSTICO DE RECUPERACIÓN (?:COMPLETA|PARCIAL FUNCIONAL|POBRE NO FUNCIONAL|NULA)\.)\s*/gi,
       '$1\n\n'
@@ -281,7 +314,8 @@ const Reporte = () => {
   // ── effects ───────────────────────────────────────────────────────────────
   useEffect(() => {
     const newConclusions = conclusions.map(cl => cl.title).join('');
-    setCopyConclusions(formatConclusions(newConclusions));
+    // Formatear primero, luego convertir a minúsculas con reglas gramaticales
+    setCopyConclusions(conclusionToSentenceCase(formatConclusions(newConclusions)));
   }, [conclusions]);
 
   const handleTextareaChange = (e) => setCopyConclusions(e.target.value);
@@ -360,10 +394,7 @@ const Reporte = () => {
             onChange={e => setTopLeftText(e.target.value)}
             placeholder="Nombre del paciente"
             style={{
-              width: 580, background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.1)', borderRadius: 7,
-              padding: '6px 14px', color: '#fff', fontSize: 13,
-              outline: 'none', boxSizing: 'border-box', textAlign: 'center',
+              width:580, background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:7, padding:'6px 14px', color:'#fff', fontSize:12, outline:'none', boxSizing:'border-box', textAlign:'center'
             }}
           />
         </div>
@@ -414,61 +445,92 @@ const Reporte = () => {
             boxShadow: '0 8px 48px rgba(0,0,0,0.6)',
             overflow: 'hidden',
           }}>
-            <div className="con-img" ref={reportRef} id="reporte-completo" style={{ width: 600, flexShrink: 0 }}>
+            <div className="con-img" ref={reportRef} id="reporte-completo" style={{ width: 600, flexShrink: 0, position: 'relative' }}>
 
-              {/* Figuras circulares/cuadradas con z-index alto */}
-              {figuras.map(figura => (
-                <Rnd
-                  key={figura.id}
-                  default={{ x: figura.x, y: figura.y, width: 80, height: 80 }}
-                  onDragStop={(_e, d) =>
-                    setFiguras(prev => prev.map(f => f.id === figura.id ? { ...f, x: d.x, y: d.y } : f))
-                  }
-                  lockAspectRatio={true}
-                  style={{ zIndex: 200, position: 'absolute' }}
-                >
-                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={figura.src}
-                      draggable="false"
-                      style={{
-                        width: '100%', height: '100%', objectFit: 'cover',
-                        borderRadius: figura.tipo === 'circle' ? '50%' : 0,
-                        border: '1.5px solid gray',
-                        display: 'block', pointerEvents: 'none',
-                      }}
-                    />
-                    <button
-                      onMouseDown={e => e.stopPropagation()}
-                      onClick={() => setFiguras(prev => prev.filter(f => f.id !== figura.id))}
-                      style={{
-                        position: 'absolute', top: -10, right: -10,
-                        width: 24, height: 24, borderRadius: '50%',
-                        background: 'red', border: 'none', cursor: 'pointer',
-                        color: '#fff', fontSize: 11, fontWeight: 700,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        zIndex: 201,
-                      }}
-                    >✕</button>
-                    <button
-                      onMouseDown={e => e.stopPropagation()}
-                      onClick={() => setCropState({ id: figura.id, src: figura.src })}
-                      style={{
-                        position: 'absolute', bottom: -10, left: -10,
-                        width: 26, height: 26, borderRadius: '50%',
-                        background: 'rgba(0,0,0,0.75)', border: 'none', cursor: 'pointer',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        zIndex: 201,
-                      }}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.364-6.364a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H8v-2.414a2 2 0 01.586-1.414z" />
-                      </svg>
-                    </button>
+              {/* ── Zona delimitada para figuras (solo sobre la imagen anatómica) ── */}
+              {(() => {
+                // ─── DIMENSIONES DE LA ZONA PERMITIDA ────────────────────────
+                const FIG_W  = 80;    // ancho de la figura (px)
+                const FIG_H  = 80;    // alto de la figura (px)
+                const ZONA_W = 535;   // ← ancho de la zona (igual que la imagen)
+                const ZONA_H = 775;   // ← alto de la zona (solo área de imagen, sin conclusiones)
+                // ─────────────────────────────────────────────────────────────
+                const LIMITE_DERECHO  = ZONA_W - FIG_W;
+                const LIMITE_INFERIOR = ZONA_H - FIG_H;
+                return (
+                  <div style={{
+                    position: 'absolute',
+                    top: 0, left: 0,
+                    width: ZONA_W,
+                    height: ZONA_H,
+                    zIndex: 15,
+                    boxSizing: 'border-box',
+                    /* Borde visual que indica la zona permitida */
+                    outline: figuras.length > 0
+                      ? '1.5px dashed rgba(249,115,22,0.35)'
+                      : 'none',
+                    borderRadius: 4,
+                    /* El div en sí no bloquea clics; solo las figuras son interactivas */
+                    pointerEvents: 'none',
+                  }}>
+                    {figuras.map(figura => (
+                      <Rnd
+                        key={figura.id}
+                        default={{ x: figura.x, y: figura.y, width: FIG_W, height: FIG_H }}
+                        onDragStop={(_e, d) => {
+                          const x = Math.max(0, Math.min(d.x, LIMITE_DERECHO));
+                          const y = Math.max(0, Math.min(d.y, LIMITE_INFERIOR));
+                          setFiguras(prev => prev.map(f => f.id === figura.id ? { ...f, x, y } : f));
+                        }}
+                        lockAspectRatio={true}
+                        bounds="parent"
+                        style={{ zIndex: 20, position: 'absolute', pointerEvents: 'all' }}
+                      >
+                        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={figura.src}
+                            draggable="false"
+                            style={{
+                              width: '100%', height: '100%', objectFit: 'cover',
+                              borderRadius: figura.tipo === 'circle' ? '50%' : 0,
+                              border: '1.5px solid gray',
+                              display: 'block', pointerEvents: 'none',
+                            }}
+                          />
+                          <button
+                            onMouseDown={e => e.stopPropagation()}
+                            onClick={() => setFiguras(prev => prev.filter(f => f.id !== figura.id))}
+                            style={{
+                              position: 'absolute', top: -10, right: -10,
+                              width: 24, height: 24, borderRadius: '50%',
+                              background: 'red', border: 'none', cursor: 'pointer',
+                              color: '#fff', fontSize: 11, fontWeight: 700,
+                              display: 'flex', alignItems: 'center', justifyContent: 'center',
+                              zIndex: 20,
+                            }}
+                          >✕</button>
+                          <button
+                            onMouseDown={e => e.stopPropagation()}
+                            onClick={() => setCropState({ id: figura.id, src: figura.src })}
+                            style={{
+                              position: 'absolute', bottom: -10, left: -10,
+                              width: 26, height: 26, borderRadius: '50%',
+                              background: 'rgba(0,0,0,0.75)', border: 'none', cursor: 'pointer',
+                              display: 'flex', alignItems: 'center', justifyContent: 'center',
+                              zIndex: 20,
+                            }}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.364-6.364a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H8v-2.414a2 2 0 01.586-1.414z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </Rnd>
+                    ))}
                   </div>
-                </Rnd>
-              ))}
+                );
+              })()}
 
               {/* Imágenes arrastrables */}
               {selectedImages.map((image, index) => (
@@ -1540,7 +1602,7 @@ const Reporte = () => {
                   border: '1px solid rgba(255,255,255,0.1)',
                   padding: 3,
                 }}>
-                  <div style={{ display: 'flex', gap: 3, padding: '5px 8px' }}>
+                  <div style={{ display: 'flex', gap: 3, padding: '5px 8px', alignItems: 'center' }}>
                     {[['reporte', 'Reporte'], ['lista', 'Lista']].map(([id, label]) => (
                       <button key={id} onClick={() => setActiveTab(id)} style={{
                         padding: '2px 11px', borderRadius: 5, fontSize: 10, fontWeight: 600,
@@ -1551,6 +1613,22 @@ const Reporte = () => {
                         {label}
                       </button>
                     ))}
+                    {/* Botón para convertir a minúsculas con reglas gramaticales */}
+                    {/* <button
+                      title="Convertir a minúsculas (respetando gramática)"
+                      onClick={() => setCopyConclusions(conclusionToSentenceCase(copyConclusions))}
+                      style={{
+                        marginLeft: 'auto',
+                        padding: '2px 9px', borderRadius: 5, fontSize: 10, fontWeight: 700,
+                        border: '1px solid rgba(255,255,255,0.15)', cursor: 'pointer',
+                        background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.55)',
+                        transition: 'all 0.15s', letterSpacing: '0.02em',
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.background = 'rgba(249,115,22,0.2)'; e.currentTarget.style.color = '#f97316'; e.currentTarget.style.borderColor = '#f97316'; }}
+                      onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.color = 'rgba(255,255,255,0.55)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; }}
+                    >
+                      Aa
+                    </button> */}
                   </div>
 
                   {activeTab === 'reporte' && (
@@ -1586,7 +1664,11 @@ const Reporte = () => {
                               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2px 20px', marginBottom: 8 }}>
                                 {listaVisual.map(({ k, v }, i) => (
                                   <p key={i} style={{ color: 'rgba(255,255,255,0.8)', fontSize: 12, margin: 0 }}>
-                                    <span style={{ color: '#f97316', fontWeight: 600 }}>{k}:</span> {v}
+                                    <span style={{ color: '#f97316', fontWeight: 600 }}>
+                                      {/* Etiqueta: solo primera letra en mayúscula */}
+                                      {k.charAt(0).toUpperCase() + k.slice(1).toLowerCase()}:
+                                    </span>{' '}
+                                    {conclusionToSentenceCase(v)}
                                   </p>
                                 ))}
                               </div>

@@ -3,7 +3,7 @@ import { NerviusButtonSegmenBILATERAL2 } from "@/app/components/ReportTemplate/C
 
 export function checkDivsSegmentarBilateral2(copyConclusions) {
 
-  if ( copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('mediano bilateral con predominio izquierdo, en segmento a nivel')) {
     return (
       <>
 <div style={{ position: 'absolute', top: '19.3%', left: '58.8%', transform: 'rotate(80deg)' }}
@@ -441,7 +441,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>
     );
   }
-  if ( copyConclusions.includes('MEDIANO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('mediano bilateral con predominio derecho, en segmento a nivel')) {
     return (
       <>
       <div style={{ position: 'absolute', top: '19.3%', left: '41.4%', transform: 'rotate(100deg)' }}
@@ -879,7 +879,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     );
 
   }
-  if ( copyConclusions.includes('INTERÓSEO ANTERIOR BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('interóseo anterior bilateral con predominio derecho, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
         <div style={{ position: 'absolute', top: '32.4%', left: '32.5%', transform: 'rotate(100deg)' }}
@@ -970,7 +970,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('INTERÓSEO ANTERIOR BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('interóseo anterior bilateral con predominio izquierdo, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
         <div style={{ position: 'absolute', top: '32.4%', left: '66.5%', transform: 'rotate(90deg)' }}
@@ -1062,7 +1062,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('ACCESORIO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('accesorio bilateral con predominio derecho, en segmento a nivel')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '14.0%', left: '48.4%', transform: 'rotate(150deg)', }}
@@ -1092,7 +1092,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('ACCESORIO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('accesorio bilateral con predominio izquierdo, en segmento a nivel')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '14.0%', left: '50.7%', transform: 'rotate(30deg)', }}
@@ -1123,7 +1123,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('axilar bilateral con predominio izquierdo, en segmento a nivel')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '19.0%', left: '59.5%', transform: 'rotate(180deg)', }}
@@ -1184,7 +1184,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('AXILAR BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('axilar bilateral con predominio derecho, en segmento a nivel')) {
     return (
       <>
         <div style={{ position: 'absolute', top: '19.0%', left: '39.8%', transform: 'rotate(180deg)', }}
@@ -1244,7 +1244,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
       </>);
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('musculocutáneo bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
         <div style={{ position: 'absolute', top: '17.5%', left: '56.0%', transform: 'rotate(50deg)', }}
           className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -1445,7 +1445,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('MUSCULOCUTÁNEO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('musculocutáneo bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '17.5%', left: '43.6%', transform: 'rotate(110deg)', }}
@@ -1642,7 +1642,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('RADIAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('radial bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
       
       <div style={{ position: 'absolute', top: '18.5%', left: '38.9%', transform: 'rotate(120deg)', }}
@@ -1908,7 +1908,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('RADIAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('radial bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '18.5%', left: '60.5%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caarii1' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /></div>
@@ -2179,7 +2179,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
   }
 
-  if ( copyConclusions.includes('RADIAL SUPERFICIAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('radial superficial bilateral con predominio derecho, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
     <div style={{ position: 'absolute', top: '36.3%', left: '29.3%', transform: 'rotate(90deg)' }}
@@ -2277,7 +2277,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('RADIAL SUPERFICIAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('radial superficial bilateral con predominio izquierdo, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
       <div style={{ position: 'absolute', top: '36.0%', left: '69.6%', transform: 'rotate(70deg)' }}
@@ -2377,7 +2377,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('INTERÓSEO POSTERIOR BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('interóseo posterior bilateral con predominio derecho, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
 
@@ -2461,7 +2461,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('INTERÓSEO POSTERIOR BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('interóseo posterior bilateral con predominio izquierdo, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
 <div style={{ position: 'absolute', top: '30.7%', left: '67.2%', transform: 'rotate(70deg)' }}
@@ -2545,7 +2545,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('DORSAL CUTÁNEO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('dorsal cutáneo bilateral con predominio derecho, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
 <div style={{ position: 'absolute', top: '34.6%', left: '34.0%', transform: 'rotate(80deg)' }}
@@ -2635,7 +2635,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('DORSAL CUTÁNEO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('dorsal cutáneo bilateral con predominio izquierdo, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
 <div style={{ position: 'absolute', top: '34.7%', left: '65.4%', transform: 'rotate(80deg)' }}
@@ -2724,7 +2724,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('SUPRAESCAPULAR BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('supraescapular bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
 
 
@@ -2791,7 +2791,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     
     </>);
   }
-  if ( copyConclusions.includes('SUPRAESCAPULAR BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('supraescapular bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '15.7%', left: '45.9%', transform: 'rotate(20deg)', }}
@@ -2856,7 +2856,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
   
     </>);
   }
-  if (copyConclusions.includes('ULNAR BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('ulnar bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '20.4%', left: '39.9%', transform: 'rotate(120deg)', }}
@@ -3164,7 +3164,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if ( copyConclusions.includes('ULNAR BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('ulnar bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '20.0%', left: '58.7%', transform: 'rotate(60deg)', }}
@@ -3475,7 +3475,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('frénico bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '14.8%', left: '51.4%', transform: 'rotate(110deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL PLEXO CERVICAL,' displayText=' ' /> </div>
@@ -3562,7 +3562,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     
     </>);
   }
-  if (copyConclusions.includes('FRÉNICO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('frénico bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '14.9%', left: '48.0%', transform: 'rotate(60deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL PLEXO CERVICAL,' displayText=' ' /> </div>
@@ -3650,7 +3650,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORACODORSAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('toracodorsal bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
 
       <div style={{ position: 'absolute', top: '18.3%', left: '55.3%', transform: 'rotate(80deg)', }}
@@ -3710,7 +3710,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if ( copyConclusions.includes('TORACODORSAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('toracodorsal bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '18.3%', left: '43.8%', transform: 'rotate(80deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='INMEDIATO A SU EMERGENCIA DE AXILA,' displayText=' ' /> </div>
@@ -3769,7 +3769,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORÁCICO LARGO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('torácico largo bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '18.7%', left: '55.8%', transform: 'rotate(80deg)', }}
@@ -3861,7 +3861,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TORÁCICO LARGO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('torácico largo bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 <div style={{ position: 'absolute', top: '18.7%', left: '43.3%', transform: 'rotate(80deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='INMEDIATO A SU EMERGENCIA DE AXILA,' displayText=' ' /> </div>
@@ -3954,7 +3954,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('ANTEBRAQUIAL MEDIAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL') || copyConclusions.includes('ANTEBRAQUIAL MEDIAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('antebraquial medial bilateral con predominio izquierdo, en segmento a nivel') || copyConclusions.includes('antebraquial medial bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '19.7%', left: '58.5%', transform: 'rotate(80deg)' }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar1' title=' DE AXILA,' displayText=' ' /></div>
@@ -4130,7 +4130,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('ANTEBRAQUIAL MEDIAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL') || copyConclusions.includes('ANTEBRAQUIAL MEDIAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('antebraquial medial bilateral con predominio derecho, en segmento a nivel') || copyConclusions.includes('antebraquial medial bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '19.7%', left: '40.8%', transform: 'rotate(80deg)' }}
         className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar1' title=' DE AXILA,' displayText=' ' /></div>
@@ -4307,7 +4307,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('ANTEBRAQUIAL LATERAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('antebraquial lateral bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
         {/* <div style={{ position: 'absolute', top: '17.5%', left: '57.0%', transform: 'rotate(50deg)', }}
           className={`dont-print-Nervius`}><NerviusButtonSegmenBILATERAL2 value='caar1' title='SUPRACLAVICULAR,' displayText=' ' /></div>
@@ -4534,7 +4534,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     </>);
 
   }
-  if (copyConclusions.includes('ANTEBRAQUIAL LATERAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('antebraquial lateral bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 
       {/* <div style={{ position: 'absolute', top: '17.5%', left: '43.6%', transform: 'rotate(110deg)', }}
@@ -4733,7 +4733,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('CIÁTICO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('ciático bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '34.8%', left: '46.4%', transform: 'rotate(160deg)', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DE LA ESCOTADURA CIATICA MAYOR,' displayText=' ' /> </div>
@@ -5021,7 +5021,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if ( copyConclusions.includes('CIÁTICO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {/* SEGUIR AQUI */
+  if ( copyConclusions.includes('ciático bilateral con predominio izquierdo, en segmento a nivel')) {/* SEGUIR AQUI */
     return (<>
 
 <div style={{ position: 'absolute', top: '34.8%', left: '54.4%', transform: 'rotate(190deg)', }}
@@ -5310,7 +5310,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if ( copyConclusions.includes('GLÚTEO INFERIOR BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('glúteo inferior bilateral con predominio derecho, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
         <div style={{ position: 'absolute', top: '34.6%', left: '46.4%', transform: 'rotate(130deg)', }}
@@ -5383,7 +5383,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('GLÚTEO INFERIOR BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('glúteo inferior bilateral con predominio izquierdo, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
         <div style={{ position: 'absolute', top: '35.0%', left: '52.8%', transform: 'rotate(40deg)', }}
@@ -5457,7 +5457,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('GLÚTEO SUPERIOR BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('glúteo superior bilateral con predominio izquierdo, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
     <div style={{ position: 'absolute', top: '34.6%', left: '53.6%', transform: 'rotate(60deg)', }}
@@ -5509,7 +5509,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('GLÚTEO SUPERIOR BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('glúteo superior bilateral con predominio derecho, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
         <div style={{ position: 'absolute', top: '34.6%', left: '45.7%', transform: 'rotate(110deg)', }}
@@ -5561,7 +5561,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('FEMORAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('femoral bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 
 
@@ -5944,7 +5944,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if ( copyConclusions.includes('FEMORAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {/* SEGUIR AQUI */
+  if ( copyConclusions.includes('femoral bilateral con predominio izquierdo, en segmento a nivel')) {/* SEGUIR AQUI */
     return (<>
       <div style={{ position: 'absolute', top: '34.2%', left: '55.2%', transform: 'rotate(60deg)', }}
           className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='PROXIMAL A LIGAMENTO INGUINAL,' displayText=' ' /> </div>
@@ -6328,7 +6328,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
   }
 
 
-  if (copyConclusions.includes('FEMOROCUTÁNEO LATERAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL') ) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('femorocutáneo lateral bilateral con predominio derecho, en segmento a nivel') ) {// FALTA VERIFIcaar
     return (
       <>
       <div style={{ position: 'absolute', top: '34.2%', left: '43.4%', transform: 'rotate(90deg)', }}
@@ -6454,7 +6454,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('FEMOROCUTÁNEO LATERAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL') ) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('femorocutáneo lateral bilateral con predominio izquierdo, en segmento a nivel') ) {// FALTA VERIFIcaar
     return (
       <>
     <div style={{ position: 'absolute', top: '34.2%', left: '56.2%', transform: 'rotate(90deg)', }}
@@ -6584,7 +6584,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
 
 
-  if (copyConclusions.includes('SAFENO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('safeno bilateral con predominio derecho, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
 
@@ -6801,7 +6801,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('SAFENO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('safeno bilateral con predominio izquierdo, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
 <div style={{ position: 'absolute', top: '54.6%', left: '53.9%', transform: 'rotate(80deg)', }}
@@ -7015,7 +7015,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL ')) {
+  if ( copyConclusions.includes('obturador bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '30.8%', left: '50.5%', transform: 'rotate(180deg)', }}
@@ -7179,7 +7179,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('OBTURADOR BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('obturador bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '30.8%', left: '48.8%', transform: 'rotate(180deg)', }}
@@ -7343,7 +7343,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PERONEO COMÚN BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('peroneo común bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '51.0%', left: '56.5%', transform: 'rotate(260deg)' }}
@@ -7601,7 +7601,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if ( copyConclusions.includes('PERONEO COMÚN BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('peroneo común bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 
 <div style={{ position: 'absolute', top: '51.0%', left: '42.9%', transform: 'rotate(95deg)' }}
@@ -7859,7 +7859,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar62' displayText=' ' /> </div>
     </>);
   }
-  if ( copyConclusions.includes('PERONEO SUPERFICIAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('peroneo superficial bilateral con predominio derecho, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
 <div style={{ position: 'absolute', top: '60.0%', left: '39.3%', transform: 'rotate(100deg)', }}
@@ -8021,7 +8021,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if ( copyConclusions.includes('PERONEO SUPERFICIAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {// FALTA VERIFIcaar
+  if ( copyConclusions.includes('peroneo superficial bilateral con predominio izquierdo, en segmento a nivel')) {// FALTA VERIFIcaar
     return (
       <>
 <div style={{ position: 'absolute', top: '60.0%', left: '60.4%', transform: 'rotate(100deg)', }}
@@ -8182,7 +8182,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
   }
 
-  if (copyConclusions.includes('PERONEO PROFUNDO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL') ) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('peroneo profundo bilateral con predominio derecho, en segmento a nivel') ) {// FALTA VERIFIcaar
     return (
       <>
         <div style={{ position: 'absolute', top: '69.9%', left: '41.1%', transform: 'rotate(90deg)', }}
@@ -8260,7 +8260,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
 
   }
-  if (copyConclusions.includes('PERONEO PROFUNDO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL') ) {// FALTA VERIFIcaar
+  if (copyConclusions.includes('peroneo profundo bilateral con predominio izquierdo, en segmento a nivel') ) {// FALTA VERIFIcaar
     return (
       <>
         <div style={{ position: 'absolute', top: '69.9%', left: '57.8%', transform: 'rotate(90deg)', }}
@@ -8335,7 +8335,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
   }
 
 
-  if ( copyConclusions.includes('TIBIAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if ( copyConclusions.includes('tibial bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 <div style={{ position: 'absolute', top: '51.0%', left: '42.9%', transform: 'rotate(95deg)' }}
     className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
@@ -8648,7 +8648,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('TIBIAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('tibial bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
 <div style={{ position: 'absolute', top: '51.0%', left: '56.5%', transform: 'rotate(260deg)' }}
     className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL TERCIO DISTAL DEL MUSLO,' displayText=' ' /> </div>
@@ -8964,7 +8964,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     </>);
   }
 
-    if (copyConclusions.includes('SURAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL') ) {
+    if (copyConclusions.includes('sural bilateral con predominio derecho, en segmento a nivel') ) {
       return (<>
   
   <div style={{ position: 'absolute', top: '61.7%', left: '40.9%',  transform: 'rotate(120deg)' }}
@@ -9044,7 +9044,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
       </>);
     }
-    if (copyConclusions.includes('SURAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL') ) {
+    if (copyConclusions.includes('sural bilateral con predominio izquierdo, en segmento a nivel') ) {
       return (<>
         <div style={{ position: 'absolute', top: '61.7%', left: '58.0%', transform: 'rotate(60deg)' }}
           className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL TERCIO PROXIMAL DE LA PIERNA,' displayText=' ' /> </div>
@@ -9124,7 +9124,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       </>);
     }
 
-  if (copyConclusions.includes('PLANTAR MEDIAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL') ) {
+  if (copyConclusions.includes('plantar medial bilateral con predominio derecho, en segmento a nivel') ) {
     return (<>
 
 <div style={{ position: 'absolute', top: '72.2%', left: '43.5%', transform: 'rotate(170deg)'}}
@@ -9189,7 +9189,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     </>);
   }
   
-    if (copyConclusions.includes('PLANTAR MEDIAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL ') ) {
+    if (copyConclusions.includes('plantar medial bilateral con predominio izquierdo, en segmento a nivel ') ) {
       return (<>
         <div style={{ position: 'absolute', top: '72.6%', left: '55.8%',  transform: 'rotate(190deg)'}}
           className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL TOBILLO,' displayText=' ' /> </div>
@@ -9252,7 +9252,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
       </>);
     }
-  if (copyConclusions.includes('PLANTAR LATERAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL') ) {
+  if (copyConclusions.includes('plantar lateral bilateral con predominio derecho, en segmento a nivel') ) {
     return (<>
 
       <div style={{ position: 'absolute', top: '72.6%', left: '43.2%', }}
@@ -9320,7 +9320,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PLANTAR LATERAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL') ) {
+  if (copyConclusions.includes('plantar lateral bilateral con predominio izquierdo, en segmento a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '72.2%', left: '55.8%', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL TOBILLO,' displayText=' ' /> </div>
@@ -9388,7 +9388,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('ILIOINGUINAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL') ) {
+  if (copyConclusions.includes('ilioinguinal bilateral con predominio derecho, en segmento a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '29.0%', left: '49.1%', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL ABDOMINAL,' displayText=' ' /> </div>
@@ -9498,7 +9498,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
       
     </>);
   }
-  if (copyConclusions.includes('ILIOINGUINAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL') ) {
+  if (copyConclusions.includes('ilioinguinal bilateral con predominio izquierdo, en segmento a nivel') ) {
     return (<>
       <div style={{ position: 'absolute', top: '29.0%', left: '50.2%', transform: 'rotate(0deg)' }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL ABDOMINAL,' displayText=' ' /> </div>
@@ -9610,7 +9610,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
     </>);
   }
 
-  if (copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('pudendo bilateral con predominio derecho, en segmento a nivel')) {
     return (<>
 
 
@@ -9626,7 +9626,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('PUDENDO BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {
+  if (copyConclusions.includes('pudendo bilateral con predominio izquierdo, en segmento a nivel')) {
     return (<>
       <div style={{ position: 'absolute', top: '37.2%', left: '50.4%', transform: 'rotate(200deg)' }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DEL FORAMEN CIÁTICO,' displayText=' ' /> </div>
@@ -9641,7 +9641,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO IZQUIERDO, EN SEGMENTO A NIVEL')) {/* SEGUIR AQUI */
+  if (copyConclusions.includes('facial bilateral con predominio izquierdo, en segmento a nivel')) {/* SEGUIR AQUI */
     return (<>
       <div style={{ position: 'absolute', top: '5.2%', left: '51.0%', }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>
@@ -9760,7 +9760,7 @@ export function checkDivsSegmentarBilateral2(copyConclusions) {
 
     </>);
   }
-  if (copyConclusions.includes('FACIAL BILATERAL CON PREDOMINIO DERECHO, EN SEGMENTO A NIVEL')) {/* SEGUIR AQUI */
+  if (copyConclusions.includes('facial bilateral con predominio derecho, en segmento a nivel')) {/* SEGUIR AQUI */
     return (<>
       <div style={{ position: 'absolute', top: '5.1%', left: '48.2%', transform: 'rotate(180deg)' }}
         className={`dont-print-Nervius`} > <NerviusButtonSegmenBILATERAL2 value='caar1' title='DE RAMA TEMPOROFACIAL,' displayText=' ' /> </div>

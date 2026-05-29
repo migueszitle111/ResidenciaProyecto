@@ -215,6 +215,8 @@ const SimpleMultiStepForm = ({ showStepNumber, conclusionDivRef, elementRef, han
       {step === 'A'    && <StepA setStep={setStep} />}
       {step === 'B'    && <StepB setStep={setStep} setSelectedSide={setSelectedSide} />}
       {step === 'B1'   && <StepB1 setStep={setStep} />}
+      {step === 'BB'   && <StepBB setStep={setStep} />}
+      {step === 'BC'   && <StepBC setStep={setStep} />}
       {step === 'C'    && <StepC setStep={setStep} selectedSide={selectedSide} />}
       {step === 'CL'   && <StepCL setStep={setStep} selectedSide={selectedSide} />}
       {step === 'CG'   && <StepCG setStep={setStep} selectedSide={selectedSide} />}
@@ -223,6 +225,8 @@ const SimpleMultiStepForm = ({ showStepNumber, conclusionDivRef, elementRef, han
       {step === 'CGI'  && <StepCGI setStep={setStep} />}
       {step === 'CDI'  && <StepCDI setStep={setStep} />}
       {step === 'D'    && <StepD setStep={setStep} />}
+      {step === 'DB'    && <StepDB setStep={setStep} />}
+      {step === 'DC'    && <StepDC setStep={setStep} />}
       {step === 'E'    && <StepE setStep={setStep} />}
       {step === 'E1'   && <StepE1 setStep={setStep} />}
       {step === 'F1'   && <StepF1 setStep={setStep} />}
@@ -328,77 +332,77 @@ const StepB = ({ setStep, setSelectedSide }) => {
       <Accordion title='MIEMBROS SUPERIORES' value='NERVIOS SUPERIORES' type='external'>
         <div onClick={() => { setSelectedSide('MEDIANO'); setStep('B1'); }}>
           <ConclusionButton value='MEDIANO' title=' DE NERVIO MEDIANO' displayText='MEDIANO' /></div>
-        <div onClick={() => { setSelectedSide('INTEROSEOANTERIOR'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('INTEROSEOANTERIOR'); setStep('BB'); }}>
           <ConclusionButton value='INTEROSEOANTERIOR' title=' DE NERVIO INTERÓSEO ANTERIOR' displayText='INTERÓSEO ANTERIOR' /></div>
         {/* <div onClick={() => { setSelectedSide('ACCESORIO'); setStep('B1'); }}>
           <ConclusionButton value='ACCESORIO' title=' DE NERVIO ACCESORIO' displayText='ACCESORIO' /></div> */}
-        <div onClick={() => { setSelectedSide('AXILAR'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('AXILAR'); setStep('BB'); }}>
           <ConclusionButton value='AXILAR' title=' DE NERVIO AXILAR' displayText='AXILAR' /></div>
         <div onClick={() => { setSelectedSide('MUSCULOCUTANEO'); setStep('B1'); }}>
           <ConclusionButton value='MUSCULOCUTANEO' title=' DE NERVIO MUSCULOCUTÁNEO' displayText='MUSCULOCUTÁNEO' /></div>
         <div onClick={() => { setSelectedSide('RADIAL'); setStep('B1'); }}>
           <ConclusionButton value='RADIAL' title=' DE NERVIO RADIAL' displayText='RADIAL' /></div>
-        <div onClick={() => { setSelectedSide('RADIAL_SUPERFICIAL'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('RADIAL_SUPERFICIAL'); setStep('BC'); }}>
           <ConclusionButton value='RADIAL_SUPERFICIAL' title=' DE NERVIO RADIAL SUPERFICIAL' displayText='RADIAL SUPERFICIAL' /></div>
-        <div onClick={() => { setSelectedSide('INTEROSEO_POSTERIOR'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('INTEROSEO_POSTERIOR'); setStep('BB'); }}>
           <ConclusionButton value='INTEROSEO_POSTERIOR' title=' DE NERVIO INTERÓSEO POSTERIOR' displayText='INTERÓSEO POSTERIOR' /></div>
-        <div onClick={() => { setSelectedSide('SUPRAESCAPULAR'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('SUPRAESCAPULAR'); setStep('BB'); }}>
           <ConclusionButton value='SUPRAESCAPULAR' title=' DE NERVIO SUPRAESCAPULAR' displayText='SUPRAESCAPULAR' /></div>
         <div onClick={() => { setSelectedSide('ULNAR'); setStep('B1'); }}>
           <ConclusionButton value='ULNAR' title=' DE NERVIO ULNAR' displayText='ULNAR' /></div>
-        <div onClick={() => { setSelectedSide('DORSAL_CUTANEO'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('DORSAL_CUTANEO'); setStep('BC'); }}>
           <ConclusionButton value='DORSAL_CUTANEO' title=' DE NERVIO DORSAL CUTÁNEO' displayText='DORSAL CUTÁNEO' /></div>
         {/* <div onClick={() => { setSelectedSide('FRENICO'); setStep('B1'); }}>
           <ConclusionButton value='FRENICO' title=' DE NERVIO FRÉNICO' displayText='FRÉNICO' /></div> */}
-        <div onClick={() => { setSelectedSide('TORACODORSAL'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('TORACODORSAL'); setStep('BB'); }}>
           <ConclusionButton value='TORACODORSAL' title=' DE NERVIO TORACODORSAL' displayText='TORACODORSAL' /></div>
-        <div onClick={() => { setSelectedSide('TORACICO_LARGO'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('TORACICO_LARGO'); setStep('BB'); }}>
           <ConclusionButton value='TORACICO_LARGO' title=' DE NERVIO TORÁCICO LARGO' displayText='TORÁCICO LARGO' /></div>
-          <div onClick={() => { setSelectedSide('ANTEBRAQUIAL_CUTANEO'); setStep('B1'); }}>
+          <div onClick={() => { setSelectedSide('ANTEBRAQUIAL_CUTANEO'); setStep('BC'); }}>
           <ConclusionButton value='ANTEBRAQUIAL_CUTANEO' title=' DE NERVIO ANTEBRAQUIAL MEDIAL' displayText='ANTEBRAQUIAL MEDIAL' /></div>
-          <div onClick={() => { setSelectedSide('ANTEBRAQUIAL LATERAL'); setStep('B1'); }}>
+          <div onClick={() => { setSelectedSide('ANTEBRAQUIAL LATERAL'); setStep('BC'); }}>
           <ConclusionButton value='MUSCULOCUTANEO' title=' DE NERVIO ANTEBRAQUIAL LATERAL' displayText='ANTEBRAQUIAL LATERAL' /></div>
               
       </Accordion>
 
       <Accordion title='CRANEALES' value='CRANEALES' type='external'>
-        <div onClick={() => { setSelectedSide('FRENICO'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('FRENICO'); setStep('BB'); }}>
             <ConclusionButton value='FRENICO' title=' DE NERVIO FRÉNICO' displayText='FRÉNICO' /></div>
-        <div onClick={() => { setSelectedSide('ACCESORIO'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('ACCESORIO'); setStep('BB'); }}>
             <ConclusionButton value='ACCESORIO' title=' DE NERVIO ACCESORIO' displayText='ACCESORIO' /></div>
-        <div onClick={() => { setSelectedSide('FACIAL'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('FACIAL'); setStep('BB'); }}>
             <ConclusionButton value='FACIAL' title=' DE NERVIO FACIAL' displayText='FACIAL' /></div>
       </Accordion>
 
       <Accordion title='MIEMBROS INFERIORES' value='NERVIOS INFERIORES' type='external'>
 
-        <div onClick={() => { setSelectedSide('GLUTEO_INFERIOR'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('GLUTEO_INFERIOR'); setStep('BB'); }}>
           <ConclusionButton value='GLUTEO_INFERIOR' title=' DE NERVIO GLÚTEO INFERIOR' displayText='GLÚTEO INFERIOR' /></div>
-        <div onClick={() => { setSelectedSide('GLUTEO_MEDIO'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('GLUTEO_MEDIO'); setStep('BB'); }}>
           <ConclusionButton value='GLUTEO_MEDIO' title=' DE NERVIO GLÚTEO SUPERIOR' displayText='GLÚTEO SUPERIOR' /></div>
         <div onClick={() => { setSelectedSide('FEMORAL'); setStep('B1'); }}>
           <ConclusionButton value='FEMORAL' title=' DE NERVIO FEMORAL' displayText='FEMORAL' /></div>
-        <div onClick={() => { setSelectedSide('FEMOROCUTÁNEO_LATERAL'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('FEMOROCUTÁNEO_LATERAL'); setStep('BC'); }}>
           <ConclusionButton value='FEMOROCUTÁNEO_LATERAL' title=' DE NERVIO FEMOROCUTÁNEO LATERAL' displayText='FEMOROCUTÁNEO LATERAL' /></div>
-        <div onClick={() => { setSelectedSide('SAFENO'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('SAFENO'); setStep('BC'); }}>
           <ConclusionButton value='SAFENO' title=' DE NERVIO SAFENO' displayText='SAFENO' /></div>
-        <div onClick={() => { setSelectedSide('OBTURADOR'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('OBTURADOR'); setStep('BB'); }}>
           <ConclusionButton value='OBTURADOR' title=' DE NERVIO OBTURADOR' displayText='OBTURADOR' /></div>
         <div onClick={() => { setSelectedSide('NERVIO_PERONEO'); setStep('B1'); }}>
           <ConclusionButton value='NERVIO_PERONEO' title=' DE NERVIO PERONEO COMÚN' displayText='PERONEO COMÚN' /></div>
-        <div onClick={() => { setSelectedSide('PERONEO_SUPERFICIAL'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('PERONEO_SUPERFICIAL'); setStep('BC'); }}>
           <ConclusionButton value='PERONEO_SUPERFICIAL' title=' DE NERVIO PERONEO SUPERFICIAL' displayText='PERONEO SUPERFICIAL' /></div>
         <div onClick={() => { setSelectedSide('PERONEO_PROFUNDO'); setStep('B1'); }}>
           <ConclusionButton value='PERONEO_PROFUNDO' title=' DE NERVIO PERONEO PROFUNDO' displayText='PERONEO PROFUNDO' /></div>
         <div onClick={() => { setSelectedSide('TIBIAL'); setStep('B1'); }}>
           <ConclusionButton value='TIBIAL' title=' DE NERVIO TIBIAL' displayText='TIBIAL' /></div>
-        <div onClick={() => { setSelectedSide('SURAL'); setStep('B1'); }}>
+        <div onClick={() => { setSelectedSide('SURAL'); setStep('BC'); }}>
           <ConclusionButton value='SURAL' title=' DE NERVIO SURAL' displayText='SURAL' /></div>
         <div onClick={() => { setSelectedSide('PLANTAR_MEDIAL'); setStep('B1'); }}>
           <ConclusionButton value='PLANTAR_MEDIAL' title=' DE NERVIO PLANTAR MEDIAL' displayText='PLANTAR MEDIAL' /></div>
         <div onClick={() => { setSelectedSide('PLANTAR_LATERAL'); setStep('B1'); }}>
           <ConclusionButton value='PLANTAR_LATERAL' title=' DE NERVIO PLANTAR LATERAL' displayText='PLANTAR LATERAL' /></div>
-          <div onClick={() => { setSelectedSide('ILIOINGUINAL'); setStep('B1'); }}>
+          <div onClick={() => { setSelectedSide('ILIOINGUINAL'); setStep('BC'); }}>
           <ConclusionButton value='ILIOINGUINAL' title=' DE NERVIO ILIOINGUINAL' displayText='ILIOINGUINAL' /></div>
 
       </Accordion>
@@ -472,9 +476,145 @@ const StepB1 = ({ setStep }) => {
             <div onClick={() => setStep('CGI')}>
               <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} />
             </div>
-            <div onClick={() => setStep('CG')}>
+            {/* <div onClick={() => setStep('CG')}>
               <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} />
+            </div> */}
+          </Accordion>
+        </InternalAccordionContainer>
+      </AccordionContainer>
+    </div>
+  );
+};
+
+const StepBB = ({ setStep }) => {
+  const { removeConclusion } = useContext(ReportContext);
+  return (
+    <div>
+      <NavRow
+        onBack={() => { 
+          removeConclusion('IZQUIERDO')
+              removeConclusion('DERECHO')
+              removeConclusion('BILATERAL')
+              removeConclusion('MEDIANO');
+              removeConclusion('INTEROSEOANTERIOR');
+              removeConclusion('ACCESORIO');
+              removeConclusion('AXILAR');
+              removeConclusion('MUSCULOCUTANEO');
+              removeConclusion('RADIAL');
+              removeConclusion('RADIAL_SUPERFICIAL');
+              removeConclusion('INTEROSEO_POSTERIOR');
+              removeConclusion('SUPRAESCAPULAR');
+              removeConclusion('ULNAR');
+              removeConclusion('DORSAL_CUTANEO');
+              removeConclusion('FRENICO');
+              removeConclusion('TORACODORSAL');
+              removeConclusion('TORACICO_LARGO');
+              removeConclusion('CIATICO');
+              removeConclusion('GLUTEO_INFERIOR');
+              removeConclusion('GLUTEO_MEDIO');
+              removeConclusion('FEMORAL');
+              removeConclusion('FEMOROCUTÁNEO_LATERAL');
+              removeConclusion('SAFENO');
+              removeConclusion('OBTURADOR');
+              removeConclusion('NERVIO_PERONEO');
+              removeConclusion('PERONEO_SUPERFICIAL');
+              removeConclusion('PERONEO_PROFUNDO');
+              removeConclusion('TIBIAL');
+              removeConclusion('SURAL');
+              removeConclusion('PLANTAR_MEDIAL');
+              removeConclusion('PLANTAR_LATERAL');
+              removeConclusion('PUDENDO');
+              removeConclusion('FACIAL'); 
+          setStep('B'); }}
+        onReset={() => window.location.reload()}
+      />
+      <StepTitle>Lado B</StepTitle>
+      <div onClick={() => setStep('C')}>
+        <ConclusionButton value='IZQUIERDO' title=' IZQUIERDO,' displayText='IZQUIERDO' />
+      </div>
+      <div onClick={() => setStep('CL')}>
+        <ConclusionButton value='DERECHO' title=' DERECHO,' displayText='DERECHO' />
+      </div>
+      <AccordionContainer>
+        <InternalAccordionContainer>
+          <Accordion title='BILATERIAL' value={'BILATERAL'} type='internal'>
+            <div onClick={() => setStep('CG')}>
+              <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO DERECHO,' displayText={'PREDOMINIO DERECHO'} />
             </div>
+            <div onClick={() => setStep('CGI')}>
+              <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} />
+            </div>
+            {/* <div onClick={() => setStep('CG')}>
+              <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} />
+            </div> */}
+          </Accordion>
+        </InternalAccordionContainer>
+      </AccordionContainer>
+    </div>
+  );
+};
+
+const StepBC = ({ setStep }) => {
+  const { removeConclusion } = useContext(ReportContext);
+  return (
+    <div>
+      <NavRow
+        onBack={() => { 
+          removeConclusion('IZQUIERDO')
+              removeConclusion('DERECHO')
+              removeConclusion('BILATERAL')
+              removeConclusion('MEDIANO');
+              removeConclusion('INTEROSEOANTERIOR');
+              removeConclusion('ACCESORIO');
+              removeConclusion('AXILAR');
+              removeConclusion('MUSCULOCUTANEO');
+              removeConclusion('RADIAL');
+              removeConclusion('RADIAL_SUPERFICIAL');
+              removeConclusion('INTEROSEO_POSTERIOR');
+              removeConclusion('SUPRAESCAPULAR');
+              removeConclusion('ULNAR');
+              removeConclusion('DORSAL_CUTANEO');
+              removeConclusion('FRENICO');
+              removeConclusion('TORACODORSAL');
+              removeConclusion('TORACICO_LARGO');
+              removeConclusion('CIATICO');
+              removeConclusion('GLUTEO_INFERIOR');
+              removeConclusion('GLUTEO_MEDIO');
+              removeConclusion('FEMORAL');
+              removeConclusion('FEMOROCUTÁNEO_LATERAL');
+              removeConclusion('SAFENO');
+              removeConclusion('OBTURADOR');
+              removeConclusion('NERVIO_PERONEO');
+              removeConclusion('PERONEO_SUPERFICIAL');
+              removeConclusion('PERONEO_PROFUNDO');
+              removeConclusion('TIBIAL');
+              removeConclusion('SURAL');
+              removeConclusion('PLANTAR_MEDIAL');
+              removeConclusion('PLANTAR_LATERAL');
+              removeConclusion('PUDENDO');
+              removeConclusion('FACIAL'); 
+          setStep('B'); }}
+        onReset={() => window.location.reload()}
+      />
+      <StepTitle>Lado C</StepTitle>
+      <div onClick={() => setStep('C')}>
+        <ConclusionButton value='IZQUIERDO' title=' IZQUIERDO,' displayText='IZQUIERDO' />
+      </div>
+      <div onClick={() => setStep('CL')}>
+        <ConclusionButton value='DERECHO' title=' DERECHO,' displayText='DERECHO' />
+      </div>
+      <AccordionContainer>
+        <InternalAccordionContainer>
+          <Accordion title='BILATERIAL' value={'BILATERAL'} type='internal'>
+            <div onClick={() => setStep('CG')}>
+              <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO DERECHO,' displayText={'PREDOMINIO DERECHO'} />
+            </div>
+            <div onClick={() => setStep('CGI')}>
+              <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} />
+            </div>
+            {/* <div onClick={() => setStep('CG')}>
+              <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} />
+            </div> */}
           </Accordion>
         </InternalAccordionContainer>
       </AccordionContainer>
@@ -730,7 +870,7 @@ const StepCD = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledSegm(true); setStep('D'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión con el puntero
+        Seleccionar el nivel de lesión con el puntero 1
       </p>
       <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledSegm(true); setStep('D'); }} />
     </div>
@@ -743,7 +883,7 @@ const StepCDD = ({ setStep }) => {
     <div>
       <NavRow
         onBack={() => { 
-           removeConclusion('BILATERAL')
+              removeConclusion('BILATERAL')
               removeConclusion('focalizada')
               removeConclusion('segmentaria')
               removeConclusion('seguir')
@@ -775,9 +915,9 @@ const StepCDD = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión del lado derecho con el puntero
+        Seleccionar el nivel de lesión del lado derecho con el puntero 2
       </p>
-      <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledSegm(true); setStep('D'); }} />
+      <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }} />
     </div>
   );
 };
@@ -820,9 +960,9 @@ const StepCDI = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión del lado izquierdo con el puntero
+        Seleccionar el nivel de lesión del lado izquierdo con el puntero 3
       </p>
-      <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledSegm(true); setStep('D'); }} />
+      <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }} />
     </div>
   );
 };
@@ -853,6 +993,160 @@ const StepD = ({ setStep }) => {
         onReset={() => window.location.reload()}
       />
       <StepTitle>Tipo</StepTitle>
+  <AccordionContainer>
+      <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type='external'>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN DIFUSA (++++)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++)' displayText={' DENERVACIÓN DIFUSA (++++) '} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN ABUNDANTE (+++)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++)' displayText={'DENERVACIÓN ABUNDANTE (+++)'} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN PROGRESIVA (++)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++)' displayText={'DENERVACIÓN PROGRESIVA (++)'} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} /></div>
+        <div onClick={() => setStep('F')}>
+          <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN (-)' displayText={'SIN DENERVACIÓN'} /></div>
+      </Accordion>
+      </AccordionContainer>
+      <AccordionContainer>
+      <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type='external'>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN DIFUSA (++++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++)' displayText={' DENERVACIÓN DIFUSA (++++) '} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN ABUNDANTE (+++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++)' displayText={'DENERVACIÓN ABUNDANTE (+++)'} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN PROGRESIVA (++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++)' displayText={'DENERVACIÓN PROGRESIVA (++)'} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} /></div>
+        <div onClick={() => setStep('F')}>
+          <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN (-)' displayText={'SIN DENERVACIÓN'} /></div>
+      </Accordion>
+      </AccordionContainer>
+      <AccordionContainer>
+      <Accordion title='DESMIELINIZANTE ' value='DESMIELINIZANTE' type='external'>
+        <div onClick={() => setStep('E1')}>
+          <ConclusionButton value=' RETARDO EN LA CONDUCCIÓN ' title=' TIPO DESMIELIMIZANTE POR RETARDO EN LA CONDUCCIÓN ' displayText={'POR RETARDO EN LA CONDUCCIÓN '} /></div>
+        <div onClick={() => setStep('E1')}>
+          <ConclusionButton value=' BLOQUEO PARCIAL EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' displayText={'POR BLOQUEO PARCIAL EN LA CONDUCCIÓN'} /></div>
+        <div onClick={() => setStep('E1')}>
+          <ConclusionButton value=' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' displayText={'POR BLOQUEO COMPLETO EN LA CONDUCCIÓN'} /></div>
+      </Accordion>
+      </AccordionContainer>
+
+      <AccordionContainer>
+      <Accordion title='MIXTA' value='MIXTA' type='external'>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' title=' TIPO DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA ' displayText={'DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA '} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA ' title=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'  AXONAL CON DESMIELINIZACIÓN SECUNDARIA'} /></div>
+      </Accordion>
+      </AccordionContainer>
+    </div>
+  );
+};
+
+const StepDB = ({ setStep }) => {
+  const { removeConclusion } = useContext(ReportContext);
+  return (
+    <div>
+      <NavRow
+        onBack={() => { 
+          removeConclusion('CON DENERVACIÓN DIFUSA (++++)');
+          removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)');
+          removeConclusion('CON DENERVACIÓN PROGRESIVA (++)');
+          removeConclusion('CON DENERVACIÓN DISCRETA (+/+)');
+          removeConclusion('SIN DENERVACIÓN ACTIVA');
+          removeConclusion('CON DENERVACIÓN DIFUSA (++++)');
+          removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)');
+          removeConclusion('CON DENERVACIÓN PROGRESIVA (++)');
+          removeConclusion('CON DENERVACIÓN DISCRETA (+/+)');
+          removeConclusion('SIN DENERVACIÓN ACTIVA');
+          removeConclusion('RETARDO EN LA CONDUCCIÓN');
+          removeConclusion('BLOQUEO PARCIAL EN LA CONDUCCIÓN');
+          removeConclusion('POR BLOQUEO COMPLETO EN LA CONDUCCIÓN');
+          removeConclusion('TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA');
+          removeConclusion('TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA');
+
+          setStep('CD'); }}
+        onReset={() => window.location.reload()}
+      />
+      <StepTitle>Tipo B</StepTitle>
+  <AccordionContainer>
+      <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type='external'>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN DIFUSA (++++)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DIFUSA (++++)' displayText={' DENERVACIÓN DIFUSA (++++) '} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN ABUNDANTE (+++)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN ABUNDANTE (+++)' displayText={'DENERVACIÓN ABUNDANTE (+++)'} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN PROGRESIVA (++)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN PROGRESIVA (++)' displayText={'DENERVACIÓN PROGRESIVA (++)'} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)' title=' TIPO AXONAL COMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} /></div>
+        <div onClick={() => setStep('F')}>
+          <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL COMPLETA SIN DENERVACIÓN (-)' displayText={'SIN DENERVACIÓN'} /></div>
+      </Accordion>
+      </AccordionContainer>
+      <AccordionContainer>
+      <Accordion title='AXONAL INCOMPLETA' value='AXONAL INCOMPLETA' type='external'>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN DIFUSA (++++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DIFUSA (++++)' displayText={' DENERVACIÓN DIFUSA (++++) '} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN ABUNDANTE (+++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN ABUNDANTE (+++)' displayText={'DENERVACIÓN ABUNDANTE (+++)'} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN PROGRESIVA (++)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN PROGRESIVA (++)' displayText={'DENERVACIÓN PROGRESIVA (++)'} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value='CON DENERVACIÓN DISCRETA (+/+)' title=' TIPO AXONAL INCOMPLETA CON DENERVACIÓN DISCRETA (+/+)' displayText={'DENERVACIÓN DISCRETA (+/+)'} /></div>
+        <div onClick={() => setStep('F')}>
+          <ConclusionButton value='SIN DENERVACIÓN ACTIVA' title=' TIPO AXONAL INCOMPLETA SIN DENERVACIÓN (-)' displayText={'SIN DENERVACIÓN'} /></div>
+      </Accordion>
+      </AccordionContainer>
+      <AccordionContainer>
+      <Accordion title='DESMIELINIZANTE ' value='DESMIELINIZANTE' type='external'>
+        <div onClick={() => setStep('E1')}>
+          <ConclusionButton value=' RETARDO EN LA CONDUCCIÓN ' title=' TIPO DESMIELIMIZANTE POR RETARDO EN LA CONDUCCIÓN ' displayText={'POR RETARDO EN LA CONDUCCIÓN '} /></div>
+        <div onClick={() => setStep('E1')}>
+          <ConclusionButton value=' BLOQUEO PARCIAL EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO PARCIAL EN LA CONDUCCIÓN' displayText={'POR BLOQUEO PARCIAL EN LA CONDUCCIÓN'} /></div>
+        <div onClick={() => setStep('E1')}>
+          <ConclusionButton value=' POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' title=' TIPO DESMIELIMIZANTE POR BLOQUEO COMPLETO EN LA CONDUCCIÓN' displayText={'POR BLOQUEO COMPLETO EN LA CONDUCCIÓN'} /></div>
+      </Accordion>
+      </AccordionContainer>
+
+      <AccordionContainer>
+      <Accordion title='MIXTA' value='MIXTA' type='external'>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value=' TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA ' title=' TIPO DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA ' displayText={'DESMIELINIZANTE CON PÉRDIDA AXONAL SECUNDARIA '} /></div>
+        <div onClick={() => setStep('E')}>
+          <ConclusionButton value=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA ' title=' TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA' displayText={'  AXONAL CON DESMIELINIZACIÓN SECUNDARIA'} /></div>
+      </Accordion>
+      </AccordionContainer>
+    </div>
+  );
+};
+
+const StepDC = ({ setStep }) => {
+  const { removeConclusion } = useContext(ReportContext);
+  return (
+    <div>
+      <NavRow
+        onBack={() => { 
+          removeConclusion('CON DENERVACIÓN DIFUSA (++++)');
+          removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)');
+          removeConclusion('CON DENERVACIÓN PROGRESIVA (++)');
+          removeConclusion('CON DENERVACIÓN DISCRETA (+/+)');
+          removeConclusion('SIN DENERVACIÓN ACTIVA');
+          removeConclusion('CON DENERVACIÓN DIFUSA (++++)');
+          removeConclusion('CON DENERVACIÓN ABUNDANTE (+++)');
+          removeConclusion('CON DENERVACIÓN PROGRESIVA (++)');
+          removeConclusion('CON DENERVACIÓN DISCRETA (+/+)');
+          removeConclusion('SIN DENERVACIÓN ACTIVA');
+          removeConclusion('RETARDO EN LA CONDUCCIÓN');
+          removeConclusion('BLOQUEO PARCIAL EN LA CONDUCCIÓN');
+          removeConclusion('POR BLOQUEO COMPLETO EN LA CONDUCCIÓN');
+          removeConclusion('TIPO DESMIELINIZANTE CON PERDIDA AXONAL SECUNDARIA');
+          removeConclusion('TIPO AXONAL CON DESMIELINIZACIÓN SECUNDARIA');
+
+          setStep('CD'); }}
+        onReset={() => window.location.reload()}
+      />
+      <StepTitle>Tipo C</StepTitle>
   <AccordionContainer>
       <Accordion title='AXONAL COMPLETA' value='AXONAL COMPLETA' type='external'>
         <div onClick={() => setStep('E')}>
@@ -1338,9 +1632,9 @@ const StepB12 = ({ setStep }) => {
             <div onClick={() => setStep('CGI2')}>
               <ConclusionButton value='IZQUIERDO2' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} />
             </div>
-            <div onClick={() => setStep('CG2')}>
+            {/* <div onClick={() => setStep('CG2')}>
               <ConclusionButton value='IZQUIERDO2' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} />
-            </div>
+            </div> */}
           </Accordion>
         </InternalAccordionContainer>
       </AccordionContainer>
@@ -1620,9 +1914,9 @@ const StepCD2 = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled2(true); setbuttonsDisabledSegm2(true); setStep('D2'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión con el puntero
+        Seleccionar el nivel de lesión con el puntero 4
       </p>
-      <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledSegm(true); setStep('D'); }} />
+      <SiguienteBtn onClick={() => { setButtonsDisabled2(true); setbuttonsDisabledSegm2(true); setStep('D2'); }} />
     </div>
   );
 };
@@ -1688,9 +1982,9 @@ const StepCDD2 = ({ setStep }) => {
         onConfirm={() => { setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión del lado derecho con el puntero
+        Seleccionar el nivel de lesión del lado derecho con el puntero 5
       </p>
-      <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledSegm(true); setStep('D'); }} />
+      <SiguienteBtn onClick={() => { setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }} />
     </div>
   );
 };
@@ -1756,7 +2050,7 @@ const StepCDI2 = ({ setStep }) => {
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }}
       />
       <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.6, margin: '90px 0 10px', textAlign: 'center' }}>
-        Seleccionar el nivel de lesión del lado izquierdo con el puntero
+        Seleccionar el nivel de lesión del lado izquierdo con el puntero 6
       </p>
       <SiguienteBtn onClick={() => { setButtonsDisabled(true); setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }} />
     </div>

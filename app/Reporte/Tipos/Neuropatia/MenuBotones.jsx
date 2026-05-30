@@ -178,30 +178,30 @@ function getListItem(c) {
   const clean = s => s.replace(/^[\s,;.]+|[\s,;.]+$/g, '').trim();
 
   if (/^evolucion/i.test(val))
-    return { k: 'EVOLUCIÓN', v: clean(title) };
+    return { k: 'Evolución', v: clean(title) };
   if (/^(MEDIANO|FRENICO|GLUTEO_INFERIOR|CIATICO|PUDENDO)/i.test(val))
-    return { k: 'NERVIO', v: clean(title.replace(/^DE NERVIO\s*/i, '')) };
+    return { k: 'Nervio', v: clean(title.replace(/^DE NERVIO\s*/i, '')) };
   if (/BILATERAL/i.test(title))
-    return { k: 'LADO', v: clean(title) };
+    return { k: 'Lado', v: clean(title) };
   if (/^(IZQUIERDO|DERECHO)$/i.test(val))
-    return { k: 'LADO', v: clean(title) };
-  if (/^focalizada$/i.test(val))  return { k: 'UBICACIÓN', v: 'FOCALIZADA A NIVEL' };
-  if (/^segmentaria$/i.test(val)) return { k: 'UBICACIÓN', v: 'SEGMENTARIA A NIVEL' };
-  if (/generalizada/i.test(val))  return { k: 'UBICACIÓN', v: 'GENERALIZADA A NIVEL' };
+    return { k: 'Lado', v: clean(title) };
+  if (/^focalizada$/i.test(val))  return { k: 'Ubicación', v: 'Focalizada a nivel' };
+  if (/^segmentaria$/i.test(val)) return { k: 'Ubicación', v: 'Segmentaria a nivel' };
+  if (/generalizada/i.test(val))  return { k: 'Ubicación', v: 'Generalizada a nivel' };
   if (/TIPO\s+(AXONAL|DESMIEL|MIXTA)/i.test(title))
-    return { k: 'TIPO', v: clean(title.replace(/^TIPO\s*/i, '')) };
+    return { k: 'Tipo', v: clean(title.replace(/^TIPO\s*/i, '')) };
   if (/^(MOTORAS|SENSITIVAS|MIXTAS)/i.test(val))
-    return { k: 'FIBRAS', v: clean(title.replace(/^DE FIBRAS\s*/i, '')) };
+    return { k: 'Fibras', v: clean(title.replace(/^DE FIBRAS\s*/i, '')) };
   if (/INTENSIDAD/i.test(title))
-    return { k: 'INTENSIDAD', v: clean(title.replace(/^INTENSIDAD\s*/i, '')) };
+    return { k: 'Intensidad', v: clean(title.replace(/^INTENSIDAD\s*/i, '')) };
   if (/REINERVACI/i.test(title))
-    return { k: 'REINERVACIÓN', v: clean(title.replace(/^REINERVACI[ÓO]N\s*/i, '')) };
+    return { k: 'Reinervación', v: clean(title.replace(/^REINERVACI[ÓO]N\s*/i, '')) };
   if (/PRON[ÓO]STICO/i.test(title))
-    return { k: 'PRONÓSTICO', v: clean(title.replace(/^PRON[ÓO]STICO\s+DE\s+RECUPERACI[ÓO]N\s*/i, '')) };
+    return { k: 'Pronóstico', v: clean(title.replace(/^PRON[ÓO]STICO\s+DE\s+RECUPERACI[ÓO]N\s*/i, '')) };
   // Botones del overlay (NerviusButton / SegmentariaButton / NerviusButtonBILATERAL…)
   // values: cari1…cariN, car1…carN, carizq1…
   if (/^car/i.test(val))
-    return { k: 'UBICACIÓN', v: clean(title) };
+    return { k: 'Ubicación', v: clean(title) };
   return null;
 }
 

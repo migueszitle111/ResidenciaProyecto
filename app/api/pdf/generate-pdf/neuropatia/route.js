@@ -247,6 +247,17 @@ async function embedImg(pdfDoc, bytes, mimeHint) {
   return embedJpg(pdfDoc, bytes);
 }
 
+// Convierte texto a minúsculas con reglas gramaticales (misma lógica que el frontend)
+function sentenceCase(text) {
+  if (!text) return '';
+  let r = text.toLowerCase();
+  r = r.replace(/^([a-záéíóúüñ])/i, ch => ch.toUpperCase());
+  r = r.replace(/([.!?]['"»]?\s+)([a-záéíóúüñ])/gi, (_, p, l) => p + l.toUpperCase());
+  r = r.replace(/(\n\s*)([a-záéíóúüñ])/gi, (_, nl, l) => nl + l.toUpperCase());
+  r = r.replace(/\b([ctls])(\d+)\b/g, (_, letter, num) => letter.toUpperCase() + num);
+  return r;
+}
+
 function wrapText(text, font, fontSize, maxWidth) {
   if (!text) return [];
   const words = text.split(' ');
@@ -553,10 +564,10 @@ async function buildPage2(pdfDoc, {
 
   for (const { k, v } of (listaVisual || [])) {
     if (ly < BOT_Y) break;
-    const keyStr = `${k}: `;
+    const keyStr = `${sentenceCase(k)}: `;
     const keyW   = fontBold.widthOfTextAtSize(keyStr, FONT_SZ);
     page.drawText(keyStr, { x: LX, y: ly, font: fontBold, size: FONT_SZ, color: rgb(0.08,0.08,0.08) });
-    const valLines = wrapText(v, fontRegular, FONT_SZ, COL_W - keyW);
+    const valLines = wrapText(sentenceCase(v), fontRegular, FONT_SZ, COL_W - keyW);
     if (valLines.length === 0) { ly -= LINE_H; continue; }
     page.drawText(valLines[0], { x: LX + keyW, y: ly, font: fontRegular, size: FONT_SZ, color: rgb(0.08,0.08,0.08) });
     ly -= LINE_H;

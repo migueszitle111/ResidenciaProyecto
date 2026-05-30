@@ -14,6 +14,7 @@ export default function LandingPage() {
   const router = useRouter();
   const [showVideoModal, setShowVideoModal] = React.useState(false);
   const [videoUrl, setVideoUrl] = React.useState("");
+  const [showPodcastModal, setShowPodcastModal] = React.useState(false);
   const videoRef = useRef(null);
   
   useEffect(() => {
@@ -101,8 +102,8 @@ const infoCards = [
     img: "/assets/LandingPage/Page/LP-11.png",
     label: "Videos",
     title: "Información Médica",
-    href: "https://f.io/S6WK6rOL", // o tu .mp4
-    action: "video"               // <- clave para mostrar modal
+    href: "https://f.io/S6WK6rOL", 
+    action: "video"              
   },
   {
     img: "/assets/LandingPage/Page/LP-12.png",
@@ -114,7 +115,9 @@ const infoCards = [
   {
     img: "/assets/LandingPage/Page/LP-13.png",
     label: "Podcast",
-    title: "Información Médica"
+    title: "Información Médica",
+    href: "assets/LandingPage/Videos/podcast.m4a", 
+    action: "podcast" 
   }
 ];
 
@@ -240,37 +243,73 @@ const infoCards = [
               </a>
             </div>
             <div
-              className="bg-black col-span-2 overflow-hidden rounded-3xl shadow-lg relative"
+              className="bg-black col-span-2 rounded-3xl shadow-lg relative"
               data-aos="zoom-in"
               data-aos-duration="800"
               data-aos-delay="200"
             >
-              <Image
-                src="/assets/LandingPage/Page/LP-05.png"
-                alt="Banner bottom"
-                width={1200}
-                height={400}
-                className="w-full h-auto object-cover"
-              />
-              {/* Tapa el botón "Regístrate" de la imagen */}
-              <div
-                className="absolute bg-[#141414]"
-                style={{ bottom: '22%', right: '15%', width: '24%', height: '28%' }}
-              />
-              <Link
-                href="/Login"
-                className="absolute flex items-center justify-center"
-                style={{ bottom: '15%', right: '18%', width: '18%' }}
-              >
-                <span
-                  className="inline-flex flex-col items-center justify-center gap-2 rounded-lg bg-[#B54B00] hover:bg-[#9a3f00] transition-colors w-full py-3"
-                  style={{ fontFamily: 'Quando', fontWeight: 400, fontSize: '0.95rem', letterSpacing: '0.02em' }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/Extras/qr-code-svgrepo-com.svg" alt="QR" width={36} height={36} style={{ filter: 'invert(1)' }} />
-                  Ingresa usando QR
-                </span>
-              </Link>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+                {infoCards.map((card, i) => {
+                  const content = (
+                    <div
+                      className="relative overflow-hidden rounded-3xl shadow-lg group cursor-pointer ring-2 ring-transparent hover:ring-red-600 transition-all duration-500"
+                      data-aos="zoom-in"
+                      data-aos-delay={i * 200}
+                      data-aos-duration="1000"
+                    >
+                      <div className="transform transition-transform duration-700 group-hover:scale-105">
+                        <Image
+                          src={card.img}
+                          alt={card.title}
+                          width={600}
+                          height={400}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  );
+
+                  if (card.action === "video") {
+                    return (
+                      <div
+                        key={i}
+                        onClick={() => {
+                          setVideoUrl(card.href);
+                          setShowVideoModal(true);
+                        }}
+                      >
+                        {content}
+                      </div>
+                    );
+                  }
+
+                  if (card.action === "podcast") {
+                    return (
+                      <div key={i} onClick={() => setShowPodcastModal(true)}>
+                        {content}
+                      </div>
+                    );
+                  }
+
+                  if (card.href) {
+                    const isExternal = card.href.startsWith("http");
+                    const downloadAttr = card.download ? { download: card.download } : {};
+
+                    return isExternal ? (
+                      <a key={i} href={card.href} target="_blank" rel="noopener noreferrer" className="block">
+                        {content}
+                      </a>
+                    ) : (
+                      <a key={i} href={card.href} className="block" {...downloadAttr}>
+                        {content}
+                      </a>
+                    );
+                  }
+
+                  return <div key={i}>{content}</div>;
+                })}
+              </div>
+           
             </div>
           </div>
         </section>
@@ -482,66 +521,6 @@ const infoCards = [
           </div>
         </section>
 
-{/* Info cards */}
-<section className="max-w-screen-xl mx-auto px-4 pt-4 pb-4" data-aos="fade-up">
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-    {infoCards.map((card, i) => {
-      const content = (
-        <div
-          className="overflow-hidden rounded-3xl shadow-lg transform hover:scale-105 transition-all duration-700 cursor-pointer"
-          data-aos="zoom-in"
-          data-aos-delay={i * 200}
-          data-aos-duration="1000"
-        >
-          <Image
-            src={card.img}
-            alt={card.title}
-            width={600}
-            height={400}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      );
-
-      if (card.action === "video") {
-        return (
-          <div
-            key={i}
-            onClick={() => {
-              setVideoUrl(card.href);
-              setShowVideoModal(true);
-            }}
-          >
-            {content}
-          </div>
-        );
-      }
-
-      if (card.href) {
-        const isExternal = card.href.startsWith("http");
-        const downloadAttr = card.download ? { download: card.download } : {};
-
-        return isExternal ? (
-          <a
-            key={i}
-            href={card.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block"
-          >
-            {content}
-          </a>
-        ) : (
-          <a key={i} href={card.href} className="block" {...downloadAttr}>
-            {content}
-          </a>
-        );
-      }
-
-      return <div key={i}>{content}</div>;
-    })}
-  </div>
-</section>
 {showVideoModal && (
   <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center">
     <div className="relative w-full max-w-3xl p-4">
@@ -551,10 +530,42 @@ const infoCards = [
       >
         &times;
       </button>
-
       <div className="aspect-w-16 aspect-h-9">
         <video src={"assets/LandingPage/Videos/VideoSeccion.mp4"} controls autoPlay className="w-full h-[70vh] rounded-xl" />
+      </div>
+    </div>
+  </div>
+)}
 
+{showPodcastModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center px-4">
+    <div className="relative w-full max-w-lg bg-[#1a1a1a] rounded-3xl p-8 shadow-2xl">
+      <button
+        onClick={() => setShowPodcastModal(false)}
+        className="absolute top-4 right-5 text-white text-3xl font-bold z-10 hover:text-red-500 transition-colors"
+      >
+        &times;
+      </button>
+      <div className="flex flex-col items-center gap-6">
+        <Image
+          src="/assets/LandingPage/Videos/L_V_S_Gris.png"
+          alt="Podcast"
+          width={300}
+          height={300}
+          className="rounded-2xl w-48 h-48 object-cover shadow-lg"
+        />
+        <div className="text-center">
+          <p className="text-[#B54B00] text-sm font-semibold uppercase tracking-widest mb-1">Podcast</p>
+          <h3 className="text-white text-xl font-bold">Información Médica</h3>
+          <p className="text-gray-400 text-sm mt-1">mEDXpro</p>
+        </div>
+        <audio
+          src="/assets/LandingPage/Videos/podcast.m4a"
+          controls
+          autoPlay
+          className="w-full rounded-xl"
+          style={{ accentColor: '#B54B00' }}
+        />
       </div>
     </div>
   </div>

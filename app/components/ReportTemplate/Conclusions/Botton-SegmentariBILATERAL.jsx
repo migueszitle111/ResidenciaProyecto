@@ -3,7 +3,7 @@
 import { ReportContext } from '@/src/context';
 import { useContext } from 'react';
 
-export function NerviusButtonSegmenBILATERAL({ title, value, displayText }) {
+export function NerviusButtonSegmenBILATERAL({ title, value }) {
   const { updateConclusions, conclusions, buttonsDisabledBITSeg } = useContext(ReportContext);
 
   // Mapeo de valores opuestos
@@ -23,7 +23,7 @@ export function NerviusButtonSegmenBILATERAL({ title, value, displayText }) {
   }
 
   function handleClick() {
-    if (buttonsDisabledBITSeg) return; // No hacer nada si los botones están deshabilitados
+    if (buttonsDisabledBITSeg) return;
 
     updateConclusions({ title, value });
 
@@ -32,14 +32,55 @@ export function NerviusButtonSegmenBILATERAL({ title, value, displayText }) {
     }
   }
 
-  const classnames = `cursor-pointer w-[3.5px] h-[18px] text-xs flex items-center justify-center text-white transition-colors duration-300 ease-in  
-    ${isSelected ? 'bg-[#ff0000]' : 'bg-transparent'} 
-    ${buttonsDisabledBITSeg ? 'opacity-50 pointer-events-none' : ''} 
-    rounded-[50px] z-50 relative`;
+  const H = 18;
+  const step = 3;
+  const amp = 4;
+  const W = amp;
+
+  let points = '';
+  for (let y = 0; y <= H; y += step) {
+    const x = (y / step) % 2 === 0 ? amp : 0;
+    points += `${x},${y} `;
+  }
 
   return (
-    <div className={classnames} onClick={handleClick}>
-      {displayText || title}
+    <div
+      onClick={handleClick}
+      style={{
+        cursor: buttonsDisabledBITSeg ? 'default' : 'pointer',
+        opacity: buttonsDisabledBITSeg ? 0.5 : 1,
+        pointerEvents: buttonsDisabledBITSeg ? 'none' : 'auto',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        zIndex: 50,
+        width: W + 2,
+        height: H,
+      }}
+    >
+      {isSelected && (
+        <span
+          className="bg-[#ff0000] text-xs"
+          style={{ position: 'absolute', inset: 0, opacity: 0, pointerEvents: 'none' }}
+        />
+      )}
+      <svg
+        width={W + 2}
+        height={H}
+        viewBox={`-1 0 ${W + 2} ${H}`}
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ display: 'block' }}
+      >
+        <polyline
+          points={points}
+          fill="none"
+          stroke={isSelected ? '#ff0000' : 'transparent'}
+          strokeWidth="1.5"
+          strokeLinejoin="miter"
+          style={{ transition: 'stroke 0.3s ease-in' }}
+        />
+      </svg>
     </div>
   );
 }

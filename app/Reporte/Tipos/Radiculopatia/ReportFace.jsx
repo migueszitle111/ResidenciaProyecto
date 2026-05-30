@@ -143,6 +143,48 @@ function GaleriaTablas({ onSelect, onClose }) {
   );
 }
 
+/* ─── Galería de símbolos ─────────────────────────────────────────────────── */
+const SIMBOLOS = [
+  { grupo: 'Círculos Rojos', items: [
+    { label: 'Rojo XS',   src: '/assets/Simbolos/S_Circulo Rojo XS (4px).png' },
+    { label: 'Rojo S',    src: '/assets/Simbolos/S_Circulo Rojo S.png' },
+    { label: 'Rojo Int.', src: '/assets/Simbolos/S_Circulo Rojo Intermedio (5.1px).png' },
+    { label: 'Rojo M',    src: '/assets/Simbolos/S_Circulo Rojo M.png' },
+    { label: 'Rojo XL',   src: '/assets/Simbolos/S_Circulo Rojo XL.png' },
+  ]},
+  { grupo: 'Cruces', items: [
+    { label: 'Cruz 1',  src: '/assets/Simbolos/S_Cruz 1.png' },
+    { label: 'Cruz 2',  src: '/assets/Simbolos/S_Cruz 2.png' },
+    { label: 'Cruz 3',  src: '/assets/Simbolos/S_Cruz 3.png' },
+    { label: 'Cruz 4',  src: '/assets/Simbolos/S_Cruz 4.png' },
+    { label: 'Cruz1',   src: '/assets/Simbolos/S_Cruz1.png' },
+    { label: 'Cruz2',   src: '/assets/Simbolos/S_Cruz2.png' },
+    { label: 'Cruz3',   src: '/assets/Simbolos/S_Cruz3.png' },
+    { label: 'Cruz4',   src: '/assets/Simbolos/S_Cruz4.png' },
+  ]},
+  { grupo: 'Cruces Rojas', items: [
+    { label: 'Cruz R01', src: '/assets/Simbolos/S_Cruz_Rojo01.png' },
+    { label: 'Cruz R02', src: '/assets/Simbolos/S_Cruz_Rojo02.png' },
+    { label: 'Cruz R03', src: '/assets/Simbolos/S_Cruz_Rojo03.png' },
+    { label: 'Cruz R04', src: '/assets/Simbolos/S_Cruz_Rojo04.png' },
+  ]},
+  { grupo: 'Cuadrados', items: [
+    { label: 'Cuad. 1',  src: '/assets/Simbolos/S_Cuadrado 1.png' },
+    { label: 'Cuad. 2',  src: '/assets/Simbolos/S_Cuadrado 2.png' },
+    { label: 'Cuad. 3',  src: '/assets/Simbolos/S_Cuadrado 3.png' },
+    { label: 'Cuad. G1', src: '/assets/Simbolos/S_Cuadrado Grande 1.png' },
+    { label: 'Cuad. G2', src: '/assets/Simbolos/S_Cuadrado Grande 2.png' },
+    { label: 'Cuad. G3', src: '/assets/Simbolos/S_Cuadrado Grande 3.png' },
+  ]},
+  { grupo: 'Otros', items: [
+    { label: 'ZigZag',    src: '/assets/Simbolos/S_ZigZag.png' },
+    { label: 'ZigZag 2',  src: '/assets/Simbolos/S_ZigZag2.png' },
+    { label: 'Inching 1', src: '/assets/Simbolos/S_Inching 1.png' },
+    { label: 'Inching 2', src: '/assets/Simbolos/S_Inching 2.png' },
+    { label: 'Inching 3', src: '/assets/Simbolos/S_Inching 3.png' },
+  ]},
+];
+
 /* ─── Contexto ────────────────────────────────────────────────────────────── */
 const ReportContext = createContext({ conclusions: [], addConclusion: () => {}, removeConclusion: () => {} });
 
@@ -1041,7 +1083,7 @@ function StepSNivel({ goTo, selectedSensitiva, setSelectedSensitiva, applySensOv
 }
 
 /* ──────────── Panel FINAL ──────────────────────────────────────── */
-function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, postOverlays, antOverlays, crosses, laminaRef, nombrePaciente, textoFinal, imgLista, setImgLista, comentarioLista, setShowGaleria, onOpenComentario, resetAll, pdfOpen, activeOv, activeTab }) {
+function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, postOverlays, antOverlays, crosses, laminaRef, nombrePaciente, textoFinal, imgLista, setImgLista, comentarioLista, setShowGaleria, onOpenComentario, resetAll, pdfOpen, activeOv, activeTab, showSimbolos, setShowSimbolos }) {
   const backStep = flowType === 'Sensitiva' ? 'S_NIVEL' : 'G_PRONOSTICO';
 
   return (
@@ -1052,7 +1094,7 @@ function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVi
       {activeTab === 'reporte' && (
         <div>
           <StepTitle>Agrega figuras al reporte (imagen)</StepTitle>
-          <div style={{ display:'flex', gap:10, marginBottom:16 }}>
+          <div style={{ display:'flex', gap:10, marginBottom:10 }}>
             <label style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:0, padding:'14px 8px', borderRadius:10, cursor:'pointer', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)' }}>
               <div style={{ width:52, height:52, borderRadius:'50%', border:'2px solid #f97316', display:'flex', alignItems:'center', justifyContent:'center' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none" viewBox="0 0 24 24" stroke="#f97316" strokeWidth={1.5}>
@@ -1072,7 +1114,41 @@ function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVi
               <input type="file" accept="image/*" multiple style={{ display:'none' }} onChange={e => { Array.from(e.target.files || []).forEach(f => agregarFigura('square', URL.createObjectURL(f))); e.target.value = ''; }} />
             </label>
           </div>
-          {figuras.length > 0 && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, margin:'0 0 6px', fontStyle:'italic' }}>{figuras.length} figura{figuras.length > 1 ? 's' : ''} en la lámina</p>}
+
+          {/* ── Panel de símbolos ── */}
+          <button
+            onClick={() => setShowSimbolos(v => !v)}
+            style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'9px 12px', marginBottom: showSimbolos ? 0 : 4, borderRadius: showSimbolos ? '8px 8px 0 0' : 8, background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)', cursor:'pointer', color:'rgba(255,255,255,0.75)', fontSize:12, fontWeight:600 }}>
+            <span>Agregar símbolo</span>
+            <span style={{ fontSize:10, opacity:0.6, transform: showSimbolos ? 'rotate(180deg)' : 'none', transition:'transform 0.2s', display:'inline-block' }}>▼</span>
+          </button>
+
+          {showSimbolos && (
+            <div className="simbolos-scroll" style={{ border:'1px solid rgba(255,255,255,0.1)', borderTop:'none', borderRadius:'0 0 8px 8px', background:'rgba(255,255,255,0.03)', padding:'10px 10px 12px', marginBottom:4, maxHeight:420, overflowY:'auto', scrollbarWidth:'thin', scrollbarColor:'rgba(255,255,255,0.12) transparent' }}>
+              {SIMBOLOS.map(grupo => (
+                <div key={grupo.grupo} style={{ marginBottom:10 }}>
+                  <p style={{ color:'rgba(255,255,255,0.35)', fontSize:10, fontWeight:700, letterSpacing:1, textTransform:'uppercase', margin:'0 0 6px 0' }}>{grupo.grupo}</p>
+                  <div style={{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap:5 }}>
+                    {grupo.items.map(sim => (
+                      <button
+                        key={sim.src}
+                        title={sim.label}
+                        onClick={() => agregarFigura('symbol', sim.src)}
+                        style={{ background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:6, padding:'5px 4px', cursor:'pointer', display:'flex', flexDirection:'column', alignItems:'center', gap:3, transition:'background 0.15s' }}
+                        onMouseEnter={e => { e.currentTarget.style.background='rgba(249,115,22,0.2)'; e.currentTarget.style.borderColor='rgba(249,115,22,0.5)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.background='rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor='rgba(255,255,255,0.1)'; }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={sim.src} alt={sim.label} draggable={false} style={{ width:32, height:32, objectFit:'contain' }} />
+                        <span style={{ color:'rgba(255,255,255,0.4)', fontSize:8, textAlign:'center', lineHeight:1.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', maxWidth:'100%' }}>{sim.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {figuras.length > 0 && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, margin:'4px 0 6px', fontStyle:'italic' }}>{figuras.length} figura{figuras.length > 1 ? 's' : ''} en la lámina</p>}
         </div>
       )}
 
@@ -1114,7 +1190,7 @@ function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVi
           antOv={antOverlays}
           crosses={crosses}
           figuras={figuras}
-          laminaSize={{ w: laminaRef.current?.clientWidth || 690, h: laminaRef.current?.clientHeight || 620 }}
+          laminaSize={(() => { const w = laminaRef.current?.clientWidth || 690; const h = laminaRef.current?.clientHeight || 620; return { w, h }; })()}
           listaVisual={listaVisual}
           imgLista={imgLista}
           comentarioLista={comentarioLista}
@@ -1228,18 +1304,19 @@ export default function ReportFaceRadiculopatia() {
   /* figuras draggables */
   const [figuras, setFiguras] = useState([]);
   const laminaRef = useRef(null);
+  const [showSimbolos, setShowSimbolos] = useState(false);
 
   const agregarFigura = useCallback((tipo, src) => {
-    const SIZE = 80;
+    const DISPLAY = tipo === 'symbol' ? 48 : 80;
     const rect = laminaRef.current?.getBoundingClientRect();
-    const cx = rect ? (rect.width / 2 - SIZE / 2) : 60;
-    const cy = rect ? (rect.height / 2 - SIZE / 2) : 60;
+    const cx = rect ? (rect.width / 2 - DISPLAY / 2) : 60;
+    const cy = rect ? (rect.height / 2 - DISPLAY / 2) : 60;
     const img = new window.Image();
     img.onload = () => {
-      setFiguras(p => [...p, { id: Date.now() + Math.random(), src, tipo, x: cx, y: cy, nw: img.naturalWidth, nh: img.naturalHeight }]);
+      setFiguras(p => [...p, { id: Date.now() + Math.random(), src, tipo, x: cx, y: cy, nw: img.naturalWidth, nh: img.naturalHeight, dw: DISPLAY, dh: DISPLAY }]);
     };
     img.onerror = () => {
-      setFiguras(p => [...p, { id: Date.now() + Math.random(), src, tipo, x: cx, y: cy }]);
+      setFiguras(p => [...p, { id: Date.now() + Math.random(), src, tipo, x: cx, y: cy, dw: DISPLAY, dh: DISPLAY }]);
     };
     img.src = src;
   }, []);
@@ -1350,7 +1427,7 @@ export default function ReportFaceRadiculopatia() {
     setCommittedPost([]); setCommittedAnt([]);
     setFiguras([]); setImgLista(null); setComentarioLista('');
     setTextoEditado(''); setEditadoManual(false);
-    setNombrePaciente('');
+    setNombrePaciente(''); setShowSimbolos(false);
   }, []);
 
   const goTo = useCallback((s) => setStep(s), []);
@@ -1419,6 +1496,8 @@ export default function ReportFaceRadiculopatia() {
             activeTab={activeTab}
             resetAll={resetAll}
             pdfOpen={pdfOpen}
+            showSimbolos={showSimbolos}
+            setShowSimbolos={setShowSimbolos}
           />
         );
       default: return null;
@@ -1507,13 +1586,15 @@ export default function ReportFaceRadiculopatia() {
 
               {/* Figuras flotantes (sobre el contenedor combinado) */}
               {figuras.map(f => (
-                <div key={f.id} onMouseDown={e => onFiguraMouseDown(e, f)} style={{ position:'absolute', left:f.x, top:f.y, zIndex:20, width:80, height:80, cursor:'grab', userSelect:'none' }}>
+                <div key={f.id} onMouseDown={e => onFiguraMouseDown(e, f)} style={{ position:'absolute', left:f.x, top:f.y, zIndex:20, width:f.tipo==='symbol'?48:80, height:f.tipo==='symbol'?48:80, cursor:'grab', userSelect:'none' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={f.src} alt="" draggable={false} style={{ width:80, height:80, objectFit:'cover', borderRadius:f.tipo === 'circle' ? '50%' : 0, border:'1.5px solid gray', display:'block', pointerEvents:'none' }} />
+                  <img src={f.src} alt="" draggable={false} style={{ width:'100%', height:'100%', objectFit:f.tipo==='symbol'?'contain':'cover', borderRadius:f.tipo==='circle'?'50%':0, border:f.tipo==='symbol'?'none':'1.5px solid gray', display:'block', pointerEvents:'none' }} />
                   <button onMouseDown={e => e.stopPropagation()} onClick={() => eliminarFigura(f.id)} style={{ position:'absolute', top:-10, right:-10, width:24, height:24, borderRadius:'50%', background:'red', border:'none', cursor:'pointer', color:'#fff', fontSize:11, fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>✕</button>
-                  <button onMouseDown={e => e.stopPropagation()} onClick={() => setCropState({ id: f.id, src: f.src })} style={{ position:'absolute', bottom:-10, left:-10, width:26, height:26, borderRadius:'50%', background:'rgba(0,0,0,0.75)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.364-6.364a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H8v-2.414a2 2 0 01.586-1.414z" /></svg>
-                  </button>
+                  {f.tipo !== 'symbol' && (
+                    <button onMouseDown={e => e.stopPropagation()} onClick={() => setCropState({ id: f.id, src: f.src })} style={{ position:'absolute', bottom:-10, left:-10, width:26, height:26, borderRadius:'50%', background:'rgba(0,0,0,0.75)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.364-6.364a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H8v-2.414a2 2 0 01.586-1.414z" /></svg>
+                    </button>
+                  )}
                 </div>
               ))}
             </div>

@@ -116,7 +116,7 @@ function justifyLine(page, line, isLast, x, y, font, fontSize, colWidth, color) 
 async function buildPage1(pdfDoc, {
   finalConclusion, userData, topLeftText, plantillaId,
   postBaseBytes, antBaseBytes, postOverlayBytes, antOverlayBytes,
-  crossesResolved, figurasData, fontRegular, fontBold, fontLight,
+  crossesResolved, figurasData, fontRegular, fontBold, fontLight, laminaSize,
 }) {
   const page = pdfDoc.addPage([PW, PH]);
 
@@ -228,11 +228,9 @@ async function buildPage1(pdfDoc, {
   }
 
   // ── Figuras movibles ──────────────────────────────────────────────────────
-  // Frontend normalises figura coords to 690×620 before sending (PDF_LAM_W/H).
-  // Map that space to the actual two-panel area in the PDF.
-  const FIG_SIZE  = Math.round(PANELS_H * (80 / 560));
-  const figScaleX = TOTAL_W / 690;
-  const figScaleY = PANELS_H / 620;
+  // Client sends raw screen pixel coords; server applies single scale via laminaSize.
+  const scaleX = TOTAL_W / (laminaSize?.w || 690);
+  const scaleY = PANELS_H / (laminaSize?.h || 620);
 
   for (const f of (figurasData || [])) {
     if (!f.src) continue;
@@ -240,23 +238,33 @@ async function buildPage1(pdfDoc, {
     const figImg   = await embedImg(pdfDoc, figBytes, dataUrlMime(f.src));
     if (!figImg) continue;
 
-    const fx = PANELS_X + f.x * figScaleX;
-    // PDF origin is bottom-left; flip Y
-    const fy = PANEL_FLOOR_Y + PANELS_H - f.y * figScaleY - FIG_SIZE;
+    const isSymbol = f.tipo === 'symbol';
+    const defSz = isSymbol ? 48 : 80;
+    const boxW = (f.dw ?? defSz) * scaleX;
+    const boxH = (f.dh ?? defSz) * scaleY;
+    let fw = boxW, fh = boxH;
+    if (isSymbol && f.nw && f.nh) {
+      const ratio = f.nw / f.nh;
+      if (ratio > 1) { fh = fw / ratio; } else { fw = fh * ratio; }
+    }
+    const fx = PANELS_X + f.x * scaleX + (boxW - fw) / 2;
+    const fy = PANEL_FLOOR_Y + PANELS_H - f.y * scaleY - boxH + (boxH - fh) / 2;
 
-    page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE });
+    page.drawImage(figImg, { x: fx, y: fy, width: fw, height: fh });
 
-    if (f.tipo === 'circle') {
-      page.drawEllipse({
-        x: fx + FIG_SIZE / 2, y: fy + FIG_SIZE / 2,
-        xScale: FIG_SIZE / 2, yScale: FIG_SIZE / 2,
-        borderColor: rgb(0.35, 0.35, 0.35), borderWidth: 1.2,
-      });
-    } else {
-      page.drawRectangle({
-        x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE,
-        borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.0,
-      });
+    if (!isSymbol) {
+      if (f.tipo === 'circle') {
+        page.drawEllipse({
+          x: fx + fw / 2, y: fy + fh / 2,
+          xScale: fw / 2, yScale: fh / 2,
+          borderColor: rgb(0.35, 0.35, 0.35), borderWidth: 1.2,
+        });
+      } else {
+        page.drawRectangle({
+          x: fx, y: fy, width: fw, height: fh,
+          borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.0,
+        });
+      }
     }
   }
 
@@ -459,6 +467,7 @@ export async function POST(req) {
       isSensitiva     = false,
       postBase        = null,
       antBase         = null,
+      laminaSize      = { w: 690, h: 620 },
     } = body;
 
     const pdfDoc = await PDFDocument.create();
@@ -526,7 +535,7 @@ export async function POST(req) {
       postBaseBytes, antBaseBytes,
       postOverlayBytes, antOverlayBytes,
       crossesResolved, figurasData: figuras,
-      fontRegular, fontBold, fontLight,
+      fontRegular, fontBold, fontLight, laminaSize,
     });
 
     const hayPag2 = (comentarioLista && comentarioLista.trim().length > 0) || !!imgListaBytes;

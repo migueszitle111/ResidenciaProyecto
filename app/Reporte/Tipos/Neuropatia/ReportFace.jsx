@@ -403,13 +403,13 @@ const Reporte = () => {
 
       {/* ── Zona centrada ── */}
       <div style={{
-        flex: '0 0 auto', width: '100%', maxWidth: 850,
+        flex: '0 0 auto', width: '100%', maxWidth: 880,
         display: 'flex', flexDirection: 'column',
-        padding: '12px 8px 0', boxSizing: 'border-box',
+        padding: '10px 0px 0', boxSizing: 'border-box',
       }}>
 
         {/* Fila: menú izquierdo + lámina derecha */}
-        <div style={{ flex: '0 0 auto', display: 'flex', alignItems: 'stretch', minHeight: 520 }}>
+        <div style={{ flex: '0 0 auto', display: 'flex', alignItems: 'stretch', minHeight: 520, }}>
 
           {/* ── Panel menú ── */}
           <div style={{
@@ -452,15 +452,15 @@ const Reporte = () => {
                 // ─── DIMENSIONES DE LA ZONA PERMITIDA ────────────────────────
                 const FIG_W  = 80;    // ancho de la figura (px)
                 const FIG_H  = 80;    // alto de la figura (px)
-                const ZONA_W = 535;   // ← ancho de la zona (igual que la imagen)
-                const ZONA_H = 775;   // ← alto de la zona (solo área de imagen, sin conclusiones)
+                const ZONA_W = 570;   // ← ancho de la zona (igual que la imagen)
+                const ZONA_H = 755;   // ← alto de la zona (solo área de imagen, sin conclusiones)
                 // ─────────────────────────────────────────────────────────────
                 const LIMITE_DERECHO  = ZONA_W - FIG_W;
                 const LIMITE_INFERIOR = ZONA_H - FIG_H;
                 return (
                   <div style={{
                     position: 'absolute',
-                    top: 0, left: 0,
+                    top: 20, left: 10,
                     width: ZONA_W,
                     height: ZONA_H,
                     zIndex: 15,

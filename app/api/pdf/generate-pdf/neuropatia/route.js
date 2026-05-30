@@ -347,8 +347,8 @@ async function buildPage1(pdfDoc, {
 
   // ── figuras ─────────────────────────────────────────────────────────────────
   const FIG_SIZE = 56;
-  const scaleX   = LAM_W / 690;
-  const scaleY   = LAM_H / 620;
+  const scaleX   = LAM_W / 670;
+  const scaleY   = LAM_H / 490;
 
   for (const f of (figurasData || [])) {
     if (!f.src) continue;

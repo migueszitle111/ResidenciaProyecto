@@ -398,14 +398,23 @@ async function buildPage1(pdfDoc, {
     const px = LAM_X + d.xPct * LAM_W;
     const py = LAM_Y + (1 - d.yPct) * LAM_H;
     if (d.shape === 'bar') {
+      // Zigzag que replica el polyline de SegmentariaButton, con la rotación original
       const deg     = ((d.rotation !== undefined ? d.rotation : 80) * Math.PI) / 180;
-      const halfLen = 7;
-      page.drawLine({
-        start: { x: px - Math.sin(deg) * halfLen, y: py - Math.cos(deg) * halfLen },
-        end:   { x: px + Math.sin(deg) * halfLen, y: py + Math.cos(deg) * halfLen },
-        thickness: 2.5,
-        color: rgb(1, 0, 0),
+      const H_pdf   = 14;
+      const amp_pdf = 3.5;
+      const steps   = 6;
+      const stepH   = H_pdf / steps;
+      const topY    = py + H_pdf / 2;
+      // Rotación horaria (misma convención que el bar original: dirección (sin,cos))
+      const rot = (x, y) => ({
+        x: px + (x - px) * Math.cos(deg) + (y - py) * Math.sin(deg),
+        y: py - (x - px) * Math.sin(deg) + (y - py) * Math.cos(deg),
       });
+      for (let i = 0; i < steps; i++) {
+        const p1 = rot(px + (i % 2 === 0 ?  amp_pdf / 2 : -amp_pdf / 2), topY - i * stepH);
+        const p2 = rot(px + (i % 2 === 0 ? -amp_pdf / 2 :  amp_pdf / 2), topY - (i + 1) * stepH);
+        page.drawLine({ start: p1, end: p2, thickness: 1.5, color: rgb(1, 0, 0) });
+      }
     } else {
       page.drawEllipse({ x: px, y: py, xScale: 3.5, yScale: 3.5, color: rgb(1.0, 0.35, 0.05) });
     }

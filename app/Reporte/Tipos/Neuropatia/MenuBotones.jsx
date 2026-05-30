@@ -2498,7 +2498,7 @@ const StepI = ({ setStep, topLeftText, copyConclusions, figuras, setFiguras, act
 
   const agregarFigura = useCallback((tipo, src) => {
     if (!setFiguras) return;
-    setFiguras(prev => [...prev, { id: Date.now() + Math.random(), src, tipo, x: 60, y: 60 }]);
+    setFiguras(prev => [...prev, { id: Date.now() + Math.random(), src, tipo, x: 250, y: 300 }]);
   }, [setFiguras]);
 
   return (

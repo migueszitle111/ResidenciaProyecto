@@ -1,37 +1,68 @@
 'use client';
 
 import { ReportContext } from '@/src/context';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
-
-export function SegmentariaButton({ title, value, displayText }) {
+export function SegmentariaButton({ title, value }) {
   const { updateConclusions, conclusions, buttonsDisabledSegm } = useContext(ReportContext);
-  const [selectedButton, setSelectedButton] = useState(null);
 
-  // Verifica si el valor ya está en las conclusiones
   const isSelected = conclusions.find(cl => cl.value === value);
 
-  // Clase condicional con opacidad y bloqueo de eventos si está deshabilitado
-  const classnames = 'cursor-pointer w-[3.5px] h-[18px] text-xs flex items-center justify-center text-white transition-colors duration-300 ease-in ' +
-    (selectedButton === value ? 'bg-[#ff0000]' : 'bg-transparent') +
-    (buttonsDisabledSegm ? ' opacity-50 pointer-events-none' : '') + ' rounded-[50px] z-50 relative';
-    
-
-  // Función para actualizar las conclusiones
   function handleClick() {
-    if (buttonsDisabledSegm) return; // Evita interacción si está bloqueado
-
-    if (selectedButton === value) {
-      setSelectedButton(null);
-    } else {
-      setSelectedButton(value);
-    }
+    if (buttonsDisabledSegm) return;
     updateConclusions({ title, value });
   }
 
+  const H = 18;
+  const step = 3;
+  const amp = 4;
+  const W = amp;
+
+  let points = '';
+  for (let y = 0; y <= H; y += step) {
+    const x = (y / step) % 2 === 0 ? amp : 0;
+    points += `${x},${y} `;
+  }
+
   return (
-    <div className={classnames} onClick={handleClick}>
-      {displayText || title}
+    <div
+      onClick={handleClick}
+      style={{
+        cursor: buttonsDisabledSegm ? 'default' : 'pointer',
+        opacity: buttonsDisabledSegm ? 0.5 : 1,
+        pointerEvents: buttonsDisabledSegm ? 'none' : 'auto',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        zIndex: 50,
+        width: W + 2,
+        height: H,
+      }}
+    >
+      {/* Ancla invisible para que el exportador PDF pueda detectar la posición */}
+      {isSelected && (
+        <span
+          className="bg-[#ff0000] text-xs"
+          style={{ position: 'absolute', inset: 0, opacity: 0, pointerEvents: 'none' }}
+        />
+      )}
+      <svg
+        width={W + 2}
+        height={H}
+        viewBox={`-1 0 ${W + 2} ${H}`}
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ display: 'block' }}
+      >
+        <polyline
+          points={points}
+          fill="none"
+          stroke={isSelected ? '#ff0000' : 'transparent'}
+          strokeWidth="1.5"
+          strokeLinejoin="miter"
+          style={{ transition: 'stroke 0.3s ease-in' }}
+        />
+      </svg>
     </div>
   );
 }

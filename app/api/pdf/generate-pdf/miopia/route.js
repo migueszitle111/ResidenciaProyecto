@@ -139,7 +139,7 @@ function justifyLine(page, line, isLast, x, y, font, fontSize, colWidth, color) 
 
 async function buildPage1(pdfDoc, {
   finalConclusion, userData, baseImgBytes, overlayBytesArr, figurasData,
-  topLeftText, plantillaId, fontRegular, fontBold, fontLight,
+  topLeftText, plantillaId, fontRegular, fontBold, fontLight, laminaSize,
 }) {
   const page = pdfDoc.addPage([PW, PH]);
 
@@ -204,9 +204,8 @@ async function buildPage1(pdfDoc, {
     }
   }
 
-  const FIG_SIZE = 56;
-  const scaleX   = LAM_W / 690;
-  const scaleY   = LAM_H / 620;
+  const scaleX = LAM_W / (laminaSize?.w || 690);
+  const scaleY = LAM_H / (laminaSize?.h || 620);
 
   for (const f of (figurasData || [])) {
     if (!f.src) continue;
@@ -214,22 +213,33 @@ async function buildPage1(pdfDoc, {
     const figImg   = await embedImg(pdfDoc, figBytes, dataUrlMime(f.src));
     if (!figImg) continue;
 
-    const fx = LAM_X + f.x * scaleX;
-    const fy = LAM_Y + LAM_H - f.y * scaleY - FIG_SIZE;
+    const isSymbol = f.tipo === 'symbol';
+    const defSz = isSymbol ? 48 : 80;
+    const boxW = (f.dw ?? defSz) * scaleX;
+    const boxH = (f.dh ?? defSz) * scaleY;
+    let fw = boxW, fh = boxH;
+    if (isSymbol && f.nw && f.nh) {
+      const ratio = f.nw / f.nh;
+      if (ratio > 1) { fh = fw / ratio; } else { fw = fh * ratio; }
+    }
+    const fx = LAM_X + f.x * scaleX + (boxW - fw) / 2;
+    const fy = LAM_Y + LAM_H - f.y * scaleY - boxH + (boxH - fh) / 2;
 
-    page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE });
+    page.drawImage(figImg, { x: fx, y: fy, width: fw, height: fh });
 
-    if (f.tipo === 'circle') {
-      page.drawEllipse({
-        x: fx + FIG_SIZE / 2, y: fy + FIG_SIZE / 2,
-        xScale: FIG_SIZE / 2, yScale: FIG_SIZE / 2,
-        borderColor: rgb(0.35, 0.35, 0.35), borderWidth: 1.2,
-      });
-    } else {
-      page.drawRectangle({
-        x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE,
-        borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.0,
-      });
+    if (!isSymbol) {
+      if (f.tipo === 'circle') {
+        page.drawEllipse({
+          x: fx + fw / 2, y: fy + fh / 2,
+          xScale: fw / 2, yScale: fh / 2,
+          borderColor: rgb(0.35, 0.35, 0.35), borderWidth: 1.2,
+        });
+      } else {
+        page.drawRectangle({
+          x: fx, y: fy, width: fw, height: fh,
+          borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.0,
+        });
+      }
     }
   }
 
@@ -427,6 +437,7 @@ export async function POST(req) {
       finalConclusion = '',
       activeOv        = [],
       figuras         = [],
+      laminaSize      = { w: 690, h: 620 },
       listaVisual     = [],
       imgListaUrl     = null,
       comentarioLista = '',
@@ -465,7 +476,7 @@ export async function POST(req) {
     await buildPage1(pdfDoc, {
       finalConclusion, userData, baseImgBytes, overlayBytesArr,
       figurasData: figuras, topLeftText, plantillaId,
-      fontRegular, fontBold, fontLight,
+      fontRegular, fontBold, fontLight, laminaSize,
     });
 
     const hayPag2 = (comentarioLista && comentarioLista.trim().length > 0) || !!imgListaBytes;

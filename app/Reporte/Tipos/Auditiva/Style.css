@@ -1,4 +1,10 @@
 
+/* Scrollbar minimalista panel símbolos */
+.simbolos-scroll::-webkit-scrollbar { width: 3px; }
+.simbolos-scroll::-webkit-scrollbar-track { background: transparent; }
+.simbolos-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 99px; }
+.simbolos-scroll::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.28); }
+
 /* Modal de ayuda */
 .help-modal-overlay {
   position: fixed;

@@ -280,35 +280,23 @@ function SiguienteBtn({ disabled, onClick }) {
 /* ─── Catálogo de símbolos ──────────────────────────────────────────────── */
 const SIMBOLOS = [
   { grupo: 'Círculos Rojos',  items: [
-    { label: 'Rojo XS',     src: '/assets/Simbolos/S_Circulo Rojo XS (4px).png' },
-    { label: 'Rojo S',      src: '/assets/Simbolos/S_Circulo Rojo S.png' },
-    { label: 'Rojo Int.',   src: '/assets/Simbolos/S_Circulo Rojo Intermedio (5.1px).png' },
-    { label: 'Rojo M',      src: '/assets/Simbolos/S_Circulo Rojo M.png' },
-    { label: 'Rojo XL',     src: '/assets/Simbolos/S_Circulo Rojo XL.png' },
+    { label: 'Rojo 1',     src: '/assets/Simbolos/S_Circulo Rojo XS (4px).png' },
+    { label: 'Rojo 2',      src: '/assets/Simbolos/S_Circulo Rojo S.png' },
+    { label: 'Rojo 3',   src: '/assets/Simbolos/S_Circulo Rojo Intermedio (5.1px).png' },
+    { label: 'Rojo 4',     src: '/assets/Simbolos/S_Circulo Rojo XL.png' },
   ]},
   { grupo: 'Cruces',          items: [
     { label: 'Cruz 1',      src: '/assets/Simbolos/S_Cruz 1.png' },
     { label: 'Cruz 2',      src: '/assets/Simbolos/S_Cruz 2.png' },
     { label: 'Cruz 3',      src: '/assets/Simbolos/S_Cruz 3.png' },
     { label: 'Cruz 4',      src: '/assets/Simbolos/S_Cruz 4.png' },
-    { label: 'Cruz1',       src: '/assets/Simbolos/S_Cruz1.png' },
-    { label: 'Cruz2',       src: '/assets/Simbolos/S_Cruz2.png' },
-    { label: 'Cruz3',       src: '/assets/Simbolos/S_Cruz3.png' },
-    { label: 'Cruz4',       src: '/assets/Simbolos/S_Cruz4.png' },
+  
   ]},
   { grupo: 'Cruces Rojas',    items: [
     { label: 'Cruz R01',    src: '/assets/Simbolos/S_Cruz_Rojo01.png' },
     { label: 'Cruz R02',    src: '/assets/Simbolos/S_Cruz_Rojo02.png' },
     { label: 'Cruz R03',    src: '/assets/Simbolos/S_Cruz_Rojo03.png' },
     { label: 'Cruz R04',    src: '/assets/Simbolos/S_Cruz_Rojo04.png' },
-  ]},
-  { grupo: 'Cuadrados',       items: [
-    { label: 'Cuad. 1',     src: '/assets/Simbolos/S_Cuadrado 1.png' },
-    { label: 'Cuad. 2',     src: '/assets/Simbolos/S_Cuadrado 2.png' },
-    { label: 'Cuad. 3',     src: '/assets/Simbolos/S_Cuadrado 3.png' },
-    { label: 'Cuad. G1',    src: '/assets/Simbolos/S_Cuadrado Grande 1.png' },
-    { label: 'Cuad. G2',    src: '/assets/Simbolos/S_Cuadrado Grande 2.png' },
-    { label: 'Cuad. G3',    src: '/assets/Simbolos/S_Cuadrado Grande 3.png' },
   ]},
   { grupo: 'Otros',           items: [
     { label: 'ZigZag',      src: '/assets/Simbolos/S_ZigZag.png' },
@@ -479,7 +467,9 @@ export default function ReportFace() {
     img.src = src;
   }, []);
   const eliminarFigura = useCallback((id) => setFiguras(p => p.filter(f => f.id !== id)), []);
-  const moverFigura = useCallback((id, x, y) => setFiguras(p => p.map(f => f.id===id ? {...f,x,y} : f)), []);
+  const moverFigura    = useCallback((id, x, y) => setFiguras(p => p.map(f => f.id===id ? {...f,x,y} : f)), []);
+  const rotarFigura    = useCallback((id, delta) => setFiguras(p => p.map(f => f.id===id ? {...f, rotation: ((f.rotation ?? 0) + delta + 360) % 360} : f)), []);
+  const ROTATE_STEP = 3;
   const onFiguraMouseDown = useCallback((e, figura) => {
     e.preventDefault();
     dragRef.active=figura.id; dragRef.startX=e.clientX; dragRef.startY=e.clientY;
@@ -1150,19 +1140,36 @@ export default function ReportFace() {
                     style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', pointerEvents:'none' }} />
                 );
               })}
-              {figuras.map(f => (
-                <div key={f.id} onMouseDown={e=>onFiguraMouseDown(e,f)}
-                  style={{ position:'absolute', left:f.x, top:f.y, zIndex:20, width:f.tipo==='symbol'?48:80, height:f.tipo==='symbol'?48:80, cursor:'grab', userSelect:'none' }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={f.src} alt="" draggable={false} style={{ width:'100%', height:'100%', objectFit: f.tipo==='symbol'?'contain':'cover', borderRadius:f.tipo==='circle'?'50%':0, border: f.tipo==='symbol'?'none':'1.5px solid gray', display:'block', pointerEvents:'none' }} />
-                  <button onMouseDown={e=>e.stopPropagation()} onClick={()=>eliminarFigura(f.id)}
-                    style={{ position:'absolute', top:-10, right:-10, width:24, height:24, borderRadius:'50%', background:'red', border:'none', cursor:'pointer', color:'#fff', fontSize:11, fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>✕</button>
-                  <button onMouseDown={e=>e.stopPropagation()} onClick={()=>setCropState({id:f.id,src:f.src})}
-                    style={{ position:'absolute', bottom:-10, left:-10, width:26, height:26, borderRadius:'50%', background:'rgba(0,0,0,0.75)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.364-6.364a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H8v-2.414a2 2 0 01.586-1.414z"/></svg>
-                  </button>
-                </div>
-              ))}
+              {figuras.map(f => {
+                const isSymbol = f.tipo === 'symbol';
+                const sz = isSymbol ? 48 : 80;
+                return (
+                  <div key={f.id} onMouseDown={e=>onFiguraMouseDown(e,f)}
+                    style={{ position:'absolute', left:f.x, top:f.y, zIndex:20, width:sz, height:sz, cursor:'grab', userSelect:'none' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={f.src} alt="" draggable={false} style={{ width:'100%', height:'100%', objectFit:isSymbol?'contain':'cover', borderRadius:f.tipo==='circle'?'50%':0, border:isSymbol?'none':'1.5px solid gray', display:'block', pointerEvents:'none', transform:`rotate(${f.rotation ?? 0}deg)` }} />
+                    <button onMouseDown={e=>e.stopPropagation()} onClick={()=>eliminarFigura(f.id)}
+                      style={{ position:'absolute', top:-10, right:-10, width:24, height:24, borderRadius:'50%', background:'red', border:'none', cursor:'pointer', color:'#fff', fontSize:11, fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>✕</button>
+                    {isSymbol ? (
+                      <>
+                        <button onMouseDown={e=>e.stopPropagation()} onClick={()=>rotarFigura(f.id,-ROTATE_STEP)}
+                          style={{ position:'absolute', bottom:-10, left:-10, width:26, height:26, borderRadius:'50%', background:'rgba(0,0,0,0.75)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                        </button>
+                        <button onMouseDown={e=>e.stopPropagation()} onClick={()=>rotarFigura(f.id,ROTATE_STEP)}
+                          style={{ position:'absolute', bottom:-10, right:-10, width:26, height:26, borderRadius:'50%', background:'rgba(0,0,0,0.75)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+                        </button>
+                      </>
+                    ) : (
+                      <button onMouseDown={e=>e.stopPropagation()} onClick={()=>setCropState({id:f.id,src:f.src})}
+                        style={{ position:'absolute', bottom:-10, left:-10, width:26, height:26, borderRadius:'50%', background:'rgba(0,0,0,0.75)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.364-6.364a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H8v-2.414a2 2 0 01.586-1.414z"/></svg>
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
           </div>{/* end row */}

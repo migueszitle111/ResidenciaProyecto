@@ -1,5 +1,5 @@
 import { NextResponse }  from 'next/server';
-import { PDFDocument, rgb } from 'pdf-lib';
+import { PDFDocument, rgb, degrees } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import fs from 'fs';
 import path from 'path';
@@ -242,7 +242,15 @@ async function buildPage1(pdfDoc, {
     const fx = LAM_X + f.x * scaleX + (boxW - fw) / 2;
     const fy = LAM_Y + LAM_H - f.y * scaleY - boxH + (boxH - fh) / 2;
 
-    page.drawImage(figImg, { x: fx, y: fy, width: fw, height: fh });
+    const rot = f.rotation ?? 0;
+    let drawX = fx, drawY = fy;
+    if (rot !== 0) {
+      const rad = (rot * Math.PI) / 180;
+      const cx = fx + fw / 2, cy = fy + fh / 2;
+      drawX = cx - (fw / 2) * Math.cos(rad) + (fh / 2) * Math.sin(rad);
+      drawY = cy - (fw / 2) * Math.sin(rad) - (fh / 2) * Math.cos(rad);
+    }
+    page.drawImage(figImg, { x: drawX, y: drawY, width: fw, height: fh, rotate: degrees(rot) });
 
     if (!isSymbol) {
       if (f.tipo === 'circle') {

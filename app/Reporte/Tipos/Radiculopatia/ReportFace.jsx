@@ -1321,6 +1321,8 @@ export default function ReportFaceRadiculopatia() {
     img.src = src;
   }, []);
   const eliminarFigura = useCallback((id) => setFiguras(p => p.filter(f => f.id !== id)), []);
+  const rotarFigura    = useCallback((id, delta) => setFiguras(p => p.map(f => f.id===id ? {...f, rotation: ((f.rotation ?? 0) + delta + 360) % 360} : f)), []);
+  const ROTATE_STEP = 3;
   const moverFigura    = useCallback((id, x, y) => setFiguras(p => p.map(f => f.id === id ? { ...f, x, y } : f)), []);
 
   const dragRef = useState(() => ({ active: null, startX: 0, startY: 0, origX: 0, origY: 0 }))[0];
@@ -1708,3 +1710,4 @@ export default function ReportFaceRadiculopatia() {
     </ReportContext.Provider>
   );
 }
+

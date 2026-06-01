@@ -556,7 +556,7 @@ const infoCards = [
         />
         <div className="text-center">
           <p className="text-[#B54B00] text-sm font-semibold uppercase tracking-widest mb-1">Podcast</p>
-          <h3 className="text-white text-xl font-bold">Información Médica</h3>
+          <h3 className="text-white text-xl font-bold">Pronóstico funcional</h3>
           <p className="text-gray-400 text-sm mt-1">mEDXpro</p>
         </div>
         <audio

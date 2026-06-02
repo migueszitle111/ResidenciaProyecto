@@ -216,6 +216,7 @@ const Reporte = () => {
   const [activeTab, setActiveTab] = useState('reporte');
   const [figuras, setFiguras]     = useState([]);
   const [cropState, setCropState] = useState(null);
+  const rotarFigura = useCallback((id, delta) => setFiguras(p => p.map(f => f.id === id ? { ...f, rotation: ((f.rotation ?? 0) + delta + 360) % 360 } : f)), []);
 
   const listaVisual = useMemo(() => {
     const rows = [];
@@ -450,8 +451,9 @@ const Reporte = () => {
               {/* ── Zona delimitada para figuras (solo sobre la imagen anatómica) ── */}
               {(() => {
                 // ─── DIMENSIONES DE LA ZONA PERMITIDA ────────────────────────
-                const FIG_W  = 80;    // ancho de la figura (px)
-                const FIG_H  = 80;    // alto de la figura (px)
+                const FIG_W       = 80;
+                const FIG_H       = 80;
+                const ROTATE_STEP = 15;
                 const ZONA_W = 570;   // ← ancho de la zona (igual que la imagen)
                 const ZONA_H = 755;   // ← alto de la zona (solo área de imagen, sin conclusiones)
                 // ─────────────────────────────────────────────────────────────
@@ -492,10 +494,13 @@ const Reporte = () => {
                             src={figura.src}
                             draggable="false"
                             style={{
-                              width: '100%', height: '100%', objectFit: 'cover',
+                              width: '100%', height: '100%',
+                              objectFit: figura.tipo === 'symbol' ? 'contain' : 'cover',
                               borderRadius: figura.tipo === 'circle' ? '50%' : 0,
-                              border: '1.5px solid gray',
+                              border: figura.tipo === 'symbol' ? 'none' : '1.5px solid gray',
                               display: 'block', pointerEvents: 'none',
+                              transform: `rotate(${figura.rotation ?? 0}deg)`,
+                              transition: 'transform 0.2s ease',
                             }}
                           />
                           <button
@@ -524,6 +529,12 @@ const Reporte = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.2}>
                               <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.364-6.364a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H8v-2.414a2 2 0 01.586-1.414z" />
                             </svg>
+                          </button>
+                          <button onMouseDown={e=>e.stopPropagation()} onClick={()=>rotarFigura(figura.id,-ROTATE_STEP)} style={{ position:'absolute', top:-10, left:-10, width:26, height:26, borderRadius:'50%', background:'rgba(0,0,0,0.75)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                          </button>
+                          <button onMouseDown={e=>e.stopPropagation()} onClick={()=>rotarFigura(figura.id,ROTATE_STEP)} style={{ position:'absolute', bottom:-10, right:-10, width:26, height:26, borderRadius:'50%', background:'rgba(0,0,0,0.75)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex:22 }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
                           </button>
                         </div>
                       </Rnd>

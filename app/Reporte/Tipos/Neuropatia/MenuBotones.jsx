@@ -107,6 +107,48 @@ function SiguienteBtn({ disabled, onClick }) {
   );
 }
 
+/* ─── MAIN COMPONENT ────────────────────────────────────────────────────── */
+const SIMBOLOS = [
+  { grupo: 'Círculos Rojos', items: [
+    { label: 'Rojo XS',   src: '/assets/Simbolos/S_Circulo Rojo XS (4px).png' },
+    { label: 'Rojo S',    src: '/assets/Simbolos/S_Circulo Rojo S.png' },
+    { label: 'Rojo Int.', src: '/assets/Simbolos/S_Circulo Rojo Intermedio (5.1px).png' },
+    { label: 'Rojo M',    src: '/assets/Simbolos/S_Circulo Rojo M.png' },
+    { label: 'Rojo XL',   src: '/assets/Simbolos/S_Circulo Rojo XL.png' },
+  ]},
+  { grupo: 'Cruces', items: [
+    { label: 'Cruz 1',  src: '/assets/Simbolos/S_Cruz 1.png' },
+    { label: 'Cruz 2',  src: '/assets/Simbolos/S_Cruz 2.png' },
+    { label: 'Cruz 3',  src: '/assets/Simbolos/S_Cruz 3.png' },
+    { label: 'Cruz 4',  src: '/assets/Simbolos/S_Cruz 4.png' },
+    { label: 'Cruz1',   src: '/assets/Simbolos/S_Cruz1.png' },
+    { label: 'Cruz2',   src: '/assets/Simbolos/S_Cruz2.png' },
+    { label: 'Cruz3',   src: '/assets/Simbolos/S_Cruz3.png' },
+    { label: 'Cruz4',   src: '/assets/Simbolos/S_Cruz4.png' },
+  ]},
+  { grupo: 'Cruces Rojas', items: [
+    { label: 'Cruz R01', src: '/assets/Simbolos/S_Cruz_Rojo01.png' },
+    { label: 'Cruz R02', src: '/assets/Simbolos/S_Cruz_Rojo02.png' },
+    { label: 'Cruz R03', src: '/assets/Simbolos/S_Cruz_Rojo03.png' },
+    { label: 'Cruz R04', src: '/assets/Simbolos/S_Cruz_Rojo04.png' },
+  ]},
+  { grupo: 'Cuadrados', items: [
+    { label: 'Cuad. 1',  src: '/assets/Simbolos/S_Cuadrado 1.png' },
+    { label: 'Cuad. 2',  src: '/assets/Simbolos/S_Cuadrado 2.png' },
+    { label: 'Cuad. 3',  src: '/assets/Simbolos/S_Cuadrado 3.png' },
+    { label: 'Cuad. G1', src: '/assets/Simbolos/S_Cuadrado Grande 1.png' },
+    { label: 'Cuad. G2', src: '/assets/Simbolos/S_Cuadrado Grande 2.png' },
+    { label: 'Cuad. G3', src: '/assets/Simbolos/S_Cuadrado Grande 3.png' },
+  ]},
+  { grupo: 'Otros', items: [
+    { label: 'ZigZag',    src: '/assets/Simbolos/S_ZigZag.png' },
+    { label: 'ZigZag 2',  src: '/assets/Simbolos/S_ZigZag2.png' },
+    { label: 'Inching 1', src: '/assets/Simbolos/S_Inching 1.png' },
+    { label: 'Inching 2', src: '/assets/Simbolos/S_Inching 2.png' },
+    { label: 'Inching 3', src: '/assets/Simbolos/S_Inching 3.png' },
+  ]},
+];
+
 function NavRow({ onBack, onReset, onPdf }) {
   const circleBase = {
     width: 44, height: 44, borderRadius: '50%',
@@ -2470,6 +2512,7 @@ const StepI = ({ setStep, topLeftText, copyConclusions, figuras, setFiguras, act
   const [showComentario, setShowComentario]   = useState(false);
   const [comentarioTemp, setComentarioTemp]   = useState('');
   const [pdfOpen, setPdfOpen]                 = useState(false);
+  const [showSimbolos, setShowSimbolos] = useState(false);
 
   const listaVisual = useMemo(() => {
     const rows = [];
@@ -2540,8 +2583,43 @@ const StepI = ({ setStep, topLeftText, copyConclusions, figuras, setFiguras, act
               {figuras.length} figura{figuras.length > 1 ? 's' : ''} en la lámina
             </p>
           )}
+                        {/* ── Panel de símbolos ── */}
+              <button
+                onClick={() => setShowSimbolos(v => !v)}
+                style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'9px 12px', marginBottom: showSimbolos ? 0 : 4, borderRadius: showSimbolos ? '8px 8px 0 0' : 8, background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)', cursor:'pointer', color:'rgba(255,255,255,0.75)', fontSize:12, fontWeight:600, marginTop: 12 }}>
+                <span>Agregar símbolo</span>
+                <span style={{ fontSize:10, opacity:0.6, transform: showSimbolos ? 'rotate(180deg)' : 'none', transition:'transform 0.2s', display:'inline-block' }}>▼</span>
+              </button>
+
+              {showSimbolos && (
+                <div className="simbolos-scroll" style={{ border:'1px solid rgba(255,255,255,0.1)', borderTop:'none', borderRadius:'0 0 8px 8px', background:'rgba(255,255,255,0.03)', padding:'10px 10px 12px', marginBottom:4, maxHeight:420, overflowY:'auto', scrollbarWidth:'thin', scrollbarColor:'rgba(255,255,255,0.12) transparent' }}>
+                  {SIMBOLOS.map(grupo => (
+                    <div key={grupo.grupo} style={{ marginBottom:10 }}>
+                      <p style={{ color:'rgba(255,255,255,0.35)', fontSize:10, fontWeight:700, letterSpacing:1, textTransform:'uppercase', margin:'0 0 6px 0' }}>{grupo.grupo}</p>
+                      <div style={{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap:5 }}>
+                        {grupo.items.map(sim => (
+                          <button
+                            key={sim.src}
+                            title={sim.label}
+                            onClick={() => agregarFigura('symbol', sim.src)}
+                            style={{ background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)', borderRadius:6, padding:'5px 4px', cursor:'pointer', display:'flex', flexDirection:'column', alignItems:'center', gap:3, transition:'background 0.15s' }}
+                            onMouseEnter={e => { e.currentTarget.style.background='rgba(249,115,22,0.2)'; e.currentTarget.style.borderColor='rgba(249,115,22,0.5)'; }}
+                            onMouseLeave={e => { e.currentTarget.style.background='rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor='rgba(255,255,255,0.1)'; }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={sim.src} alt={sim.label} draggable={false} style={{ width:32, height:32, objectFit:'contain' }} />
+                            <span style={{ color:'rgba(255,255,255,0.4)', fontSize:8, textAlign:'center', lineHeight:1.2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', maxWidth:'100%' }}>{sim.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+          
         </div>
+        
       )}
+
 
       {activeTab === 'lista' && (
         <div style={{ marginBottom: 8 }}>

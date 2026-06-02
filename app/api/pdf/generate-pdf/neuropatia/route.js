@@ -2,7 +2,7 @@
 
 import { NextResponse }  from 'next/server';
 import {
-  PDFDocument, rgb,
+  PDFDocument, rgb, degrees,
   pushGraphicsState, popGraphicsState,
   moveTo, appendBezierCurve, closePath, clip, endPath,
 } from 'pdf-lib';
@@ -387,7 +387,7 @@ async function buildPage1(pdfDoc, {
         clip(),
         endPath(),
       );
-      page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE });
+      page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE, rotate: degrees(f.rotation ?? 0) });
       page.pushOperators(popGraphicsState());
       // Draw ellipse border on top of the clipped image
       page.drawEllipse({
@@ -396,11 +396,13 @@ async function buildPage1(pdfDoc, {
         borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.2,
       });
     } else {
-      page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE });
-      page.drawRectangle({
-        x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE,
-        borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.0,
-      });
+      page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE, rotate: degrees(f.rotation ?? 0) });
+      if (f.tipo !== 'symbol') {
+        page.drawRectangle({
+          x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE,
+          borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.0,
+        });
+      }
     }
   }
 

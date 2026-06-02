@@ -427,7 +427,9 @@ export default function ExportBar({
     const scaleY = PDF_LAM_H / (laminaSize.h || PDF_LAM_H);
     const figurasB64 = await Promise.all(
       figuras.map(async (f) => {
-        const src = f.src?.startsWith('blob:') ? await toBase64DataUrl(f.src) : f.src;
+        const src = (f.src?.startsWith('blob:') || f.src?.startsWith('/'))
+          ? await toBase64DataUrl(f.src)
+          : f.src;
         return { ...f, src, x: Math.round(f.x * scaleX), y: Math.round(f.y * scaleY) };
       })
     );

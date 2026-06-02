@@ -102,8 +102,8 @@ const infoCards = [
     img: "/assets/LandingPage/Page/LP-11.png",
     label: "Videos",
     title: "Información Médica",
-    href: "https://f.io/S6WK6rOL", 
-    action: "video"              
+    href: "https://www.youtube.com/embed/eI1tOJbnj-E?autoplay=1",
+    action: "video"
   },
   {
     img: "/assets/LandingPage/Page/LP-12.png",
@@ -252,7 +252,10 @@ const infoCards = [
                 {infoCards.map((card, i) => {
                   const content = (
                     <div
-                      className="relative overflow-hidden rounded-3xl shadow-lg group cursor-pointer ring-2 ring-transparent hover:ring-red-600 transition-all duration-500"
+                      className="relative overflow-hidden rounded-3xl shadow-lg group cursor-pointer transition-all duration-500"
+                      style={{ filter: 'drop-shadow(0 0 0px transparent)', transition: 'filter 0.5s ease' }}
+                      onMouseEnter={e => e.currentTarget.style.filter = 'drop-shadow(0 0 18px rgba(200,200,200,0.5))'}
+                      onMouseLeave={e => e.currentTarget.style.filter = 'drop-shadow(0 0 0px transparent)'}
                       data-aos="zoom-in"
                       data-aos-delay={i * 200}
                       data-aos-duration="1000"
@@ -263,7 +266,7 @@ const infoCards = [
                           alt={card.title}
                           width={600}
                           height={400}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover brightness-90 group-hover:brightness-110 transition-all duration-500"
                         />
                       </div>
                     </div>
@@ -531,7 +534,12 @@ const infoCards = [
         &times;
       </button>
       <div className="aspect-w-16 aspect-h-9">
-        <video src={"assets/LandingPage/Videos/VideoSeccion.mp4"} controls autoPlay className="w-full h-[70vh] rounded-xl" />
+        <iframe
+          src={videoUrl}
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          className="w-full h-[70vh] rounded-xl"
+        />
       </div>
     </div>
   </div>

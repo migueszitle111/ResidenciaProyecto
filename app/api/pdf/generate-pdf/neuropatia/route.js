@@ -1,11 +1,7 @@
 // app/api/pdf/generate-pdf/neuropatia/route.js
 
 import { NextResponse }  from 'next/server';
-import {
-  PDFDocument, rgb, degrees,
-  pushGraphicsState, popGraphicsState,
-  moveTo, appendBezierCurve, closePath, clip, endPath,
-} from 'pdf-lib';
+import { PDFDocument, rgb, degrees } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import fs from 'fs';
 import path from 'path';
@@ -292,7 +288,7 @@ function justifyLine(page, line, isLast, x, y, font, fontSize, colWidth, color) 
 
 async function buildPage1(pdfDoc, {
   finalConclusion, userData, baseImgBytes, overlayBytesArr, figurasData,
-  topLeftText, plantillaId, fontRegular, fontBold, fontLight, dotOverlays,
+  laminaSize, topLeftText, plantillaId, fontRegular, fontBold, fontLight, dotOverlays,
 }) {
   const page = pdfDoc.addPage([PW, PH]);
 
@@ -357,9 +353,14 @@ async function buildPage1(pdfDoc, {
   }
 
   // ── figuras ─────────────────────────────────────────────────────────────────
-  const FIG_SIZE = 56;
-  const scaleX   = LAM_W / 670;
-  const scaleY   = LAM_H / 490;
+  // Figures are positioned inside a sub-zone offset by (offsetX, offsetY) px
+  // within a screen canvas of (imgW x imgH). Scale maps screen→PDF lámina.
+  const IMG_W  = 600;
+  const IMG_H  = Math.round(600 * (3301 / 2551)); // ≈ 776px — real rendered height
+  const scaleX = LAM_W / IMG_W;
+  const scaleY = LAM_H / IMG_H;
+  const OX     = (laminaSize?.offsetX ?? 10) * scaleX; // offset left:10
+  const OY     = (laminaSize?.offsetY ?? 20) * scaleY; // offset top:20
 
   for (const f of (figurasData || [])) {
     if (!f.src) continue;
@@ -367,39 +368,46 @@ async function buildPage1(pdfDoc, {
     const figImg   = await embedImg(pdfDoc, figBytes, dataUrlMime(f.src));
     if (!figImg) continue;
 
-    const fx = LAM_X + f.x * scaleX;
-    const fy = LAM_Y + LAM_H - f.y * scaleY - FIG_SIZE;
+    const isSymbol = f.tipo === 'symbol';
+    const defSz = isSymbol ? 48 : 80;
+    const boxW = (f.dw ?? defSz) * scaleX;
+    const boxH = (f.dh ?? defSz) * scaleY;
 
-    if (f.tipo === 'circle') {
-      // Clip image to a circle using Bezier-curve path
-      const cx  = fx + FIG_SIZE / 2;
-      const cy  = fy + FIG_SIZE / 2;
-      const r   = FIG_SIZE / 2;
-      const k   = 0.5522847498; // cubic Bezier constant for a circle
-      page.pushOperators(
-        pushGraphicsState(),
-        moveTo(cx + r, cy),
-        appendBezierCurve(cx + r, cy + k * r,  cx + k * r, cy + r,  cx,       cy + r),
-        appendBezierCurve(cx - k * r, cy + r,  cx - r, cy + k * r,  cx - r,   cy),
-        appendBezierCurve(cx - r, cy - k * r,  cx - k * r, cy - r,  cx,       cy - r),
-        appendBezierCurve(cx + k * r, cy - r,  cx + r, cy - k * r,  cx + r,   cy),
-        closePath(),
-        clip(),
-        endPath(),
-      );
-      page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE, rotate: degrees(f.rotation ?? 0) });
-      page.pushOperators(popGraphicsState());
-      // Draw ellipse border on top of the clipped image
-      page.drawEllipse({
-        x: cx, y: cy,
-        xScale: r, yScale: r,
-        borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.2,
-      });
-    } else {
-      page.drawImage(figImg, { x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE, rotate: degrees(f.rotation ?? 0) });
-      if (f.tipo !== 'symbol') {
+    // For symbols, preserve natural aspect ratio within the display box.
+    let fw = boxW;
+    let fh = boxH;
+    if (isSymbol && f.nw && f.nh) {
+      const ratio = f.nw / f.nh;
+      if (ratio > 1) { fh = fw / ratio; }
+      else           { fw = fh * ratio; }
+    }
+
+    // f.x/f.y are relative to the sub-zone; add OX/OY to get lámina-relative position.
+    // PDF y-axis is inverted: y=0 is bottom, so subtract from top + OY offset.
+    const fx = LAM_X + OX + f.x * scaleX + (boxW - fw) / 2;
+    const fy = LAM_Y + LAM_H - OY - f.y * scaleY - boxH + (boxH - fh) / 2;
+
+    const rot = f.rotation ?? 0;
+    const pdfRot = -rot;
+    let drawX = fx, drawY = fy;
+    if (pdfRot !== 0) {
+      const rad = (pdfRot * Math.PI) / 180;
+      const cx = fx + fw / 2, cy = fy + fh / 2;
+      drawX = cx - (fw / 2) * Math.cos(rad) + (fh / 2) * Math.sin(rad);
+      drawY = cy - (fw / 2) * Math.sin(rad) - (fh / 2) * Math.cos(rad);
+    }
+    page.drawImage(figImg, { x: drawX, y: drawY, width: fw, height: fh, rotate: degrees(pdfRot) });
+
+    if (!isSymbol) {
+      if (f.tipo === 'circle') {
+        page.drawEllipse({
+          x: fx + fw / 2, y: fy + fh / 2,
+          xScale: fw / 2, yScale: fh / 2,
+          borderColor: rgb(0.35, 0.35, 0.35), borderWidth: 1.2,
+        });
+      } else {
         page.drawRectangle({
-          x: fx, y: fy, width: FIG_SIZE, height: FIG_SIZE,
+          x: fx, y: fy, width: fw, height: fh,
           borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 1.0,
         });
       }
@@ -634,6 +642,7 @@ export async function POST(req) {
       topLeftText     = '',
       plantillaId     = 'none',
       dotOverlays     = [],
+      laminaSize      = { w: 690, h: 620 },
     } = body;
 
     const pdfDoc = await PDFDocument.create();
@@ -665,7 +674,7 @@ export async function POST(req) {
 
     await buildPage1(pdfDoc, {
       finalConclusion, userData, baseImgBytes, overlayBytesArr,
-      figurasData: figuras, topLeftText, plantillaId,
+      figurasData: figuras, laminaSize, topLeftText, plantillaId,
       fontRegular, fontBold, fontLight, dotOverlays,
     });
 

@@ -283,17 +283,16 @@ for (const f of (figurasData || [])) {
     const fy = LAM_Y + LAM_H - f.y * scaleY - boxH + (boxH - fh) / 2;
 
     const rot = f.rotation ?? 0;
-    // pdf-lib rotates around the bottom-left corner of the image.
-    // To rotate around the image center, offset the anchor by the rotation.
+    // PDF Y-axis is inverted vs screen, so negate rotation to match GUI direction.
+    const pdfRot = -rot;
     let drawX = fx, drawY = fy;
-    if (rot !== 0) {
-      const rad = (rot * Math.PI) / 180;
+    if (pdfRot !== 0) {
+      const rad = (pdfRot * Math.PI) / 180;
       const cx = fx + fw / 2, cy = fy + fh / 2;
-      // New bottom-left after rotating image around its own center:
       drawX = cx - (fw / 2) * Math.cos(rad) + (fh / 2) * Math.sin(rad);
       drawY = cy - (fw / 2) * Math.sin(rad) - (fh / 2) * Math.cos(rad);
     }
-    page.drawImage(figImg, { x: drawX, y: drawY, width: fw, height: fh, rotate: degrees(rot) });
+    page.drawImage(figImg, { x: drawX, y: drawY, width: fw, height: fh, rotate: degrees(pdfRot) });
 
     if (!isSymbol) {
       if (f.tipo === 'circle') {

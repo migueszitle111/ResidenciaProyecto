@@ -423,14 +423,18 @@ export default function ExportBar({
   }
 
   const buildPayload = async (plantillaId) => {
-    const scaleX = PDF_LAM_W / (laminaSize.w || PDF_LAM_W);
-    const scaleY = PDF_LAM_H / (laminaSize.h || PDF_LAM_H);
     const figurasB64 = await Promise.all(
       figuras.map(async (f) => {
-        const src = (f.src?.startsWith('blob:') || f.src?.startsWith('/'))
-          ? await toBase64DataUrl(f.src)
-          : f.src;
-        return { ...f, src, x: Math.round(f.x * scaleX), y: Math.round(f.y * scaleY) };
+        let src = f.src;
+        if (src?.startsWith('blob:')) src = await toBase64DataUrl(src);
+        else if (src?.startsWith('/')) src = await toBase64DataUrl(src);
+        const defSz = f.tipo === 'symbol' ? 48 : 80;
+        return { ...f, src,
+          nw: f.nw ?? defSz,
+          nh: f.nh ?? defSz,
+          dw: f.dw ?? defSz,
+          dh: f.dh ?? defSz,
+        };
       })
     );
 
@@ -477,6 +481,7 @@ export default function ExportBar({
       finalConclusion: textoReporte,
       activeOv,
       figuras: figurasB64,
+      laminaSize: { w: laminaSize.w || 690, h: laminaSize.h || 620, offsetX: laminaSize.offsetX ?? 0, offsetY: laminaSize.offsetY ?? 0 },
       listaVisual,
       imgListaUrl: imgLista?.src || null,
       comentarioLista,

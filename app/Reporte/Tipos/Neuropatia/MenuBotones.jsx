@@ -110,35 +110,22 @@ function SiguienteBtn({ disabled, onClick }) {
 /* ─── MAIN COMPONENT ────────────────────────────────────────────────────── */
 const SIMBOLOS = [
   { grupo: 'Círculos Rojos', items: [
-    { label: 'Rojo XS',   src: '/assets/Simbolos/S_Circulo Rojo XS (4px).png' },
-    { label: 'Rojo S',    src: '/assets/Simbolos/S_Circulo Rojo S.png' },
-    { label: 'Rojo Int.', src: '/assets/Simbolos/S_Circulo Rojo Intermedio (5.1px).png' },
-    { label: 'Rojo M',    src: '/assets/Simbolos/S_Circulo Rojo M.png' },
-    { label: 'Rojo XL',   src: '/assets/Simbolos/S_Circulo Rojo XL.png' },
+    { label: 'Rojo 1', src: '/assets/Simbolos/S_Circulo Rojo XS (4px).png' },
+    { label: 'Rojo 2', src: '/assets/Simbolos/S_Circulo Rojo S.png' },
+    { label: 'Rojo 3', src: '/assets/Simbolos/S_Circulo Rojo Intermedio (5.1px).png' },
+    { label: 'Rojo 4', src: '/assets/Simbolos/S_Circulo Rojo XL.png' },
   ]},
   { grupo: 'Cruces', items: [
-    { label: 'Cruz 1',  src: '/assets/Simbolos/S_Cruz 1.png' },
-    { label: 'Cruz 2',  src: '/assets/Simbolos/S_Cruz 2.png' },
-    { label: 'Cruz 3',  src: '/assets/Simbolos/S_Cruz 3.png' },
-    { label: 'Cruz 4',  src: '/assets/Simbolos/S_Cruz 4.png' },
-    { label: 'Cruz1',   src: '/assets/Simbolos/S_Cruz1.png' },
-    { label: 'Cruz2',   src: '/assets/Simbolos/S_Cruz2.png' },
-    { label: 'Cruz3',   src: '/assets/Simbolos/S_Cruz3.png' },
-    { label: 'Cruz4',   src: '/assets/Simbolos/S_Cruz4.png' },
+    { label: 'Cruz 1', src: '/assets/Simbolos/S_Cruz 1.png' },
+    { label: 'Cruz 2', src: '/assets/Simbolos/S_Cruz 2.png' },
+    { label: 'Cruz 3', src: '/assets/Simbolos/S_Cruz 3.png' },
+    { label: 'Cruz 4', src: '/assets/Simbolos/S_Cruz 4.png' },
   ]},
   { grupo: 'Cruces Rojas', items: [
     { label: 'Cruz R01', src: '/assets/Simbolos/S_Cruz_Rojo01.png' },
     { label: 'Cruz R02', src: '/assets/Simbolos/S_Cruz_Rojo02.png' },
     { label: 'Cruz R03', src: '/assets/Simbolos/S_Cruz_Rojo03.png' },
     { label: 'Cruz R04', src: '/assets/Simbolos/S_Cruz_Rojo04.png' },
-  ]},
-  { grupo: 'Cuadrados', items: [
-    { label: 'Cuad. 1',  src: '/assets/Simbolos/S_Cuadrado 1.png' },
-    { label: 'Cuad. 2',  src: '/assets/Simbolos/S_Cuadrado 2.png' },
-    { label: 'Cuad. 3',  src: '/assets/Simbolos/S_Cuadrado 3.png' },
-    { label: 'Cuad. G1', src: '/assets/Simbolos/S_Cuadrado Grande 1.png' },
-    { label: 'Cuad. G2', src: '/assets/Simbolos/S_Cuadrado Grande 2.png' },
-    { label: 'Cuad. G3', src: '/assets/Simbolos/S_Cuadrado Grande 3.png' },
   ]},
   { grupo: 'Otros', items: [
     { label: 'ZigZag',    src: '/assets/Simbolos/S_ZigZag.png' },
@@ -2541,7 +2528,15 @@ const StepI = ({ setStep, topLeftText, copyConclusions, figuras, setFiguras, act
 
   const agregarFigura = useCallback((tipo, src) => {
     if (!setFiguras) return;
-    setFiguras(prev => [...prev, { id: Date.now() + Math.random(), src, tipo, x: 250, y: 300 }]);
+    const DISPLAY = tipo === 'symbol' ? 48 : 80;
+    const img = new window.Image();
+    img.onload = () => {
+      setFiguras(prev => [...prev, { id: Date.now() + Math.random(), src, tipo, x: 250, y: 300, nw: img.naturalWidth, nh: img.naturalHeight, dw: DISPLAY, dh: DISPLAY }]);
+    };
+    img.onerror = () => {
+      setFiguras(prev => [...prev, { id: Date.now() + Math.random(), src, tipo, x: 250, y: 300, dw: DISPLAY, dh: DISPLAY }]);
+    };
+    img.src = src;
   }, [setFiguras]);
 
   return (
@@ -2654,7 +2649,7 @@ const StepI = ({ setStep, topLeftText, copyConclusions, figuras, setFiguras, act
         textoReporte={copyConclusions}
         activeOv={activeOv}
         figuras={figuras || []}
-        laminaSize={{ w: reportRef?.current?.clientWidth || 690, h: reportRef?.current?.clientHeight || 620 }}
+        laminaSize={{ w: 570, h: 755, offsetX: 10, offsetY: 20 }}
         listaVisual={listaVisual}
         imgLista={imgLista}
         comentarioLista={comentarioLista}

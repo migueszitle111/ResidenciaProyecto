@@ -1521,7 +1521,7 @@ export default function ReportFace() {
 
           {activeTab === 'lista' && (
             <>
-              <StepTitle>Imagen de tabla</StepTitle>
+              <StepTitle>Tabla</StepTitle>
               <button onClick={() => setShowGaleria(true)} style={{
                 width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
                 padding: '18px 12px', borderRadius: 10, cursor: 'pointer', marginBottom: 12,

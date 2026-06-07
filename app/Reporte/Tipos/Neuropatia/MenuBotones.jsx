@@ -2618,7 +2618,7 @@ const StepI = ({ setStep, topLeftText, copyConclusions, figuras, setFiguras, act
 
       {activeTab === 'lista' && (
         <div style={{ marginBottom: 8 }}>
-          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 10, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', marginBottom: 8 }}>Imagen de tabla</p>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 10, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', marginBottom: 8 }}>Tabla</p>
           <div onClick={() => setShowGaleria(true)} style={{ width: '100%', minHeight: 64, borderRadius: 10, border: '1.5px dashed rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.03)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
             {imgLista
               ? <img src={imgLista.src} alt="tabla" style={{ width: '100%', maxHeight: 90, objectFit: 'contain', borderRadius: 6 }} />

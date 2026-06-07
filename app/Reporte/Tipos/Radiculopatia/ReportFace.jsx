@@ -313,7 +313,7 @@ const NIVEL_OVERLAYS = {
     ant:  { izq: null, der: null },
   },
   L4: {
-    post: { izq: '/RadiculopatiaImg/L3-L4_izquierdo_anterior.png', der: '/RadiculopatiaImg/L3-L4_derecho_anterior.png' },
+    post: { izq: '/RadiculopatiaImg/L4 izquierdo.png', der: '/RadiculopatiaImg/L4 derecho.png', bil: '/RadiculopatiaImg/L4 bilateral.png' },
     ant:  { izq: null, der: null },
   },
   L5: {
@@ -348,13 +348,18 @@ function computeOverlaysFromChecks(checkedL, checkedR) {
   Object.entries(lvlSide).forEach(([lvl, sides]) => {
     const ov = NIVEL_OVERLAYS[lvl];
     if (!ov) return;
-    if (sides.L) {
-      if (ov.post.izq) postSet.add(ov.post.izq);
-      if (ov.ant.izq)  antSet.add(ov.ant.izq);
-    }
-    if (sides.R) {
-      if (ov.post.der) postSet.add(ov.post.der);
-      if (ov.ant.der)  antSet.add(ov.ant.der);
+    const isBilateral = sides.L && sides.R;
+    if (isBilateral && ov.post.bil) {
+      postSet.add(ov.post.bil);
+    } else {
+      if (sides.L) {
+        if (ov.post.izq) postSet.add(ov.post.izq);
+        if (ov.ant.izq)  antSet.add(ov.ant.izq);
+      }
+      if (sides.R) {
+        if (ov.post.der) postSet.add(ov.post.der);
+        if (ov.ant.der)  antSet.add(ov.ant.der);
+      }
     }
   });
   return { post: [...postSet], ant: [...antSet] };
@@ -973,13 +978,13 @@ function StepFReinervacion({ goTo, addText, evo, resetAll }) {
 }
 
 /* F2 – Progresión (Crónica y Crónica agudizada) */
-function StepF2Progresion({ goTo, addText, resetAll }) {
+function StepF2Progresion({ goTo, addText, setProgresion, resetAll }) {
   return (
     <div>
       <NavRow onBack={() => goTo('F_REINERVACION')} onReset={resetAll} />
       <StepTitle>Progresión</StepTitle>
-      <ChoiceBtn label="CON PROGRESIÓN DISTAL A MIOTOMAS" onPress={() => { addText('con progresión distal a miotomas'); goTo('G_PRONOSTICO'); }} />
-      <ChoiceBtn label="SIN PROGRESIÓN DISTAL A MIOTOMAS" onPress={() => { addText('sin progresión distal a miotomas'); goTo('G_PRONOSTICO'); }} />
+      <ChoiceBtn label="CON PROGRESIÓN DISTAL A MIOTOMAS" onPress={() => { setProgresion('con'); addText('con progresión distal a miotomas'); goTo('G_PRONOSTICO'); }} />
+      <ChoiceBtn label="SIN PROGRESIÓN DISTAL A MIOTOMAS" onPress={() => { setProgresion('sin'); addText('sin progresión distal a miotomas'); goTo('G_PRONOSTICO'); }} />
     </div>
   );
 }
@@ -1142,7 +1147,7 @@ function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVi
       {/* Tab LISTA: galería de tabla + comentario */}
       {activeTab === 'lista' && (
         <div>
-          <StepTitle>Imagen de tabla</StepTitle>
+          <StepTitle>Tabla</StepTitle>
           <button onClick={() => setShowGaleria(true)} style={{ width:'100%', display:'flex', flexDirection:'column', alignItems:'center', gap:8, padding:'14px 10px', borderRadius:10, cursor:'pointer', marginBottom:8, background:'rgba(255,255,255,0.04)', border:'1px dashed rgba(255,255,255,0.15)' }}>
             {imgLista ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -1206,6 +1211,7 @@ export default function ReportFaceRadiculopatia() {
   const [agudiPhase, setAgudiPhase]   = useState(false); // Crónica agudizada: segunda pasada
   const [agudiTargetNivel, setAgudiTargetNivel] = useState(null); // 'Cervical'|'Torácica'|'Lumbosacro'
   const [textos, setTextos]           = useState([]);
+  const [progresion, setProgresion]   = useState(null); // 'con' | 'sin' | null
 
   /* checkboxes del paso Nivel – viven aquí para derivar overlays en tiempo real */
   const [checkedL_C, setCheckedL_C] = useState([]);
@@ -1228,10 +1234,11 @@ export default function ReportFaceRadiculopatia() {
      Crónica agudizada: combina pasada 1 + pasada 2 (agudización) */
   const liveMusclePairs = useMemo(() => {
     if (flowType === 'Aguda') return { post: [], ant: [] };
+    if (progresion === 'sin') return { post: [], ant: [] };
     const allL = [...checkedL_C, ...checkedL_L, ...checkedL_C_A, ...checkedL_L_A];
     const allR = [...checkedR_C, ...checkedR_L, ...checkedR_C_A, ...checkedR_L_A];
     return computeOverlaysFromChecks(allL, allR);
-  }, [flowType, checkedL_C, checkedR_C, checkedL_L, checkedR_L, checkedL_C_A, checkedR_C_A, checkedL_L_A, checkedR_L_A]);
+  }, [flowType, progresion, checkedL_C, checkedR_C, checkedL_L, checkedR_L, checkedL_C_A, checkedR_C_A, checkedL_L_A, checkedR_L_A]);
 
   /* columna roja en tiempo real – igual que showCervOverlay / showLumboOverlay en móvil */
   const liveRegionPairs = useMemo(() => {
@@ -1416,6 +1423,7 @@ export default function ReportFaceRadiculopatia() {
     setCheckedL_L([]); setCheckedR_L([]);
     setCheckedL_C_A([]); setCheckedR_C_A([]);
     setCheckedL_L_A([]); setCheckedR_L_A([]);
+    setProgresion(null);
     setCommittedPost([]); setCommittedAnt([]);
     setFiguras([]); setImgLista(null); setComentarioLista('');
     setTextoEditado(''); setEditadoManual(false);
@@ -1450,7 +1458,7 @@ export default function ReportFaceRadiculopatia() {
       case 'F_REINERVACION':
         return <StepFReinervacion goTo={goTo} addText={addText} evo={evo} resetAll={resetAll} />;
       case 'F2_PROGRESION':
-        return <StepF2Progresion goTo={goTo} addText={addText} resetAll={resetAll} />;
+        return <StepF2Progresion goTo={goTo} addText={addText} setProgresion={setProgresion} resetAll={resetAll} />;
       case 'G_PRONOSTICO':
         return <StepGPronostico goTo={goTo} addText={addText} evo={evo} resetAll={resetAll} />;
       case 'S_PATOLOGIA':

@@ -1055,7 +1055,7 @@ export default function ReportFace() {
           {/* Tab Lista: imagen de tabla + comentario */}
           {activeTab === 'lista' && (
             <>
-              <StepTitle>Imagen de tabla</StepTitle>
+              <StepTitle>Tabla</StepTitle>
               {/* Botón que abre la galería emergente */}
               <button onClick={() => setShowGaleria(true)} style={{
                 width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,

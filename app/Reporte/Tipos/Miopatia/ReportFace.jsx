@@ -695,7 +695,7 @@ export default function ReportFace() {
             )}
             {activeTab === 'lista' && (
               <>
-                <StepTitle>Imagen de tabla</StepTitle>
+                <StepTitle>Tabla</StepTitle>
                 <button onClick={() => setShowGaleria(true)} style={{ width:'100%', display:'flex', flexDirection:'column', alignItems:'center', gap:8, padding:'18px 12px', borderRadius:10, cursor:'pointer', marginBottom:12, background:'rgba(255,255,255,0.05)', border:'1px dashed rgba(255,255,255,0.15)' }}>
                   {imgLista
                     ? <img src={imgLista.src} alt="tabla" style={{ width:'100%', maxHeight:100, objectFit:'contain', borderRadius:6 }} />

@@ -31,7 +31,7 @@ const OVERLAYS_NEURO_P = {
   'FocalIzq':             '/NeuropatiaImg/AxilFcIzq.png',
   'Axilar':               '/NeuropatiaImg/Axilar.png',
   'InteroseoA':           '/NeuropatiaImg/InteroseoAnterior.png',
-  'Musculocutáneo':       '/NeuropatiaImg/Musculocutaneo.png',
+  'MusculocutaneoImg':       '/NeuropatiaImg/Musculocutaneo.png',
   'Radial':               '/NeuropatiaImg/Radial.png',
   'Radial superficial':   '/NeuropatiaImg/RadialSuperficial.png',
   'Interóseo posterior':  '/NeuropatiaImg/InteroseoP.png',

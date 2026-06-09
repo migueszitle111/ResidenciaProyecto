@@ -2371,7 +2371,7 @@ const StepH2 = ({ setStep }) => {
 
 // ── Paso final: exportación ───────────────────────────────────────────────────
 const CONCLUSION_OVERLAY_MAP = {
-  'MEDIANO':         'Mediano1',
+  'MEDIANO':         'MedianoImg',
   'INTEROSEOANTERIOR': 'InteroseoAnterior',
   'ACCESORIO':       'Accesorio',
   'ANTEBRAQUIAL_CUTANEO': 'AntebraquialCutaneo',

@@ -511,3 +511,15 @@ color: white;
     height: 100%;
     object-fit: contain;
 }
+
+.btnHem2.active,
+.btnHem3.active,
+.btnHem4.active,
+.btnHem5.active,
+.btnOjoIzq.active,
+.btnOjoD.active{
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
+}

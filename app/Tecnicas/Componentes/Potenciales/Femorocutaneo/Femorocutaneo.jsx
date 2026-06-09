@@ -29,6 +29,7 @@ const Femorocutaneo = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -122,6 +123,7 @@ const Femorocutaneo = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -168,23 +170,28 @@ const Femorocutaneo = () => {
                 {currentImageIndex === 0 && (
                     <>
                         <button className="btnFem1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnFem2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Femoro-T01.png")}></button>
+                        <button className={`btnFem2 ${activeBtn === 'btnFem2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnFem2' ? null : 'btnFem2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Femoro-T01.png"); }}></button>
                         <button
-                            className="btnFem3"
-                            onClick={() =>
+                            className={`btnFem3 ${activeBtn === 'btnFem3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnFem3' ? null : 'btnFem3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/FemEstimulo.png",
                                     "Estimulo. Nervio femorocutáneo lateral, colocar el cátodo sobre la cara anterior del muslo, 12 cm distal de la espina iliaca anterosuperior siguiendo una línea imaginaria trazada hasta el borde lateral de la rótula; el ánodo se coloca 3 cm distal" + 
                                     "\n\n Intensidad. 3 a 2.5 veces el umbral sensitivo percibido por el paciente.  \n\n Tierra. M1, C5s o C4’/C3’.",
                                     
                                     { position: { top: '33%', left: '82%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnFem4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png")}></button>
+                        <button className={`btnFem4 ${activeBtn === 'btnFem4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnFem4' ? null : 'btnFem4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png");}}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnFemc" onClick={() => {
+                            <button className={`btnFemc ${activeBtn === 'btnFemc' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnFemc' ? null : 'btnFemc');
                                     handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '28%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/FemCanal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -192,7 +199,8 @@ const Femorocutaneo = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnFemc2" onClick={() => {
+                            <button className={`btnFemc2 ${activeBtn === 'btnFemc2' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnFemc2' ? null : 'btnFemc2');
                                     handleButtonClick('Espina iliaca anterosuperior N7, electrodo activo 1 cm medial a la espina ipsilateral al estimulo con electrodo de referencia sobre el trocánter mayor.', { top: '7%', left: '28%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/FemCanal2.png", { top: "50%", left: "50%" });  }}
                             >
@@ -201,7 +209,8 @@ const Femorocutaneo = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasFem" onClick={() => {
+                            <button className={`btnOndasFem ${activeBtn === 'btnOndasFem' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasFem' ? null : 'btnOndasFem');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/FemCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/FemCanal2.png",

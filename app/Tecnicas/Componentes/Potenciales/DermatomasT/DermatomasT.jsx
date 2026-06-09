@@ -29,6 +29,7 @@ const DermatomasT = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -123,6 +124,7 @@ const DermatomasT = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -169,10 +171,12 @@ const DermatomasT = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnDerT1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnDerT2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/DermaT-T01.png")}></button>
+                        <button className={`btnDerT2 ${activeBtn === 'btnDerT2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnDerT2' ? null : 'btnDerT2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/DermaT-T01.png");}}></button>
                         <button
-                            className="btnDerT3"
-                            onClick={() =>
+                            className={`btnDerT3 ${activeBtn === 'btnDerT3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnDerT3' ? null : 'btnDerT3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/RadEstimu.png",
                                     "Cortical: \n Miembros superiores C4’ (C3’)-Fpz’ o Fpz. \n Miembros inferiores Cz’-Fpz’"+
@@ -180,13 +184,16 @@ const DermatomasT = () => {
                                     "\n\n Tierra: Ligeramente proximal al sitio de estimulación.",
                                     
                                     { position: { top: '25%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnDerT4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png")}></button>
+                        <button className={`btnDerT4 ${activeBtn === 'btnDerT4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnDerT4' ? null : 'btnDerT4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png");}}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnDermT" onClick={() => {
+                            <button className={`btnDermT ${activeBtn === 'btnDermT' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDermT' ? null : 'btnDermT');
                                     handleButtonClick('6-8 cm por arriba del nivel T4.', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/DerTorT2.png", { top: "50%", left: "50%" });  }}
                             >
@@ -194,7 +201,9 @@ const DermatomasT = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnDermT2" onClick={() => {
+                            <button className={`btnDermT2 ${activeBtn === 'btnDermT2' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDermT2' ? null : 'btnDermT2');
                                     handleButtonClick('A nivel lateral de la tetilla.', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/DerTorT4.png", { top: "50%", left: "50%" });  }}
                             >
@@ -202,15 +211,19 @@ const DermatomasT = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnDermT3" onClick={() => {
+                            <button className={`btnDermT3 ${activeBtn === 'btnDermT3' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDermT3' ? null : 'btnDermT3');
                                     handleButtonClick('6-8 cm por debajo del nivel T4 o a nivel del esternón.', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/DerTorT6.png", { top: "50%", left: "50%" });  }}
                             >
                                 T6    
                             </button>
                         )}
-                                                {currentImageIndex === 0 && (
-                            <button className="btnDermT4" onClick={() => {
+                        {currentImageIndex === 0 && (
+                            <button className={`btnDermT4 ${activeBtn === 'btnDermT4' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDermT4' ? null : 'btnDermT4');
                                     handleButtonClick('6-8 cm por arriba de T10.', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/DerTorT8.png", { top: "50%", left: "50%" });  }}
                             >
@@ -218,7 +231,9 @@ const DermatomasT = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnDermT5" onClick={() => {
+                            <button className={`btnDermT5 ${activeBtn === 'btnDermT5' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDermT5' ? null : 'btnDermT5');
                                     handleButtonClick('A nivel lateral de la cicatriz umbilical. ', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/DerTorT10.png", { top: "50%", left: "50%" });  }}
                             >
@@ -226,7 +241,9 @@ const DermatomasT = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnDermT6" onClick={() => {
+                            <button className={`btnDermT6 ${activeBtn === 'btnDermT6' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDermT6' ? null : 'btnDermT6');
                                     handleButtonClick('Discretamente arriba de la región inguinal.  ', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/DerTorT12.png", { top: "50%", left: "50%" });  }}
                             >
@@ -235,7 +252,9 @@ const DermatomasT = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasDerT" onClick={() => {
+                            <button className={`btnOndasDerT ${activeBtn === 'btnOndasDerT' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasDerT' ? null : 'btnOndasDerT');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/DerTorT2.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/DerTorT4.png",

@@ -28,6 +28,7 @@ const TalloC = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -121,6 +122,7 @@ const TalloC = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -166,7 +168,8 @@ const TalloC = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnTal1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnTal2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Tallo-T01.png")}></button>
+                        <button className={`btnTal2 ${activeBtn === 'btnTal2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTal2' ? null : 'btnTal2'); openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Tallo-T01.png"); }}></button>
                         
                         
                         {/* {currentImageIndex === 0 && (
@@ -180,16 +183,17 @@ const TalloC = () => {
                         
                         
                         <button
-                            className="btnTal3"
-                            onClick={() =>
+                            className={`btnTal3 ${activeBtn === 'btnTal3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnTal3' ? null : 'btnTal3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Auditivo/TallEstimulo.png",
                                     "Click monoauricular cuadrado a 10 ms de duración en modalidades de rarefacción y condensación." + 
                                     "\n\n 70 dBnHL de intensidad con enmascaramiento contralateral a 40 dB \n\n Frecuencia a 11.1 Hz ",
                                     
                                     { position: { top: '57%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         {/* <button
@@ -202,10 +206,13 @@ const TalloC = () => {
                                 )
                             }
                         ></button>*/}
-                        <button className="btnTal4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Auditivo-10-20.png")}></button> 
+                        <button className={`btnTal4 ${activeBtn === 'btnTal4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTal4' ? null : 'btnTal4'); openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Auditivo-10-20.png"); }}></button> 
 
                         {currentImageIndex === 0 && (
-                            <button className="btnTallo" onClick={() => {
+                            <button className={`btnTallo ${activeBtn === 'btnTallo' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTallo' ? null : 'btnTallo');
                                         handleButtonClick('Auricular ipsilateral o Mi (mastoides ipsilateral) con referencia al vertex. Registra todos los componentes obligatorios, la colocación en mastoides acorta la latencia de onda I en relación con el montaje auricular; el complejo IV-V es de gran amplitud, pero puede verse como una sola onda ensanchada.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Auditivo/IPSILATERAL.png", { top: "50%", left: "50%" });   }}
                             >
@@ -213,7 +220,8 @@ const TalloC = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnTallo2" onClick={() => {
+                            <button className={`btnTallo2 ${activeBtn === 'btnTallo2' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnTallo2' ? null : 'btnTallo2');
                                         handleButtonClick('Auricular contralateral o Mc (mastoides contralateral) con referencia al vertex. Onda I ausente pero mejor diferenciación entre ondas IV y V que facilita la marcación individual.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Auditivo/CONTRALATERAL.png", { top: "50%", left: "50%" });   }}
                             >
@@ -222,7 +230,8 @@ const TalloC = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnTallo3" onClick={() => {
+                            <button className={`btnTallo3 ${activeBtn === 'btnTallo3' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnTallo3' ? null : 'btnTallo3');
                                         handleButtonClick('Auricular ipsilateral (referencial interaural) con referencia contralateral o Mi-Mc. Genera el mejor registro y diferenciación de las ondas I y III cuando no son claras en el montaje ipsilateral por el artefacto de estímulo.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Auditivo/LONGITUDINAL.png", { top: "50%", left: "50%" });   }}
                             >
@@ -231,7 +240,8 @@ const TalloC = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnTallo4" onClick={() => {
+                            <button className={`btnTallo4 ${activeBtn === 'btnTallo4' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnTallo4' ? null : 'btnTallo4');
                                         handleButtonClick('Proceso espinoso C5 o C2 (extracefálica) con referencia en vertex. Registra la mejor amplitud de la onda V.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Auditivo/CERVICAL.png", { top: "50%", left: "50%" });   }}
                             >
@@ -241,7 +251,8 @@ const TalloC = () => {
 
                         {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasTb" onClick={() => {
+                            <button className={`btnOndasTallo ${activeBtn === 'btnOndasTallo' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasTallo' ? null : 'btnOndasTallo');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Auditivo/IPSILATERAL.png",
                                             "/assets/ImgTecnicas/Potenciales/Auditivo/CONTRALATERAL.png",

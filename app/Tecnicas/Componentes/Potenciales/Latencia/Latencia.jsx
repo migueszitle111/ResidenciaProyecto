@@ -28,6 +28,7 @@ const Latencia = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -121,6 +122,7 @@ const Latencia = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -166,7 +168,8 @@ const Latencia = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnLat1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnLat2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Late-T01.png")}></button>
+                        <button className={`btnLat2 ${activeBtn === 'btnLat2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnLat2' ? null : 'btnLat2'); openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Late-T01.png"); }}></button>
                         
                         
                         {/* {currentImageIndex === 0 && (
@@ -180,16 +183,17 @@ const Latencia = () => {
                         
                         
                         <button
-                            className="btnLat3"
-                            onClick={() =>
+                            className={`btnLat3 ${activeBtn === 'btnLat3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnLat3' ? null : 'btnLat3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Auditivo/LateEstimulo.png",
                                     "Click monoauricular cuadrado a 10 ms de duración en modalidad alterna \n 70 dB NA de intensidad con enmascaramiento contralateral a 40 dB \n Reducción progresiva de intensidad a 60, 40 y 20 dB." + 
                                     "\n\n Frecuencias: \n Fase neurológica a 11.1 Hz. \n Fase audiológica a 33.1 Hz.  ",
                                     
                                     { position: { top: '57%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         {/* <button
@@ -202,10 +206,13 @@ const Latencia = () => {
                                 )
                             }
                         ></button>*/}
-                        <button className="btnLat4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Auditivo-10-20.png")}></button> 
+                        <button className={`btnLat4 ${activeBtn === 'btnLat4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnLat4' ? null : 'btnLat4'); openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Auditivo-10-20.png"); }}></button> 
 
                         {currentImageIndex === 0 && (
-                            <button className="btnLate" onClick={() => {
+                            <button className={`btnLate ${activeBtn === 'btnLate' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnLate' ? null : 'btnLate');
                                         handleButtonClick('Auricular ipsilateral o Mi (mastoides ipsilateral) con referencia al vertex.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Auditivo/LateCanal1.png", { top: "50%", left: "50%" });   }}
                             >
@@ -213,7 +220,8 @@ const Latencia = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnLate2" onClick={() => {
+                            <button className={`btnLate2 ${activeBtn === 'btnLate2' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnLate2' ? null : 'btnLate2');
                                         handleButtonClick('Auricular contralateral o Mc (mastoides contralateral) con referencia al vertex.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Auditivo/LateCanal2.png", { top: "50%", left: "50%" });   }}
                             >
@@ -222,7 +230,8 @@ const Latencia = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnLate3" onClick={() => {
+                            <button className={`btnLate3 ${activeBtn === 'btnLate3' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnLate3' ? null : 'btnLate3');
                                         // handleButtonClick('Auricular ipsilateral (referencial interaural) con referencia contralateral o Mi-Mc. Genera el mejor registro y diferenciación de las ondas I y III cuando no son claras en el montaje ipsilateral por el artefacto de estímulo.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Auditivo/CLI.png", { top: "50%", left: "50%" });   }}
                             >
@@ -242,7 +251,8 @@ const Latencia = () => {
 
                         {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasTb" onClick={() => {
+                            <button className={`btnOndasLate ${activeBtn === 'btnOndasLate' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasLate' ? null : 'btnOndasLate');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Auditivo/LateCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Auditivo/LateCanal2.png",

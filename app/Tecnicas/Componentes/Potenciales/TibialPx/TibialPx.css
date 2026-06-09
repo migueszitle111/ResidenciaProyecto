@@ -197,14 +197,14 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 } */
 
-.btnOndasTb {
+.btnOndasTib {
     position: absolute ;
     background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
     background-size: cover;
@@ -216,7 +216,7 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
@@ -235,7 +235,7 @@ color: white;
     left: 45%;
     transform: translate(700%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -254,7 +254,7 @@ color: white;
     left: 45%;
     transform: translate(580%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -273,14 +273,14 @@ color: white;
     left: 45%;
     transform: translate(460%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 }
 
-.btnRegistroInf {
+.btnRegistroTib {
     position: absolute ;
     background-image: url('/assets/ImgTecnicas/Potenciales/Registro.png');
     background-size: cover;
@@ -292,7 +292,7 @@ color: white;
     left: 10%;
     transform: translate(940%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -464,4 +464,27 @@ color: white;
     background-color: transparent; /* Fondo transparente */
     border: none; /* Sin borde */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+.btnTibP2.active,
+.btnTibP3.active,
+.btnTibP4.active,
+.btnTibP5.active,
+.btnRegistroTib.active,
+.btnOndasTib.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
+}
+
+.btnTibPia.active,
+.btnTibPia2.active,
+.btnTibPia3.active,
+.btnTibPia4.active,
+.btnTibPia5.active,
+.btnTibPia6.active {
+    background-color: #000;
+    border: 1px solid #fff;
+    color: #fff;
 }

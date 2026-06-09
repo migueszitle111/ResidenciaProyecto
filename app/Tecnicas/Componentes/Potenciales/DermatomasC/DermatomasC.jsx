@@ -29,6 +29,7 @@ const DermatomasC = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -122,6 +123,7 @@ const DermatomasC = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -168,10 +170,12 @@ const DermatomasC = () => {
                 {currentImageIndex === 0 && (
                     <>
                         <button className="btnDer1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnDer2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/DermaC-T01.png")}></button>
+                        <button className={`btnDer2 ${activeBtn === 'btnDer2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnDer2' ? null : 'btnDer2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/DermaC-T01.png");}}></button>
                         <button
-                            className="btnDer3"
-                            onClick={() =>
+                            className={`btnDer3 ${activeBtn === 'btnDer3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnDer3' ? null : 'btnDer3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/RadEstimu.png",
                                     "Cortical: \n Miembros superiores C4’ (C3’)-Fpz’ o Fpz. \n Miembros inferiores Cz’-Fpz’"+
@@ -179,13 +183,16 @@ const DermatomasC = () => {
                                     "\n\n Tierra: Ligeramente proximal al sitio de estimulación.",
                                     
                                     { position: { top: '25%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnDer4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png")}></button>
+                        <button className={`btnDer4 ${activeBtn === 'btnDer4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnDer4' ? null : 'btnDer4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png");}}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnDerm" onClick={() => {
+                            <button className={`btnDerm ${activeBtn === 'btnDerm' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDerm' ? null : 'btnDerm');
                                     handleButtonClick('Fosa supraclavicular 2 cm por arriba de línea media de la clavícula.', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/CervicalC4.png", { top: "50%", left: "50%" });  }}
                             >
@@ -193,7 +200,9 @@ const DermatomasC = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnDerm2" onClick={() => {
+                            <button className={`btnDerm2 ${activeBtn === 'btnDerm2' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDerm2' ? null : 'btnDerm2');
                                     handleButtonClick('10 cm proximal al epicóndilo lateral en la superficie lateral del brazo.', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/CervicalC5.png", { top: "50%", left: "50%" });  }}
                             >
@@ -201,15 +210,19 @@ const DermatomasC = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnDerm3" onClick={() => {
+                            <button className={`btnDerm3 ${activeBtn === 'btnDerm3' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDerm3' ? null : 'btnDerm3');
                                     handleButtonClick('Electrodos de anillo alrededor del pulgar.', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/CervicalC6.png", { top: "50%", left: "50%" });  }}
                             >
                                 C6    
                             </button>
                         )}
-                                                {currentImageIndex === 0 && (
-                            <button className="btnDerm4" onClick={() => {
+                        {currentImageIndex === 0 && (
+                            <button className={`btnDerm4 ${activeBtn === 'btnDerm4' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDerm4' ? null : 'btnDerm4');
                                     handleButtonClick('Electrodos de anillo alrededor del dedo medio.', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/CervicalC7.png", { top: "50%", left: "50%" });  }}
                             >
@@ -217,7 +230,9 @@ const DermatomasC = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnDerm5" onClick={() => {
+                            <button className={`btnDerm5 ${activeBtn === 'btnDerm5' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDerm5' ? null : 'btnDerm5');
                                     handleButtonClick('Electrodos de anillo alrededor del dedo meñique. ', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/CervicalC8.png", { top: "50%", left: "50%" });  }}
                             >
@@ -225,7 +240,9 @@ const DermatomasC = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnDerm6" onClick={() => {
+                            <button className={`btnDerm6 ${activeBtn === 'btnDerm6' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnDerm6' ? null : 'btnDerm6');
                                     handleButtonClick('5 cm distal al epicóndilo medial en la superficie medial del antebrazo.', { top: '7%', left: '54%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/CervicalT1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -234,7 +251,9 @@ const DermatomasC = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasDerC" onClick={() => {
+                            <button className={`btnOndasDerC ${activeBtn === 'btnOndasDerC' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasDerC' ? null : 'btnOndasDerC');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/CervicalC4.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/CervicalC5.png",

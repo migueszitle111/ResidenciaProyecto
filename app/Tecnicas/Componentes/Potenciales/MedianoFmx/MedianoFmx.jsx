@@ -30,6 +30,7 @@ const MedianoFmx = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -125,6 +126,7 @@ const MedianoFmx = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -171,23 +173,32 @@ const MedianoFmx = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnIMdFx1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnIMdFx2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/MedMx-T01.png")}></button>
+                        <button className={`btnIMdFx2 ${activeBtn === 'imdFx2' ? 'active' : ''}`}
+                            onClick={() => { setActiveBtn(p => p === 'imdFx2' ? null : 'imdFx2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/MedMx-T01.png"); }}>
+                        </button>
                         <button
-                            className="btnIMdFx3"
-                            onClick={() =>
+                            className={`btnIMdFx3 ${activeBtn === 'imdFx3' ? 'active' : ''}`}
+                            onClick={() => {
+                                setActiveBtn(p => p === 'imdFx3' ? null : 'imdFx3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/MedMxEstimulo.png",
                                     "Estimulo. Nervio Mediano fibras mixtas, con electrodos de superficie colocar el cátodo en dirección proximal a nivel del carpo entre los tendones del palmar mayor y palmar menor, ánodo 2-3 cm distal. Una forma práctica de colocación con electrodo de barra es ubicar el ánodo sobre pliegue de la muñeca y al cátodo proximal a esta referencia." + 
                                     "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en el pulgar y/o índice. \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
                                     
                                     { position: { top: '48%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnIMdFx4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png")}></button>
+                        <button className={`btnIMdFx4 ${activeBtn === 'imdFx4' ? 'active' : ''}`}
+                            onClick={() => {
+                                setActiveBtn(p => p === 'imdFx4' ? null : 'imdFx4');
+                                openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png");
+                            }}
+                        ></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnMedFx" onClick={() => {
+                            <button className={`btnMedFx ${activeBtn === 'medFx' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'medFx' ? null : 'medFx');
                                     handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '8%', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedMxCanal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -195,7 +206,8 @@ const MedianoFmx = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnMedFx2" onClick={() => {
+                            <button className={`btnMedFx2 ${activeBtn === 'medFx2' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'medFx2' ? null : 'medFx2');
                                     handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedMxCanal2.png", { top: "50%", left: "50%" });  }}
                             >
@@ -203,7 +215,8 @@ const MedianoFmx = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnMedFx3" onClick={() => {
+                            <button className={`btnMedFx3 ${activeBtn === 'medFx3' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'medFx3' ? null : 'medFx3');
                                     handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '8 %', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedMxCanal3.png", { top: "50%", left: "50%" });  }}
                             >
@@ -212,7 +225,8 @@ const MedianoFmx = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasMdx" onClick={() => {
+                            <button className={`btnOndasMdx ${activeBtn === 'ondasMdx' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'ondasMdx' ? null : 'ondasMdx');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/MedMxCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/MedMxCanal2.png",

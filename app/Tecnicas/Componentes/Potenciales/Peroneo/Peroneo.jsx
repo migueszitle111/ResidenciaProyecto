@@ -28,6 +28,7 @@ const Peroneo = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -120,6 +121,7 @@ const Peroneo = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -165,22 +167,24 @@ const Peroneo = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnPer1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnPer2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-T01.png")}></button>
+                        <button className={`btnPer2 ${activeBtn === 'btnPer2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnPer2' ? null : 'btnPer2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-T01.png"); }}></button>
                         <button
-                            className="btnPer3"
-                            onClick={() =>
+                            className={`btnPer3 ${activeBtn === 'btnPer3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnPer3' ? null : 'btnPer3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/PeroEstimulo.png",
                                     "Estimulo. Nervio Peroneo fibras mixtas, colocar el cátodo a nivel de la rodilla, lateral al cuello del peroné, el ánodo se coloca 3 cm distal." + 
                                     "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en los dorsiflexores o extensores de los dedos. \n\n Tierra. M1 o C4’/C3’.",
                                     
                                     { position: { top: '60%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         {/* <button
-                            className="btnRegistroInf"
+                            className="btnRegistroPer"
                             onClick={() =>
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Motores/RegidtroMiSup.png",
@@ -189,10 +193,13 @@ const Peroneo = () => {
                                 )
                             }
                         ></button>*/}
-                        <button className="btnPer4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-10-20.png")}></button> 
+                        <button className={`btnPer4 ${activeBtn === 'btnPer4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnPer4' ? null : 'btnPer4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-10-20.png"); }}></button> 
 
                         {currentImageIndex === 0 && (
-                            <button className="btnPero" onClick={() => {
+                            <button className={`btnPero ${activeBtn === 'btnPero' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnPero' ? null : 'btnPero');
                                         handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PeroCanal1.png", { top: "50%", left: "50%" });   }}
                             >
@@ -200,7 +207,8 @@ const Peroneo = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnPero3" onClick={() => {
+                            <button className={`btnPero3 ${activeBtn === 'btnPero3' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnPero3' ? null : 'btnPero3');
                                         handleButtonClick('N22 Lumbar electrodo activo en apófisis espinosa L4s con referencia a L1s o espina iliaca anterosuperior (opcional montaje T12s).', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PeroCanal2.png", { top: "50%", left: "50%" });   }}
                             >
@@ -209,7 +217,8 @@ const Peroneo = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnPero4" onClick={() => {
+                            <button className={`btnPero4 ${activeBtn === 'btnPero4' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnPero4' ? null : 'btnPero4');
                                         handleButtonClick('Escotadura ciática N5, electrodo activo debajo del pliegue glúteo línea media con referencia al trocánter mayor.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PeroCanal3.png", { top: "50%", left: "50%" });   }}
                             >
@@ -219,7 +228,8 @@ const Peroneo = () => {
 
                         {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasTb" onClick={() => {
+                            <button className={`btnOndasPer ${activeBtn === 'btnOndasPer' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasPer' ? null : 'btnOndasPer');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/PeroCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/PeroCanal2.png",

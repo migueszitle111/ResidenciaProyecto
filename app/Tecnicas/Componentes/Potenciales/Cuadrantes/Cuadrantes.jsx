@@ -28,6 +28,7 @@ const Cuadrantes = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -120,6 +121,7 @@ const Cuadrantes = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -165,11 +167,14 @@ const Cuadrantes = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnCua1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnCua2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Visual/Camp-T01.png")}></button>
+                        <button className={`btnCua2 ${activeBtn === 'btnCua2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnCua2' ? null : 'btnCua2'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Camp-T01.png"); }}></button>
                         
                         
                         {currentImageIndex === 0 && (
-                            <button className="btnEst1" onClick={() => {
+                            <button className={`btnEst1 ${activeBtn === 'btnEst1' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnEst1' ? null : 'btnEst1');
                                         handleButtonClick('Patrón Reverso de Dameros por CUADRANTES  \n (área retroquiasmática: quiasma y tracto óptico). \n Previo a realizar la valoración por hemicampos es necesario tener certeza de la integridad funcional a nivel prequiasmático, para ello se requiere la respuesta indemne por campo completo en cada ojo. ' + 
                                             "\n A 100 cm de distancia, estimular de forma monocular con oclusión contralateral. \n Tamaño de pantalla de 10 a 16° del arco visual. \n Elementos de 50’-90’ arco visual.", { top: '55%', left: '20%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/VEP-CUAD_0003_CSI.png", { top: "50%", left: "50%" });   }}
@@ -178,7 +183,9 @@ const Cuadrantes = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnEst3" onClick={() => {
+                            <button className={`btnEst3 ${activeBtn === 'btnEst3' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnEst3' ? null : 'btnEst3');
                                         handleButtonClick('Patrón Reverso de Dameros por CUADRANTES  \n (área retroquiasmática: quiasma y tracto óptico). \n Previo a realizar la valoración por hemicampos es necesario tener certeza de la integridad funcional a nivel prequiasmático, para ello se requiere la respuesta indemne por campo completo en cada ojo. ' + 
                                             "\n A 100 cm de distancia, estimular de forma monocular con oclusión contralateral. \n Tamaño de pantalla de 10 a 16° del arco visual. \n Elementos de 50’-90’ arco visual.   ", { top: '55%', left: '79%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/VEP-CUAD_0002_CSD.png", { top: "50%", left: "50%" });   }}
@@ -187,7 +194,9 @@ const Cuadrantes = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnEst4" onClick={() => {
+                            <button className={`btnEst4 ${activeBtn === 'btnEst4' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnEst4' ? null : 'btnEst4');
                                         handleButtonClick('Patrón Reverso de Dameros por CUADRANTES  \n (área retroquiasmática: quiasma y tracto óptico). \n Previo a realizar la valoración por hemicampos es necesario tener certeza de la integridad funcional a nivel prequiasmático, para ello se requiere la respuesta indemne por campo completo en cada ojo. ' + 
                                             "\n A 100 cm de distancia, estimular de forma monocular con oclusión contralateral. \n Tamaño de pantalla de 10 a 16° del arco visual. \n Elementos de 50’-90’ arco visual.  ", { top: '24%', left: '79%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/VEP-CUAD_0000_CID.png", { top: "50%", left: "50%" });   }}
@@ -195,7 +204,9 @@ const Cuadrantes = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnEst2" onClick={() => {
+                            <button className={`btnEst2 ${activeBtn === 'btnEst2' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnEst2' ? null : 'btnEst2');
                                         handleButtonClick('Patrón Reverso de Dameros por CUADRANTES  \n (área retroquiasmática: quiasma y tracto óptico). \n Previo a realizar la valoración por hemicampos es necesario tener certeza de la integridad funcional a nivel prequiasmático, para ello se requiere la respuesta indemne por campo completo en cada ojo. ' + 
                                             "\n A 100 cm de distancia, estimular de forma monocular con oclusión contralateral. \n Tamaño de pantalla de 10 a 16° del arco visual. \n Elementos de 50’-90’ arco visual. ", { top: '24%', left: '20%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/VEP-CUAD_0001_CII.png", { top: "50%", left: "50%" });   }}
@@ -227,16 +238,17 @@ const Cuadrantes = () => {
                             }
                         ></button>*/}
                         <button
-                            className="btnCua4"
-                            onClick={() =>
+                            className={`btnCua4 ${activeBtn === 'btnCua4' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnCua4' ? null : 'btnCua4');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Visual/Cuad-10-20.jpg",
                                     "Canal 1. T1-Fpz \n Temporal posterior izquierdo, colocar electrodo activo 10 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz). \n\n Canal 2. O1-Fpz \n Occipital lateral izquierdo) colocar electrodo activo 5 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz)." +
                                     "\n\n Canal 3.  Oz-Fpz \n Línea media occipital, colocar electrodo activo 5 cm por arriba del inion, referenciado a Fpz (línea media frontal) 12 cm por arriba del nasion. \n\n Canal 4. O2-Fpz \n Occipital lateral derecho, colocar electrodo activo 5 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz)."+ 
                                     "\n\n Canal 5. T2-Fpz \n Temporal posterior derecho, colocar electrodo activo 10 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz).",
                                     { position: { top: '55%', left: '50%' }, size: '0.7rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         {/* {currentImageIndex === 0 && (

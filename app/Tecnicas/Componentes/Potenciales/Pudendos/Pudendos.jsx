@@ -29,6 +29,7 @@ const Pudendos = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -127,6 +128,7 @@ const Pudendos = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -173,21 +175,26 @@ const Pudendos = () => {
                 {currentImageIndex === 0 && (
                     <>
                         <button className="btnPud1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnPud2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos-T01.png")}></button>
+                        <button className={`btnPud2 ${activeBtn === 'btnPud2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnPud2' ? null : 'btnPud2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos-T01.png"); }}></button>
                         <button
-                            className="btnPud3"
-                            onClick={() =>
+                            className={`btnPud3 ${activeBtn === 'btnPud3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnPud3' ? null : 'btnPud3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/PudFEstimulo.png",
                                     "Colocar electrodo de barra con el cátodo sobre los labios mayores, 1 cm debajo del clítoris, ánodo distal para estímulo izquierdo o derecho; si se cuentan con dos estimuladores independientes se obtienen mejores registros al estimulo bilateral. ", 
                                     { position: { top: '53%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnPud4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos10-20.png")}></button>
+                        <button className={`btnPud4 ${activeBtn === 'btnPud4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnPud4' ? null : 'btnPud4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos10-20.png")}}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnPude" onClick={() => {
+                            <button className={`btnPude ${activeBtn === 'btnPude' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnPude' ? null : 'btnPude');
                                     handleButtonClick('Sobre región media del cráneo, 2 cm detrás del vértice Cz (Cz’) con referencia frontal a Fpz’.', { top: '8%', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PudFCanal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -196,7 +203,8 @@ const Pudendos = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasPud1" onClick={() => {
+                            <button className={`btnOndasPud1 ${activeBtn === 'btnOndasPud1' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasPud1' ? null : 'btnOndasPud1');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/PudFCanal1.png",
 
@@ -210,22 +218,28 @@ const Pudendos = () => {
 
                 {currentImageIndex === 1 && (
                     <>
-                        <button className="btnPud5" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnPud6" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos-T01.png")}></button>
+                        <button className={`btnPud5 ${activeBtn === 'btnPud5' ? 'active' : ''}`} onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
+                        <button className={`btnPud6 ${activeBtn === 'btnPud6' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnPud6' ? null : 'btnPud6'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos-T01.png"); }}></button>
                         <button
-                            className="btnPud7"
-                            onClick={() =>
+                            className={`btnPud7 ${activeBtn === 'btnPud7' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnPud7' ? null : 'btnPud7');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/PudMEstimulo.png",
                                     "Colocar electrodos de anillo, cátodo en la     base del pene y ánodo 3-4 cm distal o en el cuello del glande. Se puede utilizar un electrodo de barra para estimular lado izquierdo o derecho por separado. ", 
                                     { position: { top: '60%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnPud8" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos10-20.png")}></button>
+                        <button className={`btnPud8 ${activeBtn === 'btnPud8' ? 'active' : ''}`} onClick={() => {
+                            setActiveBtn(p => p === 'btnPud8' ? null : 'btnPud8');
+                            openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos10-20.png");
+                        }}></button>
 
                         {currentImageIndex === 1 && (
-                            <button className="btnPude2" onClick={() => {
+                            <button className={`btnPude2 ${activeBtn === 'btnPude2' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnPude2' ? null : 'btnPude2');
                                     handleButtonClick('Sobre región media del cráneo, 2 cm detrás del vértice Cz (Cz’) con referencia frontal a Fpz’.', { top: '8%', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PudMCanal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -233,7 +247,8 @@ const Pudendos = () => {
                             </button>
                         )}
                         {currentImageIndex === 1 && (
-                            <button className="btnPude3" onClick={() => {
+                            <button className={`btnPude3 ${activeBtn === 'btnPude3' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnPude3' ? null : 'btnPude3');
                                     handleButtonClick('Electrodo activo sobre apófisis espinosa L1 (L1s) Referenciado a espina iliaca anterosuperior EIAS. Se puede optar por L4s.', { top: '8%', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PudMCanal2.png", { top: "50%", left: "50%" });  }}
                             >
@@ -242,7 +257,8 @@ const Pudendos = () => {
                         )}
 
                         {currentImageIndex === 1 && (
-                            <button className="btnOndasPud2" onClick={() => {
+                            <button className={`btnOndasPud2 ${activeBtn === 'btnOndasPud2' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasPud2' ? null : 'btnOndasPud2');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/PudMCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/PudMCanal2.png",

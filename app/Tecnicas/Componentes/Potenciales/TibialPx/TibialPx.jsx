@@ -28,6 +28,7 @@ const TibialPx = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -120,6 +121,7 @@ const TibialPx = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -165,18 +167,20 @@ const TibialPx = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnTibP1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnTibP2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/TibP-T01.png")}></button>
+                        <button className={`btnTibP2 ${activeBtn === 'btnTibP2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTibP2' ? null : 'btnTibP2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/TibP-T01.png"); }}></button>
                         <button
-                            className="btnTibP3"
-                            onClick={() =>
+                            className={`btnTibP3 ${activeBtn === 'btnTibP3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnTibP3' ? null : 'btnTibP3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/TbEstimulo2.png",
                                     "Estimulo. Nervio Tibial en la fosa poplítea, cátodo aproximadamente 2 cm por arriba del pliegue cutáneo ligeramente lateral y adyacente a los tendones de los isquiotibiales; ánodo distal" + 
                                     "\n\n Intensidad.  Incremento progresivo tres veces el umbral sensitivo percibido por el paciente. \n\n Tierra.  M1 o C4’/C3’.",
                                     
                                     { position: { top: '60%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         {/* <button
@@ -189,10 +193,13 @@ const TibialPx = () => {
                                 )
                             }
                         ></button>*/}
-                        <button className="btnTibP4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Tb-10-20.png")}></button> 
+                        <button className={`btnTibP4 ${activeBtn === 'btnTibP4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTibP4' ? null : 'btnTibP4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Tb-10-20.png"); }}></button> 
 
                         {currentImageIndex === 0 && (
-                            <button className="btnTibPia" onClick={() => {
+                            <button className={`btnTibPia ${activeBtn === 'btnTibPia' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTibPia' ? null : 'btnTibPia');
                                         handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TibCanalP1.png", { top: "50%", left: "50%" });   }}
                             >
@@ -200,7 +207,8 @@ const TibialPx = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnTibPia3" onClick={() => {
+                            <button className={`btnTibPia3 ${activeBtn === 'btnTibPia3' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnTibPia3' ? null : 'btnTibPia3');
                                         handleButtonClick('N22 Lumbar electrodo activo en apófisis espinosa L4s con referencia a L1s o espina iliaca anterosuperior (opcional montaje T12s).', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TibCanalP2.png", { top: "50%", left: "50%" });   }}
                             >
@@ -209,7 +217,8 @@ const TibialPx = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnTibPia4" onClick={() => {
+                            <button className={`btnTibPia4 ${activeBtn === 'btnTibPia4' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnTibPia4' ? null : 'btnTibPia4');
                                         handleButtonClick('Escotadura ciática N5, electrodo activo debajo del pliegue glúteo línea media, referencia al trocánter mayor.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TibCanalP3.png", { top: "50%", left: "50%" });   }}
                             >
@@ -219,7 +228,8 @@ const TibialPx = () => {
 
                         {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasTb" onClick={() => {
+                            <button className={`btnOndasTib ${activeBtn === 'btnOndasTb' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasTb' ? null : 'btnOndasTb');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/TibCanalP1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/TibCanalP2.png",

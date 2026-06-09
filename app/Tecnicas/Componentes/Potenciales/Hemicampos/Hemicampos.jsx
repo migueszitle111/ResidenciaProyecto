@@ -28,6 +28,7 @@ const Hemicampos = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -121,6 +122,7 @@ const Hemicampos = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -166,7 +168,8 @@ const Hemicampos = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnHem1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnHem2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Visual/Camp-T01.png")}></button>
+                        <button className={`btnHem2 ${activeBtn === 'btnHem2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnHem2' ? null : 'btnHem2'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Camp-T01.png"); }}></button>
                         
                         
                         {/* {currentImageIndex === 0 && (
@@ -193,16 +196,17 @@ const Hemicampos = () => {
                         ></button> */}
 
                         <button
-                            className="btnHem4"
-                            onClick={() =>
+                            className={`btnHem4 ${activeBtn === 'btnHem4' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnHem4' ? null : 'btnHem4');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Visual/Hem-10-20.jpg",
                                     "Canal 1. T1-Fpz \n Temporal posterior izquierdo, colocar electrodo activo 10 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz). \n\n Canal 2. O1-Fpz \n Occipital lateral izquierdo, colocar electrodo activo 5 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz)." +
                                     "\n\n Canal 3.  Oz-Fpz \n Línea media occipital, colocar electrodo activo 5 cm por arriba del inion, referenciado a Fpz (línea media frontal) 12 cm por arriba del nasion. \n\n Canal 4. O2-Fpz \n Occipital lateral derecho, colocar electrodo activo 5 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz)."+ 
                                     "\n\n Canal 5. T2-Fpz \n Temporal posterior derecho, colocar electrodo activo 10 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz).",
                                     { position: { top: '55%', left: '50%' }, size: '0.7rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
                         {/* <button className="btnHem4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Visual/Hem-10-20.jpg")}></button>  */}
 
@@ -243,7 +247,9 @@ const Hemicampos = () => {
 
                         {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
                         {currentImageIndex === 0 && (
-                            <button className="btnOjoD" onClick={() => {
+                            <button className={`btnOjoD ${activeBtn === 'btnOjoD' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnOjoD' ? null : 'btnOjoD');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Visual/HEMI-D-OJO-D.png",
                                             "/assets/ImgTecnicas/Potenciales/Visual/HEMI-D-OJO-I.png",
@@ -253,7 +259,9 @@ const Hemicampos = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOjoIzq" onClick={() => {
+                            <button className={`btnOjoIzq ${activeBtn === 'btnOjoIzq' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnOjoIzq' ? null : 'btnOjoIzq');
                                         handleButtonClick('Patrón Reverso de Dameros por HEMICAMPOS  \n (área retroquiasmática: quiasma y tracto óptico). \n Previo a realizar la valoración por hemicampos es necesario tener certeza de la integridad funcional a nivel prequiasmático, para ello se requiere la respuesta indemne por campo completo en cada ojo. ' + 
                                             "\n A 100 cm de distancia, estimular de forma monocular con oclusión contralateral. \n Tamaño de pantalla de 10 a 16° del arco visual. \n Elementos de 50’-90’ arco visual.", { top: '9%', left: '37%' });
                                         handleMultiImageBoxClick([

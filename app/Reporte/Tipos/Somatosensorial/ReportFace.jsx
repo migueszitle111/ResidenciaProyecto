@@ -1561,8 +1561,8 @@ export default function ReportFace() {
                 {comentarioLista ? 'Editar Comentario' : 'Agregar Comentario'}
               </button>
               {comentarioLista && (
-                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, fontStyle: 'italic', marginTop: 8 }}>
-                  {comentarioLista.length > 100 ? comentarioLista.slice(0, 100) + '…' : comentarioLista}
+                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, fontStyle: 'italic', marginTop: 8, wordBreak: 'break-word', whiteSpace: 'pre-wrap', textAlign: 'justify' }}>
+                  {comentarioLista}
                 </p>
               )}
             </>
@@ -1765,8 +1765,8 @@ export default function ReportFace() {
                     </div>
                 }
                 {comentarioLista && (
-                  <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, fontStyle: 'italic', marginTop: 6 }}>
-                    {comentarioLista.length > 100 ? comentarioLista.slice(0, 100) + '…' : comentarioLista}
+                  <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, fontStyle: 'italic', marginTop: 6, wordBreak: 'break-word', whiteSpace: 'pre-wrap', textAlign: 'justify' }}>
+                    {comentarioLista}
                   </p>
                 )}
               </div>

@@ -495,18 +495,18 @@ function getPair(t) {
   if (/^tor[aá]cica:\s*/i.test(t)) return ['Nivel', t.replace(/^tor[aá]cica:\s*/i, '')];
   if (low.startsWith('polisegmentario')) return ['Ubicación', t.replace(/^polisegmentario\s*/i, '')];
   if (/^niveles\s+tor[aá]cicas:\s*/i.test(t)) return ['Nivel', t.replace(/^niveles\s+tor[aá]cicas:\s*/i, '')];
-  if (/^con\s+agudizaci[oó]n\s+nivel\s+tor[aá]cica:\s*/i.test(t)) return ['Nivel de agudización', t.replace(/^con\s+agudizaci[oó]n\s+nivel\s+tor[aá]cica:\s*/i, '')];
+  if (/^con\s+agudizaci[oó]n\s+nivel\s+tor[aá]cica:\s*/i.test(t)) return ['Agudización', t.replace(/^con\s+agudizaci[oó]n\s+nivel\s+tor[aá]cica:\s*/i, '')];
   if (low.startsWith('radiculopatía')) return ['Evolución', t];
   if (low.startsWith('fase')) return ['Fase', t.replace(/^fase\s+/i, '')];
   if (low.startsWith('nivel') || low.includes('multinivel')) return ['Nivel', t.replace(/^nivel\s+/i, '')];
-  if (low.includes('agudización nivel')) return ['Nivel de agudización', t.replace(/^con agudización nivel\s+/i, '')];
+  if (low.includes('agudización nivel')) return ['Agudización', t.replace(/^con agudización nivel\s+/i, '')];
   if (low.startsWith('intensidad')) return ['Intensidad', t.replace(/^intensidad\s+/i, '')];
   if (low.includes('reinervación')) return ['Reinervación', t.replace(/^con\s+/i, '')];
   if (low.startsWith('pronóstico') || low.startsWith('pronostico')) return ['Pronóstico', canonicalizePrognosis(t)];
   return null;
 }
 
-const ORDER = ['Evolución', 'Fase', 'Patología', 'Nivel', 'Ubicación', 'Nivel de agudización', 'Intensidad', 'Progresión', 'Reinervación', 'Pronóstico'];
+const ORDER = ['Evolución', 'Fase', 'Patología', 'Nivel', 'Ubicación', 'Agudización', 'Intensidad', 'Progresión', 'Reinervación', 'Pronóstico'];
 
 const ubicacionAplanadaParaReporte = (s) => {
   if (!s) return '';
@@ -569,7 +569,7 @@ const buildDiagnostico = (items) => {
   const evolucion = (dict['Evolución'] || 'Radiculopatía').replace(/^Radiculopatía/i, 'Radiculopatía');
   const fase      = (dict['Fase'] || '').trim();
   const nivel     = (dict['Nivel'] || '').trim();
-  const nivelAgu  = (dict['Nivel de agudización'] || '').trim();
+  const nivelAgu  = (dict['Agudización'] || '').trim();
   const intenRaw  = (dict['Intensidad'] || '').replace(/^Intensidad\s+/i, '').trim();
   const prog      = (dict['Progresión'] || '').trim();
   const reinRaw   = (dict['Reinervación'] || '').trim();
@@ -1203,7 +1203,7 @@ function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVi
           <button onClick={onOpenComentario} style={{ width:'100%', padding:'10px 0', borderRadius:10, background:'#f97316', border:'none', cursor:'pointer', color:'#fff', fontWeight:700, fontSize:13, marginBottom:6 }}>
             {comentarioLista ? 'Editar Comentario' : 'Agregar Comentario'}
           </button>
-          {comentarioLista && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, fontStyle:'italic', marginBottom:8 }}>{comentarioLista.length > 80 ? comentarioLista.slice(0,80)+'…' : comentarioLista}</p>}
+          {comentarioLista && <p style={{ color:'rgba(255,255,255,0.35)', fontSize:11, fontStyle:'italic', marginBottom:8, wordBreak:'break-word', whiteSpace:'pre-wrap', textAlign:'justify' }}>{comentarioLista}</p>}
         </div>
       )}
 

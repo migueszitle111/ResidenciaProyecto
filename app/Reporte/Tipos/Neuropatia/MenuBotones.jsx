@@ -2675,8 +2675,8 @@ const StepI = ({ setStep, topLeftText, copyConclusions, figuras, setFiguras, act
             {comentarioLista ? 'Editar comentario' : 'Agregar comentario'}
           </button>
           {comentarioLista && (
-            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, fontStyle: 'italic', marginTop: 6 }}>
-              {comentarioLista.length > 80 ? comentarioLista.slice(0, 80) + '…' : comentarioLista}
+            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, fontStyle: 'italic', marginTop: 6, wordBreak: 'break-word', whiteSpace: 'pre-wrap', textAlign: 'justify' }}>
+              {comentarioLista}
             </p>
           )}
         </div>

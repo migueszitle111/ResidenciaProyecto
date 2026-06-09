@@ -1125,7 +1125,7 @@ export default function ReportFace() {
             <button onClick={() => { setComentarioTemp(comentarioLista); setShowComentarioModal(true); }} style={{ width:'100%', padding:'10px 0', borderRadius:10, background:'#f97316', border:'none', cursor:'pointer', color:'#fff', fontWeight:700, fontSize:14 }}>
               {comentarioLista ? 'Editar Comentario' : 'Agregar Comentario'}
             </button>
-            {comentarioLista && <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, fontStyle:'italic', marginTop:8 }}>{comentarioLista.length>100?comentarioLista.slice(0,100)+'…':comentarioLista}</p>}
+            {comentarioLista && <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, fontStyle:'italic', marginTop:8, wordBreak:'break-word', whiteSpace:'pre-wrap', textAlign:'justify' }}>{comentarioLista}</p>}
           </>
         )}
       </div>
@@ -1241,7 +1241,7 @@ export default function ReportFace() {
                       ))}
                     </div>
                 }
-                {comentarioLista && <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, fontStyle:'italic', marginTop:6 }}>💬 {comentarioLista.length>100?comentarioLista.slice(0,100)+'…':comentarioLista}</p>}
+                {comentarioLista && <p style={{ color:'rgba(255,255,255,0.4)', fontSize:11, fontStyle:'italic', marginTop:6, wordBreak:'break-word', whiteSpace:'pre-wrap', textAlign:'justify' }}>💬 {comentarioLista}</p>}
               </div>
             )}
 

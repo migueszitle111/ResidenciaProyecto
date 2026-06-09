@@ -155,62 +155,69 @@ function CropModal({ src, onConfirm, onClose }) {
 
 function GaleriaTablas({ onSelect, onClose }) {
   const [busqueda, setBusqueda] = useState('');
+  const [previewUrl, setPreviewUrl] = useState(null);
   const filtradas = TABLAS.filter(t => t.id.toLowerCase().includes(busqueda.toLowerCase()));
   return (
-    <div style={{
-      position: 'fixed', inset: 0, zIndex: 10100,
-      background: 'rgba(0,0,0,0.75)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
-    }}>
-      <div style={{
-        background: '#2a2a2a', borderRadius: 14, width: '100%', maxWidth: 480,
-        maxHeight: '85vh', display: 'flex', flexDirection: 'column',
-        border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden',
-      }}>
-        <div style={{ padding: '18px 20px 12px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-          <h3 style={{ color: '#fff', fontSize: 17, fontWeight: 700, margin: '0 0 12px', textAlign: 'center' }}>
-            Selecciona una imagen:
-          </h3>
-          <input
-            type="text"
-            value={busqueda}
-            onChange={e => setBusqueda(e.target.value)}
-            placeholder="Buscar imagen..."
-            autoFocus
-            style={{
-              width: '100%', boxSizing: 'border-box',
-              background: '#444', border: 'none', borderRadius: 8,
-              padding: '10px 14px', color: '#fff', fontSize: 14, outline: 'none',
-            }}
-          />
-        </div>
-        <div style={{ flex: 1, overflowY: 'auto' }}>
-          {filtradas.length === 0
-            ? <p style={{ color: 'rgba(255,255,255,0.4)', fontStyle: 'italic', padding: 20, textAlign: 'center', margin: 0 }}>Sin resultados.</p>
-            : filtradas.map((t, i) => (
-                <button key={i} onClick={() => onSelect(`${TABLAS_URL}/${t.file}`)}
-                  style={{
-                    width: '100%', textAlign: 'left', padding: '14px 20px',
-                    background: 'transparent', border: 'none',
-                    borderBottom: '1px solid rgba(255,255,255,0.07)',
-                    color: '#fff', fontSize: 14, cursor: 'pointer',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(249,115,22,0.12)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-                >
-                  {t.id}
-                </button>
-              ))
-          }
-        </div>
-        <div style={{ padding: '12px 20px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <button onClick={onClose} style={{
-            width: '100%', padding: '11px 0', borderRadius: 10, border: 'none',
-            background: '#f97316', color: '#fff', fontWeight: 700, fontSize: 15, cursor: 'pointer',
-          }}>Cerrar</button>
+    <>
+      <div style={{ position: 'fixed', inset: 0, zIndex: 10100, background: 'rgba(0,0,0,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+        <div style={{ background: '#2a2a2a', borderRadius: 14, width: '100%', maxWidth: 480, maxHeight: '85vh', display: 'flex', flexDirection: 'column', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden' }}>
+          <div style={{ padding: '18px 20px 12px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            <h3 style={{ color: '#fff', fontSize: 17, fontWeight: 700, margin: '0 0 12px', textAlign: 'center' }}>Selecciona una imagen:</h3>
+            <input type="text" value={busqueda} onChange={e => setBusqueda(e.target.value)} placeholder="Buscar imagen..." autoFocus
+              style={{ width: '100%', boxSizing: 'border-box', background: '#444', border: 'none', borderRadius: 8, padding: '10px 14px', color: '#fff', fontSize: 14, outline: 'none' }} />
+          </div>
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            {filtradas.length === 0
+              ? <p style={{ color: 'rgba(255,255,255,0.4)', fontStyle: 'italic', padding: 20, textAlign: 'center', margin: 0 }}>Sin resultados.</p>
+              : filtradas.map((t, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.07)' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(249,115,22,0.12)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    <button onClick={() => onSelect(`${TABLAS_URL}/${t.file}`)}
+                      style={{ flex: 1, textAlign: 'left', padding: '14px 20px', background: 'transparent', border: 'none', color: '#fff', fontSize: 14, cursor: 'pointer' }}
+                    >{t.id}</button>
+                    <button onClick={() => setPreviewUrl(`${TABLAS_URL}/${t.file}`)}
+                      title="Vista previa"
+                      style={{ flexShrink: 0, marginRight: 12, background: 'transparent', border: 'none', cursor: 'pointer', padding: 6, borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.45)' }}
+                      onMouseEnter={e => { e.stopPropagation(); e.currentTarget.style.color = '#f97316'; }}
+                      onMouseLeave={e => { e.stopPropagation(); e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </button>
+                  </div>
+                ))
+            }
+          </div>
+          <div style={{ padding: '12px 20px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+            <button onClick={onClose} style={{ width: '100%', padding: '11px 0', borderRadius: 10, border: 'none', background: '#f97316', color: '#fff', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>Cerrar</button>
+          </div>
         </div>
       </div>
-    </div>
+
+      {previewUrl && (
+        <div onClick={() => setPreviewUrl(null)}
+          style={{ position: 'fixed', inset: 0, zIndex: 10200, background: 'rgba(0,0,0,0.88)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'relative', maxWidth: '90vw', maxHeight: '85vh', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
+            <img src={previewUrl} alt="Vista previa"
+              style={{ maxWidth: '100%', maxHeight: '75vh', objectFit: 'contain', borderRadius: 10, boxShadow: '0 8px 40px rgba(0,0,0,0.7)', border: '1px solid rgba(255,255,255,0.12)' }} />
+            <div style={{ display: 'flex', gap: 12 }}>
+              <button onClick={() => setPreviewUrl(null)}
+                style={{ padding: '9px 24px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.08)', color: '#fff', fontSize: 14, cursor: 'pointer', fontWeight: 600 }}>
+                Cerrar preview
+              </button>
+              <button onClick={() => { onSelect(previewUrl); setPreviewUrl(null); }}
+                style={{ padding: '9px 24px', borderRadius: 8, border: 'none', background: '#f97316', color: '#fff', fontSize: 14, cursor: 'pointer', fontWeight: 600 }}>
+                Seleccionar esta tabla
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

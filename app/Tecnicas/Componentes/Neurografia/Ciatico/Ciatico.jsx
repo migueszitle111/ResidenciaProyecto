@@ -12,6 +12,7 @@ const Ciatico = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -65,11 +66,13 @@ const Ciatico = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
         const renderGalleryItem = (item) => (
@@ -124,14 +127,14 @@ const Ciatico = () => {
             {currentImageIndex === 0 && <button className="btnCt4" onClick={() => handleButtonClick('HUECO POPLÍTEO. Con estimulador convencional de puntas, se realiza la estimulación respectiva de nervio Peroneo siguiendo el trayecto a nivel lateral.', { top: '62%', left: '50%' }, 'E')}></button>}
             {currentImageIndex === 0 && <button className="btnCt5" onClick={() => handleButtonClick('HUECO POPLÍTEO. Con estimulador convencional de puntas, se realiza la estimulación respectiva de nervio Tibial siguiendo el trayecto  a nivel medial.', { top: '62%', left: '50%' }, 'E')}></button>}
             
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Sacro/Ciatico-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnICt2 ${activeBtn === 'btnICt2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnICt2' ? null : 'btnICt2'); openModal("/assets/ValoresImg/Sacro/Ciatico-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 1 && <button className="btnCt6" onClick={() => handleButtonClick('Articulación metatarsofalángica del quinto ortejo.', { top: '62%', left: '50%' }, 'R')}></button>}
             {currentImageIndex === 1 && <button className="btnCt7" onClick={() => handleButtonClick('EXTENSOR DIGITORUM BREVIS L5, S1 - Región anterolateral mediotarsiana proximal, trazar una línea imaginaria desde el centro del maléolo lateral hasta la articulación metatarsofalángica del quinto ortejo y colocar electrodo de superficie en el centro del tercio proximal.', { top: '62%', left: '50%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnCt8" onClick={() => handleButtonClick('ABDUCTOR HALLUCIS S1, S2 - Colocar electrodo de superficie ligeramente proximal y por debajo de la tuberosidad navicular, aproximadamente 1 cm en ambas direcciones.', { top: '62%', left: '50%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnCt9" onClick={() => handleButtonClick('Base del primer metatarsiano, o en la articulación metatarsofalángica.', { top: '62%', left: '50%' }, 'R')}></button>}
-            {currentImageIndex === 1 && <button className="btnICt3" onClick={() => openModal("/assets/ValoresImg/Sacro/Ciatico-G-02.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/Ciatico-G-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className={`btnICt3 ${activeBtn === 'btnICt3' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnICt3' ? null : 'btnICt3'); openModal("/assets/ValoresImg/Sacro/Ciatico-G-02.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 1 && <button className={`btnICt1 ${activeBtn === 'btnICt1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnICt1' ? null : 'btnICt1'); openModal("/assets/ValoresImg/Sacro/Ciatico-G-01.png",{ top: '2%', left: '2%' });}}></button>}
             </div>
             {textBoxVisible && (
                 <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>

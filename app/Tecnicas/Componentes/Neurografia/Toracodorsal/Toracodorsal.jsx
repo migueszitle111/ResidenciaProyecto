@@ -12,6 +12,7 @@ const Toracodorsal = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -63,11 +64,13 @@ const Toracodorsal = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -122,9 +125,9 @@ const Toracodorsal = () => {
             {currentImageIndex === 0 && <button className="btnTd2" onClick={() => handleButtonClick('Articulación acromoclavicular.', { top: '35%', left: '25%'}, 'T')}></button>}
             {currentImageIndex === 0 && <button className="btnTd3" onClick={() => handleButtonClick('LATISSIMUS DORSI C6, C7, C8 - Electrodo de aguja concéntrico insertado en el vientre muscular, pared posterior de la axila.', {  top: '35%', left: '25%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnTd4" onClick={() => handleButtonClick('No se requiere.', { top: '35%', left: '25%'}, 'R')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-T-01.png",{ top: '2%', left: '2%' })}></button>}
-                
+            {currentImageIndex === 0 && <button className={`btnITd1 ${activeBtn === 'btnITd1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnITd1' ? null : 'btnITd1'); openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnITd2 ${activeBtn === 'btnITd2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnITd2' ? null : 'btnITd2'); openModal("/assets/ValoresImg/MiembrosSp/toracodorsal-T-01.png",{ top: '2%', left: '2%' });}}></button>}
+
             </div>
             {textBoxVisible && (
                 <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>

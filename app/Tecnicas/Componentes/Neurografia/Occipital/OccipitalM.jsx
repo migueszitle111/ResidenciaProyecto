@@ -12,6 +12,7 @@ const OccipitalM = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -61,11 +62,13 @@ const OccipitalM = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -119,8 +122,8 @@ const OccipitalM = () => {
                 {currentImageIndex === 0 && <button className="btnOc2" onClick={() => handleButtonClick('ÁREA OCCIPITAL - Electrodo de aguja subdérmico, colocado en el trayecto del ápex, 1 cm lateral a la protuberancia occipital externa ipsilateral al lado a estimular (insertar de forma oblicua en dirección cefálica).', { top: '60%', left: '23%'}, 'A')}></button>}
                 {currentImageIndex === 0 && <button className="btnOc3" onClick={() => handleButtonClick('ESPACIO INTERVERTEBRAL C1-C2. Con electrodo de aguja monopolar (cátodo), 6-8 cm en dirección caudal de electrodo activo, 1 cm lateral a la línea media con referencia al borde inferior de la apófisis mastoides, emulando las técnicas de estimulación de raíz (colocar ánodo 3-4 cm caudal).', {  top: '58%', left: '23%' }, 'E')}></button>}
                 {currentImageIndex === 0 && <button className="btnOc4" onClick={() => handleButtonClick('Apófisis espinosa C7.', { top: '60%', left: '23%'}, 'T')}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-OccipitalM-G.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-OccipitalM-T.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className={`btnOcc1 ${activeBtn === 'btnOcc1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnOcc1' ? null : 'btnOcc1'); openModal("/assets/ValoresImg/Cervicales/01-OccipitalM-G.png",{ top: '2%', left: '2%' });}}></button>}
+                {currentImageIndex === 0 && <button className={`btnOcc2 ${activeBtn === 'btnOcc2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnOcc2' ? null : 'btnOcc2'); openModal("/assets/ValoresImg/Cervicales/01-OccipitalM-T.png",{ top: '5%', left: '2%' });}}></button>}
             
             </div>
             {textBoxVisible && (

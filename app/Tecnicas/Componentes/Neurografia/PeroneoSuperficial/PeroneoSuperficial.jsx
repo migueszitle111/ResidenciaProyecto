@@ -12,6 +12,7 @@ const PeroneoSuperficial = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -65,11 +66,13 @@ const PeroneoSuperficial = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
     
     const renderGalleryItem = (item) => (
@@ -125,8 +128,8 @@ const PeroneoSuperficial = () => {
             {currentImageIndex === 0 && <button className="btnPs4" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo.', { top: '10%', left: '23%' }, 'R')}></button>}
             {currentImageIndex === 0 && <button className="btnPs5" onClick={() => handleButtonClick('INTERMALEOLAR - Electrodo de superficie, colocar preferetemente barra en la línea media, entre el maléolo lateral y el tendón del tibial anterior, transversal a la intersección de ambos maléolos.', { top: '10%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnPs6" onClick={() => handleButtonClick('PIERNA LATERAL. (Antidrómico) 12-14 cm proximal del electrodo activo, anterior al musculo peroneo largo y adyacente al musculo tibial anterior.', { top: '10%', left: '23%' }, 'E')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoSp-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoSp-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnPerS1 ${activeBtn === 'btnPerS1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnPerS1' ? null : 'btnPerS1'); openModal("/assets/ValoresImg/MiembrosInf/PeroneoSp-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnPerS2 ${activeBtn === 'btnPerS2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnPerS2' ? null : 'btnPerS2'); openModal("/assets/ValoresImg/MiembrosInf/PeroneoSp-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
 
             {currentImageIndex === 1 && <button className="btnPs7" onClick={() => handleButtonClick('Dorso del pie.', { top: '10%', left: '23%' }, 'T')}></button>}
@@ -137,7 +140,7 @@ const PeroneoSuperficial = () => {
             {currentImageIndex === 1 && <button className="btnPs12" onClick={() => handleButtonClick('10', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPs13" onClick={() => handleButtonClick('11', { top: '10%', left: '23%' })}></button>} */}
             {currentImageIndex === 1 && <button className="btnPs14" onClick={() => handleButtonClick('PIERNA LATERAL. La estimulación se aplica de forma antidrómica como primer punto a 12 cm en dirección proximal del electrodo activo justo lateral al tendón extensor largo del primer ortejo en la región lateral de la pierna. Los siguientes puntos de estímulo de aplicaran cada centímetro en dirección distal hasta llegar al electrodo de registro.', { top: '15%', left: '23%' }, 'E')}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoPf-G-02.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className={`btnPerS1 ${activeBtn === 'btnPerS1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnPerS1' ? null : 'btnPerS1'); openModal("/assets/ValoresImg/MiembrosInf/PeroneoPf-G-02.png",{ top: '2%', left: '2%' });}}></button>}
             
             </div>
             {textBoxVisible && (

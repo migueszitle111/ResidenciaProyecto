@@ -12,6 +12,7 @@ const Tibial = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -73,11 +74,13 @@ const Tibial = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -132,16 +135,16 @@ const Tibial = () => {
             {currentImageIndex === 0 && <button className="btnTb3" onClick={() => handleButtonClick('Dorso del pie.', { top: '62%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 0 && <button className="btnTb4" onClick={() => handleButtonClick('ABDUCTOR HALLUCIS S1, S2 - Colocar electrodo de superficie ligeramente proximal y por debajo de la tuberosidad navicular, aproximadamente 1 cm en ambas direcciones.', { top: '62%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnTb5" onClick={() => handleButtonClick('Base del primer metatarsiano, o en la articulación metatarsofalángica.', { top: '62%', left: '23%' }, 'R')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Tibial-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Tibial-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnTib1 ${activeBtn === 'btnTib1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnTib1' ? null : 'btnTib1'); openModal("/assets/ValoresImg/MiembrosInf/Tibial-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnTib2 ${activeBtn === 'btnTib2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnTib2' ? null : 'btnTib2'); openModal("/assets/ValoresImg/MiembrosInf/Tibial-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 1 && <button className="btnTb6" onClick={() => handleButtonClick('HUECO POPLITEO. Ligeramente lateral del punto medio sobre el pliegue cutáneo poplíteo.', { top: '62%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 1 && <button className="btnTb7" onClick={() => handleButtonClick('TOBILLO. Ligeramente detrás del maléolo medial, línea media entre el borde óseo y el tendón de Aquiles.', { top: '62%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 1 && <button className="btnTb8" onClick={() => handleButtonClick('ABDUCTOR DIGITI MINIMI S2, S3 - Electrodo de superficie colocado debajo del maléolo lateral, dividiendo la distancia hasta la planta del pie.', { top: '62%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnTb9" onClick={() => handleButtonClick('Dorso del pie.', { top: '62%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 1 && <button className="btnTb10" onClick={() => handleButtonClick('Articulación metatarsofalángica del quinto ortejo', { top: '62%', left: '23%' }, 'R')}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Tibial-G-02.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Tibial-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className={`btnTib1 ${activeBtn === 'btnTib1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnTib1' ? null : 'btnTib1'); openModal("/assets/ValoresImg/MiembrosInf/Tibial-G-02.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 1 && <button className={`btnTib2 ${activeBtn === 'btnTib2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnTib2' ? null : 'btnTib2'); openModal("/assets/ValoresImg/MiembrosInf/Tibial-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 2 && <button className="btnTb11" onClick={() => handleButtonClick('TOBILLO. Ligeramente detrás del maléolo medial, línea media entre el borde óseo y el tendón de Aquiles.', { top: '62%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 2 && <button className="btnTb12" onClick={() => handleButtonClick('ABDUCTOR HALLUCIS S1, S2 - RAMA MEDIAL, colocar electrodo de superficie ligeramente proximal y por debajo de la tuberosidad navicular, aproximadamente 1 cm en ambas direcciones.', { top: '62%', left: '23%' }, 'A')}></button>}
@@ -149,8 +152,8 @@ const Tibial = () => {
             {currentImageIndex === 2 && <button className="btnTb14" onClick={() => handleButtonClick('ABDUCTOR DIGITI MINIMI S2, S3 - RAMA LATERAL, electrodo de superficie colocado debajo del maléolo lateral, dividiendo la distancia hasta la planta del pie.', { top: '62%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 2 && <button className="btnTb15" onClick={() => handleButtonClick('Base del primer metatarsiano, o en la articulación metatarsofalángica.', { top: '62%', left: '23%' }, 'R')}></button>}
             {currentImageIndex === 2 && <button className="btnTb16" onClick={() => handleButtonClick('Articulación metatarsofalángica del quinto ortejo.', { top: '62%', left: '23%' }, 'R')}></button>}
-            {currentImageIndex === 2 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Tibial-G-03.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 2 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Tibial-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 2 && <button className={`btnTib1 ${activeBtn === 'btnTib1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnTib1' ? null : 'btnTib1'); openModal("/assets/ValoresImg/MiembrosInf/Tibial-G-03.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 2 && <button className={`btnTib2 ${activeBtn === 'btnTib2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnTib2' ? null : 'btnTib2'); openModal("/assets/ValoresImg/MiembrosInf/Tibial-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 3 && <button className="btnTb17" onClick={() => handleButtonClick('HUECO POPLITEO. Ligeramente lateral del punto medio sobre el pliegue cutáneo poplíteo.', { top: '62%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 3 && <button className="btnTb18" onClick={() => handleButtonClick('GASTROCNEMIUS MEDIAL S1, S2 - 8 a 10 cm distal del pliegue de la rodilla con orientación medial, tomando como referencia una línea horizontal desde los tendones isquiotibiales en el hueco poplíteo.', { top: '62%', left: '23%' }, 'A')}></button>}
@@ -160,7 +163,7 @@ const Tibial = () => {
             {currentImageIndex === 3 && <button className="btnTb22" onClick={() => handleButtonClick('Justo debajo del borde inferior del gastrocnemio con orientación medial.', { top: '62%', left: '23%' }, 'R')}></button>}
             {currentImageIndex === 3 && <button className="btnTb23" onClick={() => handleButtonClick('SOLEUS S1, S2 - Justo debajo del borde que divide ambos gastrocnemios, se recomienda utilizar aguja de registro.', { top: '62%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 3 && <button className="btnTb24" onClick={() => handleButtonClick('Pierna lateral', { top: '62%', left: '23%' }, 'T')}></button>}
-            {currentImageIndex === 3 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Tibial-G-04.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 3 && <button className={`btnTib1 ${activeBtn === 'btnTib1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnTib1' ? null : 'btnTib1'); openModal("/assets/ValoresImg/MiembrosInf/Tibial-G-04.png",{ top: '2%', left: '2%' });}}></button>}
             
             </div>
             {textBoxVisible && (

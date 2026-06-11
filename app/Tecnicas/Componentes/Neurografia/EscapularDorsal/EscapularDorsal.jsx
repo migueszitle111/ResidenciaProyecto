@@ -12,6 +12,7 @@ const EscapularDorsal = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -63,11 +64,13 @@ const EscapularDorsal = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -121,8 +124,8 @@ const EscapularDorsal = () => {
             {currentImageIndex === 0 && <button className="btnEd2" onClick={() => handleButtonClick('RHOMBOIDEUS MAJOR C5 - Electrodo de aguja concéntrico, insertar en el borde medial del ángulo inferior de la escápula.', { top: '12%', left: '25%'}, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnEd3" onClick={() => handleButtonClick('Articulación acromoclavicular.', {  top: '12%', left: '25%' }, 'T')}></button>}
             {currentImageIndex === 0 && <button className="btnEd4" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', { top: '12%', left: '25%'}, 'R')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/escapularDorsal-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/escapularDorsal-T-01.png",{ top: '2%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnEscD1 ${activeBtn === 'btnEscD1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnEscD1' ? null : 'btnEscD1'); openModal("/assets/ValoresImg/MiembrosSp/escapularDorsal-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnEscD2 ${activeBtn === 'btnEscD2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnEscD2' ? null : 'btnEscD2'); openModal("/assets/ValoresImg/MiembrosSp/escapularDorsal-T-01.png",{ top: '2%', left: '2%' });}}></button>}
 
             </div>
             {textBoxVisible && (

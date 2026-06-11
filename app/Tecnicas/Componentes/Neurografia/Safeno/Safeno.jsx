@@ -12,6 +12,7 @@ const Safeno = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -65,11 +66,13 @@ const Safeno = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -123,15 +126,15 @@ const Safeno = () => {
             {currentImageIndex === 0 && <button className="btnSf2" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo sobre borde maleolar o utilizar el electrodo fijo de barra, colocando inicialmente esta referencia en la prominencia inferior del maléolo medial.', { top: '12%', left: '32%' }, 'R')}></button>}
             {currentImageIndex === 0 && <button className="btnSf3" onClick={() => handleButtonClick('REGISTRO DISTAL (Tobillo medial-anterior) - Con electrodo de superficie, se coloca entre el maléolo medial y el tendón del Tibial anterior tomando como referencia el borde superior óseo del mismo maléolo.', { top: '12%', left: '32%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnSf4" onClick={() => handleButtonClick('PIERNA. De forma antidrómica 12 a 14 cm proximal del electrodo activo, entre el borde medial de la tibia y el musculo Gastrocnemio medial.', { top: '12%', left: '32%' }, 'E')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Safeno-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Safeno-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnSaf1 ${activeBtn === 'btnSaf1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSaf1' ? null : 'btnSaf1'); openModal("/assets/ValoresImg/MiembrosInf/Safeno-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnSaf2 ${activeBtn === 'btnSaf2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSaf2' ? null : 'btnSaf2'); openModal("/assets/ValoresImg/MiembrosInf/Safeno-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 1 && <button className="btnSf5" onClick={() => handleButtonClick('RODILLA. De forma antidrómica en la cara medial de la rodilla ligeramente flexionada, colocar el cátodo con presión firme entre los tendones del Sartorio y el Grácil, tomando como referencia trasversal, aproximadamente 1 cm por encima del borde inferior de la rótula.', { top: '12%', left: '32%' }, 'E')}></button>}
             {currentImageIndex === 1 && <button className="btnSf6" onClick={() => handleButtonClick('Borde anterior de la tibia entre el estímulo y el registro.', { top: '12%', left: '32%' }, 'T')}></button>}
             {currentImageIndex === 1 && <button className="btnSf7" onClick={() => handleButtonClick('REGISTRO PROXIMAL (Pierna medial-anterior) - 15 cm distal desde el punto de estimulación marcado previamente, colocar el electrodo de registro entre el borde medial de la tibia y el Gastrocnemio medial.', { top: '12%', left: '32%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnSf8" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo pudiendo ser útil la barra de registro.', { top: '12%', left: '32%' }, 'R')}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Safeno-G-02.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Safeno-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className={`btnSaf1 ${activeBtn === 'btnSaf1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSaf1' ? null : 'btnSaf1'); openModal("/assets/ValoresImg/MiembrosInf/Safeno-G-02.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 1 && <button className={`btnSaf2 ${activeBtn === 'btnSaf2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSaf2' ? null : 'btnSaf2'); openModal("/assets/ValoresImg/MiembrosInf/Safeno-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             </div>
             {textBoxVisible && (

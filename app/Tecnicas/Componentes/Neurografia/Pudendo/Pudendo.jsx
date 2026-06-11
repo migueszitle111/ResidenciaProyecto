@@ -12,6 +12,7 @@ const Pudendo = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -61,11 +62,13 @@ const Pudendo = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -118,8 +121,8 @@ const Pudendo = () => {
             {currentImageIndex === 0 && <button className="btnPd1" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de referencia.', { top: '60%', left: '50%' }, 'R')}></button>}
             {currentImageIndex === 0 && <button className="btnPd2" onClick={() => handleButtonClick('ELECTRODO “ST. MARK” - Colocado ventral en el dedo índice del explorador, se realiza su introducción profunda a través del esfínter anal externo (S2-S3-S4), hasta el contacto muscular con la base del dedo que contiene incrustado el electrodo de captación.', { top: '60%', left: '50%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnPd3" onClick={() => handleButtonClick('ELECTRODO “ST. MARK”. Con la punta del dedo índice y direccionando con una leve rotación hacia izquierda o derecha (30 a 45°) dependiendo del lado a evaluar, con una palpación delicada se buscará una protuberancia de consistencia firme que corresponde a la espina isquiática.', { top: '60%', left: '50%' }, 'E')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/Pudendo-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Sacro/Pudendo-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnIPud1 ${activeBtn === 'btnIPud1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnIPud1' ? null : 'btnIPud1'); openModal("/assets/ValoresImg/Sacro/Pudendo-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnIPud2 ${activeBtn === 'btnIPud2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnIPud2' ? null : 'btnIPud2'); openModal("/assets/ValoresImg/Sacro/Pudendo-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             </div>
             {textBoxVisible && (

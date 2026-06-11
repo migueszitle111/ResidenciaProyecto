@@ -12,6 +12,7 @@ const ToracicoLargo = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -63,11 +64,13 @@ const ToracicoLargo = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -119,9 +122,9 @@ const ToracicoLargo = () => {
             {currentImageIndex === 0 && <button className="btnTl2" onClick={() => handleButtonClick('ERB. Fosa supraclavicular, 2 cm por arriba de la clavícula y borde posterior del esternocleidomastoideo, entre el escaleno anterior y el escaleno medio.', { top: '62%', left: '50%'}, 'R')}></button>}
             {currentImageIndex === 0 && <button className="btnTl3" onClick={() => handleButtonClick('Articulación acromoclavicular.', {  top: '62%', left: '50%' }, 'T')}></button>}
             {currentImageIndex === 0 && <button className="btnTl4" onClick={() => handleButtonClick('SERRATUS ANTERIOR C5, C6, C7 - Electrodos de superficie sobre la quinta o sexta costilla en la línea media axilar.', { top: '62%', left: '50%'}, 'A')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracicoLg-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/toracicoLg-T-01.png",{ top: '2%', left: '2%' })}></button>}
-                
+            {currentImageIndex === 0 && <button className={`btnITorL1 ${activeBtn === 'btnITorL1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnITorL1' ? null : 'btnITorL1'); openModal("/assets/ValoresImg/MiembrosSp/toracicoLg-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnITorL2 ${activeBtn === 'btnITorL2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnITorL2' ? null : 'btnITorL2'); openModal("/assets/ValoresImg/MiembrosSp/toracicoLg-T-01.png",{ top: '2%', left: '2%' });}}></button>}
+
             </div>
             {textBoxVisible && (
                 <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>

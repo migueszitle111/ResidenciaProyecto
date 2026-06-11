@@ -12,6 +12,7 @@ const Facial = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -77,11 +78,13 @@ const Facial = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -144,8 +147,8 @@ const Facial = () => {
             {currentImageIndex === 0 && <button className="btnFc10" onClick={() => handleButtonClick('Frontalis.', { top: '10%', left: '23%' }, 'R')}></button>}
             {currentImageIndex === 0 && <button className="btnFc11" onClick={() => handleButtonClick('Hueso cigomatico.', { top: '10%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 0 && <button className="btnFc12" onClick={() => handleButtonClick('POSTAURICULAR. El cátodo se coloca en el agujero estilomastoideo justo detrás y después del oído, inferior y anterior a la apófisis mastoides.', { top: '10%', left: '23%' }, 'E')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Facial-G.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnFaci1 ${activeBtn === 'btnFaci1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci1' ? null : 'btnFaci1'); openModal("/assets/ValoresImg/Cervicales/01-Facial-G.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnFaci2 ${activeBtn === 'btnFaci2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci2' ? null : 'btnFaci2'); openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' });}}></button>}
 
             {currentImageIndex === 1 && <button className="btnFc13" onClick={() => handleButtonClick('PREAURICULAR. El cátodo se coloca sobre el trago anterior delante de la oreja dirigiendo el ánodo proximalmente.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 1 && <button className="btnFc14" onClick={() => handleButtonClick('ORBICULARIS OCULI - Con electrodo de superficie colocado lateral al borde externo de la órbita.', { top: '10%', left: '23%' }, 'A')}></button>}
@@ -155,8 +158,8 @@ const Facial = () => {
             {currentImageIndex === 1 && <button className="btnFc18" onClick={() => handleButtonClick('NASALIS - Con electrodo de superficie colocado lateral al centro de la nariz.', { top: '10%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnFc19" onClick={() => handleButtonClick('ORBICULARIS ORIS - Con electrodo de superficie colocado lateral al borde externo de la comisura labial.', { top: '10%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnFc20" onClick={() => handleButtonClick('Inferior a la mitad del labio menor.', { top: '10%', left: '23%' }, 'R')}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Facial-G.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className={`btnFaci1 ${activeBtn === 'btnFaci1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci1' ? null : 'btnFaci1'); openModal("/assets/ValoresImg/Cervicales/02-Facial-G.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 1 && <button className={`btnFaci2 ${activeBtn === 'btnFaci2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci2' ? null : 'btnFaci2'); openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 2 && <button className="btnFc21" onClick={() => handleButtonClick('Región frontal.', { top: '10%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 2 && <button className="btnFc22" onClick={() => handleButtonClick('Sobre dorso del tabique nasal 2 cm en dirección lateral, ipsilateral al lado estimulado.', { top: '10%', left: '23%' }, 'R')}></button>}
@@ -164,8 +167,8 @@ const Facial = () => {
             {currentImageIndex === 2 && <button className="btnFc24" onClick={() => handleButtonClick('RAMA. 2 a 5 cm en dirección antero medial y orientado hacia el musculo correspondiente.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 2 && <button className="btnFc25" onClick={() => handleButtonClick('PREAURICULAR. El cátodo se coloca sobre el trago anterior delante de la oreja dirigiendo el ánodo proximalmente.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 2 && <button className="btnFc26" onClick={() => handleButtonClick('POSTAURICULAR. El cátodo se coloca en el agujero estilomastoideo justo detrás y después del oído, inferior y anterior a la apófisis mastoides.', { top: '10%', left: '23%' }, 'E')}></button>}
-            {currentImageIndex === 2 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/03-Facial-G.png",{ top: '2%', left: '2%' })}></button>}            
-            {currentImageIndex === 2 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 2 && <button className={`btnFaci1 ${activeBtn === 'btnFaci1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci1' ? null : 'btnFaci1'); openModal("/assets/ValoresImg/Cervicales/03-Facial-G.png",{ top: '2%', left: '2%' });}}></button>}            
+            {currentImageIndex === 2 && <button className={`btnFaci2 ${activeBtn === 'btnFaci2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci2' ? null : 'btnFaci2'); openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' });}}></button>}
 
             {currentImageIndex === 3 && <button className="btnFc27" onClick={() => handleButtonClick('Región frontal.', { top: '10%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 3 && <button className="btnFc28" onClick={() => handleButtonClick('Sobre el dorso del tabique nasal 1 cm en dirección lateral, ipsilateral al lado estimulado.', { top: '10%', left: '23%' }, 'R')}></button>}
@@ -173,8 +176,8 @@ const Facial = () => {
             {currentImageIndex === 3 && <button className="btnFc30" onClick={() => handleButtonClick('RAMA. 2 a 5 cm en dirección antero medial y orientado hacia el musculo correspondiente.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 3 && <button className="btnFc31" onClick={() => handleButtonClick('PREAURICULAR. El cátodo se coloca sobre el trago anterior delante de la oreja dirigiendo el ánodo proximalmente.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 3 && <button className="btnFc32" onClick={() => handleButtonClick('POSTAURICULAR. El cátodo se coloca en el agujero estilomastoideo justo detrás y después del oído, inferior y anterior a la apófisis mastoides.', { top: '10%', left: '23%' }, 'E')}></button>}
-            {currentImageIndex === 3 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/04-Facial-G.png",{ top: '2%', left: '2%' })}></button>}            
-            {currentImageIndex === 3 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 3 && <button className={`btnFaci1 ${activeBtn === 'btnFaci1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci1' ? null : 'btnFaci1'); openModal("/assets/ValoresImg/Cervicales/04-Facial-G.png",{ top: '2%', left: '2%' });}}></button>}            
+            {currentImageIndex === 3 && <button className={`btnFaci2 ${activeBtn === 'btnFaci2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci2' ? null : 'btnFaci2'); openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' });}}></button>}
 
             {currentImageIndex === 4 && <button className="btnFc33" onClick={() => handleButtonClick('Región frontal.', { top: '10%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 4 && <button className="btnFc34" onClick={() => handleButtonClick('Inferior a la mitad del labio menor.', { top: '10%', left: '23%' }, 'R')}></button>}
@@ -182,8 +185,8 @@ const Facial = () => {
             {currentImageIndex === 4 && <button className="btnFc36" onClick={() => handleButtonClick('RAMA. 2 a 5 cm en dirección antero medial y orientado hacia el musculo correspondiente.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 4 && <button className="btnFc37" onClick={() => handleButtonClick('PREAURICULAR. El cátodo se coloca sobre el trago anterior delante de la oreja dirigiendo el ánodo proximalmente.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 4 && <button className="btnFc38" onClick={() => handleButtonClick('POSTAURICULAR. El cátodo se coloca en el agujero estilomastoideo justo detrás y después del oído, inferior y anterior a la apófisis mastoides.', { top: '10%', left: '23%' }, 'E')}></button>}
-            {currentImageIndex === 4 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/05-Facial-G.png",{ top: '2%', left: '2%' })}></button>}            
-            {currentImageIndex === 4 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' })}></button>}                        
+            {currentImageIndex === 4 && <button className={`btnFaci1 ${activeBtn === 'btnFaci1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci1' ? null : 'btnFaci1'); openModal("/assets/ValoresImg/Cervicales/05-Facial-G.png",{ top: '2%', left: '2%' });}}></button>}            
+            {currentImageIndex === 4 && <button className={`btnFaci2 ${activeBtn === 'btnFaci2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFaci2' ? null : 'btnFaci2'); openModal("/assets/ValoresImg/Cervicales/02-Facial-T.png",{ top: '5%', left: '2%' });}}></button>}                        
             </div>
             {textBoxVisible && (
                 <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>

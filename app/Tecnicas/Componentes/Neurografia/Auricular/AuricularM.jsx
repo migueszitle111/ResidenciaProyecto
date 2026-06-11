@@ -12,6 +12,7 @@ const AuricularM = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
     
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -61,11 +62,13 @@ const AuricularM = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
     const renderGalleryItem = (item) => (
         <img
@@ -117,8 +120,8 @@ const AuricularM = () => {
                 {currentImageIndex === 0 && <button className="btnAu2" onClick={() => handleButtonClick('LÓBULO DE LA OREJA - Con electrodos de superficie sobre la parte posterior y tercio inferior del lóbulo de la oreja.', { top: '10%', left: '23%'}, 'A')}></button>}
                 {currentImageIndex === 0 && <button className="btnAu3" onClick={() => handleButtonClick('2 cm en dirección cefálica a electrodo activo.', {  top: '10%', left: '23%' }, 'R')}></button>}
                 {currentImageIndex === 0 && <button className="btnAu4" onClick={() => handleButtonClick('Proceso espinoso C7.', { top: '10%', left: '23%'}, 'T')}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-AuricularM-G.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-AuricularM-T.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className={`btnAur1 ${activeBtn === 'btnAur1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnAur1' ? null : 'btnAur1'); openModal("/assets/ValoresImg/Cervicales/01-AuricularM-G.png",{ top: '2%', left: '2%' })}}></button>}
+                {currentImageIndex === 0 && <button className={`btnAur2 ${activeBtn === 'btnAur2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnAur2' ? null : 'btnAur2'); openModal("/assets/ValoresImg/Cervicales/01-AuricularM-T.png",{ top: '5%', left: '2%' })}}></button>}
             
             </div>
             {textBoxVisible && (

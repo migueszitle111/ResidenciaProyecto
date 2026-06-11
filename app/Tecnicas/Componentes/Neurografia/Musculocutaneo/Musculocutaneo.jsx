@@ -12,6 +12,7 @@ const Musculocutaneo = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -63,11 +64,13 @@ const Musculocutaneo = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -120,8 +123,8 @@ const Musculocutaneo = () => {
             {currentImageIndex === 0 && <button className="btnMc2" onClick={() => handleButtonClick('Articulación acromoclavicular.', { top: '62%', left: '50%' }, 'T')}></button>}
             {currentImageIndex === 0 && <button className="btnMc3" onClick={() => handleButtonClick('BICEPS BRACHII C5, C6 - Electrodo colocado sobre el vientre muscular más prominente del Bíceps braquial o punto medio ventral del brazo.', { top: '62%', left: '50%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnMc4" onClick={() => handleButtonClick('Tendón del bíceps braquiai en el codo.', { top: '62%', left: '50%' }, 'R')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/musculocutaneo-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/musculocutaneo-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnMusc1 ${activeBtn === 'btnMusc1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnMusc1' ? null : 'btnMusc1'); openModal("/assets/ValoresImg/MiembrosSp/musculocutaneo-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnMusc2 ${activeBtn === 'btnMusc2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnMusc2' ? null : 'btnMusc2'); openModal("/assets/ValoresImg/MiembrosSp/musculocutaneo-T-01.png",{ top: '5%', left: '2%' });}}></button>}
                 
             </div>
             {textBoxVisible && (

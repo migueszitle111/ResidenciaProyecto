@@ -12,6 +12,7 @@ const DorsalDelPene = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -62,11 +63,13 @@ const DorsalDelPene = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -120,8 +123,8 @@ const DorsalDelPene = () => {
             {currentImageIndex === 0 && <button className="btnDs3" onClick={() => handleButtonClick('DORSO DEL PENE (antidromico) - 1-2 cm distal del electrodo de referencia.', { top: '12%', left: '32%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnDs4" onClick={() => handleButtonClick('ESTIMULADOR DE ANILLO. Colocar el cátodo en el cuello del glande.', { top: '12%', left: '32%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnDs5" onClick={() => handleButtonClick('ESTIMULADOR DE ANILLO. Colocar el ánodo justo en la mitad del glande.', { top: '12%', left: '32%' }, 'R')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Sacro/DorsalP-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Sacro/DorsalP-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnDorP1 ${activeBtn === 'btnDorP1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnDorP1' ? null : 'btnDorP1'); openModal("/assets/ValoresImg/Sacro/DorsalP-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnDorP2 ${activeBtn === 'btnDorP2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnDorP2' ? null : 'btnDorP2'); openModal("/assets/ValoresImg/Sacro/DorsalP-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             </div>
             {textBoxVisible && (

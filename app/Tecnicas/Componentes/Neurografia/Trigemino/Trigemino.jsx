@@ -12,6 +12,7 @@ const Trigemino = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -61,11 +62,13 @@ const Trigemino = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -119,8 +122,8 @@ const Trigemino = () => {
             {currentImageIndex === 0 && <button className="btnTg2" onClick={() => handleButtonClick('RAMA OFTÁLIMICA - El electrodo activo de superficie se coloca en el foramen supraorbitario.', { top: '62%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnTg3" onClick={() => handleButtonClick('Medial al elétrodo activo, 2-3 cm de distancia.', { top: '62%', left: '23%' }, 'R')}></button>}
             {currentImageIndex === 0 && <button className="btnTg4" onClick={() => handleButtonClick('Región frontal contralateral.', { top: '62%', left: '23%' }, 'T')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Trigemino-G.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Trigemino-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnTrig1 ${activeBtn === 'btnTrig1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnTrig1' ? null : 'btnTrig1'); openModal("/assets/ValoresImg/Cervicales/01-Trigemino-G.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnTrig2 ${activeBtn === 'btnTrig2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnTrig2' ? null : 'btnTrig2'); openModal("/assets/ValoresImg/Cervicales/01-Trigemino-T.png",{ top: '5%', left: '2%' });}}></button>}
             
             </div>
             {textBoxVisible && (

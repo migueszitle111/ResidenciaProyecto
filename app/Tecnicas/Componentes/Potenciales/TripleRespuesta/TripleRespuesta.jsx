@@ -179,7 +179,7 @@ const TripleRespuesta = () => {
                     <>
                         <button className="btnTrp1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
                         <button className={`btnTrp2 ${activeBtn === 'btnTrp2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTrp2' ? null : 'btnTrp2'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple1-T01.png"); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp2' ? null : 'btnTrp2'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple1-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
                             className={`btnTrp3 ${activeBtn === 'btnTrp3' ? 'active' : ''}`}
                         onClick={() => {
@@ -194,7 +194,7 @@ const TripleRespuesta = () => {
                             }}
                         ></button>
                         <button className={`btnTrp4 ${activeBtn === 'btnTrp4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTrp4' ? null : 'btnTrp4'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Respuesta1-10-20.png"); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp4' ? null : 'btnTrp4'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Respuesta1-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnTrpR ${activeBtn === 'btnTrpR' ? 'active' : ''}`}
@@ -258,7 +258,7 @@ const TripleRespuesta = () => {
                     <>
                         {/* <button className="btnTrp5" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnTrp6 ${activeBtn === 'btnTrp6' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTrp6' ? null : 'btnTrp6'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple2-T01.png")}}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp6' ? null : 'btnTrp6'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple2-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
                             className={`btnTrp7 ${activeBtn === 'btnTrp7' ? 'active' : ''}`}
                         onClick={() => {
@@ -273,7 +273,7 @@ const TripleRespuesta = () => {
                             }}
                         ></button>
                         <button className={`btnTrp8 ${activeBtn === 'btnTrp8' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTrp8' ? null : 'btnTrp8'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Repuesta2-10-20.png")}}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp8' ? null : 'btnTrp8'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Repuesta2-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 1 && (
                             <button className={`btnTrpR4 ${activeBtn === 'btnTrpR4' ? 'active' : ''}`}
@@ -337,7 +337,7 @@ const TripleRespuesta = () => {
                     <>
                         {/* <button className="btnTrp9" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnTrp10 ${activeBtn === 'btnTrp10' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTrp10' ? null : 'btnTrp10'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple3-T01.png")}}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp10' ? null : 'btnTrp10'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple3-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
                             className={`btnTrp11 ${activeBtn === 'btnTrp11' ? 'active' : ''}`}
                         onClick={() => {
@@ -352,7 +352,7 @@ const TripleRespuesta = () => {
                             }}
                         ></button>
                         <button className={`btnTrp12 ${activeBtn === 'btnTrp12' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTrp12' ? null : 'btnTrp12'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Repuesta3-10-20.png")}}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp12' ? null : 'btnTrp12'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Repuesta3-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 2 && (
                             <button className={`btnTrpR7 ${activeBtn === 'btnTrpR7' ? 'active' : ''}`}
@@ -511,7 +511,7 @@ const TripleRespuesta = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

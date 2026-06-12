@@ -168,7 +168,7 @@ const CapoTotal = () => {
                     <>
                         {/* <button className="btnCap1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnCap2 ${activeBtn === 'btnCap2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnCap2' ? null : 'btnCap2'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Camp-T01.png");}}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnCap2' ? null : 'btnCap2'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Camp-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         
                         
                         {currentImageIndex === 0 && (
@@ -183,7 +183,7 @@ const CapoTotal = () => {
                         )}
 
                         <button className={`btnCap4 ${activeBtn === 'btnCap4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnCap4' ? null : 'btnCap4'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Cam10-20.jpg"); }}></button> 
+                        onClick={() => { setActiveBtn(p => p === 'btnCap4' ? null : 'btnCap4'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Cam10-20.jpg","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button> 
 
                         {currentImageIndex === 0 && (
                             <button className={`btnCapo ${activeBtn === 'btnCapo' ? 'active' : ''}`}
@@ -434,7 +434,7 @@ const CapoTotal = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

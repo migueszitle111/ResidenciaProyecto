@@ -163,7 +163,7 @@ const MiembrosSup = () => {
                     ></button>
                     <button
                         className={`btnMie2 ${activeBtn === 'mie2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'mie2' ? null : 'mie2'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieSup1-T01.png"); }}
+                        onClick={() => { setActiveBtn(p => p === 'mie2' ? null : 'mie2'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieSup1-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}
                     ></button>
                     {/* <span className="labelMieSup">Miembros Superiores</span> */}
                     <button
@@ -199,14 +199,14 @@ const MiembrosSup = () => {
                             openModal(
                                 "/assets/ImgTecnicas/Potenciales/Motores/RegidtroMiSup.png",
                                 "Abductor corto del pulgar  \n\n Activo. Vientre muscular en eminencia tenar lateral. \n Referencia. Primera articulación metacarpofalángica. \n Tierra. dorso de la mano o antebrazo.",
-                                { position: { top: '62%', left: '50%' }, size: '0.8rem' }
+                                { position: { top: '55%', left: '50%' }, size: '0.8rem' }
                             );
                         }}
                     ></button>
 
                     <button
                         className={`btnMie4 ${activeBtn === 'mie4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'mie4' ? null : 'mie4'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieSup-10-20.png"); }}
+                        onClick={() => { setActiveBtn(p => p === 'mie4' ? null : 'mie4'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieSup-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}
                     ></button>
 
                     <button
@@ -377,7 +377,7 @@ const MiembrosSup = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

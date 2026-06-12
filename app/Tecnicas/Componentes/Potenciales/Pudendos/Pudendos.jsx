@@ -176,7 +176,7 @@ const Pudendos = () => {
                     <>
                         <button className="btnPud1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
                         <button className={`btnPud2 ${activeBtn === 'btnPud2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnPud2' ? null : 'btnPud2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos-T01.png"); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnPud2' ? null : 'btnPud2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
                             className={`btnPud3 ${activeBtn === 'btnPud3' ? 'active' : ''}`}
                         onClick={() => {
@@ -189,7 +189,7 @@ const Pudendos = () => {
                             }}
                         ></button>
                         <button className={`btnPud4 ${activeBtn === 'btnPud4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnPud4' ? null : 'btnPud4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos10-20.png")}}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnPud4' ? null : 'btnPud4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Pudendos10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnPude ${activeBtn === 'btnPude' ? 'active' : ''}`}
@@ -372,7 +372,7 @@ const Pudendos = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

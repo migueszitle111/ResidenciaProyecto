@@ -172,10 +172,10 @@ const Trigemino = () => {
                     <>
                         <button className="btnTri1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
                         <button className={`btnTri2 ${activeBtn === 'btnTri2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTri2' ? null : 'btnTri2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem-T01.png"); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTri2' ? null : 'btnTri2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         <button className={`btnTri4 ${activeBtn === 'btnTri4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTri4' ? null : 'btnTri4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem10-20.png");}}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTri4' ? null : 'btnTri4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnTrig ${activeBtn === 'btnTrig' ? 'active' : ''}`}
@@ -337,7 +337,7 @@ const Trigemino = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(8, 8, 8, 0.377)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

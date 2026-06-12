@@ -174,7 +174,7 @@ const MedianoFmx = () => {
                     <>
                         {/* <button className="btnIMdFx1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnIMdFx2 ${activeBtn === 'imdFx2' ? 'active' : ''}`}
-                            onClick={() => { setActiveBtn(p => p === 'imdFx2' ? null : 'imdFx2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/MedMx-T01.png"); }}>
+                            onClick={() => { setActiveBtn(p => p === 'imdFx2' ? null : 'imdFx2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/MedMx-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}>
                         </button>
                         <button
                             className={`btnIMdFx3 ${activeBtn === 'imdFx3' ? 'active' : ''}`}
@@ -192,8 +192,7 @@ const MedianoFmx = () => {
                         <button className={`btnIMdFx4 ${activeBtn === 'imdFx4' ? 'active' : ''}`}
                             onClick={() => {
                                 setActiveBtn(p => p === 'imdFx4' ? null : 'imdFx4');
-                                openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png");
-                            }}
+                                openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}
                         ></button>
 
                         {currentImageIndex === 0 && (
@@ -341,7 +340,7 @@ const MedianoFmx = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(66, 66, 66, 0.842)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

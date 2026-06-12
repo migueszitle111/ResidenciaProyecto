@@ -169,7 +169,7 @@ const Hemicampos = () => {
                     <>
                         {/* <button className="btnHem1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnHem2 ${activeBtn === 'btnHem2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnHem2' ? null : 'btnHem2'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Camp-T01.png"); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnHem2' ? null : 'btnHem2'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Camp-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         
                         
                         {/* {currentImageIndex === 0 && (

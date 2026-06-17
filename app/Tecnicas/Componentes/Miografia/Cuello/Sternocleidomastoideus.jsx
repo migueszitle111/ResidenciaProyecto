@@ -124,7 +124,7 @@ const Sternocleidomastoideus = () => {
     };
 
 const renderGalleryItem = (item) => (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%", }}>
         {(item.layers || [item.original]).map((src, index) => (
             <img
                 key={index}
@@ -133,12 +133,12 @@ const renderGalleryItem = (item) => (
                 onContextMenu={e => e.preventDefault()}
                 draggable={false}
                 style={{
-                    width: "100%",
+                    width: "80%",
                     height: "100%",
                     objectFit: "contain",
                     position: index === 0 ? "relative" : "absolute",
-                    top: 0,
-                    left: 0,
+                    top: 15,
+                    left: 180,
                 }}
             />
         ))}
@@ -155,7 +155,7 @@ const renderGalleryItem = (item) => (
     );
 
     return (
-        <div  className=" py-20 gallery-container">
+        <div  className=" py-20 bg-white gallery-container">
 
              {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
             {!isLandscape && (
@@ -172,7 +172,7 @@ const renderGalleryItem = (item) => (
                     showPlayButton={false}
                     showBullets={false}
                     showNav={false}
-                    showThumbnails={true}
+                    showThumbnails={false}
                     thumbnailPosition="bottom"
                 />
                 {/* strong>Título:</strong> Texto normal aquí, y <strong>esta parte en negritas</strong>. */}
@@ -187,7 +187,7 @@ const renderGalleryItem = (item) => (
                         <button className="btnAntb" onClick={() => {
                                 handleButtonClick('Posición del paciente: Sedente, cabeza neutra \n\nPuntos de referencia palpables: Borde anterior/lateral del ECM; mastoides' +
                         '\n\nPunto de entrada exacto: Mitad del vientre, 2 cm por encima de clavícula, borde anterior \n\nOrientación y profundidad estimada de aguja: Oblicua posterior; 1–2 cm' + 
-                        '\n\nPrecauciones: Vena yugular interna profunda; paquete carotídeo medial; nervio accesorio dentro del vientre \n\nManiobra de activación y/o nota ecográfica: Rotar cabeza contralateral contra resistencia; (US útil si variantes o vasos prominentes)', { top: "8%", left: "23%" });
+                        '\n\nPrecauciones: Vena yugular interna profunda; paquete carotídeo medial; nervio accesorio dentro del vientre \n\nManiobra de activación y/o nota ecográfica: Rotar cabeza contralateral contra resistencia; (US útil si variantes o vasos prominentes)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_52.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -195,7 +195,7 @@ const renderGalleryItem = (item) => (
                         </button>
 
                         {/* Cuadros de texto informativos - imagen 0 */}
-                        <div className="info-box info-box-1">
+                        <div className="info-box info-box-19">
                             <strong>STERNOCLEIDOMASTOIDEUS</strong> <strong></strong>
                         </div>
                         <div className="info-box info-box-2">
@@ -222,6 +222,9 @@ const renderGalleryItem = (item) => (
                         <div className="info-box info-box-9">
                             <strong>Unidades motoras: </strong>Alto (~1000)<strong></strong>
                         </div>
+                        <div className="static-text-box">
+                            
+                        </div>
 
                     </>
                 )}
@@ -239,10 +242,10 @@ const renderGalleryItem = (item) => (
             <div
                 className="image-boxAnt"
                 style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
+                top: 100,
+                left: 280,
+                width: "70%",
+                height: "70%",
                 position: "absolute",
                 display: "flex",
                 justifyContent: "center",

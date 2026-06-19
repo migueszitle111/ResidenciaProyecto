@@ -198,7 +198,7 @@ const Segmentarios = () => {
                                 Cz’-Fpz’    
                             </button>
                         )}
-                        {currentImageIndex === 0 && (
+                        {/* {currentImageIndex === 0 && (
                             <button className={`btnSegm2 ${activeBtn === 'btnSegm2' ? 'active' : ''}`} onClick={() => {
                                     setActiveBtn(p => p === 'btnSegm2' ? null : 'btnSegm2');
                                     handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '7%', left: '44%' });
@@ -215,7 +215,7 @@ const Segmentarios = () => {
                             >
                                 ErbL-ErbR     
                             </button>
-                        )}
+                        )} */}
 
                         {currentImageIndex === 0 && (
                             <button className={`btnOndasSeg ${activeBtn === 'btnOndasSeg' ? 'active' : ''}`} onClick={() => {

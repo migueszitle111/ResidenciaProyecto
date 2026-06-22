@@ -29,6 +29,7 @@ const Antebraquial = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -117,6 +118,7 @@ const Antebraquial = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -163,23 +165,28 @@ const Antebraquial = () => {
                 {currentImageIndex === 0 && (
                     <>
                         <button className="btnAn1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnAn2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Antebr-T01.png")}></button>
+                        <button className={`btnAn2 ${activeBtn === 'btnAn2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnAn2' ? null : 'btnAn2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Antebr-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnAn3"
-                            onClick={() =>
+                            className={`btnAn3 ${activeBtn === 'btnAn3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnAn3' ? null : 'btnAn3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/ESTIMULOIMG.png",
                                     "Estimulo. Nervio Cutáneo antebraquial lateral en el codo, 2 cm lateral al tendón del bíceps braquial con el ánodo distal al cátodo." + 
                                     "\n\n Intensidad.  El triple o 2.5 veces por arriba del umbral sensitivo percibido por el paciente.  \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
                                     
                                     { position: { top: '48%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnAn4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png")}></button>
+                        <button className={`btnAn4 ${activeBtn === 'btnAn4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnAn4' ? null : 'btnAn4'); openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnAntb" onClick={() => {
+                            <button className={`btnAntb ${activeBtn === 'btnAntb ' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnAntb ' ? null : 'btnAntb ');
                                     handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '8%', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Canal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -187,24 +194,29 @@ const Antebraquial = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnAntb2" onClick={() => {
-                                    handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '23%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Canal2.png", { top: "50%", left: "50%" });  }}
+                            <button className={`btnAntb2 ${activeBtn === 'btnAntb2' ? 'active' : ''}`}
+                                    onClick={() => {
+                                        setActiveBtn(p => p === 'btnAntb2' ? null : 'btnAntb2');
+                                        handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '23%' });
+                                        handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Canal2.png", { top: "50%", left: "50%" });  }}
                             >
                                 C5s-Fpz    
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnAntb3" onClick={() => {
-                                    handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '8 %', left: '23%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Canal3.png", { top: "50%", left: "50%" });  }}
+                            <button className={`btnAntb3 ${activeBtn === 'btnAntb3' ? 'active' : ''}`}
+                                    onClick={() => {
+                                        setActiveBtn(p => p === 'btnAntb3' ? null : 'btnAntb3');
+                                        handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '8 %', left: '23%' });
+                                        handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Canal3.png", { top: "50%", left: "50%" });  }}
                             >
                                 ErbL-ErbR     
                             </button>
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasAnt" onClick={() => {
+                            <button className={`btnOndasAnt ${activeBtn === 'btnOndasAnt' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasAnt' ? null : 'btnOndasAnt');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Canal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Canal2.png",
@@ -318,7 +330,7 @@ const Antebraquial = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(8, 8, 8, 0.377)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

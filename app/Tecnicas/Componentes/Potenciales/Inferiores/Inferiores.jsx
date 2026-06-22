@@ -29,6 +29,7 @@ const Inferiores = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -123,6 +124,7 @@ const Inferiores = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -169,23 +171,28 @@ const Inferiores = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnInf1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnInf2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Inferior-T01.png")}></button>
+                        <button className={`btnInf2 ${activeBtn === 'btnInf2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnInf2' ? null : 'btnInf2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Inferior-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnInf3"
-                            onClick={() =>
+                            className={`btnInf3 ${activeBtn === 'btnInf3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnInf3' ? null : 'btnInf3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/InfEstimulo.png",
                                     "Nervio Tibial derecho, fibras mixtas a nivel del tobillo. \n El nervio Tibial representa el estándar de estimulación en miembros inferiores por la alta tasa de registros exitosos en todos los relevos. " + 
                                     "\n Intensidad, incremento progresivo hasta obtener una leve contracción visible en el primer y/o quinto ortejos.  \n Frecuencia a 2 a 5 Hz. \n Duración 0.2-0.3 ms.",
                                     
                                     { position: { top: '60%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnInf4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png")}></button>
+                        <button className={`btnInf4 ${activeBtn === 'btnInf4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnInf4' ? null : 'btnInf4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnInfe" onClick={() => {
+                            <button className={`btnInfe ${activeBtn === 'btnInfe' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnInfe' ? null : 'btnInfe');
                                     handleButtonClick('Sobre región media del cráneo, 2 cm detrás del vértice Cz (Cz’) con referencia frontal a Fpz’.', { top: '7%', left: '24%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -193,7 +200,9 @@ const Inferiores = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnInfe2" onClick={() => {
+                            <button className={`btnInfe2 ${activeBtn === 'btnInfe2' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnInfe2' ? null : 'btnInfe2');
                                     handleButtonClick('Registro bipolar C1’ activo con su referencia longitudinal contralateral C2’. Puede mejorar la amplitud y morfología de las respuestas corticales con relación al montaje referencial, pero más susceptible a contaminación por ruido de fondo muscular. Es común en miembros pélvicos la lateralización paradójica.', { top: '8%', left: '24%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal2.png", { top: "50%", left: "50%" });  }}
                             >
@@ -201,7 +210,9 @@ const Inferiores = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnInfe3" onClick={() => {
+                            <button className={`btnInfe3 ${activeBtn === 'btnInfe3' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnInfe3' ? null : 'btnInfe3');
                                     handleButtonClick('Registro de campo lejano colocando el electrodo activo en la apófisis espinosa de la quinta vertebra cervical (5Cs) y referenciado a Fpz’. Se puede optar por la colocación en M1 como en la monitorización intraoperatoria.', { top: '8%', left: '24%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal3.png", { top: "50%", left: "50%" });  }}
                             >
@@ -209,7 +220,9 @@ const Inferiores = () => {
                             </button>
                         )}
                                                 {currentImageIndex === 0 && (
-                            <button className="btnInfe4" onClick={() => {
+                            <button className={`btnInfe4 ${activeBtn === 'btnInfe4' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnInfe4' ? null : 'btnInfe4');
                                     handleButtonClick('Apófisis espinosa L1 referenciada a espina iliaca anterosuperior para ampliar el campo de registro. Se puede modificar el montaje hacia niveles torácicos (T12s, T6s, etc).', { top: '7%', left: '24%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal4.png", { top: "50%", left: "50%" });  }}
                             >
@@ -217,7 +230,9 @@ const Inferiores = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnInfe5" onClick={() => {
+                            <button className={`btnInfe5 ${activeBtn === 'btnInfe5' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnInfe5' ? null : 'btnInfe5');
                                     handleButtonClick('Electrodo activo sobre apófisis espinosa L4 (L4s) localizada un nivel por arriba de la línea que une las crestas iliacas (división L4-L5). Referenciado a L1s, 5 cm en dirección ascendente.', { top: '6%', left: '24%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal5.png", { top: "50%", left: "50%" });  }}
                             >
@@ -225,7 +240,9 @@ const Inferiores = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnInfe6" onClick={() => {
+                            <button className={`btnInfe6 ${activeBtn === 'btnInfe6' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnInfe6' ? null : 'btnInfe6');
                                     handleButtonClick('Hueco poplíteo, electrodo activo discretamente lateral a la línea media 2 cm proximal al pliegue cutáneo, referenciado a cara medial línea interarticular de la rodilla ipsilateral.', { top: '6%', left: '24%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/InfeCanal6.png", { top: "50%", left: "50%" });  }}
                             >
@@ -234,7 +251,9 @@ const Inferiores = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasSup" onClick={() => {
+                            <button className={`btnOndasSup ${activeBtn === 'btnOndasSup' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasSup' ? null : 'btnOndasSup');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/InfeCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/InfeCanal2.png",
@@ -351,7 +370,7 @@ const Inferiores = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

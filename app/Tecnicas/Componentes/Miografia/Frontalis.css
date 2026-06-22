@@ -3,8 +3,8 @@
     position: relative;
     width: 100%;
     max-width: 60vw;
-    height: auto;
-    padding-bottom: 56.25%; /* Proporción de aspecto 16:9 */
+    max-height: 20vh;
+    padding-bottom: 35%; /* Proporción de aspecto 16:9 */
     overflow: hidden;
     margin: auto;
     margin-top: 2px;
@@ -220,34 +220,52 @@ color: white;
 
 .btnAntb {
     position: absolute;
-    height: 3vw; /* Tamaño reducido */
-    width: 11vw;
-    top: 50%;
-    left: 76%;
+    height: 2.5vw;
+    width: 15vw;
+    top: 80%;
+    left: 72%;
     transform: translate(0%, 0%);
-    background-color: rgba(66, 66, 66, 0.842);
+    background-color: #ff6105;
     border: none;
     border-radius: 10px;
     z-index: 1;
     color: white;
     font-size: 0.8vw;
-    transition:all .2s ease-in-out;
+    transition: all .2s ease-in-out;
     padding: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4vw;
+    cursor: pointer;
+}
+
+.btnAntb::before {
+    content: "";
+    display: inline-block;
+    height: 1.6vw;        /* tamaño del ícono */
+    width: 1.6vw;
+    background-image: url('/I_SearchB2.png');  /* ruta de la imagen */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+    background-color: transparent;
 }
 
 .text-boxAnt {
     position: absolute;
     transform: translate(-50%, 0%);
     width: 27vw;
-    height: auto;
+    height: 58vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(125, 125, 125);
-    color: rgb(255, 255, 255);
+    background-color: rgb(221, 221, 221);
+    color: rgb(0, 0, 0);
     border-radius: 10px;
-    padding: 2%;
-    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
+    padding: 1%;
+    
     font-family: 'Arial', sans-serif;
     font-size: 0.9em;
     border: 1px solid #ddd;
@@ -306,153 +324,237 @@ color: white;
 
 /* Cuadro 1 — editar coordenadas, tamaño y fuente aquí */
 .info-box-1 {
-    top: 10%;
-    left: 2%;
+    top: 6%;
+    left: 21%;
     width: 15vw;
     height: auto;
+    text-align: center;
     font-size: 1.25vw;
-    background-color: transparent;
-    color: black;
+    background-color: black;
+    color: white;
+    z-index: 10;
+    
+}
+
+.info-box-19 {
+    top: 6%;
+    left: 3%;
+    width: 26vw;
+    height: auto;
+    text-align: center;
+    font-size: 1.15vw;
+    background-color: black;
+    color: white;
+    z-index: 10;
+}
+
+.info-box-22 {
+    top: 6%;
+    left: 3%;
+    width: 26vw;
+    height: auto;
+    text-align: center;
+    font-size: 1vw;
+    background-color: black;
+    color: white;
+    z-index: 10;
     
 }
 /* Cuadro 2 — editar coordenadas, tamaño y fuente aquí */
 .info-box-2 {
-    top: 18%;
+    top: 16%;
     left: 2%;
-    width: 20vw;
-    font-size: 1vw;
+    width: 27vw;
+    font-size: 1.2vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-3 {
     top: 25%;
     left: 2%;
-    width: 20vw;
-    font-size: 0.85vw;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-4 {
-    top: 30%;
+    top: 34%;
     left: 2%;
-    width: 20vw;
-    font-size: 0.85vw;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-5 {
-    top: 36%;
+    top: 43%;
     left: 2%;
-    width: 20vw;
-    font-size: 0.85vw;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-6 {
-    top: 42%;
+    top: 52%;
     left: 2%;
-    width: 20vw;
-    font-size: 0.85vw;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-7 {
-    top: 25%;
-    left: 75%;
-    width: 15vw;
-    font-size: 0.85vw;
+    top: 61%;
+    left: 2%;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-8 {
-    top: 31%;
-    left: 75%;
-    width: 15vw;
-    font-size: 0.85vw;
+    top: 70%;
+    left: 2%;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-9 {
-    top: 37%;
-    left: 75%;
-    width: 20vw;
-    font-size: 0.85vw;
+    top: 79%;
+    left: 2%;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-10 {
-    top: 18%;
-    left: 75%;
-    width: 15vw;
-    font-size: 0.85vw;
+    top: 63%;
+    left: 2%;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-11 {
-    top: 30%;
-    left: 75%;
-    width: 15vw;
-    font-size: 0.85vw;
+    top: 74%;
+    left: 2%;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-12 {
     top: 5%;
     left: 2%;
-    width: 20vw;
+    width: 27vw;
     height: auto;
-    font-size: 1.1vw;
-    background-color: transparent;
-    color: black;
+    text-align: center;
+    font-size: 0.95vw;
+    background-color: black;
+    color: white;
+    z-index: 10;
     
 }
 
 .info-box-13 {
-    top: 37%;
-    left: 75%;
-    width: 15vw;
-    font-size: 0.85vw;
+    top: 79%;
+    left: 2%;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-14 {/* Origen */
     top: 30%;
     left: 2%;
-    width: 24vw;
-    font-size: 0.85vw;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-15 {/*Inserción*/
-    top: 39%;
+    top: 42%;
     left: 2%;
-    width: 20vw;
-    font-size: 0.85vw;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-16 {/*Función*/
-    top: 44%;
+    top: 48%;
     left: 2%;
-    width: 20vw;
-    font-size: 0.85vw;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-17 {
     top: 23%;
     left: 2%;
-    width: 20vw;
-    font-size: 0.85vw;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
 }
 .info-box-18 {/*Tipo de fibras*/
-    top: 23%;
-    left: 75%;
-    width: 15vw;
-    font-size: 0.85vw;
+    top: 60%;
+    left: 2%;
+    width: 27vw;
+    font-size: 0.95vw;
     background-color: transparent;
     color: black;
+    z-index: 10;
+}
+
+.info-box-20 {
+    top: 17%;
+    left: 2%;
+    width: 27vw;
+    font-size: 1vw;
+    background-color: transparent;
+    color: black;
+    z-index: 10;
+}
+.info-box-21 {
+    top: 27%;
+    left: 2%;
+    width: 27vw;
+    font-size: 0.95vw;
+    background-color: transparent;
+    color: black;
+    z-index: 10;
+}
+
+/* Cuadro de texto estático siempre visible — ajusta top, left, width y font-size */
+.static-text-box {
+    position: absolute;
+    top: 5%;       /* posición vertical */
+    left: 2%;       /* posición horizontal */
+    width: 27vw;    /* ancho */
+    height: 58vh;   /* altura */
+    background-color: rgb(221, 221, 221);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 2%;
+    /*box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);*/
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9em;  /* tamaño de fuente */
+    border: 1px solid #ddd;
+    white-space: pre-line;
+    z-index: 2;
+    pointer-events: none;
 }
 

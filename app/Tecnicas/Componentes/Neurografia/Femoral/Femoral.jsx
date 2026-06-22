@@ -12,6 +12,7 @@ const Femoral = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -65,11 +66,13 @@ const Femoral = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -125,8 +128,8 @@ const Femoral = () => {
             {currentImageIndex === 0 && <button className="btnFm2" onClick={() => handleButtonClick('Zona media lateral entre estimulo y registro.', { top: '62%', left: '50%' }, 'T')}></button>}
             {currentImageIndex === 0 && <button className="btnFm3" onClick={() => handleButtonClick('RECTUS FEMORIS L2, L3, L4 - Colocar el electrodo de superficie sobre la cara anterior del muslo, a la media distancia entre el ligamento inguinal y el polo superior de la rótula. Se pueden utilizar distancias establecidas desde el ligamento inguinal en dirección distal de 14 y 30 cm.', { top: '62%', left: '50%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnFm4" onClick={() => handleButtonClick('Distal al tendón del recto femoral, cerca del borde superior de la rótula.', { top: '62%', left: '50%' }, 'R')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Femoral-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Femoral-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnFem1 ${activeBtn === 'btnFem1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFem1' ? null : 'btnFem1'); openModal("/assets/ValoresImg/MiembrosInf/Femoral-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnFem2 ${activeBtn === 'btnFem2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFem2' ? null : 'btnFem2'); openModal("/assets/ValoresImg/MiembrosInf/Femoral-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 1 && <button className="btnFm5" onClick={() => handleButtonClick('ARRIBA DEL LIGAMENTO INGUINAL. 5.5 cm con dirección proximal o cefálica con relación al estímulo por debajo del ligamento inguinal.', { top: '62%', left: '50%' }, 'E')}></button>}
             {currentImageIndex === 1 && <button className="btnFm6" onClick={() => handleButtonClick('DEBAJO DEL LIGAMENTO INGUINAL. Justo debajo del ligamento inguinal y lateral a la arteria femoral.', { top: '62%', left: '50%' }, 'E')}></button>}
@@ -135,8 +138,8 @@ const Femoral = () => {
             {currentImageIndex === 1 && <button className="btnFm9" onClick={() => handleButtonClick('Distal al recorrido del tendón, cerca del borde superior de la rótula con orientacion lateral.', { top: '62%', left: '50%' }, 'R')}></button>}
             {currentImageIndex === 1 && <button className="btnFm10" onClick={() => handleButtonClick('VASTUS MEDIALIS L2, L3, L4 - Colocando el electrodo de registro en el vientre muscular con una distancia deseable desde el ligamento inguinal de 35.4 ± 1.9 cm. El punto motor se puede ubicar a 8 cm con dirección proximal del ángulo formado por los bordes superior y medial de la rótula.', { top: '62%', left: '50%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnFm11" onClick={() => handleButtonClick('Distal al recorrido del tendón, cerca del borde superior de la rótula con orientacion medial.', { top: '62%', left: '50%' }, 'R')}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Femoral-G-02.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Femoral-T-02.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className={`btnFem1 ${activeBtn === 'btnFem1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFem1' ? null : 'btnFem1'); openModal("/assets/ValoresImg/MiembrosInf/Femoral-G-02.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 1 && <button className={`btnFem2 ${activeBtn === 'btnFem2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnFem2' ? null : 'btnFem2'); openModal("/assets/ValoresImg/MiembrosInf/Femoral-T-02.png",{ top: '5%', left: '2%' });}}></button>}
             
             
             </div>

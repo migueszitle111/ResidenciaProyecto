@@ -29,6 +29,7 @@ const RadialSp = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -122,6 +123,8 @@ const RadialSp = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
+        
     };
 
     const renderGalleryItem = (item) => (
@@ -168,23 +171,27 @@ const RadialSp = () => {
                 {currentImageIndex === 0 && (
                     <>
                         <button className="btnRd1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnRd2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Radial-T01.png")}></button>
+                        <button className={`btnRd2 ${activeBtn === 'btnRd2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnRd2' ? null : 'btnRd2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Radial-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnRd3"
-                            onClick={() =>
+                            className={`btnRd3 ${activeBtn === 'btnRd3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnRd3' ? null : 'btnRd3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/RadEstimulo.png",
                                     "Estimulo. Nervio Radial superficial mediante electrodos de barra sobre el borde dorsolateral de la muñeca, 2 cm proximal a la apófisis estiloides radial; ánodo 3 cm distalmente." + 
                                     "\n\n Intensidad.  El triple o 2.5 veces por arriba del umbral sensitivo percibido por el paciente.  \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
                                     
                                     { position: { top: '53%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnRd4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png")}></button>
+                        <button className={`btnRd4 ${activeBtn === 'btnRd4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnRd4' ? null : 'btnRd4'); openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', });}}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnRdSp" onClick={() => {
+                            <button className={`btnRdSp ${activeBtn === 'btnRdSp' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnRdSp' ? null : 'btnRdSp');
                                     handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '7%', left: '27%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/RadCanal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -192,7 +199,8 @@ const RadialSp = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnRdSp2" onClick={() => {
+                            <button className={`btnRdSp2 ${activeBtn === 'btnRdSp2' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnRdSp2' ? null : 'btnRdSp2');
                                     handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '7%', left: '27%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/RadCanal2.png", { top: "50%", left: "50%" });  }}
                             >
@@ -200,7 +208,8 @@ const RadialSp = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnRdSp3" onClick={() => {
+                            <button className={`btnRdSp3 ${activeBtn === 'btnRdSp3' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnRdSp3' ? null : 'btnRdSp3');
                                     handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '7%', left: '27%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/RadCanal3.png", { top: "50%", left: "50%" });  }}
                             >
@@ -209,7 +218,8 @@ const RadialSp = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasRds" onClick={() => {
+                            <button className={`btnOndasRds ${activeBtn === 'btnOndasRds' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasRds' ? null : 'btnOndasRds');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/RadCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/RadCanal2.png",
@@ -323,7 +333,7 @@ const RadialSp = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(8, 8, 8, 0.377)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

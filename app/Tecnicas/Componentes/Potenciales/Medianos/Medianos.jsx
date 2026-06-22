@@ -29,6 +29,7 @@ const Medianos = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -122,6 +123,7 @@ const Medianos = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -168,23 +170,28 @@ const Medianos = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnIMds1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnIMds2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-T01.png")}></button>
+                        <button className={`btnIMds2 ${activeBtn === 'Mds2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'Mds2' ? null : 'Mds2');  openModal("/assets/ImgTecnicas/Potenciales/Mediano-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnIMds3"
-                            onClick={() =>
+                            className={`btnIMds3 ${activeBtn === 'IMds3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'IMds3' ? null : 'IMds3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/MedSnEstimulo.png",
                                     "Estimulo. Nervio Mediano fibras sensoriales mediante electrodos de anillo sobre el tercer dedo con el cátodo en dirección proximal cercana al pliegue metacarpofalángico, ánodo 3-4 cm distal (también es posible la colocación de los anillos en dedos índice y medio)." + 
                                     "\n\n Intensidad. El triple o 2.5 veces por arriba del umbral sensitivo percibido por el paciente. \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz",
                                     
                                     { position: { top: '48%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnIMds4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png")}></button>
+                        <button className={`btnIMds4 ${activeBtn === 'IMds4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'IMds4' ? null : 'IMds4'); openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnMd" onClick={() => {
+                            <button className={`btnMd ${activeBtn === 'btnMd' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnMd' ? null : 'btnMd');
                                     handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '8%', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedSnCanal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -192,7 +199,8 @@ const Medianos = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnMd2" onClick={() => {
+                            <button className={`btnMd2 ${activeBtn === 'btnMd2' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnMd2' ? null : 'btnMd2');
                                     handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedSnCanal2.png", { top: "50%", left: "50%" });  }}
                             >
@@ -200,7 +208,8 @@ const Medianos = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnMd3" onClick={() => {
+                            <button className={`btnMd3 ${activeBtn === 'btnMd3' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnMd3' ? null : 'btnMd3');
                                     handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '8 %', left: '23%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedSnCanal3.png", { top: "50%", left: "50%" });  }}
                             >
@@ -209,7 +218,8 @@ const Medianos = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasMd" onClick={() => {
+                            <button className={`btnOndasMd ${activeBtn === 'btnOndasMd' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasMd' ? null : 'btnOndasMd');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/MedSnCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/MedSnCanal2.png",
@@ -324,7 +334,7 @@ const Medianos = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(66, 66, 66, 0.842)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

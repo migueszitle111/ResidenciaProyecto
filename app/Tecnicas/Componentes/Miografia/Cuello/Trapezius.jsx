@@ -124,7 +124,7 @@ const Trapezius = () => {
     };
 
 const renderGalleryItem = (item) => (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%", }}>
         {(item.layers || [item.original]).map((src, index) => (
             <img
                 key={index}
@@ -133,12 +133,12 @@ const renderGalleryItem = (item) => (
                 onContextMenu={e => e.preventDefault()}
                 draggable={false}
                 style={{
-                    width: "100%",
+                    width: "80%",
                     height: "100%",
                     objectFit: "contain",
                     position: index === 0 ? "relative" : "absolute",
-                    top: 0,
-                    left: 0,
+                    top: 15,
+                    left: 180,
                 }}
             />
         ))}
@@ -155,7 +155,7 @@ const renderGalleryItem = (item) => (
     );
 
     return (
-        <div  className=" py-20 gallery-container">
+        <div  className=" py-20 bg-white gallery-container">
 
              {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
             {!isLandscape && (
@@ -172,7 +172,7 @@ const renderGalleryItem = (item) => (
                     showPlayButton={false}
                     showBullets={false}
                     showNav={false}
-                    showThumbnails={true}
+                    showThumbnails={false}
                     thumbnailPosition="bottom"
                 />
                 {/* strong>Título:</strong> Texto normal aquí, y <strong>esta parte en negritas</strong>. */}
@@ -187,7 +187,7 @@ const renderGalleryItem = (item) => (
                         <button className="btnAntb" onClick={() => {
                                 handleButtonClick('Posición del paciente: Sedente, hombros relajados \n\nPuntos de referencia palpables: Borde superior del trapecio; clavícula lateral' +
                         '\n\nPunto de entrada exacto: A 3–4 cm por encima de la clavícula, sobre vientre muscular \n\nOrientación y profundidad estimada de aguja: Perpendicular; 1–1.5 cm' + 
-                        '\n\nPrecauciones: Ramas del plexo cervical superficial; vasos transversos del cuello \n\nManiobra de activación y/o nota ecográfica: Elevación del hombro contra resistencia; (US no suele ser necesaria)', { top: "8%", left: "23%" });
+                        '\n\nPrecauciones: Ramas del plexo cervical superficial; vasos transversos del cuello \n\nManiobra de activación y/o nota ecográfica: Elevación del hombro contra resistencia; (US no suele ser necesaria)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_53.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -195,7 +195,7 @@ const renderGalleryItem = (item) => (
                         </button>
 
                         {/* Cuadros de texto informativos - imagen 0 */}
-                        <div className="info-box info-box-1">
+                        <div className="info-box info-box-19">
                             <strong>TRAPEZIUS (PARS DESCENDENS)</strong> <strong></strong>
                         </div>
                         <div className="info-box info-box-2">
@@ -219,6 +219,9 @@ const renderGalleryItem = (item) => (
                         <div className="info-box info-box-11">
                             <strong>Cantidad de fibras: </strong>Unidades motoras de tamaño medio; reclutamiento escalonado para control escapular fino; actividad tónica postural continua<strong></strong>
                         </div>
+                        <div className="static-text-box">
+                            
+                        </div>
                         
 
                     </>
@@ -237,10 +240,10 @@ const renderGalleryItem = (item) => (
             <div
                 className="image-boxAnt"
                 style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
+                top: 100,
+                left: 280,
+                width: "70%",
+                height: "70%",
                 position: "absolute",
                 display: "flex",
                 justifyContent: "center",

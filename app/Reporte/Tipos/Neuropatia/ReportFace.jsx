@@ -246,7 +246,7 @@ const Reporte = () => {
     const keywords5 = ["focalizada a nivel", "focal a nivel"];
 
     if (copyConclusions.includes(keywords5[0])) {
-      copyConclusions = 'MONO ' + copyConclusions;
+      copyConclusions = 'Mono ' + copyConclusions;
     }
 
     let words = copyConclusions.split(' ');
@@ -302,7 +302,7 @@ const Reporte = () => {
       '$1\n\n'
     );
     formattedConclusions = formattedConclusions.replace(
-      /([.;])\s*(MONO NEUROPATÍA|POLI NEUROPATÍA|NEURONOPATÍA|RADICULOPATÍA|PLEXOPATÍA)/gi,
+      /([.;])\s*(Mono Neuropatía|POLI NEUROPATÍA|NEURONOPATÍA|RADICULOPATÍA|PLEXOPATÍA)/gi,
       '$1\n\n$2'
     );
 

@@ -197,14 +197,14 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
 } */
 
-.btnOndasTb {
+.btnOndasPlan {
     position: absolute ;
     background-image: url('/assets/ValoresImg/mEDX_64_Valores.png');
     background-size: cover;
@@ -216,7 +216,7 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
@@ -235,7 +235,7 @@ color: white;
     left: 45%;
     transform: translate(700%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -254,7 +254,7 @@ color: white;
     left: 45%;
     transform: translate(580%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -273,7 +273,7 @@ color: white;
     left: 45%;
     transform: translate(460%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -292,7 +292,7 @@ color: white;
     left: 10%;
     transform: translate(940%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -453,4 +453,27 @@ color: white;
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.btnPla2.active,
+.btnPla3.active,
+.btnPla4.active,
+.btnPla5.active,
+.btnRegistroInf.active,
+.btnOndasPlan.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
+}
+
+.btnPlan.active,
+.btnPlan2.active,
+.btnPlan3.active,
+.btnPlan4.active,
+.btnPlan5.active,
+.btnPlan6.active {
+    background-color: #000;
+    border: 1px solid #fff;
+    color: #fff;
 }

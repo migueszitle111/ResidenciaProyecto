@@ -11,6 +11,7 @@ const RadialSt = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -67,11 +68,13 @@ const RadialSt = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -125,15 +128,15 @@ const RadialSt = () => {
                 {currentImageIndex === 0 && <button className="btnRSt2" onClick={() => handleButtonClick('Dorso de la mano.', { top: '12%', left: '32%'}, 'T')}></button>}
                 {currentImageIndex === 0 && <button className="btnRSt3" onClick={() => handleButtonClick('BASE DE PULGAR - Dorso de la mano entre los tendones del extensor largo y corto del pulgar, 1 cm distal al borde el radio.', {  top: '12%', left: '32%' }, 'A')}></button>}
                 {currentImageIndex === 0 && <button className="btnRSt4" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo, borde lateral del segundo metacarpiano.', { top: '12%', left: '32%'}, 'R')}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-T-01.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className={`btnRaSt1 ${activeBtn === 'btnRaSt1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnRaSt1' ? null : 'btnRaSt1'); openModal("/assets/ValoresImg/MiembrosSp/RadialSt-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+                {currentImageIndex === 0 && <button className={`btnRaSt2 ${activeBtn === 'btnRaSt2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnRaSt2' ? null : 'btnRaSt2'); openModal("/assets/ValoresImg/MiembrosSp/RadialSt-T-01.png",{ top: '5%', left: '2%' });}}></button>}
                 
                 {currentImageIndex === 1 && <button className="btnRSt5" onClick={() => handleButtonClick('3 distal a elétrodo activo sobre articulación interfalángica.', {  top: '12%', left: '32%' }, 'R')}></button>}
                 {currentImageIndex === 1 && <button className="btnRSt6" onClick={() => handleButtonClick('DORSO DEL PULGAR - Discretamente distal a la primera articulación metacarpofalángica.', { top: '12%', left: '32%'}, 'A')}></button>}
                 {currentImageIndex === 1 && <button className="btnRSt7" onClick={() => handleButtonClick('Dorso de la mano.', {  top: '12%', left: '32%' }, 'T')}></button>}
                 {currentImageIndex === 1 && <button className="btnRSt8" onClick={() => handleButtonClick('MUÑECA. En la parte media distal del radio 10/12/14 cm proximal al electrodo activo cara volar del antebrazo.', { top: '12%', left: '32%'}, 'E')}></button>}
-                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/RadialSt-T-01.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 1 && <button className={`btnRaSt1 ${activeBtn === 'btnRaSt1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnRaSt1' ? null : 'btnRaSt1'); openModal("/assets/ValoresImg/MiembrosSp/RadialSt-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+                {currentImageIndex === 1 && <button className={`btnRaSt2 ${activeBtn === 'btnRaSt2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnRaSt2' ? null : 'btnRaSt2'); openModal("/assets/ValoresImg/MiembrosSp/RadialSt-T-01.png",{ top: '5%', left: '2%' });}}></button>}
                 
             </div>
             {textBoxVisible && (

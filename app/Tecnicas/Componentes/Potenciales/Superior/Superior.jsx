@@ -29,6 +29,7 @@ const Superior = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -123,6 +124,7 @@ const Superior = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -169,23 +171,28 @@ const Superior = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnSup1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnSup2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Superiores-T01.png")}></button>
+                        <button className={`btnSup2 ${activeBtn === 'sup2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'sup2' ? null : 'sup2');openModal("/assets/ImgTecnicas/Potenciales/Somt/Superiores-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnSup3"
-                            onClick={() =>
+                            className={`btnSup3 ${activeBtn === 'sup3' ? 'active' : ''}`}
+                            onClick={() => {
+                            setActiveBtn(p => p === 'sup3' ? null : 'sup3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/SupEstimulo.png",
                                     "Nervio Mediano derecho, fibras mixtas a nivel del carpo. \n\n Intensidad, incremento progresivo hasta obtener una leve contracción visible en el pulgar y/o índice. " + 
                                     "\n\n Frecuencia a 4 a 7 Hz. \n\n Duración 0.2-0.3 ms.",
                                     
                                     { position: { top: '60%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnSup4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png")}></button>
+                        <button className={`btnSup4 ${activeBtn === 'sup4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'sup4' ? null : 'sup4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnSupe" onClick={() => {
+                            <button className={`btnSupe ${activeBtn === 'reposo' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'reposo' ? null : 'reposo');
                                     handleButtonClick('Registro referenciado; electrodo activo en C3’ contralateral al estimulo (2 cm posterior a C3), referenciado a Fpz’ (12 cm arriba del inion).', { top: '7%', left: '24%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -193,15 +200,18 @@ const Superior = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnSupe2" onClick={() => {
-                                    handleButtonClick('Registro bipolar C3’ activo con su referencia longitudinal contralateral C4’. Puede mejorar la amplitud y morfología de las respuestas corticales con relación al montaje referencial, pero es más susceptible a contaminación por ruido de fondo.', { top: '8%', left: '24%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal2.png", { top: "50%", left: "50%" });  }}
+                            <button className={`btnSupe2 ${activeBtn === 'bipolar' ? 'active' : ''}`} onClick={() => {
+                                setActiveBtn(p => p === 'bipolar' ? null : 'bipolar');
+                                handleButtonClick('Registro bipolar C3’ activo con su referencia longitudinal contralateral C4’. Puede mejorar la amplitud y morfología de las respuestas corticales con relación al montaje referencial, pero es más susceptible a contaminación por ruido de fondo.', { top: '8%', left: '24%' });
+                                handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal2.png", { top: "50%", left: "50%" });  }}
                             >
                                 C3’-C4’    
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnSupe3" onClick={() => {
+                            <button className={`btnSupe3 ${activeBtn === 'campo' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'campo' ? null : 'campo');
                                     handleButtonClick('Registro de campo lejano colocando el electrodo activo craneal C3’ y referencia extracefálica en punto de Erb contralateral; se puede optar por el montaje Fpz’ referenciado a Erb ipsilateral, ambos con alta tendencia a contaminación por ruido de fondo.', { top: '8%', left: '24%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal3.png", { top: "50%", left: "50%" });  }}
                             >
@@ -209,32 +219,36 @@ const Superior = () => {
                             </button>
                         )}
                                                 {currentImageIndex === 0 && (
-                            <button className="btnSupe4" onClick={() => {
-                                    handleButtonClick('Colocar activo sobre apófisis espinosa cervical C5 o C2, ubicadas por su relación cercana a vertebra C7 (más prominente) y referenciado a Fpz’.', { top: '7%', left: '24%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal4.png", { top: "50%", left: "50%" });  }}
+                            <button className={`btnSupe4 ${activeBtn === 'c5s-fpz' ? 'active' : ''}`} onClick={() => {
+                                setActiveBtn(p => p === 'c5s-fpz' ? null : 'c5s-fpz');
+                                handleButtonClick('Colocar activo sobre apófisis espinosa cervical C5 o C2, ubicadas por su relación cercana a vertebra C7 (más prominente) y referenciado a Fpz’.', { top: '7%', left: '24%' });
+                                handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal4.png", { top: "50%", left: "50%" });  }}
                             >
                                 C5s-Fpz’    
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnSupe5" onClick={() => {
-                                    handleButtonClick('Punto de Erb ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '6%', left: '24%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal5.png", { top: "50%", left: "50%" });  }}
+                            <button className={`btnSupe5 ${activeBtn === 'erb' ? 'active' : ''}`} onClick={() => {
+                                setActiveBtn(p => p === 'erb' ? null : 'erb');
+                                handleButtonClick('Punto de Erb ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '6%', left: '24%' });
+                                handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal5.png", { top: "50%", left: "50%" });  }}
                             >
                                 Erb R-Erb L     
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnSupe6" onClick={() => {
-                                    handleButtonClick('Fosa antecubital, a nivel del pulso de la arteria radial, referenciado a epicóndilo medial.', { top: '6%', left: '24%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal6.png", { top: "50%", left: "50%" });  }}
+                            <button className={`btnSupe6 ${activeBtn === 'fac' ? 'active' : ''}`} onClick={() => {
+                                setActiveBtn(p => p === 'fac' ? null : 'fac');
+                                handleButtonClick('Fosa antecubital, a nivel del pulso de la arteria radial, referenciado a epicóndilo medial.', { top: '6%', left: '24%' });
+                                handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal6.png", { top: "50%", left: "50%" });  }}
                             >
                                 FaC R     
                             </button>
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasSup" onClick={() => {
+                            <button className={`btnOndasSup1 ${activeBtn === 'ondas' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'ondas' ? null : 'ondas');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/SupCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/SupCanal2.png",
@@ -351,7 +365,7 @@ const Superior = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

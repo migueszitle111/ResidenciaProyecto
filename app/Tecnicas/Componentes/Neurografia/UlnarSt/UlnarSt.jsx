@@ -12,6 +12,7 @@ const UlnarSt = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -70,11 +71,13 @@ const UlnarSt = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -129,14 +132,14 @@ const UlnarSt = () => {
                 {currentImageIndex === 0 && <button className="btnUSt3" onClick={() => handleButtonClick('CUARTO DEDO - Ligeramente distal a la articulación metacarpofalángica, evitando colocar electrodo sobre pliegue cutáneo.', {  top: '10%', left: '25%' }, 'A')}></button>}
                 {currentImageIndex === 0 && <button className="btnUSt4" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal.', { top: '10%', left: '25%'}, 'R')}></button>}
                 {currentImageIndex === 0 && <button className="btnUSt5" onClick={() => handleButtonClick('3-4 cm distal al electrodo de registo en articulación interfalangica distal.', {  top: '10%', left: '25%' }, 'R')}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/01UlnarStG.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/01UlnarStT.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className={`btnUlSt1 ${activeBtn === 'btnUlSt1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnUlSt1' ? null : 'btnUlSt1'); openModal("/assets/ValoresImg/MiembrosSp/01UlnarStG.png",{ top: '2%', left: '2%' });}}></button>}
+                {currentImageIndex === 0 && <button className={`btnUlSt2 ${activeBtn === 'btnUlSt2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnUlSt2' ? null : 'btnUlSt2'); openModal("/assets/ValoresImg/MiembrosSp/01UlnarStT.png",{ top: '2%', left: '2%' });}}></button>}
             
                 {currentImageIndex === 1 && <button className="btnUSt6" onClick={() => handleButtonClick('4 cm distalmente sobre dorso del 4to dedo, falange proximal.', {  top: '10%', left: '70%' }, 'R')}></button>}
                 {currentImageIndex === 1 && <button className="btnUSt7" onClick={() => handleButtonClick('DORSO DE LA MANO - Punto medio entre 4to y 5to metacarpianos.', { top: '10%', left: '70%'}, 'A')}></button>}
                 {currentImageIndex === 1 && <button className="btnUSt8" onClick={() => handleButtonClick('MUÑECA. Estimulo Antidrómico a 14 cm con dirección proximal del electrodo de registro, medial y adyacente al tendón cubital anterior.', {  top: '10%', left: '70%' }, 'E')}></button>}
-                {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/02UlnarStG.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/01UlnarStT.png",{ top: '2%', left: '2%' })}></button>}
+                {currentImageIndex === 1 && <button className={`btnUlSt1 ${activeBtn === 'btnUlSt1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnUlSt1' ? null : 'btnUlSt1'); openModal("/assets/ValoresImg/MiembrosSp/02UlnarStG.png",{ top: '2%', left: '2%' })}}></button>}
+                {currentImageIndex === 1 && <button className={`btnUlSt2 ${activeBtn === 'btnUlSt2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnUlSt2' ? null : 'btnUlSt2'); openModal("/assets/ValoresImg/MiembrosSp/02UlnarStT.png",{ top: '2%', left: '2%' })}}></button>}
             </div>
             {textBoxVisible && (
                 <div className="tooltip-wrapper" style={{ top: textBoxPosition.top, left: textBoxPosition.left }}>

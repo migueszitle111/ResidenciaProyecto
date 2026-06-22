@@ -10,7 +10,7 @@ const Tibial = () => {
     const [textBoxPosition, setTextBoxPosition] = useState({ top: '50%', left: '50%' });
     const [textBoxClass, setTextBoxClass] = useState('text-boxTb');
 
-    // Estado existente para un solo imageBox
+    // Estado existente para un solo imageBox 
     const [imageBoxVisible, setImageBoxVisible] = useState(false);
     const [imageBoxContent, setImageBoxContent] = useState('');
     const [imageBoxPosition, setImageBoxPosition] = useState({ top: '50%', left: '50%' });
@@ -28,6 +28,7 @@ const Tibial = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -120,6 +121,7 @@ const Tibial = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -165,18 +167,20 @@ const Tibial = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnTib1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnTib2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Tib-T01.png")}></button>
+                        <button className={`btnTib2 ${activeBtn === 'btnTib2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTib2' ? null : 'btnTib2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Tib-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnTib3"
-                            onClick={() =>
+                            className={`btnTib3 ${activeBtn === 'btnTib3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnTib3' ? null : 'btnTib3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/TbEstimulo1.png",
                                     "Estimulo. Nervio Tibial fibras mixtas, colocar el cátodo entre maléolo medial y tendón de Aquiles, 1 cm por debajo del borde superior del maléolo, el ánodo se coloca a 3 cm en dirección distal al cátodo." + 
                                     "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en el primer y/o quinto ortejos.\n\n Tierra. Pierna, entre estimulo y primer relevo de registros, otros autores prefieren en M1 o C4’/C3’.",
                                     
                                     { position: { top: '60%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         {/* <button
@@ -189,10 +193,13 @@ const Tibial = () => {
                                 )
                             }
                         ></button>*/}
-                        <button className="btnTib4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Tb-10-20.png")}></button> 
+                        <button className={`btnTib4 ${activeBtn === 'btnTib4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTib4' ? null : 'btnTib4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Tb-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button> 
 
                         {currentImageIndex === 0 && (
-                            <button className="btnTibia" onClick={() => {
+                            <button className={`btnTibia ${activeBtn === 'btnTibia' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTibia' ? null : 'btnTibia');
                                         handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TibCanal1.png", { top: "50%", left: "50%" });   }}
                             >
@@ -200,7 +207,8 @@ const Tibial = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnTibia3" onClick={() => {
+                            <button className={`btnTibia3 ${activeBtn === 'btnTibia3' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnTibia3' ? null : 'btnTibia3');
                                         handleButtonClick('N22 Lumbar electrodo activo en apófisis espinosa L4s con referencia a L1s o espina iliaca anterosuperior (opcional montaje T12s).', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TibCanal2.png", { top: "50%", left: "50%" });   }}
                             >
@@ -209,7 +217,8 @@ const Tibial = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnTibia4" onClick={() => {
+                            <button className={`btnTibia4 ${activeBtn === 'btnTibia4' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnTibia4' ? null : 'btnTibia4');
                                         handleButtonClick('Fosa poplítea N7, electrodo activo discretamente lateral a la línea media, 2 cm proximal al pliegue cutáneo, referenciado a cara medial línea interarticular de la rodilla ipsilateral.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TibCanal3.png", { top: "50%", left: "50%" });   }}
                             >
@@ -219,7 +228,8 @@ const Tibial = () => {
 
                         {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasTb" onClick={() => {
+                            <button className={`btnOndasTb1 ${activeBtn === 'btnOndasTb1' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasTb1' ? null : 'btnOndasTb1');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/TibCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/TibCanal2.png",
@@ -336,7 +346,7 @@ const Tibial = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

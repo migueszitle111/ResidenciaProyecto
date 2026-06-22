@@ -197,7 +197,7 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
@@ -216,11 +216,17 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
+}
+.btnOndasS.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
 }
 
 .btnMie2 {
@@ -235,11 +241,17 @@ color: white;
     left: 45%;
     transform: translate(700%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
+}
+.btnMie2.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
 }
 
 .btnMiem3 {
@@ -254,11 +266,17 @@ color: white;
     left: 38%;
     transform: translate(580%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
+}
+.btnMiem3.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
 }
 
 
@@ -274,11 +292,17 @@ color: white;
     left: 45%;
     transform: translate(580%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
+}
+.btnMiem5.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
 }
 
 .btnMie4 {
@@ -293,11 +317,17 @@ color: white;
     left: 38%;
     transform: translate(460%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
+}
+.btnMie4.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
 }
 
 .btnRegistroInf33 {
@@ -312,11 +342,19 @@ color: white;
     left: 3%;
     transform: translate(940%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
     transition:all .2s ease-in-out;
+}
+
+.btnRegistroInf33.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-image: url('/assets/ImgTecnicas/Potenciales/Registro.png');
+    background-size: cover;
+    background-position: center;
 }
 
 
@@ -484,4 +522,40 @@ color: white;
     background-color: transparent; /* Fondo transparente */
     border: none; /* Sin borde */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+.labelMieSup {
+    position: absolute;
+    top: 1%;       /* Ajusta la posición vertical */
+    left: 10%;      /* Ajusta la posición horizontal */
+    transform: translate(-50%, 0);
+    z-index: 1;
+    color: rgb(0, 0, 0);
+    font-size: 1vw;
+    font-family: 'Arial', sans-serif;
+    background-color: rgba(0, 0, 0, 0);
+    pointer-events: none;
+    white-space: pre-line;
+}
+
+/* #### Estados activos — un solo botón activo a la vez #### */
+
+.btnMie2.active,
+.btnMiem3.active,
+.btnMie4.active,
+.btnOndasS.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
+}
+
+.btnMieSup.active,
+.btnMieSup3.active,
+.btnMieSup4.active,
+.btnMieSup5.active,
+.btnMieSup6.active {
+    background-color: #000;
+    border: 1px solid #fff;
+    color: #fff;
 }

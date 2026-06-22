@@ -103,7 +103,7 @@ color: white;
 .extra-image-container {
     flex: 1; /* La imagen lateral ocupa menos espacio */
     display: flex;
-    /*border: 2px solid #4a4a4a;  Borde para destacar */
+    /*border: 2px solid #4a4a4a;   Borde para destacar */
     padding: 5px;
     background-color: transparent;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -197,7 +197,7 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
@@ -216,7 +216,7 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
@@ -235,7 +235,7 @@ color: white;
     left: 45%;
     transform: translate(700%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -254,7 +254,7 @@ color: white;
     left: 38%;
     transform: translate(580%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -274,7 +274,7 @@ color: white;
     left: 45%;
     transform: translate(580%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -293,7 +293,7 @@ color: white;
     left: 38%;
     transform: translate(460%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -312,7 +312,7 @@ color: white;
     left: 3%;
     transform: translate(940%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -484,4 +484,27 @@ color: white;
     background-color: transparent; /* Fondo transparente */
     border: none; /* Sin borde */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+.btnMiem2.active,
+.btnMiem3.active,
+.btnMiem4.active,
+.btnMiem5.active,
+.btnRegistroInf22.active,
+.btnOndas.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
+}
+
+.btnMiemIn.active,
+.btnMiemIn2.active,
+.btnMiemIn3.active,
+.btnMiemIn4.active,
+.btnMiemIn5.active,
+.btnMiemIn6.active {
+    background-color: #000;
+    border: 1px solid #fff;
+    color: #fff;
 }

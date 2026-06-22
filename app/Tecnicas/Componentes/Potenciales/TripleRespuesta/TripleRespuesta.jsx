@@ -29,6 +29,7 @@ const TripleRespuesta = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -130,6 +131,7 @@ const TripleRespuesta = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -176,23 +178,28 @@ const TripleRespuesta = () => {
                 {currentImageIndex === 0 && (
                     <>
                         <button className="btnTrp1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnTrp2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple1-T01.png")}></button>
+                        <button className={`btnTrp2 ${activeBtn === 'btnTrp2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp2' ? null : 'btnTrp2'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple1-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnTrp3"
-                            onClick={() =>
+                            className={`btnTrp3 ${activeBtn === 'btnTrp3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnTrp3' ? null : 'btnTrp3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Motores/MedMxEstimulo.p",
                                     "Cortical a nivel Vertex craneal 1 cm delante de Cz " + 
                                     "\n\n Cervical a nivel de proceso espinoso C5-C6 para Bíceps, C7 Para Flexor radial del carpo y C8-T1 para Primer interóseo dorsal  \n\n Periférico. Opcional en punto de Erb o ventral a apófisis coracoides.",
                                     
                                     { position: { top: '25%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnTrp4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Motores/Respuesta1-10-20.png")}></button>
+                        <button className={`btnTrp4 ${activeBtn === 'btnTrp4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp4' ? null : 'btnTrp4'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Respuesta1-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnTrpR" onClick={() => {
+                            <button className={`btnTrpR ${activeBtn === 'btnTrpR' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTrpR' ? null : 'btnTrpR');
                                     handleButtonClick('Electrodo activo colocado sobre el vientre muscular punto medio ventral del brazo; referencia sobre el tendón a nivel de pliegue del codo.', { top: '60%', left: '81%' });
                                     handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/BicepsBq.png","/assets/ImgTecnicas/Potenciales/Motores/Registro1-0.png"], { top: "50%", left: "50%" });  }}
                             >
@@ -200,7 +207,9 @@ const TripleRespuesta = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnTrpR2" onClick={() => {
+                            <button className={`btnTrpR2 ${activeBtn === 'btnTrpR2' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTrpR2' ? null : 'btnTrpR2');
                                     handleButtonClick('Electrodo activo en tercio medio del antebrazo sobre la intersección de la línea trazada desde el pliegue del codo al centro de los huesos del carpo; referencia distal al recorrido del tendón 2 cm proximales a muñeca.', { top: '58%', left: '81%' });
                                     handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/FloxorCar.png","/assets/ImgTecnicas/Potenciales/Motores/Registro1-0.png"], { top: "50%", left: "50%" });  }}
                             >
@@ -208,7 +217,9 @@ const TripleRespuesta = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnTrpR3" onClick={() => {
+                            <button className={`btnTrpR3 ${activeBtn === 'btnTrpR3' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTrpR3' ? null : 'btnTrpR3');
                                     handleButtonClick('Electrodo activo en espacio dorsal, línea media de membrana cutánea entre dedos pulgar e índice; referencia en articulación metacarpofalángica del pulgar.', { top: '60%', left: '81%' });
                                     handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/PrimerInDr.png","/assets/ImgTecnicas/Potenciales/Motores/Registro1-0.png"], { top: "50%", left: "50%" });  }}
                             >
@@ -217,7 +228,8 @@ const TripleRespuesta = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnRegistro1" onClick={() => {
+                            <button className={`btnRegistro1 ${activeBtn === 'btnRegistro1' ? 'active' : ''}`} onClick={() => {
+                                setActiveBtn(p => p === 'btnRegistro1' ? null : 'btnRegistro1');
                                 
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/Registro1-0.png", { top: "-58%", left: "50%" });  }}
                             >
@@ -226,7 +238,8 @@ const TripleRespuesta = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasTrp1" onClick={() => {
+                            <button className={`btnOndasTrp1 ${activeBtn === 'btnOndasTrp1' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasTrp1' ? null : 'btnOndasTrp1');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Motores/BicepsBq.png",
                                             "/assets/ImgTecnicas/Potenciales/Motores/FloxorCar.png",
@@ -244,23 +257,28 @@ const TripleRespuesta = () => {
                 {currentImageIndex === 1 && (
                     <>
                         {/* <button className="btnTrp5" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnTrp6" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple2-T01.png")}></button>
+                        <button className={`btnTrp6 ${activeBtn === 'btnTrp6' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp6' ? null : 'btnTrp6'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple2-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnTrp7"
-                            onClick={() =>
+                            className={`btnTrp7 ${activeBtn === 'btnTrp7' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnTrp7' ? null : 'btnTrp7');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Motores/MedMxEimulo.png",
                                     "Cortical a nivel Vertex craneal 1 cm delante de Cz. Opcional con bobina en mariposa C1-C2 o C3-C4." + 
                                     "\n\n Cervical a nivel de proceso espinoso C7 se puede registrar en los tres músculos o individualizar C6 para Bíceps y C8-T1 para ACP y ADM. \n\n Periférico. Opcional en punto de Erb o ventral a apófisis coracoides.",
                                     
                                     { position: { top: '25%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnTrp8" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Motores/Repuesta2-10-20.png")}></button>
+                        <button className={`btnTrp8 ${activeBtn === 'btnTrp8' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp8' ? null : 'btnTrp8'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Repuesta2-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 1 && (
-                            <button className="btnTrpR4" onClick={() => {
+                            <button className={`btnTrpR4 ${activeBtn === 'btnTrpR4' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTrpR4' ? null : 'btnTrpR4');
                                     handleButtonClick('Electrodo activo colocado sobre el vientre muscular punto medio ventral del brazo; referencia sobre el tendón a nivel de pliegue del codo.', { top: '60%', left: '81%' });
                                     handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/BicepBq2.png","/assets/ImgTecnicas/Potenciales/Motores/Registro2.png"], { top: "50%", left: "50%" });  }}
                             >
@@ -268,7 +286,9 @@ const TripleRespuesta = () => {
                             </button>
                         )}
                         {currentImageIndex === 1 && (
-                            <button className="btnTrpR5" onClick={() => {
+                            <button className={`btnTrpR5 ${activeBtn === 'btnTrpR5' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTrpR5' ? null : 'btnTrpR5');
                                     handleButtonClick('Electrodo activo en la eminencia hipotenar medial; referencia sobre la articulación metacarpofalángica del quinto dedo.', { top: '60%', left: '81%' });
                                     handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/AbductorQut.png","/assets/ImgTecnicas/Potenciales/Motores/Registro2.png"], { top: "50%", left: "50%" });  }}
                             >
@@ -276,7 +296,9 @@ const TripleRespuesta = () => {
                             </button>
                         )}
                         {currentImageIndex === 1 && (
-                            <button className="btnTrpR6" onClick={() => {
+                            <button className={`btnTrpR6 ${activeBtn === 'btnTrpR6' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTrpR6' ? null : 'btnTrpR6');
                                     handleButtonClick('Electrodo activo en eminencia tenar lateral; referencia sobre la primera articulación metacarpofalángica.', { top: '60%', left: '81%' });
                                     handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/abductorCt.png","/assets/ImgTecnicas/Potenciales/Motores/Registro2.png"], { top: "50%", left: "50%" });  }}
                             >
@@ -285,16 +307,17 @@ const TripleRespuesta = () => {
                         )}
                         
                         {currentImageIndex === 1 && (
-                            <button className="btnRegistro2" onClick={() => {
-                                
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/Registro2.png", { top: "-58%", left: "50%" });  }}
+                            <button className={`btnRegistro2 ${activeBtn === 'btnRegistro2' ? 'active' : ''}`} onClick={() => {
+                                setActiveBtn(p => p === 'btnRegistro2' ? null : 'btnRegistro2');
+                                handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/Registro2.png", { top: "-58%", left: "50%" });  }}
                             >
                             
                             </button>
                         )}
 
                         {currentImageIndex === 1 && (
-                            <button className="btnOndasTrp2" onClick={() => {
+                            <button className={`btnOndasTrp2 ${activeBtn === 'btnOndasTrp2' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasTrp2' ? null : 'btnOndasTrp2');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Motores/BicepBq2.png",
                                             "/assets/ImgTecnicas/Potenciales/Motores/AbductorQut.png",
@@ -313,23 +336,28 @@ const TripleRespuesta = () => {
                 {currentImageIndex === 2 && (
                     <>
                         {/* <button className="btnTrp9" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnTrp10" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple3-T01.png")}></button>
+                        <button className={`btnTrp10 ${activeBtn === 'btnTrp10' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp10' ? null : 'btnTrp10'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Triple3-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnTrp11"
-                            onClick={() =>
+                            className={`btnTrp11 ${activeBtn === 'btnTrp11' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnTrp11' ? null : 'btnTrp11');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Motores/MedMxEstimo.png",
                                     "Cortical a nivel Vertex craneal 3 cm delante de Cz." + 
                                     "\n\n Lumbosacro a nivel de proceso espinoso L3-L4 para Vasto medial, L4-L5 para Tibial anterior y S1 para Abductor del hallux. \n\n Periférico. Opcional en punto de Erb o ventral a apófisis coracoides.",
                                     
                                     { position: { top: '25%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnTrp12" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Motores/Repuesta3-10-20.png")}></button>
+                        <button className={`btnTrp12 ${activeBtn === 'btnTrp12' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTrp12' ? null : 'btnTrp12'); openModal("/assets/ImgTecnicas/Potenciales/Motores/Repuesta3-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 2 && (
-                            <button className="btnTrpR7" onClick={() => {
+                            <button className={`btnTrpR7 ${activeBtn === 'btnTrpR7' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTrpR7' ? null : 'btnTrpR7');
                                     handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '60%', left: '19%' });
                                     handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/VastoMd.png","/assets/ImgTecnicas/Potenciales/Motores/Registro3.png"], { top: "50%", left: "50%" });  }}
                             >
@@ -337,7 +365,9 @@ const TripleRespuesta = () => {
                             </button>
                         )}
                         {currentImageIndex === 2 && (
-                            <button className="btnTrpR8" onClick={() => {
+                            <button className={`btnTrpR8 ${activeBtn === 'btnTrpR8' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTrpR8' ? null : 'btnTrpR8');
                                     handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '60%', left: '19%' });
                                     handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/TibialAnt.png","/assets/ImgTecnicas/Potenciales/Motores/Registro3.png"], { top: "50%", left: "50%" });  }}
                             >
@@ -345,7 +375,9 @@ const TripleRespuesta = () => {
                             </button>
                         )}
                         {currentImageIndex === 2 && (
-                            <button className="btnTrpR9" onClick={() => {
+                            <button className={`btnTrpR9 ${activeBtn === 'btnTrpR9' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnTrpR9' ? null : 'btnTrpR9');
                                     handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '60%', left: '19%' });
                                     handleMultiImageBoxClick(["/assets/ImgTecnicas/Potenciales/Motores/AbdutorHallux.png","/assets/ImgTecnicas/Potenciales/Motores/Registro3.png"], { top: "50%", left: "50%" });  }}
                             >
@@ -354,8 +386,9 @@ const TripleRespuesta = () => {
                         )}
                         
                         {currentImageIndex === 2 && (
-                            <button className="btnRegistro3" onClick={() => {
-                                
+                            <button className={`btnRegistro3 ${activeBtn === 'btnRegistro3' ? 'active' : ''}`} onClick={() => {
+                                setActiveBtn(p => p === 'btnRegistro3' ? null : 'btnRegistro3');
+
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/Registro3.png", { top: "-58%", left: "50%" });  }}
                             >
                             
@@ -363,11 +396,12 @@ const TripleRespuesta = () => {
                         )}
 
                         {currentImageIndex === 2 && (
-                            <button className="btnOndasTrp3" onClick={() => {
-                                        handleMultiImageBoxClick([
-                                            "/assets/ImgTecnicas/Potenciales/Motores/VastoMd.png",
-                                            "/assets/ImgTecnicas/Potenciales/Motores/TibialAnt.png",
-                                            "/assets/ImgTecnicas/Potenciales/Motores/AbdutorHallux.png",
+                            <button className={`btnOndasTrp3 ${activeBtn === 'btnOndasTrp3' ? 'active' : ''}`} onClick={() => {
+                                setActiveBtn(p => p === 'btnOndasTrp3' ? null : 'btnOndasTrp3');
+                                handleMultiImageBoxClick([
+                                    "/assets/ImgTecnicas/Potenciales/Motores/VastoMd.png",
+                                    "/assets/ImgTecnicas/Potenciales/Motores/TibialAnt.png",
+                                    "/assets/ImgTecnicas/Potenciales/Motores/AbdutorHallux.png",
 
                                         ], { top: "50%", left: "50%" });   }}
                             >
@@ -477,7 +511,7 @@ const TripleRespuesta = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

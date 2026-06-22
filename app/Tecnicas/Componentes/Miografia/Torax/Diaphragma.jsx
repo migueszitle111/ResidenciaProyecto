@@ -124,7 +124,7 @@ const Diaphragma = () => {
     };
 
 const renderGalleryItem = (item) => (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%", }}>
         {(item.layers || [item.original]).map((src, index) => (
             <img
                 key={index}
@@ -133,12 +133,12 @@ const renderGalleryItem = (item) => (
                 onContextMenu={e => e.preventDefault()}
                 draggable={false}
                 style={{
-                    width: "100%",
+                    width: "80%",
                     height: "100%",
                     objectFit: "contain",
                     position: index === 0 ? "relative" : "absolute",
-                    top: 0,
-                    left: 0,
+                    top: 15,
+                    left: 180,
                 }}
             />
         ))}
@@ -155,7 +155,7 @@ const renderGalleryItem = (item) => (
     );
 
     return (
-        <div  className=" py-20 gallery-container">
+        <div  className=" py-20 bg-white gallery-container">
 
              {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
             {!isLandscape && (
@@ -172,7 +172,7 @@ const renderGalleryItem = (item) => (
                     showPlayButton={false}
                     showBullets={false}
                     showNav={false}
-                    showThumbnails={true}
+                    showThumbnails={false}
                     thumbnailPosition="bottom"
                 />
                 {/* strong>Título:</strong> Texto normal aquí, y <strong>esta parte en negritas</strong>. */}
@@ -187,7 +187,7 @@ const renderGalleryItem = (item) => (
                         <button className="btnAntb" onClick={() => {
                                 handleButtonClick('Abordaje EMG clásico: costal derecho, 7.º–8.º espacio intercostal línea axilar media (electrodo de aguja o coaxial) \n\n1–2 cm (entre costillas; fibras superficiales)' +
                         '\n\nA 30–45° cefálico, tangencial entre costillas; evitar pleura \n\nEcografía: identificar deslizamiento pleural; diafragma como línea hiperecogénica con banda muscular; usar modo M para excursión' + 
-                        '\n\n≈3–4 cm por encima del margen costal en línea axilar media (EIC 7–8) \n\nPunto en línea axilar media; ventana subcostal derecha sobre hígado (para US)', { top: "8%", left: "23%" });
+                        '\n\n≈3–4 cm por encima del margen costal en línea axilar media (EIC 7–8) \n\nPunto en línea axilar media; ventana subcostal derecha sobre hígado (para US)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_55.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -222,6 +222,9 @@ const renderGalleryItem = (item) => (
                         <div className="info-box info-box-11">
                             <strong>Unidades motoras: </strong>UM pequeñas para control tónico con alta resistencia a fatiga; descarga sincrónica con ventilación<strong></strong>
                         </div>
+                        <div className="static-text-box">
+                            
+                        </div>
 
                     </>
                 )}
@@ -239,10 +242,10 @@ const renderGalleryItem = (item) => (
             <div
                 className="image-boxAnt"
                 style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
+                top: 100,
+                left: 280,
+                width: "70%",
+                height: "70%",
                 position: "absolute",
                 display: "flex",
                 justifyContent: "center",

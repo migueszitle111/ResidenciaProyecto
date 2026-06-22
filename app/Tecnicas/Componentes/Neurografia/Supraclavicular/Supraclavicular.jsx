@@ -12,6 +12,7 @@ const Supraclavicular = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -61,11 +62,13 @@ const Supraclavicular = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -119,8 +122,8 @@ const Supraclavicular = () => {
                 {currentImageIndex === 0 && <button className="btnSpC2" onClick={() => handleButtonClick('3 cm en dirección caudal con electrodo de tira, horizontal al activo.', { top: '10%', left: '25%'}, 'R')}></button>}
                 {currentImageIndex === 0 && <button className="btnSpC3" onClick={() => handleButtonClick('ÁREA SUPRACLAVICULAR - Electrodos adheribles de tira colocados sobre la superficie exterior de la diáfisis clavicular.', {  top: '10%', left: '25%' }, 'A')}></button>}
                 {currentImageIndex === 0 && <button className="btnSpC4" onClick={() => handleButtonClick('CUELLO PUNTO MEDIO. El cátodo se coloca en el borde posterior del músculo esternocleidomastoideo a nivel del margen inferior del cartílago tiroides.', { top: '10%', left: '25%'}, 'E')}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Supraclavicular-G.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Supraclavicular-T.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className={`btnSuprC1 ${activeBtn === 'btnSuprC1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSuprC1' ? null : 'btnSuprC1'); openModal("/assets/ValoresImg/Cervicales/01-Supraclavicular-G.png",{ top: '2%', left: '2%' });}}></button>}
+                {currentImageIndex === 0 && <button className={`btnSuprC2 ${activeBtn === 'btnSuprC2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSuprC2' ? null : 'btnSuprC2'); openModal("/assets/ValoresImg/Cervicales/01-Supraclavicular-T.png",{ top: '5%', left: '2%' });}}></button>}
 
             
             </div>

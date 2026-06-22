@@ -217,7 +217,7 @@ const Miografia = [
         'Gluteus Minimus',
         'Tensor Fasciae Latae',
         'Iliopsoas',
-        'Pectineus',
+        // 'Pectineus',
         'Sartorius',
         'Adductor Longus',
         'Adductor Brevis',
@@ -345,24 +345,28 @@ const Miografia = [
 
                         {/* Menú original */}
                         {Miografia.map((menuOption, menuIndex) => (
-                            <div key={menuIndex} className="ml-2">
+                            <div key={menuIndex} className="mb-1">
                                 <button
-                                    className="w-full text-left py-2 hover:text-orange-600"
+                                    className={`w-full text-left py-2 px-2 rounded-lg transition-colors ${
+                                        visibleSubMenu === menuOption.Menu
+                                            ? 'bg-orange-500 text-white'
+                                            : 'hover:text-orange-400'
+                                    }`}
                                     onClick={() => toggleSubMenuVisibility(menuOption.Menu)}
                                 >
-                                    › {menuOption.Menu}
+                                    {visibleSubMenu === menuOption.Menu ? '▽' : '▷'} {menuOption.Menu}
                                 </button>
                                 {visibleSubMenu === menuOption.Menu && (
-                                    <div className="ml-4">
+                                    <div className="ml-4 mt-1">
                                         {menuOption.Submenu.map((submenuOption, submenuIndex) => (
                                             <button
                                                 key={submenuIndex}
-                                                className={`w-full text-sm text-left py-1 hover:text-orange-600 ${
-                                                    selectedOption === submenuOption ? "text-orange-600" : ""
+                                                className={`w-full text-sm text-left py-1 px-1 hover:text-orange-400 transition-colors ${
+                                                    selectedOption === submenuOption ? "text-orange-400" : "text-gray-300"
                                                 }`}
                                                 onClick={() => handleClick(submenuOption)}
                                             >
-                                                {submenuOption}
+                                                ● {submenuOption}
                                             </button>
                                         ))}
                                     </div>
@@ -384,13 +388,19 @@ const Miografia = [
                             />
                             <h1 className="text-white text-4xl">Técnicas</h1>
                             <p className="pt-16 text-white text-center text-xl italic">
-                                Bienvenido a la sección de Técnicas en donde podrá contar a
-                                disposición de la información que se encuentran disponibles en
-                                nuestra plataforma.
+                              Bienvenido a la sección de Técnicas en donde podrá contar a
+                              disposición de la información que se encuentran disponibles en
+                              nuestra plataforma.
                             </p>
                         </div>
                     ) : (
                         <div className="flex min-h-screen flex-col items-center rounded p-2 m-4">
+                            <div className="w-full mb-8">
+                                <h1 className="text-white text-4xl font-bold">
+                                    {selectedOption}
+                                </h1>
+                                <div className="mt-2 h-[2px] w-16 bg-orange-500 rounded-full" />
+                            </div>
                             {selectedOption === "Frontalis" && <Frontalisis />}
                             {selectedOption === "Orbicularis oris" && <Oris />}
                             {selectedOption === "Orbicularis oculi (pars orbitalis)" && <Orbitalis />}
@@ -457,7 +467,7 @@ const Miografia = [
                             {selectedOption === 'Gluteus Minimus' && <GluteusMi />}
                             {selectedOption === 'Tensor Fasciae Latae' && <TensorF />}
                             {selectedOption === 'Iliopsoas' && <Iliopsoas />}
-                            {selectedOption === 'Pectineus' && <Pectineus />}
+                            {/* {selectedOption === 'Pectineus' && <Pectineus />} */}
                             {selectedOption === 'Sartorius' && <Sartorius />}
                             {selectedOption === 'Adductor Longus' && <AddLongus />}
                             {selectedOption === 'Adductor Brevis' && <AddBrevis />}

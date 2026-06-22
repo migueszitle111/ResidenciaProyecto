@@ -28,6 +28,7 @@ const MiembrosInf = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -120,6 +121,7 @@ const MiembrosInf = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -164,11 +166,14 @@ const MiembrosInf = () => {
                 {/* Botones que abren imágenes en el modal */}
                 {currentImageIndex === 0 && (
                     <>
-                        <button className="btnMiem1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnMiem2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Motores/MieInf1-T01.png")}></button>
+                        <button className={`btnMiem1 ${activeBtn === 'mie1' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'mie1' ? null : 'mie1'); openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png"); }}></button>
+                        <button className={`btnMiem2 ${activeBtn === 'mie2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'mie2' ? null : 'mie2'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieInf1-T01.png", "", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnMiem3"
-                            onClick={() =>
+                            className={`btnMiem3 ${activeBtn === 'miem3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'miem3' ? null : 'miem3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Motores/Registr.png",
                                     "ESTIMULO CORTICAL \n\n Bobina circular de estimulación magnética transcraneal. Colocar el centro de la bobina tangencialmente 3 cm por delante del Vertex (Cz) siguiendo la línea media." + 
@@ -176,35 +181,40 @@ const MiembrosInf = () => {
                                     "\n\n Bobina en doble cono. Ideal para la estimulación en miembros inferiores por la profundidad que se genera a nivel cortical y subcortical." +
                                     "\n\n Intensidad. Se recomienda iniciar en 60% con incrementos progresivos de 10% hasta obtener una contracción mínima al reposo.",
                                     { position: { top: '20%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         <button
-                            className="btnMiem5"
-                            onClick={() =>
+                            className={`btnMiem5 ${activeBtn === 'miem5' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'miem5' ? null : 'miem5');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Motores/Registr.png",
                                     "ESTIMULO LUMBAR \n\nBobina circular o en forma de 8 de estimulación magnética transcraneal. Colocar el centro de la bobina en orientación tangencial u horizontal sobre los procesos espinosos de las vértebras lumbosacras dependiendo de los niveles a explorar; se observa una respuesta idónea en L1-L2 para Vasto Medial, la unión L4-L5 para Tibial anterior y S1 para Abductor de hallux. La posición del paciente puede variar desde decúbito prono o en sedestación con máxima flexión del tronco." ,
                                     { position: { top: '20%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         <button
-                            className="btnRegistroInf22"
-                            onClick={() =>
+                            className={`btnRegistroInf22 ${activeBtn === 'registro' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'registro' ? null : 'registro');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Motores/RegistroInf.png",
                                     "Tibial anterior  \n\nActivo. Cara lateral de la tibia, el electrodo de superficie se coloca en la unión del tercio proximal y medio de la pierna, al interceptar una línea trazada entre la tuberosidad tibial y el maléolo lateral. \nReferencia: 4 cm distal al electrodo activo sobre el tendón del tibial anterior. \n Tierra: Tibia medial o rodilla." ,
                                     { position: { top: '62%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnMiem4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Motores/MieInf-10-20.png")}></button>
+                        <button className={`btnMiem4 ${activeBtn === 'miem4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'miem4' ? null : 'miem4'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieInf-10-20.png"); }}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnMiemIn" onClick={() => {
+                            <button className={`btnMiemIn ${activeBtn === 'reposo' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'reposo' ? null : 'reposo');
                                         handleButtonClick('Determinar el umbral de estimulación magnética cortical mínimo al generar un pequeño movimiento en el pie o dedos con incrementos progresivos del 10% de la intensidad. De no lograrlo al 100%, pasar a la facilitación.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/ReposoInf.png", { top: "50%", left: "50%" });   }}
                             >
@@ -212,7 +222,9 @@ const MiembrosInf = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnMiemIn3" onClick={() => {
+                            <button className={`btnMiemIn3 ${activeBtn === 'facilitacion' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'facilitacion' ? null : 'facilitacion');
                                         handleButtonClick('Solicitar al paciente una contracción voluntaria del 20% de la fuerza en dorsiflexión del tobillo (medida subjetiva). Este registro incrementa la amplitud y reducide la latencia del potencial en reposo. ', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/FacilitacionInf.png", { top: "50%", left: "50%" });   }}
                             >
@@ -221,7 +233,9 @@ const MiembrosInf = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnMiemIn4" onClick={() => {
+                            <button className={`btnMiemIn4 ${activeBtn === 'lumbar' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'lumbar' ? null : 'lumbar');
                                         handleButtonClick('Estimulación medular/radicular localizando la unión L4-L5 con referencia a las crestas iliacas o a nivel sacro (S1-S2) un nivel por arriba de las espinas iliacas posteriores. ', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/LumbarInf.png", { top: "50%", left: "50%" });   }}
                             >
@@ -229,7 +243,8 @@ const MiembrosInf = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnMiemIn5" onClick={() => {
+                            <button className={`btnMiemIn5 ${activeBtn === 'periferico' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'periferico' ? null : 'periferico');
                                         handleButtonClick('Estimulación en hueco poplíteo ipsilateral al registro, se puede realizar tanto por estimulación magnética transcraneal, como con estimulación eléctrica convencional. ', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/PerifericoInf.png", { top: "50%", left: "50%" });   }}
                             >
@@ -237,7 +252,8 @@ const MiembrosInf = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnMiemIn6" onClick={() => {
+                            <button className={`btnMiemIn6 ${activeBtn === 'ondaF' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'ondaF' ? null : 'ondaF');
                                         handleButtonClick('Registro convencional de latencia mínima mediante técnica de estimulación ortodrómica continua a nivel de la fíbula.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Motores/OndaFInf.png", { top: "50%", left: "50%" });}}
                             >
@@ -247,7 +263,8 @@ const MiembrosInf = () => {
 
                         {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
                         {currentImageIndex === 0 && (
-                            <button className="btnOndas" onClick={() => {
+                            <button className={`btnOndas ${activeBtn === 'ondas' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'ondas' ? null : 'ondas');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Motores/ReposoInf.png",
                                             "/assets/ImgTecnicas/Potenciales/Motores/FacilitacionInf.png",
@@ -366,7 +383,7 @@ const MiembrosInf = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

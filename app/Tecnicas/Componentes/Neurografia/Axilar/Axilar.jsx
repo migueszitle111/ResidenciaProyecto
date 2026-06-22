@@ -12,6 +12,7 @@ const Axilar = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -63,11 +64,14 @@ const Axilar = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
         const renderGalleryItem = (item) => (
@@ -121,8 +125,10 @@ const Axilar = () => {
                 {currentImageIndex === 0 && <button className="btnAx2" onClick={() => handleButtonClick('Articulación acromioclavicular.', { top: '62%', left: '25%'}, 'T')}></button>}
                 {currentImageIndex === 0 && <button className="btnAx3" onClick={() => handleButtonClick('DELTOIDS MIDIUM C5, C6 - Punto medio entre articulación acromioclavicular y área de inserción deltoidea en region lateral del hombro.', {  top: '62%', left: '25%' }, 'A')}></button>}
                 {currentImageIndex === 0 && <button className="btnAx4" onClick={() => handleButtonClick('Inserción deltoidea, unión del tercio proximal y medio del brazo.', { top: '62%', left: '25%'}, 'R')}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/Axilar-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/Axilar-T-01.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className={`btnAxi1 ${activeBtn === 'btnAxi1' ? 'active' : ''}`}
+                    onClick={() => { setActiveBtn(p => p === 'btnAxi1' ? null : 'btnAxi1'); openModal("/assets/ValoresImg/MiembrosSp/Axilar-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+                {currentImageIndex === 0 && <button className={`btnAxi2 ${activeBtn === 'btnAxi2' ? 'active' : ''}`}
+                    onClick={() => { setActiveBtn(p => p === 'btnAxi2' ? null : 'btnAxi2'); openModal("/assets/ValoresImg/MiembrosSp/Axilar-T-01.png",{ top: '5%', left: '2%' });}}></button>}
                 
             </div>
             {textBoxVisible && (

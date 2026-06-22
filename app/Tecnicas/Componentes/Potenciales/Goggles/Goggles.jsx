@@ -28,6 +28,7 @@ const Goggles = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -121,6 +122,7 @@ const Goggles = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -166,7 +168,8 @@ const Goggles = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnGog1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnGog2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Visual/Gogg-T01.png")}></button>
+                        <button className={`btnGog2 ${activeBtn === 'btnGog2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnGog2' ? null : 'btnGog2'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Gogg-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         
                         
                         {/* {currentImageIndex === 0 && (
@@ -180,16 +183,17 @@ const Goggles = () => {
                         
                         
                         <button
-                            className="btnGog3"
-                            onClick={() =>
+                            className={`btnGog3 ${activeBtn === 'btnGog3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnGog3' ? null : 'btnGog3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Visual/GogEstimulo.png",
                                     "LED FLASH. (luces por emisión de diodos). Se ha recomendado estimular cada ojo por separado con 10 cm de distancia, lo común es colocar directamente los goggles sobre los globos oculares, el paciente debe mantener los ojos cerrados.", 
                                     // "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en los dorsiflexores o extensores de los dedos. \n\n Tierra. M1 o C4’/C3’.",
                                     
                                     { position: { top: '57%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         {/* <button
@@ -202,10 +206,13 @@ const Goggles = () => {
                                 )
                             }
                         ></button>*/}
-                        <button className="btnGog4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Visual/Gogg-10-20.png")}></button> 
+                        <button className={`btnGog4 ${activeBtn === 'btnGog4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnGog4' ? null : 'btnGog4'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Gogg-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button> 
 
                         {currentImageIndex === 0 && (
-                            <button className="btnGogg" onClick={() => {
+                            <button className={`btnGogg ${activeBtn === 'btnGogg' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnGogg' ? null : 'btnGogg');
                                         handleButtonClick('Occipital lateral izquierdo, colocar electrodo activo 5 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz).', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/GogCanal1.png", { top: "50%", left: "50%" });   }}
                             >
@@ -213,7 +220,9 @@ const Goggles = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnGogg2" onClick={() => {
+                            <button className={`btnGogg2 ${activeBtn === 'btnGogg2' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnGogg2' ? null : 'btnGogg2');
                                         handleButtonClick('Línea media occipital, colocar electrodo activo 5 cm por arriba del inion, referenciado a Fpz (línea media frontal) 12 cm por arriba del nasion. ', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/GogCanal2.png", { top: "50%", left: "50%" });   }}
                             >
@@ -222,7 +231,9 @@ const Goggles = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnGogg3" onClick={() => {
+                            <button className={`btnGogg3 ${activeBtn === 'btnGogg3' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnGogg3' ? null : 'btnGogg3');
                                         handleButtonClick('Occipital lateral derecho, colocar electrodo activo 5 cm lateral a la línea media occipital (Oz) referenciado a línea media frontal (Fpz).', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Visual/GogCanal3.png", { top: "50%", left: "50%" });   }}
                             >
@@ -232,7 +243,8 @@ const Goggles = () => {
 
                         {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasTb" onClick={() => {
+                            <button className={`btnOndasGogg ${activeBtn === 'btnOndasGogg' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasGogg' ? null : 'btnOndasGogg');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Visual/GogCanal1.png",
 
@@ -349,7 +361,7 @@ const Goggles = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

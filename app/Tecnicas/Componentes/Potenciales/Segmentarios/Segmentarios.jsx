@@ -29,6 +29,7 @@ const Segmentarios = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -122,6 +123,7 @@ const Segmentarios = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -168,31 +170,37 @@ const Segmentarios = () => {
                 {currentImageIndex === 0 && (
                     <>
                         <button className="btnSeg1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnSeg2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Segmta-T01.png")}></button>
+                        <button className={`btnSeg2 ${activeBtn === 'btnFem2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnFem2' ? null : 'btnFem2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Segmta-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnSeg3"
-                            onClick={() =>
+                            className={`btnSeg3 ${activeBtn === 'btnSeg3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnSeg3' ? null : 'btnSeg3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/RadEstimul.png",
                                     "Estimulo. Nervio Radial superficial mediante electrodos de barra sobre el borde dorsolateral de la muñeca, 2 cm proximal a la apófisis estiloides radial; ánodo 3 cm distalmente." + 
                                     "\n\n Intensidad.  El triple o 2.5 veces por arriba del umbral sensitivo percibido por el paciente.  \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
                                     
                                     { position: { top: '25%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnSeg4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png")}></button>
+                        <button className={`btnSeg4 ${activeBtn === 'btnSeg4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnSeg4' ? null : 'btnSeg4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnSegm" onClick={() => {
+                            <button className={`btnSegm ${activeBtn === 'btnSegm' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnSegm' ? null : 'btnSegm');
                                     handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '44%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SegCanal1.png", { top: "50%", left: "50%" });  }}
                             >
                                 Cz’-Fpz’    
                             </button>
                         )}
-                        {currentImageIndex === 0 && (
-                            <button className="btnSegm2" onClick={() => {
+                        {/* {currentImageIndex === 0 && (
+                            <button className={`btnSegm2 ${activeBtn === 'btnSegm2' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnSegm2' ? null : 'btnSegm2');
                                     handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '7%', left: '44%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SegCanal2.png", { top: "50%", left: "50%" });  }}
                             >
@@ -200,16 +208,18 @@ const Segmentarios = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnSegm3" onClick={() => {
+                            <button className={`btnSegm3 ${activeBtn === 'btnSegm3' ? 'active' : ''}`} onClick={() => {
+                                    setActiveBtn(p => p === 'btnSegm3' ? null : 'btnSegm3');
                                     handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '7%', left: '44%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SegCanal3.png", { top: "50%", left: "50%" });  }}
                             >
                                 ErbL-ErbR     
                             </button>
-                        )}
+                        )} */}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasSeg" onClick={() => {
+                            <button className={`btnOndasSeg ${activeBtn === 'btnOndasSeg' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasSeg' ? null : 'btnOndasSeg');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/SegCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/SegCanal2.png",
@@ -323,7 +333,7 @@ const Segmentarios = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

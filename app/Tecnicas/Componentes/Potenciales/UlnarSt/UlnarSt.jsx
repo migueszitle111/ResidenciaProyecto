@@ -29,6 +29,7 @@ const UlnarSt = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -130,6 +131,7 @@ const UlnarSt = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -176,23 +178,28 @@ const UlnarSt = () => {
                 {currentImageIndex === 0 && (
                     <>
                         <button className="btnUlSt1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
-                        <button className="btnUlSt2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/UlnarSt-T01.png")}></button>
+                        <button className={`btnUlSt2 ${activeBtn === 'UlSt2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'UlSt2' ? null : 'UlSt2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/UlnarSt-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnUlSt3"
-                            onClick={() =>
+                            className={`btnUlSt3 ${activeBtn === 'UlSt3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'UlSt3' ? null : 'UlSt3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/UlEstimulo.png",
                                     "Estimulo. Nervio UlnarSt fibras mixtas, con electrodos de superficie colocando el cátodo en dirección proximal a nivel del carpo, medial y adyacente al tendón cubital anterior, ánodo 2-3 cm distal. Es de utilidad ajustar un electrodo de barra con el ánodo en el pliegue de la muñeca y cátodo proximal a esta referencia." + 
                                     "\n\n Intensidad. incremento progresivo hasta obtener una leve contracción visible en el quinto y/o cuarto dedos.  \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
                                     
                                     { position: { top: '50%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
-                        <button className="btnUlSt4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png")}></button>
+                        <button className={`btnUlSt4 ${activeBtn === 'UlSt4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'UlSt4' ? null : 'UlSt4'); openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
 
                         {currentImageIndex === 0 && (
-                            <button className="btnUlStr" onClick={() => {
+                            <button className={`btnUlStr ${activeBtn === 'UlStr' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'UlStr' ? null : 'UlStr');
                                     handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '6%', left: '28%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/UlStCanal1.png", { top: "50%", left: "50%" });  }}
                             >
@@ -200,24 +207,29 @@ const UlnarSt = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnUlStr2" onClick={() => {
-                                    handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '6%', left: '28%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/UlStCanal2.png", { top: "50%", left: "50%" });  }}
+                            <button className={`btnUlStr2 ${activeBtn === 'UlStr2' ? 'active' : ''}`}
+                                    onClick={() => {
+                                        setActiveBtn(p => p === 'UlStr2' ? null : 'UlStr2');
+                                        handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '6%', left: '28%' });
+                                        handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/UlStCanal2.png", { top: "50%", left: "50%" });  }}
                             >
                                 C5s-Fpz    
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnUlStr3" onClick={() => {
-                                    handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '6%', left: '28%' });
-                                    handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/UlStCanal3.png", { top: "50%", left: "50%" });  }}
+                            <button className={`btnUlStr3 ${activeBtn === 'UlStr3' ? 'active' : ''}`}
+                                    onClick={() => {
+                                        setActiveBtn(p => p === 'UlStr3' ? null : 'UlStr3');
+                                        handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '6%', left: '28%' });
+                                        handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/UlStCanal3.png", { top: "50%", left: "50%" });  }}
                             >
                                 ErbL-ErbR     
                             </button>
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasUls" onClick={() => {
+                            <button className={`btnOndasUls ${activeBtn === 'OndasUls' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'OndasUls' ? null : 'OndasUls');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/UlStCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/UlStCanal2.png",
@@ -332,7 +344,7 @@ const UlnarSt = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(8, 8, 8, 0.377)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

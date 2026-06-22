@@ -12,6 +12,7 @@ const Sural = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -65,11 +66,13 @@ const Sural = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -125,15 +128,15 @@ const Sural = () => {
             {currentImageIndex === 0 && <button className="btnSr4" onClick={() => handleButtonClick('TOBILLO RETROMALEOLAR - Línea media entre el borde posterior del maléolo lateral y el tendón de Aquiles, tomando como límite proximal el polo superior del maléolo y pudiéndose ubicar hasta su borde inferior como límite distal.', { top: '12%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnSr5" onClick={() => handleButtonClick('3 cm distal del electrodo de registo.', { top: '10%', left: '23%' }, 'R')}></button>}
             {currentImageIndex === 0 && <button className="btnSr6" onClick={() => handleButtonClick('Punto medio entre estimulo y registro.', { top: '10%', left: '23%' }, 'T')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Sural-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Sural-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnSural1 ${activeBtn === 'btnSural1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSural1' ? null : 'btnSural1'); openModal("/assets/ValoresImg/MiembrosInf/Sural-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnSural2 ${activeBtn === 'btnSural2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSural2' ? null : 'btnSural2'); openModal("/assets/ValoresImg/MiembrosInf/Sural-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 1 && <button className="btnSr7" onClick={() => handleButtonClick('Dorso del pie.', { top: '10%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 1 && <button className="btnSr8" onClick={() => handleButtonClick('TOBILLO. De forma antidrómica, justo por detrás del maléolo lateral horizontal al borde inferior.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 1 && <button className="btnSr9" onClick={() => handleButtonClick('RAMA CUTÁNEA LATERAL DORSAL - Dorso del pie sobre la porción medial del quinto metatarsiano, justo lateral al tendón extensor largo del quinto dedo.', { top: '10%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnSr10" onClick={() => handleButtonClick('3 cm distal del electrodo activo o en la articulacion metatarsofalangica del 5to ortejo.', { top: '10%', left: '23%' }, 'R')}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Sural-G-02.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/Sural-T-02.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className={`btnSural1 ${activeBtn === 'btnSural1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSural1' ? null : 'btnSural1'); openModal("/assets/ValoresImg/MiembrosInf/Sural-G-02.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 1 && <button className={`btnSural2 ${activeBtn === 'btnSural2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnSural2' ? null : 'btnSural2'); openModal("/assets/ValoresImg/MiembrosInf/Sural-T-02.png",{ top: '5%', left: '2%' });}}></button>}
             
             </div>
             {textBoxVisible && (

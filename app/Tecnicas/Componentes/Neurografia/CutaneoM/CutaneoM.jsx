@@ -12,6 +12,7 @@ const CutaneoM = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
     
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -65,11 +66,13 @@ const CutaneoM = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -123,8 +126,8 @@ const CutaneoM = () => {
                 {currentImageIndex === 0 && <button className="btnCM2" onClick={() => handleButtonClick('Antebrazo lateral.', { top: '12%', left: '32%'}, 'T')}></button>}
                 {currentImageIndex === 0 && <button className="btnCM3" onClick={() => handleButtonClick('ANTEBRAZO MEDIAL - 12 a 14 cm con dirección distal del punto de estimulación sobre línea trazada hasta el pisiforme en la muñeca, justo medial del tendón cubital anterior.', {  top: '12%', left: '32%' }, 'A')}></button>}
                 {currentImageIndex === 0 && <button className="btnCM4" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo.', { top: '12%', left: '32%'}, 'R')}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/CutaneoMd-G-01.png",{ top: '2%', left: '2%' })}></button>}
-                {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosSp/CutaneoMd-T-01.png",{ top: '5%', left: '2%' })}></button>}
+                {currentImageIndex === 0 && <button className={`btnCuM1 ${activeBtn === 'btnCuM1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnCuM1' ? null : 'btnCuM1'); openModal("/assets/ValoresImg/MiembrosSp/CutaneoMd-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+                {currentImageIndex === 0 && <button className={`btnCuM2 ${activeBtn === 'btnCuM2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnCuM2' ? null : 'btnCuM2'); openModal("/assets/ValoresImg/MiembrosSp/CutaneoMd-T-01.png",{ top: '5%', left: '2%' });}}></button>}
                 
             </div>
             {textBoxVisible && (

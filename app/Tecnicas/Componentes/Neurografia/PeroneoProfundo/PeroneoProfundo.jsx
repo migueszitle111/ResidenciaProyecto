@@ -12,6 +12,7 @@ const PeroneoProfundo = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -66,11 +67,13 @@ const PeroneoProfundo = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -124,8 +127,8 @@ const PeroneoProfundo = () => {
             {currentImageIndex === 0 && <button className="btnPp2" onClick={() => handleButtonClick('DORSO DEL PIE - Horizontal al espacio interdigital, entre las cabezas del primer y segundo metatarsiano.', { top: '10%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnPp3" onClick={() => handleButtonClick('TOBILLO. (Antidrómico) 12 cm proximal del electrodo activo y justo lateral al tendón extensor largo del primer ortejo.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 0 && <button className="btnPp4" onClick={() => handleButtonClick('Dorso del pie o pierna.', { top: '10%', left: '23%' }, 'T')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoPf-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/PeroneoPf-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnPerP1 ${activeBtn === 'btnPerP1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnPerP1' ? null : 'btnPerP1'); openModal("/assets/ValoresImg/MiembrosInf/PeroneoPf-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnPerP2 ${activeBtn === 'btnPerP2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnPerP2' ? null : 'btnPerP2'); openModal("/assets/ValoresImg/MiembrosInf/PeroneoPf-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             {/* {currentImageIndex === 1 && <button className="btnPp5" onClick={() => handleButtonClick('Dorso del pie', { top: '10%', left: '23%' })}></button>}
             {currentImageIndex === 1 && <button className="btnPp6" onClick={() => handleButtonClick('3-4 cm distal del electrodo de registo', { top: '10%', left: '23%' })}></button>}

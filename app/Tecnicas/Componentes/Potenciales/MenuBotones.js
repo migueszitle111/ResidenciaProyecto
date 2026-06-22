@@ -129,7 +129,7 @@ const MenuBotonesPt = () => {
     return (
         <div>
             <div className="BannerTitlepage">
-                <div>Potenciales evocados </div>
+                <div>Potenciales</div>
             </div>
 
             {/* Botón para ocultar/mostrar menú */}
@@ -148,10 +148,9 @@ const MenuBotonesPt = () => {
                 {menuVisible ? " " : " "}
             </button>
 
-            <div className="flex">
-                {menuVisible && (
-                    <div className="w-1/5 max-h-full bg-[#3f3c3c] text-white p-4 rounded-2xl">
-                        <h2 className="text-lg mb-4">Potenciales evocados</h2>
+            <div className="flex justify-center">
+                <div className={`max-h-full bg-[#3f3c3c] text-white rounded-2xl flex-shrink-0 overflow-hidden transition-all ${menuVisible ? 'w-1/5 p-4' : 'w-0 p-0'}`}>
+                        <h2 className="text-lg mb-4">Potenciales</h2>
 
                         {/* Buscador con autocompletado */}
                         <input
@@ -180,53 +179,62 @@ const MenuBotonesPt = () => {
 
                         {/* Menú original */}
                         {Potenciales.map((menuOption, menuIndex) => (
-                            <div key={menuIndex} className="ml-2">
-                                <button
-                                    className="w-full text-left py-2 hover:text-orange-600"
-                                    onClick={() => toggleSubMenuVisibility(menuOption.Menu)}
-                                >
-                                    › {menuOption.Menu}
-                                </button>
-                                {visibleSubMenu === menuOption.Menu && (
-                                    <div className="ml-4">
-                                        {menuOption.Submenu.map((submenuOption, submenuIndex) => (
-                                            <button
-                                                key={submenuIndex}
-                                                className={`w-full text-sm text-left py-1 hover:text-orange-600 ${
-                                                    selectedOption === submenuOption ? "text-orange-600" : ""
-                                                }`}
-                                                onClick={() => handleClick(submenuOption)}
-                                            >
-                                                {submenuOption}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {/* Contenido Principal */}
-                <div className="w-4/5 max-h-full">
-                    {!selectedOption ? (
-                        <div className="flex min-h-screen flex-col items-center p-10">
-                            <Image
-                                src="/L_B_Blanco.svg"
-                                alt="Logo de la empresa"
-                                width={120}
-                                height={120}
-                                className="w-52 h-52"
-                            />
-                            <h1 className="text-white text-4xl">Técnicas</h1>
-                            <p className="pt-16 text-white text-center text-xl italic">
-                              Bienvenido a la sección de Técnicas en donde podrá contar a
-                              disposición de la información que se encuentran disponibles en
-                              nuestra plataforma.
-                            </p>
+                                <div key={menuIndex} className="mb-1">
+                                    <button
+                                        className={`w-full text-left py-2 px-2 rounded-lg transition-colors ${
+                                            visibleSubMenu === menuOption.Menu
+                                                ? 'bg-orange-500 text-white'
+                                                : 'hover:text-orange-400'
+                                        }`}
+                                        onClick={() => toggleSubMenuVisibility(menuOption.Menu)}
+                                    >
+                                        {visibleSubMenu === menuOption.Menu ? '▽' : '▷'} {menuOption.Menu}
+                                    </button>
+                                    {visibleSubMenu === menuOption.Menu && (
+                                        <div className="ml-4 mt-1">
+                                            {menuOption.Submenu.map((submenuOption, submenuIndex) => (
+                                                <button
+                                                    key={submenuIndex}
+                                                    className={`w-full text-sm text-left py-1 px-1 hover:text-orange-400 transition-colors ${
+                                                        selectedOption === submenuOption ? "text-orange-400" : "text-gray-300"
+                                                    }`}
+                                                    onClick={() => handleClick(submenuOption)}
+                                                >
+                                                    ● {submenuOption}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
                         </div>
-                    ) : (
+    
+                    {/* Contenido Principal */}
+                    <div className="w-4/5 max-h-full">
+                        {!selectedOption ? (
+                            <div className="flex min-h-screen flex-col items-center p-10">
+                                <Image
+                                    src="/L_B_Blanco.svg"
+                                    alt="Logo de la empresa"
+                                    width={120}
+                                    height={120}
+                                    className="w-52 h-52"
+                                />
+                                <h1 className="text-white text-4xl">Técnicas</h1>
+                                <p className="pt-16 text-white text-center text-xl italic">
+                                    Bienvenido a la sección de Técnicas en donde podrá contar a
+                                    disposición de la información que se encuentran disponibles en
+                                    nuestra plataforma.
+                                </p>
+                            </div>
+                        ) : (
                         <div className="flex min-h-screen flex-col items-center rounded p-2 m-4">
+                            <div className="w-full mb-8 ml-20">
+                                <h1 className="text-white text-4xl font-bold">
+                                    {selectedOption}
+                                </h1>
+                                <div className="mt-2 h-[2px] w-16 bg-orange-500 rounded-full" />
+                            </div>
                             {selectedOption === "Nervio Mediano (fibras mixtas)" && <MedianoFmx />}
                             {selectedOption === "Nervio Mediano (fibras sensitivas)" && <Medianos />}
                             {selectedOption === "Nervios Ulnar (fibras mixtas)" && <Ulnar />}
@@ -255,7 +263,6 @@ const MenuBotonesPt = () => {
                             {selectedOption === "Curva latencia intensidad" && <Latencia />}
                             {selectedOption === "Miembros Superiores" && <Superior />}
                             {selectedOption === "Miembros Inferiores" && <Inferiores />}
-
                         </div>
                     )}
                 </div>
@@ -263,5 +270,4 @@ const MenuBotonesPt = () => {
         </div>
     );
 };
-
 export default MenuBotonesPt;

@@ -199,7 +199,7 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
@@ -218,7 +218,7 @@ color: white;
     left: 45%;
     transform: translate(820%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(1, 1, 1);
     font-size: 1.5vw;
@@ -237,7 +237,7 @@ color: white;
     left: 45%;
     transform: translate(700%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -256,7 +256,7 @@ color: white;
     left: 45%;
     transform: translate(580%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -275,7 +275,7 @@ color: white;
     left: 45%;
     transform: translate(460%, -420%);
     background-color: transparent;
-    border-radius: 20%;
+    border-radius: 50%;
     z-index: 1;
     color: rgb(10, 10, 10);
     font-size: 1.5vw;
@@ -439,4 +439,26 @@ color: white;
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.btnUln2.active,
+.btnUln3.active,
+.btnUln4.active,
+.btnUln5.active,
+.btnOndasUl.active {
+    background-color: #000;
+    border-color: #ffffff;
+    background-size: cover;
+    background-position: center;
+}
+
+.btnUlnr.active,
+.btnUlnr2.active,
+.btnUlnr3.active,
+.btnUlnr4.active,
+.btnUlnr5.active,
+.btnUlnr6.active {
+    background-color: #000;
+    border: 1px solid #fff;
+    color: #fff;
 }

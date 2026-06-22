@@ -12,6 +12,7 @@ const Espinal = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -66,11 +67,13 @@ const Espinal = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -123,8 +126,8 @@ const Espinal = () => {
             {currentImageIndex === 0 && <button className="btnEp2" onClick={() => handleButtonClick('TRAPEZIUS C3, C4 - Fibras superiores con electrodo de superficie colocar 5-8 cm lateral en relacion a la apófisis espinosa C7.', { top: '62%', left: '25%'}, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnEp3" onClick={() => handleButtonClick('3 cm lateral del electrodo de registro.', {  top: '62%', left: '25%' }, 'R')}></button>}
             {currentImageIndex === 0 && <button className="btnEp4" onClick={() => handleButtonClick('Acromio.', { top: '62%', left: '25%'}, 'T')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Espinal-G.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/01-Espinal-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnEspi1 ${activeBtn === 'btnEspi1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnEspi1' ? null : 'btnEspi1'); openModal("/assets/ValoresImg/Cervicales/01-Espinal-G.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnEspi2 ${activeBtn === 'btnEspi2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnEspi2' ? null : 'btnEspi2'); openModal("/assets/ValoresImg/Cervicales/01-Espinal-T.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 1 && <button className="btnEp5" onClick={() => handleButtonClick('TRIANGULO POSTERIOR DEL CUELLO. Borde posterior del esternocleidomastoideo, ligeramente por arriba de su tercio medio', {  top: '12%', left: '32%' }, 'E')}></button>}
             {currentImageIndex === 1 && <button className="btnEp6" onClick={() => handleButtonClick('3 cm lateral del electrodo de registro.', { top: '12%', left: '32%'}, 'R')}></button>}
@@ -134,8 +137,8 @@ const Espinal = () => {
             {currentImageIndex === 1 && <button className="btnEp10" onClick={() => handleButtonClick('3 cm distal del electrodo de registro.', { top: '12%', left: '32%'}, 'R')}></button>}
             {currentImageIndex === 1 && <button className="btnEp11" onClick={() => handleButtonClick('TRAPEZIUS C3, C4 - Fibras inferiores Con electrodo de superficie, colocarlo en el punto medio entre el ángulo inferior escapular y la apófisis espinosa de T7.', {  top: '12%', left: '32%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnEp12" onClick={() => handleButtonClick('3 cm distal del electrodo de registro.', { top: '12%', left: '32%'}, 'R')}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Espinal-G.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/Cervicales/02-Espinal-T.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className={`btnEspi1 ${activeBtn === 'btnEspi1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnEspi1' ? null : 'btnEspi1'); openModal("/assets/ValoresImg/Cervicales/02-Espinal-G.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 1 && <button className={`btnEspi2 ${activeBtn === 'btnEspi2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnEspi2' ? null : 'btnEspi2'); openModal("/assets/ValoresImg/Cervicales/02-Espinal-T.png",{ top: '5%', left: '2%' });}}></button>}
             
             
             </div>

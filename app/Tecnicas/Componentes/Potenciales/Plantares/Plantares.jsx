@@ -28,6 +28,7 @@ const Plantares = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
 
@@ -120,6 +121,7 @@ const Plantares = () => {
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -165,10 +167,12 @@ const Plantares = () => {
                 {currentImageIndex === 0 && (
                     <>
                         {/* <button className="btnPla1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
-                        <button className="btnPla2" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Plant-T01.png")}></button>
+                        <button className={`btnPla2 ${activeBtn === 'btnTib2' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnTib2' ? null : 'btnTib2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Plant-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
                         <button
-                            className="btnPla3"
-                            onClick={() =>
+                            className={`btnPla3 ${activeBtn === 'btnPla3' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveBtn(p => p === 'btnPla3' ? null : 'btnPla3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/PeroEstimuo.png",
                                     "ESTIMULO \n\n Nervio Plantar medial: planta del pie, colocar electrodo activo en el centro de una línea trazada desde el talón hasta el espacio interdigital de dedos I-II. Electrodo de referencia a 3 cm distal. "+
@@ -178,8 +182,8 @@ const Plantares = () => {
                                     // "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en los dorsiflexores o extensores de los dedos. \n\n Tierra. M1 o C4’/C3’.",
                                     
                                     { position: { top: '20%', left: '50%' }, size: '0.8rem', }
-                                )
-                            }
+                                );
+                            }}
                         ></button>
 
                         {/* <button
@@ -192,10 +196,13 @@ const Plantares = () => {
                                 )
                             }
                         ></button>*/}
-                        <button className="btnPla4" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-10-20.png")}></button> 
+                        <button className={`btnPla4 ${activeBtn === 'btnPla4' ? 'active' : ''}`}
+                        onClick={() => { setActiveBtn(p => p === 'btnPla4' ? null : 'btnPla4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button> 
 
                         {currentImageIndex === 0 && (
-                            <button className="btnPlan" onClick={() => {
+                            <button className={`btnPlan ${activeBtn === 'btnPlan' ? 'active' : ''}`}
+                                        onClick={() => {
+                                        setActiveBtn(p => p === 'btnPlan' ? null : 'btnPlan');
                                         handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PlaCanal1.png", { top: "50%", left: "50%" });   }}
                             >
@@ -203,7 +210,8 @@ const Plantares = () => {
                             </button>
                         )}
                         {currentImageIndex === 0 && (
-                            <button className="btnPlan3" onClick={() => {
+                            <button className={`btnPlan3 ${activeBtn === 'btnPlan3' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnPlan3' ? null : 'btnPlan3');
                                         handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’. ', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PlaCanal2.png", { top: "50%", left: "50%" });   }}
                             >
@@ -212,7 +220,8 @@ const Plantares = () => {
                         )}
 
                         {currentImageIndex === 0 && (
-                            <button className="btnPlan4" onClick={() => {
+                            <button className={`btnPlan4 ${activeBtn === 'btnPlan4' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnPlan4' ? null : 'btnPlan4');
                                         handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.  ', { top: '7%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PlaCanal3.png", { top: "50%", left: "50%" });   }}
                             >
@@ -222,7 +231,8 @@ const Plantares = () => {
 
                         {/* Este botón ahora usará el nuevo handleMultiImageBoxClick con un arreglo de rutas */}
                         {currentImageIndex === 0 && (
-                            <button className="btnOndasTb" onClick={() => {
+                            <button className={`btnOndasPlan ${activeBtn === 'btnOndasPlan' ? 'active' : ''}`} onClick={() => {
+                                        setActiveBtn(p => p === 'btnOndasPlan' ? null : 'btnOndasPlan');
                                         handleMultiImageBoxClick([
                                             "/assets/ImgTecnicas/Potenciales/Somt/PlaCanal1.png",
                                             "/assets/ImgTecnicas/Potenciales/Somt/PlaCanal2.png",
@@ -339,7 +349,7 @@ const Plantares = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(69, 69, 69)',
+                            background: 'rgba(0, 0, 0, 0.8)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

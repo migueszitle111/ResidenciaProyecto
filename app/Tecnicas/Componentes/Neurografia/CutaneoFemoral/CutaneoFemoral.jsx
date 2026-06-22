@@ -12,6 +12,7 @@ const CutaneoFemoral = () => {
     const [tooltipIcon, setTooltipIcon] = useState(null); // 'A' | 'R' | 'E' | 'T' | null
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
 
@@ -65,11 +66,13 @@ const CutaneoFemoral = () => {
     const openModal = (image) => {
         setExtraImage(image);
         setModalVisible(true);
+        setTextBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
@@ -122,15 +125,15 @@ const CutaneoFemoral = () => {
             {currentImageIndex === 0 && <button className="btnCf2" onClick={() => handleButtonClick('Región medial del muslo.', { top: '10%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 0 && <button className="btnCf3" onClick={() => handleButtonClick('RAMA MEDIAL - Trazar una línea imaginaria desde el ligamento inguinal, lateral a la arteria femoral hasta el borde medial de la rótula y colocar el electrodo de superficie en la intersección de 14 cm distal de la ingle.', { top: '12%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 0 && <button className="btnCf4" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo.', { top: '10%', left: '23%' }, 'R')}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-G-01.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 0 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 0 && <button className={`btnCutF1 ${activeBtn === 'btnCutF1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnCutF1' ? null : 'btnCutF1'); openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-G-01.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 0 && <button className={`btnCutF2 ${activeBtn === 'btnCutF2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnCutF2' ? null : 'btnCutF2'); openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             {currentImageIndex === 1 && <button className="btnCf5" onClick={() => handleButtonClick('Muslo lateral.', { top: '10%', left: '23%' }, 'T')}></button>}
             {currentImageIndex === 1 && <button className="btnCf6" onClick={() => handleButtonClick('MUSLO POSTERIOR. De forma antidrómica a 12 cm proximal del electrodo de registro, siguiendo una línea imaginaria con dirección a la tuberosidad isquiática.', { top: '10%', left: '23%' }, 'E')}></button>}
             {currentImageIndex === 1 && <button className="btnCf7" onClick={() => handleButtonClick('RAMA POSTERIOR - Línea media del muslo posterior, 6 cm proximal del pliegue del hueco poplíteo.', { top: '10%', left: '23%' }, 'A')}></button>}
             {currentImageIndex === 1 && <button className="btnCf8" onClick={() => handleButtonClick('3-4 cm distal del electrodo activo.', { top: '10%', left: '23%' }, 'R')}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs1" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-G-02.png",{ top: '2%', left: '2%' })}></button>}
-            {currentImageIndex === 1 && <button className="btnIMs2" onClick={() => openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-T-01.png",{ top: '5%', left: '2%' })}></button>}
+            {currentImageIndex === 1 && <button className={`btnCutF1 ${activeBtn === 'btnCutF1' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnCutF1' ? null : 'btnCutF1'); openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-G-02.png",{ top: '2%', left: '2%' });}}></button>}
+            {currentImageIndex === 1 && <button className={`btnCutF2 ${activeBtn === 'btnCutF2' ? 'active' : ''}`} onClick={() => { setActiveBtn(p => p === 'btnCutF2' ? null : 'btnCutF2'); openModal("/assets/ValoresImg/MiembrosInf/CutaneoFm-T-01.png",{ top: '5%', left: '2%' });}}></button>}
             
             </div>
             {textBoxVisible && (

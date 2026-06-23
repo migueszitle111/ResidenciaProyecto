@@ -30,6 +30,7 @@ const MedianoFmx = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
@@ -71,9 +72,10 @@ const MedianoFmx = () => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
         setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxMdMx') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxSup') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -81,7 +83,10 @@ const MedianoFmx = () => {
             setTextBoxPosition(position);
             setTextBoxClass(customClass);
             setTextBoxVisible(true);
-        }
+        }   
+        // Asegurarse de ocultar los imageBoxes cuando se muestra un text-box
+        setImageBoxVisible(false);
+        setMultiImageBoxVisible(false);
     };
 
     const handleImageBoxClick = (image, position) => {
@@ -92,6 +97,9 @@ const MedianoFmx = () => {
             setImageBoxPosition(position);
             setImageBoxVisible(true);
         }
+        // Asegurarse de ocultar otros elementos cuando se muestra este imageBox
+        
+        setMultiImageBoxVisible(false);
     };
 
     // FUNCIÓN para manejar el nuevo imageBox con múltiples imágenes
@@ -113,39 +121,64 @@ const MedianoFmx = () => {
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
@@ -158,7 +191,7 @@ const MedianoFmx = () => {
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -167,6 +200,7 @@ const MedianoFmx = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -174,7 +208,7 @@ const MedianoFmx = () => {
                     <>
                         {/* <button className="btnIMdFx1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnIMdFx2 ${activeBtn === 'imdFx2' ? 'active' : ''}`}
-                            onClick={() => { setActiveBtn(p => p === 'imdFx2' ? null : 'imdFx2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/MedMx-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}>
+                            onClick={() => { setActiveBtn(p => p === 'imdFx2' ? null : 'imdFx2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/MedMx-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}>
                         </button>
                         <button
                             className={`btnIMdFx3 ${activeBtn === 'imdFx3' ? 'active' : ''}`}
@@ -185,20 +219,21 @@ const MedianoFmx = () => {
                                     "Estimulo. Nervio Mediano fibras mixtas, con electrodos de superficie colocar el cátodo en dirección proximal a nivel del carpo entre los tendones del palmar mayor y palmar menor, ánodo 2-3 cm distal. Una forma práctica de colocación con electrodo de barra es ubicar el ánodo sobre pliegue de la muñeca y al cátodo proximal a esta referencia." + 
                                     "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en el pulgar y/o índice. \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
                                     
-                                    { position: { top: '48%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '48%', left: '50%' }, size: '0.8rem', },
+                                    '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
                         <button className={`btnIMdFx4 ${activeBtn === 'imdFx4' ? 'active' : ''}`}
                             onClick={() => {
                                 setActiveBtn(p => p === 'imdFx4' ? null : 'imdFx4');
-                                openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}
+                                openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}
                         ></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnMedFx ${activeBtn === 'medFx' ? 'active' : ''}`} onClick={() => {
                                     setActiveBtn(p => p === 'medFx' ? null : 'medFx');
-                                    handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '8%', left: '23%' });
+                                    handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '8%', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedMxCanal1.png", { top: "50%", left: "50%" });  }}
                             >
                                 C4’-Fpz    
@@ -207,7 +242,7 @@ const MedianoFmx = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnMedFx2 ${activeBtn === 'medFx2' ? 'active' : ''}`} onClick={() => {
                                     setActiveBtn(p => p === 'medFx2' ? null : 'medFx2');
-                                    handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '23%' });
+                                    handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedMxCanal2.png", { top: "50%", left: "50%" });  }}
                             >
                                 C5s-Fpz    
@@ -216,7 +251,7 @@ const MedianoFmx = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnMedFx3 ${activeBtn === 'medFx3' ? 'active' : ''}`} onClick={() => {
                                     setActiveBtn(p => p === 'medFx3' ? null : 'medFx3');
-                                    handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '8 %', left: '23%' });
+                                    handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '8 %', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedMxCanal3.png", { top: "50%", left: "50%" });  }}
                             >
                                 ErbL-ErbR     
@@ -247,76 +282,10 @@ const MedianoFmx = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxMx"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
+            
 
-            {/* NUEVO: Contenedor para múltiples imágenes que se enciman */}
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxMx" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
-
-            {modalVisible && (
-                <div className="modal-gallery">
+             {modalVisible && (
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -325,13 +294,23 @@ const MedianoFmx = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -340,7 +319,7 @@ const MedianoFmx = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

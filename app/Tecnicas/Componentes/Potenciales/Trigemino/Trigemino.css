@@ -273,11 +273,11 @@ color: white;
     top: 25%;
     left: 1%;
     transform: translate(0%, 0%);
-    background-color: rgba(66, 66, 66, 0.842);
+    background-color: rgb(202, 202, 202);
     border: none;
     border-radius: 10px;
     z-index: 1;
-    color: white;
+    color: black;
     font-size: 0.8vw;
     transition:all .2s ease-in-out;
     padding: 1%;
@@ -289,11 +289,11 @@ color: white;
     top: 41%;
     left: 1%;
     transform: translate(0%, 0%);
-    background-color: rgba(66, 66, 66, 0.842);
+    background-color: rgb(202, 202, 202);
     border: none;
     border-radius: 10px;
     z-index: 1;
-    color: white;
+    color: black;
     font-size: 0.8vw;
     transition:all .2s ease-in-out;
     padding: 1%;
@@ -327,7 +327,7 @@ color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(66, 66, 66, 0.842);
+    background-color: rgb(0, 0, 0);
     color: white;
     border-radius: 10px;
     padding: 2%;
@@ -336,6 +336,7 @@ color: white;
     font-size: 0.8em;
     border: 1px solid #ddd;
     white-space: pre-line; /* Asegura que los saltos de línea se respeten */
+    z-index: 20;
 }
 
 .zoomable-imageMt:hover {

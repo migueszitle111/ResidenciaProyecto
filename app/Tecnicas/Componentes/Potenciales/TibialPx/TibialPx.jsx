@@ -28,6 +28,7 @@ const TibialPx = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
@@ -63,7 +64,7 @@ const TibialPx = () => {
         setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxTbP') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxSup') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -105,54 +106,81 @@ const TibialPx = () => {
     };
 
 
+    // Funciones para abrir y cerrar el modal
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
-        <div className=" py-20 gallery-container">
+        <div  className=" py-20 gallery-container">
 
+             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
             {!isLandscape && (
                 <div className="orientation-message">
                     <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -161,6 +189,7 @@ const TibialPx = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -168,7 +197,7 @@ const TibialPx = () => {
                     <>
                         {/* <button className="btnTibP1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnTibP2 ${activeBtn === 'btnTibP2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTibP2' ? null : 'btnTibP2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/TibP-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTibP2' ? null : 'btnTibP2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/TibP-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
                         <button
                             className={`btnTibP3 ${activeBtn === 'btnTibP3' ? 'active' : ''}`}
                         onClick={() => {
@@ -178,7 +207,7 @@ const TibialPx = () => {
                                     "Estimulo. Nervio Tibial en la fosa poplítea, cátodo aproximadamente 2 cm por arriba del pliegue cutáneo ligeramente lateral y adyacente a los tendones de los isquiotibiales; ánodo distal" + 
                                     "\n\n Intensidad.  Incremento progresivo tres veces el umbral sensitivo percibido por el paciente. \n\n Tierra.  M1 o C4’/C3’.",
                                     
-                                    { position: { top: '60%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '20%', left: '80%' }, size: '0.8rem', }, '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
@@ -194,13 +223,13 @@ const TibialPx = () => {
                             }
                         ></button>*/}
                         <button className={`btnTibP4 ${activeBtn === 'btnTibP4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTibP4' ? null : 'btnTibP4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Tb-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button> 
+                        onClick={() => { setActiveBtn(p => p === 'btnTibP4' ? null : 'btnTibP4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Tb-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button> 
 
                         {currentImageIndex === 0 && (
                             <button className={`btnTibPia ${activeBtn === 'btnTibPia' ? 'active' : ''}`}
                                         onClick={() => {
                                         setActiveBtn(p => p === 'btnTibPia' ? null : 'btnTibPia');
-                                        handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '28%' });
+                                        handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '25%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TibCanalP1.png", { top: "50%", left: "50%" });   }}
                             >
                                 Cz’-Fpz´     
@@ -209,7 +238,7 @@ const TibialPx = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnTibPia3 ${activeBtn === 'btnTibPia3' ? 'active' : ''}`} onClick={() => {
                                         setActiveBtn(p => p === 'btnTibPia3' ? null : 'btnTibPia3');
-                                        handleButtonClick('N22 Lumbar electrodo activo en apófisis espinosa L4s con referencia a L1s o espina iliaca anterosuperior (opcional montaje T12s).', { top: '7%', left: '28%' });
+                                        handleButtonClick('N22 Lumbar electrodo activo en apófisis espinosa L4s con referencia a L1s o espina iliaca anterosuperior (opcional montaje T12s).', { top: '7%', left: '25%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TibCanalP2.png", { top: "50%", left: "50%" });   }}
                             >
                                 L4s-L1s     
@@ -219,7 +248,7 @@ const TibialPx = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnTibPia4 ${activeBtn === 'btnTibPia4' ? 'active' : ''}`} onClick={() => {
                                         setActiveBtn(p => p === 'btnTibPia4' ? null : 'btnTibPia4');
-                                        handleButtonClick('Escotadura ciática N5, electrodo activo debajo del pliegue glúteo línea media, referencia al trocánter mayor.', { top: '7%', left: '28%' });
+                                        handleButtonClick('Escotadura ciática N5, electrodo activo debajo del pliegue glúteo línea media, referencia al trocánter mayor.', { top: '7%', left: '25%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TibCanalP3.png", { top: "50%", left: "50%" });   }}
                             >
                                 EC - TM       
@@ -252,77 +281,8 @@ const TibialPx = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxTbP"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-            {/* NUEVO: Contenedor para múltiples imágenes que se enciman */}
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxTbP" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
-
-
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -331,13 +291,23 @@ const TibialPx = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -346,14 +316,14 @@ const TibialPx = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',
                             borderRadius: '10px',
                             minWidth: '180px',
                             maxWidth: '100%',
-                            width: '690px',
+                            width: '300px',
                             textAlign: 'justify',
                             zIndex: 20,
                         }}

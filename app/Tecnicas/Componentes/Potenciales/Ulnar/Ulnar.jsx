@@ -30,6 +30,7 @@ const Ulnar = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
@@ -71,9 +72,10 @@ const Ulnar = () => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
         setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxUl') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxSup') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -81,7 +83,10 @@ const Ulnar = () => {
             setTextBoxPosition(position);
             setTextBoxClass(customClass);
             setTextBoxVisible(true);
-        }
+        }   
+        // Asegurarse de ocultar los imageBoxes cuando se muestra un text-box
+        setImageBoxVisible(false);
+        setMultiImageBoxVisible(false);
     };
 
     const handleImageBoxClick = (image, position) => {
@@ -92,6 +97,8 @@ const Ulnar = () => {
             setImageBoxPosition(position);
             setImageBoxVisible(true);
         }
+        // Asegurarse de ocultar otros elementos cuando se muestra este imageBox
+        
         setMultiImageBoxVisible(false);
     };
 
@@ -109,43 +116,69 @@ const Ulnar = () => {
         setImageBoxVisible(false);
     };
 
+
     // Funciones para abrir y cerrar el modal
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
@@ -158,7 +191,7 @@ const Ulnar = () => {
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -167,6 +200,7 @@ const Ulnar = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -174,7 +208,7 @@ const Ulnar = () => {
                     <>
                         <button className="btnUln1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
                         <button className={`btnUln2 ${activeBtn === 'Uln2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'Uln2' ? null : 'Uln2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Ulnar-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'Uln2' ? null : 'Uln2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Ulnar-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
                         <button
                             className={`btnUln3 ${activeBtn === 'Uln3' ? 'active' : ''}`}
                         onClick={() => {
@@ -183,19 +217,19 @@ const Ulnar = () => {
                                     "/assets/ImgTecnicas/Potenciales/Somt/UlEstimulo.png",
                                     "Estimulo. Nervio Ulnar fibras mixtas, con electrodos de superficie colocando el cátodo en dirección proximal a nivel del carpo, medial y adyacente al tendón cubital anterior, ánodo 2-3 cm distal. Es de utilidad ajustar un electrodo de barra con el ánodo en el pliegue de la muñeca y cátodo proximal a esta referencia." + 
                                     "\n\n Intensidad. incremento progresivo hasta obtener una leve contracción visible en el quinto y/o cuarto dedos.  \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
-                                    
-                                    { position: { top: '50%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '50%', left: '50%' }, size: '0.8rem', },
+                                    '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
                         <button className={`btnUln4 ${activeBtn === 'Uln4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'Uln4' ? null : 'Uln4'); openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'Uln4' ? null : 'Uln4'); openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnUlnr ${activeBtn === 'btnUlnr' ? 'active' : ''}`}
                                         onClick={() => {
                                         setActiveBtn(p => p === 'btnUlnr' ? null : 'btnUlnr');
-                                    handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '8%', left: '23%' });
+                                    handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '8%', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/UlCanal1.png", { top: "50%", left: "50%" });  }}
                             >
                                 C4’-Fpz    
@@ -204,7 +238,7 @@ const Ulnar = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnUlnr2 ${activeBtn === 'btnUlnr2' ? 'active' : ''}`} onClick={() => {
                                     setActiveBtn(p => p === 'btnUlnr2' ? null : 'btnUlnr2');
-                                    handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '23%' });
+                                    handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/UlCanal2.png", { top: "50%", left: "50%" });  }}
                             >
                                 C5s-Fpz    
@@ -213,7 +247,7 @@ const Ulnar = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnUlnr3 ${activeBtn === 'btnUlnr3' ? 'active' : ''}`} onClick={() => {
                                     setActiveBtn(p => p === 'btnUlnr3' ? null : 'btnUlnr3');
-                                    handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '8 %', left: '23%' });
+                                    handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '8 %', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/UlCanal3.png", { top: "50%", left: "50%" });  }}
                             >
                                 ErbL-ErbR     
@@ -245,76 +279,8 @@ const Ulnar = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxUl"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-            {/* NUEVO: Contenedor para múltiples imágenes que se enciman */}
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxUl" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
-
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -323,13 +289,23 @@ const Ulnar = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -338,7 +314,7 @@ const Ulnar = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

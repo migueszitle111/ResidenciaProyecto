@@ -29,6 +29,7 @@ const DermatomasT = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
@@ -65,7 +66,7 @@ const DermatomasT = () => {
         setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxDerT') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxSup') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -111,39 +112,64 @@ const DermatomasT = () => {
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
@@ -156,7 +182,7 @@ const DermatomasT = () => {
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -165,6 +191,7 @@ const DermatomasT = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -172,7 +199,7 @@ const DermatomasT = () => {
                     <>
                         {/* <button className="btnDerT1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnDerT2 ${activeBtn === 'btnDerT2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnDerT2' ? null : 'btnDerT2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/DermaT-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnDerT2' ? null : 'btnDerT2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/DermaT-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
                         <button
                             className={`btnDerT3 ${activeBtn === 'btnDerT3' ? 'active' : ''}`}
                         onClick={() => {
@@ -183,12 +210,12 @@ const DermatomasT = () => {
                                     "\n\n Estimulo:  \n Dos a tres veces el umbral sensitivo percibido por el paciente sobre la superficie cutánea definida por dermatomas; se utilizan electrodos de anillo en los dedos y de superficie en el resto de cuerpo, es de gran utilidad la colocación de una barra de estimulación para orientar el ánodo distal al cátodo en extremidades y lateral a línea media en el tronco. " + 
                                     "\n\n Tierra: Ligeramente proximal al sitio de estimulación.",
                                     
-                                    { position: { top: '25%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '25%', left: '50%' }, size: '0.8rem', }, '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
                         <button className={`btnDerT4 ${activeBtn === 'btnDerT4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnDerT4' ? null : 'btnDerT4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnDerT4' ? null : 'btnDerT4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnDermT ${activeBtn === 'btnDermT' ? 'active' : ''}`}
@@ -279,75 +306,8 @@ const DermatomasT = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxDerL"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxDerL" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
-
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -356,13 +316,23 @@ const DermatomasT = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -371,7 +341,7 @@ const DermatomasT = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

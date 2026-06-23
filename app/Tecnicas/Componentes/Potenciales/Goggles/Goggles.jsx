@@ -28,6 +28,7 @@ const Goggles = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
@@ -106,54 +107,81 @@ const Goggles = () => {
     };
 
 
+    // Funciones para abrir y cerrar el modal
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
-        <div className=" py-20 gallery-container">
+        <div  className=" py-20 gallery-container">
 
+             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
             {!isLandscape && (
                 <div className="orientation-message">
                     <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -162,6 +190,7 @@ const Goggles = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -169,7 +198,7 @@ const Goggles = () => {
                     <>
                         {/* <button className="btnGog1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnGog2 ${activeBtn === 'btnGog2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnGog2' ? null : 'btnGog2'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Gogg-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnGog2' ? null : 'btnGog2'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Gogg-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
                         
                         
                         {/* {currentImageIndex === 0 && (
@@ -191,7 +220,7 @@ const Goggles = () => {
                                     "LED FLASH. (luces por emisión de diodos). Se ha recomendado estimular cada ojo por separado con 10 cm de distancia, lo común es colocar directamente los goggles sobre los globos oculares, el paciente debe mantener los ojos cerrados.", 
                                     // "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en los dorsiflexores o extensores de los dedos. \n\n Tierra. M1 o C4’/C3’.",
                                     
-                                    { position: { top: '57%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '57%', left: '50%' }, size: '0.8rem', }, '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
@@ -207,7 +236,7 @@ const Goggles = () => {
                             }
                         ></button>*/}
                         <button className={`btnGog4 ${activeBtn === 'btnGog4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnGog4' ? null : 'btnGog4'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Gogg-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button> 
+                        onClick={() => { setActiveBtn(p => p === 'btnGog4' ? null : 'btnGog4'); openModal("/assets/ImgTecnicas/Potenciales/Visual/Gogg-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button> 
 
                         {currentImageIndex === 0 && (
                             <button className={`btnGogg ${activeBtn === 'btnGogg' ? 'active' : ''}`}
@@ -267,77 +296,8 @@ const Goggles = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxGog"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-            {/* NUEVO: Contenedor para múltiples imágenes que se enciman */}
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxGog" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
-
-
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -346,13 +306,23 @@ const Goggles = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"

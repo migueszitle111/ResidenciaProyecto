@@ -29,6 +29,7 @@ const Femorocutaneo = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
@@ -65,7 +66,7 @@ const Femorocutaneo = () => {
         setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxTb') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxSup') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -106,43 +107,69 @@ const Femorocutaneo = () => {
         setImageBoxVisible(false);
     };
 
+
     // Funciones para abrir y cerrar el modal
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
@@ -155,7 +182,7 @@ const Femorocutaneo = () => {
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -164,6 +191,7 @@ const Femorocutaneo = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -171,7 +199,7 @@ const Femorocutaneo = () => {
                     <>
                         <button className="btnFem1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
                         <button className={`btnFem2 ${activeBtn === 'btnFem2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnFem2' ? null : 'btnFem2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Femoro-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnFem2' ? null : 'btnFem2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Femoro-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
                         <button
                             className={`btnFem3 ${activeBtn === 'btnFem3' ? 'active' : ''}`}
                         onClick={() => {
@@ -181,18 +209,18 @@ const Femorocutaneo = () => {
                                     "Estimulo. Nervio femorocutáneo lateral, colocar el cátodo sobre la cara anterior del muslo, 12 cm distal de la espina iliaca anterosuperior siguiendo una línea imaginaria trazada hasta el borde lateral de la rótula; el ánodo se coloca 3 cm distal" + 
                                     "\n\n Intensidad. 3 a 2.5 veces el umbral sensitivo percibido por el paciente.  \n\n Tierra. M1, C5s o C4’/C3’.",
                                     
-                                    { position: { top: '33%', left: '82%' }, size: '0.8rem', }
+                                    { position: { top: '33%', left: '82%' }, size: '0.8rem', }, '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
                         <button className={`btnFem4 ${activeBtn === 'btnFem4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnFem4' ? null : 'btnFem4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', });}}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnFem4' ? null : 'btnFem4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png');}}></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnFemc ${activeBtn === 'btnFemc' ? 'active' : ''}`}
                                         onClick={() => {
                                         setActiveBtn(p => p === 'btnFemc' ? null : 'btnFemc');
-                                    handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '28%' });
+                                    handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/FemCanal1.png", { top: "50%", left: "50%" });  }}
                             >
                                 Cz’-Fpz’    
@@ -201,7 +229,7 @@ const Femorocutaneo = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnFemc2 ${activeBtn === 'btnFemc2' ? 'active' : ''}`} onClick={() => {
                                     setActiveBtn(p => p === 'btnFemc2' ? null : 'btnFemc2');
-                                    handleButtonClick('Espina iliaca anterosuperior N7, electrodo activo 1 cm medial a la espina ipsilateral al estimulo con electrodo de referencia sobre el trocánter mayor.', { top: '7%', left: '28%' });
+                                    handleButtonClick('Espina iliaca anterosuperior N7, electrodo activo 1 cm medial a la espina ipsilateral al estimulo con electrodo de referencia sobre el trocánter mayor.', { top: '7%', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/FemCanal2.png", { top: "50%", left: "50%" });  }}
                             >
                                 EIAS-TM    
@@ -231,75 +259,8 @@ const Femorocutaneo = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxFem"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxFem" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
-
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -308,13 +269,23 @@ const Femorocutaneo = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -323,7 +294,7 @@ const Femorocutaneo = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

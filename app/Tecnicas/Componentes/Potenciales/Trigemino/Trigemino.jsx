@@ -29,6 +29,7 @@ const Trigemino = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
@@ -65,7 +66,7 @@ const Trigemino = () => {
         setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
-    const handleButtonClick = (content, position, customClass = 'Tri') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxTri') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -102,7 +103,7 @@ const Trigemino = () => {
             setMultiImageBoxVisible(true);
         }
         // Asegurarse de ocultar otros elementos cuando se muestra este multiImageBox
-        // setTextBoxVisible(false);
+        setTextBoxVisible(false);
         setImageBoxVisible(false);
     };
 
@@ -111,39 +112,62 @@ const Trigemino = () => {
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
@@ -156,7 +180,7 @@ const Trigemino = () => {
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -165,6 +189,7 @@ const Trigemino = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -172,10 +197,10 @@ const Trigemino = () => {
                     <>
                         <button className="btnTri1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button>
                         <button className={`btnTri2 ${activeBtn === 'btnTri2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTri2' ? null : 'btnTri2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTri2' ? null : 'btnTri2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
 
                         <button className={`btnTri4 ${activeBtn === 'btnTri4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTri4' ? null : 'btnTri4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTri4' ? null : 'btnTri4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Trigem10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnTrig ${activeBtn === 'btnTrig' ? 'active' : ''}`}
@@ -202,7 +227,7 @@ const Trigemino = () => {
                                         onClick={() => {
                                         setActiveBtn(p => p === 'btnTrig3' ? null : 'btnTrig3');
                                     handleButtonClick('Nervio Trigémino (contralateral a registro cortical), colocar el cátodo en la comisura labial y el ánodo paramedial entre ambos labios, esto estimula las divisiones maxilar y mandibular al unísono. Se puede optar por estimular cada labio de forma independiente colocando el cátodo 1 cm arriba o 1 cm debajo de la comisura en cada caso, ánodo paramedial.' +
-                                        "\n\n Intensidad. 2 a 3 veces el umbral sensitivo, es posible la poca tolerancia a la estimulación y un artefacto de estímulo por arriba de los 10 mA.", { top: '12%', left: '29%' });
+                                        "\n\n Intensidad. 2 a 3 veces el umbral sensitivo, es posible la poca tolerancia a la estimulación y un artefacto de estímulo por arriba de los 10 mA.", { top: '35%', left: '29%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/TrigeEs1.png", { top: "50%", left: "50%" });  }}
                             >
                             </button>
@@ -245,75 +270,8 @@ const Trigemino = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxTri"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxTri" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
-
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -322,13 +280,23 @@ const Trigemino = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -337,7 +305,7 @@ const Trigemino = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',
@@ -346,7 +314,7 @@ const Trigemino = () => {
                             maxWidth: '100%',
                             width: '690px',
                             textAlign: 'justify',
-                            zIndex: 20,
+                            zIndex: 999,
                         }}
                     >
                         {/* {modalText} */}

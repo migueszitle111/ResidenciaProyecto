@@ -28,6 +28,7 @@ const Peroneo = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
@@ -63,7 +64,7 @@ const Peroneo = () => {
         setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxPer') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxSup') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -105,54 +106,81 @@ const Peroneo = () => {
     };
 
 
+    // Funciones para abrir y cerrar el modal
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
-        <div className=" py-20 gallery-container">
+        <div  className=" py-20 gallery-container">
 
+             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
             {!isLandscape && (
                 <div className="orientation-message">
                     <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -161,6 +189,7 @@ const Peroneo = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -168,7 +197,7 @@ const Peroneo = () => {
                     <>
                         {/* <button className="btnPer1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnPer2 ${activeBtn === 'btnPer2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnPer2' ? null : 'btnPer2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnPer2' ? null : 'btnPer2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
                         <button
                             className={`btnPer3 ${activeBtn === 'btnPer3' ? 'active' : ''}`}
                         onClick={() => {
@@ -178,7 +207,7 @@ const Peroneo = () => {
                                     "Estimulo. Nervio Peroneo fibras mixtas, colocar el cátodo a nivel de la rodilla, lateral al cuello del peroné, el ánodo se coloca 3 cm distal." + 
                                     "\n\n Intensidad. Incremento progresivo hasta obtener una leve contracción visible en los dorsiflexores o extensores de los dedos. \n\n Tierra. M1 o C4’/C3’.",
                                     
-                                    { position: { top: '60%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '8%', left: '33%' }, size: '0.8rem', }, '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
@@ -194,13 +223,13 @@ const Peroneo = () => {
                             }
                         ></button>*/}
                         <button className={`btnPer4 ${activeBtn === 'btnPer4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnPer4' ? null : 'btnPer4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button> 
+                        onClick={() => { setActiveBtn(p => p === 'btnPer4' ? null : 'btnPer4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Peroneo-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button> 
 
                         {currentImageIndex === 0 && (
                             <button className={`btnPero ${activeBtn === 'btnPero' ? 'active' : ''}`}
                                         onClick={() => {
                                         setActiveBtn(p => p === 'btnPero' ? null : 'btnPero');
-                                        handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '28%' });
+                                        handleButtonClick('Cortical P37-N45, electrodo activo Cz’ línea media central 2 cm posterior al vértice con referencia en Fpz’.', { top: '7%', left: '25%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PeroCanal1.png", { top: "50%", left: "50%" });   }}
                             >
                                 Cz’-Fpz’     
@@ -209,7 +238,7 @@ const Peroneo = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnPero3 ${activeBtn === 'btnPero3' ? 'active' : ''}`} onClick={() => {
                                         setActiveBtn(p => p === 'btnPero3' ? null : 'btnPero3');
-                                        handleButtonClick('N22 Lumbar electrodo activo en apófisis espinosa L4s con referencia a L1s o espina iliaca anterosuperior (opcional montaje T12s).', { top: '7%', left: '28%' });
+                                        handleButtonClick('N22 Lumbar electrodo activo en apófisis espinosa L4s con referencia a L1s o espina iliaca anterosuperior (opcional montaje T12s).', { top: '7%', left: '25%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PeroCanal2.png", { top: "50%", left: "50%" });   }}
                             >
                                 L4s-L1s     
@@ -219,7 +248,7 @@ const Peroneo = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnPero4 ${activeBtn === 'btnPero4' ? 'active' : ''}`} onClick={() => {
                                         setActiveBtn(p => p === 'btnPero4' ? null : 'btnPero4');
-                                        handleButtonClick('Escotadura ciática N5, electrodo activo debajo del pliegue glúteo línea media con referencia al trocánter mayor.', { top: '7%', left: '28%' });
+                                        handleButtonClick('Escotadura ciática N5, electrodo activo debajo del pliegue glúteo línea media con referencia al trocánter mayor.', { top: '7%', left: '25%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/PeroCanal3.png", { top: "50%", left: "50%" });   }}
                             >
                                 EC-TM       
@@ -252,77 +281,8 @@ const Peroneo = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxPer"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-            {/* NUEVO: Contenedor para múltiples imágenes que se enciman */}
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxPer" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
-
-
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -331,13 +291,23 @@ const Peroneo = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -346,14 +316,14 @@ const Peroneo = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',
                             borderRadius: '10px',
                             minWidth: '180px',
                             maxWidth: '100%',
-                            width: '690px',
+                            width: '250px',
                             textAlign: 'justify',
                             zIndex: 20,
                         }}

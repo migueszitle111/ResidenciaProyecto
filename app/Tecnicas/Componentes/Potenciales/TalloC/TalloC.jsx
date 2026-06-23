@@ -28,6 +28,7 @@ const TalloC = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
@@ -106,54 +107,81 @@ const TalloC = () => {
     };
 
 
+    // Funciones para abrir y cerrar el modal
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
-        <div className=" py-20 gallery-container">
+        <div  className=" py-20 gallery-container">
 
+             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
             {!isLandscape && (
                 <div className="orientation-message">
                     <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -162,6 +190,7 @@ const TalloC = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -169,7 +198,7 @@ const TalloC = () => {
                     <>
                         {/* <button className="btnTal1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnTal2 ${activeBtn === 'btnTal2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTal2' ? null : 'btnTal2'); openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Tallo-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'btnTal2' ? null : 'btnTal2'); openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Tallo-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
                         
                         
                         {/* {currentImageIndex === 0 && (
@@ -191,7 +220,7 @@ const TalloC = () => {
                                     "Click monoauricular cuadrado a 10 ms de duración en modalidades de rarefacción y condensación." + 
                                     "\n\n 70 dBnHL de intensidad con enmascaramiento contralateral a 40 dB \n\n Frecuencia a 11.1 Hz ",
                                     
-                                    { position: { top: '57%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '20%', left: '85%' }, size: '0.8rem', }, '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
@@ -207,13 +236,13 @@ const TalloC = () => {
                             }
                         ></button>*/}
                         <button className={`btnTal4 ${activeBtn === 'btnTal4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'btnTal4' ? null : 'btnTal4'); openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Auditivo-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button> 
+                        onClick={() => { setActiveBtn(p => p === 'btnTal4' ? null : 'btnTal4'); openModal("/assets/ImgTecnicas/Potenciales/Auditivo/Auditivo-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button> 
 
                         {currentImageIndex === 0 && (
                             <button className={`btnTallo ${activeBtn === 'btnTallo' ? 'active' : ''}`}
                                         onClick={() => {
                                         setActiveBtn(p => p === 'btnTallo' ? null : 'btnTallo');
-                                        handleButtonClick('Auricular ipsilateral o Mi (mastoides ipsilateral) con referencia al vertex. Registra todos los componentes obligatorios, la colocación en mastoides acorta la latencia de onda I en relación con el montaje auricular; el complejo IV-V es de gran amplitud, pero puede verse como una sola onda ensanchada.', { top: '7%', left: '28%' });
+                                        handleButtonClick('Auricular ipsilateral o Mi (mastoides ipsilateral) con referencia al vertex. Registra todos los componentes obligatorios, la colocación en mastoides acorta la latencia de onda I en relación con el montaje auricular; el complejo IV-V es de gran amplitud, pero puede verse como una sola onda ensanchada.', { top: '8%', left: '28%' });
                                         handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Auditivo/IPSILATERAL.png", { top: "50%", left: "50%" });   }}
                             >
                                 Ai-Cz     
@@ -278,77 +307,8 @@ const TalloC = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxTall"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-            {/* NUEVO: Contenedor para múltiples imágenes que se enciman */}
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxTall" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
-
-
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -357,13 +317,23 @@ const TalloC = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -379,7 +349,7 @@ const TalloC = () => {
                             borderRadius: '10px',
                             minWidth: '180px',
                             maxWidth: '100%',
-                            width: '690px',
+                            width: '250px',
                             textAlign: 'justify',
                             zIndex: 20,
                         }}

@@ -25,6 +25,7 @@ const MiembrosSup = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);
@@ -54,9 +55,9 @@ const MiembrosSup = () => {
 
     const handleSlide = (currentIndex) => {
         setCurrentImageIndex(currentIndex);
-        setTextBoxVisible(false);
-        setImageBoxVisible(false);
-        setMultiImageBoxVisible(false);
+        setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
+        setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
     const handleButtonClick = (content, position, customClass = 'text-boxMieSup') => {
@@ -67,7 +68,8 @@ const MiembrosSup = () => {
             setTextBoxPosition(position);
             setTextBoxClass(customClass);
             setTextBoxVisible(true);
-        }
+        }   
+        // Asegurarse de ocultar los imageBoxes cuando se muestra un text-box
         setImageBoxVisible(false);
         setMultiImageBoxVisible(false);
     };
@@ -80,79 +82,111 @@ const MiembrosSup = () => {
             setImageBoxPosition(position);
             setImageBoxVisible(true);
         }
+        // Asegurarse de ocultar otros elementos cuando se muestra este imageBox
+        
         setMultiImageBoxVisible(false);
     };
 
+    // FUNCIÓN para manejar el nuevo imageBox con múltiples imágenes
     const handleMultiImageBoxClick = (imagesArray, position) => {
         if (multiImageBoxVisible && JSON.stringify(multiImageBoxContent) === JSON.stringify(imagesArray)) {
             setMultiImageBoxVisible(false);
         } else {
             setMultiImageBoxContent(imagesArray);
-            setMultiImageBoxPosition(position);
+            setMultiImageBoxPosition(position); // Esta posición puede ser para el contenedor principal
             setMultiImageBoxVisible(true);
         }
+        // Asegurarse de ocultar otros elementos cuando se muestra este multiImageBox
         setTextBoxVisible(false);
         setImageBoxVisible(false);
     };
 
+
+    // Funciones para abrir y cerrar el modal
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-        <img
-            src={item.original}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
-    );
-
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
-        <div className=" py-20 gallery-container">
+        <div  className=" py-20 gallery-container">
 
+             {/* Si no está en modo horizontal, mostramos el mensaje con el GIF */}
             {!isLandscape && (
                 <div className="orientation-message">
                     <img src="/assets/giracel.gif" alt="Gira tu dispositivo" className="rotate-gif" />
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-            <ImageGallery
-                items={images}
-                onSlide={handleSlide}
-                showFullscreenButton={false}
-                showPlayButton={false}
-                showBullets={false}
-                showNav={false}
-                showThumbnails={true}
-                thumbnailPosition="bottom"
-            />
+                <ImageGallery
+                    items={images}
+                    onSlide={handleSlide}
+                    showFullscreenButton={false}
+                    showPlayButton={false}
+                    showBullets={false}
+                    showNav={false}
+                    showThumbnails={true}
+                    thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
+                />
 
             {/* Botones que abren imágenes en el modal */}
             {currentImageIndex === 0 && (
@@ -163,7 +197,7 @@ const MiembrosSup = () => {
                     ></button>
                     <button
                         className={`btnMie2 ${activeBtn === 'mie2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'mie2' ? null : 'mie2'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieSup1-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}
+                        onClick={() => { setActiveBtn(p => p === 'mie2' ? null : 'mie2'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieSup1-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}
                     ></button>
                     {/* <span className="labelMieSup">Miembros Superiores</span> */}
                     <button
@@ -187,7 +221,7 @@ const MiembrosSup = () => {
                             openModal(
                                 "/assets/ImgTecnicas/Potenciales/Motores/Registr.png",
                                 "ESTIMULO CERVICAL \n\n Bobina circular o en forma de 8 de estimulación magnética transcraneal. Colocar el centro de la bobina en orientación tangencial u horizontal sobre C7 con flexión de cuello de 45% y descender 1-2 cm hasta la unión C8-T1 con el 120% de intensidad prefijado en la estimulación cortical y únicamente en fase de reposo muscular.",
-                                { position: { top: '20%', left: '50%' }, size: '0.8rem' }
+                                { position: { top: '25%', left: '50%' }, size: '0.8rem' }
                             );
                         }}
                     ></button>
@@ -199,14 +233,14 @@ const MiembrosSup = () => {
                             openModal(
                                 "/assets/ImgTecnicas/Potenciales/Motores/RegidtroMiSup.png",
                                 "Abductor corto del pulgar  \n\n Activo. Vientre muscular en eminencia tenar lateral. \n Referencia. Primera articulación metacarpofalángica. \n Tierra. dorso de la mano o antebrazo.",
-                                { position: { top: '55%', left: '50%' }, size: '0.8rem' }
+                                { position: { top: '55%', left: '50%' }, size: '0.8rem' }, '/assets/ImgTecnicas/Potenciales/Registro.png'
                             );
                         }}
                     ></button>
 
                     <button
                         className={`btnMie4 ${activeBtn === 'mie4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'mie4' ? null : 'mie4'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieSup-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}
+                        onClick={() => { setActiveBtn(p => p === 'mie4' ? null : 'mie4'); openModal("/assets/ImgTecnicas/Potenciales/Motores/MieSup-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}
                     ></button>
 
                     <button
@@ -288,88 +322,33 @@ const MiembrosSup = () => {
                     {textBoxContent}
                 </div>
             )}
-
-            {imageBoxVisible && (
-                <div
-                    className="image-boxMiSup"
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    <img
-                        src={imageBoxContent}
-                        alt="Cuadro dinámico"
-                        style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "contain",
-                            position: "relative",
-                        }}
-                        className="zoomable-image"
-                    />
-                </div>
-            )}
-
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxMiSup"
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute",
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                </div>
-            )}
-
             {modalVisible && (
-                <div className="modal-gallery">
-                    <button className="print-button" onClick={closeModal}>
+                <div className="modal-gallerySup">
+                    <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
                             style={{ filter: 'invert(1)' }}
                             onContextMenu={e => e.preventDefault()}
                             draggable={false}
-                            
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt=""
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     <div
                         className="modal-text-box"
                         style={{
@@ -377,7 +356,7 @@ const MiembrosSup = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

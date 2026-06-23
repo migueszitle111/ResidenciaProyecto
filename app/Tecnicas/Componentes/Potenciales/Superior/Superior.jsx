@@ -29,6 +29,7 @@ const Superior = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
@@ -111,39 +112,64 @@ const Superior = () => {
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
@@ -156,7 +182,7 @@ const Superior = () => {
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -165,6 +191,7 @@ const Superior = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -172,28 +199,28 @@ const Superior = () => {
                     <>
                         {/* <button className="btnSup1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnSup2 ${activeBtn === 'sup2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'sup2' ? null : 'sup2');openModal("/assets/ImgTecnicas/Potenciales/Somt/Superiores-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'sup2' ? null : 'sup2'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Superiores-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
                         <button
                             className={`btnSup3 ${activeBtn === 'sup3' ? 'active' : ''}`}
                             onClick={() => {
                             setActiveBtn(p => p === 'sup3' ? null : 'sup3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/SupEstimulo.png",
-                                    "Nervio Mediano derecho, fibras mixtas a nivel del carpo. \n\n Intensidad, incremento progresivo hasta obtener una leve contracción visible en el pulgar y/o índice. " + 
+                                    "Nervio Mediano derecho, fibras mixtas a nivel del carpo. \n\n Intensidad, incremento progresivo hasta obtener una leve contracción visible en el pulgar y/o índice. " +
                                     "\n\n Frecuencia a 4 a 7 Hz. \n\n Duración 0.2-0.3 ms.",
-                                    
-                                    { position: { top: '60%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '30%', left: '82%' }, size: '0.8rem', },
+                                    '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
                         <button className={`btnSup4 ${activeBtn === 'sup4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'sup4' ? null : 'sup4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'sup4' ? null : 'sup4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Sup-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnSupe ${activeBtn === 'reposo' ? 'active' : ''}`}
                                         onClick={() => {
                                         setActiveBtn(p => p === 'reposo' ? null : 'reposo');
-                                    handleButtonClick('Registro referenciado; electrodo activo en C3’ contralateral al estimulo (2 cm posterior a C3), referenciado a Fpz’ (12 cm arriba del inion).', { top: '7%', left: '24%' });
+                                    handleButtonClick('Registro referenciado; electrodo activo en C3’ contralateral al estimulo (2 cm posterior a C3), referenciado a Fpz’ (12 cm arriba del inion).', { top: '7%', left: '30%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal1.png", { top: "50%", left: "50%" });  }}
                             >
                                 C3’-Fpz’    
@@ -202,7 +229,7 @@ const Superior = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnSupe2 ${activeBtn === 'bipolar' ? 'active' : ''}`} onClick={() => {
                                 setActiveBtn(p => p === 'bipolar' ? null : 'bipolar');
-                                handleButtonClick('Registro bipolar C3’ activo con su referencia longitudinal contralateral C4’. Puede mejorar la amplitud y morfología de las respuestas corticales con relación al montaje referencial, pero es más susceptible a contaminación por ruido de fondo.', { top: '8%', left: '24%' });
+                                handleButtonClick('Registro bipolar C3’ activo con su referencia longitudinal contralateral C4’. Puede mejorar la amplitud y morfología de las respuestas corticales con relación al montaje referencial, pero es más susceptible a contaminación por ruido de fondo.', { top: '8%', left: '30%' });
                                 handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal2.png", { top: "50%", left: "50%" });  }}
                             >
                                 C3’-C4’    
@@ -212,7 +239,7 @@ const Superior = () => {
                             <button className={`btnSupe3 ${activeBtn === 'campo' ? 'active' : ''}`}
                                         onClick={() => {
                                         setActiveBtn(p => p === 'campo' ? null : 'campo');
-                                    handleButtonClick('Registro de campo lejano colocando el electrodo activo craneal C3’ y referencia extracefálica en punto de Erb contralateral; se puede optar por el montaje Fpz’ referenciado a Erb ipsilateral, ambos con alta tendencia a contaminación por ruido de fondo.', { top: '8%', left: '24%' });
+                                    handleButtonClick('Registro de campo lejano colocando el electrodo activo craneal C3’ y referencia extracefálica en punto de Erb contralateral; se puede optar por el montaje Fpz’ referenciado a Erb ipsilateral, ambos con alta tendencia a contaminación por ruido de fondo.', { top: '8%', left: '30%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal3.png", { top: "50%", left: "50%" });  }}
                             >
                                 C3’-Erb L    
@@ -221,7 +248,7 @@ const Superior = () => {
                                                 {currentImageIndex === 0 && (
                             <button className={`btnSupe4 ${activeBtn === 'c5s-fpz' ? 'active' : ''}`} onClick={() => {
                                 setActiveBtn(p => p === 'c5s-fpz' ? null : 'c5s-fpz');
-                                handleButtonClick('Colocar activo sobre apófisis espinosa cervical C5 o C2, ubicadas por su relación cercana a vertebra C7 (más prominente) y referenciado a Fpz’.', { top: '7%', left: '24%' });
+                                handleButtonClick('Colocar activo sobre apófisis espinosa cervical C5 o C2, ubicadas por su relación cercana a vertebra C7 (más prominente) y referenciado a Fpz’.', { top: '7%', left: '30%' });
                                 handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal4.png", { top: "50%", left: "50%" });  }}
                             >
                                 C5s-Fpz’    
@@ -230,7 +257,7 @@ const Superior = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnSupe5 ${activeBtn === 'erb' ? 'active' : ''}`} onClick={() => {
                                 setActiveBtn(p => p === 'erb' ? null : 'erb');
-                                handleButtonClick('Punto de Erb ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '6%', left: '24%' });
+                                handleButtonClick('Punto de Erb ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM.', { top: '6%', left: '30%' });
                                 handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal5.png", { top: "50%", left: "50%" });  }}
                             >
                                 Erb R-Erb L     
@@ -239,7 +266,7 @@ const Superior = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnSupe6 ${activeBtn === 'fac' ? 'active' : ''}`} onClick={() => {
                                 setActiveBtn(p => p === 'fac' ? null : 'fac');
-                                handleButtonClick('Fosa antecubital, a nivel del pulso de la arteria radial, referenciado a epicóndilo medial.', { top: '6%', left: '24%' });
+                                handleButtonClick('Fosa antecubital, a nivel del pulso de la arteria radial, referenciado a epicóndilo medial.', { top: '6%', left: '30%' });
                                 handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/SupCanal6.png", { top: "50%", left: "50%" });  }}
                             >
                                 FaC R     
@@ -267,81 +294,15 @@ const Superior = () => {
 
             {textBoxVisible && (
                 <div
-                    className={`text-boxSup ${textBoxClass}`}
+                    className={`text-boxInf ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxSup"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxSup" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
 
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -350,13 +311,23 @@ const Superior = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -365,14 +336,14 @@ const Superior = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',
                             borderRadius: '10px',
                             minWidth: '180px',
                             maxWidth: '100%',
-                            width: '690px',
+                            width: '300px',
                             textAlign: 'justify',
                             zIndex: 20,
                         }}

@@ -29,6 +29,7 @@ const Medianos = () => {
 
     const [extraImage, setExtraImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalIcon, setModalIcon] = useState('');
     const [activeBtn, setActiveBtn] = useState(null);
 
     const [isLandscape, setIsLandscape] = useState(window.innerHeight < window.innerWidth);/*NUEVO, Para Horizontal*/
@@ -70,9 +71,10 @@ const Medianos = () => {
         setCurrentImageIndex(currentIndex);
         setTextBoxVisible(false); // Ocultar el cuadro de texto al cambiar de imagen
         setImageBoxVisible(false); // Ocultar el cuadro de imagen al cambiar de imagen
+        setMultiImageBoxVisible(false); // Ocultar el nuevo cuadro de múltiples imágenes
     };
 
-    const handleButtonClick = (content, position, customClass = 'text-boxMds') => {
+    const handleButtonClick = (content, position, customClass = 'text-boxSup') => {
         if (textBoxVisible && textBoxContent === content) {
             setTextBoxVisible(false);
         } else {
@@ -80,7 +82,10 @@ const Medianos = () => {
             setTextBoxPosition(position);
             setTextBoxClass(customClass);
             setTextBoxVisible(true);
-        }
+        }   
+        // Asegurarse de ocultar los imageBoxes cuando se muestra un text-box
+        setImageBoxVisible(false);
+        setMultiImageBoxVisible(false);
     };
 
     const handleImageBoxClick = (image, position) => {
@@ -91,9 +96,13 @@ const Medianos = () => {
             setImageBoxPosition(position);
             setImageBoxVisible(true);
         }
+        // Asegurarse de ocultar otros elementos cuando se muestra este imageBox
+        
+        setMultiImageBoxVisible(false);
     };
 
-        const handleMultiImageBoxClick = (imagesArray, position) => {
+    // FUNCIÓN para manejar el nuevo imageBox con múltiples imágenes
+    const handleMultiImageBoxClick = (imagesArray, position) => {
         if (multiImageBoxVisible && JSON.stringify(multiImageBoxContent) === JSON.stringify(imagesArray)) {
             setMultiImageBoxVisible(false);
         } else {
@@ -106,43 +115,69 @@ const Medianos = () => {
         setImageBoxVisible(false);
     };
 
+
     // Funciones para abrir y cerrar el modal
     const openModal = (
         image,
         text = '',
-        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' }
+        options = { position: { top: '80%', left: '50%' }, color: '#fff', size: '1.2rem' },
+        icon = ''
     ) => {
         setExtraImage(image);
         setModalText(text);
         setModalTextPosition(options.position || { top: '80%', left: '50%' });
         setModalTextColor(options.color || '#fff');
         setModalTextSize(options.size || '1.2rem');
+        setModalIcon(icon);
         setModalVisible(true);
+        setTextBoxVisible(false);
+        setImageBoxVisible(false);
     };
 
     const closeModal = () => {
         setModalVisible(false);
         setExtraImage('');
+        setModalIcon('');
         setActiveBtn(null);
     };
 
     const renderGalleryItem = (item) => (
-    <img
-        src={item.original}
-        alt=""
-        onContextMenu={e => e.preventDefault()}
-        draggable={false}
-        style={{ width: '100%' }}
-    />
-    );
-    const renderThumbInner = (item) => (
-        <img
-            src={item.thumbnail}
-            alt=""
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-            style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <img
+                src={item.original}
+                alt=""
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            {imageBoxVisible && (
+                <img
+                    src={imageBoxContent}
+                    alt="Overlay"
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            )}
+            {multiImageBoxVisible && multiImageBoxContent.map((path, idx) => (
+                <img
+                    key={idx}
+                    src={path}
+                    alt=""
+                    style={{
+                        position: 'absolute', top: 0, left: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'contain', pointerEvents: 'none',
+                    }}
+                    onContextMenu={e => e.preventDefault()}
+                    draggable={false}
+                />
+            ))}
+        </div>
     );
 
     return (
@@ -155,7 +190,7 @@ const Medianos = () => {
                     <h2> Por favor, gira tu dispositivo a modo horizontal para continuar.</h2>
                 </div>
             )}
-                <ImageGallery 
+                <ImageGallery
                     items={images}
                     onSlide={handleSlide}
                     showFullscreenButton={false}
@@ -164,6 +199,7 @@ const Medianos = () => {
                     showNav={false}
                     showThumbnails={true}
                     thumbnailPosition="bottom"
+                    renderItem={renderGalleryItem}
                 />
 
                 {/* Botones que abren imágenes en el modal */}
@@ -171,7 +207,7 @@ const Medianos = () => {
                     <>
                         {/* <button className="btnIMds1" onClick={() => openModal("/assets/ImgTecnicas/Potenciales/Mediano-G01.png")}></button> */}
                         <button className={`btnIMds2 ${activeBtn === 'Mds2' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'Mds2' ? null : 'Mds2');  openModal("/assets/ImgTecnicas/Potenciales/Mediano-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'Mds2' ? null : 'Mds2');  openModal("/assets/ImgTecnicas/Potenciales/Mediano-T01.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ValoresImg/I_Tabla_Gris.png'); }}></button>
                         <button
                             className={`btnIMds3 ${activeBtn === 'IMds3' ? 'active' : ''}`}
                         onClick={() => {
@@ -180,19 +216,19 @@ const Medianos = () => {
                                     "/assets/ImgTecnicas/Potenciales/Somt/MedSnEstimulo.png",
                                     "Estimulo. Nervio Mediano fibras sensoriales mediante electrodos de anillo sobre el tercer dedo con el cátodo en dirección proximal cercana al pliegue metacarpofalángico, ánodo 3-4 cm distal (también es posible la colocación de los anillos en dedos índice y medio)." + 
                                     "\n\n Intensidad. El triple o 2.5 veces por arriba del umbral sensitivo percibido por el paciente. \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz",
-                                    
-                                    { position: { top: '48%', left: '50%' }, size: '0.8rem', }
+                                    { position: { top: '48%', left: '50%' }, size: '0.8rem', },
+                                    '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
                         ></button>
                         <button className={`btnIMds4 ${activeBtn === 'IMds4' ? 'active' : ''}`}
-                        onClick={() => { setActiveBtn(p => p === 'IMds4' ? null : 'IMds4'); openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }); }}></button>
+                        onClick={() => { setActiveBtn(p => p === 'IMds4' ? null : 'IMds4'); openModal("/assets/ImgTecnicas/Potenciales/Mediano-10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button>
 
                         {currentImageIndex === 0 && (
                             <button className={`btnMd ${activeBtn === 'btnMd' ? 'active' : ''}`}
                                         onClick={() => {
                                         setActiveBtn(p => p === 'btnMd' ? null : 'btnMd');
-                                    handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '8%', left: '23%' });
+                                    handleButtonClick('Cortical N20-P22, electrodo activo contralateral al estímulo C3’ (C4’) 2 cm posterior a C3 (C4) con referencia en Fpz’.', { top: '8%', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedSnCanal1.png", { top: "50%", left: "50%" });  }}
                             >
                                 C4’-Fpz    
@@ -201,7 +237,7 @@ const Medianos = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnMd2 ${activeBtn === 'btnMd2' ? 'active' : ''}`} onClick={() => {
                                     setActiveBtn(p => p === 'btnMd2' ? null : 'btnMd2');
-                                    handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '23%' });
+                                    handleButtonClick('Cervical N11-N13, electrodo activo sobre apófisis espinosa de vertebra cervical C5s con referencia a Fpz’.', { top: '8%', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedSnCanal2.png", { top: "50%", left: "50%" });  }}
                             >
                                 C5s-Fpz    
@@ -210,7 +246,7 @@ const Medianos = () => {
                         {currentImageIndex === 0 && (
                             <button className={`btnMd3 ${activeBtn === 'btnMd3' ? 'active' : ''}`} onClick={() => {
                                     setActiveBtn(p => p === 'btnMd3' ? null : 'btnMd3');
-                                    handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '8 %', left: '23%' });
+                                    handleButtonClick('Erb N9.  Ipsilateral al estimulo, 2-3 cm por arriba de la clavícula e intersección en el borde posterior del musculo ECM', { top: '8 %', left: '25%' });
                                     handleImageBoxClick("/assets/ImgTecnicas/Potenciales/Somt/MedSnCanal3.png", { top: "50%", left: "50%" });  }}
                             >
                                 ErbL-ErbR     
@@ -241,76 +277,9 @@ const Medianos = () => {
                     {textBoxContent}
                 </div>
             )}
-            {imageBoxVisible && (
-            <div
-                className="image-boxMs"
-                style={{
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-                }}
-            >
-                <img
-                src={imageBoxContent}
-                alt="Cuadro dinámico"
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    position: "relative",
-                }}
-                className="zoomable-image"
-                />
-            </div>
-            )}
-
-             {/* NUEVO: Contenedor para múltiples imágenes que se enciman */}
-            {multiImageBoxVisible && (
-                <div
-                    className="image-boxMs" // Reutilizamos la misma clase para los estilos
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 10,
-                    }}
-                >
-                    {multiImageBoxContent.map((imagePath, index) => (
-                        <img
-                            key={index}
-                            src={imagePath}
-                            alt={`Cuadro dinámico ${index + 1}`}
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                position: "absolute", // Mantiene las imágenes dentro del contenedor
-                                // Opcional: Puedes ajustar el zIndex si quieres un orden específico
-                                // zIndex: 10 + index,
-                            }}
-                            className="zoomable-image"
-                            onContextMenu={e => e.preventDefault()}
-                            draggable={false}
-                        />
-                    ))}
-                    {/* Botón para cerrar el multiImageBox */}
-
-                </div>
-            )}
 
             {modalVisible && (
-                <div className="modal-gallery">
+                <div className="modal-gallerySup">
                     <button className={`print-button`} onClick={closeModal}>
                         <img
                             src="/I_X.webp"
@@ -319,13 +288,23 @@ const Medianos = () => {
                             draggable={false}
                         />
                     </button>
-                    <img
-                        src={extraImage}
-                        alt="Imagen Extra"
-                        className="modal-image"
-                        onContextMenu={e => e.preventDefault()}
-                        draggable={false}
-                    />
+                    <div className="modal-image-wrapper">
+                        {modalIcon && (
+                            <img
+                                src={modalIcon}
+                                className="modal-top-icon"
+                                onContextMenu={e => e.preventDefault()}
+                                draggable={false}
+                            />
+                        )}
+                        <img
+                            src={extraImage}
+                            alt="Imagen Extra"
+                            className="modal-imageSup"
+                            onContextMenu={e => e.preventDefault()}
+                            draggable={false}
+                        />
+                    </div>
                     {/* Cuadro de texto flotante y personalizable */}
                     <div
                         className="modal-text-box"
@@ -334,7 +313,7 @@ const Medianos = () => {
                             top: modalTextPosition.top,
                             left: modalTextPosition.left,
                             transform: 'translate(-50%, 0)',
-                            background: 'rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(0, 0, 0)',
                             color: modalTextColor,
                             fontSize: modalTextSize,
                             padding: '12px 20px',

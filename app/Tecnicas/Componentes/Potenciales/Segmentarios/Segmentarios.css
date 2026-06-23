@@ -267,14 +267,14 @@ color: white;
     position: absolute;
     height: 3vw; /* Tamaño reducido */
     width: 8vw;
-    top: 34%;
+    top: 14%;
     left: 1%;
     transform: translate(0%, 0%);
-    background-color: rgba(66, 66, 66, 0.842);
+    background-color: rgb(175, 175, 175);
     border: none;
     border-radius: 10px;
     z-index: 1;
-    color: white;
+    color: black;
     font-size: 0.8vw;
     transition:all .2s ease-in-out;
     padding: 1%;
@@ -286,11 +286,11 @@ color: white;
     top: 30%;
     left: 1%;
     transform: translate(0%, 0%);
-    background-color: rgba(66, 66, 66, 0.842);
+    background-color: rgb(175, 175, 175);
     border: none;
     border-radius: 10px;
     z-index: 1;
-    color: white;
+    color: black;
     font-size: 0.8vw;
     transition:all .2s ease-in-out;
     padding: 1%;
@@ -302,11 +302,11 @@ color: white;
     top: 46%;
     left: 1%;
     transform: translate(0%, 0%);
-    background-color: rgba(66, 66, 66, 0.842);
+    background-color: rgb(175, 175, 175);
     border: none;
     border-radius: 10px;
     z-index: 1;
-    color: white;
+    color: black;
     font-size: 0.8vw;
     transition:all .2s ease-in-out;
     padding: 1%;
@@ -314,21 +314,21 @@ color: white;
 
 
 
-.text-boxSeg {
+.text-boxSeg1 {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 30vw;
+    width: 28vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(66, 66, 66, 0.842);
+    background-color: rgb(0, 0, 0);
     color: white;
     border-radius: 10px;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(8, 8, 8, 0.377);
     font-family: 'Arial', sans-serif;
-    font-size: 1em;
+    font-size: 0.8em;
     border: 1px solid #ddd;
     white-space: pre-line; /* Asegura que los saltos de línea se respeten */
 }

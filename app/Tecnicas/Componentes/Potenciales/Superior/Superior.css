@@ -63,7 +63,7 @@
 
 .modal-top-icon {
     position: absolute;
-    top: 2px;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
     width: 50px;

@@ -206,12 +206,14 @@ const Segmentarios = () => {
                             setActiveBtn(p => p === 'btnSeg3' ? null : 'btnSeg3');
                                 openModal(
                                     "/assets/ImgTecnicas/Potenciales/Somt/RadEstimul.png",
-                                    "Estimulo. Nervio Radial superficial mediante electrodos de barra sobre el borde dorsolateral de la muñeca, 2 cm proximal a la apófisis estiloides radial; ánodo 3 cm distalmente." + 
-                                    "\n\n Intensidad.  El triple o 2.5 veces por arriba del umbral sensitivo percibido por el paciente.  \n\n Tierra. Antebrazo (otros autores prefieren a nivel de Cz).",
+                                    'Estimulo\n\nNervio Sural: cara postero-lateral del tobillo, cátodo sobre la depresión entre el maléolo lateral y el tendón de Aquiles, ánodo en dirección distal, se sugiere utilizar electrodo de barra.'
+                                    + '\n\nNervio Peroneo superficial: cara antero-lateral del tobillo, cátodo discretamente lateral al tendón del tibial anterior en la intersección de una línea imaginaria entre ambos maléolos. Ánodo distal utilizando electrodo de barra.'+
+                                    '\n\nNervio Safeno: cara antero-medial del tobillo, cátodo 1 cm anterior al borde del maléolo medial y horizontal a su polo superior, ánodo pocos centímetros en dirección distal\n\nIntensidad. 2.5-3 veces al umbral percibido por el paciente.',
                                     
-                                    { position: { top: '25%', left: '50%' }, size: '0.8rem', }, '/assets/ImgTecnicas/Potenciales/Estimulo.png'
+                                    { position: { top: '20%', left: '50%' }, size: '0.8rem', }, '/assets/ImgTecnicas/Potenciales/Estimulo.png'
                                 );
                             }}
+
                         ></button>
                         <button className={`btnSeg4 ${activeBtn === 'btnSeg4' ? 'active' : ''}`}
                         onClick={() => { setActiveBtn(p => p === 'btnSeg4' ? null : 'btnSeg4'); openModal("/assets/ImgTecnicas/Potenciales/Somt/Fem10-20.png","", {position: { top: '120%', left: '50%' }, size: '0rem', }, '/assets/ImgTecnicas/Potenciales/Sistema.png'); }}></button>
@@ -313,7 +315,7 @@ const Segmentarios = () => {
                         )}
                         <img
                             src={extraImage}
-                            alt="Imagen Extra"
+                            alt=""
                             className="modal-imageSup"
                             onContextMenu={e => e.preventDefault()}
                             draggable={false}

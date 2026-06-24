@@ -326,11 +326,11 @@ function StepC({ goTo, setStep, removeConclusion, resetAll, addOverlays, setEsDe
 }
 
 /* D — Agregado (opcional) */
-function StepD({ goTo, setStep, removeConclusion, resetAll, esDesmielinizante }) {
+function StepD({ goTo, setStep, removeConclusion, resetAll, esDesmielinizante, removeLastOverlayGroup }) {
   const { addConclusion } = useContext(ReportContext);
   return (
     <div>
-      <NavRow onBack={() => { removeConclusion(null, 1); setStep('C'); }} onReset={resetAll} />
+      <NavRow onBack={() => { removeConclusion(null, 1); removeLastOverlayGroup(); setStep('C'); }} onReset={resetAll} />
       <StepTitle>Agregado (Opcional)</StepTitle>
       <Btn label="DISFUNCIÓN AUTONÓMICA POSITIVA" onClick={() => { addConclusion({ value: 'agr_auto_pos', title: ' (disfunción autonómica positiva)' }); goTo('E'); }} />
       <Btn label="DISFUNCIÓN AUTONÓMICA NEGATIVA" onClick={() => { addConclusion({ value: 'agr_auto_neg', title: ' (disfunción autonómica negativa)' }); goTo('E'); }} />
@@ -385,20 +385,21 @@ function StepF({ goTo, setStep, removeConclusion, resetAll, addOverlays, esDesmi
 }
 
 /* G_pred — Predominio (solo cuando fibras=mixta) */
-function StepG_pred({ goTo, setStep, removeConclusion, resetAll, esDesmielinizante }) {
+function StepG_pred({ goTo, setStep, removeConclusion, resetAll, esDesmielinizante, removeLastOverlayGroup }) {
   const { addConclusion } = useContext(ReportContext);
   return (
     <div>
-      <NavRow onBack={() => { removeConclusion(null, 1); setStep('F'); }} onReset={resetAll} />
+      <NavRow onBack={() => { removeConclusion(null, 1); removeLastOverlayGroup(); setStep('F'); }} onReset={resetAll} />
       <StepTitle>Predominio</StepTitle>
       <Btn label="PREDOMINIO SENSITIVO" onClick={() => { addConclusion({ value: 'pred_sensitivo', title: ' predominio sensitivo,' }); goTo('G'); }} />
       <Btn label="PREDOMINIO MOTOR"     onClick={() => { addConclusion({ value: 'pred_motor',     title: ' predominio motor,'     }); goTo('G'); }} />
+      <Btn label="SIN PREDOMINIO"     onClick={() => { addConclusion({ value: 'pred_motor',     title: ' (sensitivo-motora),'     }); goTo('G'); }} />
     </div>
   );
 }
 
 /* G — Intensidad */
-function StepG({ goTo, setStep, removeConclusion, resetAll, esDesmielinizante, esMixta, setEsSensitiva }) {
+function StepG({ goTo, setStep, removeConclusion, resetAll, esDesmielinizante, esMixta, setEsSensitiva, removeLastOverlayGroup }) {
   const { addConclusion } = useContext(ReportContext);
   const opts = [
     ['int_leve',    ' intensidad leve'],
@@ -408,7 +409,7 @@ function StepG({ goTo, setStep, removeConclusion, resetAll, esDesmielinizante, e
   const backStep = esMixta ? 'G_pred' : 'F';
   return (
     <div>
-      <NavRow onBack={() => { removeConclusion(null, 1); setEsSensitiva(false); setStep(backStep); }} onReset={resetAll} />
+      <NavRow onBack={() => { removeConclusion(null, 1); setEsSensitiva(false); if (!esMixta) removeLastOverlayGroup(); setStep(backStep); }} onReset={resetAll} />
       <StepTitle>Intensidad</StepTitle>
       {opts.map(([val, title]) => (
         <Btn key={val} label={val.replace('int_','').toUpperCase()} onClick={() => {
@@ -466,7 +467,7 @@ function StepI({ goTo, setStep, removeConclusion, resetAll, addOverlays, esDesmi
       {opts.map(([val, ovKey, nombre, label]) => (
         <Btn key={val} label={label} onClick={() => {
           addConclusion({ value: val, title: getText(nombre) });
-          if (ovKey) addOverlays([ovKey]);
+          addOverlays(ovKey ? [ovKey] : []);
           goTo('J');
         }} />
       ))}
@@ -475,7 +476,7 @@ function StepI({ goTo, setStep, removeConclusion, resetAll, addOverlays, esDesmi
 }
 
 /* J — Extensión */
-function StepJ({ goTo, setStep, removeConclusion, resetAll, addOverlays, esDesmielinizante, esSensitiva }) {
+function StepJ({ goTo, setStep, removeConclusion, resetAll, addOverlays, esDesmielinizante, esSensitiva, removeLastOverlayGroup }) {
   const { addConclusion } = useContext(ReportContext);
   const opts = [
     ['ext_proximal',            'ProximalImg',  ' proximal.'],
@@ -494,12 +495,12 @@ function StepJ({ goTo, setStep, removeConclusion, resetAll, addOverlays, esDesmi
 
   return (
     <div>
-      <NavRow onBack={() => { removeConclusion(null, 1); setStep('I'); }} onReset={resetAll} />
+      <NavRow onBack={() => { removeConclusion(null, 1); removeLastOverlayGroup(); setStep('I'); }} onReset={resetAll} />
       <StepTitle>Extensión</StepTitle>
       {opts.map(([val, ovKey, title], i) => (
         <Btn key={val} label={labels[i]} onClick={() => {
           addConclusion({ value: val, title });
-          if (ovKey) addOverlays([ovKey]);
+          addOverlays(ovKey ? [ovKey] : []);
           goTo(nextStep);
         }} />
       ))}
@@ -508,11 +509,11 @@ function StepJ({ goTo, setStep, removeConclusion, resetAll, addOverlays, esDesmi
 }
 
 /* K — Reinervación (solo axonal) */
-function StepK({ goTo, setStep, removeConclusion, resetAll }) {
+function StepK({ goTo, setStep, removeConclusion, resetAll, removeLastOverlayGroup }) {
   const { addConclusion } = useContext(ReportContext);
   return (
     <div>
-      <NavRow onBack={() => { removeConclusion(null, 1); setStep('J'); }} onReset={resetAll} />
+      <NavRow onBack={() => { removeConclusion(null, 1); removeLastOverlayGroup(); setStep('J'); }} onReset={resetAll} />
       <StepTitle>Reinervación</StepTitle>
       <Btn label="ACTIVA"   onClick={() => { addConclusion({ value: 'reinv_activa',   title: '\n\nReinervación activa;'   }); goTo('L'); }} />
       <Btn label="INACTIVA" onClick={() => { addConclusion({ value: 'reinv_inactiva', title: '\n\nReinervación inactiva;' }); goTo('L'); }} />
@@ -536,11 +537,11 @@ function StepL({ goTo, setStep, removeConclusion, resetAll }) {
 }
 
 /* L_des — RecuperacionDes: desmielinizante o axonal-sensitiva (con \n\n = párrafo separado) */
-function StepL_des({ goTo, setStep, removeConclusion, resetAll }) {
+function StepL_des({ goTo, setStep, removeConclusion, resetAll, removeLastOverlayGroup }) {
   const { addConclusion } = useContext(ReportContext);
   return (
     <div>
-      <NavRow onBack={() => { removeConclusion(null, 1); setStep('J'); }} onReset={resetAll} />
+      <NavRow onBack={() => { removeConclusion(null, 1); removeLastOverlayGroup(); setStep('J'); }} onReset={resetAll} />
       <StepTitle>Pronóstico de recuperación</StepTitle>
       <Btn label="COMPLETA"           onClick={() => { addConclusion({ value:'rec_completa', title:"\n\nPronóstico de recuperación completa."          }); goTo('FINAL'); }} />
       <Btn label="PARCIAL FUNCIONAL"  onClick={() => { addConclusion({ value:'rec_parcial',  title:"\n\nPronóstico de recuperación parcial funcional."  }); goTo('FINAL'); }} />

@@ -416,8 +416,8 @@ async function buildPage2(pdfDoc, {
       const { width: iw, height: ih } = tablaImg;
       const maxW  = CONTENT_W;
       const lowestCol = Math.min(ly, ry);
-      const tablaTopY = lowestCol - 200;
-      const maxH  = Math.min(tablaTopY - BOT_Y - 10, 320);
+      const tablaTopY = lowestCol - 120;
+      const maxH  = Math.min(tablaTopY - BOT_Y - 10, 360);
       if (maxH > 30) {
         const scale = Math.min(maxW / iw, maxH / ih, 1);
         const dw = iw * scale;

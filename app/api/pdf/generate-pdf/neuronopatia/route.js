@@ -406,10 +406,11 @@ async function buildPage2(pdfDoc, {
   ry -= 16;
 
   if (comentarioLista) {
-    const cLines = comentarioLista.split('\n').flatMap(l => wrapText(l || ' ', fontRegular, FONT_SZ, COL_W));
+    const COM_W = COL_W - 40;
+    const cLines = comentarioLista.split('\n').flatMap(l => wrapText(l || ' ', fontRegular, FONT_SZ, COM_W));
     for (let ci = 0; ci < cLines.length; ci++) {
       if (ry < BOT_Y) break;
-      justifyLine(page, cLines[ci], ci === cLines.length - 1, RX, ry, fontRegular, FONT_SZ, COL_W, rgb(0.08,0.08,0.08));
+      justifyLine(page, cLines[ci], ci === cLines.length - 1, RX, ry, fontRegular, FONT_SZ, COM_W, rgb(0.08,0.08,0.08));
       ry -= LINE_H;
     }
   }

@@ -45,7 +45,7 @@ export async function GET(req) {
     const linkIds = links.map((l) => l.id);
     const { data: files, error: filesError } = await supabase
       .from("share_link_files")
-      .select("id, link_id, name, mime_type, size_bytes")
+      .select("id, link_id, name, mime_type, size_bytes, storage_path")
       .in("link_id", linkIds)
       .order("created_at", { ascending: true });
 
@@ -69,7 +69,7 @@ export async function GET(req) {
         name: f.name,
         mimeType: f.mime_type,
         sizeBytes: f.size_bytes ?? null,
-        // La app abrirá esta URL en el navegador — el signed/route redirige a Supabase
+        storagePath: f.storage_path ?? null,
         viewUrl: `${baseUrl}/api/share/signed/${slug}/${f.id}?mode=inline`,
         downloadUrl: `${baseUrl}/api/share/signed/${slug}/${f.id}?mode=download`,
       }));

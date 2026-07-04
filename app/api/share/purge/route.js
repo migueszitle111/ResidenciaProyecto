@@ -42,8 +42,9 @@ export async function POST(req) {
     }
 
     if (!link) {
-      console.warn("[purge] Link no encontrado en BD para slug:", slug);
-      return NextResponse.json({ ok: false, error: "Link no encontrado" }, { status: 404 });
+      // Idempotente: si no existe, el resultado deseado ya está cumplido
+      console.log("[purge] Link no existe en BD (posiblemente ya eliminado) — slug:", slug);
+      return NextResponse.json({ ok: true, alreadyDeleted: true });
     }
 
     console.log("[purge] Link encontrado — id:", link.id, "createdByEmail:", link.meta?.createdByEmail);

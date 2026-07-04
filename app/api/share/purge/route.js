@@ -66,20 +66,44 @@ export async function POST(req) {
     console.log("[purge] Archivos encontrados:", files?.length ?? 0);
 
     if (files?.length) {
+      const KNOWN_BUCKETS = ['report-packages', 'monitoreo-packages', 'reportesnormales-packages'];
       const filesByBucket = files.reduce((acc, file) => {
         const bucket = getBucketFromPath(file.storage_path);
         const pathInBucket = getPathWithoutBucket(file.storage_path);
         if (!acc[bucket]) acc[bucket] = [];
-        acc[bucket].push(pathInBucket);
+        acc[bucket].push({ pathInBucket, storagePath: file.storage_path });
         return acc;
       }, {});
 
-      for (const [bucket, paths] of Object.entries(filesByBucket)) {
-        const { error: storageError } = await supabaseAdmin.storage.from(bucket).remove(paths);
+      for (const [bucket, entries] of Object.entries(filesByBucket)) {
+        const paths = entries.map(e => e.pathInBucket);
+        console.log(`[purge] Intentando borrar en bucket=${bucket} — paths:`, paths);
+        const { data: removed, error: storageError } = await supabaseAdmin.storage.from(bucket).remove(paths);
         if (storageError) {
           console.error(`[purge] Error borrando de storage bucket=${bucket}:`, storageError.message);
         } else {
-          console.log(`[purge] Storage borrado bucket=${bucket} paths=${paths.length}`);
+          console.log(`[purge] Storage borrado bucket=${bucket} archivos_removidos=${removed?.length ?? 0}`);
+        }
+
+        // Fallback: si el bucket detectado no tenía los archivos (posible mismatch),
+        // intentar en los demás buckets con el path completo original
+        if (!removed || removed.length === 0) {
+          for (const altBucket of KNOWN_BUCKETS) {
+            if (altBucket === bucket) continue;
+            // Probar con la ruta completa (por si el storage_path NO tiene prefijo de bucket)
+            const altPaths = entries.map(e => e.storagePath);
+            const { data: altRemoved } = await supabaseAdmin.storage.from(altBucket).remove(altPaths);
+            if (altRemoved?.length) {
+              console.log(`[purge] Fallback OK — bucket=${altBucket} archivos=${altRemoved.length}`);
+              break;
+            }
+            // También probar con pathInBucket en el bucket alternativo
+            const { data: altRemoved2 } = await supabaseAdmin.storage.from(altBucket).remove(paths);
+            if (altRemoved2?.length) {
+              console.log(`[purge] Fallback OK — bucket=${altBucket} (pathInBucket) archivos=${altRemoved2.length}`);
+              break;
+            }
+          }
         }
       }
     }

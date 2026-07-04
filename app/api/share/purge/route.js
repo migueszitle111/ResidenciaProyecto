@@ -29,6 +29,14 @@ export async function POST(req) {
     const { slug } = await parseJsonBody(req, sharePurgeSchema);
 
     console.log("[purge] Petición recibida — slug:", slug, "email:", auth.user?.email);
+    console.log("[purge] Supabase URL:", (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "").slice(0, 40));
+
+    // Verificación cruzada: buscar el slug también con query directa por si acaso
+    const { data: allMatches } = await supabaseAdmin
+      .from("share_links")
+      .select("id, slug, is_active, meta->>createdByEmail")
+      .eq("slug", slug);
+    console.log("[purge] Búsqueda exhaustiva por slug — encontrados:", allMatches?.length ?? 0, JSON.stringify(allMatches));
 
     const { data: link, error: linkError } = await supabaseAdmin
       .from("share_links")

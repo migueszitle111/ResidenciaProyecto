@@ -1,5 +1,7 @@
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabaseadmin";
@@ -22,6 +24,7 @@ export async function GET(req) {
     const offset = Math.max(0, parseInt(searchParams.get("offset") || "0", 10));
 
     const supabase = getSupabaseAdmin();
+    console.log("[history] Supabase URL:", (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "").slice(0, 40));
 
     // 1. Obtener los links del usuario
     const { data: links, error: linksError } = await supabase
@@ -36,6 +39,9 @@ export async function GET(req) {
       console.error("[share/history] Supabase error:", linksError.message);
       return NextResponse.json({ ok: false, error: "Error al obtener historial" }, { status: 500 });
     }
+
+    // DEBUG: log lo que Supabase devuelve
+    console.log(`[history] Email=${email} Total links=${links?.length ?? 0} — slugs:`, (links ?? []).map(l => l.slug).join(","));
 
     if (!links || links.length === 0) {
       return NextResponse.json({ ok: true, items: [], offset, pageSize: PAGE_SIZE });

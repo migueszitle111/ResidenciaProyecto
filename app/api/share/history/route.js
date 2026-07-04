@@ -89,7 +89,11 @@ export async function GET(req) {
       };
     });
 
-    return NextResponse.json({ ok: true, items, offset, pageSize: PAGE_SIZE });
+    const response = NextResponse.json({ ok: true, items, offset, pageSize: PAGE_SIZE });
+    response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, private");
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    return response;
   } catch (err) {
     return handleApiError(err, "Error al obtener historial de links");
   }

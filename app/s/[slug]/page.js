@@ -90,6 +90,13 @@ function bytes(n) {
 }
 const isPreviewable = (m) => /^image\//.test(m) || m === 'application/pdf';
 
+function prettyName(name = '') {
+  const dot = name.lastIndexOf('.');
+  const base = dot > 0 ? name.slice(0, dot) : name;
+  const ext  = dot > 0 ? name.slice(dot) : '';
+  return base.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim() + ext;
+}
+
 /* Íconos minimal (PDF / IMG / genérico) */
 function iconFor(mime = '', name = '') {
   const isPdf = mime === 'application/pdf' || name.toLowerCase().endsWith('.pdf');
@@ -344,7 +351,7 @@ export default async function Page({ params }) {
                   {/* Nombre + meta */}
                   <div className="min-w-0">
                     <div className="font-semibold truncate text-slate-900">
-                      {it.name}
+                      {prettyName(it.name)}
                     </div>
                     <div className="mt-1 flex items-center gap-2 text-xs text-slate-600">
                       <span className="truncate">{it.mime_type}</span>

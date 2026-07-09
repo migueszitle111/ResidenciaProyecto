@@ -152,7 +152,7 @@ function LinkUploaderModal({ pdfBlob, pdfFilename, nombrePaciente, session, onCl
   const [uploadPct, setUploadPct]   = useState(0);
   const [link, setLink]             = useState(null);
   const fileInputRef = useRef(null);
-  const MAX_FILES = 4;
+  const MAX_FILES = 10;
   const atLimit = files.length >= MAX_FILES;
 
   const pickFiles = () => fileInputRef.current?.click();

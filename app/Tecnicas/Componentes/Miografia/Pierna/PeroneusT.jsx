@@ -124,7 +124,7 @@ const PeroneusT = () => {
     };
 
 const renderGalleryItem = (item) => (
-    <div style={{ position: "relative", width: "100%", height: "100%", }}>
+    <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
             <img
                 key={index}
@@ -133,12 +133,13 @@ const renderGalleryItem = (item) => (
                 onContextMenu={e => e.preventDefault()}
                 draggable={false}
                 style={{
-                    width: "80%",
+                    position: "absolute",
+                    top: "0%",
+                    left: "18%",      /* desplazamiento horizontal — ajusta este % */
+                    width: "85%",     /* ancho de la imagen — ajusta este % */
                     height: "100%",
                     objectFit: "contain",
-                    position: index === 0 ? "relative" : "absolute",
-                    top: 15,
-                    left: 180,
+                    objectPosition: "center",
                 }}
             />
         ))}

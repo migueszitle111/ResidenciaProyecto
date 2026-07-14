@@ -14,6 +14,7 @@ import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosB
 import { checkDivsBILATERALIZQ } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERALIZQ';
 import { checkDivs } from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
 import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
+import { checkDivsGen } from './SelecNerviosGen';
 import './Style.css';
 
 // ── DropArea ───────────────────────────────────────────────────────
@@ -197,7 +198,7 @@ function CropModal({ src, onConfirm, onClose }) {
 const Reporte = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const { conclusions } = useContext(ReportContext);
+  const { conclusions, filtroRojoActivo } = useContext(ReportContext);
   const [copyConclusions, setCopyConclusions] = useState('');
   const [selectedImages, setSelectedImages] = useState([]);
   const [topLeftText, setTopLeftText]   = useState('');
@@ -1550,10 +1551,30 @@ const Reporte = () => {
                   },
                   ]}
                 />
+                {/* Filtro rojo al presionar botón — div transparente con hue-rotate */}
+                {filtroRojoActivo && (
+                  <div
+                    style={{
+                      position:            'absolute',
+                      top:                 filtroRojoActivo.top    ?? '0%',
+                      left:                filtroRojoActivo.left   ?? '0%',
+                      width:               filtroRojoActivo.width  ?? '100%',
+                      height:              filtroRojoActivo.height ?? '100%',
+                      clipPath:            `inset(${filtroRojoActivo.clipTop} 0 0 0)`,
+                      backdropFilter:      'hue-rotate(-60deg) saturate(1.8)',
+                      WebkitBackdropFilter:'hue-rotate(-60deg) saturate(1.8)',
+                      pointerEvents:       'none',
+                      zIndex:              8,
+                      border:              '2px solid black',
+                    }}
+                  />
+                )}
+
                 {/* Overlays de nervios */}
                 <div>{checkDivsBILATERAL(copyConclusions)}</div>
                 <div>{checkDivsBILATERAL2(copyConclusions)}</div>
                 <div>{checkDivs(copyConclusions)}</div>
+                {/* <div>{checkDivsGen(copyConclusions)}</div> */}
                 <div>{checkDivs2(copyConclusions)}</div>
                 <div>{checkDivsSegmentar(copyConclusions)}</div>
                 <div>{checkDivsSegmentar2(copyConclusions)}</div>

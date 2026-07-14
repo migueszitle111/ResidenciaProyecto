@@ -5,6 +5,7 @@ import { PDFDocument, rgb, degrees } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import fs from 'fs';
 import path from 'path';
+import { inflateSync, deflateSync } from 'zlib';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -281,6 +282,160 @@ function justifyLine(page, line, isLast, x, y, font, fontSize, colWidth, color) 
   for (const w of words) {
     page.drawText(w, { x: cx, y, font, size: fontSize, color });
     cx += font.widthOfTextAtSize(w, fontSize) + gap;
+  }
+}
+
+// ── Filtro rojo: procesa la lámina PNG en el servidor ────────────────────────
+// Aplica hue-rotate(-60deg) saturate(1.8) a los píxeles amarillos de la región.
+// Usa solo zlib (built-in Node.js) — sin dependencias externas.
+
+const _crcTable = (() => {
+  const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1;
+    t[n] = c;
+  }
+  return t;
+})();
+function _crc32(buf) {
+  let c = 0xFFFFFFFF;
+  for (let i = 0; i < buf.length; i++) c = _crcTable[(c ^ buf[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function _paeth(a, b, c) {
+  const p = a + b - c, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
+  return pa <= pb && pa <= pc ? a : pb <= pc ? b : c;
+}
+
+function applyFiltroRojoToPng(pngBytes, fr) {
+  try {
+    const buf = Buffer.isBuffer(pngBytes) ? pngBytes : Buffer.from(pngBytes);
+
+    // Parsear chunks PNG
+    let off = 8;
+    let W = 0, H = 0, bpp = 0, colorType = 0, interlace = 0;
+    const idatParts = [], preChunks = [], postChunks = [];
+    let foundIdat = false;
+    while (off + 8 <= buf.length) {
+      const len = buf.readUInt32BE(off);
+      const type = buf.toString('ascii', off + 4, off + 8);
+      const data = buf.slice(off + 8, off + 8 + len);
+      const chunk = buf.slice(off, off + 12 + len);
+      off += 12 + len;
+      if (type === 'IHDR') {
+        W = data.readUInt32BE(0); H = data.readUInt32BE(4);
+        bpp = data[8]; colorType = data[9]; interlace = data[12];
+        preChunks.push(chunk);
+      } else if (type === 'IDAT') {
+        idatParts.push(data); foundIdat = true;
+      } else if (type === 'IEND') {
+        postChunks.push(chunk);
+      } else if (!foundIdat) {
+        preChunks.push(chunk);
+      } else {
+        postChunks.push(chunk);
+      }
+    }
+
+    const ch = colorType === 2 ? 3 : colorType === 6 ? 4 : 0;
+    if (!ch || bpp !== 8 || interlace !== 0 || !idatParts.length) return pngBytes;
+
+    // Descomprimir IDAT
+    const raw = inflateSync(Buffer.concat(idatParts));
+    const stride = W * ch;
+    const pixels = Buffer.alloc(H * stride);
+
+    // Deshacer filtros PNG por scanline
+    for (let y = 0; y < H; y++) {
+      const ftype = raw[y * (stride + 1)];
+      const inRow = y * (stride + 1) + 1;
+      const outRow = y * stride;
+      for (let i = 0; i < stride; i++) {
+        const v = raw[inRow + i];
+        const a = i < ch ? 0 : pixels[outRow + i - ch];
+        const b = y === 0 ? 0 : pixels[(y - 1) * stride + i];
+        const c = (y === 0 || i < ch) ? 0 : pixels[(y - 1) * stride + i - ch];
+        let val;
+        if      (ftype === 0) val = v;
+        else if (ftype === 1) val = (v + a) & 0xFF;
+        else if (ftype === 2) val = (v + b) & 0xFF;
+        else if (ftype === 3) val = (v + ((a + b) >> 1)) & 0xFF;
+        else if (ftype === 4) val = (v + _paeth(a, b, c)) & 0xFF;
+        else val = v;
+        pixels[outRow + i] = val;
+      }
+    }
+
+    // Matriz CSS hue-rotate(-60deg)
+    const ang = -60 * Math.PI / 180;
+    const cos = Math.cos(ang), sin = Math.sin(ang);
+    const m = [
+      [0.213 + cos * 0.787 - sin * 0.213, 0.715 - cos * 0.715 - sin * 0.715, 0.072 - cos * 0.072 + sin * 0.928],
+      [0.213 - cos * 0.213 + sin * 0.143, 0.715 + cos * 0.285 + sin * 0.140, 0.072 - cos * 0.072 - sin * 0.283],
+      [0.213 - cos * 0.213 - sin * 0.787, 0.715 - cos * 0.715 + sin * 0.715, 0.072 + cos * 0.928 + sin * 0.072],
+    ];
+    const sat = 1.8;
+
+    // Las coordenadas de filtroRojo son % del *contenedor web* (imagen + paddingBottom=175).
+    // El contenedor tiene altura: webImgH + 175. Convertimos a coordenadas de la imagen.
+    const webImgH  = Math.round(600 * H / W); // altura natural al renderizar a 600px de ancho
+    const hScale   = (webImgH + 175) / webImgH; // factor contenedor / imagen ≈ 1.225
+
+    const topPct  = parseFloat(fr.top)     / 100;
+    const leftPct = parseFloat(fr.left)    / 100;
+    const wPct    = parseFloat(fr.width)   / 100;
+    const hPct    = parseFloat(fr.height)  / 100;
+    const clipPct = parseFloat(fr.clipTop) / 100;
+    const visTop  = (topPct + clipPct * hPct) * hScale;
+    const visH    = hPct * (1 - clipPct) * hScale;
+    const ry = Math.floor(visTop * H);
+    const rh = Math.min(Math.ceil(visH * H), H - ry);
+    const rx = Math.floor(leftPct * W);
+    const rw = Math.min(Math.ceil(wPct * W), W - rx);
+
+    // Aplicar filtro a píxeles amarillos de la región
+    for (let y = ry; y < ry + rh; y++) {
+      for (let x = rx; x < rx + rw; x++) {
+        const idx = (y * W + x) * ch;
+        const r = pixels[idx], g = pixels[idx + 1], b = pixels[idx + 2];
+        // Detectar amarillo: R y G altos, B bajo
+        if (r > 140 && g > 100 && b < 130 && r + g > b * 3 + 60) {
+          const rn = r / 255, gn = g / 255, bn = b / 255;
+          let nr = m[0][0] * rn + m[0][1] * gn + m[0][2] * bn;
+          let ng = m[1][0] * rn + m[1][1] * gn + m[1][2] * bn;
+          let nb = m[2][0] * rn + m[2][1] * gn + m[2][2] * bn;
+          // saturate(1.8)
+          const lum = 0.299 * nr + 0.587 * ng + 0.114 * nb;
+          nr = lum + (nr - lum) * sat;
+          ng = lum + (ng - lum) * sat;
+          nb = lum + (nb - lum) * sat;
+          pixels[idx]     = Math.min(255, Math.max(0, Math.round(nr * 255)));
+          pixels[idx + 1] = Math.min(255, Math.max(0, Math.round(ng * 255)));
+          pixels[idx + 2] = Math.min(255, Math.max(0, Math.round(nb * 255)));
+        }
+      }
+    }
+
+    // Re-encodificar con filtro tipo 0 (None) por scanline
+    const newRaw = Buffer.alloc(H * (stride + 1));
+    for (let y = 0; y < H; y++) {
+      newRaw[y * (stride + 1)] = 0;
+      pixels.copy(newRaw, y * (stride + 1) + 1, y * stride, (y + 1) * stride);
+    }
+    const compressed = deflateSync(newRaw, { level: 6 });
+
+    // Construir chunk IDAT con CRC
+    const idat = Buffer.alloc(12 + compressed.length);
+    idat.writeUInt32BE(compressed.length, 0);
+    idat.write('IDAT', 4, 'ascii');
+    compressed.copy(idat, 8);
+    idat.writeUInt32BE(_crc32(Buffer.concat([idat.slice(4, 8), compressed])), 8 + compressed.length);
+
+    return Buffer.concat([buf.slice(0, 8), ...preChunks, idat, ...postChunks]);
+  } catch (e) {
+    console.warn('applyFiltroRojoToPng:', e.message);
+    return pngBytes;
   }
 }
 
@@ -643,6 +798,7 @@ export async function POST(req) {
       topLeftText     = '',
       plantillaId     = 'none',
       dotOverlays     = [],
+      filtroRojo      = null,
       laminaSize      = { w: 690, h: 620 },
     } = body;
 
@@ -667,11 +823,16 @@ export async function POST(req) {
       .filter(Boolean)
       .filter((p, i, arr) => arr.indexOf(p) === i);
 
-    const [baseImgBytes, imgListaBytes, ...overlayBytesArr] = await Promise.all([
+    const [baseImgBytes, imgListaBytes, ...rawOverlayBytesArr] = await Promise.all([
       fetchLocalBytes('/NeuropatiaImg/BP_Neuropatia_TR.png'),
       fetchRemoteBytes(imgListaUrl),
       ...ovPaths.map(p => fetchLocalBytes(p)),
     ]);
+
+    // Aplicar filtro rojo a las imágenes superpuestas (las que contienen el nervio amarillo)
+    const overlayBytesArr = filtroRojo?.clipTop
+      ? rawOverlayBytesArr.map(b => b ? applyFiltroRojoToPng(b, filtroRojo) : b)
+      : rawOverlayBytesArr;
 
     await buildPage1(pdfDoc, {
       finalConclusion, userData, baseImgBytes, overlayBytesArr,

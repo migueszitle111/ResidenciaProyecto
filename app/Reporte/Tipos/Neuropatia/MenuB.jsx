@@ -1,6 +1,7 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { useSession } from 'next-auth/react';
+import { ReportContext } from '@/src/context';
 import './Style.css';
 
 // ─── Constantes ───────────────────────────────────────────────────────────────
@@ -406,7 +407,7 @@ export default function ExportBar({
   reportRef,
 }) {
   const { data: session } = useSession();
-
+  const { filtroRojoActivo } = useContext(ReportContext);
   const [showPlantillaModal, setShowPlantillaModal] = useState(false);
   const [progress, setProgress]         = useState(0);
   const [processing, setProcessing]     = useState(false);
@@ -487,6 +488,7 @@ export default function ExportBar({
       comentarioLista,
       plantillaId,
       dotOverlays,
+      filtroRojo: filtroRojoActivo?.clipTop ? filtroRojoActivo : null,
       userData: {
         name:         session?.user?.name,
         lastname:     session?.user?.lastname,

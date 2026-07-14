@@ -22,6 +22,7 @@ export function ReportContextProvider({ children }) {
   const [buttonsDisabledBILT2, setbuttonsDisabledBILT2] = useState(false);
   const [buttonsDisabledBITSeg, setbuttonsDisabledBITSeg] = useState(false);
   const [buttonsDisabledBITSeg2, setbuttonsDisabledBITSeg2] = useState(false);
+  const [filtroRojoActivo, setFiltroRojoActivo] = useState(null);
 
 
   // 1) Función para agregar/quitar conclusiones a modo "toggle"
@@ -69,7 +70,8 @@ export function ReportContextProvider({ children }) {
     setbuttonsDisabledBITSeg,
     buttonsDisabledBITSeg2,
     setbuttonsDisabledBITSeg2,
-
+    filtroRojoActivo,
+    setFiltroRojoActivo,
   }
 
   return (

@@ -3,8 +3,8 @@
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 
-export function NerviusButton({ title, value, displayText }) {
-  const { updateConclusions, conclusions, buttonsDisabled } = useContext(ReportContext);
+export function NerviusButton({ title, value, displayText, buttonTop, filtroRojo }) {
+  const { updateConclusions, conclusions, buttonsDisabled, setFiltroRojoActivo } = useContext(ReportContext);
   const [selectedButton, setSelectedButton] = useState(null);
 
   const isSelected = conclusions.find(cl => cl.value === value);
@@ -15,12 +15,25 @@ export function NerviusButton({ title, value, displayText }) {
     ' rounded-[50px] z-50 relative';
 
   function handleClick() {
-    if (buttonsDisabled) return; // Protección adicional
-    if (selectedButton === value) {
+    if (buttonsDisabled) return;
+
+    const isCurrentlySelected = selectedButton === value;
+
+    if (isCurrentlySelected) {
       setSelectedButton(null);
+      setFiltroRojoActivo?.(null);
     } else {
       setSelectedButton(value);
+      // Solo activa el filtro si el botón tiene todos los datos necesarios
+      if (filtroRojo?.top && filtroRojo?.height && buttonTop) {
+        const bTop    = parseFloat(buttonTop);
+        const iTop    = parseFloat(filtroRojo.top);
+        const iHeight = parseFloat(filtroRojo.height);
+        const clipTop = Math.max(0, ((bTop - iTop) / iHeight) * 100);
+        setFiltroRojoActivo?.({ ...filtroRojo, clipTop: `${clipTop.toFixed(2)}%` });
+      }
     }
+
     updateConclusions({ title, value });
   }
 
@@ -30,11 +43,3 @@ export function NerviusButton({ title, value, displayText }) {
     </div>
   );
 }
-
-
-
-
-
-
-
-

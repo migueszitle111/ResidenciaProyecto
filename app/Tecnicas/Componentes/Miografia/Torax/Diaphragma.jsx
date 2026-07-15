@@ -123,6 +123,21 @@ const Diaphragma = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Abordaje EMG clásico: costal derecho, 7.º–8.º espacio intercostal línea axilar media (electrodo de aguja o coaxial) \n\n1–2 cm (entre costillas; fibras superficiales)' +
-                        '\n\nA 30–45° cefálico, tangencial entre costillas; evitar pleura \n\nEcografía: identificar deslizamiento pleural; diafragma como línea hiperecogénica con banda muscular; usar modo M para excursión' + 
-                        '\n\n≈3–4 cm por encima del margen costal en línea axilar media (EIC 7–8) \n\nPunto en línea axilar media; ventana subcostal derecha sobre hígado (para US)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('Abordaje EMG clásico: costal derecho, 7.º–8.º espacio intercostal línea axilar media (electrodo de aguja o coaxial). \n\n1–2 cm (entre costillas; fibras superficiales).' +
+                        '\n\nA 30–45° cefálico, tangencial entre costillas; evitar pleura. \n\nEcografía: identificar deslizamiento pleural; diafragma como línea hiperecogénica con banda muscular; usar modo M para excursión.' + 
+                        '\n\n≈3–4 cm por encima del margen costal en línea axilar media (EIC 7–8). \n\nPunto en línea axilar media; ventana subcostal derecha sobre hígado (para US).', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_55.png", { top: "50%", left: "50%" });
                             }}
                         >

@@ -123,6 +123,21 @@ const PeroneusB = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('1) IZ: tercio distal lateral. \n\n2) Profundidad: 0.8–1.8 cm.' +
-                        '\n\n3) Relación: profundo al longus. \n\n4) Variaciones: trayecto subtendinoso.' + 
-                        '\n\n5) Ventana segura: lateral distal. \n\n6) Riesgos: contacto óseo. \n\n7) Posición: decúbito lateral contralateral.', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**1) IZ:** tercio distal lateral. \n\n**2) Profundidad:** 0.8–1.8 cm.' +
+                        '\n\n**3) Relación:** profundo al longus. \n\n**4) Variaciones:** trayecto subtendinoso.' + 
+                        '\n\n**5) Ventana segura:** lateral distal. \n\n**6) Riesgos:** contacto óseo. \n\n**7) Posición:** decúbito lateral contralateral.', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_77.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

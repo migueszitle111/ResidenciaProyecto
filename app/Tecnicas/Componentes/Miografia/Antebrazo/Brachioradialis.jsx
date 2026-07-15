@@ -123,6 +123,22 @@ const Brachioradialis = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,8 +202,8 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Cara anterolateral del antebrazo proximal, 2–3 cm distal al epicóndilo lateral \n\nPunto motor EMG — profundidad aprox: 0.8–1.5 cm' +
-                        '\n\nPerpendicular; aguja hacia radio \n\nUS: identificar vientre superficial lateral sobre radio' + 
+                                handleButtonClick('Cara anterolateral del antebrazo proximal, 2–3 cm distal al epicóndilo lateral \n\n**Punto motor EMG — profundidad aprox:** 0.8–1.5 cm' +
+                        '\n\nPerpendicular; aguja hacia radio \n\n**US:** identificar vientre superficial lateral sobre radio' + 
                         '\n\n≈2–3 cm distal al epicóndilo lateral; 1 cm anterior al borde del BR \n\n Proyección anterolateral del antebrazo proximal', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_31.png", { top: "50%", left: "50%" });
                             }}
@@ -236,7 +252,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

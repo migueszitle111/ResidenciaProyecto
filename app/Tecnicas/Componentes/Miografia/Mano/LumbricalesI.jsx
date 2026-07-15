@@ -123,6 +123,21 @@ const LumbricalesI = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Mano supinada, dedos extendidos \n\nPuntos de referencia palpables: Espacio interóseo radial de 2.º–3.º MC' +
-            '\n\nPunto de entrada exacto: 1–1.5 cm distal a pliegue palmar distal, radial a tendones FDP \n\nOrientación y profundidad estimada de aguja: Perpendicular; 0.5–1 cm' + 
-            '\n\nPrecauciones: Nervios digitales medianos; arco palmar superficial \n\nManiobra de activación y/o nota ecográfica: Flexión MCP dedos 2–3; (US recomendable para separar de interóseos)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Mano supinada, dedos extendidos \n\n**Puntos de referencia palpables:** Espacio interóseo radial de 2.º–3.º MC' +
+            '\n\n**Punto de entrada exacto:** 1–1.5 cm distal a pliegue palmar distal, radial a tendones FDP \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 0.5–1 cm' + 
+            '\n\n**Precauciones:** Nervios digitales medianos; arco palmar superficial \n\n**Maniobra de activación y/o nota ecográfica:** Flexión MCP dedos 2–3; (US recomendable para separar de interóseos)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_04.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

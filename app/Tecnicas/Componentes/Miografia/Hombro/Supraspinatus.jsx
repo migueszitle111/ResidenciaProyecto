@@ -123,6 +123,21 @@ const Supraspinatus = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Sedente, brazo colgando \n\nPuntos de referencia palpables: Espina de la escápula; fosa supraespinosa' +
-                        '\n\nPunto de entrada exacto: 1–2 cm superior a espina escapular, medial al acromion \n\nOrientación y profundidad estimada de aguja: Oblicua inferolateral; 1.5–2.5 cm' + 
-                        '\n\nPrecauciones: Nervio supraescapular; arteria supraescapular; pleura profunda más medial \n\nManiobra de activación y/o nota ecográfica: Abducción inicial contra resistencia; (US recomendable para evitar estructuras neurovasculares)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Sedente, brazo colgando \n\n**Puntos de referencia palpables:** Espina de la escápula; fosa supraespinosa' +
+                        '\n\n**Punto de entrada exacto:** 1–2 cm superior a espina escapular, medial al acromion \n\n**Orientación y profundidad estimada de aguja:** Oblicua inferolateral; 1.5–2.5 cm' + 
+                        '\n\n**Precauciones:** Nervio supraescapular; arteria supraescapular; pleura profunda más medial \n\n**Maniobra de activación y/o nota ecográfica:** Abducción inicial contra resistencia; (US recomendable para evitar estructuras neurovasculares)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_44.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

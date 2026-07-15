@@ -123,6 +123,21 @@ const BrachiiLat = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Prono o sedente \n\nPuntos de referencia palpables: Cara posterolateral del brazo; referencia septo lateral' +
-                        '\n\nPunto de entrada exacto: A 5–7 cm proximal al epicóndilo lateral, 2 cm lateral a la línea media posterior \n\nOrientación y profundidad estimada de aguja: Perpendicular; 1.5–3 cm' + 
-                        '\n\nPrecauciones: Nervio radial en canal espiral (proximal) y en septo lateral (distal) \n\nManiobra de activación y/o nota ecográfica: Extensión del codo contra resistencia; (US útil para evitar trayecto radial distal)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Prono o sedente \n\n**Puntos de referencia palpables:** Cara posterolateral del brazo; referencia septo lateral' +
+                        '\n\n**Punto de entrada exacto:** A 5–7 cm proximal al epicóndilo lateral, 2 cm lateral a la línea media posterior \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 1.5–3 cm' + 
+                        '\n\n**Precauciones:** Nervio radial en canal espiral (proximal) y en septo lateral (distal) \n\n**Maniobra de activación y/o nota ecográfica:** Extensión del codo contra resistencia; (US útil para evitar trayecto radial distal)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_33.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

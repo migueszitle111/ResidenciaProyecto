@@ -123,6 +123,22 @@ const AbdPollicisLo = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +202,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Antebrazo en pronación \n\nPuntos de referencia palpables: Tabaquera anatómica radial' +
-                        '\n\nPunto de entrada exacto: 6–7 cm proximal a la muñeca, borde posterorradial \n\nOrientación y profundidad estimada de aguja: Perpendicular; 1–2 cm' + 
-                        '\n\nPrecauciones: Arteria radial superficial; nervio interóseo posterior \n\nManiobra de activación y/o nota ecográfica: Abducción radial del pulgar; (US muy recomendable en zona compartimental)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Antebrazo en pronación \n\n**Puntos de referencia palpables:** Tabaquera anatómica radial' +
+                        '\n\n**Punto de entrada exacto:** 6–7 cm proximal a la muñeca, borde posterorradial \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 1–2 cm' + 
+                        '\n\n**Precauciones:** Arteria radial superficial; nervio interóseo posterior \n\n**Maniobra de activación y/o nota ecográfica:** Abducción radial del pulgar; (US muy recomendable en zona compartimental)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_26.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +252,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

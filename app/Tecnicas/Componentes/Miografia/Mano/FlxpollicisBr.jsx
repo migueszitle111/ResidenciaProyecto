@@ -123,6 +123,21 @@ const FlxpollicisBr = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Mano supinada \n\nPuntos de referencia palpables: Eminencia tenar central' +
-            '\n\nPunto de entrada exacto: 1 cm distal a la flexura palmar tenar, sobre tendón FPL \n\nOrientación y profundidad estimada de aguja: Perpendicular; 0.5–1 cm' + 
-            '\n\nPrecauciones: Arco palmar superficial; ramas digitales nerviosas \n\nManiobra de activación y/o nota ecográfica: Flexión MCP pulgar; (US opcional para separar fascículos)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Mano supinada \n\n**Puntos de referencia palpables:** Eminencia tenar central' +
+            '\n\n**Punto de entrada exacto:** 1 cm distal a la flexura palmar tenar, sobre tendón FPL \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 0.5–1 cm' + 
+            '\n\n**Precauciones:** Arco palmar superficial; ramas digitales nerviosas \n\n**Maniobra de activación y/o nota ecográfica:** Flexión MCP pulgar; (US opcional para separar fascículos)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_02.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

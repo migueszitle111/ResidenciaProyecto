@@ -123,6 +123,21 @@ const FlxCarpiUl = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Antebrazo supinado \n\nPuntos de referencia palpables: Tendón cubital palpable proximal a pisiforme' +
-                      '\n\nPunto de entrada exacto: Un tercio proximal del antebrazo, 2 cm medial \n\nOrientación y profundidad estimada de aguja: Perpendicular; 1–2 cm' + 
-                      '\n\nPrecauciones: Nervio cubital en surco epitroclear proximal y distalmente; arteria ulnar profunda \n\nManiobra de activación y/o nota ecográfica: Flexión cubital de muñeca; (US útil para guiar y evitar nervio ulnar)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Antebrazo supinado \n\n**Puntos de referencia palpables:** Tendón cubital palpable proximal a pisiforme' +
+                      '\n\n**Punto de entrada exacto:** Un tercio proximal del antebrazo, 2 cm medial \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 1–2 cm' + 
+                      '\n\n**Precauciones:** Nervio cubital en surco epitroclear proximal y distalmente; arteria ulnar profunda \n\n**Maniobra de activación y/o nota ecográfica:** Flexión cubital de muñeca; (US útil para guiar y evitar nervio ulnar)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_22.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

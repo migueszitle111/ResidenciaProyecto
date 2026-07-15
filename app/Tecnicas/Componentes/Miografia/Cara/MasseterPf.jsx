@@ -123,6 +123,21 @@ const MasseterPf = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Sedente \n\nPuntos de referencia palpables: Arco cigomático; rama mandibular posterior' +
-                        '\n\nPunto de entrada exacto: 1 cm anterior a la escotadura mandibular (profundo) \n\nOrientación y profundidad estimada de aguja: Oblicua medial; 2–3 cm' + 
-                        '\n\nPrecauciones: Cercanía a vasos masetéricos; riesgo parotídeo \n\nManiobra de activación: Cierre mandibular sostenido', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Sedente \n\n**Puntos de referencia palpables:** Arco cigomático; rama mandibular posterior' +
+                        '\n\n**Punto de entrada exacto:** 1 cm anterior a la escotadura mandibular (profundo) \n\n**Orientación y profundidad estimada de aguja:** Oblicua medial; 2–3 cm' + 
+                        '\n\n**Precauciones:** Cercanía a vasos masetéricos; riesgo parotídeo \n\n**Maniobra de activación:** Cierre mandibular sostenido', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_97.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -237,7 +252,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

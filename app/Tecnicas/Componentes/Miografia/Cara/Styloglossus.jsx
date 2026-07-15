@@ -123,6 +123,21 @@ const Styloglossus = () => {
         setExtraImage('');
     };
 
+const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('1) IZ: región posterolateral profunda. \n\n2) Profundidad: 2–3 cm.' +
-                        '\n\n3) Relación: cercano al paquete carotídeo. \n\n4) Variaciones: trayecto divergente.' + 
-                        '\n\n5) Ventana segura: submandibular alta. \n\n6) Riesgos: vasos faciales/linguales. \n\n7) Posición: supino cabeza rotada contralateral.', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**1) IZ:** región posterolateral profunda. \n\n**2) Profundidad:** 2–3 cm.' +
+                        '\n\n**3) Relación:** cercano al paquete carotídeo. \n\n**4) Variaciones:** trayecto divergente.' + 
+                        '\n\n**5) Ventana segura:** submandibular alta. \n\n**6) Riesgos:** vasos faciales/linguales. \n\n**7) Posición:** supino cabeza rotada contralateral.', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_98.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

@@ -123,6 +123,21 @@ const Popliteus = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('1) IZ profunda en fosa poplítea. \n\n2) Profundidad: 2–3 cm.' +
-                        '\n\n3) Relación: profundo a GC lateral. \n\n4) Variaciones mínimas.' + 
-                        '\n\n5) Ventana: corte transversal. \n\n6) Riesgo: arteria poplítea medial. \n\n7) Posición del paciente: Decúbito prono, rodilla flexionada 10–20° para relajar gastrocnemio.', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**1) IZ:** profunda en fosa poplítea. \n\n**2) Profundidad:** 2–3 cm.' +
+                        '\n\n**3) Relación:** profundo a GC lateral. \n\n**4) Variaciones:** mínimas.' + 
+                        '\n\n**5) Ventana:** corte transversal. \n\n**6) Riesgo:** arteria poplítea medial. \n\n**7) Posición del paciente:** Decúbito prono, rodilla flexionada 10–20° para relajar gastrocnemio.', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_65.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

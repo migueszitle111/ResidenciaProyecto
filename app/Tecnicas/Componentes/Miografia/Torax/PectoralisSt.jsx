@@ -123,6 +123,22 @@ const PectoralisSt = () => {
         setExtraImage('');
     };
 
+
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +202,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Supino, brazo en ligera abducción \n\nPuntos de referencia palpables: Borde esternal; cartílagos costales; pezón' +
-                        '\n\nPunto de entrada exacto: A 3–4 cm lateral del borde esternal a nivel del 4.º espacio intercostal \n\nOrientación y profundidad estimada de aguja: Perpendicular; 1.5–2.5 cm' + 
-                        '\n\nPrecauciones: Pleura parietal profunda; vasos mamarios internos (parasternales) \n\nManiobra de activación y/o nota ecográfica: Aducción/rotación interna contra resistencia; (US recomendada en región parasternal para evitar pleura/vasos)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Supino, brazo en ligera abducción \n\n**Puntos de referencia palpables:** Borde esternal; cartílagos costales; pezón' +
+                        '\n\n**Punto de entrada exacto:** A 3–4 cm lateral del borde esternal a nivel del 4.º espacio intercostal \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 1.5–2.5 cm' + 
+                        '\n\n**Precauciones:** Pleura parietal profunda; vasos mamarios internos (parasternales) \n\n**Maniobra de activación y/o nota ecográfica:** Aducción/rotación interna contra resistencia; (US recomendada en región parasternal para evitar pleura/vasos)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_50.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +252,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

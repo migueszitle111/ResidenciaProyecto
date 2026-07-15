@@ -123,6 +123,21 @@ const Coracobrachialis = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Sedente, hombro en ligera flexión y aducción \n\nPuntos de referencia palpables: Surco bicipital; cara medial del brazo (vientre profundo delgado)' +
-                        '\n\nPunto de entrada exacto: En tercio proximal-medial del brazo, 2 cm medial al bíceps \n\nOrientación y profundidad estimada de aguja: Oblicua anterolateral; 2–3 cm (profundo)' + 
-                        '\n\nPrecauciones: Nervio musculocutáneo perfora el vientre; arteria braquial medial \n\nManiobra de activación y/o nota ecográfica: Flexión/adducción suave del hombro; (US recomendada para localizar vientre estrecho y evitar nervio)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Sedente, hombro en ligera flexión y aducción \n\n**Puntos de referencia palpables:** Surco bicipital; cara medial del brazo (vientre profundo delgado)' +
+                        '\n\n**Punto de entrada exacto:** En tercio proximal-medial del brazo, 2 cm medial al bíceps \n\n**Orientación y profundidad estimada de aguja:** Oblicua anterolateral; 2–3 cm (profundo)' + 
+                        '\n\n**Precauciones:** Nervio musculocutáneo perfora el vientre; arteria braquial medial \n\n**Maniobra de activación y/o nota ecográfica:** Flexión/adducción suave del hombro; (US recomendada para localizar vientre estrecho y evitar nervio)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_42.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

@@ -186,9 +186,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('2–3 cm inferior a la espina de la escápula, punto medio posterior \n\nPerpendicular o 30° cráneo‑caudal' +
-                        '\n\nUS: espina como referencia; fibras peniformes superficiales \n\n≈2–3 cm inferior a la espina escapular' + 
-                        '\n\nProyección posterolateral del hombro', { top: "5%", left: "24.4%"});
+                                handleButtonClick('2–3 cm inferior a la espina de la escápula, punto medio posterior. \n\nPerpendicular o 30° cráneo‑caudal.' +
+                        '\n\nUS: espina como referencia; fibras peniformes superficiales. \n\n≈2–3 cm inferior a la espina escapular.' + 
+                        '\n\nProyección posterolateral del hombro.', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_38.png", { top: "50%", left: "50%" });
                             }}
                         >

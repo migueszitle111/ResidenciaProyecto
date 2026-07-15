@@ -123,6 +123,21 @@ const LevatorS = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Sedente, hombro relajado \n\nPuntos de referencia palpables: Borde superomedial escapular; masa posterolateral del cuello' +
-                        '\n\nPunto de entrada exacto: 2–3 cm superomedial al ángulo superomedial escapular \n\nOrientación y profundidad estimada de aguja: Perpendicular; 1.5–2.5 cm' + 
-                        '\n\nPrecauciones: Nervio accesorio variable superficial; arteria transversa del cuello \n\nManiobra de activación y/o nota ecográfica: Elevación escapular contra resistencia; (US útil para diferenciar de esplenios)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Sedente, hombro relajado \n\n**Puntos de referencia palpables:** Borde superomedial escapular; masa posterolateral del cuello' +
+                        '\n\n**Punto de entrada exacto:** 2–3 cm superomedial al ángulo superomedial escapular \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 1.5–2.5 cm' + 
+                        '\n\n**Precauciones:** Nervio accesorio variable superficial; arteria transversa del cuello \n\n**Maniobra de activación y/o nota ecográfica:** Elevación escapular contra resistencia; (US útil para diferenciar de esplenios)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_46.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

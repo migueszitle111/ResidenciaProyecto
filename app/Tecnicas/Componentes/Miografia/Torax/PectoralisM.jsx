@@ -123,6 +123,21 @@ const PectoralisM = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Supino, brazo en ligera abducción y rotación externa \n\nPuntos de referencia palpables: Proceso coracoides; espacios intercostales 3–5' +
-                        '\n\nPunto de entrada exacto: 2 cm inferior y medial al coracoides, hacia inserción costal \n\nOrientación y profundidad estimada de aguja: Oblicua inferomedial; 2–3 cm' + 
-                        '\n\nPrecauciones: Pleura y arteria toracoacromial; plexo braquial superolateral \n\nManiobra de activación y/o nota ecográfica: Protracción escapular (‘empuje’); (US recomendable por pleura subyacente)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Supino, brazo en ligera abducción y rotación externa \n\n**Puntos de referencia palpables:** Proceso coracoides; espacios intercostales 3–5' +
+                        '\n\n**Punto de entrada exacto:** 2 cm inferior y medial al coracoides, hacia inserción costal \n\n**Orientación y profundidad estimada de aguja:** Oblicua inferomedial; 2–3 cm' + 
+                        '\n\n**Precauciones:** Pleura y arteria toracoacromial; plexo braquial superolateral \n\n**Maniobra de activación y/o nota ecográfica:** Protracción escapular (‘empuje’); (US recomendable por pleura subyacente)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_51.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

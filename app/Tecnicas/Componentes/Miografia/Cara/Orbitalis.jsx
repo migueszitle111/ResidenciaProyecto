@@ -123,6 +123,21 @@ const Orbitalis = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Supino o sedente \n\nPuntos de referencia palpables: Canto lateral; reborde orbitario lateral' +
-                        '\n\nPunto de entrada exacto: 1 cm lateral al canto lateral (subcutáneo) \n\nOrientación y profundidad estimada de aguja: Oblicua superficial; 0.5–1 cm' + 
-                        '\n\nPrecauciones: Arteria angular; glándula lagrimal superolateral \n\nManiobra de activación: Cierre ocular forzado', { top: "5%", left: "24.4%" });
+                                handleButtonClick('**Posición del paciente:** Supino o sedente \n\n**Puntos de referencia palpables:** Canto lateral; reborde orbitario lateral' +
+                        '\n\n**Punto de entrada exacto:** 1 cm lateral al canto lateral (subcutáneo) \n\n**Orientación y profundidad estimada de aguja:** Oblicua superficial; 0.5–1 cm' + 
+                        '\n\n**Precauciones:** Arteria angular; glándula lagrimal superolateral \n\n**Maniobra de activación:** Cierre ocular forzado', { top: "5%", left: "24.4%" });
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_95.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

@@ -123,6 +123,21 @@ const Infraspinatus = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Sedente/prono, brazo colgando \n\nPuntos de referencia palpables: Espina de la escápula; fosa infraespinosa' +
-                        '\n\nPunto de entrada exacto: 2–3 cm inferior a espina escapular, línea medioescapular \n\nOrientación y profundidad estimada de aguja: Perpendicular; 1.5–2.5 cm' + 
-                        '\n\nPrecauciones: Nervio supraescapular; vasos circunflejos escapulares \n\nManiobra de activación y/o nota ecográfica: Rotación externa contra resistencia; (US opcional para delimitar espesor)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Sedente/prono, brazo colgando \n\n**Puntos de referencia palpables:** Espina de la escápula; fosa infraespinosa' +
+                        '\n\n**Punto de entrada exacto:** 2–3 cm inferior a espina escapular, línea medioescapular \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 1.5–2.5 cm' + 
+                        '\n\n**Precauciones:** Nervio supraescapular; vasos circunflejos escapulares \n\n**Maniobra de activación y/o nota ecográfica:** Rotación externa contra resistencia; (US opcional para delimitar espesor)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_43.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

@@ -123,6 +123,21 @@ const AddMagnusA = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Prono o supino con RI \n\nPuntos de referencia palpables: Cara medial distal del muslo' +
-                        '\n\nPunto de entrada exacto: 6–8 cm proximal al cóndilo medial, 2–3 cm profundo \n\nOrientación y profundidad estimada de aguja: Oblicua anterolateral; 3–4 cm' + 
-                        '\n\nPrecauciones: Perforantes femorales profundas \n\nManiobra de activación y/o nota ecográfica: Aducción isométrica; (US útil)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Prono o supino con RI \n\n**Puntos de referencia palpables:** Cara medial distal del muslo' +
+                        '\n\n**Punto de entrada exacto:** 6–8 cm proximal al cóndilo medial, 2–3 cm profundo \n\n**Orientación y profundidad estimada de aguja:** Oblicua anterolateral; 3–4 cm' + 
+                        '\n\n**Precauciones:** Perforantes femorales profundas \n\n**Maniobra de activación y/o nota ecográfica:** Aducción isométrica; (US útil)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_92.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

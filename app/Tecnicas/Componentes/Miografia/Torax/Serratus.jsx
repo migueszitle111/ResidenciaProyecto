@@ -123,6 +123,21 @@ const Serratus = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Sedente o decúbito lateral contrario, brazo en 90° de flexión \n\nPuntos de referencia palpables: Líneas axilares media/anterior; digitaciones costales palpables' +
-                        '\n\nPunto de entrada exacto: Sobre digitación 6.ª–7.ª en línea axilar media \n\nOrientación y profundidad estimada de aguja: Perpendicular; 1–2 cm' + 
-                        '\n\nPrecauciones: Pleura y vasos intercostales; riesgo de neumotórax si profunda \n\nManiobra de activación y/o nota ecográfica: Empuje de pared (‘push-up plus’); (US muy recomendada para ver pleura deslizante y espesor muscular)', { top: "8%", left: "23%" });
+                                handleButtonClick('**Posición del paciente:** Sedente o decúbito lateral contrario, brazo en 90° de flexión \n\n**Puntos de referencia palpables:** Líneas axilares media/anterior; digitaciones costales palpables' +
+                        '\n\n**Punto de entrada exacto:** Sobre digitación 6.ª–7.ª en línea axilar media \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 1–2 cm' + 
+                        '\n\n**Precauciones:** Pleura y vasos intercostales; riesgo de neumotórax si profunda \n\n**Maniobra de activación y/o nota ecográfica:** Empuje de pared (‘push-up plus’); (US muy recomendada para ver pleura deslizante y espesor muscular)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_47.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

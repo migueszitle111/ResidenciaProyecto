@@ -123,6 +123,21 @@ const DigitorumSp = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Antebrazo supinado \n\nPuntos de referencia palpables: Vientre medial profundo a FCR y PL' +
-            '\n\nPunto de entrada exacto: Mitad del antebrazo, 2–3 cm medial a línea media \n\nOrientación y profundidad estimada de aguja: Oblicua posterolateral; 2–3 cm' + 
-            '\n\nPrecauciones: Arteria ulnar medial profunda; nervio mediano en arco superficial \n\nManiobra de activación y/o nota ecográfica: Flexión PIP de dedos 2–5; (US recomendable para ubicar vientre profundo)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Antebrazo supinado \n\n**Puntos de referencia palpables:** Vientre medial profundo a FCR y PL' +
+            '\n\n**Punto de entrada exacto:** Mitad del antebrazo, 2–3 cm medial a línea media \n\n**Orientación y profundidad estimada de aguja:** Oblicua posterolateral; 2–3 cm' + 
+            '\n\n**Precauciones:** Arteria ulnar medial profunda; nervio mediano en arco superficial \n\n**Maniobra de activación y/o nota ecográfica:** Flexión PIP de dedos 2–5; (US recomendable para ubicar vientre profundo)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_08.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

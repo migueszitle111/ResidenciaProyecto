@@ -123,6 +123,21 @@ const MultifidiL = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('1) IZ: entre facetas; mayor actividad L4–L5. \n\n2) Profundidad: 2–4 cm.' +
-                        '\n\n3) Relación: dorsal a lámina y medial a longissimus. \n\n4) Variaciones: atrofia frecuente postdolor lumbar.' + 
-                        '\n\n5) Ventana segura: parasagital sobre faceta. \n\n6) Riesgos: penetración excesiva hacia canal. \n\n7) Posición del paciente: Decúbito prono; almohadilla bajo pelvis para abrir espacios interlaminares.', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**1) IZ:** entre facetas; mayor actividad L4–L5. \n\n**2) Profundidad:** 2–4 cm.' +
+                        '\n\n**3) Relación:** dorsal a lámina y medial a longissimus. \n\n**4) Variaciones:** atrofia frecuente postdolor lumbar.' + 
+                        '\n\n**5) Ventana segura:** parasagital sobre faceta. \n\n**6) Riesgos:** penetración excesiva hacia canal. \n\n**7) Posición del paciente:** Decúbito prono; almohadilla bajo pelvis para abrir espacios interlaminares.', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_101.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

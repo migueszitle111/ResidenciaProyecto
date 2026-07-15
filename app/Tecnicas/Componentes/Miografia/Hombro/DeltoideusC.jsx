@@ -186,9 +186,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Punto medio entre clavícula lateral y tuberosidad deltoidea, 2–3 cm inferior al borde anterior del acromion \n\nPerpendicular; evitar dirigir medial profundo' +
-                        '\n\nUS: referencia acromial anterior; fibras peniformes superficiales \n\n≈2–3 cm inferior y anterior al acromion' + 
-                        '\n\nProyección antero‑lateral del hombro ', { top: "5%", left: "24.4%"});
+                                handleButtonClick('Punto medio entre clavícula lateral y tuberosidad deltoidea, 2–3 cm inferior al borde anterior del acromion. \n\nPerpendicular; evitar dirigir medial profundo.' +
+                        '\n\nUS: referencia acromial anterior; fibras peniformes superficiales. \n\n≈2–3 cm inferior y anterior al acromion.' + 
+                        '\n\nProyección antero‑lateral del hombro. ', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_36.png", { top: "50%", left: "50%" });
                             }}
                         >

@@ -123,6 +123,21 @@ const Rectus = () => {
         setExtraImage('');
     };
 
+    const renderBoldText = (text) =>
+    text.split('\n').map((line, lineIdx) => {
+        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+        return (
+            <span key={lineIdx}>
+                {parts.map((part, partIdx) =>
+                    part.startsWith('**') && part.endsWith('**')
+                        ? <strong key={partIdx}>{part.slice(2, -2)}</strong>
+                        : part
+                )}
+                <br />
+            </span>
+        );
+    });
+
 const renderGalleryItem = (item) => (
     <div style={{ position: "absolute", inset: 0 }}>
         {(item.layers || [item.original]).map((src, index) => (
@@ -186,9 +201,9 @@ const renderGalleryItem = (item) => (
 
 
                         <button className="btnAntb" onClick={() => {
-                                handleButtonClick('Posición del paciente: Supino, cadera neutra \n\nPuntos de referencia palpables: EIAI (profunda) y vientre anterior' +
-                        '\n\nPunto de entrada exacto: 8–10 cm distal a EIAI en línea media \n\nOrientación y profundidad estimada de aguja: Perpendicular; 2–3 cm' + 
-                        '\n\nPrecauciones: Ramas femorales; vasos femorales laterales \n\nManiobra de activación y/o nota ecográfica: Flexión de cadera; (US útil)', { top: "5%", left: "24.4%"});
+                                handleButtonClick('**Posición del paciente:** Supino, cadera neutra \n\n**Puntos de referencia palpables:** EIAI (profunda) y vientre anterior' +
+                        '\n\n**Punto de entrada exacto:** 8–10 cm distal a EIAI en línea media \n\n**Orientación y profundidad estimada de aguja:** Perpendicular; 2–3 cm' + 
+                        '\n\n**Precauciones:** Ramas femorales; vasos femorales laterales \n\n**Maniobra de activación y/o nota ecográfica:** Flexión de cadera; (US útil)', { top: "5%", left: "24.4%"});
                                 handleImageBoxClick("/assets/ImgTecnicas/miogImg/LupaELE_86.png", { top: "50%", left: "50%" });
                             }}
                         >
@@ -236,7 +251,7 @@ const renderGalleryItem = (item) => (
                     className={`text-boxAnt ${textBoxClass}`}
                     style={{ top: textBoxPosition.top, left: textBoxPosition.left }}
                 >
-                    {textBoxContent}
+                    <div>{renderBoldText(textBoxContent)}</div>
                 </div>
             )}
             {imageBoxVisible && (

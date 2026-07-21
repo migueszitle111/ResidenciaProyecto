@@ -2440,7 +2440,7 @@ const CONCLUSION_OVERLAY_MAP = {
   'PLANTAR_LATERAL':    'PlantarLa',
   'PUDENDO':            'Pudendo',
 
-  'CiaticoR': 'CiaticoIzqge',
+  'CIATICO_IZQgeneralizada': 'CiaticoIzqge',
  // '${selectedSide}_IZQgeneralizada': 'CiaticoIzqge',
 
   'MED_IZQUIERDA':      'MedIzquierda',

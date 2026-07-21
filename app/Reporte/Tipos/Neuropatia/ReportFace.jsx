@@ -1563,6 +1563,8 @@ const Reporte = () => {
                       clipPath:            `inset(${filtroRojoActivo.clipTop} 0 0 0)`,
                       backdropFilter:      'hue-rotate(-60deg) saturate(1.8)',
                       WebkitBackdropFilter:'hue-rotate(-60deg) saturate(1.8)',
+                      transform:           `rotate(${filtroRojoActivo.grados ?? 0}deg)`,
+                      transformOrigin:     '50% 0%',
                       pointerEvents:       'none',
                       zIndex:              8,
                       border:              '2px solid black',

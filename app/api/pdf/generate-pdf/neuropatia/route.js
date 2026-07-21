@@ -394,9 +394,31 @@ function applyFiltroRojoToPng(pngBytes, fr) {
     const rx = Math.floor(leftPct * W);
     const rw = Math.min(Math.ceil(wPct * W), W - rx);
 
+    // Rotación del rectángulo del filtro (igual que transform: rotate en CSS con origin 50% 0%)
+    const rotDeg  = fr.grados ?? 0;
+    const rotRad  = rotDeg * Math.PI / 180;
+    const cosR    = Math.cos(-rotRad), sinR = Math.sin(-rotRad);
+    // Centro de rotación: parte superior central del rectángulo (50% 0%) en coordenadas de imagen
+    const pivotX  = rx + rw / 2;
+    const pivotY  = ry;
+    const hw = rw / 2, hh = rh;
+
+    // Bounding box expandido para cubrir el rectángulo rotado
+    const diagR  = Math.ceil(Math.sqrt(hw * hw + hh * hh));
+    const scanX0 = Math.max(0, Math.floor(pivotX - diagR));
+    const scanX1 = Math.min(W - 1, Math.ceil(pivotX + diagR));
+    const scanY0 = Math.max(0, Math.floor(pivotY - diagR));
+    const scanY1 = Math.min(H - 1, Math.ceil(pivotY + diagR));
+
     // Aplicar filtro a píxeles amarillos de la región
-    for (let y = ry; y < ry + rh; y++) {
-      for (let x = rx; x < rx + rw; x++) {
+    for (let y = scanY0; y <= scanY1; y++) {
+      for (let x = scanX0; x <= scanX1; x++) {
+        // Verificar si el píxel está dentro del rectángulo rotado
+        const dx = x - pivotX, dy = y - pivotY;
+        const lx = cosR * dx - sinR * dy;
+        const ly = sinR * dx + cosR * dy;
+        if (Math.abs(lx) > hw || ly < 0 || ly > hh) continue;
+
         const idx = (y * W + x) * ch;
         const r = pixels[idx], g = pixels[idx + 1], b = pixels[idx + 2];
         // Detectar amarillo: R y G altos, B bajo

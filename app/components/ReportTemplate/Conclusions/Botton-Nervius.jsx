@@ -3,7 +3,7 @@
 import { ReportContext } from '@/src/context';
 import { useContext, useState } from 'react';
 
-export function NerviusButton({ title, value, displayText, buttonTop, filtroRojo }) {
+export function NerviusButton({ title, value, displayText, buttonTop, filtroRojo, filtroGrados = 0 }) {
   const { updateConclusions, conclusions, buttonsDisabled, setFiltroRojoActivo } = useContext(ReportContext);
   const [selectedButton, setSelectedButton] = useState(null);
 
@@ -30,7 +30,7 @@ export function NerviusButton({ title, value, displayText, buttonTop, filtroRojo
         const iTop    = parseFloat(filtroRojo.top);
         const iHeight = parseFloat(filtroRojo.height);
         const clipTop = Math.max(0, ((bTop - iTop) / iHeight) * 100);
-        setFiltroRojoActivo?.({ ...filtroRojo, clipTop: `${clipTop.toFixed(2)}%` });
+        setFiltroRojoActivo?.({ ...filtroRojo, clipTop: `${clipTop.toFixed(2)}%`, grados: filtroGrados });
       }
     }
 

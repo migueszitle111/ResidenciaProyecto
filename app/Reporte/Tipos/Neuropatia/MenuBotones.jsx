@@ -2441,6 +2441,7 @@ const CONCLUSION_OVERLAY_MAP = {
   'PUDENDO':            'Pudendo',
 
   'CIATICO_IZQgeneralizada': 'CiaticoIzqge',
+  'CIATICOR': 'CiaticoIzqge',
  // '${selectedSide}_IZQgeneralizada': 'CiaticoIzqge',
 
   'MED_IZQUIERDA':      'MedIzquierda',
@@ -2472,7 +2473,7 @@ const CONCLUSION_OVERLAY_MAP = {
   'ANTEBRLATE_IZQgeneralizada': 'AnteLateIzqge',
   'ANTEBRMEDIAL_IZQgeneralizada': 'AnteMedIzqge',
   'AXILAR_IZQgeneralizada': 'AxilaIzqge',
-  'CIATICO_IZQgeneralizada': 'CiaticoIzqge',
+  //'CIATICO_IZQgeneralizada': 'CiaticoIzqge',
   'FACIAL_IZQgeneralizada': 'FacialIzqge',
   'FEMORAL_IZQgeneralizada': 'FemoralIzqge',
   'FEMOROCUTANEO_IZQgeneralizada': 'FemorocutaneoIzqge',

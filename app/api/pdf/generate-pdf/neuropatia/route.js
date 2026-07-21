@@ -60,7 +60,7 @@ const OVERLAYS_NEURO_P = {
   'PlantarMe':            '/NeuropatiaImg/PlantarMe.png',
   'PlantarLa':            '/NeuropatiaImg/PlantarLa.png',
   'Ilioiguinal':          '/NeuropatiaImg/Ilioinguinal.png',
-  'Ciatico':              '/NeuropatiaImg/CiaticoR.png',
+  'Ciatico':              '/NeuropatiaImg/Ciatico.png',
   'Pudendo':              '/NeuropatiaImg/Pudendo.png',
 
   'CiaticoRojo':           '/NeuropatiaImg/CiaticoR.png',

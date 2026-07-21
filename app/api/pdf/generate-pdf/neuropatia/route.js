@@ -60,10 +60,10 @@ const OVERLAYS_NEURO_P = {
   'PlantarMe':            '/NeuropatiaImg/PlantarMe.png',
   'PlantarLa':            '/NeuropatiaImg/PlantarLa.png',
   'Ilioiguinal':          '/NeuropatiaImg/Ilioinguinal.png',
-  'Ciatico':              '/NeuropatiaImg/Ciatico.png',
+  'Ciatico':              '/NeuropatiaImg/CiaticoR.png',
   'Pudendo':              '/NeuropatiaImg/Pudendo.png',
 
-  'CiaticoIzq':           '/NeuropatiaImg/Ciaticoizq.png',
+  'CiaticoRojo':           '/NeuropatiaImg/CiaticoR.png',
 
   // ── Overlays adicionales (base) ─────────────────────────────────────────────
   'Mediano1':              '/assets/NeuropatiaImg/NO_1_Mediano.png',

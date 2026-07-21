@@ -2423,7 +2423,7 @@ const CONCLUSION_OVERLAY_MAP = {
   'FRENICO':            'Frenico',
   'TORACICO_LARGO':     'Toracicolargo',
   'TORACODORSAL':       'Toracodorsal',
-  'CIATICO':            'Ciatico',
+  'CIATICO':            'CiaticoIzq',
   'GLUTEO_MEDIO':       'GluteoSup',
   'GLUTEO_INFERIOR':    'GluteoInf',
   'FEMORAL':            'Femoral',
@@ -2440,9 +2440,9 @@ const CONCLUSION_OVERLAY_MAP = {
   'PLANTAR_LATERAL':    'PlantarLa',
   'PUDENDO':            'Pudendo',
 
-  'CIATICO_IZQgeneralizada': 'CiaticoIzq',
+  //'CIATICO_IZQgeneralizada': 'CiaticoIzq',
   //'CIATICOR': 'CiaticoIzqge',
- // '${selectedSide}_IZQgeneralizada': 'CiaticoIzqge',
+  // '${selectedSide}_IZQgeneralizada': 'CiaticoIzqge',
 
   'MED_IZQUIERDA':      'MedIzquierda',
   'MEDIANO_DERgeneralizada': 'MedDerecha',

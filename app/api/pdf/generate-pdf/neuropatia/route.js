@@ -63,7 +63,7 @@ const OVERLAYS_NEURO_P = {
   'Ciatico':              '/NeuropatiaImg/Ciatico.png',
   'Pudendo':              '/NeuropatiaImg/Pudendo.png',
 
-'CiaticoIzqge':         '/NeuropatiaImg/CiaticoIzq.png',
+  'CiaticoIzqge':         '/NeuropatiaImg/CiaticoIzq.png',
 
   // ── Overlays adicionales (base) ─────────────────────────────────────────────
   'Mediano1':              '/assets/NeuropatiaImg/NO_1_Mediano.png',
@@ -131,7 +131,7 @@ const OVERLAYS_NEURO_P = {
   'AnteLateIzqge':        '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Antebraquial medial.png',
   'AnteMedIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Antebraquial medial.png',
   'AxilaIzqge':           '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Axilar.png',
-  'CiaticoIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Ciatico.png',
+  //'CiaticoIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Ciatico.png',
   'FacialIzqge':          '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Facial.png',
   'FemoralIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Femoral.png',
   'FemorocutaneoIzqge':   '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Femorocutáneo lateral.png',

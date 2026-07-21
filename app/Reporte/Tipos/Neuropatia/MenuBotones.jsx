@@ -2441,7 +2441,7 @@ const CONCLUSION_OVERLAY_MAP = {
   'PUDENDO':            'Pudendo',
 
   'CIATICO_IZQgeneralizada': 'CiaticoIzqge',
-  'CIATICOR': 'CiaticoIzqge',
+  //'CIATICOR': 'CiaticoIzqge',
  // '${selectedSide}_IZQgeneralizada': 'CiaticoIzqge',
 
   'MED_IZQUIERDA':      'MedIzquierda',

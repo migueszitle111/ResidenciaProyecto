@@ -66,6 +66,11 @@ const OVERLAYS_NEURO_P = {
   'Ciaticoizq':           '/NeuropatiaImg/CiaticoR.png',
   'Ciaticoder':           '/NeuropatiaImg/CiaticoRd.png',
 
+  'RadialIzqge':          '/NeuropatiaImg/RadialI.png',
+  'RadialDerge':          '/NeuropatiaImg/RadialD.png',
+
+  
+
   // ── Overlays adicionales (base) ─────────────────────────────────────────────
   'Mediano1':              '/assets/NeuropatiaImg/NO_1_Mediano.png',
   'InteroseoAnterior':    '/assets/NeuropatiaImg/NO_Interoseo Anterior.png',
@@ -113,14 +118,14 @@ const OVERLAYS_NEURO_P = {
   'FacialDerge':          '/assets/NeuropatiaImg/NervioRojo/DERECHA/Facial.png',
   'FemoralDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Femoral.png',
   'FemorocutaneoDerge':   '/assets/NeuropatiaImg/NervioRojo/DERECHA/Femorocutáneo lateral.png',
-  'FrenicoDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Frenico.png',
+  
   'IlioinguinalDerge':    '/assets/NeuropatiaImg/NervioRojo/DERECHA/GF-ILIO.png',
   'MedianoDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Mediano.png',
   'MusculocutaneoDerge':  '/assets/NeuropatiaImg/NervioRojo/DERECHA/Musculocutaneo.png',
   'ObturadorDerge':       '/assets/NeuropatiaImg/NervioRojo/DERECHA/Obturador.png',
   'PeroneoDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Peroneo.png',
   'PudendoDerge':         '/assets/NeuropatiaImg/NervioRojo/DERECHA/Pudendo.png',
-  'RadialDerge':          '/assets/NeuropatiaImg/NervioRojo/DERECHA/Radial.png',
+  
   'SupraescapularDerge':  '/assets/NeuropatiaImg/NervioRojo/DERECHA/Supraescapular.png',
   'TibialDerge':          '/assets/NeuropatiaImg/NervioRojo/DERECHA/Tibial.png',
   'ToracicoDerge':        '/assets/NeuropatiaImg/NervioRojo/DERECHA/Toracico largo.png',
@@ -142,7 +147,7 @@ const OVERLAYS_NEURO_P = {
   'ObturadorIzqge':       '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Obturador.png',
   'PeroneoIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Peroneo.png',
   'PudendoIzqge':         '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Pudendo.png',
-  'RadialIzqge':          '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Radial.png',
+  
   'SupraescapularIzqge':  '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Supraescapular.png',
   'TibialIzqge':          '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Tibial.png',
   'ToracicoIzqge':        '/assets/NeuropatiaImg/NervioRojo/IZQUIERDA/Toracico largo.png',

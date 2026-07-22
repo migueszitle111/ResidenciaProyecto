@@ -2424,6 +2424,8 @@ const CONCLUSION_OVERLAY_MAP = {
   'TORACICO_LARGO':     'Toracicolargo',
   'TORACODORSAL':       'Toracodorsal',
   'CIATICO':            'Ciatico',
+  'CIATICO_IZQgeneralizada': 'Ciaticoizq',
+  'CIATICO_DERgeneralizada': 'Ciaticoder',
   'GLUTEO_MEDIO':       'GluteoSup',
   'GLUTEO_INFERIOR':    'GluteoInf',
   'FEMORAL':            'Femoral',
@@ -2440,8 +2442,10 @@ const CONCLUSION_OVERLAY_MAP = {
   'PLANTAR_LATERAL':    'PlantarLa',
   'PUDENDO':            'Pudendo',
 
-  'CIATICO_IZQgeneralizada': 'Ciaticoizq',
-  'CIATICO_DERgeneralizada': 'Ciaticoder',
+  'RADIAL_IZQgeneralizada': 'RadialIzqge',
+  'RADIAL_DERgeneralizada': 'RadialDerge',
+
+
 
   //'CIATICOR': 'CiaticoIzqge',
  // '${selectedSide}_IZQgeneralizada': 'CiaticoIzqge',
@@ -2464,7 +2468,7 @@ const CONCLUSION_OVERLAY_MAP = {
   'OBTUUADOR_DERgeneralizada': 'ObturadorDerge',
   'PERONEO_DERgeneralizada': 'PeroneoDerge',
   'PUDENDO_DERgeneralizada': 'PudendoDerge',
-  'RADIAL_DERgeneralizada': 'RadialDerge',
+  
   'SUPRAESCAPULAR_DERgeneralizada': 'SupraescapularDerge',
   'TIBIAL_DERgeneralizada': 'TibialDerge',
   'TORACICO_DERgeneralizada': 'ToracicoDerge',
@@ -2485,7 +2489,7 @@ const CONCLUSION_OVERLAY_MAP = {
   'OBTUUADOR_IZQgeneralizada': 'ObturadorIzqge',
   'PERONEO_IZQgeneralizada': 'PeroneoIzqge',
   'PUDENDO_IZQgeneralizada': 'PudendoIzqge',
-  'RADIAL_IZQgeneralizada': 'RadialIzqge',
+  
   'SUPRAESCAPULAR_IZQgeneralizada': 'SupraescapularIzqge',
   'TIBIAL_IZQgeneralizada': 'TibialIzqge',
   'TORACICO_IZQgeneralizada': 'ToracicoIzqge',

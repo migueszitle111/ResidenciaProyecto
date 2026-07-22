@@ -2441,6 +2441,8 @@ const CONCLUSION_OVERLAY_MAP = {
   'PUDENDO':            'Pudendo',
 
   'CIATICO_IZQgeneralizada': 'Ciaticoizq',
+  'CIATICO_DERgeneralizada': 'Ciaticoder',
+
   //'CIATICOR': 'CiaticoIzqge',
  // '${selectedSide}_IZQgeneralizada': 'CiaticoIzqge',
 
@@ -2452,7 +2454,7 @@ const CONCLUSION_OVERLAY_MAP = {
   'ANTEBRLATE_DERgeneralizada': 'AnteLateDerge',
   'ANTEBRMEDIAL_DERgeneralizada': 'AnteBraqDerge',
   'AXILAR_DERgeneralizada': 'AxilaDerge',
-  'CIATICO_DERgeneralizada': 'CiaticoDerge',
+  //'CIATICO_DERgeneralizada': 'CiaticoDerge',
   'FACIAL_DERgeneralizada': 'FacialDerge',
   'FEMORAL_DERgeneralizada': 'FemoralDerge',
   'FEMOROCUTANEO_DERgeneralizada': 'FemorocutaneoDerge',

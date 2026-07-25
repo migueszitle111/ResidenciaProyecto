@@ -46,16 +46,6 @@ export default function LandingPage() {
     };
   }, []);
 
-  // Intercepta clics a Stripe y muestra aviso de facturación
-  const handlePaymentClick = (e, url) => {
-    e.preventDefault();
-    alert(
-      "Descarga politicas de privacidad\n\n" 
-      
-    );
-    window.location.href = url;
-  };
-
   // Slides para el slider principal
   const bannerSlides = [
     {
@@ -228,10 +218,7 @@ const infoCards = [
               data-aos-duration="600"
               data-aos-delay="400"
             >
-              <a
-                  // href="https://buy.stripe.com/6oU4gzg9ugvufgO5uYafS0c"
-                  // onClick={e => handlePaymentClick(e, "https://buy.stripe.com/6oU4gzg9ugvufgO5uYafS0c")}
-                >
+              <a>
 
               <Image
                 src="/assets/LandingPage/Page/LP-04.png"
@@ -343,7 +330,6 @@ const infoCards = [
               >
                 <a
                    href="pdfs/mEDXproMANUALPOTENCIALESEVOCADOSPREVIEW.pdf"
-                  // onClick={e => handlePaymentClick(e, "https://buy.stripe.com/00w3cv9L63II8SqbTmafS0b")}
                 >
                   <Image
                     src="/assets/LandingPage/Page/LP-09.png"
@@ -364,7 +350,6 @@ const infoCards = [
               >
                 <a
                   href="pdfs/mEDXproMANUALESTUDIODECONDUCCIÓNNERVIOSAPREVIEW.pdf"
-                  // onClick={e => handlePaymentClick(e, "https://buy.stripe.com/28EdR95uQbbad8G8HaafS0a")}
                 >
                   <Image
                     src="/assets/LandingPage/Page/LP-08.png"

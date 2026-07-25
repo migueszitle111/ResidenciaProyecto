@@ -197,10 +197,6 @@ function getRateLimitRule(pathname, method) {
     return { key: "temarios-mutation", limit: 60, windowMs: 10 * 60_000, by: "user" };
   }
 
-  if (pathname === "/api/stripe/verify" && method === "GET") {
-    return { key: "stripe-verify", limit: 30, windowMs: 15 * 60_000, by: "ip" };
-  }
-
   return null;
 }
 

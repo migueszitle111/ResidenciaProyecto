@@ -10,6 +10,28 @@ import "aos/dist/aos.css";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+// Accepts watch, youtu.be, or already-embed URLs and returns the embed form.
+// YouTube blocks watch?v= URLs inside iframes, so any UI that plays video must use /embed/<id>.
+function toYouTubeEmbedUrl(url) {
+  if (!url) return url;
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    let id = null;
+    if (host === "youtu.be") {
+      id = u.pathname.slice(1);
+    } else if (host.endsWith("youtube.com")) {
+      if (u.pathname === "/watch") id = u.searchParams.get("v");
+      else if (u.pathname.startsWith("/embed/")) return url;
+      else if (u.pathname.startsWith("/shorts/")) id = u.pathname.split("/")[2];
+    }
+    if (!id) return url;
+    return `https://www.youtube.com/embed/${id}?autoplay=1`;
+  } catch {
+    return url;
+  }
+}
+
 export default function LandingPage() {
   const router = useRouter();
   const [showVideoModal, setShowVideoModal] = React.useState(false);
@@ -92,7 +114,7 @@ const infoCards = [
     img: "/assets/LandingPage/Page/LP-11.png",
     label: "Videos",
     title: "Información Médica",
-    href: "https://www.youtube.com/embed/eI1tOJbnj-E?autoplay=1",
+    href: "https://www.youtube.com/watch?v=tYXUYpgfQjA",
     action: "video"
   },
   {
@@ -520,7 +542,7 @@ const infoCards = [
       </button>
       <div className="aspect-w-16 aspect-h-9">
         <iframe
-          src={videoUrl}
+          src={toYouTubeEmbedUrl(videoUrl)}
           allow="autoplay; encrypted-media"
           allowFullScreen
           className="w-full h-[70vh] rounded-xl"

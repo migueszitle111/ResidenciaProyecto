@@ -40,3 +40,11 @@ next-env.d.ts
 Agents.md
 architecture.md
 decisions.md
+CLAUDE.md
+PENDIENTES.txt
+analisis-dependencias-sin-uso.md
+analisis_comparativo_neurografia.md
+
+# graphify local output (knowledge graph)
+graphify-out/
+app/graphify-out/

@@ -1,6 +1,5 @@
 # MEDXproApp
 
-<<<<<<< HEAD
 Esto es el repositorio de la pagina web de la aplicación MEDXpro, ultima actualización febrero 16 de 2024.
 
 Hola compañeros 

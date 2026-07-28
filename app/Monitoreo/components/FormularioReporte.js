@@ -4,6 +4,11 @@ import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CRANEALES, OTROS } from "../utils/cirugiaUtils";
 import { buildMonitoreoPdf, buildReportFileName, toSafeToken } from "../utils/pdfGenerator";
+import { SuggestInput, SuggestTextarea } from "./SuggestField";
+
+// Fields excluded from autocomplete history (personal data or format-specific).
+const NO_SUGGEST_FIELDS = new Set(["nombrePaciente", "fecha"]);
+const fieldKeyFor = (name) => `monitoreo.${name}`;
 
 const STORAGE_KEY = (tipo, paciente) =>
   `@formulario_monitoreo_${tipo}_${(paciente||'').replace(/\s+/g,'_')}`;
@@ -118,26 +123,39 @@ function CropModal({ src, onConfirm, onClose }) {
   );
 }
 
-function Campo({ label, value, onChange, placeholder, type = 'text', required }) {
+function Campo({ label, value, onChange, placeholder, type = 'text', required, name }) {
+  const inputClass = "w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none placeholder-slate-600";
+  const suggestKey = name && !NO_SUGGEST_FIELDS.has(name) ? fieldKeyFor(name) : null;
   return (
     <div>
       <label className="text-slate-400 text-xs mb-1 block">
         {label}{required && <span className="text-orange-400 ml-1">*</span>}
       </label>
-      <input
-        type={type}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder={placeholder || label}
-        className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none placeholder-slate-600"
-      />
+      {suggestKey ? (
+        <SuggestInput
+          fieldKey={suggestKey}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder || label}
+          type={type}
+          className={inputClass}
+        />
+      ) : (
+        <input
+          type={type}
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          placeholder={placeholder || label}
+          className={inputClass}
+        />
+      )}
     </div>
   );
 }
 
 const MAX_IMAGENES = 5;
 
-function SubRegistroField({ label, value, onChange }) {
+function SubRegistroField({ label, value, onChange, suggestKey }) {
   const fileRef = useRef();
   const [cropSrc, setCropSrc] = useState(null);
   const [cropIdx, setCropIdx] = useState(null);
@@ -164,13 +182,24 @@ function SubRegistroField({ label, value, onChange }) {
   return (
     <div className="bg-[#111] rounded-xl p-4 border border-white/10">
       <p className="text-orange-400 text-xs font-semibold mb-2">{label}</p>
-      <textarea
-        value={value.texto}
-        onChange={e => onChange({ ...value, texto: e.target.value })}
-        placeholder="Observaciones..."
-        rows={3}
-        className="w-full bg-[#1c1c1c] text-white text-sm rounded-md p-2 border border-white/10 resize-none focus:border-orange-500 focus:outline-none placeholder-slate-500"
-      />
+      {suggestKey ? (
+        <SuggestTextarea
+          fieldKey={suggestKey}
+          value={value.texto}
+          onChange={(txt) => onChange({ ...value, texto: txt })}
+          placeholder="Observaciones..."
+          rows={3}
+          className="w-full bg-[#1c1c1c] text-white text-sm rounded-md p-2 border border-white/10 resize-none focus:border-orange-500 focus:outline-none placeholder-slate-500"
+        />
+      ) : (
+        <textarea
+          value={value.texto}
+          onChange={e => onChange({ ...value, texto: e.target.value })}
+          placeholder="Observaciones..."
+          rows={3}
+          className="w-full bg-[#1c1c1c] text-white text-sm rounded-md p-2 border border-white/10 resize-none focus:border-orange-500 focus:outline-none placeholder-slate-500"
+        />
+      )}
       <div className="mt-2 flex flex-wrap gap-2">
         {value.imagenes.map((src, i) => (
           <div key={i} className="relative w-16 h-16 group">
@@ -210,6 +239,36 @@ function SubRegistroField({ label, value, onChange }) {
   );
 }
 
+// Basales and Finales share the same suggestion pool per registro type — "PE
+// Somatosensoriales" observations from either phase should autocomplete each
+// other since they describe the same signal category.
+const REGISTRO_SUGGEST_KEY = {
+  peSomatosensoriales: 'monitoreo.registro.peSomatosensoriales',
+  peSomatosensorialesFinales: 'monitoreo.registro.peSomatosensoriales',
+  peMotores: 'monitoreo.registro.peMotores',
+  peMotoresFinales: 'monitoreo.registro.peMotores',
+  peMotoresCorticobulbares: 'monitoreo.registro.peMotoresCorticobulbares',
+  peMotoresCorticobulbaresFinales: 'monitoreo.registro.peMotoresCorticobulbares',
+  emgLibre: 'monitoreo.registro.emgLibre',
+  emgLibreFinales: 'monitoreo.registro.emgLibre',
+  emgEvocada: 'monitoreo.registro.emgEvocada',
+  emgEvocadaFinales: 'monitoreo.registro.emgEvocada',
+  peVisuales: 'monitoreo.registro.peVisuales',
+  peVisualesFinales: 'monitoreo.registro.peVisuales',
+  peAuditivosTallo: 'monitoreo.registro.peAuditivosTallo',
+  peAuditivosTalloFinales: 'monitoreo.registro.peAuditivosTallo',
+  ondaD: 'monitoreo.registro.ondaD',
+  ondaDFinales: 'monitoreo.registro.ondaD',
+  tof: 'monitoreo.registro.tof',
+  tofFinales: 'monitoreo.registro.tof',
+  electroencefalograma: 'monitoreo.registro.electroencefalograma',
+  electroencefalogramaFinales: 'monitoreo.registro.electroencefalograma',
+  electrocorticografia: 'monitoreo.registro.electrocorticografia',
+  electrocorticografiaFinales: 'monitoreo.registro.electrocorticografia',
+  pNeuromotores: 'monitoreo.registro.comentario',
+  pNeuromotoresFinales: 'monitoreo.registro.comentario',
+};
+
 function CamposRegistros({ data, onChange, esCraneal }) {
   const set = campo => val => onChange({ ...data, [campo]: val });
   const campos = [
@@ -231,7 +290,13 @@ function CamposRegistros({ data, onChange, esCraneal }) {
   return (
     <div className="flex flex-col gap-3">
       {campos.map(([key, label]) => (
-        <SubRegistroField key={key} label={label} value={data[key] || emptyReg()} onChange={set(key)} />
+        <SubRegistroField
+          key={key}
+          label={label}
+          value={data[key] || emptyReg()}
+          onChange={set(key)}
+          suggestKey={REGISTRO_SUGGEST_KEY[key]}
+        />
       ))}
     </div>
   );
@@ -258,7 +323,13 @@ function CamposFinales({ data, onChange, esCraneal }) {
   return (
     <div className="flex flex-col gap-3">
       {campos.map(([key, label]) => (
-        <SubRegistroField key={key} label={label} value={data[key] || emptyReg()} onChange={set(key)} />
+        <SubRegistroField
+          key={key}
+          label={label}
+          value={data[key] || emptyReg()}
+          onChange={set(key)}
+          suggestKey={REGISTRO_SUGGEST_KEY[key]}
+        />
       ))}
     </div>
   );
@@ -879,22 +950,27 @@ export default function FormularioReporte({ nombreCirugia }) {
               </h2>
               <div className="bg-[#0d0d0d] rounded-xl p-5 border border-white/10 flex flex-col gap-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Campo label="Nombre del Paciente" value={form.nombrePaciente} onChange={setField('nombrePaciente')} required />
-                  <Campo label="Edad"                value={form.edad}           onChange={setField('edad')} required />
-                  <Campo label="Fecha (DD/MM/AAAA)"  value={form.fecha}          onChange={setField('fecha')} placeholder="DD/MM/AAAA" required />
-                  <Campo label="Diagnóstico"         value={form.diagnostico}    onChange={setField('diagnostico')} required />
-                  <Campo label="Cirujano"            value={form.cirujano}       onChange={setField('cirujano')} required />
-                  <Campo label="Tipo de Cirugía"     value={form.tipoCirugia}    onChange={setField('tipoCirugia')} required />
-                  <Campo label="Hospital"            value={form.hospital}       onChange={setField('hospital')} required />
-                  <Campo label="Aseguranza"          value={form.aseguranza}     onChange={setField('aseguranza')} />
-                  <Campo label="Neurofisiólogo"      value={form.neurofisiologo} onChange={setField('neurofisiologo')} required />
-                  <Campo label="Equipo"              value={form.equipo}         onChange={setField('equipo')} />
+                  <Campo name="nombrePaciente"  label="Nombre del Paciente" value={form.nombrePaciente} onChange={setField('nombrePaciente')} required />
+                  <Campo name="edad"            label="Edad"                value={form.edad}           onChange={setField('edad')} required />
+                  <Campo name="fecha"           label="Fecha (DD/MM/AAAA)"  value={form.fecha}          onChange={setField('fecha')} placeholder="DD/MM/AAAA" required />
+                  <Campo name="diagnostico"     label="Diagnóstico"         value={form.diagnostico}    onChange={setField('diagnostico')} required />
+                  <Campo name="cirujano"        label="Cirujano"            value={form.cirujano}       onChange={setField('cirujano')} required />
+                  <Campo name="tipoCirugia"     label="Tipo de Cirugía"     value={form.tipoCirugia}    onChange={setField('tipoCirugia')} required />
+                  <Campo name="hospital"        label="Hospital"            value={form.hospital}       onChange={setField('hospital')} required />
+                  <Campo name="aseguranza"      label="Aseguranza"          value={form.aseguranza}     onChange={setField('aseguranza')} />
+                  <Campo name="neurofisiologo"  label="Neurofisiólogo"      value={form.neurofisiologo} onChange={setField('neurofisiologo')} required />
+                  <Campo name="equipo"          label="Equipo"              value={form.equipo}         onChange={setField('equipo')} />
                 </div>
                 <div>
                   <label className="text-slate-400 text-xs mb-1 block">Insumos</label>
-                  <textarea value={form.insumos} onChange={e => setField('insumos')(e.target.value)} rows={2}
+                  <SuggestTextarea
+                    fieldKey={fieldKeyFor('insumos')}
+                    value={form.insumos}
+                    onChange={(v) => setField('insumos')(v)}
+                    rows={2}
                     placeholder="Insumos utilizados..."
-                    className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600" />
+                    className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600"
+                  />
                 </div>
               </div>
               <NavButtons onSiguiente={avanzar} labelSiguiente="Iniciar Cirugía →" />
@@ -1008,15 +1084,25 @@ export default function FormularioReporte({ nombreCirugia }) {
                   <label className="text-slate-400 text-xs mb-1 block">
                     Conclusión <span className="text-orange-400">*requerida</span>
                   </label>
-                  <textarea value={form.conclusion} onChange={e => setField('conclusion')(e.target.value)} rows={5}
+                  <SuggestTextarea
+                    fieldKey={fieldKeyFor('conclusion')}
+                    value={form.conclusion}
+                    onChange={(v) => setField('conclusion')(v)}
+                    rows={5}
                     placeholder="Escriba la conclusión del monitoreo..."
-                    className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600" />
+                    className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600"
+                  />
                 </div>
                 <div>
                   <label className="text-slate-400 text-xs mb-1 block">Nota Agregada</label>
-                  <textarea value={form.notaAgregada} onChange={e => setField('notaAgregada')(e.target.value)} rows={3}
+                  <SuggestTextarea
+                    fieldKey={fieldKeyFor('notaAgregada')}
+                    value={form.notaAgregada}
+                    onChange={(v) => setField('notaAgregada')(v)}
+                    rows={3}
                     placeholder="Agregue notas adicionales si es necesario..."
-                    className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600" />
+                    className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none placeholder-slate-600"
+                  />
                 </div>
               </div>
 

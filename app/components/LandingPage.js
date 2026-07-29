@@ -128,7 +128,7 @@ const infoCards = [
     img: "/assets/LandingPage/Page/LP-13.png",
     label: "Podcast",
     title: "Información Médica",
-    href: "assets/LandingPage/Videos/podcast.m4a", 
+    href: "/assets/LandingPage/Videos/podcast2.m4a",
     action: "podcast" 
   }
 ];
@@ -571,11 +571,11 @@ const infoCards = [
         />
         <div className="text-center">
           <p className="text-[#B54B00] text-sm font-semibold uppercase tracking-widest mb-1">Podcast</p>
-          <h3 className="text-white text-xl font-bold">Pronóstico funcional</h3>
+          <h3 className="text-white text-xl font-bold">La neurofisiologia Pelvica</h3>
           <p className="text-gray-400 text-sm mt-1">mEDXpro</p>
         </div>
         <audio
-          src="/assets/LandingPage/Videos/podcast.m4a"
+          src="/assets/LandingPage/Videos/podcast2.m4a"
           controls
           autoPlay
           className="w-full rounded-xl"

@@ -2,7 +2,11 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
-const STORAGE_PREFIX = 'medxpro:suggestions:v1:';
+// v2 adds per-category scoping to clinical fields (keys now carry a suffix
+// like ":craneal", ":cervical", ":lumbar", ":otros"). Bumped from v1 so the
+// old global-pool entries don't leak into the new buckets. v1 entries stay
+// in localStorage until the browser evicts them; they're just unreachable.
+const STORAGE_PREFIX = 'medxpro:suggestions:v2:';
 const MAX_PER_FIELD = 50;
 const MIN_LENGTH = 3;
 

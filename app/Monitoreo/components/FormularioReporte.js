@@ -2,13 +2,41 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CRANEALES, OTROS } from "../utils/cirugiaUtils";
+import { CRANEALES, OTROS, getFolder } from "../utils/cirugiaUtils";
 import { buildMonitoreoPdf, buildReportFileName, toSafeToken } from "../utils/pdfGenerator";
 import { SuggestInput, SuggestTextarea } from "./SuggestField";
 
 // Fields excluded from autocomplete history (personal data or format-specific).
 const NO_SUGGEST_FIELDS = new Set(["nombrePaciente", "fecha"]);
-const fieldKeyFor = (name) => `monitoreo.${name}`;
+
+// Autocomplete scoping strategy (hybrid):
+//   - "global" fields (person/place data like cirujano, hospital, equipo) share
+//     a single pool across ALL surgery categories — same surgeon works on
+//     craneal, cervical, etc., so suggestions must cross categories.
+//   - Everything else (diagnóstico, insumos, clinical registros, conclusión,
+//     notas) is scoped per surgery category ("craneal", "cervical", "lumbar",
+//     "otros") because signal patterns and conclusions differ a lot between
+//     categories — mixing them would surface irrelevant text.
+const GLOBAL_FIELDS = new Set([
+  "cirujano",
+  "hospital",
+  "aseguranza",
+  "neurofisiologo",
+  "equipo",
+]);
+
+// Lowercase folder code used as bucket suffix. Falls back to "unknown" when
+// the surgery name doesn't map to a known category — those entries still work,
+// they just live in their own bucket instead of contaminating a real one.
+const categoryBucket = (nombreCirugia) => {
+  const folder = getFolder(nombreCirugia);
+  return folder ? folder.toLowerCase() : "unknown";
+};
+
+const fieldKeyFor = (name, nombreCirugia) => {
+  if (GLOBAL_FIELDS.has(name)) return `monitoreo.${name}`;
+  return `monitoreo.${name}:${categoryBucket(nombreCirugia)}`;
+};
 
 const STORAGE_KEY = (tipo, paciente) =>
   `@formulario_monitoreo_${tipo}_${(paciente||'').replace(/\s+/g,'_')}`;
@@ -123,9 +151,9 @@ function CropModal({ src, onConfirm, onClose }) {
   );
 }
 
-function Campo({ label, value, onChange, placeholder, type = 'text', required, name }) {
+function Campo({ label, value, onChange, placeholder, type = 'text', required, name, nombreCirugia }) {
   const inputClass = "w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none placeholder-slate-600";
-  const suggestKey = name && !NO_SUGGEST_FIELDS.has(name) ? fieldKeyFor(name) : null;
+  const suggestKey = name && !NO_SUGGEST_FIELDS.has(name) ? fieldKeyFor(name, nombreCirugia) : null;
   return (
     <div>
       <label className="text-slate-400 text-xs mb-1 block">
@@ -239,37 +267,45 @@ function SubRegistroField({ label, value, onChange, suggestKey }) {
   );
 }
 
-// Basales and Finales share the same suggestion pool per registro type — "PE
-// Somatosensoriales" observations from either phase should autocomplete each
-// other since they describe the same signal category.
-const REGISTRO_SUGGEST_KEY = {
-  peSomatosensoriales: 'monitoreo.registro.peSomatosensoriales',
-  peSomatosensorialesFinales: 'monitoreo.registro.peSomatosensoriales',
-  peMotores: 'monitoreo.registro.peMotores',
-  peMotoresFinales: 'monitoreo.registro.peMotores',
-  peMotoresCorticobulbares: 'monitoreo.registro.peMotoresCorticobulbares',
-  peMotoresCorticobulbaresFinales: 'monitoreo.registro.peMotoresCorticobulbares',
-  emgLibre: 'monitoreo.registro.emgLibre',
-  emgLibreFinales: 'monitoreo.registro.emgLibre',
-  emgEvocada: 'monitoreo.registro.emgEvocada',
-  emgEvocadaFinales: 'monitoreo.registro.emgEvocada',
-  peVisuales: 'monitoreo.registro.peVisuales',
-  peVisualesFinales: 'monitoreo.registro.peVisuales',
-  peAuditivosTallo: 'monitoreo.registro.peAuditivosTallo',
-  peAuditivosTalloFinales: 'monitoreo.registro.peAuditivosTallo',
-  ondaD: 'monitoreo.registro.ondaD',
-  ondaDFinales: 'monitoreo.registro.ondaD',
-  tof: 'monitoreo.registro.tof',
-  tofFinales: 'monitoreo.registro.tof',
-  electroencefalograma: 'monitoreo.registro.electroencefalograma',
-  electroencefalogramaFinales: 'monitoreo.registro.electroencefalograma',
-  electrocorticografia: 'monitoreo.registro.electrocorticografia',
-  electrocorticografiaFinales: 'monitoreo.registro.electrocorticografia',
-  pNeuromotores: 'monitoreo.registro.comentario',
-  pNeuromotoresFinales: 'monitoreo.registro.comentario',
+// Basales and Finales share the same suggestion pool per registro TYPE — the
+// suffix "…Finales" is dropped so "PE Somatosensoriales" observations recorded
+// during either phase autocomplete each other. Scoping by category is added at
+// use-site (see registroSuggestKey below) so a craneal EEG doesn't pollute a
+// lumbar EEG bucket.
+const REGISTRO_BASE_TYPE = {
+  peSomatosensoriales: 'peSomatosensoriales',
+  peSomatosensorialesFinales: 'peSomatosensoriales',
+  peMotores: 'peMotores',
+  peMotoresFinales: 'peMotores',
+  peMotoresCorticobulbares: 'peMotoresCorticobulbares',
+  peMotoresCorticobulbaresFinales: 'peMotoresCorticobulbares',
+  emgLibre: 'emgLibre',
+  emgLibreFinales: 'emgLibre',
+  emgEvocada: 'emgEvocada',
+  emgEvocadaFinales: 'emgEvocada',
+  peVisuales: 'peVisuales',
+  peVisualesFinales: 'peVisuales',
+  peAuditivosTallo: 'peAuditivosTallo',
+  peAuditivosTalloFinales: 'peAuditivosTallo',
+  ondaD: 'ondaD',
+  ondaDFinales: 'ondaD',
+  tof: 'tof',
+  tofFinales: 'tof',
+  electroencefalograma: 'electroencefalograma',
+  electroencefalogramaFinales: 'electroencefalograma',
+  electrocorticografia: 'electrocorticografia',
+  electrocorticografiaFinales: 'electrocorticografia',
+  pNeuromotores: 'comentario',
+  pNeuromotoresFinales: 'comentario',
 };
 
-function CamposRegistros({ data, onChange, esCraneal }) {
+const registroSuggestKey = (campoKey, nombreCirugia) => {
+  const base = REGISTRO_BASE_TYPE[campoKey];
+  if (!base) return null;
+  return `monitoreo.registro.${base}:${categoryBucket(nombreCirugia)}`;
+};
+
+function CamposRegistros({ data, onChange, esCraneal, nombreCirugia }) {
   const set = campo => val => onChange({ ...data, [campo]: val });
   const campos = [
     ['peSomatosensoriales',      'PE Somatosensoriales'],
@@ -295,14 +331,14 @@ function CamposRegistros({ data, onChange, esCraneal }) {
           label={label}
           value={data[key] || emptyReg()}
           onChange={set(key)}
-          suggestKey={REGISTRO_SUGGEST_KEY[key]}
+          suggestKey={registroSuggestKey(key, nombreCirugia)}
         />
       ))}
     </div>
   );
 }
 
-function CamposFinales({ data, onChange, esCraneal }) {
+function CamposFinales({ data, onChange, esCraneal, nombreCirugia }) {
   const set = campo => val => onChange({ ...data, [campo]: val });
   const campos = [
     ['peSomatosensorialesFinales', 'PE Somatosensoriales'],
@@ -328,7 +364,7 @@ function CamposFinales({ data, onChange, esCraneal }) {
           label={label}
           value={data[key] || emptyReg()}
           onChange={set(key)}
-          suggestKey={REGISTRO_SUGGEST_KEY[key]}
+          suggestKey={registroSuggestKey(key, nombreCirugia)}
         />
       ))}
     </div>
@@ -950,21 +986,21 @@ export default function FormularioReporte({ nombreCirugia }) {
               </h2>
               <div className="bg-[#0d0d0d] rounded-xl p-5 border border-white/10 flex flex-col gap-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Campo name="nombrePaciente"  label="Nombre del Paciente" value={form.nombrePaciente} onChange={setField('nombrePaciente')} required />
-                  <Campo name="edad"            label="Edad"                value={form.edad}           onChange={setField('edad')} required />
-                  <Campo name="fecha"           label="Fecha (DD/MM/AAAA)"  value={form.fecha}          onChange={setField('fecha')} placeholder="DD/MM/AAAA" required />
-                  <Campo name="diagnostico"     label="Diagnóstico"         value={form.diagnostico}    onChange={setField('diagnostico')} required />
-                  <Campo name="cirujano"        label="Cirujano"            value={form.cirujano}       onChange={setField('cirujano')} required />
-                  <Campo name="tipoCirugia"     label="Tipo de Cirugía"     value={form.tipoCirugia}    onChange={setField('tipoCirugia')} required />
-                  <Campo name="hospital"        label="Hospital"            value={form.hospital}       onChange={setField('hospital')} required />
-                  <Campo name="aseguranza"      label="Aseguranza"          value={form.aseguranza}     onChange={setField('aseguranza')} />
-                  <Campo name="neurofisiologo"  label="Neurofisiólogo"      value={form.neurofisiologo} onChange={setField('neurofisiologo')} required />
-                  <Campo name="equipo"          label="Equipo"              value={form.equipo}         onChange={setField('equipo')} />
+                  <Campo name="nombrePaciente"  label="Nombre del Paciente" value={form.nombrePaciente} onChange={setField('nombrePaciente')} required nombreCirugia={nombreCirugia} />
+                  <Campo name="edad"            label="Edad"                value={form.edad}           onChange={setField('edad')} required nombreCirugia={nombreCirugia} />
+                  <Campo name="fecha"           label="Fecha (DD/MM/AAAA)"  value={form.fecha}          onChange={setField('fecha')} placeholder="DD/MM/AAAA" required nombreCirugia={nombreCirugia} />
+                  <Campo name="diagnostico"     label="Diagnóstico"         value={form.diagnostico}    onChange={setField('diagnostico')} required nombreCirugia={nombreCirugia} />
+                  <Campo name="cirujano"        label="Cirujano"            value={form.cirujano}       onChange={setField('cirujano')} required nombreCirugia={nombreCirugia} />
+                  <Campo name="tipoCirugia"     label="Tipo de Cirugía"     value={form.tipoCirugia}    onChange={setField('tipoCirugia')} required nombreCirugia={nombreCirugia} />
+                  <Campo name="hospital"        label="Hospital"            value={form.hospital}       onChange={setField('hospital')} required nombreCirugia={nombreCirugia} />
+                  <Campo name="aseguranza"      label="Aseguranza"          value={form.aseguranza}     onChange={setField('aseguranza')} nombreCirugia={nombreCirugia} />
+                  <Campo name="neurofisiologo"  label="Neurofisiólogo"      value={form.neurofisiologo} onChange={setField('neurofisiologo')} required nombreCirugia={nombreCirugia} />
+                  <Campo name="equipo"          label="Equipo"              value={form.equipo}         onChange={setField('equipo')} nombreCirugia={nombreCirugia} />
                 </div>
                 <div>
                   <label className="text-slate-400 text-xs mb-1 block">Insumos</label>
                   <SuggestTextarea
-                    fieldKey={fieldKeyFor('insumos')}
+                    fieldKey={fieldKeyFor('insumos', nombreCirugia)}
                     value={form.insumos}
                     onChange={(v) => setField('insumos')(v)}
                     rows={2}
@@ -985,7 +1021,7 @@ export default function FormularioReporte({ nombreCirugia }) {
                 Registros Basales
               </h2>
               <p className="text-slate-500 text-xs mb-4 ml-8">Complete al menos un registro antes de continuar</p>
-              <CamposRegistros data={form.registrosBasales} onChange={setField('registrosBasales')} esCraneal={esCraneal} />
+              <CamposRegistros data={form.registrosBasales} onChange={setField('registrosBasales')} esCraneal={esCraneal} nombreCirugia={nombreCirugia} />
               <NavButtons onAnterior={retroceder} onSiguiente={avanzar} labelSiguiente="Continuar a Procedimiento →" />
             </div>
           )}
@@ -1026,6 +1062,7 @@ export default function FormularioReporte({ nombreCirugia }) {
                     data={form.faseActual}
                     onChange={data => updateFaseActual({ ...form.faseActual, ...data })}
                     esCraneal={esCraneal}
+                    nombreCirugia={nombreCirugia}
                   />
                   <div className="flex gap-3 mt-4">
                     <button onClick={guardarFaseActual}
@@ -1051,7 +1088,29 @@ export default function FormularioReporte({ nombreCirugia }) {
 
               <NavButtons
                 onAnterior={retroceder}
-                onSiguiente={() => { setPaso(3); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                onSiguiente={() => {
+                  // Auto-save any in-progress phase before leaving step 2.
+                  // Without this, a user who fills a fase and clicks "Continuar"
+                  // without first pressing "Guardar Fase" loses that data:
+                  // faseActual is dropped and only fasesProcedimiento reaches
+                  // the PDF (see crearPaginasProcedimiento in pdfGenerator.js).
+                  const fase = form.faseActual;
+                  const hasContent = fase && Object.entries(fase).some(([k, v]) => (
+                    k !== 'nombre' && v && (v.texto?.trim() || v.imagenes?.length > 0)
+                  ));
+                  if (fase && hasContent && !fase.nombre.trim()) {
+                    showMsg('error', 'Ingrese el nombre de la fase actual antes de continuar (o cancélela para descartar).');
+                    return;
+                  }
+                  if (fase && fase.nombre.trim()) {
+                    setForm(f => ({ ...f, fasesProcedimiento: [...f.fasesProcedimiento, f.faseActual], faseActual: null }));
+                  } else if (fase && !hasContent) {
+                    // Empty phase (no name, no content) — silently discard.
+                    setForm(f => ({ ...f, faseActual: null }));
+                  }
+                  setPaso(3);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 labelSiguiente="Continuar a Registros Finales →"
               />
             </div>
@@ -1065,7 +1124,7 @@ export default function FormularioReporte({ nombreCirugia }) {
                 Registros Finales
               </h2>
               <p className="text-slate-500 text-xs mb-4 ml-8">Registros al finalizar el procedimiento</p>
-              <CamposFinales data={form.registrosFinales} onChange={setField('registrosFinales')} esCraneal={esCraneal} />
+              <CamposFinales data={form.registrosFinales} onChange={setField('registrosFinales')} esCraneal={esCraneal} nombreCirugia={nombreCirugia} />
               <NavButtons onAnterior={retroceder} onSiguiente={avanzar} labelSiguiente="Continuar a Conclusión →" />
             </div>
           )}
@@ -1085,7 +1144,7 @@ export default function FormularioReporte({ nombreCirugia }) {
                     Conclusión <span className="text-orange-400">*requerida</span>
                   </label>
                   <SuggestTextarea
-                    fieldKey={fieldKeyFor('conclusion')}
+                    fieldKey={fieldKeyFor('conclusion', nombreCirugia)}
                     value={form.conclusion}
                     onChange={(v) => setField('conclusion')(v)}
                     rows={5}
@@ -1096,7 +1155,7 @@ export default function FormularioReporte({ nombreCirugia }) {
                 <div>
                   <label className="text-slate-400 text-xs mb-1 block">Nota Agregada</label>
                   <SuggestTextarea
-                    fieldKey={fieldKeyFor('notaAgregada')}
+                    fieldKey={fieldKeyFor('notaAgregada', nombreCirugia)}
                     value={form.notaAgregada}
                     onChange={(v) => setField('notaAgregada')(v)}
                     rows={3}

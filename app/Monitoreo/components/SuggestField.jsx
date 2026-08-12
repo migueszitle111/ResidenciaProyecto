@@ -221,14 +221,16 @@ export function SuggestTextarea({
   // Grow the textarea to whatever the mirror div reports. The mirror renders
   // value + ghost with the same font/padding/width, so its scrollHeight is
   // exactly what the textarea needs to display everything without clipping.
+  // Capped at 60vh so a runaway measurement (e.g. mirror measured before
+  // layout settled) can't blow the field up to cover the whole viewport.
   useEffect(() => {
     if (!areaRef.current || !measureRef.current) return;
     const measured = measureRef.current.scrollHeight;
-    // Never shrink below the initial `rows` — use the textarea's own natural
-    // height for empty state as the floor.
     areaRef.current.style.height = 'auto';
     const natural = areaRef.current.scrollHeight;
-    areaRef.current.style.height = Math.max(measured, natural) + 'px';
+    const target = Math.max(measured, natural);
+    const cap = typeof window !== 'undefined' ? Math.round(window.innerHeight * 0.6) : 600;
+    areaRef.current.style.height = Math.min(target, cap) + 'px';
   }, [value, ghostTail]);
 
   const acceptGhost = () => {
@@ -294,7 +296,7 @@ export function SuggestTextarea({
           ref={measureRef}
           aria-hidden="true"
           className={`${className} whitespace-pre-wrap invisible`}
-          style={{ position: 'absolute', top: 0, left: 0, right: 0, pointerEvents: 'none' }}
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, pointerEvents: 'none', overflow: 'hidden' }}
         >
           {value}{ghostTail}{'​'}
         </div>

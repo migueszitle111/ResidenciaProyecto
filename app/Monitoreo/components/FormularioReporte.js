@@ -41,6 +41,11 @@ const fieldKeyFor = (name, nombreCirugia) => {
 const STORAGE_KEY = (tipo, paciente) =>
   `@formulario_monitoreo_${tipo}_${(paciente||'').replace(/\s+/g,'_')}`;
 
+// Session key — always persists the in-progress form regardless of whether the
+// patient name has been filled yet. This is the one we auto-restore on mount
+// and auto-clear only when the user exports the PDF or hits "Limpiar".
+const SESSION_KEY = (tipo) => `@formulario_monitoreo_session_${tipo}`;
+
 const emptyReg = () => ({ texto: '', imagenes: [] });
 
 function emptyBasales(esCraneal) {
@@ -189,14 +194,23 @@ function SubRegistroField({ label, value, onChange, suggestKey }) {
   const [cropIdx, setCropIdx] = useState(null);
 
   const handleImages = e => {
+    const input = e.target;
     const disponibles = MAX_IMAGENES - value.imagenes.length;
-    if (disponibles <= 0) return;
-    const files = Array.from(e.target.files).slice(0, disponibles);
-    Promise.all(files.map(f => new Promise(res => {
+    if (disponibles <= 0) { input.value = ''; return; }
+    const files = Array.from(input.files || [])
+      .filter(f => f && f.type?.startsWith('image/'))
+      .slice(0, disponibles);
+    if (files.length === 0) { input.value = ''; return; }
+    Promise.all(files.map(f => new Promise((res, rej) => {
       const r = new FileReader();
       r.onload = () => res(r.result);
+      r.onerror = () => rej(r.error);
       r.readAsDataURL(f);
-    }))).then(uris => onChange({ ...value, imagenes: [...value.imagenes, ...uris] }));
+    })))
+      .then(uris => onChange({ ...value, imagenes: [...value.imagenes, ...uris] }))
+      .catch(() => { /* silently ignore unreadable files */ })
+      // Reset so selecting the same file again re-triggers change.
+      .finally(() => { input.value = ''; });
   };
 
   const abrirCrop = (src, i) => { setCropSrc(src); setCropIdx(i); };
@@ -632,13 +646,47 @@ export default function FormularioReporte({ nombreCirugia }) {
   const [plantillaCallback,  setPlantillaCallback]  = useState(null);   // función a ejecutar tras elegir plantilla
   const [showPlantillaModal, setShowPlantillaModal] = useState(false);  // Selector Con/Sin plantilla
 
-  // ── Auto-guardar borrador ──
+  // ── Auto-restaurar sesión al montar ──
+  // Nothing is cleared when navigating away — only export or "Limpiar" wipes
+  // the session. We restore from SESSION_KEY (cirugía-scoped, not
+  // patient-scoped) so the in-progress form survives even before nombrePaciente
+  // is entered. hydrated flag prevents the save-effect below from overwriting
+  // stored data with the empty initial state during the first render.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(SESSION_KEY(nombreCirugia));
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed?.form) setForm(parsed.form);
+        if (typeof parsed?.paso === 'number') setPaso(parsed.paso);
+        if (typeof parsed?.firmaBase64 === 'string') setFirmaBase64(parsed.firmaBase64);
+        if (typeof parsed?.incluirProtocolo === 'boolean') setIncluirProtocolo(parsed.incluirProtocolo);
+        if (typeof parsed?.incluirProcedimiento === 'boolean') setIncluirProcedimiento(parsed.incluirProcedimiento);
+        if (typeof parsed?.incluirModalidades === 'boolean') setIncluirModalidades(parsed.incluirModalidades);
+      }
+    } catch {}
+    setHydrated(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nombreCirugia]);
+
+  // ── Auto-guardar sesión (siempre) ──
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(SESSION_KEY(nombreCirugia), JSON.stringify({
+        form, paso, firmaBase64, incluirProtocolo, incluirProcedimiento, incluirModalidades,
+      }));
+    } catch {}
+  }, [hydrated, nombreCirugia, form, paso, firmaBase64, incluirProtocolo, incluirProcedimiento, incluirModalidades]);
+
+  // ── Auto-guardar borrador por paciente (compat: para "Restaurar borrador") ──
   useEffect(() => {
     if (!form.nombrePaciente) return;
     localStorage.setItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente), JSON.stringify({ form, paso }));
-  }, [form, paso]);
+  }, [form, paso, nombreCirugia]);
 
-  // ── Recuperar borrador ──
+  // ── Recuperar borrador (manual, por paciente) ──
   const restaurarBorrador = () => {
     if (!form.nombrePaciente) return;
     const saved = localStorage.getItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
@@ -664,6 +712,15 @@ export default function FormularioReporte({ nombreCirugia }) {
   // ── Fases del procedimiento ──
   const iniciarNuevaFase = () => {
     setForm(f => ({ ...f, faseActual: { nombre: '', ...emptyBasales(esCraneal) } }));
+    // Smooth scroll first; focus with preventScroll after the animation
+    // finishes so we don't yank the viewport (calling focus() during a smooth
+    // scroll cancels the animation and jumps).
+    requestAnimationFrame(() => {
+      const el = nuevaFaseRef.current;
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => { el.focus?.({ preventScroll: true }); }, 450);
+    });
   };
 
   const guardarFaseActual = () => {
@@ -672,6 +729,7 @@ export default function FormularioReporte({ nombreCirugia }) {
     setForm(f => ({ ...f, fasesProcedimiento: [...f.fasesProcedimiento, f.faseActual], faseActual: null }));
   };
 
+  const nuevaFaseRef = useRef(null);
   const agregarOtraFase = () => {
     if (!form.faseActual) return;
     if (!form.faseActual.nombre.trim()) { showMsg('error', 'Ingrese el nombre de la fase.'); return; }
@@ -680,6 +738,17 @@ export default function FormularioReporte({ nombreCirugia }) {
       fasesProcedimiento: [...f.fasesProcedimiento, f.faseActual],
       faseActual: { nombre: '', ...emptyBasales(esCraneal) },
     }));
+    // Bring the new phase's name input into view so the user can name it
+    // without scrolling back up through the previous phase's fields.
+    // Smooth scroll first; focus with preventScroll after the animation
+    // finishes so we don't yank the viewport (calling focus() during a smooth
+    // scroll cancels the animation and jumps).
+    requestAnimationFrame(() => {
+      const el = nuevaFaseRef.current;
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => { el.focus?.({ preventScroll: true }); }, 450);
+    });
   };
 
   const removeFase = idx => setForm(f => ({ ...f, fasesProcedimiento: f.fasesProcedimiento.filter((_, i) => i !== idx) }));
@@ -724,6 +793,9 @@ export default function FormularioReporte({ nombreCirugia }) {
       a.click();
       URL.revokeObjectURL(url);
       showMsg('ok', 'PDF descargado exitosamente.');
+      // PDF export is the natural "done" moment — clear session so the next
+      // visit starts fresh.
+      limpiar();
     } catch (e) {
       showMsg('error', `Error generando PDF: ${e.message}`);
     } finally {
@@ -868,6 +940,7 @@ export default function FormularioReporte({ nombreCirugia }) {
 
   const limpiar = () => {
     if (form.nombrePaciente) localStorage.removeItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
+    localStorage.removeItem(SESSION_KEY(nombreCirugia));
     setForm({
       nombrePaciente: '', edad: '',
       fecha: (() => { const n = new Date(); const d = String(n.getDate()).padStart(2,'0'); const m = String(n.getMonth()+1).padStart(2,'0'); return `${d}/${m}/${n.getFullYear()}`; })(),
@@ -1052,6 +1125,7 @@ export default function FormularioReporte({ nombreCirugia }) {
                   <div className="mb-3">
                     <label className="text-slate-400 text-xs mb-1 block">Nombre de la fase <span className="text-orange-400">*</span></label>
                     <input
+                      ref={nuevaFaseRef}
                       value={form.faseActual.nombre}
                       onChange={e => updateFaseActual({ ...form.faseActual, nombre: e.target.value })}
                       placeholder="Ej: Apertura, Resección, Cierre..."

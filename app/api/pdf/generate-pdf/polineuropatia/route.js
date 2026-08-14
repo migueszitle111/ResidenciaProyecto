@@ -43,6 +43,7 @@ const OVERLAYS_POLI = {
   'Segmentaria':             '/PolineuropatiaImg/PO_Proximal.png',
   'GenePx':                  '/PolineuropatiaImg/PO_Proximal2.png',
   'GeneDs':                  '/PolineuropatiaImg/PO_Distal2.png',
+  'LongitudDep':             '/PolineuropatiaImg/PO_LongitudDependiente.png',
 };
 
 const OVERLAY_GROUPS = { 'Generalizada': ['GenePx', 'GeneDs'] };

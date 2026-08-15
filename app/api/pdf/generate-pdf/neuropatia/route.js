@@ -389,17 +389,22 @@ function applyFiltroRojoToPng(pngBytes, fr) {
     ];
     const sat = 1.8;
 
-    // Las coordenadas de filtroRojo son % del *contenedor web* (imagen + paddingBottom=175).
-    // El contenedor tiene altura: webImgH + 175. Convertimos a coordenadas de la imagen.
+    // Las coordenadas de filtroRojo son % del *padding box* de conclusion-container
+    // (padding-top:10px + contenido≈webImgH + padding-bottom:175px).
+    // Los elementos position:absolute usan el padding box como containing block.
     const webImgH  = Math.round(600 * H / W); // altura natural al renderizar a 600px de ancho
-    const hScale   = (webImgH + 175) / webImgH; // factor contenedor / imagen ≈ 1.225
+    const padTop   = 10;
+    const padBot   = 175;
+    const padBoxH  = webImgH + padTop + padBot; // ≈ 961px
+    const hScale   = padBoxH / webImgH;         // ≈ 1.238
 
     const topPct  = parseFloat(fr.top)     / 100;
     const leftPct = parseFloat(fr.left)    / 100;
     const wPct    = parseFloat(fr.width)   / 100;
     const hPct    = parseFloat(fr.height)  / 100;
     const clipPct = parseFloat(fr.clipTop) / 100;
-    const visTop  = (topPct + clipPct * hPct) * hScale;
+    // Restar el offset del padding-top para alinear con el inicio real de la imagen
+    const visTop  = (topPct + clipPct * hPct) * hScale - padTop / webImgH;
     const visH    = hPct * (1 - clipPct) * hScale;
     const ry = Math.floor(visTop * H);
     const rh = Math.min(Math.ceil(visH * H), H - ry);
@@ -833,6 +838,7 @@ export async function POST(req) {
       plantillaId     = 'none',
       dotOverlays     = [],
       filtroRojo      = null,
+      filtroRojo2     = null,
       laminaSize      = { w: 690, h: 620 },
     } = body;
 
@@ -864,9 +870,13 @@ export async function POST(req) {
     ]);
 
     // Aplicar filtro rojo a las imágenes superpuestas (las que contienen el nervio amarillo)
-    const overlayBytesArr = filtroRojo?.clipTop
-      ? rawOverlayBytesArr.map(b => b ? applyFiltroRojoToPng(b, filtroRojo) : b)
-      : rawOverlayBytesArr;
+    const overlayBytesArr = rawOverlayBytesArr.map(b => {
+      if (!b) return b;
+      let out = b;
+      if (filtroRojo?.clipTop)  out = applyFiltroRojoToPng(out, filtroRojo);
+      if (filtroRojo2?.clipTop) out = applyFiltroRojoToPng(out, filtroRojo2);
+      return out;
+    });
 
     await buildPage1(pdfDoc, {
       finalConclusion, userData, baseImgBytes, overlayBytesArr,

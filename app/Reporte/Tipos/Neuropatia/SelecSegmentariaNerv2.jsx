@@ -7,7 +7,7 @@ export function checkDivsSegmentar2(copyConclusions) {
     return (
       <>
 <div style={{ position: 'absolute', top: '19.3%', left: '58.8%', transform: 'rotate(80deg)' }}
-  className={`.dont-print-Nervius`}> <SegmentariaButton2 value='cari1' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
+  className={`.dont-print-Nervius`}> <SegmentariaButton2 value='cari1' title='INMEDIATO A SU EMERGENCIA, 1' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '18.9%', left: '58.4%', transform: 'rotate(80deg)' }}
   className={`.dont-print-Nervius`}> <SegmentariaButton2 value='cari2' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' /> </div>
 <div style={{ position: 'absolute', top: '19.7%', left: '59.2%', transform: 'rotate(80deg)' }}

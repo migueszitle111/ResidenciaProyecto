@@ -22,7 +22,12 @@ export function ReportContextProvider({ children }) {
   const [buttonsDisabledBILT2, setbuttonsDisabledBILT2] = useState(false);
   const [buttonsDisabledBITSeg, setbuttonsDisabledBITSeg] = useState(false);
   const [buttonsDisabledBITSeg2, setbuttonsDisabledBITSeg2] = useState(false);
-  const [filtroRojoActivo, setFiltroRojoActivo] = useState(null);
+  const [filtroRojoActivo,  setFiltroRojoActivo]  = useState(null);
+  const [filtroRojoActivo2, setFiltroRojoActivo2] = useState(null);
+  const [activeNerviusValue, setActiveNerviusValue] = useState(null);
+  const [activeSegmentariaValue, setActiveSegmentariaValue] = useState(null);
+  const [activeBilateralValue, setActiveBilateralValue] = useState(null);
+  const [activeSegmBilateralValue, setActiveSegmBilateralValue] = useState(null);
 
 
   // 1) Función para agregar/quitar conclusiones a modo "toggle"
@@ -72,6 +77,16 @@ export function ReportContextProvider({ children }) {
     setbuttonsDisabledBITSeg2,
     filtroRojoActivo,
     setFiltroRojoActivo,
+    filtroRojoActivo2,
+    setFiltroRojoActivo2,
+    activeNerviusValue,
+    setActiveNerviusValue,
+    activeSegmentariaValue,
+    setActiveSegmentariaValue,
+    activeBilateralValue,
+    setActiveBilateralValue,
+    activeSegmBilateralValue,
+    setActiveSegmBilateralValue,
   }
 
   return (

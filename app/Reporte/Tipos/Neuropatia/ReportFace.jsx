@@ -102,7 +102,7 @@ function getListItem(c) {
 
   if (/^evolucion/i.test(val))
     return { k: 'Evolución', v: clean(title) };
-  if (/^(MEDIANO|FRENICO|GLUTEO_INFERIOR|CIATICO|PUDENDO)/i.test(val))
+  if (/^(MEDIANO|INTEROSEOANTERIOR|ACCESORIO|AXILAR|MUSCULOCUTANEO|RADIAL|RADIAL_SUPERFICIAL|INTEROSEO_POSTERIOR|SUPRAESCAPULAR|ULNAR|DORSAL_CUTANEO|FRENICO|TORACODORSAL|TORACICO_LARGO|ANTEBRAQUIAL_CUTANEO|ANTEBRAQUIAL_LATERAL|CIATICO|GLUTEO_INFERIOR|GLUTEO_MEDIO|FEMORAL|FEMOROCUTÁNEO_LATERAL|SAFENO|OBTURADOR|NERVIO_PERONEO|PERONEO_SUPERFICIAL|PERONEO_PROFUNDO|TIBIAL|SURAL|PLANTAR_MEDIAL|PLANTAR_LATERAL|ILIOINGUINAL|PUDENDO|FACIAL)/i.test(val))
     return { k: 'Nervio', v: clean(title.replace(/^DE NERVIO\s*/i, '')) };
   if (/BILATERAL/i.test(title))
     return { k: 'Lado', v: clean(title) };
@@ -198,7 +198,7 @@ function CropModal({ src, onConfirm, onClose }) {
 const Reporte = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const { conclusions, filtroRojoActivo } = useContext(ReportContext);
+  const { conclusions, filtroRojoActivo, filtroRojoActivo2 } = useContext(ReportContext);
   const [copyConclusions, setCopyConclusions] = useState('');
   const [selectedImages, setSelectedImages] = useState([]);
   const [topLeftText, setTopLeftText]   = useState('');
@@ -1567,7 +1567,26 @@ const Reporte = () => {
                       transformOrigin:     '50% 0%',
                       pointerEvents:       'none',
                       zIndex:              8,
-                      border:              '2px solid black',
+                      //border:              '2px solid black',
+                    }}
+                  />
+                )}
+                {filtroRojoActivo2 && (
+                  <div
+                    style={{
+                      position:            'absolute',
+                      top:                 filtroRojoActivo2.top    ?? '0%',
+                      left:                filtroRojoActivo2.left   ?? '0%',
+                      width:               filtroRojoActivo2.width  ?? '100%',
+                      height:              filtroRojoActivo2.height ?? '100%',
+                      clipPath:            `inset(${filtroRojoActivo2.clipTop} 0 0 0)`,
+                      backdropFilter:      'hue-rotate(-60deg) saturate(1.8)',
+                      WebkitBackdropFilter:'hue-rotate(-60deg) saturate(1.8)',
+                      transform:           `rotate(${filtroRojoActivo2.grados ?? 0}deg)`,
+                      transformOrigin:     '50% 0%',
+                      pointerEvents:       'none',
+                      zIndex:              8,
+                      //border:              '2px solid black',
                     }}
                   />
                 )}

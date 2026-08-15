@@ -3,32 +3,65 @@
 import { ReportContext } from '@/src/context';
 import { useContext } from 'react';
 
-export function NerviusButtonSegmenBILATERAL({ title, value }) {
-  const { updateConclusions, conclusions, buttonsDisabledBITSeg } = useContext(ReportContext);
+export function NerviusButtonSegmenBILATERAL({ title, value, buttonTop, filtroRojo, filtroGrados = 0, filtroRojoOpuesto, filtroGradosOpuesto = 0 }) {
+  const {
+    updateConclusions,
+    removeConclusion,
+    conclusions,
+    buttonsDisabledBITSeg,
+    setFiltroRojoActivo,
+    setFiltroRojoActivo2,
+    activeSegmBilateralValue,
+    setActiveSegmBilateralValue,
+  } = useContext(ReportContext);
 
-  // Mapeo de valores opuestos
   const opposites = Object.fromEntries(
     Array.from({ length: 280 }, (_, i) => [`car${i + 1}`, `cari${i + 1}`])
   );
 
-  const isSelected = conclusions.some(cl => cl?.value === value);
   const oppositeValue = opposites[value];
+  const isPrimary     = !!oppositeValue;
 
-  // Verificar si hay algún "carX" en las conclusiones
-  const hasCarSelected = conclusions.some(cl => cl?.value && cl.value.startsWith('car'));
+  const isSelected = isPrimary
+    ? activeSegmBilateralValue === value
+    : conclusions.some(cl => cl?.value === value);
 
-  // Si el botón es "cariX" y no hay ningún "carX" seleccionado, no se muestra
-  if (value.startsWith('cari') && !hasCarSelected) {
-    return null;
-  }
+  const hasCarSelected = conclusions.some(cl => cl?.value && /^car\d+$/.test(cl.value));
+  if (!isPrimary && !hasCarSelected) return null;
 
   function handleClick() {
     if (buttonsDisabledBITSeg) return;
 
-    updateConclusions({ title, value });
-
-    if (oppositeValue) {
-      updateConclusions({ title: '', value: oppositeValue });
+    if (isPrimary) {
+      if (activeSegmBilateralValue === value) {
+        removeConclusion(value);
+        removeConclusion(oppositeValue);
+        setActiveSegmBilateralValue(null);
+        setFiltroRojoActivo?.(null);
+        setFiltroRojoActivo2?.(null);
+      } else {
+        if (activeSegmBilateralValue !== null) {
+          removeConclusion(activeSegmBilateralValue);
+          removeConclusion(opposites[activeSegmBilateralValue]);
+        }
+        updateConclusions({ title, value });
+        updateConclusions({ title: '', value: oppositeValue });
+        setActiveSegmBilateralValue(value);
+        if (filtroRojo?.top && filtroRojo?.height && buttonTop) {
+          const clipTop = Math.max(0, ((parseFloat(buttonTop) - parseFloat(filtroRojo.top)) / parseFloat(filtroRojo.height)) * 100);
+          setFiltroRojoActivo?.({ ...filtroRojo, clipTop: `${clipTop.toFixed(2)}%`, grados: filtroGrados });
+        }
+        if (filtroRojoOpuesto?.top && filtroRojoOpuesto?.height && buttonTop) {
+          const clipTop = Math.max(0, ((parseFloat(buttonTop) - parseFloat(filtroRojoOpuesto.top)) / parseFloat(filtroRojoOpuesto.height)) * 100);
+          setFiltroRojoActivo2?.({ ...filtroRojoOpuesto, clipTop: `${clipTop.toFixed(2)}%`, grados: filtroGradosOpuesto });
+        }
+      }
+    } else {
+      if (isSelected) {
+        removeConclusion(value);
+      } else {
+        updateConclusions({ title, value });
+      }
     }
   }
 

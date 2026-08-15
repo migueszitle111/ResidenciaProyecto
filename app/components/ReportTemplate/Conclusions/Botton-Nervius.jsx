@@ -1,30 +1,39 @@
 'use client';
 
 import { ReportContext } from '@/src/context';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 export function NerviusButton({ title, value, displayText, buttonTop, filtroRojo, filtroGrados = 0 }) {
-  const { updateConclusions, conclusions, buttonsDisabled, setFiltroRojoActivo } = useContext(ReportContext);
-  const [selectedButton, setSelectedButton] = useState(null);
+  const {
+    updateConclusions,
+    removeConclusion,
+    buttonsDisabled,
+    setFiltroRojoActivo,
+    activeNerviusValue,
+    setActiveNerviusValue,
+  } = useContext(ReportContext);
 
-  const isSelected = conclusions.find(cl => cl.value === value);
+  const isSelected = activeNerviusValue === value;
+
   const classnames =
     'cursor-pointer p-1 text-sm text-white transition-colors duration-300 ease-in ' +
-    (selectedButton === value ? 'bg-[#ff0000]' : 'bg-transparent') +
-    (buttonsDisabled ? ' opacity-50 pointer-events-none' : '') + // desactiva el botón
+    (isSelected ? 'bg-[#ff0000]' : 'bg-transparent') +
+    (buttonsDisabled ? ' opacity-50 pointer-events-none' : '') +
     ' rounded-[50px] z-50 relative';
 
   function handleClick() {
     if (buttonsDisabled) return;
 
-    const isCurrentlySelected = selectedButton === value;
-
-    if (isCurrentlySelected) {
-      setSelectedButton(null);
+    if (isSelected) {
+      removeConclusion(value);
+      setActiveNerviusValue(null);
       setFiltroRojoActivo?.(null);
     } else {
-      setSelectedButton(value);
-      // Solo activa el filtro si el botón tiene todos los datos necesarios
+      if (activeNerviusValue !== null) {
+        removeConclusion(activeNerviusValue);
+      }
+      updateConclusions({ title, value });
+      setActiveNerviusValue(value);
       if (filtroRojo?.top && filtroRojo?.height && buttonTop) {
         const bTop    = parseFloat(buttonTop);
         const iTop    = parseFloat(filtroRojo.top);
@@ -33,8 +42,6 @@ export function NerviusButton({ title, value, displayText, buttonTop, filtroRojo
         setFiltroRojoActivo?.({ ...filtroRojo, clipTop: `${clipTop.toFixed(2)}%`, grados: filtroGrados });
       }
     }
-
-    updateConclusions({ title, value });
   }
 
   return (

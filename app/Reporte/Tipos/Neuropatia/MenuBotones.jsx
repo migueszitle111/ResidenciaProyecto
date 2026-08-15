@@ -244,7 +244,7 @@ function getListItem(c) {
 
   if (/^evolucion/i.test(val))
     return { k: 'Evolución', v: clean(title) };
-  if (/^(MEDIANO|FRENICO|GLUTEO_INFERIOR|CIATICO|PUDENDO)/i.test(val))
+  if (/^(MEDIANO|INTEROSEOANTERIOR|ACCESORIO|AXILAR|MUSCULOCUTANEO|RADIAL|RADIAL_SUPERFICIAL|INTEROSEO_POSTERIOR|SUPRAESCAPULAR|ULNAR|DORSAL_CUTANEO|FRENICO|TORACODORSAL|TORACICO_LARGO|ANTEBRAQUIAL_CUTANEO|ANTEBRAQUIAL_LATERAL|CIATICO|GLUTEO_INFERIOR|GLUTEO_MEDIO|FEMORAL|FEMOROCUTÁNEO_LATERAL|SAFENO|OBTURADOR|NERVIO_PERONEO|PERONEO_SUPERFICIAL|PERONEO_PROFUNDO|TIBIAL|SURAL|PLANTAR_MEDIAL|PLANTAR_LATERAL|ILIOINGUINAL|PUDENDO|FACIAL)/i.test(val))
     return { k: 'Nervio', v: clean(title.replace(/^DE NERVIO\s*/i, '')) };
   if (/BILATERAL/i.test(title))
     return { k: 'Lado', v: clean(title) };
@@ -373,10 +373,13 @@ const StepB = ({ setStep, setSelectedSide }) => {
             removeConclusion('FRENICO');
             removeConclusion('TORACODORSAL');
             removeConclusion('TORACICO_LARGO');
+            removeConclusion('ANTEBRAQUIAL_CUTANEO');
+            removeConclusion('ANTEBRAQUIAL_LATERAL');
             removeConclusion('CIATICO');
             removeConclusion('GLUTEO_INFERIOR');
             removeConclusion('GLUTEO_MEDIO');
             removeConclusion('FEMORAL');
+            removeConclusion('FEMOROCUTÁNEO_LATERAL');
             removeConclusion('SAFENO');
             removeConclusion('OBTURADOR');
             removeConclusion('NERVIO_PERONEO');
@@ -386,8 +389,9 @@ const StepB = ({ setStep, setSelectedSide }) => {
             removeConclusion('SURAL');
             removeConclusion('PLANTAR_MEDIAL');
             removeConclusion('PLANTAR_LATERAL');
+            removeConclusion('ILIOINGUINAL');
             removeConclusion('PUDENDO');
-            removeConclusion('FACIAL'); 
+            removeConclusion('FACIAL');
           
           setStep('A'); }}
         onReset={() => window.location.reload()}
@@ -506,6 +510,8 @@ const StepB1 = ({ setStep }) => {
               removeConclusion('FRENICO');
               removeConclusion('TORACODORSAL');
               removeConclusion('TORACICO_LARGO');
+              removeConclusion('ANTEBRAQUIAL_CUTANEO');
+              removeConclusion('ANTEBRAQUIAL_LATERAL');
               removeConclusion('CIATICO');
               removeConclusion('GLUTEO_INFERIOR');
               removeConclusion('GLUTEO_MEDIO');
@@ -520,8 +526,9 @@ const StepB1 = ({ setStep }) => {
               removeConclusion('SURAL');
               removeConclusion('PLANTAR_MEDIAL');
               removeConclusion('PLANTAR_LATERAL');
+              removeConclusion('ILIOINGUINAL');
               removeConclusion('PUDENDO');
-              removeConclusion('FACIAL'); 
+              removeConclusion('FACIAL');
           setStep('B'); }}
         onReset={() => window.location.reload()}
       />
@@ -574,6 +581,8 @@ const StepBB = ({ setStep }) => {
               removeConclusion('FRENICO');
               removeConclusion('TORACODORSAL');
               removeConclusion('TORACICO_LARGO');
+              removeConclusion('ANTEBRAQUIAL_CUTANEO');
+              removeConclusion('ANTEBRAQUIAL_LATERAL');
               removeConclusion('CIATICO');
               removeConclusion('GLUTEO_INFERIOR');
               removeConclusion('GLUTEO_MEDIO');
@@ -588,8 +597,9 @@ const StepBB = ({ setStep }) => {
               removeConclusion('SURAL');
               removeConclusion('PLANTAR_MEDIAL');
               removeConclusion('PLANTAR_LATERAL');
+              removeConclusion('ILIOINGUINAL');
               removeConclusion('PUDENDO');
-              removeConclusion('FACIAL'); 
+              removeConclusion('FACIAL');
           setStep('B'); }}
         onReset={() => window.location.reload()}
       />
@@ -642,6 +652,8 @@ const StepBC = ({ setStep }) => {
               removeConclusion('FRENICO');
               removeConclusion('TORACODORSAL');
               removeConclusion('TORACICO_LARGO');
+              removeConclusion('ANTEBRAQUIAL_CUTANEO');
+              removeConclusion('ANTEBRAQUIAL_LATERAL');
               removeConclusion('CIATICO');
               removeConclusion('GLUTEO_INFERIOR');
               removeConclusion('GLUTEO_MEDIO');
@@ -656,8 +668,9 @@ const StepBC = ({ setStep }) => {
               removeConclusion('SURAL');
               removeConclusion('PLANTAR_MEDIAL');
               removeConclusion('PLANTAR_LATERAL');
+              removeConclusion('ILIOINGUINAL');
               removeConclusion('PUDENDO');
-              removeConclusion('FACIAL'); 
+              removeConclusion('FACIAL');
           setStep('B'); }}
         onReset={() => window.location.reload()}
       />
@@ -898,12 +911,16 @@ const StepCL = ({ setStep, selectedSide }) => {
 };
 
 const StepCD = ({ setStep }) => {
-  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledSegm } = useContext(ReportContext);
+  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledSegm,
+          setFiltroRojoActivo, setFiltroRojoActivo2,
+          setActiveNerviusValue, setActiveSegmentariaValue } = useContext(ReportContext);
+  const { filtroRojoActivo, filtroRojoActivo2 } = useContext(ReportContext);
   return (
     <div>
       <NavRow
         onBack={() => { 
-          removeConclusion('BILATERAL')
+              filtroRojoActivo && setButtonsDisabled(true)
+              removeConclusion('BILATERAL')
               removeConclusion('focalizada')
               removeConclusion('segmentaria')
               removeConclusion('seguir')
@@ -930,7 +947,9 @@ const StepCD = ({ setStep }) => {
               removeConclusion('cari81'),removeConclusion('cari82'),removeConclusion('cari83'),removeConclusion('cari84'),removeConclusion('cari85'),removeConclusion('cari86'),removeConclusion('cari87'),removeConclusion('cari88'),removeConclusion('cari89'),removeConclusion('cari90')
               removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
 
-          setStep('C'); }}
+          setFiltroRojoActivo(null); setFiltroRojoActivo2(null);
+              setActiveNerviusValue(null); setActiveSegmentariaValue(null);
+              setStep('C'); }}
         onReset={() => window.location.reload()}
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledSegm(true); setStep('D'); }}
       />
@@ -943,7 +962,9 @@ const StepCD = ({ setStep }) => {
 };
 
 const StepCDD = ({ setStep }) => {
-  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT, setbuttonsDisabledBITSeg } = useContext(ReportContext);
+  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT, setbuttonsDisabledBITSeg,
+          setFiltroRojoActivo, setFiltroRojoActivo2,
+          setActiveBilateralValue, setActiveSegmBilateralValue } = useContext(ReportContext);
   return (
     <div>
       <NavRow
@@ -975,7 +996,9 @@ const StepCDD = ({ setStep }) => {
               removeConclusion('cari81'),removeConclusion('cari82'),removeConclusion('cari83'),removeConclusion('cari84'),removeConclusion('cari85'),removeConclusion('cari86'),removeConclusion('cari87'),removeConclusion('cari88'),removeConclusion('cari89'),removeConclusion('cari90')
               removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
 
-          setStep('CG'); }}
+          setFiltroRojoActivo(null); setFiltroRojoActivo2(null);
+              setActiveBilateralValue(null); setActiveSegmBilateralValue(null);
+              setStep('CG'); }}
         onReset={() => window.location.reload()}
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }}
       />
@@ -988,7 +1011,9 @@ const StepCDD = ({ setStep }) => {
 };
 
 const StepCDI = ({ setStep }) => {
-  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT, setbuttonsDisabledBITSeg } = useContext(ReportContext);
+  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT, setbuttonsDisabledBITSeg,
+          setFiltroRojoActivo, setFiltroRojoActivo2,
+          setActiveBilateralValue, setActiveSegmBilateralValue } = useContext(ReportContext);
   return (
     <div>
       <NavRow
@@ -1020,7 +1045,9 @@ const StepCDI = ({ setStep }) => {
               removeConclusion('cari81'),removeConclusion('cari82'),removeConclusion('cari83'),removeConclusion('cari84'),removeConclusion('cari85'),removeConclusion('cari86'),removeConclusion('cari87'),removeConclusion('cari88'),removeConclusion('cari89'),removeConclusion('cari90')
               removeConclusion('cari91'),removeConclusion('cari92'),removeConclusion('cari93'),removeConclusion('cari94'),removeConclusion('cari95'),removeConclusion('cari96'),removeConclusion('cari97'),removeConclusion('cari98'),removeConclusion('cari99'),removeConclusion('cari100')
 
-          setStep('CGI'); }}
+          setFiltroRojoActivo(null); setFiltroRojoActivo2(null);
+              setActiveBilateralValue(null); setActiveSegmBilateralValue(null);
+              setStep('CGI'); }}
         onReset={() => window.location.reload()}
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledBILT(true); setbuttonsDisabledBITSeg(true); setStep('D'); }}
       />
@@ -1919,7 +1946,9 @@ const StepCL2 = ({ setStep, selectedSide }) => {
 };
 
 const StepCD2 = ({ setStep }) => {
-  const { removeConclusion, setButtonsDisabled2, setbuttonsDisabledSegm2 } = useContext(ReportContext);
+  const { removeConclusion, setButtonsDisabled2, setbuttonsDisabledSegm2,
+          setFiltroRojoActivo, setFiltroRojoActivo2,
+          setActiveNerviusValue, setActiveSegmentariaValue } = useContext(ReportContext);
   return (
     <div>
       <NavRow
@@ -1974,7 +2003,9 @@ const StepCD2 = ({ setStep }) => {
               removeConclusion('caarii81'),removeConclusion('caarii82'),removeConclusion('caarii83'),removeConclusion('caarii84'),removeConclusion('caarii85'),removeConclusion('caarii86'),removeConclusion('caarii87'),removeConclusion('caarii88'),removeConclusion('caarii89'),removeConclusion('caarii90')
               removeConclusion('caarii91'),removeConclusion('caarii92'),removeConclusion('caarii93'),removeConclusion('caarii94'),removeConclusion('caarii95'),removeConclusion('caarii96'),removeConclusion('caarii97'),removeConclusion('caarii98'),removeConclusion('caarii99'),removeConclusion('caarii100')
  
-          setStep('C2'); }}
+          setFiltroRojoActivo(null); setFiltroRojoActivo2(null);
+              setActiveNerviusValue(null); setActiveSegmentariaValue(null);
+              setStep('C2'); }}
         onReset={() => window.location.reload()}
         onConfirm={() => { setButtonsDisabled2(true); setbuttonsDisabledSegm2(true); setStep('D2'); }}
       />
@@ -1987,7 +2018,9 @@ const StepCD2 = ({ setStep }) => {
 };
 
 const StepCDD2 = ({ setStep }) => {
-  const { removeConclusion, setbuttonsDisabledBILT2, setbuttonsDisabledBITSeg2 } = useContext(ReportContext);
+  const { removeConclusion, setbuttonsDisabledBILT2, setbuttonsDisabledBITSeg2,
+          setFiltroRojoActivo, setFiltroRojoActivo2,
+          setActiveBilateralValue, setActiveSegmBilateralValue } = useContext(ReportContext);
   return (
     <div>
       <NavRow
@@ -2042,6 +2075,8 @@ const StepCDD2 = ({ setStep }) => {
           removeConclusion('caarii81'),removeConclusion('caarii82'),removeConclusion('caarii83'),removeConclusion('caarii84'),removeConclusion('caarii85'),removeConclusion('caarii86'),removeConclusion('caarii87'),removeConclusion('caarii88'),removeConclusion('caarii89'),removeConclusion('caarii90')
           removeConclusion('caarii91'),removeConclusion('caarii92'),removeConclusion('caarii93'),removeConclusion('caarii94'),removeConclusion('caarii95'),removeConclusion('caarii96'),removeConclusion('caarii97'),removeConclusion('caarii98'),removeConclusion('caarii99'),removeConclusion('caarii100')
 
+          setFiltroRojoActivo(null); setFiltroRojoActivo2(null);
+          setActiveBilateralValue(null); setActiveSegmBilateralValue(null);
           setStep('CG2'); }}
         onReset={() => window.location.reload()}
         onConfirm={() => { setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }}
@@ -2055,7 +2090,9 @@ const StepCDD2 = ({ setStep }) => {
 };
 
 const StepCDI2 = ({ setStep }) => {
-  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT2, setbuttonsDisabledBITSeg2 } = useContext(ReportContext);
+  const { removeConclusion, setButtonsDisabled, setbuttonsDisabledBILT2, setbuttonsDisabledBITSeg2,
+          setFiltroRojoActivo, setFiltroRojoActivo2,
+          setActiveBilateralValue, setActiveSegmBilateralValue } = useContext(ReportContext);
   return (
     <div>
       <NavRow
@@ -2110,6 +2147,8 @@ const StepCDI2 = ({ setStep }) => {
           removeConclusion('caarii81'),removeConclusion('caarii82'),removeConclusion('caarii83'),removeConclusion('caarii84'),removeConclusion('caarii85'),removeConclusion('caarii86'),removeConclusion('caarii87'),removeConclusion('caarii88'),removeConclusion('caarii89'),removeConclusion('caarii90')
           removeConclusion('caarii91'),removeConclusion('caarii92'),removeConclusion('caarii93'),removeConclusion('caarii94'),removeConclusion('caarii95'),removeConclusion('caarii96'),removeConclusion('caarii97'),removeConclusion('caarii98'),removeConclusion('caarii99'),removeConclusion('caarii100')
 
+          setFiltroRojoActivo(null); setFiltroRojoActivo2(null);
+          setActiveBilateralValue(null); setActiveSegmBilateralValue(null);
           setStep('CGI2'); }}
         onReset={() => window.location.reload()}
         onConfirm={() => { setButtonsDisabled(true); setbuttonsDisabledBILT2(true); setbuttonsDisabledBITSeg2(true); setStep('D2'); }}

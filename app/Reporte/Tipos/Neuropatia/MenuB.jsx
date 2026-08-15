@@ -133,7 +133,7 @@ export default function ExportBar({
   reportRef,
 }) {
   const { data: session } = useSession();
-  const { filtroRojoActivo } = useContext(ReportContext);
+  const { filtroRojoActivo, filtroRojoActivo2 } = useContext(ReportContext);
   const [showPlantillaModal, setShowPlantillaModal] = useState(false);
   const [progress, setProgress]         = useState(0);
   const [processing, setProcessing]     = useState(false);
@@ -215,6 +215,7 @@ export default function ExportBar({
       plantillaId,
       dotOverlays,
       filtroRojo: filtroRojoActivo?.clipTop ? filtroRojoActivo : null,
+      filtroRojo2: filtroRojoActivo2?.clipTop ? filtroRojoActivo2 : null,
       userData: {
         name:         session?.user?.name,
         lastname:     session?.user?.lastname,

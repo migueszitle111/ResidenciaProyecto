@@ -3,14 +3,39 @@
 import { ReportContext } from '@/src/context';
 import { useContext } from 'react';
 
-export function SegmentariaButton({ title, value }) {
-  const { updateConclusions, conclusions, buttonsDisabledSegm } = useContext(ReportContext);
+export function SegmentariaButton({ title, value, buttonTop, filtroRojo, filtroGrados = 0 }) {
+  const {
+    updateConclusions,
+    removeConclusion,
+    buttonsDisabledSegm,
+    setFiltroRojoActivo,
+    activeSegmentariaValue,
+    setActiveSegmentariaValue,
+  } = useContext(ReportContext);
 
-  const isSelected = conclusions.find(cl => cl.value === value);
+  const isSelected = activeSegmentariaValue === value;
 
   function handleClick() {
     if (buttonsDisabledSegm) return;
-    updateConclusions({ title, value });
+
+    if (isSelected) {
+      removeConclusion(value);
+      setActiveSegmentariaValue(null);
+      setFiltroRojoActivo?.(null);
+    } else {
+      if (activeSegmentariaValue !== null) {
+        removeConclusion(activeSegmentariaValue);
+      }
+      updateConclusions({ title, value });
+      setActiveSegmentariaValue(value);
+      if (filtroRojo?.top && filtroRojo?.height && buttonTop) {
+        const bTop    = parseFloat(buttonTop);
+        const iTop    = parseFloat(filtroRojo.top);
+        const iHeight = parseFloat(filtroRojo.height);
+        const clipTop = Math.max(0, ((bTop - iTop) / iHeight) * 100);
+        setFiltroRojoActivo?.({ ...filtroRojo, clipTop: `${clipTop.toFixed(2)}%`, grados: filtroGrados });
+      }
+    }
   }
 
   const H = 18;
@@ -40,7 +65,6 @@ export function SegmentariaButton({ title, value }) {
         height: H,
       }}
     >
-      {/* Ancla invisible para que el exportador PDF pueda detectar la posición */}
       {isSelected && (
         <span
           className="bg-[#ff0000] text-xs"
@@ -66,4 +90,3 @@ export function SegmentariaButton({ title, value }) {
     </div>
   );
 }
-

@@ -3,10 +3,8 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 import Link from 'next/link';
-
 import AOS from "aos";
 import "aos/dist/aos.css";
-
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -132,8 +130,6 @@ const infoCards = [
     action: "podcast" 
   }
 ];
-
-
 
   return (
     <>
@@ -585,8 +581,6 @@ const infoCards = [
     </div>
   </div>
 )}
-
-
       </motion.div>
 
       {/* Global overrides for Swiper, marquee, etc. */}

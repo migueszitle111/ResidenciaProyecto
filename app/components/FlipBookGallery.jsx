@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
 const BOOKS = [
-  { pdf: '/pdfs/POTENCIALESEVOCADOSmEDXpro.pdf',          label: 'Potenciales Evocados' },
   { pdf: '/pdfs/ESTUDIOSDECONDUCCIONNERVIOSAmEDXpro.pdf', label: 'Conducción Nerviosa'  },
+  { pdf: '/pdfs/POTENCIALESEVOCADOSmEDXpro.pdf',          label: 'Potenciales Evocados' },
   { pdf: '/pdfs/mEDXproMANUALIOM.pdf',                    label: 'Monitoreo Intraoperatorio' },
 ];
 

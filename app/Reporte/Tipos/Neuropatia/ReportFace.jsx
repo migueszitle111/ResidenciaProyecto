@@ -1,20 +1,18 @@
-import { ReportContext, DropContext } from '@/src/context';
+import { checkDivs } from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
+import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL';
+import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
+import { DropContext, ReportContext } from '@/src/context';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd';
-import { useRouter } from 'next/navigation';
 import { ConclusionCanvas } from '../../../components/ReportTemplate/Conclusions/Canvas';
 import SimpleMultiStepForm from './MenuBotones';
 import { checkDivs2 } from './selecNervio2';
-import { checkDivsSegmentarBilateral2 } from './SelecNerviosSegmenBILATERAL2';
 import { checkDivsBILATERAL2 } from './SelecNerviosBILATERAL2';
-import { checkDivsSegmentar2 } from './SelecSegmentariaNerv2';
+import { checkDivsSegmentarBilateral2 } from './SelecNerviosSegmenBILATERAL2';
 import { checkDivsSegmentar } from './SelecSegmentariaNerv';
-import { checkDivsBILATERAL } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERAL';
-import { checkDivsBILATERALIZQ } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosBILATERALIZQ';
-import { checkDivs } from '@/app/Reporte/Tipos/Neuropatia/SelecNervios';
-import { checkDivsSegmentarBilateral } from '@/app/Reporte/Tipos/Neuropatia/SelecNerviosSegmenBILATERAL';
-import { checkDivsGen } from './SelecNerviosGen';
+import { checkDivsSegmentar2 } from './SelecSegmentariaNerv2';
 import './Style.css';
 
 // ── DropArea ───────────────────────────────────────────────────────

@@ -1,5 +1,5 @@
 // GaleriaEmergente.jsx — versión JavaScript
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const imagenesDemo = [
   { id: 'CRITERIOS DE LAMBERT PARA DESMIELINIZACIÓN',                              src: '/assets/Tablas/LAMBERT_DESMIELINIZACION.png' },
@@ -45,6 +45,9 @@ const imagenesDemo = [
   { id: 'SÍNDROME DEL TÚNEL DEL CARPO – HIRANI',                                   src: '/assets/Tablas/Tabla42.png' },
   { id: 'CRITERIOS DE LAMBERT PARA DESMIELINIZACIÓN (2)',                           src: '/assets/Tablas/Tabla43.png' },
   { id: 'CRITERIOS CIDP AANEM (2)',                                                 src: '/assets/Tablas/Tabla44.png' },
+  { id: 'ELA / ALS — GOLD COAST 2020',                                                 src: '/assets/Tablas/ELA_ALS.png' },
+  { id: 'SÍNDROME DE GUILLAIN-BARRÉ — EAN/PNS 2023',                                                 src: '/assets/Tablas/SINDROME_GUILLAIN.png' },
+  { id: 'NEUROPATÍA MOTORA MULTIFOCAL (MMN) — EFNS/PNS 2010',                                                 src: '/assets/Tablas/NEUROPATIA_MOTORA.png' },
 ];
 
 const GaleriaEmergente = ({ visible, onImagenSeleccionada, onClose }) => {

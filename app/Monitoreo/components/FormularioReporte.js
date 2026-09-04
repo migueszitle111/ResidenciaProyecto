@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CRANEALES, OTROS, getFolder } from "../utils/cirugiaUtils";
 import { buildMonitoreoPdf, buildReportFileName, toSafeToken } from "../utils/pdfGenerator";
 import { SuggestInput, SuggestTextarea } from "./SuggestField";
+import LinkUploaderModal from "../../components/LinkUploaderModal";
 
 // Fields excluded from autocomplete history (personal data or format-specific).
 const NO_SUGGEST_FIELDS = new Set(["nombrePaciente", "fecha"]);
@@ -480,101 +481,6 @@ function GenerarInformeModal({ onLink, onPdf, onCancelar }) {
   );
 }
 
-// ─── LinkModal ────────────────────────────────────────────────────────────────
-function LinkModal({ onClose, onGenerate, generating, link, progress, nombrePaciente }) {
-  const [title, setTitle]     = useState(nombrePaciente ? `Neuromonitoreo Intraoperatorio – ${nombrePaciente}` : 'Neuromonitoreo Intraoperatorio');
-  const [message, setMessage] = useState('');
-  const [expiry, setExpiry]   = useState('15d');
-  const [files, setFiles]     = useState([]);
-  const fileRef = useRef();
-
-  const handleFiles = e => {
-    const newFiles = Array.from(e.target.files).map(f => ({
-      id: `${Date.now()}_${f.name}`, name: f.name, file: f,
-      size: f.size, type: f.type, status: 'pending',
-    }));
-    setFiles(prev => [...prev, ...newFiles]);
-  };
-
-  const expiryOpts = [
-    { v: '15d', l: '15 días' },
-    { v: '30d', l: '30 días' },
-    { v: '3m',  l: '3 meses' },
-  ];
-
-  return (
-    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-      <div className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-lg p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-white font-bold text-lg">Generar Link Compartible</h3>
-          <button onClick={onClose} className="text-slate-400 hover:text-white text-xl">×</button>
-        </div>
-        {link ? (
-          <div className="flex flex-col gap-3">
-            <p className="text-green-400 text-sm font-semibold">✓ Link generado exitosamente</p>
-            <div className="bg-[#1c1c1c] rounded-lg px-3 py-2 text-orange-400 text-xs break-all">{link}</div>
-            <div className="flex gap-2">
-              <button onClick={() => navigator.clipboard.writeText(link)}
-                className="flex-1 bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 rounded-lg transition-colors">Copiar</button>
-              <button onClick={onClose} className="flex-1 border border-white/20 text-slate-300 text-sm py-2 rounded-lg hover:border-white/40 transition-colors">Cerrar</button>
-            </div>
-          </div>
-        ) : generating ? (
-          <div className="flex flex-col items-center gap-4 py-6">
-            <div className="w-full bg-[#1c1c1c] rounded-full h-2">
-              <div className="bg-orange-500 h-2 rounded-full transition-all" style={{ width: `${progress}%` }} />
-            </div>
-            <p className="text-slate-300 text-sm">Generando... {progress}%</p>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4">
-            <div>
-              <label className="text-slate-400 text-xs mb-1 block">Título del link</label>
-              <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Reporte de Monitoreo"
-                className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none" />
-            </div>
-            <div>
-              <label className="text-slate-400 text-xs mb-1 block">Mensaje (opcional)</label>
-              <textarea value={message} onChange={e => setMessage(e.target.value)} rows={2}
-                className="w-full bg-[#1c1c1c] text-white text-sm rounded-md px-3 py-2 border border-white/10 focus:border-orange-500 focus:outline-none resize-none" />
-            </div>
-            <div>
-              <label className="text-slate-400 text-xs mb-2 block">Vigencia del link</label>
-              <div className="flex gap-2">
-                {expiryOpts.map(o => (
-                  <button key={o.v} onClick={() => setExpiry(o.v)}
-                    className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-colors ${expiry === o.v ? 'bg-orange-500 text-white' : 'bg-[#1c1c1c] text-slate-400 border border-white/10 hover:border-orange-500/50'}`}>
-                    {o.l}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <label className="text-slate-400 text-xs mb-2 block">Archivos adicionales (opcional)</label>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {files.map(f => (
-                  <div key={f.id} className="bg-[#1c1c1c] rounded-lg px-3 py-1 text-xs text-slate-300 flex items-center gap-2">
-                    {f.name}
-                    <button onClick={() => setFiles(prev => prev.filter(x => x.id !== f.id))} className="text-red-400">×</button>
-                  </div>
-                ))}
-              </div>
-              <button onClick={() => fileRef.current.click()}
-                className="w-full border border-dashed border-white/20 text-slate-400 hover:border-orange-500/50 hover:text-orange-400 text-xs py-3 rounded-lg transition-colors">
-                + Agregar archivos
-              </button>
-              <input ref={fileRef} type="file" multiple className="hidden" onChange={handleFiles} />
-            </div>
-            <button onClick={() => onGenerate({ title, message, expiry, files })}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl text-sm transition-colors">
-              Generar Link
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
 
 // ─── Botones de navegación ────────────────────────────────────────────────────
 function NavButtons({ onAnterior, onSiguiente, labelSiguiente = 'Siguiente →', disabledSiguiente = false, hideSiguiente = false }) {
@@ -637,9 +543,8 @@ export default function FormularioReporte({ nombreCirugia }) {
   const [generandoPdf,   setGenerandoPdf]   = useState(false);
   const [pdfProgress,    setPdfProgress]    = useState(0);
   const [showLink,       setShowLink]       = useState(false);
-  const [linkUrl,        setLinkUrl]        = useState(null);
-  const [linkGenerating, setLinkGenerating] = useState(false);
-  const [linkProgress,   setLinkProgress]  = useState(0);
+  const [linkPdfBlob,    setLinkPdfBlob]    = useState(null);
+  const [linkPdfName,    setLinkPdfName]    = useState('');
 
   // Modales de flujo de generación
   const [showGenerarModal,   setShowGenerarModal]   = useState(false);  // Generar Informe (Link/PDF)
@@ -804,120 +709,34 @@ export default function FormularioReporte({ nombreCirugia }) {
   };
 
   // ── Generar Link ──
+  // Genera el PDF y abre el LinkUploaderModal compartido, que permite
+  // adjuntar más archivos y unirlos en un solo PDF con orden reordenable.
   const handleGenerarLink = async (usarPlantilla) => {
     setShowPlantillaModal(false);
     setShowGenerarModal(false);
     if (!form.conclusion) { showMsg('error', 'La conclusión es requerida.'); return; }
-    setShowLink(true);
-    setLinkUrl(null);
-    // La generación real la dispara el LinkModal al confirmar
-    // Guardamos usarPlantilla para usarlo en el callback real
-    setLinkUsarPlantilla(usarPlantilla);
-  };
-
-  const [linkUsarPlantilla, setLinkUsarPlantilla] = useState(true);
-
-  const handleGenerarLinkConfirmar = async ({ title, message, expiry, files }) => {
-    if (!form.conclusion) { showMsg('error', 'La conclusión es requerida.'); return; }
-    setLinkGenerating(true);
-    setLinkProgress(5);
-    setLinkUrl(null);
-
+    setGenerandoPdf(true);
+    setPdfProgress(0);
     try {
       const datos = buildReporteData();
-      const doctorName = [datos.usuarioNombre, datos.usuarioApellido].filter(Boolean).join(' ');
-      const studyType  = 'Neuromonitoreo Intraoperatorio';
-      const expSeconds = expiry === '30d' ? 2592000 : expiry === '3m' ? 7776000 : 1296000;
-
-      const finalTitle = (title?.trim() || `${studyType} – ${form.nombrePaciente || 'Paciente'}`).slice(0, 140);
-      const finalMsg   = message?.trim() || '';
-
-      // Rutas relativas → funciona en local y en producción sin CORS
-      const initRes = await fetch(`/api/share/init`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: finalTitle, message: finalMsg, expiresInSeconds: expSeconds,
-          patient: form.nombrePaciente || null, doctor: doctorName || null,
-          studyType, doctorLogo: session?.user?.imageUrl || null,
-          meta: { patient: form.nombrePaciente, doctor: doctorName, study: studyType, studyType, doctorLogo: session?.user?.imageUrl || null },
-        }),
-      });
-      const initData = await initRes.json();
-      if (!initData.ok) throw new Error(initData.error || 'Error iniciando link');
-      const { linkId } = initData;
-
-      setLinkProgress(15);
-
-      const arrayBuffer = await buildMonitoreoPdf(datos, linkUsarPlantilla, p => setLinkProgress(15 + Math.round(p * 0.5)));
-      const reportName  = buildReportFileName(form.tipoCirugia, form.nombrePaciente);
-
-      setLinkProgress(65);
-
-      // Bucket de monitoreo — igual que la app móvil
-      const MONITOREO_BUCKET = 'monitoreo-packages';
-      const folder = toSafeToken(form.nombrePaciente || 'Paciente');
-
-      // — Subir PDF del reporte —
-      const formData = new FormData();
-      formData.append('file', new Blob([arrayBuffer], { type: 'application/pdf' }), reportName);
-      formData.append('folder', folder);
-      formData.append('bucket', MONITOREO_BUCKET);
-
-      const uploadRes = await fetch(`/api/share/upload`, { method: 'POST', body: formData });
-      const uploadData = await uploadRes.json();
-      if (!uploadData.ok) throw new Error(uploadData.error || 'Error subiendo PDF');
-
-      setLinkProgress(85);
-
-      // — Archivos adicionales del usuario —
-      // uploadData.path ya viene con prefijo "monitoreo-packages/..." igual que la app móvil
-      const uploadedFiles = [
-        {
-          name:         uploadData.name,
-          mime_type:    uploadData.mime_type,
-          size_bytes:   uploadData.size_bytes,
-          storage_path: uploadData.path,
-        },
-      ];
-
-      for (const f of (files || [])) {
-        const fd = new FormData();
-        fd.append('file', f.file);
-        fd.append('folder', folder);
-        fd.append('bucket', MONITOREO_BUCKET);
-        const r = await fetch(`/api/share/upload`, { method: 'POST', body: fd }).catch(() => null);
-        if (r?.ok) {
-          const d = await r.json().catch(() => null);
-          if (d?.ok) {
-            uploadedFiles.push({
-              name:         d.name,
-              mime_type:    d.mime_type,
-              size_bytes:   d.size_bytes,
-              storage_path: d.path,
-            });
-          }
-        }
-      }
-
-      const doneRes = await fetch(`/api/share/complete`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ linkId, files: uploadedFiles }),
-      });
-      const doneData = await doneRes.json();
-      if (!doneData.ok) throw new Error(doneData.error || 'Error completando link');
-
-      setLinkProgress(100);
-      setLinkUrl(doneData.url);
-      localStorage.removeItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente));
-      limpiar();
+      const arrayBuffer = await buildMonitoreoPdf(datos, usarPlantilla, p => setPdfProgress(p));
+      const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
+      const reportName = buildReportFileName(form.tipoCirugia, form.nombrePaciente);
+      setLinkPdfBlob(blob);
+      setLinkPdfName(reportName);
+      setShowLink(true);
     } catch (e) {
-      showMsg('error', `Error: ${e.message}`);
-      setShowLink(false);
+      showMsg('error', `Error generando PDF: ${e.message}`);
     } finally {
-      setLinkGenerating(false);
+      setGenerandoPdf(false);
     }
+  };
+
+  const cerrarLinkModal = () => {
+    setShowLink(false);
+    setLinkPdfBlob(null);
+    setLinkPdfName('');
+    limpiar();
   };
 
   // ── Flujo de selección: Generar Informe → Link/PDF → Con/Sin plantilla ──
@@ -1426,15 +1245,18 @@ export default function FormularioReporte({ nombreCirugia }) {
         />
       )}
 
-      {/* ── Modal de link ── */}
-      {showLink && (
-        <LinkModal
-          onClose={() => { setShowLink(false); setLinkUrl(null); setLinkGenerating(false); }}
-          onGenerate={handleGenerarLinkConfirmar}
-          generating={linkGenerating}
-          link={linkUrl}
-          progress={linkProgress}
+      {/* ── Modal de link (compartido con Reporte/Tipos) ── */}
+      {showLink && linkPdfBlob && (
+        <LinkUploaderModal
+          pdfBlob={linkPdfBlob}
+          pdfFilename={linkPdfName}
           nombrePaciente={form.nombrePaciente}
+          session={session}
+          onClose={cerrarLinkModal}
+          studyKey="Monitoreo"
+          defaultTitle={form.nombrePaciente ? `Neuromonitoreo Intraoperatorio – ${form.nombrePaciente}` : 'Neuromonitoreo Intraoperatorio'}
+          fallbackTitle={`Neuromonitoreo Intraoperatorio – ${form.nombrePaciente || 'Paciente'}`}
+          bucket="monitoreo-packages"
         />
       )}
     </div>

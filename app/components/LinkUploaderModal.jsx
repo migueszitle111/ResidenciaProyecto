@@ -1,9 +1,9 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 
-const BUCKET     = 'report-packages';
-const SHARE_BASE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.medxproapp.com';
-const MAX_FILES  = 10;
+const DEFAULT_BUCKET = 'report-packages';
+const SHARE_BASE     = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.medxproapp.com';
+const MAX_FILES      = 10;
 
 const EXPIRY_OPTIONS = [
   { value: '15d', label: '15 días' },
@@ -111,6 +111,7 @@ export default function LinkUploaderModal({
   requireUserFileWhenNotJustReport = true,
   useSlugFallback = false,
   useOverlayLoader = false,
+  bucket = DEFAULT_BUCKET,
 }) {
   const [files, setFiles]           = useState([]);
   const [title, setTitle]           = useState(defaultTitle);
@@ -247,7 +248,7 @@ export default function LinkUploaderModal({
         const mergedForm = new FormData();
         mergedForm.append('file', mergedBlob, mergedName);
         mergedForm.append('folder', folder);
-        mergedForm.append('bucket', BUCKET);
+        mergedForm.append('bucket', bucket);
         const mergedUp = await fetch('/api/share/upload', { method: 'POST', body: mergedForm });
         if (!mergedUp.ok) throw new Error('Error al subir PDF unido');
         const mergedData = await mergedUp.json();
@@ -267,7 +268,7 @@ export default function LinkUploaderModal({
         const pdfForm = new FormData();
         pdfForm.append('file', pdfBlob, pdfFilename);
         pdfForm.append('folder', folder);
-        pdfForm.append('bucket', BUCKET);
+        pdfForm.append('bucket', bucket);
         const pdfUp = await fetch('/api/share/upload', { method: 'POST', body: pdfForm });
         if (!pdfUp.ok) throw new Error('Error al subir PDF');
         const pdfData = await pdfUp.json();
@@ -280,7 +281,7 @@ export default function LinkUploaderModal({
           for (let i = 0; i < userFilesList.length; i++) {
             const f = userFilesList[i];
             const form = new FormData();
-            form.append('file', f.file, f.name); form.append('folder', folder); form.append('bucket', BUCKET);
+            form.append('file', f.file, f.name); form.append('folder', folder); form.append('bucket', bucket);
             updateProgress(f.id, 0.3);
             const up = await fetch('/api/share/upload', { method: 'POST', body: form });
             if (!up.ok) throw new Error(`Error subiendo ${f.name}`);

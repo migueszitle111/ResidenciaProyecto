@@ -7,8 +7,8 @@
  */
 
 import { useSession } from 'next-auth/react';
-import { useCallback, createContext, useContext, useMemo, useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { createContext, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ExportBar from './MenuBotones';
 import './Style.css';
 
@@ -58,6 +58,9 @@ const TABLAS = [
   { id: 'SÍNDROME DEL TÚNEL DEL CARPO – HIRANI',                             file: 'Tabla42.png' },
   { id: 'CRITERIOS DE LAMBERT PARA DESMIELINIZACIÓN',                        file: 'Tabla43.png' },
   { id: 'CRITERIOS CIDP AANEM',                                               file: 'Tabla44.png' },
+  { id: 'ELA / ALS — GOLD COAST 2020',                                                       file: 'ELA_ALS.png' },
+  { id: 'SÍNDROME DE GUILLAIN-BARRÉ — EAN/PNS 2023',                                         file: 'SINDROME_GUILLAIN.png' },
+  { id: 'NEUROPATÍA MOTORA MULTIFOCAL (MMN) — EFNS/PNS 2010',                                file: 'NEUROPATIA_MOTORA.png' },
 ];
 
 /* ─── Crop Modal ──────────────────────────────────────────────────────────── */

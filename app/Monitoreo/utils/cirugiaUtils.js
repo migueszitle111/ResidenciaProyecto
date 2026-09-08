@@ -44,7 +44,6 @@ export const SOLO_PROCEDIMIENTO = new Set([
   'Endarterectomía Carotídea',
   'Neurólisis de Nervio Periférico',
   'Neurorrafia Microquirúrgica de Nervio Periférico',
-  'Tiroidectomía',
 ]);
 
 export const CERVICALES = [

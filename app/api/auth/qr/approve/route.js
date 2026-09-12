@@ -119,7 +119,11 @@ export async function POST(request) {
       throw new ApiInputError("No se pudo resolver el usuario movil", 401);
     }
 
-    const user = await User.findOne({ email });
+    // Busqueda case-insensitive: algunas cuentas moviles tienen el email
+    // guardado con mayusculas/espacios (ver QR-WEB-LOGIN-EMAIL-BUG.md, Fase 1).
+    const user = await User.findOne({
+      $expr: { $eq: [{ $toLower: "$email" }, email] },
+    });
 
     if (!user) {
       throw new ApiInputError(

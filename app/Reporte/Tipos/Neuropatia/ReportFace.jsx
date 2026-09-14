@@ -13,6 +13,8 @@ import { checkDivsBILATERAL2 } from './SelecNerviosBILATERAL2';
 import { checkDivsSegmentarBilateral2 } from './SelecNerviosSegmenBILATERAL2';
 import { checkDivsSegmentar } from './SelecSegmentariaNerv';
 import { checkDivsSegmentar2 } from './SelecSegmentariaNerv2';
+import { checkBILATERAL } from './SelectBILATERAL';
+import { checkSegtarBilateral } from './SelectBILATERALSEG';
 import './Style.css';
 
 // ── DropArea ───────────────────────────────────────────────────────
@@ -1591,14 +1593,17 @@ const Reporte = () => {
 
                 {/* Overlays de nervios */}
                 <div>{checkDivsBILATERAL(copyConclusions)}</div>
+                <div>{checkBILATERAL(copyConclusions)}</div>
+                <div>{checkSegtarBilateral(copyConclusions)}</div>
                 <div>{checkDivsBILATERAL2(copyConclusions)}</div>
                 <div>{checkDivs(copyConclusions)}</div>
-                {/* <div>{checkDivsGen(copyConclusions)}</div> */}
+                {/* <div>{checkDivsGen(copyConclusions)}</div> import { checkBILATERAL} from './SelectBILATERAL';*/}
                 <div>{checkDivs2(copyConclusions)}</div>
                 <div>{checkDivsSegmentar(copyConclusions)}</div>
                 <div>{checkDivsSegmentar2(copyConclusions)}</div>
                 <div>{checkDivsSegmentarBilateral(copyConclusions)}</div>
                 <div>{checkDivsSegmentarBilateral2(copyConclusions)}</div>
+
               </div>
 
             </div>

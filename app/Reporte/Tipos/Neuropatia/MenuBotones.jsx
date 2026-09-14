@@ -548,9 +548,9 @@ const StepB1 = ({ setStep }) => {
             <div onClick={() => setStep('CGI')}>
               <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} />
             </div>
-            {/* <div onClick={() => setStep('CG')}>
+            <div onClick={() => setStep('CG')}>
               <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} />
-            </div> */}
+            </div>
           </Accordion>
         </InternalAccordionContainer>
       </AccordionContainer>
@@ -619,9 +619,9 @@ const StepBB = ({ setStep }) => {
             <div onClick={() => setStep('CGI')}>
               <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} />
             </div>
-            {/* <div onClick={() => setStep('CG')}>
+            <div onClick={() => setStep('CG')}>
               <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} />
-            </div> */}
+            </div>
           </Accordion>
         </InternalAccordionContainer>
       </AccordionContainer>
@@ -690,9 +690,9 @@ const StepBC = ({ setStep }) => {
             <div onClick={() => setStep('CGI')}>
               <ConclusionButton value='IZQUIERDO' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} />
             </div>
-            {/* <div onClick={() => setStep('CG')}>
+            <div onClick={() => setStep('CG')}>
               <ConclusionButton value='IZQUIERDO' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} />
-            </div> */}
+            </div>
           </Accordion>
         </InternalAccordionContainer>
       </AccordionContainer>
@@ -1724,9 +1724,9 @@ const StepB12 = ({ setStep }) => {
             <div onClick={() => setStep('CGI2')}>
               <ConclusionButton value='IZQUIERDO2' title=' BILATERAL CON PREDOMINIO IZQUIERDO,' displayText={'PREDOMINIO IZQUIERDO'} />
             </div>
-            {/* <div onClick={() => setStep('CG2')}>
+            <div onClick={() => setStep('CG2')}>
               <ConclusionButton value='IZQUIERDO2' title=' BILATERAL,' displayText={'SIN PREDOMINIO'} />
-            </div> */}
+            </div>
           </Accordion>
         </InternalAccordionContainer>
       </AccordionContainer>

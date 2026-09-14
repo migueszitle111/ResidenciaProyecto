@@ -40,7 +40,7 @@ export function checkDivsBILATERAL(copyConclusions) {
         <div style={{ position: 'absolute', top: '19.7%', left: '40.5%', borderRadius: '50%' }}
           className={`.dont-print-Nerviusgrande`}> <NerviusButtonBILATERAL value='car14' title='INMEDIATO A SU EMERGENCIA,' displayText=' ' buttonTop='19.7%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '20.3%', left: '39.7%', borderRadius: '50%' }}
-          className={`.dont-print-Nerviusgrande`}> <NerviusButtonBILATERAL value='car15' title='DE AXILA,' displayText=' ' buttonTop='20.3%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '20%', width: '30%', height: '65%'}} />  </div>
+          className={`.dont-print-Nerviusgrande`}> <NerviusButtonBILATERAL value='car15' title='DE AXILA,' displayText=' ' buttonTop='20.3%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} />  </div>
         <div style={{ position: 'absolute', top: '21.1%', left: '38.9%', borderRadius: '50%' }}
           className={`.dont-print-Nerviusgrande`}> <NerviusButtonBILATERAL value='car16' title='DE AXILA,' displayText=' ' buttonTop='21.1%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} />  </div>
 
@@ -80,9 +80,9 @@ export function checkDivsBILATERAL(copyConclusions) {
         <div style={{ position: 'absolute', top: '32.2%', left: '32.4%', borderRadius: '50%', }}
           className={`dont-print-Nervius`}  ><NerviusButtonBILATERAL value='car30' title='DEL TERCIO PROXIMAL DEL ANTEBRAZO,' displayText=' ' buttonTop='32.2%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /></div>
         <div style={{ position: 'absolute', top: '33.0%', left: '32.2%', borderRadius: '50%', }}
-          className={`dont-print-Nervius`} ><NerviusButtonBILATERAL value='car31' title='PRONADOR REDONDO,' displayText=' ' buttonTop='33.0%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '20%', width: '30%', height: '65%'}} /></div>
+          className={`dont-print-Nervius`} ><NerviusButtonBILATERAL value='car31' title='PRONADOR REDONDO,' displayText=' ' buttonTop='33.0%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /></div>
         <div style={{ position: 'absolute', top: '33.7%', left: '31.7%', borderRadius: '50%', }}
-          className={`dont-print-Nervius`}  ><NerviusButtonBILATERAL value='car32' title='PRONADOR REDONDO,' displayText=' ' buttonTop='33.7%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '20%', width: '30%', height: '65%'}} /></div>
+          className={`dont-print-Nervius`}  ><NerviusButtonBILATERAL value='car32' title='PRONADOR REDONDO,' displayText=' ' buttonTop='33.7%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /></div>
 
         <div style={{ position: 'absolute', top: '34.4%', left: '31.4%', borderRadius: '50%', }}
           className={`dont-print-Nervius`}><NerviusButtonBILATERAL value='car33' title='DEL TERCIO MEDIAL DEL ANTEBRAZO,' displayText=' ' buttonTop='34.4%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /></div>
@@ -120,7 +120,7 @@ export function checkDivsBILATERAL(copyConclusions) {
         <div style={{ position: 'absolute', top: '44.9%', left: '25.5%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car47' title='DE DEDOS II-III,' displayText=' ' buttonTop='44.9%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '45.8%', left: '25.5%', }}
-          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car48' title='DE DEDOS II-III,' displayText=' ' buttonTop='45.8%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '20%', width: '30%', height: '65%'}} /> </div>
+          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car48' title='DE DEDOS II-III,' displayText=' ' buttonTop='45.8%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
 
 
         <div style={{ position: 'absolute', top: '42.4%', left: '28.2%', }}
@@ -130,7 +130,7 @@ export function checkDivsBILATERAL(copyConclusions) {
         <div style={{ position: 'absolute', top: '43.9%', left: '27.5%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car51' title='DE DEDOS II-III,' displayText=' ' buttonTop='43.9%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '44.7%', left: '27.2%', }}
-          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car52' title='DE DEDOS II-III,' displayText=' ' buttonTop='44.7%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '20%', width: '30%', height: '65%'}} /> </div>
+          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car52' title='DE DEDOS II-III,' displayText=' ' buttonTop='44.7%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '45.6%', left: '27.0%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car53' title='DE DEDOS II-III,' displayText=' ' buttonTop='45.6%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '46.4%', left: '26.8%', }}
@@ -140,7 +140,7 @@ export function checkDivsBILATERAL(copyConclusions) {
         <div style={{ position: 'absolute', top: '40.6%', left: '29.1%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car55' title='DEL CARPO,' displayText=' ' buttonTop='40.6%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '41.4%', left: '28.9%', }}
-          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car56' title='DEL CARPO,' displayText=' ' buttonTop='41.4%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '20%', width: '30%', height: '65%'}} /> </div>
+          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car56' title='DEL CARPO,' displayText=' ' buttonTop='41.4%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '42.3%', left: '29.2%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car57' title='DE PALMA,' displayText=' ' buttonTop='42.3%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '43.1%', left: '29.1%', }}
@@ -149,9 +149,9 @@ export function checkDivsBILATERAL(copyConclusions) {
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car59' title='DE DEDOS II-III,' displayText=' ' buttonTop='43.8%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
 
         <div style={{ position: 'absolute', top: '44.6%', left: '28.8%', }}
-          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car60' title='DE DEDOS II-III,' displayText=' ' buttonTop='44.6%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '20%', width: '30%', height: '65%'}} /> </div>
+          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car60' title='DE DEDOS II-III,' displayText=' ' buttonTop='44.6%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '45.5%', left: '28.9%', }}
-          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car61' title='DE DEDOS II-III,' displayText=' ' buttonTop='45.5%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '20%', width: '30%', height: '65%'}} /> </div>
+          className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car61' title='DE DEDOS II-III,' displayText=' ' buttonTop='45.5%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
         <div style={{ position: 'absolute', top: '46.3%', left: '28.7%', }}
           className={`dont-print-Nervius`}> <NerviusButtonBILATERAL value='car62' title='DE DEDOS II-III,' displayText=' ' buttonTop='46.3%' filtroRojo={{top: '15%', left: '10%', width: '40%', height: '85%', }} filtroRojoOpuesto={{top: '15%', left: '50%', width: '30%', height: '65%'}} /> </div>
 

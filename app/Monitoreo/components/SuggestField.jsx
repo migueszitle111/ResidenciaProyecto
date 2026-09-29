@@ -86,10 +86,16 @@ export function SuggestInput({
 
   // Detect when the ghost tail is clipped by the input's fixed width so we
   // can surface the full suggestion in a floating preview underneath.
+  // Batched via rAF para no forzar layout sincrónico en cada keystroke cuando
+  // hay muchos SuggestInput montados (varias fases del procedimiento).
   useEffect(() => {
     if (!overlayRef.current) return;
-    const el = overlayRef.current;
-    setOverflowing(ghostTail.length > 0 && el.scrollWidth > el.clientWidth + 1);
+    const raf = requestAnimationFrame(() => {
+      if (!overlayRef.current) return;
+      const el = overlayRef.current;
+      setOverflowing(ghostTail.length > 0 && el.scrollWidth > el.clientWidth + 1);
+    });
+    return () => cancelAnimationFrame(raf);
   }, [value, ghostTail]);
 
   useEffect(() => {
@@ -223,14 +229,21 @@ export function SuggestTextarea({
   // exactly what the textarea needs to display everything without clipping.
   // Capped at 60vh so a runaway measurement (e.g. mirror measured before
   // layout settled) can't blow the field up to cover the whole viewport.
+  // Batched via rAF: con muchos textareas montados (una fase = ~13, con 3+
+  // fases son 40+), medir sincrónico en cada keystroke fuerza layouts en
+  // cascada. rAF los agrupa en un solo frame.
   useEffect(() => {
     if (!areaRef.current || !measureRef.current) return;
-    const measured = measureRef.current.scrollHeight;
-    areaRef.current.style.height = 'auto';
-    const natural = areaRef.current.scrollHeight;
-    const target = Math.max(measured, natural);
-    const cap = typeof window !== 'undefined' ? Math.round(window.innerHeight * 0.6) : 600;
-    areaRef.current.style.height = Math.min(target, cap) + 'px';
+    const raf = requestAnimationFrame(() => {
+      if (!areaRef.current || !measureRef.current) return;
+      const measured = measureRef.current.scrollHeight;
+      areaRef.current.style.height = 'auto';
+      const natural = areaRef.current.scrollHeight;
+      const target = Math.max(measured, natural);
+      const cap = typeof window !== 'undefined' ? Math.round(window.innerHeight * 0.6) : 600;
+      areaRef.current.style.height = Math.min(target, cap) + 'px';
+    });
+    return () => cancelAnimationFrame(raf);
   }, [value, ghostTail]);
 
   const acceptGhost = () => {

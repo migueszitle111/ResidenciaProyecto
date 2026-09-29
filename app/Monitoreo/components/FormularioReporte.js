@@ -533,6 +533,11 @@ export default function FormularioReporte({ nombreCirugia }) {
   const [firmaBase64, setFirmaBase64] = useState('');
   const firmaInputRef = useRef(null);
 
+  // Refs para cancelar el trabajo idle pendiente del auto-save (evita
+  // que setItem tardío pise una limpieza más reciente).
+  const cleanupIdleRef = useRef(null);
+  const cleanupBorradorIdleRef = useRef(null);
+
   // Opciones de adjuntos
   const [incluirProtocolo,    setIncluirProtocolo]    = useState(false);
   const [incluirProcedimiento,setIncluirProcedimiento]= useState(false);
@@ -575,20 +580,53 @@ export default function FormularioReporte({ nombreCirugia }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nombreCirugia]);
 
-  // ── Auto-guardar sesión (siempre) ──
+  // ── Auto-guardar sesión (debounced) ──
+  // JSON.stringify + localStorage.setItem son síncronos. Con varias fases +
+  // imágenes base64 (hasta 5 por registro, ~cientos de KB c/u) el JSON crece a
+  // MB y cada keystroke bloqueaba la UI. Debounce a 600ms + requestIdleCallback
+  // saca el trabajo del hot path del input.
+  const scheduleIdle = (fn) => {
+    if (typeof window === 'undefined') return () => {};
+    const ric = window.requestIdleCallback || ((cb) => window.setTimeout(cb, 0));
+    const cic = window.cancelIdleCallback || window.clearTimeout;
+    const id = ric(fn);
+    return () => cic(id);
+  };
+
   useEffect(() => {
     if (!hydrated) return;
-    try {
-      localStorage.setItem(SESSION_KEY(nombreCirugia), JSON.stringify({
-        form, paso, firmaBase64, incluirProtocolo, incluirProcedimiento, incluirModalidades,
-      }));
-    } catch {}
+    const t = setTimeout(() => {
+      const cancelIdle = scheduleIdle(() => {
+        try {
+          localStorage.setItem(SESSION_KEY(nombreCirugia), JSON.stringify({
+            form, paso, firmaBase64, incluirProtocolo, incluirProcedimiento, incluirModalidades,
+          }));
+        } catch {}
+      });
+      // Cleanup si el efecto se re-ejecuta antes de que el idle corra.
+      cleanupIdleRef.current = cancelIdle;
+    }, 600);
+    return () => {
+      clearTimeout(t);
+      if (cleanupIdleRef.current) { cleanupIdleRef.current(); cleanupIdleRef.current = null; }
+    };
   }, [hydrated, nombreCirugia, form, paso, firmaBase64, incluirProtocolo, incluirProcedimiento, incluirModalidades]);
 
-  // ── Auto-guardar borrador por paciente (compat: para "Restaurar borrador") ──
+  // ── Auto-guardar borrador por paciente (debounced) ──
   useEffect(() => {
     if (!form.nombrePaciente) return;
-    localStorage.setItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente), JSON.stringify({ form, paso }));
+    const t = setTimeout(() => {
+      const cancelIdle = scheduleIdle(() => {
+        try {
+          localStorage.setItem(STORAGE_KEY(nombreCirugia, form.nombrePaciente), JSON.stringify({ form, paso }));
+        } catch {}
+      });
+      cleanupBorradorIdleRef.current = cancelIdle;
+    }, 800);
+    return () => {
+      clearTimeout(t);
+      if (cleanupBorradorIdleRef.current) { cleanupBorradorIdleRef.current(); cleanupBorradorIdleRef.current = null; }
+    };
   }, [form, paso, nombreCirugia]);
 
   // ── Recuperar borrador (manual, por paciente) ──

@@ -105,16 +105,8 @@ export function getPdfPath(nombreCirugia, tipo) {
   if (!folder) return null;
 
   const nombreArchivo = NOMBRES_SIN_ESPACIOS[nombreCirugia] || nombreCirugia;
-  const esOtros = folder === 'OTROS';
 
   if (tipo === 'modalidades') {
-    if (esOtros) {
-      return {
-        combined: true,
-        cervical: `/CERVICAL/Modalidades NF.pdf`,
-        lumbar:   `/LUMBAR/Modalidades NF.pdf`,
-      };
-    }
     return `/${folder}/Modalidades NF.pdf`;
   }
 

@@ -36,7 +36,7 @@ function VisorContent() {
 
   const nombreCirugia = decodeURIComponent(nombre);
   const tipo          = searchParams.get("tipo") || "protocolo";
-  const pdfResult     = getPdfPath(nombreCirugia, tipo);
+  const pdfPath       = getPdfPath(nombreCirugia, tipo);
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
@@ -54,27 +54,15 @@ function VisorContent() {
       <p className="text-orange-400 text-sm mb-6">{TIPO_LABEL[tipo]}</p>
 
       {/* Visor */}
-      {!pdfResult ? (
+      {!pdfPath ? (
         <div className="bg-[#1a1a1a] rounded-xl p-10 text-center text-slate-400">
           PDF no disponible para esta cirugía
         </div>
-      ) : pdfResult.combined ? (
-        // Cirugías "Otros" → modalidades muestra CERVICAL + LUMBAR
-        <div className="flex flex-col gap-8">
-          <div>
-            <p className="text-white text-sm font-semibold mb-2">Modalidades — Cervical</p>
-            <PdfFrame src={proxyUrl(pdfResult.cervical)} title="Modalidades Cervical" />
-          </div>
-          <div>
-            <p className="text-white text-sm font-semibold mb-2">Modalidades — Lumbar</p>
-            <PdfFrame src={proxyUrl(pdfResult.lumbar)} title="Modalidades Lumbar" />
-          </div>
-        </div>
       ) : (
         <div className="flex flex-col gap-2">
-          <PdfFrame src={proxyUrl(pdfResult)} title={`${tipo} - ${nombreCirugia}`} />
+          <PdfFrame src={proxyUrl(pdfPath)} title={`${tipo} - ${nombreCirugia}`} />
           <a
-            href={proxyUrl(pdfResult)}
+            href={proxyUrl(pdfPath)}
             target="_blank"
             rel="noopener noreferrer"
             className="self-end text-xs text-orange-400 hover:underline"

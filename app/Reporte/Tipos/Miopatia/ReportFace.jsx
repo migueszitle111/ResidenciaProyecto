@@ -182,9 +182,37 @@ const OVERLAYS_MIO = {
   'Oculofaringea':        '/MiopatiaImg/MI_Oculofaringea.png',
 };
 
+// Variantes artísticas de los overlays. Si una clave no existe aquí,
+// se usará el overlay "normal" como fallback.
+// Paths relativos — se resuelven con artUrl() al mostrarse en pantalla
+// y se envían tal cual al backend de PDF (que ya hace fallback a laminasImg).
+const OVERLAYS_MIO_ARTISTICO = {
+  'Proximal':             '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Proximal.png',
+  'Distal':               '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distal.png',
+  'FacialImg':            '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia Facial.png',
+  'Cinturas':             '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia de Anillo Oseo.png',
+  'Duchenne/Becker':      '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia de Duchenne e Becker.png',
+  'Emery-Dreifuss':       '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia de Emery-Dreifuss.png',
+  'Facioescapulohumeral': '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia Facioescapulohumeral.png',
+  'Oculofaringea':        '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia Oculofaringea.png',
+  'GenePx':               '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Proximal.png',
+  'GeneDs':               '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distal.png',
+  'GeneFc':               '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia Facial.png',
+};
+
 const OVERLAY_GROUPS = {
   'Generalizada': ['GenePx', 'GeneDs', 'GeneFc'],
 };
+
+const ARTES_MIO = {
+  normal:    '/MiopatiaImg/MI_Base_TR.png',
+  artistico: '/MiopatiaImg/MiopatiaArtistico/Elementos Individuales/A_Completo.png',
+};
+
+// Las imágenes del filtro artístico viven solo en el backend (no se copian a public/).
+// Para el <img> del preview se resuelven como URL absoluta al backend.
+const BACKEND_LAMINAS_URL = 'https://backendmedxpro-tef2.onrender.com/laminasImg';
+const artUrl = (p) => BACKEND_LAMINAS_URL + p.split('/').map(encodeURIComponent).join('/');
 
 const limpiarTextoReporte = (s) => {
   if (!s) return '';
@@ -520,6 +548,8 @@ export default function ReportFace() {
   const [figuras, setFiguras] = useState([]);
   const [pdfOpen, setPdfOpen] = useState(false);
   const [showSimbolos, setShowSimbolos] = useState(false);
+  const [arteId, setArteId] = useState('normal');
+  const [showArteMenu, setShowArteMenu] = useState(false);
   const laminaRef = useRef(null);
 
   /* ── Crop modal ── */
@@ -579,23 +609,28 @@ export default function ReportFace() {
     window.addEventListener('mouseup', onUp);
   }, [dragRef, moverFigura, laminaRef]);
 
-  /* ── Resolución de overlays (con grupos) ── */
+  /* ── Resolución de overlays (con grupos, respetando arteId) ── */
   const resolvedOverlayUrls = useMemo(() => {
+    const resolve = (k) => {
+      const art = arteId === 'artistico' ? OVERLAYS_MIO_ARTISTICO[k] : null;
+      if (art) return artUrl(art);
+      return OVERLAYS_MIO[k] || null;
+    };
     const urls = [];
     for (const key of overlayKeys) {
       const group = OVERLAY_GROUPS[key];
       if (group) {
         for (const gk of group) {
-          const url = OVERLAYS_MIO[gk];
+          const url = resolve(gk);
           if (url && !urls.includes(url)) urls.push(url);
         }
       } else {
-        const url = OVERLAYS_MIO[key];
+        const url = resolve(key);
         if (url && !urls.includes(url)) urls.push(url);
       }
     }
     return urls;
-  }, [overlayKeys]);
+  }, [overlayKeys, arteId]);
 
   /* ── Texto reporte ── */
   const textoReporte = useMemo(() => {
@@ -761,6 +796,7 @@ export default function ReportFace() {
                 listaVisual={listaVisual}
                 imgLista={imgLista}
                 comentarioLista={comentarioLista}
+                arteId={arteId}
                 onBack={goBack}
                 onReset={resetAll}
                 isOpen={pdfOpen}
@@ -814,7 +850,26 @@ export default function ReportFace() {
                 </div>
               )}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/MiopatiaImg/MI_Base_TR.png" alt="base" draggable={false} style={{ display:'block', width:'100%', height:'auto', objectFit:'contain' }} />
+              <img src={arteId === 'artistico' ? artUrl(ARTES_MIO.artistico) : ARTES_MIO.normal} alt="base" draggable={false} style={{ display:'block', width:'100%', height:'auto', objectFit:'contain' }} />
+              <div style={{ position:'absolute', top:8, right:8, zIndex:30 }}>
+                <button onClick={() => setShowArteMenu(v => !v)} title="Cambiar arte de la base" style={{ width:28, height:28, borderRadius:'50%', background:'rgba(0,0,0,0.45)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', padding:0, fontSize:18, lineHeight:1, fontWeight:700 }}>⋮</button>
+                {showArteMenu && (
+                  <>
+                    <div onClick={() => setShowArteMenu(false)} style={{ position:'fixed', inset:0, zIndex:30 }} />
+                    <div style={{ position:'absolute', top:34, right:0, zIndex:31, background:'#1a1a1a', border:'1px solid rgba(255,255,255,0.12)', borderRadius:10, padding:6, minWidth:160, boxShadow:'0 6px 24px rgba(0,0,0,0.5)' }}>
+                      <p style={{ color:'rgba(255,255,255,0.45)', fontSize:10, textTransform:'uppercase', letterSpacing:0.6, margin:'4px 10px 6px' }}>Arte de la base</p>
+                      {[['normal','Normal'],['artistico','Artístico']].map(([id,label]) => (
+                        <button key={id} onClick={() => { setArteId(id); setShowArteMenu(false); }} style={{ display:'flex', alignItems:'center', gap:8, width:'100%', textAlign:'left', padding:'8px 10px', borderRadius:7, border:'none', background: arteId===id ? 'rgba(249,115,22,0.18)' : 'transparent', color: arteId===id ? '#f97316' : '#fff', fontSize:13, fontWeight:600, cursor:'pointer' }}
+                          onMouseEnter={e => { if (arteId!==id) e.currentTarget.style.background='rgba(255,255,255,0.06)'; }}
+                          onMouseLeave={e => { if (arteId!==id) e.currentTarget.style.background='transparent'; }}>
+                          <span style={{ width:8, height:8, borderRadius:'50%', background: arteId===id ? '#f97316' : 'rgba(255,255,255,0.25)' }} />
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
               {resolvedOverlayUrls.map((src, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img key={i} src={src} alt="" draggable={false} style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', pointerEvents:'none' }} />

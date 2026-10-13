@@ -150,7 +150,7 @@ function toCircleDataUrl(src) {
 const PDF_LAM_W = 690;
 const PDF_LAM_H = 620;
 
-export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [], figuras = [], laminaSize = { w: 690, h: 620 }, listaVisual = [], imgLista = null, comentarioLista = '', onBack: _onBack, onReset, isOpen = false, onClose: notifyClose }) {
+export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [], figuras = [], laminaSize = { w: 690, h: 620 }, listaVisual = [], imgLista = null, comentarioLista = '', arteId = 'normal', onBack: _onBack, onReset, isOpen = false, onClose: notifyClose }) {
   const { data: session } = useSession();
 
   const [showPlantillaModal, setShowPlantillaModal] = useState(false);
@@ -187,6 +187,7 @@ export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [],
       imgListaUrl: imgLista?.src || null,
       comentarioLista,
       plantillaId,
+      arteId,
       userData: {
         name:         session?.user?.name,
         lastname:     session?.user?.lastname,

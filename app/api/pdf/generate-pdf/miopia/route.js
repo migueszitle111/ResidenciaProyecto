@@ -40,10 +40,33 @@ const OVERLAYS_MIO = {
   'Oculofaringea':        '/MiopatiaImg/MI_Oculofaringea.png',
 };
 
+const OVERLAYS_MIO_ARTISTICO = {
+  'Proximal':             '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Proximal.png',
+  'Distal':               '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distal.png',
+  'FacialImg':            '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia Facial.png',
+  'Cinturas':             '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia de Anillo Oseo.png',
+  'Duchenne/Becker':      '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia de Duchenne e Becker.png',
+  'Emery-Dreifuss':       '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia de Emery-Dreifuss.png',
+  'Facioescapulohumeral': '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia Facioescapulohumeral.png',
+  'Oculofaringea':        '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia Oculofaringea.png',
+  'GenePx':               '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Proximal.png',
+  'GeneDs':               '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distal.png',
+  'GeneFc':               '/MiopatiaImg/MiopatiaArtistico/Miopatia/A_MI_Distrofia Facial.png',
+};
+
+const OVERLAY_GROUPS = {
+  'Generalizada': ['GenePx', 'GeneDs', 'GeneFc'],
+};
+
 const PLANTILLAS_PDF = {
   A: { p1: 'PLANTILLA_A_VERTICAL-1.pdf', p2: 'PLANTILLA_A_VERTICAL-2.pdf' },
   B: { p1: 'PLANTILLA_B_VERTICAL-1.pdf', p2: 'PLANTILLA_B_VERTICAL-2.pdf' },
   C: { p1: 'PLANTILLA_C_VERTICAL-1.pdf', p2: 'PLANTILLA_C_VERTICAL-2.pdf' },
+};
+
+const ARTES_MIO_PATHS = {
+  normal:    '/MiopatiaImg/MI_Base_TR.png',
+  artistico: '/MiopatiaImg/MiopatiaArtistico/Elementos Individuales/A_Completo.png',
 };
 
 // ── helpers ──────────────────────────────────────────────────────────────────
@@ -65,7 +88,8 @@ async function fetchLocalBytes(publicPath) {
   // In production, images live in the backend under /laminasImg/
   // Strip leading /assets/ prefix if present (trigeminofacial uses /assets/TrigeminoFacialImg/...)
   const imgPath = publicPath.startsWith('/assets/') ? publicPath.slice(7) : publicPath;
-  return fetchBytes(`${BACKEND_URL}/laminasImg${imgPath}`);
+  const encoded = imgPath.split('/').map(encodeURIComponent).join('/');
+  return fetchBytes(`${BACKEND_URL}/laminasImg${encoded}`);
 }
 
 async function fetchRemoteBytes(url) {
@@ -445,7 +469,10 @@ export async function POST(req) {
       userData        = {},
       topLeftText     = '',
       plantillaId     = 'none',
+      arteId          = 'normal',
     } = body;
+
+    const basePath = ARTES_MIO_PATHS[arteId] || ARTES_MIO_PATHS.normal;
 
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontkit);
@@ -463,13 +490,15 @@ export async function POST(req) {
       return b ? pdfDoc.embedFont(b) : fontRegular;
     })();
 
-    const ovPaths = activeOv
-      .map(key => OVERLAYS_MIO[key])
+    const resolveOv = (k) => (arteId === 'artistico' ? OVERLAYS_MIO_ARTISTICO[k] : null) || OVERLAYS_MIO[k];
+    const expandedKeys = activeOv.flatMap(k => OVERLAY_GROUPS[k] || [k]);
+    const ovPaths = expandedKeys
+      .map(resolveOv)
       .filter(Boolean)
       .filter((p, i, arr) => arr.indexOf(p) === i);
 
     const [baseImgBytes, imgListaBytes, ...overlayBytesArr] = await Promise.all([
-      fetchLocalBytes('/MiopatiaImg/MI_Base_TR.png'),
+      fetchLocalBytes(basePath),
       fetchRemoteBytes(imgListaUrl),
       ...ovPaths.map(p => fetchLocalBytes(p)),
     ]);

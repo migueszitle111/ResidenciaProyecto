@@ -1,3 +1,16 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "plugin:security/recommended-legacy"],
+  "rules": {
+    "security/detect-object-injection": "off",
+    "security/detect-eval-with-expression": "error",
+    "security/detect-child-process": "error",
+    "security/detect-non-literal-require": "error",
+    "security/detect-new-buffer": "error",
+    "security/detect-buffer-noassert": "error",
+    "security/detect-pseudoRandomBytes": "error",
+    "security/detect-disable-mustache-escape": "error",
+    "security/detect-no-csrf-before-method-override": "error",
+    "security/detect-bidi-characters": "error",
+    "security/detect-invisible-characters": "error"
+  }
 }

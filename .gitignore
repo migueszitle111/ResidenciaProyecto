@@ -48,3 +48,6 @@ analisis_comparativo_neurografia.md
 # graphify local output (knowledge graph)
 graphify-out/
 app/graphify-out/
+
+# Playwright MCP output (capturas, PDFs, logs de pruebas)
+.playwright-mcp/

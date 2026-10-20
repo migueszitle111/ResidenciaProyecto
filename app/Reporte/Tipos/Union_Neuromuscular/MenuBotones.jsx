@@ -1,5 +1,5 @@
 ﻿'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import LinkUploaderModal from '../../../components/LinkUploaderModal';
 import './Style.css';
@@ -162,10 +162,12 @@ export default function ExportBar({ nombrePaciente, textoReporte, activeOv = [],
   const [showLinkUploader, setShowLinkUploader] = useState(false);
   const [filename, setFilename]         = useState('');
 
-  if (isOpen && !showPlantillaModal && !processing && !showSuccess && !showLinkUploader) {
-    setShowPlantillaModal(true);
-    notifyClose?.();
-  }
+  useEffect(() => {
+    if (isOpen && !showPlantillaModal && !processing && !showSuccess && !showLinkUploader) {
+      setShowPlantillaModal(true);
+      notifyClose?.();
+    }
+  }, [isOpen, showPlantillaModal, processing, showSuccess, showLinkUploader, notifyClose]);
 
   const buildPayload = async (plantillaId) => {
     const figurasB64 = await Promise.all(

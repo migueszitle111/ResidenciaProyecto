@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { ReportContext } from '@/src/context';
 import LinkUploaderModal from '../../../components/LinkUploaderModal';
@@ -144,10 +144,12 @@ export default function ExportBar({
   const [filename, setFilename]         = useState('');
 
   // isOpen=true → abrir PlantillaModal directamente (disparado desde botón PDF externo)
-  if (isOpen && !showPlantillaModal && !processing && !showSuccess && !showLinkUploader) {
-    setShowPlantillaModal(true);
-    notifyClose?.();
-  }
+  useEffect(() => {
+    if (isOpen && !showPlantillaModal && !processing && !showSuccess && !showLinkUploader) {
+      setShowPlantillaModal(true);
+      notifyClose?.();
+    }
+  }, [isOpen, showPlantillaModal, processing, showSuccess, showLinkUploader, notifyClose]);
 
   const buildPayload = async (plantillaId) => {
     const figurasB64 = await Promise.all(

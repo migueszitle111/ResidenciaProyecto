@@ -858,7 +858,7 @@ export default function ReportFace() {
                     <div onClick={() => setShowArteMenu(false)} style={{ position:'fixed', inset:0, zIndex:30 }} />
                     <div style={{ position:'absolute', top:34, right:0, zIndex:31, background:'#1a1a1a', border:'1px solid rgba(255,255,255,0.12)', borderRadius:10, padding:6, minWidth:160, boxShadow:'0 6px 24px rgba(0,0,0,0.5)' }}>
                       <p style={{ color:'rgba(255,255,255,0.45)', fontSize:10, textTransform:'uppercase', letterSpacing:0.6, margin:'4px 10px 6px' }}>Arte de la base</p>
-                      {[['normal','Normal'],['artistico','Artístico']].map(([id,label]) => (
+                      {[['normal','Esquemático'],['artistico','Artístico']].map(([id,label]) => (
                         <button key={id} onClick={() => { setArteId(id); setShowArteMenu(false); }} style={{ display:'flex', alignItems:'center', gap:8, width:'100%', textAlign:'left', padding:'8px 10px', borderRadius:7, border:'none', background: arteId===id ? 'rgba(249,115,22,0.18)' : 'transparent', color: arteId===id ? '#f97316' : '#fff', fontSize:13, fontWeight:600, cursor:'pointer' }}
                           onMouseEnter={e => { if (arteId!==id) e.currentTarget.style.background='rgba(255,255,255,0.06)'; }}
                           onMouseLeave={e => { if (arteId!==id) e.currentTarget.style.background='transparent'; }}>

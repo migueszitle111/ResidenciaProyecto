@@ -369,8 +369,59 @@ const NIVEL_OVERLAYS = {
   },
 };
 
+/* ─── Filtro artístico ───────────────────────────────────────────────────── */
+/* Las imágenes artísticas viven solo en el backend (no se copian a public/).
+   Los paths se guardan relativos (se envían tal cual al PDF) y se resuelven
+   con artUrl() al mostrarse en pantalla. */
+const BACKEND_LAMINAS_URL = 'https://backendmedxpro-tef2.onrender.com/laminasImg';
+const ART_DIR_ANT  = '/RadiculopatiaImg/RadiculopatiaArtistico/Radiculopatia';
+const ART_DIR_POST = '/RadiculopatiaImg/RadiculopatiaArtistico/Radiculopatía Posterior';
+const artUrl = (p) => BACKEND_LAMINAS_URL + p.split('/').map(encodeURIComponent).join('/');
+const toDisplaySrc = (p) => (p && p.startsWith('/RadiculopatiaImg/RadiculopatiaArtistico/') ? artUrl(p) : p);
+
+/* Bases artísticas (solo flujo motor; el sensitivo depende de los dermatomas de su base) */
+const ARTES_RADI = {
+  artistico: {
+    post: `${ART_DIR_ANT}/Columna/RA_Columna_Con Musculos.png`,
+    ant:  `${ART_DIR_POST}/RA_P_Completo.png`,
+    /* RA_P_Completo no trae la mitad de columna del panel posterior: va como primera capa */
+    antColumna: `${ART_DIR_POST}/Columna/A_P_Columna_Sin_Musculos.png`,
+  },
+};
+
+/* Overlays artísticos por nivel (misma forma que NIVEL_OVERLAYS, sin variante bilateral) */
+const artLvl = (a, p) => ({
+  post: a ? { izq: `${ART_DIR_ANT}/A_RA_${a[0]}.png`,  der: `${ART_DIR_ANT}/A_RA_${a[1]}.png` } : { izq: null, der: null },
+  ant:  p ? { izq: `${ART_DIR_POST}/RA_P_${p}_I.png`,  der: `${ART_DIR_POST}/RA_P_${p}_D.png` } : { izq: null, der: null },
+});
+const NIVEL_OVERLAYS_ART = {
+  C4: artLvl(['C5 I', 'C5 D'], 'C5'),
+  C5: artLvl(['C5 I', 'C5 D'], 'C5'),
+  C6: artLvl(['C6 I', 'C6 D'], 'C6'),
+  C7: artLvl(['C7 I', 'C7 D'], 'C7'),
+  C8: artLvl(['C8 I', 'C8 D'], 'C8'),
+  T1: artLvl(['T1 I', 'T1 D'], 'T1'),
+  L1: artLvl(['L2I',  'L2 D'], null),
+  L2: artLvl(['L2I',  'L2 D'], null),
+  L3: artLvl(['L4 I', 'L4 D'], null),
+  L4: artLvl(['L4 I', 'L4 D'], null),
+  L5: artLvl(['L5 I', 'L5 D'], 'L5'),
+  S1: artLvl(['S1 I', 'S1 D'], 'S1'),
+  S2: artLvl(null, null),
+};
+
+/* Columna roja por región: path normal → path artístico */
+const REGION_OVERLAYS_ART = {
+  '/RadiculopatiaImg/Multinivel/Columna_Cervical_I.png': `${ART_DIR_ANT}/Columna/A_Columna_Cervical I.png`,
+  '/RadiculopatiaImg/Multinivel/Columna_Toracica_I.png': `${ART_DIR_ANT}/Columna/A_Columna_Toracica I.png`,
+  '/RadiculopatiaImg/Multinivel/Columna_Lumbar_I.png':   `${ART_DIR_ANT}/Columna/A_Columna_Lumbar I.png`,
+  '/RadiculopatiaImg/Multinivel/Columna_Cervical_D.png': `${ART_DIR_POST}/Columna/A_P_Columna_Cervical_D.png`,
+  '/RadiculopatiaImg/Multinivel/Columna_Toracica_D.png': `${ART_DIR_POST}/Columna/A_P_Columna_Toracica_D.png`,
+  '/RadiculopatiaImg/Multinivel/Columna_Lumbar_D.png':   `${ART_DIR_POST}/Columna/A_P_Columna_Lumbar_D.png`,
+};
+
 /* Dado un array de IDs de checkbox ["C5_L1","C5_R2",...], calcula los overlays únicos */
-function computeOverlaysFromChecks(checkedL, checkedR) {
+function computeOverlaysFromChecks(checkedL, checkedR, table = NIVEL_OVERLAYS) {
   const postSet = new Set();
   const antSet  = new Set();
   const lvlSide = {}; // { lvl: { L: bool, R: bool } }
@@ -385,7 +436,7 @@ function computeOverlaysFromChecks(checkedL, checkedR) {
     lvlSide[lvl].R = true;
   });
   Object.entries(lvlSide).forEach(([lvl, sides]) => {
-    const ov = NIVEL_OVERLAYS[lvl];
+    const ov = table[lvl];
     if (!ov) return;
     const isBilateral = sides.L && sides.R;
     if (isBilateral && ov.post.bil) {
@@ -1114,7 +1165,7 @@ function StepSNivel({ goTo, selectedSensitiva, setSelectedSensitiva, applySensOv
 }
 
 /* ──────────── Panel FINAL ──────────────────────────────────────── */
-function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, postOverlays, antOverlays, crosses, laminaRef, nombrePaciente, textoFinal, imgLista, setImgLista, comentarioLista, setShowGaleria, onOpenComentario, resetAll, pdfOpen, activeOv, activeTab, showSimbolos, setShowSimbolos }) {
+function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVisual, postOverlays, antOverlays, crosses, laminaRef, nombrePaciente, textoFinal, imgLista, setImgLista, comentarioLista, setShowGaleria, onOpenComentario, resetAll, pdfOpen, activeOv, activeTab, showSimbolos, setShowSimbolos, arteId }) {
   const backStep = flowType === 'Sensitiva' ? 'S_NIVEL' : 'G_PRONOSTICO';
 
   return (
@@ -1225,6 +1276,7 @@ function StepFinal({ goTo, flowType, figuras, agregarFigura, setPdfOpen, listaVi
           listaVisual={listaVisual}
           imgLista={imgLista}
           comentarioLista={comentarioLista}
+          arteId={arteId}
           onReset={resetAll}
           isOpen={pdfOpen}
           onClose={() => setPdfOpen(false)}
@@ -1251,6 +1303,10 @@ export default function ReportFaceRadiculopatia() {
   const [agudiTargetNivel, setAgudiTargetNivel] = useState(null); // 'Cervical'|'Torácica'|'Lumbosacro'
   const [textos, setTextos]           = useState([]);
   const [progresion, setProgresion]   = useState(null); // 'con' | 'sin' | null
+  const [arteId, setArteId]           = useState('normal'); // 'normal' | 'artistico'
+  const [showArteMenu, setShowArteMenu] = useState(false);
+  /* el arte artístico solo aplica al flujo motor */
+  const usarArte = arteId === 'artistico' && flowType !== 'Sensitiva';
 
   /* checkboxes del paso Nivel – viven aquí para derivar overlays en tiempo real */
   const [checkedL_C, setCheckedL_C] = useState([]);
@@ -1276,8 +1332,8 @@ export default function ReportFaceRadiculopatia() {
     if (progresion === 'sin') return { post: [], ant: [] };
     const allL = [...checkedL_C, ...checkedL_L, ...checkedL_C_A, ...checkedL_L_A];
     const allR = [...checkedR_C, ...checkedR_L, ...checkedR_C_A, ...checkedR_L_A];
-    return computeOverlaysFromChecks(allL, allR);
-  }, [flowType, progresion, checkedL_C, checkedR_C, checkedL_L, checkedR_L, checkedL_C_A, checkedR_C_A, checkedL_L_A, checkedR_L_A]);
+    return computeOverlaysFromChecks(allL, allR, usarArte ? NIVEL_OVERLAYS_ART : NIVEL_OVERLAYS);
+  }, [flowType, progresion, usarArte, checkedL_C, checkedR_C, checkedL_L, checkedR_L, checkedL_C_A, checkedR_C_A, checkedL_L_A, checkedR_L_A]);
 
   /* columna roja en tiempo real – igual que showCervOverlay / showLumboOverlay en móvil */
   const liveRegionPairs = useMemo(() => {
@@ -1311,15 +1367,17 @@ export default function ReportFaceRadiculopatia() {
   /* combinadas para renderizar y enviar al PDF */
   const allCrosses = useMemo(() => [...crosses, ...crossesRed], [crosses, crossesRed]);
 
-  /* overlays finales = comprometidos + región en vivo + músculos en vivo (sin duplicados) */
-  const postOverlays = useMemo(() =>
-    [...new Set([...committedPost, ...liveRegionPairs.post, ...liveMusclePairs.post])],
-    [committedPost, liveRegionPairs, liveMusclePairs]
-  );
-  const antOverlays = useMemo(() =>
-    [...new Set([...committedAnt, ...liveRegionPairs.ant, ...liveMusclePairs.ant])],
-    [committedAnt, liveRegionPairs, liveMusclePairs]
-  );
+  /* overlays finales = comprometidos + región en vivo + músculos en vivo (sin duplicados).
+     Con arte artístico, la columna roja se sustituye por su variante artística. */
+  const postOverlays = useMemo(() => {
+    const region = [...committedPost, ...liveRegionPairs.post].map(p => (usarArte && REGION_OVERLAYS_ART[p]) || p);
+    return [...new Set([...region, ...liveMusclePairs.post])];
+  }, [committedPost, liveRegionPairs, liveMusclePairs, usarArte]);
+  const antOverlays = useMemo(() => {
+    const region = [...committedAnt, ...liveRegionPairs.ant].map(p => (usarArte && REGION_OVERLAYS_ART[p]) || p);
+    const columnaArte = usarArte ? [ARTES_RADI.artistico.antColumna] : [];
+    return [...new Set([...columnaArte, ...region, ...liveMusclePairs.ant])];
+  }, [committedAnt, liveRegionPairs, liveMusclePairs, usarArte]);
 
   /* ── VisualNew shell state ── */
   const [nombrePaciente, setNombrePaciente] = useState('');
@@ -1393,8 +1451,8 @@ export default function ReportFaceRadiculopatia() {
 
   /* --- bases de imagen según flowType (como en móvil) --- */
   const isSensitiva = flowType === 'Sensitiva';
-  const basePost = isSensitiva ? BASE_POST_SENS : BASE_POST_MOTOR;
-  const baseAnt  = isSensitiva ? BASE_ANT_SENS  : BASE_ANT_MOTOR;
+  const basePost = isSensitiva ? BASE_POST_SENS : usarArte ? ARTES_RADI.artistico.post : BASE_POST_MOTOR;
+  const baseAnt  = isSensitiva ? BASE_ANT_SENS  : usarArte ? ARTES_RADI.artistico.ant  : BASE_ANT_MOTOR;
 
   /* --- applySensOverlays reemplazando el overlay anterior del mismo nivel --- */
   const applySensOverlays = useCallback((sNivel, lado, prevPost, prevAnt) => {
@@ -1537,6 +1595,7 @@ export default function ReportFaceRadiculopatia() {
             pdfOpen={pdfOpen}
             showSimbolos={showSimbolos}
             setShowSimbolos={setShowSimbolos}
+            arteId={usarArte ? 'artistico' : 'normal'}
           />
         );
       default: return null;
@@ -1589,14 +1648,37 @@ export default function ReportFaceRadiculopatia() {
                 </div>
               )}
 
+              {/* Selector de arte de la base (solo flujo motor) */}
+              {!isSensitiva && (
+                <div style={{ position:'absolute', top:8, right:8, zIndex:30 }}>
+                  <button onClick={() => setShowArteMenu(v => !v)} title="Cambiar arte de la base" style={{ width:28, height:28, borderRadius:'50%', background:'rgba(0,0,0,0.45)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', padding:0, fontSize:18, lineHeight:1, fontWeight:700 }}>⋮</button>
+                  {showArteMenu && (
+                    <>
+                      <div onClick={() => setShowArteMenu(false)} style={{ position:'fixed', inset:0, zIndex:30 }} />
+                      <div style={{ position:'absolute', top:34, right:0, zIndex:31, background:'#1a1a1a', border:'1px solid rgba(255,255,255,0.12)', borderRadius:10, padding:6, minWidth:160, boxShadow:'0 6px 24px rgba(0,0,0,0.5)' }}>
+                        <p style={{ color:'rgba(255,255,255,0.45)', fontSize:10, textTransform:'uppercase', letterSpacing:0.6, margin:'4px 10px 6px' }}>Arte de la base</p>
+                        {[['normal','Esquemático'],['artistico','Artístico']].map(([id,label]) => (
+                          <button key={id} onClick={() => { setArteId(id); setShowArteMenu(false); }} style={{ display:'flex', alignItems:'center', gap:8, width:'100%', textAlign:'left', padding:'8px 10px', borderRadius:7, border:'none', background: arteId===id ? 'rgba(249,115,22,0.18)' : 'transparent', color: arteId===id ? '#f97316' : '#fff', fontSize:13, fontWeight:600, cursor:'pointer' }}
+                            onMouseEnter={e => { if (arteId!==id) e.currentTarget.style.background='rgba(255,255,255,0.06)'; }}
+                            onMouseLeave={e => { if (arteId!==id) e.currentTarget.style.background='transparent'; }}>
+                            <span style={{ width:8, height:8, borderRadius:'50%', background: arteId===id ? '#f97316' : 'rgba(255,255,255,0.25)' }} />
+                            {label}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+
               {/* Panel POSTERIOR (side L) */}
               <div style={{ position:'relative', aspectRatio:'2550/3300', height:'100%', minHeight:560 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img key={basePost} src={basePost} alt="" draggable={false}
+                <img key={basePost} src={toDisplaySrc(basePost)} alt="" draggable={false}
                   style={{ display:'block', width:'100%', height:'100%' }} />
                 {postOverlays.map((src, i) => (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img key={`post_ov_${i}_${src}`} src={src} alt="" draggable={false}
+                  <img key={`post_ov_${i}_${src}`} src={toDisplaySrc(src)} alt="" draggable={false}
                     style={{ position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none' }} />
                 ))}
                 {allCrosses.filter(c => c.side === 'L').map(({ key, src, topPct, offPct }) => (
@@ -1609,11 +1691,11 @@ export default function ReportFaceRadiculopatia() {
               {/* Panel ANTERIOR (side R) */}
               <div style={{ position:'relative', aspectRatio:'2550/3300', height:'100%', minHeight:560 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img key={baseAnt} src={baseAnt} alt="" draggable={false}
+                <img key={baseAnt} src={toDisplaySrc(baseAnt)} alt="" draggable={false}
                   style={{ display:'block', width:'100%', height:'100%' }} />
                 {antOverlays.map((src, i) => (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img key={`ant_ov_${i}_${src}`} src={src} alt="" draggable={false}
+                  <img key={`ant_ov_${i}_${src}`} src={toDisplaySrc(src)} alt="" draggable={false}
                     style={{ position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none' }} />
                 ))}
                 {allCrosses.filter(c => c.side === 'R').map(({ key, src, topPct, offPct }) => (

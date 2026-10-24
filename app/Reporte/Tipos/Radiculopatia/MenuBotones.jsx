@@ -152,7 +152,7 @@ function toCircleDataUrl(src) {
 const PDF_LAM_W = 690;
 const PDF_LAM_H = 620;
 
-export default function ExportBar({ nombrePaciente, textoReporte, flowType = '', activeOv = [], postOv = [], antOv = [], crosses = [], figuras = [], laminaSize = { w: 690, h: 620 }, listaVisual = [], imgLista = null, comentarioLista = '', onBack: _onBack, onReset, isOpen = false, onClose: notifyClose }) {
+export default function ExportBar({ nombrePaciente, textoReporte, flowType = '', activeOv = [], postOv = [], antOv = [], crosses = [], figuras = [], laminaSize = { w: 690, h: 620 }, listaVisual = [], imgLista = null, comentarioLista = '', arteId = 'normal', onBack: _onBack, onReset, isOpen = false, onClose: notifyClose }) {
   const { data: session } = useSession();
 
   const [showPlantillaModal, setShowPlantillaModal] = useState(false);
@@ -183,6 +183,7 @@ export default function ExportBar({ nombrePaciente, textoReporte, flowType = '',
       })
     );
     const isSensitiva = flowType === 'Sensitiva';
+    const isArtistico = !isSensitiva && arteId === 'artistico';
     return {
       finalConclusion: textoReporte,
       activeOv,
@@ -197,10 +198,16 @@ export default function ExportBar({ nombrePaciente, textoReporte, flowType = '',
       plantillaId,
       flowType,
       isSensitiva,
-      postBase: isSensitiva
+      arteId,
+      // Las bases artísticas ya tienen fondo transparente (sirven con y sin plantilla)
+      postBase: isArtistico
+        ? '/RadiculopatiaImg/RadiculopatiaArtistico/Radiculopatia/Columna/RA_Columna_Con Musculos.png'
+        : isSensitiva
         ? (plantillaId !== 'none' ? '/RadiculopatiaImg/Columna/BASE_POSTERIOR_TR.png'          : '/RadiculopatiaImg/Columna/BASE_POSTERIOR.png')
         : (plantillaId !== 'none' ? '/RadiculopatiaImg/Multinivel/RA_Columna_1_FondoB_TR.png'  : '/RadiculopatiaImg/Multinivel/RA_Columna_1_FondoB.png'),
-      antBase: isSensitiva
+      antBase: isArtistico
+        ? '/RadiculopatiaImg/RadiculopatiaArtistico/Radiculopatía Posterior/RA_P_Completo.png'
+        : isSensitiva
         ? (plantillaId !== 'none' ? '/RadiculopatiaImg/Columna/BASE_ANTERIOR_TR.png'           : '/RadiculopatiaImg/Columna/BASE_ANTERIOR.png')
         : (plantillaId !== 'none' ? '/RadiculopatiaImg/Multinivel/RA_Columna_2_FondoB_TR.png'  : '/RadiculopatiaImg/Multinivel/RA_Columna_2_FondoB.png'),
       userData: {

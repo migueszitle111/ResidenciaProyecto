@@ -41,7 +41,9 @@ async function fetchLocalBytes(publicPath) {
     if (fs.existsSync(fsPath)) return new Uint8Array(fs.readFileSync(fsPath));
   } catch {}
   const imgPath = publicPath.startsWith('/assets/') ? publicPath.slice(7) : publicPath;
-  return fetchBytes(`${BACKEND_URL}/laminasImg${imgPath}`);
+  // Codificar cada segmento: los paths artísticos llevan espacios y acentos
+  const encoded = imgPath.split('/').map(encodeURIComponent).join('/');
+  return fetchBytes(`${BACKEND_URL}/laminasImg${encoded}`);
 }
 
 async function fetchRemoteBytes(url) {

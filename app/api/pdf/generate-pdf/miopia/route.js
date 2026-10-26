@@ -523,7 +523,7 @@ export async function POST(req) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename=reporte_miopatia.pdf',
+        'Content-Disposition': 'attachment; filename="Reporte miopatia.pdf"',
       },
     });
   } catch (err) {

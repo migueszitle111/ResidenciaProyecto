@@ -532,7 +532,7 @@ export async function POST(req) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename=reporte_visual.pdf',
+        'Content-Disposition': 'attachment; filename="Reporte visual.pdf"',
       },
     });
   } catch (err) {

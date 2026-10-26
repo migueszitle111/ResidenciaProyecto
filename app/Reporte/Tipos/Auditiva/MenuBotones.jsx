@@ -15,18 +15,20 @@ const PLANTILLAS = [
   { id: 'none', label: 'Sin plantilla',ring: '#cccccc', dot: '#cccccc' },
 ];
 
-// Contador global para pacientes sin nombre → mEDXproAuditiva_1, _2, …
+// Contador global para pacientes sin nombre → mEDXpro Auditiva 1, 2, …
 let _unnamedCounter = 0;
 
-const toSafeToken = (s) =>
-  (s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '')
-    .replace(/[^\w.\-]/g, '_').replace(/_+/g, '_').replace(/^_+|_+$/g, '')
-    || `archivo_${Date.now()}`;
+// Nombre legible: conserva espacios y acentos, solo quita lo que el sistema de archivos no acepta
+const toFileName = (s) =>
+  (s || '').replace(/[\\/:*?"<>|_\u0000-\u001f]+/g, ' ').replace(/\s+/g, ' ').trim();
+
+const STUDY_LABEL = STUDY_PREFIX.replace(/^mEDXpro/, 'mEDXpro ').replace(/_/g, ' ');
 
 const buildBaseName = (paciente) => {
-  if (paciente && paciente.trim()) return `${STUDY_PREFIX}_${toSafeToken(paciente.trim())}`;
+  const nombre = toFileName(paciente);
+  if (nombre) return `${STUDY_LABEL} ${nombre}`;
   _unnamedCounter += 1;
-  return `${STUDY_PREFIX}_${_unnamedCounter}`;
+  return `${STUDY_LABEL} ${_unnamedCounter}`;
 };
 
 /* ─── Modales ─────────────────────────────────────────────────────────────── */

@@ -384,7 +384,7 @@ export async function POST(req) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename=reporte_trigeminofacial.pdf',
+        'Content-Disposition': 'attachment; filename="Reporte trigeminofacial.pdf"',
       },
     });
   } catch (err) {

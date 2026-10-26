@@ -497,7 +497,7 @@ export async function POST(req) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename=reporte_unionneuromuscular.pdf',
+        'Content-Disposition': 'attachment; filename="Reporte unionneuromuscular.pdf"',
       },
     });
   } catch (err) {

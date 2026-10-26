@@ -579,7 +579,7 @@ export async function POST(req) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename=reporte_plexopatia.pdf',
+        'Content-Disposition': 'attachment; filename="Reporte plexopatia.pdf"',
       },
     });
   } catch (err) {

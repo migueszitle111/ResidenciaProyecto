@@ -898,7 +898,7 @@ export async function POST(req) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename=reporte_neuropatia.pdf',
+        'Content-Disposition': 'attachment; filename="Reporte neuropatia.pdf"',
       },
     });
   } catch (err) {

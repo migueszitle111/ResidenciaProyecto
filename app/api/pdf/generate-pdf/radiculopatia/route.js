@@ -383,7 +383,8 @@ async function buildPage2(pdfDoc, {
 
   const hasPlantilla = plantillaId && plantillaId !== 'none';
   const TOP_Y    = hasPlantilla ? PH - 90 : PH - 75;
-  const BOT_Y    = hasPlantilla ? 40 : 20;
+  // La barra del pie de las plantillas llega hasta ~60pt (B) / ~50pt (A, C)
+  const BOT_Y    = hasPlantilla ? 75 : 20;
   const MARGIN_L = 184;
   const MARGIN_R = 108;
   const CONTENT_W = PW - MARGIN_L - MARGIN_R;
@@ -442,8 +443,8 @@ async function buildPage2(pdfDoc, {
     if (tablaImg) {
       const { width: iw, height: ih } = tablaImg;
       const lowestCol  = Math.min(ly, ry);
-      const tablaTopY  = lowestCol - 120;
-      const maxH = Math.min(tablaTopY - BOT_Y - 10, 360);
+      const tablaTopY  = lowestCol - 40;
+      const maxH = Math.min(tablaTopY - BOT_Y, 360);
       if (maxH > 30) {
         const scale = Math.min(CONTENT_W / iw, maxH / ih, 0.55);
         const dw = iw * scale;

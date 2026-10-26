@@ -237,11 +237,12 @@ export default function LinkUploaderModal({
         setUploadPct(20);
         const orderedForMerge = files.map(f => f.id === '__auto_report__' ? { ...f, blob: pdfBlob } : f);
         // Nombre = primer archivo del usuario (ignora el diagnóstico auto).
-        // Fallback: título del link o 'Documentos_unidos'.
+        // Fallback: título del link o 'Documentos unidos'.
+        // El servidor limpia el nombre visible (conserva espacios y acentos).
         const firstUserFile = files.find(f => f.id !== '__auto_report__');
-        const rawName = firstUserFile?.name || title.trim() || 'Documentos_unidos';
+        const rawName = firstUserFile?.name || title.trim() || 'Documentos unidos';
         const nameWithoutExt = rawName.replace(/\.[^./\\]+$/, '');
-        const mergedName = nameWithoutExt.replace(/[^\w\-. ]/g, '_') + '.pdf';
+        const mergedName = nameWithoutExt + '.pdf';
         const mergedBlob = await mergeFilesToPdf(orderedForMerge);
         setUploadPct(50);
 

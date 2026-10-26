@@ -15,6 +15,7 @@ import {
   MAX_UPLOAD_BYTES,
   isAllowedUploadMimeType,
   safeToken,
+  safeDisplayName,
 } from "@/lib/api/storage";
 
 export async function POST(req) {
@@ -60,6 +61,8 @@ export async function POST(req) {
     const baseName = dotIndex >= 0 ? rawName.slice(0, dotIndex) : rawName;
     const safeName = `${safeToken(baseName)}${extension}`;
     const storagePath = `${folder}/${Date.now()}_${safeName}`;
+    // La ruta en Storage va sanitizada; el nombre visible conserva espacios y acentos
+    const displayName = `${safeDisplayName(baseName)}${extension.replace(/[^\w.]/g, "")}`;
 
     const { error } = await supabase.storage
       .from(bucket)
@@ -76,7 +79,7 @@ export async function POST(req) {
       ok: true,
       bucket,
       path: `${bucket}/${storagePath}`,
-      name: safeName,
+      name: displayName,
       mime_type: file.type || "application/pdf",
       size_bytes: file.size ?? uint8.byteLength,
     });

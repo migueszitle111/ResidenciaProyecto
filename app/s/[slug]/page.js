@@ -94,7 +94,8 @@ function prettyName(name = '') {
   const dot = name.lastIndexOf('.');
   const base = dot > 0 ? name.slice(0, dot) : name;
   const ext  = dot > 0 ? name.slice(dot) : '';
-  return base.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim() + ext;
+  // Links viejos guardaban el nombre con "_" en lugar de espacios
+  return base.replace(/_+/g, ' ').replace(/\s+/g, ' ').trim() + ext;
 }
 
 /* Íconos minimal (PDF / IMG / genérico) */

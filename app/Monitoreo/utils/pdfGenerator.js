@@ -1,6 +1,6 @@
 // Generador de PDF de Monitoreo para Web
 // Puerto exacto de pdfMonitoreoGenerator.ts de la app React Native
-// Usa: pdf-lib + @pdf-lib/fontkit, fuentes Quando + WorkSans, plantilla IOM
+// Usa: pdf-lib + @pdf-lib/fontkit, fuentes Quando + WorkSans + Montserrat, plantilla IOM
 
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
@@ -177,8 +177,11 @@ async function loadCustomFonts(pdfDoc) {
   const quandoBytes       = await fetchOptional(`${origin}/fonts/Quando-Regular.ttf`);
   const workSansBytes     = await fetchOptional(`${origin}/fonts/WorkSans-Regular.ttf`);
   const workSansLightBytes = await fetchOptional(`${origin}/fonts/WorkSans-Light.ttf`);
+  // Montserrat: nombre del paciente y datos del médico en la firma
+  const montserratBytes     = await fetchOptional(`${origin}/fonts/Montserrat-Regular.ttf`);
+  const montserratBoldBytes = await fetchOptional(`${origin}/fonts/Montserrat-SemiBold.ttf`);
 
-  let quando, workSans, workSansLight;
+  let quando, workSans, workSansLight, montserrat, montserratBold;
 
   try {
     quando = quandoBytes
@@ -204,7 +207,19 @@ async function loadCustomFonts(pdfDoc) {
     workSansLight = workSans;
   }
 
-  return { quando, workSans, workSansLight };
+  try {
+    montserrat = montserratBytes ? await pdfDoc.embedFont(montserratBytes) : workSansLight;
+  } catch {
+    montserrat = workSansLight;
+  }
+
+  try {
+    montserratBold = montserratBoldBytes ? await pdfDoc.embedFont(montserratBoldBytes) : quando;
+  } catch {
+    montserratBold = quando;
+  }
+
+  return { quando, workSans, workSansLight, montserrat, montserratBold };
 }
 
 // ─── Plantilla ───────────────────────────────────────────────────────────────
@@ -316,7 +331,7 @@ async function renderImagenesEnGrid(imagenes, currentPage, pdfDoc, usarPlantilla
 
 async function crearPaginaInformacionGeneral(pdfDoc, data, usarPlantilla, fonts) {
   let page = await aplicarPlantillaFondo(pdfDoc, usarPlantilla);
-  const { quando, workSansLight } = fonts;
+  const { quando, workSansLight, montserrat } = fonts;
   const { width, height } = page.getSize();
 
   // Fecha en la parte superior
@@ -345,10 +360,10 @@ async function crearPaginaInformacionGeneral(pdfDoc, data, usarPlantilla, fonts)
 
   // Nombre del paciente centrado
   const nombrePaciente = toSingleLine(data.nombrePaciente || '');
-  const nombreW = workSansLight.widthOfTextAtSize(nombrePaciente, PDF_CONFIG.header.nameSize);
+  const nombreW = montserrat.widthOfTextAtSize(nombrePaciente, PDF_CONFIG.header.nameSize);
   page.drawText(nombrePaciente, {
     x: width / 2 - nombreW / 2, y: PDF_CONFIG.header.nameY,
-    size: PDF_CONFIG.header.nameSize, font: workSansLight, color: rgb(0, 0, 0),
+    size: PDF_CONFIG.header.nameSize, font: montserrat, color: rgb(0, 0, 0),
   });
 
   // Cuatro líneas de info en dos columnas
@@ -724,7 +739,7 @@ async function crearPaginaRegistrosFinales(pdfDoc, registros, usarPlantilla, fon
 
 async function crearPaginaConclusion(pdfDoc, data, usarPlantilla, fonts) {
   let page = await aplicarPlantillaFondo(pdfDoc, usarPlantilla);
-  const { quando, workSansLight } = fonts;
+  const { quando, workSansLight, montserrat, montserratBold } = fonts;
   const { width, height } = page.getSize();
 
   let yPos = height - 120;
@@ -838,11 +853,11 @@ async function crearPaginaConclusion(pdfDoc, data, usarPlantilla, fonts) {
   // Calcular ancho del texto
   const nombreCompleto = toSingleLine(`Dr. ${data.usuarioNombre || ''} ${data.usuarioApellido || ''}`.trim());
   let maxTxtWidth = 0;
-  if (nombreCompleto !== 'Dr.') maxTxtWidth = Math.max(maxTxtWidth, quando.widthOfTextAtSize(nombreCompleto, 11));
-  if (data.usuarioCedula) maxTxtWidth = Math.max(maxTxtWidth, workSansLight.widthOfTextAtSize(`Céd. ${data.usuarioCedula}`, 9));
-  if (data.usuarioEspecialidad) maxTxtWidth = Math.max(maxTxtWidth, workSansLight.widthOfTextAtSize(data.usuarioEspecialidad, 9));
-  if (data.usuarioCorreo) maxTxtWidth = Math.max(maxTxtWidth, workSansLight.widthOfTextAtSize(data.usuarioCorreo, 9));
-  if (data.usuarioTelefono) maxTxtWidth = Math.max(maxTxtWidth, workSansLight.widthOfTextAtSize(data.usuarioTelefono, 9));
+  if (nombreCompleto !== 'Dr.') maxTxtWidth = Math.max(maxTxtWidth, montserratBold.widthOfTextAtSize(nombreCompleto, 11));
+  if (data.usuarioCedula) maxTxtWidth = Math.max(maxTxtWidth, montserrat.widthOfTextAtSize(`Céd. ${data.usuarioCedula}`, 9));
+  if (data.usuarioEspecialidad) maxTxtWidth = Math.max(maxTxtWidth, montserrat.widthOfTextAtSize(data.usuarioEspecialidad, 9));
+  if (data.usuarioCorreo) maxTxtWidth = Math.max(maxTxtWidth, montserrat.widthOfTextAtSize(data.usuarioCorreo, 9));
+  if (data.usuarioTelefono) maxTxtWidth = Math.max(maxTxtWidth, montserrat.widthOfTextAtSize(data.usuarioTelefono, 9));
 
   const totalFirmaWidth = (logoImage ? imageDrawWidth + espacioEntreLogoYTexto : 0) + maxTxtWidth;
   const firmaX = (width - totalFirmaWidth) / 2;
@@ -858,23 +873,23 @@ async function crearPaginaConclusion(pdfDoc, data, usarPlantilla, fonts) {
   let textoY = firmaY;
 
   if (nombreCompleto !== 'Dr.') {
-    firmaPage.drawText(nombreCompleto, { x: textoX, y: textoY, size: 11, font: quando, color: rgb(0, 0, 0) });
+    firmaPage.drawText(nombreCompleto, { x: textoX, y: textoY, size: 11, font: montserratBold, color: rgb(0, 0, 0) });
     textoY -= 14;
   }
   if (data.usuarioCedula) {
-    firmaPage.drawText(toSingleLine(`Céd. ${data.usuarioCedula}`), { x: textoX, y: textoY, size: 9, font: workSansLight, color: rgb(0, 0, 0) });
+    firmaPage.drawText(toSingleLine(`Céd. ${data.usuarioCedula}`), { x: textoX, y: textoY, size: 9, font: montserrat, color: rgb(0, 0, 0) });
     textoY -= 13;
   }
   if (data.usuarioEspecialidad) {
-    firmaPage.drawText(toSingleLine(data.usuarioEspecialidad), { x: textoX, y: textoY, size: 9, font: workSansLight, color: rgb(0, 0, 0) });
+    firmaPage.drawText(toSingleLine(data.usuarioEspecialidad), { x: textoX, y: textoY, size: 9, font: montserrat, color: rgb(0, 0, 0) });
     textoY -= 13;
   }
   if (data.usuarioCorreo) {
-    firmaPage.drawText(toSingleLine(data.usuarioCorreo), { x: textoX, y: textoY, size: 9, font: workSansLight, color: rgb(0, 0, 0) });
+    firmaPage.drawText(toSingleLine(data.usuarioCorreo), { x: textoX, y: textoY, size: 9, font: montserrat, color: rgb(0, 0, 0) });
     textoY -= 13;
   }
   if (data.usuarioTelefono) {
-    firmaPage.drawText(toSingleLine(data.usuarioTelefono), { x: textoX, y: textoY, size: 9, font: workSansLight, color: rgb(0, 0, 0) });
+    firmaPage.drawText(toSingleLine(data.usuarioTelefono), { x: textoX, y: textoY, size: 9, font: montserrat, color: rgb(0, 0, 0) });
   }
 }
 
@@ -1029,8 +1044,9 @@ export async function buildMonitoreoPdf(data, usarPlantilla = true, onProgress) 
 // ─── Utilidades exportadas ────────────────────────────────────────────────────
 
 export function buildReportFileName(tipoCirugia, nombrePaciente) {
-  const safe = (s) => (s || '').replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s\-]/g, '').trim().replace(/\s+/g, '_');
-  return `${safe(tipoCirugia)}_${safe(nombrePaciente)}.pdf`;
+  const safe = (s) => (s || '').replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑüÜ\s\-]/g, '').trim().replace(/\s+/g, ' ');
+  const base = [safe(tipoCirugia), safe(nombrePaciente)].filter(Boolean).join(' ');
+  return `${base || 'Reporte Monitoreo'}.pdf`;
 }
 
 export function toSafeToken(s) {

@@ -185,7 +185,9 @@ export default function ExportBar({ nombrePaciente, textoReporte, flowType = '',
       })
     );
     const isSensitiva = flowType === 'Sensitiva';
-    const isArtistico = !isSensitiva && arteId === 'artistico';
+    const isArtistico = arteId === 'artistico';
+    const conPlantilla = plantillaId !== 'none';
+    const DERM = '/RadiculopatiaImg/RadiculopatiaArtistico/Dermatomas';
     return {
       finalConclusion: textoReporte,
       activeOv,
@@ -201,13 +203,18 @@ export default function ExportBar({ nombrePaciente, textoReporte, flowType = '',
       flowType,
       isSensitiva,
       arteId,
-      // Las bases artísticas ya tienen fondo transparente (sirven con y sin plantilla)
-      postBase: isArtistico
+      // Las bases artísticas del flujo motor ya tienen fondo transparente (sirven con y sin plantilla);
+      // las de dermatomas traen variante _TR para plantilla
+      postBase: isArtistico && isSensitiva
+        ? `${DERM}/${conPlantilla ? 'A_DE_Gris_TR.png' : 'A_DE_Gris.png'}`
+        : isArtistico
         ? '/RadiculopatiaImg/RadiculopatiaArtistico/Radiculopatia/Columna/RA_Columna_Con Musculos.png'
         : isSensitiva
         ? (plantillaId !== 'none' ? '/RadiculopatiaImg/Columna/BASE_POSTERIOR_TR.png'          : '/RadiculopatiaImg/Columna/BASE_POSTERIOR.png')
         : (plantillaId !== 'none' ? '/RadiculopatiaImg/Multinivel/RA_Columna_1_FondoB_TR.png'  : '/RadiculopatiaImg/Multinivel/RA_Columna_1_FondoB.png'),
-      antBase: isArtistico
+      antBase: isArtistico && isSensitiva
+        ? `${DERM}/${conPlantilla ? 'A_DE_Gris_P_TR.png' : 'A_DE_Gris_P.png'}`
+        : isArtistico
         ? '/RadiculopatiaImg/RadiculopatiaArtistico/Radiculopatía Posterior/RA_P_Completo.png'
         : isSensitiva
         ? (plantillaId !== 'none' ? '/RadiculopatiaImg/Columna/BASE_ANTERIOR_TR.png'           : '/RadiculopatiaImg/Columna/BASE_ANTERIOR.png')

@@ -379,13 +379,22 @@ const ART_DIR_POST = '/RadiculopatiaImg/RadiculopatiaArtistico/Radiculopatía Po
 const artUrl = (p) => BACKEND_LAMINAS_URL + p.split('/').map(encodeURIComponent).join('/');
 const toDisplaySrc = (p) => (p && p.startsWith('/RadiculopatiaImg/RadiculopatiaArtistico/') ? artUrl(p) : p);
 
-/* Bases artísticas (solo flujo motor; el sensitivo depende de los dermatomas de su base) */
+const ART_DIR_DERM = '/RadiculopatiaImg/RadiculopatiaArtistico/Dermatomas';
+
+/* Bases artísticas por flujo */
 const ARTES_RADI = {
   artistico: {
     post: `${ART_DIR_ANT}/Columna/RA_Columna_Con Musculos.png`,
     ant:  `${ART_DIR_POST}/RA_P_Completo.png`,
     /* RA_P_Completo no trae la mitad de columna del panel posterior: va como primera capa */
     antColumna: `${ART_DIR_POST}/Columna/A_P_Columna_Sin_Musculos.png`,
+  },
+  /* Sensitiva: las bases de dermatomas no traen columna; ambas mitades van como primera capa */
+  sensitiva: {
+    post: `${ART_DIR_DERM}/A_DE_Gris.png`,
+    ant:  `${ART_DIR_DERM}/A_DE_Gris_P.png`,
+    postColumna: `${ART_DIR_ANT}/Columna/RA_Columna_Sin Musculos.png`,
+    antColumna:  `${ART_DIR_POST}/Columna/A_P_Columna_Sin_Musculos.png`,
   },
 };
 
@@ -509,6 +518,14 @@ const SENS_OVERLAYS = {
     },
   },
 };
+
+/* Overlays sensitivos artísticos: path normal → path artístico.
+   Los normales traen dibujado el cuerpo esquemático completo, así que con el arte
+   artístico solo se muestran los que tengan variante aquí (pendientes de recibir). */
+const SENS_OVERLAYS_ART = {};
+const SENS_OVERLAY_PATHS = new Set(
+  Object.values(SENS_OVERLAYS).flatMap(v => [...Object.values(v.post), ...Object.values(v.ant)]).filter(Boolean)
+);
 
 const CERVICAL_LEVELS    = ['C5','C6','C7','C8','T1'];
 const LUMBOSACRAL_LEVELS = ['L1-L2','L3-L4','L5','S1'];
@@ -1124,6 +1141,7 @@ function StepSNivel({ goTo, selectedSensitiva, setSelectedSensitiva, applySensOv
 
     if (prev === lado) {
       setSelectedSensitiva(s => ({ ...s, [lvl]: null }));
+      applySensOverlays(lvl, null, postPrev, antPrev); // quita el overlay sin agregar otro
       return;
     }
     const postSrc = SENS_OVERLAYS[lvl]?.post[lado];
@@ -1305,8 +1323,7 @@ export default function ReportFaceRadiculopatia() {
   const [progresion, setProgresion]   = useState(null); // 'con' | 'sin' | null
   const [arteId, setArteId]           = useState('normal'); // 'normal' | 'artistico'
   const [showArteMenu, setShowArteMenu] = useState(false);
-  /* el arte artístico solo aplica al flujo motor */
-  const usarArte = arteId === 'artistico' && flowType !== 'Sensitiva';
+  const usarArte = arteId === 'artistico';
 
   /* checkboxes del paso Nivel – viven aquí para derivar overlays en tiempo real */
   const [checkedL_C, setCheckedL_C] = useState([]);
@@ -1368,16 +1385,23 @@ export default function ReportFaceRadiculopatia() {
   const allCrosses = useMemo(() => [...crosses, ...crossesRed], [crosses, crossesRed]);
 
   /* overlays finales = comprometidos + región en vivo + músculos en vivo (sin duplicados).
-     Con arte artístico, la columna roja se sustituye por su variante artística. */
+     Con arte artístico, la columna roja y los sensitivos se sustituyen por su variante
+     artística (los sensitivos sin variante se omiten), y la columna gris va como primera capa. */
+  const toArte = useCallback((p) => {
+    if (!usarArte) return p;
+    if (SENS_OVERLAY_PATHS.has(p)) return SENS_OVERLAYS_ART[p] || null;
+    return REGION_OVERLAYS_ART[p] || p;
+  }, [usarArte]);
   const postOverlays = useMemo(() => {
-    const region = [...committedPost, ...liveRegionPairs.post].map(p => (usarArte && REGION_OVERLAYS_ART[p]) || p);
-    return [...new Set([...region, ...liveMusclePairs.post])];
-  }, [committedPost, liveRegionPairs, liveMusclePairs, usarArte]);
+    const region = [...committedPost, ...liveRegionPairs.post].map(toArte);
+    const columnaArte = usarArte && flowType === 'Sensitiva' ? [ARTES_RADI.sensitiva.postColumna] : [];
+    return [...new Set([...columnaArte, ...region, ...liveMusclePairs.post])].filter(Boolean);
+  }, [committedPost, liveRegionPairs, liveMusclePairs, usarArte, flowType, toArte]);
   const antOverlays = useMemo(() => {
-    const region = [...committedAnt, ...liveRegionPairs.ant].map(p => (usarArte && REGION_OVERLAYS_ART[p]) || p);
-    const columnaArte = usarArte ? [ARTES_RADI.artistico.antColumna] : [];
-    return [...new Set([...columnaArte, ...region, ...liveMusclePairs.ant])];
-  }, [committedAnt, liveRegionPairs, liveMusclePairs, usarArte]);
+    const region = [...committedAnt, ...liveRegionPairs.ant].map(toArte);
+    const columnaArte = usarArte ? [(flowType === 'Sensitiva' ? ARTES_RADI.sensitiva : ARTES_RADI.artistico).antColumna] : [];
+    return [...new Set([...columnaArte, ...region, ...liveMusclePairs.ant])].filter(Boolean);
+  }, [committedAnt, liveRegionPairs, liveMusclePairs, usarArte, flowType, toArte]);
 
   /* ── VisualNew shell state ── */
   const [nombrePaciente, setNombrePaciente] = useState('');
@@ -1451,8 +1475,9 @@ export default function ReportFaceRadiculopatia() {
 
   /* --- bases de imagen según flowType (como en móvil) --- */
   const isSensitiva = flowType === 'Sensitiva';
-  const basePost = isSensitiva ? BASE_POST_SENS : usarArte ? ARTES_RADI.artistico.post : BASE_POST_MOTOR;
-  const baseAnt  = isSensitiva ? BASE_ANT_SENS  : usarArte ? ARTES_RADI.artistico.ant  : BASE_ANT_MOTOR;
+  const arteBases = isSensitiva ? ARTES_RADI.sensitiva : ARTES_RADI.artistico;
+  const basePost = usarArte ? arteBases.post : isSensitiva ? BASE_POST_SENS : BASE_POST_MOTOR;
+  const baseAnt  = usarArte ? arteBases.ant  : isSensitiva ? BASE_ANT_SENS  : BASE_ANT_MOTOR;
 
   /* --- applySensOverlays reemplazando el overlay anterior del mismo nivel --- */
   const applySensOverlays = useCallback((sNivel, lado, prevPost, prevAnt) => {
@@ -1595,7 +1620,7 @@ export default function ReportFaceRadiculopatia() {
             pdfOpen={pdfOpen}
             showSimbolos={showSimbolos}
             setShowSimbolos={setShowSimbolos}
-            arteId={usarArte ? 'artistico' : 'normal'}
+            arteId={arteId}
           />
         );
       default: return null;
@@ -1648,28 +1673,26 @@ export default function ReportFaceRadiculopatia() {
                 </div>
               )}
 
-              {/* Selector de arte de la base (solo flujo motor) */}
-              {!isSensitiva && (
-                <div style={{ position:'absolute', top:8, right:8, zIndex:30 }}>
-                  <button onClick={() => setShowArteMenu(v => !v)} title="Cambiar arte de la base" style={{ width:28, height:28, borderRadius:'50%', background:'rgba(0,0,0,0.45)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', padding:0, fontSize:18, lineHeight:1, fontWeight:700 }}>⋮</button>
-                  {showArteMenu && (
-                    <>
-                      <div onClick={() => setShowArteMenu(false)} style={{ position:'fixed', inset:0, zIndex:30 }} />
-                      <div style={{ position:'absolute', top:34, right:0, zIndex:31, background:'#1a1a1a', border:'1px solid rgba(255,255,255,0.12)', borderRadius:10, padding:6, minWidth:160, boxShadow:'0 6px 24px rgba(0,0,0,0.5)' }}>
-                        <p style={{ color:'rgba(255,255,255,0.45)', fontSize:10, textTransform:'uppercase', letterSpacing:0.6, margin:'4px 10px 6px' }}>Arte de la base</p>
-                        {[['normal','Esquemático'],['artistico','Artístico']].map(([id,label]) => (
-                          <button key={id} onClick={() => { setArteId(id); setShowArteMenu(false); }} style={{ display:'flex', alignItems:'center', gap:8, width:'100%', textAlign:'left', padding:'8px 10px', borderRadius:7, border:'none', background: arteId===id ? 'rgba(249,115,22,0.18)' : 'transparent', color: arteId===id ? '#f97316' : '#fff', fontSize:13, fontWeight:600, cursor:'pointer' }}
-                            onMouseEnter={e => { if (arteId!==id) e.currentTarget.style.background='rgba(255,255,255,0.06)'; }}
-                            onMouseLeave={e => { if (arteId!==id) e.currentTarget.style.background='transparent'; }}>
-                            <span style={{ width:8, height:8, borderRadius:'50%', background: arteId===id ? '#f97316' : 'rgba(255,255,255,0.25)' }} />
-                            {label}
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-              )}
+              {/* Selector de arte de la base */}
+              <div style={{ position:'absolute', top:8, right:8, zIndex:30 }}>
+                <button onClick={() => setShowArteMenu(v => !v)} title="Cambiar arte de la base" style={{ width:28, height:28, borderRadius:'50%', background:'rgba(0,0,0,0.45)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', padding:0, fontSize:18, lineHeight:1, fontWeight:700 }}>⋮</button>
+                {showArteMenu && (
+                  <>
+                    <div onClick={() => setShowArteMenu(false)} style={{ position:'fixed', inset:0, zIndex:30 }} />
+                    <div style={{ position:'absolute', top:34, right:0, zIndex:31, background:'#1a1a1a', border:'1px solid rgba(255,255,255,0.12)', borderRadius:10, padding:6, minWidth:160, boxShadow:'0 6px 24px rgba(0,0,0,0.5)' }}>
+                      <p style={{ color:'rgba(255,255,255,0.45)', fontSize:10, textTransform:'uppercase', letterSpacing:0.6, margin:'4px 10px 6px' }}>Arte de la base</p>
+                      {[['normal','Esquemático'],['artistico','Artístico']].map(([id,label]) => (
+                        <button key={id} onClick={() => { setArteId(id); setShowArteMenu(false); }} style={{ display:'flex', alignItems:'center', gap:8, width:'100%', textAlign:'left', padding:'8px 10px', borderRadius:7, border:'none', background: arteId===id ? 'rgba(249,115,22,0.18)' : 'transparent', color: arteId===id ? '#f97316' : '#fff', fontSize:13, fontWeight:600, cursor:'pointer' }}
+                          onMouseEnter={e => { if (arteId!==id) e.currentTarget.style.background='rgba(255,255,255,0.06)'; }}
+                          onMouseLeave={e => { if (arteId!==id) e.currentTarget.style.background='transparent'; }}>
+                          <span style={{ width:8, height:8, borderRadius:'50%', background: arteId===id ? '#f97316' : 'rgba(255,255,255,0.25)' }} />
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
 
               {/* Panel POSTERIOR (side L) */}
               <div style={{ position:'relative', aspectRatio:'2550/3300', height:'100%', minHeight:560 }}>

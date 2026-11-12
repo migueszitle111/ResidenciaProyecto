@@ -519,10 +519,19 @@ const SENS_OVERLAYS = {
   },
 };
 
-/* Overlays sensitivos artísticos: path normal → path artístico.
+/* Overlays sensitivos artísticos (solo la franja amarilla) por nivel y lado.
    Los normales traen dibujado el cuerpo esquemático completo, así que con el arte
-   artístico solo se muestran los que tengan variante aquí (pendientes de recibir). */
-const SENS_OVERLAYS_ART = {};
+   artístico se omiten y se usan estos; Bilateral = izquierdo + derecho. */
+const ART_DIR_AFECT = `${ART_DIR_DERM}/Afectados`;
+const sensArt = (vista, nivel) => {
+  const izq = `${ART_DIR_AFECT}/DE_${vista}_${nivel}_I.png`;
+  const der = `${ART_DIR_AFECT}/DE_${vista}_${nivel}_D.png`;
+  return { Izquierda: [izq], Derecha: [der], Bilateral: [izq, der] };
+};
+const SENS_OVERLAYS_ART = {
+  'C6-C7': { post: sensArt('AN', 'C6C7'), ant: sensArt('P', 'C6C7') },
+  S1:      { post: sensArt('AN', 'S1'),   ant: sensArt('P', 'S1')   },
+};
 const SENS_OVERLAY_PATHS = new Set(
   Object.values(SENS_OVERLAYS).flatMap(v => [...Object.values(v.post), ...Object.values(v.ant)]).filter(Boolean)
 );
@@ -1385,23 +1394,28 @@ export default function ReportFaceRadiculopatia() {
   const allCrosses = useMemo(() => [...crosses, ...crossesRed], [crosses, crossesRed]);
 
   /* overlays finales = comprometidos + región en vivo + músculos en vivo (sin duplicados).
-     Con arte artístico, la columna roja y los sensitivos se sustituyen por su variante
-     artística (los sensitivos sin variante se omiten), y la columna gris va como primera capa. */
+     Con arte artístico, la columna roja se sustituye por su variante artística, los
+     sensitivos esquemáticos se reemplazan por las franjas artísticas de la selección
+     actual, y la columna gris va como primera capa. */
   const toArte = useCallback((p) => {
     if (!usarArte) return p;
-    if (SENS_OVERLAY_PATHS.has(p)) return SENS_OVERLAYS_ART[p] || null;
+    if (SENS_OVERLAY_PATHS.has(p)) return null;
     return REGION_OVERLAYS_ART[p] || p;
   }, [usarArte]);
+  const sensArte = useCallback((panel) => {
+    if (!usarArte || flowType !== 'Sensitiva') return [];
+    return Object.entries(selectedSensitiva).flatMap(([lvl, lado]) => (lado ? SENS_OVERLAYS_ART[lvl]?.[panel]?.[lado] || [] : []));
+  }, [usarArte, flowType, selectedSensitiva]);
   const postOverlays = useMemo(() => {
     const region = [...committedPost, ...liveRegionPairs.post].map(toArte);
     const columnaArte = usarArte && flowType === 'Sensitiva' ? [ARTES_RADI.sensitiva.postColumna] : [];
-    return [...new Set([...columnaArte, ...region, ...liveMusclePairs.post])].filter(Boolean);
-  }, [committedPost, liveRegionPairs, liveMusclePairs, usarArte, flowType, toArte]);
+    return [...new Set([...columnaArte, ...region, ...sensArte('post'), ...liveMusclePairs.post])].filter(Boolean);
+  }, [committedPost, liveRegionPairs, liveMusclePairs, usarArte, flowType, toArte, sensArte]);
   const antOverlays = useMemo(() => {
     const region = [...committedAnt, ...liveRegionPairs.ant].map(toArte);
     const columnaArte = usarArte ? [(flowType === 'Sensitiva' ? ARTES_RADI.sensitiva : ARTES_RADI.artistico).antColumna] : [];
-    return [...new Set([...columnaArte, ...region, ...liveMusclePairs.ant])].filter(Boolean);
-  }, [committedAnt, liveRegionPairs, liveMusclePairs, usarArte, flowType, toArte]);
+    return [...new Set([...columnaArte, ...region, ...sensArte('ant'), ...liveMusclePairs.ant])].filter(Boolean);
+  }, [committedAnt, liveRegionPairs, liveMusclePairs, usarArte, flowType, toArte, sensArte]);
 
   /* ── VisualNew shell state ── */
   const [nombrePaciente, setNombrePaciente] = useState('');

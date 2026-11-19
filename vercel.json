@@ -3,5 +3,11 @@
     "app/api/**": {
       "excludeFiles": "node_modules/{canvas,googleapis,pdfmake,html2canvas,stackblur-canvas,react-icons,lucide-react,react-pdf,three,page-flip,typescript,webpack,jspdf,framer-motion,puppeteer,cloudinary}/**"
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/purge-expired-links",
+      "schedule": "0 9 * * *"
+    }
+  ]
 }

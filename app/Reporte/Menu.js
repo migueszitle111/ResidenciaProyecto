@@ -456,7 +456,24 @@ export default function Perfil() {
   return (
     <div className="Conteiner">
       {/*Menú 1 */}
-      <div className="lg:w-2/3 bg-orange-500 md:p-10 flex flex-col mx-auto m-5 rounded-tr-3xl rounded-bl-3xl p-5">
+      <div className="relative lg:w-2/3 bg-orange-500 md:p-10 flex flex-col mx-auto m-5 rounded-tr-3xl rounded-bl-3xl p-5">
+        {/* Reporte genérico a redactar (ENMG): separado de los reportes por lámina */}
+        <a
+          href="./Reporte/Tipos/ENMG"
+          aria-label="Redactar reporte"
+          className="group relative self-end mb-3 md:mb-0 md:absolute md:top-6 md:right-6 z-10 w-10 h-10 inline-flex items-center justify-center rounded-full bg-[#2b2b2b] hover:bg-black text-white ring-1 ring-white/10 shadow-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zM19.5 13.5V19.5A1.5 1.5 0 0118 21H5.25a1.5 1.5 0 01-1.5-1.5V6.75a1.5 1.5 0 011.5-1.5H11" />
+          </svg>
+          {/* Etiqueta al pasar el mouse (o al enfocar con teclado) */}
+          <span
+            role="tooltip"
+            className="pointer-events-none absolute top-full right-0 mt-2 whitespace-nowrap rounded-md bg-[#1c1c1c] text-white text-xs font-medium px-2.5 py-1.5 shadow-lg opacity-0 translate-y-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0"
+          >
+            Redactar reporte
+          </span>
+        </a>
         <div className="flex flex-wrap">
           <div className="Description w-full md:w-1/2">
             {/*Titulo */}

@@ -44,7 +44,7 @@ const BLOQUES_PDF = {
     descY: [187.5],
     hdr: 'hdrSensitiva', hdrH: 76.2, row: 'rowSensitiva',
     tituloY: 154, filasTop: 224.8,
-    prefijo: 'NERVIO', seccion: 'Neurografía', icono: 'iconoNeurografia',
+    prefijo: 'NERVIO', seccion: 'Neurografía', claveIcono: 'neurografia',
   },
   motora: {
     titulo: 'Conducción Nerviosa Motora (PAMC)',
@@ -52,14 +52,14 @@ const BLOQUES_PDF = {
     descY: [187.5],
     hdr: 'hdrMotora', hdrH: 81.3, row: 'rowMotora',
     tituloY: 154, filasTop: 229.6,
-    prefijo: 'NERVIO', seccion: 'Neurografía', icono: 'iconoNeurografia',
+    prefijo: 'NERVIO', seccion: 'Neurografía', claveIcono: 'neurografia',
   },
   especiales: {
     titulo: 'Pruebas especiales complementarias',
     descripcion: [],
     hdr: 'hdrEspeciales', hdrH: 39.0, row: 'rowEspeciales',
     tituloY: 153, filasTop: 192.0,
-    prefijo: '', seccion: 'Neurografía', icono: 'iconoNeurografia',
+    prefijo: '', seccion: 'Neurografía', claveIcono: 'neurografia',
   },
   miografia: {
     titulo: 'Electrodo monopolar/concéntrico (EMG)',
@@ -70,7 +70,7 @@ const BLOQUES_PDF = {
     descY: [185.5, 194.5],
     hdr: 'hdrMiografia', hdrH: 81.3, row: 'rowMiografia',
     tituloY: 163, filasTop: 229.6,
-    prefijo: '', seccion: 'Miografía', icono: 'iconoMiografia',
+    prefijo: '', seccion: 'Miografía', claveIcono: 'miografia',
   },
   ecografia: {
     titulo: 'Ultrasonido MSK',
@@ -78,7 +78,7 @@ const BLOQUES_PDF = {
     descY: [187.5],
     hdr: 'hdrEcografia', hdrH: 81.3, row: 'rowEcografia',
     tituloY: 163, filasTop: 229.6,
-    prefijo: '', seccion: 'Ecografía', icono: 'iconoEcografia',
+    prefijo: '', seccion: 'Ecografía', claveIcono: 'ecografia',
   },
 };
 
@@ -720,8 +720,8 @@ export async function buildEnmgPdf(data, loadAsset) {
   for (const id of incluidos) {
     const cfg = BLOQUES_PDF[id];
     const b = bloques[id];
-    // Logo del usuario junto al título de la sección (mismo lugar y tamaño que el ícono de la plantilla); sin logo, no se dibuja
-    const icono = await imagen(data.logo);
+    // Ícono que subió el usuario para esta sección (mismo lugar y tamaño que el de la plantilla); sin ícono, no se dibuja
+    const icono = await imagen(data.iconos?.[cfg.claveIcono] || null);
     const encabezadoPagina = (conTitulo) => {
       nuevaPagina();
       if (conTitulo) textoDerecha(cfg.seccion, 524.5, 106, F.luxRegular, 28, NEGRO);

@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SuggestInput, SuggestTextarea } from "../../../Monitoreo/components/SuggestField";
 import LinkUploaderModal from "../../../components/LinkUploaderModal";
-import { buildEnmgPdf, nombreArchivoEnmg, RECURSOS_ENMG, DESCRIPCION_ESTANDAR, tituloConclusion, crearRevisorEnmg, ENMG_IMG_URL } from "./pdfENMG.mjs";
+import { buildEnmgPdf, nombreArchivoEnmg, RECURSOS_ENMG, DESCRIPCION_ESTANDAR, tituloConclusion, crearRevisorEnmg } from "./pdfENMG.mjs";
 // Fuentes (/fonts del frontend) e imágenes del formato (backend, laminasImg/ENMGImg) para el PDF.
 // Se guardan en memoria: una vez descargadas, generar el PDF ya no depende del servidor.
 // Más reintentos porque el backend (Render) puede tardar en despertar.
@@ -145,11 +145,34 @@ function SelectorImagen({ label, valor, onChange, ayuda, alto = "h-20" }) {
 
 export const TITULO_FIJO = "ELECTRONEUROMIOGRAFÍA";
 
-const ICONOS = {
-  neurografia: `${ENMG_IMG_URL}/I_Neurografia.png`,
-  miografia: `${ENMG_IMG_URL}/I_Miografia.png`,
-  ecografia: `${ENMG_IMG_URL}/I_Ecografia.png`,
-};
+/* Ícono de una sección (Neurografía / Miografía / Ecografía), junto al título.
+ * Lo sube el usuario; se usa en el PDF en el mismo lugar. Sin ícono, no aparece. */
+function IconoSeccion({ seccion, valor, onChange }) {
+  const ref = useRef(null);
+  return (
+    <span className="inline-flex items-center gap-2 ml-1">
+      <button type="button" onClick={() => ref.current?.click()}
+        title={valor ? `Cambiar el logo de ${seccion}` : `Subir logo de ${seccion}`}
+        className={`w-7 h-7 rounded-md flex items-center justify-center overflow-hidden transition-colors ${
+          valor ? "bg-white p-0.5 hover:ring-2 hover:ring-orange-500" : "border border-dashed border-orange-500/60 text-orange-400 hover:border-orange-500 text-sm"
+        }`}>
+        {valor
+          // eslint-disable-next-line @next/next/no-img-element
+          ? <img src={valor} alt={`Logo de ${seccion}`} className="max-w-full max-h-full object-contain" />
+          : "+"}
+      </button>
+      {valor
+        ? <button type="button" onClick={() => onChange("")} className="text-xs font-normal text-slate-500 hover:text-red-400 transition-colors">Quitar logo</button>
+        : <span className="text-xs font-normal text-slate-500">Subir logo</span>}
+      <input ref={ref} type="file" accept="image/png,image/jpeg" className="hidden"
+        onChange={async (e) => {
+          const file = e.target.files?.[0];
+          e.target.value = "";
+          if (file) onChange(await leerComoDataUrl(file));
+        }} />
+    </span>
+  );
+}
 
 /* Bloques con título, color y descripción fijos. Solo los renglones son editables. */
 export const BLOQUES = {
@@ -266,16 +289,13 @@ function Campo({ label, value, onChange, placeholder, required, suggestKey }) {
   );
 }
 
-function TituloPaso({ num, children, icono, sub }) {
+function TituloPaso({ num, children, accesorio, sub }) {
   return (
     <>
       <h2 className={`text-white font-semibold text-base ${sub ? "mb-1" : "mb-4"} flex items-center gap-2`}>
         <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">{num}</span>
         {children}
-        {icono && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={icono} alt="" className="w-7 h-7 rounded-md bg-white p-0.5 ml-1" />
-        )}
+        {accesorio}
       </h2>
       {sub && <p className={`${helpClass} mb-4 ml-8`}>{sub}</p>}
     </>
@@ -661,6 +681,8 @@ export default function ReportFace() {
   const [firmante, setFirmante] = useState("");   // una línea por renglón
   const [firma, setFirma] = useState("");         // data URL
   const [logo, setLogo] = useState("");           // data URL; vacío = logo del perfil
+  const [iconos, setIconos] = useState({});       // { neurografia, miografia, ecografia }: data URL (vacío = sin ícono)
+  const setIcono = (clave) => (valor) => setIconos((i) => ({ ...i, [clave]: valor }));
   const [anexo, setAnexo] = useState(null);       // { nombre, bytes } — no se guarda en la sesión
   const anexoRef = useRef(null);
 
@@ -698,6 +720,7 @@ export default function ReportFace() {
         if (typeof f.firmante === "string") setFirmante(f.firmante);
         if (typeof f.firma === "string") setFirma(f.firma);
         if (typeof f.logo === "string") setLogo(f.logo);
+        if (f.iconos && typeof f.iconos === "object") setIconos(f.iconos);
       }
     } catch {}
     setHydrated(true);
@@ -713,8 +736,8 @@ export default function ReportFace() {
 
   useEffect(() => {
     if (!hydrated) return;
-    try { localStorage.setItem(FIRMA_KEY, JSON.stringify({ firmante, firma, logo })); } catch {}
-  }, [hydrated, firmante, firma, logo]);
+    try { localStorage.setItem(FIRMA_KEY, JSON.stringify({ firmante, firma, logo, iconos })); } catch {}
+  }, [hydrated, firmante, firma, logo, iconos]);
 
   // Prellenar los datos del firmante con el perfil la primera vez
   useEffect(() => {
@@ -906,7 +929,8 @@ export default function ReportFace() {
         ...form,
         firmante: firmante.split("\n"),
         firma,
-        logo, // solo el que cargue el usuario; sin logo el PDF sale sin logo
+        logo: logo || session?.user?.imageUrl || "",
+        iconos, // íconos de sección que subió el usuario; sin ícono no se dibuja
         anexoPdf: anexo?.bytes || null,
       };
       const bytes = await buildEnmgPdf(datos, cargarRecurso);
@@ -1029,7 +1053,7 @@ export default function ReportFace() {
           {/* ── PASO 2: Neurografía ── */}
           {paso === 2 && (
             <div>
-              <TituloPaso num={3} icono={ICONOS.neurografia}>Neurografía</TituloPaso>
+              <TituloPaso num={3} accesorio={<IconoSeccion seccion="Neurografía" valor={iconos.neurografia || ""} onChange={setIcono("neurografia")} />}>Neurografía</TituloPaso>
               {NEURO.map((id) => (
                 <BloqueHallazgos key={id} id={id} bloque={form.bloques[id]} onChange={setBloque(id)} opcional renglones={renglones}
                   abierto={neuroAbierto === id}
@@ -1043,7 +1067,7 @@ export default function ReportFace() {
           {/* ── PASO 3: Miografía ── */}
           {paso === 3 && (
             <div>
-              <TituloPaso num={4} icono={ICONOS.miografia}>Miografía</TituloPaso>
+              <TituloPaso num={4} accesorio={<IconoSeccion seccion="Miografía" valor={iconos.miografia || ""} onChange={setIcono("miografia")} />}>Miografía</TituloPaso>
               <BloqueHallazgos id="miografia" bloque={form.bloques.miografia} onChange={setBloque("miografia")} opcional renglones={renglones} />
               <NavButtons onAnterior={retroceder} onSiguiente={avanzar} labelSiguiente="Continuar a Ecografía →" />
             </div>
@@ -1052,7 +1076,7 @@ export default function ReportFace() {
           {/* ── PASO 4: Ecografía ── */}
           {paso === 4 && (
             <div>
-              <TituloPaso num={5} icono={ICONOS.ecografia}>Ecografía</TituloPaso>
+              <TituloPaso num={5} accesorio={<IconoSeccion seccion="Ecografía" valor={iconos.ecografia || ""} onChange={setIcono("ecografia")} />}>Ecografía</TituloPaso>
               <BloqueHallazgos id="ecografia" bloque={form.bloques.ecografia} onChange={setBloque("ecografia")} opcional renglones={renglones} />
               <NavButtons onAnterior={retroceder} onSiguiente={avanzar} labelSiguiente="Continuar a Conclusión →" />
             </div>
@@ -1091,8 +1115,8 @@ export default function ReportFace() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <SelectorImagen label="Firma" valor={firma} onChange={setFirma} ayuda="PNG con fondo transparente" />
-                  <SelectorImagen label="Logo" valor={logo} onChange={setLogo}
-                    ayuda={logo ? "Aparece junto a los títulos de sección y en la conclusión" : "Si no se carga, el PDF sale sin logo"} alto="h-20" />
+                  <SelectorImagen label="Logo" valor={logo || session?.user?.imageUrl || ""} onChange={setLogo}
+                    ayuda={logo ? "" : "Por defecto, el de su perfil"} alto="h-20" />
                 </div>
               </div>
 

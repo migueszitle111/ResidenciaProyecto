@@ -220,11 +220,8 @@ const formVacio = () => ({
   dx: "",
   datosClinicos: [linea()],
   antecedentes: [linea()],
-  principal: "",
-  secundario: "",
-  terceraEtiqueta: "",
-  tercera: "",
-  correlacion: "",
+  conclusion: "",
+  correlacion: "", // "Comentario adicional" (en el PDF va solo el texto)
   tituloConclusion: "", // vacío = "ENMG de {región}"
   bloques: {
     sensitiva: { incluir: true, filas: [fila()], nota: "" },
@@ -478,7 +475,18 @@ function ListaRenglones({ titulo, color, items, onChange, suggestKey }) {
 /* Bloque de hallazgos: encabezado fijo con color + n renglones + nota opcional.
  * Con `onToggle` funciona como acordeón: clic en el encabezado abre/cierra,
  * y entrar a editar (foco) lo abre con `onAbrir`. */
-function BloqueHallazgos({ id, bloque, onChange, opcional, abierto = true, onAbrir, onToggle }) {
+/* Renglones que ocupa el texto en el PDF ("3/5"); naranja al llegar al máximo */
+function ContadorRenglones({ info }) {
+  if (!info) return null;
+  const color = info.usados > info.max ? "text-red-400" : info.usados === info.max ? "text-orange-400" : "text-slate-500";
+  return (
+    <p className={`text-xs font-normal text-right mt-1 ${color}`}>
+      {info.usados}/{info.max} renglones en el PDF
+    </p>
+  );
+}
+
+function BloqueHallazgos({ id, bloque, onChange, opcional, abierto = true, onAbrir, onToggle, renglones = {} }) {
   const cfg = BLOQUES[id];
   const setFila = (fid, patch) => onChange({ ...bloque, filas: bloque.filas.map((f) => (f.id === fid ? { ...f, ...patch } : f)) });
   const delFila = (fid) => onChange({ ...bloque, filas: bloque.filas.filter((f) => f.id !== fid) });
@@ -606,6 +614,7 @@ function BloqueHallazgos({ id, bloque, onChange, opcional, abierto = true, onAbr
                       placeholder="Hallazgo"
                       className={textareaClass}
                     />
+                    <ContadorRenglones info={renglones[`${id}.fila.${f.id}`]} />
                   </div>
                 </div>
                 </div>
@@ -629,6 +638,7 @@ function BloqueHallazgos({ id, bloque, onChange, opcional, abierto = true, onAbr
                   placeholder=""
                   className={textareaClass}
                 />
+                <ContadorRenglones info={renglones[`${id}.nota`]} />
               </div>
             </div>
           </motion.div>
@@ -674,6 +684,10 @@ export default function ReportFace() {
             ...parsed.form,
             datosClinicos: normalizarLineas(parsed.form.datosClinicos),
             antecedentes: normalizarLineas(parsed.form.antecedentes),
+            // Sesiones anteriores tenían Principal y Secundario: se juntan en Conclusión
+            conclusion: typeof parsed.form.conclusion === "string"
+              ? parsed.form.conclusion
+              : [parsed.form.principal, parsed.form.secundario].map((t) => String(t || "").trim()).filter(Boolean).join("\n"),
           });
         }
         if (typeof parsed?.paso === "number") setPaso(parsed.paso);
@@ -731,6 +745,7 @@ export default function ReportFace() {
 
   // ── Límite de texto: no deja escribir más de lo que cabe en la plantilla del PDF ──
   const revisorRef = useRef(null);
+  const [revisorListo, setRevisorListo] = useState(false);
   const formRef = useRef(form);
   const firmanteRef = useRef(firmante);
   formRef.current = form;
@@ -738,11 +753,13 @@ export default function ReportFace() {
   useEffect(() => {
     let vivo = true;
     crearRevisorEnmg(cargarRecurso)
-      .then((r) => { if (vivo) revisorRef.current = r; })
+      .then((r) => { if (vivo) { revisorRef.current = r; setRevisorListo(true); } })
       .catch(() => {}); // sin fuentes no se limita; el PDF tampoco se podrá generar y lo avisará
     return () => { vivo = false; };
   }, []);
   const datosPdf = (f, firm) => ({ ...f, firmante: String(firm || "").split("\n") });
+  // Renglones que ocupa cada texto largo en el PDF (contadores "3/5")
+  const renglones = revisorListo && revisorRef.current ? revisorRef.current.renglones(form) : {};
 
   const avisarEspacio = (r) => {
     if (r.bloqueado || r.recortado) {
@@ -775,10 +792,19 @@ export default function ReportFace() {
   const setField = (field) => (val) => cambiarForm((f) => ({ ...f, [field]: val }));
   const setBloque = (id) => (val) => cambiarForm((f) => ({ ...f, bloques: { ...f.bloques, [id]: val } }));
 
-  const limpiar = () => {
+  // Deja el formulario vacío para un nuevo reporte (firmante, firma y logo se conservan)
+  const reiniciarFormulario = () => {
     try { localStorage.removeItem(SESSION_KEY); } catch {}
-    setForm(formVacio());
+    const vacio = formVacio();
+    formRef.current = vacio;
+    setForm(vacio);
     setPaso(0);
+    setAnexo(null);
+    setNeuroAbierto("sensitiva");
+  };
+
+  const limpiar = () => {
+    reiniciarFormulario();
     showMsg("info", "Formulario limpiado.");
   };
 
@@ -823,8 +849,8 @@ export default function ReportFace() {
         return false;
       }
     }
-    if (p === 5 && (!form.principal.trim() || !form.secundario.trim())) {
-      showMsg("error", "La conclusión Principal y Secundario son requeridas.");
+    if (p === 5 && !String(form.conclusion || "").trim()) {
+      showMsg("error", "La conclusión es requerida.");
       return false;
     }
     return true;
@@ -880,7 +906,7 @@ export default function ReportFace() {
         ...form,
         firmante: firmante.split("\n"),
         firma,
-        logo: logo || session?.user?.imageUrl || "",
+        logo, // solo el que cargue el usuario; sin logo el PDF sale sin logo
         anexoPdf: anexo?.bytes || null,
       };
       const bytes = await buildEnmgPdf(datos, cargarRecurso);
@@ -900,7 +926,8 @@ export default function ReportFace() {
       a.download = nombre;
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      showMsg("ok", "PDF descargado.");
+      reiniciarFormulario();
+      showMsg("ok", "PDF descargado. El formulario quedó listo para un nuevo reporte.");
     } catch (e) {
       showMsg("error", `Error generando PDF: ${e.message}`);
     }
@@ -909,10 +936,16 @@ export default function ReportFace() {
   const generarLink = async () => {
     setShowGenerar(false);
     try {
-      setLinkPdf(await generarPdf());
+      // Se guarda el paciente con el PDF: el formulario se reinicia al cerrar la ventana del link
+      setLinkPdf({ ...(await generarPdf()), paciente: form.nombrePaciente });
     } catch (e) {
       showMsg("error", `Error generando PDF: ${e.message}`);
     }
+  };
+  const cerrarLink = () => {
+    setLinkPdf(null);
+    reiniciarFormulario();
+    showMsg("info", "El formulario quedó listo para un nuevo reporte.");
   };
 
   return (
@@ -998,7 +1031,7 @@ export default function ReportFace() {
             <div>
               <TituloPaso num={3} icono={ICONOS.neurografia}>Neurografía</TituloPaso>
               {NEURO.map((id) => (
-                <BloqueHallazgos key={id} id={id} bloque={form.bloques[id]} onChange={setBloque(id)} opcional
+                <BloqueHallazgos key={id} id={id} bloque={form.bloques[id]} onChange={setBloque(id)} opcional renglones={renglones}
                   abierto={neuroAbierto === id}
                   onAbrir={() => setNeuroAbierto(id)}
                   onToggle={() => setNeuroAbierto((a) => (a === id ? null : id))} />
@@ -1011,7 +1044,7 @@ export default function ReportFace() {
           {paso === 3 && (
             <div>
               <TituloPaso num={4} icono={ICONOS.miografia}>Miografía</TituloPaso>
-              <BloqueHallazgos id="miografia" bloque={form.bloques.miografia} onChange={setBloque("miografia")} opcional />
+              <BloqueHallazgos id="miografia" bloque={form.bloques.miografia} onChange={setBloque("miografia")} opcional renglones={renglones} />
               <NavButtons onAnterior={retroceder} onSiguiente={avanzar} labelSiguiente="Continuar a Ecografía →" />
             </div>
           )}
@@ -1020,7 +1053,7 @@ export default function ReportFace() {
           {paso === 4 && (
             <div>
               <TituloPaso num={5} icono={ICONOS.ecografia}>Ecografía</TituloPaso>
-              <BloqueHallazgos id="ecografia" bloque={form.bloques.ecografia} onChange={setBloque("ecografia")} opcional />
+              <BloqueHallazgos id="ecografia" bloque={form.bloques.ecografia} onChange={setBloque("ecografia")} opcional renglones={renglones} />
               <NavButtons onAnterior={retroceder} onSiguiente={avanzar} labelSiguiente="Continuar a Conclusión →" />
             </div>
           )}
@@ -1036,28 +1069,16 @@ export default function ReportFace() {
                     placeholder={tituloConclusion({ region: form.region })} maxLength={60} className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass}>Principal<span className="text-orange-400 ml-1">*</span></label>
-                  <SuggestTextarea fieldKey="enmg.principal" value={form.principal} onChange={setField("principal")} rows={4}
+                  <label className={labelClass}>Conclusión<span className="text-orange-400 ml-1">*</span></label>
+                  <SuggestTextarea fieldKey="enmg.conclusion" value={form.conclusion} onChange={setField("conclusion")} rows={5}
                     className={textareaClass} />
+                  <ContadorRenglones info={renglones.conclusion} />
                 </div>
                 <div>
-                  <label className={labelClass}>Secundario<span className="text-orange-400 ml-1">*</span></label>
-                  <SuggestTextarea fieldKey="enmg.secundario" value={form.secundario} onChange={setField("secundario")} rows={3}
-                    className={textareaClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Renglón adicional <span className="text-slate-600 font-normal">(opcional)</span></label>
-                  <div className="flex flex-col gap-2">
-                    <input value={form.terceraEtiqueta} onChange={(e) => setField("terceraEtiqueta")(e.target.value)}
-                      placeholder="Título" maxLength={60} className={inputClass} />
-                    <SuggestTextarea fieldKey="enmg.tercera" value={form.tercera} onChange={setField("tercera")} rows={2}
-                      placeholder="Texto" className={textareaClass} />
-                  </div>
-                </div>
-                <div>
-                  <label className={labelClass}>Correlación clínica <span className="text-slate-600 font-normal">(opcional)</span></label>
+                  <label className={labelClass}>Comentario adicional <span className="text-slate-600 font-normal">(opcional)</span></label>
                   <SuggestTextarea fieldKey="enmg.correlacion" value={form.correlacion} onChange={setField("correlacion")} rows={5}
                     className={textareaClass} />
+                  <ContadorRenglones info={renglones.correlacion} />
                 </div>
               </div>
 
@@ -1070,8 +1091,8 @@ export default function ReportFace() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <SelectorImagen label="Firma" valor={firma} onChange={setFirma} ayuda="PNG con fondo transparente" />
-                  <SelectorImagen label="Logo" valor={logo || session?.user?.imageUrl || ""} onChange={setLogo}
-                    ayuda={logo ? "" : "Por defecto, el de su perfil"} alto="h-20" />
+                  <SelectorImagen label="Logo" valor={logo} onChange={setLogo}
+                    ayuda={logo ? "Aparece junto a los títulos de sección y en la conclusión" : "Si no se carga, el PDF sale sin logo"} alto="h-20" />
                 </div>
               </div>
 
@@ -1145,12 +1166,12 @@ export default function ReportFace() {
         <LinkUploaderModal
           pdfBlob={linkPdf.blob}
           pdfFilename={linkPdf.nombre}
-          nombrePaciente={form.nombrePaciente}
+          nombrePaciente={linkPdf.paciente}
           session={session}
-          onClose={() => setLinkPdf(null)}
+          onClose={cerrarLink}
           studyKey="ENMG"
-          defaultTitle={form.nombrePaciente ? `Electroneuromiografía – ${form.nombrePaciente}` : "Electroneuromiografía"}
-          fallbackTitle={`Electroneuromiografía – ${form.nombrePaciente || "Paciente"}`}
+          defaultTitle={linkPdf.paciente ? `Electroneuromiografía – ${linkPdf.paciente}` : "Electroneuromiografía"}
+          fallbackTitle={`Electroneuromiografía – ${linkPdf.paciente || "Paciente"}`}
         />
       )}
     </div>

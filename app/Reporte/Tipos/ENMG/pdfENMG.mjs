@@ -25,6 +25,10 @@ const BLANCO = rgb(1, 1, 1);
 const GRIS_7F = rgb(0x7f / 255, 0x7f / 255, 0x7f / 255);
 const GRIS_74 = rgb(0x74 / 255, 0x74 / 255, 0x74 / 255);
 const GRIS_80 = rgb(0x80 / 255, 0x80 / 255, 0x80 / 255);
+const GRIS_CAJA = rgb(245 / 255, 246 / 255, 247 / 255); // relleno de las tarjetas grises de la plantilla
+
+// Tarjeta del Dx (hoja Motivo de envío): termina 11 pt antes de las columnas (y = 209)
+const DX_CAJA = { x: 41.4, y: 136.1, w: 527.9, h: 62, r: 20, base: 174 };
 
 // Imágenes del formato: viven en el backend (laminasImg/ENMGImg) para no cargar el frontend.
 // Las fuentes sí se sirven desde el frontend (/fonts), compartidas con otros reportes.
@@ -39,7 +43,7 @@ const BLOQUES_PDF = {
     descripcion: ['Estímulo submáximo a territorio cutáneo sensorial con registro distal mediante técnica antidrómica convencional, encontrando:'],
     descY: [187.5],
     hdr: 'hdrSensitiva', hdrH: 76.2, row: 'rowSensitiva',
-    tituloY: 154, filasTop: 224.8, textoOff: 44.2,
+    tituloY: 154, filasTop: 224.8,
     prefijo: 'NERVIO', seccion: 'Neurografía', icono: 'iconoNeurografia',
   },
   motora: {
@@ -47,14 +51,14 @@ const BLOQUES_PDF = {
     descripcion: ['Estímulo supramáximo a trayecto nervioso con registro en punto motor correspondiente, encontrando:'],
     descY: [187.5],
     hdr: 'hdrMotora', hdrH: 81.3, row: 'rowMotora',
-    tituloY: 154, filasTop: 229.6, textoOff: 36.9,
+    tituloY: 154, filasTop: 229.6,
     prefijo: 'NERVIO', seccion: 'Neurografía', icono: 'iconoNeurografia',
   },
   especiales: {
     titulo: 'Pruebas especiales complementarias',
     descripcion: [],
     hdr: 'hdrEspeciales', hdrH: 39.0, row: 'rowEspeciales',
-    tituloY: 153, filasTop: 192.0, textoOff: 36.9,
+    tituloY: 153, filasTop: 192.0,
     prefijo: '', seccion: 'Neurografía', icono: 'iconoNeurografia',
   },
   miografia: {
@@ -65,7 +69,7 @@ const BLOQUES_PDF = {
     ],
     descY: [185.5, 194.5],
     hdr: 'hdrMiografia', hdrH: 81.3, row: 'rowMiografia',
-    tituloY: 163, filasTop: 229.6, textoOff: 43.9,
+    tituloY: 163, filasTop: 229.6,
     prefijo: '', seccion: 'Miografía', icono: 'iconoMiografia',
   },
   ecografia: {
@@ -73,7 +77,7 @@ const BLOQUES_PDF = {
     descripcion: ['Se evalúan estructuras nerviosas con sonda lineal de alta frecuencia (L12-5L40S), encontrando:'],
     descY: [187.5],
     hdr: 'hdrEcografia', hdrH: 81.3, row: 'rowEcografia',
-    tituloY: 163, filasTop: 229.6, textoOff: 43.9,
+    tituloY: 163, filasTop: 229.6,
     prefijo: '', seccion: 'Ecografía', icono: 'iconoEcografia',
   },
 };
@@ -81,18 +85,6 @@ const BLOQUES_PDF = {
 const FILA = { x: 41.4, w: 525, h: 104.5, paso: 113.55, textoX: 94, textoDer: 555, size: 12, lh: 14 };
 const NOTA = { x: 42.9, w: 522.8, h: 103.5, gap: 17.8, textoX: 68, textoDer: 548, off: 52.5, size: 10, lh: 12 };
 const LIMITE_INFERIOR = 742; // y máxima para cajas antes de saltar de página
-
-const PIE_MIOGRAFIA = [
-  { t: '**El termino ', f: 'luxLight' },
-  { t: 'respuesta normal', f: 'luxRegular' },
-  { t: ', hace alusión a registros dentro de valores estadísticos (2.5 DE) de acuerdo con edad y sexo (DeLisa)**', f: 'luxLight' },
-];
-
-const AVISO_VALIDEZ = [
-  '“Esta evaluación tiene una validez de 3-6 meses a partir de la fecha de entregado el presente resultado, ya que los procesos de reinervación y/o',
-  'degeneración NEURAL, se modifican indeterminadamente con o sin tratamiento pasado este lapso. Todo tratamiento final, es responsabilidad del',
-  'médico tratante, tomando este informe como adyuvante en la correlación diagnostica”',
-];
 
 const MESES = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
 
@@ -132,7 +124,21 @@ const DESC_MAX_LINEAS = 3; // líneas que caben en el encabezado de color
  * (crearRevisorEnmg) para que el formulario no deje escribir más de lo que cabe.
  * Así ambos calculan exactamente lo mismo. F = { luxLight, luxRegular, workLight, quando }. */
 
-const ancho = (t, f, size) => f.widthOfTextAtSize(t, size);
+// Medir texto con la fuente es lo más costoso: se guarda cada medida (por fuente, tamaño y texto)
+// para que revisar el formulario en cada tecla sea rápido.
+const cacheAnchos = new WeakMap();
+const ancho = (t, f, size) => {
+  let porFuente = cacheAnchos.get(f);
+  if (!porFuente) { porFuente = new Map(); cacheAnchos.set(f, porFuente); }
+  const clave = `${size}|${t}`;
+  let w = porFuente.get(clave);
+  if (w === undefined) {
+    w = f.widthOfTextAtSize(t, size);
+    if (porFuente.size > 20000) porFuente.clear(); // tope de memoria
+    porFuente.set(clave, w);
+  }
+  return w;
+};
 
 // Reduce el tamaño hasta que el texto quepa en `max` puntos (sin bajar de `min`)
 const ajustarTam = (t, f, size, max, min = 8) => {
@@ -142,14 +148,25 @@ const ajustarTam = (t, f, size, max, min = 8) => {
 };
 
 /* Parte un párrafo (varias corridas de texto: etiqueta negra + valor gris…) en líneas por palabras.
+ * Respeta los saltos de línea escritos (punto y aparte): cada Enter empieza una línea nueva
+ * y dos Enter seguidos dejan una línea en blanco. La línea antes de un salto lleva
+ * `finParrafo = true` (no se justifica, como en Word).
  * runs: [{ t, f, color }] → [[{ t, f, color, espacio }]] */
 function partirLineas(runs, size, maxW) {
   const palabras = [];
   for (const r of runs) {
-    const partes = String(r.t || '').split(/(\s+)/);
+    const partes = String(r.t || '').replace(/\r\n?/g, '\n').split(/(\s+)/);
     for (const p of partes) {
       if (!p) continue;
-      if (/^\s+$/.test(p)) { if (palabras.length) palabras[palabras.length - 1].espacio = true; continue; }
+      if (/^\s+$/.test(p)) {
+        const saltos = (p.match(/\n/g) || []).length;
+        if (saltos) {
+          for (let i = 0; i < saltos; i++) palabras.push({ salto: true });
+        } else if (palabras.length && !palabras[palabras.length - 1].salto) {
+          palabras[palabras.length - 1].espacio = true;
+        }
+        continue;
+      }
       // Permite cortar después de un guion entre letras, como Word ("sensitivo-" | "motoras")
       for (const trozo of p.split(/(?<=[A-Za-zÀ-ÿ]-)(?=[A-Za-zÀ-ÿ])/)) {
         palabras.push({ t: trozo, f: r.f, color: r.color, espacio: false });
@@ -160,8 +177,45 @@ function partirLineas(runs, size, maxW) {
   let actual = [];
   let w = 0;
   for (const pal of palabras) {
+    if (pal.salto) {
+      if (actual.length) actual[actual.length - 1].espacio = false;
+      actual.finParrafo = true;
+      lineas.push(actual);
+      actual = [];
+      w = 0;
+      continue;
+    }
     const pw = ancho(pal.t, pal.f, size);
     const sp = actual.length && actual[actual.length - 1].espacio ? ancho(' ', actual[actual.length - 1].f, size) : 0;
+    if (pw > maxW) {
+      // Palabra más ancha que el renglón: se parte por letras y sigue de corrido, empezando en el
+      // espacio que queda en el renglón actual (como el cuadro del formulario).
+      // Cada letra se mide una sola vez (lineal) para no trabar el tecleo.
+      const anchoLetra = new Map();
+      let trozo = '';
+      let wTrozo = 0;
+      let disponible = maxW - w - sp;
+      for (const ch of Array.from(pal.t)) {
+        if (!anchoLetra.has(ch)) anchoLetra.set(ch, ancho(ch, pal.f, size));
+        const wc = anchoLetra.get(ch);
+        if (wTrozo + wc > disponible && (trozo || actual.length)) {
+          if (trozo) actual.push({ ...pal, t: trozo, espacio: false });
+          lineas.push(actual);
+          actual = [];
+          w = 0;
+          trozo = '';
+          wTrozo = 0;
+          disponible = maxW;
+        }
+        trozo += ch;
+        wTrozo += wc;
+      }
+      if (trozo) {
+        w += (actual.length ? sp : 0) + wTrozo;
+        actual.push({ ...pal, t: trozo });
+      }
+      continue;
+    }
     if (actual.length && w + sp + pw > maxW) {
       lineas.push(actual);
       actual = [pal];
@@ -200,12 +254,9 @@ const COLUMNA = { maxW: 253.65 - 54.1 - 20, disponible: 491.8 - 347 - 8, min: 7 
 const CONC_MOTIVO = { x: 71, y0: 575.5, maxW: 541 - 71, limite: 700 };
 const CONC_FINAL = { x: 66, y0: 296.5, maxW: 536 - 66, fin: 229.6 + 343.2 - 20, corrX: 69, corrMaxW: 540 - 69, corrSize: 9.85, corrLh: 11.7, corrMinY: 473 };
 const FIRMANTE = { maxW: 290, alto: 78, min: 7 };
-// En la hoja que lleva el pie "respuesta normal" (y = 718) el contenido debe terminar antes
-const LIMITE_PIE = 708;
-// Alto máximo de una caja: un renglón debe caber debajo del encabezado de su bloque y una nota
-// en una hoja nueva, aun en la hoja del pie (así nunca queda un encabezado solo ni se encima nada)
-const altoMaxFila = (cfg) => LIMITE_PIE - cfg.filasTop;
-const ALTO_MAX_NOTA = LIMITE_PIE - 130.3;
+// Alto máximo de una nota: debe caber en una hoja nueva
+// (los renglones de hallazgo tienen alto fijo: máximo 5 líneas)
+const ALTO_MAX_NOTA = LIMITE_INFERIOR - 130.3;
 
 const lineasColumna = (items) =>
   (items || []).map((i) => (typeof i === 'string' ? i : i?.texto || '')).map((s) => s.trim()).filter(Boolean);
@@ -224,22 +275,14 @@ function medidaColumna(items, F) {
   return { lineas, size, lh, exceso };
 }
 
-// Principal, Secundario y un tercer renglón opcional (p. ej. "Vía Trigémino-Facial")
+// Texto de la conclusión (un solo campo; la caja ya lleva el título "Conclusión")
+const textoConclusion = (data) => String(data.conclusion || '').trim();
 function parrafosConclusion(data, F) {
-  const lista = [
-    [{ t: 'Principal. ', f: F.luxRegular, color: NEGRO }, { t: conPunto(data.principal), f: F.workLight, color: GRIS_74 }],
-    [{ t: 'Secundario. ', f: F.luxRegular, color: NEGRO }, { t: conPunto(data.secundario), f: F.workLight, color: GRIS_74 }],
-  ];
-  const etq3 = String(data.terceraEtiqueta || '').trim().replace(/\.+$/, '');
-  const txt3 = String(data.tercera || '').trim();
-  if (etq3 || txt3) {
-    lista.push([
-      ...(etq3 ? [{ t: txt3 ? `${etq3}. ` : etq3, f: F.luxRegular, color: NEGRO }] : []),
-      ...(txt3 ? [{ t: conPunto(txt3), f: F.workLight, color: GRIS_74 }] : []),
-    ]);
-  }
-  return lista;
+  return [[{ t: conPunto(textoConclusion(data)), f: F.workLight, color: GRIS_74 }]];
 }
+
+// Comentario adicional (campo `correlacion`): en el PDF va solo el texto, sin título
+const runsComentario = (texto, F) => [{ t: texto, f: F.workLight, color: GRIS_80 }];
 // Alto de los párrafos separados por una línea en blanco (incluye una línea extra al final)
 const altoParrafos = (ps, size, lh, maxW) => (ps.reduce((a, r) => a + contarLineas(r, size, maxW), 0) + ps.length - 1) * lh;
 const excesoAnchoParrafos = (ps, size, maxW) => Math.max(0, ...ps.map((r) => excesoAncho(r, size, maxW)));
@@ -254,12 +297,12 @@ function medidaConclusionMotivo(data, F) {
   return { ps, size, lh, exceso };
 }
 
-// Caja de la hoja final de Conclusión (conclusiones + correlación clínica)
+// Caja de la hoja final de Conclusión (conclusiones + comentario adicional)
 function medidaConclusionFinal(data, F) {
   const ps = parrafosConclusion(data, F);
   const c = CONC_FINAL;
   const corr = String(data.correlacion || '').trim();
-  const runsC = [{ t: 'Correlación clínica. ', f: F.quando, color: NEGRO }, { t: corr, f: F.workLight, color: GRIS_80 }];
+  const runsC = runsComentario(corr, F);
   const nC = corr ? contarLineas(runsC, c.corrSize, c.corrMaxW) : 0;
   const altoC = nC * c.corrLh;
   const ultimaY = (s, l) => c.y0 + altoParrafos(ps, s, l, c.maxW) - l;
@@ -303,7 +346,14 @@ function lineasDescripcion(id, b, F) {
 
 const filaConTexto = (f) => String(f?.nombre || '').trim() || String(f?.hallazgo || '').trim();
 
-// Renglón de hallazgo (caja de color que crece con el texto)
+// Para contar renglones mientras se escribe: un Enter al final ya cuenta como renglón nuevo
+// (el PDF ignora los espacios finales, pero en el formulario el renglón ya existe)
+const conRenglonPendiente = (s) =>
+  String(s || '').replace(/\s+$/, (m) => (m.includes('\n') ? `${m.replace(/[^\n]/g, '')}·` : ''));
+
+// Renglón de hallazgo: tarjeta de alto fijo con hasta 5 líneas de texto, centradas verticalmente
+const FILA_MAX_LINEAS = 5;
+const FILA_ALTO_MAYUS = 0.7 * FILA.size; // altura visual de las mayúsculas (Work Sans)
 function medidaFila(id, f, F) {
   const cfg = BLOQUES_PDF[id];
   const runs = [
@@ -312,8 +362,10 @@ function medidaFila(id, f, F) {
   ];
   const maxW = FILA.textoDer - FILA.textoX;
   const n = contarLineas(runs, FILA.size, maxW);
-  const alto = Math.max(FILA.h, cfg.textoOff + (n - 1) * FILA.lh + 30);
-  return { runs, alto, exceso: Math.max(alto - altoMaxFila(cfg), excesoAncho(runs, FILA.size, maxW)) };
+  // Primera línea (desde el borde superior de la tarjeta) para que el bloque de texto quede centrado
+  const offTexto = FILA.h / 2 - ((n - 1) * FILA.lh) / 2 + FILA_ALTO_MAYUS / 2;
+  const nConteo = contarLineas([runs[0], { ...runs[1], t: ` ${conPunto(conRenglonPendiente(f.hallazgo))}` }], FILA.size, maxW);
+  return { runs, n, nConteo, alto: FILA.h, offTexto, exceso: Math.max(nConteo - FILA_MAX_LINEAS, excesoAncho(runs, FILA.size, maxW)) };
 }
 
 function medidaNota(nota, F) {
@@ -328,6 +380,40 @@ function medidaNota(nota, F) {
 }
 
 const ETIQUETA_MEDICO = 'Médico tratante ';
+
+/* Máximo de renglones (medidos con el ancho y tamaño del PDF) de los campos de texto largo */
+export const MAX_RENGLONES = 5;
+
+/**
+ * Renglones que ocupa en el PDF cada campo de texto largo (para el contador del formulario).
+ * Claves: `${bloque}.fila.${id}`, `${bloque}.nota`, conclusion, correlacion (comentario adicional).
+ * @returns {Record<string, { usados: number, max: number }>}
+ */
+export function contarRenglones(data, F) {
+  const r = {};
+  for (const [id, b] of Object.entries(data.bloques || {})) {
+    if (!BLOQUES_PDF[id] || !b) continue;
+    (b.filas || []).forEach((f, i) => {
+      if (filaConTexto(f)) r[`${id}.fila.${f.id ?? i}`] = { usados: medidaFila(id, f, F).nConteo, max: FILA_MAX_LINEAS };
+    });
+    if (String(b.nota || '').trim()) {
+      const runs = [{ t: 'NOTA. ', f: F.luxLight, color: NEGRO }, { t: conPunto(conRenglonPendiente(b.nota)), f: F.workLight, color: GRIS_74 }];
+      r[`${id}.nota`] = { usados: contarLineas(runs, NOTA.size, NOTA.textoDer - NOTA.textoX), max: MAX_RENGLONES };
+    }
+  }
+  // Conclusión: al tamaño normal (14 pt) y ancho de la caja
+  if (textoConclusion(data)) {
+    const runs = [{ t: conPunto(conRenglonPendiente(String(data.conclusion).trimStart())), f: F.workLight, color: GRIS_74 }];
+    r.conclusion = { usados: contarLineas(runs, 14, CONC_FINAL.maxW), max: MAX_RENGLONES };
+  }
+  if (String(data.correlacion || '').trim()) {
+    const runsC = runsComentario(conRenglonPendiente(String(data.correlacion).trimStart()), F);
+    r.correlacion = { usados: contarLineas(runsC, CONC_FINAL.corrSize, CONC_FINAL.corrMaxW), max: MAX_RENGLONES };
+  }
+  return r;
+}
+
+const NOMBRE_RENGLONES = { conclusion: 'Conclusión', correlacion: 'Comentario adicional' };
 
 /**
  * Revisa qué campos no caben en la plantilla del PDF.
@@ -370,8 +456,16 @@ export function revisarCapacidad(data, F) {
   marcar('tituloConclusion', 'Título de la hoja de conclusión', ancho(titulo, F.quando, 8) - PORTADA_MAX_W);
   const cf = medidaConclusionFinal(data, F);
   marcar('conclusionFinal', 'Conclusión', cf.excesoConclusiones);
-  marcar('correlacion', 'Correlación clínica', cf.excesoCorrelacion);
+  marcar('correlacion', 'Comentario adicional', cf.excesoCorrelacion);
   marcar('firmante', 'Datos del médico que realiza el estudio', medidaFirmante(data.firmante, F).exceso);
+
+  // Máximo de 5 renglones en notas y conclusiones (los nervios ya lo traen en su renglón)
+  for (const [clave, { usados, max }] of Object.entries(contarRenglones(data, F))) {
+    if (clave.includes('.fila.')) continue;
+    const [id] = clave.split('.');
+    const campo = clave.endsWith('.nota') ? `${BLOQUES_PDF[id].titulo} · nota` : NOMBRE_RENGLONES[clave];
+    marcar(`${clave}.renglones`, `${campo} (máximo ${max} renglones)`, usados - max);
+  }
   return r;
 }
 
@@ -396,7 +490,9 @@ export async function crearRevisorEnmg(loadAsset) {
     workLight: await fuente('WorkSans-Light.ttf'),
     quando: await fuente('Quando-Regular.ttf'),
   };
-  return (data) => revisarCapacidad(data, F);
+  const revisar = (data) => revisarCapacidad(data, F);
+  revisar.renglones = (data) => contarRenglones(data, F); // para el contador "3/5 renglones"
+  return revisar;
 }
 
 const conPunto = (s) => {
@@ -422,8 +518,8 @@ const esJpg = (b) => b && b[0] === 0xff && b[1] === 0xd8;
  * (antes se generaba con Helvetica y sin cajas, sin avisar). */
 const FUENTES = ['LuxoraGrotesk-Light.ttf', 'LuxoraGrotesk-Regular.ttf', 'WorkSans-Light.ttf', 'Quando-Regular.ttf'];
 const IMAGENES_PLANTILLA = [
-  'portada', 'caja', 'dx', 'datosClinicos', 'antecedentes', 'hdrConclusion',
-  ...Object.values(BLOQUES_PDF).flatMap((b) => [b.hdr, b.row, b.icono]),
+  'portada', 'caja', 'datosClinicos', 'antecedentes', 'hdrConclusion',
+  ...Object.values(BLOQUES_PDF).flatMap((b) => [b.hdr, b.row]),
 ];
 export const RECURSOS_ENMG = [
   ...FUENTES.map((f) => `/fonts/${f}`),
@@ -511,6 +607,12 @@ export async function buildEnmgPdf(data, loadAsset) {
   };
   const textoCentro = (t, cx, y, f, size, color, skew) => texto(t, cx - ancho(t, f, size) / 2, y, f, size, color, skew);
   const textoDerecha = (t, xDer, y, f, size, color) => texto(t, xDer - ancho(t, f, size), y, f, size, color);
+  // Rectángulo con esquinas redondeadas (vector) — x, yTop, w, h en puntos desde arriba
+  const dibujarCajaRedondeada = (x, yTop, w, h, r, color) => {
+    const d = `M ${r} 0 H ${w - r} A ${r} ${r} 0 0 1 ${w} ${r} V ${h - r} A ${r} ${r} 0 0 1 ${w - r} ${h} `
+      + `H ${r} A ${r} ${r} 0 0 1 0 ${h - r} V ${r} A ${r} ${r} 0 0 1 ${r} 0 Z`;
+    page.drawSvgPath(d, { x, y: PH - yTop, color, borderWidth: 0 });
+  };
 
   /*
    * Párrafo con varias corridas de texto (p. ej. etiqueta negra + valor gris),
@@ -520,7 +622,8 @@ export async function buildEnmgPdf(data, loadAsset) {
   const dibujarParrafo = (runs, x, y, maxW, size, lh, { justificar = true } = {}) => {
     const lineas = partirLineas(runs, size, maxW);
     lineas.forEach((linea, li) => {
-      const ultima = li === lineas.length - 1;
+      // La última línea y la que termina en punto y aparte no se justifican
+      const ultima = li === lineas.length - 1 || linea.finParrafo;
       const anchos = linea.map((p) => ancho(p.t, p.f, size));
       const espacios = linea.slice(0, -1).map((p) => (p.espacio ? ancho(' ', p.f, size) : 0));
       const total = anchos.reduce((a, b) => a + b, 0) + espacios.reduce((a, b) => a + b, 0);
@@ -562,11 +665,13 @@ export async function buildEnmgPdf(data, loadAsset) {
   /* ════════════════════ HOJA 2 · Motivo de envío ════════════════════ */
   nuevaPagina();
   textoCentro('Motivo de envío', 305.5, 111, F.luxRegular, 19.4, NEGRO);
-  dibujarImg(await plantilla('dx'), 41.4, 136.1, 527.9, 79.8);
-  texto('Dx', 50, 171.5, F.luxRegular, 20, NEGRO);
-  texto('–', 79, 171.5, F.workLight, 20, NEGRO);
+  // Caja del Dx: tarjeta completa (esquinas redondeadas abajo también) separada de las columnas.
+  // En la plantilla original quedaba debajo de Datos clínicos / Antecedentes.
+  dibujarCajaRedondeada(DX_CAJA.x, DX_CAJA.y, DX_CAJA.w, DX_CAJA.h, DX_CAJA.r, GRIS_CAJA);
+  texto('Dx', 50, DX_CAJA.base, F.luxRegular, 20, NEGRO);
+  texto('–', 79, DX_CAJA.base, F.workLight, 20, NEGRO);
   const dx = String(data.dx || '').trim();
-  texto(dx, 99.5, 171.5, F.workLight, ajustarTam(dx, F.workLight, 20, DX_MAX_W, MIN_DX), NEGRO);
+  texto(dx, 99.5, DX_CAJA.base, F.workLight, ajustarTam(dx, F.workLight, 20, DX_MAX_W, MIN_DX), NEGRO);
 
   const columna = async (img, x, titulo, cxTitulo, items) => {
     dibujarImg(await plantilla(img), x, 209.0, 253.65, 282.85);
@@ -610,18 +715,17 @@ export async function buildEnmgPdf(data, loadAsset) {
     if (!b || b.incluir === false) return false;
     return (b.filas || []).some((f) => String(f.nombre || '').trim() || String(f.hallazgo || '').trim());
   });
-  // El pie "respuesta normal" va en la última hoja de Miografía/Ecografía (o en la última de Neurografía)
-  const idPie = [...incluidos].reverse()[0];
   const seccionesTituladas = new Set();
 
   for (const id of incluidos) {
     const cfg = BLOQUES_PDF[id];
     const b = bloques[id];
-    const icono = await plantilla(cfg.icono);
+    // Logo del usuario junto al título de la sección (mismo lugar y tamaño que el ícono de la plantilla); sin logo, no se dibuja
+    const icono = await imagen(data.logo);
     const encabezadoPagina = (conTitulo) => {
       nuevaPagina();
       if (conTitulo) textoDerecha(cfg.seccion, 524.5, 106, F.luxRegular, 28, NEGRO);
-      dibujarImg(icono, 535.5, 79.4, 35.1, 35.1);
+      dibujarImgContenida(icono, 535.5, 79.4, 35.1, 35.1);
     };
 
     const primeraDeSeccion = !seccionesTituladas.has(cfg.seccion);
@@ -647,17 +751,16 @@ export async function buildEnmgPdf(data, loadAsset) {
     const imgNota = await plantilla('caja');
     let y = cfg.filasTop;
     const filas = (b.filas || []).filter(filaConTexto);
-    // El bloque que lleva el pie no debe llegar a él
-    const limite = id === idPie ? LIMITE_PIE : LIMITE_INFERIOR;
+    const limite = LIMITE_INFERIOR;
 
     for (const f of filas) {
-      const { runs, alto } = medidaFila(id, f, F);
+      const { runs, alto, offTexto } = medidaFila(id, f, F);
       if (y + alto > limite) {
         encabezadoPagina(false);
         y = 130.3;
       }
       dibujarImg(imgFila, FILA.x, y, FILA.w, alto);
-      dibujarParrafo(runs, FILA.textoX, y + cfg.textoOff, FILA.textoDer - FILA.textoX, FILA.size, FILA.lh);
+      dibujarParrafo(runs, FILA.textoX, y + offTexto, FILA.textoDer - FILA.textoX, FILA.size, FILA.lh);
       y += alto + (FILA.paso - FILA.h);
     }
 
@@ -671,15 +774,6 @@ export async function buildEnmgPdf(data, loadAsset) {
       }
       dibujarImg(imgNota, NOTA.x, top, NOTA.w, alto);
       dibujarParrafo(runs, NOTA.textoX, top + NOTA.off, NOTA.textoDer - NOTA.textoX, NOTA.size, NOTA.lh, { justificar: false });
-    }
-
-    if (id === idPie) {
-      const total = PIE_MIOGRAFIA.reduce((a, r) => a + ancho(r.t, F[r.f], 8), 0);
-      let x = 305.5 - total / 2;
-      for (const r of PIE_MIOGRAFIA) {
-        texto(r.t, x, 718, F[r.f], 8, NEGRO, true);
-        x += ancho(r.t, F[r.f], 8);
-      }
     }
   }
 
@@ -707,8 +801,6 @@ export async function buildEnmgPdf(data, loadAsset) {
     lineas.forEach((l, i) => textoDerecha(l, 469.5, 606.5 + i * size * 1.18, F.workLight, size, GRIS_80));
   }
   dibujarImgContenida(await imagen(data.logo), 483.4, 587.2, 84.8, 84.8);
-
-  AVISO_VALIDEZ.forEach((l, i) => textoCentro(l, 305.5, [694.5, 704.5, 715.5][i], F.luxLight, 8, NEGRO, true));
 
   /* ════════════════════ Anexo: resultados del equipo (PDF) ════════════════════ */
   const anexo = await bytes(data.anexoPdf);

@@ -2,7 +2,7 @@
  * pdfENMG.mjs — Generador del PDF de Electroneuromiografía (reporte genérico).
  *
  * Replica la plantilla "EMG 4 extremidades": las cajas/encabezados son las mismas
- * imágenes de la plantilla (public/ENMGImg/plantilla) colocadas en las mismas
+ * imágenes de la plantilla (backend: laminasImg/ENMGImg/plantilla) colocadas en las mismas
  * coordenadas, y el texto usa las fuentes de la plantilla (Luxora Grotesk,
  * Work Sans Light y Quando).
  *
@@ -26,7 +26,11 @@ const GRIS_7F = rgb(0x7f / 255, 0x7f / 255, 0x7f / 255);
 const GRIS_74 = rgb(0x74 / 255, 0x74 / 255, 0x74 / 255);
 const GRIS_80 = rgb(0x80 / 255, 0x80 / 255, 0x80 / 255);
 
-const PLANTILLA = '/ENMGImg/plantilla';
+// Imágenes del formato: viven en el backend (laminasImg/ENMGImg) para no cargar el frontend.
+// Las fuentes sí se sirven desde el frontend (/fonts), compartidas con otros reportes.
+export const BACKEND_LAMINAS_URL = 'https://backendmedxpro-tef2.onrender.com/laminasImg';
+export const ENMG_IMG_URL = `${BACKEND_LAMINAS_URL}/ENMGImg`;
+const PLANTILLA = `${ENMG_IMG_URL}/plantilla`;
 
 /* Configuración fija de cada bloque (medidas tomadas de la plantilla) */
 const BLOQUES_PDF = {

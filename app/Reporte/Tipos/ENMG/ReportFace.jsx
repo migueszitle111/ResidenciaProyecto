@@ -10,13 +10,14 @@ import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SuggestInput, SuggestTextarea } from "../../../Monitoreo/components/SuggestField";
 import LinkUploaderModal from "../../../components/LinkUploaderModal";
-import { buildEnmgPdf, nombreArchivoEnmg, RECURSOS_ENMG, DESCRIPCION_ESTANDAR, tituloConclusion, crearRevisorEnmg } from "./pdfENMG.mjs";
-// Fuentes/imágenes de /public para el generador del PDF.
+import { buildEnmgPdf, nombreArchivoEnmg, RECURSOS_ENMG, DESCRIPCION_ESTANDAR, tituloConclusion, crearRevisorEnmg, ENMG_IMG_URL } from "./pdfENMG.mjs";
+// Fuentes (/fonts del frontend) e imágenes del formato (backend, laminasImg/ENMGImg) para el PDF.
 // Se guardan en memoria: una vez descargadas, generar el PDF ya no depende del servidor.
+// Más reintentos porque el backend (Render) puede tardar en despertar.
 const cacheRecursos = new Map();
 const cargarRecurso = async (ruta) => {
   if (cacheRecursos.has(ruta)) return cacheRecursos.get(ruta);
-  for (let intento = 0; intento < 3; intento++) {
+  for (let intento = 0; intento < 5; intento++) {
     try {
       const r = await fetch(ruta, { cache: "force-cache" });
       if (r.ok) {
@@ -27,7 +28,7 @@ const cargarRecurso = async (ruta) => {
     } catch {
       // red caída o servidor reiniciando: reintenta
     }
-    await new Promise((res) => setTimeout(res, 400 * (intento + 1)));
+    await new Promise((res) => setTimeout(res, 1000 * (intento + 1)));
   }
   return null;
 };
@@ -145,9 +146,9 @@ function SelectorImagen({ label, valor, onChange, ayuda, alto = "h-20" }) {
 export const TITULO_FIJO = "ELECTRONEUROMIOGRAFÍA";
 
 const ICONOS = {
-  neurografia: "/ENMGImg/I_Neurografia.png",
-  miografia: "/ENMGImg/I_Miografia.png",
-  ecografia: "/ENMGImg/I_Ecografia.png",
+  neurografia: `${ENMG_IMG_URL}/I_Neurografia.png`,
+  miografia: `${ENMG_IMG_URL}/I_Miografia.png`,
+  ecografia: `${ENMG_IMG_URL}/I_Ecografia.png`,
 };
 
 /* Bloques con título, color y descripción fijos. Solo los renglones son editables. */

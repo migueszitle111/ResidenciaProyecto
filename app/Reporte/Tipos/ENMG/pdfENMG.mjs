@@ -252,7 +252,16 @@ const MEDICO_MAX_W = 500;
 const DX_MAX_W = 460;
 const COLUMNA = { maxW: 253.65 - 54.1 - 20, disponible: 491.8 - 347 - 8, min: 7 };
 const CONC_MOTIVO = { x: 71, y0: 575.5, maxW: 541 - 71, limite: 700 };
-const CONC_FINAL = { x: 66, y0: 296.5, maxW: 536 - 66, fin: 229.6 + 343.2 - 20, corrX: 69, corrMaxW: 540 - 69, corrSize: 9.85, corrLh: 11.7, corrMinY: 473 };
+/* Caja de la hoja de Conclusión (y 229.6 a 572.8), en dos zonas:
+ *   Conclusión (arriba, la más importante): 15 renglones a 11.5 pt, empieza a ~14 pt de la orilla superior.
+ *   Comentario adicional (abajo): 9 renglones, termina a ~14 pt de la orilla inferior.
+ * Cada texto solo puede ocupar su zona, así nunca chocan ni se salen del cuadro.
+ * y0 = primera línea (base); fin = última línea permitida. */
+const zona = (z) => ({ ...z, maxLineas: Math.floor((z.fin - z.y0) / z.lh) + 1 });
+const CONC_FINAL = {
+  conclusion: zona({ x: 66, y0: 252, fin: 434, maxW: 536 - 66, size: 11.5, lh: 12.95 }),
+  comentario: zona({ x: 69, y0: 460, fin: 555, maxW: 540 - 69, size: 9.85, lh: 11.7 }),
+};
 const FIRMANTE = { maxW: 290, alto: 78, min: 7 };
 // Alto máximo de una nota: debe caber en una hoja nueva
 // (los renglones de hallazgo tienen alto fijo: máximo 5 líneas)
@@ -299,23 +308,17 @@ function medidaConclusionMotivo(data, F) {
 
 // Caja de la hoja final de Conclusión (conclusiones + comentario adicional)
 function medidaConclusionFinal(data, F) {
+  const { conclusion: a, comentario: b } = CONC_FINAL;
   const ps = parrafosConclusion(data, F);
-  const c = CONC_FINAL;
+  const nA = ps.reduce((t, r) => t + contarLineas(r, a.size, a.maxW), 0);
   const corr = String(data.correlacion || '').trim();
   const runsC = runsComentario(corr, F);
-  const nC = corr ? contarLineas(runsC, c.corrSize, c.corrMaxW) : 0;
-  const altoC = nC * c.corrLh;
-  const ultimaY = (s, l) => c.y0 + altoParrafos(ps, s, l, c.maxW) - l;
-  const yCorr = (s, l) => Math.max(c.corrMinY, ultimaY(s, l) + 45);
-  // y de la última línea escrita en la caja
-  const finReal = (s, l) => (corr ? yCorr(s, l) + (nC - 1) * c.corrLh : ultimaY(s, l));
-  let size = 14, lh = 16.3;
-  while (size > 8 && (c.y0 + altoParrafos(ps, size, lh, c.maxW) + (corr ? 40 + altoC : 0) > c.fin || finReal(size, lh) > c.fin)) {
-    size -= 0.5; lh = size * 1.165;
-  }
-  const excesoConclusiones = Math.max(ultimaY(size, lh) - c.fin, excesoAnchoParrafos(ps, size, c.maxW));
-  const excesoCorrelacion = corr ? Math.max(finReal(size, lh) - c.fin, excesoAncho(runsC, c.corrSize, c.corrMaxW)) : 0;
-  return { ps, size, lh, corr, runsC, yCorr: yCorr(size, lh), excesoConclusiones, excesoCorrelacion };
+  const nC = corr ? contarLineas(runsC, b.size, b.maxW) : 0;
+  return {
+    ps, corr, runsC,
+    excesoConclusiones: Math.max(nA - a.maxLineas, excesoAnchoParrafos(ps, a.size, a.maxW)),
+    excesoCorrelacion: corr ? Math.max(nC - b.maxLineas, excesoAncho(runsC, b.size, b.maxW)) : 0,
+  };
 }
 
 // Datos del médico: renglones largos se parten (como Word); si son demasiados, se reduce el tamaño
@@ -401,14 +404,15 @@ export function contarRenglones(data, F) {
       r[`${id}.nota`] = { usados: contarLineas(runs, NOTA.size, NOTA.textoDer - NOTA.textoX), max: MAX_RENGLONES };
     }
   }
-  // Conclusión: al tamaño normal (14 pt) y ancho de la caja
+  // Conclusión y Comentario adicional: cada uno con los renglones que caben en su zona de la caja
+  const { conclusion: a, comentario: b } = CONC_FINAL;
   if (textoConclusion(data)) {
     const runs = [{ t: conPunto(conRenglonPendiente(String(data.conclusion).trimStart())), f: F.workLight, color: GRIS_74 }];
-    r.conclusion = { usados: contarLineas(runs, 14, CONC_FINAL.maxW), max: MAX_RENGLONES };
+    r.conclusion = { usados: contarLineas(runs, a.size, a.maxW), max: a.maxLineas };
   }
   if (String(data.correlacion || '').trim()) {
     const runsC = runsComentario(conRenglonPendiente(String(data.correlacion).trimStart()), F);
-    r.correlacion = { usados: contarLineas(runsC, CONC_FINAL.corrSize, CONC_FINAL.corrMaxW), max: MAX_RENGLONES };
+    r.correlacion = { usados: contarLineas(runsC, b.size, b.maxW), max: b.maxLineas };
   }
   return r;
 }
@@ -788,10 +792,10 @@ export async function buildEnmgPdf(data, loadAsset) {
   textoCentro('Estudio con datos electrofisiológicos que sugieren:', 302.8, 190, F.workLight, 8, GRIS_80);
   dibujarImg(await plantilla('caja'), 42.1, 229.6, 524.9, 343.2);
   {
-    const c = CONC_FINAL;
-    const { ps, size, lh, corr, runsC, yCorr } = medidaConclusionFinal(data, F);
-    dibujarConclusion(ps, c.x, c.y0, c.maxW, size, lh);
-    if (corr) dibujarParrafo(runsC, c.corrX, yCorr, c.corrMaxW, c.corrSize, c.corrLh);
+    const { conclusion: a, comentario: b } = CONC_FINAL;
+    const { ps, corr, runsC } = medidaConclusionFinal(data, F);
+    dibujarConclusion(ps, a.x, a.y0, a.maxW, a.size, a.lh);
+    if (corr) dibujarParrafo(runsC, b.x, b.y0, b.maxW, b.size, b.lh);
   }
 
   // Firma, datos del médico que realiza el estudio y logo

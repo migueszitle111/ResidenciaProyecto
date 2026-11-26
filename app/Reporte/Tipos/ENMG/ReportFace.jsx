@@ -110,8 +110,33 @@ const leerComoDataUrl = (file) =>
     r.readAsDataURL(file);
   });
 
+/* Reduce la imagen subida (firma, logo, íconos) a `maxLado` px por lado como máximo.
+ * Así se guarda para el usuario sin llenar el almacenamiento del navegador. En el PDF
+ * se dibuja dentro de su recuadro fijo, así que el tamaño en el reporte no cambia.
+ * PNG se mantiene PNG (conserva la transparencia); JPG se guarda como JPG. */
+const reducirImagen = async (file, maxLado = 600) => {
+  const original = await leerComoDataUrl(file);
+  const img = await new Promise((res, rej) => {
+    const i = new Image();
+    i.onload = () => res(i);
+    i.onerror = rej;
+    i.src = original;
+  }).catch(() => null);
+  if (!img) return original;
+  const escala = Math.min(1, maxLado / Math.max(img.width, img.height));
+  const w = Math.max(1, Math.round(img.width * escala));
+  const h = Math.max(1, Math.round(img.height * escala));
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+  const esJpg = /jpe?g/i.test(file.type);
+  const reducida = esJpg ? canvas.toDataURL("image/jpeg", 0.9) : canvas.toDataURL("image/png");
+  return reducida.length < original.length ? reducida : original;
+};
+
 /* Selector de imagen (firma / logo) con vista previa */
-function SelectorImagen({ label, valor, onChange, ayuda, alto = "h-20" }) {
+function SelectorImagen({ label, valor, onChange, ayuda, alto = "h-20", maxLado = 600 }) {
   const ref = useRef(null);
   return (
     <div>
@@ -135,7 +160,7 @@ function SelectorImagen({ label, valor, onChange, ayuda, alto = "h-20" }) {
         onChange={async (e) => {
           const file = e.target.files?.[0];
           e.target.value = "";
-          if (file) onChange(await leerComoDataUrl(file));
+          if (file) onChange(await reducirImagen(file, maxLado));
         }} />
     </div>
   );
@@ -168,7 +193,7 @@ function IconoSeccion({ seccion, valor, onChange }) {
         onChange={async (e) => {
           const file = e.target.files?.[0];
           e.target.value = "";
-          if (file) onChange(await leerComoDataUrl(file));
+          if (file) onChange(await reducirImagen(file, 400));
         }} />
     </span>
   );
@@ -281,7 +306,7 @@ function Campo({ label, value, onChange, placeholder, required, suggestKey }) {
         {label}{required && <span className="text-orange-400 ml-1">*</span>}
       </label>
       {suggestKey ? (
-        <SuggestInput fieldKey={suggestKey} value={value} onChange={onChange} placeholder={placeholder || ""} className={inputClass} />
+        <SuggestInput selectorGuardados fieldKey={suggestKey} value={value} onChange={onChange} placeholder={placeholder || ""} className={inputClass} />
       ) : (
         <input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder || ""} className={inputClass} />
       )}
@@ -471,7 +496,7 @@ function ListaRenglones({ titulo, color, items, onChange, suggestKey }) {
                   onPasteCapture={(e) => onPaste(e, idx, item)}>
                   <span className="text-slate-500 text-sm w-2">–</span>
                   <div className="flex-1 min-w-0">
-                    <SuggestInput fieldKey={suggestKey} value={item.texto} onChange={(val) => set(item.id, val)}
+                    <SuggestInput selectorGuardados fieldKey={suggestKey} value={item.texto} onChange={(val) => set(item.id, val)}
                       placeholder="" className={inputClass} />
                   </div>
                   {items.length > 1 && (
@@ -613,7 +638,7 @@ function BloqueHallazgos({ id, bloque, onChange, opcional, abierto = true, onAbr
                         </button>
                       )}
                       <div className="flex-1 min-w-0">
-                        <SuggestInput
+                        <SuggestInput selectorGuardados
                           fieldKey={`enmg.${id}.nombre`}
                           value={f.nombre}
                           onChange={(v) => setFila(f.id, { nombre: v })}
@@ -626,7 +651,7 @@ function BloqueHallazgos({ id, bloque, onChange, opcional, abierto = true, onAbr
                           className="text-slate-400 hover:text-red-400 text-xs w-8 h-8 rounded-lg border border-white/10 shrink-0 transition-colors">✕</button>
                       )}
                     </div>
-                    <SuggestTextarea
+                    <SuggestTextarea selectorGuardados
                       fieldKey={`enmg.${id}.hallazgo`}
                       value={f.hallazgo}
                       onChange={(v) => setFila(f.id, { hallazgo: v })}
@@ -650,7 +675,7 @@ function BloqueHallazgos({ id, bloque, onChange, opcional, abierto = true, onAbr
 
               <div className="mt-1">
                 <label className={labelClass}>Nota <span className="text-slate-600 font-normal">(opcional)</span></label>
-                <SuggestTextarea
+                <SuggestTextarea selectorGuardados
                   fieldKey={`enmg.${id}.nota`}
                   value={bloque.nota}
                   onChange={(v) => onChange({ ...bloque, nota: v })}
@@ -671,7 +696,7 @@ function BloqueHallazgos({ id, bloque, onChange, opcional, abierto = true, onAbr
 /* ─── Componente principal ──────────────────────────────────────────────────── */
 
 export default function ReportFace() {
-  const { data: session } = useSession();
+  const { data: session, status: estadoSesion } = useSession();
   const [paso, setPaso] = useState(0);
   const [form, setForm] = useState(formVacio);
   const [mensaje, setMensaje] = useState(null);
@@ -714,17 +739,41 @@ export default function ReportFace() {
         }
         if (typeof parsed?.paso === "number") setPaso(parsed.paso);
       }
-      // Datos del médico que firma: se recuerdan entre reportes
-      const f = JSON.parse(localStorage.getItem(FIRMA_KEY) || "null");
-      if (f) {
-        if (typeof f.firmante === "string") setFirmante(f.firmante);
-        if (typeof f.firma === "string") setFirma(f.firma);
-        if (typeof f.logo === "string") setLogo(f.logo);
-        if (f.iconos && typeof f.iconos === "object") setIconos(f.iconos);
-      }
     } catch {}
     setHydrated(true);
   }, []);
+
+  // ── Datos del médico que firma, firma, logo e íconos de sección: se guardan POR USUARIO
+  // (clave con su correo) y se recuerdan entre reportes. Se cargan cuando se conoce la sesión.
+  const claveFirma = session?.user?.email ? `${FIRMA_KEY}:${String(session.user.email).toLowerCase()}` : `${FIRMA_KEY}:sin-sesion`;
+  const [firmaCargada, setFirmaCargada] = useState(null); // clave ya cargada
+  useEffect(() => {
+    if (!hydrated || estadoSesion === "loading" || firmaCargada === claveFirma) return;
+    let f = null;
+    try {
+      // Si este usuario aún no tiene nada guardado, se toma lo que había antes (sin usuario)
+      f = JSON.parse(localStorage.getItem(claveFirma) || "null") || JSON.parse(localStorage.getItem(FIRMA_KEY) || "null");
+    } catch {}
+    setFirma(typeof f?.firma === "string" ? f.firma : "");
+    setLogo(typeof f?.logo === "string" ? f.logo : "");
+    setIconos(f?.iconos && typeof f.iconos === "object" ? f.iconos : {});
+    let texto = typeof f?.firmante === "string" ? f.firmante : "";
+    if (!texto.trim() && session?.user) {
+      // Primera vez: se prellena con el perfil (los campos pueden venir vacíos o con espacios)
+      const u = session.user;
+      const limpio = (v) => (typeof v === "string" ? v.trim() : "");
+      const nombre = [limpio(u.name), limpio(u.lastname)].filter(Boolean).join(" ");
+      const cedula = limpio(u.idprofessional);
+      texto = [
+        nombre && (/^dr/i.test(nombre) ? nombre : `Dr. ${nombre}`),
+        limpio(u.specialty),
+        cedula && `CE ${cedula}`,
+      ].filter(Boolean).join("\n");
+    }
+    setFirmante(texto);
+    setFirmaCargada(claveFirma);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrated, estadoSesion, claveFirma, firmaCargada]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -734,26 +783,21 @@ export default function ReportFace() {
     return () => clearTimeout(t);
   }, [hydrated, form, paso]);
 
+  const avisoGuardado = useRef(false);
   useEffect(() => {
-    if (!hydrated) return;
-    try { localStorage.setItem(FIRMA_KEY, JSON.stringify({ firmante, firma, logo, iconos })); } catch {}
-  }, [hydrated, firmante, firma, logo, iconos]);
-
-  // Prellenar los datos del firmante con el perfil la primera vez
-  useEffect(() => {
-    if (!hydrated || firmante.trim() || !session?.user) return;
-    const u = session.user;
-    // Los campos del perfil pueden venir vacíos o con espacios: se recortan y se omiten
-    const limpio = (v) => (typeof v === "string" ? v.trim() : "");
-    const nombre = [limpio(u.name), limpio(u.lastname)].filter(Boolean).join(" ");
-    const cedula = limpio(u.idprofessional);
-    setFirmante([
-      nombre && (/^dr/i.test(nombre) ? nombre : `Dr. ${nombre}`),
-      limpio(u.specialty),
-      cedula && `CE ${cedula}`,
-    ].filter(Boolean).join("\n"));
+    if (firmaCargada !== claveFirma) return; // no sobrescribir antes de cargar lo de este usuario
+    try {
+      localStorage.setItem(claveFirma, JSON.stringify({ firmante, firma, logo, iconos }));
+      avisoGuardado.current = false;
+    } catch {
+      // Almacenamiento del navegador lleno: se usa en este reporte pero no se recordará
+      if (!avisoGuardado.current) {
+        avisoGuardado.current = true;
+        showMsg("error", "No se pudo guardar la firma o los logos en este navegador (almacenamiento lleno). Se usarán en este reporte, pero no se recordarán.");
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hydrated, session]);
+  }, [firmaCargada, claveFirma, firmante, firma, logo, iconos]);
 
   useEffect(() => () => clearTimeout(msgTimer.current), []);
 
@@ -1094,13 +1138,13 @@ export default function ReportFace() {
                 </div>
                 <div>
                   <label className={labelClass}>Conclusión<span className="text-orange-400 ml-1">*</span></label>
-                  <SuggestTextarea fieldKey="enmg.conclusion" value={form.conclusion} onChange={setField("conclusion")} rows={5}
+                  <SuggestTextarea selectorGuardados fieldKey="enmg.conclusion" value={form.conclusion} onChange={setField("conclusion")} rows={5}
                     className={textareaClass} />
                   <ContadorRenglones info={renglones.conclusion} />
                 </div>
                 <div>
                   <label className={labelClass}>Comentario adicional <span className="text-slate-600 font-normal">(opcional)</span></label>
-                  <SuggestTextarea fieldKey="enmg.correlacion" value={form.correlacion} onChange={setField("correlacion")} rows={5}
+                  <SuggestTextarea selectorGuardados fieldKey="enmg.correlacion" value={form.correlacion} onChange={setField("correlacion")} rows={5}
                     className={textareaClass} />
                   <ContadorRenglones info={renglones.correlacion} />
                 </div>
@@ -1114,8 +1158,8 @@ export default function ReportFace() {
                   <textarea value={firmante} onChange={(e) => cambiarFirmante(e.target.value)} rows={5} className={textareaClass} />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <SelectorImagen label="Firma" valor={firma} onChange={setFirma} ayuda="PNG con fondo transparente" />
-                  <SelectorImagen label="Logo" valor={logo || session?.user?.imageUrl || ""} onChange={setLogo}
+                  <SelectorImagen label="Firma" valor={firma} onChange={setFirma} ayuda="PNG con fondo transparente" maxLado={900} />
+                  <SelectorImagen label="Logo" valor={logo || session?.user?.imageUrl || ""} onChange={setLogo} maxLado={500}
                     ayuda={logo ? "" : "Por defecto, el de su perfil"} alto="h-20" />
                 </div>
               </div>

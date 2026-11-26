@@ -76,5 +76,14 @@ export function useFieldSuggestions(fieldKey) {
     return null;
   }, [suggestions]);
 
-  return { suggestions, saveSuggestion, filter, prefixMatch };
+  // Olvida una sugerencia guardada (lo usa el selector de guardados).
+  const removeSuggestion = useCallback((value) => {
+    if (!fieldKey) return;
+    const lowered = (value ?? '').toString().trim().toLowerCase();
+    const next = readStore(fieldKey).filter((s) => s.toLowerCase() !== lowered);
+    writeStore(fieldKey, next);
+    setSuggestions(next);
+  }, [fieldKey]);
+
+  return { suggestions, saveSuggestion, removeSuggestion, filter, prefixMatch };
 }

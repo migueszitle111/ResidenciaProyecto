@@ -42,6 +42,79 @@ function Dropdown({ matches, activeIdx, onPick }) {
   );
 }
 
+/* Selector de guardados (opcional, prop `selectorGuardados`): botón ▾ que lista todo lo
+ * que se ha escrito antes en el campo (más reciente primero), con buscador; al elegir
+ * se rellena el campo y cada entrada se puede olvidar con ✕. */
+function SelectorGuardados({ suggestions, onPick, onRemove, enTextarea }) {
+  const [abierto, setAbierto] = useState(false);
+  const [busqueda, setBusqueda] = useState('');
+  const ref = useRef(null);
+  useOutsideClose(ref, () => setAbierto(false));
+  const q = busqueda.trim().toLowerCase();
+  const lista = q ? suggestions.filter((s) => s.toLowerCase().includes(q)) : suggestions;
+  return (
+    <div ref={ref} className={`absolute right-1.5 ${enTextarea ? 'top-1.5' : 'top-1/2 -translate-y-1/2'} z-20`}>
+      <button
+        type="button"
+        tabIndex={-1}
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={() => { setAbierto((a) => !a); setBusqueda(''); }}
+        title={suggestions.length ? `Elegir de lo guardado (${suggestions.length})` : 'Aún no hay textos guardados en este campo'}
+        className={`w-7 h-7 rounded-md flex items-center justify-center transition-colors ${
+          abierto ? 'bg-orange-500/20 text-orange-300' : 'text-slate-500 hover:text-orange-300 hover:bg-white/5'
+        }`}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {abierto && (
+        <div className="absolute right-0 mt-1 w-[min(32rem,85vw)] bg-[#1c1c1c] border border-white/10 rounded-md shadow-xl z-40">
+          {suggestions.length > 0 ? (
+            <>
+              {suggestions.length > 5 && (
+                <input
+                  autoFocus
+                  value={busqueda}
+                  onChange={(e) => setBusqueda(e.target.value)}
+                  placeholder="Buscar en lo guardado"
+                  className="w-full bg-[#111] text-white text-sm px-3 py-2 border-b border-white/10 rounded-t-md focus:outline-none placeholder-slate-600"
+                />
+              )}
+              <ul className="max-h-64 overflow-auto" role="listbox">
+                {lista.map((s) => (
+                  <li key={s} className="flex items-start gap-2 px-3 py-2 text-sm text-slate-200 hover:bg-white/5 group">
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => { onPick(s); setAbierto(false); }}
+                      className="flex-1 text-left whitespace-pre-wrap break-words line-clamp-3"
+                    >
+                      {s}
+                    </button>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => onRemove(s)}
+                      title="Olvidar este texto"
+                      className="text-slate-600 hover:text-red-400 text-xs shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      ✕
+                    </button>
+                  </li>
+                ))}
+                {lista.length === 0 && <li className="px-3 py-2 text-xs text-slate-500">Sin coincidencias</li>}
+              </ul>
+            </>
+          ) : (
+            <p className="px-3 py-2 text-xs text-slate-500">Aún no hay textos guardados en este campo. Se guardan al escribirlos.</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function useOutsideClose(ref, onClose) {
   useEffect(() => {
     const handler = (e) => {
@@ -68,8 +141,11 @@ export function SuggestInput({
   placeholder,
   type = 'text',
   className,
+  selectorGuardados = false,
 }) {
-  const { saveSuggestion, filter, prefixMatch } = useFieldSuggestions(fieldKey);
+  const { suggestions, saveSuggestion, removeSuggestion, filter, prefixMatch } = useFieldSuggestions(fieldKey);
+  // Con el selector de guardados se reserva espacio a la derecha para el botón ▾ (campo y capas de sugerencia)
+  const clase = selectorGuardados ? `${className} pr-10` : className;
   const [open, setOpen] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
   const [focused, setFocused] = useState(false);
@@ -155,7 +231,7 @@ export function SuggestInput({
         <div
           ref={overlayRef}
           aria-hidden="true"
-          className={`${className} pointer-events-none absolute inset-0 whitespace-pre overflow-hidden`}
+          className={`${clase} pointer-events-none absolute inset-0 whitespace-pre overflow-hidden`}
           style={{ background: 'transparent', borderColor: 'transparent', color: 'transparent' }}
         >
           <span>{value}</span>
@@ -173,9 +249,12 @@ export function SuggestInput({
           onBlur={() => { setFocused(false); saveSuggestion(value); }}
           onKeyDown={onKeyDown}
           placeholder={placeholder}
-          className={`${className} relative bg-transparent`}
+          className={`${clase} relative bg-transparent`}
           autoComplete="off"
         />
+        {selectorGuardados && (
+          <SelectorGuardados suggestions={suggestions} onPick={pickDropdown} onRemove={removeSuggestion} />
+        )}
       </div>
       {/* Full-suggestion preview when the ghost tail doesn't fit inside the
           input. Keeps the user informed of what Tab will insert without
@@ -202,8 +281,11 @@ export function SuggestTextarea({
   placeholder,
   rows = 3,
   className,
+  selectorGuardados = false,
 }) {
-  const { saveSuggestion, filter, prefixMatch } = useFieldSuggestions(fieldKey);
+  const { suggestions, saveSuggestion, removeSuggestion, filter, prefixMatch } = useFieldSuggestions(fieldKey);
+  // Con el selector de guardados se reserva espacio a la derecha para el botón ▾ (campo y capas de sugerencia)
+  const clase = selectorGuardados ? `${className} pr-10` : className;
   const [open, setOpen] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
   const [focused, setFocused] = useState(false);
@@ -296,7 +378,7 @@ export function SuggestTextarea({
         {/* Ghost overlay — same box model as the textarea so text lines up */}
         <div
           aria-hidden="true"
-          className={`${className} pointer-events-none absolute inset-0 whitespace-pre-wrap overflow-hidden`}
+          className={`${clase} pointer-events-none absolute inset-0 whitespace-pre-wrap overflow-hidden`}
           style={{ background: 'transparent', borderColor: 'transparent', color: 'transparent' }}
         >
           <span>{value}</span>
@@ -308,7 +390,7 @@ export function SuggestTextarea({
         <div
           ref={measureRef}
           aria-hidden="true"
-          className={`${className} whitespace-pre-wrap invisible`}
+          className={`${clase} whitespace-pre-wrap invisible`}
           style={{ position: 'absolute', top: 0, left: 0, right: 0, pointerEvents: 'none', overflow: 'hidden' }}
         >
           {value}{ghostTail}{'​'}
@@ -325,9 +407,12 @@ export function SuggestTextarea({
           onKeyDown={onKeyDown}
           placeholder={placeholder}
           rows={rows}
-          className={`${className} relative bg-transparent overflow-hidden`}
+          className={`${clase} relative bg-transparent overflow-hidden`}
           style={{ resize: 'none' }}
         />
+        {selectorGuardados && (
+          <SelectorGuardados suggestions={suggestions} onPick={pickDropdown} onRemove={removeSuggestion} enTextarea />
+        )}
       </div>
       {open && <Dropdown matches={dropdownMatches} activeIdx={activeIdx} onPick={pickDropdown} />}
     </div>

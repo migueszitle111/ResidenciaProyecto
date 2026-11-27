@@ -89,6 +89,11 @@ function SuccessModal({ filename, pdfUrl, onAbrir, onLink, onClose }) {
             LINK
           </button>
         </div>
+        {/* Ir al reporte ENMG (redactar) para hacer el otro reporte del mismo estudio */}
+        <button type="button" onClick={() => window.location.assign('/Reporte/Tipos/ENMG')}
+          className="w-full mt-3 border-2 border-white/15 text-slate-200 font-bold py-3 rounded-full text-sm hover:border-orange-500 hover:text-orange-400 transition-colors">
+          Agregar reporte de Electroneuromiografía
+        </button>
       </div>
     </div>
   );

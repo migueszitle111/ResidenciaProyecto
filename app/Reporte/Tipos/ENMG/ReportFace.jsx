@@ -715,6 +715,7 @@ export default function ReportFace() {
   const [showGenerar, setShowGenerar] = useState(false);
   const [generando, setGenerando] = useState(false);
   const [linkPdf, setLinkPdf] = useState(null);   // { blob, nombre }
+  const [listo, setListo] = useState(null);       // { nombre, url } — PDF recién descargado
   // Acordeón de Neurografía: apartado abierto ("sensitiva" | "motora" | "especiales")
   const [neuroAbierto, setNeuroAbierto] = useState("sensitiva");
 
@@ -993,9 +994,10 @@ export default function ReportFace() {
       a.href = url;
       a.download = nombre;
       a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      // El reporte ya quedó generado: el formulario se vacía y se muestra "¡Reporte listo!"
+      // (con Abrir / Agregar esquema anatómico / Nuevo reporte). La URL se libera al cerrarla.
       reiniciarFormulario();
-      showMsg("ok", "PDF descargado. El formulario quedó listo para un nuevo reporte.");
+      setListo({ nombre, url });
     } catch (e) {
       showMsg("error", `Error generando PDF: ${e.message}`);
     }
@@ -1010,6 +1012,20 @@ export default function ReportFace() {
       showMsg("error", `Error generando PDF: ${e.message}`);
     }
   };
+  // Ir al menú de Reportes (esquemas anatómicos). Guarda el avance antes de salir
+  // (el guardado normal espera 600 ms) para que al regresar el ENMG siga igual.
+  const irAEsquemaAnatomico = () => {
+    try { localStorage.setItem(SESSION_KEY, JSON.stringify({ form: formRef.current, paso })); } catch {}
+    window.location.assign("/Reporte");
+  };
+
+  // Ventana "¡Reporte listo!" después de descargar el PDF
+  const cerrarListo = () => {
+    if (listo?.url) URL.revokeObjectURL(listo.url);
+    setListo(null);
+  };
+  const abrirPdfListo = () => { if (listo?.url) window.open(listo.url, "_blank", "noopener"); };
+
   const cerrarLink = () => {
     setLinkPdf(null);
     reiniciarFormulario();
@@ -1212,6 +1228,12 @@ export default function ReportFace() {
                 className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl text-sm transition-colors">
                 ⬇ PDF
               </button>
+              {/* Ir al menú de Reportes (esquema anatómico) para hacer el otro reporte.
+                  El avance del ENMG queda guardado: al regresar sigue donde se quedó. */}
+              <button onClick={irAEsquemaAnatomico}
+                className="w-full border border-white/15 text-slate-200 hover:border-orange-500 hover:text-orange-400 font-semibold py-3 rounded-xl text-sm transition-colors">
+                Agregar esquema anatómico
+              </button>
               <button onClick={() => setShowGenerar(false)}
                 className="w-full border border-white/10 text-slate-400 hover:text-white py-2.5 rounded-xl text-sm transition-colors">
                 Cancelar
@@ -1226,6 +1248,32 @@ export default function ReportFace() {
           <div className="bg-[#111] border border-white/10 rounded-2xl p-8 w-72 flex flex-col items-center gap-4">
             <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
             <p className="text-white text-sm font-semibold">Generando PDF...</p>
+          </div>
+        </div>
+      )}
+
+      {/* ¡Reporte listo! — igual que en los esquemas anatómicos */}
+      {listo && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-[#111] border-2 border-orange-500 rounded-2xl w-full max-w-sm p-6 shadow-2xl text-center relative">
+            <button onClick={cerrarListo} title="Cerrar" className="absolute top-3 right-4 text-white text-xl font-bold leading-none">✕</button>
+            <p className="text-orange-400 font-bold text-xl mb-1">¡Reporte listo!</p>
+            <p className="text-white font-semibold text-sm mb-1 break-all">{listo.nombre}</p>
+            <p className="text-slate-400 text-xs mb-4">Guardado en Descargas</p>
+            <div className="flex flex-col gap-3">
+              <button onClick={abrirPdfListo}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl text-sm transition-colors">
+                Abrir
+              </button>
+              <button onClick={irAEsquemaAnatomico}
+                className="w-full border border-white/15 text-slate-200 hover:border-orange-500 hover:text-orange-400 font-semibold py-3 rounded-xl text-sm transition-colors">
+                Agregar esquema anatómico
+              </button>
+              <button onClick={cerrarListo}
+                className="w-full border border-white/10 text-slate-400 hover:text-white py-2.5 rounded-xl text-sm transition-colors">
+                Nuevo reporte ENMG
+              </button>
+            </div>
           </div>
         </div>
       )}
